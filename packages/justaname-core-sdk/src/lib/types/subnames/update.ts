@@ -1,14 +1,14 @@
 import { ApiKeyHeaders, SIWEHeaders } from '../headers';
 import { IRequest, IResponse, IRoute } from '../common';
 
-export interface Address {
+interface Address {
 
   address: string;
 
   coinType: number;
 }
 
-export interface TextRecord {
+interface TextRecord {
 
   key: string;
 
@@ -16,7 +16,7 @@ export interface TextRecord {
   value: string;
 }
 
-export interface Metadata {
+interface Metadata {
   id: string;
 
   contentHash: string;
@@ -28,7 +28,7 @@ export interface Metadata {
   subdomainId: string;
 }
 
-export interface SubnameClaimRequest extends IRequest{
+export interface SubnameUpdateRequest extends IRequest{
 
   username: string;
 
@@ -44,14 +44,15 @@ export interface SubnameClaimRequest extends IRequest{
 }
 
 
-export interface SubnameClaimResponse extends IResponse{
+export interface SubnameUpdateResponse extends IResponse{
+  
   id: string;
 
   data: Metadata;
 }
 
-export interface SubnameClaimRoute extends IRoute {
-  request: SubnameClaimRequest;
-  response: SubnameClaimResponse;
+export interface SubnameUpdateRoute extends IRoute {
+  request: SubnameUpdateRequest;
+  response: SubnameUpdateResponse;
   headers: ApiKeyHeaders & SIWEHeaders;
 }
