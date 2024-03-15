@@ -10,7 +10,7 @@
       "defaultConfiguration": "production",
       "options": {
         "main": "packages/justaname-core-sdk/src/index.ts",
-        "outputPath": "dist/packages/@justaname/sdk",
+        "outputPath": "packages/justaname-core-sdk/dist",
         "tsConfig": "packages/justaname-core-sdk/tsconfig.lib.json",
         "additionalEntryPoints": ["packages/justaname-core-sdk/src/index.ts"],
         "project": "packages/justaname-core-sdk/package.json",
@@ -38,7 +38,7 @@
       "dependsOn": ["lint"]
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs @justaname/sdk {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs @justaname.id/sdk {args.ver} {args.tag}",
       "dependsOn": ["build","test"]
     },
     "lint": {
@@ -49,7 +49,7 @@
       "options": {
         "fix": true,
         "lintFilePatterns": [
-          "packages/justaname-core-sdk/**/*.{ts,tsx,js,jsx}",
+          "packages/justaname-core-sdk/src/*.{ts,tsx,js,jsx}",
           "packages/justaname-core-sdk/package.json"
         ]
       }

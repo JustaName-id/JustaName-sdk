@@ -1,0 +1,24 @@
+{
+  "name": "@justaname.id/express",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/justaname-express-sdk/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/justaname-express-sdk/dist",
+        "tsConfig": "packages/justaname-express-sdk/tsconfig.lib.json",
+        "packageJson": "packages/justaname-express-sdk/package.json",
+        "main": "packages/justaname-express-sdk/src/index.ts",
+        "assets": ["packages/justaname-express-sdk/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs @justaname.id/express {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  },
+  "tags": []
+}

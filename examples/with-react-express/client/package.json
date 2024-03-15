@@ -1,0 +1,13 @@
+{
+  "name": "with-react-express-client",
+  "dependencies": {
+    "@justaname.id/react": "^0.0.1",
+    "@nx/vite": "18.0.8",
+    "@vitejs/plugin-react": "^4.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "6.11.2",
+    "vite": "~5.0.0",
+    "vite-plugin-dts": "^3.7.3"
+  }
+}

@@ -8,5 +8,20 @@
   },
   "scripts": {
     "test": "jest"
-  }
+  },
+  "exports": {
+    "./package.json": "./dist/package.json",
+    ".": {
+      "module": "./dist/index.esm.js",
+      "import": "./dist/index.cjs.mjs",
+      "default": "./dist/index.cjs.js"
+    },
+    "./index": {
+      "module": "./dist/index.esm.js",
+      "import": "./dist/index.cjs.mjs",
+      "default": "./dist/index.cjs.js"
+    }
+  },
+  "module": "./dist/index.esm.js",
+  "main": "./dist/index.cjs.js"
 }

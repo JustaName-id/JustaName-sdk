@@ -9,13 +9,15 @@
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/@justaname/react",
+        "outputPath": "packages/justaname-react-sdk/dist",
         "tsConfig": "packages/justaname-react-sdk/tsconfig.lib.json",
         "project": "packages/justaname-react-sdk/package.json",
         "entryFile": "packages/justaname-react-sdk/src/index.ts",
         "external": ["react", "react-dom", "react/jsx-runtime"],
+        "generateExportsField": true,
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
         "compiler": "swc",
+        "format": ["esm","cjs"],
         "assets": [
           {
             "glob": "packages/justaname-react-sdk/README.md",
@@ -23,7 +25,34 @@
             "output": "."
           }
         ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      },
+      "dependsOn": ["lint"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "fix": true,
+        "lintFilePatterns": [
+          "packages/justaname-react-sdk/**/*.{ts,tsx,js,jsx}",
+          "packages/justaname-react-sdk/package.json"
+        ]
       }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs @justaname.id/react {args.ver} {args.tag}",
+      "dependsOn": ["build"]
     }
   }
 }

@@ -1,2 +1,2 @@
-export * from './useWalletSubnames'
+export * from './useAccountSubnames'
 export * from './useMounted'

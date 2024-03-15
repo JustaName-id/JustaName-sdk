@@ -18,7 +18,7 @@ export const justANameInstance = axios.create({
  * Represents the Controlled Axios Promise type.
  * @typeparam T - The type of the data to be returned.
  */
-export type ControlledAxiosPromise<T extends NonNullable<unknown>> =
+export type ControlledAxiosPromise<T extends {}> =
   AxiosPromise<BaseResponse<T>>;
 
 

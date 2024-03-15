@@ -18,6 +18,19 @@
           "buildTarget": "with-react-express-server:build:production"
         }
       }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "fix": true,
+        "lintFilePatterns": [
+          "examples/with-react-express/server/src/*.{ts,tsx,js,jsx}",
+          "examples/with-react-express/server/package.json"
+        ]
+      }
     }
   },
   "tags": []

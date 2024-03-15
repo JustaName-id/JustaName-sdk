@@ -1,6 +1,6 @@
 {
   "extends": ["../../.eslintrc.base.json"],
-  "ignorePatterns": ["!**/*"],
+  "ignorePatterns": ["!src/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -9,7 +9,8 @@
     {
       "files": ["*.ts", "*.tsx"],
       "rules": {
-        "@typescript-eslint/no-empty-interface": "off"
+        "@typescript-eslint/no-empty-interface": "off",
+        "no-func-assign": "off"
       }
     },
     {

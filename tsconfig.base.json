@@ -10,7 +10,7 @@
     "declarationDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ESNext"],
+    "lib": ["ESNext","dom"],
     "module": "CommonJS",
     "allowJs": true,
     "moduleResolution": "node",
@@ -27,7 +27,10 @@
     "useUnknownInCatchVariables": false,
     "rootDir": ".",
     "paths": {
-      "@justaname.id/sdk": ["packages/justaname-core-sdk/src/index.ts"]
+      "@justaname.id/express": ["packages/justaname-express-sdk/src/index.ts"],
+      "@justaname.id/sdk": ["packages/justaname-core-sdk/src/index.ts"],
+      "@justaname.id/react": ["dist/packages/@justaname/react"]
+//      "@justaname.id/react": ["packages/justaname-react-sdk/src/index.ts"]
     }
   },
   "exclude": [

@@ -1,0 +1,32 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "target": "ES2020",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "noErrorTruncation": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "lib": ["ES2020", "dom"],
+    "types": ["vite/client", "vitest"],
+    "paths": {
+      "@justaname.id/react": ["packages/justaname-react-sdk/dist"]
+    }
+  },
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

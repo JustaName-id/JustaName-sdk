@@ -2,16 +2,8 @@
   "name": "justaname-mono-sdk",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "targets": {
-    "local-registry": {
-      "executor": "@nx/js:verdaccio",
-      "options": {
-        "port": 4873,
-        "config": ".verdaccio/config.yml",
-        "storage": "tmp/local-registry/storage"
-      }
-    },
     "start:react-express": {
-      "command": "nx serve with-react-express-server"
+      "command":"nx run-many --target=serve --projects=with-react-express-server,with-react-express-client"
     }
   }
 }
