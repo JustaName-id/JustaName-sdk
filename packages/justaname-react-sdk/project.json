@@ -1,0 +1,29 @@
+{
+  "name": "@justaname.id/react",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/justaname-react-sdk/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/@justaname/react",
+        "tsConfig": "packages/justaname-react-sdk/tsconfig.lib.json",
+        "project": "packages/justaname-react-sdk/package.json",
+        "entryFile": "packages/justaname-react-sdk/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "swc",
+        "assets": [
+          {
+            "glob": "packages/justaname-react-sdk/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}

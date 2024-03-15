@@ -1,0 +1,24 @@
+{
+  "name": "with-react-express-server",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "examples/with-react-express/server/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "with-react-express-server:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "with-react-express-server:build:development"
+        },
+        "production": {
+          "buildTarget": "with-react-express-server:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}
