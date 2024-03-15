@@ -34,14 +34,19 @@ export const UPDATE_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/update';
 export const REVOKE_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/revoke';
 
 /**
+ * Routes to get subname by domain, name and chain id
+ */
+export const GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE = SUBNAME_BASE_ROUTE + '/username';
+
+/**
  * Routes to get subname by full subname
  */
-export const GET_SUBNAME_BY_FULL_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/full-subname';
+export const GET_SUBNAME_BY_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/subname';
 
 /**
  * Routes to get all subnames by domain
  */
-export const GET_ALL_SUBNAMES_BY_DOMAIN_ROUTE = SUBNAME_BASE_ROUTE + '/domain';
+export const GET_ALL_SUBNAMES_BY_DOMAIN_ROUTE = SUBNAME_BASE_ROUTE + '/ensDomain';
 
 /**
  * Routes to get all subnames by address
