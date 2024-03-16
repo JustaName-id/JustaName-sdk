@@ -1,6 +1,6 @@
 {
   "name": "justaname-mono-sdk",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "JustaName SDK",
   "main": "index.js",
   "author": "JustaLab",
@@ -31,6 +31,7 @@
     "@swc/helpers": "~0.5.2",
     "@swc/jest": "0.2.20",
     "@testing-library/react": "14.0.0",
+    "@types/cors": "^2.8.17",
     "@types/jest": "^29.4.0",
     "@types/node": "18.16.9",
     "@types/react": "18.2.33",
@@ -61,17 +62,20 @@
     "url-loader": "^4.1.1",
     "verdaccio": "^5.0.4",
     "vite": "~5.0.0",
+    "vite-plugin-node-polyfills": "^0.21.0",
     "vitest": "^1.3.1",
     "webpack-cli": "^5.1.4"
   },
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "yarn@3.3.0",
+  "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@rainbow-me/rainbowkit": "^2.0.2",
     "@tanstack/react-query": "^5.28.4",
+    "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.6.0",
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "next": "14.0.4",
     "openapi-typescript": "next",

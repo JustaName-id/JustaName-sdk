@@ -1,9 +1,0 @@
-{
-  "name": "justaname-mono-sdk",
-  "$schema": "node_modules/nx/schemas/project-schema.json",
-  "targets": {
-    "start:react-express": {
-      "command":"nx run-many --target=serve --projects=with-react-express-server,with-react-express-client"
-    }
-  }
-}
