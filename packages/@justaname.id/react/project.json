@@ -1,0 +1,56 @@
+{
+  "name": "@justaname.id/react",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@justaname.id/react/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/@justaname.id/react/dist",
+        "tsConfig": "packages/@justaname.id/react/tsconfig.lib.json",
+        "project": "packages/@justaname.id/react/package.json",
+        "entryFile": "packages/@justaname.id/react/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "generateExportsField": true,
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "swc",
+        "format": ["esm", "cjs"],
+        "assets": [
+          {
+            "glob": "packages/@justaname.id/react/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      },
+      "dependsOn": ["lint"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "fix": true,
+        "lintFilePatterns": [
+          "packages/@justaname.id/react/**/*.{ts,tsx,js,jsx}",
+          "packages/@justaname.id/react/package.json"
+        ]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs @justaname.id/react {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  }
+}

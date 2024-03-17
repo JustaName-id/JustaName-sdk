@@ -1,0 +1,57 @@
+{
+  "name": "@justaname.id/sdk",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@justaname.id/sdk/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "main": "packages/@justaname.id/sdk/src/index.ts",
+        "outputPath": "packages/@justaname.id/sdk/dist",
+        "tsConfig": "packages/@justaname.id/sdk/tsconfig.lib.json",
+        "additionalEntryPoints": ["packages/@justaname.id/sdk/src/index.ts"],
+        "project": "packages/@justaname.id/sdk/package.json",
+        "generateExportsField": true,
+        "allowJs": true,
+        "compiler": "swc",
+        "format": ["esm", "cjs"],
+        "assets": [
+          {
+            "glob": "packages/@justaname.id/sdk/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      },
+      "dependsOn": ["lint"]
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs @justaname.id/sdk {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "fix": true,
+        "lintFilePatterns": [
+          "packages/@justaname.id/sdk/src/*.{ts,tsx,js,jsx}",
+          "packages/@justaname.id/sdk/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

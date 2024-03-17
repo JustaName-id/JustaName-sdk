@@ -1,0 +1,23 @@
+{
+  "name": "create-justaname-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/create-justaname-app/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/create-justaname-app/dist",
+        "main": "packages/create-justaname-app/src/index.ts",
+        "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
+        "assets": ["packages/create-justaname-app/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs create-justaname-app {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  },
+  "tags": []
+}

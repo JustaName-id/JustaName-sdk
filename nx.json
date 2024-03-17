@@ -11,14 +11,24 @@
     "libsDir": "packages"
   },
   "targetDefaults": {
+    "release": {
+      "options": {
+        "packageRoot": "packages/{projectName}/dist"
+      },
+      "dependsOn": ["^build", "^test"],
+      "defaultConfiguration": "production"
+    },
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "cache": true
     },
     "test": {
-      "dependsOn": ["build", "^build"]
+      "dependsOn": ["build", "^build"],
+      "cache": true
     },
     "test:coverage": {
-      "dependsOn": ["build", "^build"]
+      "dependsOn": ["build", "^build"],
+      "cache": true
     },
     "prepare": {
       "dependsOn": ["^prepare"]
@@ -35,6 +45,12 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["default", "^default"]
+    },
+    "format": {
+      "cache": true
+    },
+    "lint": {
+      "cache": true
     }
   },
   "affected": {
@@ -42,15 +58,7 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "format",
-          "lint",
-          "test",
-          "test:coverage"
-        ]
-      }
+      "options": {}
     }
   },
   "plugins": [
@@ -111,6 +119,26 @@
         "linter": "eslint",
         "unitTestRunner": "jest"
       }
+    },
+    "@nx/next": {
+      "application": {
+        "style": "none",
+        "linter": "eslint"
+      }
     }
+  },
+  "release": {
+    "version": {
+      "conventionalCommits": true
+    },
+    "changelog": {
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
+    },
+    "projects": [
+      "packages/*",
+      "packages/@justaname.id/*"
+    ]
   }
 }

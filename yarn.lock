@@ -2384,9 +2384,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@workspace:packages/justaname-react-sdk":
+"@justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
-  resolution: "@justaname.id/react@workspace:packages/justaname-react-sdk"
+  resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
     "@justaname.id/sdk": "npm:0.0.6"
     "@tanstack/react-query": "npm:^5.28.4"
@@ -2399,9 +2399,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justaname.id/sdk@npm:0.0.6, @justaname.id/sdk@workspace:packages/justaname-core-sdk":
+"@justaname.id/sdk@npm:0.0.6, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
-  resolution: "@justaname.id/sdk@workspace:packages/justaname-core-sdk"
+  resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
     axios: "npm:^1.6.0"
     dotenv: "npm:16.3.2"

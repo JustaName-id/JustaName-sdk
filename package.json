@@ -67,6 +67,7 @@
     "webpack-cli": "^5.1.4"
   },
   "workspaces": [
+    "packages/@justaname.id/*",
     "packages/*"
   ],
   "packageManager": "yarn@4.1.1",
