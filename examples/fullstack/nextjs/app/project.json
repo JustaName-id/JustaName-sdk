@@ -1,7 +1,7 @@
 {
-  "name": "justaname-next-pages",
+  "name": "justaname-next-app",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "examples/frontend/nextjs/pages",
+  "sourceRoot": "examples/fullstack/nextjs/app",
   "projectType": "application",
   "targets": {},
   "tags": []

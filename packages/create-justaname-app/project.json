@@ -11,7 +11,23 @@
         "outputPath": "packages/create-justaname-app/dist",
         "main": "packages/create-justaname-app/src/index.ts",
         "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
-        "assets": ["packages/create-justaname-app/*.md"]
+        "assets": ["packages/create-justaname-app/*.md"],
+      }
+    },
+    "watch": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "packages/create-justaname-app/dist",
+        "main": "packages/create-justaname-app/src/index.ts",
+        "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
+        "watch": true
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "create-justaname-app:watch",
+        "watch": true
       }
     },
     "publish": {

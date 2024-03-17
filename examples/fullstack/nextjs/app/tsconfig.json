@@ -23,8 +23,8 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    "../../../../examples/frontend/nextjs/app/.next/types/**/*.ts",
-    "../../../../dist/examples/frontend/nextjs/app/.next/types/**/*.ts",
+    "../../../../examples/fullstack/nextjs/app/.next/types/**/*.ts",
+    "../../../../dist/examples/fullstack/nextjs/app/.next/types/**/*.ts",
     "next-env.d.ts"
   ],
   "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
