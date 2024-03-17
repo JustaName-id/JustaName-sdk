@@ -1,0 +1,40 @@
+---
+id: subdomain-write-controller-revoke
+title: "Revoke Subdomain"
+description: "Revokes the specified subdomain by providing the ENS domain name, subdomain name, and chain ID in the request body"
+sidebar_label: "Revoke Subdomain"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFVcFu2zAM/RVBpw1wk2ZAL7l1XQ89rBuaDDt0xSDbTKzUljRJThoY/veRku14SdEWw4AlgBNJ5BPJ90g3XBuwwkutbnI+54s6zXUlpPpupYcrrbzVZQn2p4WtfgSe8BxcZqUhD7S/C9uO+QKYM5DJlYScuR6FpXtmrN7KXKp1MLq+XbDuTIkKkpFtXAuVs6yg9c0nhk9ysvCrBudZqvM9hmCERVMP1vH5/UPCu+OPdDpvwlJawHS8rSHhGWYBytORMKaUWUh3unGUQcNdVkAl6J/fG8CcdLqBzNM9lorjJTg6BeVu8dqRofMW0zqpyRIjplyYXoXo0bFLGU3hSVSmJO+NULxNeO3Aqr/CHSr3B2wOW4INJSRKB1RVVynYE9SrUGuZJ2yHyKrcI64x2np2jZdYqCv2GS0U+EDNAowupWBLLDjtvZuxlbasiiYJm81mFxf4CLsuGr8fB9gbtG0yYup+KO+oIocskGQvfchvUGiU3qWRd5F+3rYR0xmtXOQsh5WoSx//HtdyQGI74VgUOGk3y8C5VV2W+wn/Z+pxXvjaXekcnqNkqM6H8/PnaI/eLEP3nv0+zwmPSXdpvhxFLvwbYu2hTyV5TNpg+QpBnRV6g7Xavq71Wyw/kyumNAseTGdZbfHWhGmS5U46iM0VTitkTKypFkcBhoT7W98U5F0o5WIn1muk5hhvRONQ9TfBLqKsDrhBrF6saYYd/AgMR1uhaRgb7QI5whe4mg79Ph2GMXbKNo7Bhte2RKvCe+Pm0ykGusbCngkjJ5saV9RRE5nzFm8g8d4dhuZ1r77RkAvjaTydwmAZzZWhjxMu1UoHSrsqLMPvMaXjVcIp7Lg/m5x3bSYykjDVhTKvRGiw7vZY0EPPHsM3h0b9Py+lTs8envzUlBQhDXfipOkYRPWMou84RDYKohlPmyYVDr7Zsm1pG9HtPr7gtsJKkVJt7x8QtQCRo4aI9EfY0wyPqZ8tKQYyL2uK5WRetUnvcYlqNP5F27ESv35ZLNE47d6wVRhj3IodJYLPOf+BX1zoQEecIrTf8FKodY29SZIKuPT5DWME8xo=
+sidebar_class_name: "post api-method"
+info_path: api-reference/title
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Revoke Subdomain</h1>
+
+<MethodEndpoint method={"post"} path={"/subdomain/revoke"}></MethodEndpoint>
+
+
+
+Revokes the specified subdomain by providing the ENS domain name, subdomain name, and chain ID in the request body
+
+## Request
+
+<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"ensName"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the ens domain","example":"jan"}}></SchemaItem><SchemaItem collapsible={false} name={"username"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the subdomain","example":"dev"}}></SchemaItem><SchemaItem collapsible={false} name={"chainId"} required={true} schemaName={"number"} qualifierMessage={undefined} schema={{"type":"number","description":"Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)","example":11155111}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs><TabItem label={"default"} value={"default"}><div>
+
+The Subdomain was revoked successfully.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"statusCode"} required={true} schemaName={"number"} qualifierMessage={undefined} schema={{"type":"number","example":200,"description":"The status code of the response."}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>result</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>data</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"response"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"error"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Null if no error occurred, otherwise the error message."}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"statusCode\": 200,\n  \"result\": {\n    \"data\": {\n      \"response\": \"string\"\n    },\n    \"error\": \"string\"\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+      

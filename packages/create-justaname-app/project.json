@@ -1,0 +1,40 @@
+{
+  "name": "create-justaname-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/create-justaname-app/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/create-justaname-app/dist",
+        "main": "packages/create-justaname-app/src/index.ts",
+        "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
+        "format": ["esm"]
+      }
+    },
+    "watch": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "bundler": "tsc",
+        "outputPath": "packages/create-justaname-app/dist",
+        "main": "packages/create-justaname-app/src/index.ts",
+        "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
+        "watch": true
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "create-justaname-app:build",
+        "watch": true
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs create-justaname-app {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  },
+  "tags": []
+}

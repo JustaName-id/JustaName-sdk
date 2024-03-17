@@ -1,0 +1,2788 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/siwe/request-challenge": {
+      "post": {
+        "operationId": "SiweChallengeController_requestChallenge",
+        "summary": "Request a challenge",
+        "description": "Request a challenge.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SiweRequestChallengeApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The challenge was requested successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiweRequestChallengeApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Siwe"]
+      }
+    },
+    "/siwe/verify-message": {
+      "post": {
+        "operationId": "SiweVerifyController_verify",
+        "summary": "Verify a message",
+        "description": "Verify a message.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SiweVerifyMessageApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The message was verified successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiweVerifyMessageApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Siwe"]
+      }
+    },
+    "/subdomain/accept": {
+      "post": {
+        "operationId": "SubdomainWriteController_accept",
+        "summary": "Claim Subdomain",
+        "description": "Claim Subdomain.",
+        "parameters": [
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubdomainAcceptApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subdomain was claimed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainAcceptApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    },
+    "/subdomain/reserve": {
+      "post": {
+        "operationId": "SubdomainWriteController_apiReserve",
+        "summary": "Reserve Subdomain",
+        "description": "Reserve Subdomain.",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "The Api Key.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubdomainReserveApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subdomain was reserved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainReserveApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    },
+    "/subdomain/add": {
+      "post": {
+        "operationId": "SubdomainWriteController_add",
+        "summary": "Add Subdomain",
+        "description": "Adds a new subdomain by providing the required information in the request body",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "The Api Key.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubdomainAddApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subdomain was added successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainAddApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    },
+    "/subdomain/update": {
+      "post": {
+        "operationId": "SubdomainWriteController_update",
+        "summary": "Update Subdomain",
+        "description": "Updates the specified subdomain by providing the required information in the request body",
+        "parameters": [
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubdomainUpdateApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subdomain was updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainUpdateApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    },
+    "/subdomain/revoke": {
+      "post": {
+        "operationId": "SubdomainWriteController_revoke",
+        "summary": "Revoke Subdomain",
+        "description": "Revokes the specified subdomain by providing the ENS domain name, subdomain name, and chain ID in the request body",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubdomainRevokeApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subdomain was revoked successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainRevokeApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    },
+    "/subdomain/name": {
+      "get": {
+        "operationId": "SubdomainReadController_findByDomainNameAndNameAndChainId",
+        "summary": "Get Subdomain by Name and Domain Name",
+        "description": "Retrieves subdomain details based on the specified ENS domain name, subdomain name, and chainId",
+        "parameters": [
+          {
+            "name": "domainName",
+            "required": true,
+            "in": "query",
+            "description": "The name of the ENS domain",
+            "example": "jan",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The Subdomain was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    },
+    "/subdomain/full-domain": {
+      "get": {
+        "operationId": "SubdomainReadController_findByFullDomainAndChainId",
+        "summary": "Get Subdomain by Subname",
+        "description": "Retrieves subdomain details based on the specified subname and chainId",
+        "parameters": [
+          {
+            "name": "fullDomain",
+            "required": true,
+            "in": "query",
+            "description": "The full domain of the ENS domain",
+            "example": "jan.eth or user.jan.eth",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The Subdomain was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    },
+    "/subdomain/domainName": {
+      "get": {
+        "operationId": "SubdomainReadController_findAllByDomainNameAndChainId",
+        "summary": "Get Subdomain by Domain Name",
+        "description": "Retrieves all subdomains associated with the provided domain name",
+        "parameters": [
+          {
+            "name": "domainName",
+            "required": true,
+            "in": "query",
+            "description": "The domain name of the subdomain",
+            "example": "jan",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "description": "The address of the subdomain",
+            "example": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "coinType",
+            "required": true,
+            "in": "query",
+            "description": "The coin type of the address",
+            "example": 60,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "The page number (defaults to 1)",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "description": "The number of items per page (defaults to 20)",
+            "example": 20,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The Subdomain was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    },
+    "/subdomain/address": {
+      "get": {
+        "operationId": "SubdomainReadController_findAllByAddress",
+        "summary": "Get Subdomains by Address",
+        "description": "Retrieves all subdomains associated with an address",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "description": "The address of the subdomain",
+            "example": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "coinType",
+            "required": true,
+            "in": "query",
+            "description": "The coin type of the address",
+            "example": 60,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "isClaimed",
+            "required": true,
+            "in": "query",
+            "description": "if true, will return claimed subdomain, if false, will return unclaimed subdomain, if not provided, will return all subdomains",
+            "example": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The Subdomain was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    },
+    "/subdomain/invitations": {
+      "get": {
+        "operationId": "SubdomainReadController_getInvitations",
+        "summary": "Get Subdomains Reserved to an Address",
+        "description": "Retrieves all subdomains reserved to an address",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "description": "The address of the subdomain",
+            "example": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "coinType",
+            "required": true,
+            "in": "query",
+            "description": "The coin type of the address",
+            "example": 60,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "isClaimed",
+            "required": true,
+            "in": "query",
+            "description": "if true, will return claimed subdomain, if false, will return unclaimed subdomain, if not provided, will return all subdomains",
+            "example": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The Subdomain was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    },
+    "/subdomain/is-username-available": {
+      "get": {
+        "operationId": "SubdomainReadController_isUsernameAvailable",
+        "summary": "Check if Subname Is Available",
+        "description": "Checks if a subname is available for a given domain",
+        "parameters": [
+          {
+            "name": "fullDomain",
+            "required": true,
+            "in": "query",
+            "description": "The full domain of the ENS domain",
+            "example": "jan.eth or user.jan.eth",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The response was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IsUsernameAvailableApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Subdomain"]
+      }
+    }
+  },
+  "info": {
+    "title": "Title",
+    "description": "description",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Siwe",
+      "description": ""
+    },
+    {
+      "name": "Subdomain",
+      "description": ""
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://staging-api.justaname.id"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "SiweRequestChallengeApiRequest": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Domain name",
+            "example": "test"
+          },
+          "address": {
+            "type": "string",
+            "description": "Address",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "origin": {
+            "type": "string",
+            "description": "Origin",
+            "example": "http://localhost:3000"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": "11155111"
+          },
+          "ttl": {
+            "type": "number",
+            "description": "Time to Live (TTL) in milliseconds (ms), default is 2 minutes (2 * 60 * 1000 = 120000 ms)",
+            "example": 120000,
+            "default": 120000
+          }
+        },
+        "required": ["domain", "address", "origin", "chainId"]
+      },
+      "SiweRequestChallengeApiResponse": {
+        "type": "object",
+        "properties": {
+          "challenge": {
+            "type": "string",
+            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+          }
+        },
+        "required": ["challenge"]
+      },
+      "SiweRequestChallengeApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SiweRequestChallengeApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "SiweRequestChallengeApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SiweRequestChallengeApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "SiweVerifyMessageApiRequest": {
+        "type": "object",
+        "properties": {
+          "signature": {
+            "type": "string",
+            "example": "0x0a"
+          },
+          "message": {
+            "type": "string",
+            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+          },
+          "address": {
+            "type": "string",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": ["signature", "message", "address"]
+      },
+      "SiweVerifyMessageApiResponse": {
+        "type": "object",
+        "properties": {
+          "verified": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "required": ["verified"]
+      },
+      "SiweVerifyMessageApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SiweVerifyMessageApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "SiweVerifyMessageApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SiweVerifyMessageApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "EnsAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensDomain": {
+            "type": "string"
+          },
+          "offchainResolverId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          }
+        },
+        "required": ["ensDomain", "offchainResolverId", "workspaceId"]
+      },
+      "EnsAddApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": ["id"]
+      },
+      "EnsAddApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EnsAddApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "EnsAddApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/EnsAddApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "UpdateUserChosenLimitApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensId": {
+            "type": "string"
+          },
+          "userChosenLimit": {
+            "type": "number"
+          }
+        },
+        "required": ["ensId", "userChosenLimit"]
+      },
+      "RemoveUserChosenLimitApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensId": {
+            "type": "string"
+          }
+        },
+        "required": ["ensId"]
+      },
+      "EnsDeleteApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensId": {
+            "type": "string"
+          }
+        },
+        "required": ["ensId"]
+      },
+      "UpdateIsBlockedApiRequest": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "isBlocked": {
+            "type": "boolean"
+          }
+        },
+        "required": ["ens", "chainId", "isBlocked"]
+      },
+      "EnsApiResponse": {
+        "type": "object",
+        "properties": {
+          "ensId": {
+            "type": "string"
+          },
+          "domainName": {
+            "type": "string"
+          },
+          "userChosenLimit": {
+            "type": "number"
+          }
+        },
+        "required": ["ensId", "domainName", "userChosenLimit"]
+      },
+      "EnsApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EnsApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "EnsApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/EnsApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "EnsGetExpiryApiRequest": {
+        "type": "object",
+        "properties": {
+          "names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["names"]
+      },
+      "OffchainResolverApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "resolverAddress": {
+            "type": "string"
+          },
+          "ensRegistryAddress": {
+            "type": "string"
+          },
+          "nodeProvider": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "chainName": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resolverAddress",
+          "ensRegistryAddress",
+          "nodeProvider",
+          "chainId",
+          "chainName",
+          "environment"
+        ]
+      },
+      "OffchainResolverApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/OffchainResolverApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "OffchainResolverApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/OffchainResolverApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "OffchainResolverUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "resolverAddress": {
+            "type": "string"
+          },
+          "ensRegistryAddress": {
+            "type": "string"
+          },
+          "nodeProvider": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "resolverAddress",
+          "ensRegistryAddress",
+          "nodeProvider",
+          "environment"
+        ]
+      },
+      "OffchainResolverUpdateApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "resolverAddress": {
+            "type": "string"
+          },
+          "ensRegistryAddress": {
+            "type": "string"
+          },
+          "nodeProvider": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "resolverAddress",
+          "ensRegistryAddress",
+          "nodeProvider",
+          "environment"
+        ]
+      },
+      "OffchainResolverUpdateApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/OffchainResolverUpdateApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "OffchainResolverUpdateApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/OffchainResolverUpdateApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "AddressEnsDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "coinType": {
+            "type": "number"
+          }
+        },
+        "required": ["address", "coinType"]
+      },
+      "TextRecordDto": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": ["key", "value"]
+      },
+      "SubdomainAcceptApiRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "ensName": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressEnsDto"
+            }
+          },
+          "text": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextRecordDto"
+            }
+          },
+          "contentHash": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "ensName",
+          "chainId",
+          "addresses",
+          "text",
+          "contentHash"
+        ]
+      },
+      "Metadata": {
+        "type": "object",
+        "properties": {}
+      },
+      "SubdomainAcceptApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "0x..."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          }
+        },
+        "required": ["id", "metadata"]
+      },
+      "SubdomainAcceptApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubdomainAcceptApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "SubdomainAcceptApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubdomainAcceptApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "SubdomainReserveApiRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "ensName": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "ethAddress": {
+            "type": "string"
+          }
+        },
+        "required": ["username", "ensName", "chainId", "ethAddress"]
+      },
+      "SubdomainReserveApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": ["id"]
+      },
+      "SubdomainReserveApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubdomainReserveApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "SubdomainReserveApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubdomainReserveApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "SubdomainAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The name of the subdomain",
+            "example": "dev"
+          },
+          "ensName": {
+            "type": "string",
+            "description": "The name of the ens domain",
+            "example": "jan"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          },
+          "addresses": {
+            "description": "The addresses corresponding to the subdomain",
+            "example": [
+              {
+                "address": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+                "coinType": 60
+              },
+              {
+                "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+                "coinType": 0
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressEnsDto"
+            }
+          },
+          "text": {
+            "description": "The texts corresponding to the subdomain",
+            "example": [
+              {
+                "key": "twitter.com",
+                "value": "@justaname"
+              },
+              {
+                "key": "youtube.com",
+                "value": "justaname"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextRecordDto"
+            }
+          },
+          "contentHash": {
+            "type": "string",
+            "description": "The content hash of the subdomain",
+            "example": "ipfs://QmRAQB6YaCyidP37UdDnjFY5vQuiBrcqdyoW1CuDgwxkD4"
+          }
+        },
+        "required": [
+          "username",
+          "ensName",
+          "chainId",
+          "addresses",
+          "text",
+          "contentHash"
+        ]
+      },
+      "SubdomainAddApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "id"
+          }
+        },
+        "required": ["id"]
+      },
+      "SubdomainAddApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubdomainAddApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "SubdomainAddApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubdomainAddApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "SubdomainUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The name of the ens domain",
+            "example": "dev"
+          },
+          "ensName": {
+            "type": "string",
+            "description": "The name of the subdomain",
+            "example": "jan"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          },
+          "addresses": {
+            "description": "The new addresses associated with the subdomain",
+            "example": [
+              {
+                "address": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+                "coinType": 60
+              },
+              {
+                "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+                "coinType": 0
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressEnsDto"
+            }
+          },
+          "text": {
+            "description": "The new texts of the subdomain",
+            "example": [
+              {
+                "key": "twitter.com",
+                "value": "@justaname"
+              },
+              {
+                "key": "youtube.com",
+                "value": "justaname"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextRecordDto"
+            }
+          },
+          "contentHash": {
+            "type": "string",
+            "description": "The new contentHash of the subdomain",
+            "example": "ipfs://QmRAQB6YaCyidP37UdDnjFY5vQuiBrcqdyoW1CuDgwxkD4"
+          }
+        },
+        "required": [
+          "username",
+          "ensName",
+          "chainId",
+          "addresses",
+          "text",
+          "contentHash"
+        ]
+      },
+      "SubdomainUpdateApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "id"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          }
+        },
+        "required": ["id", "metadata"]
+      },
+      "SubdomainUpdateApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubdomainUpdateApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "SubdomainUpdateApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubdomainUpdateApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "SubdomainRevokeApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensName": {
+            "type": "string",
+            "description": "The name of the ens domain",
+            "example": "jan"
+          },
+          "username": {
+            "type": "string",
+            "description": "The name of the subdomain",
+            "example": "dev"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          }
+        },
+        "required": ["ensName", "username", "chainId"]
+      },
+      "SubdomainRevokeApiResponse": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          }
+        },
+        "required": ["response"]
+      },
+      "SubdomainRevokeApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubdomainRevokeApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "SubdomainRevokeApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubdomainRevokeApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "MetadataApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "contentHash": {
+            "type": "string"
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "textRecords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "subdomainId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "contentHash",
+          "addresses",
+          "textRecords",
+          "subdomainId"
+        ]
+      },
+      "SubdomainApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "subdomainName": {
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadataApiResponse"
+          },
+          "ensId": {
+            "type": "string"
+          },
+          "fullSubdomainName": {
+            "type": "string"
+          },
+          "isClaimed": {
+            "type": "boolean"
+          },
+          "claimedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "subdomainName",
+          "metadata",
+          "ensId",
+          "fullSubdomainName",
+          "isClaimed",
+          "claimedAt"
+        ]
+      },
+      "SubdomainApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubdomainApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "SubdomainApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubdomainApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "PaginationApiResponse": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "number"
+          },
+          "page": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "nextPage": {
+            "type": "number"
+          },
+          "prevPage": {
+            "type": "number"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          },
+          "hasPrevPage": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "totalCount",
+          "page",
+          "limit",
+          "totalPages",
+          "nextPage",
+          "prevPage",
+          "hasNextPage",
+          "hasPrevPage"
+        ]
+      },
+      "SubdomainWithPaginationApiResponse": {
+        "type": "object",
+        "properties": {
+          "subnames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationApiResponse"
+          }
+        },
+        "required": ["subnames", "pagination"]
+      },
+      "SubdomainWithPaginationApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubdomainWithPaginationApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "SubdomainWithPaginationApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubdomainWithPaginationApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "IsUsernameAvailableApiResponse": {
+        "type": "object",
+        "properties": {
+          "isAvailable": {
+            "type": "boolean"
+          }
+        },
+        "required": ["isAvailable"]
+      },
+      "IsUsernameAvailableApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/IsUsernameAvailableApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "IsUsernameAvailableApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/IsUsernameAvailableApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "PrimaryNameAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The full name",
+            "example": "ghadi.jan.eth"
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the primary name",
+            "example": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          }
+        },
+        "required": ["name", "address", "chainId"]
+      },
+      "PrimaryNameUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The full name",
+            "example": "ghadi.jan.eth"
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the primary name",
+            "example": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          }
+        },
+        "required": ["name", "address", "chainId"]
+      },
+      "CheckEmailAvailableDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "ApiKeyApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          },
+          "creatorId": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "name", "key", "workspaceId", "creatorId"]
+      },
+      "ApiKeyApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ApiKeyApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "ApiKeyApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/ApiKeyApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "ApiKeyAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "workspaceId"]
+      },
+      "ApiKeyAddApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "key"]
+      },
+      "ApiKeyAddApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ApiKeyAddApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "ApiKeyAddApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/ApiKeyAddApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "ApiKeyDeleteApiRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": ["id"]
+      },
+      "UserAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "occupation": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "occupation",
+          "phoneNumber",
+          "location"
+        ]
+      },
+      "UserAddApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": ["id"]
+      },
+      "UserAddApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserAddApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "UserAddApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/UserAddApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "UserUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "occupation": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "occupation",
+          "phoneNumber",
+          "location"
+        ]
+      },
+      "UserUpdateApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "occupation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "firstName",
+          "lastName",
+          "phoneNumber",
+          "location",
+          "occupation"
+        ]
+      },
+      "UserUpdateApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserUpdateApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "UserUpdateApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/UserUpdateApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "UserApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "occupation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "firstName",
+          "lastName",
+          "phoneNumber",
+          "location",
+          "occupation"
+        ]
+      },
+      "UserApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "UserApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/UserApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "UserWorkspaceApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          },
+          "role": {
+            "type": "object"
+          },
+          "email": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "required": ["id", "userId", "workspaceId", "role", "email", "isActive"]
+      },
+      "UserWorkspaceApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserWorkspaceApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "UserWorkspaceApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/UserWorkspaceApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "UserWorkspaceChangeRoleApiRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "object"
+          }
+        },
+        "required": ["id", "role"]
+      },
+      "UserWorkspaceChangeRoleApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "object"
+          }
+        },
+        "required": ["id", "role"]
+      },
+      "UserWorkspaceChangeRoleApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserWorkspaceChangeRoleApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "UserWorkspaceChangeRoleApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/UserWorkspaceChangeRoleApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "UserWorkspaceRemoveMemberApiRequest": {
+        "type": "object",
+        "properties": {
+          "workspaceId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": ["workspaceId", "email"]
+      },
+      "UserWorkspaceLeaveWorkspaceApiRequest": {
+        "type": "object",
+        "properties": {
+          "workspaceId": {
+            "type": "string"
+          }
+        },
+        "required": ["workspaceId"]
+      },
+      "UserWorkspaceLeaveWorkspaceApiResponse": {
+        "type": "object",
+        "properties": {
+          "deleted": {
+            "type": "boolean"
+          }
+        },
+        "required": ["deleted"]
+      },
+      "UserWorkspaceLeaveWorkspaceApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserWorkspaceLeaveWorkspaceApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "UserWorkspaceLeaveWorkspaceApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/UserWorkspaceLeaveWorkspaceApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "WorkspaceApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "businessType": {
+            "type": "string"
+          },
+          "billingEmail": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "name", "businessType", "billingEmail"]
+      },
+      "WorkspaceApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/WorkspaceApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "WorkspaceApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/WorkspaceApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "WorkspaceAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "businessType": {
+            "type": "string"
+          },
+          "billingEmail": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "businessType", "billingEmail"]
+      },
+      "WorkspaceAddApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": ["id"]
+      },
+      "WorkspaceAddApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/WorkspaceAddApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "WorkspaceAddApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/WorkspaceAddApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "WorkspaceUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "billingEmail": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "billingEmail"]
+      },
+      "WorkspaceUpdateApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "billingEmail": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "businessType": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "billingEmail", "name", "businessType"]
+      },
+      "WorkspaceUpdateApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/WorkspaceUpdateApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "WorkspaceUpdateApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/WorkspaceUpdateApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "UserInvitationApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "invitorId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "object"
+          },
+          "role": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "invitorId",
+          "workspaceId",
+          "status",
+          "role"
+        ]
+      },
+      "UserInvitationApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserInvitationApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "UserInvitationApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/UserInvitationApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "UserInvitationAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          },
+          "role": {
+            "type": "object"
+          }
+        },
+        "required": ["email", "workspaceId", "role"]
+      },
+      "UserInvitationUpdateApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "object"
+          },
+          "role": {
+            "type": "object"
+          }
+        },
+        "required": ["id", "email", "workspaceId", "status", "role"]
+      },
+      "UserInvitationUpdateApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserInvitationUpdateApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "UserInvitationUpdateApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/UserInvitationUpdateApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      },
+      "UserInvitationUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "required": ["id", "status"]
+      },
+      "UserInvitationDeleteApiRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": ["id"]
+      },
+      "PlanRangeDto": {
+        "type": "object",
+        "properties": {
+          "upperLimit": {
+            "type": "number"
+          },
+          "chargePerUnit": {
+            "type": "number"
+          }
+        },
+        "required": ["upperLimit", "chargePerUnit"]
+      },
+      "PlanAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "planRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanRangeDto"
+            }
+          }
+        },
+        "required": ["name", "planRanges"]
+      },
+      "SubscriptionUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "planId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "object"
+          }
+        },
+        "required": ["id", "planId", "status"]
+      },
+      "PaymentPayApiRequest": {
+        "type": "object",
+        "properties": {
+          "paymentDueDate": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": ["paymentDueDate"]
+      },
+      "PaymentRetryPayApiRequest": {
+        "type": "object",
+        "properties": {
+          "paymentDueDate": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": ["paymentDueDate"]
+      },
+      "DefaultPaymentMethodUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "workspaceId": {
+            "type": "string"
+          },
+          "paymentMethodId": {
+            "type": "string"
+          }
+        },
+        "required": ["workspaceId", "paymentMethodId"]
+      },
+      "PaymentDeleteApiRequest": {
+        "type": "object",
+        "properties": {
+          "paymentMethodId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          }
+        },
+        "required": ["paymentMethodId", "workspaceId"]
+      },
+      "PaymentSetupIntentApiRequest": {
+        "type": "object",
+        "properties": {
+          "billingEmail": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          },
+          "workspaceName": {
+            "type": "string"
+          },
+          "defaultPayment": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "billingEmail",
+          "workspaceId",
+          "workspaceName",
+          "defaultPayment"
+        ]
+      },
+      "DiscountAddApiRequest": {
+        "type": "object",
+        "properties": {}
+      },
+      "DiscountApplyApiRequest": {
+        "type": "object",
+        "properties": {}
+      },
+      "NewsletterSubscriberAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": ["email"]
+      },
+      "NewsletterSubscriberDeleteApiRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": ["email"]
+      },
+      "FeatureCreateApiRequest": {
+        "type": "object",
+        "properties": {}
+      },
+      "FeatureCreateApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": ["id"]
+      },
+      "FeatureCreateApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/FeatureCreateApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "ApplyApiRequest": {
+        "type": "object",
+        "properties": {}
+      },
+      "FeatureSubscribeApiRequest": {
+        "type": "object",
+        "properties": {}
+      },
+      "FeatureSubscribeApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": ["id"]
+      },
+      "FeatureSubscribeApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/FeatureSubscribeApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "FeatureIsEligibleApiResponse": {
+        "type": "object",
+        "properties": {
+          "isEligible": {
+            "type": "boolean"
+          }
+        },
+        "required": ["isEligible"]
+      },
+      "FeatureIsEligibleApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/FeatureIsEligibleApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": ["data", "error"]
+      },
+      "FeatureIsEligibleApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/FeatureIsEligibleApiResponseResultSwagger"
+          }
+        },
+        "required": ["statusCode", "result"]
+      }
+    }
+  }
+}
