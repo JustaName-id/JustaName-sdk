@@ -2,11 +2,11 @@
   "name": "create-justaname-app",
   "version": "0.0.3",
   "dependencies": {
-    "node-fetch": "2.7.0",
-    "tar": "6.2.0",
+    "@inquirer/prompts": "^4.3.0",
     "fs-extra": "11.2.0",
+    "node-fetch": "2.7.0",
     "ora": "^8.0.1",
-    "@inquirer/prompts": "^4.3.0"
+    "tar": "6.2.0"
   },
   "type": "module",
   "bin": "lib/index.esm.js"

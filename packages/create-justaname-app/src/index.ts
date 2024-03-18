@@ -3,8 +3,9 @@ import tar from 'tar';
 import fs from 'fs-extra';
 import path from 'path';
 import { collectAppDetails } from './lib/helpers/questions';
-import { downloadDetails } from './lib/helpers/download';
-import Ora from "ora";
+import { downloadDetails, installDependencies } from './lib/helpers/download';
+import Ora from 'ora';
+import { BackendEnv, FrontendEnv, createEnvFile } from './lib/helpers/env';
 
 async function main() {
   const collectApps = await collectAppDetails();
@@ -13,7 +14,7 @@ async function main() {
   const spinner = Ora({
     text: 'Downloading your app...',
     color: 'green',
-    spinner:'dots'
+    spinner: 'dots',
   }).start();
 
   try {
@@ -32,13 +33,49 @@ async function main() {
         .on('finish', resolve);
     });
 
-    const frontendDir = path.join(projectDir + '/temp', details.frontendFramework);
-    const backendDir = path.join(projectDir + '/temp', details.backendFramework);
+    const frontendDir = path.join(
+      projectDir + '/temp',
+      details.frontendFramework
+    );
+    const backendDir = path.join(
+      projectDir + '/temp',
+      details.backendFramework
+    );
 
     await fs.copy(frontendDir, path.join(projectDir, 'frontend'));
     await fs.copy(backendDir, path.join(projectDir, 'backend'));
 
     await fs.remove(projectDir + '/temp');
+
+    await installDependencies(path.join(projectDir, 'backend'));
+    spinner.succeed('Backend dependencies installed');
+
+    // await installDependencies(path.join(projectDir, 'frontend'));
+    // spinner.succeed('Frontend dependencies installed');
+
+    const backendEnv: BackendEnv = {
+      JUSTANAME_API_KEY: 'aZsaY98yzzjVaQmNFrMm8jMIdgQeJXOD',
+      JUSTANAME_CHAIN_ID: 11155111,
+      JUSTANAME_DOMAIN: 'justawallet.eth',
+      JUSTANAME_ORIGIN: 'https://justaname.id',
+    };
+
+    const frontEnv: FrontendEnv = {
+      API_URL: 'http://localhost:3333',
+      ENS_DOMAIN: 'justawallet.eth',
+      CHAIN_ID: 11155111,
+    };
+
+    await createEnvFile(
+      path.join(projectDir, 'backend'),
+      backendEnv,
+    );
+
+    await createEnvFile(
+      path.join(projectDir, 'frontend'),
+      frontEnv,
+      "REACT_APP_",
+    );
 
     spinner.succeed('Download complete');
   } catch (err) {

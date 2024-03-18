@@ -1,3 +1,4 @@
+import { exec } from 'child_process';
 import { AppDetails} from './questions';
 
 export const downloadDetails = async (project: AppDetails) => {
@@ -10,3 +11,15 @@ export const downloadDetails = async (project: AppDetails) => {
     backendFramework: 'examples/backend/'+ project.backendFramework,
   }
 }
+
+export const installDependencies = (directory: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    exec('npm install', { cwd: directory }, (error, stdout) => {
+      if (error) {
+        reject(new Error(`Failed to install dependencies: ${error.message}`));
+        return;
+      }
+      resolve();
+    });
+  });
+};
