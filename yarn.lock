@@ -38,6 +38,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@adraffy/ens-normalize@npm:1.10.1":
+  version: 1.10.1
+  resolution: "@adraffy/ens-normalize@npm:1.10.1"
+  checksum: 10c0/fdd647604e8fac6204921888aaf5a6bc65eabf0d2921bc5f93b64d01f4bc33ead167c1445f7de05468d05cd92ac31b74c68d2be840c62b79d73693308f885c06
+  languageName: node
+  linkType: hard
+
 "@ampproject/remapping@npm:^2.2.0, @ampproject/remapping@npm:^2.2.1":
   version: 2.3.0
   resolution: "@ampproject/remapping@npm:2.3.0"
@@ -6895,6 +6902,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:18.15.13":
+  version: 18.15.13
+  resolution: "@types/node@npm:18.15.13"
+  checksum: 10c0/6e5f61c559e60670a7a8fb88e31226ecc18a21be103297ca4cf9848f0a99049dae77f04b7ae677205f2af494f3701b113ba8734f4b636b355477a6534dbb8ada
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:18.16.9":
   version: 18.16.9
   resolution: "@types/node@npm:18.16.9"
@@ -8007,6 +8021,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@walletconnect/react-native-compat@npm:^2.11.2":
+  version: 2.11.2
+  resolution: "@walletconnect/react-native-compat@npm:2.11.2"
+  dependencies:
+    events: "npm:3.3.0"
+    fast-text-encoding: "npm:^1.0.6"
+    react-native-url-polyfill: "npm:^2.0.0"
+  peerDependencies:
+    "@react-native-async-storage/async-storage": "*"
+    "@react-native-community/netinfo": "*"
+    expo-application: "*"
+    react-native-get-random-values: "*"
+  peerDependenciesMeta:
+    expo-application:
+      optional: true
+  checksum: 10c0/b8a9d63de7e57078203c08a70f3b406d21582495cbea089160f5fd670d9c4db9afb9dee5507acb534507d4651cd6e1e38231930996cad6d8d5115d9b0d92124a
+  languageName: node
+  linkType: hard
+
 "@walletconnect/relay-api@npm:^1.0.9":
   version: 1.0.9
   resolution: "@walletconnect/relay-api@npm:1.0.9"
@@ -8142,6 +8175,74 @@ __metadata:
   version: 1.0.0
   resolution: "@web3-storage/multipart-parser@npm:1.0.0"
   checksum: 10c0/1cdf5bbb5a40d151a4c6ebf00e7e2f1075bd91d08d5c7259e683a4b5d31e697ad594024644dcf547f297fdef39d39b75a7edb2b234720f80e8e860284022aa96
+  languageName: node
+  linkType: hard
+
+"@web3modal/core-react-native@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@web3modal/core-react-native@npm:1.2.1"
+  dependencies:
+    valtio: "npm:1.10.5"
+  peerDependencies:
+    "@react-native-async-storage/async-storage": ">=1.17.0"
+    "@walletconnect/react-native-compat": ">=2.10.5"
+    react: ">=17"
+    react-native: ">=0.68.5"
+  checksum: 10c0/9fafe945a288b5543fcc5eb9138ecdeeb74e8eed7f9263a7f3951fec3d1cc957730cce06e888bdac063f64657a02d8d3ff67187b3705812f230d8b7364bcab09
+  languageName: node
+  linkType: hard
+
+"@web3modal/scaffold-react-native@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@web3modal/scaffold-react-native@npm:1.2.1"
+  dependencies:
+    "@web3modal/core-react-native": "npm:1.2.1"
+    "@web3modal/ui-react-native": "npm:1.2.1"
+  peerDependencies:
+    react: ">=17"
+    react-native: ">=0.68.5"
+    react-native-modal: ">=13"
+  checksum: 10c0/218d1ed1ea32f5166f0f4d8c36f2cd6602c5a8da865a91d71b3d20bb0a6e6382c4c90b155dde00b871edc5bda3a153dfc3014a586533140060949d98055be18d
+  languageName: node
+  linkType: hard
+
+"@web3modal/scaffold-utils-react-native@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@web3modal/scaffold-utils-react-native@npm:1.2.1"
+  dependencies:
+    "@web3modal/scaffold-react-native": "npm:1.2.1"
+  checksum: 10c0/3028fe4de7904ae170c2198a13be746b01d102746420ba150f2e91bcd06ab22ef468fefe93ed25a2714a3bd058d19e18cd7cf3e0923ebcd58bcaa21b38ee001f
+  languageName: node
+  linkType: hard
+
+"@web3modal/ui-react-native@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@web3modal/ui-react-native@npm:1.2.1"
+  dependencies:
+    qrcode: "npm:1.5.3"
+  peerDependencies:
+    react: ">=17"
+    react-native: ">=0.68.5"
+    react-native-svg: ">=13"
+  checksum: 10c0/5315f659d01720cb544a9bc2378c3f6d8aa869382964d4c573e1caf0aa6c6b0d552355bbac22f69d5ec85894f647af7a4d8c6b65eea8468f7d3edd4bba8b5f36
+  languageName: node
+  linkType: hard
+
+"@web3modal/wagmi-react-native@npm:^1.2.0":
+  version: 1.2.1
+  resolution: "@web3modal/wagmi-react-native@npm:1.2.1"
+  dependencies:
+    "@web3modal/scaffold-react-native": "npm:1.2.1"
+    "@web3modal/scaffold-utils-react-native": "npm:1.2.1"
+  peerDependencies:
+    "@react-native-async-storage/async-storage": ">=1.17.0"
+    "@react-native-community/netinfo": "*"
+    react: ">=17"
+    react-native: ">=0.68.5"
+    react-native-get-random-values: "*"
+    viem: ">=1"
+    wagmi: ">=1"
+  checksum: 10c0/b0115c76c12f44aba1792cbe91a31c534e18da4649704cb73619c09ec0cdbe88c6028268ea7ccab4c43f055b8561af53d218af6f07e214ba60f30d539e068437
   languageName: node
   linkType: hard
 
@@ -8515,6 +8616,13 @@ __metadata:
   version: 1.2.2
   resolution: "address@npm:1.2.2"
   checksum: 10c0/1c8056b77fb124456997b78ed682ecc19d2fd7ea8bd5850a2aa8c3e3134c913847c57bcae418622efd32ba858fa1e242a40a251ac31da0515664fc0ac03a047d
+  languageName: node
+  linkType: hard
+
+"aes-js@npm:4.0.0-beta.5":
+  version: 4.0.0-beta.5
+  resolution: "aes-js@npm:4.0.0-beta.5"
+  checksum: 10c0/444f4eefa1e602cbc4f2a3c644bc990f93fd982b148425fee17634da510586fc09da940dcf8ace1b2d001453c07ff042e55f7a0482b3cc9372bf1ef75479090c
   languageName: node
   linkType: hard
 
@@ -13336,6 +13444,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ethers@npm:^6.11.1":
+  version: 6.11.1
+  resolution: "ethers@npm:6.11.1"
+  dependencies:
+    "@adraffy/ens-normalize": "npm:1.10.1"
+    "@noble/curves": "npm:1.2.0"
+    "@noble/hashes": "npm:1.3.2"
+    "@types/node": "npm:18.15.13"
+    aes-js: "npm:4.0.0-beta.5"
+    tslib: "npm:2.4.0"
+    ws: "npm:8.5.0"
+  checksum: 10c0/97a920e0244ba6cd1622b58a448c87f26dad20bad242777abb2e583d045bf7752218477bd7367ba6518c2a5e2b16030afff15e87b705526d0ea667498c27ac89
+  languageName: node
+  linkType: hard
+
 "event-target-shim@npm:^5.0.0, event-target-shim@npm:^5.0.1":
   version: 5.0.1
   resolution: "event-target-shim@npm:5.0.1"
@@ -13371,7 +13494,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"events@npm:^3.0.0, events@npm:^3.2.0, events@npm:^3.3.0":
+"events@npm:3.3.0, events@npm:^3.0.0, events@npm:^3.2.0, events@npm:^3.3.0":
   version: 3.3.0
   resolution: "events@npm:3.3.0"
   checksum: 10c0/d6b6f2adbccbcda74ddbab52ed07db727ef52e31a61ed26db9feb7dc62af7fc8e060defa65e5f8af9449b86b52cc1a1f6a79f2eafcf4e62add2b7a1fa4a432f6
@@ -13520,7 +13643,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-constants@npm:~15.4.0":
+"expo-constants@npm:~15.4.0, expo-constants@npm:~15.4.3":
   version: 15.4.5
   resolution: "expo-constants@npm:15.4.5"
   dependencies:
@@ -13557,6 +13680,16 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: 10c0/d3699129ae1d536787f0e84f0e9e4cf5c1c99a6f8396057db6319de6485f8a832b98902aa13d71973c75fb9067b36290b1e9947a3fae79e6bf46348cf72c2ee5
+  languageName: node
+  linkType: hard
+
+"expo-linking@npm:^6.2.2":
+  version: 6.2.2
+  resolution: "expo-linking@npm:6.2.2"
+  dependencies:
+    expo-constants: "npm:~15.4.3"
+    invariant: "npm:^2.2.4"
+  checksum: 10c0/fcbac8ba0471e676682ee5e83fe977faf9a4430cf208654bf76a747b641a5d40cbacf86ab3898d47953cc3338446e6c7f11c3fc94284b6eeab1202fd59ddccf6
   languageName: node
   linkType: hard
 
@@ -13869,6 +14002,13 @@ __metadata:
   version: 2.1.1
   resolution: "fast-safe-stringify@npm:2.1.1"
   checksum: 10c0/d90ec1c963394919828872f21edaa3ad6f1dddd288d2bd4e977027afff09f5db40f94e39536d4646f7e01761d704d72d51dce5af1b93717f3489ef808f5f4e4d
+  languageName: node
+  linkType: hard
+
+"fast-text-encoding@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "fast-text-encoding@npm:1.0.6"
+  checksum: 10c0/e1d0381bda229c92c7906f63308f3b9caca8c78b732768b1ee16f560089ed21bc159bbe1434138ccd3815931ec8d4785bdade1ad1c45accfdf27ac6606ac67d2
   languageName: node
   linkType: hard
 
@@ -17532,6 +17672,8 @@ __metadata:
     "@vitejs/plugin-react": "npm:^4.2.0"
     "@vitest/coverage-v8": "npm:^1.0.4"
     "@vitest/ui": "npm:^1.3.1"
+    "@walletconnect/react-native-compat": "npm:^2.11.2"
+    "@web3modal/wagmi-react-native": "npm:^1.2.0"
     axios: "npm:^1.6.0"
     babel-jest: "npm:^29.4.1"
     babel-preset-expo: "npm:~10.0.0"
@@ -17545,7 +17687,9 @@ __metadata:
     eslint-plugin-jsx-a11y: "npm:6.7.1"
     eslint-plugin-react: "npm:7.32.2"
     eslint-plugin-react-hooks: "npm:4.6.0"
+    ethers: "npm:^6.11.1"
     expo: "npm:~50.0.3"
+    expo-linking: "npm:^6.2.2"
     expo-splash-screen: "npm:~0.26.1"
     expo-status-bar: "npm:~1.11.1"
     express: "npm:^4.18.1"
@@ -17566,6 +17710,7 @@ __metadata:
     react-native: "npm:0.73.2"
     react-native-svg: "npm:14.1.0"
     react-native-svg-transformer: "npm:1.2.0"
+    react-native-url-polyfill: "npm:^2.0.0"
     react-native-web: "npm:~0.19.9"
     react-refresh: "npm:^0.10.0"
     react-router-dom: "npm:6.11.2"
@@ -22147,6 +22292,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-url-polyfill@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "react-native-url-polyfill@npm:2.0.0"
+  dependencies:
+    whatwg-url-without-unicode: "npm:8.0.0-3"
+  peerDependencies:
+    react-native: "*"
+  checksum: 10c0/a48e6978f5a2c9e225bb93cc5f9985a8ac0fe7d8122105bcd88ef8d8420a3b33a67ce5d2bda2b606bf5fa94af9f6d04efce354580b60900e7c967fd2ebdc42cf
+  languageName: node
+  linkType: hard
+
 "react-native-web@npm:~0.19.9":
   version: 0.19.10
   resolution: "react-native-web@npm:0.19.10"
@@ -25237,6 +25393,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:2.4.0":
+  version: 2.4.0
+  resolution: "tslib@npm:2.4.0"
+  checksum: 10c0/eb19bda3ae545b03caea6a244b34593468e23d53b26bf8649fbc20fce43e9b21a71127fd6d2b9662c0fe48ee6ff668ead48fd00d3b88b2b716b1c12edae25b5d
+  languageName: node
+  linkType: hard
+
 "tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.6.2":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
@@ -25942,6 +26105,21 @@ __metadata:
   version: 13.11.0
   resolution: "validator@npm:13.11.0"
   checksum: 10c0/0107da3add5a4ebc6391dac103c55f6d8ed055bbcc29a4c9cbf89eacfc39ba102a5618c470bdc33c6487d30847771a892134a8c791f06ef0962dd4b7a60ae0f5
+  languageName: node
+  linkType: hard
+
+"valtio@npm:1.10.5":
+  version: 1.10.5
+  resolution: "valtio@npm:1.10.5"
+  dependencies:
+    proxy-compare: "npm:2.5.1"
+    use-sync-external-store: "npm:1.2.0"
+  peerDependencies:
+    react: ">=16.8"
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: 10c0/f0ab44b408931bc611cf213414d4b513f9c0af5bc3540a15362f154471bfca2d103957df33d42672d5a1a90e1a7fc97d2371a800328936e0e886ef60e883fb05
   languageName: node
   linkType: hard
 
@@ -26929,6 +27107,21 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 10c0/579817dbbab3ee46669129c220cfd81ba6cdb9ab5c3e9a105702dd045743c4ab72e33bb384573827c0c481213417cc880e41bc097e0fc541a0b79fa3eb38207d
+  languageName: node
+  linkType: hard
+
+"ws@npm:8.5.0":
+  version: 8.5.0
+  resolution: "ws@npm:8.5.0"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ^5.0.2
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 10c0/0baeee03e97865accda8fad51e8e5fa17d19b8e264529efdf662bbba2acc1c7f1de8316287e6df5cb639231a96009e6d5234b57e6ff36ee2d04e49a0995fec2f
   languageName: node
   linkType: hard
 
