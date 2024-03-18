@@ -1,0 +1,8 @@
+{
+  "name": "justaname-expo",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "examples/frontend/expo/src",
+  "projectType": "application",
+  "targets": {},
+  "tags": []
+}
