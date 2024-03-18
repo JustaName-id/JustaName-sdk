@@ -13,6 +13,7 @@ export interface AppDetails {
   backendFramework: BackendFramework;
   apiKey: string;
   ensDomain: string;
+  directory: string;
   network: Network;
   appDir?: boolean;
 }
@@ -103,6 +104,13 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
     message: 'Do you want to use mainnet or sepolia?',
   });
 
+  const directory = await input({
+    message: 'Enter the directory for your app (default: .)',
+    validate: (input: string) => validateInput(input, 'Directory'),
+    default: '.'
+  });
+
+
   if(!backendFramework) throw new Error('Backend framework is required');
 
   return {
@@ -112,6 +120,7 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
     apiKey,
     ensDomain,
     network,
-    appDir
+    appDir,
+    directory
   }
 }

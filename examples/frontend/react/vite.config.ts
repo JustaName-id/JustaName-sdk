@@ -6,7 +6,7 @@ import { join } from 'path';
 import dts from 'vite-plugin-dts';
 export default defineConfig({
   root: __dirname,
-  cacheDir: '../../../node_modules/.vite/examples/with-react-express/client',
+  cacheDir: '../../../node_modules/.vite/examples/frontend/justaname-react-example',
   server: {
     port: 4200,
     host: 'localhost',

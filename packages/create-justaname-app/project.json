@@ -9,20 +9,25 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "packages/create-justaname-app/dist",
+        "compiler": "tsc",
+        "additionalEntryPoints": ["packages/create-justaname-app/src/index.ts"],
+        "project": "packages/create-justaname-app/package.json",
         "main": "packages/create-justaname-app/src/index.ts",
         "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
+        "generateExportsField": true,
+        "allowJs": true,
         "format": ["esm"]
-      }
-    },
-    "watch": {
-      "executor": "@nx/js:tsc",
-      "options": {
-        "bundler": "tsc",
-        "outputPath": "packages/create-justaname-app/dist",
-        "main": "packages/create-justaname-app/src/index.ts",
-        "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
-        "watch": true
-      }
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      },
+      "dependsOn": ["lint"]
     },
     "serve": {
       "executor": "@nx/js:node",
@@ -34,6 +39,19 @@
     "publish": {
       "command": "node tools/scripts/publish.mjs create-justaname-app {args.ver} {args.tag}",
       "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "fix": true,
+        "lintFilePatterns": [
+          "packages/create-justaname-app/src/*.{ts,tsx,js,jsx}",
+          "packages/create-justaname-app/package.json"
+        ]
+      }
     }
   },
   "tags": []
