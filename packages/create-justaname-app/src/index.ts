@@ -54,16 +54,16 @@ async function main() {
     // spinner.succeed('Frontend dependencies installed');
 
     const backendEnv: BackendEnv = {
-      JUSTANAME_API_KEY: 'aZsaY98yzzjVaQmNFrMm8jMIdgQeJXOD',
-      JUSTANAME_CHAIN_ID: 11155111,
-      JUSTANAME_DOMAIN: 'justawallet.eth',
+      JUSTANAME_API_KEY: collectApps.apiKey,
+      JUSTANAME_CHAIN_ID: collectApps.network === 'testnet' ? 11155111 : 1,
+      JUSTANAME_DOMAIN: collectApps.ensDomain,
       JUSTANAME_ORIGIN: 'https://justaname.id',
     };
 
     const frontEnv: FrontendEnv = {
       API_URL: 'http://localhost:3333',
-      ENS_DOMAIN: 'justawallet.eth',
-      CHAIN_ID: 11155111,
+      ENS_DOMAIN: collectApps.ensDomain,
+      CHAIN_ID: collectApps.network === 'testnet' ? 11155111 : 1,
     };
 
     await createEnvFile(
