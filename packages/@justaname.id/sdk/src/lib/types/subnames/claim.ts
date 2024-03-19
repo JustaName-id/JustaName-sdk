@@ -2,16 +2,13 @@ import { ApiKeyHeaders, SIWEHeaders } from '../headers';
 import { IRequest, IResponse, IRoute } from '../common';
 
 export interface Address {
-
   address: string;
 
   coinType: number;
 }
 
 export interface TextRecord {
-
   key: string;
-
 
   value: string;
 }
@@ -28,23 +25,21 @@ export interface Metadata {
   subdomainId: string;
 }
 
-export interface SubnameClaimRequest extends IRequest{
-
+export interface SubnameClaimRequest extends IRequest {
   username: string;
 
   ensDomain: string;
 
   chainId: number;
 
-  addresses: Address[]
+  addresses?: Address[];
 
-  text: TextRecord[];
+  text?: TextRecord[];
 
-  contentHash: string;
+  contentHash?: string;
 }
 
-
-export interface SubnameClaimResponse extends IResponse{
+export interface SubnameClaimResponse extends IResponse {
   id: string;
 
   data: Metadata;

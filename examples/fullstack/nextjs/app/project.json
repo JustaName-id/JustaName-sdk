@@ -3,6 +3,13 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "examples/fullstack/nextjs/app",
   "projectType": "application",
-  "targets": {},
+  "targets": {
+    "build": {
+      "executor": "@nx/web:webpack",
+      "options": {
+        "postcssConfig": "apps/justaname-next-app/postcss.config.js"
+      }
+    }
+  },
   "tags": []
 }
