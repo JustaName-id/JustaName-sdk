@@ -3,9 +3,16 @@ import { validateApiKey, validateDomain, validateInput } from './validate';
 
 export type FrontendFramework = 'react' | 'nextjs' | 'react-native' | 'expo';
 
-export type BackendFramework = 'express' | 'nestjs' | 'koa' | 'hapi' | 'fastify';
+export type BackendFramework =
+  | 'express'
+  | 'nestjs'
+  | 'koa'
+  | 'hapi'
+  | 'fastify';
 
 export type Network = 'mainnet' | 'testnet';
+
+export type PackageManager = 'npm' | 'yarn';
 
 export interface AppDetails {
   appName: string;
@@ -16,37 +23,38 @@ export interface AppDetails {
   directory: string;
   network: Network;
   appDir?: boolean;
+  packageManager: PackageManager;
 }
 
 export const collectAppDetails = async (): Promise<AppDetails> => {
-
   let appDir = false;
   let backendFramework: BackendFramework | undefined;
 
   const appName = await input({
     message: 'What is the name of your app?',
-    validate: (input: string) => validateInput(input, 'App name')
+    validate: (input: string) => validateInput(input, 'App name'),
   });
 
   const frontendFramework = await select<FrontendFramework>({
-    choices: [{
-      name: 'React',
-      value: 'react'
-    },
+    choices: [
+      {
+        name: 'React',
+        value: 'react',
+      },
       {
         name: 'Next.js',
-        value: 'nextjs'
+        value: 'nextjs',
       },
       {
         name: 'React Native',
-        value: 'react-native'
+        value: 'react-native',
       },
       {
         name: 'Expo',
-        value: 'expo'
-      }
+        value: 'expo',
+      },
     ],
-    message: 'Which frontend framework do you want?'
+    message: 'Which frontend framework do you want?',
   });
 
   if (frontendFramework !== 'nextjs') {
@@ -54,52 +62,56 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
       choices: [
         {
           name: 'Express',
-          value: 'express'
+          value: 'express',
         },
         {
           name: 'NestJS',
-          value: 'nestjs'
+          value: 'nestjs',
         },
         {
           name: 'Koa',
-          value: 'koa'
+          value: 'koa',
         },
         {
           name: 'Hapi',
-          value: 'hapi'
+          value: 'hapi',
         },
         {
           name: 'Fastify',
-          value: 'fastify'
-        }],
-      message: 'Which backend framework do you want?'
+          value: 'fastify',
+        },
+      ],
+      message: 'Which backend framework do you want?',
     });
   } else {
     appDir = await confirm({
       message: 'Do you want to use the appDir?',
-      default: false
+      default: false,
     });
   }
 
   const apiKey = await input({
     message: 'Enter your API key (https://admin.justaname.id)',
-    validate: (input: string) => validateInput(input, 'API key', validateApiKey)
+    validate: (input: string) =>
+      validateInput(input, 'API key', validateApiKey),
   });
 
   const ensDomain = await input({
     message: 'Enter your ENS domain',
-    validate: (input: string) => validateInput(input, 'ENS domain', validateDomain)
+    validate: (input: string) =>
+      validateInput(input, 'ENS domain', validateDomain),
   });
 
   const network = await select<Network>({
-    choices: [{
-      name: 'Mainnet',
-      value: 'mainnet'
-    },
+    choices: [
+      {
+        name: 'Mainnet',
+        value: 'mainnet',
+      },
       {
         name: 'Testnet',
-        value: 'testnet'
-      }
+        value: 'testnet',
+      },
     ],
     message: 'Do you want to use mainnet or sepolia?',
   });
@@ -107,11 +119,24 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
   const directory = await input({
     message: 'Enter the directory for your app (default: .)',
     validate: (input: string) => validateInput(input, 'Directory'),
-    default: '.'
+    default: '.',
   });
 
+  const packageManager = await select<PackageManager>({
+    choices: [
+      {
+        name: 'npm',
+        value: 'npm',
+      },
+      {
+        name: 'yarn',
+        value: 'yarn',
+      },
+    ],
+    message: 'Which package manager do you want to use?',
+  });
 
-  if(!backendFramework) throw new Error('Backend framework is required');
+  if (!backendFramework) throw new Error('Backend framework is required');
 
   return {
     appName,
@@ -121,6 +146,7 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
     ensDomain,
     network,
     appDir,
-    directory
-  }
-}
+    directory,
+    packageManager,
+  };
+};

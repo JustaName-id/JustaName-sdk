@@ -47,10 +47,10 @@ async function main() {
 
     await fs.remove(projectDir + '/temp');
 
-    await installDependencies(path.join(projectDir, 'backend'));
+    await installDependencies(path.join(projectDir, 'backend'), collectApps.packageManager);
     spinner.succeed('Backend dependencies installed');
 
-    // await installDependencies(path.join(projectDir, 'frontend'));
+    // await installDependencies(path.join(projectDir, 'frontend'), collectApps.packageManager);
     // spinner.succeed('Frontend dependencies installed');
 
     const backendEnv: BackendEnv = {

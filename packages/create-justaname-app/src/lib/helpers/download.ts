@@ -1,5 +1,5 @@
 import { exec } from 'child_process';
-import { AppDetails} from './questions';
+import { AppDetails, PackageManager} from './questions';
 
 export const downloadDetails = async (project: AppDetails) => {
 
@@ -12,9 +12,9 @@ export const downloadDetails = async (project: AppDetails) => {
   }
 }
 
-export const installDependencies = (directory: string): Promise<void> => {
+export const installDependencies = (directory: string, packageManager: PackageManager): Promise<void> => {
   return new Promise((resolve, reject) => {
-    exec('npm install', { cwd: directory }, (error, stdout) => {
+    exec(packageManager === 'npm' ? 'npm install' : 'yarn', { cwd: directory }, (error, stdout) => {
       if (error) {
         reject(new Error(`Failed to install dependencies: ${error.message}`));
         return;
