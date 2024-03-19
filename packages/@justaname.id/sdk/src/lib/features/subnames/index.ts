@@ -131,7 +131,6 @@ export class Subnames {
 
 
   private isNotReadOnlyMode<T>(callback: T): T {
-    console.log(this.apiKey);
     const check =  this.apiKey === undefined;
     if(check){
       throw new Error('This method is not available in read-only mode');

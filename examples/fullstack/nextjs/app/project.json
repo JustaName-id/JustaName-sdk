@@ -4,10 +4,17 @@
   "sourceRoot": "examples/fullstack/nextjs/app",
   "projectType": "application",
   "targets": {
-    "build": {
-      "executor": "@nx/web:webpack",
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "postcssConfig": "apps/justaname-next-app/postcss.config.js"
+        "fix": true,
+        "lintFilePatterns": [
+          "examples/fullstack/nextjs/app/src/*.{ts,tsx,js,jsx}",
+          "examples/fullstack/nextjs/app/package.json"
+        ]
       }
     }
   },

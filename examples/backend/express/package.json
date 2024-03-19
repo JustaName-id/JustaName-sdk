@@ -1,5 +1,6 @@
 {
   "name": "justaname-express-example",
+  "private": true,
   "dependencies": {
     "@justaname.id/sdk": "0.0.6",
     "@nx/webpack": "18.0.8",

@@ -16,12 +16,15 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node"],
+    "types": [
+      "jest",
+      "node"
+    ],
     "paths": {
-      "@justaname.id/react": ["packages/@justaname.id/react/dist"],
-      "@utils": ["examples/fullstacl/nextjs/app/src/utils"],
-      "@utils/*": ["examples/fullstacl/nextjs/app/src/utils/*"]
-    }
+      "@justaname.id/react": [
+        "packages/@justaname.id/react/dist"
+      ]
+    },
   },
   "include": [
     "**/*.ts",
@@ -33,5 +36,10 @@
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
+  "exclude": [
+    "node_modules",
+    "jest.config.ts",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }

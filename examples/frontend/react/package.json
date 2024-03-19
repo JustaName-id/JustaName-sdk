@@ -1,6 +1,7 @@
 {
   "name": "justaname-react-example",
   "type": "module",
+  "private": true,
   "dependencies": {
     "@justaname.id/react": "^0.0.3",
     "@nx/vite": "18.0.8",

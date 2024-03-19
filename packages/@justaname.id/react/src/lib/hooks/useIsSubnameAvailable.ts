@@ -10,7 +10,6 @@ export const useIsSubnameAvailable = (props: UseIsSubnameAvailableOptions) => {
   const { justaname, chainId } = useJustaName();
   const { subname, ensDomain } = props;
 
-  console.log(justaname, chainId, subname, ensDomain)
   const query = useQuery({
     queryKey: ['IS_SUBNAME_AVAILABLE', subname],
     queryFn: () => justaname?.subnames.checkSubnameAvailable({

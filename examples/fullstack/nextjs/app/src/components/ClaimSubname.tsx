@@ -29,8 +29,7 @@ export const ClaimSubname = () => {
               placeholder="Enter a subdomain" />
             <button
               onClick={() => claimSubname({
-                subname,
-
+                username: debouncedSubname,
               })}
               disabled={!isAvailable || !address || !debouncedSubname}
               className='bg-blue-500 disabled:bg-blue-300 disabled:cursor-not-allowed text-white rounded-md p-2 w-full my-2'

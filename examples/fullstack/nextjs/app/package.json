@@ -1,0 +1,15 @@
+{
+  "name": "justaname-next-app-example",
+  "private": true,
+  "dependencies": {
+    "@justaname.id/react": "0.0.3",
+    "@justaname.id/sdk": "0.0.6",
+    "@nx/next": "18.0.8",
+    "@rainbow-me/rainbowkit": "^2.0.2",
+    "@tanstack/react-query": "^5.28.4",
+    "@testing-library/react": "14.0.0",
+    "@uidotdev/usehooks": "^2.4.1",
+    "react": "18.2.0",
+    "wagmi": "^2.5.7"
+  }
+}
