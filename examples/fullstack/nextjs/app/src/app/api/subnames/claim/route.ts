@@ -15,7 +15,7 @@ export default async function handler(
   const justaname = await getJustaNameInstance();
 
   try {
-    const subname = await justaname.subnames.claimSubname(
+    const subname = await justaname.subnames.addSubname(
       {
         username: username,
         ensDomain: justanameConfig.domain,
