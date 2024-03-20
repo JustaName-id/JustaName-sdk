@@ -30,15 +30,9 @@
       "dependsOn": ["lint"]
     },
     "serve": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "node packages/create-justaname-app/dist/index.js"
-          }
-        ],
-        "parallel": false
-      }
+
+        "command":  "tsc --watch packages/create-justaname-app/index.ts"
+      
     },
     "publish": {
       "command": "node tools/scripts/publish.mjs create-justaname-app {args.ver} {args.tag}",
