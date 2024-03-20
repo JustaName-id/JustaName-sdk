@@ -7,10 +7,10 @@ import { Subname } from './Subname';
 export const ClaimSubname = () => {
   const { address } = useAccount();
   const { subnames } = useAccountSubnames();
-  const [subname, setSubname] = useState<string>("");
-  const debouncedSubname = useDebounce(subname, 500);
+  const [username, setUsername] = useState<string>("");
+  const debouncedUsername = useDebounce(username, 500);
   const { isAvailable } = useIsSubnameAvailable({
-    subname: debouncedSubname,
+    username: debouncedUsername,
     ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN as string,
   })
   const { claimSubname } = useClaimSubname();
@@ -22,14 +22,14 @@ export const ClaimSubname = () => {
           <>
             <h1>Claim your first subdomain</h1>
             <input
-              value={subname}
-              onChange={(e) => setSubname(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter a subdomain" />
             <button
               onClick={() => claimSubname({
-                username: subname,
+                username,
               })}
-              disabled={!isAvailable || !address || !debouncedSubname}
+              disabled={!isAvailable || !address || !debouncedUsername}
             >
               Claim
             </button>

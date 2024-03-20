@@ -8,10 +8,10 @@ import { Subname } from './Subname';
 export const ClaimSubname = () => {
   const { address } = useAccount();
   const { subnames } = useAccountSubnames();
-  const [subname, setSubname] = useState<string>("");
-  const debouncedSubname = useDebounce(subname, 500);
+  const [username, setUsername] = useState<string>("");
+  const debouncedUsername = useDebounce(username, 500);
   const { isAvailable } = useIsSubnameAvailable({
-    subname: debouncedSubname,
+    username: debouncedUsername,
     ensDomain: process.env.NEXT_PUBLIC_ENS_DOMAIN as string,
   })
   const { claimSubname } = useClaimSubname();
@@ -23,16 +23,16 @@ export const ClaimSubname = () => {
           <>
             <h1 className='text-base font-semibold text-center'>Claim your first subdomain</h1>
             <input
-              value={subname}
+              value={username}
               className='border border-gray-300 rounded-md p-2 w-full my-2'
-              onChange={(e) => setSubname(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter a subdomain" />
             <button
               onClick={() => claimSubname({
-                subname,
+                username,
 
               })}
-              disabled={!isAvailable || !address || !debouncedSubname}
+              disabled={!isAvailable || !address || !debouncedUsername}
               className='bg-blue-500 disabled:bg-blue-300 disabled:cursor-not-allowed text-white rounded-md p-2 w-full my-2'
             >
               Claim

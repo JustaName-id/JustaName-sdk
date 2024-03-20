@@ -1,34 +1,50 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { SIWEHeaders } from '@justaname.id/sdk';
-import { getJustaNameInstance, justanameConfig } from '../../../../justaname';
+import { ChainId } from '@justaname.id/sdk';
+import { getJustaNameInstance } from '../../../../justaname';
+import { NextRequest } from 'next/server';
 
-interface BodyParams extends SIWEHeaders {
-  username: string;
-}
 
-export default async function handler(
-  req: NextApiRequest & { body: BodyParams },
-  res: NextApiResponse
+
+export  async function POST(
+  req: NextRequest
 ) {
-  const { username, xMessage, xSignature, xAddress } = req.body;
+    const requestBody = await req.json()
+  const { username, message, signature, address } = requestBody;
+
+  if(!username) {
+    return new Response('Username is required', { status: 400 });
+  }
+
+  if(!address ) {
+    return new Response('Address is required', { status: 400 });
+  }
+
+  if(!signature) {
+    return new Response('Signature is required', { status: 400 });
+  }
+
+  if(!message) {
+    return new Response('Message is required', { status: 400 });
+  }
   const justaname = await getJustaNameInstance();
 
+  const chainId = parseInt(process.env.JUSTANAME_CHAIN_ID as string) as ChainId
+  const ensDomain = process.env.JUSTANAME_DOMAIN as string
   try {
     const subname = await justaname.subnames.addSubname(
       {
         username: username,
-        ensDomain: justanameConfig.domain,
-        chainId: justanameConfig.chainId,
+        ensDomain,
+        chainId
       },
       {
-        xSignature: xSignature,
-        xAddress: xAddress,
-        xMessage: xMessage,
+        xSignature: signature,
+        xAddress: address,
+        xMessage: message,
       }
     );
-    res.status(200).json(subname);
+    return Response.json(subname);
   } catch (e) {
-    res.status(500).json(e);
+    return new Response(e.message, { status: 500 });
   }
 }
