@@ -30,10 +30,14 @@
       "dependsOn": ["lint"]
     },
     "serve": {
-      "executor": "@nx/js:node",
+      "executor": "nx:run-commands",
       "options": {
-        "buildTarget": "create-justaname-app:build",
-        "watch": true
+        "commands": [
+          {
+            "command": "node packages/create-justaname-app/dist/index.js"
+          }
+        ],
+        "parallel": false
       }
     },
     "publish": {
