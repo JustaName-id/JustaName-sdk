@@ -16,7 +16,12 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "paths": {
+      "@justaname.id/react": ["packages/@justaname.id/react/dist"],
+      "@utils": ["examples/fullstacl/nextjs/app/src/utils"],
+      "@utils/*": ["examples/fullstacl/nextjs/app/src/utils/*"]
+    }
   },
   "include": [
     "**/*.ts",
@@ -25,7 +30,8 @@
     "**/*.jsx",
     "../../../../examples/fullstack/nextjs/app/.next/types/**/*.ts",
     "../../../../dist/examples/fullstack/nextjs/app/.next/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

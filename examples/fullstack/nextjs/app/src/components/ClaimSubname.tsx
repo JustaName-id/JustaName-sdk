@@ -1,3 +1,4 @@
+'use client'
 import { useAccount } from 'wagmi';
 import { useAccountSubnames, useClaimSubname, useIsSubnameAvailable } from '@justaname.id/react';
 import React, { useState } from 'react';
@@ -11,7 +12,7 @@ export const ClaimSubname = () => {
   const debouncedUsername = useDebounce(username, 500);
   const { isAvailable } = useIsSubnameAvailable({
     username: debouncedUsername,
-    ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN as string,
+    ensDomain: process.env.NEXT_PUBLIC_ENS_DOMAIN as string,
   })
   const { claimSubname } = useClaimSubname();
 
@@ -20,23 +21,26 @@ export const ClaimSubname = () => {
       {
         subnames.length === 0 ?
           <>
-            <h1>Claim your first subdomain</h1>
+            <h1 className='text-base font-semibold text-center'>Claim your first subdomain</h1>
             <input
               value={username}
+              className='border border-gray-300 rounded-md p-2 w-full my-2'
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter a subdomain" />
             <button
               onClick={() => claimSubname({
                 username,
+
               })}
               disabled={!isAvailable || !address || !debouncedUsername}
+              className='bg-blue-500 disabled:bg-blue-300 disabled:cursor-not-allowed text-white rounded-md p-2 w-full my-2'
             >
               Claim
             </button>
           </>
           :
           <div>
-            <h1>My Subdomains</h1>
+            <h1 className='text-base font-semibold text-center'>My Subdomains</h1>
             <ul>
               {subnames.map((subname) => (
                 <React.Fragment key={subname.subname}>
