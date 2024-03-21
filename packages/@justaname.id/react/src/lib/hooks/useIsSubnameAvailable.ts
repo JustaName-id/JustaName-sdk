@@ -2,22 +2,21 @@ import { useJustaName } from '../providers';
 import { useQuery } from '@tanstack/react-query';
 
 export interface UseIsSubnameAvailableOptions {
-  subname: string;
+  username: string;
   ensDomain: string;
 }
 
 export const useIsSubnameAvailable = (props: UseIsSubnameAvailableOptions) => {
   const { justaname, chainId } = useJustaName();
-  const { subname, ensDomain } = props;
+  const { username, ensDomain } = props;
 
-  console.log(justaname, chainId, subname, ensDomain)
   const query = useQuery({
-    queryKey: ['IS_SUBNAME_AVAILABLE', subname],
+    queryKey: ['IS_SUBNAME_AVAILABLE', username],
     queryFn: () => justaname?.subnames.checkSubnameAvailable({
-        subname: subname + '.' + ensDomain,
+        subname: username + '.' + ensDomain,
         chainId
       }),
-    enabled: Boolean(subname) && Boolean(justaname) && Boolean(chainId),
+    enabled: Boolean(username) && Boolean(justaname) && Boolean(chainId),
   })
 
   return {

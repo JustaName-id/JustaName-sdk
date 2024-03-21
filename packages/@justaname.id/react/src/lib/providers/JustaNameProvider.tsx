@@ -2,7 +2,7 @@ import React from 'react';
 import { JustaName } from '@justaname.id/sdk'
 
 export const defaultRoutes = {
-  claimSubnameRoute:'/api/subnames/claim',
+  claimSubnameRoute: '/api/subnames/claim',
   checkSubnameAvailabilityRoute: '/api/subnames/available',
   requestChallengeRoute: '/api/request-challenge',
 }
@@ -27,9 +27,9 @@ interface JustaNameProvider {
   backendUrl?: string;
 }
 export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
-                                                                 routes,
+  routes,
   chainId = 1,
-  backendUrl
+  backendUrl = ""
 
 }) => {
 
@@ -48,8 +48,8 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
       chainId,
       justaname,
       routes: {
-      ...defaultRoutes,
-      ...routes,
+        ...defaultRoutes,
+        ...routes,
       }
     }}>
       {children}
