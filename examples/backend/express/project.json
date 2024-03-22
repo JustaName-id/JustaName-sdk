@@ -4,34 +4,6 @@
   "sourceRoot": "examples/backend/express/src",
   "projectType": "application",
   "targets": {
-    "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "outputs": ["{workspaceRoot}/examples/backend/express/dist"],
-      "options": {
-        "buildTarget": "justaname-express:build",
-        "port": 3000
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "justaname-express:build:development"
-        },
-        "production": {
-          "buildTarget": "justaname-express:production"
-        }
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "fix": true,
-        "lintFilePatterns": [
-          "examples/backend/express/src/*.{ts,tsx,js,jsx}",
-          "examples/backend/express/package.json"
-        ]
-      }
-    }
   },
   "tags": []
 }
