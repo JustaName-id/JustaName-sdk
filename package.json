@@ -85,7 +85,8 @@
   },
   "workspaces": [
     "packages/@justaname.id/*",
-    "packages/*"
+    "packages/*",
+    "examples/backend/*"
   ],
   "packageManager": "yarn@4.1.1",
   "dependencies": {

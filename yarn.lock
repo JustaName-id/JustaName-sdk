@@ -3338,6 +3338,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@justaname.id/sdk@npm:0.0.6":
+  version: 0.0.6
+  resolution: "@justaname.id/sdk@npm:0.0.6"
+  dependencies:
+    axios: "npm:^1.6.0"
+    dotenv: "npm:16.3.2"
+    qs: "npm:^6.12.0"
+  checksum: 10c0/ae08cf31edc8356ed72af2ad1ca1925ccaf97cd1ffda005408842f693334a8f49981cce281f8b8ff53d700f37e2d4856ded0b4b607746daccf19f78a8838eba4
+  languageName: node
+  linkType: hard
+
 "@leichtgewicht/ip-codec@npm:^2.0.1":
   version: 2.0.4
   resolution: "@leichtgewicht/ip-codec@npm:2.0.4"
@@ -17534,6 +17545,15 @@ __metadata:
   checksum: 10c0/a32679e9cb55469cb6d8bbc863f7d631b2c98b7fc7bf172629261751a6e7bc8da6ae374ddb74d5fbd8b06cf0eb4572287b259813d92b36e384024ed35e4c13e1
   languageName: node
   linkType: hard
+
+"justaname-express-example@workspace:examples/backend/express":
+  version: 0.0.0-use.local
+  resolution: "justaname-express-example@workspace:examples/backend/express"
+  dependencies:
+    "@justaname.id/sdk": "npm:0.0.6"
+    express: "npm:^4.18.1"
+  languageName: unknown
+  linkType: soft
 
 "justaname-mono-sdk@workspace:.":
   version: 0.0.0-use.local
