@@ -26,6 +26,10 @@ if(chainId !== 1 && chainId !== 11155111) {
   throw new Error('ChainId is not supported');
 }
 
+if (!domain) {
+  throw new Error('Domain is required');
+}
+
 let justaname: JustaName;
 
 interface RequestChallenge {
