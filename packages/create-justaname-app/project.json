@@ -52,6 +52,25 @@
           "packages/create-justaname-app/package.json"
         ]
       }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "packages/create-justaname-app/dist",
+        "buildTarget": "create-justaname-app:build"
+      },
+      "dependsOn": ["^build"]
+    },
+    "release:package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx semantic-release --debug --extends=./packages/create-justaname-app/release.config.js"
+      }
+    },
+    "update-deps": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx rjp ./packages/create-justaname-app/dist/package.json $PACKAGE_NAME $VERSION"
+      }
     }
   },
   "tags": []

@@ -17,7 +17,7 @@
         "generateExportsField": true,
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
         "compiler": "swc",
-        "format": ["esm", "cjs"],
+        "format": ["esm"],
         "assets": [
           {
             "glob": "packages/@justaname.id/react/README.md",
@@ -51,6 +51,24 @@
     "publish": {
       "command": "node tools/scripts/publish.mjs @justaname.id/react {args.ver} {args.tag}",
       "dependsOn": ["build"]
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "packages/@justaname.id/react/dist"
+      },
+      "dependsOn": ["^build","build","^@justaname.id/sdk:build"]
+    },
+    "release:package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx semantic-release --debug --extends=./packages/@justaname.id/react/release.config.js"
+      }
+    },
+    "update-deps": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx rjp ./packages/@justaname.id/react/dist/package.json $PACKAGE_NAME $VERSION"
+      }
     }
   }
 }

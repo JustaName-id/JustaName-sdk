@@ -5,33 +5,7 @@
   "projectType": "application",
   "targets": {
     "serve": {
-      "executor": "@nx/vite:dev-server" ,
-      "options": {
-        "outputPath": "examples/frontend/react/dist",
-        "buildTarget": "justaname-react:build",
-        "buildLibsFromSource": true
-      },
-      "configurations": {
-        "development": {
-          "mode": "development"
-        }
-      }
-    },
-    "build": {
-      "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
-      "options": {
-        "outputPath": "examples/frontend/react/dist"
-      },
-      "configurations": {
-        "development": {
-          "mode": "development"
-        },
-        "production": {
-          "mode": "production"
-        }
-      }
+      "command": "cd ./examples/frontend/react && yarn dev"
     }
   },
   "tags": []

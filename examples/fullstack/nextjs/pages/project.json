@@ -1,8 +1,12 @@
 {
   "name": "justaname-next-pages",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "examples/fullstack/nextjs/pages",
+  "sourceRoot": "examples/fullstack/nextjs/pages/src",
   "projectType": "application",
-  "targets": {},
+  "targets": {
+    "serve": {
+      "command": "cd ./examples/fullstack/nextjs/pages && yarn dev"
+    }
+  },
   "tags": []
 }

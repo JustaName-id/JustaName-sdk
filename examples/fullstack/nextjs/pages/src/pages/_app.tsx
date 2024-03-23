@@ -1,18 +1,11 @@
-import { AppProps } from 'next/app';
-import Head from 'next/head';
-import './styles.css';
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import {Providers} from "./providers";
 
-function CustomApp({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Head>
-        <title>Welcome to justaname-next-pages!</title>
-      </Head>
-      <main className="app">
+      <Providers>
         <Component {...pageProps} />
-      </main>
-    </>
-  );
+      </Providers>
+  )
 }
-
-export default CustomApp;

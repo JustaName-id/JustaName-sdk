@@ -150,13 +150,17 @@
   },
   "release": {
     "version": {
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "generatorOptions": {
+        "fallbackCurrentVersionResolver": "disk"
+      }
     },
     "changelog": {
       "projectChangelogs": {
         "createRelease": "github"
       }
     },
+    "projectsRelationship": "independent",
     "projects": ["packages/*", "packages/@justaname.id/*"]
   }
 }

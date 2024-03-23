@@ -1,6 +1,6 @@
 {
   "name": "create-justaname-app",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "dependencies": {
     "@inquirer/prompts": "^4.3.0",
     "fs-extra": "11.2.0",

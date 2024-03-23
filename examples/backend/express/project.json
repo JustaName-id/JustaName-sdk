@@ -4,6 +4,9 @@
   "sourceRoot": "examples/backend/express/src",
   "projectType": "application",
   "targets": {
+    "serve": {
+      "command": "cd ./examples/backend/express && yarn && yarn serve"
+    }
   },
   "tags": []
 }

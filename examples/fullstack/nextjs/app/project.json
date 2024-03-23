@@ -1,8 +1,12 @@
 {
   "name": "justaname-next-app",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "examples/fullstack/nextjs/app",
+  "sourceRoot": "examples/fullstack/nextjs/app/src",
   "projectType": "application",
-  "targets": {},
+  "targets": {
+    "serve": {
+      "command": "cd ./examples/fullstack/nextjs/app && yarn dev"
+    }
+  },
   "tags": []
 }
