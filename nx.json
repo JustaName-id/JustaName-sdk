@@ -7,7 +7,6 @@
   "extends": "nx/presets/npm.json",
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "workspaceLayout": {
-    "appsDir": "examples",
     "libsDir": "packages"
   },
   "targetDefaults": {
