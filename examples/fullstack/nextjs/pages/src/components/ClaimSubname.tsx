@@ -1,5 +1,4 @@
 "use client";
-
 import { useAccount } from 'wagmi';
 import { useAccountSubnames, useClaimSubname, useIsSubnameAvailable } from '@justaname.id/react';
 import React, { useState } from 'react';

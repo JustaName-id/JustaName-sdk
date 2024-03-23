@@ -12,7 +12,6 @@
         "main": "packages/@justaname.id/sdk/src/index.ts",
         "outputPath": "packages/@justaname.id/sdk/dist",
         "tsConfig": "packages/@justaname.id/sdk/tsconfig.lib.json",
-        "additionalEntryPoints": ["packages/@justaname.id/sdk/src/index.ts"],
         "project": "packages/@justaname.id/sdk/package.json",
         "generateExportsField": true,
         "allowJs": true,

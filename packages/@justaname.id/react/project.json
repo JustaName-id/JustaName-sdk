@@ -35,7 +35,11 @@
           "vendorChunk": false
         }
       },
-      "dependsOn": ["lint"]
+      "dependsOn": ["lint", {
+        "projects": ["@justaname.id/sdk"],
+        "target": "build",
+        "configuration": "production"
+      }]
     },
     "lint": {
       "executor": "@nx/eslint:lint",

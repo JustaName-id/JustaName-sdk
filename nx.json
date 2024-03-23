@@ -24,7 +24,7 @@
     },
     "test": {
       "dependsOn": ["build", "^build"],
-      "cache": true
+      "cache": true,
     },
     "test:coverage": {
       "dependsOn": ["build", "^build"],

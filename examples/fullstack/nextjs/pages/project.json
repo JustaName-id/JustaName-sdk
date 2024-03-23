@@ -4,6 +4,13 @@
   "sourceRoot": "examples/fullstack/nextjs/pages/src",
   "projectType": "application",
   "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn build",
+        "cwd": "examples/fullstack/nextjs/pages"
+      }
+    },
     "serve": {
       "executor": "nx:run-commands",
       "options": {

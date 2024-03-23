@@ -10,7 +10,6 @@
       "options": {
         "outputPath": "packages/create-justaname-app/dist",
         "compiler": "tsc",
-        "additionalEntryPoints": ["packages/create-justaname-app/src/index.ts"],
         "project": "packages/create-justaname-app/package.json",
         "main": "packages/create-justaname-app/src/index.ts",
         "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
