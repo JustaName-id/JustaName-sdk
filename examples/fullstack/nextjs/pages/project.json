@@ -5,10 +5,25 @@
   "projectType": "application",
   "targets": {
     "serve": {
-      "command": "cd ./examples/fullstack/nextjs/pages && yarn dev"
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn dev",
+        "cwd": "examples/fullstack/nextjs/pages"
+      }
     },
     "lint": {
-      "command": "cd ./examples/fullstack/nextjs/pages && yarn lint"
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn lint",
+        "cwd": "examples/fullstack/nextjs/pages"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn",
+        "cwd": "examples/fullstack/nextjs/pages"
+      }
     }
   },
   "tags": []

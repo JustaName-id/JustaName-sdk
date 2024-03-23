@@ -5,14 +5,24 @@
   "projectType": "application",
   "targets": {
     "serve": {
-      "command": "cd ./examples/fullstack/nextjs/app && yarn dev"
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn dev",
+        "cwd": "examples/fullstack/nextjs/app"
+      }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
+      "executor": "nx:run-commands",
       "options": {
-        "lintFilePatterns": ["examples/fullstack/nextjs/app/src/**/*.ts"],
-        "eslintConfig": "examples/fullstack/nextjs/app/.eslintrc.json",
-        "fix": true
+        "command": "yarn lint",
+        "cwd": "examples/fullstack/nextjs/app"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn",
+        "cwd": "examples/fullstack/nextjs/app"
       }
     }
   },

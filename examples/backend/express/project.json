@@ -5,12 +5,24 @@
   "projectType": "application",
   "targets": {
     "serve": {
-      "command": "cd ./examples/backend/express && yarn && yarn serve"
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn serve",
+        "cwd": "examples/backend/express"
+      }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
+      "executor": "nx:run-commands",
       "options": {
-        "lintFilePatterns": ["examples/backend/express/src/main.ts"]
+        "command": "yarn lint",
+        "cwd": "examples/backend/express"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn",
+        "cwd": "examples/backend/express"
       }
     }
   },

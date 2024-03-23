@@ -5,14 +5,24 @@
   "projectType": "application",
   "targets": {
     "serve": {
-      "command": "cd ./examples/frontend/react && yarn dev"
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn dev",
+        "cwd": "examples/frontend/react"
+      }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
+      "executor": "nx:run-commands",
       "options": {
-        "lintFilePatterns": ["examples/frontend/react/src/**/*.ts"],
-        "eslintConfig": "examples/frontend/react/.eslintrc.cjs",
-        "fix": true
+        "command": "yarn lint",
+        "cwd": "examples/frontend/react"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn",
+        "cwd": "examples/frontend/react"
       }
     }
   },
