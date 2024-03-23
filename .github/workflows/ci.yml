@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v3
       - run: yarn install --immutable
-      - run: nx run-many --target=install --all -parallel
+      - run: npx nx run-many --target=install --all -parallel
       - run: npx nx affected -t lint
       - run: npx nx affected -t test --configuration=ci
       - run: npx nx affected -t build
