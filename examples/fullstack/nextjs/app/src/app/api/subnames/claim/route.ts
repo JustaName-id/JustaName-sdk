@@ -44,7 +44,7 @@ export  async function POST(
       }
     );
     return Response.json(subname);
-  } catch (e) {
+  } catch (e: any) {
     return new Response(e.message, { status: 500 });
   }
 }

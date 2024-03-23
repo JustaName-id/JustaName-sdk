@@ -12,7 +12,6 @@
         "main": "packages/@justaname.id/sdk/src/index.ts",
         "outputPath": "packages/@justaname.id/sdk/dist",
         "tsConfig": "packages/@justaname.id/sdk/tsconfig.lib.json",
-        "additionalEntryPoints": ["packages/@justaname.id/sdk/src/index.ts"],
         "project": "packages/@justaname.id/sdk/package.json",
         "generateExportsField": true,
         "allowJs": true,
@@ -50,6 +49,24 @@
           "packages/@justaname.id/sdk/src/*.{ts,tsx,js,jsx}",
           "packages/@justaname.id/sdk/package.json"
         ]
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "packages/@justaname.id/sdk/dist"
+      },
+      "dependsOn": ["build","^build"]
+    },
+    "release:package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx semantic-release --debug --extends=./packages/@justaname.id/sdk/release.config.js"
+      }
+    },
+    "update-deps": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx rjp ./packages/@justaname.id/sdk/dist/package.json $PACKAGE_NAME $VERSION"
       }
     }
   },

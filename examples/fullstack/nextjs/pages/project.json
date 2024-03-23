@@ -1,8 +1,37 @@
 {
   "name": "justaname-next-pages",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "examples/fullstack/nextjs/pages",
+  "sourceRoot": "examples/fullstack/nextjs/pages/src",
   "projectType": "application",
-  "targets": {},
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn build",
+        "cwd": "examples/fullstack/nextjs/pages"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn dev",
+        "cwd": "examples/fullstack/nextjs/pages"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn lint",
+        "cwd": "examples/fullstack/nextjs/pages"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn",
+        "cwd": "examples/fullstack/nextjs/pages"
+      }
+    }
+  },
   "tags": []
 }
