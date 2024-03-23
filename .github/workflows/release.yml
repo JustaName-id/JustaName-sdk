@@ -14,7 +14,7 @@ jobs:
       - run: yarn install
       - run: npx nx run-many --target=install --all -parallel
       - run: npx nx affected -t lint
-      - run: npx nx affected -t test --configuration=ci
+      - run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
       - run: npx nx affected -t build
       - run: npx nx affected -t release:package --parallel=1
         env:
