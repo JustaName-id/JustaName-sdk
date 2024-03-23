@@ -6,6 +6,12 @@
   "targets": {
     "serve": {
       "command": "cd ./examples/backend/express && yarn && yarn serve"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["examples/backend/express/src/main.ts"]
+      }
     }
   },
   "tags": []
