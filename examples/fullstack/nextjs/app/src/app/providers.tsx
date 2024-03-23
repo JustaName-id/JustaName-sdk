@@ -7,6 +7,7 @@ import { ChainId } from '@justaname.id/sdk'
 import { getDefaultConfig, getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { argentWallet, ledgerWallet, trustWallet } from '@rainbow-me/rainbowkit/wallets';
 import { mainnet, sepolia } from 'wagmi/chains';
+import React from 'react';
 
 interface ProviderProps {
     children: React.ReactNode
@@ -38,7 +39,9 @@ export const Providers: React.FC<ProviderProps> = (props) =>{
             <QueryClientProvider client={queryClient}>
                 <RainbowKitProvider>
                     <JustaNameProvider chainId={chainId}>
-                        {props.children}
+                        <React.Fragment>
+                            {props.children}
+                        </React.Fragment>
                     </JustaNameProvider>
                 </RainbowKitProvider>
             </QueryClientProvider>

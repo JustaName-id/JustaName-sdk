@@ -8,10 +8,10 @@ import { getDefaultConfig, getDefaultWallets, RainbowKitProvider } from '@rainbo
 import { argentWallet, ledgerWallet, trustWallet } from '@rainbow-me/rainbowkit/wallets';
 import { mainnet } from 'wagmi/chains';
 import { sepolia } from 'viem/chains';
+import React from 'react';
 
 interface ProviderProps {
     children: React.ReactNode
-
 }
 export const Providers: React.FC<ProviderProps> = (props) =>{
     const { wallets } = getDefaultWallets();
@@ -40,7 +40,9 @@ export const Providers: React.FC<ProviderProps> = (props) =>{
             <QueryClientProvider client={queryClient}>
                 <RainbowKitProvider>
                     <JustaNameProvider chainId={chainId}>
-                        {props.children}
+                        <React.Fragment>
+                            {props.children}
+                        </React.Fragment>
                     </JustaNameProvider>
                 </RainbowKitProvider>
             </QueryClientProvider>
