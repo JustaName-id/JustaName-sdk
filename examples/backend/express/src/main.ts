@@ -1,7 +1,9 @@
 import express, { Request } from 'express';
 import cors from 'cors';
 import { JustaName } from '@justaname.id/sdk';
+import dotenv from 'dotenv'
 
+dotenv.config();
 const app = express();
 
 app.use(cors());

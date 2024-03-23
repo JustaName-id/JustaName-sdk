@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { getJustaNameInstance } from '../../../justaname';
 import { NextRequest } from 'next/server';
-import { ChainId } from '../../../../../../../../packages/@justaname.id/sdk';
+import { ChainId } from '@justaname.id/sdk';
 
 export  async function GET(
   req: NextRequest,
@@ -26,7 +26,7 @@ export  async function GET(
       domain,
     });
    return Response.json(challenge);
-  } catch (e) {
+  } catch (e: any) {
     return new Response(e.message, { status: 500 });
   }
 }

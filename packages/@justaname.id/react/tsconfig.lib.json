@@ -9,7 +9,7 @@
       "@nx/react/typings/image.d.ts"
     ],
     "paths": {
-      "@justaname.id/sdk": ["packages/@justaname.id/sdk/dist"]
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"]
     }
   },
   "exclude": [

@@ -4,32 +4,32 @@
   "sourceRoot": "examples/backend/express/src",
   "projectType": "application",
   "targets": {
-    "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "outputs": ["{workspaceRoot}/examples/backend/express/dist"],
+    "build": {
+      "executor": "nx:run-commands",
       "options": {
-        "buildTarget": "justaname-express:build",
-        "port": 3000
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "justaname-express:build:development"
-        },
-        "production": {
-          "buildTarget": "justaname-express:production"
-        }
+        "command": "yarn build",
+        "cwd": "examples/backend/express"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn serve",
+        "cwd": "examples/backend/express"
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
+      "executor": "nx:run-commands",
       "options": {
-        "fix": true,
-        "lintFilePatterns": [
-          "examples/backend/express/src/*.{ts,tsx,js,jsx}",
-          "examples/backend/express/package.json"
-        ]
+        "command": "yarn lint",
+        "cwd": "examples/backend/express"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn",
+        "cwd": "examples/backend/express"
       }
     }
   },

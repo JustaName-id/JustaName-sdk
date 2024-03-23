@@ -1,0 +1,33 @@
+name: CI
+on:
+  push:
+    branches:
+      - '*'
+      - '*/*'
+      - '**'
+      - '!main'
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.OS }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-yarn-
+      - uses: nrwl/nx-set-shas@v3
+      - run: yarn install
+      - run: npx nx run-many --target=install --all -parallel
+      - run: npx nx affected -t lint
+      - run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
+      - run: npx nx affected -t build
