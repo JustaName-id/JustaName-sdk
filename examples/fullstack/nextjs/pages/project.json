@@ -6,6 +6,9 @@
   "targets": {
     "serve": {
       "command": "cd ./examples/fullstack/nextjs/pages && yarn dev"
+    },
+    "lint": {
+      "command": "cd ./examples/fullstack/nextjs/pages && yarn lint"
     }
   },
   "tags": []

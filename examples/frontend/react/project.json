@@ -6,6 +6,14 @@
   "targets": {
     "serve": {
       "command": "cd ./examples/frontend/react && yarn dev"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["examples/frontend/react/src/**/*.ts"],
+        "eslintConfig": "examples/frontend/react/.eslintrc.cjs",
+        "fix": true
+      }
     }
   },
   "tags": []

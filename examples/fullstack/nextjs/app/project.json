@@ -6,6 +6,14 @@
   "targets": {
     "serve": {
       "command": "cd ./examples/fullstack/nextjs/app && yarn dev"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["examples/fullstack/nextjs/app/src/**/*.ts"],
+        "eslintConfig": "examples/fullstack/nextjs/app/.eslintrc.json",
+        "fix": true
+      }
     }
   },
   "tags": []
