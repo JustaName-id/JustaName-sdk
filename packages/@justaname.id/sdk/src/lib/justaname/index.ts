@@ -28,6 +28,13 @@ import { restCall } from '../api/rest';
  */
 export class JustaName {
   siwe: Siwe;
+
+  /**
+   * The subnames feature.
+   * @public
+   * @type {Subnames}
+   * @memberof JustaName
+   **/
   subnames: Subnames;
 
   constructor(

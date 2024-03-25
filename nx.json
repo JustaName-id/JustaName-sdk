@@ -7,8 +7,8 @@
   "extends": "nx/presets/npm.json",
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "workspaceLayout": {
-    "appsDir": "examples",
-    "libsDir": "packages"
+    "libsDir": "packages",
+    "appsDir": "examples"
   },
   "targetDefaults": {
     "release": {
@@ -103,20 +103,6 @@
       }
     },
     {
-      "plugin": "@nx/expo/plugin",
-      "options": {
-        "startTargetName": "start",
-        "serveTargetName": "serve",
-        "runIosTargetName": "run-ios",
-        "runAndroidTargetName": "run-android",
-        "exportTargetName": "export",
-        "prebuildTargetName": "prebuild",
-        "installTargetName": "install",
-        "buildTargetName": "build",
-        "submitTargetName": "submit"
-      }
-    },
-    {
       "plugin": "@nx/cypress/plugin",
       "options": {
         "targetName": "e2e",
@@ -150,13 +136,17 @@
   },
   "release": {
     "version": {
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "generatorOptions": {
+        "fallbackCurrentVersionResolver": "disk"
+      }
     },
     "changelog": {
       "projectChangelogs": {
         "createRelease": "github"
       }
     },
+    "projectsRelationship": "independent",
     "projects": ["packages/*", "packages/@justaname.id/*"]
   }
 }

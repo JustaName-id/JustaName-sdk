@@ -1,7 +1,9 @@
 import express, { Request } from 'express';
 import cors from 'cors';
 import { JustaName } from '@justaname.id/sdk';
+import dotenv from 'dotenv'
 
+dotenv.config();
 const app = express();
 
 app.use(cors());
@@ -72,7 +74,6 @@ interface SubnameClaim {
 
 app.post('/api/subnames/claim', async (req: Request<SubnameClaim>, res) => {
 
-  console.log('req.body', req.body);
   const username = req.body.username
   const address = req.body.address
   const signature = req.body.signature
@@ -94,7 +95,6 @@ app.post('/api/subnames/claim', async (req: Request<SubnameClaim>, res) => {
   }
 
   try {
-    console.log('justaname', justaname);
     const claim = await justaname.subnames.addSubname({
         username: username,
         ensDomain: domain,

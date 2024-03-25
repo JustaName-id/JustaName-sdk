@@ -4,33 +4,32 @@
   "sourceRoot": "examples/frontend/react/src",
   "projectType": "application",
   "targets": {
-    "serve": {
-      "executor": "@nx/vite:dev-server" ,
+    "build": {
+      "executor": "nx:run-commands",
       "options": {
-        "outputPath": "examples/frontend/react/dist",
-        "buildTarget": "justaname-react:build",
-        "buildLibsFromSource": true
-      },
-      "configurations": {
-        "development": {
-          "mode": "development"
-        }
+        "command": "yarn build",
+        "cwd": "examples/frontend/react"
       }
     },
-    "build": {
-      "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+    "serve": {
+      "executor": "nx:run-commands",
       "options": {
-        "outputPath": "examples/frontend/react/dist"
-      },
-      "configurations": {
-        "development": {
-          "mode": "development"
-        },
-        "production": {
-          "mode": "production"
-        }
+        "command": "yarn dev",
+        "cwd": "examples/frontend/react"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn lint",
+        "cwd": "examples/frontend/react"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn",
+        "cwd": "examples/frontend/react"
       }
     }
   },

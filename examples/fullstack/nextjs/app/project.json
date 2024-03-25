@@ -1,8 +1,37 @@
 {
   "name": "justaname-next-app",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "examples/fullstack/nextjs/app",
+  "sourceRoot": "examples/fullstack/nextjs/app/src",
   "projectType": "application",
-  "targets": {},
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn build",
+        "cwd": "examples/fullstack/nextjs/app"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn dev",
+        "cwd": "examples/fullstack/nextjs/app"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn lint",
+        "cwd": "examples/fullstack/nextjs/app"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn",
+        "cwd": "examples/fullstack/nextjs/app"
+      }
+    }
+  },
   "tags": []
 }

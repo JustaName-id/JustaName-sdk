@@ -2,7 +2,7 @@ import { useJustaName } from '../providers';
 import { useAccount } from 'wagmi';
 import { useMounted } from './useMounted';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-
+import { SubnameGetAllByAddressResponse } from '@justaname.id/sdk'
 
 export const buildAccountSubnamesKey = (address: string | undefined) => ['WALLET_SUBNAMES_BY_ADDRESS', address]
 export interface UseConnectedWalletSubnamesOptions {
@@ -25,12 +25,12 @@ export const useAccountSubnames = (props:UseConnectedWalletSubnamesOptions = {})
         chainId: chainId
       })
 
-      subnames?.forEach(subname => {
+      subnames?.forEach((subname: SubnameGetAllByAddressResponse) => {
         queryClient.setQueryData(buildAccountSubnamesKey(subname.subname), subname)
       })
 
       if(props.ensDomain){
-        return subnames?.filter(subname => subname.subname.endsWith(`.${props.ensDomain}`))
+        return subnames?.filter((subname: SubnameGetAllByAddressResponse) => subname.subname.endsWith(`.${props.ensDomain}`))
       }
 
       return subnames
