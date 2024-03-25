@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { JustaName } from '@justaname.id/sdk';
+import { ChainId, JustaName } from '@justaname.id/sdk';
 import { RequestChallenge } from './interfaces/request-challenge.interface';
 import { SubnameUpdate } from './interfaces/update.interface';
 import { SubnameClaim } from './interfaces/claim.interface';
@@ -34,7 +34,7 @@ export class AppService {
 
     try {
       const challenge = await this.justaname.siwe.requestChallenge({
-        chainId: this.chainId,
+        chainId: this.chainId as ChainId,
         origin: this.origin,
         address: req.address,
         domain: this.domain,
@@ -59,11 +59,13 @@ export class AppService {
 
     try {
       const claim = await this.justaname.subnames.claimSubname({
-        chainId: this.chainId,
-        origin: this.origin,
         username: req.username,
-        address: req.address,
-        signature: req.signature,
+        ensDomain: this.domain,
+        chainId: this.chainId,
+      }, {
+        xSignature: req.signature,
+        xAddress: req.address,
+        xMessage: req.message,
       });
 
       return claim;

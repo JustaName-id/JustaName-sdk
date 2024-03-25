@@ -4,7 +4,7 @@ import { SubnameUpdate } from './interfaces/update.interface';
 import { SubnameClaim } from './interfaces/claim.interface';
 import { RequestChallenge } from './interfaces/request-challenge.interface';
 
-@Controller('/api/subnames')
+@Controller('/api')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -13,12 +13,12 @@ export class AppController {
     return this.appService.requestChallenge(req);
   }
 
-  @Post('/claim')
+  @Post('/subnames/claim')
   async claimSubname(req: SubnameClaim): Promise<any> {
     return this.appService.claimSubname(req);
   }
 
-  @Post('/update')
+  @Post('/subnames/update')
   async updateSubname(req: SubnameUpdate): Promise<any> {
     return this.appService.updateSubname(req);
   }

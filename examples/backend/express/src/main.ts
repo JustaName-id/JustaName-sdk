@@ -95,7 +95,7 @@ app.post('/api/subnames/claim', async (req: Request<SubnameClaim>, res) => {
   }
 
   try {
-    const claim = await justaname.subnames.addSubname({
+    const claim = await justaname.subnames.claimSubname({
         username: username,
         ensDomain: domain,
         chainId
@@ -120,8 +120,8 @@ export interface SubnameUpdate {
   address: string;
   signature: string;
   message: string;
-
 }
+
 app.post('/api/subnames/update', async (req: Request<SubnameUpdate>, res) => {
 
   const username = req.body.username
@@ -146,7 +146,7 @@ app.post('/api/subnames/update', async (req: Request<SubnameUpdate>, res) => {
 
   // TODO: add text, contentHash and addresses
   try {
-    const claim = await justaname.subnames.updateSubname({
+    const update = await justaname.subnames.updateSubname({
         username: username,
         ensDomain: domain,
         chainId,
@@ -159,7 +159,7 @@ app.post('/api/subnames/update', async (req: Request<SubnameUpdate>, res) => {
         xAddress: address,
         xMessage: message,
       });
-    res.send( claim );
+    res.send( update );
     return;
   }
   catch (error) {
@@ -167,8 +167,45 @@ app.post('/api/subnames/update', async (req: Request<SubnameUpdate>, res) => {
   }
 
   res.send({ message: 'Something went wrong' });
+});
 
-})
+interface SubnameReserve {
+  username: string;
+  ethAddress: string;
+}
+
+app.post('/api/subnames/reserve', async (req: Request<SubnameReserve>, res) => {
+  
+    const username = req.body.username;
+    const ethAddress = req.body.ethAddress;
+  
+    if(!username) {
+      res.send({ message: 'Username is required' });
+      return;
+    }
+
+    if(!ethAddress) {
+      res.send({ message: 'EthAddress is required' });
+      return;
+    }
+  
+    try {
+      const reserve = await justaname.subnames.reserveSubname({
+          username: username,
+          ensDomain: domain,
+          chainId: chainId,
+          ethAddress: ethAddress,
+        });
+      res.send( reserve );
+      return;
+    }
+    catch (error) {
+      console.error(error);
+    }
+  
+    res.send({ message: 'Something went wrong' });
+});
+
 
 app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to with-react-express-server!' });

@@ -1,0 +1,38 @@
+{
+  "name": "justaname-nestjs",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "examples/backend/nestjs/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "yarn build",
+          "cwd": "examples/backend/nestjs"
+        }
+      },
+      "serve": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "yarn start:dev",
+          "cwd": "examples/backend/nestjs"
+        }
+      },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn lint",
+        "cwd": "examples/backend/nestjs"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn",
+        "cwd": "examples/backend/nestjs"
+      }
+    }
+  },
+
+  "tags": []
+}
