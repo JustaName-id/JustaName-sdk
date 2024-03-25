@@ -76,7 +76,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/common/index.ts:1](https://github.com/JustaName-id/JustaName-sdk/blob/11f6578/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L1)
+[lib/types/common/index.ts:1](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L1)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/11f6578/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L39)
+[lib/api/routes/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L39)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/11f6578/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L37)
+[lib/api/routes/index.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L37)
 
 ## Variables
 
@@ -125,4 +125,4 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:20](https://github.com/JustaName-id/JustaName-sdk/blob/11f6578/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L20)
+[lib/api/routes/index.ts:20](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L20)

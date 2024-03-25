@@ -25,4 +25,4 @@ Represents the challenge to be signed by the user.
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:52](https://github.com/JustaName-id/JustaName-sdk/blob/11f6578/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L52)
+[lib/types/siwe/request-challenge.ts:52](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L52)

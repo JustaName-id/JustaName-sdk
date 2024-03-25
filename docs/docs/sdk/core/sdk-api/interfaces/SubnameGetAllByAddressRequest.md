@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/11f6578/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L36)
+[lib/types/subnames/get-all-by-address.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L36)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/11f6578/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L38)
+[lib/types/subnames/get-all-by-address.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L38)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/11f6578/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L40)
+[lib/types/subnames/get-all-by-address.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L40)
 
 ___
 
@@ -50,4 +50,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/11f6578/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L42)
+[lib/types/subnames/get-all-by-address.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L42)

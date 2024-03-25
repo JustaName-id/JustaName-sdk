@@ -14,4 +14,4 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/justaname/configuration.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/11f6578/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L2)
+[lib/types/justaname/configuration.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L2)
