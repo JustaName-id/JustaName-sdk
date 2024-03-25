@@ -1,4 +1,4 @@
-interface SubnameClaim {
+export interface SubnameClaim {
     username: string;
     address: string;
     signature: string;

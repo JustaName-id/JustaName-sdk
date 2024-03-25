@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { JustaName } from '@justaname.id/sdk';
 import { RequestChallenge } from './interfaces/request-challenge.interface';
+import { SubnameUpdate } from './interfaces/update.interface';
+import { SubnameClaim } from './interfaces/claim.interface';
 
 @Injectable()
 export class AppService {
@@ -39,6 +41,65 @@ export class AppService {
       });
 
       return challenge;
+    } catch (error) {
+      console.error(error);
+    }
+
+    return {
+        message: 'Something went wrong'
+    }
+  }
+
+  async claimSubname(req: SubnameClaim): Promise<any> {
+    if (!req.username || !req.address || !req.signature) {
+      return {
+        message: 'Username, address and signature are required',
+      };
+    }
+
+    try {
+      const claim = await this.justaname.subnames.claimSubname({
+        chainId: this.chainId,
+        origin: this.origin,
+        username: req.username,
+        address: req.address,
+        signature: req.signature,
+      });
+
+      return claim;
+    } catch (error) {
+      console.error(error);
+    }
+
+    return {
+        message: 'Something went wrong'
+    }
+  }
+  
+  // TODO: add text, contentHash and addresses
+  async updateSubname(req: SubnameUpdate): Promise<any> {
+    if (!req.username || !req.address || !req.signature || !req.message) {
+      return {
+        message: 'Username, address, signature and message are required',
+      };
+    }
+
+    try {
+      const update = await this.justaname.subnames.updateSubname({
+        username: req.username,
+        ensDomain: this.domain,
+        chainId: this.chainId,
+        text: [],
+        contentHash: '',
+        addresses: [],
+      },
+      {
+        xSignature: req.signature,
+        xAddress: req.address,
+        xMessage: req.message,
+      });
+
+      return update;
     } catch (error) {
       console.error(error);
     }

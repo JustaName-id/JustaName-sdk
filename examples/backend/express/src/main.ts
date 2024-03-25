@@ -144,6 +144,7 @@ app.post('/api/subnames/update', async (req: Request<SubnameUpdate>, res) => {
     return;
   }
 
+  // TODO: add text, contentHash and addresses
   try {
     const claim = await justaname.subnames.updateSubname({
         username: username,
