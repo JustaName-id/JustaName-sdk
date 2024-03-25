@@ -94,15 +94,6 @@
     },
     "nx/plugins/package-json",
     {
-      "plugin": "@nx/next/plugin",
-      "options": {
-        "buildTargetName": "build",
-        "devTargetName": "dev",
-        "startTargetName": "start",
-        "serveStaticTargetName": "serve-static"
-      }
-    },
-    {
       "plugin": "@nx/cypress/plugin",
       "options": {
         "targetName": "e2e",
@@ -125,12 +116,6 @@
         "style": "css",
         "linter": "eslint",
         "unitTestRunner": "jest"
-      }
-    },
-    "@nx/next": {
-      "application": {
-        "style": "none",
-        "linter": "eslint"
       }
     }
   },
