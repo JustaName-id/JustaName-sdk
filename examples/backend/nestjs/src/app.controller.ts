@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { SubnameUpdate } from './interfaces/update.interface';
 import { SubnameClaim } from './interfaces/claim.interface';
 import { RequestChallenge } from './interfaces/request-challenge.interface';
+import { SubnameReserve } from './interfaces/reserve.interface';
 
 @Controller('/api')
 export class AppController {
@@ -21,5 +22,10 @@ export class AppController {
   @Post('/subnames/update')
   async updateSubname(req: SubnameUpdate): Promise<any> {
     return this.appService.updateSubname(req);
+  }
+
+  @Post('/subnames/reserve')
+  async reserveSubname(req: SubnameReserve): Promise<any> {
+    return this.appService.reserveSubname(req);
   }
 }

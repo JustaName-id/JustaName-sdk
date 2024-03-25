@@ -3,6 +3,7 @@ import { ChainId, JustaName } from '@justaname.id/sdk';
 import { RequestChallenge } from './interfaces/request-challenge.interface';
 import { SubnameUpdate } from './interfaces/update.interface';
 import { SubnameClaim } from './interfaces/claim.interface';
+import { SubnameReserve } from './interfaces/reserve.interface';
 
 @Injectable()
 export class AppService {
@@ -102,6 +103,31 @@ export class AppService {
       });
 
       return update;
+    } catch (error) {
+      console.error(error);
+    }
+
+    return {
+        message: 'Something went wrong'
+    }
+  }
+
+  async reserveSubname(req: SubnameReserve): Promise<any> {
+    if (!req.username || !req.ethAddress) {
+      return {
+        message: 'Username and Eth Address are required',
+      };
+    }
+
+    try {
+      const reserve = await this.justaname.subnames.reserveSubname({
+        username: req.username,
+        ensDomain: this.domain,
+        chainId: this.chainId,
+        ethAddress: req.ethAddress,
+      });
+
+      return reserve;
     } catch (error) {
       console.error(error);
     }
