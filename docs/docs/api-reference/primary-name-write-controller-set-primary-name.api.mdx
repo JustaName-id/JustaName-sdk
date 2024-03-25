@@ -1,0 +1,40 @@
+---
+id: primary-name-write-controller-set-primary-name
+title: "Set Primary Name"
+description: "Set a Subname as Primary Name for an address."
+sidebar_label: "Set Primary Name"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVktv2zgQ/isETy3g5zZuXd9cbw499IHYiz14i2IsUTJTSWRJKo4h+L/vDClZim0kbtEEsC1x3t83M6y40sKAk6r4GPMZ/2pkDmb/GXLxr5FOLFThjMoyYb5b4TqnvMdjYSMjNemi5lI4BmxZbgo8ZWBZLcxImiXKMCgYxLER1g5QW4PBAyeM5bN1xUkLrTz2rUwLcKUhD5IMbwXEwpz5W20FO8qSQSN+ltIIzMKZUvS4jbYiBz6ruNtrsm2dkUXKD4dex12O4UB6jbNPQfL3XdXJX+Fq3pbpelffgrCw7oOK9yRxqhshmKJwdARaZzLyuA/vLTmuzk2rzb2IHGFliCVOCkunIaHTAC7lkZRZxorAFvEIuc5IId1CLAf3UAyE2/JDjzeFucpmLcxUwhw+6pplZ15Gj5v3bycwSd7AKFmMp39Pb27fTqfTN1E0jyej6c3NBN69H7+bTymEaAvSd8AxhKLMNxfgWZAgk3GP7QRTRbZnttRaGcduMRwjypx9QomCuqGI2VJolUlgK4SF3r0a+1bIg0iPjcfjyQQ//FsbhF9382gEkEodPNe8zrflVJMB0sBJ50vQaVdk1FzLu8APJEswZ7UqbAA1FgmUmQs/T2veLTLbYW/jLMC8owhdE8Z7YuofYpd12NF2oWJxCYxjXf4ajS5OBK/NIlRvGNKkOeAh5zrL56OIwV0Rq4wvcbblIJ6f4iZfQigES7EKY5R5uSk+U5PJhBWKeQ2moqg06K7HFFFyJ63whQineTPGTiPzKTder4nxztdyuYM0RWxOzXVwPJb9GqvLQKvWrOeqg5T2BO8uFTKHG2SraHFpZT0+gCNlxoc1Y/vE2CGytd99gXJWmIdm9ZQmo3HsnLaz4RDjTrHMfdA4o0p8Io0BIYnuiMx37ZC9bZA+Tvmns60z2n5lHnXG0bH9aWkkyrOhruDKf5+yofvU45RjeD8ejOoehYj4T0WlmuVQdMKnJf6kxCfmq7bLf3nh1yx24tENdYb5Ecd97asatjU/Q+kEOIRgS0CjaFVtwIp/THY40GvExODSW+PPBzASNlSj9Td0Ue9ZQjqWlg6wrglkVjyT3Ku7msqv2dlF42IiP8T+7PryAFlJkpyuAb/tu3PveNZze5P5M37nL0DX+G1X0BO/4XgRrPdXZKGVOFsQrcYc21+7Z2W7ff/1y3KFwpv6ypP7vcEN7Gjq4OeM/4f/+KB8xn5s+/cVz6BIS6rYjAe79Pc/32HHEA==
+sidebar_class_name: "post api-method"
+info_path: api-reference/title
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Set Primary Name</h1>
+
+<MethodEndpoint method={"post"} path={"/primary-name/set-primary-name"}></MethodEndpoint>
+
+
+
+Set a Subname as Primary Name for an address.
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Header Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"x-signature","in":"header","description":"The signature.","required":true,"schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"name":"x-message","in":"header","description":"The Message.","required":true,"schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"name":"x-address","in":"header","description":"The Address.","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"name"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The full name","example":"ghadi.jan.eth"}}></SchemaItem><SchemaItem collapsible={false} name={"address"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The address of the primary name","example":"0xb965a5f3a0fC18D84E68883ccAd508445a7917A8"}}></SchemaItem><SchemaItem collapsible={false} name={"chainId"} required={true} schemaName={"number"} qualifierMessage={undefined} schema={{"type":"number","description":"Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)","example":11155111}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs><TabItem label={"default"} value={"default"}><div>
+
+The primary name was set successfully.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"statusCode"} required={true} schemaName={"number"} qualifierMessage={undefined} schema={{"type":"number","example":200,"description":"The status code of the response."}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>result</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>data</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"id"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","example":"id"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"error"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Null if no error occurred, otherwise the error message."}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"statusCode\": 200,\n  \"result\": {\n    \"data\": {\n      \"id\": \"id\"\n    },\n    \"error\": \"string\"\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+      

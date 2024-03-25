@@ -1,6 +1,29 @@
 import { restCall } from '../../api/rest';
 import { IsSubnameAvailableRequest, IsSubnameAvailableResponse, SIWEHeaders, SubnameAddRequest, SubnameAddResponse, SubnameClaimRequest, SubnameClaimResponse, SubnameGetAllByAddressRequest, SubnameGetAllByAddressResponse, SubnameGetByDomainNameChainIdRequest, SubnameGetByDomainNameChainIdResponse, SubnameGetBySubnameRequest, SubnameGetBySubnameResponse, SubnameReserveRequest, SubnameReserveResponse, SubnameRevokeRequest, SubnameRevokeResponse, SubnameUpdateRequest, SubnameUpdateResponse } from '../../types';
 
+/**
+ * Represents the Subnames class for interacting with the Subnames API.
+ * @public
+ * @class
+ * @classdesc Represents the Subnames class for interacting with the Subnames API.
+ * @example
+ * ```typescript
+ * import { JustaName } from 'justaname-sdk';
+ *
+ * const configuration = {
+ *  apiKey: 'your-api-key'
+ *  };
+ *
+ *  const justaName = await JustaName.init(configuration);
+ *
+ *  const addedUser = await justaName.subnames.addSubname({
+ *  username: 'test',
+ *  ensDomain: 'justaname.id',
+ *  chainId: 1,
+ *  });
+ *
+ *  ```
+ */
 export class Subnames {
   private readonly apiKey: string | undefined;
 
@@ -131,7 +154,6 @@ export class Subnames {
 
 
   private isNotReadOnlyMode<T>(callback: T): T {
-    console.log(this.apiKey);
     const check =  this.apiKey === undefined;
     if(check){
       throw new Error('This method is not available in read-only mode');

@@ -1,16 +1,21 @@
 import { confirm, input, select } from '@inquirer/prompts';
 import { validateApiKey, validateDomain, validateInput } from './validate';
 
-export type FrontendFramework = 'react' | 'nextjs' | 'react-native' | 'expo';
+export type FrontendFramework = 'react' | 'react-native' | 'expo';
+
+export type FullstackFramework = 'nextjs';
 
 export type BackendFramework = 'express' | 'nestjs' | 'koa' | 'hapi' | 'fastify';
 
 export type Network = 'mainnet' | 'testnet';
 
+
+
 export interface AppDetails {
   appName: string;
-  frontendFramework: FrontendFramework;
-  backendFramework: BackendFramework;
+  frontendFramework?: FrontendFramework;
+  backendFramework?: BackendFramework;
+  fullstackFramework?: FullstackFramework;
   apiKey: string;
   ensDomain: string;
   directory: string;
@@ -28,7 +33,7 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
     validate: (input: string) => validateInput(input, 'App name')
   });
 
-  const frontendFramework = await select<FrontendFramework>({
+  const frontendFramework = await select<FrontendFramework | FullstackFramework>({
     choices: [{
       name: 'React',
       value: 'react'
@@ -88,7 +93,8 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
 
   const ensDomain = await input({
     message: 'Enter your ENS domain',
-    validate: (input: string) => validateInput(input, 'ENS domain', validateDomain)
+    validate: (input: string) => validateInput(input, 'ENS domain', validateDomain),
+    default: appName + '.eth'
   });
 
   const network = await select<Network>({
@@ -111,12 +117,13 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
   });
 
 
-  if(!backendFramework) throw new Error('Backend framework is required');
+  if(frontendFramework !=="nextjs" && !backendFramework) throw new Error('Backend framework is required');
 
   return {
     appName,
-    frontendFramework,
-    backendFramework,
+    frontendFramework: frontendFramework === 'nextjs' ? undefined : frontendFramework,
+    backendFramework: frontendFramework === 'nextjs' ? undefined : backendFramework,
+    fullstackFramework: frontendFramework === 'nextjs' ? 'nextjs' : undefined,
     apiKey,
     ensDomain,
     network,
