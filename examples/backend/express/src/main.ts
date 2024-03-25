@@ -206,6 +206,42 @@ app.post('/api/subnames/reserve', async (req: Request<SubnameReserve>, res) => {
     res.send({ message: 'Something went wrong' });
 });
 
+interface SubnameAdd {
+  username: string;
+  address: string;
+  signature: string;
+  message: string;
+}
+
+app.post('api/subnames/add', async (req: Request<SubnameAdd>, res) => {
+  const username = req.body.username;
+
+  if(!username) {
+    res.send({ message: 'Username is required' });
+    return;
+  }
+
+  try {
+    const add = await justaname.subnames.addSubname({
+      username: username,
+      ensDomain: domain,
+      chainId: chainId
+    },
+    {
+      xSignature: req.body.signature,
+      xAddress: req.body.address,
+      xMessage: req.body.message
+    });
+
+    res.send( add );
+    return;
+  }
+  catch (error) {
+    console.error(error);
+  }
+
+  res.send({ message: 'Something went wrong' });
+});
 
 app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to with-react-express-server!' });

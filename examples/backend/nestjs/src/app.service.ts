@@ -4,6 +4,7 @@ import { RequestChallenge } from './interfaces/request-challenge.interface';
 import { SubnameUpdate } from './interfaces/update.interface';
 import { SubnameClaim } from './interfaces/claim.interface';
 import { SubnameReserve } from './interfaces/reserve.interface';
+import { SubnameAdd } from './interfaces/add.interface';
 
 @Injectable()
 export class AppService {
@@ -128,6 +129,38 @@ export class AppService {
       });
 
       return reserve;
+    } catch (error) {
+      console.error(error);
+    }
+
+    return {
+        message: 'Something went wrong'
+    }
+  }
+
+  async addSubname(req: SubnameAdd): Promise<any> {
+    if (!req.username || !req.address || !req.signature || !req.message) {
+      return {
+        message: 'Username, address, signature and message are required',
+      };
+    }
+
+    try {
+      const add = await this.justaname.subnames.addSubname({
+        username: req.username,
+        ensDomain: this.domain,
+        chainId: this.chainId,
+        text: [],
+        contentHash: '',
+        addresses: [],
+      },
+      {
+        xSignature: req.signature,
+        xAddress: req.address,
+        xMessage: req.message,
+      });
+
+      return add;
     } catch (error) {
       console.error(error);
     }
