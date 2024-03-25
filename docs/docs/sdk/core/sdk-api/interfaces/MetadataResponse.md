@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L30)
+[lib/types/subnames/get-by-domain-name-chainId.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L30)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L26)
+[lib/types/subnames/get-by-domain-name-chainId.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L26)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L24)
+[lib/types/subnames/get-by-domain-name-chainId.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L24)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L28)
+[lib/types/subnames/get-by-domain-name-chainId.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L28)
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:32](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L32)
+[lib/types/subnames/get-by-domain-name-chainId.ts:32](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L32)

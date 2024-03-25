@@ -24,7 +24,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:59](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L59)
+[lib/types/siwe/request-challenge.ts:59](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L59)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L57)
+[lib/types/siwe/request-challenge.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L57)
 
 ___
 
@@ -52,4 +52,4 @@ ___
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L58)
+[lib/types/siwe/request-challenge.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L58)

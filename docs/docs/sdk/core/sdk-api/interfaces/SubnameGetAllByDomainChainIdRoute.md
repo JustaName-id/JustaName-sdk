@@ -24,7 +24,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:96](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L96)
+[lib/types/subnames/get-all-by-ens-domain.ts:96](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L96)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:94](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L94)
+[lib/types/subnames/get-all-by-ens-domain.ts:94](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L94)
 
 ___
 
@@ -52,4 +52,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:95](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L95)
+[lib/types/subnames/get-all-by-ens-domain.ts:95](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L95)

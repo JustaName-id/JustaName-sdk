@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/update.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L51)
+[lib/types/subnames/update.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L51)
 
 ___
 
@@ -30,4 +30,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/update.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L49)
+[lib/types/subnames/update.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L49)

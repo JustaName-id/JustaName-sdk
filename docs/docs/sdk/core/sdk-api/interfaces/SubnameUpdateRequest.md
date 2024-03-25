@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/update.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L39)
+[lib/types/subnames/update.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L39)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/update.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L37)
+[lib/types/subnames/update.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L37)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/update.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L43)
+[lib/types/subnames/update.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L43)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/update.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L35)
+[lib/types/subnames/update.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L35)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/update.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L41)
+[lib/types/subnames/update.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L41)
 
 ___
 
@@ -70,4 +70,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/update.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L33)
+[lib/types/subnames/update.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L33)
