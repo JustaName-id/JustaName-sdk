@@ -10,10 +10,10 @@
       "options": {
         "outputPath": "packages/create-justaname-app/dist",
         "compiler": "tsc",
-        "additionalEntryPoints": ["packages/create-justaname-app/src/index.ts"],
         "project": "packages/create-justaname-app/package.json",
         "main": "packages/create-justaname-app/src/index.ts",
         "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
+        "rollupConfig":[ "packages/create-justaname-app/rollup.config.cjs"],
         "generateExportsField": true,
         "allowJs": true,
         "format": ["esm"]
@@ -51,6 +51,25 @@
           "packages/create-justaname-app/src/*.{ts,tsx,js,jsx}",
           "packages/create-justaname-app/package.json"
         ]
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "packages/create-justaname-app/dist",
+        "buildTarget": "create-justaname-app:build"
+      },
+      "dependsOn": ["^build"]
+    },
+    "release:package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx semantic-release --debug --extends=./packages/create-justaname-app/release.config.js"
+      }
+    },
+    "update-deps": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx rjp ./packages/create-justaname-app/dist/package.json $PACKAGE_NAME $VERSION"
       }
     }
   },

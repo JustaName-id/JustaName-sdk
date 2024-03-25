@@ -46,7 +46,7 @@ export const GET_SUBNAME_BY_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/subname';
 /**
  * Routes to get all subnames by domain
  */
-export const GET_ALL_SUBNAMES_BY_DOMAIN_ROUTE = SUBNAME_BASE_ROUTE + '/ensDomain';
+export const GET_ALL_SUBNAMES_BY_DOMAIN_ROUTE = SUBNAME_BASE_ROUTE + '/ens-domain';
 
 /**
  * Routes to get all subnames by address

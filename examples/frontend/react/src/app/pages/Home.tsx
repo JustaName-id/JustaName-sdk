@@ -7,11 +7,12 @@ export const Home = () => {
   const { address } = useAccount();
   return (
     <div>
-      <ConnectButton />
       <h1> Welcome to {import.meta.env.VITE_APP_ENS_DOMAIN} community</h1>
       {
         !address && <p>Connect your wallet to claim your subdomain</p>
       }
+      <ConnectButton />
+
       {
         address && <ClaimSubname />
       }
