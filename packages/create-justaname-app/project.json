@@ -13,6 +13,7 @@
         "project": "packages/create-justaname-app/package.json",
         "main": "packages/create-justaname-app/src/index.ts",
         "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
+        "rollupConfig":[ "packages/create-justaname-app/rollup.config.cjs"],
         "generateExportsField": true,
         "allowJs": true,
         "format": ["esm"]

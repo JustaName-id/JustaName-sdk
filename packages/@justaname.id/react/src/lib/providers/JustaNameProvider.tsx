@@ -20,7 +20,7 @@ const JustaNameContext = React.createContext<JustaNameContextProps>({
   routes: defaultRoutes,
   chainId: 1,
 })
-interface JustaNameProvider {
+export interface JustaNameProvider {
   children: React.ReactNode;
   routes?: typeof defaultRoutes;
   chainId?: 1 | 11155111

@@ -1,13 +1,16 @@
 {
   "name": "create-justaname-app",
-  "version": "0.0.5",
+  "version": "0.1.1",
   "dependencies": {
     "@inquirer/prompts": "^4.3.0",
     "fs-extra": "11.2.0",
     "node-fetch": "2.7.0",
     "ora": "^8.0.1",
-    "tar": "6.2.0"
+    "tar": "6.2.0",
+    "rollup-plugin-strip-shebang": "^1.2.10",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-commonjs": "^25.0.7"
   },
   "type": "module",
-  "bin": "lib/index.esm.js"
+  "bin": "index.esm.js"
 }

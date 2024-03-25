@@ -1,0 +1,30 @@
+{
+  "name": "justaname-docs",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "docs/src",
+  "projectType": "library",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+        "options": {
+          "commands": ["yarn start"],
+          "cwd": "docs"
+        }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+        "options": {
+          "commands": ["yarn build"],
+          "cwd": "docs"
+        }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn",
+        "cwd": "docs"
+      }
+    }
+  },
+  "tags": []
+}

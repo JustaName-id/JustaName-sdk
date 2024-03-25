@@ -5252,6 +5252,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/plugin-commonjs@npm:^25.0.7":
+  version: 25.0.7
+  resolution: "@rollup/plugin-commonjs@npm:25.0.7"
+  dependencies:
+    "@rollup/pluginutils": "npm:^5.0.1"
+    commondir: "npm:^1.0.1"
+    estree-walker: "npm:^2.0.2"
+    glob: "npm:^8.0.3"
+    is-reference: "npm:1.2.1"
+    magic-string: "npm:^0.30.3"
+  peerDependencies:
+    rollup: ^2.68.0||^3.0.0||^4.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: 10c0/d096af5aedd55c19ac528daa84a4cacdf21a69c9c9b20c23e04f27a64966cb383f5e2b01b9c903d40318e35dcaa74dc7b5292a844c6cbc66c252f5447eac05b4
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-image@npm:^2.1.0":
   version: 2.1.1
   resolution: "@rollup/plugin-image@npm:2.1.1"
@@ -5307,6 +5326,44 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/plugin-node-resolve@npm:^15.2.3":
+  version: 15.2.3
+  resolution: "@rollup/plugin-node-resolve@npm:15.2.3"
+  dependencies:
+    "@rollup/pluginutils": "npm:^5.0.1"
+    "@types/resolve": "npm:1.20.2"
+    deepmerge: "npm:^4.2.2"
+    is-builtin-module: "npm:^3.2.1"
+    is-module: "npm:^1.0.0"
+    resolve: "npm:^1.22.1"
+  peerDependencies:
+    rollup: ^2.78.0||^3.0.0||^4.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: 10c0/598c15615086f26e28c4b3dbf966682af7fb0e5bc277cc4e57f559668a3be675a63ab261eb34729ce9569c3a51342c48863e50b5efe02e0fc1571828f0113f9d
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-typescript@npm:^11.1.6":
+  version: 11.1.6
+  resolution: "@rollup/plugin-typescript@npm:11.1.6"
+  dependencies:
+    "@rollup/pluginutils": "npm:^5.1.0"
+    resolve: "npm:^1.22.1"
+  peerDependencies:
+    rollup: ^2.14.0||^3.0.0||^4.0.0
+    tslib: "*"
+    typescript: ">=3.7.0"
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+    tslib:
+      optional: true
+  checksum: 10c0/5347cd73ac28d4cf2401a3e689864a1a0df8f3ae029abd9c38525cbc84bcfa16c3a32a0ac5698dac65ec531ba7cf8332e14f5fc7f8fa501193da23320a134c5c
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-url@npm:^7.0.0":
   version: 7.0.0
   resolution: "@rollup/plugin-url@npm:7.0.0"
@@ -5333,7 +5390,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^4.1.2, @rollup/pluginutils@npm:^4.2.1":
+"@rollup/pluginutils@npm:^4.1.0, @rollup/pluginutils@npm:^4.1.2, @rollup/pluginutils@npm:^4.2.1":
   version: 4.2.1
   resolution: "@rollup/pluginutils@npm:4.2.1"
   dependencies:
@@ -7309,6 +7366,13 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10c0/6eeb9c27d99bf4b393bf168d43208f63e78cefca5644662a0bdb2bdbf8352386f4f3aca66add138fc41bce5f66fd48a0de430a1473f11b612fbed0375ae78031
+  languageName: node
+  linkType: hard
+
+"@types/resolve@npm:1.20.2":
+  version: 1.20.2
+  resolution: "@types/resolve@npm:1.20.2"
+  checksum: 10c0/c5b7e1770feb5ccfb6802f6ad82a7b0d50874c99331e0c9b259e415e55a38d7a86ad0901c57665d93f75938be2a6a0bc9aa06c9749192cadb2e4512800bbc6e6
   languageName: node
   linkType: hard
 
@@ -11806,13 +11870,33 @@ __metadata:
   dependencies:
     "@inquirer/prompts": "npm:^4.3.0"
     fs-extra: "npm:11.2.0"
+    handlebars: "npm:^4.7.8"
     node-fetch: "npm:2.7.0"
     ora: "npm:^8.0.1"
+    rollup-plugin-strip-shebang: "npm:^1.2.10"
     tar: "npm:6.2.0"
   bin:
-    create-justaname-app: lib/index.esm.js
+    create-justaname-app: index.esm.js
   languageName: unknown
   linkType: soft
+
+"create-package-json@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "create-package-json@npm:1.1.0"
+  dependencies:
+    "@npmcli/name-from-folder": "npm:^2.0.0"
+    "@npmcli/package-json": "npm:^5.0.0"
+    fs-extra: "npm:^11.1.1"
+    loggerr: "npm:^3.0.0"
+    npm-package-arg: "npm:^11.0.1"
+    opta: "npm:^1.0.0"
+    safe-parse-list: "npm:^0.1.1"
+    validate-npm-package-name: "npm:^5.0.0"
+  bin:
+    create-package-json: bin/create-package-json
+  checksum: 10c0/a65092da7d2a720d8307ae2ed0acf6f3c46130187a9c593757ff4bae3e6ba6045d4536be860213739d7d7c2fe2b79ec0e6ee1d67abebfa04dd7bdd633942a024
+  languageName: node
+  linkType: hard
 
 "create-require@npm:^1.1.0, create-require@npm:^1.1.1":
   version: 1.1.1
@@ -15199,7 +15283,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:11.2.0, fs-extra@npm:^11.0.0, fs-extra@npm:^11.1.0":
+"fs-extra@npm:11.2.0, fs-extra@npm:^11.0.0, fs-extra@npm:^11.1.0, fs-extra@npm:^11.1.1":
   version: 11.2.0
   resolution: "fs-extra@npm:11.2.0"
   dependencies:
@@ -15631,6 +15715,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"glob@npm:^8.0.3":
+  version: 8.1.0
+  resolution: "glob@npm:8.1.0"
+  dependencies:
+    fs.realpath: "npm:^1.0.0"
+    inflight: "npm:^1.0.4"
+    inherits: "npm:2"
+    minimatch: "npm:^5.0.1"
+    once: "npm:^1.3.0"
+  checksum: 10c0/cb0b5cab17a59c57299376abe5646c7070f8acb89df5595b492dba3bfb43d301a46c01e5695f01154e6553168207cb60d4eaf07d3be4bc3eb9b0457c5c561d0f
+  languageName: node
+  linkType: hard
+
 "global-dirs@npm:^3.0.0":
   version: 3.0.1
   resolution: "global-dirs@npm:3.0.1"
@@ -15801,7 +15898,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"handlebars@npm:4.7.8, handlebars@npm:^4.7.7":
+"handlebars@npm:4.7.8, handlebars@npm:^4.7.7, handlebars@npm:^4.7.8":
   version: 4.7.8
   resolution: "handlebars@npm:4.7.8"
   dependencies:
@@ -16520,7 +16617,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:^8.0.0, inquirer@npm:^8.2.5":
+"inquirer@npm:^8.0.0, inquirer@npm:^8.2.5, inquirer@npm:^8.2.6":
   version: 8.2.6
   resolution: "inquirer@npm:8.2.6"
   dependencies:
@@ -16723,7 +16820,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-builtin-module@npm:^3.1.0":
+"is-builtin-module@npm:^3.1.0, is-builtin-module@npm:^3.2.1":
   version: 3.2.1
   resolution: "is-builtin-module@npm:3.2.1"
   dependencies:
@@ -16732,7 +16829,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-callable@npm:^1.1.3, is-callable@npm:^1.1.4, is-callable@npm:^1.2.7":
+"is-callable@npm:^1.1.3, is-callable@npm:^1.1.4, is-callable@npm:^1.2.2, is-callable@npm:^1.2.7":
   version: 1.2.7
   resolution: "is-callable@npm:1.2.7"
   checksum: 10c0/ceebaeb9d92e8adee604076971dd6000d38d6afc40bb843ea8e45c5579b57671c3f3b50d7f04869618242c6cee08d1b67806a8cb8edaaaf7c0748b3720d6066f
@@ -17029,7 +17126,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-reference@npm:^1.2.1":
+"is-reference@npm:1.2.1, is-reference@npm:^1.2.1":
   version: 1.2.1
   resolution: "is-reference@npm:1.2.1"
   dependencies:
@@ -18419,6 +18516,9 @@ __metadata:
     "@nx/webpack": "npm:18.0.8"
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.5.7"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
+    "@rollup/plugin-commonjs": "npm:^25.0.7"
+    "@rollup/plugin-node-resolve": "npm:^15.2.3"
+    "@rollup/plugin-typescript": "npm:^11.1.6"
     "@rollup/plugin-url": "npm:^7.0.0"
     "@semantic-release/changelog": "npm:^6.0.3"
     "@semantic-release/commit-analyzer": "npm:^12.0.0"
@@ -18457,6 +18557,7 @@ __metadata:
     babel-jest: "npm:^29.4.1"
     babel-preset-expo: "npm:~10.0.0"
     cors: "npm:^2.8.5"
+    create-package-json: "npm:^1.1.0"
     cypress: "npm:13.6.4"
     eslint: "npm:~8.48.0"
     eslint-config-next: "npm:14.0.4"
@@ -18470,6 +18571,7 @@ __metadata:
     expo-splash-screen: "npm:~0.26.1"
     expo-status-bar: "npm:~1.11.1"
     express: "npm:^4.18.1"
+    handlebars: "npm:^4.7.8"
     inquirer: "npm:^8.0.0"
     jest: "npm:^29.4.1"
     jest-environment-jsdom: "npm:^29.4.1"
@@ -18490,6 +18592,7 @@ __metadata:
     react-refresh: "npm:^0.10.0"
     react-router-dom: "npm:6.11.2"
     react-test-renderer: "npm:18.2.0"
+    rollup-plugin-strip-shebang: "npm:^1.2.10"
     tailwindcss: "npm:^3.4.1"
     ts-jest: "npm:^29.1.0"
     ts-node: "npm:10.9.1"
@@ -19376,6 +19479,15 @@ __metadata:
     slice-ansi: "npm:^4.0.0"
     wrap-ansi: "npm:^6.2.0"
   checksum: 10c0/18b299e230432a156f2535660776406d15ba8bb7817dd3eaadd58004b363756d4ecaabcd658f9949f90b62ea7d3354423be3fdeb7a201ab951ec0e8d6139af86
+  languageName: node
+  linkType: hard
+
+"loggerr@npm:^3.0.0":
+  version: 3.3.0
+  resolution: "loggerr@npm:3.3.0"
+  dependencies:
+    chalk: "npm:^4.1.0"
+  checksum: 10c0/52d2a37988ae30a572ac59bd5cd6c89abaf18682e781390d10da9973c3fccf694e68658c6c1c89bc36e97a7d2750a05bc7923fe97310f313932ccc318aeade11
   languageName: node
   linkType: hard
 
@@ -21263,6 +21375,16 @@ __metadata:
   bin:
     opener: bin/opener-bin.js
   checksum: 10c0/dd56256ab0cf796585617bc28e06e058adf09211781e70b264c76a1dbe16e90f868c974e5bf5309c93469157c7d14b89c35dc53fe7293b0e40b4d2f92073bc79
+  languageName: node
+  linkType: hard
+
+"opta@npm:^1.0.0":
+  version: 1.1.0
+  resolution: "opta@npm:1.1.0"
+  dependencies:
+    inquirer: "npm:^8.2.6"
+    yargs: "npm:^17.3.1"
+  checksum: 10c0/f0f74d14b618c9eafed35642d1eba3f5e8538e70d8b5cc3276a38b1a991e501d2c848d8b217591ac058be312583b1e36b0bfc2b22b69b7034e892bf4fb1ea455
   languageName: node
   linkType: hard
 
@@ -24237,6 +24359,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup-plugin-strip-shebang@npm:^1.2.10":
+  version: 1.2.10
+  resolution: "rollup-plugin-strip-shebang@npm:1.2.10"
+  dependencies:
+    "@rollup/pluginutils": "npm:^4.1.0"
+    is-callable: "npm:^1.2.2"
+    magic-string: "npm:^0.25.7"
+  peerDependencies:
+    rollup: ^2.0.0
+  checksum: 10c0/c8c1238d81057afc063e57a038ef9bdd62d51e600bc72a301d7527a263b48ebcd6f5db7a481994d698d30e51c61710d813e4b59cd0fc758510f3a15bd2e3ca16
+  languageName: node
+  linkType: hard
+
 "rollup-plugin-typescript2@npm:0.36.0":
   version: 0.36.0
   resolution: "rollup-plugin-typescript2@npm:0.36.0"
@@ -24479,6 +24614,13 @@ __metadata:
   version: 1.2.0
   resolution: "safe-json-stringify@npm:1.2.0"
   checksum: 10c0/9c21c7b63a35a9e52d248eea2ad7bc9e790dde5aa418f0d4eed3c0b4c866e15337425b0d973173d30dd70a9e422271619f17e13574e0c8371d0c240cf72b871f
+  languageName: node
+  linkType: hard
+
+"safe-parse-list@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "safe-parse-list@npm:0.1.1"
+  checksum: 10c0/0f4f6fdd68a83d445af2fa253e17fa8af565f09bc5d8f04472aaf177ca643203899ee61b6732390f222f901e26be8003396cd28dd80ba36431fbb53a30799e43
   languageName: node
   linkType: hard
 
