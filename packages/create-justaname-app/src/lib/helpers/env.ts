@@ -61,5 +61,5 @@ export const getEnv = (framework: FrontendFramework | BackendFramework | Fullsta
   return env.replace(/{{domain}}/g, appDetails.ensDomain)
             .replace(/{{chainId}}/g, appDetails.network === 'mainnet' ? '1' : '11155111')
             .replace(/{{apiKey}}/g, appDetails.apiKey)
-            .replace(/{{origin}}/g, appDetails.appName + '.com')
+            .replace(/{{origin}}/g, appDetails.appUrl)
 }

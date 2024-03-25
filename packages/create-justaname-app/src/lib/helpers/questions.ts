@@ -17,6 +17,7 @@ export interface AppDetails {
   backendFramework?: BackendFramework;
   fullstackFramework?: FullstackFramework;
   apiKey: string;
+  appUrl: string;
   ensDomain: string;
   directory: string;
   network: Network;
@@ -91,6 +92,12 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
     validate: (input: string) => validateInput(input, 'API key', validateApiKey)
   });
 
+  const appUrl = await input({
+    message: 'Enter the URL of your app (example: https://<appName>.com or http://localhost:3000)',
+    validate: (input: string) => validateInput(input, 'App URL'),
+    default: 'https://' + appName + '.com',
+  });
+
   const ensDomain = await input({
     message: 'Enter your ENS domain',
     validate: (input: string) => validateInput(input, 'ENS domain', validateDomain),
@@ -126,6 +133,7 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
     fullstackFramework: frontendFramework === 'nextjs' ? 'nextjs' : undefined,
     apiKey,
     ensDomain,
+    appUrl,
     network,
     appDir,
     directory
