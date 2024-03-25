@@ -11869,8 +11869,9 @@ __metadata:
   resolution: "create-justaname-app@workspace:packages/create-justaname-app"
   dependencies:
     "@inquirer/prompts": "npm:^4.3.0"
+    "@rollup/plugin-commonjs": "npm:^25.0.7"
+    "@rollup/plugin-node-resolve": "npm:^15.2.3"
     fs-extra: "npm:11.2.0"
-    handlebars: "npm:^4.7.8"
     node-fetch: "npm:2.7.0"
     ora: "npm:^8.0.1"
     rollup-plugin-strip-shebang: "npm:^1.2.10"
