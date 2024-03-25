@@ -1,17 +1,15 @@
 import "@ethersproject/shims";
+import { useAccountSubnames, useClaimSubname, useIsSubnameAvailable } from '@justaname.id/react/src';
 import '@walletconnect/react-native-compat';
-import 'react-native-url-polyfill/auto';
-import { useAccountSubnames, useClaimSubname, useIsSubnameAvailable } from '@justaname.id/react';
 import { W3mButton } from '@web3modal/wagmi-react-native';
-import { ethers } from "ethers";
 import React, { useState } from 'react';
 import { ActivityIndicator, Button, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import 'react-native-url-polyfill/auto';
 import { useDebounced } from "../hooks/useDebounced";
 
 
 export default function HomeScreen() {
     const [inputValue, setInputValue] = useState('');
-    const [randomWallet, setRandomWallet] = useState({} as ethers.HDNodeWallet);
     // Wagmi
 
     const {
@@ -22,17 +20,11 @@ export default function HomeScreen() {
     );
 
     const { subnames } = useAccountSubnames();
-    const { isAvailable } = useIsSubnameAvailable({
-        subname: debouncedSubdomain,
+    const { isAvailable, isLoading } = useIsSubnameAvailable({
+        username: debouncedSubdomain,
         ensDomain: process.env.EXPO_PUBLIC_ENS_DOMAIN as string,
     })
     const { claimSubname } = useClaimSubname();
-
-    const handleGenerateWallet = async () => {
-        const wallet = ethers.Wallet.createRandom();
-        setRandomWallet(wallet);
-    }
-
     const handleAddSubdomain = async () => {
         return await claimSubname({
             username: inputValue,
@@ -48,28 +40,28 @@ export default function HomeScreen() {
                     <Text style={styles.text}>JAN WALLET TEST</Text>
                     <Text style={styles.subText}>Connect ur wallet</Text>
                     <W3mButton />
-                    <Text style={[styles.subText, { marginTop: 10 }]}>Or generate random wallet on each click</Text>
-                    <Button
-                        title={"Generate wallet"}
-                        onPress={handleGenerateWallet}
-                    />
-                    <Text style={[styles.subText, { marginTop: 10 }]}>{randomWallet.address ?? "No Generated Wallet"}</Text>
-                    <TextInput
-                        style={[styles.input, {
-                            borderColor: isAvailable
-                                ? 'lightgreen'
-                                : 'red',
-                        }]}
-                        placeholder="Enter your string"
-                        value={inputValue}
-                        onChangeText={setInputValue}
-                    />
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={[styles.input,
+                            {
+                                borderColor:
+                                    isAvailable
+                                        ? 'lightgreen'
+                                        : 'red',
+                            }
+                            ]}
+                            placeholder="Enter your string"
+                            value={inputValue}
+                            onChangeText={setInputValue}
+                        />
+                        <Text style={styles.domainText}>.{process.env.EXPO_PUBLIC_ENS_DOMAIN}</Text>
+                    </View>
                     <Button
                         title="Claim"
                         onPress={handleAddSubdomain}
                         disabled={!isAvailable}
                     />
-                    {debouncedSubdomain.length > 2 &&
+                    {debouncedSubdomain.length > 2 && isLoading &&
                         <ActivityIndicator
                             size="large"
                             color="black"
@@ -93,6 +85,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        paddingHorizontal: 20,
     },
     text: {
         fontSize: 24,
@@ -103,6 +96,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
+        marginTop: 20,
     },
     input: {
         height: 40,
@@ -113,4 +107,15 @@ const styles = StyleSheet.create({
         padding: 10,
         marginHorizontal: 20,
     },
+    inputContainer: {
+        position: 'relative',
+        width: '100%',
+    },
+    domainText: {
+        position: 'absolute',
+        right: 28,
+        top: 22,
+        fontSize: 15,
+        color: 'black'
+    }
 });

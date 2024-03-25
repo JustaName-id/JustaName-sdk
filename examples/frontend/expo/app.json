@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "jan-expo-demo-fullstack",
-    "slug": "jan-expo-demo-fullstack",
-    "scheme": "jan-expo-demo-fullstack",
+    "name": "jan-expo-demo-frontend",
+    "slug": "jan-expo-demo-frontend",
+    "scheme": "jan-expo-demo-frontend",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,6 +22,7 @@
           "safe",
           "rainbow",
           "uniswap"
+          // Add other wallet schemes names here
         ]
       }
     },
@@ -32,17 +33,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png",
-      "output": "server",
-      "bundler": "metro"
-    },
-    "plugins": [
-      [
-        "expo-router",
-        {
-          "origin": "https://jan-expo-demo.dev/"
-        }
-      ]
-    ]
+      "favicon": "./assets/favicon.png"
+    }
   }
 }
