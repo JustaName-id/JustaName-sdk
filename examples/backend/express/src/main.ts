@@ -213,7 +213,7 @@ interface SubnameAdd {
   message: string;
 }
 
-app.post('api/subnames/add', async (req: Request<SubnameAdd>, res) => {
+app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
   const username = req.body.username;
 
   if(!username) {
