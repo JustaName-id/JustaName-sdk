@@ -75,21 +75,6 @@ app.post('/api/subnames/claim', async (req: Request<SubnameClaim>, res) => {
   const signature = req.body.signature
   const message = req.body.message
 
-  if(!username) {
-    res.send({ message: 'Username is required' });
-    return;
-  }
-
-  if(!address) {
-    res.send({ message: 'Address is required' });
-    return;
-  }
-
-  if(!signature) {
-    res.send({ message: 'Signature is required' });
-    return;
-  }
-
   try {
     const claim = await justaname.subnames.addSubname({
         username: username,
