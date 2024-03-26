@@ -851,7 +851,12 @@
   ],
   "servers": [
     {
-      "url": "https://staging-api.justaname.id"
+      "url": "https://staging-api.justaname.id",
+      "description": "Staging"
+    },
+    {
+      "url": "https://api.justaname.id",
+      "description": "Production"
     }
   ],
   "components": {

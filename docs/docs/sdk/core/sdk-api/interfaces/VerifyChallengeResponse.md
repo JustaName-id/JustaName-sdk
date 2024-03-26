@@ -25,4 +25,4 @@ Represents the result of the verification.
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L41)
+[lib/types/siwe/verify-challenge.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L41)

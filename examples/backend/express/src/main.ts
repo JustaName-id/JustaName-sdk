@@ -169,7 +169,7 @@ app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to with-react-express-server!' });
 });
 
-const port = process.env.PORT || 3333;
+const port = process.env.PORT || 3005;
 const server = app.listen(port, async  () => {
   justaname = await JustaName.init({
     apiKey: process.env.JUSTANAME_API_KEY as string,
