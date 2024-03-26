@@ -25,7 +25,7 @@ Represents the ethereum address to be challenged.
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L21)
+[lib/types/siwe/request-challenge.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L21)
 
 ___
 
@@ -37,7 +37,7 @@ Represents the chainId of the blockchain to be used.
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:31](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L31)
+[lib/types/siwe/request-challenge.ts:31](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L31)
 
 ___
 
@@ -49,7 +49,7 @@ Represents the ENS domain
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L14)
+[lib/types/siwe/request-challenge.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L14)
 
 ___
 
@@ -61,7 +61,7 @@ Represents the origin of the request (e.g. the domain of the website).
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L26)
+[lib/types/siwe/request-challenge.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L26)
 
 ___
 
@@ -82,4 +82,4 @@ default: 120000 ms, 2 minutes ( 2 * 60 * 1000 )
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L39)
+[lib/types/siwe/request-challenge.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L39)

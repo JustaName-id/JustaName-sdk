@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L40)
+[lib/types/subnames/get-by-subname.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L40)
 
 ___
 
@@ -30,4 +30,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/f71acf4/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L38)
+[lib/types/subnames/get-by-subname.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L38)
