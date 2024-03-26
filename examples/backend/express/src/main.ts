@@ -88,7 +88,7 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
       xMessage: req.body.message
     });
 
-    res.status(200).send(add);
+    res.status(201).send(add);
     return;
   }
   catch (error: any) {

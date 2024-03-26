@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ChainId, JustaName } from '@justaname.id/sdk';
-import { RequestChallenge } from './interfaces/request-challenge.interface';
-import { SubnameAdd } from './interfaces/add.interface';
+import { RequestChallenge, SubnameAdd } from './interfaces';
 
 @Injectable()
 export class AppService {
@@ -24,8 +23,8 @@ export class AppService {
       });
     }
 
-  async requestChallenge(req: RequestChallenge): Promise<any> {
-    if (!req.address) {
+  async requestChallenge(request: RequestChallenge): Promise<any> {
+    if (!request.address) {
       return {
         message: 'Address is required',
       };
@@ -35,49 +34,42 @@ export class AppService {
       const challenge = await this.justaname.siwe.requestChallenge({
         chainId: this.chainId as ChainId,
         origin: this.origin,
-        address: req.address,
+        address: request.address,
         domain: this.domain,
       });
 
       return challenge;
     } catch (error) {
-      console.error(error);
-    }
-
-    return {
-        message: 'Something went wrong'
+      return {
+        error: error.message,
+      }
     }
   }
 
-  async addSubname(req: SubnameAdd): Promise<any> {
-    if (!req.username || !req.address || !req.signature || !req.message) {
+  async addSubname(request: SubnameAdd): Promise<any> {
+    if (!request.username) {
       return {
-        message: 'Username, address, signature and message are required',
+        message: 'Username is required',
       };
     }
 
     try {
       const add = await this.justaname.subnames.addSubname({
-        username: req.username,
+        username: request.username,
         ensDomain: this.domain,
-        chainId: this.chainId,
-        text: [],
-        contentHash: '',
-        addresses: [],
+        chainId: this.chainId
       },
       {
-        xSignature: req.signature,
-        xAddress: req.address,
-        xMessage: req.message,
+        xSignature: request.signature,
+        xAddress: request.address,
+        xMessage: request.message,
       });
 
       return add;
     } catch (error) {
-      console.error(error);
-    }
-
-    return {
-        message: 'Something went wrong'
+      return {
+        error: error.message,
+      }
     }
   }
 }

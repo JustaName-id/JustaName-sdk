@@ -1,19 +1,29 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { AppService } from './app.service';
-import { RequestChallenge } from './interfaces/request-challenge.interface';
-import { SubnameAdd } from './interfaces/add.interface';
+import { RequestChallenge, SubnameAdd } from './interfaces';
 
 @Controller('/api')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Post('/request-challenge')
-  async requestChallenge(req: RequestChallenge): Promise<any> {
-    return this.appService.requestChallenge(req);
+  @Get('/')
+  getWelcomeMessage(): any {
+    return { message: 'Welcome to with-react-nest-server!' };
   }
 
+  @Get('/request-challenge')
+  async requestChallenge(@Query() query: RequestChallenge): Promise<any> {
+    return this.appService.requestChallenge(query);
+  }
+
+  // TODO: error status code should reflect the actual status code from the backend
   @Post('/subnames/add')
-  async addSubname(req: SubnameAdd): Promise<any> {
-    return this.appService.addSubname(req);
+  async addSubname(
+    @Body() request: SubnameAdd,
+    @Res() response: Response
+  ): Promise<any> {
+    const subname = await this.appService.addSubname(request);
+    response.status(subname.error ? 500 : 201).send(subname);
   }
 }
