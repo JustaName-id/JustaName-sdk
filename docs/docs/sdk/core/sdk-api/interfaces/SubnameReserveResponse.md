@@ -20,4 +20,4 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L16)
+[lib/types/subnames/reserve.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L16)

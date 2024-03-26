@@ -9,7 +9,7 @@ description: Seamless Cross-Platform Identity Management for Gamers and Metavers
 ## The Problem: Fragmented Identities and Limited Interoperability
 The world of gaming and metaverses is rapidly expanding, yet players face limitations that hinder a seamless experience:
 
-* **Disjointed Usernames:** Gamers are forced to create separate usernames for each game or metaverse they join, leading to fragmented reputations and online presence.
+* **Disjointed Usernames**: Gamers are forced to create separate usernames for each game or metaverse they join, leading to fragmented reputations and online presence.
 * **Trapped Assets**: Achievements, items, and in-game currency earned on one platform often can't be shared or recognized in others.
 * **Difficult Cross-Game Connections**: Building communities and finding friends across games is complicated due to separate identities.
 

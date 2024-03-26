@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L10)
+[lib/types/subnames/revoke.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L10)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L6)
+[lib/types/subnames/revoke.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L6)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L8)
+[lib/types/subnames/revoke.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L8)

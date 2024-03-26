@@ -24,7 +24,7 @@ IROUTES.ACCEPT\_SUBNAME\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L46)
+[lib/api/routes/index.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L46)
 
 ___
 
@@ -38,7 +38,7 @@ IROUTES.ADD\_SUBNAME\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L48)
+[lib/api/routes/index.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L48)
 
 ___
 
@@ -52,7 +52,7 @@ IROUTES.CHECK\_SUBNAME\_AVAILABILITY\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L56)
+[lib/api/routes/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L56)
 
 ___
 
@@ -66,7 +66,7 @@ IROUTES.GET\_ALL\_SUBNAMES\_BY\_ADDRESS\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:54](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L54)
+[lib/api/routes/index.ts:54](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L54)
 
 ___
 
@@ -80,7 +80,7 @@ IROUTES.GET\_ALL\_SUBNAMES\_BY\_DOMAIN\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:53](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L53)
+[lib/api/routes/index.ts:53](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L53)
 
 ___
 
@@ -94,7 +94,7 @@ IROUTES.GET\_ALL\_SUBNAMES\_BY\_INVITATION\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:55](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L55)
+[lib/api/routes/index.ts:55](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L55)
 
 ___
 
@@ -108,7 +108,7 @@ IROUTES.GET\_SUBNAME\_BY\_DOMAIN\_NAME\_CHAIN\_ID\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L51)
+[lib/api/routes/index.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L51)
 
 ___
 
@@ -122,7 +122,7 @@ IROUTES.GET\_SUBNAME\_BY\_SUBNAME\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:52](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L52)
+[lib/api/routes/index.ts:52](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L52)
 
 ___
 
@@ -136,7 +136,7 @@ IROUTES.HEALTH\_CHECK\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L43)
+[lib/api/routes/index.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L43)
 
 ___
 
@@ -150,7 +150,7 @@ IROUTES.RESERVE\_SUBNAME\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L47)
+[lib/api/routes/index.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L47)
 
 ___
 
@@ -164,7 +164,7 @@ IROUTES.REVOKE\_SUBNAME\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L50)
+[lib/api/routes/index.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L50)
 
 ___
 
@@ -178,7 +178,7 @@ IROUTES.SIWE\_REQUEST\_CHALLENGE\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L45)
+[lib/api/routes/index.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L45)
 
 ___
 
@@ -192,7 +192,7 @@ IROUTES.SIWE\_VERIFY\_MESSAGE\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:44](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L44)
+[lib/api/routes/index.ts:44](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L44)
 
 ___
 
@@ -206,4 +206,4 @@ IROUTES.UPDATE\_SUBNAME\_ROUTE
 
 #### Defined in
 
-[lib/api/routes/index.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L49)
+[lib/api/routes/index.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L49)
