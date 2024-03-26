@@ -37,7 +37,15 @@ export class Subnames {
     ):  Promise<SubnameClaimResponse> {
     return this.isNotReadOnlyMode(restCall(
       'ACCEPT_SUBNAME_ROUTE','POST',
-      params,
+      {
+        text: [],
+        addresses: [{
+          coinType: 60,
+          address: headers.xAddress
+        }],
+        contentHash: '',
+        ...params
+      },
       {
         xApiKey: this.apiKey as string,
         ...headers
@@ -85,7 +93,15 @@ export class Subnames {
   ): Promise<SubnameUpdateResponse> {
     return this.isNotReadOnlyMode(restCall(
       'UPDATE_SUBNAME_ROUTE','POST',
-      params,
+      {
+        ...params,
+        text: [],
+        addresses: [{
+          coinType: 60,
+          address: headers.xAddress
+        }],
+        contentHash: '',
+      },
       {
         xApiKey: this.apiKey as string,
         ...headers

@@ -36,9 +36,9 @@ export interface SubnameUpdateRequest extends IRequest{
 
   chainId: number;
 
-  addresses: Address[]
+  addresses?: Address[]
 
-  text: TextRecord[];
+  text?: TextRecord[];
 
   contentHash: string;
 }
