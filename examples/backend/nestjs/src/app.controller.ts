@@ -1,9 +1,6 @@
-import { Controller, Post, Get } from '@nestjs/common';
+import { Controller, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { SubnameUpdate } from './interfaces/update.interface';
-import { SubnameClaim } from './interfaces/claim.interface';
 import { RequestChallenge } from './interfaces/request-challenge.interface';
-import { SubnameReserve } from './interfaces/reserve.interface';
 import { SubnameAdd } from './interfaces/add.interface';
 
 @Controller('/api')

@@ -1,9 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ChainId, JustaName } from '@justaname.id/sdk';
 import { RequestChallenge } from './interfaces/request-challenge.interface';
-import { SubnameUpdate } from './interfaces/update.interface';
-import { SubnameClaim } from './interfaces/claim.interface';
-import { SubnameReserve } from './interfaces/reserve.interface';
 import { SubnameAdd } from './interfaces/add.interface';
 
 @Injectable()
