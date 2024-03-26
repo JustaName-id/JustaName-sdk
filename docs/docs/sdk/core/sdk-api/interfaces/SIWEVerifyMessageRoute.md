@@ -24,7 +24,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L48)
+[lib/types/siwe/verify-challenge.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L48)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L46)
+[lib/types/siwe/verify-challenge.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L46)
 
 ___
 
@@ -52,4 +52,4 @@ ___
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/3b7cbff/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L47)
+[lib/types/siwe/verify-challenge.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L47)
