@@ -15,21 +15,6 @@ export class AppController {
     return this.appService.requestChallenge(req);
   }
 
-  @Post('/subnames/claim')
-  async claimSubname(req: SubnameClaim): Promise<any> {
-    return this.appService.claimSubname(req);
-  }
-
-  @Post('/subnames/update')
-  async updateSubname(req: SubnameUpdate): Promise<any> {
-    return this.appService.updateSubname(req);
-  }
-
-  @Post('/subnames/reserve')
-  async reserveSubname(req: SubnameReserve): Promise<any> {
-    return this.appService.reserveSubname(req);
-  }
-
   @Post('/subnames/add')
   async addSubname(req: SubnameAdd): Promise<any> {
     return this.appService.addSubname(req);
