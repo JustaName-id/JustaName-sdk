@@ -10,11 +10,9 @@ app.use(cors());
 
 app.use(express.json());
 
-
 const chainId = parseInt(process.env.JUSTANAME_CHAIN_ID as string);
 const domain = process.env.JUSTANAME_DOMAIN as string;
 const origin = process.env.JUSTANAME_ORIGIN as string;
-
 
 if(!origin) {
   throw new Error('Origin is required');
@@ -55,16 +53,13 @@ app.get('/api/request-challenge', async (req: Request<NonNullable<unknown>, NonN
       domain,
     });
 
-    res.send( challenge );
+    res.status(200).send(challenge);
     return;
   }
-  catch (error) {
-    console.error(error);
+  catch (error: any) {
+    res.status(500).send({ error: error.message });
   }
-
-  res.send({ message: 'Something went wrong' });
-})
-
+});
 
 interface SubnameAdd {
   username: string;
@@ -93,14 +88,12 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
       xMessage: req.body.message
     });
 
-    res.send( add );
+    res.status(200).send(add);
     return;
   }
-  catch (error) {
-    console.error(error);
+  catch (error: any) {
+    res.status(500).send({ error: error.message });
   }
-
-  res.send({ message: 'Something went wrong' });
 });
 
 app.get('/api', (req, res) => {
