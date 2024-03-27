@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:27](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L27)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:27](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L27)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:26](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L26)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:26](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L26)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:24](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L24)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:24](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L24)
 
 ___
 
@@ -52,4 +52,4 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:25](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L25)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:25](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L25)

@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/claim.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L45)
+[lib/types/subnames/claim.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L45)
 
 ___
 
@@ -30,4 +30,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/claim.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L43)
+[lib/types/subnames/claim.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L43)

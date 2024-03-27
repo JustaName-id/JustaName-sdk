@@ -31,7 +31,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:4](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L4)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:4](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L4)
 
 ## Functions
 
@@ -52,9 +52,9 @@ custom_edit_url: null
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:23](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L23)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:23](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L23)
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:29](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L29)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:29](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L29)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts#L7)
+[packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts#L7)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L5)
+[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L5)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts#L12)
+[packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts#L12)
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useClaimSubname.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/hooks/useClaimSubname.ts#L12)
+[packages/@justaname.id/react/src/lib/hooks/useClaimSubname.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useClaimSubname.ts#L12)
 
 ___
 
@@ -170,7 +170,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L9)
+[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L9)
 
 ___
 
@@ -184,7 +184,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:62](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L62)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:62](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L62)
 
 ___
 
@@ -198,7 +198,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useMounted.ts:3](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/hooks/useMounted.ts#L3)
+[packages/@justaname.id/react/src/lib/hooks/useMounted.ts:3](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useMounted.ts#L3)
 
 ___
 
@@ -224,7 +224,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L11)
+[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L11)
 
 ___
 
@@ -243,4 +243,4 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts#L7)
+[packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts#L7)

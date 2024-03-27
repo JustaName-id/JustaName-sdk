@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L8)
+[lib/types/subnames/get-by-domain-name-chainId.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L8)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L6)
+[lib/types/subnames/get-by-domain-name-chainId.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L6)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L10)
+[lib/types/subnames/get-by-domain-name-chainId.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L10)
 
 ___
 
@@ -44,4 +44,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L4)
+[lib/types/subnames/get-by-domain-name-chainId.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L4)

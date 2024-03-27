@@ -14,4 +14,4 @@ custom_edit_url: null
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L8)
+[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L8)

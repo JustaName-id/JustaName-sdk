@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L13)
+[lib/types/api-key/health-check.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L13)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L5)
+[lib/types/api-key/health-check.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L5)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L9)
+[lib/types/api-key/health-check.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L9)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L7)
+[lib/types/api-key/health-check.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L7)
 
 ___
 
@@ -60,4 +60,4 @@ ___
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/26d8d95/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L11)
+[lib/types/api-key/health-check.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L11)
