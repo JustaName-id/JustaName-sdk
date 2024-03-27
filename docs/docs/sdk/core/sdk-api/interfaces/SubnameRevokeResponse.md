@@ -20,4 +20,4 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/24a962e/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L14)
+[lib/types/subnames/revoke.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/4bd6b66/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L14)
