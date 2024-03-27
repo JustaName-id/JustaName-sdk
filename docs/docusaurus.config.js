@@ -67,11 +67,6 @@ const config = {
         },
         items: [
           {
-            label: "Getting Started",
-            position: "left",
-            to: "/getting-started",
-          },
-          {
             label: "SDK",
             position: "left",
             to: "/sdk",
@@ -97,10 +92,6 @@ const config = {
               {
                 label: "Welcome",
                 to: "/",
-              },
-              {
-                label: "Getting Started",
-                to: "/getting-started",
               },
               {
                 label: "SDK",
@@ -155,8 +146,10 @@ const config = {
           '../packages/@justaname.id/sdk/src/index.ts'
         ],
         tsconfig: '../packages/@justaname.id/sdk/tsconfig.json',
-        out: 'sdk/core/sdk-api',
+        out: 'sdk/core',
         sidebar: {
+          categoryLabel: 'Core SDK',
+          collapsed: false,
           position: 2,
         }
       }
@@ -171,8 +164,10 @@ const config = {
           '../packages/@justaname.id/react/src/index.ts'
         ],
         tsconfig: '../packages/@justaname.id/react/tsconfig.json',
-        out: 'sdk/react/sdk-api',
+        out: 'sdk/react',
         sidebar: {
+          categoryLabel: 'React SDK',
+          collapsed: false,
           position: 2,
         }
       }
