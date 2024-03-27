@@ -28,7 +28,7 @@
     "install": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn",
+        "command": "yarn --frozen-lockfile",
         "cwd": "examples/backend/fastify"
       }
     }
