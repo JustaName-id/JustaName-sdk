@@ -35,7 +35,7 @@
     "install": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn",
+        "command": "yarn --force",
         "cwd": "examples/fullstack/expo"
       }
     }
