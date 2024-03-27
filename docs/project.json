@@ -21,7 +21,7 @@
     "install": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn --frozen-lockfile",
+        "command": "yarn",
         "cwd": "docs"
       }
     },
