@@ -64,7 +64,8 @@ fastify.get('/api/request-challenge', async (request: FastifyRequest<{ Querystri
     });
 
     reply.status(200).send(challenge);
-  } catch (error: any) {
+  } catch (error) {
+    if(error instanceof Error)
     reply.status(500).send({ error: error.message });
   }
 });
@@ -92,13 +93,14 @@ fastify.post<{ Body: SubnameAdd }>('/api/subnames/add', async (request: FastifyR
     );
 
     reply.status(201).send(add);
-  } catch (error: any) {
+  } catch (error) {
+    if(error instanceof Error)
     reply.status(500).send({ error: error.message });
   }
 });
 
-fastify.get('/api', async (request: any, reply: FastifyReply) => {
-  reply.send({ message: 'Welcome to with-fastify-server!' });
+fastify.get('/api', async (_, reply: FastifyReply) => {
+  reply.send({ message: 'Welcome to JustaName Fastify!' });
 });
 
 const start = async () => {
@@ -108,6 +110,8 @@ const start = async () => {
     });
 
     await fastify.listen({ port: parseInt(process.env.PORT ?? '3333'), host: '0.0.0.0' });
+    console.log('Listening on port 3333: http://localhost:3333/api');
+
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);

@@ -15,6 +15,14 @@ const domain = process.env.JUSTANAME_DOMAIN as string;
 const origin = process.env.JUSTANAME_ORIGIN as string;
 const apiKey = process.env.JUSTANAME_API_KEY as string;
 
+interface SubnameAdd {
+  username: string;
+  address: string;
+  signature: string;
+  message: string;
+}
+
+
 if (!origin) {
   throw new Error('Origin is required');
 }
@@ -56,14 +64,16 @@ router.get('/api/request-challenge', async (ctx) => {
 
     ctx.status = 200;
     ctx.body = challenge;
-  } catch (error: any) {
+  } catch (error) {
     ctx.status = 500;
+    if (error instanceof Error)
     ctx.body = { error: error.message };
   }
 });
 
+
 router.post('/api/subnames/add', async (ctx) => {
-  const { username, address, signature, message } = ctx.request.body;
+  const { username, address, signature, message } = <SubnameAdd>ctx.request.body;
 
   if (!username) {
     ctx.status = 400;
@@ -87,14 +97,15 @@ router.post('/api/subnames/add', async (ctx) => {
 
     ctx.status = 201;
     ctx.body = add;
-  } catch (error: any) {
+  } catch (error) {
     ctx.status = 500;
-    ctx.body = { error: error.message };
+    if (error instanceof Error)
+    ctx.body = { error: error?.message };
   }
 });
 
 router.get('/api', (ctx) => {
-  ctx.body = { message: 'Welcome to with-koa-server!' };
+  ctx.body = { message: 'Welcome to JustaName Koa!' };
 });
 
 app.use(cors());

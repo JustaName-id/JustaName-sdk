@@ -1,27 +1,29 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ChainId, JustaName } from '@justaname.id/sdk';
 import { RequestChallenge, SubnameAdd } from './interfaces';
-
+import { ConfigService } from '@nestjs/config';
 @Injectable()
-export class AppService {
+export class AppService implements OnModuleInit {
   chainId: number;
   domain: string;
   origin: string;
   justaname: JustaName;
 
-  constructor() {
-    this.init();
+  constructor(readonly configService: ConfigService) {
+    this.chainId = parseInt(this.configService.get('JUSTANAME_CHAIN_ID'));
+    this.domain = this.configService.get('JUSTANAME_DOMAIN');
+    this.origin = this.configService.get('JUSTANAME_ORIGIN');
+  }
+
+  async onModuleInit(): Promise<void> {
+    await this.init();
   }
 
   async init() {
-    this.chainId = parseInt(process.env.JUSTANAME_CHAIN_ID);
-    this.domain = process.env.JUSTANAME_DOMAIN;
-    this.origin = process.env.JUSTANAME_ORIGIN;
-
     this.justaname = await JustaName.init({
-        apiKey: process.env.JUSTANAME_API_KEY as string,
-      });
-    }
+      apiKey: this.configService.get('JUSTANAME_API_KEY'),
+    });
+  }
 
   async requestChallenge(request: RequestChallenge): Promise<any> {
     if (!request.address) {
@@ -42,7 +44,7 @@ export class AppService {
     } catch (error) {
       return {
         error: error.message,
-      }
+      };
     }
   }
 
@@ -54,22 +56,24 @@ export class AppService {
     }
 
     try {
-      const add = await this.justaname.subnames.addSubname({
-        username: request.username,
-        ensDomain: this.domain,
-        chainId: this.chainId
-      },
-      {
-        xSignature: request.signature,
-        xAddress: request.address,
-        xMessage: request.message,
-      });
+      const add = await this.justaname.subnames.addSubname(
+        {
+          username: request.username,
+          ensDomain: this.domain,
+          chainId: this.chainId,
+        },
+        {
+          xSignature: request.signature,
+          xAddress: request.address,
+          xMessage: request.message,
+        },
+      );
 
       return add;
     } catch (error) {
       return {
         error: error.message,
-      }
+      };
     }
   }
 }

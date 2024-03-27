@@ -1,3 +1,3 @@
 export interface RequestChallenge {
-    address: string;
-};
+  address: string;
+}

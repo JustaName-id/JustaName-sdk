@@ -1,6 +1,6 @@
 export interface SubnameAdd {
-    username: string;
-    address: string;
-    signature: string;
-    message: string;
+  username: string;
+  address: string;
+  signature: string;
+  message: string;
 }

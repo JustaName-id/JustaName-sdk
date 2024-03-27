@@ -70,7 +70,8 @@ const init = async () => {
             domain,
           });
           return h.response(challenge).code(200);
-        } catch (error: any) {
+        } catch (error) {
+          if(error instanceof Error)
           return h.response({ error: error.message }).code(500);
         }
       }
@@ -97,7 +98,8 @@ const init = async () => {
           });
 
           return h.response(add).code(201);
-        } catch (error: any) {
+        } catch (error) {
+          if(error instanceof Error)
           return h.response({ error: error.message }).code(500);
         }
       }
@@ -105,14 +107,14 @@ const init = async () => {
     {
       method: 'GET',
       path: '/api',
-      handler: async (request, h) => {
-        return { message: 'Welcome to with-hapi-server!' };
+      handler: async () => {
+        return { message: 'Welcome to JustaName Hapi!' };
       }
     }
   ]);
 
   await server.start();
-  console.log(`Server running on ${server.info.uri}`);
+  console.log(`Listening at ${server.info.uri}`);
 };
 
 process.on('unhandledRejection', (err) => {

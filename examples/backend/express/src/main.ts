@@ -68,7 +68,8 @@ app.get('/api/request-challenge', async (req: Request<NonNullable<unknown>, NonN
     res.status(200).send(challenge);
     return;
   }
-  catch (error: any) {
+  catch (error) {
+    if(error instanceof Error)
     res.status(500).send({ error: error.message });
   }
 });
@@ -96,13 +97,14 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
     res.status(201).send(add);
     return;
   }
-  catch (error: any) {
+  catch (error) {
+    if(error instanceof Error)
     res.status(500).send({ error: error.message });
   }
 });
 
 app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to with-express-server!' });
+  res.send({ message: 'Welcome to JustaName Express!' });
 });
 
 const port = process.env.PORT || 3333;

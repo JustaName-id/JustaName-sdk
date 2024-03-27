@@ -9,7 +9,7 @@ export class AppController {
 
   @Get('/')
   getWelcomeMessage(): any {
-    return { message: 'Welcome to with-nest-server!' };
+    return { message: 'Welcome to JustaName NestJs!' };
   }
 
   @Get('/request-challenge')
@@ -21,7 +21,7 @@ export class AppController {
   @Post('/subnames/add')
   async addSubname(
     @Body() request: SubnameAdd,
-    @Res() response: Response
+    @Res() response: Response,
   ): Promise<any> {
     const subname = await this.appService.addSubname(request);
     response.status(subname.error ? 500 : 201).send(subname);
