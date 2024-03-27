@@ -10,11 +10,21 @@ app.use(cors());
 
 app.use(express.json());
 
+interface RequestChallenge {
+  address: string;
+}
+
+interface SubnameAdd {
+  username: string;
+  address: string;
+  signature: string;
+  message: string;
+}
 
 const chainId = parseInt(process.env.JUSTANAME_CHAIN_ID as string);
 const domain = process.env.JUSTANAME_DOMAIN as string;
 const origin = process.env.JUSTANAME_ORIGIN as string;
-
+const apiKey = process.env.JUSTANAME_API_KEY as string;
 
 if(!origin) {
   throw new Error('Origin is required');
@@ -28,18 +38,22 @@ if(chainId !== 1 && chainId !== 11155111) {
   throw new Error('ChainId is not supported');
 }
 
-let justaname: JustaName;
-
-interface RequestChallenge {
-  address: string;
+if (!domain) {
+  throw new Error('Domain is required');
 }
+
+if (!apiKey) {
+  throw new Error('API Key is required');
+}
+
+let justaname: JustaName;
 
 app.get('/api/request-challenge', async (req: Request<NonNullable<unknown>, NonNullable<unknown>, NonNullable<unknown>,RequestChallenge>, res) => {
 
   const address = req.query.address
 
   if(!address) {
-    res.send({ message: 'Address is required' });
+    res.status(400).send({ message: 'Address is required' });
     return;
   }
 
@@ -51,110 +65,49 @@ app.get('/api/request-challenge', async (req: Request<NonNullable<unknown>, NonN
       domain,
     });
 
-    res.send( challenge );
+    res.status(200).send(challenge);
     return;
   }
   catch (error) {
-    console.error(error);
+    if(error instanceof Error)
+    res.status(500).send({ error: error.message });
   }
-
-  res.send({ message: 'Something went wrong' });
-})
-
-interface SubnameClaim {
-  username: string;
-  address: string;
-  signature: string;
-  message: string;
-}
-
-app.post('/api/subnames/claim', async (req: Request<SubnameClaim>, res) => {
-
-  const username = req.body.username
-  const address = req.body.address
-  const signature = req.body.signature
-  const message = req.body.message
-
-  try {
-    const claim = await justaname.subnames.addSubname({
-        username: username,
-        ensDomain: domain,
-        chainId
-      },
-      {
-        xSignature: signature,
-        xAddress: address,
-        xMessage: message,
-      });
-    res.send( claim );
-    return;
-  }
-  catch (error) {
-    console.error(error);
-  }
-
-  res.send({ message: 'Something went wrong' });
-})
-
-export interface SubnameUpdate {
-  username: string;
-  address: string;
-  signature: string;
-  message: string;
-
-}
-app.post('/api/subnames/update', async (req: Request<SubnameUpdate>, res) => {
-
-  const username = req.body.username
-  const address = req.body.address
-  const signature = req.body.signature
-  const message = req.body.message
-
-  if(!username) {
-    res.send({ message: 'Username is required' });
-    return;
-  }
-
-  if(!address) {
-    res.send({ message: 'Address is required' });
-    return;
-  }
-
-  if(!signature) {
-    res.send({ message: 'Signature is required' });
-    return;
-  }
-
-  try {
-    const claim = await justaname.subnames.updateSubname({
-        username: username,
-        ensDomain: domain,
-        chainId,
-        text: [],
-        contentHash: '',
-        addresses: [],
-      },
-      {
-        xSignature: signature,
-        xAddress: address,
-        xMessage: message,
-      });
-    res.send( claim );
-    return;
-  }
-  catch (error) {
-    console.error(error);
-  }
-
-  res.send({ message: 'Something went wrong' });
-
-})
-
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to with-react-express-server!' });
 });
 
-const port = process.env.PORT || 3005;
+app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
+  const username = req.body.username;
+
+  if(!username) {
+    res.status(400).send({ message: 'Username is required' });
+    return;
+  }
+
+  try {
+    const add = await justaname.subnames.addSubname({
+      username: username,
+      ensDomain: domain,
+      chainId: chainId
+    },
+    {
+      xSignature: req.body.signature,
+      xAddress: req.body.address,
+      xMessage: req.body.message
+    });
+
+    res.status(201).send(add);
+    return;
+  }
+  catch (error) {
+    if(error instanceof Error)
+    res.status(500).send({ error: error.message });
+  }
+});
+
+app.get('/api', (req, res) => {
+  res.send({ message: 'Welcome to JustaName Express!' });
+});
+
+const port = process.env.PORT || 3333;
 const server = app.listen(port, async  () => {
   justaname = await JustaName.init({
     apiKey: process.env.JUSTANAME_API_KEY as string,
