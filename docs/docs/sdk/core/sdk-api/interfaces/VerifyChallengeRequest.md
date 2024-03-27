@@ -25,7 +25,7 @@ Represents the ethereum address to be verified.
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L13)
+[lib/types/siwe/verify-challenge.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/24a962e/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L13)
 
 ___
 
@@ -37,7 +37,7 @@ Represents the challenge signed by the address.
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L26)
+[lib/types/siwe/verify-challenge.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/24a962e/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L26)
 
 ___
 
@@ -49,4 +49,4 @@ Represents the signature of the challenge.
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L19)
+[lib/types/siwe/verify-challenge.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/24a962e/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L19)

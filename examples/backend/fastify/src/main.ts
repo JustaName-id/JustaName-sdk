@@ -5,9 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const fastify = Fastify({
-  logger: true,
-});
+const fastify = Fastify();
 
 fastify.register(cors);
 
@@ -25,10 +23,26 @@ interface SubnameAdd {
 const chainId = parseInt(process.env.JUSTANAME_CHAIN_ID ?? '');
 const domain = process.env.JUSTANAME_DOMAIN ?? '';
 const origin = process.env.JUSTANAME_ORIGIN ?? '';
+const apiKey = process.env.JUSTANAME_API_KEY as string;
 
-if (!origin || !chainId || !domain || (chainId !== 1 && chainId !== 11155111)) {
-  console.error('Environment configuration is invalid');
-  process.exit(1);
+if(!origin) {
+  throw new Error('Origin is required');
+}
+
+if(!chainId) {
+  throw new Error('ChainId is required');
+}
+
+if(chainId !== 1 && chainId !== 11155111) {
+  throw new Error('ChainId is not supported');
+}
+
+if (!domain) {
+  throw new Error('Domain is required');
+}
+
+if (!apiKey) {
+  throw new Error('API Key is required');
 }
 
 let justaname: JustaName;
@@ -37,7 +51,7 @@ fastify.get('/api/request-challenge', async (request: FastifyRequest<{ Querystri
   const { address } = request.query;
 
   if (!address) {
-    reply.send({ message: 'Address is required' });
+    reply.status(400).send({ message: 'Address is required' });
     return;
   }
 
@@ -59,7 +73,7 @@ fastify.post<{ Body: SubnameAdd }>('/api/subnames/add', async (request: FastifyR
   const { username, signature, address, message } = request.body;
 
   if (!username) {
-    reply.send({ message: 'Username is required' });
+    reply.status(400).send({ message: 'Username is required' });
     return;
   }
 
@@ -84,7 +98,7 @@ fastify.post<{ Body: SubnameAdd }>('/api/subnames/add', async (request: FastifyR
 });
 
 fastify.get('/api', async (request: any, reply: FastifyReply) => {
-  reply.send({ message: 'Welcome to the server!' });
+  reply.send({ message: 'Welcome to with-fastify-server!' });
 });
 
 const start = async () => {

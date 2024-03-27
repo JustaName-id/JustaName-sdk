@@ -10,9 +10,21 @@ app.use(cors());
 
 app.use(express.json());
 
+interface RequestChallenge {
+  address: string;
+}
+
+interface SubnameAdd {
+  username: string;
+  address: string;
+  signature: string;
+  message: string;
+}
+
 const chainId = parseInt(process.env.JUSTANAME_CHAIN_ID as string);
 const domain = process.env.JUSTANAME_DOMAIN as string;
 const origin = process.env.JUSTANAME_ORIGIN as string;
+const apiKey = process.env.JUSTANAME_API_KEY as string;
 
 if(!origin) {
   throw new Error('Origin is required');
@@ -30,18 +42,18 @@ if (!domain) {
   throw new Error('Domain is required');
 }
 
-let justaname: JustaName;
-
-interface RequestChallenge {
-  address: string;
+if (!apiKey) {
+  throw new Error('API Key is required');
 }
+
+let justaname: JustaName;
 
 app.get('/api/request-challenge', async (req: Request<NonNullable<unknown>, NonNullable<unknown>, NonNullable<unknown>,RequestChallenge>, res) => {
 
   const address = req.query.address
 
   if(!address) {
-    res.send({ message: 'Address is required' });
+    res.status(400).send({ message: 'Address is required' });
     return;
   }
 
@@ -61,18 +73,11 @@ app.get('/api/request-challenge', async (req: Request<NonNullable<unknown>, NonN
   }
 });
 
-interface SubnameAdd {
-  username: string;
-  address: string;
-  signature: string;
-  message: string;
-}
-
 app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
   const username = req.body.username;
 
   if(!username) {
-    res.send({ message: 'Username is required' });
+    res.status(400).send({ message: 'Username is required' });
     return;
   }
 
@@ -97,7 +102,7 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
 });
 
 app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to with-react-express-server!' });
+  res.send({ message: 'Welcome to with-express-server!' });
 });
 
 const port = process.env.PORT || 3333;

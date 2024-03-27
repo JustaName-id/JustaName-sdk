@@ -9,7 +9,7 @@ export class AppController {
 
   @Get('/')
   getWelcomeMessage(): any {
-    return { message: 'Welcome to with-react-nest-server!' };
+    return { message: 'Welcome to with-nest-server!' };
   }
 
   @Get('/request-challenge')

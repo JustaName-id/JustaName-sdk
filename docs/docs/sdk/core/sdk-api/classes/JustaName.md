@@ -51,7 +51,7 @@ const configuration = {
 
 #### Defined in
 
-[lib/justaname/index.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L40)
+[lib/justaname/index.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/24a962e/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L40)
 
 ## Properties
 
@@ -61,7 +61,7 @@ const configuration = {
 
 #### Defined in
 
-[lib/justaname/index.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L30)
+[lib/justaname/index.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/24a962e/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L30)
 
 ___
 
@@ -77,7 +77,7 @@ JustaName
 
 #### Defined in
 
-[lib/justaname/index.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L38)
+[lib/justaname/index.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/24a962e/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L38)
 
 ## Methods
 
@@ -105,7 +105,7 @@ Checks if the API key is present.
 
 #### Defined in
 
-[lib/justaname/index.ts:73](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L73)
+[lib/justaname/index.ts:73](https://github.com/JustaName-id/JustaName-sdk/blob/24a962e/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L73)
 
 ___
 
@@ -137,7 +137,7 @@ Checks the health of the API.
 
 #### Defined in
 
-[lib/justaname/index.ts:87](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L87)
+[lib/justaname/index.ts:87](https://github.com/JustaName-id/JustaName-sdk/blob/24a962e/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L87)
 
 ___
 
@@ -167,4 +167,4 @@ Initializes the JustaName SDK.
 
 #### Defined in
 
-[lib/justaname/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/5718518/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L56)
+[lib/justaname/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/24a962e/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L56)
