@@ -18,6 +18,13 @@
         "cwd": "examples/fullstack/expo"
       }
     },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'No lint setup for expo fullstack'",
+        "cwd": "examples/fullstack/expo"
+      }
+    },
     "android": {
       "executor": "nx:run-commands",
       "options": {

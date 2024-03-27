@@ -11,6 +11,13 @@
         "cwd": "examples/frontend/expo"
       }
     },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo 'No lint setup for expo frontend'",
+        "cwd": "examples/frontend/expo"
+      }
+    },
     "ios": {
       "executor": "nx:run-commands",
       "options": {
