@@ -1,3 +1,11 @@
+---
+id: "index"
+title: "@justaname.id/sdk"
+sidebar_label: "Readme"
+sidebar_position: 0
+custom_edit_url: null
+---
+
 # JustaName Core SDK
 
 The JustaName Core SDK empowers developers to seamlessly integrate robust digital identity and subnaming features into their Web3 applications. It simplifies the complexities of blockchain addresses by enabling the use of human-readable subdomains within the Ethereum Name Service (ENS).
@@ -91,7 +99,6 @@ A key functionality aspect of the SDK revolves around its methods. Below is a li
 - getAllByAddress
 - getInvitations
 - checkSubnameAvailable
-
 
 ## Conclusion
 

@@ -1,3 +1,11 @@
+---
+id: "index"
+title: "@justaname.id/react"
+sidebar_label: "Readme"
+sidebar_position: 0
+custom_edit_url: null
+---
+
 # JustaName React SDK
 
 The JustaName React SDK is a powerful tool that allows developers to seamlessly integrate robust digital identity and subnaming features into their React applications. It simplifies the complexities of blockchain addresses by enabling the use of human-readable subdomains within the Ethereum Name Service (ENS).
