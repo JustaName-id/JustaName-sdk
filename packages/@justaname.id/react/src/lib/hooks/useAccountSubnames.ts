@@ -1,7 +1,7 @@
 import { useJustaName } from '../providers';
 import { useAccount } from 'wagmi';
 import { useMounted } from './useMounted';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryObserverResult, RefetchOptions, useQuery, useQueryClient } from '@tanstack/react-query';
 import { SubnameGetAllByAddressResponse } from '@justaname.id/sdk'
 
 export const buildAccountSubnamesKey = (address: string | undefined) => ['WALLET_SUBNAMES_BY_ADDRESS', address]
@@ -9,7 +9,14 @@ export interface UseConnectedWalletSubnamesOptions {
   ensDomain?: string
 }
 
-export const useAccountSubnames = (props:UseConnectedWalletSubnamesOptions = {}) => {
+type SubnameType = SubnameGetAllByAddressResponse[];
+
+interface UseAccountSubnamesResult {
+  subnames: SubnameType;
+  isLoading: boolean;
+  refetchSubnames: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<SubnameType | undefined, unknown>>;
+}
+export const useAccountSubnames = (props:UseConnectedWalletSubnamesOptions = {}): UseAccountSubnamesResult => {
   const mounted = useMounted()
   const queryClient = useQueryClient()
   const { address} = useAccount()
@@ -41,6 +48,6 @@ export const useAccountSubnames = (props:UseConnectedWalletSubnamesOptions = {})
   return {
     subnames: query.data ?? [],
     isLoading: query.isLoading,
-    refetchSubnames: query.refetch,
+    refetchSubnames: query.refetch
   }
 }
