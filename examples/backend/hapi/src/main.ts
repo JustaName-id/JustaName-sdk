@@ -1,8 +1,7 @@
-import Hapi,{ ServerRoute } from '@hapi/hapi';
+import Hapi from '@hapi/hapi';
 import { JustaName } from '@justaname.id/sdk';
 import dotenv from 'dotenv';
 
-// Initialize dotenv
 dotenv.config();
 
 const chainId = parseInt(process.env.JUSTANAME_CHAIN_ID as string);
@@ -10,11 +9,25 @@ const domain = process.env.JUSTANAME_DOMAIN as string;
 const origin = process.env.JUSTANAME_ORIGIN as string;
 const apiKey = process.env.JUSTANAME_API_KEY as string;
 
-if(!origin) throw new Error('Origin is required');
-if(!chainId) throw new Error('ChainId is required');
-if(chainId !== 1 && chainId !== 11155111) throw new Error('ChainId is not supported');
-if (!domain) throw new Error('Domain is required');
-if (!apiKey) throw new Error('API Key is required');
+if(!origin) {
+  throw new Error('Origin is required');
+}
+
+if(!chainId) {
+  throw new Error('ChainId is required');
+}
+
+if(chainId !== 1 && chainId !== 11155111) {
+  throw new Error('ChainId is not supported');
+}
+
+if (!domain) {
+  throw new Error('Domain is required');
+}
+
+if (!apiKey) {
+  throw new Error('API Key is required');
+}
 
 interface RequestChallengeQuery {
   address: string;
