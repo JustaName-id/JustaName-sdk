@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/4bd6b66/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L10)
+[lib/types/subnames/reserve.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L10)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/4bd6b66/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L8)
+[lib/types/subnames/reserve.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L8)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/4bd6b66/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L12)
+[lib/types/subnames/reserve.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L12)
 
 ___
 
@@ -50,4 +50,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/4bd6b66/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L6)
+[lib/types/subnames/reserve.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/d3b91b5/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L6)
