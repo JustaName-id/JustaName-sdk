@@ -35,7 +35,7 @@
     "install": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn --force",
+        "command": "yarn",
         "cwd": "examples/frontend/expo"
       }
     }
