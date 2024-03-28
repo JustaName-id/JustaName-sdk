@@ -5,24 +5,30 @@ import { useSubnameSignature } from './useSubnameSignature';
 import { SubnameAcceptResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from './useAccountSubnames';
 
-/**
- * Interface defining the base request structure for claiming a subname.
- *
- * @typedef BaseAddSubnameRequest
- * @type {object}
- * @property {string} username - The username part of the subname to be claimed.
- */
 export interface BaseAddSubnameRequest {
   username: string;
 }
 
 /**
+ *  Interface defining the parameters needed to add a subname.
+ *
+ *  @typedef UseAddSubname
+ *  @type {object}
+ *  @property {function} addSubname - The function to add a subname.
+ *  @property {boolean} addSubnamePending - Indicates if the mutation is currently pending.
+ *  @template T - The type of additional parameters that can be passed to the claim subname mutation, extending the base request.
+ */
+export interface UseAddSubname<T = any> {
+  addSubname: (params: T & BaseAddSubnameRequest) => Promise<SubnameAcceptResponse>;
+  addSubnamePending: boolean;
+}
+/**
  * Custom hook for performing a mutation to add a subname.
  *
  * @template T - The type of additional parameters that can be passed to the claim subname mutation, extending the base request.
- * @returns {object} An object containing the `addSubname` async function to initiate the subname claim, and a boolean `claimSubnamePending` indicating the mutation's pending state.
+ * @returns {UseAddSubname} An object containing the `addSubname` async function to initiate the subname claim, and a boolean `claimSubnamePending` indicating the mutation's pending state.
  */
-export const useAddSubname = <T = any>() => {
+export const useAddSubname = <T = any>() : UseAddSubname<T> => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount()
   const { getSignature} = useSubnameSignature({
@@ -67,7 +73,7 @@ export const useAddSubname = <T = any>() => {
   })
 
   return {
-    claimSubname: mutate.mutateAsync as (params: T & BaseAddSubnameRequest) => Promise<SubnameAcceptResponse>,
-    claimSubnamePending: mutate.isPending,
+    addSubname: mutate.mutateAsync as (params: T & BaseAddSubnameRequest) => Promise<SubnameAcceptResponse>,
+    addSubnamePending: mutate.isPending,
   }
 }

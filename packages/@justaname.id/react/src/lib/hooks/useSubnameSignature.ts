@@ -10,15 +10,19 @@ export interface UseSubnameSignatureOptions {
   requestChallengeRoute: string
 }
 
+export interface UseSubnameSignatureResult {
+  getSignature: () => Promise<{signature: string, message: string, address: string, expirationTime: Date}>,
+  subnameSignaturePending: boolean;
+}
 /**
  * Custom hook to request a challenge for a subname and obtain a signature proving ownership of an address.
  *
- * @returns {object} An object containing the function to initiate the signing process (`subnameSignature`)
+ * @returns {UseSubnameSignatureResult} An object containing the function to initiate the signing process (`subnameSignature`)
  * and a boolean indicating if the signature operation is pending (`subnameSignaturePending`).
  */
 export const useSubnameSignature = (
   props: UseSubnameSignatureOptions
-) => {
+): UseSubnameSignatureResult => {
   const {  address} = useMountedAccount();
   const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
