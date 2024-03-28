@@ -10,15 +10,21 @@ export interface UseSubnameSignatureOptions {
   requestChallengeRoute: string
 }
 
+/**
+ * Custom hook to request a challenge for a subname and obtain a signature proving ownership of an address.
+ *
+ * @returns {object} An object containing the function to initiate the signing process (`subnameSignature`)
+ * and a boolean indicating if the signature operation is pending (`subnameSignaturePending`).
+ */
 export const useSubnameSignature = (
   props: UseSubnameSignatureOptions
 ) => {
   const {  address} = useMountedAccount();
   const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
-
-
   const mutation = useMutation({
+
+
     mutationFn: async () => {
       if (!address) {
         throw new Error('No address found');

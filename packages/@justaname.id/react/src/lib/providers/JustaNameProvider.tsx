@@ -3,6 +3,9 @@ import { JustaName } from '@justaname.id/sdk'
 import { useMountedAccount } from '../hooks/useMountedAccount';
 import { useSubnameSignature } from '../hooks';
 
+/**
+ * Defines the default routes for interacting with the JustaName API.
+ */
 export const defaultRoutes = {
   addSubnameRoute: '/api/subnames/add',
   checkSubnameAvailabilityRoute: '/api/subnames/available',
@@ -10,6 +13,16 @@ export const defaultRoutes = {
   updateSubnameRoute: '/api/subnames/update',
 }
 
+/**
+ * Type definition for the properties available in the JustaNameContext.
+ * 
+ * @typedef JustaNameContextProps
+ * @type {object}
+ * @property {JustaName | null} justaname - The JustaName SDK instance.
+ * @property {object} routes - An object containing route definitions.
+ * @property {string} [backendUrl] - The backend URL for JustaName API requests.
+ * @property {1 | 11155111} chainId - The blockchain network identifier.
+ */
 export interface JustaNameContextProps {
   justaname: JustaName | null;
   routes: typeof defaultRoutes;
@@ -24,12 +37,32 @@ const JustaNameContext = React.createContext<JustaNameContextProps>({
   chainId: 1,
   backendUrl: ""
 })
+
+/**
+ * Props for the JustaNameProvider component.
+ * 
+ * @typedef JustaNameProvider
+ * @type {object}
+ * @property {React.ReactNode} children - The child components.
+ * @property {object} [routes] - Optional custom API routes.
+ * @property {1 | 11155111} [chainId] - Optional blockchain network identifier.
+ * @property {string} [backendUrl] - Optional backend URL for API requests.
+ */
 export interface JustaNameProvider {
   children: React.ReactNode;
   routes?: typeof defaultRoutes;
   chainId?: 1 | 11155111
   backendUrl?: string;
 }
+
+/**
+ * Provides JustaName context to child components, allowing them to access and interact
+ * with the JustaName service.
+ * 
+ * @component
+ * @param {JustaNameProviderProps} props - The props for the JustaNameProvider component.
+ * @returns {React.ReactNode} The provider component wrapping children.
+ */
 export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
   routes,
   chainId = 1,
@@ -75,6 +108,13 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
 
 export default JustaNameProvider;
 
+/**
+ * Custom hook for accessing the JustaNameContext.
+ * 
+ * @hook
+ * @returns {JustaNameContextProps} The context value with JustaName service instance and configuration.
+ * @throws {Error} If the hook is used outside a JustaNameProvider.
+ */
 export const useJustaName = () => {
   const context = React.useContext(JustaNameContext);
   if (!context) {
