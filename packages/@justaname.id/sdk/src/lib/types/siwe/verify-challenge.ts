@@ -41,7 +41,17 @@ export interface VerifyChallengeResponse extends IResponse {
   verified: boolean;
 }
 
-
+/**
+ * Configures the route for verifying a SIWE message. This interface extends the generic `IRoute`,
+ * specifying the request and response structures involved in verifying an Ethereum address.
+ *
+ * @interface SIWEVerifyMessageRoute
+ * @extends IRoute
+ * @public
+ * @property {VerifyChallengeRequest} request - The structure required for the verification request.
+ * @property {VerifyChallengeResponse} response - The expected response indicating verification result.
+ * @property {NonNullable<unknown>} headers - The headers required for the request, left flexible for specific needs.
+ */
 export interface SIWEVerifyMessageRoute extends IRoute {
   request: VerifyChallengeRequest;
   response: VerifyChallengeResponse;
