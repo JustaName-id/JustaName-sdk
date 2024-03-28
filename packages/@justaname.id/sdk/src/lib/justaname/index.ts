@@ -22,6 +22,7 @@ import { restCall } from '../api/rest';
  *  origin: 'http://localhost:3333',
  *  address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
  *  domain: 'justaname.id',
+ *  ttl?: 120000,
  *  });
  *
  *  ```

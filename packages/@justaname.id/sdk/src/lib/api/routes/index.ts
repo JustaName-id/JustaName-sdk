@@ -4,7 +4,7 @@ import {
   SIWERequestChallengeRoute,
   SIWEVerifyMessageRoute,
   SubnameAddRoute,
-  SubnameClaimRoute,
+  SubnameApproveRoute,
   SubnameGetAllByAddressRoute,
   SubnameGetAllByDomainChainIdRoute,
   SubnameGetByDomainNameChainIdRoute,
@@ -43,7 +43,7 @@ export interface ROUTES extends IROUTES {
   HEALTH_CHECK_ROUTE: ApiKeyRoute
   SIWE_VERIFY_MESSAGE_ROUTE: SIWEVerifyMessageRoute
   SIWE_REQUEST_CHALLENGE_ROUTE: SIWERequestChallengeRoute
-  ACCEPT_SUBNAME_ROUTE: SubnameClaimRoute
+  APPROVE_SUBNAME_ROUTE: SubnameApproveRoute
   RESERVE_SUBNAME_ROUTE: SubnameReserveRoute
   ADD_SUBNAME_ROUTE: SubnameAddRoute
   UPDATE_SUBNAME_ROUTE: SubnameUpdateRoute

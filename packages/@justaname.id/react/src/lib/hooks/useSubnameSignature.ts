@@ -1,20 +1,30 @@
 import { useMountedAccount } from './useMountedAccount';
 import { useSignMessage } from 'wagmi';
-import { useMutation } from '@tanstack/react-query';
-import { useJustaName } from '../providers';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { RequestChallengeResponse } from '@justaname.id/sdk';
 
-export const useSubnameSignature = () => {
+export const buildSignature = (address: string) => ['SUBNAME_SIGNATURE', address]
+
+export interface UseSubnameSignatureOptions {
+  backendUrl: string,
+  requestChallengeRoute: string
+}
+
+export const useSubnameSignature = (
+  props: UseSubnameSignatureOptions
+) => {
   const {  address} = useMountedAccount();
+  const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
-  const { backendUrl, routes} = useJustaName()
+
+
   const mutation = useMutation({
     mutationFn: async () => {
       if (!address) {
         throw new Error('No address found');
       }
 
-      const response = await fetch(backendUrl + routes.requestChallengeRoute + `?address=${address}`, {
+      const response = await fetch(props.backendUrl + props.requestChallengeRoute + `?address=${address}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -36,16 +46,40 @@ export const useSubnameSignature = () => {
         throw new Error('Message not signed');
       }
 
+      const expirationTime =  new Date(data.challenge.split('Expiration Time: ')[1])
+      await queryClient.setQueryData(
+        buildSignature(address),
+        signature
+      )
+
       return {
         signature,
         message: data.challenge,
-        address
+        address,
+        expirationTime
       }
     },
   });
 
+
+  const query = useQuery({
+    queryKey: buildSignature(address ?? ''),
+    queryFn: () => mutation.mutateAsync(),
+    enabled: false
+  })
+
+  const getSignature = async () => {
+    const now = new Date()
+    if (query.data) {
+      if (query.data.expirationTime > now) {
+        return query.data
+      }
+    }
+    return await mutation.mutateAsync()
+  }
   return {
-    subnameSignature: mutation.mutateAsync,
+    getSignature,
     subnameSignaturePending: mutation.isPending,
   }
 }
+
