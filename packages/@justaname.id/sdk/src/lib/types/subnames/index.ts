@@ -1,4 +1,4 @@
-export * from './claim'
+export * from './accept'
 export * from './available'
 export * from './reserve'
 export * from './add'

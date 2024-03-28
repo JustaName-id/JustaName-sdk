@@ -2,10 +2,10 @@ import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useMountedAccount } from './useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { SubnameClaimResponse } from '@justaname.id/sdk';
+import { SubnameAcceptResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from './useAccountSubnames';
 
-export interface BaseClaimSubnameRequest {
+export interface BaseAddSubnameRequest {
   username: string;
 }
 
@@ -18,10 +18,10 @@ export const useAddSubname = <T = any>() => {
   })
   const { refetchSubnames } = useAccountSubnames()
 
-  const mutate = useMutation<SubnameClaimResponse,  Error, T & BaseClaimSubnameRequest>
+  const mutate = useMutation<SubnameAcceptResponse,  Error, T & BaseAddSubnameRequest>
   ({
     mutationFn: async (
-      params: T & BaseClaimSubnameRequest
+      params: T & BaseAddSubnameRequest
     ) => {
       if (!address) {
         throw new Error('No address found');
@@ -47,14 +47,14 @@ export const useAddSubname = <T = any>() => {
         throw new Error('Network response was not ok');
       }
 
-      const data: SubnameClaimResponse = await response.json();
+      const data: SubnameAcceptResponse = await response.json();
       refetchSubnames()
       return data;
     },
   })
 
   return {
-    claimSubname: mutate.mutateAsync as (params: T & BaseClaimSubnameRequest) => Promise<SubnameClaimResponse>,
+    claimSubname: mutate.mutateAsync as (params: T & BaseAddSubnameRequest) => Promise<SubnameAcceptResponse>,
     claimSubnamePending: mutate.isPending,
   }
 }

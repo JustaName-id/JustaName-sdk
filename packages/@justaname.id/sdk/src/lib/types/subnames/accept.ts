@@ -25,7 +25,7 @@ export interface Metadata {
   subdomainId: string;
 }
 
-export interface SubnameApproveRequest extends IRequest {
+export interface SubnameAcceptRequest extends IRequest {
   username: string;
 
   ensDomain: string;
@@ -39,14 +39,14 @@ export interface SubnameApproveRequest extends IRequest {
   contentHash?: string;
 }
 
-export interface SubnameApproveResponse extends IResponse {
+export interface SubnameAcceptResponse extends IResponse {
   id: string;
 
   data: Metadata;
 }
 
-export interface SubnameApproveRoute extends IRoute {
-  request: SubnameApproveRequest;
-  response: SubnameApproveResponse;
+export interface SubnameAcceptRoute extends IRoute {
+  request: SubnameAcceptRequest;
+  response: SubnameAcceptResponse;
   headers: ApiKeyHeaders & SIWEHeaders;
 }

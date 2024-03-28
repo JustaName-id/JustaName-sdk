@@ -1,5 +1,5 @@
 import { useAccount } from 'wagmi';
-import { useAccountSubnames, useClaimSubname, useIsSubnameAvailable } from '@justaname.id/react';
+import { useAccountSubnames, useAddSubname, useIsSubnameAvailable } from '@justaname.id/react';
 import React, { useState } from 'react';
 import { useDebounce } from '@uidotdev/usehooks';
 import { Subname } from './Subname';
@@ -13,7 +13,7 @@ export const ClaimSubname = () => {
     username: debouncedUsername,
     ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN as string,
   })
-  const { claimSubname } = useClaimSubname();
+  const { claimSubname } = useAddSubname();
 
   return (
     <div>
