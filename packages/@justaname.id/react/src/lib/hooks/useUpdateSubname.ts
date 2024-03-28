@@ -5,10 +5,23 @@ import { useSubnameSignature } from './useSubnameSignature';
 import { SubnameClaimResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from './useAccountSubnames';
 
+/**
+ * Defines the structure for the base request needed to claim a subname.
+ * 
+ * @typedef BaseClaimSubnameRequest
+ * @type {object}
+ * @property {string} username - The username part of the subname to be claimed or updated.
+ */
 export interface BaseClaimSubnameRequest {
   username: string;
 }
 
+/**
+ * Custom hook to handle the subname claim or update process.
+ *
+ * @template T Additional request parameters that can be merged with the base request structure.
+ * @returns {object} An object containing methods and properties to handle the mutation state.
+ */
 export const useUpdateSubname = <T = any>() => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount()

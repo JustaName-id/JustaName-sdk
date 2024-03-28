@@ -1,6 +1,9 @@
 import { confirm, input, select } from '@inquirer/prompts';
 import { validateApiKey, validateDomain, validateInput } from './validate';
 
+/**
+ * Types representing the choices of technology stacks for different parts of the application.
+ */
 export type FrontendFramework = 'react' | 'react-native' | 'expo';
 
 export type FullstackFramework = 'nextjs';
@@ -9,8 +12,9 @@ export type BackendFramework = 'express' | 'nestjs' | 'koa' | 'hapi' | 'fastify'
 
 export type Network = 'mainnet' | 'testnet';
 
-
-
+/**
+ * Defines the structure for storing details about the application collected from the user.
+ */
 export interface AppDetails {
   appName: string;
   frontendFramework?: FrontendFramework;
@@ -24,6 +28,12 @@ export interface AppDetails {
   appDir?: boolean;
 }
 
+/**
+ * Prompts the user for various pieces of information regarding their application setup,
+ * including framework preferences, API key, URL, ENS domain, and deployment network.
+ *
+ * @returns {Promise<AppDetails>} A promise that resolves to an object containing the collected app details.
+ */
 export const collectAppDetails = async (): Promise<AppDetails> => {
 
   let appDir = false;

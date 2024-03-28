@@ -27,10 +27,21 @@ import { IsSubnameAvailableRequest, IsSubnameAvailableResponse, SIWEHeaders, Sub
 export class Subnames {
   private readonly apiKey: string | undefined;
 
+  /**
+   * Constructs a new instance of the Subnames class, optionally with an API key for write operations.
+   * @param {string} [apiKey] - Your API key, required for operations that modify data.
+   */
   constructor(apiKey?: string) {
     this.apiKey = apiKey;
   }
 
+   /**
+   * Claims a subname under a specific domain, associating it with an Ethereum address.
+   * This operation requires an API key.
+   * @param {SubnameClaimRequest} params - Parameters for claiming a subname.
+   * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
+   * @returns {Promise<SubnameClaimResponse>} The result of the claim operation.
+   */
   async claimSubname(
     params: SubnameClaimRequest,
     headers: SIWEHeaders,
@@ -45,6 +56,12 @@ export class Subnames {
     ))
   }
 
+  /**
+   * Reserves a subname for later claiming. This can be useful for securing a subname
+   * before it is officially registered or claimed. Requires an API key.
+   * @param {SubnameReserveRequest} params - The parameters for the reservation.
+   * @returns {Promise<SubnameReserveResponse>} The result of the reservation operation.
+   */
   async reserveSubname(
     params: SubnameReserveRequest,
   ): Promise<SubnameReserveResponse> {
@@ -57,6 +74,13 @@ export class Subnames {
     ))
   }
 
+  /**
+   * Adds a new subname under a domain, directly associating it with an address and optional content.
+   * Requires an API key.
+   * @param {SubnameAddRequest} params - The parameters for adding the subname.
+   * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
+   * @returns {Promise<SubnameAddResponse>} The result of the add operation.
+   */
   async addSubname(
     params: SubnameAddRequest,
     headers: SIWEHeaders,
@@ -79,6 +103,13 @@ export class Subnames {
     ))
   }
 
+  /**
+   * Updates the details of an existing subname. This operation can be used to change the associated
+   * address or the content of a subname. Requires an API key.
+   * @param {SubnameUpdateRequest} params - The parameters for updating the subname.
+   * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
+   * @returns {Promise<SubnameUpdateResponse>} The result of the update operation.
+   */
   async updateSubname(
     params: SubnameUpdateRequest,
     headers: SIWEHeaders,
@@ -93,6 +124,13 @@ export class Subnames {
     ))
   }
 
+  /**
+   * Revokes a subname, removing its association and optionally freeing it for re-registration.
+   * Requires an API key.
+   * @param {SubnameRevokeRequest} params - The parameters for revoking the subname.
+   * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
+   * @returns {Promise<SubnameRevokeResponse>} The result of the revoke operation.
+   */
   async revokeSubname(
     params: SubnameRevokeRequest,
     headers: SIWEHeaders,
@@ -107,6 +145,12 @@ export class Subnames {
     ))
   }
 
+  /**
+   * Retrieves details of a subname by its domain name and chain ID. This is a read-only
+   * operation and does not require an API key.
+   * @param {SubnameGetByDomainNameChainIdRequest} params - The parameters for the lookup.
+   * @returns {Promise<SubnameGetByDomainNameChainIdResponse>} The details of the subname, if found.
+   */
   async getByDomainNameChainId(
     params: SubnameGetByDomainNameChainIdRequest,
   ): Promise<SubnameGetByDomainNameChainIdResponse> {
@@ -116,6 +160,12 @@ export class Subnames {
     )
   }
 
+  /**
+   * Retrieves details of a subname directly by its name. This is a read-only operation
+   * and does not require an API key.
+   * @param {SubnameGetBySubnameRequest} params - The parameters for the lookup.
+   * @returns {Promise<SubnameGetBySubnameResponse>} The details of the subname, if found.
+   */
   async getBySubname(
     params: SubnameGetBySubnameRequest,
   ): Promise<SubnameGetBySubnameResponse> {
@@ -125,6 +175,13 @@ export class Subnames {
     )
   }
 
+  /**
+   * Retrieves all subnames associated with a specific address. This can be useful for
+   * users to see all subnames under their control. This is a read-only operation
+   * and does not require an API key.
+   * @param {SubnameGetAllByAddressRequest} params - The parameters for the lookup.
+   * @returns {Promise<SubnameGetAllByAddressResponse[]>} A list of subnames associated with the address.
+   */
   async getAllByAddress(
     params: SubnameGetAllByAddressRequest,
   ): Promise<SubnameGetAllByAddressResponse[]> {
@@ -134,6 +191,12 @@ export class Subnames {
     )
   }
 
+  /**
+   * Retrieves all subname invitations for a specific address. This allows users to see
+   * any pending subname associations. This is a read-only operation and does not require an API key.
+   * @param {SubnameGetAllByAddressRequest} params - The parameters for retrieving invitations.
+   * @returns {Promise<SubnameGetAllByAddressResponse[]>} A list of subname invitations.
+   */
   async getInvitations(
     params: SubnameGetAllByAddressRequest,
   ): Promise<SubnameGetAllByAddressResponse[]> {
@@ -143,6 +206,12 @@ export class Subnames {
     )
   }
 
+  /**
+   * Checks if a subname is available for registration.
+   * This is a read-only operation and does not require an API key.
+   * @param {IsSubnameAvailableRequest} params - Parameters for checking subname availability.
+   * @returns {Promise<IsSubnameAvailableResponse>} Information about the subname's availability.
+   */
   async checkSubnameAvailable(
     params: IsSubnameAvailableRequest,
   ): Promise<IsSubnameAvailableResponse> {
@@ -153,6 +222,13 @@ export class Subnames {
   }
 
 
+  /**
+   * Ensures that the method is not called in read-only mode, throwing an error if an API key is not provided.
+   * @private
+   * @param {T} callback - The operation to be performed.
+   * @returns {T} The result of the callback operation if an API key is present.
+   * @throws {Error} If called in read-only mode without an API key.
+   */
   private isNotReadOnlyMode<T>(callback: T): T {
     const check =  this.apiKey === undefined;
     if(check){

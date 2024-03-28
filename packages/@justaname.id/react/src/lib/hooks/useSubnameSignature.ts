@@ -4,6 +4,12 @@ import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { RequestChallengeResponse } from '@justaname.id/sdk';
 
+/**
+ * Custom hook to request a challenge for a subname and obtain a signature proving ownership of an address.
+ *
+ * @returns {object} An object containing the function to initiate the signing process (`subnameSignature`)
+ * and a boolean indicating if the signature operation is pending (`subnameSignaturePending`).
+ */
 export const useSubnameSignature = () => {
   const {  address} = useMountedAccount();
   const { signMessageAsync } = useSignMessage()

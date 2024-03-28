@@ -52,7 +52,20 @@ export interface RequestChallengeResponse extends IResponse{
   challenge: string;
 }
 
-
+/**
+ * Specifies the route configuration for initiating a SIWE (Sign-In with Ethereum) challenge request.
+ * This interface extends the generic `IRoute` interface, setting concrete types for the request
+ * and response associated with the SIWE challenge process. It defines how a client should structure
+ * their challenge request and what response they can expect to receive.
+ * 
+ * @interface SIWERequestChallengeRoute
+ * @extends IRoute
+ * @public
+ * @property {RequestChallengeRequest} request - The request structure for the SIWE challenge.
+ * @property {RequestChallengeResponse} response - The expected response structure.
+ * @property {NonNullable<unknown>} headers - The headers required for the request, left intentionally
+ *                                            generic to accommodate various possible requirements.
+ */
 export interface SIWERequestChallengeRoute extends IRoute {
   request: RequestChallengeRequest;
   response: RequestChallengeResponse;
