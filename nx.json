@@ -92,6 +92,7 @@
         "serveStaticTargetName": "serve-static"
       }
     },
+    "nx/plugins/package-json",
     {
       "plugin": "@nx/cypress/plugin",
       "options": {
@@ -115,12 +116,6 @@
         "style": "css",
         "linter": "eslint",
         "unitTestRunner": "jest"
-      }
-    },
-    "@nx/next": {
-      "application": {
-        "style": "none",
-        "linter": "eslint"
       }
     }
   },
