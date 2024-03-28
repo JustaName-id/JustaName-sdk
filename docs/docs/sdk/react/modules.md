@@ -145,7 +145,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useClaimSubname.ts#L12)
+[packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts#L12)
 
 ___
 

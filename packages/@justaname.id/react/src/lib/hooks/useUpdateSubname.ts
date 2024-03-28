@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useMountedAccount } from './useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { SubnameClaimResponse } from '@justaname.id/sdk';
+import { SubnameAcceptResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from './useAccountSubnames';
 
 export interface BaseClaimSubnameRequest {
@@ -18,7 +18,7 @@ export const useUpdateSubname = <T = any>() => {
   })
   const { refetchSubnames } = useAccountSubnames()
 
-  const mutate = useMutation<SubnameClaimResponse,  Error, T & BaseClaimSubnameRequest>
+  const mutate = useMutation<SubnameAcceptResponse,  Error, T & BaseClaimSubnameRequest>
   ({
     mutationFn: async (
       params: T & BaseClaimSubnameRequest
@@ -49,14 +49,14 @@ export const useUpdateSubname = <T = any>() => {
         throw new Error('Network response was not ok');
       }
 
-      const data: SubnameClaimResponse = await response.json();
+      const data: SubnameAcceptResponse = await response.json();
       refetchSubnames()
       return data;
     },
   })
 
   return {
-    claimSubname: mutate.mutateAsync as (params: T & BaseClaimSubnameRequest) => Promise<SubnameClaimResponse>,
+    claimSubname: mutate.mutateAsync as (params: T & BaseClaimSubnameRequest) => Promise<SubnameAcceptResponse>,
     claimSubnamePending: mutate.isPending,
   }
 }

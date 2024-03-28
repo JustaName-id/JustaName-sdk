@@ -1,5 +1,25 @@
 import { restCall } from '../../api/rest';
-import { IsSubnameAvailableRequest, IsSubnameAvailableResponse, SIWEHeaders, SubnameAddRequest, SubnameAddResponse, SubnameApproveRequest, SubnameApproveResponse, SubnameGetAllByAddressRequest, SubnameGetAllByAddressResponse, SubnameGetByDomainNameChainIdRequest, SubnameGetByDomainNameChainIdResponse, SubnameGetBySubnameRequest, SubnameGetBySubnameResponse, SubnameReserveRequest, SubnameReserveResponse, SubnameRevokeRequest, SubnameRevokeResponse, SubnameUpdateRequest, SubnameUpdateResponse } from '../../types';
+import {
+  IsSubnameAvailableRequest,
+  IsSubnameAvailableResponse,
+  SIWEHeaders,
+  SubnameAcceptRequest, SubnameAcceptResponse,
+  SubnameAddRequest,
+  SubnameAddResponse,
+
+  SubnameGetAllByAddressRequest,
+  SubnameGetAllByAddressResponse,
+  SubnameGetByDomainNameChainIdRequest,
+  SubnameGetByDomainNameChainIdResponse,
+  SubnameGetBySubnameRequest,
+  SubnameGetBySubnameResponse,
+  SubnameReserveRequest,
+  SubnameReserveResponse,
+  SubnameRevokeRequest,
+  SubnameRevokeResponse,
+  SubnameUpdateRequest,
+  SubnameUpdateResponse
+} from '../../types';
 
 /**
  * Represents the Subnames class for interacting with the Subnames API.
@@ -31,12 +51,12 @@ export class Subnames {
     this.apiKey = apiKey;
   }
 
-  async approveSubname(
-    params: SubnameApproveRequest,
+  async acceptSubname(
+    params: SubnameAcceptRequest,
     headers: SIWEHeaders,
-    ):  Promise<SubnameApproveResponse> {
+    ):  Promise<SubnameAcceptResponse> {
     return this.isNotReadOnlyMode(restCall(
-      'APPROVE_SUBNAME_ROUTE','POST',
+      'ACCEPT_SUBNAME_ROUTE','POST',
       params,
       {
         xApiKey: this.apiKey as string,
