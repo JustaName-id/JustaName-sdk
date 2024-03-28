@@ -6,7 +6,7 @@ import 'react-native-url-polyfill/auto';
 import { arbitrum, mainnet, polygon } from 'viem/chains';
 import { WagmiConfig } from 'wagmi';
 
-import { JustaNameProvider } from '@justaname.id/react/src'
+import { JustaNameProvider } from '@justaname.id/react/src';
 import HomeScreen from './screens/Home';
 
 const projectId = process.env.EXPO_PUBLIC_PROJECT_ID ?? ""
@@ -41,8 +41,7 @@ export default function App() {
     <WagmiConfig config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <JustaNameProvider
-          // backendUrl={process.env.EXPO_PUBLIC_API_URL} 
-          // backendUrl={"exp://192.168.1.5:8081"}
+          backendUrl={process.env.EXPO_PUBLIC_API_URL}
           chainId={chainId}>
           <HomeScreen />
           <Web3Modal />

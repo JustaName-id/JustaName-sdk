@@ -24,11 +24,15 @@ export default function HomeScreen() {
         username: debouncedSubdomain,
         ensDomain: process.env.EXPO_PUBLIC_ENS_DOMAIN as string,
     })
-    const { claimSubname } = useClaimSubname();
+    const { claimSubname, claimSubnamePending } = useClaimSubname();
     const handleAddSubdomain = async () => {
-        return await claimSubname({
-            username: inputValue,
-        });
+        try {
+            return await claimSubname({
+                username: inputValue,
+            });
+        } catch (error) {
+            console.log('error', error);
+        }
     }
 
     return (
@@ -56,11 +60,13 @@ export default function HomeScreen() {
                         />
                         <Text style={styles.domainText}>.{process.env.EXPO_PUBLIC_ENS_DOMAIN}</Text>
                     </View>
-                    <Button
-                        title="Claim"
-                        onPress={handleAddSubdomain}
-                        disabled={!isAvailable}
-                    />
+                    {claimSubnamePending ? <ActivityIndicator /> :
+                        <Button
+                            title="Claim"
+                            onPress={handleAddSubdomain}
+                            disabled={!isAvailable}
+                        />
+                    }
                     {debouncedSubdomain.length > 2 && isLoading &&
                         <ActivityIndicator
                             size="large"
