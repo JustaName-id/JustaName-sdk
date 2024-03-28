@@ -24,7 +24,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/update.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L57)
+[lib/types/subnames/update.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L57)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/update.ts:55](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L55)
+[lib/types/subnames/update.ts:55](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L55)
 
 ___
 
@@ -52,4 +52,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/update.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L56)
+[lib/types/subnames/update.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L56)

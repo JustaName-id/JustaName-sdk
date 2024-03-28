@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:75](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L75)
+[lib/types/subnames/get-all-by-ens-domain.ts:75](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L75)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:73](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L73)
+[lib/types/subnames/get-all-by-ens-domain.ts:73](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L73)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:77](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L77)
+[lib/types/subnames/get-all-by-ens-domain.ts:77](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L77)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L71)
+[lib/types/subnames/get-all-by-ens-domain.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L71)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:83](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L83)
+[lib/types/subnames/get-all-by-ens-domain.ts:83](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L83)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:81](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L81)
+[lib/types/subnames/get-all-by-ens-domain.ts:81](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L81)
 
 ___
 
@@ -80,4 +80,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:79](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L79)
+[lib/types/subnames/get-all-by-ens-domain.ts:79](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L79)

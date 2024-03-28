@@ -20,7 +20,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/types/subnames/claim.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L35)
+[lib/types/subnames/claim.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L35)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/claim.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L33)
+[lib/types/subnames/claim.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L33)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/claim.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L39)
+[lib/types/subnames/claim.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L39)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/claim.ts:31](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L31)
+[lib/types/subnames/claim.ts:31](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L31)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/claim.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L37)
+[lib/types/subnames/claim.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L37)
 
 ___
 
@@ -70,4 +70,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/claim.ts:29](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L29)
+[lib/types/subnames/claim.ts:29](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L29)
