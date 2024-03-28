@@ -16,13 +16,18 @@ export interface BaseClaimSubnameRequest {
   username: string;
 }
 
+export interface UseUpdateSubnameResult<T extends any> {
+  updateSubname: (params: T & BaseClaimSubnameRequest) => Promise<SubnameAcceptResponse>;
+  updateSubnamePending: boolean;
+}
+
 /**
  * Custom hook to handle the subname claim or update process.
  *
  * @template T Additional request parameters that can be merged with the base request structure.
- * @returns {object} An object containing methods and properties to handle the mutation state.
+ * @returns {UseUpdateSubnameResult} An object containing methods and properties to handle the mutation state.
  */
-export const useUpdateSubname = <T = any>() => {
+export const useUpdateSubname = <T = any>() : UseUpdateSubnameResult<T> => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount()
   const { getSignature} = useSubnameSignature({
@@ -69,7 +74,7 @@ export const useUpdateSubname = <T = any>() => {
   })
 
   return {
-    claimSubname: mutate.mutateAsync as (params: T & BaseClaimSubnameRequest) => Promise<SubnameAcceptResponse>,
-    claimSubnamePending: mutate.isPending,
+    updateSubname: mutate.mutateAsync as (params: T & BaseClaimSubnameRequest) => Promise<SubnameAcceptResponse>,
+    updateSubnamePending: mutate.isPending,
   }
 }

@@ -1,5 +1,6 @@
 import { useJustaName } from '../providers';
 import { useQuery } from '@tanstack/react-query';
+import { IsSubnameAvailableResponse } from '@justaname.id/sdk';
 
 /**
  * Interface defining the parameters required to check the availability of a subname.
@@ -14,14 +15,19 @@ export interface UseIsSubnameAvailableOptions {
   ensDomain: string;
 }
 
+export interface UseIsSubnameAvailableResult {
+  isAvailable: IsSubnameAvailableResponse | undefined;
+  isLoading: boolean;
+}
+
 /**
  * Custom hook to check if a subname is available for registration under a given ENS domain. 
  *
  * @param {UseIsSubnameAvailableOptions} props - The options including the username and ENS domain to check.
- * @returns {object} An object containing the availability status of the subname (`isAvailable`) 
+ * @returns {UseIsSubnameAvailableResult} An object containing the availability status of the subname (`isAvailable`)
  * and the loading state of the query (`isLoading`).
  */
-export const useIsSubnameAvailable = (props: UseIsSubnameAvailableOptions) => {
+export const useIsSubnameAvailable = (props: UseIsSubnameAvailableOptions): UseIsSubnameAvailableResult => {
   const { justaname, chainId } = useJustaName();
   const { username, ensDomain } = props;
 

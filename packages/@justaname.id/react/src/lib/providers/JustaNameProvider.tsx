@@ -8,6 +8,7 @@ import { useSubnameSignature } from '../hooks';
  */
 export const defaultRoutes = {
   addSubnameRoute: '/api/subnames/add',
+  acceptSubnameRoute: '/api/subnames/accept',
   checkSubnameAvailabilityRoute: '/api/subnames/available',
   requestChallengeRoute: '/api/request-challenge',
   updateSubnameRoute: '/api/subnames/update',
