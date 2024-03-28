@@ -64,6 +64,7 @@ const init = async () => {
 
         try {
           const challenge = await justaname.siwe.requestChallenge({
+      ttl:1800000,
             chainId,
             origin,
             address,

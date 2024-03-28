@@ -14,4 +14,4 @@ custom_edit_url: null
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useClaimSubname.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useClaimSubname.ts#L9)
+[packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useClaimSubname.ts#L9)

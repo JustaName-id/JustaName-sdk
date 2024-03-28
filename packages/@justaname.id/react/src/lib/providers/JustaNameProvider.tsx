@@ -1,16 +1,19 @@
 import React from 'react';
 import { JustaName } from '@justaname.id/sdk'
+import { useMountedAccount } from '../hooks/useMountedAccount';
+import { useSubnameSignature } from '../hooks';
 
 export const defaultRoutes = {
-  claimSubnameRoute: '/api/subnames/claim',
+  addSubnameRoute: '/api/subnames/add',
   checkSubnameAvailabilityRoute: '/api/subnames/available',
   requestChallengeRoute: '/api/request-challenge',
+  updateSubnameRoute: '/api/subnames/update',
 }
 
 export interface JustaNameContextProps {
   justaname: JustaName | null;
   routes: typeof defaultRoutes;
-  backendUrl?: string;
+  backendUrl: string;
   chainId: 1 | 11155111
 }
 
@@ -19,6 +22,7 @@ const JustaNameContext = React.createContext<JustaNameContextProps>({
   justaname: null,
   routes: defaultRoutes,
   chainId: 1,
+  backendUrl: ""
 })
 export interface JustaNameProvider {
   children: React.ReactNode;
@@ -30,10 +34,14 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
   routes,
   chainId = 1,
   backendUrl = ""
-
 }) => {
 
   const [justaname, setJustaName] = React.useState<JustaName | null>(null);
+  const { address } = useMountedAccount();
+  const { getSignature } = useSubnameSignature({
+    backendUrl,
+    requestChallengeRoute: routes?.requestChallengeRoute || defaultRoutes.requestChallengeRoute
+  })
 
   React.useEffect(() => {
     const main = async () => {
@@ -42,6 +50,14 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
     }
     main();
   }, []);
+
+
+  React.useEffect(() => {
+
+    if(!address) return;
+    getSignature()
+  }, [address])
+
   return (
     <JustaNameContext.Provider value={{
       backendUrl,

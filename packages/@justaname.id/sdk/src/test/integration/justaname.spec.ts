@@ -35,6 +35,7 @@ describe('justaname', () => {
 
   it('should request a challenge', async () => {
     const challenge = await justaname.siwe.requestChallenge({
+      ttl:1800000,
       chainId: 1,
       origin: 'http://localhost:3333',
       address: '0x59c44836630760F97b74b569B379ca94c37B93ca',

@@ -59,6 +59,7 @@ app.get('/api/request-challenge', async (req: Request<NonNullable<unknown>, NonN
 
   try {
     const challenge = await justaname.siwe.requestChallenge({
+      ttl:1800000,
       chainId,
       origin,
       address,

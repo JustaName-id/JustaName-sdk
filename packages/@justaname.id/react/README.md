@@ -50,10 +50,10 @@ function MyComponent() {
 ### Claim a Subname
 
 ```jsx
-import { useClaimSubname } from '@justaname.id/react';
+import { useAddSubname } from '@justaname.id/react';
 
 function MyComponent() {
-  const { claimSubname, claimSubnamePending } = useClaimSubname();
+  const { claimSubname, claimSubnamePending } = useAddSubname();
 
   const handleClaim = async () => {
     try {
@@ -78,7 +78,7 @@ The JustaName React SDK provides several hooks to simplify working with JustaNam
 
 - `useJustaName`: Access the JustaName context.
 - `useIsSubnameAvailable`: Check if a subname is available.
-- `useClaimSubname`: Claim a subname.
+- `useAddSubname`: Claim a subname.
 - `useUpdateSubname`: Update a subname.
 - `useSubnameSignature`: Get a signature for a subname.
 - `useSubname`: Get information about a subname.

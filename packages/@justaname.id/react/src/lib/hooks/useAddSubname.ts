@@ -9,10 +9,13 @@ export interface BaseClaimSubnameRequest {
   username: string;
 }
 
-export const useClaimSubname = <T = any>() => {
+export const useAddSubname = <T = any>() => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount()
-  const { subnameSignature} = useSubnameSignature()
+  const { getSignature} = useSubnameSignature({
+    backendUrl,
+    requestChallengeRoute: routes.requestChallengeRoute
+  })
   const { refetchSubnames } = useAccountSubnames()
 
   const mutate = useMutation<SubnameClaimResponse,  Error, T & BaseClaimSubnameRequest>
@@ -24,10 +27,10 @@ export const useClaimSubname = <T = any>() => {
         throw new Error('No address found');
       }
 
-      const signature = await subnameSignature()
+      const signature = await getSignature()
 
       const response = await fetch(
-        backendUrl + routes.claimSubnameRoute, {
+        backendUrl + routes.addSubnameRoute, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
