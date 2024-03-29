@@ -3858,6 +3858,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@justaname.id/react@file:../../../packages/@justaname.id/react/dist::locator=justaname-react-example%40workspace%3Aexamples%2Ffrontend%2Freact":
+  version: 0.1.2
+  resolution: "@justaname.id/react@file:../../../packages/@justaname.id/react/dist#../../../packages/@justaname.id/react/dist::hash=aa747c&locator=justaname-react-example%40workspace%3Aexamples%2Ffrontend%2Freact"
+  dependencies:
+    "@justaname.id/sdk": "npm:0.0.8"
+    "@tanstack/react-query": "npm:^5.28.4"
+  peerDependencies:
+    "@tanstack/query-core": ">=5.0.0"
+    react: ">=17"
+    react-dom: ">=17"
+    viem: 2.x
+    wagmi: 2.x
+  checksum: 10c0/2244acdb7818511c9dc8383024a47a5a672f340a156f4298328b5c8393cc7df00f9fa9e46aed0359002fc4922ab6001e8c048e870bbe84774ac0fb2ef39c2d7a
+  languageName: node
+  linkType: hard
+
 "@justaname.id/react@npm:^0.0.4":
   version: 0.0.4
   resolution: "@justaname.id/react@npm:0.0.4"
@@ -3874,7 +3890,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:^0.1.2, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:^0.3.0, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
@@ -3898,6 +3914,17 @@ __metadata:
     dotenv: "npm:16.3.2"
     qs: "npm:^6.12.0"
   checksum: 10c0/583c3f440d45710124b3abd03b345e53de00119c9ad42d27b671a489160db73a7918872b135decb359092bfe3f3e819261ee1297034f642a71f01c50ff7f721e
+  languageName: node
+  linkType: hard
+
+"@justaname.id/sdk@npm:0.0.8":
+  version: 0.0.8
+  resolution: "@justaname.id/sdk@npm:0.0.8"
+  dependencies:
+    axios: "npm:^1.6.0"
+    dotenv: "npm:16.3.2"
+    qs: "npm:^6.12.0"
+  checksum: 10c0/ce4a2cf5717df40f02e21291a86e830c941f0147ce0215d7ab3d46486ae68ebdfa3dce04a7a3aed6233d69172c5c5bb72baa2c6a4de9b38facf5ba5153a15646
   languageName: node
   linkType: hard
 
@@ -22152,7 +22179,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-app-example@workspace:examples/fullstack/nextjs/app"
   dependencies:
-    "@justaname.id/react": "npm:^0.1.2"
+    "@justaname.id/react": "npm:^0.3.0"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -22173,7 +22200,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-pages-example@workspace:examples/fullstack/nextjs/pages"
   dependencies:
-    "@justaname.id/react": "npm:^0.1.2"
+    "@justaname.id/react": "npm:^0.3.0"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -22194,7 +22221,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-react-example@workspace:examples/frontend/react"
   dependencies:
-    "@justaname.id/react": "npm:^0.1.2"
+    "@justaname.id/react": ../../../packages/@justaname.id/react/dist
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@tanstack/react-query": "npm:^5.28.6"
     "@types/react": "npm:^18.2.66"
