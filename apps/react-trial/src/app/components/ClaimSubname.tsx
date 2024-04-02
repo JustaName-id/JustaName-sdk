@@ -5,7 +5,7 @@ import { useDebounce } from '@uidotdev/usehooks';
 import { Subname } from './Subname';
 
 export const ClaimSubname = () => {
-  const { address } = useAccount();
+  const { address  } = useAccount();
   const { subnames } = useAccountSubnames();
   const [username, setUsername] = useState<string>("");
   const debouncedUsername = useDebounce(username, 500);
@@ -15,7 +15,6 @@ export const ClaimSubname = () => {
   })
   const { addSubname } = useAddSubname();
 
-  console.log(subnames, addSubname);
   return (
     <div>
       {

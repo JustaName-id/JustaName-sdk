@@ -1,6 +1,6 @@
 import express, { Request } from 'express';
 import cors from 'cors';
-import { JustaName } from '@justaname.id/sdk';
+import { JustaName, SubnameUpdateRequest } from '@justaname.id/sdk';
 import dotenv from 'dotenv'
 
 dotenv.config();
@@ -57,10 +57,11 @@ app.get('/api/request-challenge', async (req: Request<NonNullable<unknown>, NonN
     return;
   }
 
+  const minutes = 30;
   try {
     const challenge = await justaname.siwe.requestChallenge({
       // 30mins
-      ttl:1800000,
+      ttl:minutes * 60 * 1000,
       chainId,
       origin,
       address,
@@ -72,7 +73,7 @@ app.get('/api/request-challenge', async (req: Request<NonNullable<unknown>, NonN
   }
   catch (error) {
     if(error instanceof Error)
-    res.status(500).send({ error: error.message });
+      res.status(500).send({ error: error.message });
   }
 });
 
@@ -84,26 +85,97 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
     return;
   }
 
+  if(!req.body.address || !req.body.signature || !req.body.message) {
+    res.status(400).send({ message: 'Address, signature and message are required' });
+    return;
+  }
+
   try {
     const add = await justaname.subnames.addSubname({
-      username: username,
-      ensDomain: domain,
-      chainId: chainId
-    },
-    {
-      xSignature: req.body.signature,
-      xAddress: req.body.address,
-      xMessage: req.body.message
-    });
+        username: username,
+        ensDomain: domain,
+        chainId: chainId
+      },
+      {
+        xSignature: req.body.signature,
+        xAddress: req.body.address,
+        xMessage: req.body.message
+      });
 
     res.status(201).send(add);
     return;
   }
   catch (error) {
     if(error instanceof Error)
-    res.status(500).send({ error: error.message });
+      res.status(500).send({ error: error.message });
   }
 });
+
+export interface SubnameUpdate extends Omit<SubnameUpdateRequest, 'ensDomain' | 'chainId'> {
+  address: string;
+  signature: string;
+  message: string;
+}
+
+app.post('/api/subnames/update', async (req: Request<SubnameUpdate>, res) => {
+
+  const username = req.body.username;
+  const addresses = req.body.addresses;
+  const text = req.body.text;
+  const contentHash = req.body.contentHash;
+  const signature = req.body.signature;
+  const address = req.body.address;
+  const message = req.body.message;
+
+  if(!username) {
+    res.status(400).send({ message: 'Username is required' });
+    return;
+  }
+
+  if(!addresses) {
+    res.status(400).send({ message: 'Addresses are required' });
+    return;
+  }
+
+  if(!text) {
+    res.status(400).send({ message: 'Text records are required' });
+    return;
+  }
+
+  if(!contentHash && contentHash !== '') {
+    res.status(400).send({ message: 'Content hash is required' });
+    return;
+  }
+
+  if(!req.body.address || !req.body.signature || !req.body.message) {
+    res.status(400).send({ message: 'Address, signature and message are required' });
+    return;
+  }
+
+
+  try {
+    const add = await justaname.subnames.updateSubname({
+        username: username,
+        ensDomain: domain,
+        chainId: chainId,
+      addresses,
+      text,
+      contentHash
+      },
+      {
+        xSignature: signature,
+        xAddress: address,
+        xMessage: message
+      });
+
+    res.status(201).send(add);
+    return;
+  }
+  catch (error) {
+    if(error instanceof Error)
+      res.status(500).send({ error: error.message });
+  }
+})
 
 app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to JustaName Express!' });

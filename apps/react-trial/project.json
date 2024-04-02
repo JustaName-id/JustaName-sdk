@@ -1,0 +1,8 @@
+{
+  "name": "justaname-react-trial",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/react-trial/src",
+  "projectType": "application",
+  "targets": {},
+  "tags": []
+}
