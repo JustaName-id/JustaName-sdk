@@ -71,7 +71,7 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
 }) => {
 
   const [justaname, setJustaName] = React.useState<JustaName | null>(null);
-  const { address } = useMountedAccount();
+  const { address, isConnected } = useMountedAccount();
   const { getSignature } = useSubnameSignature({
     backendUrl,
     requestChallengeRoute: routes?.requestChallengeRoute || defaultRoutes.requestChallengeRoute
@@ -88,9 +88,13 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
 
   React.useEffect(() => {
 
-    if(!address) return;
-    getSignature()
-  }, [address])
+    if(!address || !isConnected) return;
+    const main = async () => {
+      console.log('getting signature')
+      await getSignature()
+    }
+    main();
+  }, [address, isConnected])
 
   return (
     <JustaNameContext.Provider value={{
@@ -116,7 +120,7 @@ export default JustaNameProvider;
  * @returns {JustaNameContextProps} The context value with JustaName service instance and configuration.
  * @throws {Error} If the hook is used outside a JustaNameProvider.
  */
-export const useJustaName = () => {
+export const useJustaName = (): JustaNameContextProps => {
   const context = React.useContext(JustaNameContext);
   if (!context) {
     throw new Error('useJustaName must be used within a JustaNameProvider');

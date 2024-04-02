@@ -27,8 +27,6 @@ export const useSubnameSignature = (
   const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
   const mutation = useMutation({
-
-
     mutationFn: async () => {
       if (!address) {
         throw new Error('No address found');
@@ -47,6 +45,7 @@ export const useSubnameSignature = (
 
       const data: RequestChallengeResponse = await response.json();
 
+      console.log(data.challenge, address)
       const signature = await signMessageAsync({
         message: data.challenge,
         account: address
@@ -57,17 +56,19 @@ export const useSubnameSignature = (
       }
 
       const expirationTime =  new Date(data.challenge.split('Expiration Time: ')[1])
-      await queryClient.setQueryData(
-        buildSignature(address),
-        signature
-      )
 
-      return {
+      const signedData = {
         signature,
-        message: data.challenge,
+          message: data.challenge,
         address,
         expirationTime
       }
+      await queryClient.setQueryData(
+        buildSignature(address),
+        signedData
+      )
+
+      return signedData
     },
   });
 
@@ -79,8 +80,10 @@ export const useSubnameSignature = (
   })
 
   const getSignature = async () => {
-    const now = new Date()
+    const now = new Date();
+    console.log(query.data)
     if (query.data) {
+      console.log(query.data.expirationTime, now)
       if (query.data.expirationTime > now) {
         return query.data
       }

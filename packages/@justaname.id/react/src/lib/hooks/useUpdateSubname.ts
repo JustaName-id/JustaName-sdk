@@ -1,9 +1,10 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useMountedAccount } from './useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { SubnameAcceptResponse } from '@justaname.id/sdk';
+import { SubnameUpdateRequest, SubnameUpdateResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from './useAccountSubnames';
+import { buildSubnameBySubnameKey } from './useSubname';
 
 /**
  * Defines the structure for the base request needed to claim a subname.
@@ -12,12 +13,12 @@ import { useAccountSubnames } from './useAccountSubnames';
  * @type {object}
  * @property {string} username - The username part of the subname to be claimed or updated.
  */
-export interface BaseClaimSubnameRequest {
-  username: string;
+export interface SubnameUpdate extends Omit<SubnameUpdateRequest, 'ensDomain' | 'chainId'> {
+  subname: string;
 }
 
-export interface UseUpdateSubnameResult<T extends any> {
-  updateSubname: (params: T & BaseClaimSubnameRequest) => Promise<SubnameAcceptResponse>;
+export interface UseUpdateSubnameResult {
+  updateSubname: (params: SubnameUpdate) => Promise<SubnameUpdateResponse>;
   updateSubnamePending: boolean;
 }
 
@@ -27,19 +28,20 @@ export interface UseUpdateSubnameResult<T extends any> {
  * @template T Additional request parameters that can be merged with the base request structure.
  * @returns {UseUpdateSubnameResult} An object containing methods and properties to handle the mutation state.
  */
-export const useUpdateSubname = <T = any>() : UseUpdateSubnameResult<T> => {
+export const useUpdateSubname = () : UseUpdateSubnameResult => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount()
+  const queryClient = useQueryClient()
   const { getSignature} = useSubnameSignature({
     backendUrl,
     requestChallengeRoute: routes.requestChallengeRoute
   })
   const { refetchSubnames } = useAccountSubnames()
 
-  const mutate = useMutation<SubnameAcceptResponse,  Error, T & BaseClaimSubnameRequest>
+  const mutate = useMutation<SubnameUpdateResponse,  Error, SubnameUpdate>
   ({
     mutationFn: async (
-      params: T & BaseClaimSubnameRequest
+      params: SubnameUpdate
     ) => {
       if (!address) {
         throw new Error('No address found');
@@ -58,8 +60,9 @@ export const useUpdateSubname = <T = any>() : UseUpdateSubnameResult<T> => {
             signature: signature.signature,
             address: address,
             message: signature.message,
-            addresses: [
-            ]
+            text: params.text,
+            addresses: params.addresses,
+            contentHash: params.contentHash
           })
         });
 
@@ -67,14 +70,18 @@ export const useUpdateSubname = <T = any>() : UseUpdateSubnameResult<T> => {
         throw new Error('Network response was not ok');
       }
 
-      const data: SubnameAcceptResponse = await response.json();
+      const data: SubnameUpdateResponse = await response.json();
+      const key = buildSubnameBySubnameKey(params.subname)
+      await queryClient.invalidateQueries({
+        queryKey: key
+      })
       refetchSubnames()
       return data;
     },
   })
 
   return {
-    updateSubname: mutate.mutateAsync as (params: T & BaseClaimSubnameRequest) => Promise<SubnameAcceptResponse>,
+    updateSubname: mutate.mutateAsync as (params: SubnameUpdate) => Promise<SubnameUpdateResponse>,
     updateSubnamePending: mutate.isPending,
   }
 }
