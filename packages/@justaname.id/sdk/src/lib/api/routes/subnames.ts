@@ -36,7 +36,8 @@ export const REVOKE_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/revoke';
 /**
  * Routes to get subname by domain, name and chain id
  */
-export const GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE = SUBNAME_BASE_ROUTE + '/username';
+export const GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE =
+  SUBNAME_BASE_ROUTE + '/username';
 
 /**
  * Routes to get subname by full subname
@@ -46,22 +47,28 @@ export const GET_SUBNAME_BY_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/subname';
 /**
  * Routes to get all subnames by domain
  */
-export const GET_ALL_SUBNAMES_BY_DOMAIN_ROUTE = SUBNAME_BASE_ROUTE + '/ens-domain';
+export const GET_ALL_SUBNAMES_BY_DOMAIN_ROUTE =
+  SUBNAME_BASE_ROUTE + '/ens-domain';
 
 /**
  * Routes to get all subnames by address
  */
-export const GET_ALL_SUBNAMES_BY_ADDRESS_ROUTE = SUBNAME_BASE_ROUTE + '/address';
+export const GET_ALL_SUBNAMES_BY_ADDRESS_ROUTE =
+  SUBNAME_BASE_ROUTE + '/address';
 
 /**
  * Routes to get all subnames by invitation
  */
-export const GET_ALL_SUBNAMES_BY_INVITATION_ROUTE = SUBNAME_BASE_ROUTE + '/invitations';
+export const GET_ALL_SUBNAMES_BY_INVITATION_ROUTE =
+  SUBNAME_BASE_ROUTE + '/invitations';
 
 /**
  * Routes to check subname availability
  */
-export const CHECK_SUBNAME_AVAILABILITY_ROUTE = SUBNAME_BASE_ROUTE + '/available';
+export const CHECK_SUBNAME_AVAILABILITY_ROUTE =
+  SUBNAME_BASE_ROUTE + '/available';
 
-
-
+/**
+ * Route to search for subnames
+ */
+export const SEARCH_SUBNAMES_ROUTE = SUBNAME_BASE_ROUTE + '/search';
