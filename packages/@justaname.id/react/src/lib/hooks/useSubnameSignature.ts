@@ -1,3 +1,5 @@
+"use client";
+
 import { useMountedAccount } from './useMountedAccount';
 import { useSignMessage } from 'wagmi';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';

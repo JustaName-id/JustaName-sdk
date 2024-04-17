@@ -1,18 +1,24 @@
+"use client";
+
 import React from 'react';
 import { JustaName } from '@justaname.id/sdk'
-import { useMountedAccount } from '../hooks/useMountedAccount';
-import { useSubnameSignature } from '../hooks';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { SignatureOnMounted } from '../components/SignatureOnMounted';
+import { defaultRoutes } from '../constants';
 
-/**
- * Defines the default routes for interacting with the JustaName API.
- */
-export const defaultRoutes = {
-  addSubnameRoute: '/api/subnames/add',
-  acceptSubnameRoute: '/api/subnames/accept',
-  checkSubnameAvailabilityRoute: '/api/subnames/available',
-  requestChallengeRoute: '/api/request-challenge',
-  updateSubnameRoute: '/api/subnames/update',
-}
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+      networkMode: "offlineFirst",
+      refetchOnWindowFocus: false,
+      retry: 0
+    },
+    mutations: {
+      networkMode: "offlineFirst"
+    }
+  }
+});
 
 /**
  * Type definition for the properties available in the JustaNameContext.
@@ -71,11 +77,6 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
 }) => {
 
   const [justaname, setJustaName] = React.useState<JustaName | null>(null);
-  const { address, isConnected } = useMountedAccount();
-  const { getSignature } = useSubnameSignature({
-    backendUrl,
-    requestChallengeRoute: routes?.requestChallengeRoute || defaultRoutes.requestChallengeRoute
-  })
 
   React.useEffect(() => {
     const main = async () => {
@@ -86,28 +87,24 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
   }, []);
 
 
-  React.useEffect(() => {
-
-    if(!address || !isConnected) return;
-    const main = async () => {
-      console.log('getting signature')
-      await getSignature()
-    }
-    main();
-  }, [address, isConnected])
-
   return (
-    <JustaNameContext.Provider value={{
-      backendUrl,
-      chainId,
-      justaname,
-      routes: {
-        ...defaultRoutes,
-        ...routes,
-      }
-    }}>
-      {children}
-    </JustaNameContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <JustaNameContext.Provider value={{
+        backendUrl,
+        chainId,
+        justaname,
+        routes: {
+          ...defaultRoutes,
+          ...routes,
+        }
+      }}>
+        <SignatureOnMounted
+          routes={routes || defaultRoutes}
+          backendUrl={backendUrl}
+        />
+        {children}
+      </JustaNameContext.Provider>
+    </QueryClientProvider>
   )
 }
 

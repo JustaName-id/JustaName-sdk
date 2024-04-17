@@ -1,3 +1,5 @@
+"use client";
+
 import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useMountedAccount } from './useMountedAccount';

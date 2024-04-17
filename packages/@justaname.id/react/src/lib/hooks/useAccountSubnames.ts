@@ -1,3 +1,5 @@
+"use client";
+
 import { useJustaName } from '../providers';
 import { useAccount } from 'wagmi';
 import { useMounted } from './useMounted';

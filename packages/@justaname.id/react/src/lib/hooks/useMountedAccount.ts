@@ -1,3 +1,4 @@
+"use client";
 
 import { useAccount } from 'wagmi';
 import { useMounted } from './useMounted';
