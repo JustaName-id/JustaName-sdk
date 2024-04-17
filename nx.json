@@ -132,6 +132,8 @@
       }
     },
     "projectsRelationship": "independent",
-    "projects": ["packages/*", "packages/@justaname.id/*"]
+    "projects": [
+      "packages/@justaname.id/react"
+    ]
   }
 }
