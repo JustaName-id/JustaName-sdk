@@ -3858,7 +3858,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.1, @justaname.id/react@npm:^0.3.1, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.2, @justaname.id/react@npm:^0.3.2, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
@@ -22021,7 +22021,7 @@ __metadata:
     "@babel/core": "npm:^7.14.5"
     "@babel/preset-react": "npm:^7.14.5"
     "@inquirer/prompts": "npm:^4.3.0"
-    "@justaname.id/react": "npm:0.3.1"
+    "@justaname.id/react": "npm:0.3.2"
     "@nx/cypress": "npm:18.0.8"
     "@nx/eslint": "npm:18.0.8"
     "@nx/eslint-plugin": "npm:18.0.8"
@@ -22180,7 +22180,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-app-example@workspace:examples/fullstack/nextjs/app"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.1"
+    "@justaname.id/react": "npm:^0.3.2"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -22201,7 +22201,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-pages-example@workspace:examples/fullstack/nextjs/pages"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.1"
+    "@justaname.id/react": "npm:^0.3.2"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
