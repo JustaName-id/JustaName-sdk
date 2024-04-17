@@ -1,3 +1,15 @@
+## 0.3.1 (2024-04-17)
+
+
+### 🚀 Features
+
+- signature on connect ([8858ff6](https://github.com/JustaName-id/JustaName-sdk/commit/8858ff6))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.0 (2024-03-29)
 
 
