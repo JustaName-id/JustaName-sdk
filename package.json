@@ -100,7 +100,7 @@
   "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@inquirer/prompts": "^4.3.0",
-    "@justaname.id/react": "0.3.5",
+    "@justaname.id/react": "0.3.6",
     "@justaname.id/sdk": "workspace:^",
     "@rainbow-me/rainbowkit": "^2.0.2",
     "@rollup/plugin-commonjs": "^25.0.7",
@@ -136,6 +136,7 @@
     "react-native-web": "~0.19.9",
     "react-router-dom": "6.11.2",
     "rollup-plugin-strip-shebang": "^1.2.10",
+    "rollup-preserve-directives": "^1.1.1",
     "tslib": "^2.3.0",
     "viem": "2.x",
     "vite-plugin-dts": "^3.7.3",

@@ -3865,7 +3865,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.5, @justaname.id/react@npm:^0.3.5, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.6, @justaname.id/react@npm:^0.3.6, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
@@ -21616,7 +21616,7 @@ __metadata:
     "@babel/core": "npm:^7.14.5"
     "@babel/preset-react": "npm:^7.14.5"
     "@inquirer/prompts": "npm:^4.3.0"
-    "@justaname.id/react": "npm:0.3.5"
+    "@justaname.id/react": "npm:0.3.6"
     "@justaname.id/sdk": "workspace:^"
     "@nx/cypress": "npm:18.0.8"
     "@nx/eslint": "npm:18.0.8"
@@ -21720,6 +21720,7 @@ __metadata:
     react-router-dom: "npm:6.11.2"
     react-test-renderer: "npm:18.2.0"
     rollup-plugin-strip-shebang: "npm:^1.2.10"
+    rollup-preserve-directives: "npm:^1.1.1"
     tailwindcss: "npm:^3.4.1"
     ts-jest: "npm:^29.1.0"
     ts-node: "npm:10.9.1"
@@ -21776,7 +21777,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-app-example@workspace:examples/fullstack/nextjs/app"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.5"
+    "@justaname.id/react": "npm:^0.3.6"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -21797,7 +21798,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-pages-example@workspace:examples/fullstack/nextjs/pages"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.5"
+    "@justaname.id/react": "npm:^0.3.6"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -21818,7 +21819,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-react-example@workspace:examples/frontend/react"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.5"
+    "@justaname.id/react": "npm:^0.3.6"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@tanstack/react-query": "npm:^5.28.6"
     "@types/react": "npm:^18.2.66"
@@ -28664,6 +28665,17 @@ __metadata:
   dependencies:
     estree-walker: "npm:^0.6.1"
   checksum: 10c0/20947bec5a5dd68b5c5c8423911e6e7c0ad834c451f1a929b1f4e2bc08836ad3f1a722ef2bfcbeca921870a0a283f13f064a317dc7a6768496e98c9a641ba290
+  languageName: node
+  linkType: hard
+
+"rollup-preserve-directives@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "rollup-preserve-directives@npm:1.1.1"
+  dependencies:
+    magic-string: "npm:^0.30.5"
+  peerDependencies:
+    rollup: ^2.0.0 || ^3.0.0 || ^4.0.0
+  checksum: 10c0/a472dc02df5d93bf81ee7fe5befffd5ace1f7a2f9224a41518a2c8d70e16c1b62e9ac4f5f03d5f5b4193c3c84323aaedfb7e3243a4707a89e1bd4bb84543b2f2
   languageName: node
   linkType: hard
 
