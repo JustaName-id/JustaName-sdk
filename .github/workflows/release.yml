@@ -4,19 +4,36 @@ on:
     branches:
       - 'main'
 jobs:
-  main:
+  release:
+    permissions:
+      contents: write
+
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: nrwl/nx-set-shas@v3
-      - run: yarn install
-      - run: npx nx run-many --target=install --all -parallel
-      - run: npx nx affected -t lint
-      - run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
-      - run: npx nx affected -t build
-      - run: npx nx affected -t release:package --parallel=1
+          ref: ${{ github.head_ref }}
+      
+      - name: Install Dependencies
+        run: |
+          yarn install
+          npx nx run-many --target=install --all -parallel
+      
+      - name: Build and Test
+        run: |
+          npx nx affected -t lint
+          npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
+          npx nx affected -t build
+
+      - name: Set up Git user
+        run: |
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --global user.name "${GITHUB_ACTOR}"
+        
+      - name: Release
+        run: npx nx release --dry-run --first-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
