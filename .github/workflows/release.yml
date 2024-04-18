@@ -9,17 +9,16 @@ jobs:
       contents: write
 
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          ref: ${{ github.head_ref }}
       
       - name: Install Dependencies
         run: |
           yarn install
-          npx nx run-many --target=install --all -parallel
+          npx nx run-many --target=install --all --parallel
       
       - name: Build and Test
         run: |
