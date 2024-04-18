@@ -32,7 +32,7 @@ jobs:
           git config --global user.name "${GITHUB_ACTOR}"
         
       - name: Release
-        run: npx nx release --dry-run --first-release
+        run: npx nx release --yes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
