@@ -129,11 +129,14 @@
     "changelog": {
       "projectChangelogs": {
         "createRelease": "github"
-      }
+      },
+      "automaticFromRef": true
     },
     "projectsRelationship": "independent",
     "projects": [
-      "packages/@justaname.id/react"
+      "packages/@justaname.id/react",
+      "packages/@justaname.id/sdk",
+      "packages/create-justaname-app"
     ]
   }
 }
