@@ -31,6 +31,13 @@
         "command": "yarn --frozen-lockfile",
         "cwd": "examples/fullstack/nextjs/app"
       }
+    },
+    "reinstall": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn install",
+        "cwd": "examples/fullstack/nextjs/app"
+      }
     }
   },
   "tags": []

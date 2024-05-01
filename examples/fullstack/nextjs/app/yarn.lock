@@ -370,11 +370,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@justaname.id/react@npm:0.1.2"
+"@justaname.id/react@npm:^0.3.6":
+  version: 0.3.6
+  resolution: "@justaname.id/react@npm:0.3.6"
   dependencies:
-    "@justaname.id/sdk": "npm:0.0.8"
+    "@justaname.id/sdk": "npm:0.1.0"
     "@tanstack/react-query": "npm:^5.28.4"
   peerDependencies:
     "@tanstack/query-core": ">=5.0.0"
@@ -382,18 +382,18 @@ __metadata:
     react-dom: ">=17"
     viem: 2.x
     wagmi: 2.x
-  checksum: 10c0/3146de729c4d22c567f1f007d77abe616f2571a2c1db0ccf4b331887ceaf87550887a0030d708a98b22c85989e5697fdf98048a6fdc74bf90762d615501c1579
+  checksum: 10c0/1df56f237f4c4a8b78337666ff49a8bac90e255698f29512d1f7cbc7b042c70ae512b1443dd828034638326268f5d449e3bb4bdf969ab7ff495ee4374e5b576e
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.0.8":
-  version: 0.0.8
-  resolution: "@justaname.id/sdk@npm:0.0.8"
+"@justaname.id/sdk@npm:0.1.0":
+  version: 0.1.0
+  resolution: "@justaname.id/sdk@npm:0.1.0"
   dependencies:
     axios: "npm:^1.6.0"
     dotenv: "npm:16.3.2"
     qs: "npm:^6.12.0"
-  checksum: 10c0/ce4a2cf5717df40f02e21291a86e830c941f0147ce0215d7ab3d46486ae68ebdfa3dce04a7a3aed6233d69172c5c5bb72baa2c6a4de9b38facf5ba5153a15646
+  checksum: 10c0/723f4ac78f33e648d6dd66d7f904575fb3fa39a60e5821537bf6d3ff0cef82b3b03e0af269a9fee87176100bad0748b83b09bbbedf434076c7fe42ea1dc3a665
   languageName: node
   linkType: hard
 
@@ -4875,7 +4875,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-app-example@workspace:."
   dependencies:
-    "@justaname.id/react": "npm:^0.1.2"
+    "@justaname.id/react": "npm:^0.3.6"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
