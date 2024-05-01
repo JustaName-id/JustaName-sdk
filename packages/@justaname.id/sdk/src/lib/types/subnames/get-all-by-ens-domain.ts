@@ -149,8 +149,6 @@ export interface SubnameGetAllByDomainChainIdRequest extends IRequest {
 
   chainId: ChainId;
 
-  adderess?: string;
-
   coinType?: number;
 
   page?: number;

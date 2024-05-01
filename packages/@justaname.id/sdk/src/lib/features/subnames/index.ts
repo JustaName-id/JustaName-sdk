@@ -9,7 +9,8 @@ import {
 
   SubnameGetAllByAddressRequest,
   SubnameGetAllByAddressResponse,
-  SubnameGetByDomainNameChainIdRequest,
+ SubnameGetAllByDomainChainIdRequest,
+  SubnameGetAllByDomainChainIdResponse, SubnameGetByDomainNameChainIdRequest,
   SubnameGetByDomainNameChainIdResponse,
   SubnameGetBySubnameRequest,
   SubnameGetBySubnameResponse,
@@ -17,8 +18,10 @@ import {
   SubnameReserveResponse,
   SubnameRevokeRequest,
   SubnameRevokeResponse,
-  SubnameUpdateRequest,
+ SubnameSearchRequest,
+  SubnameSearchResponse, SubnameUpdateRequest,
   SubnameUpdateResponse
+,
 } from '../../types';
 
 /**
@@ -65,16 +68,14 @@ export class Subnames {
    */
   async acceptSubname(
     params: SubnameAcceptRequest,
-    headers: SIWEHeaders,
-    ):  Promise<SubnameAcceptResponse> {
-    return this.isNotReadOnlyMode(restCall(
-      'ACCEPT_SUBNAME_ROUTE','POST',
-      params,
-      {
+    headers: SIWEHeaders
+  ): Promise<SubnameAcceptResponse> {
+    return this.isNotReadOnlyMode(
+      restCall('ACCEPT_SUBNAME_ROUTE', 'POST', params, {
         xApiKey: this.apiKey as string,
-        ...headers
-      }
-    ))
+        ...headers,
+      })
+    );
   }
 
   /**
@@ -84,15 +85,13 @@ export class Subnames {
    * @returns {Promise<SubnameReserveResponse>} The result of the reservation operation.
    */
   async reserveSubname(
-    params: SubnameReserveRequest,
+    params: SubnameReserveRequest
   ): Promise<SubnameReserveResponse> {
-    return this.isNotReadOnlyMode(restCall(
-      'RESERVE_SUBNAME_ROUTE','POST',
-      params,
-      {
-        xApiKey: this.apiKey as string
-      }
-    ))
+    return this.isNotReadOnlyMode(
+      restCall('RESERVE_SUBNAME_ROUTE', 'POST', params, {
+        xApiKey: this.apiKey as string,
+      })
+    );
   }
 
   /**
@@ -104,24 +103,29 @@ export class Subnames {
    */
   async addSubname(
     params: SubnameAddRequest,
-    headers: SIWEHeaders,
+    headers: SIWEHeaders
   ): Promise<SubnameAddResponse> {
-    return this.isNotReadOnlyMode(restCall(
-      'ADD_SUBNAME_ROUTE','POST',
-      {
-        text: [],
-        addresses: [{
-          coinType: 60,
-          address: headers.xAddress
-        }],
-        contentHash: '',
-        ...params
-      },
-      {
-        xApiKey: this.apiKey as string,
-        ...headers
-      }
-    ))
+    return this.isNotReadOnlyMode(
+      restCall(
+        'ADD_SUBNAME_ROUTE',
+        'POST',
+        {
+          text: [],
+          addresses: [
+            {
+              coinType: 60,
+              address: headers.xAddress,
+            },
+          ],
+          contentHash: '',
+          ...params,
+        },
+        {
+          xApiKey: this.apiKey as string,
+          ...headers,
+        }
+      )
+    );
   }
 
   /**
@@ -133,16 +137,14 @@ export class Subnames {
    */
   async updateSubname(
     params: SubnameUpdateRequest,
-    headers: SIWEHeaders,
+    headers: SIWEHeaders
   ): Promise<SubnameUpdateResponse> {
-    return this.isNotReadOnlyMode(restCall(
-      'UPDATE_SUBNAME_ROUTE','POST',
-      params,
-      {
+    return this.isNotReadOnlyMode(
+      restCall('UPDATE_SUBNAME_ROUTE', 'POST', params, {
         xApiKey: this.apiKey as string,
-        ...headers
-      }
-    ))
+        ...headers,
+      })
+    );
   }
 
   /**
@@ -154,16 +156,14 @@ export class Subnames {
    */
   async revokeSubname(
     params: SubnameRevokeRequest,
-    headers: SIWEHeaders,
+    headers: SIWEHeaders
   ): Promise<SubnameRevokeResponse> {
-    return this.isNotReadOnlyMode(restCall(
-      'REVOKE_SUBNAME_ROUTE','POST',
-      params,
-      {
+    return this.isNotReadOnlyMode(
+      restCall('REVOKE_SUBNAME_ROUTE', 'POST', params, {
         xApiKey: this.apiKey as string,
-        ...headers
-      }
-    ))
+        ...headers,
+      })
+    );
   }
 
   /**
@@ -173,12 +173,9 @@ export class Subnames {
    * @returns {Promise<SubnameGetByDomainNameChainIdResponse>} The details of the subname, if found.
    */
   async getByDomainNameChainId(
-    params: SubnameGetByDomainNameChainIdRequest,
+    params: SubnameGetByDomainNameChainIdRequest
   ): Promise<SubnameGetByDomainNameChainIdResponse> {
-    return restCall(
-      'GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE','GET',
-      params,
-    )
+    return restCall('GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE', 'GET', params);
   }
 
   /**
@@ -188,12 +185,9 @@ export class Subnames {
    * @returns {Promise<SubnameGetBySubnameResponse>} The details of the subname, if found.
    */
   async getBySubname(
-    params: SubnameGetBySubnameRequest,
+    params: SubnameGetBySubnameRequest
   ): Promise<SubnameGetBySubnameResponse> {
-    return restCall(
-      'GET_SUBNAME_BY_SUBNAME_ROUTE','GET',
-      params,
-    )
+    return restCall('GET_SUBNAME_BY_SUBNAME_ROUTE', 'GET', params);
   }
 
   /**
@@ -204,12 +198,21 @@ export class Subnames {
    * @returns {Promise<SubnameGetAllByAddressResponse[]>} A list of subnames associated with the address.
    */
   async getAllByAddress(
-    params: SubnameGetAllByAddressRequest,
+    params: SubnameGetAllByAddressRequest
   ): Promise<SubnameGetAllByAddressResponse[]> {
-    return restCall(
-      'GET_ALL_SUBNAMES_BY_ADDRESS_ROUTE','GET',
-      params,
-    )
+    return restCall('GET_ALL_SUBNAMES_BY_ADDRESS_ROUTE', 'GET', params);
+  }
+
+  async getCommunitySubnamesByDomain(
+    params: SubnameGetAllByDomainChainIdRequest
+  ): Promise<SubnameGetAllByDomainChainIdResponse> {
+    return restCall('GET_ALL_SUBNAMES_BY_DOMAIN_ROUTE', 'GET', params);
+  }
+
+  async searchSubnames(
+    params: SubnameSearchRequest
+  ): Promise<SubnameSearchResponse[]> {
+    return restCall('SEARCH_SUBNAMES_ROUTE', 'GET', params);
   }
 
   /**
@@ -219,12 +222,9 @@ export class Subnames {
    * @returns {Promise<SubnameGetAllByAddressResponse[]>} A list of subname invitations.
    */
   async getInvitations(
-    params: SubnameGetAllByAddressRequest,
+    params: SubnameGetAllByAddressRequest
   ): Promise<SubnameGetAllByAddressResponse[]> {
-    return restCall(
-      'GET_ALL_SUBNAMES_BY_INVITATION_ROUTE','GET',
-      params,
-    )
+    return restCall('GET_ALL_SUBNAMES_BY_INVITATION_ROUTE', 'GET', params);
   }
 
   /**
@@ -234,14 +234,10 @@ export class Subnames {
    * @returns {Promise<IsSubnameAvailableResponse>} Information about the subname's availability.
    */
   async checkSubnameAvailable(
-    params: IsSubnameAvailableRequest,
+    params: IsSubnameAvailableRequest
   ): Promise<IsSubnameAvailableResponse> {
-    return restCall(
-      'CHECK_SUBNAME_AVAILABILITY_ROUTE','GET',
-      params,
-    )
+    return restCall('CHECK_SUBNAME_AVAILABILITY_ROUTE', 'GET', params);
   }
-
 
   /**
    * Ensures that the method is not called in read-only mode, throwing an error if an API key is not provided.
@@ -251,8 +247,8 @@ export class Subnames {
    * @throws {Error} If called in read-only mode without an API key.
    */
   private isNotReadOnlyMode<T>(callback: T): T {
-    const check =  this.apiKey === undefined;
-    if(check){
+    const check = this.apiKey === undefined;
+    if (check) {
       throw new Error('This method is not available in read-only mode');
     }
     return callback;
