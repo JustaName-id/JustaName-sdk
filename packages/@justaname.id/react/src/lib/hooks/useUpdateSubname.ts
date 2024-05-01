@@ -1,33 +1,58 @@
-import { useMutation } from '@tanstack/react-query';
+"use client";
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useMountedAccount } from './useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { SubnameClaimResponse } from '@justaname.id/sdk';
+import { SubnameUpdateRequest, SubnameUpdateResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from './useAccountSubnames';
+import { buildSubnameBySubnameKey } from './useSubname';
 
-export interface BaseClaimSubnameRequest {
-  username: string;
+/**
+ * Defines the structure for the base request needed to claim a subname.
+ * 
+ * @typedef BaseClaimSubnameRequest
+ * @type {object}
+ * @property {string} username - The username part of the subname to be claimed or updated.
+ */
+export interface SubnameUpdate extends Omit<SubnameUpdateRequest, 'chainId'> {
+  subname: string;
 }
 
-export const useUpdateSubname = <T = any>() => {
+export interface UseUpdateSubnameResult {
+  updateSubname: (params: SubnameUpdate) => Promise<SubnameUpdateResponse>;
+  updateSubnamePending: boolean;
+}
+
+/**
+ * Custom hook to handle the subname claim or update process.
+ *
+ * @template T Additional request parameters that can be merged with the base request structure.
+ * @returns {UseUpdateSubnameResult} An object containing methods and properties to handle the mutation state.
+ */
+export const useUpdateSubname = () : UseUpdateSubnameResult => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount()
-  const { subnameSignature} = useSubnameSignature()
+  const queryClient = useQueryClient()
+  const { getSignature} = useSubnameSignature({
+    backendUrl,
+    requestChallengeRoute: routes.requestChallengeRoute
+  })
   const { refetchSubnames } = useAccountSubnames()
 
-  const mutate = useMutation<SubnameClaimResponse,  Error, T & BaseClaimSubnameRequest>
+  const mutate = useMutation<SubnameUpdateResponse,  Error, SubnameUpdate>
   ({
     mutationFn: async (
-      params: T & BaseClaimSubnameRequest
+      params: SubnameUpdate
     ) => {
       if (!address) {
         throw new Error('No address found');
       }
 
-      const signature = await subnameSignature()
+      const signature = await getSignature()
 
       const response = await fetch(
-        backendUrl + routes.claimSubnameRoute, {
+        backendUrl + routes.updateSubnameRoute, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -35,10 +60,12 @@ export const useUpdateSubname = <T = any>() => {
           body: JSON.stringify({
             username: params.username,
             signature: signature.signature,
+            ensDomain: params.ensDomain,
             address: address,
             message: signature.message,
-            addresses: [
-            ]
+            text: params.text,
+            addresses: params.addresses,
+            contentHash: params.contentHash
           })
         });
 
@@ -46,14 +73,18 @@ export const useUpdateSubname = <T = any>() => {
         throw new Error('Network response was not ok');
       }
 
-      const data: SubnameClaimResponse = await response.json();
+      const data: SubnameUpdateResponse = await response.json();
+      const key = buildSubnameBySubnameKey(params.subname)
+      await queryClient.invalidateQueries({
+        queryKey: key
+      })
       refetchSubnames()
       return data;
     },
   })
 
   return {
-    claimSubname: mutate.mutateAsync as (params: T & BaseClaimSubnameRequest) => Promise<SubnameClaimResponse>,
-    claimSubnamePending: mutate.isPending,
+    updateSubname: mutate.mutateAsync as (params: SubnameUpdate) => Promise<SubnameUpdateResponse>,
+    updateSubnamePending: mutate.isPending,
   }
 }

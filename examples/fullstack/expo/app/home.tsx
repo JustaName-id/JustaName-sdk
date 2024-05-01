@@ -1,5 +1,5 @@
 import "@ethersproject/shims";
-import { useAccountSubnames, useClaimSubname, useIsSubnameAvailable } from '@justaname.id/react/src';
+import { useAccountSubnames, useAddSubname, useIsSubnameAvailable } from '@justaname.id/react/src';
 import '@walletconnect/react-native-compat';
 import { W3mButton } from '@web3modal/wagmi-react-native';
 import React, { useState } from 'react';
@@ -24,7 +24,7 @@ export default function HomeScreen() {
         username: debouncedSubdomain,
         ensDomain: process.env.EXPO_PUBLIC_ENS_DOMAIN as string,
     })
-    const { claimSubname } = useClaimSubname();
+    const { claimSubname } = useAddSubname();
 
     const handleAddSubdomain = async () => {
         return await claimSubname({

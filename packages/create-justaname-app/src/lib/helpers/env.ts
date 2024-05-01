@@ -1,5 +1,10 @@
 import { AppDetails, BackendFramework, FrontendFramework, FullstackFramework } from './questions';
 
+/**
+ * Maps each supported framework to its corresponding environment variable template.
+ * 
+ * @type {Record<string, string>}
+ */
 export const frameworkEnv: Record<FrontendFramework | BackendFramework | FullstackFramework, string>= {
   'nextjs':
     `NEXT_PUBLIC_ENS_DOMAIN={{domain}}
@@ -55,7 +60,13 @@ export const frameworkEnv: Record<FrontendFramework | BackendFramework | Fullsta
   `
 }
 
-
+/**
+ * Generates environment variable configurations for a given framework based on the specified application details.
+ * 
+ * @param {FrontendFramework | BackendFramework | FullstackFramework} framework - The selected framework for the application.
+ * @param {AppDetails} appDetails - The detailed specifications of the application.
+ * @returns {string} The generated environment variable configuration for the project.
+ */
 export const getEnv = (framework: FrontendFramework | BackendFramework | FullstackFramework, appDetails: AppDetails) => {
   const env = frameworkEnv[framework];
   return env.replace(/{{domain}}/g, appDetails.ensDomain)

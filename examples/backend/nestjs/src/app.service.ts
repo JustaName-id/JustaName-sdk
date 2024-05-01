@@ -34,6 +34,8 @@ export class AppService implements OnModuleInit {
 
     try {
       const challenge = await this.justaname.siwe.requestChallenge({
+      // 30mins
+      ttl:1800000,
         chainId: this.chainId as ChainId,
         origin: this.origin,
         address: request.address,

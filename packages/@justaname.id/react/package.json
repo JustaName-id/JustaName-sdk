@@ -1,8 +1,8 @@
 {
   "name": "@justaname.id/react",
-  "version": "0.1.2",
+  "version": "0.3.8",
   "dependencies": {
-    "@justaname.id/sdk": "0.0.8",
+    "@justaname.id/sdk": "0.1.0",
     "@tanstack/react-query": "^5.28.4"
   },
   "peerDependencies": {
@@ -21,5 +21,6 @@
   },
   "module": "./index.esm.js",
   "type": "module",
-  "main": "./dist/index.esm.js"
+  "main": "./index.esm.js",
+  "types": "./index.esm.d.ts"
 }

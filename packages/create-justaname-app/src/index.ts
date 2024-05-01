@@ -6,6 +6,16 @@ import Ora from "ora";
 import { setupDirectories } from './lib/helpers/setup';
 import { installPackages } from './lib/helpers/install';
 
+/**
+ * Initiates the application setup process by collecting app details,
+ * downloading the app, setting up directories, and installing packages.
+ * 
+ * @async
+ * @function main
+ * @description Main script function that orchestrates the application setup process.
+ * Steps include collecting user input for app details, downloading the app,
+ * setting up necessary directories, and installing any required packages.
+ */
 async function main() {
   const collectApps = await collectAppDetails();
   let spinner = Ora();
