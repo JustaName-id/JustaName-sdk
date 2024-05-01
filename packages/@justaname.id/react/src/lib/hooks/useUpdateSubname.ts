@@ -15,7 +15,7 @@ import { buildSubnameBySubnameKey } from './useSubname';
  * @type {object}
  * @property {string} username - The username part of the subname to be claimed or updated.
  */
-export interface SubnameUpdate extends Omit<SubnameUpdateRequest, 'ensDomain' | 'chainId'> {
+export interface SubnameUpdate extends Omit<SubnameUpdateRequest, 'chainId'> {
   subname: string;
 }
 
@@ -60,6 +60,7 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
           body: JSON.stringify({
             username: params.username,
             signature: signature.signature,
+            ensDomain: params.ensDomain,
             address: address,
             message: signature.message,
             text: params.text,
