@@ -24,6 +24,8 @@ export default async function handler(
   const domain = process.env.JUSTANAME_DOMAIN as string
   try {
     const challenge = await justaname.siwe.requestChallenge({
+      // 30mins
+      ttl:1800000,
       chainId,
       origin,
       address,

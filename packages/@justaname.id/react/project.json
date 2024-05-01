@@ -14,8 +14,8 @@
         "project": "packages/@justaname.id/react/package.json",
         "entryFile": "packages/@justaname.id/react/src/index.ts",
         "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "packages/@justaname.id/react/rollup.config.cjs",
         "generateExportsField": true,
-        "rollupConfig": "@nx/react/plugins/bundle-rollup",
         "compiler": "swc",
         "format": ["esm"],
         "assets": [

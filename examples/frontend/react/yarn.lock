@@ -531,7 +531,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:^0.1.2":
+"@justaname.id/react@npm:^0.1.1":
   version: 0.1.2
   resolution: "@justaname.id/react@npm:0.1.2"
   dependencies:
@@ -4551,7 +4551,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-react-example@workspace:."
   dependencies:
-    "@justaname.id/react": "npm:^0.1.2"
+    "@justaname.id/react": "npm:^0.1.1"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@tanstack/react-query": "npm:^5.28.6"
     "@types/react": "npm:^18.2.66"

@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@justaname.id/react": "^0.1.2",
+    "@justaname.id/react": "^0.3.8",
     "@rainbow-me/rainbowkit": "^2.0.2",
     "@tanstack/react-query": "^5.28.6",
     "@uidotdev/usehooks": "^2.4.1",
@@ -30,5 +30,8 @@
     "eslint-plugin-react-refresh": "^0.4.6",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
+  },
+  "resolutions": {
+    "justaname-mono-sdk": "portal:../../.."
   }
 }

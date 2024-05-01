@@ -20,6 +20,8 @@ export async function GET(req: ExpoRequest): Promise<ExpoResponse> {
 
   try {
     const challenge = await justaname.siwe.requestChallenge({
+      // 30mins
+      ttl:1800000,
       chainId,
       origin,
       address,
