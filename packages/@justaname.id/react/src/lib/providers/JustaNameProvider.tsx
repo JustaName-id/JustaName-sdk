@@ -20,9 +20,10 @@ const queryClient = new QueryClient({
   }
 });
 
+
 /**
  * Type definition for the properties available in the JustaNameContext.
- * 
+ *
  * @typedef JustaNameContextProps
  * @type {object}
  * @property {JustaName | null} justaname - The JustaName SDK instance.
@@ -47,7 +48,7 @@ const JustaNameContext = React.createContext<JustaNameContextProps>({
 
 /**
  * Props for the JustaNameProvider component.
- * 
+ *
  * @typedef JustaNameProvider
  * @type {object}
  * @property {React.ReactNode} children - The child components.
@@ -65,7 +66,7 @@ export interface JustaNameProvider {
 /**
  * Provides JustaName context to child components, allowing them to access and interact
  * with the JustaName service.
- * 
+ *
  * @component
  * @param {JustaNameProviderProps} props - The props for the JustaNameProvider component.
  * @returns {React.ReactNode} The provider component wrapping children.
@@ -112,7 +113,7 @@ export default JustaNameProvider;
 
 /**
  * Custom hook for accessing the JustaNameContext.
- * 
+ *
  * @hook
  * @returns {JustaNameContextProps} The context value with JustaName service instance and configuration.
  * @throws {Error} If the hook is used outside a JustaNameProvider.
