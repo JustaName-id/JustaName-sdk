@@ -1,3 +1,15 @@
+## 0.2.8 (2024-05-08)
+
+
+### 🚀 Features
+
+- added revoke and accept hooks ([#16](https://github.com/JustaName-id/JustaName-sdk/pull/16))
+
+
+### ❤️  Thank You
+
+- anthony23991
+
 ## 0.2.7 (2024-05-03)
 
 This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.

@@ -1,3 +1,15 @@
+## 0.3.11 (2024-05-08)
+
+
+### 🚀 Features
+
+- added revoke and accept hooks ([#16](https://github.com/JustaName-id/JustaName-sdk/pull/16))
+
+
+### ❤️  Thank You
+
+- anthony23991
+
 ## 0.3.10 (2024-05-03)
 
 This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
