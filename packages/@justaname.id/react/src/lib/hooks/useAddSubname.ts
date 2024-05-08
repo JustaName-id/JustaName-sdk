@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
 import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useMountedAccount } from './useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { SubnameAcceptResponse } from '@justaname.id/sdk';
+import { SubnameAddResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from './useAccountSubnames';
 
 export interface BaseAddSubnameRequest {
@@ -21,7 +21,9 @@ export interface BaseAddSubnameRequest {
  *  @template T - The type of additional parameters that can be passed to the claim subname mutation, extending the base request.
  */
 export interface UseAddSubname<T = any> {
-  addSubname: (params: T & BaseAddSubnameRequest) => Promise<SubnameAcceptResponse>;
+  addSubname: (
+    params: T & BaseAddSubnameRequest
+  ) => Promise<SubnameAddResponse>;
   addSubnamePending: boolean;
 }
 /**
@@ -30,52 +32,54 @@ export interface UseAddSubname<T = any> {
  * @template T - The type of additional parameters that can be passed to the claim subname mutation, extending the base request.
  * @returns {UseAddSubname} An object containing the `addSubname` async function to initiate the subname claim, and a boolean `claimSubnamePending` indicating the mutation's pending state.
  */
-export const useAddSubname = <T = any>() : UseAddSubname<T> => {
+export const useAddSubname = <T = any>(): UseAddSubname<T> => {
   const { backendUrl, routes } = useJustaName();
-  const { address } = useMountedAccount()
-  const { getSignature} = useSubnameSignature({
+  const { address } = useMountedAccount();
+  const { getSignature } = useSubnameSignature({
     backendUrl,
-    requestChallengeRoute: routes.requestChallengeRoute
-  })
-  const { refetchSubnames } = useAccountSubnames()
+    requestChallengeRoute: routes.requestChallengeRoute,
+  });
+  const { refetchSubnames } = useAccountSubnames();
 
-  const mutate = useMutation<SubnameAcceptResponse,  Error, T & BaseAddSubnameRequest>
-  ({
-    mutationFn: async (
-      params: T & BaseAddSubnameRequest
-    ) => {
+  const mutate = useMutation<
+    SubnameAddResponse,
+    Error,
+    T & BaseAddSubnameRequest
+  >({
+    mutationFn: async (params: T & BaseAddSubnameRequest) => {
       if (!address) {
         throw new Error('No address found');
       }
 
-      const signature = await getSignature()
+      const signature = await getSignature();
 
-      const response = await fetch(
-        backendUrl + routes.addSubnameRoute, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: params.username,
-            signature: signature.signature,
-            address: address,
-            message: signature.message,
-          })
-        });
+      const response = await fetch(backendUrl + routes.addSubnameRoute, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: params.username,
+          signature: signature.signature,
+          address: address,
+          message: signature.message,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
 
-      const data: SubnameAcceptResponse = await response.json();
-      refetchSubnames()
+      const data: SubnameAddResponse = await response.json();
+      refetchSubnames();
       return data;
     },
-  })
+  });
 
   return {
-    addSubname: mutate.mutateAsync as (params: T & BaseAddSubnameRequest) => Promise<SubnameAcceptResponse>,
+    addSubname: mutate.mutateAsync as (
+      params: T & BaseAddSubnameRequest
+    ) => Promise<SubnameAddResponse>,
     addSubnamePending: mutate.isPending,
-  }
-}
+  };
+};
