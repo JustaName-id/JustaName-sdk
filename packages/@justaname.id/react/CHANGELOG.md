@@ -1,3 +1,15 @@
+## 0.3.13 (2024-05-09)
+
+
+### 🩹 Fixes
+
+- search subname hook ([c3c83cb](https://github.com/JustaName-id/JustaName-sdk/commit/c3c83cb))
+
+
+### ❤️  Thank You
+
+- anthony2399
+
 ## 0.3.12 (2024-05-09)
 
 This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
