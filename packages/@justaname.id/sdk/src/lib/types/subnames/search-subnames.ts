@@ -49,6 +49,11 @@ export interface SubnameSearchRequest extends IRequest {
 }
 
 export interface SubnameSearchResponse extends IResponse {
+  domains: SubnameSearchDomainResponse[] | string[];
+  registered?: boolean;
+}
+
+export interface SubnameSearchDomainResponse {
   id: string;
 
   username: string;
@@ -66,6 +71,6 @@ export interface SubnameSearchResponse extends IResponse {
 
 export interface SubnameSearchRoute extends IRoute {
   request: SubnameSearchRequest;
-  response: SubnameSearchResponse[];
+  response: SubnameSearchResponse;
   headers: NonNullable<unknown>;
 }
