@@ -3,14 +3,15 @@ import {
   IsSubnameAvailableRequest,
   IsSubnameAvailableResponse,
   SIWEHeaders,
-  SubnameAcceptRequest, SubnameAcceptResponse,
+  SubnameAcceptRequest,
+  SubnameAcceptResponse,
   SubnameAddRequest,
   SubnameAddResponse,
-
   SubnameGetAllByAddressRequest,
   SubnameGetAllByAddressResponse,
- SubnameGetAllByDomainChainIdRequest,
-  SubnameGetAllByDomainChainIdResponse, SubnameGetByDomainNameChainIdRequest,
+  SubnameGetAllByDomainChainIdRequest,
+  SubnameGetAllByDomainChainIdResponse,
+  SubnameGetByDomainNameChainIdRequest,
   SubnameGetByDomainNameChainIdResponse,
   SubnameGetBySubnameRequest,
   SubnameGetBySubnameResponse,
@@ -18,10 +19,10 @@ import {
   SubnameReserveResponse,
   SubnameRevokeRequest,
   SubnameRevokeResponse,
- SubnameSearchRequest,
-  SubnameSearchResponse, SubnameUpdateRequest,
-  SubnameUpdateResponse
-,
+  SubnameSearchRequest,
+  SubnameSearchResponse,
+  SubnameUpdateRequest,
+  SubnameUpdateResponse,
 } from '../../types';
 
 /**
@@ -57,7 +58,6 @@ export class Subnames {
   constructor(apiKey?: string) {
     this.apiKey = apiKey;
   }
-
 
   /**
    * Accept a subname invite under a specific domain, associating it with an Ethereum address.
@@ -211,7 +211,7 @@ export class Subnames {
 
   async searchSubnames(
     params: SubnameSearchRequest
-  ): Promise<SubnameSearchResponse[]> {
+  ): Promise<SubnameSearchResponse> {
     return restCall('SEARCH_SUBNAMES_ROUTE', 'GET', params);
   }
 
