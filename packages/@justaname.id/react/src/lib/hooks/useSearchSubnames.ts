@@ -1,4 +1,4 @@
-import { SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
+import { SubnameSearchResponse } from '@justaname.id/sdk';
 import {
   QueryObserverResult,
   RefetchOptions,
@@ -19,14 +19,12 @@ export interface UseSearchSubnamesOptions {
   isClaimed?: boolean;
 }
 
-type SubnameType = SubnameGetAllByAddressResponse[];
-
 interface UseSearchSubnamesResult {
-  subnames: SubnameType;
+  subnames: SubnameSearchResponse;
   isLoading: boolean;
   refetchSearchSubnames: (
     options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<SubnameType | undefined, unknown>>;
+  ) => Promise<QueryObserverResult<SubnameSearchResponse | undefined, unknown>>;
 }
 export const useSearchSubnames = (
   props: UseSearchSubnamesOptions = {
@@ -56,7 +54,7 @@ export const useSearchSubnames = (
   });
 
   return {
-    subnames: query.data ?? [],
+    subnames: query.data ?? { domains: [] },
     isLoading: query.isLoading,
     refetchSearchSubnames: query.refetch,
   };
