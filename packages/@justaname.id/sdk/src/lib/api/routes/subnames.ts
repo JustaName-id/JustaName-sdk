@@ -6,7 +6,7 @@ import { GLOBAL_PREFIX } from './prefix';
 // TODO: should be
 // export const SUBNAME_BASE_ROUTE = GLOBAL_PREFIX + '/subname';
 
-export const SUBNAME_BASE_ROUTE = GLOBAL_PREFIX + '/subdomain';
+export const SUBNAME_BASE_ROUTE = GLOBAL_PREFIX + '/ens/v1/subdomain';
 /**
  *
  * Routes to accept subname invitation
@@ -72,3 +72,8 @@ export const CHECK_SUBNAME_AVAILABILITY_ROUTE =
  * Route to search for subnames
  */
 export const SEARCH_SUBNAMES_ROUTE = SUBNAME_BASE_ROUTE + '/search';
+
+/**
+ * Route to get all subnames
+ */
+export const RECORDS_BY_FULLNAME_ROUTE = SUBNAME_BASE_ROUTE + '/records';

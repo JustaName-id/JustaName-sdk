@@ -3,7 +3,7 @@ import { GLOBAL_PREFIX } from './prefix';
 /**
  * Prefix for all SIWE routes
  */
-export const SIWE_BASE_ROUTE = GLOBAL_PREFIX + '/siwe';
+export const SIWE_BASE_ROUTE = GLOBAL_PREFIX + '/ens/v1/siwe';
 
 /**
  * Routes for SIWE Request Challenge

@@ -28,6 +28,7 @@ const configuration = {
  origin: 'http://localhost:3333',
  address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
  domain: 'justaname.id',
+ ttl?: 120000,
  });
 
  ```
@@ -51,7 +52,7 @@ const configuration = {
 
 #### Defined in
 
-[lib/justaname/index.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L40)
+[lib/justaname/index.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L41)
 
 ## Properties
 
@@ -61,7 +62,7 @@ const configuration = {
 
 #### Defined in
 
-[lib/justaname/index.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L30)
+[lib/justaname/index.ts:31](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L31)
 
 ___
 
@@ -77,7 +78,7 @@ JustaName
 
 #### Defined in
 
-[lib/justaname/index.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L38)
+[lib/justaname/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L39)
 
 ## Methods
 
@@ -105,39 +106,7 @@ Checks if the API key is present.
 
 #### Defined in
 
-[lib/justaname/index.ts:73](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L73)
-
-___
-
-### healthCheck
-
-▸ **healthCheck**(`apiKey`): `Promise`<`void`\>
-
-Checks the health of the API.
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `apiKey` | `string` |
-
-#### Returns
-
-`Promise`<`void`\>
-
-- A promise that resolves if the API is healthy.
-
-**`Throws`**
-
-- If the API key is invalid.
-
-**`Static`**
-
-**`Async`**
-
-#### Defined in
-
-[lib/justaname/index.ts:87](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L87)
+[lib/justaname/index.ts:74](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L74)
 
 ___
 
@@ -167,4 +136,4 @@ Initializes the JustaName SDK.
 
 #### Defined in
 
-[lib/justaname/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L56)
+[lib/justaname/index.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L57)

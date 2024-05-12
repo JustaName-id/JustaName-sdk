@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMountedAccount } from '../hooks/useMountedAccount';
 import { useSubnameSignature } from '../hooks';
-import { defaultRoutes } from '../constants';
+import { defaultRoutes } from '../constants/default-routes';
 
 export const SignatureOnMounted: React.FC<{
   routes: typeof defaultRoutes,

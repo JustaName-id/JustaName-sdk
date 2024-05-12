@@ -4,7 +4,11 @@ import { BaseResponse } from '../types';
 /**
  * The base URL of JustaName API.
  */
-export const BASE_URL ='https://staging-api.justaname.id';
+export const BASE_URL =
+  process.env['JUSTANAME_ENVIRONMENT'] === 'development' ||
+  process.env['NEXT_PUBLIC_JUSTANAME_ENVIRONMENT'] === 'development' ?
+  'https://api-staging.justaname.id'
+  : 'https://api.justaname.id';
 
 /**
  * The instance of axios with the base URL of JustaName API.

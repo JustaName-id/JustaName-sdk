@@ -6,15 +6,21 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Represents an Ethereum address and its corresponding coin type.
+
+ Address
+
 ## Properties
 
 ### address
 
 • **address**: `string`
 
+The cryptocurrency address.
+
 #### Defined in
 
-[lib/types/subnames/accept.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L5)
+[lib/types/subnames/accept.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L13)
 
 ___
 
@@ -22,6 +28,8 @@ ___
 
 • **coinType**: `number`
 
+The coin type number, typically following the BIP-0044 standard.
+
 #### Defined in
 
-[lib/types/subnames/accept.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L7)
+[lib/types/subnames/accept.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L15)

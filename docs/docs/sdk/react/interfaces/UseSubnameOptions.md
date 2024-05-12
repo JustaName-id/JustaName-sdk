@@ -6,12 +6,16 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Interface defining the options required by the useSubname hook.
+
 ## Properties
 
 ### subname
 
 • **subname**: `string`
 
+The subname to query.
+
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L8)
+[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L23)

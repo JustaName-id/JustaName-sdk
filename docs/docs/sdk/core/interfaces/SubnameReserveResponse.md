@@ -6,6 +6,10 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Outlines the structure of the response after a successful subname reservation.
+
+ SubnameReserveResponse
+
 ## Hierarchy
 
 - [`IResponse`](IResponse.md)
@@ -18,6 +22,8 @@ custom_edit_url: null
 
 • **id**: `string`
 
+The unique identifier of the reserved subname. This ID can be used to claim the subname.
+
 #### Defined in
 
-[lib/types/subnames/reserve.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L16)
+[lib/types/subnames/reserve.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L35)

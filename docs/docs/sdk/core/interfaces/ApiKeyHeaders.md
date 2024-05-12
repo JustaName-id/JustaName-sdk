@@ -6,12 +6,21 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Defines the headers for API requests that require an API key for authentication.
+The `xApiKey` header is used to pass the API key associated with the client making the request.
+This is a common method for controlling access to restricted API endpoints.
+
+ ApiKeyHeaders
+
 ## Properties
 
 ### xApiKey
 
 • **xApiKey**: `string`
 
+The API key provided to the client. This key should be included in API
+                             requests to authenticate and authorize the client's access to the API.
+
 #### Defined in
 
-[lib/types/headers/index.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/headers/index.ts#L9)
+[lib/types/headers/index.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/headers/index.ts#L30)

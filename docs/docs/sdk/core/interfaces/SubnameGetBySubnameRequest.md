@@ -6,6 +6,10 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Specifies the request format for retrieving a subname's details, including the subname and blockchain chain ID.
+
+ SubnameGetBySubnameRequest
+
 ## Hierarchy
 
 - [`IRequest`](IRequest.md)
@@ -18,9 +22,11 @@ custom_edit_url: null
 
 • **chainId**: [`ChainId`](../modules.md#chainid)
 
+The blockchain network identifier.
+
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L40)
+[lib/types/subnames/get-by-subname.ts:79](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L79)
 
 ___
 
@@ -28,6 +34,8 @@ ___
 
 • **subname**: `string`
 
+The full subname to lookup.
+
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L38)
+[lib/types/subnames/get-by-subname.ts:77](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L77)

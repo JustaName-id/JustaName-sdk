@@ -20,7 +20,9 @@ custom_edit_url: null
 - [ApiKeyResponse](interfaces/ApiKeyResponse.md)
 - [ApiKeyRoute](interfaces/ApiKeyRoute.md)
 - [BaseResponse](interfaces/BaseResponse.md)
+- [Coin](interfaces/Coin.md)
 - [Configuration](interfaces/Configuration.md)
+- [ContentHash](interfaces/ContentHash.md)
 - [IHeaders](interfaces/IHeaders.md)
 - [IRequest](interfaces/IRequest.md)
 - [IResponse](interfaces/IResponse.md)
@@ -36,12 +38,12 @@ custom_edit_url: null
 - [SIWEHeaders](interfaces/SIWEHeaders.md)
 - [SIWERequestChallengeRoute](interfaces/SIWERequestChallengeRoute.md)
 - [SIWEVerifyMessageRoute](interfaces/SIWEVerifyMessageRoute.md)
+- [SubnameAcceptRequest](interfaces/SubnameAcceptRequest.md)
+- [SubnameAcceptResponse](interfaces/SubnameAcceptResponse.md)
+- [SubnameAcceptRoute](interfaces/SubnameAcceptRoute.md)
 - [SubnameAddRequest](interfaces/SubnameAddRequest.md)
 - [SubnameAddResponse](interfaces/SubnameAddResponse.md)
 - [SubnameAddRoute](interfaces/SubnameAddRoute.md)
-- [SubnameClaimRequest](interfaces/SubnameClaimRequest.md)
-- [SubnameClaimResponse](interfaces/SubnameClaimResponse.md)
-- [SubnameClaimRoute](interfaces/SubnameClaimRoute.md)
 - [SubnameGetAllByAddressRequest](interfaces/SubnameGetAllByAddressRequest.md)
 - [SubnameGetAllByAddressResponse](interfaces/SubnameGetAllByAddressResponse.md)
 - [SubnameGetAllByAddressRoute](interfaces/SubnameGetAllByAddressRoute.md)
@@ -54,15 +56,23 @@ custom_edit_url: null
 - [SubnameGetBySubnameRequest](interfaces/SubnameGetBySubnameRequest.md)
 - [SubnameGetBySubnameResponse](interfaces/SubnameGetBySubnameResponse.md)
 - [SubnameGetBySubnameRoute](interfaces/SubnameGetBySubnameRoute.md)
+- [SubnameRecordsRequest](interfaces/SubnameRecordsRequest.md)
+- [SubnameRecordsResponse](interfaces/SubnameRecordsResponse.md)
+- [SubnameRecordsRoute](interfaces/SubnameRecordsRoute.md)
 - [SubnameReserveRequest](interfaces/SubnameReserveRequest.md)
 - [SubnameReserveResponse](interfaces/SubnameReserveResponse.md)
 - [SubnameReserveRoute](interfaces/SubnameReserveRoute.md)
 - [SubnameRevokeRequest](interfaces/SubnameRevokeRequest.md)
 - [SubnameRevokeResponse](interfaces/SubnameRevokeResponse.md)
 - [SubnameRevokeRoute](interfaces/SubnameRevokeRoute.md)
+- [SubnameSearchDomainResponse](interfaces/SubnameSearchDomainResponse.md)
+- [SubnameSearchRequest](interfaces/SubnameSearchRequest.md)
+- [SubnameSearchResponse](interfaces/SubnameSearchResponse.md)
+- [SubnameSearchRoute](interfaces/SubnameSearchRoute.md)
 - [SubnameUpdateRequest](interfaces/SubnameUpdateRequest.md)
 - [SubnameUpdateResponse](interfaces/SubnameUpdateResponse.md)
 - [SubnameUpdateRoute](interfaces/SubnameUpdateRoute.md)
+- [Text](interfaces/Text.md)
 - [TextRecord](interfaces/TextRecord.md)
 - [TextRecordResponse](interfaces/TextRecordResponse.md)
 - [VerifyChallengeRequest](interfaces/VerifyChallengeRequest.md)
@@ -74,9 +84,14 @@ custom_edit_url: null
 
 Ƭ **ChainId**: ``1`` \| ``11155111``
 
+Represents the blockchain network identifier, restricting to specific networks.
+This type is used to specify and restrict operations to the following chain IDs:
+- `1`: Ethereum Mainnet
+- `11155111`: An example of a testnet or custom network ID
+
 #### Defined in
 
-[lib/types/common/index.ts:1](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L1)
+[lib/types/common/index.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L9)
 
 ___
 
@@ -86,7 +101,7 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L39)
+[lib/api/routes/index.ts:61](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L61)
 
 ___
 
@@ -96,7 +111,7 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L37)
+[lib/api/routes/index.ts:59](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L59)
 
 ## Variables
 
@@ -117,12 +132,14 @@ ___
 | `GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE` | `string` |
 | `GET_SUBNAME_BY_SUBNAME_ROUTE` | `string` |
 | `HEALTH_CHECK_ROUTE` | `string` |
+| `RECORDS_BY_FULLNAME_ROUTE` | `string` |
 | `RESERVE_SUBNAME_ROUTE` | `string` |
 | `REVOKE_SUBNAME_ROUTE` | `string` |
+| `SEARCH_SUBNAMES_ROUTE` | `string` |
 | `SIWE_REQUEST_CHALLENGE_ROUTE` | `string` |
 | `SIWE_VERIFY_MESSAGE_ROUTE` | `string` |
 | `UPDATE_SUBNAME_ROUTE` | `string` |
 
 #### Defined in
 
-[lib/api/routes/index.ts:20](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L20)
+[lib/api/routes/index.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L40)

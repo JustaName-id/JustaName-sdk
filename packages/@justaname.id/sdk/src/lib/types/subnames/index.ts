@@ -9,3 +9,4 @@ export * from './revoke';
 export * from './search-subnames';
 export * from './update';
 export * from './accept';
+export * from './records';

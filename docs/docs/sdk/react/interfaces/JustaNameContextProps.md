@@ -6,15 +6,19 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Type definition for the properties available in the JustaNameContext.
+
 ## Properties
 
 ### backendUrl
 
-• `Optional` **backendUrl**: `string`
+• **backendUrl**: `string`
+
+The backend URL for JustaName API requests.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:13](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L13)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:37](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L37)
 
 ___
 
@@ -22,9 +26,11 @@ ___
 
 • **chainId**: ``1`` \| ``11155111``
 
+The blockchain network identifier.
+
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:14](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L14)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:38](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L38)
 
 ___
 
@@ -32,9 +38,11 @@ ___
 
 • **justaname**: ``null`` \| `JustaName`
 
+The JustaName SDK instance.
+
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:11](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L11)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:35](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L35)
 
 ___
 
@@ -42,14 +50,19 @@ ___
 
 • **routes**: `Object`
 
+An object containing route definitions.
+
 #### Type declaration
 
 | Name | Type |
 | :------ | :------ |
+| `acceptSubnameRoute` | `string` |
+| `addSubnameRoute` | `string` |
 | `checkSubnameAvailabilityRoute` | `string` |
-| `claimSubnameRoute` | `string` |
 | `requestChallengeRoute` | `string` |
+| `revokeSubnameRoute` | `string` |
+| `updateSubnameRoute` | `string` |
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:12](https://github.com/JustaName-id/JustaName-sdk/blob/5db266b/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L12)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:36](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L36)

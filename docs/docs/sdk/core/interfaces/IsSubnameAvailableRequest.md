@@ -6,6 +6,10 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Defines the request structure for checking the availability of a subname.
+
+ IsSubnameAvailableRequest
+
 ## Hierarchy
 
 - [`IRequest`](IRequest.md)
@@ -18,9 +22,13 @@ custom_edit_url: null
 
 • **chainId**: [`ChainId`](../modules.md#chainid)
 
+The blockchain network identifier where the subname exists. 
+                              This helps in ensuring that the check is performed within
+                              the context of the correct blockchain network.
+
 #### Defined in
 
-[lib/types/subnames/available.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L5)
+[lib/types/subnames/available.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L16)
 
 ___
 
@@ -28,6 +36,8 @@ ___
 
 • **subname**: `string`
 
+The subname to check for availability.
+
 #### Defined in
 
-[lib/types/subnames/available.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L4)
+[lib/types/subnames/available.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L15)

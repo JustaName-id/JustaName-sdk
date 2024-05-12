@@ -6,6 +6,10 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Defines the request structure for revoking a subname under a specific ENS domain.
+
+ SubnameRevokeRequest
+
 ## Hierarchy
 
 - [`IRequest`](IRequest.md)
@@ -18,9 +22,11 @@ custom_edit_url: null
 
 • **chainId**: `number`
 
+The blockchain network identifier, specifying the network of the ENS domain.
+
 #### Defined in
 
-[lib/types/subnames/revoke.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L10)
+[lib/types/subnames/revoke.ts:20](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L20)
 
 ___
 
@@ -28,9 +34,11 @@ ___
 
 • **ensDomain**: `string`
 
+The parent ENS domain under which the subname is registered.
+
 #### Defined in
 
-[lib/types/subnames/revoke.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L6)
+[lib/types/subnames/revoke.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L16)
 
 ___
 
@@ -38,6 +46,8 @@ ___
 
 • **username**: `string`
 
+The subname to be revoked.
+
 #### Defined in
 
-[lib/types/subnames/revoke.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L8)
+[lib/types/subnames/revoke.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L18)

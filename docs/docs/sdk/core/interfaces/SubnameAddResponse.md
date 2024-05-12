@@ -6,6 +6,10 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Describes the response returned upon successfully adding a subname.
+
+ SubnameAddResponse
+
 ## Hierarchy
 
 - [`IResponse`](IResponse.md)
@@ -18,6 +22,8 @@ custom_edit_url: null
 
 • **id**: `string`
 
+The unique identifier of the added subname.
+
 #### Defined in
 
-[lib/types/subnames/add.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L36)
+[lib/types/subnames/add.ts:69](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L69)

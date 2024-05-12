@@ -33,7 +33,7 @@ T - The type of the data to be returned.
 
 #### Defined in
 
-[lib/types/base-response/index.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/base-response/index.ts#L14)
+[lib/types/base-response/index.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/base-response/index.ts#L14)
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 #### Defined in
 
-[lib/types/base-response/index.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/base-response/index.ts#L13)
+[lib/types/base-response/index.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/base-response/index.ts#L13)

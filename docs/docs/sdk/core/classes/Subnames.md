@@ -37,11 +37,13 @@ const configuration = {
 
 • **new Subnames**(`apiKey?`): [`Subnames`](Subnames.md)
 
+Constructs a new instance of the Subnames class, optionally with an API key for write operations.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `apiKey?` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `apiKey?` | `string` | Your API key, required for operations that modify data. |
 
 #### Returns
 
@@ -49,7 +51,7 @@ const configuration = {
 
 #### Defined in
 
-[lib/features/subnames/index.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L30)
+[lib/features/subnames/index.ts:60](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L60)
 
 ## Properties
 
@@ -59,28 +61,59 @@ const configuration = {
 
 #### Defined in
 
-[lib/features/subnames/index.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L28)
+[lib/features/subnames/index.ts:54](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L54)
 
 ## Methods
+
+### acceptSubname
+
+▸ **acceptSubname**(`params`, `headers`): `Promise`<[`SubnameAcceptResponse`](../interfaces/SubnameAcceptResponse.md)\>
+
+Accept a subname invite under a specific domain, associating it with an Ethereum address.
+This operation requires an API key.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameAcceptRequest`](../interfaces/SubnameAcceptRequest.md) | Parameters for claiming a subname. |
+| `headers` | [`SIWEHeaders`](../interfaces/SIWEHeaders.md) | Additional headers for signing and authentication. |
+
+#### Returns
+
+`Promise`<[`SubnameAcceptResponse`](../interfaces/SubnameAcceptResponse.md)\>
+
+The result of the claim operation.
+
+#### Defined in
+
+[lib/features/subnames/index.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L71)
+
+___
 
 ### addSubname
 
 ▸ **addSubname**(`params`, `headers`): `Promise`<[`SubnameAddResponse`](../interfaces/SubnameAddResponse.md)\>
 
+Adds a new subname under a domain, directly associating it with an address and optional content.
+Requires an API key.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | [`SubnameAddRequest`](../interfaces/SubnameAddRequest.md) |
-| `headers` | [`SIWEHeaders`](../interfaces/SIWEHeaders.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameAddRequest`](../interfaces/SubnameAddRequest.md) | The parameters for adding the subname. |
+| `headers` | [`SIWEHeaders`](../interfaces/SIWEHeaders.md) | Additional headers for signing and authentication. |
 
 #### Returns
 
 `Promise`<[`SubnameAddResponse`](../interfaces/SubnameAddResponse.md)\>
 
+The result of the add operation.
+
 #### Defined in
 
-[lib/features/subnames/index.ts:60](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L60)
+[lib/features/subnames/index.ts:106](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L106)
 
 ___
 
@@ -88,40 +121,24 @@ ___
 
 ▸ **checkSubnameAvailable**(`params`): `Promise`<[`IsSubnameAvailableResponse`](../interfaces/IsSubnameAvailableResponse.md)\>
 
+Checks if a subname is available for registration.
+This is a read-only operation and does not require an API key.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | [`IsSubnameAvailableRequest`](../interfaces/IsSubnameAvailableRequest.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`IsSubnameAvailableRequest`](../interfaces/IsSubnameAvailableRequest.md) | Parameters for checking subname availability. |
 
 #### Returns
 
 `Promise`<[`IsSubnameAvailableResponse`](../interfaces/IsSubnameAvailableResponse.md)\>
 
-#### Defined in
-
-[lib/features/subnames/index.ts:146](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L146)
-
-___
-
-### claimSubname
-
-▸ **claimSubname**(`params`, `headers`): `Promise`<[`SubnameClaimResponse`](../interfaces/SubnameClaimResponse.md)\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | [`SubnameClaimRequest`](../interfaces/SubnameClaimRequest.md) |
-| `headers` | [`SIWEHeaders`](../interfaces/SIWEHeaders.md) |
-
-#### Returns
-
-`Promise`<[`SubnameClaimResponse`](../interfaces/SubnameClaimResponse.md)\>
+Information about the subname's availability.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:34](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L34)
+[lib/features/subnames/index.ts:238](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L238)
 
 ___
 
@@ -129,19 +146,25 @@ ___
 
 ▸ **getAllByAddress**(`params`): `Promise`<[`SubnameGetAllByAddressResponse`](../interfaces/SubnameGetAllByAddressResponse.md)[]\>
 
+Retrieves all subnames associated with a specific address. This can be useful for
+users to see all subnames under their control. This is a read-only operation
+and does not require an API key.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | [`SubnameGetAllByAddressRequest`](../interfaces/SubnameGetAllByAddressRequest.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameGetAllByAddressRequest`](../interfaces/SubnameGetAllByAddressRequest.md) | The parameters for the lookup. |
 
 #### Returns
 
 `Promise`<[`SubnameGetAllByAddressResponse`](../interfaces/SubnameGetAllByAddressResponse.md)[]\>
 
+A list of subnames associated with the address.
+
 #### Defined in
 
-[lib/features/subnames/index.ts:128](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L128)
+[lib/features/subnames/index.ts:202](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L202)
 
 ___
 
@@ -149,19 +172,24 @@ ___
 
 ▸ **getByDomainNameChainId**(`params`): `Promise`<[`SubnameGetByDomainNameChainIdResponse`](../interfaces/SubnameGetByDomainNameChainIdResponse.md)\>
 
+Retrieves details of a subname by its domain name and chain ID. This is a read-only
+operation and does not require an API key.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | [`SubnameGetByDomainNameChainIdRequest`](../interfaces/SubnameGetByDomainNameChainIdRequest.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameGetByDomainNameChainIdRequest`](../interfaces/SubnameGetByDomainNameChainIdRequest.md) | The parameters for the lookup. |
 
 #### Returns
 
 `Promise`<[`SubnameGetByDomainNameChainIdResponse`](../interfaces/SubnameGetByDomainNameChainIdResponse.md)\>
 
+The details of the subname, if found.
+
 #### Defined in
 
-[lib/features/subnames/index.ts:110](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L110)
+[lib/features/subnames/index.ts:177](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L177)
 
 ___
 
@@ -169,19 +197,44 @@ ___
 
 ▸ **getBySubname**(`params`): `Promise`<[`SubnameGetBySubnameResponse`](../interfaces/SubnameGetBySubnameResponse.md)\>
 
+Retrieves details of a subname directly by its name. This is a read-only operation
+and does not require an API key.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | [`SubnameGetBySubnameRequest`](../interfaces/SubnameGetBySubnameRequest.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameGetBySubnameRequest`](../interfaces/SubnameGetBySubnameRequest.md) | The parameters for the lookup. |
 
 #### Returns
 
 `Promise`<[`SubnameGetBySubnameResponse`](../interfaces/SubnameGetBySubnameResponse.md)\>
 
+The details of the subname, if found.
+
 #### Defined in
 
-[lib/features/subnames/index.ts:119](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L119)
+[lib/features/subnames/index.ts:189](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L189)
+
+___
+
+### getCommunitySubnamesByDomain
+
+▸ **getCommunitySubnamesByDomain**(`params`): `Promise`<[`SubnameGetAllByDomainChainIdResponse`](../interfaces/SubnameGetAllByDomainChainIdResponse.md)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `params` | [`SubnameGetAllByDomainChainIdRequest`](../interfaces/SubnameGetAllByDomainChainIdRequest.md) |
+
+#### Returns
+
+`Promise`<[`SubnameGetAllByDomainChainIdResponse`](../interfaces/SubnameGetAllByDomainChainIdResponse.md)\>
+
+#### Defined in
+
+[lib/features/subnames/index.ts:208](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L208)
 
 ___
 
@@ -189,25 +242,57 @@ ___
 
 ▸ **getInvitations**(`params`): `Promise`<[`SubnameGetAllByAddressResponse`](../interfaces/SubnameGetAllByAddressResponse.md)[]\>
 
+Retrieves all subname invitations for a specific address. This allows users to see
+any pending subname associations. This is a read-only operation and does not require an API key.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | [`SubnameGetAllByAddressRequest`](../interfaces/SubnameGetAllByAddressRequest.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameGetAllByAddressRequest`](../interfaces/SubnameGetAllByAddressRequest.md) | The parameters for retrieving invitations. |
 
 #### Returns
 
 `Promise`<[`SubnameGetAllByAddressResponse`](../interfaces/SubnameGetAllByAddressResponse.md)[]\>
 
+A list of subname invitations.
+
 #### Defined in
 
-[lib/features/subnames/index.ts:137](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L137)
+[lib/features/subnames/index.ts:226](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L226)
+
+___
+
+### getRecordsByFullName
+
+▸ **getRecordsByFullName**(`params`): `Promise`<[`SubnameRecordsResponse`](../interfaces/SubnameRecordsResponse.md)\>
+
+Retrieves the records associated with a subname.
+This is a read-only operation and does not require an API key.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameRecordsRequest`](../interfaces/SubnameRecordsRequest.md) | Parameters for retrieving subname records. |
+
+#### Returns
+
+`Promise`<[`SubnameRecordsResponse`](../interfaces/SubnameRecordsResponse.md)\>
+
+The records associated with the subname.
+
+#### Defined in
+
+[lib/features/subnames/index.ts:251](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L251)
 
 ___
 
 ### isNotReadOnlyMode
 
 ▸ **isNotReadOnlyMode**<`T`\>(`callback`): `T`
+
+Ensures that the method is not called in read-only mode, throwing an error if an API key is not provided.
 
 #### Type parameters
 
@@ -217,17 +302,23 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `callback` | `T` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `callback` | `T` | The operation to be performed. |
 
 #### Returns
 
 `T`
 
+The result of the callback operation if an API key is present.
+
+**`Throws`**
+
+If called in read-only mode without an API key.
+
 #### Defined in
 
-[lib/features/subnames/index.ts:156](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L156)
+[lib/features/subnames/index.ts:264](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L264)
 
 ___
 
@@ -235,19 +326,24 @@ ___
 
 ▸ **reserveSubname**(`params`): `Promise`<[`SubnameReserveResponse`](../interfaces/SubnameReserveResponse.md)\>
 
+Reserves a subname for later claiming. This can be useful for securing a subname
+before it is officially registered or claimed. Requires an API key.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | [`SubnameReserveRequest`](../interfaces/SubnameReserveRequest.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameReserveRequest`](../interfaces/SubnameReserveRequest.md) | The parameters for the reservation. |
 
 #### Returns
 
 `Promise`<[`SubnameReserveResponse`](../interfaces/SubnameReserveResponse.md)\>
 
+The result of the reservation operation.
+
 #### Defined in
 
-[lib/features/subnames/index.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L48)
+[lib/features/subnames/index.ts:89](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L89)
 
 ___
 
@@ -255,20 +351,45 @@ ___
 
 ▸ **revokeSubname**(`params`, `headers`): `Promise`<[`SubnameRevokeResponse`](../interfaces/SubnameRevokeResponse.md)\>
 
+Revokes a subname, removing its association and optionally freeing it for re-registration.
+Requires an API key.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | [`SubnameRevokeRequest`](../interfaces/SubnameRevokeRequest.md) |
-| `headers` | [`SIWEHeaders`](../interfaces/SIWEHeaders.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameRevokeRequest`](../interfaces/SubnameRevokeRequest.md) | The parameters for revoking the subname. |
+| `headers` | [`SIWEHeaders`](../interfaces/SIWEHeaders.md) | Additional headers for signing and authentication. |
 
 #### Returns
 
 `Promise`<[`SubnameRevokeResponse`](../interfaces/SubnameRevokeResponse.md)\>
 
+The result of the revoke operation.
+
 #### Defined in
 
-[lib/features/subnames/index.ts:96](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L96)
+[lib/features/subnames/index.ts:159](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L159)
+
+___
+
+### searchSubnames
+
+▸ **searchSubnames**(`params`): `Promise`<[`SubnameSearchResponse`](../interfaces/SubnameSearchResponse.md)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `params` | [`SubnameSearchRequest`](../interfaces/SubnameSearchRequest.md) |
+
+#### Returns
+
+`Promise`<[`SubnameSearchResponse`](../interfaces/SubnameSearchResponse.md)\>
+
+#### Defined in
+
+[lib/features/subnames/index.ts:214](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L214)
 
 ___
 
@@ -276,17 +397,22 @@ ___
 
 ▸ **updateSubname**(`params`, `headers`): `Promise`<[`SubnameUpdateResponse`](../interfaces/SubnameUpdateResponse.md)\>
 
+Updates the details of an existing subname. This operation can be used to change the associated
+address or the content of a subname. Requires an API key.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | [`SubnameUpdateRequest`](../interfaces/SubnameUpdateRequest.md) |
-| `headers` | [`SIWEHeaders`](../interfaces/SIWEHeaders.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameUpdateRequest`](../interfaces/SubnameUpdateRequest.md) | The parameters for updating the subname. |
+| `headers` | [`SIWEHeaders`](../interfaces/SIWEHeaders.md) | Additional headers for signing and authentication. |
 
 #### Returns
 
 `Promise`<[`SubnameUpdateResponse`](../interfaces/SubnameUpdateResponse.md)\>
 
+The result of the update operation.
+
 #### Defined in
 
-[lib/features/subnames/index.ts:82](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L82)
+[lib/features/subnames/index.ts:140](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L140)
