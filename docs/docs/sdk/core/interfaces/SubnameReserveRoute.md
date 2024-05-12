@@ -6,6 +6,10 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Configures the route for the subname reservation process.
+
+ SubnameReserveRoute
+
 ## Hierarchy
 
 - [`IRoute`](IRoute.md)
@@ -18,13 +22,15 @@ custom_edit_url: null
 
 • **headers**: [`ApiKeyHeaders`](ApiKeyHeaders.md)
 
+Specifies the API key headers required for authentication to perform the reservation.
+
 #### Overrides
 
 [IRoute](IRoute.md).[headers](IRoute.md#headers)
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L22)
+[lib/types/subnames/reserve.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L51)
 
 ___
 
@@ -32,13 +38,15 @@ ___
 
 • **request**: [`SubnameReserveRequest`](SubnameReserveRequest.md)
 
+The data structure required for a subname reservation request.
+
 #### Overrides
 
 [IRoute](IRoute.md).[request](IRoute.md#request)
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:20](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L20)
+[lib/types/subnames/reserve.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L49)
 
 ___
 
@@ -46,10 +54,12 @@ ___
 
 • **response**: [`SubnameReserveResponse`](SubnameReserveResponse.md)
 
+The expected format of the response upon a successful reservation.
+
 #### Overrides
 
 [IRoute](IRoute.md).[response](IRoute.md#response)
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L21)
+[lib/types/subnames/reserve.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L50)

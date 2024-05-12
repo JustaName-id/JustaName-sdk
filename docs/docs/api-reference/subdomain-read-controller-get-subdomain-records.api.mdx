@@ -1,0 +1,40 @@
+---
+id: subdomain-read-controller-get-subdomain-records
+title: "Get Subnames and ENS Records"
+description: "Retrieves all records associated with a subname"
+sidebar_label: "Get Subnames and ENS Records"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVtuO2jAQ/RXLT61ECdunirfVarVtVaEKtk8rVJl4IN46sdd2YFGUf++Mk0C4lL30icSZy5kz4zNU3FhwIihTfJN8zGflQppcqGIKQt6YIjijNbjfKwi9T6lx0vMBl+BTpyx5o+8UglOwBs+E1sw1Vkx4b1IlAki2USFjgvlyUYgc0N8Khw8BnOfjh4rH0zFfllpPGgMHT6VygMiCK2HAFeV5KsFtT7LfZ8DIk1EUZpYs4IHvMKO5TzPIBR9XPGwt5fEIt1jxuh7sUqcZ2iIRb84cHZmS5/IUZb4Ad5DHOrNWEtwvp9+W62fryH5Nf1ysaU5hvTWFB0/fJSxFqUPzeIy+7SjbgEMSIWBUidylKXhPnG6HmCvFaYAiRhDWapXGqUkePYWpTqGYxSOkgbrsaMaCaoD4IELpb4yEU4oGHJ5FbjUefR6NzvHceLMU3bsed2UOeR1rbqu8jEKK8AqsGM3oNbhrKfHRn+F5wAM8h/4X4ZygvqkA+TmPmphUxZtdIvlfhc9ehE2gVCAS+U3PDY+V/3496fkvjNEgiphhP4QPJ3V3VXbQD/F0cef7vDutuIPQDte1VdO2UwQFnDPutNbjnk/oRqslKwyLHsykaekQ5oAZbL7bKA9xCpqvOaIVKxqFo4piv7usrwY6jdM024jVqrnABzF7k7wbvFeHnjW3ax+7pvBBrEgKyTcqBYZDfcwMSTNKcJTMgBPAEyh8sr5KdgKXuJ0qe3DrTlJLFJgxz0KwfpwkwqrhY4m4KfgQ1Yok6cTkExqssBmXTNFSm1TozPgw/jIajTgpjiqWJva0peA+/h73tP824AS1Ob8ajtrJEildYSLEYvxcRIFppRPZZC09uFwKyW4nM/aPlVTtResd26mdTBr9xGpaIggoUlC1bXjgEG/D+opo7+2arhnICTFEllW1EB5Q8Ouajht5pxZJ5cVC00gthfZwoYQP03b6PrIXt91Z8H9ge7hf10KXZBa7+24gveV3Ie1+t/5/1qM1eCHr4abdZ57Ti1OUGrswR/sM//HgTaSWNK7XeENt6HmdrL26fz/vbu/xGv8FJTs71A==
+sidebar_class_name: "get api-method"
+info_path: api-reference/title
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Get Subnames and ENS Records</h1>
+
+<MethodEndpoint method={"get"} path={"/ens/v1/subdomain/records"}></MethodEndpoint>
+
+
+
+Retrieves all records associated with a subname
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Query Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"fullName","required":true,"in":"query","description":"The full name of the subdomain","schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"name":"chainId","required":true,"in":"query","description":"The chain id","schema":{"type":"number"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"name":"providerUrl","required":true,"in":"query","description":"Provider URL","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs><TabItem label={"default"} value={"default"}><div>
+
+The Records were fetched successfully.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"statusCode"} required={true} schemaName={"number"} qualifierMessage={undefined} schema={{"type":"number","example":200,"description":"The status code of the response."}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>result</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>data</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"resolverAddress"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"texts"} required={true} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"coins"} required={true} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>contentHash</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}></div></details></SchemaItem><SchemaItem collapsible={false} name={"isJAN"} required={true} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"error"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Null if no error occurred, otherwise the error message."}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"statusCode\": 200,\n  \"result\": {\n    \"data\": {\n      \"resolverAddress\": \"string\",\n      \"texts\": [\n        \"string\"\n      ],\n      \"coins\": [\n        \"string\"\n      ],\n      \"contentHash\": {},\n      \"isJAN\": true\n    },\n    \"error\": \"string\"\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+      

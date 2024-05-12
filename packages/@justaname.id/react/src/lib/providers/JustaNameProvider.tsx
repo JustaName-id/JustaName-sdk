@@ -4,7 +4,7 @@ import React from 'react';
 import { JustaName } from '@justaname.id/sdk'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SignatureOnMounted } from '../components/SignatureOnMounted';
-import { defaultRoutes } from '../constants';
+import { defaultRoutes } from '../constants/default-routes';
 
 const queryClient = new QueryClient({
   defaultOptions: {

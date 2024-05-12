@@ -6,6 +6,11 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Configures the route for retrieving all subnames associated with a given domain and chain ID,
+detailing the request and response structure and specifying any required headers.
+
+ SubnameGetAllByDomainChainIdRoute
+
 ## Hierarchy
 
 - [`IRoute`](IRoute.md)
@@ -18,13 +23,15 @@ custom_edit_url: null
 
 • **headers**: `Object`
 
+The headers required for the request, left intentionally unspecified to accommodate various requirements.
+
 #### Overrides
 
 [IRoute](IRoute.md).[headers](IRoute.md#headers)
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:96](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L96)
+[lib/types/subnames/get-all-by-ens-domain.ts:192](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L192)
 
 ___
 
@@ -32,13 +39,15 @@ ___
 
 • **request**: [`SubnameGetAllByDomainChainIdRequest`](SubnameGetAllByDomainChainIdRequest.md)
 
+The request data structure.
+
 #### Overrides
 
 [IRoute](IRoute.md).[request](IRoute.md#request)
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:94](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L94)
+[lib/types/subnames/get-all-by-ens-domain.ts:190](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L190)
 
 ___
 
@@ -46,10 +55,12 @@ ___
 
 • **response**: [`SubnameGetAllByDomainChainIdResponse`](SubnameGetAllByDomainChainIdResponse.md)
 
+The expected response structure.
+
 #### Overrides
 
 [IRoute](IRoute.md).[response](IRoute.md#response)
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:95](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L95)
+[lib/types/subnames/get-all-by-ens-domain.ts:191](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L191)

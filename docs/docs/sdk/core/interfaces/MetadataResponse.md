@@ -6,15 +6,22 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Contains detailed metadata for a subname, including content hash, associated addresses,
+and text records.
+
+ MetadataResponse
+
 ## Properties
 
 ### addresses
 
 • **addresses**: [`AddressResponse`](AddressResponse.md)[]
 
+A list of cryptocurrency addresses associated with the subname.
+
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L30)
+[lib/types/subnames/get-by-domain-name-chainId.ts:64](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L64)
 
 ___
 
@@ -22,9 +29,11 @@ ___
 
 • **contentHash**: `string`
 
+A content hash associated with the subname, representing stored or linked content.
+
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L26)
+[lib/types/subnames/get-by-domain-name-chainId.ts:60](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L60)
 
 ___
 
@@ -32,9 +41,11 @@ ___
 
 • **id**: `string`
 
+The unique identifier of the subname's metadata.
+
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L24)
+[lib/types/subnames/get-by-domain-name-chainId.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L58)
 
 ___
 
@@ -42,9 +53,11 @@ ___
 
 • **subdomainId**: `string`
 
+The identifier of the subdomain to which this metadata belongs.
+
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L28)
+[lib/types/subnames/get-by-domain-name-chainId.ts:62](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L62)
 
 ___
 
@@ -52,6 +65,8 @@ ___
 
 • **textRecords**: [`TextRecordResponse`](TextRecordResponse.md)[]
 
+A list of text records providing additional information about the subname.
+
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:32](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L32)
+[lib/types/subnames/get-by-domain-name-chainId.ts:66](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L66)

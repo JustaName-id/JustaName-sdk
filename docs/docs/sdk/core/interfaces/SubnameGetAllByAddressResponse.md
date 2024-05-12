@@ -6,6 +6,10 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Outlines the structure of the response containing details about subnames associated with a specific address.
+
+ SubnameGetAllByAddressResponse
+
 ## Hierarchy
 
 - [`IResponse`](IResponse.md)
@@ -18,9 +22,11 @@ custom_edit_url: null
 
 • `Optional` **claimedAt**: ``null`` \| `Date`
 
+The timestamp when the subname was claimed, if applicable.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L56)
+[lib/types/subnames/get-all-by-address.ts:112](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L112)
 
 ___
 
@@ -28,9 +34,11 @@ ___
 
 • **data**: `MetadataResponse`
 
+Metadata associated with the subname.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L58)
+[lib/types/subnames/get-all-by-address.ts:114](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L114)
 
 ___
 
@@ -38,9 +46,11 @@ ___
 
 • **ensId**: `string`
 
+Identifier of the parent ENS domain.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L50)
+[lib/types/subnames/get-all-by-address.ts:106](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L106)
 
 ___
 
@@ -48,9 +58,11 @@ ___
 
 • **id**: `string`
 
+Unique identifier of the subname.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L46)
+[lib/types/subnames/get-all-by-address.ts:102](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L102)
 
 ___
 
@@ -58,9 +70,11 @@ ___
 
 • **isClaimed**: `boolean`
 
+Indicates if the subname has been claimed.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:54](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L54)
+[lib/types/subnames/get-all-by-address.ts:110](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L110)
 
 ___
 
@@ -68,9 +82,11 @@ ___
 
 • **subname**: `string`
 
+The full subname.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:52](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L52)
+[lib/types/subnames/get-all-by-address.ts:108](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L108)
 
 ___
 
@@ -78,6 +94,8 @@ ___
 
 • **username**: `string`
 
+The username part of the subname.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L48)
+[lib/types/subnames/get-all-by-address.ts:104](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L104)

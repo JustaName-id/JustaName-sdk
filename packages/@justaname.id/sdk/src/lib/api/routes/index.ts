@@ -14,6 +14,7 @@ import {
   SubnameRevokeRoute,
   SubnameSearchRoute,
   SubnameUpdateRoute,
+  SubnameRecordsRoute
 } from '../../types';
 import {
   ACCEPT_SUBNAME_ROUTE,
@@ -28,6 +29,7 @@ import {
   REVOKE_SUBNAME_ROUTE,
   SEARCH_SUBNAMES_ROUTE,
   UPDATE_SUBNAME_ROUTE,
+  RECORDS_BY_FULLNAME_ROUTE
 } from './subnames';
 import { HEALTH_CHECK_ROUTE } from './api-key';
 import {
@@ -51,6 +53,7 @@ export const Routes = {
   GET_ALL_SUBNAMES_BY_INVITATION_ROUTE,
   CHECK_SUBNAME_AVAILABILITY_ROUTE,
   SEARCH_SUBNAMES_ROUTE,
+  RECORDS_BY_FULLNAME_ROUTE
 } as const;
 
 export type RoutesType = keyof typeof Routes;
@@ -74,4 +77,5 @@ export interface ROUTES extends IROUTES {
   GET_ALL_SUBNAMES_BY_INVITATION_ROUTE: SubnameGetAllByAddressRoute;
   CHECK_SUBNAME_AVAILABILITY_ROUTE: IsSubnameAvailableRoute;
   SEARCH_SUBNAMES_ROUTE: SubnameSearchRoute;
+  RECORDS_BY_FULLNAME_ROUTE: SubnameRecordsRoute;
 }

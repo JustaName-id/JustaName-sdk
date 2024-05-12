@@ -6,6 +6,10 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Specifies the request parameters for reserving a subname under a given ENS domain.
+
+ SubnameReserveRequest
+
 ## Hierarchy
 
 - [`IRequest`](IRequest.md)
@@ -18,9 +22,11 @@ custom_edit_url: null
 
 • **chainId**: `number`
 
+The blockchain network identifier, indicating which network the ENS domain resides on.
+
 #### Defined in
 
-[lib/types/subnames/reserve.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L10)
+[lib/types/subnames/reserve.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L21)
 
 ___
 
@@ -28,9 +34,11 @@ ___
 
 • **ensDomain**: `string`
 
+The parent ENS domain under which the subname will be reserved.
+
 #### Defined in
 
-[lib/types/subnames/reserve.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L8)
+[lib/types/subnames/reserve.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L19)
 
 ___
 
@@ -38,9 +46,11 @@ ___
 
 • **ethAddress**: `string`
 
+The Ethereum address associated with the reservation. This is usually the address that will claim the subname.
+
 #### Defined in
 
-[lib/types/subnames/reserve.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L12)
+[lib/types/subnames/reserve.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L23)
 
 ___
 
@@ -48,6 +58,8 @@ ___
 
 • **username**: `string`
 
+The desired subname to reserve.
+
 #### Defined in
 
-[lib/types/subnames/reserve.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L6)
+[lib/types/subnames/reserve.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L17)

@@ -179,7 +179,7 @@ const config = {
         docsPluginId: "classic",
         config: {
           siwe: {
-            specPath: "swagger/public.json",
+            specPath: "swagger/swagger.json",
             outputDir: "docs/api-reference",
             sidebarOptions: {
               groupPathsBy: "tag",

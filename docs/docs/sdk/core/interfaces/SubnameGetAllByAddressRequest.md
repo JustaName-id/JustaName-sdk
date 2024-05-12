@@ -6,6 +6,10 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Defines the request parameters for retrieving all subnames associated with a given address.
+
+ SubnameGetAllByAddressRequest
+
 ## Hierarchy
 
 - [`IRequest`](IRequest.md)
@@ -18,9 +22,11 @@ custom_edit_url: null
 
 • **address**: `string`
 
+The cryptocurrency address to search for associated subnames.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L36)
+[lib/types/subnames/get-all-by-address.ts:78](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L78)
 
 ___
 
@@ -28,9 +34,11 @@ ___
 
 • **chainId**: [`ChainId`](../modules.md#chainid)
 
+The blockchain network identifier.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L38)
+[lib/types/subnames/get-all-by-address.ts:80](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L80)
 
 ___
 
@@ -38,9 +46,11 @@ ___
 
 • **coinType**: `number`
 
+Coin type number for the cryptocurrency of the address.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L40)
+[lib/types/subnames/get-all-by-address.ts:82](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L82)
 
 ___
 
@@ -48,6 +58,8 @@ ___
 
 • **isClaimed**: `boolean`
 
+Flag indicating whether to retrieve only claimed subnames.
+
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L42)
+[lib/types/subnames/get-all-by-address.ts:84](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L84)

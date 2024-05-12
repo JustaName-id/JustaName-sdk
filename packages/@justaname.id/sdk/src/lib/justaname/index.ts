@@ -1,6 +1,6 @@
 import { Configuration } from '../types';
 import { Siwe, Subnames } from '../features';
-import { restCall } from '../api/rest';
+// import { restCall } from '../api/rest';
 
 /**
  * The main class for the JustaName SDK.
@@ -57,7 +57,7 @@ export class JustaName {
   static async init(configuration: Configuration): Promise<JustaName> {
     if (configuration.apiKey){
       this.checkApiKey(configuration.apiKey);
-      await this.healthCheck(configuration.apiKey);
+      // await this.healthCheck(configuration.apiKey);
     }
 
     const subnames = !configuration.apiKey ? new Subnames() : new Subnames(configuration.apiKey);
@@ -77,17 +77,17 @@ export class JustaName {
     }
   }
 
-  /**
-   * Checks the health of the API.
-   * @returns {Promise<void>} - A promise that resolves if the API is healthy.
-   * @throws {Error} - If the API key is invalid.
-   * @private
-   * @static
-   * @async
-   */
-  private static async healthCheck(apiKey: string): Promise<void> {
-    await restCall('HEALTH_CHECK_ROUTE', 'GET', { }, {
-      xApiKey: apiKey
-    })
-  }
+  // /**
+  //  * Checks the health of the API.
+  //  * @returns {Promise<void>} - A promise that resolves if the API is healthy.
+  //  * @throws {Error} - If the API key is invalid.
+  //  * @private
+  //  * @static
+  //  * @async
+  //  */
+  // private static async healthCheck(apiKey: string): Promise<void> {
+  //   await restCall('HEALTH_CHECK_ROUTE', 'GET', { }, {
+  //     xApiKey: apiKey
+  //   })
+  // }
 }

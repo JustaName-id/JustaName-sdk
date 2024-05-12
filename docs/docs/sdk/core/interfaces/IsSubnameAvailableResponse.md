@@ -6,6 +6,10 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Represents the response to a query about the availability of a subname.
+
+ IsSubnameAvailableResponse
+
 ## Hierarchy
 
 - [`IResponse`](IResponse.md)
@@ -18,6 +22,10 @@ custom_edit_url: null
 
 • **available**: `boolean`
 
+Indicates the availability of the subname. 
+                                `true` if the subname is available for registration, 
+                                `false` if it's already taken.
+
 #### Defined in
 
-[lib/types/subnames/available.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L9)
+[lib/types/subnames/available.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L30)

@@ -6,15 +6,21 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Represents a key-value pair for text records associated with a subname.
+
+ TextRecord
+
 ## Properties
 
 ### key
 
 • **key**: `string`
 
+The key of the text record.
+
 #### Defined in
 
-[lib/types/subnames/accept.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L11)
+[lib/types/subnames/accept.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L27)
 
 ___
 
@@ -22,6 +28,8 @@ ___
 
 • **value**: `string`
 
+The value of the text record.
+
 #### Defined in
 
-[lib/types/subnames/accept.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/subnames/claim.ts#L13)
+[lib/types/subnames/accept.ts:29](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L29)

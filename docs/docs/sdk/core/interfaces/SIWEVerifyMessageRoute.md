@@ -6,6 +6,11 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
+Configures the route for verifying a SIWE message. This interface extends the generic `IRoute`,
+specifying the request and response structures involved in verifying an Ethereum address.
+
+ SIWEVerifyMessageRoute
+
 ## Hierarchy
 
 - [`IRoute`](IRoute.md)
@@ -18,13 +23,15 @@ custom_edit_url: null
 
 • **headers**: `Object`
 
+The headers required for the request, left flexible for specific needs.
+
 #### Overrides
 
 [IRoute](IRoute.md).[headers](IRoute.md#headers)
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L48)
+[lib/types/siwe/verify-challenge.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L58)
 
 ___
 
@@ -32,13 +39,15 @@ ___
 
 • **request**: [`VerifyChallengeRequest`](VerifyChallengeRequest.md)
 
+The structure required for the verification request.
+
 #### Overrides
 
 [IRoute](IRoute.md).[request](IRoute.md#request)
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L46)
+[lib/types/siwe/verify-challenge.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L56)
 
 ___
 
@@ -46,10 +55,12 @@ ___
 
 • **response**: [`VerifyChallengeResponse`](VerifyChallengeResponse.md)
 
+The expected response indicating verification result.
+
 #### Overrides
 
 [IRoute](IRoute.md).[response](IRoute.md#response)
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/45e45ce/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L47)
+[lib/types/siwe/verify-challenge.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L57)

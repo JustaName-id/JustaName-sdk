@@ -23,6 +23,8 @@ import {
   SubnameSearchResponse,
   SubnameUpdateRequest,
   SubnameUpdateResponse,
+  SubnameRecordsRequest,
+  SubnameRecordsResponse
 } from '../../types';
 
 /**
@@ -237,6 +239,19 @@ export class Subnames {
     params: IsSubnameAvailableRequest
   ): Promise<IsSubnameAvailableResponse> {
     return restCall('CHECK_SUBNAME_AVAILABILITY_ROUTE', 'GET', params);
+  }
+
+
+  /**
+   * Retrieves the records associated with a subname.
+   * This is a read-only operation and does not require an API key.
+   * @param {SubnameRecordsRequest} params - Parameters for retrieving subname records.
+   * @returns {Promise<SubnameRecordsResponse>} The records associated with the subname.
+   */
+  async getRecordsByFullName(
+    params: SubnameRecordsRequest
+  ) : Promise<SubnameRecordsResponse> {
+    return restCall('RECORDS_BY_FULLNAME_ROUTE', 'GET', params);
   }
 
   /**
