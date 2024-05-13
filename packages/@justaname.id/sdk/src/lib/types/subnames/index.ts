@@ -6,6 +6,7 @@ export * from './get-by-domain-name-chainId';
 export * from './get-by-subname';
 export * from './reserve';
 export * from './revoke';
+export * from './reject';
 export * from './search-subnames';
 export * from './update';
 export * from './accept';

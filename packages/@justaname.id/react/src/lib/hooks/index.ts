@@ -1,4 +1,5 @@
 export * from './useAcceptSubname';
+export * from './useRejectSubname';
 export * from './useAccountInvitations';
 export * from './useAccountSubnames';
 export * from './useAddSubname';

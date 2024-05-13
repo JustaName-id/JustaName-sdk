@@ -1,5 +1,5 @@
-import { ApiKeyHeaders, SIWEHeaders } from '../headers';
 import { IRequest, IResponse, IRoute } from '../common';
+import { SIWEHeaders } from '../headers';
 
 /**
  * Represents an Ethereum address and its corresponding coin type.
@@ -95,7 +95,6 @@ export interface SubnameAcceptResponse extends IResponse {
   data: Metadata;
 }
 
-
 /**
  * Configures the route for accepting a subname invitation.
  *
@@ -104,10 +103,10 @@ export interface SubnameAcceptResponse extends IResponse {
  * @public
  * @property {SubnameAcceptRequest} request - The data structure for the claim request.
  * @property {SubnameAcceptResponse} response - The expected structure for the claim response.
- * @property {ApiKeyHeaders & SIWEHeaders} headers - Combined API key and SIWE authentication headers required for the request.
+ * @property {SIWEHeaders} headers - SIWE authentication headers required for the request.
  */
 export interface SubnameAcceptRoute extends IRoute {
   request: SubnameAcceptRequest;
   response: SubnameAcceptResponse;
-  headers: ApiKeyHeaders & SIWEHeaders;
+  headers: SIWEHeaders;
 }

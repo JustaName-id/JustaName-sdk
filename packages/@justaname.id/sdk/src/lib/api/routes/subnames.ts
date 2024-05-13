@@ -34,6 +34,11 @@ export const UPDATE_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/update';
 export const REVOKE_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/revoke';
 
 /**
+ * Routes to reject subname
+ */
+export const REJECT_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/reject-invitation';
+
+/**
  * Routes to get subname by domain, name and chain id
  */
 export const GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE =
