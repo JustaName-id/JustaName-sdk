@@ -83,9 +83,7 @@ export const useSubnameSignature = (
 
   const getSignature = async () => {
     const now = new Date();
-    console.log(query.data)
     if (query.data) {
-      console.log(query.data.expirationTime, now)
       if (query.data.expirationTime > now) {
         return query.data
       }

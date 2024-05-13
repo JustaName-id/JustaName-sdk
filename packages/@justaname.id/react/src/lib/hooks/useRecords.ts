@@ -1,8 +1,6 @@
 import { useJustaName } from '../providers';
 import { QueryObserverResult, RefetchOptions, useQuery } from '@tanstack/react-query';
-import { ChainId, JustaName, SubnameRecordsResponse } from '@justaname.id/sdk';
-import { SanitizedRecords, sanitizeRecords } from '../utils/sanitizeRecords';
-
+import { ChainId, JustaName, SubnameRecordsResponse, SanitizedRecords, sanitizeRecords } from '@justaname.id/sdk';
 
 export const buildRecordsBySubnameKey = (subname: string, chainId: number) => ['RECORDS_BY_SUBNAME', subname, chainId]
 

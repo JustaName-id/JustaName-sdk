@@ -30,13 +30,13 @@ export const useAccountInvitations = (): UseAccountInvitationsResult => {
   const query = useQuery({
     queryKey: buildAccountInvitationsKey(address),
     queryFn: async () =>
-      justaname?.subnames.getInvitations({
+      justaname.subnames.getInvitations({
         address: address as string,
         isClaimed: true,
         coinType: 60,
         chainId: chainId,
       }),
-    enabled: Boolean(mounted) && Boolean(address) && Boolean(justaname),
+    enabled: Boolean(mounted) && Boolean(address),
   });
 
   return {
