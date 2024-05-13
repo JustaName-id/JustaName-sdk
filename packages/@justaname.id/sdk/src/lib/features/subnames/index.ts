@@ -24,8 +24,12 @@ import {
   SubnameUpdateRequest,
   SubnameUpdateResponse,
   SubnameRecordsRequest,
-  SubnameRecordsResponse
+  SubnameRecordsResponse,
 } from '../../types';
+import {
+  SubnameRejectRequest,
+  SubnameRejectResponse,
+} from '../../types/subnames/reject';
 
 /**
  * Represents the Subnames class for interacting with the Subnames API.
@@ -63,7 +67,6 @@ export class Subnames {
 
   /**
    * Accept a subname invite under a specific domain, associating it with an Ethereum address.
-   * This operation requires an API key.
    * @param {SubnameAcceptRequest} params - Parameters for claiming a subname.
    * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
    * @returns {Promise<SubnameAcceptResponse>} The result of the claim operation.
@@ -74,7 +77,6 @@ export class Subnames {
   ): Promise<SubnameAcceptResponse> {
     return this.isNotReadOnlyMode(
       restCall('ACCEPT_SUBNAME_ROUTE', 'POST', params, {
-        xApiKey: this.apiKey as string,
         ...headers,
       })
     );
@@ -169,6 +171,23 @@ export class Subnames {
   }
 
   /**
+   * Rejects a subname, removing its association and optionally freeing it for re-registration.
+   * @param {SubnameRejectRequest} params - The parameters for rejecting the subname.
+   * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
+   * @returns {Promise<SubnameRejectResponse>} The result of the revoke operation.
+   */
+  async rejectSubname(
+    params: SubnameRejectRequest,
+    headers: SIWEHeaders
+  ): Promise<SubnameRejectResponse> {
+    return this.isNotReadOnlyMode(
+      restCall('REJECT_SUBNAME_ROUTE', 'POST', params, {
+        ...headers,
+      })
+    );
+  }
+
+  /**
    * Retrieves details of a subname by its domain name and chain ID. This is a read-only
    * operation and does not require an API key.
    * @param {SubnameGetByDomainNameChainIdRequest} params - The parameters for the lookup.
@@ -241,7 +260,6 @@ export class Subnames {
     return restCall('CHECK_SUBNAME_AVAILABILITY_ROUTE', 'GET', params);
   }
 
-
   /**
    * Retrieves the records associated with a subname.
    * This is a read-only operation and does not require an API key.
@@ -250,7 +268,7 @@ export class Subnames {
    */
   async getRecordsByFullName(
     params: SubnameRecordsRequest
-  ) : Promise<SubnameRecordsResponse> {
+  ): Promise<SubnameRecordsResponse> {
     return restCall('RECORDS_BY_FULLNAME_ROUTE', 'GET', params);
   }
 

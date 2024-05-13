@@ -28,21 +28,19 @@ export interface BaseAcceptSubnameRequest {
  *  @type {object}
  *  @property {function} acceptSubname - The function to accept a subname.
  *  @property {boolean} acceptSubnamePending - Indicates if the mutation is currently pending.
- *  @template T - The type of additional parameters that can be passed to the accept subname mutation, extending the base request.
  */
-export interface UseAcceptSubname<T = any> {
+export interface UseAcceptSubname {
   acceptSubname: (
-    params: T & BaseAcceptSubnameRequest
+    params: BaseAcceptSubnameRequest
   ) => Promise<SubnameAcceptResponse>;
   acceptSubnamePending: boolean;
 }
 /**
  * Custom hook for performing a mutation to accept a subname.
  *
- * @template T - The type of additional parameters that can be passed to the accept subname mutation, extending the base request.
  * @returns {UseAcceptSubname} An object containing the `acceptSubname` async function to initiate the subname accept, and a boolean `acceptSubnamePending` indicating the mutation's pending state.
  */
-export const useAcceptSubname = <T = any>(): UseAcceptSubname<T> => {
+export const useAcceptSubname = (): UseAcceptSubname => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount();
   const { getSignature } = useSubnameSignature({
@@ -54,9 +52,9 @@ export const useAcceptSubname = <T = any>(): UseAcceptSubname<T> => {
   const mutate = useMutation<
     SubnameAcceptResponse,
     Error,
-    T & BaseAcceptSubnameRequest
+    BaseAcceptSubnameRequest
   >({
-    mutationFn: async (params: T & BaseAcceptSubnameRequest) => {
+    mutationFn: async (params: BaseAcceptSubnameRequest) => {
       if (!address) {
         throw new Error('No address found');
       }
@@ -88,7 +86,7 @@ export const useAcceptSubname = <T = any>(): UseAcceptSubname<T> => {
 
   return {
     acceptSubname: mutate.mutateAsync as (
-      params: T & BaseAcceptSubnameRequest
+      params: BaseAcceptSubnameRequest
     ) => Promise<SubnameAcceptResponse>,
     acceptSubnamePending: mutate.isPending,
   };

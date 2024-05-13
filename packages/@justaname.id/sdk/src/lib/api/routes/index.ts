@@ -14,7 +14,7 @@ import {
   SubnameRevokeRoute,
   SubnameSearchRoute,
   SubnameUpdateRoute,
-  SubnameRecordsRoute
+  SubnameRecordsRoute,
 } from '../../types';
 import {
   ACCEPT_SUBNAME_ROUTE,
@@ -29,13 +29,15 @@ import {
   REVOKE_SUBNAME_ROUTE,
   SEARCH_SUBNAMES_ROUTE,
   UPDATE_SUBNAME_ROUTE,
-  RECORDS_BY_FULLNAME_ROUTE
+  RECORDS_BY_FULLNAME_ROUTE,
+  REJECT_SUBNAME_ROUTE,
 } from './subnames';
 import { HEALTH_CHECK_ROUTE } from './api-key';
 import {
   SIWE_REQUEST_CHALLENGE_ROUTE,
   SIWE_VERIFY_MESSAGE_ROUTE,
 } from './siwe';
+import { SubnameRejectRoute } from '../../types/subnames/reject';
 
 export const Routes = {
   HEALTH_CHECK_ROUTE,
@@ -44,6 +46,7 @@ export const Routes = {
   ACCEPT_SUBNAME_ROUTE,
   RESERVE_SUBNAME_ROUTE,
   ADD_SUBNAME_ROUTE,
+  REJECT_SUBNAME_ROUTE,
   UPDATE_SUBNAME_ROUTE,
   REVOKE_SUBNAME_ROUTE,
   GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE,
@@ -53,7 +56,7 @@ export const Routes = {
   GET_ALL_SUBNAMES_BY_INVITATION_ROUTE,
   CHECK_SUBNAME_AVAILABILITY_ROUTE,
   SEARCH_SUBNAMES_ROUTE,
-  RECORDS_BY_FULLNAME_ROUTE
+  RECORDS_BY_FULLNAME_ROUTE,
 } as const;
 
 export type RoutesType = keyof typeof Routes;
@@ -69,6 +72,7 @@ export interface ROUTES extends IROUTES {
   RESERVE_SUBNAME_ROUTE: SubnameReserveRoute;
   ADD_SUBNAME_ROUTE: SubnameAddRoute;
   UPDATE_SUBNAME_ROUTE: SubnameUpdateRoute;
+  REJECT_SUBNAME_ROUTE: SubnameRejectRoute;
   REVOKE_SUBNAME_ROUTE: SubnameRevokeRoute;
   GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE: SubnameGetByDomainNameChainIdRoute;
   GET_SUBNAME_BY_SUBNAME_ROUTE: SubnameGetBySubnameRoute;
