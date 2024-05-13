@@ -1,3 +1,18 @@
+## 0.3.22 (2024-05-13)
+
+
+### 🚀 Features
+
+- records ([99fc079](https://github.com/JustaName-id/JustaName-sdk/commit/99fc079))
+
+- added reject ([3eeeba0](https://github.com/JustaName-id/JustaName-sdk/commit/3eeeba0))
+
+
+### ❤️  Thank You
+
+- anthony2399
+- HadiKhai
+
 ## 0.3.21 (2024-05-12)
 
 This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
