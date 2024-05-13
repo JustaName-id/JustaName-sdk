@@ -6,7 +6,9 @@ import { BaseResponse } from '../types';
  */
 export const BASE_URL =
   process.env['JUSTANAME_ENVIRONMENT'] === 'development' ||
-  process.env['NEXT_PUBLIC_JUSTANAME_ENVIRONMENT'] === 'development' ?
+  process.env['NEXT_PUBLIC_JUSTANAME_ENVIRONMENT'] === 'development' ||
+  process.env['VITE_JUSTANAME_ENVIRONMENT'] === 'development'
+    ?
   'https://api-staging.justaname.id'
   : 'https://api.justaname.id';
 

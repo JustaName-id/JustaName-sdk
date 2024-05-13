@@ -15,7 +15,7 @@ import { Siwe, Subnames } from '../features';
  *  apiKey: 'your-api-key'
  *  };
  *
- *  const justaName = await JustaName.init(configuration);
+ *  const justaName = JustaName.init(configuration);
  *
  *  const requestChallengeResponse = await justaName.siwe.requestChallenge({
  *  chainId: 1,
@@ -49,12 +49,12 @@ export class JustaName {
   /**
    * Initializes the JustaName SDK.
    * @param {Configuration} configuration - The configuration object.
-   * @returns {Promise<JustaName>} - A promise that resolves with the JustaName SDK.
+   * @returns {JustaName} - A promise that resolves with the JustaName SDK.
    * @throws {Error} - If the API key is not present or if the API key is invalid.
    * @public
    * @static
    */
-  static async init(configuration: Configuration): Promise<JustaName> {
+  static init(configuration: Configuration): JustaName {
     if (configuration.apiKey){
       this.checkApiKey(configuration.apiKey);
       // await this.healthCheck(configuration.apiKey);

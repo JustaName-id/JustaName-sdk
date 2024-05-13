@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMountedAccount } from '../hooks/useMountedAccount';
-import { useSubnameSignature } from '../hooks';
+import { useSubnameSignature } from '../hooks/useSubnameSignature';
 import { defaultRoutes } from '../constants/default-routes';
 
 export const SignatureOnMounted: React.FC<{
@@ -21,7 +21,6 @@ export const SignatureOnMounted: React.FC<{
 
     if(!address || !isConnected) return;
     const main = async () => {
-      console.log('getting signature')
       await getSignature()
     }
     main();

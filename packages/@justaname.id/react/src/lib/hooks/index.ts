@@ -5,6 +5,7 @@ export * from './useAddSubname';
 export * from './useCommunitySubnames';
 export * from './useIsSubnameAvailable';
 export * from './useMounted';
+export * from './useMountedAccount'
 export * from './useRevokeSubname';
 export * from './useSearchSubnames';
 export * from './useSubname';

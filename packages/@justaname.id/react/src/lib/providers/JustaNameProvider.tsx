@@ -32,7 +32,7 @@ const queryClient = new QueryClient({
  * @property {1 | 11155111} chainId - The blockchain network identifier.
  */
 export interface JustaNameContextProps {
-  justaname: JustaName | null;
+  justaname: JustaName;
   routes: typeof defaultRoutes;
   backendUrl: string;
   chainId: 1 | 11155111
@@ -40,7 +40,7 @@ export interface JustaNameContextProps {
 
 
 const JustaNameContext = React.createContext<JustaNameContextProps>({
-  justaname: null,
+  justaname: JustaName.init({}),
   routes: defaultRoutes,
   chainId: 1,
   backendUrl: ""
@@ -77,16 +77,7 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
   backendUrl = ""
 }) => {
 
-  const [justaname, setJustaName] = React.useState<JustaName | null>(null);
-
-  React.useEffect(() => {
-    const main = async () => {
-      const justaname = await JustaName.init({});
-      setJustaName(justaname);
-    }
-    main();
-  }, []);
-
+  const [justaname] = React.useState<JustaName>(JustaName.init({}));
 
   return (
     <QueryClientProvider client={queryClient}>
