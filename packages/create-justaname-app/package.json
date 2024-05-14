@@ -1,6 +1,6 @@
 {
   "name": "create-justaname-app",
-  "version": "0.3.23",
+  "version": "0.3.24",
   "dependencies": {
     "@inquirer/prompts": "^4.3.0",
     "@rollup/plugin-commonjs": "^25.0.7",
