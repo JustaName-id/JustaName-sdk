@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@justaname.id/react": "^0.3.31",
+    "@justaname.id/react": "^0.3.32",
     "@rainbow-me/rainbowkit": "^2.0.2",
     "@uidotdev/usehooks": "^2.4.1",
     "next": "14.1.4",
