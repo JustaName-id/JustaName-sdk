@@ -96,8 +96,8 @@
   "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@inquirer/prompts": "^4.3.0",
-    "@justaname.id/react": "0.3.34",
-    "@justaname.id/sdk": "0.2.31",
+    "@justaname.id/react": "0.3.35",
+    "@justaname.id/sdk": "0.2.32",
     "@rainbow-me/rainbowkit": "^2.0.2",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
