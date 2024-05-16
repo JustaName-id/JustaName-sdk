@@ -1,8 +1,8 @@
 {
   "name": "@justaname.id/react",
-  "version": "0.3.32",
+  "version": "0.3.33",
   "dependencies": {
-    "@justaname.id/sdk": "0.2.29",
+    "@justaname.id/sdk": "0.2.30",
     "@tanstack/react-query": "^5.28.4"
   },
   "peerDependencies": {
