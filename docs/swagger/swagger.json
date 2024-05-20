@@ -99,15 +99,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "description": "The Api Key.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "requestBody": {
@@ -325,6 +316,33 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -340,6 +358,67 @@
         "responses": {
           "default": {
             "description": "The Subname was revoked successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubdomainRevokeApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subdomain/reject-invitation": {
+      "post": {
+        "operationId": "SubdomainWriteController_revokeInvitation",
+        "summary": "Reject Subname Invitation",
+        "description": "Reject the specified subname invitation",
+        "parameters": [
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubdomainRevokeApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subname invitation was rejected successfully.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1166,6 +1245,17 @@
           "isBlocked"
         ]
       },
+      "EnsUnlockDomainApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ensId"
+        ]
+      },
       "EnsApiResponse": {
         "type": "object",
         "properties": {
@@ -1230,6 +1320,50 @@
         },
         "required": [
           "names"
+        ]
+      },
+      "EnsGetSubscriptionApiResponse": {
+        "type": "object",
+        "properties": {
+          "isSubscribed": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "isSubscribed"
+        ]
+      },
+      "EnsGetSubscriptionApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EnsGetSubscriptionApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "EnsGetSubscriptionApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/EnsGetSubscriptionApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
         ]
       },
       "OffchainResolverApiResponse": {
@@ -1627,7 +1761,7 @@
             }
           },
           "contentHash": {
-            "type": "string",
+            "type": "object",
             "description": "The content hash of the subdomain",
             "example": "ipfs://QmRAQB6YaCyidP37UdDnjFY5vQuiBrcqdyoW1CuDgwxkD4"
           }

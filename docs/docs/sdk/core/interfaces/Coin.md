@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-lib/types/subnames/records.ts:10
+[lib/types/subnames/records.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L10)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-lib/types/subnames/records.ts:11
+[lib/types/subnames/records.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L11)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 #### Defined in
 
-lib/types/subnames/records.ts:12
+[lib/types/subnames/records.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L12)

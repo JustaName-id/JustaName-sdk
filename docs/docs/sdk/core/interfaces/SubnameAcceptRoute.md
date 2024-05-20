@@ -20,9 +20,9 @@ Configures the route for accepting a subname invitation.
 
 ### headers
 
-• **headers**: [`ApiKeyHeaders`](ApiKeyHeaders.md) & [`SIWEHeaders`](SIWEHeaders.md)
+• **headers**: [`SIWEHeaders`](SIWEHeaders.md)
 
-Combined API key and SIWE authentication headers required for the request.
+SIWE authentication headers required for the request.
 
 #### Overrides
 
@@ -30,7 +30,7 @@ Combined API key and SIWE authentication headers required for the request.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:112](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L112)
+[lib/types/subnames/accept.ts:111](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L111)
 
 ___
 
@@ -46,7 +46,7 @@ The data structure for the claim request.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:110](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L110)
+[lib/types/subnames/accept.ts:109](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L109)
 
 ___
 
@@ -62,4 +62,4 @@ The expected structure for the claim response.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:111](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L111)
+[lib/types/subnames/accept.ts:110](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L110)

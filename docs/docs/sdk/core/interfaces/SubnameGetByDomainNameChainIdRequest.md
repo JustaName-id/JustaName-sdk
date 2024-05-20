@@ -26,7 +26,7 @@ The blockchain network identifier where the domain and subname exist.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:84](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L84)
+[lib/types/subnames/get-by-domain-name-chainId.ts:84](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L84)
 
 ___
 
@@ -38,7 +38,7 @@ The ENS domain within which the subname is registered.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:80](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L80)
+[lib/types/subnames/get-by-domain-name-chainId.ts:80](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L80)
 
 ___
 
@@ -50,4 +50,4 @@ The specific username associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:82](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L82)
+[lib/types/subnames/get-by-domain-name-chainId.ts:82](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L82)

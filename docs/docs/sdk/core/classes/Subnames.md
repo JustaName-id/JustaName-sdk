@@ -51,7 +51,7 @@ Constructs a new instance of the Subnames class, optionally with an API key for 
 
 #### Defined in
 
-[lib/features/subnames/index.ts:60](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L60)
+[lib/features/subnames/index.ts:62](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L62)
 
 ## Properties
 
@@ -61,7 +61,7 @@ Constructs a new instance of the Subnames class, optionally with an API key for 
 
 #### Defined in
 
-[lib/features/subnames/index.ts:54](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L54)
+[lib/features/subnames/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L56)
 
 ## Methods
 
@@ -70,7 +70,6 @@ Constructs a new instance of the Subnames class, optionally with an API key for 
 ▸ **acceptSubname**(`params`, `headers`): `Promise`<[`SubnameAcceptResponse`](../interfaces/SubnameAcceptResponse.md)\>
 
 Accept a subname invite under a specific domain, associating it with an Ethereum address.
-This operation requires an API key.
 
 #### Parameters
 
@@ -87,7 +86,7 @@ The result of the claim operation.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L71)
+[lib/features/subnames/index.ts:72](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L72)
 
 ___
 
@@ -113,7 +112,7 @@ The result of the add operation.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:106](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L106)
+[lib/features/subnames/index.ts:105](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L105)
 
 ___
 
@@ -138,7 +137,7 @@ Information about the subname's availability.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:238](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L238)
+[lib/features/subnames/index.ts:250](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L250)
 
 ___
 
@@ -164,7 +163,7 @@ A list of subnames associated with the address.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:202](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L202)
+[lib/features/subnames/index.ts:214](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L214)
 
 ___
 
@@ -189,7 +188,7 @@ The details of the subname, if found.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:177](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L177)
+[lib/features/subnames/index.ts:189](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L189)
 
 ___
 
@@ -214,7 +213,7 @@ The details of the subname, if found.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:189](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L189)
+[lib/features/subnames/index.ts:201](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L201)
 
 ___
 
@@ -234,7 +233,7 @@ ___
 
 #### Defined in
 
-[lib/features/subnames/index.ts:208](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L208)
+[lib/features/subnames/index.ts:220](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L220)
 
 ___
 
@@ -259,7 +258,7 @@ A list of subname invitations.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:226](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L226)
+[lib/features/subnames/index.ts:238](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L238)
 
 ___
 
@@ -284,7 +283,7 @@ The records associated with the subname.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:251](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L251)
+[lib/features/subnames/index.ts:262](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L262)
 
 ___
 
@@ -318,7 +317,32 @@ If called in read-only mode without an API key.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:264](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L264)
+[lib/features/subnames/index.ts:275](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L275)
+
+___
+
+### rejectSubname
+
+▸ **rejectSubname**(`params`, `headers`): `Promise`<[`SubnameRejectResponse`](../interfaces/SubnameRejectResponse.md)\>
+
+Rejects a subname, removing its association and optionally freeing it for re-registration.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`SubnameRejectRequest`](../interfaces/SubnameRejectRequest.md) | The parameters for rejecting the subname. |
+| `headers` | [`SIWEHeaders`](../interfaces/SIWEHeaders.md) | Additional headers for signing and authentication. |
+
+#### Returns
+
+`Promise`<[`SubnameRejectResponse`](../interfaces/SubnameRejectResponse.md)\>
+
+The result of the revoke operation.
+
+#### Defined in
+
+[lib/features/subnames/index.ts:174](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L174)
 
 ___
 
@@ -343,7 +367,7 @@ The result of the reservation operation.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:89](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L89)
+[lib/features/subnames/index.ts:88](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L88)
 
 ___
 
@@ -369,7 +393,7 @@ The result of the revoke operation.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:159](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L159)
+[lib/features/subnames/index.ts:156](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L156)
 
 ___
 
@@ -389,7 +413,7 @@ ___
 
 #### Defined in
 
-[lib/features/subnames/index.ts:214](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L214)
+[lib/features/subnames/index.ts:226](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L226)
 
 ___
 
@@ -415,4 +439,4 @@ The result of the update operation.
 
 #### Defined in
 
-[lib/features/subnames/index.ts:140](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L140)
+[lib/features/subnames/index.ts:139](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L139)

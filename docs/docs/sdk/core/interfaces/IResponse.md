@@ -39,6 +39,8 @@ Extend this interface to define specific properties for different responses.
 
   ↳ [`SubnameRevokeResponse`](SubnameRevokeResponse.md)
 
+  ↳ [`SubnameRejectResponse`](SubnameRejectResponse.md)
+
   ↳ [`SubnameSearchResponse`](SubnameSearchResponse.md)
 
   ↳ [`SubnameUpdateResponse`](SubnameUpdateResponse.md)

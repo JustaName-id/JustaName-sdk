@@ -20,7 +20,7 @@ The cryptocurrency address.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L13)
+[lib/types/subnames/accept.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L13)
 
 ___
 
@@ -32,4 +32,4 @@ The coin type number, typically following the BIP-0044 standard.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L15)
+[lib/types/subnames/accept.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L15)

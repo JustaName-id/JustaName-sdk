@@ -33,7 +33,7 @@ The required headers for API key operations, specified by the
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L45)
+[lib/types/api-key/health-check.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L45)
 
 ___
 
@@ -50,7 +50,7 @@ The type of the request data. It is intentionally broad
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L43)
+[lib/types/api-key/health-check.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L43)
 
 ___
 
@@ -67,4 +67,4 @@ The expected response structure for the API key operations,
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:44](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L44)
+[lib/types/api-key/health-check.ts:44](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L44)

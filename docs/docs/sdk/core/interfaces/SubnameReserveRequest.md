@@ -26,7 +26,7 @@ The blockchain network identifier, indicating which network the ENS domain resid
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L21)
+[lib/types/subnames/reserve.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L21)
 
 ___
 
@@ -38,7 +38,7 @@ The parent ENS domain under which the subname will be reserved.
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L19)
+[lib/types/subnames/reserve.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L19)
 
 ___
 
@@ -50,7 +50,7 @@ The Ethereum address associated with the reservation. This is usually the addres
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L23)
+[lib/types/subnames/reserve.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L23)
 
 ___
 
@@ -62,4 +62,4 @@ The desired subname to reserve.
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L17)
+[lib/types/subnames/reserve.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L17)

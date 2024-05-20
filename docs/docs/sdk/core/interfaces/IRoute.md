@@ -42,6 +42,8 @@ a specific API endpoint, ensuring type safety and consistency in request/respons
 
   ↳ [`SubnameRevokeRoute`](SubnameRevokeRoute.md)
 
+  ↳ [`SubnameRejectRoute`](SubnameRejectRoute.md)
+
   ↳ [`SubnameSearchRoute`](SubnameSearchRoute.md)
 
   ↳ [`SubnameUpdateRoute`](SubnameUpdateRoute.md)
@@ -60,7 +62,7 @@ The type of the headers for the request/response.
 
 #### Defined in
 
-[lib/types/common/index.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L57)
+[lib/types/common/index.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L57)
 
 ___
 
@@ -72,7 +74,7 @@ The type of the request data.
 
 #### Defined in
 
-[lib/types/common/index.ts:55](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L55)
+[lib/types/common/index.ts:55](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L55)
 
 ___
 
@@ -84,4 +86,4 @@ The type of the response data.
 
 #### Defined in
 
-[lib/types/common/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L56)
+[lib/types/common/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L56)

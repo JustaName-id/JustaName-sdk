@@ -30,7 +30,7 @@ Specifies the API key headers required for authentication to perform the reserva
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L51)
+[lib/types/subnames/reserve.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L51)
 
 ___
 
@@ -46,7 +46,7 @@ The data structure required for a subname reservation request.
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L49)
+[lib/types/subnames/reserve.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L49)
 
 ___
 
@@ -62,4 +62,4 @@ The expected format of the response upon a successful reservation.
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L50)
+[lib/types/subnames/reserve.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L50)

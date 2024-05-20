@@ -22,7 +22,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts#L16)
+[packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts#L13)
 
 ___
 
@@ -32,4 +32,4 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts#L17)
+[packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts#L14)

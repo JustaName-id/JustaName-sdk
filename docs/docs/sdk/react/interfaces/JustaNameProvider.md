@@ -18,7 +18,7 @@ Optional backend URL for API requests.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:63](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L63)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:62](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L62)
 
 ___
 
@@ -30,7 +30,7 @@ Optional blockchain network identifier.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:62](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L62)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:61](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L61)
 
 ___
 
@@ -42,7 +42,7 @@ The child components.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:60](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L60)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:59](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L59)
 
 ___
 
@@ -56,13 +56,10 @@ Optional custom API routes.
 
 | Name | Type |
 | :------ | :------ |
-| `acceptSubnameRoute` | `string` |
 | `addSubnameRoute` | `string` |
-| `checkSubnameAvailabilityRoute` | `string` |
 | `requestChallengeRoute` | `string` |
 | `revokeSubnameRoute` | `string` |
-| `updateSubnameRoute` | `string` |
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:61](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L61)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:60](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L60)

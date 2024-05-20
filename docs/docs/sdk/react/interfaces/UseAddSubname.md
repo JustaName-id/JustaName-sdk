@@ -38,7 +38,7 @@ The function to add a subname.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts#L24)
+[packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts#L24)
 
 ___
 
@@ -50,4 +50,4 @@ Indicates if the mutation is currently pending.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts#L27)
+[packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts#L27)

@@ -20,7 +20,7 @@ Configures the route for updating subname details.
 
 ### headers
 
-• **headers**: [`ApiKeyHeaders`](ApiKeyHeaders.md) & [`SIWEHeaders`](SIWEHeaders.md)
+• **headers**: [`SIWEHeaders`](SIWEHeaders.md)
 
 Combined API key and SIWE authentication headers required for the operation.
 
@@ -30,7 +30,7 @@ Combined API key and SIWE authentication headers required for the operation.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:117](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L117)
+[lib/types/subnames/update.ts:117](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L117)
 
 ___
 
@@ -46,7 +46,7 @@ The structure required for a subname update request.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:115](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L115)
+[lib/types/subnames/update.ts:115](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L115)
 
 ___
 
@@ -62,4 +62,4 @@ The expected format of the response after successful update.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:116](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L116)
+[lib/types/subnames/update.ts:116](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L116)

@@ -37,6 +37,8 @@ This interface can be extended to include common request properties shared acros
 
   ↳ [`SubnameRevokeRequest`](SubnameRevokeRequest.md)
 
+  ↳ [`SubnameRejectRequest`](SubnameRejectRequest.md)
+
   ↳ [`SubnameSearchRequest`](SubnameSearchRequest.md)
 
   ↳ [`SubnameUpdateRequest`](SubnameUpdateRequest.md)

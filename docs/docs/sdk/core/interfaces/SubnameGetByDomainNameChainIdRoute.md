@@ -30,7 +30,7 @@ Specifies any headers required for the request, left unspecified to accommodate 
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:131](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L131)
+[lib/types/subnames/get-by-domain-name-chainId.ts:131](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L131)
 
 ___
 
@@ -46,7 +46,7 @@ The expected format of the request data.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:129](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L129)
+[lib/types/subnames/get-by-domain-name-chainId.ts:129](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L129)
 
 ___
 
@@ -62,4 +62,4 @@ The structure of the response data.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:130](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L130)
+[lib/types/subnames/get-by-domain-name-chainId.ts:130](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L130)
