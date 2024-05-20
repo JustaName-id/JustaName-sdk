@@ -10,6 +10,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 import { SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
+import { buildSubnameBySubnameKey } from './useSubname';
 
 /**
  * Constructs a unique cache key for storing and retrieving subnames data associated with a wallet address.
@@ -82,7 +83,7 @@ export const useAccountSubnames = (
 
       subnames?.forEach((subname: SubnameGetAllByAddressResponse) => {
         queryClient.setQueryData(
-          buildAccountSubnamesKey(subname.subname),
+          buildSubnameBySubnameKey(subname.subname),
           subname
         );
       });

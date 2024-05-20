@@ -1,4 +1,4 @@
-import { ApiKeyHeaders, SIWEHeaders } from '../headers';
+import {  SIWEHeaders } from '../headers';
 import { IRequest, IResponse, IRoute } from '../common';
 
 /**
@@ -109,10 +109,10 @@ export interface SubnameUpdateResponse extends IResponse{
  * @public
  * @property {SubnameUpdateRequest} request - The structure required for a subname update request.
  * @property {SubnameUpdateResponse} response - The expected format of the response after successful update.
- * @property {ApiKeyHeaders & SIWEHeaders} headers - Combined API key and SIWE authentication headers required for the operation.
+ * @property {SIWEHeaders} headers - Combined API key and SIWE authentication headers required for the operation.
  */
 export interface SubnameUpdateRoute extends IRoute {
   request: SubnameUpdateRequest;
   response: SubnameUpdateResponse;
-  headers: ApiKeyHeaders & SIWEHeaders;
+  headers: SIWEHeaders;
 }

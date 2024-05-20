@@ -4,6 +4,7 @@ import { BaseResponse } from '../types';
 /**
  * The base URL of JustaName API.
  */
+
 export const BASE_URL =
   process.env['JUSTANAME_ENVIRONMENT'] === 'development' ||
   process.env['NEXT_PUBLIC_JUSTANAME_ENVIRONMENT'] === 'development' ||

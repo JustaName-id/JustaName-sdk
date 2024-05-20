@@ -35,10 +35,7 @@ export interface UseAddSubname<T = any> {
 export const useAddSubname = <T = any>(): UseAddSubname<T> => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount();
-  const { getSignature } = useSubnameSignature({
-    backendUrl,
-    requestChallengeRoute: routes.requestChallengeRoute,
-  });
+  const { getSignature } = useSubnameSignature();
   const { refetchSubnames } = useAccountSubnames();
 
   const mutate = useMutation<
@@ -53,7 +50,7 @@ export const useAddSubname = <T = any>(): UseAddSubname<T> => {
 
       const signature = await getSignature();
 
-      const response = await fetch(backendUrl + routes.addSubnameRoute, {
+      const response = await fetch((backendUrl ?? "") + routes.addSubnameRoute, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

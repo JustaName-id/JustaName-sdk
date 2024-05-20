@@ -4,9 +4,5 @@
 export const defaultRoutes = {
   addSubnameRoute: '/api/subnames/add',
   revokeSubnameRoute: '/api/subnames/revoke',
-  rejectSubnameRoute: '/api/subnames/reject',
-  acceptSubnameRoute: '/api/subnames/accept',
-  checkSubnameAvailabilityRoute: '/api/subnames/available',
   requestChallengeRoute: '/api/request-challenge',
-  updateSubnameRoute: '/api/subnames/update',
 };

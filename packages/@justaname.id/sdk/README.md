@@ -23,7 +23,7 @@ import { JustaName } from '@justaname.id/sdk';
 
 async function main() {
   const apiKey = 'your-api-key';
-  const justaName = await JustaName.init({ apiKey });
+  const justaName = JustaName.init({ apiKey });
   // Your SDK is now ready to be used!
 }
 
@@ -39,7 +39,7 @@ const requestChallengeResponse = await justaName.siwe.requestChallenge({
   chainId: 1,
   origin: 'http://localhost:3333',
   address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
-  domain: 'justaname.id',
+  domain: 'localhost',
 });
 ```
 
@@ -50,6 +50,10 @@ const addedUser = await justaName.subnames.addSubname({
   username: 'testuser',
   ensDomain: 'justaname.id',
   chainId: 1,
+}, {
+  xAddress: '0x59c44836630760F97b74b569B379ca94c37B93ca',
+  xSignature: '...',
+  xMessage: '...'
 });
 ```
 
@@ -86,9 +90,11 @@ A key functionality aspect of the SDK revolves around its methods. Below is a li
 - addSubname
 - updateSubname
 - revokeSubname
+- rejectSubname
 - getByDomainNameChainId
 - getBySubname
 - getAllByAddress
+- getRecordsByFullName
 - getInvitations
 - checkSubnameAvailable
 

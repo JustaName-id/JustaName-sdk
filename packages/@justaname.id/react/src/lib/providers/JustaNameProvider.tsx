@@ -3,7 +3,6 @@
 import React from 'react';
 import { JustaName } from '@justaname.id/sdk'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { SignatureOnMounted } from '../components/SignatureOnMounted';
 import { defaultRoutes } from '../constants/default-routes';
 
 const queryClient = new QueryClient({
@@ -34,7 +33,7 @@ const queryClient = new QueryClient({
 export interface JustaNameContextProps {
   justaname: JustaName;
   routes: typeof defaultRoutes;
-  backendUrl: string;
+  backendUrl?: string;
   chainId: 1 | 11155111
 }
 
@@ -43,7 +42,7 @@ const JustaNameContext = React.createContext<JustaNameContextProps>({
   justaname: JustaName.init({}),
   routes: defaultRoutes,
   chainId: 1,
-  backendUrl: ""
+  backendUrl: undefined
 })
 
 /**
@@ -74,7 +73,7 @@ export interface JustaNameProvider {
 export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
   routes,
   chainId = 1,
-  backendUrl = ""
+  backendUrl,
 }) => {
 
   const [justaname] = React.useState<JustaName>(JustaName.init({}));
@@ -90,10 +89,6 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({ children,
           ...routes,
         }
       }}>
-        <SignatureOnMounted
-          routes={routes || defaultRoutes}
-          backendUrl={backendUrl}
-        />
         {children}
       </JustaNameContext.Provider>
     </QueryClientProvider>

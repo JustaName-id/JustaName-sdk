@@ -2,7 +2,14 @@ import { useJustaName } from '../providers';
 import { QueryObserverResult, RefetchOptions, useQuery } from '@tanstack/react-query';
 import { ChainId, JustaName, SubnameRecordsResponse, SanitizedRecords, sanitizeRecords } from '@justaname.id/sdk';
 
-export const buildRecordsBySubnameKey = (subname: string, chainId: number) => ['RECORDS_BY_SUBNAME', subname, chainId]
+export const buildRecordsBySubnameKey = (
+  subname: string,
+  chainId: number
+) => [
+  'RECORDS_BY_SUBNAME',
+  subname,
+  chainId
+]
 
 
 export const getSubnameDetails = async (fullName: string,
@@ -66,7 +73,7 @@ export const useRecords = (
 
    const query = useQuery({
       queryKey: buildRecordsBySubnameKey(props.fullName, chainId),
-      queryFn: () => justaname ? getSubnameDetails(props.fullName, justaname, chainId, props.providerUrl) : undefined,
+      queryFn: () =>  getSubnameDetails(props.fullName, justaname, chainId, props.providerUrl)
     })
 
     return {

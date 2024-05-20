@@ -183,8 +183,8 @@ app.get('/api', (req, res) => {
 
 const port = process.env.PORT || 3333;
 const server = app.listen(port, async  () => {
-  justaname = await JustaName.init({
-    apiKey: process.env.JUSTANAME_API_KEY as string,
+  justaname = JustaName.init({
+    apiKey: process.env.JUSTANAME_API_KEY as string
   });
 
 

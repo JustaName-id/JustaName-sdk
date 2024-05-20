@@ -1,10 +1,6 @@
-import { SubnameGetAllByDomainChainIdResponse } from '@justaname.id/sdk';
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  useQuery,
-} from '@tanstack/react-query';
+import { InfiniteData, useInfiniteQuery, UseInfiniteQueryResult } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
+import { SubnameGetAllByDomainChainIdResponse } from '@justaname.id/sdk';
 
 export const buildCommunitySubnamesKey = (domainName: string | undefined) => [
   'COMMUNITY_SUBNAMES_BY_ADDRESS',
@@ -12,55 +8,50 @@ export const buildCommunitySubnamesKey = (domainName: string | undefined) => [
 ];
 export interface UseCommunitySubnamesOptions {
   ensDomain: string;
-  page?: number;
-  limit?: number;
-  isClaimed?: boolean;
+  isClaimed: boolean;
 }
 
-interface UseCommunitySubnamesResult {
-  communitySubnamesResponse: SubnameGetAllByDomainChainIdResponse;
-  isLoading: boolean;
-  refetchCommunitySubnames: (
-    options?: RefetchOptions | undefined
-  ) => Promise<
-    QueryObserverResult<
-      SubnameGetAllByDomainChainIdResponse | undefined,
-      unknown
-    >
-  >;
-}
 export const useCommunitySubnames = (
   props: UseCommunitySubnamesOptions
-): UseCommunitySubnamesResult => {
+): UseInfiniteQueryResult<InfiniteData<SubnameGetAllByDomainChainIdResponse, unknown>, Error> => {
   const { justaname, chainId } = useJustaName();
 
-  const query = useQuery({
+  return useInfiniteQuery({
     queryKey: buildCommunitySubnamesKey(props.ensDomain),
-    queryFn: async () =>
-      await justaname?.subnames.getCommunitySubnamesByDomain({
+    queryFn: ({
+                pageParam: { page, limit },
+              }) => {
+      return justaname?.subnames.getCommunitySubnamesByDomain({
         ensDomain: props.ensDomain,
-        isClaimed: true,
-        coinType: 60,
+        isClaimed: props.isClaimed,
         chainId: chainId,
-      }),
+        page,
+        limit,
+      })
+    },
+    initialPageParam: {
+      page: 1,
+      limit: 20,
+    },
+    getNextPageParam: (p) => {
+      if (p.pagination.hasNextPage) {
+        return {
+          page: p.pagination.nextPage ?? 1,
+          limit: 20,
+        };
+      }
+
+      return undefined;
+    },
+    getPreviousPageParam: (p) => {
+      if (p.pagination.hasPrevPage) {
+        return {
+          page: p.pagination.prevPage ?? 1,
+          limit: 20,
+        };
+      }
+      return undefined;
+    },
     enabled: Boolean(props.ensDomain) && Boolean(justaname),
   });
-
-  return {
-    communitySubnamesResponse: query.data ?? {
-      subnames: [],
-      pagination: {
-        totalCount: 0,
-        page: 0,
-        limit: 0,
-        totalPages: 0,
-        nextPage: 0,
-        prevPage: 0,
-        hasNextPage: false,
-        hasPrevPage: false,
-      },
-    },
-    isLoading: query.isLoading,
-    refetchCommunitySubnames: query.refetch,
-  };
 };

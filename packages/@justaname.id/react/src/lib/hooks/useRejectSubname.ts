@@ -6,6 +6,7 @@ import { useJustaName } from '../providers';
 import { useAccountSubnames } from './useAccountSubnames';
 import { useMountedAccount } from './useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
+import { useAccountInvitations } from './useAccountInvitations';
 
 export interface BaseRejectSubnameRequest {
   username: string;
@@ -35,12 +36,10 @@ export interface UseRejectSubname {
  * @returns {UseRejectSubname} An object containing the `rejectSubname` async function to initiate the subname reject, and a boolean `rejectSubnamePending` indicating the mutation's pending state.
  */
 export const useRejectSubname = (): UseRejectSubname => {
-  const { backendUrl, routes } = useJustaName();
+  const { justaname } = useJustaName();
   const { address } = useMountedAccount();
-  const { getSignature } = useSubnameSignature({
-    backendUrl,
-    requestChallengeRoute: routes.requestChallengeRoute,
-  });
+  const { refetchInvitations } = useAccountInvitations();
+  const { getSignature } = useSubnameSignature();
   const { refetchSubnames } = useAccountSubnames();
 
   const mutate = useMutation<
@@ -55,26 +54,19 @@ export const useRejectSubname = (): UseRejectSubname => {
 
       const signature = await getSignature();
 
-      const response = await fetch(backendUrl + routes.rejectSubnameRoute, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...params,
-          signature: signature.signature,
-          address: address,
-          message: signature.message,
-        }),
+      const accepted = await  justaname.subnames.rejectSubname({
+        chainId: params.chainId,
+        ensDomain: params.ensDomain,
+        username: params.username,
+      }, {
+        xAddress: address,
+        xSignature: signature.signature,
+        xMessage: signature.message,
       });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data: SubnameRejectResponse = await response.json();
       refetchSubnames();
-      return data;
+      refetchInvitations();
+      return accepted;
     },
   });
 

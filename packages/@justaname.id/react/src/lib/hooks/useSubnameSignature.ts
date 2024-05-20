@@ -4,13 +4,10 @@ import { useMountedAccount } from './useMountedAccount';
 import { useSignMessage } from 'wagmi';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { RequestChallengeResponse } from '@justaname.id/sdk';
+import { useJustaName } from '../providers';
 
 export const buildSignature = (address: string) => ['SUBNAME_SIGNATURE', address]
 
-export interface UseSubnameSignatureOptions {
-  backendUrl: string,
-  requestChallengeRoute: string
-}
 
 export interface UseSubnameSignatureResult {
   getSignature: () => Promise<{signature: string, message: string, address: string, expirationTime: Date}>,
@@ -22,9 +19,8 @@ export interface UseSubnameSignatureResult {
  * @returns {UseSubnameSignatureResult} An object containing the function to initiate the signing process (`subnameSignature`)
  * and a boolean indicating if the signature operation is pending (`subnameSignaturePending`).
  */
-export const useSubnameSignature = (
-  props: UseSubnameSignatureOptions
-): UseSubnameSignatureResult => {
+export const useSubnameSignature = (): UseSubnameSignatureResult => {
+  const { backendUrl, routes} = useJustaName();
   const {  address} = useMountedAccount();
   const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
@@ -34,7 +30,9 @@ export const useSubnameSignature = (
         throw new Error('No address found');
       }
 
-      const response = await fetch(props.backendUrl + props.requestChallengeRoute + `?address=${address}`, {
+      const response = await fetch(
+        (backendUrl ?? "") + routes.requestChallengeRoute
+        + `?address=${address}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -47,7 +45,6 @@ export const useSubnameSignature = (
 
       const data: RequestChallengeResponse = await response.json();
 
-      console.log(data.challenge, address)
       const signature = await signMessageAsync({
         message: data.challenge,
         account: address
@@ -78,7 +75,8 @@ export const useSubnameSignature = (
   const query = useQuery({
     queryKey: buildSignature(address ?? ''),
     queryFn: () => mutation.mutateAsync(),
-    enabled: false
+    enabled: false,
+    refetchOnWindowFocus: false,
   })
 
   const getSignature = async () => {

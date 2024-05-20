@@ -6,6 +6,7 @@ import { useJustaName } from '../providers';
 import { useAccountSubnames } from './useAccountSubnames';
 import { useMountedAccount } from './useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
+import { useAccountInvitations } from './useAccountInvitations';
 
 export interface BaseAcceptSubnameRequest {
   username: string;
@@ -41,12 +42,10 @@ export interface UseAcceptSubname {
  * @returns {UseAcceptSubname} An object containing the `acceptSubname` async function to initiate the subname accept, and a boolean `acceptSubnamePending` indicating the mutation's pending state.
  */
 export const useAcceptSubname = (): UseAcceptSubname => {
-  const { backendUrl, routes } = useJustaName();
+  const {  justaname } = useJustaName();
   const { address } = useMountedAccount();
-  const { getSignature } = useSubnameSignature({
-    backendUrl,
-    requestChallengeRoute: routes.requestChallengeRoute,
-  });
+  const { refetchInvitations } = useAccountInvitations();
+  const { getSignature } = useSubnameSignature();
   const { refetchSubnames } = useAccountSubnames();
 
   const mutate = useMutation<
@@ -61,26 +60,23 @@ export const useAcceptSubname = (): UseAcceptSubname => {
 
       const signature = await getSignature();
 
-      const response = await fetch(backendUrl + routes.acceptSubnameRoute, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...params,
-          signature: signature.signature,
-          address: address,
-          message: signature.message,
-        }),
+      const accepted = await  justaname.subnames.acceptSubname({
+        addresses: params.addresses,
+        chainId: params.chainId,
+        contentHash: params.contentHash,
+        ensDomain: params.ensDomain,
+        text: params.text,
+        username: params.username,
+      }, {
+        xAddress: address,
+        xSignature: signature.signature,
+        xMessage: signature.message,
       });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data: SubnameAcceptResponse = await response.json();
       refetchSubnames();
-      return data;
+      refetchInvitations();
+
+      return accepted;
     },
   });
 
