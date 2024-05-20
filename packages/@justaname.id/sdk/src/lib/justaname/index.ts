@@ -9,7 +9,7 @@ import { Siwe, Subnames } from '../features';
  * @classdesc The main class for the JustaName SDK.
  * @example
  * ```typescript
- * import { JustaName } from 'justaname-sdk';
+ * import { JustaName } from '@justaname.id/sdk';
  *
  * const configuration = {
  *  apiKey: 'your-api-key'
@@ -21,7 +21,7 @@ import { Siwe, Subnames } from '../features';
  *  chainId: 1,
  *  origin: 'http://localhost:3333',
  *  address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
- *  domain: 'justaname.id',
+ *  domain: 'localhost',
  *  ttl?: 120000,
  *  });
  *
@@ -55,7 +55,7 @@ export class JustaName {
    * @static
    */
   static init(configuration: Configuration): JustaName {
-    if (configuration.apiKey){
+    if (configuration?.apiKey){
       this.checkApiKey(configuration.apiKey);
       // await this.healthCheck(configuration.apiKey);
     }

@@ -39,10 +39,7 @@ export interface UseRevokeSubname<T = any> {
 export const useRevokeSubname = <T = any>(): UseRevokeSubname<T> => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount();
-  const { getSignature } = useSubnameSignature({
-    backendUrl,
-    requestChallengeRoute: routes.requestChallengeRoute,
-  });
+  const { getSignature } = useSubnameSignature();
   const { refetchSubnames } = useAccountSubnames();
 
   const mutate = useMutation<
@@ -57,7 +54,7 @@ export const useRevokeSubname = <T = any>(): UseRevokeSubname<T> => {
 
       const signature = await getSignature();
 
-      const response = await fetch(backendUrl + routes.revokeSubnameRoute, {
+      const response = await fetch((backendUrl ?? "") + routes.revokeSubnameRoute, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,21 +1,11 @@
 import React from 'react';
 import { useMountedAccount } from '../hooks/useMountedAccount';
 import { useSubnameSignature } from '../hooks/useSubnameSignature';
-import { defaultRoutes } from '../constants/default-routes';
 
-export const SignatureOnMounted: React.FC<{
-  routes: typeof defaultRoutes,
-  backendUrl: string
-}> = ({
-                                         routes,
-                                         backendUrl
-  }) =>
+export const SignatureOnMounted: React.FC = () =>
 {
   const { address, isConnected } = useMountedAccount();
-  const { getSignature } = useSubnameSignature({
-    backendUrl,
-    requestChallengeRoute: routes?.requestChallengeRoute || defaultRoutes.requestChallengeRoute
-  })
+  const { getSignature } = useSubnameSignature()
 
   React.useEffect(() => {
 

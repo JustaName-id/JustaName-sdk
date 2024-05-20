@@ -25,11 +25,9 @@ import {
   SubnameUpdateResponse,
   SubnameRecordsRequest,
   SubnameRecordsResponse,
-} from '../../types';
-import {
   SubnameRejectRequest,
   SubnameRejectResponse,
-} from '../../types/subnames/reject';
+} from '../../types';
 
 /**
  * Represents the Subnames class for interacting with the Subnames API.
@@ -38,19 +36,24 @@ import {
  * @classdesc Represents the Subnames class for interacting with the Subnames API.
  * @example
  * ```typescript
- * import { JustaName } from 'justaname-sdk';
+ * import { JustaName } from '@justaname.id/sdk';
  *
  * const configuration = {
  *  apiKey: 'your-api-key'
  *  };
  *
- *  const justaName = await JustaName.init(configuration);
+ *  const justaName = JustaName.init(configuration);
  *
  *  const addedUser = await justaName.subnames.addSubname({
  *  username: 'test',
- *  ensDomain: 'justaname.id',
+ *  ensDomain: 'test.eth',
  *  chainId: 1,
- *  });
+ *  },
+ *  {
+ *    xAddress: '0x59c44836630760F97b74b569B379ca94c37B93ca',
+ *    xMessage: '...',
+ *    xSignature: '...',
+ * });
  *
  *  ```
  */
@@ -75,11 +78,10 @@ export class Subnames {
     params: SubnameAcceptRequest,
     headers: SIWEHeaders
   ): Promise<SubnameAcceptResponse> {
-    return this.isNotReadOnlyMode(
-      restCall('ACCEPT_SUBNAME_ROUTE', 'POST', params, {
+    return restCall('ACCEPT_SUBNAME_ROUTE', 'POST', params, {
         ...headers,
       })
-    );
+
   }
 
   /**
@@ -143,12 +145,10 @@ export class Subnames {
     params: SubnameUpdateRequest,
     headers: SIWEHeaders
   ): Promise<SubnameUpdateResponse> {
-    return this.isNotReadOnlyMode(
-      restCall('UPDATE_SUBNAME_ROUTE', 'POST', params, {
-        xApiKey: this.apiKey as string,
+    return restCall('UPDATE_SUBNAME_ROUTE', 'POST', params, {
         ...headers,
       })
-    );
+
   }
 
   /**
@@ -180,11 +180,9 @@ export class Subnames {
     params: SubnameRejectRequest,
     headers: SIWEHeaders
   ): Promise<SubnameRejectResponse> {
-    return this.isNotReadOnlyMode(
-      restCall('REJECT_SUBNAME_ROUTE', 'POST', params, {
+    return restCall('REJECT_SUBNAME_ROUTE', 'POST', params, {
         ...headers,
-      })
-    );
+      });
   }
 
   /**

@@ -1,12 +1,11 @@
 "use client";
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useMountedAccount } from './useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
 import { SubnameUpdateRequest, SubnameUpdateResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from './useAccountSubnames';
-import { buildSubnameBySubnameKey } from './useSubname';
 
 /**
  * Defines the structure for the base request needed to claim a subname.
@@ -31,13 +30,9 @@ export interface UseUpdateSubnameResult {
  * @returns {UseUpdateSubnameResult} An object containing methods and properties to handle the mutation state.
  */
 export const useUpdateSubname = () : UseUpdateSubnameResult => {
-  const { backendUrl, routes } = useJustaName();
+  const { justaname,chainId } = useJustaName();
   const { address } = useMountedAccount()
-  const queryClient = useQueryClient()
-  const { getSignature} = useSubnameSignature({
-    backendUrl,
-    requestChallengeRoute: routes.requestChallengeRoute
-  })
+  const { getSignature} = useSubnameSignature()
   const { refetchSubnames } = useAccountSubnames()
 
   const mutate = useMutation<SubnameUpdateResponse,  Error, SubnameUpdate>
@@ -51,35 +46,21 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
 
       const signature = await getSignature()
 
-      const response = await fetch(
-        backendUrl + routes.updateSubnameRoute, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: params.username,
-            signature: signature.signature,
-            ensDomain: params.ensDomain,
-            address: address,
-            message: signature.message,
-            text: params.text,
-            addresses: params.addresses,
-            contentHash: params.contentHash
-          })
-        });
+      const updated = await  justaname.subnames.updateSubname({
+        addresses: params.addresses,
+        chainId,
+        contentHash: params.contentHash,
+        ensDomain: params.ensDomain,
+        text: params.text,
+        username: params.username,
+      }, {
+        xAddress: address,
+        xSignature: signature.signature,
+        xMessage: signature.message,
+      });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data: SubnameUpdateResponse = await response.json();
-      const key = buildSubnameBySubnameKey(params.subname)
-      await queryClient.invalidateQueries({
-        queryKey: key
-      })
       refetchSubnames()
-      return data;
+      return updated
     },
   })
 
