@@ -54,9 +54,9 @@ The provider component wrapping children.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:58](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L58)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:58](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L58)
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:73](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L73)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:73](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L73)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/components/SignatureOnMounted.tsx:5](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/components/SignatureOnMounted.tsx#L5)
+[packages/@justaname.id/react/src/lib/components/SignatureOnMounted.tsx:5](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/components/SignatureOnMounted.tsx#L5)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAccountInvitations.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useAccountInvitations.ts#L11)
+[packages/@justaname.id/react/src/lib/hooks/useAccountInvitations.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useAccountInvitations.ts#L11)
 
 ___
 
@@ -121,7 +121,7 @@ A unique cache key array for react-query.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts#L21)
+[packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts#L21)
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useCommunitySubnames.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useCommunitySubnames.ts#L5)
+[packages/@justaname.id/react/src/lib/hooks/useCommunitySubnames.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useCommunitySubnames.ts#L5)
 
 ___
 
@@ -162,7 +162,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useRecords.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useRecords.ts#L5)
+[packages/@justaname.id/react/src/lib/hooks/useRecords.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useRecords.ts#L5)
 
 ___
 
@@ -182,7 +182,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSearchSubnames.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useSearchSubnames.ts#L9)
+[packages/@justaname.id/react/src/lib/hooks/useSearchSubnames.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useSearchSubnames.ts#L9)
 
 ___
 
@@ -202,7 +202,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts#L9)
+[packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts#L9)
 
 ___
 
@@ -226,7 +226,7 @@ A unique cache key array for react-query.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L13)
+[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L13)
 
 ___
 
@@ -249,7 +249,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useRecords.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useRecords.ts#L15)
+[packages/@justaname.id/react/src/lib/hooks/useRecords.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useRecords.ts#L15)
 
 ___
 
@@ -267,7 +267,7 @@ An object containing the `acceptSubname` async function to initiate the subname 
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts:44](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts#L44)
+[packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts:44](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts#L44)
 
 ___
 
@@ -281,7 +281,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAccountInvitations.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useAccountInvitations.ts#L25)
+[packages/@justaname.id/react/src/lib/hooks/useAccountInvitations.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useAccountInvitations.ts#L25)
 
 ___
 
@@ -305,7 +305,7 @@ The result object containing subnames data, loading state, and a refetch functio
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts:66](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts#L66)
+[packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts:66](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useAccountSubnames.ts#L66)
 
 ___
 
@@ -329,7 +329,7 @@ An object containing the `addSubname` async function to initiate the subname cla
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts#L35)
+[packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useAddSubname.ts#L35)
 
 ___
 
@@ -349,7 +349,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useCommunitySubnames.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useCommunitySubnames.ts#L14)
+[packages/@justaname.id/react/src/lib/hooks/useCommunitySubnames.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useCommunitySubnames.ts#L14)
 
 ___
 
@@ -374,7 +374,7 @@ and the loading state of the query (`isLoading`).
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:32](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L32)
+[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:32](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L32)
 
 ___
 
@@ -398,7 +398,7 @@ If the hook is used outside a JustaNameProvider.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:107](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L107)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:107](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L107)
 
 ___
 
@@ -416,7 +416,7 @@ A boolean flag indicating whether the component is currently mounted.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useMounted.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useMounted.ts#L10)
+[packages/@justaname.id/react/src/lib/hooks/useMounted.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useMounted.ts#L10)
 
 ___
 
@@ -435,7 +435,7 @@ along with an improved `isConnected` boolean that also takes the component's mou
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useMountedAccount.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useMountedAccount.ts#L12)
+[packages/@justaname.id/react/src/lib/hooks/useMountedAccount.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useMountedAccount.ts#L12)
 
 ___
 
@@ -455,7 +455,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useRecords.ts:68](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useRecords.ts#L68)
+[packages/@justaname.id/react/src/lib/hooks/useRecords.ts:68](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useRecords.ts#L68)
 
 ___
 
@@ -473,7 +473,7 @@ An object containing the `rejectSubname` async function to initiate the subname 
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useRejectSubname.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useRejectSubname.ts#L38)
+[packages/@justaname.id/react/src/lib/hooks/useRejectSubname.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useRejectSubname.ts#L38)
 
 ___
 
@@ -497,7 +497,7 @@ An object containing the `revokeSubname` async function to initiate the subname 
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L39)
+[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L39)
 
 ___
 
@@ -517,7 +517,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSearchSubnames.ts:29](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useSearchSubnames.ts#L29)
+[packages/@justaname.id/react/src/lib/hooks/useSearchSubnames.ts:29](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useSearchSubnames.ts#L29)
 
 ___
 
@@ -541,7 +541,7 @@ An object containing the subname data, loading state, and a refetch function.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L48)
+[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L48)
 
 ___
 
@@ -560,7 +560,7 @@ and a boolean indicating if the signature operation is pending (`subnameSignatur
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts#L22)
+[packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useSubnameSignature.ts#L22)
 
 ___
 
@@ -578,4 +578,4 @@ An object containing methods and properties to handle the mutation state.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts:32](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts#L32)
+[packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts:32](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts#L32)

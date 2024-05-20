@@ -31,7 +31,7 @@ The headers required for the request, left intentionally unspecified to accommod
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:192](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L192)
+[lib/types/subnames/get-all-by-ens-domain.ts:192](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L192)
 
 ___
 
@@ -47,7 +47,7 @@ The request data structure.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:190](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L190)
+[lib/types/subnames/get-all-by-ens-domain.ts:190](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L190)
 
 ___
 
@@ -63,4 +63,4 @@ The expected response structure.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:191](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L191)
+[lib/types/subnames/get-all-by-ens-domain.ts:191](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L191)

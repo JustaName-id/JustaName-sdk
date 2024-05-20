@@ -26,7 +26,7 @@ The cryptocurrency address to search for associated subnames.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:78](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L78)
+[lib/types/subnames/get-all-by-address.ts:78](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L78)
 
 ___
 
@@ -38,7 +38,7 @@ The blockchain network identifier.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:80](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L80)
+[lib/types/subnames/get-all-by-address.ts:80](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L80)
 
 ___
 
@@ -50,7 +50,7 @@ Coin type number for the cryptocurrency of the address.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:82](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L82)
+[lib/types/subnames/get-all-by-address.ts:82](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L82)
 
 ___
 
@@ -62,4 +62,4 @@ Flag indicating whether to retrieve only claimed subnames.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:84](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L84)
+[lib/types/subnames/get-all-by-address.ts:84](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L84)

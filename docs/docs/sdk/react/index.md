@@ -61,11 +61,11 @@ function MyComponent() {
 import { useAddSubname } from '@justaname.id/react';
 
 function MyComponent() {
-  const { claimSubname, claimSubnamePending } = useAddSubname();
+  const { addSubname, addSubnamePending } = useAddSubname();
 
   const handleClaim = async () => {
     try {
-      await claimSubname({ username: 'test' });
+      await addSubname({ username: 'test' });
       console.log('Subname claimed successfully!');
     } catch (error) {
       console.error('Failed to claim subname:', error);

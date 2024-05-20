@@ -99,7 +99,7 @@ This type is used to specify and restrict operations to the following chain IDs:
 
 #### Defined in
 
-[lib/types/common/index.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L9)
+[lib/types/common/index.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L9)
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 #### Defined in
 
-[lib/utils/sanitizeRecords/index.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L5)
+[lib/utils/sanitizeRecords/index.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L5)
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 #### Defined in
 
-[lib/utils/cointypes/index.ts:1262](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L1262)
+[lib/utils/cointypes/index.ts:1262](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L1262)
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 #### Defined in
 
-[lib/constants/general-fields/index.ts:3](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L3)
+[lib/constants/general-fields/index.ts:3](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L3)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[lib/constants/general-fields/index.ts:1](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L1)
+[lib/constants/general-fields/index.ts:1](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L1)
 
 ___
 
@@ -149,7 +149,7 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:64](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L64)
+[lib/api/routes/index.ts:64](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L64)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:62](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L62)
+[lib/api/routes/index.ts:62](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L62)
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 #### Defined in
 
-[lib/utils/sanitizeRecords/index.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L7)
+[lib/utils/sanitizeRecords/index.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L7)
 
 ___
 
@@ -179,7 +179,7 @@ ___
 
 #### Defined in
 
-[lib/constants/supported-socials/index.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L4)
+[lib/constants/supported-socials/index.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L4)
 
 ___
 
@@ -189,7 +189,7 @@ ___
 
 #### Defined in
 
-[lib/constants/supported-socials/index.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L2)
+[lib/constants/supported-socials/index.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L2)
 
 ___
 
@@ -199,7 +199,7 @@ ___
 
 #### Defined in
 
-[lib/constants/general-fields/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L39)
+[lib/constants/general-fields/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L39)
 
 ___
 
@@ -209,7 +209,7 @@ ___
 
 #### Defined in
 
-[lib/constants/supported-socials/index.ts:77](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L77)
+[lib/constants/supported-socials/index.ts:77](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L77)
 
 ## Variables
 
@@ -219,7 +219,7 @@ ___
 
 #### Defined in
 
-[lib/constants/general-fields/index.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L12)
+[lib/constants/general-fields/index.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L12)
 
 ___
 
@@ -251,7 +251,7 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L42)
+[lib/api/routes/index.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L42)
 
 ___
 
@@ -261,7 +261,7 @@ ___
 
 #### Defined in
 
-[lib/constants/supported-socials/index.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L21)
+[lib/constants/supported-socials/index.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L21)
 
 ___
 
@@ -271,7 +271,7 @@ ___
 
 #### Defined in
 
-[lib/utils/cointypes/index.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L11)
+[lib/utils/cointypes/index.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L11)
 
 ## Functions
 
@@ -292,7 +292,7 @@ ___
 
 #### Defined in
 
-[lib/utils/cointypes/index.ts:1264](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L1264)
+[lib/utils/cointypes/index.ts:1264](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L1264)
 
 ___
 
@@ -312,7 +312,7 @@ ___
 
 #### Defined in
 
-[lib/utils/sanitizeRecords/index.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L41)
+[lib/utils/sanitizeRecords/index.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L41)
 
 ___
 
@@ -332,7 +332,7 @@ ___
 
 #### Defined in
 
-[lib/utils/sanitizeRecords/index.ts:68](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L68)
+[lib/utils/sanitizeRecords/index.ts:68](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L68)
 
 ___
 
@@ -352,7 +352,7 @@ ___
 
 #### Defined in
 
-[lib/utils/sanitizeRecords/index.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L50)
+[lib/utils/sanitizeRecords/index.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L50)
 
 ___
 
@@ -372,7 +372,7 @@ ___
 
 #### Defined in
 
-[lib/utils/cointypes/index.ts:1292](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L1292)
+[lib/utils/cointypes/index.ts:1292](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L1292)
 
 ___
 
@@ -392,4 +392,4 @@ ___
 
 #### Defined in
 
-[lib/utils/sanitizeRecords/index.ts:78](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L78)
+[lib/utils/sanitizeRecords/index.ts:78](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L78)

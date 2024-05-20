@@ -21,7 +21,7 @@ A reference to the metadata this text record is associated with.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L42)
+[lib/types/subnames/get-by-domain-name-chainId.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L42)
 
 ___
 
@@ -33,7 +33,7 @@ Unique identifier for the text record.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L36)
+[lib/types/subnames/get-by-domain-name-chainId.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L36)
 
 ___
 
@@ -45,7 +45,7 @@ The key or label of the text record.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L38)
+[lib/types/subnames/get-by-domain-name-chainId.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L38)
 
 ___
 
@@ -57,4 +57,4 @@ The text content or value of the record.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L40)
+[lib/types/subnames/get-by-domain-name-chainId.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L40)

@@ -27,7 +27,7 @@ Optional. Ethereum addresses associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/add.ts:54](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L54)
+[lib/types/subnames/add.ts:54](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L54)
 
 ___
 
@@ -39,7 +39,7 @@ The chain ID of the Ethereum blockchain where the operation takes place.
 
 #### Defined in
 
-[lib/types/subnames/add.ts:52](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L52)
+[lib/types/subnames/add.ts:52](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L52)
 
 ___
 
@@ -51,7 +51,7 @@ Optional. A content hash representing associated data.
 
 #### Defined in
 
-[lib/types/subnames/add.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L58)
+[lib/types/subnames/add.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L58)
 
 ___
 
@@ -63,7 +63,7 @@ The ENS domain under which the subname is added.
 
 #### Defined in
 
-[lib/types/subnames/add.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L50)
+[lib/types/subnames/add.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L50)
 
 ___
 
@@ -75,7 +75,7 @@ Optional. Text records for additional data associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/add.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L56)
+[lib/types/subnames/add.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L56)
 
 ___
 
@@ -87,4 +87,4 @@ The subname to be added.
 
 #### Defined in
 
-[lib/types/subnames/add.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L48)
+[lib/types/subnames/add.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L48)

@@ -20,7 +20,7 @@ The key of the text record.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L27)
+[lib/types/subnames/accept.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L27)
 
 ___
 
@@ -32,4 +32,4 @@ The value of the text record.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:29](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L29)
+[lib/types/subnames/accept.ts:29](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L29)

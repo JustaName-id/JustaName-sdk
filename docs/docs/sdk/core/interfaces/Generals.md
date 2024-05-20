@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/constants/general-fields/index.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L8)
+[lib/constants/general-fields/index.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L8)
 
 ___
 
@@ -24,4 +24,4 @@ ___
 
 #### Defined in
 
-[lib/constants/general-fields/index.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L7)
+[lib/constants/general-fields/index.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L7)

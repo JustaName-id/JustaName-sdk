@@ -26,7 +26,7 @@ The chain identifier.
 
 #### Defined in
 
-[lib/types/subnames/records.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L56)
+[lib/types/subnames/records.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L56)
 
 ___
 
@@ -38,7 +38,7 @@ The full name of the subname.
 
 #### Defined in
 
-[lib/types/subnames/records.ts:55](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L55)
+[lib/types/subnames/records.ts:55](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L55)
 
 ___
 
@@ -50,4 +50,4 @@ The URL of the provider.
 
 #### Defined in
 
-[lib/types/subnames/records.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L57)
+[lib/types/subnames/records.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L57)

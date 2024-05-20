@@ -38,7 +38,7 @@ The function to revoke a subname.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L28)
+[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L28)
 
 ___
 
@@ -50,4 +50,4 @@ Indicates if the mutation is currently pending.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:31](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L31)
+[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:31](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L31)

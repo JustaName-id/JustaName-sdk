@@ -12,17 +12,21 @@ to initiate and verify challenges.
 **`Example`**
 
 ```typescript
-import { JustaName } from 'justaname-sdk';
+import { JustaName } from '@justaname.id/sdk';
 
 const configuration = {
  apiKey: 'your-api-key'
  };
 
- const justaName = await JustaName.init(configuration);
+ const justaName = JustaName.init(configuration);
 
- const challenge = await justaName.siwe.requestChallenge({
-   address: "0x1234567890123456789012345678901234567890",
- });
+const requestChallengeResponse = await justaName.siwe.requestChallenge({
+ chainId: 1,
+ origin: 'http://localhost:3333',
+ address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
+ domain: 'localhost',
+ ttl?: 120000,
+});
 
  ```
 
@@ -58,7 +62,7 @@ Sends a request to initiate a challenge.
 
 #### Defined in
 
-[lib/features/siwe/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/siwe/index.ts#L39)
+[lib/features/siwe/index.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/features/siwe/index.ts#L43)
 
 ___
 
@@ -82,4 +86,4 @@ Sends a request to verify a specific address using SIWE.
 
 #### Defined in
 
-[lib/features/siwe/index.ts:52](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/features/siwe/index.ts#L52)
+[lib/features/siwe/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/features/siwe/index.ts#L56)

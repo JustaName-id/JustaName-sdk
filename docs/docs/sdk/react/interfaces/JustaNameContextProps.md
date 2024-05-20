@@ -18,7 +18,7 @@ The backend URL for JustaName API requests.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:36](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L36)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:36](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L36)
 
 ___
 
@@ -30,7 +30,7 @@ The blockchain network identifier.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:37](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L37)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:37](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L37)
 
 ___
 
@@ -42,7 +42,7 @@ The JustaName SDK instance.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:34](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L34)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:34](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L34)
 
 ___
 
@@ -62,4 +62,4 @@ An object containing route definitions.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:35](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L35)
+[packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx:35](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/providers/JustaNameProvider.tsx#L35)

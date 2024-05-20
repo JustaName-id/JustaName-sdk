@@ -33,7 +33,7 @@ The headers required for the request, deliberately unspecified
 
 #### Defined in
 
-[lib/types/subnames/available.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L50)
+[lib/types/subnames/available.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L50)
 
 ___
 
@@ -49,7 +49,7 @@ The request structure for the subname availability check.
 
 #### Defined in
 
-[lib/types/subnames/available.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L48)
+[lib/types/subnames/available.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L48)
 
 ___
 
@@ -65,4 +65,4 @@ The response indicating the availability of the subname.
 
 #### Defined in
 
-[lib/types/subnames/available.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L49)
+[lib/types/subnames/available.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L49)

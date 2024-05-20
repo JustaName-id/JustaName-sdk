@@ -21,7 +21,7 @@ An array of addresses associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L49)
+[lib/types/subnames/accept.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L49)
 
 ___
 
@@ -33,7 +33,7 @@ A hash of the content associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L47)
+[lib/types/subnames/accept.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L47)
 
 ___
 
@@ -45,7 +45,7 @@ The unique identifier of the subname metadata.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L45)
+[lib/types/subnames/accept.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L45)
 
 ___
 
@@ -57,7 +57,7 @@ The identifier of the parent domain.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:53](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L53)
+[lib/types/subnames/accept.ts:53](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L53)
 
 ___
 
@@ -69,4 +69,4 @@ An array of text records associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L51)
+[lib/types/subnames/accept.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L51)
