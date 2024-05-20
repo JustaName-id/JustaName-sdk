@@ -21,7 +21,7 @@ The actual cryptocurrency address.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L19)
+[lib/types/subnames/get-by-domain-name-chainId.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L19)
 
 ___
 
@@ -33,7 +33,7 @@ The cryptocurrency coin type number, typically following a standard like BIP-44.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L17)
+[lib/types/subnames/get-by-domain-name-chainId.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L17)
 
 ___
 
@@ -45,7 +45,7 @@ A reference to the metadata associated with this address.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L21)
+[lib/types/subnames/get-by-domain-name-chainId.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L21)
 
 ___
 
@@ -57,4 +57,4 @@ The unique identifier of the address record.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L15)
+[lib/types/subnames/get-by-domain-name-chainId.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L15)

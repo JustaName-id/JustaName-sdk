@@ -25,4 +25,4 @@ An optional API key used for authenticating requests
 
 #### Defined in
 
-[lib/types/justaname/configuration.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L13)
+[lib/types/justaname/configuration.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L13)

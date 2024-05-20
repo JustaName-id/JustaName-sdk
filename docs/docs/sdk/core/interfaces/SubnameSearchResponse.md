@@ -27,7 +27,7 @@ Extend this interface to define specific properties for different responses.
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:52](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L52)
+[lib/types/subnames/search-subnames.ts:52](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L52)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:53](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L53)
+[lib/types/subnames/search-subnames.ts:53](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L53)

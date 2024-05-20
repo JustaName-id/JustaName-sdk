@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L21)
+[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L21)
 
 ___
 
@@ -24,4 +24,4 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L22)
+[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L22)

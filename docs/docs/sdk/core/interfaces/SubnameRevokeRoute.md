@@ -32,7 +32,7 @@ Combined API key and SIWE authentication headers required for the operation.
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L50)
+[lib/types/subnames/revoke.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L50)
 
 ___
 
@@ -48,7 +48,7 @@ The structure required for a subname revocation request.
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L48)
+[lib/types/subnames/revoke.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L48)
 
 ___
 
@@ -64,4 +64,4 @@ The expected format of the response upon successful revocation.
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L49)
+[lib/types/subnames/revoke.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L49)

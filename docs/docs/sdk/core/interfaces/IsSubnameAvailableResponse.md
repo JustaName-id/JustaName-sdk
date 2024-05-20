@@ -28,4 +28,4 @@ Indicates the availability of the subname.
 
 #### Defined in
 
-[lib/types/subnames/available.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L30)
+[lib/types/subnames/available.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L30)

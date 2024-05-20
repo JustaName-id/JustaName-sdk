@@ -23,4 +23,4 @@ The API key provided to the client. This key should be included in API
 
 #### Defined in
 
-[lib/types/headers/index.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/headers/index.ts#L30)
+[lib/types/headers/index.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/headers/index.ts#L30)

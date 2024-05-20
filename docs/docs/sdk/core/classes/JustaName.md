@@ -21,7 +21,7 @@ const configuration = {
  apiKey: 'your-api-key'
  };
 
- const justaName = await JustaName.init(configuration);
+ const justaName = JustaName.init(configuration);
 
  const requestChallengeResponse = await justaName.siwe.requestChallenge({
  chainId: 1,
@@ -52,7 +52,7 @@ const configuration = {
 
 #### Defined in
 
-[lib/justaname/index.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L41)
+[lib/justaname/index.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L41)
 
 ## Properties
 
@@ -62,7 +62,7 @@ const configuration = {
 
 #### Defined in
 
-[lib/justaname/index.ts:31](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L31)
+[lib/justaname/index.ts:31](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L31)
 
 ___
 
@@ -78,7 +78,7 @@ JustaName
 
 #### Defined in
 
-[lib/justaname/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L39)
+[lib/justaname/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L39)
 
 ## Methods
 
@@ -106,13 +106,13 @@ Checks if the API key is present.
 
 #### Defined in
 
-[lib/justaname/index.ts:74](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L74)
+[lib/justaname/index.ts:74](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L74)
 
 ___
 
 ### init
 
-▸ **init**(`configuration`): `Promise`<[`JustaName`](JustaName.md)\>
+▸ **init**(`configuration`): [`JustaName`](JustaName.md)
 
 Initializes the JustaName SDK.
 
@@ -124,7 +124,7 @@ Initializes the JustaName SDK.
 
 #### Returns
 
-`Promise`<[`JustaName`](JustaName.md)\>
+[`JustaName`](JustaName.md)
 
 - A promise that resolves with the JustaName SDK.
 
@@ -136,4 +136,4 @@ Initializes the JustaName SDK.
 
 #### Defined in
 
-[lib/justaname/index.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L57)
+[lib/justaname/index.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/justaname/index.ts#L57)

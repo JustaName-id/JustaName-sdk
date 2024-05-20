@@ -31,7 +31,7 @@ The headers required for the request, left flexible for specific needs.
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L58)
+[lib/types/siwe/verify-challenge.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L58)
 
 ___
 
@@ -47,7 +47,7 @@ The structure required for the verification request.
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L56)
+[lib/types/siwe/verify-challenge.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L56)
 
 ___
 
@@ -63,4 +63,4 @@ The expected response indicating verification result.
 
 #### Defined in
 
-[lib/types/siwe/verify-challenge.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L57)
+[lib/types/siwe/verify-challenge.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L57)

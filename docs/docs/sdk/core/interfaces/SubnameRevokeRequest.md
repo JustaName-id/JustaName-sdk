@@ -26,7 +26,7 @@ The blockchain network identifier, specifying the network of the ENS domain.
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:20](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L20)
+[lib/types/subnames/revoke.ts:20](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L20)
 
 ___
 
@@ -38,7 +38,7 @@ The parent ENS domain under which the subname is registered.
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L16)
+[lib/types/subnames/revoke.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L16)
 
 ___
 
@@ -50,4 +50,4 @@ The subname to be revoked.
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L18)
+[lib/types/subnames/revoke.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L18)

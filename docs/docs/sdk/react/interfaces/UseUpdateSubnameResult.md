@@ -28,7 +28,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts#L23)
+[packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts#L22)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts#L24)
+[packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts#L23)

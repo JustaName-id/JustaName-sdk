@@ -21,8 +21,11 @@ custom_edit_url: null
 - [ApiKeyRoute](interfaces/ApiKeyRoute.md)
 - [BaseResponse](interfaces/BaseResponse.md)
 - [Coin](interfaces/Coin.md)
+- [CoinType](interfaces/CoinType.md)
+- [CoinTypeMap](interfaces/CoinTypeMap.md)
 - [Configuration](interfaces/Configuration.md)
 - [ContentHash](interfaces/ContentHash.md)
+- [Generals](interfaces/Generals.md)
 - [IHeaders](interfaces/IHeaders.md)
 - [IRequest](interfaces/IRequest.md)
 - [IResponse](interfaces/IResponse.md)
@@ -38,6 +41,8 @@ custom_edit_url: null
 - [SIWEHeaders](interfaces/SIWEHeaders.md)
 - [SIWERequestChallengeRoute](interfaces/SIWERequestChallengeRoute.md)
 - [SIWEVerifyMessageRoute](interfaces/SIWEVerifyMessageRoute.md)
+- [SanitizedRecords](interfaces/SanitizedRecords.md)
+- [Socials](interfaces/Socials.md)
 - [SubnameAcceptRequest](interfaces/SubnameAcceptRequest.md)
 - [SubnameAcceptResponse](interfaces/SubnameAcceptResponse.md)
 - [SubnameAcceptRoute](interfaces/SubnameAcceptRoute.md)
@@ -59,6 +64,9 @@ custom_edit_url: null
 - [SubnameRecordsRequest](interfaces/SubnameRecordsRequest.md)
 - [SubnameRecordsResponse](interfaces/SubnameRecordsResponse.md)
 - [SubnameRecordsRoute](interfaces/SubnameRecordsRoute.md)
+- [SubnameRejectRequest](interfaces/SubnameRejectRequest.md)
+- [SubnameRejectResponse](interfaces/SubnameRejectResponse.md)
+- [SubnameRejectRoute](interfaces/SubnameRejectRoute.md)
 - [SubnameReserveRequest](interfaces/SubnameReserveRequest.md)
 - [SubnameReserveResponse](interfaces/SubnameReserveResponse.md)
 - [SubnameReserveRoute](interfaces/SubnameReserveRoute.md)
@@ -91,7 +99,47 @@ This type is used to specify and restrict operations to the following chain IDs:
 
 #### Defined in
 
-[lib/types/common/index.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L9)
+[lib/types/common/index.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/common/index.ts#L9)
+
+___
+
+### CoinAndDetails
+
+Ƭ **CoinAndDetails**: [`Coin`](interfaces/Coin.md) & [`CoinType`](interfaces/CoinType.md)
+
+#### Defined in
+
+[lib/utils/sanitizeRecords/index.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L5)
+
+___
+
+### CoinTypeKeys
+
+Ƭ **CoinTypeKeys**: keyof typeof [`coinTypeMap`](modules.md#cointypemap)
+
+#### Defined in
+
+[lib/utils/cointypes/index.ts:1262](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L1262)
+
+___
+
+### GeneralsIdentifier
+
+Ƭ **GeneralsIdentifier**: ``"display"`` \| ``"description"`` \| ``"url"`` \| ``"location"`` \| ``"avatar"`` \| ``"banner"``
+
+#### Defined in
+
+[lib/constants/general-fields/index.ts:3](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L3)
+
+___
+
+### GeneralsName
+
+Ƭ **GeneralsName**: ``"Nickname"`` \| ``"Description"`` \| ``"Website"`` \| ``"Location"`` \| ``"Avatar"`` \| ``"Banner"``
+
+#### Defined in
+
+[lib/constants/general-fields/index.ts:1](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L1)
 
 ___
 
@@ -101,7 +149,7 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:61](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L61)
+[lib/api/routes/index.ts:64](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L64)
 
 ___
 
@@ -111,9 +159,69 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:59](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L59)
+[lib/api/routes/index.ts:62](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L62)
+
+___
+
+### SocialDetails
+
+Ƭ **SocialDetails**: [`Text`](interfaces/Text.md) & \{ `name`: [`SupportedSocialsNames`](modules.md#supportedsocialsnames)  }
+
+#### Defined in
+
+[lib/utils/sanitizeRecords/index.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L7)
+
+___
+
+### SocialsIdentifier
+
+Ƭ **SocialsIdentifier**: ``"com.twitter"`` \| ``"com.facebook"`` \| ``"com.instagram"`` \| ``"com.reddit"`` \| ``"com.x"`` \| ``"com.github"`` \| ``"email"`` \| ``"org.telegram"``
+
+#### Defined in
+
+[lib/constants/supported-socials/index.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L4)
+
+___
+
+### SocialsName
+
+Ƭ **SocialsName**: ``"Twitter"`` \| ``"Facebook"`` \| ``"Instagram"`` \| ``"Reddit"`` \| ``"X"`` \| ``"Github"`` \| ``"Email"`` \| ``"Telegram"``
+
+#### Defined in
+
+[lib/constants/supported-socials/index.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L2)
+
+___
+
+### SupportedGeneralsNames
+
+Ƭ **SupportedGeneralsNames**: typeof [`GENERAL_FIELDS`](modules.md#general_fields)[`number`][``"name"``]
+
+#### Defined in
+
+[lib/constants/general-fields/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L39)
+
+___
+
+### SupportedSocialsNames
+
+Ƭ **SupportedSocialsNames**: typeof [`SUPPORTED_SOCIALS`](modules.md#supported_socials)[`number`][``"name"``]
+
+#### Defined in
+
+[lib/constants/supported-socials/index.ts:77](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L77)
 
 ## Variables
+
+### GENERAL\_FIELDS
+
+• `Const` **GENERAL\_FIELDS**: readonly [`Generals`](interfaces/Generals.md)[]
+
+#### Defined in
+
+[lib/constants/general-fields/index.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/general-fields/index.ts#L12)
+
+___
 
 ### Routes
 
@@ -133,6 +241,7 @@ ___
 | `GET_SUBNAME_BY_SUBNAME_ROUTE` | `string` |
 | `HEALTH_CHECK_ROUTE` | `string` |
 | `RECORDS_BY_FULLNAME_ROUTE` | `string` |
+| `REJECT_SUBNAME_ROUTE` | `string` |
 | `RESERVE_SUBNAME_ROUTE` | `string` |
 | `REVOKE_SUBNAME_ROUTE` | `string` |
 | `SEARCH_SUBNAMES_ROUTE` | `string` |
@@ -142,4 +251,145 @@ ___
 
 #### Defined in
 
-[lib/api/routes/index.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/4ff9084/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L40)
+[lib/api/routes/index.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/api/routes/index.ts#L42)
+
+___
+
+### SUPPORTED\_SOCIALS
+
+• `Const` **SUPPORTED\_SOCIALS**: readonly [`Socials`](interfaces/Socials.md)[]
+
+#### Defined in
+
+[lib/constants/supported-socials/index.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L21)
+
+___
+
+### coinTypeMap
+
+• `Const` **coinTypeMap**: [`CoinTypeMap`](interfaces/CoinTypeMap.md)
+
+#### Defined in
+
+[lib/utils/cointypes/index.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L11)
+
+## Functions
+
+### LightenDarkenColor
+
+▸ **LightenDarkenColor**(`color`, `percent`): `string`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `color` | `string` |
+| `percent` | `number` |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[lib/utils/cointypes/index.ts:1264](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L1264)
+
+___
+
+### createAddresses
+
+▸ **createAddresses**(`coins`): [`CoinAndDetails`](modules.md#coinanddetails)[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `coins` | [`Coin`](interfaces/Coin.md)[] |
+
+#### Returns
+
+[`CoinAndDetails`](modules.md#coinanddetails)[]
+
+#### Defined in
+
+[lib/utils/sanitizeRecords/index.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L41)
+
+___
+
+### createGenerals
+
+▸ **createGenerals**(`texts`): [`Text`](interfaces/Text.md)[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `texts` | [`Text`](interfaces/Text.md)[] |
+
+#### Returns
+
+[`Text`](interfaces/Text.md)[]
+
+#### Defined in
+
+[lib/utils/sanitizeRecords/index.ts:68](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L68)
+
+___
+
+### createSocialsAndOthers
+
+▸ **createSocialsAndOthers**(`texts`): [[`SocialDetails`](modules.md#socialdetails)[], [`Text`](interfaces/Text.md)[]]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `texts` | [`Text`](interfaces/Text.md)[] |
+
+#### Returns
+
+[[`SocialDetails`](modules.md#socialdetails)[], [`Text`](interfaces/Text.md)[]]
+
+#### Defined in
+
+[lib/utils/sanitizeRecords/index.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L50)
+
+___
+
+### getCoinTypeDetails
+
+▸ **getCoinTypeDetails**(`cointype`): [`CoinType`](interfaces/CoinType.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `cointype` | `string` \| `number` |
+
+#### Returns
+
+[`CoinType`](interfaces/CoinType.md)
+
+#### Defined in
+
+[lib/utils/cointypes/index.ts:1292](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L1292)
+
+___
+
+### sanitizeRecords
+
+▸ **sanitizeRecords**(`records`): [`SanitizedRecords`](interfaces/SanitizedRecords.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `records` | `undefined` \| [`SubnameRecordsResponse`](interfaces/SubnameRecordsResponse.md) |
+
+#### Returns
+
+[`SanitizedRecords`](interfaces/SanitizedRecords.md)
+
+#### Defined in
+
+[lib/utils/sanitizeRecords/index.ts:78](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L78)
