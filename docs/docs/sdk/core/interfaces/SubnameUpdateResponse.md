@@ -26,7 +26,7 @@ The updated metadata associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:101](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L101)
+[lib/types/subnames/update.ts:101](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L101)
 
 ___
 
@@ -38,4 +38,4 @@ The unique identifier of the update operation.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:99](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L99)
+[lib/types/subnames/update.ts:99](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L99)

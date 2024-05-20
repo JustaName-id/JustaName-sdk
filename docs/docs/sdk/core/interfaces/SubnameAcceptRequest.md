@@ -26,7 +26,7 @@ Optional. Addresses to associate with the subname.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:76](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L76)
+[lib/types/subnames/accept.ts:76](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L76)
 
 ___
 
@@ -38,7 +38,7 @@ The blockchain network identifier for the claim.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:74](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L74)
+[lib/types/subnames/accept.ts:74](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L74)
 
 ___
 
@@ -50,7 +50,7 @@ Optional. A content hash to associate with the subname.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:80](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L80)
+[lib/types/subnames/accept.ts:80](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L80)
 
 ___
 
@@ -62,7 +62,7 @@ The parent ENS domain under which the subname is claimed.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:72](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L72)
+[lib/types/subnames/accept.ts:72](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L72)
 
 ___
 
@@ -74,7 +74,7 @@ Optional. Text records to associate with the subname.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:78](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L78)
+[lib/types/subnames/accept.ts:78](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L78)
 
 ___
 
@@ -86,4 +86,4 @@ The desired subname to claim.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:70](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L70)
+[lib/types/subnames/accept.ts:70](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L70)

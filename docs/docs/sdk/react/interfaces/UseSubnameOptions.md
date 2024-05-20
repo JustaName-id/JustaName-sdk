@@ -18,4 +18,4 @@ The subname to query.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L23)
+[packages/@justaname.id/react/src/lib/hooks/useSubname.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useSubname.ts#L23)

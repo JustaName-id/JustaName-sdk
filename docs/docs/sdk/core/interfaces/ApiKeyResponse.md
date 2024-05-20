@@ -27,7 +27,7 @@ The identifier of the user who created this API key.
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L25)
+[lib/types/api-key/health-check.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L25)
 
 ___
 
@@ -39,7 +39,7 @@ The unique identifier of the API key.
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L17)
+[lib/types/api-key/health-check.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L17)
 
 ___
 
@@ -51,7 +51,7 @@ The actual API key string used for authentication and authorization.
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L21)
+[lib/types/api-key/health-check.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L21)
 
 ___
 
@@ -63,7 +63,7 @@ The name given to the API key, typically used for easy identification.
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L19)
+[lib/types/api-key/health-check.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L19)
 
 ___
 
@@ -75,4 +75,4 @@ The identifier of the workspace to which this API key belongs.
 
 #### Defined in
 
-[lib/types/api-key/health-check.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L23)
+[lib/types/api-key/health-check.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/api-key/health-check.ts#L23)

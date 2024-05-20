@@ -27,7 +27,7 @@ The blockchain network identifier.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:150](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L150)
+[lib/types/subnames/get-all-by-ens-domain.ts:150](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L150)
 
 ___
 
@@ -39,7 +39,7 @@ Optional coin type to filter the subnames by.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:152](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L152)
+[lib/types/subnames/get-all-by-ens-domain.ts:152](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L152)
 
 ___
 
@@ -51,7 +51,7 @@ The ENS domain to search under.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:148](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L148)
+[lib/types/subnames/get-all-by-ens-domain.ts:148](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L148)
 
 ___
 
@@ -63,7 +63,7 @@ Optional flag to filter by claimed status.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:158](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L158)
+[lib/types/subnames/get-all-by-ens-domain.ts:158](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L158)
 
 ___
 
@@ -75,7 +75,7 @@ Optional limit on the number of items per page.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:156](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L156)
+[lib/types/subnames/get-all-by-ens-domain.ts:156](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L156)
 
 ___
 
@@ -87,4 +87,4 @@ Optional page number for pagination.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:154](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L154)
+[lib/types/subnames/get-all-by-ens-domain.ts:154](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L154)

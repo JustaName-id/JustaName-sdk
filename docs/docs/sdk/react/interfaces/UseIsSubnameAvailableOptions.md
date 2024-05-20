@@ -18,7 +18,7 @@ The ENS domain under which the subname will be checked.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L17)
+[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L17)
 
 ___
 
@@ -30,4 +30,4 @@ The desired username to check within the ENS domain.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/610ce53/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L16)
+[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L16)
