@@ -1,3 +1,15 @@
+## 0.3.37 (2024-05-23)
+
+
+### 🚀 Features
+
+- changes ([d2cf526](https://github.com/JustaName-id/JustaName-sdk/commit/d2cf526))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.36 (2024-05-16)
 
 This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.

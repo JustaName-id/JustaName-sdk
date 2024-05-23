@@ -1,3 +1,15 @@
+## 0.2.34 (2024-05-23)
+
+
+### 🚀 Features
+
+- changes ([d2cf526](https://github.com/JustaName-id/JustaName-sdk/commit/d2cf526))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.2.33 (2024-05-16)
 
 This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
