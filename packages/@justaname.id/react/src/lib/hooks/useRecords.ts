@@ -4,11 +4,13 @@ import { ChainId, JustaName, SubnameRecordsResponse, SanitizedRecords, sanitizeR
 
 export const buildRecordsBySubnameKey = (
   subname: string,
-  chainId: number
+  chainId: ChainId,
+  providerUrl: string
 ) => [
   'RECORDS_BY_SUBNAME',
   subname,
-  chainId
+  chainId,
+  providerUrl
 ]
 
 
@@ -48,6 +50,7 @@ export const getSubnameDetails = async (fullName: string,
 interface UseRecordsProps {
   fullName: string;
   providerUrl: string;
+  chainId?: ChainId;
 }
 
 interface UseRecordsResult {
@@ -72,8 +75,8 @@ export const useRecords = (
   const { justaname, chainId } = useJustaName()
 
    const query = useQuery({
-      queryKey: buildRecordsBySubnameKey(props.fullName, chainId),
-      queryFn: () =>  getSubnameDetails(props.fullName, justaname, chainId, props.providerUrl)
+      queryKey: buildRecordsBySubnameKey(props.fullName, props?.chainId || chainId, props?.providerUrl),
+      queryFn: () =>  getSubnameDetails(props.fullName, justaname, props?.chainId || chainId, props.providerUrl)
     })
 
     return {

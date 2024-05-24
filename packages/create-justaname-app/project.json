@@ -55,10 +55,9 @@
     },
     "nx-release-publish": {
       "options": {
-        "packageRoot": "packages/create-justaname-app/dist",
-        "buildTarget": "create-justaname-app:build"
+        "packageRoot": "packages/create-justaname-app/dist"
       },
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build","build"]
     },
     "release:package": {
       "executor": "nx:run-commands",
