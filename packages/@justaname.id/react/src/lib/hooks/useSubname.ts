@@ -2,7 +2,7 @@
 
 import { useJustaName } from '../providers';
 import { QueryObserverResult, RefetchOptions, useQuery } from '@tanstack/react-query';
-import { SubnameGetBySubnameResponse } from '@justaname.id/sdk';
+import { ChainId, SubnameGetBySubnameResponse } from '@justaname.id/sdk';
 
 /**
  * Generates a unique cache key for storing and retrieving subname details.
@@ -10,7 +10,10 @@ import { SubnameGetBySubnameResponse } from '@justaname.id/sdk';
  * @param {string} subname - The subname to generate a cache key for.
  * @returns {Array} A unique cache key array for react-query.
  */
-export const buildSubnameBySubnameKey = (subname: string) => ['SUBNAME_BY_SUBNAME', subname]
+export const buildSubnameBySubnameKey = (
+  subname: string,
+  chainId: ChainId
+) => ['SUBNAME_BY_SUBNAME', subname, chainId]
 
 /**
  * Interface defining the options required by the useSubname hook.
@@ -21,6 +24,7 @@ export const buildSubnameBySubnameKey = (subname: string) => ['SUBNAME_BY_SUBNAM
  */
 export interface UseSubnameOptions {
   subname: string;
+  chainId?: ChainId;
 }
 
 /**
@@ -49,7 +53,7 @@ export const useSubname = (props: UseSubnameOptions) : UseSubnameResult => {
   const { justaname, chainId } = useJustaName()
 
   const query = useQuery({
-    queryKey: buildSubnameBySubnameKey(props.subname),
+    queryKey: buildSubnameBySubnameKey(props.subname, props?.chainId || chainId),
     queryFn: () => justaname?.subnames.getBySubname({
        subname: props.subname,
         chainId: chainId}),

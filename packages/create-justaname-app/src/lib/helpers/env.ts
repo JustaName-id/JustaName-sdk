@@ -7,52 +7,57 @@ import { AppDetails, BackendFramework, FrontendFramework, FullstackFramework } f
  */
 export const frameworkEnv: Record<FrontendFramework | BackendFramework | FullstackFramework, string>= {
   'nextjs':
-    `NEXT_PUBLIC_ENS_DOMAIN={{domain}}
+    `NEXT_PUBLIC_ENS_DOMAIN={{ensDomain}}
     NEXT_PUBLIC_CHAIN_ID={{chainId}}
     JUSTANAME_DOMAIN={{domain}}
     JUSTANAME_CHAIN_ID={{chainId}}
     JUSTANAME_API_KEY={{apiKey}}
     JUSTANAME_ORIGIN={{origin}}`,
+  'react': `
+    VITE_APP_API_URL=http://localhost:3333
+    VITE_APP_ENS_DOMAIN={{ensDomain}}
+    VITE_APP_CHAIN_ID={{chainId}}
+  `,
+  'react-native': `
+    API_URL=http://localhost:3333
+    ENS_DOMAIN={{ensDomain}}
+    CHAIN_ID={{chainId}}
+  `,
+  'expo': `
+    API_URL=http://localhost:3333
+    ENS_DOMAIN={{ensDomain}}
+    CHAIN_ID={{chainId}}
+  `,
   'express':
-    `JUSTANAME_DOMAIN={{domain}}
+    `JUSTANAME_ENS_DOMAIN={{ensDomain}}
+     JUSTANAME_DOMAIN={{domain}}
      JUSTANAME_CHAIN_ID={{chainId}}
      JUSTANAME_API_KEY={{apiKey}}
      JUSTANAME_ORIGIN={{origin}}
     `,
-  'react': `
-    VITE_APP_API_URL={{apiKey}}
-    VITE_APP_ENS_DOMAIN={{domain}}
-    VITE_APP_CHAIN_ID={{chainId}}
-  `,
-  'react-native': `
-    API_URL={{apiKey}}
-    ENS_DOMAIN={{domain}}
-    CHAIN_ID={{chainId}}
-  `,
-  'expo': `
-    API_URL={{apiKey}}
-    ENS_DOMAIN={{domain}}
-    CHAIN_ID={{chainId}}
-  `,
   'nestjs': `
+    JUSTANAME_ENS_DOMAIN={{ensDomain}}
     JUSTANAME_DOMAIN={{domain}}
     JUSTANAME_CHAIN_ID={{chainId}}
     JUSTANAME_API_KEY={{apiKey}}
     JUSTANAME_ORIGIN={{origin}}
   `,
   'koa': `
+    JUSTANAME_ENS_DOMAIN={{ensDomain}}
     JUSTANAME_DOMAIN={{domain}}
     JUSTANAME_CHAIN_ID={{chainId}}
     JUSTANAME_API_KEY={{apiKey}}
     JUSTANAME_ORIGIN={{origin}}
   `,
   'hapi': `
+    JUSTANAME_ENS_DOMAIN={{ensDomain}}
     JUSTANAME_DOMAIN={{domain}}
     JUSTANAME_CHAIN_ID={{chainId}}
     JUSTANAME_API_KEY={{apiKey}}
     JUSTANAME_ORIGIN={{origin}}
   `,
   'fastify': `
+    JUSTANAME_ENS_DOMAIN={{ensDomain}}
     JUSTANAME_DOMAIN={{domain}}
     JUSTANAME_CHAIN_ID={{chainId}}
     JUSTANAME_API_KEY={{apiKey}}
@@ -69,8 +74,9 @@ export const frameworkEnv: Record<FrontendFramework | BackendFramework | Fullsta
  */
 export const getEnv = (framework: FrontendFramework | BackendFramework | FullstackFramework, appDetails: AppDetails) => {
   const env = frameworkEnv[framework];
-  return env.replace(/{{domain}}/g, appDetails.ensDomain)
+  return env.replace(/{{ensDomain}}/g, appDetails.ensDomain)
             .replace(/{{chainId}}/g, appDetails.network === 'mainnet' ? '1' : '11155111')
             .replace(/{{apiKey}}/g, appDetails.apiKey)
             .replace(/{{origin}}/g, appDetails.appUrl)
+            .replace(/{{domain}}/g, appDetails.appUrl.split('://')[1])
 }

@@ -9,17 +9,23 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import { SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
+import { ChainId, SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
 import { buildSubnameBySubnameKey } from './useSubname';
 
 /**
  * Constructs a unique cache key for storing and retrieving subnames data associated with a wallet address.
  *
  * @param {string | undefined} address - The Ethereum address of the connected wallet.
+ * @param chainId
+ * @param ensDomain
  * @returns {Array} A unique cache key array for react-query.
  */
-export const buildAccountSubnamesKey = (address: string | undefined) => ['WALLET_SUBNAMES_BY_ADDRESS', address]
-
+export const buildAccountSubnamesKey = (
+  address: string | undefined,
+  chainId: ChainId,
+  ensDomain?: string
+): Array<any> => [
+  'WALLET_SUBNAMES_BY_ADDRESS', address, chainId, ensDomain]
 
 /**
  * Options for the `useAccountSubnames` hook, allowing customization of the query.
@@ -30,6 +36,7 @@ export const buildAccountSubnamesKey = (address: string | undefined) => ['WALLET
  */
 export interface UseConnectedWalletSubnamesOptions {
   ensDomain?: string;
+  chainId?: ChainId;
 }
 
 /**
@@ -72,18 +79,18 @@ export const useAccountSubnames = (
   const { justaname, chainId } = useJustaName();
 
   const query = useQuery({
-    queryKey: buildAccountSubnamesKey(address),
+    queryKey: buildAccountSubnamesKey(address, props?.chainId || chainId, props.ensDomain),
     queryFn: async () => {
       const subnames = await justaname?.subnames.getAllByAddress({
         address: address as string,
         isClaimed: true,
         coinType: 60,
-        chainId: chainId,
+        chainId: props?.chainId || chainId,
       });
 
       subnames?.forEach((subname: SubnameGetAllByAddressResponse) => {
         queryClient.setQueryData(
-          buildSubnameBySubnameKey(subname.subname),
+          buildSubnameBySubnameKey(subname.subname, props?.chainId || chainId),
           subname
         );
       });

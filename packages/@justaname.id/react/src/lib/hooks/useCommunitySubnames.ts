@@ -1,14 +1,21 @@
 import { InfiniteData, useInfiniteQuery, UseInfiniteQueryResult } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
-import { SubnameGetAllByDomainChainIdResponse } from '@justaname.id/sdk';
+import { ChainId, SubnameGetAllByDomainChainIdResponse } from '@justaname.id/sdk';
 
-export const buildCommunitySubnamesKey = (domainName: string | undefined) => [
+export const buildCommunitySubnamesKey = (
+  domainName: string | undefined,
+  isClaimed: boolean,
+  chainId: ChainId
+) => [
   'COMMUNITY_SUBNAMES_BY_ADDRESS',
   domainName,
+  isClaimed,
+  chainId,
 ];
 export interface UseCommunitySubnamesOptions {
   ensDomain: string;
   isClaimed: boolean;
+  chainId?: ChainId;
 }
 
 export const useCommunitySubnames = (
@@ -17,14 +24,14 @@ export const useCommunitySubnames = (
   const { justaname, chainId } = useJustaName();
 
   return useInfiniteQuery({
-    queryKey: buildCommunitySubnamesKey(props.ensDomain),
+    queryKey: buildCommunitySubnamesKey(props.ensDomain, props.isClaimed, props.chainId || chainId),
     queryFn: ({
                 pageParam: { page, limit },
               }) => {
       return justaname?.subnames.getCommunitySubnamesByDomain({
         ensDomain: props.ensDomain,
         isClaimed: props.isClaimed,
-        chainId: chainId,
+        chainId: props?.chainId || chainId,
         page,
         limit,
       })
