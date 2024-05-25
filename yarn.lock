@@ -3903,11 +3903,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.40, @justaname.id/react@npm:^0.3.40, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.41, @justaname.id/react@npm:^0.3.41, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.37"
+    "@justaname.id/sdk": "npm:0.2.38"
     "@tanstack/react-query": "npm:^5.28.4"
     jest: "npm:^29.4.1"
   peerDependencies:
@@ -3919,7 +3919,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justaname.id/sdk@npm:0.2.37, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.2.38, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
@@ -9301,6 +9301,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/tar-fs@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@types/tar-fs@npm:2.0.4"
+  dependencies:
+    "@types/node": "npm:*"
+    "@types/tar-stream": "npm:*"
+  checksum: 10c0/d1dd6944d0905debaabe5787af7f3aeb98f13a928d688d00fb7de0411040f8556c297d388abdd046f6b0646a374b53c198ade0484060b63ef36ad5ac585df138
+  languageName: node
+  linkType: hard
+
+"@types/tar-stream@npm:*":
+  version: 3.1.3
+  resolution: "@types/tar-stream@npm:3.1.3"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/64f87d209bd2edf1a7d029a922a246ef0dcfb19e623b95714e2c074195a61ed4fe4d67d0c3c6dc33239ef7d18902fcb70df7f7e85cfbd92a6bf25d087ce531fd
+  languageName: node
+  linkType: hard
+
 "@types/tar@npm:^6.1.11":
   version: 6.1.13
   resolution: "@types/tar@npm:6.1.13"
@@ -12018,6 +12037,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"b4a@npm:^1.6.4":
+  version: 1.6.6
+  resolution: "b4a@npm:1.6.6"
+  checksum: 10c0/56f30277666cb511a15829e38d369b114df7dc8cec4cedc09cc5d685bc0f27cb63c7bcfb58e09a19a1b3c4f2541069ab078b5328542e85d74a39620327709a38
+  languageName: node
+  linkType: hard
+
 "babel-core@npm:^7.0.0-bridge.0":
   version: 7.0.0-bridge.0
   resolution: "babel-core@npm:7.0.0-bridge.0"
@@ -12284,6 +12310,49 @@ __metadata:
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
   checksum: 10c0/9308baf0a7e4838a82bbfd11e01b1cb0f0cf2893bc1676c27c2a8c0e70cbae1c59120c3268517a8ae7fb6376b4639ef81ca22582611dbee4ed28df945134aaee
+  languageName: node
+  linkType: hard
+
+"bare-events@npm:^2.0.0, bare-events@npm:^2.2.0":
+  version: 2.2.2
+  resolution: "bare-events@npm:2.2.2"
+  checksum: 10c0/bacdaaf072f87ab5d2ed0c2fc519ef0fa8f6acd834fee50710a05f416a1b73ed99c9c6dfbefdd462ec4eb726d8f74e4a8476c2f8c3ae8812919c67eacb1f807f
+  languageName: node
+  linkType: hard
+
+"bare-fs@npm:^2.1.1":
+  version: 2.3.0
+  resolution: "bare-fs@npm:2.3.0"
+  dependencies:
+    bare-events: "npm:^2.0.0"
+    bare-path: "npm:^2.0.0"
+    bare-stream: "npm:^1.0.0"
+  checksum: 10c0/78e81160236c3c3dcccf63d356915e68b18f9637ad594a91c5ded48f27ea7d5d060aacc3dd015e5b6207523c3484c205111956963c8084c9490759df311885b3
+  languageName: node
+  linkType: hard
+
+"bare-os@npm:^2.1.0":
+  version: 2.3.0
+  resolution: "bare-os@npm:2.3.0"
+  checksum: 10c0/a6d3c81dd98e2e7c8ca92c3ea0d2bf44c904cb3a887dfd91bf3ef568997aee8b597afc6eb8f0d53f1792ffb6fc411ec32fd0bc821d458fc74c9164c3c1bb7d27
+  languageName: node
+  linkType: hard
+
+"bare-path@npm:^2.0.0, bare-path@npm:^2.1.0":
+  version: 2.1.3
+  resolution: "bare-path@npm:2.1.3"
+  dependencies:
+    bare-os: "npm:^2.1.0"
+  checksum: 10c0/35587e177fc8fa5b13fb90bac8779b5ce49c99016d221ddaefe2232d02bd4295d79b941e14ae19fda75ec42a6fe5fb66c07d83ae7ec11462178e66b7be65ca74
+  languageName: node
+  linkType: hard
+
+"bare-stream@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "bare-stream@npm:1.0.0"
+  dependencies:
+    streamx: "npm:^2.16.1"
+  checksum: 10c0/a80093420b254dce5f66a24b3400dc7d3afcb55d98a153649f7051d22004e47d270e935bb6ae9882efc8a957026dd3a59676832a94a95afdfbdc59aa778768af
   languageName: node
   linkType: hard
 
@@ -14182,6 +14251,15 @@ __metadata:
 "create-justaname-app@workspace:packages/create-justaname-app":
   version: 0.0.0-use.local
   resolution: "create-justaname-app@workspace:packages/create-justaname-app"
+  dependencies:
+    "@inquirer/prompts": "npm:^4.3.0"
+    "@rollup/plugin-commonjs": "npm:^25.0.7"
+    "@rollup/plugin-node-resolve": "npm:^15.2.3"
+    fs-extra: "npm:11.2.0"
+    node-fetch: "npm:2.7.0"
+    ora: "npm:^8.0.1"
+    rollup-plugin-strip-shebang: "npm:^1.2.10"
+    tar-fs: "npm:^3.0.6"
   bin:
     create-justaname-app: index.esm.js
   languageName: unknown
@@ -17371,6 +17449,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-fifo@npm:^1.1.0, fast-fifo@npm:^1.2.0":
+  version: 1.3.2
+  resolution: "fast-fifo@npm:1.3.2"
+  checksum: 10c0/d53f6f786875e8b0529f784b59b4b05d4b5c31c651710496440006a398389a579c8dbcd2081311478b5bf77f4b0b21de69109c5a4eabea9d8e8783d1eb864e4c
+  languageName: node
+  linkType: hard
+
 "fast-glob@npm:3.2.7":
   version: 3.2.7
   resolution: "fast-glob@npm:3.2.7"
@@ -18053,6 +18138,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fs-extra@npm:11.2.0, fs-extra@npm:^11.0.0, fs-extra@npm:^11.1.0, fs-extra@npm:^11.1.1":
+  version: 11.2.0
+  resolution: "fs-extra@npm:11.2.0"
+  dependencies:
+    graceful-fs: "npm:^4.2.0"
+    jsonfile: "npm:^6.0.1"
+    universalify: "npm:^2.0.0"
+  checksum: 10c0/d77a9a9efe60532d2e790e938c81a02c1b24904ef7a3efb3990b835514465ba720e99a6ea56fd5e2db53b4695319b644d76d5a0e9988a2beef80aa7b1da63398
+  languageName: node
+  linkType: hard
+
 "fs-extra@npm:9.0.0":
   version: 9.0.0
   resolution: "fs-extra@npm:9.0.0"
@@ -18073,17 +18169,6 @@ __metadata:
     jsonfile: "npm:^6.0.1"
     universalify: "npm:^2.0.0"
   checksum: 10c0/5f579466e7109719d162a9249abbeffe7f426eb133ea486e020b89bc6d67a741134076bf439983f2eb79276ceaf6bd7b7c1e43c3fd67fe889863e69072fb0a5e
-  languageName: node
-  linkType: hard
-
-"fs-extra@npm:^11.0.0, fs-extra@npm:^11.1.0, fs-extra@npm:^11.1.1":
-  version: 11.2.0
-  resolution: "fs-extra@npm:11.2.0"
-  dependencies:
-    graceful-fs: "npm:^4.2.0"
-    jsonfile: "npm:^6.0.1"
-    universalify: "npm:^2.0.0"
-  checksum: 10c0/d77a9a9efe60532d2e790e938c81a02c1b24904ef7a3efb3990b835514465ba720e99a6ea56fd5e2db53b4695319b644d76d5a0e9988a2beef80aa7b1da63398
   languageName: node
   linkType: hard
 
@@ -20527,7 +20612,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@ethersproject/shims": "npm:^5.7.0"
-    "@justaname.id/react": "npm:^0.3.40"
+    "@justaname.id/react": "npm:^0.3.41"
     "@metamask/sdk-react": "npm:^0.15.0"
     "@react-native-async-storage/async-storage": "npm:1.21.0"
     "@react-native-community/netinfo": "npm:11.1.0"
@@ -20565,7 +20650,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@ethersproject/shims": "npm:^5.7.0"
-    "@justaname.id/react": "npm:0.3.40"
+    "@justaname.id/react": "npm:0.3.41"
     "@metamask/sdk-react": "npm:^0.15.0"
     "@react-native-async-storage/async-storage": "npm:1.21.0"
     "@react-native-community/netinfo": "npm:11.1.0"
@@ -21620,7 +21705,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-express-example@workspace:examples/backend/express"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.37"
+    "@justaname.id/sdk": "npm:0.2.38"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
@@ -21638,7 +21723,7 @@ __metadata:
   resolution: "justaname-fastify-example@workspace:examples/backend/fastify"
   dependencies:
     "@fastify/cors": "npm:^7.0.0"
-    "@justaname.id/sdk": "npm:0.2.37"
+    "@justaname.id/sdk": "npm:0.2.38"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
@@ -21656,7 +21741,7 @@ __metadata:
   resolution: "justaname-hapi-example@workspace:examples/backend/hapi"
   dependencies:
     "@hapi/hapi": "npm:^21.3.7"
-    "@justaname.id/sdk": "npm:0.2.37"
+    "@justaname.id/sdk": "npm:0.2.38"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
@@ -21672,7 +21757,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-koa-example@workspace:examples/backend/koa"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.37"
+    "@justaname.id/sdk": "npm:0.2.38"
     "@koa/cors": "npm:^5.0.0"
     "@koa/router": "npm:^12.0.1"
     "@types/eslint": "npm:^8"
@@ -21698,8 +21783,8 @@ __metadata:
     "@babel/core": "npm:^7.14.5"
     "@babel/preset-react": "npm:^7.14.5"
     "@inquirer/prompts": "npm:^4.3.0"
-    "@justaname.id/react": "npm:0.3.40"
-    "@justaname.id/sdk": "npm:0.2.37"
+    "@justaname.id/react": "npm:0.3.41"
+    "@justaname.id/sdk": "npm:0.2.38"
     "@nx/cypress": "npm:18.0.8"
     "@nx/eslint": "npm:18.0.8"
     "@nx/eslint-plugin": "npm:18.0.8"
@@ -21745,6 +21830,7 @@ __metadata:
     "@types/react": "npm:~18.2.45"
     "@types/react-dom": "npm:18.2.14"
     "@types/tar": "npm:^6.1.11"
+    "@types/tar-fs": "npm:^2.0.4"
     "@typescript-eslint/eslint-plugin": "npm:^6.13.2"
     "@typescript-eslint/parser": "npm:^6.13.2"
     "@uidotdev/usehooks": "npm:^2.4.1"
@@ -21804,6 +21890,7 @@ __metadata:
     rollup-plugin-strip-shebang: "npm:^1.2.10"
     rollup-preserve-directives: "npm:^1.1.1"
     tailwindcss: "npm:^3.4.1"
+    tar-fs: "npm:^3.0.6"
     ts-jest: "npm:^29.1.0"
     ts-node: "npm:10.9.1"
     tslib: "npm:^2.3.0"
@@ -21824,7 +21911,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-nestjs-example@workspace:examples/backend/nestjs"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.37"
+    "@justaname.id/sdk": "npm:0.2.38"
     "@nestjs/cli": "npm:^10.0.0"
     "@nestjs/common": "npm:^10.0.0"
     "@nestjs/config": "npm:^3.2.1"
@@ -21859,7 +21946,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-app-example@workspace:examples/fullstack/nextjs/app"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.40"
+    "@justaname.id/react": "npm:^0.3.41"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -21880,7 +21967,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-pages-example@workspace:examples/fullstack/nextjs/pages"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.40"
+    "@justaname.id/react": "npm:^0.3.41"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -21901,7 +21988,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-react-example@workspace:examples/frontend/react"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.40"
+    "@justaname.id/react": "npm:^0.3.41"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@tanstack/react-query": "npm:^5.28.6"
     "@types/react": "npm:^18.2.66"
@@ -24306,7 +24393,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.2.0, node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.7":
+"node-fetch@npm:2.7.0, node-fetch@npm:^2.2.0, node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.7":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:
@@ -27374,6 +27461,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"queue-tick@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "queue-tick@npm:1.0.1"
+  checksum: 10c0/0db998e2c9b15215317dbcf801e9b23e6bcde4044e115155dae34f8e7454b9a783f737c9a725528d677b7a66c775eb7a955cf144fe0b87f62b575ce5bfd515a9
+  languageName: node
+  linkType: hard
+
 "queue@npm:6.0.2":
   version: 6.0.2
   resolution: "queue@npm:6.0.2"
@@ -30100,6 +30194,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"streamx@npm:^2.15.0, streamx@npm:^2.16.1":
+  version: 2.16.1
+  resolution: "streamx@npm:2.16.1"
+  dependencies:
+    bare-events: "npm:^2.2.0"
+    fast-fifo: "npm:^1.1.0"
+    queue-tick: "npm:^1.0.1"
+  dependenciesMeta:
+    bare-events:
+      optional: true
+  checksum: 10c0/202b1d7cb7ceb36cdc5d5d0e2c27deafcc8670a4934cda7a5e3d3d45b8d3a64dc43f1b982b1c1cb316f01964dd5137b7e26af3151582c7c29ad3cf4072c6dbb9
+  languageName: node
+  linkType: hard
+
 "strict-uri-encode@npm:^2.0.0":
   version: 2.0.0
   resolution: "strict-uri-encode@npm:2.0.0"
@@ -30764,6 +30872,34 @@ __metadata:
   version: 2.2.1
   resolution: "tapable@npm:2.2.1"
   checksum: 10c0/bc40e6efe1e554d075469cedaba69a30eeb373552aaf41caeaaa45bf56ffacc2674261b106245bd566b35d8f3329b52d838e851ee0a852120acae26e622925c9
+  languageName: node
+  linkType: hard
+
+"tar-fs@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "tar-fs@npm:3.0.6"
+  dependencies:
+    bare-fs: "npm:^2.1.1"
+    bare-path: "npm:^2.1.0"
+    pump: "npm:^3.0.0"
+    tar-stream: "npm:^3.1.5"
+  dependenciesMeta:
+    bare-fs:
+      optional: true
+    bare-path:
+      optional: true
+  checksum: 10c0/207b7c0f193495668bd9dbad09a0108ce4ffcfec5bce2133f90988cdda5c81fad83c99f963d01e47b565196594f7a17dbd063ae55b97b36268fcc843975278ee
+  languageName: node
+  linkType: hard
+
+"tar-stream@npm:^3.1.5":
+  version: 3.1.7
+  resolution: "tar-stream@npm:3.1.7"
+  dependencies:
+    b4a: "npm:^1.6.4"
+    fast-fifo: "npm:^1.2.0"
+    streamx: "npm:^2.15.0"
+  checksum: 10c0/a09199d21f8714bd729993ac49b6c8efcb808b544b89f23378ad6ffff6d1cb540878614ba9d4cfec11a64ef39e1a6f009a5398371491eb1fda606ffc7f70f718
   languageName: node
   linkType: hard
 

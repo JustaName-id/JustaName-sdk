@@ -1,3 +1,19 @@
+## 0.3.35 (2024-05-25)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.34 (2024-05-24)
+
+
+### 🚀 Features
+
+- chains optional in the hooks ([bf502a0](https://github.com/JustaName-id/JustaName-sdk/commit/bf502a0))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.33 (2024-05-23)
 
 This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
