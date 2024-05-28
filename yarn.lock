@@ -2039,6 +2039,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ensdomains/address-encoder@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@ensdomains/address-encoder@npm:1.1.2"
+  dependencies:
+    "@noble/curves": "npm:^1.2.0"
+    "@noble/hashes": "npm:^1.3.2"
+    "@scure/base": "npm:^1.1.5"
+  checksum: 10c0/8e07567a1c6c7012f2e1fcc95359f4940f8a3abd90c9233611f62af5315876db2367c86b14723e0513ef0e9198990f2df16520f4c3bf16f7a58110ba9c325f7f
+  languageName: node
+  linkType: hard
+
 "@esbuild/aix-ppc64@npm:0.19.12":
   version: 0.19.12
   resolution: "@esbuild/aix-ppc64@npm:0.19.12"
@@ -3903,11 +3914,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.41, @justaname.id/react@npm:^0.3.41, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.42, @justaname.id/react@npm:^0.3.42, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.38"
+    "@justaname.id/sdk": "npm:0.2.39"
     "@tanstack/react-query": "npm:^5.28.4"
     jest: "npm:^29.4.1"
   peerDependencies:
@@ -3919,7 +3930,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justaname.id/sdk@npm:0.2.38, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.2.39, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
@@ -4823,6 +4834,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@noble/curves@npm:^1.2.0":
+  version: 1.4.0
+  resolution: "@noble/curves@npm:1.4.0"
+  dependencies:
+    "@noble/hashes": "npm:1.4.0"
+  checksum: 10c0/31fbc370df91bcc5a920ca3f2ce69c8cf26dc94775a36124ed8a5a3faf0453badafd2ee4337061ffea1b43c623a90ee8b286a5a81604aaf9563bdad7ff795d18
+  languageName: node
+  linkType: hard
+
 "@noble/hashes@npm:1.3.2":
   version: 1.3.2
   resolution: "@noble/hashes@npm:1.3.2"
@@ -4837,7 +4857,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noble/hashes@npm:^1.3.1":
+"@noble/hashes@npm:1.4.0, @noble/hashes@npm:^1.3.1, @noble/hashes@npm:^1.3.2":
   version: 1.4.0
   resolution: "@noble/hashes@npm:1.4.0"
   checksum: 10c0/8c3f005ee72e7b8f9cff756dfae1241485187254e3f743873e22073d63906863df5d4f13d441b7530ea614b7a093f0d889309f28b59850f33b66cb26a779a4a5
@@ -7359,7 +7379,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@scure/base@npm:^1.1.3, @scure/base@npm:~1.1.0, @scure/base@npm:~1.1.2, @scure/base@npm:~1.1.4":
+"@scure/base@npm:^1.1.3, @scure/base@npm:^1.1.5, @scure/base@npm:~1.1.0, @scure/base@npm:~1.1.2, @scure/base@npm:~1.1.4":
   version: 1.1.6
   resolution: "@scure/base@npm:1.1.6"
   checksum: 10c0/237a46a1f45391fc57719154f14295db936a0b1562ea3e182dd42d7aca082dbb7062a28d6c49af16a7e478b12dae8a0fe678d921ea5056bcc30238d29eb05c55
@@ -20612,7 +20632,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@ethersproject/shims": "npm:^5.7.0"
-    "@justaname.id/react": "npm:^0.3.41"
+    "@justaname.id/react": "npm:^0.3.42"
     "@metamask/sdk-react": "npm:^0.15.0"
     "@react-native-async-storage/async-storage": "npm:1.21.0"
     "@react-native-community/netinfo": "npm:11.1.0"
@@ -20650,7 +20670,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@ethersproject/shims": "npm:^5.7.0"
-    "@justaname.id/react": "npm:0.3.41"
+    "@justaname.id/react": "npm:0.3.42"
     "@metamask/sdk-react": "npm:^0.15.0"
     "@react-native-async-storage/async-storage": "npm:1.21.0"
     "@react-native-community/netinfo": "npm:11.1.0"
@@ -21705,7 +21725,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-express-example@workspace:examples/backend/express"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.38"
+    "@justaname.id/sdk": "npm:0.2.39"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
@@ -21723,7 +21743,7 @@ __metadata:
   resolution: "justaname-fastify-example@workspace:examples/backend/fastify"
   dependencies:
     "@fastify/cors": "npm:^7.0.0"
-    "@justaname.id/sdk": "npm:0.2.38"
+    "@justaname.id/sdk": "npm:0.2.39"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
@@ -21741,7 +21761,7 @@ __metadata:
   resolution: "justaname-hapi-example@workspace:examples/backend/hapi"
   dependencies:
     "@hapi/hapi": "npm:^21.3.7"
-    "@justaname.id/sdk": "npm:0.2.38"
+    "@justaname.id/sdk": "npm:0.2.39"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
@@ -21757,7 +21777,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-koa-example@workspace:examples/backend/koa"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.38"
+    "@justaname.id/sdk": "npm:0.2.39"
     "@koa/cors": "npm:^5.0.0"
     "@koa/router": "npm:^12.0.1"
     "@types/eslint": "npm:^8"
@@ -21782,9 +21802,10 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.14.5"
     "@babel/preset-react": "npm:^7.14.5"
+    "@ensdomains/address-encoder": "npm:^1.1.2"
     "@inquirer/prompts": "npm:^4.3.0"
-    "@justaname.id/react": "npm:0.3.41"
-    "@justaname.id/sdk": "npm:0.2.38"
+    "@justaname.id/react": "npm:0.3.42"
+    "@justaname.id/sdk": "npm:0.2.39"
     "@nx/cypress": "npm:18.0.8"
     "@nx/eslint": "npm:18.0.8"
     "@nx/eslint-plugin": "npm:18.0.8"
@@ -21911,7 +21932,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-nestjs-example@workspace:examples/backend/nestjs"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.38"
+    "@justaname.id/sdk": "npm:0.2.39"
     "@nestjs/cli": "npm:^10.0.0"
     "@nestjs/common": "npm:^10.0.0"
     "@nestjs/config": "npm:^3.2.1"
@@ -21946,7 +21967,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-app-example@workspace:examples/fullstack/nextjs/app"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.41"
+    "@justaname.id/react": "npm:^0.3.42"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -21967,7 +21988,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-next-pages-example@workspace:examples/fullstack/nextjs/pages"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.41"
+    "@justaname.id/react": "npm:^0.3.42"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -21988,7 +22009,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-react-example@workspace:examples/frontend/react"
   dependencies:
-    "@justaname.id/react": "npm:^0.3.41"
+    "@justaname.id/react": "npm:^0.3.42"
     "@rainbow-me/rainbowkit": "npm:^2.0.2"
     "@tanstack/react-query": "npm:^5.28.6"
     "@types/react": "npm:^18.2.66"
