@@ -31,10 +31,11 @@ export default async function handler(
   if(!message) {
     return new Response('Message is required', { status: 400 });
   }
-  const justaname = await getJustaNameInstance();
+  const justaname =  getJustaNameInstance();
 
   const chainId = parseInt(process.env.JUSTANAME_CHAIN_ID as string) as ChainId
-  const ensDomain = process.env.JUSTANAME_DOMAIN as string
+  const domain = process.env.JUSTANAME_DOMAIN as string;
+  const ensDomain = process.env.JUSTANAME_ENS_DOMAIN as string;
   try {
     const subname = await justaname.subnames.addSubname(
       {

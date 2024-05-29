@@ -31,7 +31,7 @@ export const useCommunitySubnames = (
       return justaname?.subnames.getCommunitySubnamesByDomain({
         ensDomain: props.ensDomain,
         isClaimed: props.isClaimed,
-        chainId: props?.chainId || chainId,
+        chainId: props?.chainId ? props?.chainId : chainId,
         page,
         limit,
       })

@@ -24,6 +24,7 @@ const chainId = parseInt(process.env.JUSTANAME_CHAIN_ID ?? '');
 const domain = process.env.JUSTANAME_DOMAIN ?? '';
 const origin = process.env.JUSTANAME_ORIGIN ?? '';
 const apiKey = process.env.JUSTANAME_API_KEY as string;
+const ensDomain = process.env.JUSTANAME_ENS_DOMAIN as string;
 
 if(!origin) {
   throw new Error('Origin is required');
@@ -84,7 +85,7 @@ fastify.post<{ Body: SubnameAdd }>('/api/subnames/add', async (request: FastifyR
     const add = await justaname.subnames.addSubname(
       {
         username,
-        ensDomain: domain,
+        ensDomain,
         chainId,
       },
       {

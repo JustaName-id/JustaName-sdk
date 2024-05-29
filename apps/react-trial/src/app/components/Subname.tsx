@@ -19,9 +19,9 @@ export const Subname: React.FC<SubnameProps> = ({ currentSubname }) => {
 
   return (
     <div>
-      <p>{subname?.subname}</p>
+      <h2>{subname?.subname}</h2>
 
-      <h2>Data</h2>
+      <p>Data</p>
       <table>
         <thead>
           <tr>
@@ -50,6 +50,7 @@ export const Subname: React.FC<SubnameProps> = ({ currentSubname }) => {
         updateSubname({
           username: subname.username,
           subname: subname.subname,
+          ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN as string,
           ...subname.data,
           text: [
             ...subname.data.textRecords.filter(record => record.key !== key ).map((record)=>{

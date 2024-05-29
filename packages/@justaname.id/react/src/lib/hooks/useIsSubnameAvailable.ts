@@ -41,10 +41,10 @@ export const useIsSubnameAvailable = (props: UseIsSubnameAvailableOptions): UseI
   const { username, ensDomain } = props;
 
   const query = useQuery({
-    queryKey: buildIsSubnameAvailableKey(username, ensDomain, props?.chainId || chainId),
+    queryKey: buildIsSubnameAvailableKey(username, ensDomain, props?.chainId ? props?.chainId : chainId),
     queryFn: () => justaname?.subnames.checkSubnameAvailable({
         subname: username + '.' + ensDomain,
-        chainId: props?.chainId || chainId,
+        chainId: props?.chainId ? props?.chainId : chainId,
       }),
     enabled: Boolean(username) && Boolean(justaname) && Boolean(chainId),
   })

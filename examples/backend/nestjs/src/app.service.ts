@@ -7,12 +7,14 @@ export class AppService implements OnModuleInit {
   chainId: number;
   domain: string;
   origin: string;
+  ensDomain: string;
   justaname: JustaName;
 
   constructor(readonly configService: ConfigService) {
     this.chainId = parseInt(this.configService.get('JUSTANAME_CHAIN_ID'));
     this.domain = this.configService.get('JUSTANAME_DOMAIN');
     this.origin = this.configService.get('JUSTANAME_ORIGIN');
+    this.ensDomain = this.configService.get('JUSTANAME_ENS_DOMAIN');
   }
 
   async onModuleInit(): Promise<void> {
@@ -61,7 +63,7 @@ export class AppService implements OnModuleInit {
       const add = await this.justaname.subnames.addSubname(
         {
           username: request.username,
-          ensDomain: this.domain,
+          ensDomain: this.ensDomain,
           chainId: this.chainId,
         },
         {

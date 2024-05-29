@@ -24,9 +24,9 @@ export default function HomeScreen() {
         username: debouncedSubdomain,
         ensDomain: process.env.EXPO_PUBLIC_ENS_DOMAIN as string,
     })
-    const { claimSubname } = useAddSubname();
+    const { addSubname } = useAddSubname();
     const handleAddSubdomain = async () => {
-        return await claimSubname({
+        return await addSubname({
             username: inputValue,
         });
     }
