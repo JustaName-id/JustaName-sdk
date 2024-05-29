@@ -2,9 +2,9 @@ import { JustaName } from '@justaname.id/sdk';
 
 let justanameInstance: JustaName | null = null;
 
-export const getJustaNameInstance = async () => {
+export const getJustaNameInstance =  () => {
   if (!justanameInstance) {
-    justanameInstance = await JustaName.init({
+    justanameInstance = JustaName.init({
       apiKey: process.env.JUSTANAME_API_KEY,
     });
   }

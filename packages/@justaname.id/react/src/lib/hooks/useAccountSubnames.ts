@@ -79,18 +79,18 @@ export const useAccountSubnames = (
   const { justaname, chainId } = useJustaName();
 
   const query = useQuery({
-    queryKey: buildAccountSubnamesKey(address, props?.chainId || chainId, props.ensDomain),
+    queryKey: buildAccountSubnamesKey(address, props?.chainId ? props?.chainId : chainId, props.ensDomain),
     queryFn: async () => {
       const subnames = await justaname?.subnames.getAllByAddress({
         address: address as string,
         isClaimed: true,
         coinType: 60,
-        chainId: props?.chainId || chainId,
+        chainId: props?.chainId ? props?.chainId : chainId,
       });
 
       subnames?.forEach((subname: SubnameGetAllByAddressResponse) => {
         queryClient.setQueryData(
-          buildSubnameBySubnameKey(subname.subname, props?.chainId || chainId),
+          buildSubnameBySubnameKey(subname.subname, props?.chainId ? props?.chainId : chainId),
           subname
         );
       });
