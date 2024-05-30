@@ -1,3 +1,15 @@
+## 0.3.37 (2024-05-30)
+
+
+### 🚀 Features
+
+- address decoder upgrade ([2584c15](https://github.com/JustaName-id/JustaName-sdk/commit/2584c15))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.36 (2024-05-28)
 
 This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.

@@ -1,3 +1,17 @@
+## 0.2.40 (2024-05-30)
+
+
+### 🚀 Features
+
+- address decoder upgrade ([2584c15](https://github.com/JustaName-id/JustaName-sdk/commit/2584c15))
+
+- get communities ([4874cfb](https://github.com/JustaName-id/JustaName-sdk/commit/4874cfb))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.2.39 (2024-05-28)
 
 This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
