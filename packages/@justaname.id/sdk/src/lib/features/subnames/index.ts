@@ -26,7 +26,7 @@ import {
   SubnameRecordsRequest,
   SubnameRecordsResponse,
   SubnameRejectRequest,
-  SubnameRejectResponse,
+  SubnameRejectResponse, SubnameGetAllCommunitiesChainIdRequest, SubnameGetAllCommunitiesChainIdResponse
 } from '../../types';
 
 /**
@@ -183,6 +183,18 @@ export class Subnames {
     return restCall('REJECT_SUBNAME_ROUTE', 'POST', params, {
         ...headers,
       });
+  }
+
+  /**
+   * Retrieves all communities with the count of subnames in each community.
+   * @param {SubnameGetAllCommunitiesChainIdRequest} params - The parameters for the lookup.
+   * @returns {Promise<SubnameGetAllCommunitiesChainIdResponse>} The details of the subname, if found.
+   */
+
+  async getAllCommunities(
+    params: SubnameGetAllCommunitiesChainIdRequest
+  ): Promise<SubnameGetAllCommunitiesChainIdResponse> {
+    return restCall('GET_ALL_COMMUNITIES_WITH_COUNT_ROUTE', 'GET', params);
   }
 
   /**

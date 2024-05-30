@@ -11,3 +11,4 @@ export * from './search-subnames';
 export * from './update';
 export * from './accept';
 export * from './records';
+export * from './community';

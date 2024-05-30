@@ -82,3 +82,5 @@ export const SEARCH_SUBNAMES_ROUTE = SUBNAME_BASE_ROUTE + '/search';
  * Route to get all subnames
  */
 export const RECORDS_BY_FULLNAME_ROUTE = SUBNAME_BASE_ROUTE + '/records';
+
+export const GET_ALL_COMMUNITIES_WITH_COUNT_ROUTE = SUBNAME_BASE_ROUTE + '/community/all';
