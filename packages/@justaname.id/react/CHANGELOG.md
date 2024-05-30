@@ -1,3 +1,7 @@
+## 0.3.44 (2024-05-30)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
 ## 0.3.43 (2024-05-30)
 
 
