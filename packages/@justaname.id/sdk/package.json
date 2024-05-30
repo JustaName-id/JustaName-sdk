@@ -1,6 +1,6 @@
 {
   "name": "@justaname.id/sdk",
-  "version": "0.2.39",
+  "version": "0.2.40",
   "dependencies": {
     "axios": "^1.6.0",
     "dotenv": "16.3.2",
