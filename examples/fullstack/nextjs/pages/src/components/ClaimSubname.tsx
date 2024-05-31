@@ -14,7 +14,7 @@ export const ClaimSubname = () => {
     username: debouncedUsername,
     ensDomain: process.env.NEXT_PUBLIC_ENS_DOMAIN as string,
   })
-  const { claimSubname } = useAddSubname();
+  const { addSubname } = useAddSubname();
 
   return (
     <div>
@@ -28,7 +28,7 @@ export const ClaimSubname = () => {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter a subdomain" />
             <button
-              onClick={() => claimSubname({
+              onClick={() => addSubname({
                 username,
 
               })}

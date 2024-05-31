@@ -2,7 +2,8 @@ import { AppDetails} from './questions';
 import fetch from 'node-fetch';
 import path from 'path';
 import fs from 'fs-extra';
-import tar from 'tar';
+import tar from 'tar-fs';
+
 
 /**
  * Defines the structure for the details needed to download a project.
@@ -96,7 +97,7 @@ export const downloadApp = async (project: AppDetails) : Promise<DownloadDetails
 
   await new Promise((resolve, reject) => {
     response.body
-      .pipe(tar.extract({ cwd: projectDir + '/temp', strip: 1 }))
+      .pipe(tar.extract( projectDir + '/temp', { strip: 1 }))
       .on('error', reject)
       .on('finish', resolve);
   });

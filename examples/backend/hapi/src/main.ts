@@ -8,6 +8,7 @@ const chainId = parseInt(process.env.JUSTANAME_CHAIN_ID as string);
 const domain = process.env.JUSTANAME_DOMAIN as string;
 const origin = process.env.JUSTANAME_ORIGIN as string;
 const apiKey = process.env.JUSTANAME_API_KEY as string;
+const ensDomain = process.env.JUSTANAME_ENS_DOMAIN as string;
 
 if(!origin) {
   throw new Error('Origin is required');
@@ -91,7 +92,7 @@ const init = async () => {
         try {
           const add = await justaname.subnames.addSubname({
             username: payload.username,
-            ensDomain: domain,
+            ensDomain,
             chainId: chainId
           }, {
             xSignature: payload.signature,

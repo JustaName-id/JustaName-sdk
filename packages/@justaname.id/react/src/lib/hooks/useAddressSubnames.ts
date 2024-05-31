@@ -1,8 +1,6 @@
 "use client";
 
 import { useJustaName } from '../providers';
-import { useAccount } from 'wagmi';
-import { useMounted } from './useMounted';
 import {
   QueryObserverResult,
   RefetchOptions,
@@ -20,22 +18,22 @@ import { buildSubnameBySubnameKey } from './useSubname';
  * @param ensDomain
  * @returns {Array} A unique cache key array for react-query.
  */
-export const buildAccountSubnamesKey = (
+export const buildAddressSubnamesKey = (
   address: string | undefined,
   chainId: ChainId,
-  ensDomain?: string
 ): Array<any> => [
-  'WALLET_SUBNAMES_BY_ADDRESS', address, chainId, ensDomain]
+  'WALLET_SUBNAMES_BY_ADDRESS', address, chainId]
 
 /**
- * Options for the `useAccountSubnames` hook, allowing customization of the query.
+ * Options for the `useAddressSubnames` hook, allowing customization of the query.
  *
- * @typedef UseConnectedWalletSubnamesOptions
+ * @typedef UseAddressSubnamesOptions
  * @type {object}
- * @property {string} [ensDomain] - An optional ENS domain to filter the subnames by.
+ * @property {string} address - The Ethereum address to query for subnames.
+ * @property {ChainId} [chainId] - The chain ID to query for subnames on.
  */
-export interface UseConnectedWalletSubnamesOptions {
-  ensDomain?: string;
+export interface UseAddressSubnamesOptions {
+  address: string;
   chainId?: ChainId;
 }
 
@@ -48,15 +46,15 @@ export interface UseConnectedWalletSubnamesOptions {
 type SubnameType = SubnameGetAllByAddressResponse[];
 
 /**
- * The shape of the object returned by the `useAccountSubnames` hook.
+ * The shape of the object returned by the `useAddressSubnames` hook.
  *
- * @typedef UseAccountSubnamesResult
+ * @typedef UseAddressSubnamesResult
  * @type {object}
  * @property {SubnameType} subnames - The list of subnames associated with the account.
  * @property {boolean} isLoading - Indicates if the query is currently loading.
  * @property {function} refetchSubnames - Function to manually refetch the subnames data.
  */
-interface UseAccountSubnamesResult {
+interface UseAddressSubnamesResult {
   subnames: SubnameType;
   isLoading: boolean;
   refetchSubnames: (
@@ -65,24 +63,22 @@ interface UseAccountSubnamesResult {
 }
 
 /**
- * Custom hook to fetch subnames associated with the connected wallet's address.
+ * Custom hook to fetch subnames associated with a wallet's address.
  *
- * @param {UseConnectedWalletSubnamesOptions} props - Optional configurations for subname retrieval.
- * @returns {UseAccountSubnamesResult} The result object containing subnames data, loading state, and a refetch function.
+ * @param {UseAddressSubnamesOptions} props - Optional configurations for subname retrieval.
+ * @returns {UseAddressSubnamesResult} The result object containing subnames data, loading state, and a refetch function.
  */
-export const useAccountSubnames = (
-  props: UseConnectedWalletSubnamesOptions = {}
-): UseAccountSubnamesResult => {
-  const mounted = useMounted();
+export const useAddressSubnames = (
+  props: UseAddressSubnamesOptions
+): UseAddressSubnamesResult => {
   const queryClient = useQueryClient();
-  const { address } = useAccount();
   const { justaname, chainId } = useJustaName();
 
   const query = useQuery({
-    queryKey: buildAccountSubnamesKey(address, props?.chainId ? props?.chainId : chainId, props.ensDomain),
+    queryKey: buildAddressSubnamesKey(props.address, props?.chainId ? props?.chainId : chainId),
     queryFn: async () => {
       const subnames = await justaname?.subnames.getAllByAddress({
-        address: address as string,
+        address: props.address as string,
         isClaimed: true,
         coinType: 60,
         chainId: props?.chainId ? props?.chainId : chainId,
@@ -95,15 +91,9 @@ export const useAccountSubnames = (
         );
       });
 
-      if (props.ensDomain) {
-        return subnames?.filter((subname: SubnameGetAllByAddressResponse) =>
-          subname.subname.endsWith(`.${props.ensDomain}`)
-        );
-      }
-
       return subnames;
     },
-    enabled: Boolean(mounted) && Boolean(address) && Boolean(justaname),
+    enabled: Boolean(justaname) && Boolean(props.address),
   });
 
   return {

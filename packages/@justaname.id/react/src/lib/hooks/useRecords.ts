@@ -75,8 +75,8 @@ export const useRecords = (
   const { justaname, chainId } = useJustaName()
 
    const query = useQuery({
-      queryKey: buildRecordsBySubnameKey(props.fullName, props?.chainId || chainId, props?.providerUrl),
-      queryFn: () =>  getSubnameDetails(props.fullName, justaname, props?.chainId || chainId, props.providerUrl)
+      queryKey: buildRecordsBySubnameKey(props.fullName, props?.chainId ? props?.chainId : chainId, props?.providerUrl),
+      queryFn: () =>  getSubnameDetails(props.fullName, justaname, props?.chainId ? props?.chainId : chainId, props.providerUrl)
     })
 
     return {

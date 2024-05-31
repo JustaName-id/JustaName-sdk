@@ -24,6 +24,9 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
   const {  address} = useMountedAccount();
   const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
+
+  const isWeb = typeof window !== 'undefined';
+
   const mutation = useMutation({
     mutationFn: async () => {
       if (!address) {
@@ -67,6 +70,10 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
         signedData
       )
 
+      if (isWeb) {
+        localStorage.setItem(buildSignature(address).join('_'), JSON.stringify(signedData));
+      }
+
       return signedData
     },
   });
@@ -81,11 +88,27 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
 
   const getSignature = async () => {
     const now = new Date();
+
     if (query.data) {
       if (query.data.expirationTime > now) {
         return query.data
       }
     }
+
+    if (isWeb) {
+      const localData = localStorage.getItem(buildSignature(address ?? '').join('_'));
+      if (localData) {
+        const parsedData = JSON.parse(localData);
+        if (new Date(parsedData.expirationTime) > now) {
+          await queryClient.setQueryData(
+            buildSignature(address ?? ''),
+            parsedData
+          )
+          return parsedData;
+        }
+      }
+    }
+
     return await mutation.mutateAsync()
   }
   return {
