@@ -15,7 +15,6 @@ export const ClaimSubname = () => {
   })
   const { addSubname } = useAddSubname();
 
-  console.log(subnames, addSubname);
   return (
     <div>
       {

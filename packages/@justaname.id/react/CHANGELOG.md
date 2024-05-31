@@ -1,3 +1,55 @@
+## 0.3.48 (2024-05-31)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.47 (2024-05-31)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.46 (2024-05-31)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.45 (2024-05-30)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.44 (2024-05-30)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.43 (2024-05-30)
+
+
+### 🚀 Features
+
+- address decoder upgrade ([2584c15](https://github.com/JustaName-id/JustaName-sdk/commit/2584c15))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.3.42 (2024-05-28)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.41 (2024-05-25)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.40 (2024-05-24)
+
+
+### 🚀 Features
+
+- chains optional in the hooks ([bf502a0](https://github.com/JustaName-id/JustaName-sdk/commit/bf502a0))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.39 (2024-05-23)
 
 This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.

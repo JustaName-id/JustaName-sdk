@@ -53,7 +53,7 @@ export const useSubname = (props: UseSubnameOptions) : UseSubnameResult => {
   const { justaname, chainId } = useJustaName()
 
   const query = useQuery({
-    queryKey: buildSubnameBySubnameKey(props.subname, props?.chainId || chainId),
+    queryKey: buildSubnameBySubnameKey(props.subname, props?.chainId ? props?.chainId : chainId),
     queryFn: () => justaname?.subnames.getBySubname({
        subname: props.subname,
         chainId: chainId}),

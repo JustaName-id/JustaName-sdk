@@ -13,3 +13,5 @@ export * from './useSubname';
 export * from './useSubnameSignature';
 export * from './useUpdateSubname';
 export * from './useRecords';
+export * from './useAddressSubnames';
+export * from './useCommunities';

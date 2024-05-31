@@ -1,3 +1,49 @@
+## 0.2.45 (2024-05-31)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.44 (2024-05-31)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.43 (2024-05-31)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.42 (2024-05-30)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.41 (2024-05-30)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.40 (2024-05-30)
+
+
+### 🚀 Features
+
+- address decoder upgrade ([2584c15](https://github.com/JustaName-id/JustaName-sdk/commit/2584c15))
+
+- get communities ([4874cfb](https://github.com/JustaName-id/JustaName-sdk/commit/4874cfb))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.39 (2024-05-28)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.38 (2024-05-25)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.37 (2024-05-24)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
 ## 0.2.36 (2024-05-23)
 
 This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.

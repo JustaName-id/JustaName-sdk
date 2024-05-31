@@ -8,7 +8,7 @@ export default defineConfig({
   cacheDir: '../../node_modules/.vite/apps/react-trial',
 
   server: {
-    port: 4200,
+    port: 3000,
     host: 'localhost',
   },
 
@@ -19,6 +19,9 @@ export default defineConfig({
 
   plugins: [react(), nxViteTsPaths()],
 
+  define: {
+    'process.env': process.env,
+  },
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [ nxViteTsPaths() ],

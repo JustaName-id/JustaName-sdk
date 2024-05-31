@@ -20,7 +20,7 @@ export async function POST(req: ExpoRequest): Promise<ExpoResponse> {
   if (!message) {
     return new ExpoResponse('Message is required', { status: 400 });
   }
-  const justaname = await getJustaNameInstance();
+  const justaname = getJustaNameInstance();
 
   const chainId = parseInt(
     process.env.EXPO_PUBLIC_CHAIN_ID as string
