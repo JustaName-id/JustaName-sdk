@@ -156,7 +156,6 @@ export interface SubnameGetAllCommunitiesChainIdRequest extends IRequest {
 
   chainId: ChainId;
 
-
   page?: number;
 
   limit?: number;
