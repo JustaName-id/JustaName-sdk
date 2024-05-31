@@ -5,17 +5,23 @@ import { ChainId, SubnameGetAllByDomainChainIdResponse } from '@justaname.id/sdk
 export const buildCommunitySubnamesKey = (
   domainName: string | undefined,
   isClaimed: boolean,
-  chainId: ChainId
+  chainId: ChainId,
+  page: number,
+  limit: number
 ) => [
   'COMMUNITY_SUBNAMES_BY_ADDRESS',
   domainName,
   isClaimed,
   chainId,
+  page,
+  limit,
 ];
 export interface UseCommunitySubnamesOptions {
   ensDomain: string;
   isClaimed: boolean;
   chainId?: ChainId;
+  page?: number;
+  limit?: number;
 }
 
 export const useCommunitySubnames = (
@@ -24,7 +30,7 @@ export const useCommunitySubnames = (
   const { justaname, chainId } = useJustaName();
 
   return useInfiniteQuery({
-    queryKey: buildCommunitySubnamesKey(props.ensDomain, props.isClaimed, props.chainId || chainId),
+    queryKey: buildCommunitySubnamesKey(props.ensDomain, props.isClaimed, props.chainId || chainId, props.page ?? 1, props.limit ?? 20),
     queryFn: ({
                 pageParam: { page, limit },
               }) => {
@@ -37,14 +43,14 @@ export const useCommunitySubnames = (
       })
     },
     initialPageParam: {
-      page: 1,
-      limit: 20,
+      page: props.page ?? 1,
+      limit: props.limit ?? 20,
     },
     getNextPageParam: (p) => {
       if (p.pagination.hasNextPage) {
         return {
-          page: p.pagination.nextPage ?? 1,
-          limit: 20,
+          page: p.pagination.nextPage ?? props.page ?? 1,
+          limit: props.limit ?? 20,
         };
       }
 
@@ -53,8 +59,8 @@ export const useCommunitySubnames = (
     getPreviousPageParam: (p) => {
       if (p.pagination.hasPrevPage) {
         return {
-          page: p.pagination.prevPage ?? 1,
-          limit: 20,
+          page: p.pagination.prevPage ?? props.page ?? 1,
+          limit: props.limit ?? 20,
         };
       }
       return undefined;
