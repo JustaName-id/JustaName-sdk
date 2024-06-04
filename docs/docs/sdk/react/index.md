@@ -95,4 +95,4 @@ The JustaName React SDK provides several hooks to simplify working with JustaNam
 
 ## Conclusion
 
-For more detailed documentation and additional use cases, please visit [JustaName's Documentation](https://docs.justaname.io).
+For more detailed documentation and additional use cases, please visit [JustaName's Documentation](https://docs.justaname.id).

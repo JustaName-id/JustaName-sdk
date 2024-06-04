@@ -31,7 +31,7 @@ Specifies any headers required for the request. The type is intentionally kept g
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:126](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L126)
+[lib/types/subnames/get-by-subname.ts:126](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L126)
 
 ___
 
@@ -47,7 +47,7 @@ The structure of the request for retrieving a subname.
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:124](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L124)
+[lib/types/subnames/get-by-subname.ts:124](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L124)
 
 ___
 
@@ -63,4 +63,4 @@ The format of the response containing the subname details.
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:125](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L125)
+[lib/types/subnames/get-by-subname.ts:125](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L125)

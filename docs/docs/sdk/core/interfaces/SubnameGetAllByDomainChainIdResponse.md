@@ -27,7 +27,7 @@ Pagination information for navigating through the subnames.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:175](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L175)
+[lib/types/subnames/get-all-by-ens-domain.ts:175](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L175)
 
 ___
 
@@ -39,4 +39,4 @@ An array of subname details.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-ens-domain.ts:173](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L173)
+[lib/types/subnames/get-all-by-ens-domain.ts:173](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain.ts#L173)

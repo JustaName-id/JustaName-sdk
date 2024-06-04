@@ -48,3 +48,5 @@ Extend this interface to define specific properties for different responses.
   ↳ [`SubnameAcceptResponse`](SubnameAcceptResponse.md)
 
   ↳ [`SubnameRecordsResponse`](SubnameRecordsResponse.md)
+
+  ↳ [`SubnameGetAllCommunitiesChainIdResponse`](SubnameGetAllCommunitiesChainIdResponse.md)

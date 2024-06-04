@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts#L18)
+[packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useUpdateSubname.ts#L18)
 
 ___
 

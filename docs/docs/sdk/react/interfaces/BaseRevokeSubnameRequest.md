@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L15)
+[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L15)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L11)
+[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L11)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L13)
+[packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useRevokeSubname.ts#L13)

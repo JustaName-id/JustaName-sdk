@@ -27,7 +27,7 @@ The cryptocurrency addresses to associate with the subname.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:81](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L81)
+[lib/types/subnames/update.ts:81](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L81)
 
 ___
 
@@ -39,7 +39,7 @@ The blockchain network identifier.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:79](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L79)
+[lib/types/subnames/update.ts:79](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L79)
 
 ___
 
@@ -51,7 +51,7 @@ A hash of the content to be associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:85](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L85)
+[lib/types/subnames/update.ts:85](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L85)
 
 ___
 
@@ -63,7 +63,7 @@ The parent ENS domain under which the subname is registered.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:77](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L77)
+[lib/types/subnames/update.ts:77](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L77)
 
 ___
 
@@ -75,7 +75,7 @@ The text records to associate with the subname.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:83](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L83)
+[lib/types/subnames/update.ts:83](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L83)
 
 ___
 
@@ -87,4 +87,4 @@ The subname to be updated.
 
 #### Defined in
 
-[lib/types/subnames/update.ts:75](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L75)
+[lib/types/subnames/update.ts:75](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/update.ts#L75)

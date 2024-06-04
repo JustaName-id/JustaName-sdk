@@ -21,7 +21,7 @@ A list of cryptocurrency addresses associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:64](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L64)
+[lib/types/subnames/get-by-domain-name-chainId.ts:64](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L64)
 
 ___
 
@@ -33,7 +33,7 @@ A content hash associated with the subname, representing stored or linked conten
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:60](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L60)
+[lib/types/subnames/get-by-domain-name-chainId.ts:60](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L60)
 
 ___
 
@@ -45,7 +45,7 @@ The unique identifier of the subname's metadata.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L58)
+[lib/types/subnames/get-by-domain-name-chainId.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L58)
 
 ___
 
@@ -57,7 +57,7 @@ The identifier of the subdomain to which this metadata belongs.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:62](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L62)
+[lib/types/subnames/get-by-domain-name-chainId.ts:62](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L62)
 
 ___
 
@@ -69,4 +69,4 @@ A list of text records providing additional information about the subname.
 
 #### Defined in
 
-[lib/types/subnames/get-by-domain-name-chainId.ts:66](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L66)
+[lib/types/subnames/get-by-domain-name-chainId.ts:66](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-domain-name-chainId.ts#L66)

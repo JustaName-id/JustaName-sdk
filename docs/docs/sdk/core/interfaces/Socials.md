@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/constants/supported-socials/index.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L16)
+[lib/constants/supported-socials/index.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L16)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/constants/supported-socials/index.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L17)
+[lib/constants/supported-socials/index.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L17)
 
 ___
 
@@ -48,4 +48,4 @@ ___
 
 #### Defined in
 
-[lib/constants/supported-socials/index.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L15)
+[lib/constants/supported-socials/index.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/constants/supported-socials/index.ts#L15)
