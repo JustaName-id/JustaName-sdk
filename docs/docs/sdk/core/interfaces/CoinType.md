@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[lib/utils/cointypes/index.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L2)
+[lib/utils/cointypes/index.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L4)
 
 ___
 
@@ -24,17 +24,7 @@ ___
 
 #### Defined in
 
-[lib/utils/cointypes/index.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L4)
-
-___
-
-### color
-
-• **color**: `string`
-
-#### Defined in
-
-[lib/utils/cointypes/index.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L5)
+[lib/utils/cointypes/index.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L6)
 
 ___
 
@@ -44,4 +34,4 @@ ___
 
 #### Defined in
 
-[lib/utils/cointypes/index.ts:3](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L3)
+[lib/utils/cointypes/index.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/utils/cointypes/index.ts#L5)

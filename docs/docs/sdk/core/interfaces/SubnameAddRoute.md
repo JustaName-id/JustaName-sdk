@@ -33,7 +33,7 @@ The combined set of headers required for authentication and verification.
 
 #### Defined in
 
-[lib/types/subnames/add.ts:87](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L87)
+[lib/types/subnames/add.ts:87](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L87)
 
 ___
 
@@ -49,7 +49,7 @@ The required structure for the subname addition request.
 
 #### Defined in
 
-[lib/types/subnames/add.ts:85](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L85)
+[lib/types/subnames/add.ts:85](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L85)
 
 ___
 
@@ -65,4 +65,4 @@ The expected response upon successful operation.
 
 #### Defined in
 
-[lib/types/subnames/add.ts:86](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L86)
+[lib/types/subnames/add.ts:86](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L86)

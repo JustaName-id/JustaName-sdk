@@ -2,7 +2,7 @@ import { AppDetails} from './questions';
 import fetch from 'node-fetch';
 import path from 'path';
 import fs from 'fs-extra';
-import tar from 'tar-fs';
+import tar from 'tar';
 
 
 /**
@@ -97,7 +97,10 @@ export const downloadApp = async (project: AppDetails) : Promise<DownloadDetails
 
   await new Promise((resolve, reject) => {
     response.body
-      .pipe(tar.extract( projectDir + '/temp', { strip: 1 }))
+      .pipe(tar.extract({
+        cwd: projectDir + '/temp',
+        strip: 1
+      }))
       .on('error', reject)
       .on('finish', resolve);
   });

@@ -30,7 +30,7 @@ The headers required for the request. The type is intentionally kept generic to 
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:130](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L130)
+[lib/types/subnames/get-all-by-address.ts:130](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L130)
 
 ___
 
@@ -46,7 +46,7 @@ The request data structure.
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:128](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L128)
+[lib/types/subnames/get-all-by-address.ts:128](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L128)
 
 ___
 
@@ -62,4 +62,4 @@ An array of responses, each containing details of a subname associated with the 
 
 #### Defined in
 
-[lib/types/subnames/get-all-by-address.ts:129](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L129)
+[lib/types/subnames/get-all-by-address.ts:129](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-address.ts#L129)

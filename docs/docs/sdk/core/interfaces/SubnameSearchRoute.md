@@ -36,7 +36,7 @@ The type of the headers for the request/response.
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:75](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L75)
+[lib/types/subnames/search-subnames.ts:75](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L75)
 
 ___
 
@@ -52,7 +52,7 @@ The type of the request data.
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:73](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L73)
+[lib/types/subnames/search-subnames.ts:73](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L73)
 
 ___
 
@@ -68,4 +68,4 @@ The type of the response data.
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:74](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L74)
+[lib/types/subnames/search-subnames.ts:74](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L74)

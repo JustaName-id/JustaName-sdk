@@ -74,9 +74,11 @@ export const frameworkEnv: Record<FrontendFramework | BackendFramework | Fullsta
  */
 export const getEnv = (framework: FrontendFramework | BackendFramework | FullstackFramework, appDetails: AppDetails) => {
   const env = frameworkEnv[framework];
-  return env.replace(/{{ensDomain}}/g, appDetails.ensDomain)
+  const envMatched =  env.replace(/{{ensDomain}}/g, appDetails.ensDomain)
             .replace(/{{chainId}}/g, appDetails.network === 'mainnet' ? '1' : '11155111')
             .replace(/{{apiKey}}/g, appDetails.apiKey)
             .replace(/{{origin}}/g, appDetails.appUrl)
             .replace(/{{domain}}/g, appDetails.appUrl.split('://')[1])
+
+  return envMatched;
 }

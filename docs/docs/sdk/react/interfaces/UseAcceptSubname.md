@@ -32,7 +32,7 @@ The function to accept a subname.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts:34](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts#L34)
+[packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts:34](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts#L34)
 
 ___
 
@@ -44,4 +44,4 @@ Indicates if the mutation is currently pending.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts#L37)
+[packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useAcceptSubname.ts#L37)

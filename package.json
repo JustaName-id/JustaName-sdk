@@ -98,8 +98,8 @@
   "dependencies": {
     "@ensdomains/address-encoder": "^1.1.2",
     "@inquirer/prompts": "^4.3.0",
-    "@justaname.id/react": "0.3.48",
-    "@justaname.id/sdk": "0.2.45",
+    "@justaname.id/react": "0.3.49",
+    "@justaname.id/sdk": "0.2.46",
     "@rainbow-me/rainbowkit": "^2.0.2",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -136,6 +136,7 @@
     "rollup-plugin-strip-shebang": "^1.2.10",
     "rollup-preserve-directives": "^1.1.1",
     "tar-fs": "^3.0.6",
+    "tar-stream": "^3.1.7",
     "tslib": "^2.3.0",
     "viem": "2.x",
     "vite-plugin-dts": "^3.7.3",
