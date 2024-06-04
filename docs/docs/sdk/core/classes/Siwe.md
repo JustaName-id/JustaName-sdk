@@ -62,7 +62,7 @@ Sends a request to initiate a challenge.
 
 #### Defined in
 
-[lib/features/siwe/index.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/features/siwe/index.ts#L43)
+[lib/features/siwe/index.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/features/siwe/index.ts#L43)
 
 ___
 
@@ -86,4 +86,4 @@ Sends a request to verify a specific address using SIWE.
 
 #### Defined in
 
-[lib/features/siwe/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/features/siwe/index.ts#L56)
+[lib/features/siwe/index.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/features/siwe/index.ts#L56)

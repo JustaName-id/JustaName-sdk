@@ -27,7 +27,7 @@ This interface can be extended to include common request properties shared acros
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L42)
+[lib/types/subnames/search-subnames.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L42)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:44](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L44)
+[lib/types/subnames/search-subnames.ts:44](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L44)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L46)
+[lib/types/subnames/search-subnames.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L46)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L48)
+[lib/types/subnames/search-subnames.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L48)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L38)
+[lib/types/subnames/search-subnames.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L38)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L36)
+[lib/types/subnames/search-subnames.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L36)
 
 ___
 
@@ -87,4 +87,4 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/search-subnames.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L40)
+[lib/types/subnames/search-subnames.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L40)

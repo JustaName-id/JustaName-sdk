@@ -26,4 +26,4 @@ The unique identifier of the reserved subname. This ID can be used to claim the 
 
 #### Defined in
 
-[lib/types/subnames/reserve.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L35)
+[lib/types/subnames/reserve.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L35)

@@ -34,7 +34,7 @@ The headers required for the request, left intentionally
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:72](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L72)
+[lib/types/siwe/request-challenge.ts:72](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L72)
 
 ___
 
@@ -50,7 +50,7 @@ The request structure for the SIWE challenge.
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:70](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L70)
+[lib/types/siwe/request-challenge.ts:70](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L70)
 
 ___
 
@@ -66,4 +66,4 @@ The expected response structure.
 
 #### Defined in
 
-[lib/types/siwe/request-challenge.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L71)
+[lib/types/siwe/request-challenge.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/siwe/request-challenge.ts#L71)

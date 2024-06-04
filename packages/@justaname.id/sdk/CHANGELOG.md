@@ -1,3 +1,16 @@
+## 0.2.46 (2024-06-04)
+
+
+### 🚀 Features
+
+- community paginated and use address subname ([0b5bd45](https://github.com/JustaName-id/JustaName-sdk/commit/0b5bd45))
+
+
+### ❤️  Thank You
+
+- Ghadi Mhawej @Ghadi8
+- HadiKhai
+
 ## 0.2.45 (2024-05-31)
 
 This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.

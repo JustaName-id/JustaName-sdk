@@ -31,7 +31,7 @@ SIWE authentication headers required for the operation.
 
 #### Defined in
 
-[lib/types/subnames/reject.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/reject.ts#L48)
+[lib/types/subnames/reject.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/reject.ts#L48)
 
 ___
 
@@ -47,7 +47,7 @@ The structure required for a subname revocation request.
 
 #### Defined in
 
-[lib/types/subnames/reject.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/reject.ts#L46)
+[lib/types/subnames/reject.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/reject.ts#L46)
 
 ___
 
@@ -63,4 +63,4 @@ The expected format of the response upon successful revocation.
 
 #### Defined in
 
-[lib/types/subnames/reject.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/reject.ts#L47)
+[lib/types/subnames/reject.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/reject.ts#L47)

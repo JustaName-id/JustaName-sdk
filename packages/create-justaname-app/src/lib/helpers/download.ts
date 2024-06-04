@@ -2,7 +2,7 @@ import { AppDetails} from './questions';
 import fetch from 'node-fetch';
 import path from 'path';
 import fs from 'fs-extra';
-import tar from 'tar-fs';
+import tar from 'tar';
 
 
 /**
@@ -31,8 +31,7 @@ interface GetDownloadDetails {
  * @returns {Promise<GetDownloadDetails>} The details including the download URL, project directory, and optional paths for frontend, backend, and fullstack frameworks.
  */
 export const getDownloadDetails = async (project: AppDetails): Promise<GetDownloadDetails> => {
-
-  const downloadUrl = 'https://github.com/JustaName-id/JustaName-sdk/archive/refs/heads/main.tar.gz';
+  const downloadUrl = 'https://github.com/JustaName-id/JustaName-sdk/archive/refs/heads/examples.tar.gz';
   const projectDir = path.join(process.cwd(), project.directory, project.appName);
 
   let frontendFrameworkPath: string | undefined;
@@ -97,7 +96,10 @@ export const downloadApp = async (project: AppDetails) : Promise<DownloadDetails
 
   await new Promise((resolve, reject) => {
     response.body
-      .pipe(tar.extract( projectDir + '/temp', { strip: 1 }))
+      .pipe(tar.extract({
+        cwd: projectDir + '/temp',
+        strip: 1
+      }))
       .on('error', reject)
       .on('finish', resolve);
   });

@@ -26,7 +26,7 @@ The coin records associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/records.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L37)
+[lib/types/subnames/records.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L37)
 
 ___
 
@@ -38,7 +38,7 @@ The content hash associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/records.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L39)
+[lib/types/subnames/records.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L39)
 
 ___
 
@@ -50,7 +50,7 @@ A boolean indicating whether the subname is a Japanese name.
 
 #### Defined in
 
-[lib/types/subnames/records.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L41)
+[lib/types/subnames/records.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L41)
 
 ___
 
@@ -62,7 +62,7 @@ The address of the resolver.
 
 #### Defined in
 
-[lib/types/subnames/records.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L33)
+[lib/types/subnames/records.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L33)
 
 ___
 
@@ -74,4 +74,4 @@ The text records associated with the subname.
 
 #### Defined in
 
-[lib/types/subnames/records.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L35)
+[lib/types/subnames/records.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L35)

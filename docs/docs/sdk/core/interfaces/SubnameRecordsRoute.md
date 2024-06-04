@@ -30,7 +30,7 @@ The headers required for the request. The type is intentionally kept generic to 
 
 #### Defined in
 
-[lib/types/subnames/records.ts:73](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L73)
+[lib/types/subnames/records.ts:73](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L73)
 
 ___
 
@@ -46,7 +46,7 @@ The request data structure.
 
 #### Defined in
 
-[lib/types/subnames/records.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L71)
+[lib/types/subnames/records.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L71)
 
 ___
 
@@ -62,4 +62,4 @@ The response data structure.
 
 #### Defined in
 
-[lib/types/subnames/records.ts:72](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L72)
+[lib/types/subnames/records.ts:72](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/records.ts#L72)

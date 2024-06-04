@@ -26,7 +26,7 @@ The date and time when the subname was claimed, if applicable.
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:107](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L107)
+[lib/types/subnames/get-by-subname.ts:107](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L107)
 
 ___
 
@@ -38,7 +38,7 @@ Detailed metadata about the subname.
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:109](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L109)
+[lib/types/subnames/get-by-subname.ts:109](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L109)
 
 ___
 
@@ -50,7 +50,7 @@ The identifier of the ENS domain to which the subname belongs.
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:101](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L101)
+[lib/types/subnames/get-by-subname.ts:101](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L101)
 
 ___
 
@@ -62,7 +62,7 @@ The unique identifier of the subname.
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:97](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L97)
+[lib/types/subnames/get-by-subname.ts:97](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L97)
 
 ___
 
@@ -74,7 +74,7 @@ Indicates whether the subname has been claimed.
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:105](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L105)
+[lib/types/subnames/get-by-subname.ts:105](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L105)
 
 ___
 
@@ -86,7 +86,7 @@ The full subname, including both the username and domain parts.
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:103](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L103)
+[lib/types/subnames/get-by-subname.ts:103](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L103)
 
 ___
 
@@ -98,4 +98,4 @@ The username portion of the subname.
 
 #### Defined in
 
-[lib/types/subnames/get-by-subname.ts:99](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L99)
+[lib/types/subnames/get-by-subname.ts:99](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/get-by-subname.ts#L99)
