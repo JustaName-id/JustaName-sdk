@@ -31,8 +31,7 @@ interface GetDownloadDetails {
  * @returns {Promise<GetDownloadDetails>} The details including the download URL, project directory, and optional paths for frontend, backend, and fullstack frameworks.
  */
 export const getDownloadDetails = async (project: AppDetails): Promise<GetDownloadDetails> => {
-
-  const downloadUrl = 'https://github.com/JustaName-id/JustaName-sdk/archive/refs/heads/main.tar.gz';
+  const downloadUrl = 'https://github.com/JustaName-id/JustaName-sdk/archive/refs/heads/examples.tar.gz';
   const projectDir = path.join(process.cwd(), project.directory, project.appName);
 
   let frontendFrameworkPath: string | undefined;
