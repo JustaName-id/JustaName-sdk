@@ -26,4 +26,4 @@ A message or status indicating the outcome of the subname revocation.
 
 #### Defined in
 
-[lib/types/subnames/revoke.ts:32](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L32)
+[lib/types/subnames/revoke.ts:32](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/revoke.ts#L32)

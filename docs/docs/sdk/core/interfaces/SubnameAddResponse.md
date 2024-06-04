@@ -26,4 +26,4 @@ The unique identifier of the added subname.
 
 #### Defined in
 
-[lib/types/subnames/add.ts:69](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L69)
+[lib/types/subnames/add.ts:69](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/add.ts#L69)

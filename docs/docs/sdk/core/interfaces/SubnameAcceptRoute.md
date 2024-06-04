@@ -30,7 +30,7 @@ SIWE authentication headers required for the request.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:111](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L111)
+[lib/types/subnames/accept.ts:111](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L111)
 
 ___
 
@@ -46,7 +46,7 @@ The data structure for the claim request.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:109](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L109)
+[lib/types/subnames/accept.ts:109](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L109)
 
 ___
 
@@ -62,4 +62,4 @@ The expected structure for the claim response.
 
 #### Defined in
 
-[lib/types/subnames/accept.ts:110](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L110)
+[lib/types/subnames/accept.ts:110](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/accept.ts#L110)

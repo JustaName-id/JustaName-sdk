@@ -10,6 +10,16 @@ Interface defining the parameters required to check the availability of a subnam
 
 ## Properties
 
+### chainId
+
+• `Optional` **chainId**: `ChainId`
+
+#### Defined in
+
+[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L24)
+
+___
+
 ### ensDomain
 
 • **ensDomain**: `string`
@@ -18,7 +28,7 @@ The ENS domain under which the subname will be checked.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L17)
+[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L23)
 
 ___
 
@@ -30,4 +40,4 @@ The desired username to check within the ENS domain.
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/1dd4ff6/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L16)
+[packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useIsSubnameAvailable.ts#L22)

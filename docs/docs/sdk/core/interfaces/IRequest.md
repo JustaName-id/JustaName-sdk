@@ -46,3 +46,5 @@ This interface can be extended to include common request properties shared acros
   ↳ [`SubnameAcceptRequest`](SubnameAcceptRequest.md)
 
   ↳ [`SubnameRecordsRequest`](SubnameRecordsRequest.md)
+
+  ↳ [`SubnameGetAllCommunitiesChainIdRequest`](SubnameGetAllCommunitiesChainIdRequest.md)

@@ -81,7 +81,7 @@ The JustaName SDK prioritizes security and privacy with encrypted communication 
 
 ## Get Started!
 
-Explore the full documentation and in-depth examples on the JustaName Developer Portal: [https://docs.justaname.io](https://docs.justaname.io).
+Explore the full documentation and in-depth examples on the JustaName Developer Portal: [https://docs.justaname.id](https://docs.justaname.io).
 
 ## Core Methods
 
@@ -108,4 +108,4 @@ A key functionality aspect of the SDK revolves around its methods. Below is a li
 
 ## Conclusion
 
-For more detailed documentation and additional use cases, please visit [JustaName's Documentation](https://docs.justaname.io).
+For more detailed documentation and additional use cases, please visit [JustaName's Documentation](https://docs.justaname.id).
