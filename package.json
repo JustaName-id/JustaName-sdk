@@ -98,8 +98,8 @@
   "dependencies": {
     "@ensdomains/address-encoder": "^1.1.2",
     "@inquirer/prompts": "^4.3.0",
-    "@justaname.id/react": "0.3.49",
-    "@justaname.id/sdk": "0.2.46",
+    "@justaname.id/react": "0.3.54",
+    "@justaname.id/sdk": "0.2.51",
     "@rainbow-me/rainbowkit": "^2.0.2",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",

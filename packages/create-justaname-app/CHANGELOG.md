@@ -1,3 +1,33 @@
+## 0.3.48 (2024-08-08)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.47 (2024-07-29)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.46 (2024-07-10)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.45 (2024-06-04)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.44 (2024-06-04)
+
+
+### 🚀 Features
+
+- nextjs updated env in create-justaname-app ([f9875bf](https://github.com/JustaName-id/JustaName-sdk/commit/f9875bf))
+
+- download the projects from the examples branch instead of main ([0712a76](https://github.com/JustaName-id/JustaName-sdk/commit/0712a76))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.43 (2024-06-04)
 
 This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.

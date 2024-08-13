@@ -8,7 +8,7 @@
     "lint": "eslint . --ext .ts"
   },
   "dependencies": {
-    "@justaname.id/sdk": "0.2.46",
+    "@justaname.id/sdk": "0.2.51",
     "express": "^4.18.1"
   },
   "devDependencies": {

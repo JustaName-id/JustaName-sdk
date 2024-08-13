@@ -29,9 +29,7 @@
             }
           }
         },
-        "tags": [
-          "Siwe"
-        ]
+        "tags": ["Siwe"]
       }
     },
     "/ens/v1/siwe/verify-message": {
@@ -62,9 +60,7 @@
             }
           }
         },
-        "tags": [
-          "Siwe"
-        ]
+        "tags": ["Siwe"]
       }
     },
     "/ens/v1/subdomain/accept": {
@@ -123,9 +119,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/reserve": {
@@ -166,9 +160,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/add": {
@@ -236,9 +228,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/update": {
@@ -297,9 +287,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/revoke": {
@@ -367,9 +355,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/reject-invitation": {
@@ -428,9 +414,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/username": {
@@ -472,9 +456,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/subname": {
@@ -516,9 +498,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/ens-domain": {
@@ -590,9 +570,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/address": {
@@ -646,9 +624,7 @@
             "required": false,
             "in": "query",
             "description": "Array of ensDomains to filter the subnames by",
-            "example": [
-              "jan.eth"
-            ],
+            "example": ["jan.eth"],
             "schema": {
               "type": "array",
               "items": {
@@ -669,9 +645,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/invitations": {
@@ -715,9 +689,7 @@
             "required": false,
             "in": "query",
             "description": "Array of ensDomains to filter the subnames by",
-            "example": [
-              "jan.eth"
-            ],
+            "example": ["jan.eth"],
             "schema": {
               "type": "array",
               "items": {
@@ -738,9 +710,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/records": {
@@ -789,9 +759,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/subdomain/available": {
@@ -833,9 +801,7 @@
             }
           }
         },
-        "tags": [
-          "Subname"
-        ]
+        "tags": ["Subname"]
       }
     },
     "/ens/v1/primary-name/address": {
@@ -877,9 +843,7 @@
             }
           }
         },
-        "tags": [
-          "Primary Name"
-        ]
+        "tags": ["Primary Name"]
       }
     },
     "/ens/v1/primary-name/set-primary-name": {
@@ -938,9 +902,7 @@
             }
           }
         },
-        "tags": [
-          "Primary Name"
-        ]
+        "tags": ["Primary Name"]
       }
     }
   },
@@ -1007,24 +969,17 @@
             "default": 120000
           }
         },
-        "required": [
-          "domain",
-          "address",
-          "origin",
-          "chainId"
-        ]
+        "required": ["domain", "address", "origin", "chainId"]
       },
       "SiweRequestChallengeApiResponse": {
         "type": "object",
         "properties": {
           "challenge": {
             "type": "string",
-            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustaName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
           }
         },
-        "required": [
-          "challenge"
-        ]
+        "required": ["challenge"]
       },
       "SiweRequestChallengeApiResponseResultSwagger": {
         "type": "object",
@@ -1037,10 +992,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "SiweRequestChallengeApiResponseSuccessSwagger": {
         "type": "object",
@@ -1054,10 +1006,7 @@
             "$ref": "#/components/schemas/SiweRequestChallengeApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "SiweVerifyMessageApiRequest": {
         "type": "object",
@@ -1068,18 +1017,14 @@
           },
           "message": {
             "type": "string",
-            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustaName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
           },
           "address": {
             "type": "string",
             "example": "0x1234567890123456789012345678901234567890"
           }
         },
-        "required": [
-          "signature",
-          "message",
-          "address"
-        ]
+        "required": ["signature", "message", "address"]
       },
       "SiweVerifyMessageApiResponse": {
         "type": "object",
@@ -1089,9 +1034,7 @@
             "example": true
           }
         },
-        "required": [
-          "verified"
-        ]
+        "required": ["verified"]
       },
       "SiweVerifyMessageApiResponseResultSwagger": {
         "type": "object",
@@ -1104,10 +1047,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "SiweVerifyMessageApiResponseSuccessSwagger": {
         "type": "object",
@@ -1121,10 +1061,7 @@
             "$ref": "#/components/schemas/SiweVerifyMessageApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "EnsAddApiRequest": {
         "type": "object",
@@ -1139,11 +1076,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "ensDomain",
-          "offchainResolverId",
-          "workspaceId"
-        ]
+        "required": ["ensDomain", "offchainResolverId", "workspaceId"]
       },
       "EnsAddApiResponse": {
         "type": "object",
@@ -1152,9 +1085,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id"
-        ]
+        "required": ["id"]
       },
       "EnsAddApiResponseResultSwagger": {
         "type": "object",
@@ -1167,10 +1098,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "EnsAddApiResponseSuccessSwagger": {
         "type": "object",
@@ -1184,10 +1112,7 @@
             "$ref": "#/components/schemas/EnsAddApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "UpdateUserChosenLimitApiRequest": {
         "type": "object",
@@ -1199,10 +1124,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "ensId",
-          "userChosenLimit"
-        ]
+        "required": ["ensId", "userChosenLimit"]
       },
       "RemoveUserChosenLimitApiRequest": {
         "type": "object",
@@ -1211,9 +1133,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "ensId"
-        ]
+        "required": ["ensId"]
       },
       "EnsDeleteApiRequest": {
         "type": "object",
@@ -1222,9 +1142,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "ensId"
-        ]
+        "required": ["ensId"]
       },
       "UpdateIsBlockedApiRequest": {
         "type": "object",
@@ -1239,11 +1157,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "ens",
-          "chainId",
-          "isBlocked"
-        ]
+        "required": ["ens", "chainId", "isBlocked"]
       },
       "EnsUnlockDomainApiRequest": {
         "type": "object",
@@ -1252,9 +1166,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "ensId"
-        ]
+        "required": ["ensId"]
       },
       "EnsApiResponse": {
         "type": "object",
@@ -1269,11 +1181,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "ensId",
-          "domainName",
-          "userChosenLimit"
-        ]
+        "required": ["ensId", "domainName", "userChosenLimit"]
       },
       "EnsApiResponseResultSwagger": {
         "type": "object",
@@ -1286,10 +1194,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "EnsApiResponseSuccessSwagger": {
         "type": "object",
@@ -1303,10 +1208,7 @@
             "$ref": "#/components/schemas/EnsApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "EnsGetExpiryApiRequest": {
         "type": "object",
@@ -1318,9 +1220,7 @@
             }
           }
         },
-        "required": [
-          "names"
-        ]
+        "required": ["names"]
       },
       "EnsGetSubscriptionApiResponse": {
         "type": "object",
@@ -1329,9 +1229,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "isSubscribed"
-        ]
+        "required": ["isSubscribed"]
       },
       "EnsGetSubscriptionApiResponseResultSwagger": {
         "type": "object",
@@ -1344,10 +1242,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "EnsGetSubscriptionApiResponseSuccessSwagger": {
         "type": "object",
@@ -1361,10 +1256,7 @@
             "$ref": "#/components/schemas/EnsGetSubscriptionApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "OffchainResolverApiResponse": {
         "type": "object",
@@ -1412,10 +1304,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "OffchainResolverApiResponseSuccessSwagger": {
         "type": "object",
@@ -1429,10 +1318,7 @@
             "$ref": "#/components/schemas/OffchainResolverApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "OffchainResolverUpdateApiRequest": {
         "type": "object",
@@ -1499,10 +1385,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "OffchainResolverUpdateApiResponseSuccessSwagger": {
         "type": "object",
@@ -1516,10 +1399,7 @@
             "$ref": "#/components/schemas/OffchainResolverUpdateApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "AddressEnsDto": {
         "type": "object",
@@ -1531,10 +1411,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "address",
-          "coinType"
-        ]
+        "required": ["address", "coinType"]
       },
       "TextRecordDto": {
         "type": "object",
@@ -1546,10 +1423,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "key",
-          "value"
-        ]
+        "required": ["key", "value"]
       },
       "SubdomainAcceptApiRequest": {
         "type": "object",
@@ -1603,10 +1477,7 @@
             "$ref": "#/components/schemas/Metadata"
           }
         },
-        "required": [
-          "id",
-          "data"
-        ]
+        "required": ["id", "data"]
       },
       "SubdomainAcceptApiResponseResultSwagger": {
         "type": "object",
@@ -1619,10 +1490,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "SubdomainAcceptApiResponseSuccessSwagger": {
         "type": "object",
@@ -1636,10 +1504,7 @@
             "$ref": "#/components/schemas/SubdomainAcceptApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "SubdomainReserveApiRequest": {
         "type": "object",
@@ -1657,12 +1522,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "username",
-          "ensDomain",
-          "chainId",
-          "ethAddress"
-        ]
+        "required": ["username", "ensDomain", "chainId", "ethAddress"]
       },
       "SubdomainReserveApiResponse": {
         "type": "object",
@@ -1671,9 +1531,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id"
-        ]
+        "required": ["id"]
       },
       "SubdomainReserveApiResponseResultSwagger": {
         "type": "object",
@@ -1686,10 +1544,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "SubdomainReserveApiResponseSuccessSwagger": {
         "type": "object",
@@ -1703,10 +1558,7 @@
             "$ref": "#/components/schemas/SubdomainReserveApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "SubdomainAddApiRequest": {
         "type": "object",
@@ -1783,9 +1635,7 @@
             "example": "id"
           }
         },
-        "required": [
-          "id"
-        ]
+        "required": ["id"]
       },
       "SubdomainAddApiResponseResultSwagger": {
         "type": "object",
@@ -1798,10 +1648,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "SubdomainAddApiResponseSuccessSwagger": {
         "type": "object",
@@ -1815,10 +1662,7 @@
             "$ref": "#/components/schemas/SubdomainAddApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "SubdomainUpdateApiRequest": {
         "type": "object",
@@ -1898,10 +1742,7 @@
             "$ref": "#/components/schemas/Metadata"
           }
         },
-        "required": [
-          "id",
-          "data"
-        ]
+        "required": ["id", "data"]
       },
       "SubdomainUpdateApiResponseResultSwagger": {
         "type": "object",
@@ -1914,10 +1755,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "SubdomainUpdateApiResponseSuccessSwagger": {
         "type": "object",
@@ -1931,10 +1769,7 @@
             "$ref": "#/components/schemas/SubdomainUpdateApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "SubdomainRevokeApiRequest": {
         "type": "object",
@@ -1955,11 +1790,7 @@
             "example": 11155111
           }
         },
-        "required": [
-          "ensDomain",
-          "username",
-          "chainId"
-        ]
+        "required": ["ensDomain", "username", "chainId"]
       },
       "SubdomainRevokeApiResponse": {
         "type": "object",
@@ -1968,9 +1799,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "response"
-        ]
+        "required": ["response"]
       },
       "SubdomainRevokeApiResponseResultSwagger": {
         "type": "object",
@@ -1983,10 +1812,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "SubdomainRevokeApiResponseSuccessSwagger": {
         "type": "object",
@@ -2000,10 +1826,7 @@
             "$ref": "#/components/schemas/SubdomainRevokeApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "MetadataApiResponse": {
         "type": "object",
@@ -2085,10 +1908,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "SubdomainApiResponseSuccessSwagger": {
         "type": "object",
@@ -2102,10 +1922,7 @@
             "$ref": "#/components/schemas/SubdomainApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "PaginationApiResponse": {
         "type": "object",
@@ -2159,10 +1976,7 @@
             "$ref": "#/components/schemas/PaginationApiResponse"
           }
         },
-        "required": [
-          "subnames",
-          "pagination"
-        ]
+        "required": ["subnames", "pagination"]
       },
       "SubdomainWithPaginationApiResponseResultSwagger": {
         "type": "object",
@@ -2175,10 +1989,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "SubdomainWithPaginationApiResponseSuccessSwagger": {
         "type": "object",
@@ -2192,10 +2003,7 @@
             "$ref": "#/components/schemas/SubdomainWithPaginationApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "ContentHash": {
         "type": "object",
@@ -2245,10 +2053,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "SubdomainGetRecordsApiResponseSuccessSwagger": {
         "type": "object",
@@ -2262,10 +2067,7 @@
             "$ref": "#/components/schemas/SubdomainGetRecordsApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "IsUsernameAvailableApiResponse": {
         "type": "object",
@@ -2274,9 +2076,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "available"
-        ]
+        "required": ["available"]
       },
       "IsUsernameAvailableApiResponseResultSwagger": {
         "type": "object",
@@ -2289,10 +2089,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "IsUsernameAvailableApiResponseSuccessSwagger": {
         "type": "object",
@@ -2306,10 +2103,7 @@
             "$ref": "#/components/schemas/IsUsernameAvailableApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "PrimaryNameApiResponse": {
         "type": "object",
@@ -2330,13 +2124,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "id",
-          "name",
-          "address",
-          "nameHash",
-          "chainId"
-        ]
+        "required": ["id", "name", "address", "nameHash", "chainId"]
       },
       "PrimaryNameApiResponseResultSwagger": {
         "type": "object",
@@ -2349,10 +2137,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "PrimaryNameApiResponseSuccessSwagger": {
         "type": "object",
@@ -2366,10 +2151,7 @@
             "$ref": "#/components/schemas/PrimaryNameApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       },
       "PrimaryNameAddApiRequest": {
         "type": "object",
@@ -2390,11 +2172,7 @@
             "example": 11155111
           }
         },
-        "required": [
-          "name",
-          "address",
-          "chainId"
-        ]
+        "required": ["name", "address", "chainId"]
       },
       "PrimaryNameUpdateApiRequest": {
         "type": "object",
@@ -2415,11 +2193,7 @@
             "example": 11155111
           }
         },
-        "required": [
-          "name",
-          "address",
-          "chainId"
-        ]
+        "required": ["name", "address", "chainId"]
       },
       "PrimaryNameAddApiResponse": {
         "type": "object",
@@ -2429,9 +2203,7 @@
             "example": "id"
           }
         },
-        "required": [
-          "id"
-        ]
+        "required": ["id"]
       },
       "PrimaryNameAddApiResponseResultSwagger": {
         "type": "object",
@@ -2444,10 +2216,7 @@
             "description": "Null if no error occurred, otherwise the error message."
           }
         },
-        "required": [
-          "data",
-          "error"
-        ]
+        "required": ["data", "error"]
       },
       "PrimaryNameAddApiResponseSuccessSwagger": {
         "type": "object",
@@ -2461,10 +2230,7 @@
             "$ref": "#/components/schemas/PrimaryNameAddApiResponseResultSwagger"
           }
         },
-        "required": [
-          "statusCode",
-          "result"
-        ]
+        "required": ["statusCode", "result"]
       }
     }
   }

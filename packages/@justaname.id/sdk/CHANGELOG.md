@@ -1,3 +1,31 @@
+## 0.2.51 (2024-08-08)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.50 (2024-07-29)
+
+
+### 🩹 Fixes
+
+- **sdk:** link function ([706088d](https://github.com/JustaName-id/JustaName-sdk/commit/706088d))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.49 (2024-07-10)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.48 (2024-06-04)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.47 (2024-06-04)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
 ## 0.2.46 (2024-06-04)
 
 
