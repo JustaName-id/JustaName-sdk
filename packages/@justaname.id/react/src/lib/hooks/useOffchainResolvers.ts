@@ -4,12 +4,12 @@ import { useJustaName } from '../providers';
 
 export const offchainResolversKey = ['OFFCHAIN_RESOLVERS'];
 
-interface UseGetOffchainResolversResult {
+interface UseOffchainResolversResult {
   offchainResolvers: OffchainResolverResponse[];
   isLoading: boolean;
 }
 
-export const useGetOffchainResolvers = (): UseGetOffchainResolversResult => {
+export const useOffchainResolvers = (): UseOffchainResolversResult => {
   const { justaname } = useJustaName();
 
   const query = useQuery({

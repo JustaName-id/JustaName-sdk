@@ -5,7 +5,7 @@ export * from './useAddressSubnames';
 export * from './useAddSubname';
 export * from './useCommunities';
 export * from './useCommunitySubnames';
-export * from './useGetOffchainResolvers';
+export * from './useOffchainResolvers';
 export * from './useIsSubnameAvailable';
 export * from './useMounted';
 export * from './useMountedAccount';

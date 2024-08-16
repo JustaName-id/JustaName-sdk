@@ -9,7 +9,7 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from 'wagmi';
-import { useGetOffchainResolvers } from './useGetOffchainResolvers';
+import { useOffchainResolvers } from './useOffchainResolvers';
 import { useMountedAccount } from './useMountedAccount';
 
 const REGISTRY_ADDRESS = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e';
@@ -120,7 +120,7 @@ export const useSetJustaNameResolver = <
   T = any
 >(): UseSetJustaNameResolver<T> => {
   const { chainId, address } = useMountedAccount();
-  const { offchainResolvers, isLoading } = useGetOffchainResolvers();
+  const { offchainResolvers, isLoading } = useOffchainResolvers();
 
   const currentResolver = useMemo(() => {
     if (!chainId || !offchainResolvers || isLoading) return;
