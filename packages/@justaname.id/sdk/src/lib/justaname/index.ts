@@ -1,5 +1,5 @@
 import { Configuration } from '../types';
-import { Siwe, Subnames } from '../features';
+import { Siwe, Subnames, OffchainResolvers } from '../features';
 // import { restCall } from '../api/rest';
 
 /**
@@ -38,12 +38,22 @@ export class JustaName {
    **/
   subnames: Subnames;
 
+  /**
+   * The offchainResolvers feature.
+   * @public
+   * @type {OffchainResolvers}
+   * @memberof JustaName
+   **/
+  offchainResolvers: OffchainResolvers;
+
   constructor(
     siwe: Siwe,
-    subnames: Subnames
+    subnames: Subnames,
+    offchainResolvers: OffchainResolvers
   ) {
     this.siwe = siwe;
     this.subnames = subnames;
+    this.offchainResolvers = offchainResolvers;
   }
 
   /**
@@ -55,15 +65,16 @@ export class JustaName {
    * @static
    */
   static init(configuration: Configuration): JustaName {
-    if (configuration?.apiKey){
+    if (configuration?.apiKey) {
       this.checkApiKey(configuration.apiKey);
       // await this.healthCheck(configuration.apiKey);
     }
 
-    const subnames = !configuration.apiKey ? new Subnames() : new Subnames(configuration.apiKey);
-    return new JustaName(new Siwe(), subnames);
+    const subnames = !configuration.apiKey
+      ? new Subnames()
+      : new Subnames(configuration.apiKey);
+    return new JustaName(new Siwe(), subnames, new OffchainResolvers());
   }
-
 
   /**
    * Checks if the API key is present.
