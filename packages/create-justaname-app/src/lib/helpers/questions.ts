@@ -98,7 +98,7 @@ export const collectAppDetails = async (): Promise<AppDetails> => {
   }
 
   const apiKey = await input({
-    message: 'Enter your API key (https://admin.justaname.id)',
+    message: 'Enter your API key (https://dashboard.justaname.id)',
     validate: (input: string) => validateInput(input, 'API key', validateApiKey)
   });
 
