@@ -1,3 +1,15 @@
+## 0.3.55 (2024-08-16)
+
+
+### 🚀 Features
+
+- **sdk, react:** added getoffchainresolvers method and setjustaname resolver ([#22](https://github.com/JustaName-id/JustaName-sdk/pull/22))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.3.54 (2024-08-08)
 
 This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
