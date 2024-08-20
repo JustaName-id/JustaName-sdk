@@ -18,6 +18,7 @@ jobs:
       - name: Install Dependencies
         run: |
           yarn install
+          npx nx run-many --target=reinstall --projects=justaname-express,justaname-next-app,justaname-next-pages,justaname-fastify,justaname-nestjs,justaname-expo-full,justaname-react,justaname-hapi,justaname-koa,justaname-expo-frontend --parallel
           npx nx run-many --target=install --all --parallel
 
       - name: Build and Test
