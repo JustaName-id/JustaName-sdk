@@ -15,10 +15,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Dependencies
+      - name: Reinstall Dependencies
         run: |
           yarn install
           npx nx run-many --target=reinstall --projects=justaname-express,justaname-next-app,justaname-next-pages,justaname-fastify,justaname-nestjs,justaname-expo-full,justaname-react,justaname-hapi,justaname-koa,justaname-expo-frontend --parallel
+
+      - name: Check for Updated yarn.lock Files
+        run: |
+          git add examples/*/yarn.lock
+          if ! git diff --cached --exit-code; then
+            git commit -m "CI: Update yarn.lock files"
+            git push origin main
+          fi
+
+      - name: Install Dependencies
+        run: |
+          yarn install
           npx nx run-many --target=install --all --parallel
 
       - name: Build and Test
