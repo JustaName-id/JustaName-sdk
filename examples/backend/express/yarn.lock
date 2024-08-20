@@ -102,14 +102,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.2.51":
-  version: 0.2.51
-  resolution: "@justaname.id/sdk@npm:0.2.51"
+"@justaname.id/sdk@npm:0.2.52":
+  version: 0.2.52
+  resolution: "@justaname.id/sdk@npm:0.2.52"
   dependencies:
     axios: "npm:^1.6.0"
     dotenv: "npm:16.3.2"
     qs: "npm:^6.12.0"
-  checksum: 10c0/0a74ca17a12b1933736a0aa8283cc09124b6fe5ba4de0b229d791896d8481083092a97e53ff7414389789f0a76189ed1d184260d352623058a0874e2d28ea3cf
+  checksum: 10c0/30b1e11787f1ecaa20db202f165a34b00478c2c54ac5758968d405dc8d45a3626eef467f0b12f5cce9976b0bef9f0d6d5e4e3a0a9f2a50b163ecac44585a6895
   languageName: node
   linkType: hard
 
@@ -2234,7 +2234,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-express-example@workspace:."
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.51"
+    "@justaname.id/sdk": "npm:0.2.52"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
