@@ -28,7 +28,6 @@ jobs:
       - name: Check for Updated yarn.lock Files
         run: |
           git add examples/*/yarn.lock
-          git add packages/*/yarn.lock # If there are yarn.lock files in your packages directory as well
           git diff --cached --exit-code || (git commit -m "CI: Update yarn.lock files" && git push origin main)
 
       - name: Build and Test
