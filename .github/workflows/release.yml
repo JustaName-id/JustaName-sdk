@@ -15,23 +15,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Reinstall Dependencies
+      - name: Install Dependencies with Frozen Lockfile
         run: |
-          yarn install
+          yarn install --frozen-lockfile
+
+      - name: Reinstall Dependencies for Specific Projects
+        run: |
           npx nx run-many --target=reinstall --projects=justaname-express,justaname-next-app,justaname-next-pages,justaname-fastify,justaname-nestjs,justaname-expo-full,justaname-react,justaname-hapi,justaname-koa,justaname-expo-frontend --parallel
 
       - name: Check for Updated yarn.lock Files
         run: |
           git add examples/*/yarn.lock
-          if ! git diff --cached --exit-code; then
-            git commit -m "CI: Update yarn.lock files"
-            git push origin main
-          fi
-
-      - name: Install Dependencies
-        run: |
-          yarn install
-          npx nx run-many --target=install --all --parallel
+          git add packages/*/yarn.lock # If there are yarn.lock files in your packages directory as well
+          git diff --cached --exit-code || (git commit -m "CI: Update yarn.lock files" && git push origin main)
 
       - name: Build and Test
         run: |
