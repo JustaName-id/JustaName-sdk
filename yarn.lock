@@ -3918,7 +3918,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.52"
+    "@justaname.id/sdk": "npm:0.3.0"
     "@tanstack/react-query": "npm:^5.28.4"
     jest: "npm:^29.4.1"
   peerDependencies:
@@ -3930,7 +3930,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justaname.id/sdk@npm:0.2.52, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.3.0, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
@@ -21725,7 +21725,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-express-example@workspace:examples/backend/express"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.52"
+    "@justaname.id/sdk": "npm:0.3.0"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
@@ -21743,7 +21743,7 @@ __metadata:
   resolution: "justaname-fastify-example@workspace:examples/backend/fastify"
   dependencies:
     "@fastify/cors": "npm:^7.0.0"
-    "@justaname.id/sdk": "npm:0.2.52"
+    "@justaname.id/sdk": "npm:0.3.0"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
@@ -21761,7 +21761,7 @@ __metadata:
   resolution: "justaname-hapi-example@workspace:examples/backend/hapi"
   dependencies:
     "@hapi/hapi": "npm:^21.3.7"
-    "@justaname.id/sdk": "npm:0.2.52"
+    "@justaname.id/sdk": "npm:0.3.0"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
@@ -21777,7 +21777,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-koa-example@workspace:examples/backend/koa"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.52"
+    "@justaname.id/sdk": "npm:0.3.0"
     "@koa/cors": "npm:^5.0.0"
     "@koa/router": "npm:^12.0.1"
     "@types/eslint": "npm:^8"
@@ -21805,7 +21805,7 @@ __metadata:
     "@ensdomains/address-encoder": "npm:^1.1.2"
     "@inquirer/prompts": "npm:^4.3.0"
     "@justaname.id/react": "npm:0.3.55"
-    "@justaname.id/sdk": "npm:0.2.52"
+    "@justaname.id/sdk": "npm:0.3.0"
     "@nx/cypress": "npm:18.0.8"
     "@nx/eslint": "npm:18.0.8"
     "@nx/eslint-plugin": "npm:18.0.8"
@@ -21933,7 +21933,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-nestjs-example@workspace:examples/backend/nestjs"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.52"
+    "@justaname.id/sdk": "npm:0.3.0"
     "@nestjs/cli": "npm:^10.0.0"
     "@nestjs/common": "npm:^10.0.0"
     "@nestjs/config": "npm:^3.2.1"
