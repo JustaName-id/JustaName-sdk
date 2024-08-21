@@ -5,15 +5,29 @@ on:
       - 'main'
 jobs:
   release:
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-
-    runs-on: ubuntu-latest
+      packages: write
+      actions: read
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.VERSION_BUMPER_APPID }}
+          private-key: ${{ secrets.VERSION_BUMPER_SECRET }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Set up Git user
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
 
       - name: Install Dependencies with Frozen Lockfile
         run: |
@@ -24,11 +38,6 @@ jobs:
           YARN_ENABLE_IMMUTABLE_INSTALLS: false
         run: |
           npx nx run-many --target=reinstall --projects=justaname-express,justaname-next-app,justaname-next-pages,justaname-fastify,justaname-nestjs,justaname-expo-full,justaname-react,justaname-hapi,justaname-koa,justaname-expo-frontend --parallel
-
-      - name: Set up Git user
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
 
       - name: Check for Updated yarn.lock Files
         run: |
