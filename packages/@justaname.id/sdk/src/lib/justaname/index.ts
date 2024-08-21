@@ -1,6 +1,5 @@
 import { Configuration } from '../types';
 import { Siwe, Subnames, OffchainResolvers } from '../features';
-// import { restCall } from '../api/rest';
 
 /**
  * The main class for the JustaName SDK.
