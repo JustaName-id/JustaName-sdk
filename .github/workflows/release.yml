@@ -54,7 +54,7 @@ jobs:
         run: git pull origin main
 
       - name: Release
-        run: npx nx release --type=patch --yes
+        run: npx nx release --specifier=patch --yes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
