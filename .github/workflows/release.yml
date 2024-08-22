@@ -53,6 +53,12 @@ jobs:
       - name: Pull latest changes from main
         run: git pull origin main
 
+      - name: Setup Node.js with npm Registry
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
+
       - name: Release
         run: npx nx release --specifier=patch --yes
         env:
