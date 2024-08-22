@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@fastify/cors": "^7.0.0",
-    "@justaname.id/sdk": "0.2.52",
+    "@justaname.id/sdk": "0.2.53",
     "fastify": "^3.0.0"
   },
   "devDependencies": {
