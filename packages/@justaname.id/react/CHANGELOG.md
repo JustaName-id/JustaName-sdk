@@ -1,3 +1,15 @@
+## 0.3.56 (2024-08-22)
+
+
+### 🩹 Fixes
+
+- version ([0a1f85b](https://github.com/JustaName-id/JustaName-sdk/commit/0a1f85b))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.55 (2024-08-16)
 
 
