@@ -1,3 +1,28 @@
+## 0.2.53 (2024-08-22)
+
+
+### 🚀 Features
+
+- test release ([501058a](https://github.com/JustaName-id/JustaName-sdk/commit/501058a))
+
+- test release ([c9289f4](https://github.com/JustaName-id/JustaName-sdk/commit/c9289f4))
+
+
+### 🩹 Fixes
+
+- yml release ([113c62d](https://github.com/JustaName-id/JustaName-sdk/commit/113c62d))
+
+- version ([0a1f85b](https://github.com/JustaName-id/JustaName-sdk/commit/0a1f85b))
+
+- token ([8237d29](https://github.com/JustaName-id/JustaName-sdk/commit/8237d29))
+
+- npm ([1ab2e65](https://github.com/JustaName-id/JustaName-sdk/commit/1ab2e65))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.2 (2024-08-22)
 
 
