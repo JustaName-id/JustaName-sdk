@@ -1,3 +1,15 @@
+## 0.3.2 (2024-08-22)
+
+
+### 🩹 Fixes
+
+- token ([8237d29](https://github.com/JustaName-id/JustaName-sdk/commit/8237d29))
+
+
+### ❤️  Thank You
+
+- anthony2399
+
 ## 0.3.1 (2024-08-22)
 
 
