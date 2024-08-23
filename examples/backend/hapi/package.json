@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@hapi/hapi": "^21.3.7",
-    "@justaname.id/sdk": "0.2.52"
+    "@justaname.id/sdk": "0.2.53"
   },
   "devDependencies": {
     "@types/eslint": "^8",
