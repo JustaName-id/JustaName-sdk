@@ -1,8 +1,8 @@
 {
   "name": "@justaname.id/react",
-  "version": "0.3.56",
+  "version": "0.3.55",
   "dependencies": {
-    "@justaname.id/sdk": "0.2.53",
+    "@justaname.id/sdk": "0.2.52",
     "@tanstack/react-query": "^5.28.4"
   },
   "peerDependencies": {
@@ -22,5 +22,9 @@
   "module": "./index.esm.js",
   "type": "module",
   "main": "./index.esm.js",
-  "types": "./index.esm.d.ts"
+  "types": "./index.esm.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JustaName-id/JustaName-sdk"
+  }
 }
