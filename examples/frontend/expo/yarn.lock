@@ -2487,11 +2487,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:^0.3.55":
-  version: 0.3.55
-  resolution: "@justaname.id/react@npm:0.3.55"
+"@justaname.id/react@npm:^0.3.56":
+  version: 0.3.56
+  resolution: "@justaname.id/react@npm:0.3.56"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.52"
+    "@justaname.id/sdk": "npm:0.2.53"
     "@tanstack/react-query": "npm:^5.28.4"
   peerDependencies:
     "@tanstack/query-core": ">=5.0.0"
@@ -2499,18 +2499,18 @@ __metadata:
     react-dom: ">=17"
     viem: 2.x
     wagmi: 2.x
-  checksum: 10c0/fe7e061d4cb87eb8dad36c4999e2cee465596fe1904413ddce54ac7540a50253576eaaddc81532636e3d4aa232b84492d24fc5d9719457fe9e2d184ebd74b689
+  checksum: 10c0/fbc18f473a9c5547dddb7affdea5b28158eb19b93178694c78dd1cc4b103e6770c4501773eba26bc46784ab0328175f3e0a6bf104981b2dc8a42032944c8c663
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.2.52":
-  version: 0.2.52
-  resolution: "@justaname.id/sdk@npm:0.2.52"
+"@justaname.id/sdk@npm:0.2.53":
+  version: 0.2.53
+  resolution: "@justaname.id/sdk@npm:0.2.53"
   dependencies:
     axios: "npm:^1.6.0"
     dotenv: "npm:16.3.2"
     qs: "npm:^6.12.0"
-  checksum: 10c0/30b1e11787f1ecaa20db202f165a34b00478c2c54ac5758968d405dc8d45a3626eef467f0b12f5cce9976b0bef9f0d6d5e4e3a0a9f2a50b163ecac44585a6895
+  checksum: 10c0/cc3e6440af3070f68efa7e92bf9394250d5d31a2607b7a6e876c2885e8b4b46e3b40e3913514c27cad1bb3e6377b9aa2debad7c4d0fe15b733c9ecd2c292fdf6
   languageName: node
   linkType: hard
 
@@ -8860,7 +8860,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@ethersproject/shims": "npm:^5.7.0"
-    "@justaname.id/react": "npm:^0.3.55"
+    "@justaname.id/react": "npm:^0.3.56"
     "@metamask/sdk-react": "npm:^0.15.0"
     "@react-native-async-storage/async-storage": "npm:1.21.0"
     "@react-native-community/netinfo": "npm:11.1.0"
