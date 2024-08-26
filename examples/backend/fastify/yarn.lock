@@ -128,14 +128,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.2.58":
-  version: 0.2.58
-  resolution: "@justaname.id/sdk@npm:0.2.58"
+"@justaname.id/sdk@npm:0.2.59":
+  version: 0.2.59
+  resolution: "@justaname.id/sdk@npm:0.2.59"
   dependencies:
     axios: "npm:^1.6.0"
     dotenv: "npm:16.3.2"
     qs: "npm:^6.12.0"
-  checksum: 10c0/715edb5bc4286e7829e897dad98ca156dca504da9830fd46760c2fd8016102bb670319f50092103065819e1763bf65481ccc2bae9a27808a4290a296ec51c9a5
+  checksum: 10c0/e252b3d3171e8dc02bc11c0f5ff41a3ddabcae17556b4e22f10bd5682ceb7e9165717c6ec45e2b5de568d31f265fb12571ac3867042db2815e8ce7c1e5a507a3
   languageName: node
   linkType: hard
 
@@ -2209,7 +2209,7 @@ __metadata:
   resolution: "justaname-fastify-example@workspace:."
   dependencies:
     "@fastify/cors": "npm:^7.0.0"
-    "@justaname.id/sdk": "npm:0.2.58"
+    "@justaname.id/sdk": "npm:0.2.59"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
