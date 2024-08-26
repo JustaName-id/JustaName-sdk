@@ -1,3 +1,7 @@
+## 0.2.60 (2024-08-26)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
 ## 0.2.59 (2024-08-26)
 
 This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
