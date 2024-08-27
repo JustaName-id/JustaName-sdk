@@ -86,3 +86,7 @@ export const restCall = <T extends keyof ROUTES>(
     })
   )
 }
+
+export default {
+  restCall
+}

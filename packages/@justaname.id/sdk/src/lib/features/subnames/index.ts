@@ -60,12 +60,15 @@ import {
 export class Subnames {
   private readonly apiKey: string | undefined;
 
+  private readonly providerUrl: string;
+
   /**
    * Constructs a new instance of the Subnames class, optionally with an API key for write operations.
    * @param {string} [apiKey] - Your API key, required for operations that modify data.
    */
-  constructor(apiKey?: string) {
+  constructor(providerUrl: string, apiKey?: string) {
     this.apiKey = apiKey;
+    this.providerUrl = providerUrl;
   }
 
   /**
@@ -277,9 +280,14 @@ export class Subnames {
    * @returns {Promise<SubnameRecordsResponse>} The records associated with the subname.
    */
   async getRecordsByFullName(
-    params: SubnameRecordsRequest
+    params: Omit<SubnameRecordsRequest, 'providerUrl'> & {
+      providerUrl?: string;
+    }
   ): Promise<SubnameRecordsResponse> {
-    return restCall('RECORDS_BY_FULLNAME_ROUTE', 'GET', params);
+    return restCall('RECORDS_BY_FULLNAME_ROUTE', 'GET', {
+      providerUrl: this.providerUrl,
+      ...params,
+    });
   }
 
   /**
