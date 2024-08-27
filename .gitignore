@@ -58,3 +58,5 @@ npm-debug.*
 *.orig.*
 web-build/
 cache/
+
+.yarn/install-state.gz

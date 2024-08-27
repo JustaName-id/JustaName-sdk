@@ -3,7 +3,6 @@
 import { useMountedAccount } from './useMountedAccount';
 import { useSignMessage } from 'wagmi';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { RequestChallengeResponse } from '@justaname.id/sdk';
 import { useJustaName } from '../providers';
 
 export const buildSignature = (address: string) => ['SUBNAME_SIGNATURE', address]
@@ -20,8 +19,8 @@ export interface UseSubnameSignatureResult {
  * and a boolean indicating if the signature operation is pending (`subnameSignaturePending`).
  */
 export const useSubnameSignature = (): UseSubnameSignatureResult => {
-  const { backendUrl, routes} = useJustaName();
-  const {  address} = useMountedAccount();
+  const { justaname} = useJustaName();
+  const { address} = useMountedAccount();
   const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
 
@@ -32,24 +31,12 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
       if (!address) {
         throw new Error('No address found');
       }
-
-      const response = await fetch(
-        (backendUrl ?? "") + routes.requestChallengeRoute
-        + `?address=${address}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data: RequestChallengeResponse = await response.json();
+      const message = await justaname.siwe.requestChallenge({
+        address
+      })
 
       const signature = await signMessageAsync({
-        message: data.challenge,
+        message: message.challenge,
         account: address
       });
 
@@ -57,11 +44,11 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
         throw new Error('Message not signed');
       }
 
-      const expirationTime =  new Date(data.challenge.split('Expiration Time: ')[1])
+      const expirationTime =  new Date(message.challenge.split('Expiration Time: ')[1])
 
       const signedData = {
         signature,
-          message: data.challenge,
+          message: message.challenge,
         address,
         expirationTime
       }

@@ -1,2 +1,5 @@
 export * from './cointypes'
 export * from './sanitizeRecords'
+export * from './checkDomainValid'
+export * from './checkTTL'
+export * from './constructSignInStatement'

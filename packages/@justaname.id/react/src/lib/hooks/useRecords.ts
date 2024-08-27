@@ -49,7 +49,7 @@ export const getSubnameDetails = async (fullName: string,
 
 interface UseRecordsProps {
   fullName: string;
-  providerUrl: string;
+  providerUrl?: string;
   chainId?: ChainId;
 }
 
@@ -72,11 +72,14 @@ export const useRecords = (
   props: UseRecordsProps
 ): UseRecordsResult => {
 
-  const { justaname, chainId } = useJustaName()
+  const { justaname, chainId, providerUrl } = useJustaName()
+
+  const currentChainId =props?.chainId ? props?.chainId : chainId
+  const currentProviderUrl = props?.providerUrl ? props?.providerUrl : providerUrl
 
    const query = useQuery({
-      queryKey: buildRecordsBySubnameKey(props.fullName, props?.chainId ? props?.chainId : chainId, props?.providerUrl),
-      queryFn: () =>  getSubnameDetails(props.fullName, justaname, props?.chainId ? props?.chainId : chainId, props.providerUrl)
+      queryKey: buildRecordsBySubnameKey(props.fullName, currentChainId, currentProviderUrl),
+      queryFn: () =>  getSubnameDetails(props.fullName, justaname,  currentChainId, currentProviderUrl)
     })
 
     return {
