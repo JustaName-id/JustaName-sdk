@@ -66,9 +66,17 @@ jobs:
           npx nx reset
           echo "Reset completed"
 
-      - name: Release
+      - name: Release SDK and React packages
         run: |
-          npx nx release --specifier=patch --yes
+          npx nx release --projects=packages/@justaname.id/react,packages/@justaname.id/sdk --specifier=patch --yes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+
+      - name: Release create-justaname-app package
+        run: |
+          npx nx release --projects=packages/create-justaname-app --specifier=patch --yes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
