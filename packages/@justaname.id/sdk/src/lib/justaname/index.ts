@@ -1,5 +1,5 @@
 import { JustaNameConfig } from '../types';
-import { SubnameChallenge, Subnames, OffchainResolvers, SignIn } from '../features';
+import { OffchainResolvers, SignIn, SubnameChallenge, Subnames } from '../features';
 import { InvalidConfigurationException } from '../errors/InvalidConfiguration.exception';
 
 /**
@@ -58,7 +58,7 @@ export class JustaName {
     siwe: SubnameChallenge,
     subnames: Subnames,
     offchainResolvers: OffchainResolvers,
-    signIn: SignIn,
+    signIn: SignIn
   ) {
     this.siwe = siwe;
     this.subnames = subnames;
@@ -74,12 +74,18 @@ export class JustaName {
    * @static
    */
   static init(configuration: JustaNameConfig): JustaName {
-    this.checkConfig(configuration);;
+    this.checkConfig(configuration);
     return new JustaName(
-      new SubnameChallenge(configuration.config.siwe),
-      new Subnames(configuration.providerUrl,configuration.apiKey),
+      new SubnameChallenge({
+        ...configuration.config,
+        ttl: configuration.config.subnameChallenge?.ttl || 120000
+      }),
+      new Subnames(configuration.providerUrl, configuration.ensDomain, configuration.config.chainId, configuration.apiKey),
       new OffchainResolvers(),
-      new SignIn(configuration.config.siwe, configuration.providerUrl)
+      new SignIn({
+        ...configuration.config,
+        ttl: configuration.config.signIn?.ttl || 120000
+      } , configuration.providerUrl)
     );
   }
 
@@ -90,34 +96,31 @@ export class JustaName {
    * @static
    */
   private static checkConfig(configuration: JustaNameConfig): void {
-    const { providerUrl, config} = configuration;
+    const { providerUrl, config, ensDomain } = configuration;
 
-    if(!providerUrl){
+    if (!ensDomain) {
+      throw InvalidConfigurationException.ensDomainRequired();
+    }
+
+    if (!providerUrl) {
       throw InvalidConfigurationException.providerUrlRequired();
     }
 
-    if(!config) {
+    if (!config) {
       throw InvalidConfigurationException.configRequired();
     }
 
-    if(!config.siwe){
-      throw InvalidConfigurationException.siweConfigRequired();
-    }
-
-    if(!config.siwe.chainId){
+    if (!config.chainId) {
       throw InvalidConfigurationException.chainIdRequired();
     }
 
-    if(!config.siwe.domain){
+    if (!config.domain) {
       throw InvalidConfigurationException.domainRequired();
     }
 
-    if(!config.siwe.origin){
+    if (!config.origin) {
       throw InvalidConfigurationException.originRequired();
     }
 
-    if(!config.siwe.ttl){
-      throw InvalidConfigurationException.ttlRequired();
-    }
   }
 }

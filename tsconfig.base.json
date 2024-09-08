@@ -28,6 +28,12 @@
     "rootDir": ".",
     "paths": {
       "@justaname.id/react": ["packages/@justaname.id/react/src/index.ts"],
+      "@justaname.id/react-signin": [
+        "packages/@justaname.id/react-signin/src/index.ts"
+      ],
+      "@justaname.id/react-ui": [
+        "packages/@justaname.id/react-ui/src/index.ts"
+      ],
       "@justaname.id/sdk": ["packages/@justaname.id/sdk/src/index.ts"],
       "create-justaname-app": ["packages/create-justaname-app/src/index.ts"]
     }

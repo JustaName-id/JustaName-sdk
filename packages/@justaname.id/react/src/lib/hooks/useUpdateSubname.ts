@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useMountedAccount } from './useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { SubnameUpdateRequest, SubnameUpdateResponse } from '@justaname.id/sdk';
+import { ChainId, SubnameUpdateRequest, SubnameUpdateResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from './useAccountSubnames';
 
 /**
@@ -14,8 +14,10 @@ import { useAccountSubnames } from './useAccountSubnames';
  * @type {object}
  * @property {string} username - The username part of the subname to be claimed or updated.
  */
-export interface SubnameUpdate extends Omit<SubnameUpdateRequest, 'chainId'> {
+export interface SubnameUpdate extends Omit<SubnameUpdateRequest, 'chainId' |'ensDomain'> {
   subname: string;
+  ensDomain?: string;
+  chainId?: ChainId;
 }
 
 export interface UseUpdateSubnameResult {
@@ -30,7 +32,7 @@ export interface UseUpdateSubnameResult {
  * @returns {UseUpdateSubnameResult} An object containing methods and properties to handle the mutation state.
  */
 export const useUpdateSubname = () : UseUpdateSubnameResult => {
-  const { justaname,chainId } = useJustaName();
+  const { justaname,chainId, ensDomain } = useJustaName();
   const { address } = useMountedAccount()
   const { getSignature} = useSubnameSignature()
   const { refetchSubnames } = useAccountSubnames()
@@ -44,13 +46,17 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
         throw new Error('No address found');
       }
 
+      const chainIdToUse = params.chainId ? params.chainId : chainId;
+      const ensDomainToUse = params.ensDomain ? params.ensDomain : ensDomain;
+
+
       const signature = await getSignature()
 
       const updated = await  justaname.subnames.updateSubname({
         addresses: params.addresses,
-        chainId,
+        chainId: chainIdToUse,
         contentHash: params.contentHash,
-        ensDomain: params.ensDomain,
+        ensDomain: ensDomainToUse,
         text: params.text,
         username: params.username,
       }, {

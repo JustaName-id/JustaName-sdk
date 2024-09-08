@@ -16,13 +16,17 @@ const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 export const initializeJustaName =  (apiKey: string) => {
   return JustaName.init({
     config:{
-      siwe:{
-        domain: DOMAIN,
-        origin: URI,
-        chainId: CHAIN_ID,
+      domain: DOMAIN,
+      origin: URI,
+      chainId: CHAIN_ID,
+      subnameChallenge:{
         ttl: VALID_TTL,
+      },
+      signIn:{
+        ttl: VALID_TTL
       }
     },
+    ensDomain: DOMAIN,
     apiKey: apiKey,
     providerUrl: PROVIDER_URL
   });

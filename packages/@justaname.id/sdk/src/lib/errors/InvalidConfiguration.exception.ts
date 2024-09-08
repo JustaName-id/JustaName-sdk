@@ -19,11 +19,6 @@ export class InvalidConfigurationException extends Error {
     return new InvalidConfigurationException(message);
   }
 
-  static siweConfigRequired() {
-    const message = 'InvalidConfigurationException: Siwe configuration is required';
-    return new InvalidConfigurationException(message);
-  }
-
   static domainRequired() {
     const message = 'InvalidConfigurationException: Domain is required';
     return new InvalidConfigurationException(message);
@@ -34,8 +29,8 @@ export class InvalidConfigurationException extends Error {
     return new InvalidConfigurationException(message);
   }
 
-  static ttlRequired() {
-    const message = 'InvalidConfigurationException: TTL is required';
+  static ensDomainRequired() {
+    const message = 'InvalidConfigurationException: ENS domain is required';
     return new InvalidConfigurationException(message);
   }
 }

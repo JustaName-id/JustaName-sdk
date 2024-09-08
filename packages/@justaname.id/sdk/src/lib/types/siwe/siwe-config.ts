@@ -23,5 +23,5 @@ export interface SiweConfig {
    * @default 120000
    * @optional
    */
-  ttl: number;
+  ttl?: number;
 }

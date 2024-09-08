@@ -1,6 +1,6 @@
 'use client';
 
-import { Address, TextRecord, SubnameAcceptResponse } from '@justaname.id/sdk';
+import { Address, TextRecord, SubnameAcceptResponse, ChainId } from '@justaname.id/sdk';
 import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useAccountSubnames } from './useAccountSubnames';
@@ -13,7 +13,7 @@ export interface BaseAcceptSubnameRequest {
 
   ensDomain: string;
 
-  chainId: number;
+  chainId: ChainId;
 
   addresses?: Address[];
 
@@ -42,7 +42,7 @@ export interface UseAcceptSubname {
  * @returns {UseAcceptSubname} An object containing the `acceptSubname` async function to initiate the subname accept, and a boolean `acceptSubnamePending` indicating the mutation's pending state.
  */
 export const useAcceptSubname = (): UseAcceptSubname => {
-  const {  justaname } = useJustaName();
+  const {  justaname, chainId, ensDomain } = useJustaName();
   const { address } = useMountedAccount();
   const { refetchInvitations } = useAccountInvitations();
   const { getSignature } = useSubnameSignature();
@@ -58,13 +58,16 @@ export const useAcceptSubname = (): UseAcceptSubname => {
         throw new Error('No address found');
       }
 
+      const chainIdToUse = params.chainId || chainId;
+      const ensDomainToUse = params.ensDomain || ensDomain;
+
       const signature = await getSignature();
 
       const accepted = await  justaname.subnames.acceptSubname({
         addresses: params.addresses,
-        chainId: params.chainId,
+        chainId: chainIdToUse,
         contentHash: params.contentHash,
-        ensDomain: params.ensDomain,
+        ensDomain: ensDomainToUse,
         text: params.text,
         username: params.username,
       }, {

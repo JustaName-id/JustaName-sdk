@@ -1,5 +1,5 @@
 import { ApiKeyHeaders } from '../headers';
-import { IRequest, IResponse, IRoute } from '../common';
+import { ChainId, IRequest, IResponse, IRoute } from '../common';
 
 /**
  * Specifies the request parameters for reserving a subname under a given ENS domain.
@@ -49,4 +49,9 @@ export interface SubnameReserveRoute extends IRoute {
     request: SubnameReserveRequest;
     response: SubnameReserveResponse;
     headers: ApiKeyHeaders;
+}
+
+export interface SubnameReserveParams extends Omit<SubnameReserveRequest, 'ensDomain' | 'chainId'> {
+    ensDomain?: string;
+    chainId?: ChainId;
 }
