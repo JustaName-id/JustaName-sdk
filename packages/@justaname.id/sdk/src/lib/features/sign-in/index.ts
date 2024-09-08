@@ -23,7 +23,8 @@ export class SignIn {
       params: {
         uri: params.origin || this.config.origin,
         ...this.config,
-        ...params
+        ...params,
+        ttl: params?.ttl || 120000,
       },
       providerUrl: this.providerUrl
     })

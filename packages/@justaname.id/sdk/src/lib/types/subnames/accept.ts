@@ -1,4 +1,4 @@
-import { IRequest, IResponse, IRoute } from '../common';
+import { ChainId, IRequest, IResponse, IRoute } from '../common';
 import { SIWEHeaders } from '../headers';
 
 /**
@@ -109,4 +109,9 @@ export interface SubnameAcceptRoute extends IRoute {
   request: SubnameAcceptRequest;
   response: SubnameAcceptResponse;
   headers: SIWEHeaders;
+}
+
+export interface SubnameAcceptParams extends Omit<SubnameAcceptRequest, 'ensDomain' | 'chainId'> {
+  ensDomain?: string;
+  chainId?: ChainId;
 }

@@ -16,13 +16,13 @@
     "jest": "^29.4.1"
   },
   "exports": {
-    "./package.json": "./package.json",
-    ".": "./index.esm.js"
+    "./package.json": "./dist/package.json",
+    ".": "./dist/index.esm.js"
   },
-  "module": "./index.esm.js",
+  "main": "./dist/index.esm.js",
+  "types": "./dist/index.esm.d.ts",
+  "module": "./dist/index.esm.js",
   "type": "module",
-  "main": "./index.esm.js",
-  "types": "./index.esm.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/JustaName-id/JustaName-sdk"

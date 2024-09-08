@@ -72,3 +72,8 @@ export interface SubnameRecordsRoute extends IRoute {
   response: SubnameRecordsResponse;
   headers: NonNullable<unknown>;
 }
+
+export interface SubnameRecordsParams extends Omit<SubnameRecordsRequest, 'providerUrl' | 'chainId'>  {
+  providerUrl?: string;
+  chainId?: ChainId;
+}

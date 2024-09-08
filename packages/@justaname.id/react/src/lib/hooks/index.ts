@@ -17,3 +17,4 @@ export * from './useSetJustaNameResolver';
 export * from './useSubname';
 export * from './useSubnameSignature';
 export * from './useUpdateSubname';
+export * from './signIn'

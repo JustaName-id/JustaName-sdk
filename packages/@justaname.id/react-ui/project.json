@@ -1,0 +1,71 @@
+{
+  "name": "@justaname.id/react-ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@justaname.id/react-ui/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "storybook": {
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "packages/@justaname.id/react-ui/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "packages/@justaname.id/react-ui/dist",
+        "tsConfig": "packages/@justaname.id/react-ui/tsconfig.lib.json",
+        "project": "packages/@justaname.id/react-ui/package.json",
+        "entryFile": "packages/@justaname.id/react-ui/src/index.ts",
+        "external": [
+          "react",
+          "react-dom",
+          "react/jsx-runtime"
+        ],
+        "generateExportsField": true,
+        "compiler": "swc",
+        "format": ["esm"],
+        "assets": [
+          {
+            "glob": "packages/@justaname.id/react-ui/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      },
+      "dependsOn": [
+        "lint"
+      ]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "fix": true,
+        "lintFilePatterns": [
+          "packages/@justaname.id/react/**/*.{ts,tsx,js,jsx}",
+          "packages/@justaname.id/react/package.json"
+        ]
+      }
+    }
+  }
+}

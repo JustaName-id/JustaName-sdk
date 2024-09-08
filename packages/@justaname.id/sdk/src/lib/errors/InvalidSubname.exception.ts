@@ -20,4 +20,14 @@ export class InvalidSubnameException extends Error {
     const message = `InvalidSubnameException: subname ${subname} is not owned by address ${address}`;
     return new InvalidSubnameException(message);
   }
+
+  static chainNotSupported(chainId: string): InvalidSubnameException {
+    const message = `InvalidSubnameException: Chain ${chainId} is not supported`;
+    return new InvalidSubnameException(message);
+  }
+
+  static notOnJustanameResolver(subname: string): InvalidSubnameException {
+    const message = `InvalidSubnameException: Subname ${subname} is not on Justaname resolver`;
+    return new InvalidSubnameException(message);
+  }
 }

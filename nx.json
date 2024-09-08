@@ -58,7 +58,9 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "options": {}
+      "options": {
+        "cacheableOperations": ["build-storybook"]
+      }
     }
   },
   "plugins": [
@@ -99,6 +101,15 @@
         "targetName": "e2e",
         "componentTestingTargetName": "component-test"
       }
+    },
+    {
+      "plugin": "@nx/storybook/plugin",
+      "options": {
+        "buildStorybookTargetName": "build-storybook",
+        "serveStorybookTargetName": "storybook",
+        "testStorybookTargetName": "test-storybook",
+        "staticStorybookTargetName": "static-storybook"
+      }
     }
   ],
   "generators": {
@@ -136,6 +147,8 @@
     "projects": [
       "packages/@justaname.id/react",
       "packages/@justaname.id/sdk",
+      "packages/@justaname.id/react-ui",
+      "packages/@justaname.id/react-signin",
       "packages/create-justaname-app"
     ]
   }

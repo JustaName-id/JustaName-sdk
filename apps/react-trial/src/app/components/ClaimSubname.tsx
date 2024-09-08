@@ -11,7 +11,6 @@ export const ClaimSubname = () => {
   const debouncedUsername = useDebounce(username, 500);
   const { isAvailable } = useIsSubnameAvailable({
     username: debouncedUsername,
-    ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN as string,
   })
   const { addSubname } = useAddSubname();
 

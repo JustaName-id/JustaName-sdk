@@ -116,3 +116,8 @@ export interface SubnameUpdateRoute extends IRoute {
   response: SubnameUpdateResponse;
   headers: SIWEHeaders;
 }
+
+export interface SubnameUpdateParams extends Omit<SubnameUpdateRequest, 'ensDomain' | 'chainId'> {
+  ensDomain?: string;
+  chainId?: number;
+}

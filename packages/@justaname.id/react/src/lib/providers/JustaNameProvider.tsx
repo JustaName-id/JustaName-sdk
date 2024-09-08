@@ -52,8 +52,12 @@ const JustaNameContext = React.createContext<JustaNameContextProps | null>(null)
  * @property {1 | 11155111} [chainId] - Optional blockchain network identifier.
  * @property {string} [backendUrl] - Optional backend URL for API requests.
  */
-export interface JustaNameProvider extends JustaNameConfigWithouthApiKey{
+export interface JustaNameProviderProps {
   children: React.ReactNode;
+  config: JustaNameProviderConfig
+}
+
+export interface JustaNameProviderConfig extends JustaNameConfigWithouthApiKey {
   routes?: typeof defaultRoutes;
   backendUrl?: string;
 }
@@ -66,17 +70,21 @@ export interface JustaNameProvider extends JustaNameConfigWithouthApiKey{
  * @param {JustaNameProviderProps} props - The props for the JustaNameProvider component.
  * @returns {React.ReactNode} The provider component wrapping children.
  */
-export const JustaNameProvider: React.FC<JustaNameProvider> = ({
+export const JustaNameProvider: React.FC<JustaNameProviderProps> = ({
   children,
-  routes,
-  config,
-  backendUrl,
-  providerUrl,
-}) => {
+  config: {
+    routes,
+    backendUrl,
+    providerUrl,
+    ensDomain,
+    config
+  },
+}: JustaNameProviderProps): React.ReactNode => {
 
   const [justaname] = React.useState<JustaName>(JustaName.init({
     config,
-    providerUrl
+    providerUrl,
+    ensDomain
   }));
 
   return (
@@ -84,9 +92,14 @@ export const JustaNameProvider: React.FC<JustaNameProvider> = ({
       <JustaNameContext.Provider value={{
         backendUrl,
         config: {
-            siwe: config.siwe
+          origin: config.origin,
+          chainId: config.chainId,
+          domain: config.domain,
+          signIn: config.signIn,
+          subnameChallenge: config.subnameChallenge,
         },
-        chainId: config.siwe.chainId,
+        ensDomain,
+        chainId: config.chainId,
         providerUrl,
         justaname,
         routes: {

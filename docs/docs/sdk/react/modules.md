@@ -63,9 +63,9 @@ The provider component wrapping children.
 
 ___
 
-### SignatureOnMounted
+### Index
 
-▸ **SignatureOnMounted**(`props`, `context?`): `ReactNode`
+▸ **Index**(`props`, `context?`): `ReactNode`
 
 #### Parameters
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/components/SignatureOnMounted.tsx:5](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/components/SignatureOnMounted.tsx#L5)
+[packages/@justaname.id/react/src/lib/components/index.tsx:5](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/components/SignatureOnMounted.tsx#L5)
 
 ___
 
