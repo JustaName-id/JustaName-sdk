@@ -133,10 +133,6 @@
       "automaticFromRef": true
     },
     "projectsRelationship": "independent",
-    "projects": [
-      "packages/create-justaname-app",
-      "packages/@justaname.id/react",
-      "packages/@justaname.id/sdk"
-    ]
+    "projects": ["packages/create-justaname-app"]
   }
 }
