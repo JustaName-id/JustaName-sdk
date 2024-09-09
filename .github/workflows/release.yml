@@ -66,10 +66,10 @@ jobs:
           npx nx run-many --target=lint --projects=packages/@justaname.id/react,packages/@justaname.id/sdk
           npx nx run-many --target=build --projects=packages/@justaname.id/react,packages/@justaname.id/sdk
           npx nx release --projects=packages/@justaname.id/react,packages/@justaname.id/sdk --specifier=patch --yes
-          env:
-            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-            NPM_CONFIG_PROVENANCE: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
 
       - name: Reset Nx Cache
         run: |
