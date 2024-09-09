@@ -873,14 +873,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.2.61":
-  version: 0.2.61
-  resolution: "@justaname.id/sdk@npm:0.2.61"
+"@justaname.id/sdk@npm:0.2.62":
+  version: 0.2.62
+  resolution: "@justaname.id/sdk@npm:0.2.62"
   dependencies:
     axios: "npm:^1.6.0"
     dotenv: "npm:16.3.2"
     qs: "npm:^6.12.0"
-  checksum: 10c0/72538b9c5ff4e65c8e015d0f0e69efdb45507a40fb9b86656b106e949d6d283ae86e31b3f278566a62ffb3f8b4dbc2c5e8849283c2410cc7559ffb607123bd5b
+  checksum: 10c0/85d4817ee2c9609ba1e405281feea63a1d66f9d52ebaca0798b421f59ff1472c8194dc4b7c6da3037118cf90a8f0058f77530d2f147d4fc11da01cff4b5c5734
   languageName: node
   linkType: hard
 
@@ -4805,7 +4805,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "justaname-nestjs-example@workspace:."
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.61"
+    "@justaname.id/sdk": "npm:0.2.62"
     "@nestjs/cli": "npm:^10.0.0"
     "@nestjs/common": "npm:^10.0.0"
     "@nestjs/config": "npm:^3.2.1"

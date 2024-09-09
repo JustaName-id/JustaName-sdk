@@ -7,15 +7,16 @@
     "build": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "packages/create-justaname-app/dist",
-        "compiler": "tsc",
-        "project": "packages/create-justaname-app/package.json",
         "main": "packages/create-justaname-app/src/index.ts",
+        "outputPath": "packages/create-justaname-app/dist",
         "tsConfig": "packages/create-justaname-app/tsconfig.lib.json",
-        "rollupConfig":[ "packages/create-justaname-app/rollup.config.cjs"],
+        "project": "packages/create-justaname-app/package.json",
+        "rollupConfig": ["packages/create-justaname-app/rollup.config.cjs"],
         "generateExportsField": true,
         "allowJs": true,
+        "compiler": "tsc",
         "format": ["esm"]
       },
       "configurations": {
@@ -42,9 +43,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
         "fix": true,
         "lintFilePatterns": [
@@ -57,7 +56,7 @@
       "options": {
         "packageRoot": "packages/create-justaname-app/dist"
       },
-      "dependsOn": ["^build","build"]
+      "dependsOn": ["build", "^build"]
     },
     "release:package": {
       "executor": "nx:run-commands",
