@@ -21,7 +21,7 @@ export interface UseSearchSubnamesOptions {
 
 interface UseSearchSubnamesResult {
   subnames: SubnameSearchResponse;
-  isLoading: boolean;
+  isSubnamesPending: boolean;
   refetchSearchSubnames: (
     options?: RefetchOptions | undefined
   ) => Promise<QueryObserverResult<SubnameSearchResponse | undefined, unknown>>;
@@ -55,7 +55,7 @@ export const useSearchSubnames = (
 
   return {
     subnames: query.data ?? { domains: [] },
-    isLoading: query.isLoading,
+    isSubnamesPending: query.isPending,
     refetchSearchSubnames: query.refetch,
   };
 };

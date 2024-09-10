@@ -29,25 +29,25 @@ export const SIWJDialog: React.FC<SIWJDialogProps> = ({ open, handleOpenDialog, 
   const { ensDomain } = useJustaName();
   const { subnameSession } = useSubnameSession()
 
-  const { subnames: allSubnames, isPending} = useAccountSubnames()
+  const { accountSubnames, isAccountSubnamesPending} = useAccountSubnames()
   const subnames = useMemo(() => {
     if (allowedSubnames === 'all') {
-      return allSubnames;
+      return accountSubnames;
     }
 
     if (allowedSubnames === 'platform') {
-      return allSubnames.filter(subname => subname.subname.endsWith(ensDomain));
+      return accountSubnames.filter(subname => subname.subname.endsWith(ensDomain));
     }
 
-    return allSubnames.filter(subname => allowedSubnames.includes(subname.subname));
-  }, [allSubnames, allowedSubnames, ensDomain]);
+    return accountSubnames.filter(subname => allowedSubnames.includes(subname.subname));
+  }, [accountSubnames, allowedSubnames, ensDomain]);
 
 
   useEffect(() => {
-    if(!isPending){
+    if(!isAccountSubnamesPending){
       setStep("select-subname")
     }
-  }, [isPending]);
+  }, [isAccountSubnamesPending]);
 
   useEffect(() => {
     if(subnameSession){
@@ -73,7 +73,7 @@ export const SIWJDialog: React.FC<SIWJDialogProps> = ({ open, handleOpenDialog, 
         </TransitionElement>
 
         <TransitionElement maxheight={"fit-content"} className={step ==="select-subname" ? "visible" : ""}>
-          <SelectSubname address={address || ""} subnames={subnames} />
+          <SelectSubname address={address || ""} subnames={subnames} handleOpenDialog={handleOpenDialog} />
         </TransitionElement>
 
       </DialogContent>

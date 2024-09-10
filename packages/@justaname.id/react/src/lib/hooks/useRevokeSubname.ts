@@ -21,14 +21,14 @@ export interface BaseRevokeSubnameRequest {
  *  @typedef UseRevokeSubname
  *  @type {object}
  *  @property {function} revokeSubname - The function to revoke a subname.
- *  @property {boolean} revokeSubnamePending - Indicates if the mutation is currently pending.
+ *  @property {boolean} isRevokeSubnamePending - Indicates if the mutation is currently pending.
  *  @template T - The type of additional parameters that can be passed to the revoke subname mutation, extending the base request.
  */
 export interface UseRevokeSubname<T = any> {
   revokeSubname: (
     params: T & BaseRevokeSubnameRequest
   ) => Promise<SubnameRevokeResponse>;
-  revokeSubnamePending: boolean;
+  isRevokeSubnamePending: boolean;
 }
 /**
  * Custom hook for performing a mutation to revoke a subname.
@@ -40,7 +40,7 @@ export const useRevokeSubname = <T = any>(): UseRevokeSubname<T> => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount();
   const { getSignature } = useSubnameSignature();
-  const { refetchSubnames } = useAccountSubnames();
+  const { refetchAccountSubnames } = useAccountSubnames();
 
   const mutate = useMutation<
     SubnameRevokeResponse,
@@ -72,7 +72,7 @@ export const useRevokeSubname = <T = any>(): UseRevokeSubname<T> => {
       }
 
       const data: SubnameRevokeResponse = await response.json();
-      refetchSubnames();
+      refetchAccountSubnames();
       return data;
     },
   });
@@ -81,6 +81,6 @@ export const useRevokeSubname = <T = any>(): UseRevokeSubname<T> => {
     revokeSubname: mutate.mutateAsync as (
       params: T & BaseRevokeSubnameRequest
     ) => Promise<SubnameRevokeResponse>,
-    revokeSubnamePending: mutate.isPending,
+    isRevokeSubnamePending: mutate.isPending,
   };
 };

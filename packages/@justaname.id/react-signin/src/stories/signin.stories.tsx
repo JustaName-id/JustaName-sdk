@@ -1,13 +1,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { SIWJProvider, SIWJProviderConfig } from '../lib';
+import { SIWJProvider, SIWJProviderConfig, useSignInWithJustaName } from '../lib';
 import '@rainbow-me/rainbowkit/styles.css';
 import { ConnectButton, getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { ChainId } from '@justaname.id/sdk';
 import { Meta, StoryObj } from '@storybook/react';
-import { useSubnameSession } from '@justaname.id/react';
-
 
 const queryClient = new QueryClient();
 
@@ -18,22 +16,31 @@ const JustaNameConfig: SIWJProviderConfig = {
     domain: import.meta.env.STORYBOOK_APP_DOMAIN,
     signIn:{
       ttl: 1000 * 60 * 60 * 24
-    }
+    },
   },
   backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
   providerUrl: import.meta.env.STORYBOOK_APP_PROVIDER_URL,
   ensDomain: import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
+  // color:{
+  //   primary: "#FF0000",
+  //   background: "#000000"
+  // },
   openOnWalletConnect: true,
-  allowedSubnames:'all'
+  allowedSubnames:'all',
 }
 
 const Session = () => {
-  const { subnameSession } = useSubnameSession();
-
+  const { session, handleDialog, signOut} = useSignInWithJustaName()
   return (
     <div>
       <h1>Subname Session</h1>
-      <pre>{JSON.stringify(subnameSession, null, 2)}</pre>
+      {
+        !session && <button onClick={() => handleDialog(true)}>Sign In</button>
+      }
+      {
+        session && <button onClick={signOut}>Sign Out</button>
+      }
+      <pre>{JSON.stringify(session, null, 2)}</pre>
     </div>
   )
 }

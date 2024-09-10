@@ -3,15 +3,15 @@ import { useJustaName } from '../../providers';
 
 export const SESSION_KEY = ['SUBNAME_SESSION']
 
-export interface SubnameSession<T> {
+export interface SubnameSession {
   subname: string;
   address: string;
-  metadata: Record<keyof T, any>;
 }
 
 export interface UseSubnameSession {
-  subnameSession: SubnameSession<any> | null | undefined;
-  subnameSessionPending: boolean;
+  isLoggedIn: boolean;
+  subnameSession: SubnameSession | null | undefined;
+  isSubnameSessionPending: boolean;
   refreshSubnameSession: () => void;
 }
 
@@ -31,7 +31,7 @@ export const useSubnameSession: <T = string[]> () => UseSubnameSession = () => {
           },
           credentials: 'include'
         });
-        const json = await response.json() as SubnameSession<any>
+        const json = await response.json() as SubnameSession
         return response.status === 200 ? json : null
       }catch(e){
         return null
@@ -40,8 +40,9 @@ export const useSubnameSession: <T = string[]> () => UseSubnameSession = () => {
   })
 
   return{
+    isLoggedIn: !!query.data,
     subnameSession: query.data,
-    subnameSessionPending: query.isLoading,
+    isSubnameSessionPending: query.isLoading,
     refreshSubnameSession: query.refetch
   }
 }

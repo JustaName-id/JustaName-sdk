@@ -25,8 +25,8 @@ export interface UseIsSubnameAvailableOptions {
 }
 
 export interface UseIsSubnameAvailableResult {
-  isAvailable: IsSubnameAvailableResponse | undefined;
-  isPending: boolean;
+  isSubnameAvailable: IsSubnameAvailableResponse | undefined;
+  isSubnameAvailablePending: boolean;
 }
 
 /**
@@ -52,7 +52,7 @@ export const useIsSubnameAvailable = (props: UseIsSubnameAvailableOptions): UseI
   })
 
   return {
-    isAvailable: query.data,
-    isPending: query.isPending,
+    isSubnameAvailable: query.data,
+    isSubnameAvailablePending: query.isPending,
   }
 }

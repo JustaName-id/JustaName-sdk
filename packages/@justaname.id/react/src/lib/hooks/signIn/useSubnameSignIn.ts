@@ -13,7 +13,7 @@ export interface SubnameSignInParams {
 
 export interface UseSubnameSignInResult {
   signIn:  UseMutateAsyncFunction<string, Error, SubnameSignInParams, unknown>,
-  signInPending: boolean;
+  isSignInPending: boolean;
 }
 
 /**
@@ -71,7 +71,7 @@ export const useSubnameSignIn = (): UseSubnameSignInResult => {
 
   return {
     signIn: mutation.mutateAsync,
-    signInPending: mutation.isPending
+    isSignInPending: mutation.isPending
   }
 }
 

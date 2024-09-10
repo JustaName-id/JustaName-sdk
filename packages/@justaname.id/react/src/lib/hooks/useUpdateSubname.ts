@@ -22,7 +22,7 @@ export interface SubnameUpdate extends Omit<SubnameUpdateRequest, 'chainId' |'en
 
 export interface UseUpdateSubnameResult {
   updateSubname: (params: SubnameUpdate) => Promise<SubnameUpdateResponse>;
-  updateSubnamePending: boolean;
+  isUpdateSubnamePending: boolean;
 }
 
 /**
@@ -35,7 +35,7 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
   const { justaname,chainId, ensDomain } = useJustaName();
   const { address } = useMountedAccount()
   const { getSignature} = useSubnameSignature()
-  const { refetchSubnames } = useAccountSubnames()
+  const { refetchAccountSubnames } = useAccountSubnames()
 
   const mutate = useMutation<SubnameUpdateResponse,  Error, SubnameUpdate>
   ({
@@ -65,13 +65,13 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
         xMessage: signature.message,
       });
 
-      refetchSubnames()
+      refetchAccountSubnames()
       return updated
     },
   })
 
   return {
     updateSubname: mutate.mutateAsync as (params: SubnameUpdate) => Promise<SubnameUpdateResponse>,
-    updateSubnamePending: mutate.isPending,
+    isUpdateSubnamePending: mutate.isPending,
   }
 }

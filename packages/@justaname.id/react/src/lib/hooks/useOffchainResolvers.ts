@@ -6,7 +6,7 @@ export const offchainResolversKey = ['OFFCHAIN_RESOLVERS'];
 
 interface UseOffchainResolversResult {
   offchainResolvers: OffchainResolverResponse[];
-  isLoading: boolean;
+  isOffchainResolversPending: boolean;
 }
 
 export const useOffchainResolvers = (): UseOffchainResolversResult => {
@@ -21,6 +21,6 @@ export const useOffchainResolvers = (): UseOffchainResolversResult => {
 
   return {
     offchainResolvers: query.data ?? [],
-    isLoading: query.isLoading,
+    isOffchainResolversPending: query.isPending,
   };
 };

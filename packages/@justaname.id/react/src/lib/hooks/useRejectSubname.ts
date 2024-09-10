@@ -22,13 +22,13 @@ export interface BaseRejectSubnameRequest {
  *  @typedef UseRejectSubname
  *  @type {object}
  *  @property {function} rejectSubname - The function to reject a subname.
- *  @property {boolean} rejectSubnamePending - Indicates if the mutation is currently pending.
+ *  @property {boolean} isRejectSubnamePending - Indicates if the mutation is currently pending.
  */
 export interface UseRejectSubname {
   rejectSubname: (
     params: BaseRejectSubnameRequest
   ) => Promise<SubnameRejectResponse>;
-  rejectSubnamePending: boolean;
+  isRejectSubnamePending: boolean;
 }
 /**
  * Custom hook for performing a mutation to reject a subname.
@@ -40,7 +40,7 @@ export const useRejectSubname = (): UseRejectSubname => {
   const { address } = useMountedAccount();
   const { refetchInvitations } = useAccountInvitations();
   const { getSignature } = useSubnameSignature();
-  const { refetchSubnames } = useAccountSubnames();
+  const { refetchAccountSubnames } = useAccountSubnames();
 
   const mutate = useMutation<
     SubnameRejectResponse,
@@ -64,7 +64,7 @@ export const useRejectSubname = (): UseRejectSubname => {
         xMessage: signature.message,
       });
 
-      refetchSubnames();
+      refetchAccountSubnames();
       refetchInvitations();
       return accepted;
     },
@@ -74,6 +74,6 @@ export const useRejectSubname = (): UseRejectSubname => {
     rejectSubname: mutate.mutateAsync as (
       params: BaseRejectSubnameRequest
     ) => Promise<SubnameRejectResponse>,
-    rejectSubnamePending: mutate.isPending,
+    isRejectSubnamePending: mutate.isPending,
   };
 };

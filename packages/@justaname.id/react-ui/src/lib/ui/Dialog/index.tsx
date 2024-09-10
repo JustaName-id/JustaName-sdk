@@ -8,9 +8,8 @@ const StyledOverlay = styled(DialogPrimitive.Overlay)`
     inset: 0;
     -webkit-transition: backdrop-filter 100ms ease;
     transition: backdrop-filter 100ms ease;
-    -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 
     @keyframes overlayShow {

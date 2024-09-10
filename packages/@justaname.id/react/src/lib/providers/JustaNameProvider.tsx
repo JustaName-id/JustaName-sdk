@@ -40,7 +40,7 @@ export interface JustaNameContextProps extends JustaNameConfigWithouthApiKey {
 }
 
 
-const JustaNameContext = React.createContext<JustaNameContextProps | null>(null);
+export const JustaNameContext = React.createContext<JustaNameContextProps | null>(null);
 
 /**
  * Props for the JustaNameProvider component.

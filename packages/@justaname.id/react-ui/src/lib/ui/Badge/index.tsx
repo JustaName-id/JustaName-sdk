@@ -9,10 +9,10 @@ interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const badgeVariants = {
   default: css`
-    background-color: hsla(0, 0%, 95%, 1);
-    color: rgba(0, 0, 0, 0.50);
-    font-family: var(--justaname-font-family),serif;
-    font-size: 14px;
+      background-color: var(--justaname-foreground-color-4);
+      color: hsl(from var(--justaname-foreground-color-2) h s l / 0.5);       
+      font-family: var(--justaname-font-family),serif;
+        font-size: 14px;
     font-style: normal;
     font-weight: 900;
   `,

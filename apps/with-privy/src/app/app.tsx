@@ -12,7 +12,7 @@ import {
 import { ChainId } from '@justaname.id/sdk';
 import { PrivyProvider, usePrivy } from '@privy-io/react-auth';
 import {createConfig, WagmiProvider} from '@privy-io/wagmi';
-import { useSubnameSession, useSubnameSignOut } from '@justaname.id/react';
+import { useSubnameSession } from '@justaname.id/react';
 
 const queryClient = new QueryClient();
 
@@ -32,7 +32,6 @@ const JustaNameConfig: SIWJProviderConfig = {
 const Connect = () => {
   const { ready, authenticated, user, login, logout } = usePrivy();
   const { subnameSession} = useSubnameSession();
-  const { signOut } = useSubnameSignOut()
   if (!ready) {
     return null;
   }

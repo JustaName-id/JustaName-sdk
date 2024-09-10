@@ -52,14 +52,14 @@ export type SubnamesType = SubnameGetAllByAddressResponse[];
  *
  * @typedef UseAccountSubnamesResult
  * @type {object}
- * @property {SubnamesType} subnames - The list of subnames associated with the account.
- * @property {boolean} isPending - Indicates if the query is currently loading.
- * @property {function} refetchSubnames - Function to manually refetch the subnames data.
+ * @property {SubnamesType} accountSubnames - The list of subnames associated with the account.
+ * @property {boolean} isAccountSubnamesPending - Indicates if the query is currently loading.
+ * @property {function} refetchAccountSubnames - Function to manually refetch the subnames data.
  */
 interface UseAccountSubnamesResult {
-  subnames: SubnamesType;
-  isPending: boolean;
-  refetchSubnames: (
+  accountSubnames: SubnamesType;
+  isAccountSubnamesPending: boolean;
+  refetchAccountSubnames: (
     options?: RefetchOptions | undefined
   ) => Promise<QueryObserverResult<SubnamesType | undefined, unknown>>;
 }
@@ -107,8 +107,8 @@ export const useAccountSubnames = (
   });
 
   return {
-    subnames: query.data ?? [],
-    isPending: query.isPending,
-    refetchSubnames: query.refetch,
+    accountSubnames: query.data ?? [],
+    isAccountSubnamesPending: query.isPending,
+    refetchAccountSubnames: query.refetch,
   };
 };
