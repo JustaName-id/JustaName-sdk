@@ -28,7 +28,7 @@ const getBackgroundVariations = (color: string) => {
     '--justaname-background-color': hsl,
     '--justaname-foreground-color-2': isTooLight ? 'hsl(0, 0%, 0%)' : 'hsl(0, 0%, 100%)',
     '--justaname-foreground-color-3': detectLightColor(foreground2) ? generateDarkVariation(foreground2) : generateLightVariation(foreground2),
-    '--justaname-foreground-color-4': detectLightColor(hsl,50) ?  generateDarkVariation(hsl) : generateLightVariation(hsl),
+    '--justaname-foreground-color-4': detectLightColor(hsl,50) ?  generateDarkVariation(hsl, 0.1) : generateLightVariation(hsl, 0.4),
     '--justaname-border-color': isTooLight ?  'hsl(0, 0%, 0%)' : 'hsl(0, 0%, 100%)',
   }
 }

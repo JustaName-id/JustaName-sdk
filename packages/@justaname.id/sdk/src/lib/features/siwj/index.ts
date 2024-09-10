@@ -6,8 +6,9 @@ import {
   InvalidSubnameException,
   InvalidTimeException
 } from '../../errors';
-import { checkDomainValid, checkTTL, constructSignInStatement } from '../../utils';
+import { checkDomainValid, checkTTL, constructSignInStatement, extractDataFromStatement } from '../../utils';
 import { OffchainResolvers } from '../../features/offchain-resolvers';
+import { InvalidConfigurationException } from '../../errors/InvalidConfiguration.exception';
 
 export interface SiwjResponse extends SiweResponse {
   subname: string
@@ -40,10 +41,14 @@ export class Siwj extends SiweMessage {
       throw InvalidTimeException.requiredTTL()
     }
 
+    if(!params.domain){
+      throw InvalidConfigurationException.domainRequired()
+    }
+
     checkTTL(params.ttl);
     checkDomainValid(params.subname);
 
-    const statement = constructSignInStatement(params.subname);
+    const statement = constructSignInStatement(params.domain, params.subname);
 
     super({
       ...params,
@@ -62,7 +67,7 @@ export class Siwj extends SiweMessage {
        verification = await super.verify(params, opts);
     } catch (e) {
       const statement = e.data.statement;
-      const subname = Siwj.extractSubnameFromStatement(statement);
+      const { subname } = extractDataFromStatement(statement);
       throw {
         ...e,
         subname
@@ -73,7 +78,7 @@ export class Siwj extends SiweMessage {
     if(!statement){
       throw InvalidStatementException.invalidStatement()
     }
-    const subname = Siwj.extractSubnameFromStatement(statement)
+    const { subname } = extractDataFromStatement(statement)
 
 
     await Promise.all([this.verifySubnameAddress(
@@ -95,14 +100,6 @@ export class Siwj extends SiweMessage {
     return generateNonce()
   }
 
-  static extractSubnameFromStatement(statement:string){
-    const regex = /I want to sign in as (.*)/;
-    const result = regex.exec(statement);
-    if(result){
-      return result[1];
-    }
-    throw InvalidStatementException.invalidStatement();
-  }
 
   private async verifySubnameResolves(subname:string){
     const [resolverAddress,resolvers] = await Promise.all([this.provider.getResolver(subname),this.offchainResolver.getAllOffchainResolvers()]);

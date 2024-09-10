@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
+  JustaNameContext,
   JustaNameProvider,
   JustaNameProviderConfig,
-  useMountedAccount,
-  useSubnameSession,
+  useMountedAccount, UseSubnameSession,
+  useSubnameSession, useSubnameSignIn,
   useSubnameSignOut
 } from '@justaname.id/react';
 import { JustaThemeProvider, JustaThemeProviderConfig } from '@justaname.id/react-ui';
@@ -20,14 +21,12 @@ export interface SIWJProviderProps {
 }
 
 export interface SIWJContextProps {
-  openOnWalletConnect: boolean;
-  allowedSubnames: "all" | "platform" | string[];
   handleOpenDialog: (open: boolean) => void;
+  isOpen: boolean;
 }
 
 export const SIWJContext = React.createContext<SIWJContextProps>({
-  openOnWalletConnect: false,
-  allowedSubnames: "all",
+ isOpen: false,
   handleOpenDialog: () => {}
 });
 
@@ -41,12 +40,14 @@ export const SIWJProvider: React.FC<SIWJProviderProps> = ({
   const [open, setOpen] = React.useState(false);
   const { address } = useMountedAccount();
 
-  const handleOpenDialog = (open: boolean) => {
-    setOpen(open);
+  const handleOpenDialog = (_open: boolean) => {
+    if (_open !== open) {
+      setOpen(_open);
+    }
   };
 
   return (
-    <SIWJContext.Provider value={{ openOnWalletConnect, handleOpenDialog, allowedSubnames }}>
+    <SIWJContext.Provider value={{ handleOpenDialog, isOpen: open }}>
       <JustaNameProvider config={{
         config: props.config,
         backendUrl: props.backendUrl,
@@ -64,18 +65,69 @@ export const SIWJProvider: React.FC<SIWJProviderProps> = ({
   );
 };
 
-export const useSIWJ = () => {
+export interface UseSignInWithJustaName {
+  handleDialog: (open: boolean) => void;
+  isOpen: boolean
+  signIn: ({ subname }: { subname: string }) => void;
+  signOut: () => void;
+  status: 'pending' | 'signedIn' | 'signedOut';
+  refreshSubnameSession: () => void;
+  session: UseSubnameSession['subnameSession'];
+}
+
+export const useSignInWithJustaName = (): UseSignInWithJustaName => {
   const context = React.useContext(SIWJContext);
+  const justanameContext = React.useContext(JustaNameContext);
+  const { signIn, isSignInPending} = useSubnameSignIn();
+  const { signOut, isSignOutPending} = useSubnameSignOut();
+  const { subnameSession, isSubnameSessionPending, refreshSubnameSession } = useSubnameSession();
+
+  const status = useMemo(() => {
+    if(isSignInPending){
+      return 'pending';
+    }
+    if(isSignOutPending){
+      return 'pending';
+    }
+    if(isSubnameSessionPending){
+      return 'pending';
+    }
+    if(subnameSession){
+      return 'signedIn';
+    }
+    return 'signedOut';
+  }, [isSignInPending, isSignOutPending, isSubnameSessionPending, subnameSession]);
+
   if (context === undefined) {
     throw new Error('useSIWJ must be used within a SIWJProvider');
   }
-  return context;
+
+  if (justanameContext === undefined) {
+    throw new Error('useSIWJ must be used within a JustaNameProvider');
+  }
+
+  return {
+    handleDialog: context.handleOpenDialog,
+    isOpen: context.isOpen,
+    signIn,
+    signOut,
+    status,
+    session: subnameSession,
+    refreshSubnameSession
+  };
 }
 
 const CheckSession: React.FC<{ openOnWalletConnect: boolean, handleOpenDialog: (open: boolean) => void }> = ({ openOnWalletConnect, handleOpenDialog }) => {
-  const { subnameSession , subnameSessionPending} = useSubnameSession();
+  const { subnameSession , isSubnameSessionPending} = useSubnameSession();
   const { signOut } = useSubnameSignOut();
-  const { address, isConnected, isDisconnected, isConnecting, isReconnecting } = useMountedAccount();
+  const {
+    address,
+    isConnected,
+    isDisconnected,
+    isConnecting,
+    isReconnecting,
+    status
+  } = useMountedAccount();
 
   useEffect(() => {
     if (subnameSession && address) {
@@ -87,16 +139,17 @@ const CheckSession: React.FC<{ openOnWalletConnect: boolean, handleOpenDialog: (
   }, [subnameSession, address]);
 
   useEffect(() => {
-    if (openOnWalletConnect && isConnected && !subnameSession && !subnameSessionPending) {
+    if (openOnWalletConnect && isConnected && !subnameSession && !isSubnameSessionPending) {
       handleOpenDialog(true);
     }
     if (!isConnected) {
       handleOpenDialog(false);
     }
-  }, [isConnected, subnameSession, subnameSessionPending, openOnWalletConnect]);
+  }, [isConnected, subnameSession, isSubnameSessionPending, openOnWalletConnect]);
 
+  // setTimeout for the first time and then regular intervals, if it doesn't work try localstorage
   useEffect(() => {
-    console.log(isDisconnected, isConnecting, isReconnecting);
+    console.log(isDisconnected, isConnected, isConnecting, isReconnecting, status);
     if(isDisconnected && !isConnecting && !isReconnecting){
       signOut();
       handleOpenDialog(false);

@@ -21,7 +21,7 @@ type SubnameType = SubnameGetAllByAddressResponse[];
 
 interface UseAccountInvitationsResult {
   invitations: SubnameType;
-  isLoading: boolean;
+  isInvitationsPending: boolean;
   refetchInvitations: (
     options?: RefetchOptions | undefined
   ) => Promise<QueryObserverResult<SubnameType | undefined, unknown>>;
@@ -59,7 +59,7 @@ export const useAccountInvitations = (
 
   return {
     invitations: query.data ?? [],
-    isLoading: query.isLoading,
+    isInvitationsPending: query.isPending,
     refetchInvitations: query.refetch,
   };
 };

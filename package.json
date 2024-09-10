@@ -126,6 +126,8 @@
     "@uiw/color-convert": "^2.3.0",
     "@uiw/react-color-chrome": "^2.3.0",
     "@uiw/react-color-github": "^2.3.0",
+    "@usecapsule/react-sdk": "^3.19.0",
+    "@usecapsule/wagmi-v2-integration": "^2.20.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "@walletconnect/react-native-compat": "^2.11.2",
     "@web3modal/wagmi-react-native": "^1.2.0",

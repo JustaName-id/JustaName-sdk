@@ -6,7 +6,7 @@ import { useSubnameSession } from './useSubnameSession';
 
 export interface UseSubnameSignOutResult {
   signOut: UseMutateAsyncFunction<void, Error, void, unknown>,
-  signOutPending: boolean;
+  isSignOutPending: boolean;
 }
 
 /**
@@ -32,7 +32,7 @@ export const useSubnameSignOut = (): UseSubnameSignOutResult => {
 
   return {
     signOut: mutation.mutateAsync,
-    signOutPending: mutation.isPending,
+    isSignOutPending: mutation.isPending,
   }
 }
 

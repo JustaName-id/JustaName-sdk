@@ -56,7 +56,7 @@ type SubnameType = SubnameGetAllByAddressResponse[];
  */
 interface UseAddressSubnamesResult {
   subnames: SubnameType;
-  isLoading: boolean;
+  isAddressSubnamesPending: boolean;
   refetchSubnames: (
     options?: RefetchOptions | undefined
   ) => Promise<QueryObserverResult<SubnameType | undefined, unknown>>;
@@ -98,7 +98,7 @@ export const useAddressSubnames = (
 
   return {
     subnames: query.data ?? [],
-    isLoading: query.isLoading,
+    isAddressSubnamesPending: query.isPending,
     refetchSubnames: query.refetch,
   };
 };

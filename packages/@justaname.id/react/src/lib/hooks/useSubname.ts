@@ -33,12 +33,12 @@ export interface UseSubnameOptions {
  * @typedef UseSubnameResult
  * @type {object}
  * @property {SubnameGetBySubnameResponse | undefined} subname - The fetched subname details.
- * @property {boolean} isLoading - Indicates if the query is currently loading.
+ * @property {boolean} isSubnamePending - Indicates if the query is currently loading.
  * @property {function} refetchSubname - Function to manually refetch the subname data.
  */
 interface UseSubnameResult {
   subname: SubnameGetBySubnameResponse | undefined;
-  isLoading: boolean;
+  isSubnamePending: boolean;
   refetchSubname: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<SubnameGetBySubnameResponse | undefined, unknown>>;
 }
 
@@ -62,7 +62,7 @@ export const useSubname = (props: UseSubnameOptions) : UseSubnameResult => {
 
   return {
     subname: query.data,
-    isLoading: query.isLoading,
+    isSubnamePending: query.isPending,
     refetchSubname: query.refetch,
   }
 }

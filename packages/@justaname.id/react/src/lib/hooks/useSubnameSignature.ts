@@ -10,7 +10,7 @@ export const buildSignature = (address: string) => ['SUBNAME_SIGNATURE', address
 
 export interface UseSubnameSignatureResult {
   getSignature: () => Promise<{signature: string, message: string, address: string, expirationTime: Date}>,
-  subnameSignaturePending: boolean;
+  isSubnameSignaturePending: boolean;
 }
 /**
  * Custom hook to request a challenge for a subname and obtain a signature proving ownership of an address.
@@ -100,7 +100,7 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
   }
   return {
     getSignature,
-    subnameSignaturePending: mutation.isPending,
+    isSubnameSignaturePending: mutation.isPending,
   }
 }
 
