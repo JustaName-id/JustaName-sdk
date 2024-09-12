@@ -111,7 +111,9 @@ export interface SubnameAcceptRoute extends IRoute {
   headers: SIWEHeaders;
 }
 
-export interface SubnameAcceptParams extends Omit<SubnameAcceptRequest, 'ensDomain' | 'chainId'> {
+export interface SubnameAcceptParams extends Omit<SubnameAcceptRequest, 'ensDomain' | 'chainId' | 'addresses' | 'text'> {
   ensDomain?: string;
   chainId?: ChainId;
+  text?: Record<string, string>;
+  addresses?: Record<string, string>;
 }

@@ -9,7 +9,7 @@ const PROVIDER_URL = process.env['PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
 const ADDRESS = signer.address;
-const CHAIN_ID = 1;
+const CHAIN_ID = 11155111;
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 const VALID_SUBNAME = process.env['VALID_SUBNAME'] as string;
 

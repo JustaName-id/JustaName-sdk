@@ -29,7 +29,7 @@ import {
   SubnameRevokeParams,
   SubnameRejectParams,
   SubnameRecordsParams,
-  ChainId
+  ChainId, TextRecord, Address
 } from '../../types';
 import { ApiKeyRequiredException } from '../../errors/ApiKeyRequired.exception';
 
@@ -97,7 +97,8 @@ export class Subnames {
     return restCall('ACCEPT_SUBNAME_ROUTE', 'POST', {
       chainId: this.chainId,
       ensDomain: this.ensDomain,
-      ...params
+      ...params,
+      ...this.transformTextAndAddressRecord(params.text, params.addresses),
     },
       {
         ...headers,
@@ -116,7 +117,7 @@ export class Subnames {
   ): Promise<SubnameReserveResponse> {
 
     return this.isNotReadOnlyMode(
-      restCall('RESERVE_SUBNAME_ROUTE', 'POST', {
+      () => restCall('RESERVE_SUBNAME_ROUTE', 'POST', {
         chainId: this.chainId,
         ensDomain: this.ensDomain,
         ...params
@@ -138,28 +139,25 @@ export class Subnames {
     headers: SIWEHeaders
   ): Promise<SubnameAddResponse> {
     return this.isNotReadOnlyMode(
-      restCall(
-        'ADD_SUBNAME_ROUTE',
-        'POST',
-        {
-          text: [],
-          addresses: [
-            {
-              coinType: 60,
-              address: headers.xAddress,
-            },
-          ],
-          contentHash: '',
-          chainId: this.chainId,
-          ensDomain: this.ensDomain,
-          ...params,
-        },
-        {
-          xApiKey: this.apiKey as string,
-          ...headers,
-        }
-      )
-    );
+       () =>restCall(
+          'ADD_SUBNAME_ROUTE',
+          'POST',
+          {
+            contentHash: '',
+            chainId: this.chainId,
+            ensDomain: this.ensDomain,
+            ...params,
+            ...this.transformTextAndAddressRecord(params.text, {
+              ...params.addresses,
+              '60': headers.xAddress
+            })
+          },
+          {
+            xApiKey: this.apiKey as string,
+            ...headers
+          }
+        )
+      );
   }
 
   /**
@@ -173,10 +171,12 @@ export class Subnames {
     params: SubnameUpdateParams,
     headers: SIWEHeaders
   ): Promise<SubnameUpdateResponse> {
+
     return restCall('UPDATE_SUBNAME_ROUTE', 'POST', {
       chainId: this.chainId,
       ensDomain: this.ensDomain,
-      ...params
+      ...params,
+      ...this.transformTextAndAddressRecord(params.text, params.addresses),
     }, {
         ...headers,
       })
@@ -195,7 +195,7 @@ export class Subnames {
     headers: SIWEHeaders
   ): Promise<SubnameRevokeResponse> {
     return this.isNotReadOnlyMode(
-      restCall('REVOKE_SUBNAME_ROUTE', 'POST', {
+      () => restCall('REVOKE_SUBNAME_ROUTE', 'POST', {
         chainId: this.chainId,
         ensDomain: this.ensDomain,
         ...params
@@ -326,6 +326,32 @@ export class Subnames {
     });
   }
 
+  transformTextAndAddressRecord(text: Record<string, string> | undefined, addresses: Record<string, string> | undefined): {
+    text: TextRecord[];
+    addresses: Address[];
+  } {
+    return {
+      text: text ? this.jsonToArrayOfKeyValue(text, 'key', 'value') : [],
+      addresses: addresses ?this.jsonToArrayOfKeyValue(addresses, 'coinType', 'address').map(
+        (address) => ({
+          coinType: parseInt(address.coinType),
+          address: address.address,
+        })
+      ) : [],
+    }
+  }
+
+  jsonToArrayOfKeyValue<T extends string, K extends string>(
+    json: Record<string, string>,
+    keyName: T,
+    valueName: K
+  ): Record<T | K, string>[] {
+    return Object.entries(json).map(([key, value]) => ({
+      [keyName]: key,
+      [valueName]: value
+    } as Record<T | K, string>));
+  }
+
   /**
    * Ensures that the method is not called in read-only mode, throwing an error if an API key is not provided.
    * @private
@@ -333,11 +359,11 @@ export class Subnames {
    * @returns {T} The result of the callback operation if an API key is present.
    * @throws {Error} If called in read-only mode without an API key.
    */
-  private isNotReadOnlyMode<T>(callback: T): T {
+  private isNotReadOnlyMode<T>(callback: () => T): T {
     const check = this.apiKey === undefined;
     if (check) {
       throw ApiKeyRequiredException.apiKeyRequired()
     }
-    return callback;
+    return callback()
   }
 }
