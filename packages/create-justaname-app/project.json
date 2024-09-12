@@ -7,7 +7,6 @@
     "build": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
       "options": {
         "main": "packages/create-justaname-app/src/index.ts",
         "outputPath": "packages/create-justaname-app/dist",
@@ -17,16 +16,12 @@
         "generateExportsField": true,
         "allowJs": true,
         "compiler": "tsc",
-        "format": ["esm"]
-      },
-      "configurations": {
-        "production": {
-          "optimization": true,
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
-        }
+        "format": ["esm"],
+        "optimization": true,
+        "sourceMap": false,
+        "namedChunks": false,
+        "extractLicenses": true,
+        "vendorChunk": false
       },
       "dependsOn": ["lint"]
     },

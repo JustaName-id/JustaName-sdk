@@ -134,9 +134,9 @@
     },
     "projectsRelationship": "independent",
     "projects": [
-      "packages/create-justaname-app",
-      "packages/@justaname.id/react",
-      "packages/@justaname.id/sdk"
+      "@justaname.id/react",
+      "@justaname.id/sdk",
+      "create-justaname-app"
     ]
   }
 }
