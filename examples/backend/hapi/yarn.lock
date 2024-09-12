@@ -410,14 +410,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.2.63":
-  version: 0.2.63
-  resolution: "@justaname.id/sdk@npm:0.2.63"
+"@justaname.id/sdk@npm:0.2.64":
+  version: 0.2.64
+  resolution: "@justaname.id/sdk@npm:0.2.64"
   dependencies:
     axios: "npm:^1.6.0"
     dotenv: "npm:16.3.2"
     qs: "npm:^6.12.0"
-  checksum: 10c0/6eeea45dcf9bdaf1e4ac5b8a71e923847f47be5d45cd9bb83f44118de8635fcefdcd14af45aee8d5d762da4600a474e68413f7ba05691ee4a739073e693606a8
+  checksum: 10c0/bad647194bf9e8b09a5697a1e2c6359e8d2b075bb8c14514dbde41a86de6094c0fb7ecef0f5da7cf40f58c7a36e6df009da7abb3318782eb5428125e3ff73d94
   languageName: node
   linkType: hard
 
@@ -2321,7 +2321,7 @@ __metadata:
   resolution: "justaname-hapi-example@workspace:."
   dependencies:
     "@hapi/hapi": "npm:^21.3.7"
-    "@justaname.id/sdk": "npm:0.2.63"
+    "@justaname.id/sdk": "npm:0.2.64"
     "@types/eslint": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^7.3.1"
     "@typescript-eslint/parser": "npm:^7.3.1"
