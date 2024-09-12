@@ -5,7 +5,8 @@ dotenv.config();
 const PROVIDER_URL = process.env['PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
-const CHAIN_ID = 1;
+const ENS_DOMAIN = process.env['ENS_DOMAIN'] as string;
+const CHAIN_ID = 11155111;
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 
 /**
@@ -26,7 +27,7 @@ export const initializeJustaName =  (apiKey: string) => {
         ttl: VALID_TTL
       }
     },
-    ensDomain: DOMAIN,
+    ensDomain: ENS_DOMAIN,
     apiKey: apiKey,
     providerUrl: PROVIDER_URL
   });
