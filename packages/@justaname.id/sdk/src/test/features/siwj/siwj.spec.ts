@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 import dotenv from 'dotenv';
 import Siwj from '../../../lib/features/siwj';
 import { InvalidSubnameException, InvalidTimeException } from '../../../lib/errors';
+import { extractDataFromStatement } from '@justaname.id/sdk';
 
 dotenv.config();
 
@@ -11,7 +12,7 @@ const PROVIDER_URL = process.env['PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
 const ADDRESS = signer.address;
-const CHAIN_ID = 1;
+const CHAIN_ID = 11155111;
 const VERSION = '1';
 const NONCE = '1234567890';
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
@@ -107,7 +108,10 @@ describe('Siwj', () => {
     if (!siwj.statement) {
       throw new Error('Statement is empty');
     }
-    expect(Siwj.extractSubnameFromStatement(siwj.statement)).toEqual(VALID_SUBNAME);
+    expect(extractDataFromStatement(siwj.statement)).toEqual({
+      domain: DOMAIN,
+      subname: VALID_SUBNAME,
+    });
   });
 
   it('should generate expiration from ttl', () => {
