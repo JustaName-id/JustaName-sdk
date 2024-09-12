@@ -90,6 +90,6 @@ export interface SubnameAddRoute extends IRoute {
 export interface SubnameAddParams extends Omit<SubnameAddRequest, 'ensDomain' | 'chainId'| 'addresses'|'text'> {
   ensDomain?: string;
   chainId?: ChainId;
-  addresses?: SubnameAddRequest['addresses'];
-  text?: SubnameAddRequest['text'];
+  addresses?: Record<string, string>;
+  text?: Record<string, string>;
 }

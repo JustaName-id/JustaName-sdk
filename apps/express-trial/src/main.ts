@@ -136,7 +136,7 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
 
 
 app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to JustaName Express!' });
+  res.send({ message: 'Welcome to efe Express!' });
 });
 
 const port = process.env.PORT || 3333;

@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useMountedAccount } from './useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { ChainId, SubnameUpdateRequest, SubnameUpdateResponse } from '@justaname.id/sdk';
+import { SubnameUpdateParams, SubnameUpdateResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from './useAccountSubnames';
 
 /**
@@ -14,11 +14,7 @@ import { useAccountSubnames } from './useAccountSubnames';
  * @type {object}
  * @property {string} username - The username part of the subname to be claimed or updated.
  */
-export interface SubnameUpdate extends Omit<SubnameUpdateRequest, 'chainId' |'ensDomain'> {
-  subname: string;
-  ensDomain?: string;
-  chainId?: ChainId;
-}
+export interface SubnameUpdate extends SubnameUpdateParams {}
 
 export interface UseUpdateSubnameResult {
   updateSubname: (params: SubnameUpdate) => Promise<SubnameUpdateResponse>;
