@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@ethersproject/shims": "^5.7.0",
-    "@justaname.id/react": "^0.3.67",
+    "@justaname.id/react": "^0.3.68",
     "@metamask/sdk-react": "^0.15.0",
     "@react-native-async-storage/async-storage": "1.21.0",
     "@react-native-community/netinfo": "11.1.0",
