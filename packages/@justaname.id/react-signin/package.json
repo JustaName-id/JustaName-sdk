@@ -5,6 +5,9 @@
     "@justaname.id/react": "0.3.68",
     "@justaname.id/sdk": "0.2.65"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     "./package.json": "./dist/package.json",
     ".": "./dist/index.esm.js"
