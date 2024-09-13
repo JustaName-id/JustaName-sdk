@@ -9,9 +9,6 @@
     "./package.json": "./dist/package.json",
     ".": "./dist/index.esm.js"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "module": "./dist/index.esm.js",
   "main": "./dist/index.esm.js",
   "types": "./dist/index.esm.d.ts"
