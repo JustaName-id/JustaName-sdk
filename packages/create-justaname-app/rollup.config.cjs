@@ -11,7 +11,7 @@ module.exports = (config) => {
   return {
     ...config,
     output: {
-      ...config.output,
+      ...config.output[0],
       banner: '#!/usr/bin/env node', // Adds the shebang
     },
     plugins: [

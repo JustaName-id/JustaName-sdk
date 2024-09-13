@@ -3,9 +3,7 @@ import {
   IsSubnameAvailableRequest,
   IsSubnameAvailableResponse,
   SIWEHeaders,
-  SubnameAcceptRequest,
   SubnameAcceptResponse,
-  SubnameAddRequest,
   SubnameAddResponse,
   SubnameGetAllByAddressRequest,
   SubnameGetAllByAddressResponse,
@@ -15,19 +13,25 @@ import {
   SubnameGetByDomainNameChainIdResponse,
   SubnameGetBySubnameRequest,
   SubnameGetBySubnameResponse,
-  SubnameReserveRequest,
   SubnameReserveResponse,
-  SubnameRevokeRequest,
   SubnameRevokeResponse,
   SubnameSearchRequest,
   SubnameSearchResponse,
-  SubnameUpdateRequest,
   SubnameUpdateResponse,
-  SubnameRecordsRequest,
   SubnameRecordsResponse,
-  SubnameRejectRequest,
-  SubnameRejectResponse, SubnameGetAllCommunitiesChainIdRequest, SubnameGetAllCommunitiesChainIdResponse
+  SubnameRejectResponse,
+  SubnameGetAllCommunitiesChainIdRequest,
+  SubnameGetAllCommunitiesChainIdResponse,
+  SubnameAcceptParams,
+  SubnameReserveParams,
+  SubnameAddParams,
+  SubnameUpdateParams,
+  SubnameRevokeParams,
+  SubnameRejectParams,
+  SubnameRecordsParams,
+  ChainId, TextRecord, Address
 } from '../../types';
+import { ApiKeyRequiredException } from '../../errors/ApiKeyRequired.exception';
 
 /**
  * Represents the Subnames class for interacting with the Subnames API.
@@ -60,25 +64,43 @@ import {
 export class Subnames {
   private readonly apiKey: string | undefined;
 
+  private readonly providerUrl: string;
+
+  private readonly ensDomain: string;
+
+  private readonly chainId: ChainId;
+
   /**
    * Constructs a new instance of the Subnames class, optionally with an API key for write operations.
+   * @param providerUrl
+   * @param ensDomain
+   * @param chainId
    * @param {string} [apiKey] - Your API key, required for operations that modify data.
    */
-  constructor(apiKey?: string) {
+  constructor(providerUrl: string, ensDomain: string, chainId: ChainId, apiKey?: string) {
     this.apiKey = apiKey;
+    this.providerUrl = providerUrl;
+    this.ensDomain = ensDomain;
+    this.chainId = chainId;
   }
 
   /**
    * Accept a subname invite under a specific domain, associating it with an Ethereum address.
-   * @param {SubnameAcceptRequest} params - Parameters for claiming a subname.
+   * @param {SubnameAcceptParams} params - Parameters for claiming a subname.
    * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
    * @returns {Promise<SubnameAcceptResponse>} The result of the claim operation.
    */
   async acceptSubname(
-    params: SubnameAcceptRequest,
+    params: SubnameAcceptParams,
     headers: SIWEHeaders
   ): Promise<SubnameAcceptResponse> {
-    return restCall('ACCEPT_SUBNAME_ROUTE', 'POST', params, {
+    return restCall('ACCEPT_SUBNAME_ROUTE', 'POST', {
+      chainId: this.chainId,
+      ensDomain: this.ensDomain,
+      ...params,
+      ...this.transformTextAndAddressRecord(params.text, params.addresses),
+    },
+      {
         ...headers,
       })
 
@@ -87,14 +109,19 @@ export class Subnames {
   /**
    * Reserves a subname for later claiming. This can be useful for securing a subname
    * before it is officially registered or claimed. Requires an API key.
-   * @param {SubnameReserveRequest} params - The parameters for the reservation.
+   * @param {SubnameReserveParams} params - The parameters for the reservation.
    * @returns {Promise<SubnameReserveResponse>} The result of the reservation operation.
    */
   async reserveSubname(
-    params: SubnameReserveRequest
+    params: SubnameReserveParams,
   ): Promise<SubnameReserveResponse> {
+
     return this.isNotReadOnlyMode(
-      restCall('RESERVE_SUBNAME_ROUTE', 'POST', params, {
+      () => restCall('RESERVE_SUBNAME_ROUTE', 'POST', {
+        chainId: this.chainId,
+        ensDomain: this.ensDomain,
+        ...params
+      }, {
         xApiKey: this.apiKey as string,
       })
     );
@@ -103,49 +130,54 @@ export class Subnames {
   /**
    * Adds a new subname under a domain, directly associating it with an address and optional content.
    * Requires an API key.
-   * @param {SubnameAddRequest} params - The parameters for adding the subname.
+   * @param {SubnameAddParams} params - The parameters for adding the subname.
    * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
    * @returns {Promise<SubnameAddResponse>} The result of the add operation.
    */
   async addSubname(
-    params: SubnameAddRequest,
+    params: SubnameAddParams,
     headers: SIWEHeaders
   ): Promise<SubnameAddResponse> {
     return this.isNotReadOnlyMode(
-      restCall(
-        'ADD_SUBNAME_ROUTE',
-        'POST',
-        {
-          text: [],
-          addresses: [
-            {
-              coinType: 60,
-              address: headers.xAddress,
-            },
-          ],
-          contentHash: '',
-          ...params,
-        },
-        {
-          xApiKey: this.apiKey as string,
-          ...headers,
-        }
-      )
-    );
+       () =>restCall(
+          'ADD_SUBNAME_ROUTE',
+          'POST',
+          {
+            contentHash: '',
+            chainId: this.chainId,
+            ensDomain: this.ensDomain,
+            ...params,
+            ...this.transformTextAndAddressRecord(params.text, {
+              ...params.addresses,
+              '60': headers.xAddress
+            })
+          },
+          {
+            xApiKey: this.apiKey as string,
+            ...headers
+          }
+        )
+      );
   }
 
   /**
    * Updates the details of an existing subname. This operation can be used to change the associated
    * address or the content of a subname. Requires an API key.
-   * @param {SubnameUpdateRequest} params - The parameters for updating the subname.
+   * @param {SubnameUpdateParams} params - The parameters for updating the subname.
    * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
    * @returns {Promise<SubnameUpdateResponse>} The result of the update operation.
    */
   async updateSubname(
-    params: SubnameUpdateRequest,
+    params: SubnameUpdateParams,
     headers: SIWEHeaders
   ): Promise<SubnameUpdateResponse> {
-    return restCall('UPDATE_SUBNAME_ROUTE', 'POST', params, {
+
+    return restCall('UPDATE_SUBNAME_ROUTE', 'POST', {
+      chainId: this.chainId,
+      ensDomain: this.ensDomain,
+      ...params,
+      ...this.transformTextAndAddressRecord(params.text, params.addresses),
+    }, {
         ...headers,
       })
 
@@ -154,16 +186,20 @@ export class Subnames {
   /**
    * Revokes a subname, removing its association and optionally freeing it for re-registration.
    * Requires an API key.
-   * @param {SubnameRevokeRequest} params - The parameters for revoking the subname.
+   * @param {SubnameRevokeParams} params - The parameters for revoking the subname.
    * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
    * @returns {Promise<SubnameRevokeResponse>} The result of the revoke operation.
    */
   async revokeSubname(
-    params: SubnameRevokeRequest,
+    params: SubnameRevokeParams,
     headers: SIWEHeaders
   ): Promise<SubnameRevokeResponse> {
     return this.isNotReadOnlyMode(
-      restCall('REVOKE_SUBNAME_ROUTE', 'POST', params, {
+      () => restCall('REVOKE_SUBNAME_ROUTE', 'POST', {
+        chainId: this.chainId,
+        ensDomain: this.ensDomain,
+        ...params
+      }, {
         xApiKey: this.apiKey as string,
         ...headers,
       })
@@ -172,15 +208,19 @@ export class Subnames {
 
   /**
    * Rejects a subname, removing its association and optionally freeing it for re-registration.
-   * @param {SubnameRejectRequest} params - The parameters for rejecting the subname.
+   * @param {SubnameRejectParams} params - The parameters for rejecting the subname.
    * @param {SIWEHeaders} headers - Additional headers for signing and authentication.
    * @returns {Promise<SubnameRejectResponse>} The result of the revoke operation.
    */
   async rejectSubname(
-    params: SubnameRejectRequest,
+    params: SubnameRejectParams,
     headers: SIWEHeaders
   ): Promise<SubnameRejectResponse> {
-    return restCall('REJECT_SUBNAME_ROUTE', 'POST', params, {
+    return restCall('REJECT_SUBNAME_ROUTE', 'POST', {
+        chainId: this.chainId,
+        ensDomain: this.ensDomain,
+        ...params
+    }, {
         ...headers,
       });
   }
@@ -273,13 +313,43 @@ export class Subnames {
   /**
    * Retrieves the records associated with a subname.
    * This is a read-only operation and does not require an API key.
-   * @param {SubnameRecordsRequest} params - Parameters for retrieving subname records.
+   * @param {SubnameRecordsParams} params - Parameters for retrieving subname records.
    * @returns {Promise<SubnameRecordsResponse>} The records associated with the subname.
    */
   async getRecordsByFullName(
-    params: SubnameRecordsRequest
+    params: SubnameRecordsParams
   ): Promise<SubnameRecordsResponse> {
-    return restCall('RECORDS_BY_FULLNAME_ROUTE', 'GET', params);
+    return restCall('RECORDS_BY_FULLNAME_ROUTE', 'GET', {
+      providerUrl: this.providerUrl,
+      chainId: this.chainId,
+      ...params,
+    });
+  }
+
+  transformTextAndAddressRecord(text: Record<string, string> | undefined, addresses: Record<string, string> | undefined): {
+    text: TextRecord[];
+    addresses: Address[];
+  } {
+    return {
+      text: text ? this.jsonToArrayOfKeyValue(text, 'key', 'value') : [],
+      addresses: addresses ?this.jsonToArrayOfKeyValue(addresses, 'coinType', 'address').map(
+        (address) => ({
+          coinType: parseInt(address.coinType),
+          address: address.address,
+        })
+      ) : [],
+    }
+  }
+
+  jsonToArrayOfKeyValue<T extends string, K extends string>(
+    json: Record<string, string>,
+    keyName: T,
+    valueName: K
+  ): Record<T | K, string>[] {
+    return Object.entries(json).map(([key, value]) => ({
+      [keyName]: key,
+      [valueName]: value
+    } as Record<T | K, string>));
   }
 
   /**
@@ -289,11 +359,11 @@ export class Subnames {
    * @returns {T} The result of the callback operation if an API key is present.
    * @throws {Error} If called in read-only mode without an API key.
    */
-  private isNotReadOnlyMode<T>(callback: T): T {
+  private isNotReadOnlyMode<T>(callback: () => T): T {
     const check = this.apiKey === undefined;
     if (check) {
-      throw new Error('This method is not available in read-only mode');
+      throw ApiKeyRequiredException.apiKeyRequired()
     }
-    return callback;
+    return callback()
   }
 }

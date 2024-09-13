@@ -50,7 +50,6 @@ export const Subname: React.FC<SubnameProps> = ({ currentSubname }) => {
         updateSubname({
           username: subname.username,
           subname: subname.subname,
-          ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN as string,
           ...subname.data,
           text: [
             ...subname.data.textRecords.filter(record => record.key !== key ).map((record)=>{

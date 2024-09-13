@@ -53,12 +53,11 @@
       "cache": true
     }
   },
-  "affected": {
-    "defaultBase": "main"
-  },
   "tasksRunnerOptions": {
     "default": {
-      "options": {}
+      "options": {
+        "cacheableOperations": ["build-storybook"]
+      }
     }
   },
   "plugins": [
@@ -99,6 +98,15 @@
         "targetName": "e2e",
         "componentTestingTargetName": "component-test"
       }
+    },
+    {
+      "plugin": "@nx/storybook/plugin",
+      "options": {
+        "buildStorybookTargetName": "build-storybook",
+        "serveStorybookTargetName": "storybook",
+        "testStorybookTargetName": "test-storybook",
+        "staticStorybookTargetName": "static-storybook"
+      }
     }
   ],
   "generators": {
@@ -133,6 +141,13 @@
       "automaticFromRef": true
     },
     "projectsRelationship": "independent",
-    "projects": ["@justaname.id/react", "@justaname.id/sdk"]
-  }
+    "projects": [
+      "packages/@justaname.id/sdk",
+      "packages/@justaname.id/react",
+      "packages/create-justaname-app",
+      "packages/@justaname.id/react-ui",
+      "packages/@justaname.id/react-signin"
+    ]
+  },
+  "defaultBase": "main"
 }

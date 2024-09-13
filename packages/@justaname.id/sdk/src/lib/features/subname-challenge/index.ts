@@ -1,10 +1,15 @@
 import { restCall } from '../../api/rest';
 import {
+  ChainId,
   RequestChallengeRequest,
   RequestChallengeResponse,
   VerifyChallengeRequest,
   VerifyChallengeResponse
 } from '../../types';
+import { SiweConfig } from '../../types/siwe/siwe-config';
+
+
+
 
 /**
  * Represents the Sign-In with Ethereum (SIWE) functionality, providing methods
@@ -31,7 +36,13 @@ import {
  *
  *  ```
  */
-export class Siwe {
+export class SubnameChallenge {
+
+  siweConfig: SiweConfig;
+
+  constructor(config: SiweConfig) {
+    this.siweConfig = config;
+  }
 
   /**
    * Sends a request to initiate a challenge.
@@ -41,9 +52,16 @@ export class Siwe {
    * @public
    */
   requestChallenge  (
-    params: RequestChallengeRequest
-  ) : Promise<RequestChallengeResponse> {
-    return restCall('SIWE_REQUEST_CHALLENGE_ROUTE','POST', params)
+    params: Omit<RequestChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl'> &{
+      origin?: string,
+      domain?: string,
+      chainId?: ChainId,
+      ttl?: number
+    }): Promise<RequestChallengeResponse> {
+    return restCall('SIWE_REQUEST_CHALLENGE_ROUTE','POST', {
+      ...this.siweConfig,
+      ...params
+    })
   }
 
 

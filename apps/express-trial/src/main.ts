@@ -1,18 +1,21 @@
+// inspired by https://github.com/spruceid/siwe-quickstart/blob/main/03_complete_app/backend/src/index.js
+
 import express, { Request } from 'express';
 import cors from 'cors';
 import { JustaName } from '@justaname.id/sdk';
-import dotenv from 'dotenv'
-
+import { config } from './config';
+import dotenv from 'dotenv';
+import Session from 'express-session';
 dotenv.config();
+
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 
 app.use(express.json());
-
-interface RequestChallenge {
-  address: string;
-}
 
 interface SubnameAdd {
   username: string;
@@ -21,85 +24,101 @@ interface SubnameAdd {
   message: string;
 }
 
-const chainId = parseInt(process.env.JUSTANAME_CHAIN_ID as string);
-const domain = process.env.JUSTANAME_DOMAIN as string;
-const origin = process.env.JUSTANAME_ORIGIN as string;
-const apiKey = process.env.JUSTANAME_API_KEY as string;
-const ensDomain = process.env.JUSTANAME_ENS_DOMAIN as string;
-
-if(!origin) {
-  throw new Error('Origin is required');
-}
-
-if(!chainId) {
-  throw new Error('ChainId is required');
-}
-
-if(chainId !== 1 && chainId !== 11155111) {
-  throw new Error('ChainId is not supported');
-}
-
-if (!domain) {
-  throw new Error('Domain is required');
-}
-
-if (!apiKey) {
-  throw new Error('API Key is required');
-}
-
-if (!ensDomain) {
-  throw new Error('ENS Domain is required');
-}
-
 let justaname: JustaName;
 
-app.get('/api/request-challenge', async (req: Request<NonNullable<unknown>, NonNullable<unknown>, NonNullable<unknown>,RequestChallenge>, res) => {
+type Siwj = { address: string, subname: string };
 
-  const address = req.query.address
-
-  if(!address) {
-    res.status(400).send({ message: 'Address is required' });
-    return;
+declare module 'express-session' {
+  interface SessionData {
+    nonce: string | null;
+    siwj: Siwj | null;
   }
+}
 
-  const minutes = 30;
+app.use(Session({
+  name: 'siwj-quickstart',
+  secret: "siwj-quickstart-secret",
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: false, sameSite: true }
+}));
+
+app.get('/api/signin/nonce', async (req: Request, res) => {
+  req.session.nonce = justaname.signIn.generateNonce();
+  res.setHeader('Content-Type', 'text/plain');
+  res.status(200).send(req.session.nonce);
+})
+
+app.post('/api/signin', async (req: Request, res) => {
   try {
-    const challenge = await justaname.siwe.requestChallenge({
-      // 30mins
-      ttl:minutes * 60 * 1000,
-      chainId,
-      origin,
-      address,
-      domain,
-    });
+    if (!req.body.message) {
+      res.status(422).json({ message: 'Expected prepareMessage object as body.' });
+      return;
+    }
 
-    res.status(200).send(challenge);
+    if(!req.body.signature) {
+      res.status(422).json({ message: 'Expected signature as body.' });
+      return;
+    }
+
+    const { data: message, subname } = await justaname.signIn.signIn( req.body.message,  req.body.signature );
+
+    if (!message) {
+      res.status(500).json({ message: 'No message returned.' });
+      return;
+    }
+
+    if (!message.expirationTime) {
+      res.status(500).json({ message: 'No expirationTime returned.' });
+    }
+
+    req.session.siwj = { address: message.address, subname };
+    req.session.cookie.expires = new Date(message?.expirationTime || new Date());
+    req.session.save(() => res.status(200).send(true));
+  } catch (e) {
+    req.session.siwj = null;
+    req.session.nonce = null;
+    req.session.save(() => res.status(500).json({ message: e.message }));
+    console.error(e);
+  }
+})
+
+app.get('/api/session', function (req, res) {
+  if (!req.session.siwj) {
+    res.status(401).json({ message: 'You have to first sign_in' });
     return;
   }
-  catch (error) {
-    if(error instanceof Error)
-      res.status(500).send({ error: error.message });
-  }
+  console.log("User is authenticated!");
+  res.setHeader('Content-Type', 'text/plain');
+  res.status(200).send({ subname: req.session.siwj?.subname, address: req.session.siwj?.address });
 });
 
+app.get('/api/signout', function (req, res) {
+  req.session.siwj = null;
+  req.session.nonce = null;
+  req.session.save(() => res.status(200).send(true));
+})
+
 app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
+
+  const ensDomain = process.env.JUSTANAME_ENS_DOMAIN as string;
+
   const username = req.body.username;
 
-  if(!username) {
+  if (!username) {
     res.status(400).send({ message: 'Username is required' });
     return;
   }
 
-  if(!req.body.address || !req.body.signature || !req.body.message) {
+  if (!req.body.address || !req.body.signature || !req.body.message) {
     res.status(400).send({ message: 'Address, signature and message are required' });
     return;
   }
 
   try {
     const add = await justaname.subnames.addSubname({
-        username: username,
-        ensDomain: ensDomain,
-        chainId: chainId
+        username,
+        ensDomain,
       },
       {
         xSignature: req.body.signature,
@@ -109,23 +128,22 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
 
     res.status(201).send(add);
     return;
-  }
-  catch (error) {
-    if(error instanceof Error)
+  } catch (error) {
+    if (error instanceof Error)
       res.status(500).send({ error: error.message });
   }
 });
 
 
 app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to JustaName Express!' });
+  res.send({ message: 'Welcome to efe Express!' });
 });
 
 const port = process.env.PORT || 3333;
-const server = app.listen(port, async  () => {
-  justaname = JustaName.init({
-    apiKey: process.env.JUSTANAME_API_KEY as string
-  });
+
+const server = app.listen(port, async () => {
+
+  justaname = JustaName.init(config);
 
   console.log(`Listening at http://localhost:${port}/api`);
 });

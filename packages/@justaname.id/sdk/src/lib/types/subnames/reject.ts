@@ -47,3 +47,9 @@ export interface SubnameRejectRoute extends IRoute {
   response: SubnameRejectResponse;
   headers: SIWEHeaders;
 }
+
+
+export interface SubnameRejectParams extends Omit<SubnameRejectRequest, 'chainId' | 'ensDomain'> {
+  chainId?: number;
+  ensDomain?: string;
+}

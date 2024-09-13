@@ -72,7 +72,6 @@ export const restCall = <T extends keyof ROUTES>(
 
   }
 
-
   return controlledAxiosPromise<ROUTES[T]['response']>(
     justANameInstance.request({
       url: Routes[route],
@@ -85,4 +84,8 @@ export const restCall = <T extends keyof ROUTES>(
       headers: currentHeaders
     })
   )
+}
+
+export default {
+  restCall
 }

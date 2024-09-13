@@ -17,14 +17,14 @@ export interface BaseAddSubnameRequest {
  *  @typedef UseAddSubname
  *  @type {object}
  *  @property {function} addSubname - The function to add a subname.
- *  @property {boolean} addSubnamePending - Indicates if the mutation is currently pending.
+ *  @property {boolean} isAddSubnamePending - Indicates if the mutation is currently pending.
  *  @template T - The type of additional parameters that can be passed to the claim subname mutation, extending the base request.
  */
 export interface UseAddSubname<T = any> {
   addSubname: (
     params: T & BaseAddSubnameRequest
   ) => Promise<SubnameAddResponse>;
-  addSubnamePending: boolean;
+  isAddSubnamePending: boolean;
 }
 /**
  * Custom hook for performing a mutation to add a subname.
@@ -36,7 +36,7 @@ export const useAddSubname = <T = any>(): UseAddSubname<T> => {
   const { backendUrl, routes } = useJustaName();
   const { address } = useMountedAccount();
   const { getSignature } = useSubnameSignature();
-  const { refetchSubnames } = useAccountSubnames();
+  const { refetchAccountSubnames } = useAccountSubnames();
 
   const mutate = useMutation<
     SubnameAddResponse,
@@ -68,7 +68,7 @@ export const useAddSubname = <T = any>(): UseAddSubname<T> => {
       }
 
       const data: SubnameAddResponse = await response.json();
-      refetchSubnames();
+      refetchAccountSubnames();
       return data;
     },
   });
@@ -77,6 +77,6 @@ export const useAddSubname = <T = any>(): UseAddSubname<T> => {
     addSubname: mutate.mutateAsync as (
       params: T & BaseAddSubnameRequest
     ) => Promise<SubnameAddResponse>,
-    addSubnamePending: mutate.isPending,
+    isAddSubnamePending: mutate.isPending,
   };
 };

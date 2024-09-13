@@ -49,3 +49,8 @@ export interface SubnameRevokeRoute extends IRoute {
   response: SubnameRevokeResponse;
   headers: ApiKeyHeaders & SIWEHeaders;
 }
+
+export interface SubnameRevokeParams extends Omit<SubnameRevokeRequest, 'chainId' | 'ensDomain'> {
+    chainId?: number;
+    ensDomain?: string;
+}
