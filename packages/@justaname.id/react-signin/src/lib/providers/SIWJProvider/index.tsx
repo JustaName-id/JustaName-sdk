@@ -26,14 +26,14 @@ export interface SIWJContextProps {
 }
 
 export const SIWJContext = React.createContext<SIWJContextProps>({
- isOpen: false,
-  handleOpenDialog: () => {}
+  isOpen: false,
+  handleOpenDialog: () => { }
 });
 
 export const SIWJProvider: React.FC<SIWJProviderProps> = ({
   children,
   config: props
-                                                          }) => {
+}) => {
   const openOnWalletConnect = props.openOnWalletConnect || false;
   const allowedSubnames = props.allowedSubnames || "all";
 
@@ -78,21 +78,21 @@ export interface UseSignInWithJustaName {
 export const useSignInWithJustaName = (): UseSignInWithJustaName => {
   const context = React.useContext(SIWJContext);
   const justanameContext = React.useContext(JustaNameContext);
-  const { signIn, isSignInPending} = useSubnameSignIn();
-  const { signOut, isSignOutPending} = useSubnameSignOut();
+  const { signIn, isSignInPending } = useSubnameSignIn();
+  const { signOut, isSignOutPending } = useSubnameSignOut();
   const { subnameSession, isSubnameSessionPending, refreshSubnameSession } = useSubnameSession();
 
   const status = useMemo(() => {
-    if(isSignInPending){
+    if (isSignInPending) {
       return 'pending';
     }
-    if(isSignOutPending){
+    if (isSignOutPending) {
       return 'pending';
     }
-    if(isSubnameSessionPending){
+    if (isSubnameSessionPending) {
       return 'pending';
     }
-    if(subnameSession){
+    if (subnameSession) {
       return 'signedIn';
     }
     return 'signedOut';
@@ -118,7 +118,7 @@ export const useSignInWithJustaName = (): UseSignInWithJustaName => {
 }
 
 const CheckSession: React.FC<{ openOnWalletConnect: boolean, handleOpenDialog: (open: boolean) => void }> = ({ openOnWalletConnect, handleOpenDialog }) => {
-  const { subnameSession , isSubnameSessionPending} = useSubnameSession();
+  const { subnameSession, isSubnameSessionPending } = useSubnameSession();
   const { signOut } = useSubnameSignOut();
   const {
     address,
@@ -150,7 +150,7 @@ const CheckSession: React.FC<{ openOnWalletConnect: boolean, handleOpenDialog: (
   // setTimeout for the first time and then regular intervals, if it doesn't work try localstorage
   useEffect(() => {
     console.log(isDisconnected, isConnected, isConnecting, isReconnecting, status);
-    if(isDisconnected && !isConnecting && !isReconnecting){
+    if (isDisconnected && !isConnecting && !isReconnecting) {
       signOut();
       handleOpenDialog(false);
     }

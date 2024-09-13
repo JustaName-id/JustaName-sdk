@@ -19,9 +19,8 @@
     },
     "build": {
       "executor": "@nx/rollup:rollup",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
         "outputPath": "packages/@justaname.id/react-signin/dist",
         "tsConfig": "packages/@justaname.id/react-signin/tsconfig.lib.json",
@@ -30,14 +29,13 @@
         "external": [
           "react",
           "react-dom",
-          "react/jsx-runtime"
+          "react/jsx-runtime",
+          "@justaname.id/react"
         ],
         "rollupConfig": "packages/@justaname.id/react-signin/rollup.config.cjs",
         "generateExportsField": true,
         "compiler": "swc",
-        "format": [
-          "esm"
-        ],
+        "format": ["esm"],
         "assets": [
           {
             "glob": "packages/@justaname.id/react-signin/README.md",
@@ -63,8 +61,7 @@
             "@justaname.id/react",
             "@justaname.id/react-ui"
           ],
-          "target": "build",
-          "configuration": "production"
+          "target": "build"
         }
       ]
     },
@@ -77,6 +74,28 @@
           "packages/@justaname.id/react/**/*.{ts,tsx,js,jsx}",
           "packages/@justaname.id/react/package.json"
         ]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs @justaname.id/react-signin {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "packages/@justaname.id/react-signin/dist"
+      },
+      "dependsOn": ["^build", "build", "^@justaname.id/react:build"]
+    },
+    "release:package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx semantic-release --debug --extends=./packages/@justaname.id/react-signin/release.config.js"
+      }
+    },
+    "update-deps": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx rjp ./packages/@justaname.id/react-signin/dist/package.json $PACKAGE_NAME $VERSION"
       }
     }
   }
