@@ -8,6 +8,7 @@
     "build": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
         "outputPath": "packages/@justaname.id/react/dist",
         "tsConfig": "packages/@justaname.id/react/tsconfig.lib.json",
@@ -35,11 +36,13 @@
           "vendorChunk": false
         }
       },
-      "dependsOn": ["lint", {
-        "projects": ["@justaname.id/sdk"],
-        "target": "build",
-        "configuration": "production"
-      }]
+      "dependsOn": [
+        "lint",
+        {
+          "projects": ["@justaname.id/sdk"],
+          "target": "build"
+        }
+      ]
     },
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -60,7 +63,7 @@
       "options": {
         "packageRoot": "packages/@justaname.id/react/dist"
       },
-      "dependsOn": ["^build","build","^@justaname.id/sdk:build"]
+      "dependsOn": ["^build", "build", "^@justaname.id/sdk:build"]
     },
     "release:package": {
       "executor": "nx:run-commands",

@@ -101,13 +101,13 @@ const recordExistsABI = [
  *  @type {object}
  *  @property {function} setJustaNameResolver - The function to set the JustaName resolver.
  *  @property {boolean} justanameResolverSet - Indicates if the JustaName resolver is set.
- *  @property {boolean} setJustaNameResolverPending - Indicates if the mutation is currently pending.
+ *  @property {boolean} isSetJustaNameResolverPending - Indicates if the mutation is currently pending.
  *  @property {boolean} setJustaNameResolverError - Indicates if the mutation has led to an error.
  */
 export interface UseSetJustaNameResolver<T = any> {
   setJustaNameResolver: () => Promise<void>;
   justanameResolverSet: boolean;
-  setJustaNameResolverPending: boolean;
+  isSetJustaNameResolverPending: boolean;
   setJustaNameResolverError: boolean;
 }
 /**
@@ -120,13 +120,13 @@ export const useSetJustaNameResolver = <
   T = any
 >(): UseSetJustaNameResolver<T> => {
   const { chainId, address } = useMountedAccount();
-  const { offchainResolvers, isLoading } = useOffchainResolvers();
+  const { offchainResolvers, isOffchainResolversPending } = useOffchainResolvers();
 
   const currentResolver = useMemo(() => {
-    if (!chainId || !offchainResolvers || isLoading) return;
+    if (!chainId || !offchainResolvers || isOffchainResolversPending) return;
     return offchainResolvers?.find((resolver) => resolver.chainId === chainId)
       ?.resolverAddress;
-  }, [offchainResolvers, chainId, isLoading]);
+  }, [offchainResolvers, chainId, isOffchainResolversPending]);
 
   const {
     data: recordExistsConfig,
@@ -281,7 +281,7 @@ export const useSetJustaNameResolver = <
     setJustaNameResolver: mutate.mutateAsync as () => Promise<void>,
     justanameResolverSet:
       isResolverConfigured && getResolverABIStatus !== 'pending',
-    setJustaNameResolverPending:
+    isSetJustaNameResolverPending:
       !noResultData &&
       (setResolverConfigPending || setClaimWithResolverPending),
     setJustaNameResolverError:

@@ -1,6 +1,12 @@
 'use client';
 
-import { Address, TextRecord, SubnameAcceptResponse } from '@justaname.id/sdk';
+import {
+  Address,
+  TextRecord,
+  SubnameAcceptResponse,
+  ChainId,
+  SubnameAcceptParams,
+} from '@justaname.id/sdk';
 import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../providers';
 import { useAccountSubnames } from './useAccountSubnames';
@@ -13,7 +19,7 @@ export interface BaseAcceptSubnameRequest {
 
   ensDomain: string;
 
-  chainId: number;
+  chainId: ChainId;
 
   addresses?: Address[];
 
@@ -28,13 +34,13 @@ export interface BaseAcceptSubnameRequest {
  *  @typedef UseAcceptSubname
  *  @type {object}
  *  @property {function} acceptSubname - The function to accept a subname.
- *  @property {boolean} acceptSubnamePending - Indicates if the mutation is currently pending.
+ *  @property {boolean} isAcceptSubnamePending - Indicates if the mutation is currently pending.
  */
 export interface UseAcceptSubname {
   acceptSubname: (
-    params: BaseAcceptSubnameRequest
+    params: SubnameAcceptParams
   ) => Promise<SubnameAcceptResponse>;
-  acceptSubnamePending: boolean;
+  isAcceptSubnamePending: boolean;
 }
 /**
  * Custom hook for performing a mutation to accept a subname.
@@ -42,48 +48,52 @@ export interface UseAcceptSubname {
  * @returns {UseAcceptSubname} An object containing the `acceptSubname` async function to initiate the subname accept, and a boolean `acceptSubnamePending` indicating the mutation's pending state.
  */
 export const useAcceptSubname = (): UseAcceptSubname => {
-  const {  justaname } = useJustaName();
+  const { justaname, chainId, ensDomain } = useJustaName();
   const { address } = useMountedAccount();
   const { refetchInvitations } = useAccountInvitations();
   const { getSignature } = useSubnameSignature();
-  const { refetchSubnames } = useAccountSubnames();
+  const { refetchAccountSubnames } = useAccountSubnames();
 
-  const mutate = useMutation<
-    SubnameAcceptResponse,
-    Error,
-    BaseAcceptSubnameRequest
-  >({
-    mutationFn: async (params: BaseAcceptSubnameRequest) => {
-      if (!address) {
-        throw new Error('No address found');
-      }
+  const mutate = useMutation<SubnameAcceptResponse, Error, SubnameAcceptParams>(
+    {
+      mutationFn: async (params: SubnameAcceptParams) => {
+        if (!address) {
+          throw new Error('No address found');
+        }
 
-      const signature = await getSignature();
+        const chainIdToUse = params.chainId || chainId;
+        const ensDomainToUse = params.ensDomain || ensDomain;
 
-      const accepted = await  justaname.subnames.acceptSubname({
-        addresses: params.addresses,
-        chainId: params.chainId,
-        contentHash: params.contentHash,
-        ensDomain: params.ensDomain,
-        text: params.text,
-        username: params.username,
-      }, {
-        xAddress: address,
-        xSignature: signature.signature,
-        xMessage: signature.message,
-      });
+        const signature = await getSignature();
 
-      refetchSubnames();
-      refetchInvitations();
+        const accepted = await justaname.subnames.acceptSubname(
+          {
+            addresses: params.addresses,
+            chainId: chainIdToUse,
+            contentHash: params.contentHash,
+            ensDomain: ensDomainToUse,
+            text: params.text,
+            username: params.username,
+          },
+          {
+            xAddress: address,
+            xSignature: signature.signature,
+            xMessage: signature.message,
+          }
+        );
 
-      return accepted;
-    },
-  });
+        refetchAccountSubnames();
+        refetchInvitations();
+
+        return accepted;
+      },
+    }
+  );
 
   return {
     acceptSubname: mutate.mutateAsync as (
-      params: BaseAcceptSubnameRequest
+      params: SubnameAcceptParams
     ) => Promise<SubnameAcceptResponse>,
-    acceptSubnamePending: mutate.isPending,
+    isAcceptSubnamePending: mutate.isPending,
   };
 };

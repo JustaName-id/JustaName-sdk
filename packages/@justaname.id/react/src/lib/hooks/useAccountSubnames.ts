@@ -42,26 +42,26 @@ export interface UseConnectedWalletSubnamesOptions {
 /**
  * Type definition for the list of subnames returned by the JustaName service.
  *
- * @typedef SubnameType
+ * @typedef SubnamesType
  * @type {SubnameGetAllByAddressResponse[]}
  */
-type SubnameType = SubnameGetAllByAddressResponse[];
+export type SubnamesType = SubnameGetAllByAddressResponse[];
 
 /**
  * The shape of the object returned by the `useAccountSubnames` hook.
  *
  * @typedef UseAccountSubnamesResult
  * @type {object}
- * @property {SubnameType} subnames - The list of subnames associated with the account.
- * @property {boolean} isLoading - Indicates if the query is currently loading.
- * @property {function} refetchSubnames - Function to manually refetch the subnames data.
+ * @property {SubnamesType} accountSubnames - The list of subnames associated with the account.
+ * @property {boolean} isAccountSubnamesPending - Indicates if the query is currently loading.
+ * @property {function} refetchAccountSubnames - Function to manually refetch the subnames data.
  */
 interface UseAccountSubnamesResult {
-  subnames: SubnameType;
-  isLoading: boolean;
-  refetchSubnames: (
+  accountSubnames: SubnamesType;
+  isAccountSubnamesPending: boolean;
+  refetchAccountSubnames: (
     options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<SubnameType | undefined, unknown>>;
+  ) => Promise<QueryObserverResult<SubnamesType | undefined, unknown>>;
 }
 
 /**
@@ -107,8 +107,8 @@ export const useAccountSubnames = (
   });
 
   return {
-    subnames: query.data ?? [],
-    isLoading: query.isLoading,
-    refetchSubnames: query.refetch,
+    accountSubnames: query.data ?? [],
+    isAccountSubnamesPending: query.isPending,
+    refetchAccountSubnames: query.refetch,
   };
 };

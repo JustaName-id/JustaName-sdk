@@ -1,8 +1,8 @@
 import React from 'react';
-import { useMountedAccount } from '../hooks/useMountedAccount';
-import { useSubnameSignature } from '../hooks/useSubnameSignature';
+import { useMountedAccount } from '../../hooks/useMountedAccount';
+import { useSubnameSignature } from '../../hooks/useSubnameSignature';
 
-export const SignatureOnMounted: React.FC = () =>
+export const Index: React.FC = () =>
 {
   const { address, isConnected } = useMountedAccount();
   const { getSignature } = useSubnameSignature()

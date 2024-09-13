@@ -1,5 +1,6 @@
-import { Configuration } from '../types';
-import { Siwe, Subnames, OffchainResolvers } from '../features';
+import { JustaNameConfig } from '../types';
+import { OffchainResolvers, SignIn, SubnameChallenge, Subnames } from '../features';
+import { InvalidConfigurationException } from '../errors/InvalidConfiguration.exception';
 
 /**
  * The main class for the JustaName SDK.
@@ -27,7 +28,7 @@ import { Siwe, Subnames, OffchainResolvers } from '../features';
  *  ```
  */
 export class JustaName {
-  siwe: Siwe;
+  siwe: SubnameChallenge;
 
   /**
    * The subnames feature.
@@ -45,34 +46,47 @@ export class JustaName {
    **/
   offchainResolvers: OffchainResolvers;
 
+  /**
+   * The signIn feature.
+   * @public
+   * @type {SignIn}
+   * @memberof JustaName
+   **/
+  signIn: SignIn;
+
   constructor(
-    siwe: Siwe,
+    siwe: SubnameChallenge,
     subnames: Subnames,
-    offchainResolvers: OffchainResolvers
+    offchainResolvers: OffchainResolvers,
+    signIn: SignIn
   ) {
     this.siwe = siwe;
     this.subnames = subnames;
     this.offchainResolvers = offchainResolvers;
+    this.signIn = signIn;
   }
 
   /**
    * Initializes the JustaName SDK.
-   * @param {Configuration} configuration - The configuration object.
+   * @param {JustaNameConfig} configuration - The configuration object.
    * @returns {JustaName} - A promise that resolves with the JustaName SDK.
-   * @throws {Error} - If the API key is not present or if the API key is invalid.
    * @public
    * @static
    */
-  static init(configuration: Configuration): JustaName {
-    if (configuration?.apiKey) {
-      this.checkApiKey(configuration.apiKey);
-      // await this.healthCheck(configuration.apiKey);
-    }
-
-    const subnames = !configuration.apiKey
-      ? new Subnames()
-      : new Subnames(configuration.apiKey);
-    return new JustaName(new Siwe(), subnames, new OffchainResolvers());
+  static init(configuration: JustaNameConfig): JustaName {
+    this.checkConfig(configuration);
+    return new JustaName(
+      new SubnameChallenge({
+        ...configuration.config,
+        ttl: configuration.config.subnameChallenge?.ttl || 120000
+      }),
+      new Subnames(configuration.providerUrl, configuration.ensDomain, configuration.config.chainId, configuration.apiKey),
+      new OffchainResolvers(),
+      new SignIn({
+        ...configuration.config,
+        ttl: configuration.config.signIn?.ttl || 120000
+      } , configuration.providerUrl)
+    );
   }
 
   /**
@@ -81,23 +95,32 @@ export class JustaName {
    * @private
    * @static
    */
-  private static checkApiKey(apiKey: string) {
-    if (!apiKey) {
-      throw new Error('API key is required');
-    }
-  }
+  private static checkConfig(configuration: JustaNameConfig): void {
+    const { providerUrl, config, ensDomain } = configuration;
 
-  // /**
-  //  * Checks the health of the API.
-  //  * @returns {Promise<void>} - A promise that resolves if the API is healthy.
-  //  * @throws {Error} - If the API key is invalid.
-  //  * @private
-  //  * @static
-  //  * @async
-  //  */
-  // private static async healthCheck(apiKey: string): Promise<void> {
-  //   await restCall('HEALTH_CHECK_ROUTE', 'GET', { }, {
-  //     xApiKey: apiKey
-  //   })
-  // }
+    if (!ensDomain) {
+      throw InvalidConfigurationException.ensDomainRequired();
+    }
+
+    if (!providerUrl) {
+      throw InvalidConfigurationException.providerUrlRequired();
+    }
+
+    if (!config) {
+      throw InvalidConfigurationException.configRequired();
+    }
+
+    if (!config.chainId) {
+      throw InvalidConfigurationException.chainIdRequired();
+    }
+
+    if (!config.domain) {
+      throw InvalidConfigurationException.domainRequired();
+    }
+
+    if (!config.origin) {
+      throw InvalidConfigurationException.originRequired();
+    }
+
+  }
 }

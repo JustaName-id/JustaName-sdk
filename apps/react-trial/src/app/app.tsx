@@ -1,8 +1,7 @@
-import { JustaNameProvider} from '@justaname.id/react'
+import { SIWJProvider, SIWJProviderConfig } from '@justaname.id/react-signin'
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultConfig,
-  RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import {
@@ -14,8 +13,22 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { Home } from './pages/Home';
+import { ChainId } from '@justaname.id/sdk';
 
 const queryClient = new QueryClient();
+
+const JustaNameConfig: SIWJProviderConfig = {
+  config: {
+    chainId: parseInt(import.meta.env.VITE_APP_CHAIN_ID) as ChainId,
+    origin: import.meta.env.VITE_APP_ORIGIN,
+    domain: import.meta.env.VITE_APP_DOMAIN,
+  },
+  backendUrl: import.meta.env.VITE_APP_BACKEND_URL,
+  providerUrl: import.meta.env.VITE_APP_PROVIDER_URL,
+  ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN,
+  openOnWalletConnect: true,
+  allowedSubnames:'all'
+}
 
 export function App() {
 
@@ -24,14 +37,13 @@ export function App() {
     projectId: 'YOUR_PROJECT_ID',
     chains: import.meta.env.VITE_APP_CHAIN_ID === 1 ? [mainnet] : [sepolia],
   });
+
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
-          <JustaNameProvider backendUrl={import.meta.env.VITE_APP_API_URL} chainId={import.meta.env.VITE_APP_CHAIN_ID}>
-            <Home />
-          </JustaNameProvider>
-        </RainbowKitProvider>
+          <SIWJProvider config={JustaNameConfig} >
+              <Home />
+          </SIWJProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

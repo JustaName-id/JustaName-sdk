@@ -20,13 +20,13 @@ export const buildIsSubnameAvailableKey = (
  */
 export interface UseIsSubnameAvailableOptions {
   username: string;
-  ensDomain: string;
+  ensDomain?: string;
   chainId?: ChainId;
 }
 
 export interface UseIsSubnameAvailableResult {
-  isAvailable: IsSubnameAvailableResponse | undefined;
-  isLoading: boolean;
+  isSubnameAvailable: IsSubnameAvailableResponse | undefined;
+  isSubnameAvailablePending: boolean;
 }
 
 /**
@@ -34,23 +34,25 @@ export interface UseIsSubnameAvailableResult {
  *
  * @param {UseIsSubnameAvailableOptions} props - The options including the username and ENS domain to check.
  * @returns {UseIsSubnameAvailableResult} An object containing the availability status of the subname (`isAvailable`)
- * and the loading state of the query (`isLoading`).
+ * and the loading state of the query (`isPending`).
  */
 export const useIsSubnameAvailable = (props: UseIsSubnameAvailableOptions): UseIsSubnameAvailableResult => {
-  const { justaname, chainId } = useJustaName();
+  const { justaname, chainId, ensDomain: defaultEnsDomain } = useJustaName();
   const { username, ensDomain } = props;
+  const ensDomainToUse = ensDomain ? ensDomain : defaultEnsDomain;
+  const chainIdToUse = props?.chainId ? props?.chainId : chainId;
 
   const query = useQuery({
-    queryKey: buildIsSubnameAvailableKey(username, ensDomain, props?.chainId ? props?.chainId : chainId),
+    queryKey: buildIsSubnameAvailableKey(username, ensDomainToUse, chainIdToUse),
     queryFn: () => justaname?.subnames.checkSubnameAvailable({
-        subname: username + '.' + ensDomain,
-        chainId: props?.chainId ? props?.chainId : chainId,
+        subname: username + '.' + ensDomainToUse,
+        chainId: chainIdToUse,
       }),
     enabled: Boolean(username) && Boolean(justaname) && Boolean(chainId),
   })
 
   return {
-    isAvailable: query.data,
-    isLoading: query.isLoading,
+    isSubnameAvailable: query.data,
+    isSubnameAvailablePending: query.isPending,
   }
 }
