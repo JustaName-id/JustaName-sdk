@@ -19,19 +19,13 @@
     },
     "build": {
       "executor": "@nx/rollup:rollup",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "packages/@justaname.id/react-ui/dist",
         "tsConfig": "packages/@justaname.id/react-ui/tsconfig.lib.json",
         "project": "packages/@justaname.id/react-ui/package.json",
         "entryFile": "packages/@justaname.id/react-ui/src/index.ts",
-        "external": [
-          "react",
-          "react-dom",
-          "react/jsx-runtime"
-        ],
+        "external": ["react", "react-dom", "react/jsx-runtime"],
         "generateExportsField": true,
         "compiler": "swc",
         "format": ["esm"],
@@ -52,9 +46,7 @@
           "vendorChunk": false
         }
       },
-      "dependsOn": [
-        "lint"
-      ]
+      "dependsOn": ["lint"]
     },
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -62,9 +54,31 @@
       "options": {
         "fix": true,
         "lintFilePatterns": [
-          "packages/@justaname.id/react/**/*.{ts,tsx,js,jsx}",
-          "packages/@justaname.id/react/package.json"
+          "packages/@justaname.id/react-ui/**/*.{ts,tsx,js,jsx}",
+          "packages/@justaname.id/react-ui/package.json"
         ]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs @justaname.id/react-ui {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "packages/@justaname.id/react-ui/dist"
+      },
+      "dependsOn": ["^build", "build"]
+    },
+    "release:package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx semantic-release --debug --extends=./packages/@justaname.id/react-ui/release.config.js"
+      }
+    },
+    "update-deps": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx rjp ./packages/@justaname.id/react-ui/dist/package.json $PACKAGE_NAME $VERSION"
       }
     }
   }
