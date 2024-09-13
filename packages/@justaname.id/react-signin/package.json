@@ -11,5 +11,9 @@
   },
   "module": "./dist/index.esm.js",
   "main": "./dist/index.esm.js",
-  "types": "./dist/index.esm.d.ts"
+  "types": "./dist/index.esm.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JustaName-id/JustaName-sdk"
+  }
 }
