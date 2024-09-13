@@ -1,6 +1,6 @@
 {
   "name": "@justaname.id/react-signin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
     "@justaname.id/react": "0.3.68",
     "@justaname.id/sdk": "0.2.65"
