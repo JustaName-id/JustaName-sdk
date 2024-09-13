@@ -142,6 +142,9 @@
     },
     "projectsRelationship": "independent",
     "projects": [
+      "packages/@justaname.id/sdk",
+      "packages/@justaname.id/react",
+      "packages/create-justaname-app",
       "packages/@justaname.id/react-ui",
       "packages/@justaname.id/react-signin"
     ]
