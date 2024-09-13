@@ -7,25 +7,18 @@
   "targets": {
     "build": {
       "executor": "@nx/rollup:rollup",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
         "outputPath": "packages/@justaname.id/react/dist",
         "tsConfig": "packages/@justaname.id/react/tsconfig.lib.json",
         "project": "packages/@justaname.id/react/package.json",
         "entryFile": "packages/@justaname.id/react/src/index.ts",
-        "external": [
-          "react",
-          "react-dom",
-          "react/jsx-runtime"
-        ],
+        "external": ["react", "react-dom", "react/jsx-runtime"],
         "rollupConfig": "packages/@justaname.id/react/rollup.config.cjs",
         "generateExportsField": true,
         "compiler": "swc",
-        "format": [
-          "esm"
-        ],
+        "format": ["esm"],
         "assets": [
           {
             "glob": "packages/@justaname.id/react/README.md",
@@ -46,19 +39,14 @@
       "dependsOn": [
         "lint",
         {
-          "projects": [
-            "@justaname.id/sdk"
-          ],
-          "target": "build",
-          "configuration": "production"
+          "projects": ["@justaname.id/sdk"],
+          "target": "build"
         }
       ]
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
         "fix": true,
         "lintFilePatterns": [
@@ -69,19 +57,13 @@
     },
     "publish": {
       "command": "node tools/scripts/publish.mjs @justaname.id/react {args.ver} {args.tag}",
-      "dependsOn": [
-        "build"
-      ]
+      "dependsOn": ["build"]
     },
     "nx-release-publish": {
       "options": {
         "packageRoot": "packages/@justaname.id/react/dist"
       },
-      "dependsOn": [
-        "^build",
-        "build",
-        "^@justaname.id/sdk:build"
-      ]
+      "dependsOn": ["^build", "build", "^@justaname.id/sdk:build"]
     },
     "release:package": {
       "executor": "nx:run-commands",

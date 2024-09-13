@@ -53,9 +53,6 @@
       "cache": true
     }
   },
-  "affected": {
-    "defaultBase": "main"
-  },
   "tasksRunnerOptions": {
     "default": {
       "options": {
@@ -145,11 +142,9 @@
     },
     "projectsRelationship": "independent",
     "projects": [
-      "packages/@justaname.id/react",
-      "packages/@justaname.id/sdk",
       "packages/@justaname.id/react-ui",
-      "packages/@justaname.id/react-signin",
-      "packages/create-justaname-app"
+      "packages/@justaname.id/react-signin"
     ]
-  }
+  },
+  "defaultBase": "main"
 }
