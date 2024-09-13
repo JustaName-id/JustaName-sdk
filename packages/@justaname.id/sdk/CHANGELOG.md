@@ -1,3 +1,31 @@
+## 0.2.65 (2024-09-12)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.64 (2024-09-09)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.63 (2024-09-09)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.62 (2024-09-06)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.61 (2024-08-26)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.60 (2024-08-26)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.59 (2024-08-26)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
 ## 0.2.58 (2024-08-23)
 
 This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
