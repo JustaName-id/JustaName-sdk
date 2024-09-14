@@ -1,3 +1,7 @@
+## 0.3.57 (2024-09-14)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
 ## 0.3.56 (2024-08-26)
 
 This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
