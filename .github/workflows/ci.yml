@@ -29,5 +29,14 @@ jobs:
       - run: yarn install
       - run: npx nx run-many --target=install --all -parallel
       - run: npx nx affected -t lint
-      - run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
+      - name: Run Tests
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          PROVIDER_URL: ${{ secrets.PROVIDER_URL }}
+          VALID_SUBNAME: ${{ secrets.VALID_SUBNAME }}
+          JUSTANAME_ENVIRONMENT: ${{ secrets.JUSTANAME_ENVIRONMENT }}
+          JUSTANAME_TEST_API_KEY: ${{ secrets.JUSTANAME_TEST_API_KEY }}
+          JUSTANAME_DEV: ${{ secrets.JUSTANAME_DEV }}
+          ENS_DOMAIN: ${{ secrets.ENS_DOMAIN }}
+        run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
       - run: npx nx affected -t build
