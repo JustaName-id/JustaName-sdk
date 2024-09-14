@@ -28144,7 +28144,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-environment-node@npm:^29.4.1, jest-environment-node@npm:^29.6.3, jest-environment-node@npm:^29.7.0":
+"jest-environment-node@npm:^29.6.3, jest-environment-node@npm:^29.7.0":
   version: 29.7.0
   resolution: "jest-environment-node@npm:29.7.0"
   dependencies:
@@ -29629,7 +29629,7 @@ __metadata:
     inquirer: "npm:^8.0.0"
     jest: "npm:29.7.0"
     jest-environment-jsdom: "npm:29.7.0"
-    jest-environment-node: "npm:^29.4.1"
+    jest-environment-node: "npm:^29.7.0"
     jest-expo: "npm:~50.0.1"
     jsdom: "npm:~22.1.0"
     lucide-react: "npm:^0.436.0"

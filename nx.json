@@ -71,7 +71,8 @@
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
-      }
+      },
+      "exclude": ["apps/express-app-e2e/**/*"]
     },
     {
       "plugin": "@nx/webpack/plugin",
