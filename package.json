@@ -106,6 +106,7 @@
   ],
   "packageManager": "yarn@4.1.1",
   "dependencies": {
+    "@docusaurus/eslint-plugin": "^3.5.2",
     "@ensdomains/address-encoder": "^1.1.2",
     "@inquirer/prompts": "^4.3.0",
     "@justaname.id/react": "0.3.68",
