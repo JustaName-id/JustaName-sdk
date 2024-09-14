@@ -78,7 +78,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
-    "jest-environment-node": "^29.4.1",
+    "jest-environment-node": "^29.7.0",
     "jest-expo": "~50.0.1",
     "jsdom": "~22.1.0",
     "nx": "19.7.3",
@@ -106,6 +106,7 @@
   ],
   "packageManager": "yarn@4.1.1",
   "dependencies": {
+    "@docusaurus/eslint-plugin": "^3.5.2",
     "@ensdomains/address-encoder": "^1.1.2",
     "@inquirer/prompts": "^4.3.0",
     "@justaname.id/react": "0.3.68",

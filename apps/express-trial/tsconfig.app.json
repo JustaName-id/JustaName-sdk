@@ -1,9 +1,10 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
     "types": ["node", "express"],
+    "baseUrl": ".",
+    "esModuleInterop": true,
     "paths": {
       "@justaname.id/sdk": ["packages/@justaname.id/sdk/dist"]
     }
