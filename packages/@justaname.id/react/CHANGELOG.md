@@ -1,3 +1,29 @@
+## 0.3.69 (2024-09-14)
+
+
+### 🚀 Features
+
+- signin widget and privy example ([3f9bc14](https://github.com/JustaName-id/JustaName-sdk/commit/3f9bc14))
+
+- update loading flags in hooks naming convention ([70f70a4](https://github.com/JustaName-id/JustaName-sdk/commit/70f70a4))
+
+- update subname ([12755c4](https://github.com/JustaName-id/JustaName-sdk/commit/12755c4))
+
+
+### 🩹 Fixes
+
+- signIn feature ([fbaf873](https://github.com/JustaName-id/JustaName-sdk/commit/fbaf873))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.66
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.68 (2024-09-12)
 
 This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.

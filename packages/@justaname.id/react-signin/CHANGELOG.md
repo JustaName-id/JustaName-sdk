@@ -1,3 +1,23 @@
+## 0.0.2 (2024-09-14)
+
+
+### 🚀 Features
+
+- published react-signin and react-ui ([1d90025](https://github.com/JustaName-id/JustaName-sdk/commit/1d90025))
+
+- added git repository for new packages ([e40c722](https://github.com/JustaName-id/JustaName-sdk/commit/e40c722))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.66
+- Updated @justaname.id/react to 0.3.69
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.1 (2024-09-13)
 
 
