@@ -1,3 +1,11 @@
+## 0.0.10 (2024-09-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.74
+- Updated @justaname.id/react to 0.3.77
+
 ## 0.0.9 (2024-09-15)
 
 
