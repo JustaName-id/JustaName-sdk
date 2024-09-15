@@ -6426,8 +6426,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justaname.id/react-signin@workspace:packages/@justaname.id/react-signin"
   dependencies:
-    "@justaname.id/react": "npm:0.3.78"
-    "@justaname.id/sdk": "npm:0.2.75"
+    "@justaname.id/react": "npm:0.3.79"
+    "@justaname.id/sdk": "npm:0.2.76"
   languageName: unknown
   linkType: soft
 
@@ -6456,11 +6456,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.78, @justaname.id/react@npm:^0.3.68, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.79, @justaname.id/react@npm:^0.3.68, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.75"
+    "@justaname.id/sdk": "npm:0.2.76"
     "@tanstack/react-query": "npm:^5.28.4"
     jest: "npm:^29.4.1"
   peerDependencies:
@@ -6497,7 +6497,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.2.75, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.2.76, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
@@ -6505,7 +6505,6 @@ __metadata:
     jest: "npm:^29.4.1"
     qs: "npm:^6.12.0"
   peerDependencies:
-    dotenv: 16.3.2
     ethers: ^6.11.1
     siwe: ^2.3.2
   languageName: unknown
