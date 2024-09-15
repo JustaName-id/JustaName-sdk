@@ -6426,8 +6426,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justaname.id/react-signin@workspace:packages/@justaname.id/react-signin"
   dependencies:
-    "@justaname.id/react": "npm:0.3.75"
-    "@justaname.id/sdk": "npm:0.2.72"
+    "@justaname.id/react": "npm:0.3.76"
+    "@justaname.id/sdk": "npm:0.2.73"
   languageName: unknown
   linkType: soft
 
@@ -6456,11 +6456,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.75, @justaname.id/react@npm:^0.3.68, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.76, @justaname.id/react@npm:^0.3.68, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.72"
+    "@justaname.id/sdk": "npm:0.2.73"
     "@tanstack/react-query": "npm:^5.28.4"
     jest: "npm:^29.4.1"
   peerDependencies:
@@ -6483,7 +6483,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.2.72, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.2.73, @justaname.id/sdk@workspace:^, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
@@ -29551,7 +29551,7 @@ __metadata:
     "@ensdomains/address-encoder": "npm:^1.1.2"
     "@inquirer/prompts": "npm:^4.3.0"
     "@justaname.id/react": "npm:0.3.68"
-    "@justaname.id/sdk": "npm:0.2.65"
+    "@justaname.id/sdk": "workspace:^"
     "@nx/cypress": "npm:19.7.3"
     "@nx/eslint": "npm:19.7.3"
     "@nx/eslint-plugin": "npm:19.7.3"
