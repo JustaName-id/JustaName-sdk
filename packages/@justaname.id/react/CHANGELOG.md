@@ -1,3 +1,20 @@
+## 0.3.81 (2024-09-16)
+
+
+### 🩹 Fixes
+
+- trial action ([d6c9afd](https://github.com/JustaName-id/JustaName-sdk/commit/d6c9afd))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.78
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.80 (2024-09-16)
 
 
