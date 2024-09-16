@@ -45,6 +45,8 @@ describe('justaname', () => {
     const signature = await signer.signMessage(challenge);
     const response = await justaname.signIn.signIn(challenge, signature);
 
+    console.log(challenge)
+    console.log(signature)
     expect(response).toBeDefined();
 
   })

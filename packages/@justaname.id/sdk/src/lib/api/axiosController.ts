@@ -1,23 +1,43 @@
 import axios, { AxiosError, AxiosPromise } from 'axios';
 import { BaseResponse } from '../types';
-
 /**
  * The base URL of JustaName API.
  */
 
-export const BASE_URL =
-  process?.env['JUSTANAME_ENVIRONMENT'] === 'development' ||
-  process?.env['NEXT_PUBLIC_JUSTANAME_ENVIRONMENT'] === 'development' ||
-  process?.env['VITE_JUSTANAME_ENVIRONMENT'] === 'development'
-    ?
-  'https://api-staging.justaname.id'
-  : 'https://api.justaname.id';
+export let BASE_URL = 'https://api.justaname.id';
 
+declare global {
+  interface Window {
+    __JUSTANAME_ENV__?: string;
+  }
+}
+
+function loadEnv() {
+  let isDevelopment = false;
+
+  if (typeof process !== 'undefined' && process.env) {
+    try {
+      isDevelopment = process.env['JUSTANAME_ENVIRONMENT'] === 'development' ||
+        process.env['NEXT_PUBLIC_JUSTANAME_ENVIRONMENT'] === 'development' ||
+        process.env['VITE_JUSTANAME_ENVIRONMENT'] === 'development';
+    } catch (e) {
+      console.warn('Unable to load dotenv', e);
+    }
+  }
+
+  BASE_URL = isDevelopment ? 'https://api-staging.justaname.id' : 'https://api.justaname.id';
+}
+
+loadEnv();
+
+export function getBaseUrl() {
+  return BASE_URL;
+}
 /**
  * The instance of axios with the base URL of JustaName API.
  */
 export const justANameInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: getBaseUrl(),
 });
 
 

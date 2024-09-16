@@ -18,6 +18,21 @@
       }
     },
     "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx buildProject @justaname.id/react-signin"
+          },
+          {
+            "command": "node update-package-json.js"
+          }
+        ],
+        "cwd": "packages/@justaname.id/react-signin",
+        "parallel": false
+      }
+    },
+    "buildProject": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",

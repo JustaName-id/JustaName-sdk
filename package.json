@@ -110,7 +110,7 @@
     "@ensdomains/address-encoder": "^1.1.2",
     "@inquirer/prompts": "^4.3.0",
     "@justaname.id/react": "0.3.68",
-    "@justaname.id/sdk": "0.2.65",
+    "@justaname.id/sdk": "0.2.74",
     "@privy-io/react-auth": "^1.82.0",
     "@privy-io/wagmi": "^0.2.12",
     "@radix-ui/react-dialog": "^1.1.1",
