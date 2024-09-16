@@ -86,7 +86,7 @@ export function App() {
 
   return (
     <PrivyProvider
-      appId={process.env.VITE_APP_PRIVY_APP_ID || ''}
+      appId={import.meta.env.VITE_APP_PRIVY_APP_ID || ''}
       config={{
         embeddedWallets: {
           createOnLogin: 'all-users',
@@ -96,11 +96,11 @@ export function App() {
       }}
     >
       <QueryClientProvider client={queryClient}>
-    <WagmiProvider config={config}>
-        <SIWJProvider config={JustaNameConfig} >
-          <Connect />
-        </SIWJProvider>
-    </WagmiProvider>
+        <WagmiProvider config={config}>
+            <SIWJProvider config={JustaNameConfig} >
+              <Connect />
+            </SIWJProvider>
+        </WagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>
   );

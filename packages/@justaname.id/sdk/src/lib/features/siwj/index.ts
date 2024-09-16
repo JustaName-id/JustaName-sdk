@@ -104,7 +104,9 @@ export class Siwj extends SiweMessage {
   private async verifySubnameResolves(subname:string){
     const [resolverAddress,resolvers] = await Promise.all([this.provider.getResolver(subname),this.offchainResolver.getAllOffchainResolvers()]);
 
+    console.log(resolverAddress, resolvers)
     const currentOffchainResolver = resolvers.find(resolver => resolver.chainId === this.chainId)
+
 
     if(!currentOffchainResolver){
       throw InvalidSubnameException.chainNotSupported(
@@ -117,6 +119,8 @@ export class Siwj extends SiweMessage {
         subname
       )
      }
+
+    console.log(currentOffchainResolver.resolverAddress, resolverAddress?.address)
 
     if(currentOffchainResolver.resolverAddress !== resolverAddress?.address){
       throw InvalidSubnameException.notOnJustanameResolver(

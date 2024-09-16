@@ -6,6 +6,21 @@
   "tags": [],
   "targets": {
     "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx buildProject @justaname.id/react"
+          },
+          {
+            "command": "node update-package-json.js"
+          }
+        ],
+        "cwd": "packages/@justaname.id/react",
+        "parallel": false
+      }
+    },
+    "buildProject": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",

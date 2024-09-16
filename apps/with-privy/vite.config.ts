@@ -16,9 +16,7 @@ export default defineConfig({
     port: 4300,
     host: 'localhost',
   },
-  define: {
-    'process.env': process.env,
-  },
+
   plugins: [react(), nxViteTsPaths()],
 
   // Uncomment this if you are using workers.
