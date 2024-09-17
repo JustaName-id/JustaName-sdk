@@ -6426,8 +6426,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justaname.id/react-signin@workspace:packages/@justaname.id/react-signin"
   dependencies:
-    "@justaname.id/react": "npm:0.3.81"
-    "@justaname.id/sdk": "npm:0.2.78"
+    "@justaname.id/react": "npm:0.3.80"
+    "@justaname.id/sdk": "npm:0.2.77"
   languageName: unknown
   linkType: soft
 
@@ -6456,27 +6456,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.79":
-  version: 0.3.79
-  resolution: "@justaname.id/react@npm:0.3.79"
-  dependencies:
-    "@justaname.id/sdk": "npm:0.2.76"
-    "@tanstack/react-query": "npm:^5.28.4"
-  peerDependencies:
-    "@tanstack/query-core": ">=5.0.0"
-    react: ">=17"
-    react-dom: ">=17"
-    viem: 2.x
-    wagmi: 2.x
-  checksum: 10c0/7d009d2d69f09863f0411fe322ecaf83068e9cf1f71ce05c1b76f0c8aec9bf067bbd69f4d5f5b651bea6b803f497718bf118d8b2a68b7a473ba064396c73cb80
-  languageName: node
-  linkType: hard
-
-"@justaname.id/react@npm:0.3.81, @justaname.id/react@npm:^0.3.68, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.80, @justaname.id/react@npm:^0.3.68, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.78"
+    "@justaname.id/sdk": "npm:0.2.77"
     "@tanstack/react-query": "npm:^5.28.4"
     jest: "npm:^29.4.1"
   peerDependencies:
@@ -6499,20 +6483,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.2.76":
-  version: 0.2.76
-  resolution: "@justaname.id/sdk@npm:0.2.76"
-  dependencies:
-    axios: "npm:^1.6.0"
-    qs: "npm:^6.12.0"
-  peerDependencies:
-    ethers: ^6.11.1
-    siwe: ^2.3.2
-  checksum: 10c0/8520f48cd9a5581a50360b8ba909c146e7f486508275872ca947527c42f01650f1079757d51e6836601810645285f01bc4b716688794e8682bddfcfeaa7b66f1
-  languageName: node
-  linkType: hard
-
-"@justaname.id/sdk@npm:0.2.78, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.2.77, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
@@ -29578,8 +29549,8 @@ __metadata:
     "@docusaurus/eslint-plugin": "npm:^3.5.2"
     "@ensdomains/address-encoder": "npm:^1.1.2"
     "@inquirer/prompts": "npm:^4.3.0"
-    "@justaname.id/react": "npm:0.3.79"
-    "@justaname.id/sdk": "npm:0.2.76"
+    "@justaname.id/react": "npm:0.3.80"
+    "@justaname.id/sdk": "npm:0.2.77"
     "@nx/cypress": "npm:19.7.3"
     "@nx/eslint": "npm:19.7.3"
     "@nx/eslint-plugin": "npm:19.7.3"
