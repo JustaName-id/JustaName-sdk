@@ -1,6 +1,6 @@
 {
   "name": "create-justaname-app",
-  "version": "0.3.67",
+  "version": "0.3.66",
   "type": "module",
   "bin": "index.esm.js",
   "dependencies": {
@@ -16,6 +16,9 @@
   "exports": {
     "./package.json": "./package.json",
     ".": "./index.esm.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "module": "./index.esm.js",
   "main": "./index.esm.js",
