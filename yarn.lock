@@ -6426,8 +6426,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justaname.id/react-signin@workspace:packages/@justaname.id/react-signin"
   dependencies:
-    "@justaname.id/react": "npm:0.3.80"
-    "@justaname.id/sdk": "npm:0.2.77"
+    "@justaname.id/react": "npm:0.3.81"
+    "@justaname.id/sdk": "npm:0.2.78"
   languageName: unknown
   linkType: soft
 
@@ -6456,11 +6456,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.80, @justaname.id/react@npm:^0.3.68, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.80":
+  version: 0.3.80
+  resolution: "@justaname.id/react@npm:0.3.80"
+  dependencies:
+    "@justaname.id/sdk": "npm:0.2.77"
+    "@tanstack/react-query": "npm:^5.28.4"
+  peerDependencies:
+    "@tanstack/query-core": ">=5.0.0"
+    react: ">=17"
+    react-dom: ">=17"
+    viem: 2.x
+    wagmi: 2.x
+  checksum: 10c0/9910ca1813f0a5779bc0728663ae427830d58c407c6b3d8d5dcc8e5fabb55d60f9e08792a49f1f83ded0560691b870e235c0b841a4b9776a72b8b7e9be66b13a
+  languageName: node
+  linkType: hard
+
+"@justaname.id/react@npm:0.3.81, @justaname.id/react@npm:^0.3.68, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
-    "@justaname.id/sdk": "npm:0.2.77"
+    "@justaname.id/sdk": "npm:0.2.78"
     "@tanstack/react-query": "npm:^5.28.4"
     jest: "npm:^29.4.1"
   peerDependencies:
@@ -6483,7 +6499,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.2.77, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.2.77":
+  version: 0.2.77
+  resolution: "@justaname.id/sdk@npm:0.2.77"
+  dependencies:
+    axios: "npm:^1.6.0"
+    qs: "npm:^6.12.0"
+  peerDependencies:
+    ethers: ^6.11.1
+    siwe: ^2.3.2
+  checksum: 10c0/29f940aa28bd67084c6336e30987d13546025b2f6a1d52424e12dd209b325c68c8b6b935fe780466929569d1fc962179e27fc73f60cafdae3b88a24335fe0ffb
+  languageName: node
+  linkType: hard
+
+"@justaname.id/sdk@npm:0.2.78, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
