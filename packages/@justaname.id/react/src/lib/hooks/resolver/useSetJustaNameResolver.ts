@@ -9,8 +9,8 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from 'wagmi';
-import { useOffchainResolvers } from './useOffchainResolvers';
-import { useMountedAccount } from './useMountedAccount';
+import { useOffchainResolvers } from '../offchainResolver/useOffchainResolvers';
+import { useMountedAccount } from '../account/useMountedAccount';
 
 const REGISTRY_ADDRESS = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e';
 const SEPOLIA_REGISTRAR_ADDRESS = '0xA0a1AbcDAe1a2a4A2EF8e9113Ff0e02DD81DC0C6';

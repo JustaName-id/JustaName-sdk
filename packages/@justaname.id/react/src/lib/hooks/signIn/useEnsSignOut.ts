@@ -2,23 +2,23 @@
 
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
-import { useSubnameSession } from './useEnsAuth';
+import { useEnsAuth } from './useEnsAuth';
 
-export interface UseSubnameSignOutResult {
+export interface UseEnsSignOutResult {
   signOut: UseMutateAsyncFunction<void, Error, void, unknown>,
   isSignOutPending: boolean;
 }
 
 /**
- * Custom hook to request a challenge for a subname and obtain a signature proving ownership of an address.
+ * Custom hook to request a challenge for a ens and obtain a signature proving ownership of an address.
  *
- * @returns {UseSubnameSignOutResult} An object containing the function to initiate the signing process (`subnameSignature`)
- * and a boolean indicating if the signature operation is pending (`subnameSignaturePending`).
+ * @returns {UseEnsSignOutResult} An object containing the function to initiate the signing process (`ensSignature`)
+ * and a boolean indicating if the signature operation is pending (`ensSignaturePending`).
  */
 
-export const useSubnameSignOut = (): UseSubnameSignOutResult => {
+export const useEnsSignOut = (): UseEnsSignOutResult => {
   const { backendUrl, routes} = useJustaName();
-  const { refreshSubnameSession } = useSubnameSession()
+  const { refreshEnsAuth } = useEnsAuth()
   const mutation = useMutation({
     mutationFn: async () => {
 
@@ -26,7 +26,7 @@ export const useSubnameSignOut = (): UseSubnameSignOutResult => {
         credentials: 'include',
       });
 
-      refreshSubnameSession()
+      refreshEnsAuth()
     },
   });
 

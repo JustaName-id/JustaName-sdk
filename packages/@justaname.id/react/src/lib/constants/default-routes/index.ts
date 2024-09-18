@@ -1,5 +1,6 @@
 /**
  * Defines the default routes for interacting with the JustaName API.
+ *
  */
 export const defaultRoutes = {
   addSubnameRoute: '/api/subnames/add',
@@ -7,5 +8,5 @@ export const defaultRoutes = {
   signinRoute: '/api/signin',
   signinNonceRoute: '/api/signin/nonce',
   signoutRoute: '/api/signout',
-  sessionRoute: '/api/session',
-};
+  currentEnsRoute: '/api/current',
+} as const;
