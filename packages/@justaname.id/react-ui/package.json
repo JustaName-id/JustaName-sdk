@@ -1,6 +1,6 @@
 {
   "name": "@justaname.id/react-ui",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "peerDependencies": {
     "react": ">=17",
     "react-dom": ">=17"
@@ -12,6 +12,9 @@
   "module": "./dist/index.esm.js",
   "main": "./dist/index.esm.js",
   "types": "./dist/index.esm.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/JustaName-id/JustaName-sdk"
