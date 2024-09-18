@@ -1,6 +1,6 @@
 {
   "name": "@justaname.id/siwens",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "dependencies": {
     "ethers": "^6.11.1",
     "siwe": "^2.3.2"
@@ -22,5 +22,11 @@
   "module": "./dist/index.esm.js",
   "main": "./dist/index.cjs.js",
   "typings": "./dist/index.d.ts",
-  "private": true
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JustaName-id/JustaName-sdk"
+  }
 }
