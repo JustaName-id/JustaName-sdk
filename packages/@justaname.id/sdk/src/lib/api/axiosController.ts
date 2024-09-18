@@ -6,12 +6,6 @@ import { BaseResponse } from '../types';
 
 export let BASE_URL = 'https://api.justaname.id';
 
-declare global {
-  interface Window {
-    __JUSTANAME_ENV__?: string;
-  }
-}
-
 function loadEnv() {
   let isDevelopment = false;
 
@@ -19,7 +13,8 @@ function loadEnv() {
     try {
       isDevelopment = process.env['JUSTANAME_ENVIRONMENT'] === 'development' ||
         process.env['NEXT_PUBLIC_JUSTANAME_ENVIRONMENT'] === 'development' ||
-        process.env['VITE_JUSTANAME_ENVIRONMENT'] === 'development';
+        process.env['VITE_JUSTANAME_ENVIRONMENT'] === 'development' ||
+        process.env['NODE_ENV'] === 'test';
     } catch (e) {
       console.warn('Unable to load dotenv', e);
     }

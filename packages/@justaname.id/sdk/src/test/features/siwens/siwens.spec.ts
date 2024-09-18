@@ -1,9 +1,8 @@
 import { ethers } from 'ethers';
 import dotenv from 'dotenv';
-import Siwj from '../../../lib/features/siwens';
-import { InvalidSubnameException, InvalidTimeException } from '../../../lib/errors';
+import SIWENS from '../../../lib/features/siwens';
+import { InvalidENSException, InvalidTimeException } from '../../../lib/errors';
 import { extractDataFromStatement } from '@justaname.id/sdk';
-
 dotenv.config();
 
 const pk = process.env['PRIVATE_KEY'] as string;
@@ -18,15 +17,15 @@ const NONCE = '1234567890';
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 const TTL_LESS_THAN_ZERO = -1;
 const TTL_GREATER_THAN_MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER + 1;
-const INVALID_SUBNAME = 'justaname';
-const VALID_SUBNAME = process.env['VALID_SUBNAME'] as string;
-describe('Siwj', () => {
+const INVALID_ENS = 'justaname';
+const VALID_ENS = process.env['VALID_ENS'] as string;
+describe('SIWENS', () => {
 
-  let siwj: Siwj;
+  let siwens: SIWENS;
   let message: string;
   beforeEach(() => {
 
-    siwj = new Siwj({
+    siwens = new SIWENS({
       params: {
         domain: DOMAIN,
         address: ADDRESS,
@@ -35,26 +34,26 @@ describe('Siwj', () => {
         nonce: NONCE,
         chainId: CHAIN_ID,
         ttl: VALID_TTL,
-        subname: VALID_SUBNAME
+        ens: VALID_ENS
       },
       providerUrl: PROVIDER_URL
     });
 
-    message = siwj.prepareMessage();
+    message = siwens.prepareMessage();
   });
 
   it('should create an instance', () => {
-    expect(siwj).toBeTruthy();
+    expect(siwens).toBeTruthy();
   });
 
   it('should create the message', () => {
-    expect(siwj.prepareMessage()).toBeTruthy();
+    expect(siwens.prepareMessage()).toBeTruthy();
   });
 
   
   it('should throw an error when ttl is less than zero', () => {
     expect(() => {
-      new Siwj({
+      new SIWENS({
         params: {
           domain: DOMAIN,
           address: ADDRESS,
@@ -63,7 +62,7 @@ describe('Siwj', () => {
           nonce: NONCE,
           chainId: CHAIN_ID,
           ttl: TTL_LESS_THAN_ZERO,
-          subname: VALID_SUBNAME
+          ens: VALID_ENS
         }
       });
     }).toThrow(InvalidTimeException.timeValueLessThanZero().message);
@@ -72,7 +71,7 @@ describe('Siwj', () => {
 
   it('should throw an error when ttl exceeds max safe integer', () => {
     expect(() => {
-      new Siwj({
+      new SIWENS({
         params: {
           domain: DOMAIN,
           address: ADDRESS,
@@ -81,15 +80,15 @@ describe('Siwj', () => {
           nonce: NONCE,
           chainId: CHAIN_ID,
           ttl: TTL_GREATER_THAN_MAX_SAFE_INTEGER,
-          subname: VALID_SUBNAME
+          ens: VALID_ENS
         }
       });
     }).toThrow(InvalidTimeException.timeExceedsMaxSafeInteger().message);
   });
 
-  it('should throw an error when subname is invalid', () => {
+  it('should throw an error when ens is invalid', () => {
     expect(() => {
-      new Siwj({
+      new SIWENS({
         params: {
           domain: DOMAIN,
           address: ADDRESS,
@@ -98,40 +97,42 @@ describe('Siwj', () => {
           nonce: NONCE,
           chainId: CHAIN_ID,
           ttl: VALID_TTL,
-          subname: INVALID_SUBNAME
+          ens: INVALID_ENS
         }
       });
-    }).toThrow(InvalidSubnameException.invalidSubnameFormat().message);
+    }).toThrow(InvalidENSException.invalidENSFormat().message);
   });
 
-  it('should extract subname from statement', () => {
-    if (!siwj.statement) {
+  it('should extract ens from statement', () => {
+    if (!siwens.statement) {
       throw new Error('Statement is empty');
     }
-    expect(extractDataFromStatement(siwj.statement)).toEqual({
+    expect(extractDataFromStatement(siwens.statement)).toEqual({
       domain: DOMAIN,
-      subname: VALID_SUBNAME,
+      ens: VALID_ENS,
     });
   });
 
-  it('should generate expiration from ttl', () => {
-    expect(Siwj.generateExpirationFromTtl(VALID_TTL)).toBeTruthy();
+  it('should generate issued and expiration time', () => {
+    const ttl = 1000 * 60 * 60 * 24;
+    const { issuedAt, expirationTime } = SIWENS.generateIssuedAndExpirationTime(ttl);
+    expect(new Date(expirationTime).getTime() - new Date(issuedAt).getTime()).toBe(ttl);
   });
 
   it('should generate a different nonce each time', () => {
-    const nonce1 = Siwj.generateNonce();
-    const nonce2 = Siwj.generateNonce();
+    const nonce1 = SIWENS.generateNonce();
+    const nonce2 = SIWENS.generateNonce();
     expect(nonce1).not.toEqual(nonce2);
   })
 
   it('should generate a valid signature', async () => {
-    const signature = await signer.signMessage(siwj.prepareMessage());
+    const signature = await signer.signMessage(siwens.prepareMessage());
     expect(signature).toBeTruthy();
   });
 
   it('should verify a valid signature', async () => {
     const signature = await signer.signMessage(message);
-    const address = await new Siwj({
+    const address = await new SIWENS({
       params:message,
       providerUrl: PROVIDER_URL
     }).verify({
@@ -140,37 +141,37 @@ describe('Siwj', () => {
     expect(address.success).toBeTruthy();
   },60000)
 
-  it('should return subname in the response', async () => {
+  it('should return ens in the response', async () => {
     const signature = await signer.signMessage(message);
-    const address = await new Siwj({
+    const address = await new SIWENS({
       params:message,
       providerUrl: PROVIDER_URL
     }).verify({
       signature
     });
-    expect(address.subname).toBe(VALID_SUBNAME);
+    expect(address.ens).toBe(VALID_ENS);
   },60000)
 
-  it('should return subname in the failed response', async () => {
+  it('should return ens in the failed response', async () => {
     const signer2 = ethers.Wallet.createRandom();
     const signature = await signer2.signMessage(message);
     try {
-        await new Siwj({
+        await new SIWENS({
         params: message,
         providerUrl: PROVIDER_URL
       }).verify({
         signature: signature
       });
     } catch (e) {
-      expect(e.subname).toBe(VALID_SUBNAME);
+      expect(e.ens).toBe(VALID_ENS);
       return;
     }
     throw new Error('Should have thrown an error');
   },60000)
 
-  it('should throw an error if address isn\'t owner of subname', async () => {
+  it('should throw an error if address isn\'t owner of ens', async () => {
     const signer = ethers.Wallet.createRandom();
-    const siwj = new Siwj({
+    const siwens = new SIWENS({
       params: {
         domain: DOMAIN,
         address: signer.address,
@@ -179,19 +180,19 @@ describe('Siwj', () => {
         nonce: NONCE,
         chainId: CHAIN_ID,
         ttl: VALID_TTL,
-        subname: VALID_SUBNAME
+        ens: VALID_ENS
       },
       providerUrl: PROVIDER_URL
     });
-    const message = siwj.prepareMessage();
+    const message = siwens.prepareMessage();
     const signature = await signer.signMessage(message);
-    const siwjInstance = new Siwj({
+    const siwensInstance = new SIWENS({
       params: message,
       providerUrl: PROVIDER_URL
     })
 
-    await expect(siwjInstance.verify({
+    await expect(siwensInstance.verify({
       signature
-    })).rejects.toThrow(InvalidSubnameException.invalidSubnameOwner(VALID_SUBNAME, signer.address).message);
+    })).rejects.toThrow(InvalidENSException.invalidENSOwner(VALID_ENS, signer.address).message);
   }, 60000);
 });

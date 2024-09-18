@@ -1,5 +1,5 @@
 import { InfiniteData, useInfiniteQuery, UseInfiniteQueryResult } from '@tanstack/react-query';
-import { useJustaName } from '../providers';
+import { useJustaName } from '../../providers';
 import { ChainId, SubnameGetAllCommunitiesChainIdResponse } from '@justaname.id/sdk';
 
 export const buildCommunitiesKey = (

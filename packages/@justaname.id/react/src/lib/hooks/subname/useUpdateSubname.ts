@@ -1,11 +1,11 @@
 "use client";
 
 import { useMutation } from '@tanstack/react-query';
-import { useJustaName } from '../providers';
-import { useMountedAccount } from './useMountedAccount';
+import { useJustaName } from '../../providers';
+import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
 import { SubnameUpdateParams, SubnameUpdateResponse } from '@justaname.id/sdk';
-import { useAccountSubnames } from './useAccountSubnames';
+import { useAccountSubnames } from '../account/useAccountSubnames';
 
 /**
  * Defines the structure for the base request needed to claim a subname.

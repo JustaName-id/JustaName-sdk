@@ -1,6 +1,6 @@
 import { OffchainResolverResponse } from '@justaname.id/sdk';
 import { useQuery } from '@tanstack/react-query';
-import { useJustaName } from '../providers';
+import { useJustaName } from '../../providers';
 
 export const offchainResolversKey = ['OFFCHAIN_RESOLVERS'];
 

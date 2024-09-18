@@ -1,36 +1,36 @@
 "use client";
 
-import { useMountedAccount } from '../useMountedAccount';
+import { useMountedAccount } from '../account/useMountedAccount';
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useSignMessage } from 'wagmi';
-import { useSubnameSession } from './useENSAuth';
+import { useEnsAuth } from './useEnsAuth';
 
 
-export interface SubnameSignInParams {
-  subname: string;
+export interface EnsSignInParams {
+  ens: string;
 }
 
-export interface UseSubnameSignInResult {
-  signIn:  UseMutateAsyncFunction<string, Error, SubnameSignInParams, unknown>,
+export interface UseEnsSignInResult {
+  signIn:  UseMutateAsyncFunction<string, Error, EnsSignInParams, unknown>,
   isSignInPending: boolean;
 }
 
 /**
- * Custom hook to request a challenge for a subname and obtain a signature proving ownership of an address.
+ * Custom hook to request a challenge for a ens and obtain a signature proving ownership of an address.
  *
- * @returns {UseSubnameSignInResult} An object containing the function to initiate the signing process (`subnameSignature`)
- * and a boolean indicating if the signature operation is pending (`subnameSignaturePending`).
+ * @returns {UseEnsSignInResult} An object containing the function to initiate the signing process (`ensSignature`)
+ * and a boolean indicating if the signature operation is pending (`ensSignaturePending`).
  */
 
-export const useSubnameSignIn = (): UseSubnameSignInResult => {
+export const useEnsSignIn = (): UseEnsSignInResult => {
   const { justaname, backendUrl, routes} = useJustaName();
   const { address } = useMountedAccount();
-  const { refreshSubnameSession } =useSubnameSession()
+  const { refreshEnsAuth } =useEnsAuth()
   const { signMessageAsync } = useSignMessage()
 
   const mutation = useMutation({
-    mutationFn: async ({ subname }: SubnameSignInParams) => {
+    mutationFn: async ({ ens }: EnsSignInParams) => {
       if (!address) {
         throw new Error('No address found');
       }
@@ -41,7 +41,7 @@ export const useSubnameSignIn = (): UseSubnameSignInResult => {
 
       const message = justaname.signIn.requestSignIn({
         address,
-        subname,
+        ens,
         nonce: await nonceResponse.text()
       })
 
@@ -63,7 +63,7 @@ export const useSubnameSignIn = (): UseSubnameSignInResult => {
         credentials: 'include'
       });
 
-      refreshSubnameSession();
+      refreshEnsAuth();
 
       return response.text();
     },

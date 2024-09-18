@@ -1,9 +1,9 @@
 "use client";
 
-import { useMountedAccount } from './useMountedAccount';
+import { useMountedAccount } from '../account/useMountedAccount';
 import { useSignMessage } from 'wagmi';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useJustaName } from '../providers';
+import { useJustaName } from '../../providers';
 
 export const buildSignature = (address: string) => ['SUBNAME_SIGNATURE', address]
 

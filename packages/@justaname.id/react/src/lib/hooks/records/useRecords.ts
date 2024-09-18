@@ -1,4 +1,4 @@
-import { useJustaName } from '../providers';
+import { useJustaName } from '../../providers';
 import { QueryObserverResult, RefetchOptions, useQuery } from '@tanstack/react-query';
 import { ChainId, JustaName, SubnameRecordsResponse, SanitizedRecords, sanitizeRecords } from '@justaname.id/sdk';
 

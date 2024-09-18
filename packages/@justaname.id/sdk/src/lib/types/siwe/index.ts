@@ -1,2 +1,6 @@
 export * from './request-challenge'
 export * from './verify-challenge'
+export * from './add-ebdc-permission-challenge'
+export * from './append-ebdc-field-challenge'
+export * from './revoke-ebdc-permission-challenge'
+export * from './siwe-config'
