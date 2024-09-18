@@ -1,3 +1,15 @@
+## 0.0.13 (2024-09-18)
+
+
+### 🚀 Features
+
+- siwens and ebdc ([87677f3](https://github.com/JustaName-id/JustaName-sdk/commit/87677f3))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.12 (2024-09-18)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
