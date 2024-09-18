@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { SIWJProvider, SIWJProviderConfig, useSignInWithJustaName } from '../lib';
+import { SIWENSProvider, SIWENSProviderConfig, useSignInWithEns } from '../lib';
 import '@rainbow-me/rainbowkit/styles.css';
 import { ConnectButton, getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
@@ -9,7 +9,7 @@ import { Meta, StoryObj } from '@storybook/react';
 
 const queryClient = new QueryClient();
 
-const JustaNameConfig: SIWJProviderConfig = {
+const JustaNameConfig: SIWENSProviderConfig = {
   config: {
     chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
     origin: import.meta.env.STORYBOOK_APP_ORIGIN,
@@ -21,26 +21,22 @@ const JustaNameConfig: SIWJProviderConfig = {
   backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
   providerUrl: import.meta.env.STORYBOOK_APP_PROVIDER_URL,
   ensDomain: import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
-  // color:{
-  //   primary: "#FF0000",
-  //   background: "#000000"
-  // },
   openOnWalletConnect: true,
   allowedSubnames:'all',
 }
 
 const Session = () => {
-  const { session, handleDialog, signOut} = useSignInWithJustaName()
+  const { connectedEns, handleOpenSignInDialog, signOut} = useSignInWithEns()
   return (
     <div>
       <h1>Subname Session</h1>
       {
-        !session && <button onClick={() => handleDialog(true)}>Sign In</button>
+        !connectedEns && <button onClick={() => handleOpenSignInDialog(true)}>Sign In</button>
       }
       {
-        session && <button onClick={signOut}>Sign Out</button>
+        connectedEns && <button onClick={signOut}>Sign Out</button>
       }
-      <pre>{JSON.stringify(session, null, 2)}</pre>
+      <pre>{JSON.stringify(connectedEns, null, 2)}</pre>
     </div>
   )
 }
@@ -57,10 +53,10 @@ export const Example = () => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <SIWJProvider config={JustaNameConfig}>
+          <SIWENSProvider config={JustaNameConfig}>
             <ConnectButton />
             <Session />
-          </SIWJProvider>
+          </SIWENSProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

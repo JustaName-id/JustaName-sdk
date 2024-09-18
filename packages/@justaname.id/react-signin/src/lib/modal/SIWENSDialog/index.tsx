@@ -1,12 +1,9 @@
-import { Dialog, DialogContent, DialogTitle } from '@justaname.id/react-ui';
-import { useAccountSubnames, useJustaName, useEnsAuth } from '@justaname.id/react';
-import { Loading, SelectSubname } from '../../components';
-import { useEffect, useMemo, useState } from 'react';
-import styled from 'styled-components';
+import { useAccountSubnames, useJustaName, useMountedAccount } from '@justaname.id/react';
+import { useMemo } from 'react';
 import { LoadingDialog } from '../LoadingDialog';
 import { SelectSubnameDialog } from '../SelectSubnameDialog';
 
-export interface SIWJDialogProps {
+export interface SIWENSDialogProps {
   open: boolean;
   handleOpenDialog: (open: boolean) => void;
   address?: string;
@@ -14,11 +11,9 @@ export interface SIWJDialogProps {
 }
 
 
-export const SIWJDialog: React.FC<SIWJDialogProps> = ({ open, handleOpenDialog, address, allowedSubnames }) => {
-  const [step, setStep] = useState<"loading" | "select-subname">("loading")
+export const SIWENSDialog: React.FC<SIWENSDialogProps> = ({ open, handleOpenDialog, allowedSubnames }) => {
   const { ensDomain } = useJustaName();
-  const { connectedEns } = useEnsAuth()
-
+  const { isConnected} = useMountedAccount()
   const { accountSubnames, isAccountSubnamesPending} = useAccountSubnames()
   const subnames = useMemo(() => {
     if (allowedSubnames === 'all') {
@@ -33,48 +28,10 @@ export const SIWJDialog: React.FC<SIWJDialogProps> = ({ open, handleOpenDialog, 
   }, [accountSubnames, allowedSubnames, ensDomain]);
 
 
-  useEffect(() => {
-    if(!isAccountSubnamesPending){
-      setStep("select-subname")
-    }
-  }, [isAccountSubnamesPending]);
-
-  useEffect(() => {
-    if(connectedEns){
-      handleOpenDialog(false)
-    }
-  }, [connectedEns]);
-
-  if(!address){
-    return <LoadingDialog open={true} />
-  }
-
   return (
     <>
-      <SelectSubnameDialog open={step==='select-subname'} address={address} subnames={subnames} handleOpenDialog={handleOpenDialog} />
-      <LoadingDialog open={isAccountSubnamesPending} />
+      <SelectSubnameDialog open={open && !isAccountSubnamesPending && isConnected} subnames={subnames} handleOpenDialog={handleOpenDialog} />
+      <LoadingDialog open={isAccountSubnamesPending && open && isConnected} />
     </>
-    // <Dialog open={open}>
-    //   <div style={{
-    //     display: 'hidden'
-    //   }}>
-    //     <DialogTitle>
-    //
-    //     </DialogTitle>
-    //   </div>
-    //   <DialogContent style={{
-    //     padding: 0,
-    //     transition: "all 0.4 ease-in-out"
-    //   }}>
-    //     <TransitionElement maxheight={"100px"} className={step ==="loading" ? "visible" : ""}>
-    //       <Loading />
-    //     </TransitionElement>
-    //
-    //     <TransitionElement maxheight={"fit-content"} className={step ==="select-subname" ? "visible" : ""}>
-    //       <SelectSubname address={address || ""} subnames={subnames} handleOpenDialog={handleOpenDialog} />
-    //     </TransitionElement>
-    //
-    //   </DialogContent>
-    // </Dialog>
   );
 };

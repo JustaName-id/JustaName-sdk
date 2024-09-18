@@ -320,9 +320,9 @@ export class Subnames {
     params: SubnameRecordsParams
   ): Promise<SubnameRecordsResponse> {
     return restCall('RECORDS_BY_FULLNAME_ROUTE', 'GET', {
-      providerUrl: this.providerUrl,
-      chainId: this.chainId,
       ...params,
+      providerUrl: params.providerUrl || this.providerUrl,
+      chainId: params.chainId || this.chainId,
     });
   }
 

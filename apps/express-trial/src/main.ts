@@ -26,7 +26,7 @@ interface SubnameAdd {
 
 let justaname: JustaName;
 
-type Siwj = { address: string, subname: string };
+type Siwj = { address: string, ens: string };
 
 declare module 'express-session' {
   interface SessionData {
@@ -61,7 +61,7 @@ app.post('/api/signin', async (req: Request, res) => {
       return;
     }
 
-    const { data: message, subname } = await justaname.signIn.signIn( req.body.message,  req.body.signature );
+    const { data: message, ens } = await justaname.signIn.signIn( req.body.message,  req.body.signature );
 
     if (!message) {
       res.status(500).json({ message: 'No message returned.' });
@@ -72,7 +72,7 @@ app.post('/api/signin', async (req: Request, res) => {
       res.status(500).json({ message: 'No expirationTime returned.' });
     }
 
-    req.session.siwj = { address: message.address, subname };
+    req.session.siwj = { address: message.address, ens };
     req.session.cookie.expires = new Date(message?.expirationTime || new Date());
     req.session.save(() => res.status(200).send(true));
   } catch (e) {
@@ -83,14 +83,14 @@ app.post('/api/signin', async (req: Request, res) => {
   }
 })
 
-app.get('/api/session', function (req, res) {
+app.get('/api/current', function (req, res) {
   if (!req.session.siwj) {
     res.status(401).json({ message: 'You have to first sign_in' });
     return;
   }
   console.log("User is authenticated!");
   res.setHeader('Content-Type', 'text/plain');
-  res.status(200).send({ subname: req.session.siwj?.subname, address: req.session.siwj?.address });
+  res.status(200).send({ ens: req.session.siwj?.ens, address: req.session.siwj?.address });
 });
 
 app.get('/api/signout', function (req, res) {
@@ -136,7 +136,7 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
 
 
 app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to efe Express!' });
+  res.send({ message: 'Welcome to JustaName Express!' });
 });
 
 const port = process.env.PORT || 3333;

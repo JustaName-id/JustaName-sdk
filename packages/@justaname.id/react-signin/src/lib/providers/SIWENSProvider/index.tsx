@@ -10,47 +10,50 @@ import {
   UseEnsAuthReturn, EnsSignInParams
 } from '@justaname.id/react';
 import { JustaThemeProvider, JustaThemeProviderConfig } from '@justaname.id/react-ui';
-import { SIWJDialog } from '../../modal';
+import { SIWENSDialog } from '../../modal';
 import { UseMutateAsyncFunction } from '@tanstack/react-query';
 
-export interface SIWJProviderConfig extends JustaNameProviderConfig, JustaThemeProviderConfig {
+export interface SIWENSProviderConfig extends JustaNameProviderConfig, JustaThemeProviderConfig {
   openOnWalletConnect?: boolean;
   allowedSubnames: "all" | "platform" | string[];
 }
 
-export interface SIWJProviderProps {
+export interface SIWENSProviderProps {
   children: React.ReactNode;
-  config: SIWJProviderConfig;
+  config: SIWENSProviderConfig;
 }
 
-export interface SIWJContextProps {
-  handleOpenDialog: (open: boolean) => void;
-  isOpen: boolean;
+export interface SIWENSContextProps {
+  handleOpenSignInDialog: (open: boolean) => void;
+  isSignInOpen: boolean;
 }
 
-export const SIWJContext = createContext<SIWJContextProps>({
-  isOpen: false,
-  handleOpenDialog: () => { }
+export const SIWENSContext = createContext<SIWENSContextProps>({
+  isSignInOpen: false,
+  handleOpenSignInDialog: () => { }
 });
 
-export const SIWJProvider: FC<SIWJProviderProps> = ({
+export const SIWENSProvider: FC<SIWENSProviderProps> = ({
   children,
   config: props
 }) => {
   const openOnWalletConnect = props.openOnWalletConnect || false;
   const allowedSubnames = props.allowedSubnames || "all";
 
-  const [open, setOpen] = useState(false);
-  const { address } = useMountedAccount();
+  const { isConnected } = useMountedAccount()
+  const [signInOpen, setSignInOpen] = useState(false);
 
-  const handleOpenDialog = (_open: boolean) => {
-    if (_open !== open) {
-      setOpen(_open);
+  const handleOpenSignInDialog = (open: boolean) => {
+    if(!isConnected){
+      return;
     }
-  };
+    if (open !== signInOpen) {
+      setSignInOpen(open);
+    }
+  }
 
   return (
-    <SIWJContext.Provider value={{ handleOpenDialog, isOpen: open }}>
+    <SIWENSContext.Provider value={{ handleOpenSignInDialog, isSignInOpen: signInOpen }}>
       <JustaNameProvider config={{
         config: props.config,
         backendUrl: props.backendUrl,
@@ -60,17 +63,17 @@ export const SIWJProvider: FC<SIWJProviderProps> = ({
       }}>
         <JustaThemeProvider color={props.color}>
           {children}
-          <CheckSession openOnWalletConnect={openOnWalletConnect} handleOpenDialog={handleOpenDialog} />
-          <SIWJDialog open={open} address={address} handleOpenDialog={handleOpenDialog} allowedSubnames={allowedSubnames} />
+          <CheckSession openOnWalletConnect={openOnWalletConnect} handleOpenDialog={handleOpenSignInDialog}/>
+          <SIWENSDialog open={signInOpen} handleOpenDialog={handleOpenSignInDialog} allowedSubnames={allowedSubnames} />
         </JustaThemeProvider>
       </JustaNameProvider>
-    </SIWJContext.Provider>
+    </SIWENSContext.Provider>
   );
 };
 
-export interface UseSignInWithJustaName {
-  handleDialog: (open: boolean) => void;
-  isOpen: boolean
+export interface UseSignInWithEns {
+  handleOpenSignInDialog: (open: boolean) => void;
+  isSignInOpen: boolean
   signIn: UseMutateAsyncFunction<string, Error, EnsSignInParams, unknown>
   signOut: () => void;
   status: 'pending' | 'signedIn' | 'signedOut';
@@ -78,8 +81,8 @@ export interface UseSignInWithJustaName {
   connectedEns: UseEnsAuthReturn['connectedEns'];
 }
 
-export const useSignInWithJustaName = (): UseSignInWithJustaName => {
-  const context = useContext(SIWJContext);
+export const useSignInWithEns = (): UseSignInWithEns => {
+  const context = useContext(SIWENSContext);
   const justanameContext = useContext(JustaNameContext);
   const { signIn, isSignInPending } = useEnsSignIn();
   const { signOut, isSignOutPending } = useEnsSignOut();
@@ -102,16 +105,16 @@ export const useSignInWithJustaName = (): UseSignInWithJustaName => {
   }, [isSignInPending, isSignOutPending, isEnsAuthPending, connectedEns]);
 
   if (context === undefined) {
-    throw new Error('useSIWJ must be used within a SIWJProvider');
+    throw new Error('useSIWENS must be used within a SIWENSProvider');
   }
 
   if (justanameContext === undefined) {
-    throw new Error('useSIWJ must be used within a JustaNameProvider');
+    throw new Error('useSIWENS must be used within a JustaNameProvider');
   }
 
   return {
-    handleDialog: context.handleOpenDialog,
-    isOpen: context.isOpen,
+    handleOpenSignInDialog: context.handleOpenSignInDialog,
+    isSignInOpen: context.isSignInOpen,
     signIn,
     signOut,
     status,
@@ -123,6 +126,7 @@ export const useSignInWithJustaName = (): UseSignInWithJustaName => {
 const CheckSession: React.FC<{ openOnWalletConnect: boolean, handleOpenDialog: (open: boolean) => void }> = ({ openOnWalletConnect, handleOpenDialog }) => {
   const { connectedEns, isEnsAuthPending } = useEnsAuth();
   const { signOut } = useEnsSignOut();
+  const [wasConnected, setWasConnected] = useState(false);
   const {
     address,
     isConnected,
@@ -130,6 +134,13 @@ const CheckSession: React.FC<{ openOnWalletConnect: boolean, handleOpenDialog: (
     isConnecting,
     isReconnecting,
   } = useMountedAccount();
+
+
+  useEffect(() => {
+    if (isConnected && !wasConnected) {
+      setWasConnected(true);
+    }
+  }, [isConnected, wasConnected])
 
   useEffect(() => {
     if (connectedEns && address) {
@@ -151,13 +162,11 @@ const CheckSession: React.FC<{ openOnWalletConnect: boolean, handleOpenDialog: (
 
 
   useEffect(() => {
-    setTimeout(() => {
-      if (isDisconnected && !isConnecting && !isReconnecting) {
+      if (isDisconnected && !isConnecting && !isReconnecting && wasConnected) {
         signOut();
         handleOpenDialog(false);
       }
-    }, 2000);
-  }, [isDisconnected, isConnecting, isReconnecting]);
+  }, [isDisconnected, isConnecting, isReconnecting, wasConnected]);
 
   return null;
 }

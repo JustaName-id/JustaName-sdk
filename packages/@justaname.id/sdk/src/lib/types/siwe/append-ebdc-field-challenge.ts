@@ -73,10 +73,9 @@ export interface RequestAppendEbdcFieldChallengeRoute extends IRoute {
   headers: NonNullable<unknown>;
 }
 
-export interface RequestAppendEbdcFieldChallengeParams extends Omit<RequestAppendEbdcFieldChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl' | 'ensDomain'> {
+export interface RequestAppendEbdcFieldChallengeParams extends Omit<RequestAppendEbdcFieldChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl' > {
   origin?: string,
   domain?: string,
   chainId?: ChainId,
   ttl?: number
-  ensDomain?: string
 }
