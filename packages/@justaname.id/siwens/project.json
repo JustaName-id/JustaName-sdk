@@ -14,6 +14,9 @@
           },
           {
             "command": "node update-package-json.js"
+          },
+          {
+            "command": "node copy-to-outside-dist.js"
           }
         ],
         "cwd": "packages/@justaname.id/siwens",
@@ -51,6 +54,35 @@
         }
       },
       "dependsOn": ["lint"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "fix": true,
+        "lintFilePatterns": [
+          "packages/@justaname.id/siwens/src/lib/**/*.{ts,tsx,js,jsx}",
+          "packages/@justaname.id/siwens/package.json"
+        ]
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "packages/@justaname.id/siwens/dist"
+      },
+      "dependsOn": ["build","^build"]
+    },
+    "release:package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx semantic-release --debug --extends=./packages/@justaname.id/siwens/release.config.js"
+      }
+    },
+    "update-deps": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx rjp ./packages/@justaname.id/siwens/dist/package.json $PACKAGE_NAME $VERSION"
+      }
     }
   }
 }

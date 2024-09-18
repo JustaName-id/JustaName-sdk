@@ -73,10 +73,9 @@ export interface RequestAddEbdcPermissionChallengeRoute extends IRoute {
   headers: NonNullable<unknown>;
 }
 
-export interface RequestAddEbdcPermissionChallengeParams extends Omit<RequestAddEbdcPermissionChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl' | 'ensDomain'> {
+export interface RequestAddEbdcPermissionChallengeParams extends Omit<RequestAddEbdcPermissionChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl' > {
   origin?: string,
   domain?: string,
   chainId?: ChainId,
   ttl?: number
-  ensDomain?: string
 }

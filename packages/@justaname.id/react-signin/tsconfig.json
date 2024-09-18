@@ -10,7 +10,8 @@
     "strict": true,
     "paths": {
       "@justaname.id/react": ["packages/@justaname.id/react"],
-      "@justaname.id/react-ui": ["packages/@justaname.id/react-ui"]
+      "@justaname.id/react-ui": ["packages/@justaname.id/react-ui"],
+
     }
   },
   "files": [],

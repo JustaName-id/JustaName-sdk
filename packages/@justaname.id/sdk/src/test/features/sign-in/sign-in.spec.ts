@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import dotenv from 'dotenv';
 import SignIn from '../../../lib/features/sign-in';
+import { OffchainResolvers } from '../../../lib/features';
 dotenv.config();
 
 const pk = process.env['PRIVATE_KEY'] as string;
@@ -24,7 +25,9 @@ describe('SignIn', () => {
       domain: DOMAIN,
       chainId: CHAIN_ID,
       ttl: VALID_TTL,
-    }, PROVIDER_URL);
+    }, PROVIDER_URL,
+      new OffchainResolvers()
+      );
   });
 
   it('should create an instance', () => {

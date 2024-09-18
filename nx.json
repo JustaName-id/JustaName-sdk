@@ -143,7 +143,12 @@
     },
     "projectsRelationship": "independent",
     "projects": [
-      "packages/@justaname.id/siwens"
+      "packages/create-justaname-app",
+      "packages/@justaname.id/sdk",
+      "packages/@justaname.id/react",
+      "packages/@justaname.id/siwens",
+      "packages/@justaname.id/react-ui",
+      "packages/@justaname.id/react-signin"
     ]
   },
   "defaultBase": "main"

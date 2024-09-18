@@ -13,6 +13,9 @@
           },
           {
             "command": "node update-package-json.js"
+          },
+          {
+            "command": "node copy-to-outside-dist.js"
           }
         ],
         "cwd": "packages/@justaname.id/sdk",

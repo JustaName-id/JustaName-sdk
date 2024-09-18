@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { LoadingSpinner } from '../LoadingSpinner';
 
-type ButtonVariant = 'primary';
+type ButtonVariant = 'primary' | 'secondary';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,7 +26,7 @@ const StyledButton = styled.button<StyledButtonProps>`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
+    border-radius: 16px;
     border: none;
     font-weight: 900;
     font-family: var(--justaname-font-family), serif;
@@ -46,6 +46,18 @@ const StyledButton = styled.button<StyledButtonProps>`
         }
     `}
 
+    ${props => props.variant === 'secondary' && css`
+        background-color: var(--justaname-background-color);
+        color: var(--justaname-primary-color);
+        border: 1px solid var(--justaname-primary-color);
+        
+        &:hover {
+            background-color: var(--justaname-background-color);
+            color: var(--justaname-primary-color-dark);
+            border: 1px solid var(--justaname-primary-color-dark);
+        }
+    `}
+    
     ${props => props.disabled && css`
         opacity: 0.5;
         cursor: not-allowed;
@@ -90,7 +102,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
                                                                    asChild = false,
                                                                    loading = false,
                                                                    children,
-  disabled = false,
+                                                                   disabled = false,
                                                                    ...props
                                                                  }, ref) => {
   return (
@@ -108,7 +120,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
       </ButtonContent>
       {loading && (
         <SpinnerWrapper>
-          <LoadingSpinner />
+          <LoadingSpinner
+            color={variant === 'primary' ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-primary-color)'}
+          />
         </SpinnerWrapper>
       )}
     </StyledButton>

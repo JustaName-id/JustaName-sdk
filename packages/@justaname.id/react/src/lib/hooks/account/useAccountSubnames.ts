@@ -1,8 +1,6 @@
 "use client";
 
 import { useJustaName } from '../../providers';
-import { useAccount } from 'wagmi';
-import { useMounted } from './useMounted';
 import {
   QueryObserverResult,
   RefetchOptions,
@@ -11,6 +9,7 @@ import {
 } from '@tanstack/react-query';
 import { ChainId, SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
 import { buildSubnameBySubnameKey } from '../subname/useSubname';
+import { useMountedAccount } from './useMountedAccount';
 
 /**
  * Constructs a unique cache key for storing and retrieving subnames data associated with a wallet address.
@@ -73,9 +72,8 @@ interface UseAccountSubnamesResult {
 export const useAccountSubnames = (
   props: UseConnectedWalletSubnamesOptions = {}
 ): UseAccountSubnamesResult => {
-  const mounted = useMounted();
   const queryClient = useQueryClient();
-  const { address } = useAccount();
+  const { address } = useMountedAccount();
   const { justaname, chainId } = useJustaName();
 
   const query = useQuery({
@@ -103,7 +101,7 @@ export const useAccountSubnames = (
 
       return subnames;
     },
-    enabled: Boolean(mounted) && Boolean(address) && Boolean(justaname),
+    enabled: Boolean(address) && Boolean(justaname),
   });
 
   return {

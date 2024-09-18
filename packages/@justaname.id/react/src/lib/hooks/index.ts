@@ -5,3 +5,4 @@ export * from './signIn'
 export * from './account'
 export * from './subname';
 export * from './records';
+export * from './ebdc';

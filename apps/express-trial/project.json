@@ -18,6 +18,25 @@
           "buildTarget": "justaname-express-trial:build:production"
         }
       }
+    },
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/express-trial",
+        "main": "apps/express-trial/src/main.ts",
+        "tsConfig": "apps/express-trial/tsconfig.app.json",
+        "webpackConfig": "apps/express-trial/webpack.config.js",
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      },
+      "dependsOn": ["lint"]
     }
   },
   "tags": []

@@ -85,21 +85,42 @@ export class JustaName {
    */
   static init(configuration: JustaNameConfig): JustaName {
     this.checkConfig(configuration);
-    return new JustaName(
-      new SubnameChallenge({
-        ...configuration.config,
-        ttl: configuration.config.subnameChallenge?.ttl || 120000
-      }),
-      new Subnames(configuration.providerUrl, configuration.ensDomain, configuration.config.chainId, configuration.apiKey),
-      new OffchainResolvers(),
-      new SignIn({
+
+    const subnameChallenge = new SubnameChallenge({
+      ...configuration.config,
+      ttl: configuration.config.subnameChallenge?.ttl || 120000
+    });
+
+    const subnames = new Subnames(
+      configuration.providerUrl,
+      configuration.ensDomain,
+      configuration.config.chainId,
+      configuration.apiKey
+    );
+
+    const offchainResolvers = new OffchainResolvers();
+
+    const signIn = new SignIn(
+      {
         ...configuration.config,
         ttl: configuration.config.signIn?.ttl || 120000
-      } , configuration.providerUrl),
-      new EBDC(
-        configuration.ensDomain,
-        configuration.config
-      )
+      },
+      configuration.providerUrl,
+      offchainResolvers
+    );
+
+    const ebdc = new EBDC(
+      configuration.ensDomain,
+      configuration.config,
+      subnames
+    );
+
+    return new JustaName(
+      subnameChallenge,
+      subnames,
+      offchainResolvers,
+      signIn,
+      ebdc
     );
   }
 

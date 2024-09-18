@@ -1,6 +1,6 @@
 import { SiweConfig } from '../../types/siwe/siwe-config';
 import { ChainId } from '../../types';
-import SIWENS, { SiwensParams, SiwensResponse } from '../siwens';
+import { SIWENS, SiwensParams, SiwensResponse } from '@justaname.id/siwens';
 import { InvalidENSException } from '../../errors';
 import { OffchainResolvers } from '../offchain-resolvers';
 import { JsonRpcProvider } from 'ethers';
@@ -15,10 +15,10 @@ export class SignIn {
   readonly providerUrl: string;
   readonly offchainResolver: OffchainResolvers;
   readonly provider: JsonRpcProvider;
-  constructor(signInConfig: SiweConfig,providerUrl:string){
+  constructor(signInConfig: SiweConfig,providerUrl:string, offchainResolver: OffchainResolvers){
     this.config = signInConfig;
     this.providerUrl = providerUrl;
-    this.offchainResolver = new OffchainResolvers();
+    this.offchainResolver = offchainResolver;
     this.provider = new JsonRpcProvider(providerUrl);
   }
 

@@ -89,10 +89,20 @@ describe('justaname', () => {
 
   })
 
+  it('shouldn\'t have ebdc enabled', async () => {
+    const subname = await justaname.ebdc.checkIfEbdcIsEnabled({
+      subname: subnameToBeAdded + '.' + ENS_DOMAIN,
+      ebdc: ENS_DOMAIN
+    })
+
+    expect(subname).toBeFalsy();
+  })
+
   it('should add ebdc permission', async () => {
     const challenge = await justaname.ebdc.requestAddEbdcPermissionChallenge({
       address: subnameSigner.address,
-      subname: subnameToBeAdded + '.' +  ENS_DOMAIN
+      subname: subnameToBeAdded + '.' +  ENS_DOMAIN,
+      ensDomain: ENS_DOMAIN
     });
 
     const signature = await subnameSigner.signMessage(challenge.challenge);
@@ -105,10 +115,20 @@ describe('justaname', () => {
     expect(response).toBeDefined();
   })
 
+  it('shouldn\'t have ebdc enabled', async () => {
+    const subname = await justaname.ebdc.checkIfEbdcIsEnabled({
+      subname: subnameToBeAdded + '.' + ENS_DOMAIN,
+      ebdc: ENS_DOMAIN
+    })
+
+    expect(subname).toBeTruthy();
+  })
+
   it('should append field to ebdc subname', async () => {
     const challenge = await justaname.ebdc.requestAppendEbdcFieldChallenge({
       subname: subnameToBeAdded + '.' + ENS_DOMAIN,
       address: signer.address,
+      ensDomain: ENS_DOMAIN,
     })
 
     const signature = await signer.signMessage(challenge.challenge);

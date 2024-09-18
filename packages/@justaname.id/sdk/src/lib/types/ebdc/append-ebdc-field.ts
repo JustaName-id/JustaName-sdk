@@ -57,38 +57,9 @@ interface Metadata {
 }
 
 /**
- * Defines the request parameters for updating a subname, including its associated addresses, text records,
- * and content hash.
- *
- * @interface SubnameUpdateRequest
- * @extends IRequest
- * @public
- * @property {string} username - The subname to be updated.
- * @property {string} ensDomain - The parent ENS domain under which the subname is registered.
- * @property {number} chainId - The blockchain network identifier.
- * @property {Address[]} addresses - The cryptocurrency addresses to associate with the subname.
- * @property {TextRecord[]} text - The text records to associate with the subname.
- * @property {string} contentHash - A hash of the content to be associated with the subname.
- */
-export interface SubnameUpdateRequest extends IRequest{
-
-  username: string;
-
-  ensDomain: string;
-
-  chainId: number;
-
-  addresses: Address[]
-
-  text: TextRecord[];
-
-  contentHash: string;
-}
-
-/**
  * Outlines the response received after successfully updating a subname.
  *
- * @interface SubnameUpdateResponse
+ * @interface AppendEbdcFieldResponse
  * @extends IResponse
  * @public
  * @property {string} id - The unique identifier of the update operation.

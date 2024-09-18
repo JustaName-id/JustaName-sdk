@@ -1,6 +1,6 @@
 {
   "extends": ["../../../.eslintrc.base.json"],
-  "ignorePatterns": ["!**/*"],
+  "ignorePatterns": ["!**/*", "dist", "src/test"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -16,9 +16,15 @@
     },
     {
       "files": ["*.json"],
+      "excludedFiles": ["src/test/**"],
       "parser": "jsonc-eslint-parser",
       "rules": {
-        "@nx/dependency-checks": "error"
+        "@nx/dependency-checks": [
+          "error",
+          {
+            "ignoredDependencies": ["dotenv"]
+          }
+        ]
       }
     }
   ]
