@@ -1,8 +1,10 @@
 import { Dialog, DialogContent, DialogTitle } from '@justaname.id/react-ui';
-import { useAccountSubnames, useJustaName, useSubnameSession } from '@justaname.id/react';
+import { useAccountSubnames, useJustaName, useEnsAuth } from '@justaname.id/react';
 import { Loading, SelectSubname } from '../../components';
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import { LoadingDialog } from '../LoadingDialog';
+import { SelectSubnameDialog } from '../SelectSubnameDialog';
 
 export interface SIWJDialogProps {
   open: boolean;
@@ -11,23 +13,11 @@ export interface SIWJDialogProps {
   allowedSubnames: "all" | "platform" | string[];
 }
 
-const TransitionElement = styled.div<{ maxheight: string }>`
-  max-height: 0;
-  overflow: hidden;
-  display: none;
-  padding: 0;
-  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-
-  &.visible {
-    display: block;
-    max-height: ${(props) => props.maxheight};
-  }
-`;
 
 export const SIWJDialog: React.FC<SIWJDialogProps> = ({ open, handleOpenDialog, address, allowedSubnames }) => {
   const [step, setStep] = useState<"loading" | "select-subname">("loading")
   const { ensDomain } = useJustaName();
-  const { subnameSession } = useSubnameSession()
+  const { connectedEns } = useEnsAuth()
 
   const { accountSubnames, isAccountSubnamesPending} = useAccountSubnames()
   const subnames = useMemo(() => {
@@ -50,33 +40,41 @@ export const SIWJDialog: React.FC<SIWJDialogProps> = ({ open, handleOpenDialog, 
   }, [isAccountSubnamesPending]);
 
   useEffect(() => {
-    if(subnameSession){
+    if(connectedEns){
       handleOpenDialog(false)
     }
-  }, [subnameSession]);
+  }, [connectedEns]);
+
+  if(!address){
+    return <LoadingDialog open={true} />
+  }
 
   return (
-    <Dialog open={open}>
-      <div style={{
-        display: 'hidden'
-      }}>
-        <DialogTitle>
-
-        </DialogTitle>
-      </div>
-      <DialogContent style={{
-        padding: 0,
-        transition: "all 0.4 ease-in-out"
-      }}>
-        <TransitionElement maxheight={"100px"} className={step ==="loading" ? "visible" : ""}>
-          <Loading />
-        </TransitionElement>
-
-        <TransitionElement maxheight={"fit-content"} className={step ==="select-subname" ? "visible" : ""}>
-          <SelectSubname address={address || ""} subnames={subnames} handleOpenDialog={handleOpenDialog} />
-        </TransitionElement>
-
-      </DialogContent>
-    </Dialog>
+    <>
+      <SelectSubnameDialog open={step==='select-subname'} address={address} subnames={subnames} handleOpenDialog={handleOpenDialog} />
+      <LoadingDialog open={isAccountSubnamesPending} />
+    </>
+    // <Dialog open={open}>
+    //   <div style={{
+    //     display: 'hidden'
+    //   }}>
+    //     <DialogTitle>
+    //
+    //     </DialogTitle>
+    //   </div>
+    //   <DialogContent style={{
+    //     padding: 0,
+    //     transition: "all 0.4 ease-in-out"
+    //   }}>
+    //     <TransitionElement maxheight={"100px"} className={step ==="loading" ? "visible" : ""}>
+    //       <Loading />
+    //     </TransitionElement>
+    //
+    //     <TransitionElement maxheight={"fit-content"} className={step ==="select-subname" ? "visible" : ""}>
+    //       <SelectSubname address={address || ""} subnames={subnames} handleOpenDialog={handleOpenDialog} />
+    //     </TransitionElement>
+    //
+    //   </DialogContent>
+    // </Dialog>
   );
 };

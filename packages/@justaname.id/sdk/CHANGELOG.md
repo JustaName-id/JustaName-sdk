@@ -1,3 +1,20 @@
+## 0.2.79 (2024-09-18)
+
+
+### 🚀 Features
+
+- siwens ([48572d1](https://github.com/JustaName-id/JustaName-sdk/commit/48572d1))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.12
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.2.78 (2024-09-16)
 
 This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
