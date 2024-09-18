@@ -4,7 +4,7 @@ import {
   RefetchOptions,
   useQuery,
 } from '@tanstack/react-query';
-import { useJustaName } from '../providers';
+import { useJustaName } from '../../providers';
 
 export const buildSearchSubnamesKey = (subname: string | undefined) => [
   'SEARCH_SUBNAME',

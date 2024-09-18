@@ -1,6 +1,6 @@
 "use client";
 
-import { useJustaName } from '../providers';
+import { useJustaName } from '../../providers';
 import {
   QueryObserverResult,
   RefetchOptions,

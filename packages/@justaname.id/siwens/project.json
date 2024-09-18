@@ -1,0 +1,56 @@
+{
+  "name": "@justaname.id/siwens",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@justaname.id/siwens/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx buildProject @justaname.id/siwens"
+          },
+          {
+            "command": "node update-package-json.js"
+          }
+        ],
+        "cwd": "packages/@justaname.id/siwens",
+        "parallel": false
+      }
+    },
+    "buildProject": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "main": "packages/@justaname.id/siwens/src/index.ts",
+        "outputPath": "packages/@justaname.id/siwens/dist",
+        "tsConfig": "packages/@justaname.id/siwens/tsconfig.lib.json",
+        "project": "packages/@justaname.id/siwens/package.json",
+        "generateExportsField": true,
+        "allowJs": true,
+        "compiler": "swc",
+        "format": ["esm", "cjs"],
+        "assets": [
+          {
+            "glob": "packages/@justaname.id/siwens/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      },
+      "dependsOn": ["lint"]
+    }
+  }
+}

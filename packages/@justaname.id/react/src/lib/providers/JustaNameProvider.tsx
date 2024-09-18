@@ -5,7 +5,9 @@ import { ChainId, JustaName, JustaNameConfig } from '@justaname.id/sdk';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { defaultRoutes } from '../constants/default-routes';
 
-interface JustaNameConfigWithouthApiKey extends Omit<JustaNameConfig, 'apiKey'> {}
+interface JustaNameConfigWithOptionalApiKey extends Omit<JustaNameConfig, 'apiKey'> {
+  apiKey?: string;
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,7 +34,7 @@ const queryClient = new QueryClient({
  * @property {string} [backendUrl] - The backend URL for JustaName API requests.
  * @property {1 | 11155111} chainId - The blockchain network identifier.
  */
-export interface JustaNameContextProps extends JustaNameConfigWithouthApiKey {
+export interface JustaNameContextProps extends JustaNameConfigWithOptionalApiKey {
   justaname: JustaName;
   routes: typeof defaultRoutes;
   backendUrl?: string;
@@ -57,8 +59,8 @@ export interface JustaNameProviderProps {
   config: JustaNameProviderConfig
 }
 
-export interface JustaNameProviderConfig extends JustaNameConfigWithouthApiKey {
-  routes?: typeof defaultRoutes;
+export interface JustaNameProviderConfig extends JustaNameConfigWithOptionalApiKey {
+  routes?: Partial<typeof defaultRoutes>;
   backendUrl?: string;
 }
 
@@ -77,14 +79,16 @@ export const JustaNameProvider: React.FC<JustaNameProviderProps> = ({
     backendUrl,
     providerUrl,
     ensDomain,
-    config
+    config,
+    apiKey
   },
 }: JustaNameProviderProps): React.ReactNode => {
 
   const [justaname] = React.useState<JustaName>(JustaName.init({
     config,
     providerUrl,
-    ensDomain
+    ensDomain,
+    apiKey,
   }));
 
   return (
@@ -105,7 +109,8 @@ export const JustaNameProvider: React.FC<JustaNameProviderProps> = ({
         routes: {
           ...defaultRoutes,
           ...routes,
-        }
+        },
+        apiKey
       }}>
         {children}
       </JustaNameContext.Provider>

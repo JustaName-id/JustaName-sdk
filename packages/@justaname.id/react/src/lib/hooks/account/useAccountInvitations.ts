@@ -5,7 +5,7 @@ import {
   useQuery,
 } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
-import { useJustaName } from '../providers';
+import { useJustaName } from '../../providers';
 import { useMounted } from './useMounted';
 
 export const buildAccountInvitationsKey = (

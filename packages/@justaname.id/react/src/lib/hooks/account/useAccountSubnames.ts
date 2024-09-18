@@ -1,6 +1,6 @@
 "use client";
 
-import { useJustaName } from '../providers';
+import { useJustaName } from '../../providers';
 import { useAccount } from 'wagmi';
 import { useMounted } from './useMounted';
 import {
@@ -10,7 +10,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 import { ChainId, SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
-import { buildSubnameBySubnameKey } from './useSubname';
+import { buildSubnameBySubnameKey } from '../subname/useSubname';
 
 /**
  * Constructs a unique cache key for storing and retrieving subnames data associated with a wallet address.

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useMountedAccount } from '../../hooks/useMountedAccount';
-import { useSubnameSignature } from '../../hooks/useSubnameSignature';
+import { useMountedAccount } from '../../hooks/account/useMountedAccount';
+import { useSubnameSignature } from '../../hooks/subname/useSubnameSignature';
 
 export const Index: React.FC = () =>
 {

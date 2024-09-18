@@ -1,8 +1,6 @@
 import { restCall } from '../../api/rest';
 import {
-  ChainId,
-  RequestChallengeRequest,
-  RequestChallengeResponse,
+  RequestChallengeResponse, RequestChallengeParams,
   VerifyChallengeRequest,
   VerifyChallengeResponse
 } from '../../types';
@@ -51,13 +49,7 @@ export class SubnameChallenge {
    * @returns {Promise<RequestChallengeResponse>} - A promise that resolves with the response.
    * @public
    */
-  requestChallenge  (
-    params: Omit<RequestChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl'> &{
-      origin?: string,
-      domain?: string,
-      chainId?: ChainId,
-      ttl?: number
-    }): Promise<RequestChallengeResponse> {
+  requestChallenge  (params: RequestChallengeParams): Promise<RequestChallengeResponse> {
     return restCall('SIWE_REQUEST_CHALLENGE_ROUTE','POST', {
       ...this.siweConfig,
       ...params
