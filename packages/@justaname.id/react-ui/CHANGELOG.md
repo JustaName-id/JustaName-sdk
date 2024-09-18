@@ -1,3 +1,11 @@
+## 0.0.14 (2024-09-16)
+
+This was a version bump only for @justaname.id/react-ui to align it with other projects, there were no code changes.
+
+## 0.0.13 (2024-09-16)
+
+This was a version bump only for @justaname.id/react-ui to align it with other projects, there were no code changes.
+
 ## 0.0.12 (2024-09-15)
 
 This was a version bump only for @justaname.id/react-ui to align it with other projects, there were no code changes.

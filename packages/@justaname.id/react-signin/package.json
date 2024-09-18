@@ -1,13 +1,16 @@
 {
   "name": "@justaname.id/react-signin",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "dependencies": {
-    "@justaname.id/react": "0.3.79",
-    "@justaname.id/sdk": "0.2.76"
+    "@justaname.id/react": "0.3.81",
+    "@justaname.id/sdk": "0.2.78"
   },
   "exports": {
     "./package.json": "./dist/package.json",
     ".": "./dist/index.esm.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "module": "./dist/index.esm.js",
   "main": "./dist/index.esm.js",
