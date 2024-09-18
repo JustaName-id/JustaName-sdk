@@ -6510,6 +6510,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@justaname.id/siwens@workspace:packages/@justaname.id/siwens":
+  version: 0.0.0-use.local
+  resolution: "@justaname.id/siwens@workspace:packages/@justaname.id/siwens"
+  dependencies:
+    ethers: "npm:^6.11.1"
+    siwe: "npm:^2.3.2"
+  languageName: unknown
+  linkType: soft
+
 "@koa/cors@npm:^5.0.0":
   version: 5.0.0
   resolution: "@koa/cors@npm:5.0.0"

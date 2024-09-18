@@ -4,7 +4,7 @@ import { useMountedAccount } from '../useMountedAccount';
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useSignMessage } from 'wagmi';
-import { useSubnameSession } from './useSubnameSession';
+import { useSubnameSession } from './useENSAuth';
 
 
 export interface SubnameSignInParams {
