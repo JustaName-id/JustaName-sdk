@@ -1,3 +1,21 @@
+## 0.0.16 (2024-09-18)
+
+
+### 🚀 Features
+
+- siwens and ebdc ([87677f3](https://github.com/JustaName-id/JustaName-sdk/commit/87677f3))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.80
+- Updated @justaname.id/react to 0.3.83
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.15 (2024-09-18)
 
 
