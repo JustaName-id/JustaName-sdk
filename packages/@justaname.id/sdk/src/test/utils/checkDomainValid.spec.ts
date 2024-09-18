@@ -1,4 +1,4 @@
-import { InvalidSubnameException } from '../../lib/errors/InvalidSubname.exception';
+import { InvalidENSException } from '../../lib/errors/InvalidENS.exception';
 import { checkDomainValid } from '../../lib/utils/checkDomainValid';
 
 const VALID_DOMAIN = 'test.justaname.id';
@@ -12,13 +12,13 @@ describe('checkDomainValid', () => {
 
   it('should throw an error if domain is invalid', () => {
     expect(() => checkDomainValid(INVALID_DOMAIN)).toThrow(
-      InvalidSubnameException.invalidSubnameFormat()
+      InvalidENSException.invalidENSFormat()
     )
   })
 
   it('should throw an error if domain is invalid', () => {
     expect(() => checkDomainValid(INVALID_DOMAIN_2)).toThrow(
-      InvalidSubnameException.invalidSubnameFormat()
+      InvalidENSException.invalidENSFormat()
     )
   })
 })

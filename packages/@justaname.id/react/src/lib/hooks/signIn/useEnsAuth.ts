@@ -3,35 +3,33 @@ import { useJustaName } from '../../providers';
 
 export const SESSION_KEY = ['SUBNAME_SESSION']
 
-export interface SubnameSession {
-  subname: string;
+export interface EnsAuth {
+  ens: string;
   address: string;
 }
 
-export interface UseSubnameSession {
+export interface UseEnsAuth {
   isLoggedIn: boolean;
-  subnameSession: SubnameSession | null | undefined;
-  isSubnameSessionPending: boolean;
-  refreshSubnameSession: () => void;
+  ens: EnsAuth | null | undefined;
+  isEnsAuthPending: boolean;
+  refreshEnsAuth: () => void;
 }
 
-export const useSubnameSession: <T = string[]> () => UseSubnameSession = () => {
+export const useEnsAuth: <T = string[]> () => UseEnsAuth = () => {
   const { backendUrl, routes} = useJustaName()
 
   const query = useQuery({
     queryKey: SESSION_KEY,
     queryFn: async () => {
       try {
-
-
-        const response = await fetch((backendUrl ?? '') + routes.sessionRoute, {
+        const response = await fetch((backendUrl ?? '') + routes.currentEnsRoute, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           },
           credentials: 'include'
         });
-        const json = await response.json() as SubnameSession
+        const json = await response.json() as EnsAuth
         return response.status === 200 ? json : null
       }catch(e){
         return null
@@ -41,8 +39,8 @@ export const useSubnameSession: <T = string[]> () => UseSubnameSession = () => {
 
   return{
     isLoggedIn: !!query.data,
-    subnameSession: query.data,
-    isSubnameSessionPending: query.isLoading,
-    refreshSubnameSession: query.refetch
+    ens: query.data,
+    isEnsAuthPending: query.isLoading,
+    refreshEnsAuth: query.refetch
   }
 }

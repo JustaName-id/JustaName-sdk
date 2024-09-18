@@ -3,8 +3,8 @@ import {
   IRoute,
   IsSubnameAvailableRoute,
   OffchainResolversRoute,
-  SIWERequestChallengeRoute,
-  SIWEVerifyMessageRoute,
+  RequestChallengeRoute,
+  VerifyMessageRoute,
   SubnameAcceptRoute,
   SubnameAddRoute,
   SubnameGetAllByAddressRoute,
@@ -18,13 +18,27 @@ import {
   SubnameRevokeRoute,
   SubnameSearchRoute,
   SubnameUpdateRoute,
+  RequestAddEbdcPermissionChallengeRoute,
+  RequestAppendEbdcFieldChallengeRoute,
+  RequestRevokeEbdcFieldChallengeRoute,
+  AddEbdcPermissionRoute,
+  AppendEbdcFieldRoute,
+  RevokeEbdcPermissionRoute
 } from '../../types';
 import { HEALTH_CHECK_ROUTE } from './api-key';
 import { OFFCHAIN_RESOLVERS_ROUTE } from './offchain-resolver';
 import {
   SIWE_REQUEST_CHALLENGE_ROUTE,
   SIWE_VERIFY_MESSAGE_ROUTE,
+  SIWE_EBDC_ADD_PERMISSION_ROUTE,
+  SIWE_EBDC_APPEND_FIELD_ROUTE,
+  SIWE_EBDC_REVOKE_PERMISSION_ROUTE
 } from './siwe';
+import {
+  EBDC_ADD_PERMISSION_ROUTE,
+  EBDC_APPEND_FIELD_ROUTE,
+  EBDC_REVOKE_PERMISSION_ROUTE
+} from './ebdc'
 import {
   ACCEPT_SUBNAME_ROUTE,
   ADD_SUBNAME_ROUTE,
@@ -47,6 +61,12 @@ export const Routes = {
   HEALTH_CHECK_ROUTE,
   SIWE_VERIFY_MESSAGE_ROUTE,
   SIWE_REQUEST_CHALLENGE_ROUTE,
+  SIWE_EBDC_ADD_PERMISSION_ROUTE,
+  SIWE_EBDC_APPEND_FIELD_ROUTE,
+  SIWE_EBDC_REVOKE_PERMISSION_ROUTE,
+  EBDC_ADD_PERMISSION_ROUTE,
+  EBDC_APPEND_FIELD_ROUTE,
+  EBDC_REVOKE_PERMISSION_ROUTE,
   ACCEPT_SUBNAME_ROUTE,
   RESERVE_SUBNAME_ROUTE,
   ADD_SUBNAME_ROUTE,
@@ -70,10 +90,17 @@ export type RoutesType = keyof typeof Routes;
 export type IROUTES = {
   [key in RoutesType]: IRoute;
 };
+
 export interface ROUTES extends IROUTES {
   HEALTH_CHECK_ROUTE: ApiKeyRoute;
-  SIWE_VERIFY_MESSAGE_ROUTE: SIWEVerifyMessageRoute;
-  SIWE_REQUEST_CHALLENGE_ROUTE: SIWERequestChallengeRoute;
+  SIWE_VERIFY_MESSAGE_ROUTE: VerifyMessageRoute;
+  SIWE_REQUEST_CHALLENGE_ROUTE: RequestChallengeRoute;
+  SIWE_EBDC_ADD_PERMISSION_ROUTE: RequestAddEbdcPermissionChallengeRoute;
+  SIWE_EBDC_APPEND_FIELD_ROUTE: RequestAppendEbdcFieldChallengeRoute;
+  SIWE_EBDC_REVOKE_PERMISSION_ROUTE: RequestRevokeEbdcFieldChallengeRoute;
+  EBDC_ADD_PERMISSION_ROUTE: AddEbdcPermissionRoute;
+  EBDC_APPEND_FIELD_ROUTE: AppendEbdcFieldRoute;
+  EBDC_REVOKE_PERMISSION_ROUTE: RevokeEbdcPermissionRoute;
   ACCEPT_SUBNAME_ROUTE: SubnameAcceptRoute;
   RESERVE_SUBNAME_ROUTE: SubnameReserveRoute;
   ADD_SUBNAME_ROUTE: SubnameAddRoute;

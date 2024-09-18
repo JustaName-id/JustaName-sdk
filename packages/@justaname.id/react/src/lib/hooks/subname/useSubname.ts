@@ -1,6 +1,6 @@
 "use client";
 
-import { useJustaName } from '../providers';
+import { useJustaName } from '../../providers';
 import { QueryObserverResult, RefetchOptions, useQuery } from '@tanstack/react-query';
 import { ChainId, SubnameGetBySubnameResponse } from '@justaname.id/sdk';
 

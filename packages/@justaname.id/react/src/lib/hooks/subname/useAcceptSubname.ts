@@ -8,11 +8,11 @@ import {
   SubnameAcceptParams,
 } from '@justaname.id/sdk';
 import { useMutation } from '@tanstack/react-query';
-import { useJustaName } from '../providers';
-import { useAccountSubnames } from './useAccountSubnames';
-import { useMountedAccount } from './useMountedAccount';
+import { useJustaName } from '../../providers';
+import { useAccountSubnames } from '../account/useAccountSubnames';
+import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { useAccountInvitations } from './useAccountInvitations';
+import { useAccountInvitations } from '../account/useAccountInvitations';
 
 export interface BaseAcceptSubnameRequest {
   username: string;

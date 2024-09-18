@@ -35,6 +35,7 @@
         "packages/@justaname.id/react-ui/src/index.ts"
       ],
       "@justaname.id/sdk": ["packages/@justaname.id/sdk/src/index.ts"],
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens/src/index.ts"],
       "create-justaname-app": ["packages/create-justaname-app/src/index.ts"]
     }
   },

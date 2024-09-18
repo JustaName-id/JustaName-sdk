@@ -11,7 +11,8 @@ const URI = 'https://' + DOMAIN;
 const ADDRESS = signer.address;
 const CHAIN_ID = 11155111;
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
-const VALID_SUBNAME = process.env['VALID_SUBNAME'] as string;
+const VALID_ENS = process.env['VALID_ENS'] as string;
+
 
 describe('SignIn', () => {
 
@@ -43,7 +44,7 @@ describe('SignIn', () => {
   it('should request a challenge', async () => {
     const response = signIn.requestSignIn({
       address: ADDRESS,
-      subname: VALID_SUBNAME,
+      ens: VALID_ENS,
     });
     expect(response).toBeTruthy();
   });
@@ -52,7 +53,7 @@ describe('SignIn', () => {
   it('should verify a signature', async () => {
     const message = signIn.requestSignIn({
       address: ADDRESS,
-      subname: VALID_SUBNAME,
+      ens: VALID_ENS,
     });
     const signature = await signer.signMessage(message);
     const response = await signIn.signIn(message, signature);
@@ -62,7 +63,7 @@ describe('SignIn', () => {
   it('should fail to verify an invalid signature', async () => {
     const message = signIn.requestSignIn({
       address: ADDRESS,
-      subname: VALID_SUBNAME,
+      ens: VALID_ENS,
     });
     const signer2 = new ethers.Wallet(ethers.Wallet.createRandom().privateKey);
     const signature = await signer2.signMessage(message);
@@ -75,4 +76,14 @@ describe('SignIn', () => {
 
     throw new Error('Should have thrown an error');
   })
+
+  it('should return true if JustaName resolver is Configured', async () => {
+    const message = signIn.requestSignIn({
+      address: ADDRESS,
+      ens: VALID_ENS,
+    });
+    const signature = await signer.signMessage(message);
+    const response = await signIn.signIn(message, signature);
+    expect(response.isJustaName).toBeTruthy();
+  },60000)
 })

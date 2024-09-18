@@ -1,19 +1,19 @@
 import { constructSignInStatement, extractDataFromStatement } from '../../lib/utils/signInStatementHelpers';
 
 describe('constructStatement', () => {
-  it('should return a string with the subname', () => {
+  it('should return a string with the ens', () => {
     const domain = 'justaname';
-    const subname = 'test';
-    const result = constructSignInStatement(domain, subname);
-    expect(result).toBe(`I am signing in to ${domain} with the subname ${subname}`);
+    const ens = 'test';
+    const result = constructSignInStatement(domain, ens);
+    expect(result).toBe(`I am signing in to ${domain} with the ens ${ens}`);
   });
 
-  it("should extract the subname from the statement", () => {
+  it("should extract the ens from the statement", () => {
     const domain = 'justaname';
-    const subname = 'test';
-    const result = constructSignInStatement(domain, subname);
+    const ens = 'test';
+    const result = constructSignInStatement(domain, ens);
     const extractedSubname = extractDataFromStatement(result);
-    expect(extractedSubname.subname).toBe(subname);
+    expect(extractedSubname.ens).toBe(ens);
     expect(extractedSubname.domain).toBe(domain);
   })
 })

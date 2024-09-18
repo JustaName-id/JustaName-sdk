@@ -1,18 +1,13 @@
 'use client';
 
-import { SubnameRevokeResponse } from '@justaname.id/sdk';
+import { SubnameRevokeParams, SubnameRevokeResponse } from '@justaname.id/sdk';
 import { useMutation } from '@tanstack/react-query';
-import { useJustaName } from '../providers';
-import { useAccountSubnames } from './useAccountSubnames';
-import { useMountedAccount } from './useMountedAccount';
+import { useJustaName } from '../../providers';
+import { useAccountSubnames } from '../account/useAccountSubnames';
+import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
 
-export interface BaseRevokeSubnameRequest {
-  ensDomain: string;
-
-  username: string;
-
-  chainId: number;
+export interface RevokeSubnameRequest extends SubnameRevokeParams {
 }
 
 /**
@@ -24,9 +19,9 @@ export interface BaseRevokeSubnameRequest {
  *  @property {boolean} isRevokeSubnamePending - Indicates if the mutation is currently pending.
  *  @template T - The type of additional parameters that can be passed to the revoke subname mutation, extending the base request.
  */
-export interface UseRevokeSubname<T = any> {
+export interface UseRevokeSubname {
   revokeSubname: (
-    params: T & BaseRevokeSubnameRequest
+    params: RevokeSubnameRequest
   ) => Promise<SubnameRevokeResponse>;
   isRevokeSubnamePending: boolean;
 }
@@ -36,8 +31,8 @@ export interface UseRevokeSubname<T = any> {
  * @template T - The type of additional parameters that can be passed to the revoke subname mutation, extending the base request.
  * @returns {UseRevokeSubname} An object containing the `revokeSubname` async function to initiate the subname revoke, and a boolean `revokeSubnamePending` indicating the mutation's pending state.
  */
-export const useRevokeSubname = <T = any>(): UseRevokeSubname<T> => {
-  const { backendUrl, routes } = useJustaName();
+export const useRevokeSubname = (): UseRevokeSubname => {
+  const { backendUrl, routes, apiKey, justaname } = useJustaName();
   const { address } = useMountedAccount();
   const { getSignature } = useSubnameSignature();
   const { refetchAccountSubnames } = useAccountSubnames();
@@ -45,41 +40,56 @@ export const useRevokeSubname = <T = any>(): UseRevokeSubname<T> => {
   const mutate = useMutation<
     SubnameRevokeResponse,
     Error,
-    T & BaseRevokeSubnameRequest
+    RevokeSubnameRequest
   >({
-    mutationFn: async (params: T & BaseRevokeSubnameRequest) => {
+    mutationFn: async (params: RevokeSubnameRequest) => {
       if (!address) {
         throw new Error('No address found');
       }
 
       const signature = await getSignature();
 
-      const response = await fetch((backendUrl ?? "") + routes.revokeSubnameRoute, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...params,
-          signature: signature.signature,
-          address: address,
-          message: signature.message,
-        }),
-      });
+      let response: SubnameRevokeResponse;
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      if(apiKey){
+        response = await justaname.subnames.revokeSubname({
+          username: params.username,
+          ensDomain: params.ensDomain,
+          chainId: params.chainId,
+        }, {
+          xSignature: signature.signature,
+          xAddress: address,
+          xMessage: signature.message,
+        });
+      } else {
+        const backendResponse = await fetch((backendUrl ?? "") + routes.revokeSubnameRoute, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...params,
+            signature: signature.signature,
+            address: address,
+            message: signature.message,
+          }),
+        });
+
+        if (!backendResponse.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        response = await backendResponse.json();
       }
 
-      const data: SubnameRevokeResponse = await response.json();
       refetchAccountSubnames();
-      return data;
+      return response;
     },
   });
 
   return {
     revokeSubname: mutate.mutateAsync as (
-      params: T & BaseRevokeSubnameRequest
+      params: RevokeSubnameRequest
     ) => Promise<SubnameRevokeResponse>,
     isRevokeSubnamePending: mutate.isPending,
   };

@@ -1,7 +1,7 @@
 import { IRequest, IResponse, IRoute } from '../common';
 
 /**
- * Represents the request to verify a specific address using SIWE.
+ * Represents the request to verify a specific address using .
  * @interface VerifyChallengeRequest
  * @public
  */
@@ -29,7 +29,7 @@ export interface VerifyChallengeRequest extends IRequest {
 
 
 /**
- * Represents the response to a request to verify a specific address using SIWE.
+ * Represents the response to a request to verify a specific address using siwe.
  * @interface VerifyChallengeResponse
  * @public
  */
@@ -42,17 +42,17 @@ export interface VerifyChallengeResponse extends IResponse {
 }
 
 /**
- * Configures the route for verifying a SIWE message. This interface extends the generic `IRoute`,
+ * Configures the route for verifying a siwe message. This interface extends the generic `IRoute`,
  * specifying the request and response structures involved in verifying an Ethereum address.
  *
- * @interface SIWEVerifyMessageRoute
+ * @interface VerifyMessageRoute
  * @extends IRoute
  * @public
  * @property {VerifyChallengeRequest} request - The structure required for the verification request.
  * @property {VerifyChallengeResponse} response - The expected response indicating verification result.
  * @property {NonNullable<unknown>} headers - The headers required for the request, left flexible for specific needs.
  */
-export interface SIWEVerifyMessageRoute extends IRoute {
+export interface VerifyMessageRoute extends IRoute {
   request: VerifyChallengeRequest;
   response: VerifyChallengeResponse;
   headers: NonNullable<unknown>;

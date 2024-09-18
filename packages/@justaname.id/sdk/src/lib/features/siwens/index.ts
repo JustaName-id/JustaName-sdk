@@ -1,39 +1,35 @@
 import { generateNonce, SiweMessage, SiweResponse, VerifyOpts, VerifyParams, } from 'siwe';
 import { JsonRpcProvider } from 'ethers';
 import {
-
   InvalidStatementException,
-  InvalidSubnameException,
-  InvalidTimeException
+  InvalidENSException,
+  InvalidTimeException,
+  InvalidConfigurationException
 } from '../../errors';
 import { checkDomainValid, checkTTL, constructSignInStatement, extractDataFromStatement } from '../../utils';
-import { OffchainResolvers } from '../../features/offchain-resolvers';
-import { InvalidConfigurationException } from '../../errors/InvalidConfiguration.exception';
 
-export interface SiwjResponse extends SiweResponse {
-  subname: string
+export interface SiwensResponse extends SiweResponse {
+  ens: string
 }
 
-export interface SiwjConfig {
-  params: string | SiwjParams
+export interface SiwensConfig {
+  params: string | SiwensParams
   providerUrl?: string
 }
 
-export interface SiwjParams extends Omit<Partial<SiweMessage>,"statement" | "expirationTime" | "issuedAt"> {
-  subname: string,
+export interface SiwensParams extends Omit<Partial<SiweMessage>,"statement" | "expirationTime" | "issuedAt"> {
+  ens: string,
   ttl?: number,
 }
 
-export class Siwj extends SiweMessage {
+export class SIWENS extends SiweMessage {
   readonly provider: JsonRpcProvider;
-  readonly offchainResolver: OffchainResolvers;
 
-  constructor(signInConfig: SiwjConfig){
+  constructor(signInConfig: SiwensConfig){
     const { params, providerUrl } = signInConfig;
     if(typeof params === "string"){
       super(params)
       this.provider = new JsonRpcProvider(providerUrl);
-      this.offchainResolver = new OffchainResolvers();
       return;
     }
 
@@ -46,31 +42,30 @@ export class Siwj extends SiweMessage {
     }
 
     checkTTL(params.ttl);
-    checkDomainValid(params.subname);
+    checkDomainValid(params.ens);
 
-    const statement = constructSignInStatement(params.domain, params.subname);
+    const statement = constructSignInStatement(params.domain, params.ens);
 
     super({
       ...params,
       statement,
       version: params.version || "1",
-      expirationTime: Siwj.generateExpirationFromTtl(params.ttl),
+      ...SIWENS.generateIssuedAndExpirationTime(params.ttl),
     })
-    this.offchainResolver = new OffchainResolvers();
     this.provider = new JsonRpcProvider(providerUrl)
   }
 
-  override async verify(params: VerifyParams, opts?: VerifyOpts): Promise<SiwjResponse> {
+  override async verify(params: VerifyParams, opts?: VerifyOpts): Promise<SiwensResponse> {
     let verification: SiweResponse;
 
     try {
        verification = await super.verify(params, opts);
     } catch (e) {
       const statement = e.data.statement;
-      const { subname } = extractDataFromStatement(statement);
+      const { ens } = extractDataFromStatement(statement);
       throw {
         ...e,
-        subname
+        ens
       }
     }
 
@@ -78,69 +73,45 @@ export class Siwj extends SiweMessage {
     if(!statement){
       throw InvalidStatementException.invalidStatement()
     }
-    const { subname } = extractDataFromStatement(statement)
+    const { ens } = extractDataFromStatement(statement)
 
 
-    await Promise.all([this.verifySubnameAddress(
-      subname,
+    await this.verifyEnsAddress(
+      ens,
       this.address
-    ),this.verifySubnameResolves(subname)])
+    )
 
     return {
       ...verification,
-      subname
+      ens
     };
   }
 
-  static generateExpirationFromTtl(ttl:number){
-    return new Date(Date.now() + ttl).toISOString();
+  static generateIssuedAndExpirationTime(ttl: number){
+    const date = new Date();
+    const issuedAt = date.toISOString();
+    const expirationTime = new Date(date.getTime() + ttl).toISOString();
+    return {
+      issuedAt,
+      expirationTime
+    }
   }
 
   static generateNonce(){
     return generateNonce()
   }
 
-
-  private async verifySubnameResolves(subname:string){
-    const [resolverAddress,resolvers] = await Promise.all([this.provider.getResolver(subname),this.offchainResolver.getAllOffchainResolvers()]);
-
-    console.log(resolverAddress, resolvers)
-    const currentOffchainResolver = resolvers.find(resolver => resolver.chainId === this.chainId)
-
-
-    if(!currentOffchainResolver){
-      throw InvalidSubnameException.chainNotSupported(
-        this.chainId.toString()
-      )
-    }
-
-    if(!resolverAddress?.address){
-      throw InvalidSubnameException.notRegisteredSubname(
-        subname
-      )
-     }
-
-    console.log(currentOffchainResolver.resolverAddress, resolverAddress?.address)
-
-    if(currentOffchainResolver.resolverAddress !== resolverAddress?.address){
-      throw InvalidSubnameException.notOnJustanameResolver(
-        subname
-      )
-    }
-    return true
-  }
-
-  private async verifySubnameAddress(subname:string, address:string){
-    const resolvedAddress = await this.provider.resolveName(subname);
+  private async verifyEnsAddress(ens:string, address:string){
+    const resolvedAddress = await this.provider.resolveName(ens);
     if(!resolvedAddress){
-      throw InvalidSubnameException.notRegisteredSubname(
-        subname
+      throw InvalidENSException.notRegisteredENS(
+        ens
       )
     }
 
     if(resolvedAddress !== address){
-      throw InvalidSubnameException.invalidSubnameOwner(
-        subname,
+      throw InvalidENSException.invalidENSOwner(
+        ens,
         address
       )
     }
@@ -148,4 +119,4 @@ export class Siwj extends SiweMessage {
   }
 }
 
-export default Siwj;
+export default SIWENS;
