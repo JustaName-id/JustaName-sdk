@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import dotenv from 'dotenv';
-import Siwj from '../../../lib/features/siwj';
+import Siwj from '../../../lib/features/siwens';
 import { InvalidSubnameException, InvalidTimeException } from '../../../lib/errors';
 import { extractDataFromStatement } from '@justaname.id/sdk';
 

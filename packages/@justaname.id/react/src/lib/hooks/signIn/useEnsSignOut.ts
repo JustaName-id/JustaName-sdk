@@ -2,7 +2,7 @@
 
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
-import { useSubnameSession } from './useSubnameSession';
+import { useSubnameSession } from './useEnsAuth';
 
 export interface UseSubnameSignOutResult {
   signOut: UseMutateAsyncFunction<void, Error, void, unknown>,
