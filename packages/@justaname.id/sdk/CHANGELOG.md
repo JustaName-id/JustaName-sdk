@@ -1,3 +1,20 @@
+## 0.2.83 (2024-09-19)
+
+
+### 🩹 Fixes
+
+- removed logs ([cbcbb39](https://github.com/JustaName-id/JustaName-sdk/commit/cbcbb39))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.16
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.2.82 (2024-09-19)
 
 
