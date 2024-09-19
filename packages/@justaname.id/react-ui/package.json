@@ -1,6 +1,6 @@
 {
   "name": "@justaname.id/react-ui",
-  "version": "0.0.16",
+  "version": "0.0.15",
   "peerDependencies": {
     "react": ">=17",
     "react-dom": ">=17"
