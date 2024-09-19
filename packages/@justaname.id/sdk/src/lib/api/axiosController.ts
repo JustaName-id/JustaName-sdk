@@ -9,9 +9,7 @@ export let BASE_URL = 'https://api.justaname.id';
 function loadEnv() {
   let isDevelopment = false;
 
-  console.log('checking env', typeof process, process.env);
   if (typeof process !== 'undefined' && process.env) {
-    console.log('env', process.env);
     try {
       isDevelopment =
         process.env['JUSTANAME_ENVIRONMENT'] === 'development' ||
