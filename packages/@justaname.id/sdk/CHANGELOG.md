@@ -1,3 +1,20 @@
+## 0.2.81 (2024-09-19)
+
+
+### 🩹 Fixes
+
+- debug sdk ([38ba1e4](https://github.com/JustaName-id/JustaName-sdk/commit/38ba1e4))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.14
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.2.80 (2024-09-18)
 
 
