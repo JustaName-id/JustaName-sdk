@@ -9,9 +9,12 @@ export let BASE_URL = 'https://api.justaname.id';
 function loadEnv() {
   let isDevelopment = false;
 
+  console.log('checking env');
   if (typeof process !== 'undefined' && process.env) {
+    console.log('env', process.env);
     try {
-      isDevelopment = process.env['JUSTANAME_ENVIRONMENT'] === 'development' ||
+      isDevelopment =
+        process.env['JUSTANAME_ENVIRONMENT'] === 'development' ||
         process.env['NEXT_PUBLIC_JUSTANAME_ENVIRONMENT'] === 'development' ||
         process.env['VITE_JUSTANAME_ENVIRONMENT'] === 'development' ||
         process.env['NODE_ENV'] === 'test';
@@ -20,7 +23,9 @@ function loadEnv() {
     }
   }
 
-  BASE_URL = isDevelopment ? 'https://api-staging.justaname.id' : 'https://api.justaname.id';
+  BASE_URL = isDevelopment
+    ? 'https://api-staging.justaname.id'
+    : 'https://api.justaname.id';
 }
 
 loadEnv();
@@ -35,14 +40,13 @@ export const justANameInstance = axios.create({
   baseURL: getBaseUrl(),
 });
 
-
 /**
  * Represents the Controlled Axios Promise type.
  * @typeparam T - The type of the data to be returned.
  */
-export type ControlledAxiosPromise<T extends {}> =
-  AxiosPromise<BaseResponse<T>>;
-
+export type ControlledAxiosPromise<T extends {}> = AxiosPromise<
+  BaseResponse<T>
+>;
 
 /**
  * Represents the controlled axios promise.
