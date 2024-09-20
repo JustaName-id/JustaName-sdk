@@ -28,10 +28,11 @@ export const SIWENSDialog: React.FC<SIWENSDialogProps> = ({ open, handleOpenDial
   }, [accountSubnames, allowedSubnames, ensDomain]);
 
 
+  if(isConnected && isAccountSubnamesPending && open){
+    return <LoadingDialog open={true} />
+  }
+
   return (
-    <>
       <SelectSubnameDialog open={open && !isAccountSubnamesPending && isConnected} subnames={subnames} handleOpenDialog={handleOpenDialog} />
-      <LoadingDialog open={isAccountSubnamesPending && open && isConnected} />
-    </>
   );
 };

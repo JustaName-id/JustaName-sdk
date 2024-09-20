@@ -2,11 +2,11 @@ import { ChainId, IRequest, IResponse, IRoute } from '../common';
 
 /**
  * Represents a request to challenge to add EBDC permission.
- * @interface RequestRevokeEbdcFieldChallengeRequest
+ * @interface RequestRevokeMAppFieldChallengeRequest
  * @public
  */
 
-export interface RequestRevokeEbdcFieldChallengeRequest extends IRequest {
+export interface RequestRevokeMAppFieldChallengeRequest extends IRequest {
 
   /**
    *  Represents the ENS domain
@@ -48,18 +48,18 @@ export interface RequestRevokeEbdcFieldChallengeRequest extends IRequest {
   subname: string
 
   /**
-   * Subname requesting the ABDC Permission
+   * Subname requesting the MApps Permission
    * @type {string}
    */
-  ensDomain: string
+  mApp: string
 }
 
 /**
  * Represents the response to a request to challenge a specific address using SIWE.
- * @interface RequestRevokeEbdcFieldChallengeResponse
+ * @interface RequestRevokeMAppPermissionChallengeResponse
  * @public
  */
-export interface RequestRevokeEbdcFieldChallengeResponse extends IResponse{
+export interface RequestRevokeMAppPermissionChallengeResponse extends IResponse{
   /**
    * Represents the challenge to be signed by the user.
    * @type {string}
@@ -67,13 +67,13 @@ export interface RequestRevokeEbdcFieldChallengeResponse extends IResponse{
   challenge: string;
 }
 
-export interface RequestRevokeEbdcFieldChallengeRoute extends IRoute {
-  request: RequestRevokeEbdcFieldChallengeRequest;
-  response: RequestRevokeEbdcFieldChallengeResponse;
+export interface RequestRevokeMAppFieldChallengeRoute extends IRoute {
+  request: RequestRevokeMAppFieldChallengeRequest;
+  response: RequestRevokeMAppPermissionChallengeResponse;
   headers: NonNullable<unknown>;
 }
 
-export interface RequestRevokeEbdcFieldChallengeParams extends Omit<RequestRevokeEbdcFieldChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl' > {
+export interface RequestRevokeMAppPermissionChallengeParams extends Omit<RequestRevokeMAppFieldChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl' > {
   origin?: string,
   domain?: string,
   chainId?: ChainId,

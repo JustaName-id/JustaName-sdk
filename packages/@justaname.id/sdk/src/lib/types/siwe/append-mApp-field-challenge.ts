@@ -2,11 +2,11 @@ import { ChainId, IRequest, IResponse, IRoute } from '../common';
 
 /**
  * Represents a request to challenge to add EBDC permission.
- * @interface RequestAppendEbdcFieldChallengeRequest
+ * @interface RequestAppendMAppFieldChallengeRequest
  * @public
  */
 
-export interface RequestAppendEbdcFieldChallengeRequest extends IRequest {
+export interface RequestAppendMAppFieldChallengeRequest extends IRequest {
 
   /**
    *  Represents the ENS domain
@@ -48,18 +48,18 @@ export interface RequestAppendEbdcFieldChallengeRequest extends IRequest {
   subname: string
 
   /**
-   * Subname requesting the ABDC Permission
+   * Subname requesting the MApps Permission
    * @type {string}
    */
-  ensDomain: string
+  mApp: string
 }
 
 /**
  * Represents the response to a request to challenge a specific address using SIWE.
- * @interface RequestAppendEbdcFieldChallengeResponse
+ * @interface RequestAppendMAppFieldChallengeResponse
  * @public
  */
-export interface RequestAppendEbdcFieldChallengeResponse extends IResponse{
+export interface RequestAppendMAppFieldChallengeResponse extends IResponse{
   /**
    * Represents the challenge to be signed by the user.
    * @type {string}
@@ -67,13 +67,13 @@ export interface RequestAppendEbdcFieldChallengeResponse extends IResponse{
   challenge: string;
 }
 
-export interface RequestAppendEbdcFieldChallengeRoute extends IRoute {
-  request: RequestAppendEbdcFieldChallengeRequest;
-  response: RequestAppendEbdcFieldChallengeResponse;
+export interface RequestAppendMAppFieldChallengeRoute extends IRoute {
+  request: RequestAppendMAppFieldChallengeRequest;
+  response: RequestAppendMAppFieldChallengeResponse;
   headers: NonNullable<unknown>;
 }
 
-export interface RequestAppendEbdcFieldChallengeParams extends Omit<RequestAppendEbdcFieldChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl' > {
+export interface RequestAppendMAppFieldChallengeParams extends Omit<RequestAppendMAppFieldChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl' > {
   origin?: string,
   domain?: string,
   chainId?: ChainId,

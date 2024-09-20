@@ -18,27 +18,27 @@ import {
   SubnameRevokeRoute,
   SubnameSearchRoute,
   SubnameUpdateRoute,
-  RequestAddEbdcPermissionChallengeRoute,
-  RequestAppendEbdcFieldChallengeRoute,
-  RequestRevokeEbdcFieldChallengeRoute,
-  AddEbdcPermissionRoute,
-  AppendEbdcFieldRoute,
-  RevokeEbdcPermissionRoute
+  RequestAddMAppPermissionChallengeRoute,
+  RequestAppendMAppFieldChallengeRoute,
+  RequestRevokeMAppFieldChallengeRoute,
+  AddMAppPermissionRoute,
+  AppendMAppFieldRoute,
+  RevokeMAppPermissionRoute
 } from '../../types';
 import { HEALTH_CHECK_ROUTE } from './api-key';
 import { OFFCHAIN_RESOLVERS_ROUTE } from './offchain-resolver';
 import {
   SIWE_REQUEST_CHALLENGE_ROUTE,
   SIWE_VERIFY_MESSAGE_ROUTE,
-  SIWE_EBDC_ADD_PERMISSION_ROUTE,
-  SIWE_EBDC_APPEND_FIELD_ROUTE,
-  SIWE_EBDC_REVOKE_PERMISSION_ROUTE
+  SIWE_MAPP_ADD_PERMISSION_ROUTE,
+  SIWE_MAPP_APPEND_FIELD_ROUTE,
+  SIWE_MAPP_REVOKE_PERMISSION_ROUTE
 } from './siwe';
 import {
-  EBDC_ADD_PERMISSION_ROUTE,
-  EBDC_APPEND_FIELD_ROUTE,
-  EBDC_REVOKE_PERMISSION_ROUTE
-} from './ebdc'
+  MAPP_ADD_PERMISSION_ROUTE,
+  MAPP_APPEND_FIELD_ROUTE,
+  MAPP_REVOKE_PERMISSION_ROUTE
+} from './mapp'
 import {
   ACCEPT_SUBNAME_ROUTE,
   ADD_SUBNAME_ROUTE,
@@ -61,12 +61,12 @@ export const Routes = {
   HEALTH_CHECK_ROUTE,
   SIWE_VERIFY_MESSAGE_ROUTE,
   SIWE_REQUEST_CHALLENGE_ROUTE,
-  SIWE_EBDC_ADD_PERMISSION_ROUTE,
-  SIWE_EBDC_APPEND_FIELD_ROUTE,
-  SIWE_EBDC_REVOKE_PERMISSION_ROUTE,
-  EBDC_ADD_PERMISSION_ROUTE,
-  EBDC_APPEND_FIELD_ROUTE,
-  EBDC_REVOKE_PERMISSION_ROUTE,
+  SIWE_MAPP_ADD_PERMISSION_ROUTE,
+  SIWE_MAPP_APPEND_FIELD_ROUTE,
+  SIWE_MAPP_REVOKE_PERMISSION_ROUTE,
+  MAPP_ADD_PERMISSION_ROUTE,
+  MAPP_APPEND_FIELD_ROUTE,
+  MAPP_REVOKE_PERMISSION_ROUTE,
   ACCEPT_SUBNAME_ROUTE,
   RESERVE_SUBNAME_ROUTE,
   ADD_SUBNAME_ROUTE,
@@ -95,12 +95,12 @@ export interface ROUTES extends IROUTES {
   HEALTH_CHECK_ROUTE: ApiKeyRoute;
   SIWE_VERIFY_MESSAGE_ROUTE: VerifyMessageRoute;
   SIWE_REQUEST_CHALLENGE_ROUTE: RequestChallengeRoute;
-  SIWE_EBDC_ADD_PERMISSION_ROUTE: RequestAddEbdcPermissionChallengeRoute;
-  SIWE_EBDC_APPEND_FIELD_ROUTE: RequestAppendEbdcFieldChallengeRoute;
-  SIWE_EBDC_REVOKE_PERMISSION_ROUTE: RequestRevokeEbdcFieldChallengeRoute;
-  EBDC_ADD_PERMISSION_ROUTE: AddEbdcPermissionRoute;
-  EBDC_APPEND_FIELD_ROUTE: AppendEbdcFieldRoute;
-  EBDC_REVOKE_PERMISSION_ROUTE: RevokeEbdcPermissionRoute;
+  SIWE_MAPP_ADD_PERMISSION_ROUTE: RequestAddMAppPermissionChallengeRoute;
+  SIWE_MAPP_APPEND_FIELD_ROUTE: RequestAppendMAppFieldChallengeRoute;
+  SIWE_MAPP_REVOKE_PERMISSION_ROUTE: RequestRevokeMAppFieldChallengeRoute;
+  MAPP_ADD_PERMISSION_ROUTE: AddMAppPermissionRoute;
+  MAPP_APPEND_FIELD_ROUTE: AppendMAppFieldRoute;
+  MAPP_REVOKE_PERMISSION_ROUTE: RevokeMAppPermissionRoute;
   ACCEPT_SUBNAME_ROUTE: SubnameAcceptRoute;
   RESERVE_SUBNAME_ROUTE: SubnameReserveRoute;
   ADD_SUBNAME_ROUTE: SubnameAddRoute;

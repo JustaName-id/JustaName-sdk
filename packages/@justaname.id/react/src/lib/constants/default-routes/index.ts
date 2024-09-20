@@ -9,4 +9,4 @@ export const defaultRoutes = {
   signinNonceRoute: '/api/signin/nonce',
   signoutRoute: '/api/signout',
   currentEnsRoute: '/api/current',
-} as const;
+};

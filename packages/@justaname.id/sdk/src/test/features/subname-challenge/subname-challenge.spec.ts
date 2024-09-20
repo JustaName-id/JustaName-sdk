@@ -3,9 +3,7 @@ import rest from '../../../lib/api/rest';
 import dotenv from 'dotenv';
 import { ethers } from 'ethers';
 dotenv.config();
-
-const pk = process.env['PRIVATE_KEY'] as string;
-const signer = new ethers.Wallet(pk);
+const signer = ethers.Wallet.createRandom();
 describe('subnameChallenge', () => {
 
   let subnameChallenge: SubnameChallenge;
@@ -25,7 +23,7 @@ challenge: '0x1234',
 
   it('should be able to request a challenge', async () => {
     const requestChallengeResponse = await subnameChallenge.requestChallenge({
-      address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
+      address: signer.address,
     });
     expect(requestChallengeResponse).toBeDefined();
   })

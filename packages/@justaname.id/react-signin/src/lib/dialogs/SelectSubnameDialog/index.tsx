@@ -1,27 +1,32 @@
 import {
-  A,
   Badge,
-  Button, Dialog, DialogContent, DialogTitle,
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   Flex,
   formatText,
   H2,
   Input,
-  JustaNameLogoIcon,
   OrLine,
   ProfileIcon,
-  SPAN,
   CloseIcon
 } from '@justaname.id/react-ui';
 import {
   SubnamesType,
-  useAddSubname, useEnsSignIn,
+  useAddSubname,
+  useEnsSignIn,
   useIsSubnameAvailable,
-  useJustaName, useMountedAccount
+  useJustaName,
+  useMountedAccount
 } from '@justaname.id/react';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { useDebounce } from '../../hooks';
-import { SelectSubnameItem } from '../../components';
+import {
+  Footer,
+  SelectSubnameItem
+} from '../../components';
 
 const TransitionElement = styled.div<{ maxheight: string }>`
     max-height: 0;
@@ -114,7 +119,7 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({  subna
                   cursor: 'pointer'
                 }}
                 onClick={() => handleOpenDialog(false)}
-                />
+              />
             </Flex>
 
             <TransitionElement className={(shouldBeAbleToSelect) ? 'visible' : ''} maxheight={'fit-content'}>
@@ -207,41 +212,7 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({  subna
 
 
           </Flex>
-          <Flex
-            align={'center'}
-            justify={'space-between'}
-            style={{
-              padding: '10px 20px',
-              background: 'var(--justaname-foreground-color-4)',
-              borderRadius: ' 0 0 16px 16px'
-            }}
-          >
-            <Flex
-              justify={'center'}
-              align={'center'}
-              style={{
-                height: '19px'
-              }}
-            >
-              <SPAN
-                style={{
-                  fontWeight: '700',
-                  fontSize: '12px'
-                }}
-              >
-                Powered by <A
-                style={{
-                  color: 'var(--justaname-primary-color)',
-                  fontWeight: '700',
-                  fontSize: '12px'
-
-                }}
-                href="https://justaname.id" target="_blank" rel="noreferrer">justaname.id</A>
-              </SPAN>
-
-            </Flex>
-            <JustaNameLogoIcon />
-          </Flex>
+          <Footer />
         </Flex>
       </DialogContent>
     </Dialog>

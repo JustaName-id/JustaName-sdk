@@ -6,4 +6,4 @@ export * from './justaname';
 export * from './offchain-resolver';
 export * from './siwe';
 export * from './subnames';
-export * from './ebdc';
+export * from './mapp';
