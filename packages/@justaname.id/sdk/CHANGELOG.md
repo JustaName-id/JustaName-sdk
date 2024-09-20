@@ -1,3 +1,68 @@
+## 0.2.84 (2024-09-20)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.17
+
+## 0.2.83 (2024-09-19)
+
+
+### 🩹 Fixes
+
+- removed logs ([cbcbb39](https://github.com/JustaName-id/JustaName-sdk/commit/cbcbb39))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.16
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.82 (2024-09-19)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.15
+
+## 0.2.81 (2024-09-19)
+
+
+### 🩹 Fixes
+
+- debug sdk ([38ba1e4](https://github.com/JustaName-id/JustaName-sdk/commit/38ba1e4))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.14
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.80 (2024-09-18)
+
+
+### 🚀 Features
+
+- siwens and ebdc ([87677f3](https://github.com/JustaName-id/JustaName-sdk/commit/87677f3))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.13
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.2.79 (2024-09-18)
 
 

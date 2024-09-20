@@ -1,3 +1,63 @@
+## 0.0.20 (2024-09-20)
+
+
+### 🩹 Fixes
+
+- **react-signin:** design subnames ([b384537](https://github.com/JustaName-id/JustaName-sdk/commit/b384537))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.84
+- Updated @justaname.id/react to 0.3.87
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.19 (2024-09-19)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.83
+- Updated @justaname.id/react to 0.3.86
+
+## 0.0.18 (2024-09-19)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.82
+- Updated @justaname.id/react to 0.3.85
+
+## 0.0.17 (2024-09-19)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.81
+- Updated @justaname.id/react to 0.3.84
+
+## 0.0.16 (2024-09-18)
+
+
+### 🚀 Features
+
+- siwens and ebdc ([87677f3](https://github.com/JustaName-id/JustaName-sdk/commit/87677f3))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.80
+- Updated @justaname.id/react to 0.3.83
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.15 (2024-09-18)
 
 

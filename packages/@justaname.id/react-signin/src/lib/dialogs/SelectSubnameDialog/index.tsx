@@ -47,8 +47,8 @@ export interface SelectSubnameDialogProps {
   open: boolean;
 }
 
-export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({  subnames, handleOpenDialog, open }) => {
-  const { address} = useMountedAccount();
+export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnames, handleOpenDialog, open }) => {
+  const { address } = useMountedAccount();
   const [username, setUsername] = React.useState('');
   const [subnameSigningIn, setSubnameSigningIn] = React.useState('');
   const { ensDomain } = useJustaName();
@@ -87,7 +87,7 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({  subna
       }}>
         <Flex
           style={{
-            padding:'0px 0 0 0',
+            padding: '0px 0 0 0',
             borderRadius: '16px',
             background: 'var(--justaname-foreground-color-4)',
           }}
@@ -134,6 +134,11 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({  subna
                 <Flex
                   direction={'column'}
                   gap={'15px'}
+                  style={{
+                    maxHeight: '20vh',
+                    overflowY: 'scroll',
+                    overflowX: 'hidden'
+                  }}
                 >
                   {
                     subnames.map((subname, index) => {
@@ -144,7 +149,7 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({  subna
                             subname={subname}
                             onClick={() => {
                               setSubnameSigningIn(subname.subname);
-                              signIn({ ens: subname.subname }).then(()=> handleOpenDialog(false)).finally(() => {
+                              signIn({ ens: subname.subname }).then(() => handleOpenDialog(false)).finally(() => {
                                 setSubnameSigningIn('');
                               });
                             }}
