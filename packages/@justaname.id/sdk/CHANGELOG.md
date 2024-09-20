@@ -1,3 +1,20 @@
+## 0.2.85 (2024-09-20)
+
+
+### 🚀 Features
+
+- mApp in sdk react and react-signin ([#26](https://github.com/JustaName-id/JustaName-sdk/pull/26))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.18
+
+
+### ❤️  Thank You
+
+- JustHadi @HadiKhai
+
 ## 0.2.84 (2024-09-20)
 
 
