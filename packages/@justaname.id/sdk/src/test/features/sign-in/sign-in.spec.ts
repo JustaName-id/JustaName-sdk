@@ -2,24 +2,31 @@ import { ethers } from 'ethers';
 import dotenv from 'dotenv';
 import SignIn from '../../../lib/features/sign-in';
 import { OffchainResolvers } from '../../../lib/features';
+import { configureEnv } from '../../helpers/configureEnv';
+import { initializeJustaName } from '../../helpers/initializeJustaName';
+import { JustaName } from '../../../lib/justaname';
 dotenv.config();
 
-const pk = process.env['PRIVATE_KEY'] as string;
-const signer = new ethers.Wallet(pk);
-const PROVIDER_URL = process.env['PROVIDER_URL'] as string;
+const PROVIDER_URL = process.env['SDK_PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
-const ADDRESS = signer.address;
 const CHAIN_ID = 11155111;
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
-const VALID_ENS = process.env['VALID_ENS'] as string;
 
-
+const invalidSigner = new ethers.Wallet(ethers.Wallet.createRandom().privateKey);
+const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
+const subnameSigner = ethers.Wallet.createRandom()
+const subnameToBeAdded = Math.random().toString(36).substring(7);
+const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 describe('SignIn', () => {
 
   let signIn: SignIn;
+  let justaname: JustaName;
 
-  beforeEach(() => {
+  beforeEach(async () => {
+
+    await configureEnv();
+    justaname = initializeJustaName(validApiKey);
     signIn = new SignIn({
       origin: URI,
       domain: DOMAIN,
@@ -29,6 +36,24 @@ describe('SignIn', () => {
       new OffchainResolvers()
       );
   });
+
+
+  it('should add a subname', async () => {
+    const challenge = await justaname.siwe.requestChallenge({
+      address: subnameSigner.address,
+    });
+
+    const signature = await subnameSigner.signMessage(challenge.challenge);
+    const response = await justaname.subnames.addSubname({
+      username: subnameToBeAdded
+    }, {
+      xMessage: challenge.challenge,
+      xAddress: subnameSigner.address,
+      xSignature: signature
+    })
+
+    expect(response).toBeDefined();
+  })
 
   it('should create an instance', () => {
     expect(signIn).toBeTruthy();
@@ -46,8 +71,8 @@ describe('SignIn', () => {
 
   it('should request a challenge', async () => {
     const response = signIn.requestSignIn({
-      address: ADDRESS,
-      ens: VALID_ENS,
+      address: subnameSigner.address,
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
     });
     expect(response).toBeTruthy();
   });
@@ -55,18 +80,18 @@ describe('SignIn', () => {
 
   it('should verify a signature', async () => {
     const message = signIn.requestSignIn({
-      address: ADDRESS,
-      ens: VALID_ENS,
+      address: subnameSigner.address,
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
     });
-    const signature = await signer.signMessage(message);
+    const signature = await subnameSigner.signMessage(message);
     const response = await signIn.signIn(message, signature);
     expect(response.success).toBeTruthy();
   },60000)
 
   it('should fail to verify an invalid signature', async () => {
     const message = signIn.requestSignIn({
-      address: ADDRESS,
-      ens: VALID_ENS,
+      address: invalidSigner.address,
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
     });
     const signer2 = new ethers.Wallet(ethers.Wallet.createRandom().privateKey);
     const signature = await signer2.signMessage(message);
@@ -82,11 +107,30 @@ describe('SignIn', () => {
 
   it('should return true if JustaName resolver is Configured', async () => {
     const message = signIn.requestSignIn({
-      address: ADDRESS,
-      ens: VALID_ENS,
+      address: subnameSigner.address,
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
     });
-    const signature = await signer.signMessage(message);
+    const signature = await subnameSigner.signMessage(message);
     const response = await signIn.signIn(message, signature);
     expect(response.isJustaName).toBeTruthy();
   },60000)
+
+  it('should revoke subname', async () => {
+    const challenge = await justaname.siwe.requestChallenge({
+      address: subnameSigner.address,
+    });
+
+    const signature = await subnameSigner.signMessage(challenge.challenge);
+
+    const response = await justaname.subnames.revokeSubname({
+      chainId: 11155111,
+      username: subnameToBeAdded
+    }, {
+      xAddress: subnameSigner.address,
+      xSignature: signature,
+      xMessage: challenge.challenge
+    })
+
+    expect(response).toBeDefined();
+  })
 })

@@ -1,42 +1,42 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
-import { AddEbdcPermissionResponse } from '@justaname.id/sdk';
+import { RevokeMAppPermissionResponse } from '@justaname.id/sdk';
 import { useSignMessage } from 'wagmi';
 import { useAccountSubnames, useMountedAccount } from '../account';
 
-export interface UseRequestAddEbdcPermission {
-  addEbdcPermission: UseMutateFunction<AddEbdcPermissionResponse, Error, AddEbdcPermissionRequest, unknown>;
-  isAddEbdcPermissionPending: boolean;
+export interface UseRequestRevokeEbdcPermission {
+  addEbdcPermission: UseMutateFunction<RevokeMAppPermissionResponse, Error, RevokeEbdcPermissionRequest, unknown>;
+  isRevokeEbdcPermissionPending: boolean;
 }
 
-export interface AddEbdcPermissionRequest {
+export interface RevokeEbdcPermissionRequest {
   subname: string
 }
 
-export const useAddEbdcPermission = ({
-  ensDomain
-                                    }: {
-  ensDomain: string
-}): UseRequestAddEbdcPermission => {
+export interface UseRevokeMAppPermissionParams {
+  mApp: string
+}
+
+export const useRevokeMAppPermission = ({ mApp }: UseRevokeMAppPermissionParams): UseRequestRevokeEbdcPermission => {
   const { justaname } = useJustaName()
   const { signMessageAsync } = useSignMessage()
   const { address} = useMountedAccount()
   const { refetchAccountSubnames } = useAccountSubnames()
   const mutate = useMutation<
-    AddEbdcPermissionResponse,
+    RevokeMAppPermissionResponse,
     Error,
-    AddEbdcPermissionRequest
+    RevokeEbdcPermissionRequest
   >({
     mutationFn: async (
-      params:AddEbdcPermissionRequest
+      params:RevokeEbdcPermissionRequest
     ) => {
       if (!address) {
         throw new Error('Wallet not connected')
       }
-      const challengeResponse = await justaname.ebdc.requestAddEbdcPermissionChallenge({
+      const challengeResponse = await justaname.mApps.requestRevokeMAppPermissionChallenge({
         subname: params.subname,
         address: address,
-        ensDomain,
+        mApp: mApp
       })
 
       const signature = await signMessageAsync({
@@ -44,19 +44,19 @@ export const useAddEbdcPermission = ({
         account: address
       })
 
-      const response = await justaname.ebdc.addEbdcPermission({
+      const response = await justaname.mApps.revokeMAppPermission({
         message: challengeResponse.challenge,
         address: address,
         signature
       })
-      
+
       refetchAccountSubnames()
       return response
     }
   })
-  
+
   return {
     addEbdcPermission: mutate.mutate,
-    isAddEbdcPermissionPending: mutate.isPending
+    isRevokeEbdcPermissionPending: mutate.isPending
   }
 }

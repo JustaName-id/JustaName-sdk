@@ -58,20 +58,20 @@ interface Metadata {
 /**
  * Outlines the response received after successfully updating a subname.
  *
- * @interface AddEbdcPermissionResponse
+ * @interface AddMAppPermissionResponse
  * @extends IResponse
  * @public
  * @property {string} id - The unique identifier of the update operation.
  * @property {Metadata} data - The updated metadata associated with the subname.
  */
-export interface AddEbdcPermissionResponse extends IResponse{
+export interface AddMAppPermissionResponse extends IResponse{
 
   id: string;
 
   data: Metadata;
 }
 
-export interface AddEbdcPermissionRequest extends IRequest {
+export interface AddMAppPermissionRequest extends IRequest {
   /**
    * Represents the ethereum address to be verified.
    * @type {string}
@@ -92,10 +92,10 @@ export interface AddEbdcPermissionRequest extends IRequest {
   message: string;
 }
 
-export interface AddEbdcPermissionRoute extends IRoute {
-  request: AddEbdcPermissionRequest;
-  response: AddEbdcPermissionResponse;
+export interface AddMAppPermissionRoute extends IRoute {
+  request: AddMAppPermissionRequest;
+  response: AddMAppPermissionResponse;
   headers: NonNullable<unknown>;
 }
 
-export interface AddEbdcPermissionParams extends AddEbdcPermissionRequest {}
+export interface AddMAppPermissionParams extends AddMAppPermissionRequest {}
