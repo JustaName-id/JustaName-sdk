@@ -1,11 +1,13 @@
+import { Meta, StoryObj } from '@storybook/react';
+import { MAppDialog } from '../lib/dialogs';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SIWENSProvider, SIWENSProviderConfig, useSignInWithEns } from '../lib';
 import '@rainbow-me/rainbowkit/styles.css';
 import { ConnectButton, getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
+import { WagmiProvider } from 'wagmi';
 import { ChainId } from '@justaname.id/sdk';
-import { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 const queryClient = new QueryClient();
 
@@ -27,6 +29,14 @@ const JustaNameConfig: SIWENSProviderConfig = {
 
 const Session = () => {
   const { connectedEns, handleOpenSignInDialog, signOut} = useSignInWithEns()
+  const [open, setOpen] = useState(false);
+
+  const handleOpenDialog = (_open: boolean) => {
+    if (_open !== open) {
+      setOpen(_open);
+    }
+  }
+
   return (
     <div>
       <h1>Subname Session</h1>
@@ -34,8 +44,9 @@ const Session = () => {
         !connectedEns && <button onClick={() => handleOpenSignInDialog(true)}>Sign In</button>
       }
       {
-        connectedEns && <button onClick={signOut}>Sign Out</button>
+        connectedEns && <button onClick={signOut} >Sign Out</button>
       }
+      <MAppDialog mApp={"justverified.eth"} open={open} handleOpenDialog={handleOpenDialog} />
       <pre>{JSON.stringify(connectedEns, null, 2)}</pre>
     </div>
   )
@@ -65,10 +76,9 @@ export const Example = () => {
 
 const meta: Meta<typeof Example> = {
   component: Example,
-  title: 'Connect/Wallet',
-
+  title: 'Connect/MAppDialog',
 };
+
 export default meta;
 // @ts-ignore
 type Story = StoryObj<typeof Example>
-

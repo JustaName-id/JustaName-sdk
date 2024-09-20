@@ -1,5 +1,5 @@
 import { JustaNameConfig } from '../types';
-import { OffchainResolvers, SignIn, SubnameChallenge, Subnames, EBDC } from '../features';
+import { OffchainResolvers, SignIn, SubnameChallenge, Subnames, MApps } from '../features';
 import { InvalidConfigurationException } from '../errors/InvalidConfiguration.exception';
 
 /**
@@ -55,25 +55,25 @@ export class JustaName {
   signIn: SignIn;
 
   /**
-   * The EBDC feature.
+   * The MApps feature.
    * @public
-   * @type {EBDC}
+   * @type {MApps}
    * @memberof JustaName
    */
-  ebdc: EBDC;
+  mApps: MApps;
 
   constructor(
     siwe: SubnameChallenge,
     subnames: Subnames,
     offchainResolvers: OffchainResolvers,
     signIn: SignIn,
-    ebdc: EBDC
+    mApps: MApps
   ) {
     this.siwe = siwe;
     this.subnames = subnames;
     this.offchainResolvers = offchainResolvers;
     this.signIn = signIn;
-    this.ebdc = ebdc;
+    this.mApps = mApps;
   }
 
   /**
@@ -109,8 +109,7 @@ export class JustaName {
       offchainResolvers
     );
 
-    const ebdc = new EBDC(
-      configuration.ensDomain,
+    const mApps = new MApps(
       configuration.config,
       subnames
     );
@@ -120,7 +119,7 @@ export class JustaName {
       subnames,
       offchainResolvers,
       signIn,
-      ebdc
+      mApps
     );
   }
 

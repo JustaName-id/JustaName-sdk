@@ -1,4 +1,4 @@
-import { SIWJProvider, SIWJProviderConfig } from '@justaname.id/react-signin'
+import { SIWENSProvider, SIWENSProviderConfig } from '@justaname.id/react-signin'
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultConfig,
@@ -17,7 +17,7 @@ import { ChainId } from '@justaname.id/sdk';
 
 const queryClient = new QueryClient();
 
-const JustaNameConfig: SIWJProviderConfig = {
+const JustaNameConfig: SIWENSProviderConfig = {
   config: {
     chainId: parseInt(import.meta.env.VITE_APP_CHAIN_ID) as ChainId,
     origin: import.meta.env.VITE_APP_ORIGIN,
@@ -41,9 +41,9 @@ export function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-          <SIWJProvider config={JustaNameConfig} >
+          <SIWENSProvider config={JustaNameConfig} >
               <Home />
-          </SIWJProvider>
+          </SIWENSProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

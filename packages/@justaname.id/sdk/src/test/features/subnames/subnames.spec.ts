@@ -5,7 +5,7 @@ import { ApiKeyRequiredException } from '../../../lib/errors/ApiKeyRequired.exce
 const PROVIDER_URL = 'https://mainnet.infura.io/v3/your-infura-project-id';
 const CHAIN_ID = 1;
 const ENS_DOMAIN = 'justaname.eth';
-const validApiKey = process.env['JUSTANAME_TEST_API_KEY'] as string;
+const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 
 describe('Subnames', () => {
 

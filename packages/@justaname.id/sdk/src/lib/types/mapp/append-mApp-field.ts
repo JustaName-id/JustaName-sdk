@@ -59,33 +59,33 @@ interface Metadata {
 /**
  * Outlines the response received after successfully updating a subname.
  *
- * @interface AppendEbdcFieldResponse
+ * @interface AppendMAppFieldResponse
  * @extends IResponse
  * @public
  * @property {string} id - The unique identifier of the update operation.
  * @property {Metadata} data - The updated metadata associated with the subname.
  */
-export interface AppendEbdcFieldResponse extends IResponse{
+export interface AppendMAppFieldResponse extends IResponse{
 
   id: string;
 
   data: Metadata;
 }
 
-export interface AppendEbdcFieldsRequest {
+export interface AppendMAppFieldsRequest {
   key: string;
   value: string;
 }
 
-export interface AppendEbdcFieldRequest extends IRequest{
+export interface AppendMAppFieldRequest extends IRequest{
   subname: string;
-  fields: AppendEbdcFieldsRequest[];
+  fields: AppendMAppFieldsRequest[];
 }
 
-export interface AppendEbdcFieldRoute extends IRoute {
-  request: AppendEbdcFieldRequest;
-  response: AppendEbdcFieldResponse;
+export interface AppendMAppFieldRoute extends IRoute {
+  request: AppendMAppFieldRequest;
+  response: AppendMAppFieldResponse;
   headers: SIWEHeaders
 }
 
-export interface AppendEbdcFieldParams extends AppendEbdcFieldRequest {}
+export interface AppendMAppFieldParams extends AppendMAppFieldRequest {}

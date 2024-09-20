@@ -1,4 +1,4 @@
-import { SIWJProvider, SIWJProviderConfig } from '@justaname.id/react-signin'
+import { SIWENSProvider, SIWENSProviderConfig } from '@justaname.id/react-signin'
 import '@rainbow-me/rainbowkit/styles.css';
 import { http } from 'wagmi';
 import {
@@ -12,11 +12,11 @@ import {
 import { ChainId } from '@justaname.id/sdk';
 import { PrivyProvider, usePrivy } from '@privy-io/react-auth';
 import {createConfig, WagmiProvider} from '@privy-io/wagmi';
-import { useSubnameSession } from '@justaname.id/react';
+import { useEnsAuth } from '@justaname.id/react';
 
 const queryClient = new QueryClient();
 
-const JustaNameConfig: SIWJProviderConfig = {
+const JustaNameConfig: SIWENSProviderConfig = {
   config: {
     chainId: parseInt(import.meta.env.VITE_APP_CHAIN_ID) as ChainId,
     origin: import.meta.env.VITE_APP_ORIGIN,
@@ -31,7 +31,7 @@ const JustaNameConfig: SIWJProviderConfig = {
 
 const Connect = () => {
   const { ready, authenticated, user, login, logout } = usePrivy();
-  const { subnameSession} = useSubnameSession();
+  const { connectedEns} = useEnsAuth();
   if (!ready) {
     return null;
   }
@@ -57,10 +57,10 @@ const Connect = () => {
           <button onClick={login} style={{padding: "12px", backgroundColor: "#069478", color: "#FFF", border: "none", borderRadius: "6px" }}>Log In</button>
         )}
         {
-          subnameSession && <div>
+          connectedEns && <div>
             <textarea
               readOnly
-              value={JSON.stringify(subnameSession, null, 2)}
+              value={JSON.stringify(connectedEns, null, 2)}
               style={{ width: "600px", height: "250px", borderRadius: "6px" }}
             />
           </div>
@@ -97,9 +97,9 @@ export function App() {
     >
       <QueryClientProvider client={queryClient}>
         <WagmiProvider config={config}>
-            <SIWJProvider config={JustaNameConfig} >
+            <SIWENSProvider config={JustaNameConfig} >
               <Connect />
-            </SIWJProvider>
+            </SIWENSProvider>
         </WagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>

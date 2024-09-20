@@ -10,7 +10,7 @@ import {
   UseEnsAuthReturn, EnsSignInParams
 } from '@justaname.id/react';
 import { JustaThemeProvider, JustaThemeProviderConfig } from '@justaname.id/react-ui';
-import { SIWENSDialog } from '../../modal';
+import { SIWENSDialog } from '../../dialogs';
 import { UseMutateAsyncFunction } from '@tanstack/react-query';
 
 export interface SIWENSProviderConfig extends JustaNameProviderConfig, JustaThemeProviderConfig {

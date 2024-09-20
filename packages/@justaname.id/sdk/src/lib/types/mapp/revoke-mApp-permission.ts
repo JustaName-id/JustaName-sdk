@@ -64,14 +64,14 @@ interface Metadata {
  * @property {string} id - The unique identifier of the update operation.
  * @property {Metadata} data - The updated metadata associated with the subname.
  */
-export interface RevokeEbdcPermissionResponse extends IResponse{
+export interface RevokeMAppPermissionResponse extends IResponse{
 
   id: string;
 
   data: Metadata;
 }
 
-export interface RevokeEbdcPermissionRequest extends IRequest {
+export interface RevokeMAppPermissionRequest extends IRequest {
   /**
    * Represents the ethereum address to be verified.
    * @type {string}
@@ -92,10 +92,10 @@ export interface RevokeEbdcPermissionRequest extends IRequest {
   message: string;
 }
 
-export interface RevokeEbdcPermissionRoute extends IRoute {
-  request: RevokeEbdcPermissionRequest;
-  response: RevokeEbdcPermissionResponse;
+export interface RevokeMAppPermissionRoute extends IRoute {
+  request: RevokeMAppPermissionRequest;
+  response: RevokeMAppPermissionResponse;
   headers: NonNullable<unknown>;
 }
 
-export interface RevokeEbdcPermissionParams extends RevokeEbdcPermissionRequest {}
+export interface RevokeMAppPermissionParams extends RevokeMAppPermissionRequest {}
