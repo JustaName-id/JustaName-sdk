@@ -6,15 +6,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // const invalidApiKey = 'invalid-api-key';
-const validApiKey = process.env['JUSTANAME_TEST_API_KEY'] as string;
+const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 jest.setTimeout(50000);
-const mAppPk = process.env['MAPP_PRIVATE_KEY'] as string;
+const mAppPk = process.env['SDK_MAPP_PRIVATE_KEY'] as string;
 const mAppSigner = new ethers.Wallet(mAppPk);
 const subnameSigner = ethers.Wallet.createRandom()
 const subnameToBeAdded = Math.random().toString(36).substring(7);
 const CHAIN_ID = 11155111;
-const ENS_DOMAIN = process.env['ENS_DOMAIN'] as string;
-const MAPP = process.env['MAPP'] as string;
+const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
+const MAPP = process.env['SDK_MAPP'] as string;
 const MAPP_2 = MAPP.split('.')[0] + '2' + '.' + MAPP.split('.')[1];
 describe('justaname', () => {
 

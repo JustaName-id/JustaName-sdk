@@ -7,9 +7,9 @@ import {
 } from '../';
 dotenv.config();
 
-const pk = process.env['PRIVATE_KEY'] as string;
+const pk = process.env['SIWENS_PRIVATE_KEY'] as string;
 const signer = new ethers.Wallet(pk);
-const PROVIDER_URL = process.env['PROVIDER_URL'] as string;
+const PROVIDER_URL = process.env['SIWENS_PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
 const ADDRESS = signer.address;
@@ -20,7 +20,7 @@ const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 const TTL_LESS_THAN_ZERO = -1;
 const TTL_GREATER_THAN_MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER + 1;
 const INVALID_ENS = 'justaname';
-const VALID_ENS = process.env['VALID_ENS'] as string;
+const VALID_ENS = process.env['SIWENS_VALID_ENS'] as string;
 
 describe('SIWENS', () => {
 

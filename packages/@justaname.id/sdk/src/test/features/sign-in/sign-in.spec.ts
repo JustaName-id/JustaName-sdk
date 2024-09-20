@@ -7,17 +7,17 @@ import { initializeJustaName } from '../../helpers/initializeJustaName';
 import { JustaName } from '../../../lib/justaname';
 dotenv.config();
 
-const PROVIDER_URL = process.env['PROVIDER_URL'] as string;
+const PROVIDER_URL = process.env['SDK_PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
 const CHAIN_ID = 11155111;
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 
 const invalidSigner = new ethers.Wallet(ethers.Wallet.createRandom().privateKey);
-const ENS_DOMAIN = process.env['ENS_DOMAIN'] as string;
+const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
 const subnameSigner = ethers.Wallet.createRandom()
 const subnameToBeAdded = Math.random().toString(36).substring(7);
-const validApiKey = process.env['JUSTANAME_TEST_API_KEY'] as string;
+const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 describe('SignIn', () => {
 
   let signIn: SignIn;

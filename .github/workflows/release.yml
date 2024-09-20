@@ -48,13 +48,15 @@ jobs:
 
       - name: Build and Test
         env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          PROVIDER_URL: ${{ secrets.PROVIDER_URL }}
-          VALID_SUBNAME: ${{ secrets.VALID_SUBNAME }}
-          JUSTANAME_ENVIRONMENT: ${{ secrets.JUSTANAME_ENVIRONMENT }}
-          JUSTANAME_TEST_API_KEY: ${{ secrets.JUSTANAME_TEST_API_KEY }}
-          JUSTANAME_DEV: ${{ secrets.JUSTANAME_DEV }}
-          ENS_DOMAIN: ${{ secrets.ENS_DOMAIN }}
+          SDK_JUSTANAME_ENVIRONMENT: ${{ secrets.SDK_JUSTANAME_ENVIRONMENT }}
+          SDK_JUSTANAME_TEST_API_KEY: ${{ secrets.SDK_JUSTANAME_TEST_API_KEY }}
+          SDK_MAPP_PRIVATE_KEY: ${{ secrets.SDK_MAPP_PRIVATE_KEY }}
+          SDK_PROVIDER_URL: ${{ secrets.SDK_PROVIDER_URL }}
+          SDK_ENS_DOMAIN: ${{ secrets.SDK_ENS_DOMAIN }}
+          SDK_MAPP: ${{ secrets.SDK_MAPP }}
+          SIWENS_PRIVATE_KEY: ${{ secrets.SIWENS_PRIVATE_KEY }}
+          SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
+          SIWENS_VALID_SUBNAME: ${{ secrets.SIWENS_VALID_SUBNAME }}
         run: |
           npx nx affected -t lint
           npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk

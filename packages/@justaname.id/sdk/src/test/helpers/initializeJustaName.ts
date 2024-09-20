@@ -2,10 +2,10 @@ import { JustaName } from '../../../src';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const PROVIDER_URL = process.env['PROVIDER_URL'] as string;
+const PROVIDER_URL = process.env['SDK_PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
-const ENS_DOMAIN = process.env['ENS_DOMAIN'] as string;
+const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
 const CHAIN_ID = 11155111;
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 
