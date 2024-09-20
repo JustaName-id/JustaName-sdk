@@ -1,3 +1,21 @@
+## 0.0.20 (2024-09-20)
+
+
+### 🩹 Fixes
+
+- **react-signin:** design subnames ([b384537](https://github.com/JustaName-id/JustaName-sdk/commit/b384537))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.84
+- Updated @justaname.id/react to 0.3.87
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.19 (2024-09-19)
 
 
