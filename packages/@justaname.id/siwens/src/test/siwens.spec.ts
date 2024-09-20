@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import {
   SIWENS,
   InvalidTimeException,

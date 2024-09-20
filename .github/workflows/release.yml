@@ -56,7 +56,7 @@ jobs:
           SDK_MAPP: ${{ secrets.SDK_MAPP }}
           SIWENS_PRIVATE_KEY: ${{ secrets.SIWENS_PRIVATE_KEY }}
           SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
-          SIWENS_VALID_SUBNAME: ${{ secrets.SIWENS_VALID_SUBNAME }}
+          SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
         run: |
           npx nx affected -t lint
           npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
