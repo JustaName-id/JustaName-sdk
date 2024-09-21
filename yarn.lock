@@ -6530,8 +6530,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
+    "@ensdomains/ensjs": "npm:4.0.1-alpha.0"
     "@justaname.id/sdk": "npm:0.2.85"
     "@tanstack/react-query": "npm:^5.28.4"
+    ethers: "npm:^6.11.1"
     jest: "npm:^29.4.1"
   peerDependencies:
     "@tanstack/query-core": ">=5.0.0"
