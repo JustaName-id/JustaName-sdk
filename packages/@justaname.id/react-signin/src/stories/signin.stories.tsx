@@ -22,7 +22,7 @@ const JustaNameConfig: SIWENSProviderConfig = {
   providerUrl: import.meta.env.STORYBOOK_APP_PROVIDER_URL,
   ensDomain: import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
   openOnWalletConnect: true,
-  allowedSubnames:'all',
+  allowedEns:'all',
 }
 
 const Session = () => {

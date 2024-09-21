@@ -110,7 +110,11 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
               direction="row"
               gap="10px"
             >
-              <Badge>
+              <Badge style={{
+                fontSize:'10px',
+                lineHeight:'10px',
+                fontWeight: 900,
+              }}>
                 {address && formatText(address, 4)}
               </Badge>
 

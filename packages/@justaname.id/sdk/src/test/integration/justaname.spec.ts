@@ -175,9 +175,27 @@ describe('justaname', () => {
 
   })
 
+  it("should return false if ens can't enable mApps", async () => {
+    const canEnable = await justaname.mApps.canEnableMApps({
+      ens: 'justatest2.eth',
+      chainId: CHAIN_ID
+    })
+
+    expect(canEnable).toBeFalsy();
+  })
+
+  it("should return true if ens can enable mApps", async () => {
+    const canEnable = await justaname.mApps.canEnableMApps({
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
+      chainId: CHAIN_ID
+    })
+
+    expect(canEnable).toBeTruthy();
+  })
+
   it('shouldn\'t have mApps enabled', async () => {
     const subname = await justaname.mApps.checkIfMAppIsEnabled({
-      subname: subnameToBeAdded + '.' + ENS_DOMAIN,
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       mApp: MAPP,
       chainId: CHAIN_ID
     })
@@ -234,7 +252,7 @@ describe('justaname', () => {
 
   it('should have mApps enabled', async () => {
     const mapp = await justaname.mApps.checkIfMAppIsEnabled({
-      subname: subnameToBeAdded + '.' + ENS_DOMAIN,
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       mApp: MAPP,
       chainId: CHAIN_ID
     })
