@@ -209,7 +209,9 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
                     onClick={() => {
                       addSubname({ username: username }).then(() => {
                         setSubnameSigningIn(username + '.' + ensDomain);
-                        signIn({ ens: username + '.' + ensDomain })
+                        signIn({ ens: username + '.' + ensDomain }).then(() => handleOpenDialog(false)).finally(() => {
+                          setSubnameSigningIn('');
+                        });
                       });
                     }}
                   >

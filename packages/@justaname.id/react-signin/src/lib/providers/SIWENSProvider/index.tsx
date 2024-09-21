@@ -1,4 +1,4 @@
-import { createContext, FC, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, FC, Fragment, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 import {
   JustaNameContext,
   JustaNameProvider,
@@ -10,7 +10,7 @@ import {
   UseEnsAuthReturn, EnsSignInParams
 } from '@justaname.id/react';
 import { JustaThemeProvider, JustaThemeProviderConfig } from '@justaname.id/react-ui';
-import { SIWENSDialog } from '../../dialogs';
+import { MAppDialog, SIWENSDialog } from '../../dialogs';
 import { UseMutateAsyncFunction } from '@tanstack/react-query';
 
 export interface SIWENSProviderConfig extends JustaNameProviderConfig, JustaThemeProviderConfig {
@@ -19,18 +19,32 @@ export interface SIWENSProviderConfig extends JustaNameProviderConfig, JustaThem
 }
 
 export interface SIWENSProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
   config: SIWENSProviderConfig;
 }
 
 export interface SIWENSContextProps {
   handleOpenSignInDialog: (open: boolean) => void;
   isSignInOpen: boolean;
+  handleOpenMAppDialog: (mApp: string, open: boolean) => void;
+  mApps: string[];
 }
+
+export interface MAPPContextProps {
+  handleAddMApp: (mapp: string, open?: boolean) => void;
+  handleRemoveMApp: (mapp: string, open: boolean) => void;
+}
+
+export const MAPPContext = createContext<MAPPContextProps>({
+  handleAddMApp: () => { },
+  handleRemoveMApp: () => { },
+});
 
 export const SIWENSContext = createContext<SIWENSContextProps>({
   isSignInOpen: false,
-  handleOpenSignInDialog: () => { }
+  handleOpenSignInDialog: () => { },
+  handleOpenMAppDialog: () => { },
+  mApps: []
 });
 
 export const SIWENSProvider: FC<SIWENSProviderProps> = ({
@@ -39,9 +53,39 @@ export const SIWENSProvider: FC<SIWENSProviderProps> = ({
 }) => {
   const openOnWalletConnect = props.openOnWalletConnect || false;
   const allowedEns = props.allowedEns || "all";
-
   const { isConnected } = useMountedAccount()
   const [signInOpen, setSignInOpen] = useState(false);
+  const [mApps, setMApps] = useState<string[]>([]);
+  const [mAppsOpen, setMAppsOpen] = useState<boolean[]>([]);
+
+  const handleOpenMAppDialog = (mApp: string, open: boolean) => {
+    const index = mApps.indexOf(mApp);
+    if (index === -1) {
+      handleAddMApp(mApp, open);
+    }
+    const newMAppsOpen = [...mAppsOpen];
+    newMAppsOpen[index] = open;
+    setMAppsOpen(newMAppsOpen);
+  }
+
+  const handleAddMApp = (mApp: string, open= false) => {
+    if (mApps.includes(mApp)) {
+      return;
+    }
+    setMApps([...mApps, mApp]);
+    setMAppsOpen([...mAppsOpen, open]);
+  }
+
+  const handleRemoveMApp = (mApp: string) => {
+    const index = mApps.indexOf(mApp);
+
+    if (index === -1) {
+      return;
+    }
+
+    setMApps([...mApps.slice(0, index), ...mApps.slice(index + 1)]);
+    setMAppsOpen([...mAppsOpen.slice(0, index), ...mAppsOpen.slice(index + 1)]);
+  }
 
   const handleOpenSignInDialog = (open: boolean) => {
     if(!isConnected){
@@ -53,20 +97,37 @@ export const SIWENSProvider: FC<SIWENSProviderProps> = ({
   }
 
   return (
-    <SIWENSContext.Provider value={{ handleOpenSignInDialog, isSignInOpen: signInOpen }}>
-      <JustaNameProvider config={{
-        config: props.config,
-        backendUrl: props.backendUrl,
-        providerUrl: props.providerUrl,
-        ensDomain: props.ensDomain,
-        routes: props.routes
+    <SIWENSContext.Provider value={{
+      handleOpenSignInDialog,
+      isSignInOpen: signInOpen,
+      handleOpenMAppDialog,
+      mApps
+    }}>
+      <MAPPContext.Provider value={{
+        handleAddMApp,
+        handleRemoveMApp
       }}>
-        <JustaThemeProvider color={props.color}>
-          {children}
-          <CheckSession openOnWalletConnect={openOnWalletConnect} handleOpenDialog={handleOpenSignInDialog}/>
-          <SIWENSDialog open={signInOpen} handleOpenDialog={handleOpenSignInDialog} allowedEns={allowedEns} />
-        </JustaThemeProvider>
-      </JustaNameProvider>
+        <JustaNameProvider config={{
+          config: props.config,
+          backendUrl: props.backendUrl,
+          providerUrl: props.providerUrl,
+          ensDomain: props.ensDomain,
+          routes: props.routes
+        }}>
+          <JustaThemeProvider color={props.color}>
+            {children}
+            <CheckSession openOnWalletConnect={openOnWalletConnect} handleOpenDialog={handleOpenSignInDialog}/>
+            <SIWENSDialog open={signInOpen} handleOpenDialog={handleOpenSignInDialog} allowedEns={allowedEns} />
+            {
+              mApps.map((mApp, i) => (
+                <Fragment key={mApp}>
+                  <MAppDialog open={mAppsOpen[i]} handleOpenDialog={(open) => handleOpenMAppDialog(mApp, open)} mApp={mApp} />
+                </Fragment>
+              ))
+            }
+          </JustaThemeProvider>
+        </JustaNameProvider>
+      </MAPPContext.Provider>
     </SIWENSContext.Provider>
   );
 };
@@ -74,19 +135,24 @@ export const SIWENSProvider: FC<SIWENSProviderProps> = ({
 export interface UseSignInWithEns {
   handleOpenSignInDialog: (open: boolean) => void;
   isSignInOpen: boolean
+  handleOpenMAppDialog: (mApp: string, open: boolean) => void;
+  mApps: string[];
   signIn: UseMutateAsyncFunction<string, Error, EnsSignInParams, unknown>
   signOut: () => void;
   status: 'pending' | 'signedIn' | 'signedOut';
+  isLoggedIn: boolean;
+  isEnsAuthPending: boolean;
   refreshEnsAuth: () => void;
   connectedEns: UseEnsAuthReturn['connectedEns'];
 }
+
 
 export const useSignInWithEns = (): UseSignInWithEns => {
   const context = useContext(SIWENSContext);
   const justanameContext = useContext(JustaNameContext);
   const { signIn, isSignInPending } = useEnsSignIn();
   const { signOut, isSignOutPending } = useEnsSignOut();
-  const { connectedEns, isEnsAuthPending, refreshEnsAuth } = useEnsAuth();
+  const { connectedEns, isLoggedIn, isEnsAuthPending, refreshEnsAuth } = useEnsAuth();
 
   const status = useMemo(() => {
     if (isSignInPending) {
@@ -115,11 +181,15 @@ export const useSignInWithEns = (): UseSignInWithEns => {
   return {
     handleOpenSignInDialog: context.handleOpenSignInDialog,
     isSignInOpen: context.isSignInOpen,
+    handleOpenMAppDialog: context.handleOpenMAppDialog,
+    mApps: context.mApps,
+    isEnsAuthPending,
     signIn,
     signOut,
+    isLoggedIn,
     status,
     connectedEns,
-    refreshEnsAuth
+    refreshEnsAuth,
   };
 }
 
