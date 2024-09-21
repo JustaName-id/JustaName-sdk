@@ -7,8 +7,7 @@ import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
 
-export interface RevokeSubnameRequest extends SubnameRevokeParams {
-}
+export type RevokeSubnameRequest = SubnameRevokeParams
 
 /**
  *  Interface defining the parameters needed to revoke a subname.
