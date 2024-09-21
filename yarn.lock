@@ -6536,9 +6536,7 @@ __metadata:
     ethers: "npm:^6.11.1"
     jest: "npm:^29.4.1"
   peerDependencies:
-    "@tanstack/query-core": ">=5.0.0"
     react: ">=17"
-    react-dom: ">=17"
     viem: 2.x
     wagmi: 2.x
   languageName: unknown

@@ -5,13 +5,13 @@ import { useSignMessage } from 'wagmi';
 import { useAccountSubnames, useMountedAccount } from '../account';
 import { buildIsMAppEnabledKey } from './useIsMAppEnabled';
 
-export interface UseRequestRevokeEbdcPermission {
-  revokeEbdcPermission: UseMutateFunction<RevokeMAppPermissionResponse, Error, RevokeEbdcPermissionRequest, unknown>;
-  isRevokeEbdcPermissionPending: boolean;
+export interface UseRequestRevokeMAppPermissionResult {
+  revokeMAppPermission: UseMutateFunction<RevokeMAppPermissionResponse, Error, RevokeMAppPermissionRequest, unknown>;
+  isRevokeMAppPermissionPending: boolean;
 }
 
-export interface RevokeEbdcPermissionRequest {
-  subname: string
+export interface RevokeMAppPermissionRequest {
+  ens: string
 }
 
 export interface UseRevokeMAppPermissionParams {
@@ -19,7 +19,7 @@ export interface UseRevokeMAppPermissionParams {
   chainId?: ChainId
 }
 
-export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): UseRequestRevokeEbdcPermission => {
+export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): UseRequestRevokeMAppPermissionResult => {
   const { justaname, chainId } = useJustaName()
   const queryClient = useQueryClient()
   const currentChainId = props.chainId || chainId
@@ -29,16 +29,16 @@ export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): U
   const mutate = useMutation<
     RevokeMAppPermissionResponse,
     Error,
-    RevokeEbdcPermissionRequest
+    RevokeMAppPermissionRequest
   >({
     mutationFn: async (
-      params:RevokeEbdcPermissionRequest
+      params:RevokeMAppPermissionRequest
     ) => {
       if (!address) {
         throw new Error('Wallet not connected')
       }
       const challengeResponse = await justaname.mApps.requestRevokeMAppPermissionChallenge({
-        subname: params.subname,
+        subname: params.ens,
         address: address,
         mApp: props.mApp,
         chainId: currentChainId
@@ -56,7 +56,7 @@ export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): U
       })
 
       queryClient.invalidateQueries({
-        queryKey: buildIsMAppEnabledKey(params.subname, props.mApp, currentChainId)
+        queryKey: buildIsMAppEnabledKey(params.ens, props.mApp, currentChainId)
       })
       refetchAccountSubnames()
       return response
@@ -64,7 +64,7 @@ export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): U
   })
 
   return {
-    revokeEbdcPermission: mutate.mutate,
-    isRevokeEbdcPermissionPending: mutate.isPending
+    revokeMAppPermission: mutate.mutateAsync,
+    isRevokeMAppPermissionPending: mutate.isPending
   }
 }
