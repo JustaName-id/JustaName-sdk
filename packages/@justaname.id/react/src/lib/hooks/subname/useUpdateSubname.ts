@@ -14,7 +14,7 @@ import { useAccountSubnames } from '../account/useAccountSubnames';
  * @type {object}
  * @property {string} username - The username part of the subname to be claimed or updated.
  */
-export interface SubnameUpdate extends SubnameUpdateParams {}
+export type SubnameUpdate = SubnameUpdateParams
 
 export interface UseUpdateSubnameResult {
   updateSubname: (params: SubnameUpdate) => Promise<SubnameUpdateResponse>;

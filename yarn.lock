@@ -3454,6 +3454,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ensdomains/address-encoder@npm:1.0.0-rc.3":
+  version: 1.0.0-rc.3
+  resolution: "@ensdomains/address-encoder@npm:1.0.0-rc.3"
+  dependencies:
+    "@noble/curves": "npm:^1.2.0"
+    "@noble/hashes": "npm:^1.3.2"
+    "@scure/base": "npm:^1.1.5"
+  checksum: 10c0/312709495ddf033a886dae256ccf14730cc1460edb41b59326e3dc6440a5725a0a837f7210b14a765da236572e317889f3ecc6ed047667021c97ae27a7fc96ae
+  languageName: node
+  linkType: hard
+
+"@ensdomains/address-encoder@npm:1.1.1":
+  version: 1.1.1
+  resolution: "@ensdomains/address-encoder@npm:1.1.1"
+  dependencies:
+    "@noble/curves": "npm:^1.2.0"
+    "@noble/hashes": "npm:^1.3.2"
+    "@scure/base": "npm:^1.1.5"
+  checksum: 10c0/3de495d6ef56fdc39026148adcd40c8641cc889f329479847a471c80f732b87157b822d028aac14721398c7e0fd57bac38e391363f3cb96281b3324888f10c4a
+  languageName: node
+  linkType: hard
+
 "@ensdomains/address-encoder@npm:^1.1.2":
   version: 1.1.2
   resolution: "@ensdomains/address-encoder@npm:1.1.2"
@@ -3462,6 +3484,47 @@ __metadata:
     "@noble/hashes": "npm:^1.3.2"
     "@scure/base": "npm:^1.1.5"
   checksum: 10c0/8e07567a1c6c7012f2e1fcc95359f4940f8a3abd90c9233611f62af5315876db2367c86b14723e0513ef0e9198990f2df16520f4c3bf16f7a58110ba9c325f7f
+  languageName: node
+  linkType: hard
+
+"@ensdomains/content-hash@npm:3.1.0-rc.1":
+  version: 3.1.0-rc.1
+  resolution: "@ensdomains/content-hash@npm:3.1.0-rc.1"
+  dependencies:
+    "@ensdomains/address-encoder": "npm:1.0.0-rc.3"
+    "@noble/curves": "npm:^1.2.0"
+    "@scure/base": "npm:^1.1.5"
+  checksum: 10c0/2fb38781bf3a33d14b815564e32e85ab961cbbd2c62edcf7bea3a784cc53af4c3e0ddc7d84bfcc8772f41d15b98e708f987603c27bb2d39dc8e37350388131ad
+  languageName: node
+  linkType: hard
+
+"@ensdomains/dnsprovejs@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "@ensdomains/dnsprovejs@npm:0.5.1"
+  dependencies:
+    "@noble/hashes": "npm:^1.3.2"
+    dns-packet: "npm:^5.6.1"
+    typescript-logging: "npm:^1.0.1"
+  checksum: 10c0/865800c82f889d8ad016c774d9fd87915e6bf1f666a476cbc9a4ce64082fd1fe0d2718498a614f6f2236b8ba6908097f0a4c1f234371f49c5ee08808163a368c
+  languageName: node
+  linkType: hard
+
+"@ensdomains/ensjs@npm:4.0.1-alpha.0":
+  version: 4.0.1-alpha.0
+  resolution: "@ensdomains/ensjs@npm:4.0.1-alpha.0"
+  dependencies:
+    "@adraffy/ens-normalize": "npm:1.10.1"
+    "@ensdomains/address-encoder": "npm:1.1.1"
+    "@ensdomains/content-hash": "npm:3.1.0-rc.1"
+    "@ensdomains/dnsprovejs": "npm:^0.5.1"
+    abitype: "npm:^1.0.0"
+    dns-packet: "npm:^5.3.1"
+    graphql: "npm:^16.3.0"
+    graphql-request: "npm:6.1.0"
+    pako: "npm:^2.1.0"
+  peerDependencies:
+    viem: ^2.9.2
+  checksum: 10c0/44acb914772d8ad85ab0b4ea30f10d20da39213aa317f26fbbf9329bfcda8876666ed50905fccb4b89d8b4cc7e272aa1d40c3f5fc15ab89a62b6c01d07a4c05e
   languageName: node
   linkType: hard
 
@@ -5197,7 +5260,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-typed-document-node/core@npm:^3.1.0":
+"@graphql-typed-document-node/core@npm:^3.1.0, @graphql-typed-document-node/core@npm:^3.2.0":
   version: 3.2.0
   resolution: "@graphql-typed-document-node/core@npm:3.2.0"
   peerDependencies:
@@ -6467,8 +6530,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
+    "@ensdomains/ensjs": "npm:4.0.1-alpha.0"
     "@justaname.id/sdk": "npm:0.2.85"
     "@tanstack/react-query": "npm:^5.28.4"
+    ethers: "npm:^6.11.1"
     jest: "npm:^29.4.1"
   peerDependencies:
     "@tanstack/query-core": ">=5.0.0"
@@ -16930,6 +16995,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"abitype@npm:^1.0.0":
+  version: 1.0.6
+  resolution: "abitype@npm:1.0.6"
+  peerDependencies:
+    typescript: ">=5.0.4"
+    zod: ^3 >=3.22.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+    zod:
+      optional: true
+  checksum: 10c0/30ca97010bbf34b9aaed401858eeb6bc30419f7ff11eb34adcb243522dd56c9d8a9d3d406aa5d4f60a7c263902f5136043005698e3f073ea882a4922d43a2929
+  languageName: node
+  linkType: hard
+
 "abort-controller@npm:^3.0.0":
   version: 3.0.0
   resolution: "abort-controller@npm:3.0.0"
@@ -21707,7 +21787,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dns-packet@npm:^5.2.2":
+"dns-packet@npm:^5.2.2, dns-packet@npm:^5.3.1, dns-packet@npm:^5.6.1":
   version: 5.6.1
   resolution: "dns-packet@npm:5.6.1"
   dependencies:
@@ -22272,6 +22352,15 @@ __metadata:
   dependencies:
     is-arrayish: "npm:^0.2.1"
   checksum: 10c0/ba827f89369b4c93382cfca5a264d059dfefdaa56ecc5e338ffa58a6471f5ed93b71a20add1d52290a4873d92381174382658c885ac1a2305f7baca363ce9cce
+  languageName: node
+  linkType: hard
+
+"error-stack-parser@npm:^1.3.6":
+  version: 1.3.6
+  resolution: "error-stack-parser@npm:1.3.6"
+  dependencies:
+    stackframe: "npm:^0.3.1"
+  checksum: 10c0/23d87ce4a57bbc1766a205edc6344bc1c543edbe793c8c8871a922b9bc162b9523e4cd51d366bd5c4d7fc7c770b35707425a33bcc0473c26ae05fe2bfd78f4a1
   languageName: node
   linkType: hard
 
@@ -25914,6 +26003,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"graphql-request@npm:6.1.0":
+  version: 6.1.0
+  resolution: "graphql-request@npm:6.1.0"
+  dependencies:
+    "@graphql-typed-document-node/core": "npm:^3.2.0"
+    cross-fetch: "npm:^3.1.5"
+  peerDependencies:
+    graphql: 14 - 16
+  checksum: 10c0/f8167925a110e8e1de93d56c14245e7e64391dc8dce5002dd01bf24a3059f345d4ca1bb6ce2040e2ec78264211b0704e75da3e63984f0f74d2042f697a4e8cc6
+  languageName: node
+  linkType: hard
+
 "graphql-tag@npm:^2.10.1":
   version: 2.12.6
   resolution: "graphql-tag@npm:2.12.6"
@@ -25929,6 +26030,13 @@ __metadata:
   version: 15.8.0
   resolution: "graphql@npm:15.8.0"
   checksum: 10c0/30cc09b77170a9d1ed68e4c017ec8c5265f69501c96e4f34f8f6613f39a886c96dd9853eac925f212566ed651736334c8fe24ceae6c44e8d7625c95c3009a801
+  languageName: node
+  linkType: hard
+
+"graphql@npm:^16.3.0":
+  version: 16.9.0
+  resolution: "graphql@npm:16.9.0"
+  checksum: 10c0/a8850f077ff767377237d1f8b1da2ec70aeb7623cdf1dfc9e1c7ae93accc0c8149c85abe68923be9871a2934b1bce5a2496f846d4d56e1cfb03eaaa7ddba9b6a
   languageName: node
   linkType: hard
 
@@ -29789,6 +29897,7 @@ __metadata:
     "@chromatic-com/storybook": "npm:^1"
     "@docusaurus/eslint-plugin": "npm:^3.5.2"
     "@ensdomains/address-encoder": "npm:^1.1.2"
+    "@ensdomains/ensjs": "npm:4.0.1-alpha.0"
     "@inquirer/prompts": "npm:^4.3.0"
     "@justaname.id/react": "npm:0.3.80"
     "@justaname.id/sdk": "npm:0.2.77"
@@ -34064,6 +34173,13 @@ __metadata:
   bin:
     pacote: bin/index.js
   checksum: 10c0/d80907375dd52a521255e0debca1ba9089ad8fd7acdf16c5a5db2ea2a5bb23045e2bcf08d1648b1ebc40fcc889657db86ff6187ff5f8d2fc312cd6ad1ec4c6ac
+  languageName: node
+  linkType: hard
+
+"pako@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "pako@npm:2.1.0"
+  checksum: 10c0/8e8646581410654b50eb22a5dfd71159cae98145bd5086c9a7a816ec0370b5f72b4648d08674624b3870a521e6a3daffd6c2f7bc00fdefc7063c9d8232ff5116
   languageName: node
   linkType: hard
 
@@ -39142,6 +39258,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stack-generator@npm:^1.0.7":
+  version: 1.1.0
+  resolution: "stack-generator@npm:1.1.0"
+  dependencies:
+    stackframe: "npm:^1.0.2"
+  checksum: 10c0/7bc63ba5581c8fa663dd696a317cc49579798f1d3938030245ea8d52d10fcc25efdc676c2cb1679f47d936da4d4e5272927b10909b90df0109549d15fc1c65dd
+  languageName: node
+  linkType: hard
+
 "stack-generator@npm:^2.0.5":
   version: 2.0.10
   resolution: "stack-generator@npm:2.0.10"
@@ -39167,10 +39292,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stackframe@npm:^1.3.4":
+"stackframe@npm:^0.3.1, stackframe@npm:~0.3":
+  version: 0.3.1
+  resolution: "stackframe@npm:0.3.1"
+  checksum: 10c0/3bd772ec4877cedf266c44e47a6027cd3c2b51035b1e15032941a1e8c52dd4e72b951a8b9a56fc8d09f46547dcc9739c7ae445037bb10d2257959815eb5da229
+  languageName: node
+  linkType: hard
+
+"stackframe@npm:^1.0.2, stackframe@npm:^1.3.4":
   version: 1.3.4
   resolution: "stackframe@npm:1.3.4"
   checksum: 10c0/18410f7a1e0c5d211a4effa83bdbf24adbe8faa8c34db52e1cd3e89837518c592be60b60d8b7270ac53eeeb8b807cd11b399a41667f6c9abb41059c3ccc8a989
+  languageName: node
+  linkType: hard
+
+"stacktrace-gps@npm:^2.4.3":
+  version: 2.4.4
+  resolution: "stacktrace-gps@npm:2.4.4"
+  dependencies:
+    source-map: "npm:0.5.6"
+    stackframe: "npm:~0.3"
+  checksum: 10c0/ab0f9f958024d56c2729434a09a4bedeb4e1c95cd575d58f15aaed2aabc95e12c923d170368f6abeadae46dcb6d1a1b6739bfd732b09cc3424d6c9fcf2e7a8ff
   languageName: node
   linkType: hard
 
@@ -39181,6 +39323,17 @@ __metadata:
     source-map: "npm:0.5.6"
     stackframe: "npm:^1.3.4"
   checksum: 10c0/0dcc1aa46e364a2b4d1eabce4777fecf337576a11ee3cfc92f07b9ec79ccb76810752431eeb9771289d250d0bb58dbe19a178b96bf7b2e9f773334d03aa96bb9
+  languageName: node
+  linkType: hard
+
+"stacktrace-js@npm:1.3.1":
+  version: 1.3.1
+  resolution: "stacktrace-js@npm:1.3.1"
+  dependencies:
+    error-stack-parser: "npm:^1.3.6"
+    stack-generator: "npm:^1.0.7"
+    stacktrace-gps: "npm:^2.4.3"
+  checksum: 10c0/76948b0b06386914fec12dab1e423a69562798078d8da45f6d536f315d66748cc01d436983f4ebb52137610305dae3e1e63020ea82fcf54952f9318ead972d2c
   languageName: node
   linkType: hard
 
@@ -41226,6 +41379,15 @@ __metadata:
   version: 0.0.6
   resolution: "typedarray@npm:0.0.6"
   checksum: 10c0/6005cb31df50eef8b1f3c780eb71a17925f3038a100d82f9406ac2ad1de5eb59f8e6decbdc145b3a1f8e5836e17b0c0002fb698b9fe2516b8f9f9ff602d36412
+  languageName: node
+  linkType: hard
+
+"typescript-logging@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "typescript-logging@npm:1.0.1"
+  dependencies:
+    stacktrace-js: "npm:1.3.1"
+  checksum: 10c0/2d34bb47c05ed33a5ba57b73800aa36411719e1d25845f8af0ac1280ea321505606a8ebff8b3b610c6b13160003244e4715229c9b7315d46110b52ddd49db133
   languageName: node
   linkType: hard
 

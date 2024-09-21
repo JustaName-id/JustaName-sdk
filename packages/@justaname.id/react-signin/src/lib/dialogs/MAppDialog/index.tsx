@@ -1,6 +1,6 @@
 import { FC, Fragment, useEffect, useMemo } from 'react';
-import { useAddMAppPermission, useEnsAuth, useIsMAppEnabled, useRecords } from '@justaname.id/react';
-import { Badge, Button, CloseIcon, Dialog, DialogContent, DialogTitle, Flex, H2, P } from '@justaname.id/react-ui';
+import { useAddMAppPermission, useCanEnableMApps, useEnsAuth, useIsMAppEnabled, useRecords } from '@justaname.id/react';
+import { Badge, Button, CloseIcon, Dialog, DialogContent, DialogTitle, Flex, H2, P, SPAN } from '@justaname.id/react-ui';
 import { Footer } from '../../components';
 import { isParseable } from '../../utils';
 import { LoadingDialog } from '../LoadingDialog';
@@ -17,11 +17,14 @@ export const MAppDialog: FC<MAppDialogProps> = ({
                                                   handleOpenDialog
                                                 }) => {
   const { connectedEns, isLoggedIn, isEnsAuthPending } = useEnsAuth();
-  const { records , isRecordsPending} = useRecords({
+  const { records: mAppRecords , isRecordsPending: isMAppRecordsPending} = useRecords({
     fullName: mApp || ''
   });
-  const { isMAppEnabled, refetchIsMAppEnabled , isMAppEnabledPending } = useIsMAppEnabled({
-    subname: connectedEns?.ens || '',
+  const { canEnableMApps, isCanEnableMAppsPending} = useCanEnableMApps({
+    ens: connectedEns?.ens || ''
+  })
+  const { isMAppEnabled  , isMAppEnabledPending } = useIsMAppEnabled({
+    ens: connectedEns?.ens || '',
     mApp
   });
   const { addMAppPermission, isAddMAppPermissionPending } = useAddMAppPermission({
@@ -29,16 +32,15 @@ export const MAppDialog: FC<MAppDialogProps> = ({
   });
 
   const mAppDescription = useMemo(() => {
-    return records?.texts?.find((text) => text.key === `mApp_description`)?.value;
-  }, [records]);
+    return mAppRecords?.texts?.find((text) => text.key === `mApp_description`)?.value;
+  }, [mAppRecords]);
 
   const mAppPermissions = useMemo((): string[] => {
-    console.log(records)
-    if (!records) {
+    if (!mAppRecords) {
       return [];
     }
 
-    const permissions = records?.texts?.find((text) => text.key === `mApp_permissions`)?.value;
+    const permissions = mAppRecords?.texts?.find((text) => text.key === `mApp_permissions`)?.value;
     if (!permissions) {
       return [];
     }
@@ -53,24 +55,30 @@ export const MAppDialog: FC<MAppDialogProps> = ({
     }
 
     return parsedPermissions;
-  }, [records]);
+  }, [mAppRecords]);
 
-  console.log(isMAppEnabled, open)
   useEffect(() => {
-    if(isLoggedIn){
-
-      if(isMAppEnabledPending || isMAppEnabled === undefined){
+    if(connectedEns) {
+      if(isCanEnableMAppsPending){
         return
       }
 
-      handleOpenDialog(!isMAppEnabled)
+      if(!canEnableMApps && canEnableMApps !== undefined){
+        handleOpenDialog(false)
+        return
+      }
+      if (isLoggedIn) {
+        if (isMAppEnabledPending || isMAppEnabled === undefined) {
+          return;
+        }
+        handleOpenDialog(!isMAppEnabled);
+      } else {
+        handleOpenDialog(false);
+      }
     }
-    else{
-      handleOpenDialog(false)
-    }
-  }, [isMAppEnabled, isLoggedIn, isMAppEnabledPending])
+  }, [isMAppEnabled, isLoggedIn, isMAppEnabledPending, connectedEns, isCanEnableMAppsPending, canEnableMApps])
 
-  if (( isEnsAuthPending || isRecordsPending || isMAppEnabledPending) && open) {
+  if (( isEnsAuthPending || isMAppRecordsPending || isCanEnableMAppsPending || isMAppEnabledPending) && open) {
     return <LoadingDialog open={true} />
   }
 
@@ -114,7 +122,11 @@ export const MAppDialog: FC<MAppDialogProps> = ({
               gap="10px"
             >
               <Badge>
-                {connectedEns?.ens}
+                <SPAN style={{
+                  fontSize:'10px',
+                  lineHeight:'10px',
+                  fontWeight: 900,
+                }}>{connectedEns?.ens}</SPAN>
               </Badge>
 
               <CloseIcon
@@ -185,7 +197,6 @@ export const MAppDialog: FC<MAppDialogProps> = ({
                   subname: connectedEns?.ens || '',
                 }).then(() => {
                   handleOpenDialog(false);
-                  refetchIsMAppEnabled();
                 })
               }}
             >

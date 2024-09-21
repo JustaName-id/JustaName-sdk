@@ -15,7 +15,7 @@ import { UseMutateAsyncFunction } from '@tanstack/react-query';
 
 export interface SIWENSProviderConfig extends JustaNameProviderConfig, JustaThemeProviderConfig {
   openOnWalletConnect?: boolean;
-  allowedSubnames: "all" | "platform" | string[];
+  allowedEns: "all" | "platform" | string[];
 }
 
 export interface SIWENSProviderProps {
@@ -38,7 +38,7 @@ export const SIWENSProvider: FC<SIWENSProviderProps> = ({
   config: props
 }) => {
   const openOnWalletConnect = props.openOnWalletConnect || false;
-  const allowedSubnames = props.allowedSubnames || "all";
+  const allowedEns = props.allowedEns || "all";
 
   const { isConnected } = useMountedAccount()
   const [signInOpen, setSignInOpen] = useState(false);
@@ -64,7 +64,7 @@ export const SIWENSProvider: FC<SIWENSProviderProps> = ({
         <JustaThemeProvider color={props.color}>
           {children}
           <CheckSession openOnWalletConnect={openOnWalletConnect} handleOpenDialog={handleOpenSignInDialog}/>
-          <SIWENSDialog open={signInOpen} handleOpenDialog={handleOpenSignInDialog} allowedSubnames={allowedSubnames} />
+          <SIWENSDialog open={signInOpen} handleOpenDialog={handleOpenSignInDialog} allowedEns={allowedEns} />
         </JustaThemeProvider>
       </JustaNameProvider>
     </SIWENSContext.Provider>

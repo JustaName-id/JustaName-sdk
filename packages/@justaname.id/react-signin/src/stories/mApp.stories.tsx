@@ -8,6 +8,7 @@ import { mainnet, sepolia } from 'wagmi/chains';
 import { WagmiProvider } from 'wagmi';
 import { ChainId } from '@justaname.id/sdk';
 import { useState } from 'react';
+import { useIsMAppEnabled, useRevokeMAppPermission } from '@justaname.id/react';
 
 const queryClient = new QueryClient();
 
@@ -24,12 +25,19 @@ const JustaNameConfig: SIWENSProviderConfig = {
   providerUrl: import.meta.env.STORYBOOK_APP_PROVIDER_URL,
   ensDomain: import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
   openOnWalletConnect: true,
-  allowedSubnames:'all',
+  allowedEns:'all',
 }
 
 const Session = () => {
   const { connectedEns, handleOpenSignInDialog, signOut} = useSignInWithEns()
   const [open, setOpen] = useState(false);
+  const { revokeEbdcPermission } = useRevokeMAppPermission({
+    mApp: "justverified.eth",
+  })
+  const { isMAppEnabled } = useIsMAppEnabled({
+    mApp: "justverified.eth",
+    ens: connectedEns?.ens || ""
+  })
 
   const handleOpenDialog = (_open: boolean) => {
     if (_open !== open) {
@@ -48,6 +56,13 @@ const Session = () => {
       }
       <MAppDialog mApp={"justverified.eth"} open={open} handleOpenDialog={handleOpenDialog} />
       <pre>{JSON.stringify(connectedEns, null, 2)}</pre>
+      {
+        isMAppEnabled && <button
+          onClick={() => revokeEbdcPermission({
+            subname: connectedEns?.ens || ""
+          })}
+        >Remove Permission</button>
+      }
     </div>
   )
 }

@@ -4,18 +4,18 @@ import { useJustaName } from '../../providers';
 
 
 export const buildIsMAppEnabledKey = (
-  subname: string,
+  ens: string,
   mApp: string,
   chainId: ChainId
 ) => [
-  'IS_EBDC_ENABLED',
-  subname,
+  'IS_MAPP_ENABLED',
+  ens,
   mApp,
   chainId
 ]
 
 export interface UseIsMAppEnabledParams {
-  subname: string;
+  ens: string;
   mApp: string;
   chainId?: ChainId;
 }
@@ -30,15 +30,15 @@ export const useIsMAppEnabled = (params: UseIsMAppEnabledParams): UseIsMAppEnabl
   const { justaname, chainId} = useJustaName();
   const currentChainId = params.chainId || chainId;
   const query = useQuery({
-    queryKey: buildIsMAppEnabledKey(params.subname, params.mApp,currentChainId),
+    queryKey: buildIsMAppEnabledKey(params.ens, params.mApp,currentChainId),
     queryFn: async () => {
       return await justaname?.mApps.checkIfMAppIsEnabled({
-        subname: params.subname,
+        ens: params.ens,
         mApp: params.mApp,
         chainId: currentChainId
       })
     },
-    enabled: Boolean(params.subname) && Boolean(justaname) && params.subname.length > 0 && params.mApp.length > 0
+    enabled: Boolean(params.ens) && Boolean(justaname) && params.ens.length > 0 && params.mApp.length > 0
   })
 
   return {
