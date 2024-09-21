@@ -1,9 +1,9 @@
 {
   "name": "@justaname.id/react-signin",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "dependencies": {
-    "@justaname.id/react": "0.3.88",
-    "@justaname.id/sdk": "0.2.85"
+    "@justaname.id/react": "0.3.89",
+    "@justaname.id/sdk": "0.2.86"
   },
   "exports": {
     "./package.json": "./dist/package.json",
