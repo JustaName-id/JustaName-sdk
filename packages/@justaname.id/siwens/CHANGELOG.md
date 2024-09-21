@@ -1,3 +1,15 @@
+## 0.0.18 (2024-09-20)
+
+
+### 🚀 Features
+
+- mApp in sdk react and react-signin ([#26](https://github.com/JustaName-id/JustaName-sdk/pull/26))
+
+
+### ❤️  Thank You
+
+- JustHadi @HadiKhai
+
 ## 0.0.17 (2024-09-20)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
