@@ -1,5 +1,4 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { MAppDialog } from '../lib/dialogs';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SIWENSProvider, SIWENSProviderConfig, useSignInWithEns } from '../lib';
 import '@rainbow-me/rainbowkit/styles.css';
@@ -7,9 +6,8 @@ import { ConnectButton, getDefaultConfig, RainbowKitProvider } from '@rainbow-me
 import { mainnet, sepolia } from 'wagmi/chains';
 import { WagmiProvider } from 'wagmi';
 import { ChainId } from '@justaname.id/sdk';
-import { useState } from 'react';
-import { useIsMAppEnabled, useRevokeMAppPermission } from '@justaname.id/react';
-
+import { useMApp } from '../lib/hooks';
+import { Button } from '@justaname.id/react-ui'
 const queryClient = new QueryClient();
 
 const JustaNameConfig: SIWENSProviderConfig = {
@@ -30,38 +28,35 @@ const JustaNameConfig: SIWENSProviderConfig = {
 
 const Session = () => {
   const { connectedEns, handleOpenSignInDialog, signOut} = useSignInWithEns()
-  const [open, setOpen] = useState(false);
-  const { revokeEbdcPermission } = useRevokeMAppPermission({
-    mApp: "justverified.eth",
+  const {
+    handleOpenMAppDialog,
+    revokeMAppPermission,
+    isMAppEnabled,
+    canOpenMAppDialog
+  } = useMApp({
+    mApp: "justverified.eth"
   })
-  const { isMAppEnabled } = useIsMAppEnabled({
-    mApp: "justverified.eth",
-    ens: connectedEns?.ens || ""
-  })
-
-  const handleOpenDialog = (_open: boolean) => {
-    if (_open !== open) {
-      setOpen(_open);
-    }
-  }
 
   return (
     <div>
       <h1>Subname Session</h1>
+      <Button
+        onClick={() => handleOpenMAppDialog(true)}
+        disabled={!canOpenMAppDialog}
+      >Open MApp</Button>
       {
         !connectedEns && <button onClick={() => handleOpenSignInDialog(true)}>Sign In</button>
       }
       {
         connectedEns && <button onClick={signOut} >Sign Out</button>
       }
-      <MAppDialog mApp={"justverified.eth"} open={open} handleOpenDialog={handleOpenDialog} />
       <pre>{JSON.stringify(connectedEns, null, 2)}</pre>
       {
-        isMAppEnabled && <button
-          onClick={() => revokeEbdcPermission({
-            subname: connectedEns?.ens || ""
+        isMAppEnabled && <Button
+          onClick={() => revokeMAppPermission({
+            ens: connectedEns?.ens || ""
           })}
-        >Remove Permission</button>
+        >Remove Permission</Button>
       }
     </div>
   )

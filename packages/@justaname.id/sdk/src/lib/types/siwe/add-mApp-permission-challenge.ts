@@ -1,7 +1,7 @@
 import { ChainId, IRequest, IResponse, IRoute } from '../common';
 
 /**
- * Represents a request to challenge to add EBDC permission.
+ * Represents a request to challenge to add mApp permission.
  * @interface RequestAddMAppPermissionChallengeRequest
  * @public
  */

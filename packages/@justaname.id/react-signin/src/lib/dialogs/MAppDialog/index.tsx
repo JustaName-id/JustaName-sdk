@@ -1,9 +1,10 @@
 import { FC, Fragment, useEffect, useMemo } from 'react';
-import { useAddMAppPermission, useCanEnableMApps, useEnsAuth, useIsMAppEnabled, useRecords } from '@justaname.id/react';
+import { useAddMAppPermission, useCanEnableMApps, useIsMAppEnabled, useRecords } from '@justaname.id/react';
 import { Badge, Button, CloseIcon, Dialog, DialogContent, DialogTitle, Flex, H2, P, SPAN } from '@justaname.id/react-ui';
 import { Footer } from '../../components';
 import { isParseable } from '../../utils';
 import { LoadingDialog } from '../LoadingDialog';
+import { useSignInWithEns } from '../../providers';
 
 export interface MAppDialogProps {
   mApp: string;
@@ -16,7 +17,7 @@ export const MAppDialog: FC<MAppDialogProps> = ({
                                                   open,
                                                   handleOpenDialog
                                                 }) => {
-  const { connectedEns, isLoggedIn, isEnsAuthPending } = useEnsAuth();
+  const { connectedEns, isLoggedIn, isEnsAuthPending, handleOpenSignInDialog} = useSignInWithEns()
   const { records: mAppRecords , isRecordsPending: isMAppRecordsPending} = useRecords({
     fullName: mApp || ''
   });
@@ -57,6 +58,17 @@ export const MAppDialog: FC<MAppDialogProps> = ({
     return parsedPermissions;
   }, [mAppRecords]);
 
+  const handleOpenDialogInternal = (_open: boolean) => {
+    if(!connectedEns){
+      handleOpenSignInDialog(true)
+      return
+    }
+
+    if (_open !== open) {
+      handleOpenDialog(_open);
+    }
+  }
+
   useEffect(() => {
     if(connectedEns) {
       if(isCanEnableMAppsPending){
@@ -64,21 +76,26 @@ export const MAppDialog: FC<MAppDialogProps> = ({
       }
 
       if(!canEnableMApps && canEnableMApps !== undefined){
-        handleOpenDialog(false)
+        handleOpenDialogInternal(false)
         return
       }
       if (isLoggedIn) {
         if (isMAppEnabledPending || isMAppEnabled === undefined) {
           return;
         }
-        handleOpenDialog(!isMAppEnabled);
+        handleOpenDialogInternal(!isMAppEnabled);
       } else {
-        handleOpenDialog(false);
+        handleOpenDialogInternal(false);
       }
     }
   }, [isMAppEnabled, isLoggedIn, isMAppEnabledPending, connectedEns, isCanEnableMAppsPending, canEnableMApps])
 
-  if (( isEnsAuthPending || isMAppRecordsPending || isCanEnableMAppsPending || isMAppEnabledPending) && open) {
+  if(isEnsAuthPending || !connectedEns){
+    return null
+  }
+
+
+  if (( isMAppRecordsPending || isCanEnableMAppsPending || isMAppEnabledPending) && open) {
     return <LoadingDialog open={true} />
   }
 
@@ -133,7 +150,7 @@ export const MAppDialog: FC<MAppDialogProps> = ({
                 style={{
                   cursor: 'pointer'
                 }}
-                onClick={() => handleOpenDialog(false)}
+                onClick={() => handleOpenDialogInternal(false)}
               />
             </Flex>
 
@@ -196,7 +213,7 @@ export const MAppDialog: FC<MAppDialogProps> = ({
                 addMAppPermission({
                   subname: connectedEns?.ens || '',
                 }).then(() => {
-                  handleOpenDialog(false);
+                  handleOpenDialogInternal(false);
                 })
               }}
             >
