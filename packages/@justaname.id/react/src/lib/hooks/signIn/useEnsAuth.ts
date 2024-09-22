@@ -1,12 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 
-export const SESSION_KEY = ['SUBNAME_SESSION']
+export const buildEnsAuthKey = (backendUrl: string) => [
+  'ENS_AUTH',
+  backendUrl,
+];
 
 export type EnsAuth<T extends object = {}> = T & {
   ens: string;
   address: string;
 };
+
+export interface UseEnsAuthParams {
+  backendUrl?: string;
+}
 
 export interface UseEnsAuthReturn<T extends object = {}> {
   isLoggedIn: boolean;
@@ -15,14 +22,14 @@ export interface UseEnsAuthReturn<T extends object = {}> {
   refreshEnsAuth: () => void;
 }
 
-export const useEnsAuth: <T extends object = {}> () => UseEnsAuthReturn<T> = () => {
-  const { backendUrl, routes} = useJustaName()
+export const useEnsAuth = <T extends object = {}>({ backendUrl }: UseEnsAuthParams = {}): UseEnsAuthReturn<T> => {
+  const { backendUrl: defaultBackendUrl , routes} = useJustaName()
 
   const query = useQuery({
-    queryKey: SESSION_KEY,
+    queryKey: buildEnsAuthKey(backendUrl || defaultBackendUrl || ''),
     queryFn: async () => {
       try {
-        const response = await fetch((backendUrl ?? '') + routes.currentEnsRoute, {
+        const response = await fetch((backendUrl || defaultBackendUrl || '') + routes.currentEnsRoute, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'

@@ -1,14 +1,15 @@
 "use client";
 
-import { useMountedAccount } from '../account/useMountedAccount';
-import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
+import { useMountedAccount } from '../account';
+import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useSignMessage } from 'wagmi';
-import { useEnsAuth } from './useEnsAuth';
+import { buildEnsAuthKey } from './useEnsAuth';
 
 
 export interface EnsSignInParams {
   ens: string;
+  backendUrl?: string;
 }
 
 export interface UseEnsSignInResult {
@@ -24,18 +25,18 @@ export interface UseEnsSignInResult {
  */
 
 export const useEnsSignIn = (): UseEnsSignInResult => {
-  const { justaname, backendUrl, routes} = useJustaName();
+  const { justaname, backendUrl: defaultBackendUrl, routes} = useJustaName();
   const { address } = useMountedAccount();
-  const { refreshEnsAuth } =useEnsAuth()
+  const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
 
   const mutation = useMutation({
-    mutationFn: async ({ ens }: EnsSignInParams) => {
+    mutationFn: async ({ ens, backendUrl }: EnsSignInParams) => {
       if (!address) {
         throw new Error('No address found');
       }
 
-      const nonceResponse = await fetch((backendUrl ?? "") + routes.signinNonceRoute, {
+      const nonceResponse = await fetch((backendUrl || defaultBackendUrl || "") + routes.signinNonceRoute, {
         credentials: 'include',
       });
 
@@ -51,7 +52,7 @@ export const useEnsSignIn = (): UseEnsSignInResult => {
       })
 
 
-      const response = await fetch((backendUrl ?? "") + routes.signinRoute, {
+      const response = await fetch((backendUrl || defaultBackendUrl || "") + routes.signinRoute, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +64,9 @@ export const useEnsSignIn = (): UseEnsSignInResult => {
         credentials: 'include'
       });
 
-      refreshEnsAuth();
+      queryClient.invalidateQueries({
+        queryKey: buildEnsAuthKey(backendUrl || defaultBackendUrl || "")
+      })
 
       return response.text();
     },
