@@ -6480,8 +6480,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justaname.id/react-signin@workspace:packages/@justaname.id/react-signin"
   dependencies:
-    "@justaname.id/react": "npm:0.3.91"
-    "@justaname.id/sdk": "npm:0.2.88"
+    "@justaname.id/react": "npm:0.3.92"
+    "@justaname.id/sdk": "npm:0.2.89"
   languageName: unknown
   linkType: soft
 
@@ -6526,12 +6526,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.91, @justaname.id/react@npm:^0.3.68, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.92, @justaname.id/react@npm:^0.3.68, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
     "@ensdomains/ensjs": "npm:4.0.1-alpha.0"
-    "@justaname.id/sdk": "npm:0.2.88"
+    "@justaname.id/sdk": "npm:0.2.89"
     "@tanstack/react-query": "npm:^5.28.4"
     ethers: "npm:^6.11.1"
     jest: "npm:^29.4.1"
@@ -6566,11 +6566,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/sdk@npm:0.2.88, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.2.89, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
-    "@justaname.id/siwens": "npm:0.0.21"
+    "@justaname.id/siwens": "npm:0.0.22"
     axios: "npm:^1.6.0"
     jest: "npm:^29.4.1"
     qs: "npm:^6.12.0"
@@ -6590,7 +6590,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/siwens@npm:0.0.21, @justaname.id/siwens@workspace:packages/@justaname.id/siwens":
+"@justaname.id/siwens@npm:0.0.22, @justaname.id/siwens@workspace:packages/@justaname.id/siwens":
   version: 0.0.0-use.local
   resolution: "@justaname.id/siwens@workspace:packages/@justaname.id/siwens"
   dependencies:
