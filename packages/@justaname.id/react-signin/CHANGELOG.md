@@ -1,3 +1,21 @@
+## 0.0.24 (2024-09-21)
+
+
+### 🚀 Features
+
+- expose usemapp in the package ([#29](https://github.com/JustaName-id/JustaName-sdk/pull/29))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.88
+- Updated @justaname.id/react to 0.3.91
+
+
+### ❤️  Thank You
+
+- JustHadi @HadiKhai
+
 ## 0.0.23 (2024-09-21)
 
 
