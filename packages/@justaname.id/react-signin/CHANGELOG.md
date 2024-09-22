@@ -1,3 +1,21 @@
+## 0.0.27 (2024-09-22)
+
+
+### 🚀 Features
+
+- isCanOpenMAppDialogPending ([#32](https://github.com/JustaName-id/JustaName-sdk/pull/32))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.91
+- Updated @justaname.id/react to 0.3.94
+
+
+### ❤️  Thank You
+
+- JustHadi @HadiKhai
+
 ## 0.0.26 (2024-09-22)
 
 
