@@ -11,6 +11,7 @@ export interface UseEnsSignOutResult {
 
 export interface UseEnsSignOutParams {
   backendUrl?: string;
+  signoutRoute?: string;
 }
 
 /**
@@ -20,14 +21,14 @@ export interface UseEnsSignOutParams {
  * and a boolean indicating if the signature operation is pending (`ensSignaturePending`).
  */
 
-export const useEnsSignOut = ( { backendUrl }: UseEnsSignOutParams = {}): UseEnsSignOutResult => {
+export const useEnsSignOut = ( { backendUrl, signoutRoute }: UseEnsSignOutParams = {}): UseEnsSignOutResult => {
   const { backendUrl: defaultBackendUrl, routes} = useJustaName();
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
     mutationFn: async () => {
 
-      await fetch((backendUrl || defaultBackendUrl || "") + routes.signoutRoute, {
+      await fetch((backendUrl || defaultBackendUrl || "") + (signoutRoute || routes.signoutRoute), {
         credentials: 'include',
       });
 
