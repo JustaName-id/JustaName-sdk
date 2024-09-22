@@ -10,6 +10,8 @@ import { buildEnsAuthKey } from './useEnsAuth';
 export interface EnsSignInParams {
   ens: string;
   backendUrl?: string;
+  signinNonceRoute?: string;
+  signinRoute?: string;
 }
 
 export interface UseEnsSignInResult {
@@ -31,12 +33,12 @@ export const useEnsSignIn = (): UseEnsSignInResult => {
   const { signMessageAsync } = useSignMessage()
 
   const mutation = useMutation({
-    mutationFn: async ({ ens, backendUrl }: EnsSignInParams) => {
+    mutationFn: async ({ ens, backendUrl, signinNonceRoute, signinRoute }: EnsSignInParams) => {
       if (!address) {
         throw new Error('No address found');
       }
 
-      const nonceResponse = await fetch((backendUrl || defaultBackendUrl || "") + routes.signinNonceRoute, {
+      const nonceResponse = await fetch((backendUrl || defaultBackendUrl || "") + (signinNonceRoute || routes.signinNonceRoute), {
         credentials: 'include',
       });
 
@@ -52,7 +54,7 @@ export const useEnsSignIn = (): UseEnsSignInResult => {
       })
 
 
-      const response = await fetch((backendUrl || defaultBackendUrl || "") + routes.signinRoute, {
+      const response = await fetch((backendUrl || defaultBackendUrl || "") + (signinRoute || routes.signinRoute), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

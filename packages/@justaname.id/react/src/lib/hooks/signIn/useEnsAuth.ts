@@ -13,6 +13,7 @@ export type EnsAuth<T extends object = {}> = T & {
 
 export interface UseEnsAuthParams {
   backendUrl?: string;
+  currentEnsRoute?: string;
 }
 
 export interface UseEnsAuthReturn<T extends object = {}> {
@@ -22,14 +23,14 @@ export interface UseEnsAuthReturn<T extends object = {}> {
   refreshEnsAuth: () => void;
 }
 
-export const useEnsAuth = <T extends object = {}>({ backendUrl }: UseEnsAuthParams = {}): UseEnsAuthReturn<T> => {
+export const useEnsAuth = <T extends object = {}>({ backendUrl, currentEnsRoute }: UseEnsAuthParams = {}): UseEnsAuthReturn<T> => {
   const { backendUrl: defaultBackendUrl , routes} = useJustaName()
 
   const query = useQuery({
     queryKey: buildEnsAuthKey(backendUrl || defaultBackendUrl || ''),
     queryFn: async () => {
       try {
-        const response = await fetch((backendUrl || defaultBackendUrl || '') + routes.currentEnsRoute, {
+        const response = await fetch((backendUrl || defaultBackendUrl || '') + (currentEnsRoute || routes.currentEnsRoute), {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
