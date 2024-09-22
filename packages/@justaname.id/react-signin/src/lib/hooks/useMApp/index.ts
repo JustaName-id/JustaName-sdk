@@ -24,6 +24,7 @@ export interface UseMAppResult {
   revokeMAppPermission:  UseRequestRevokeMAppPermissionResult['revokeMAppPermission']
   isMAppEnabled: boolean | undefined;
   canOpenMAppDialog: boolean;
+  isCanOpenMAppDialogPending: boolean;
 }
 
 export const useMApp = ({ mApp, openOnConnect = true }: UseMAppParams) : UseMAppResult => {
@@ -88,10 +89,15 @@ export const useMApp = ({ mApp, openOnConnect = true }: UseMAppParams) : UseMApp
       : true
   }, [connectedEns, isMAppEnabled, canEnableMApps, isMAppEnabledPending, isCanEnableMAppsPending]);
 
+  const isCanOpenMAppDialogPending = useMemo(() => {
+    return isMAppEnabledPending || isCanEnableMAppsPending
+  }, [isMAppEnabledPending, isCanEnableMAppsPending]);
+
   return {
     handleOpenMAppDialog,
     revokeMAppPermission,
     isMAppEnabled,
-    canOpenMAppDialog
+    canOpenMAppDialog,
+    isCanOpenMAppDialogPending
   }
 }
