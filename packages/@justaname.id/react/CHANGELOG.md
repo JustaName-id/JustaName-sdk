@@ -1,3 +1,20 @@
+## 0.3.93 (2024-09-22)
+
+
+### 🚀 Features
+
+- add routes to auth ([#31](https://github.com/JustaName-id/JustaName-sdk/pull/31))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.90
+
+
+### ❤️  Thank You
+
+- JustHadi @HadiKhai
+
 ## 0.3.92 (2024-09-22)
 
 
