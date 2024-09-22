@@ -1,12 +1,16 @@
 "use client";
 
-import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
+import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
-import { useEnsAuth } from './useEnsAuth';
+import { buildEnsAuthKey } from './useEnsAuth';
 
 export interface UseEnsSignOutResult {
   signOut: UseMutateAsyncFunction<void, Error, void, unknown>,
   isSignOutPending: boolean;
+}
+
+export interface UseEnsSignOutParams {
+  backendUrl?: string;
 }
 
 /**
@@ -16,17 +20,20 @@ export interface UseEnsSignOutResult {
  * and a boolean indicating if the signature operation is pending (`ensSignaturePending`).
  */
 
-export const useEnsSignOut = (): UseEnsSignOutResult => {
-  const { backendUrl, routes} = useJustaName();
-  const { refreshEnsAuth } = useEnsAuth()
+export const useEnsSignOut = ( { backendUrl }: UseEnsSignOutParams = {}): UseEnsSignOutResult => {
+  const { backendUrl: defaultBackendUrl, routes} = useJustaName();
+  const queryClient = useQueryClient()
+
   const mutation = useMutation({
     mutationFn: async () => {
 
-      await fetch((backendUrl ?? "") + routes.signoutRoute, {
+      await fetch((backendUrl || defaultBackendUrl || "") + routes.signoutRoute, {
         credentials: 'include',
       });
 
-      refreshEnsAuth()
+      queryClient.invalidateQueries({
+        queryKey: buildEnsAuthKey(backendUrl || defaultBackendUrl || "")
+      })
     },
   });
 
