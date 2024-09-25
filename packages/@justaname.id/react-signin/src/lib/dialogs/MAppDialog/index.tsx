@@ -13,18 +13,18 @@ export interface MAppDialogProps {
 }
 
 export const MAppDialog: FC<MAppDialogProps> = ({
-                                                  mApp,
-                                                  open,
-                                                  handleOpenDialog
-                                                }) => {
-  const { connectedEns, isLoggedIn, isEnsAuthPending, handleOpenSignInDialog} = useSignInWithEns()
-  const { records: mAppRecords , isRecordsPending: isMAppRecordsPending} = useRecords({
+  mApp,
+  open,
+  handleOpenDialog
+}) => {
+  const { connectedEns, isLoggedIn, isEnsAuthPending, handleOpenSignInDialog } = useSignInWithEns()
+  const { records: mAppRecords, isRecordsPending: isMAppRecordsPending } = useRecords({
     fullName: mApp || ''
   });
-  const { canEnableMApps, isCanEnableMAppsPending} = useCanEnableMApps({
+  const { canEnableMApps, isCanEnableMAppsPending } = useCanEnableMApps({
     ens: connectedEns?.ens || ''
   })
-  const { isMAppEnabled  , isMAppEnabledPending } = useIsMAppEnabled({
+  const { isMAppEnabled, isMAppEnabledPending } = useIsMAppEnabled({
     ens: connectedEns?.ens || '',
     mApp
   });
@@ -59,7 +59,7 @@ export const MAppDialog: FC<MAppDialogProps> = ({
   }, [mAppRecords]);
 
   const handleOpenDialogInternal = (_open: boolean) => {
-    if(!connectedEns){
+    if (!connectedEns) {
       handleOpenSignInDialog(true)
       return
     }
@@ -70,12 +70,12 @@ export const MAppDialog: FC<MAppDialogProps> = ({
   }
 
   useEffect(() => {
-    if(connectedEns) {
-      if(isCanEnableMAppsPending){
+    if (connectedEns) {
+      if (isCanEnableMAppsPending) {
         return
       }
 
-      if(!canEnableMApps && canEnableMApps !== undefined){
+      if (!canEnableMApps && canEnableMApps !== undefined) {
         handleOpenDialogInternal(false)
         return
       }
@@ -90,12 +90,12 @@ export const MAppDialog: FC<MAppDialogProps> = ({
     }
   }, [isMAppEnabled, isLoggedIn, isMAppEnabledPending, connectedEns, isCanEnableMAppsPending, canEnableMApps])
 
-  if(isEnsAuthPending || !connectedEns){
+  if (isEnsAuthPending || !connectedEns) {
     return null
   }
 
 
-  if (( isMAppRecordsPending || isCanEnableMAppsPending || isMAppEnabledPending) && open) {
+  if ((isMAppRecordsPending || isCanEnableMAppsPending || isMAppEnabledPending) && open) {
     return <LoadingDialog open={true} />
   }
 
@@ -108,7 +108,7 @@ export const MAppDialog: FC<MAppDialogProps> = ({
 
         </DialogTitle>
       </div>
-      <DialogContent style={{
+      <DialogContent aria-describedby='Mapp-dialog' style={{
         padding: 0,
         maxWidth: '500px',
         transition: 'all 0.4 ease-in-out'
@@ -140,8 +140,8 @@ export const MAppDialog: FC<MAppDialogProps> = ({
             >
               <Badge>
                 <SPAN style={{
-                  fontSize:'10px',
-                  lineHeight:'10px',
+                  fontSize: '10px',
+                  lineHeight: '10px',
                   fontWeight: 900,
                 }}>{connectedEns?.ens}</SPAN>
               </Badge>
@@ -165,7 +165,7 @@ export const MAppDialog: FC<MAppDialogProps> = ({
             </Flex>
 
             <Flex
-              >
+            >
               <P>
                 {mAppDescription}
               </P>
@@ -174,18 +174,18 @@ export const MAppDialog: FC<MAppDialogProps> = ({
             <Flex
               direction={"column"}
               gap={"15px"}
-              >
+            >
 
-            {
-              mAppPermissions.map((permission, index) => {
-                return (<Fragment key={'permission_'+index}>
+              {
+                mAppPermissions.map((permission, index) => {
+                  return (<Fragment key={'permission_' + index}>
                     <Flex
                       direction={"column"}
                       gap={"5px"}
                       style={{
-                        padding:"10px",
-                        borderRadius:"16px",
-                        border:"1px solid var(--justaname-foreground-color-4)"
+                        padding: "10px",
+                        borderRadius: "16px",
+                        border: "1px solid var(--justaname-foreground-color-4)"
                       }}
                     >
 
@@ -197,15 +197,15 @@ export const MAppDialog: FC<MAppDialogProps> = ({
                         {permission}
                       </P>
                     </Flex>
-                </Fragment>
-                )
+                  </Fragment>
+                  )
                 })
-            }
+              }
             </Flex>
 
             <Button
               style={{
-                width:'100%',
+                width: '100%',
               }}
               size="lg"
               loading={isAddMAppPermissionPending}

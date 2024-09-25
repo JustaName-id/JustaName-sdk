@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "emitDecoratorMetadata": true,
-    "outDir": "",
+    "outDir": ""
   },
   "files": [
     "../../../node_modules/@nx/react/typings/styled-jsx.d.ts",
@@ -21,6 +21,7 @@
   ],
   "include": [
     "src/lib/**/index.ts",
+    "src/lib/**/index.tsx",
     "src/**/*.stories.ts",
     "src/**/*.stories.js",
     "src/**/*.stories.jsx",
