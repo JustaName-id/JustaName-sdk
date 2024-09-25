@@ -5,11 +5,11 @@ import { useDebounce } from '@uidotdev/usehooks';
 import { Subname } from './Subname';
 
 export const ClaimSubname = () => {
-  const { address  } = useAccount();
-  const { subnames } = useAccountSubnames();
+  const { address } = useAccount();
+  const { accountSubnames } = useAccountSubnames();
   const [username, setUsername] = useState<string>("");
   const debouncedUsername = useDebounce(username, 500);
-  const { isAvailable } = useIsSubnameAvailable({
+  const { isSubnameAvailable } = useIsSubnameAvailable({
     username: debouncedUsername,
   })
   const { addSubname } = useAddSubname();
@@ -17,7 +17,7 @@ export const ClaimSubname = () => {
   return (
     <div>
       {
-        subnames.length === 0 ?
+        accountSubnames.length === 0 ?
           <>
             <h1>Claim your first subdomain</h1>
             <input
@@ -28,7 +28,7 @@ export const ClaimSubname = () => {
               onClick={() => addSubname({
                 username,
               })}
-              disabled={!isAvailable || !address || !debouncedUsername}
+              disabled={!isSubnameAvailable || !address || !debouncedUsername}
             >
               Claim
             </button>
@@ -37,7 +37,7 @@ export const ClaimSubname = () => {
           <div>
             <h1>My Subdomains</h1>
             <ul>
-              {subnames.map((subname) => (
+              {accountSubnames.map((subname) => (
                 <React.Fragment key={subname.subname}>
                   <Subname currentSubname={subname.subname} />
                 </React.Fragment>

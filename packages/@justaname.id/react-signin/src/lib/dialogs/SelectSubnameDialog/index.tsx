@@ -1,6 +1,15 @@
 import {
+  SubnamesType,
+  useAddSubname,
+  useEnsSignIn,
+  useIsSubnameAvailable,
+  useJustaName,
+  useMountedAccount
+} from '@justaname.id/react';
+import {
   Badge,
   Button,
+  CloseIcon,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -9,24 +18,15 @@ import {
   H2,
   Input,
   OrLine,
-  ProfileIcon,
-  CloseIcon
+  ProfileIcon
 } from '@justaname.id/react-ui';
-import {
-  SubnamesType,
-  useAddSubname,
-  useEnsSignIn,
-  useIsSubnameAvailable,
-  useJustaName,
-  useMountedAccount
-} from '@justaname.id/react';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import { useDebounce } from '../../hooks';
 import {
   Footer,
   SelectSubnameItem
 } from '../../components';
+import { useDebounce } from '../../hooks';
 
 const TransitionElement = styled.div<{ maxheight: string }>`
     max-height: 0;
@@ -51,25 +51,33 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
   const { address } = useMountedAccount();
   const [username, setUsername] = React.useState('');
   const [subnameSigningIn, setSubnameSigningIn] = React.useState('');
-  const { ensDomain } = useJustaName();
+  const { ensDomain, chainId } = useJustaName();
   const { addSubname, isAddSubnamePending } = useAddSubname();
+
   const {
     debouncedValue: debouncedUsername,
     isDebouncing
   } = useDebounce(username, 500);
 
   const { signIn } = useEnsSignIn();
-  const { isSubnameAvailable, isSubnameAvailablePending } = useIsSubnameAvailable({
-    username: debouncedUsername
-  });
 
   const shouldBeAbleToSelect = useMemo(() => {
     return subnames.length > 0;
   }, [subnames, ensDomain]);
 
-  const shouldBeAbleToClaim = useMemo(() => {
-    return !subnames.find(subname => subname.subname.endsWith(ensDomain));
+  const shouldBeAbleToClaimDomain = useMemo(() => {
+    const filteredSubnames = subnames.filter(subname => subname.subname.split('.').length === 3);
+    return !filteredSubnames.find(subname => subname.subname.endsWith(ensDomain));
   }, [subnames, ensDomain]);
+
+  const shouldBeAbleToClaimJANDomain = useMemo(() => {
+    return !subnames.find(subname => subname.subname.endsWith(chainId === 1 ? 'justan.id' : 'jaw.eth'));
+  }, [subnames, chainId]);
+
+  const { isSubnameAvailable, isSubnameAvailablePending } = useIsSubnameAvailable({
+    username: debouncedUsername,
+    ensDomain: shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'jaw.eth'
+  });
 
   return (
     <Dialog open={open}
@@ -81,7 +89,7 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
 
         </DialogTitle>
       </div>
-      <DialogContent style={{
+      <DialogContent aria-describedby='select-subname-dialog' style={{
         padding: 0,
         transition: "all 0.4 ease-in-out"
       }}>
@@ -99,7 +107,7 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
               // border: "1px solid var(--justaname-input-border-color)",
               borderRadius: '16px',
               background: 'var(--justaname-background-color)',
-              gap: '20px',
+              gap: '10px',
               display: 'flex',
               flexDirection: 'column',
               maxWidth: '400px'
@@ -111,8 +119,8 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
               gap="10px"
             >
               <Badge style={{
-                fontSize:'10px',
-                lineHeight:'10px',
+                fontSize: '10px',
+                lineHeight: '10px',
                 fontWeight: 900,
               }}>
                 {address && formatText(address, 4)}
@@ -139,7 +147,7 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
                   direction={'column'}
                   gap={'15px'}
                   style={{
-                    maxHeight: '20vh',
+                    maxHeight: '30vh',
                     overflowY: 'scroll',
                     overflowX: 'hidden'
                   }}
@@ -165,11 +173,11 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
                 </Flex>
               </Flex>
             </TransitionElement>
-            <TransitionElement className={(shouldBeAbleToSelect && shouldBeAbleToClaim) ? 'visible' : ''} maxheight={'100px'}>
+            <TransitionElement className={(shouldBeAbleToSelect && (shouldBeAbleToClaimJANDomain || shouldBeAbleToClaimDomain)) ? 'visible' : ''} maxheight={'100px'}>
               <OrLine />
             </TransitionElement>
 
-            <TransitionElement className={(shouldBeAbleToClaim) ? 'visible' : ''} maxheight={'100px'}>
+            <TransitionElement maxheight={'100px'} className={(shouldBeAbleToClaimJANDomain || shouldBeAbleToClaimDomain) ? 'visible' : ''}>
               <Flex
                 justify="space-between"
                 direction="column"
@@ -184,7 +192,7 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
                   <Input
                     id="name"
                     placeholder={`Enter your username...`}
-                    right={'.' + ensDomain}
+                    right={'.' + (shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'jaw.eth')}
                     onChange={(e) => setUsername(e.target.value)}
                     value={username}
                     left={<Flex justify={'center'} align={'center'}>
@@ -207,9 +215,16 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
                       fontWeight: '900'
                     }}
                     onClick={() => {
-                      addSubname({ username: username }).then(() => {
-                        setSubnameSigningIn(username + '.' + ensDomain);
-                        signIn({ ens: username + '.' + ensDomain }).then(() => handleOpenDialog(false)).finally(() => {
+                      addSubname({
+                        username: username,
+                        ensDomain: shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'jaw.eth',
+                        backendUrl: shouldBeAbleToClaimDomain ? undefined : `https://claim${chainId === 1 ? '' : '-staging'}.justaname.id`,
+                        addSubnameRoute: shouldBeAbleToClaimDomain ? undefined : "/api/subnames/add",
+                      }).then(() => {
+                        setSubnameSigningIn(username + '.' + shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'jaw.eth');
+                        signIn({
+                          ens: username + '.' + shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'jaw.eth'
+                        }).then(() => handleOpenDialog(false)).finally(() => {
                           setSubnameSigningIn('');
                         });
                       });
