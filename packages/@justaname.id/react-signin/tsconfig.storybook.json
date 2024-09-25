@@ -3,6 +3,12 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "outDir": "",
+    "target": "esnext",
+    "module": "esnext",
+    "paths": {
+      "@justaname.id/react": ["packages/@justaname.id/react"],
+      "@justaname.id/react-ui": ["packages/@justaname.id/react-ui"]
+    }
   },
   "files": [
     "../../../node_modules/@nx/react/typings/styled-jsx.d.ts",

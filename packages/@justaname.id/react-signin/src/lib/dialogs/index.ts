@@ -1,4 +1,3 @@
-export * from './SIWENSDialog';
-export * from './SelectSubnameDialog';
+export * from './SignInDialog';
 export * from './LoadingDialog';
-export * from './MAppDialog';
+export * from './AuthorizeMAppDialog';

@@ -1,5 +1,6 @@
 import {  SIWEHeaders } from '../headers';
-import { IRequest, IResponse, IRoute } from '../common';
+import { AddressWithTypedCoins, IRequest, IResponse, IRoute, PartialAddressJson } from '../common';
+import { ChainId } from '@justaname.id/sdk';
 
 /**
  * Represents a cryptocurrency address associated with a subname.
@@ -47,7 +48,7 @@ interface TextRecord {
 interface Metadata {
   id: string;
 
-  contentHash: string;
+  contentHash: string | null | undefined;
 
   addresses: Address[];
 
@@ -76,13 +77,13 @@ export interface SubnameUpdateRequest extends IRequest{
 
   ensDomain: string;
 
-  chainId: number;
+  chainId: ChainId;
 
-  addresses: Address[]
+  addresses?: Address[]
 
-  text: TextRecord[];
+  text?: TextRecord[];
 
-  contentHash: string;
+  contentHash?: string;
 }
 
 /**
@@ -119,7 +120,7 @@ export interface SubnameUpdateRoute extends IRoute {
 
 export interface SubnameUpdateParams extends Omit<SubnameUpdateRequest, 'ensDomain' | 'chainId' | 'text' | 'addresses'> {
   ensDomain?: string;
-  chainId?: number;
-  text: Record<string, string>;
-  addresses: Record<string, string>;
+  chainId?: ChainId;
+  addresses?:  PartialAddressJson  | AddressWithTypedCoins[];
+  text?: Record<string, string> | TextRecord[];
 }

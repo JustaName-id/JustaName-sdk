@@ -4,6 +4,7 @@ import { ChainId, RevokeMAppPermissionResponse } from '@justaname.id/sdk';
 import { useSignMessage } from 'wagmi';
 import { useAccountSubnames, useMountedAccount } from '../account';
 import { buildIsMAppEnabledKey } from './useIsMAppEnabled';
+import { useRecords } from '../records';
 
 export interface UseRequestRevokeMAppPermissionResult {
   revokeMAppPermission: UseMutateFunction<RevokeMAppPermissionResponse, Error, RevokeMAppPermissionRequest, unknown>;
@@ -26,6 +27,7 @@ export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): U
   const { signMessageAsync } = useSignMessage()
   const { address} = useMountedAccount()
   const { refetchAccountSubnames } = useAccountSubnames()
+  const { getRecords } = useRecords()
   const mutate = useMutation<
     RevokeMAppPermissionResponse,
     Error,
@@ -59,6 +61,10 @@ export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): U
         queryKey: buildIsMAppEnabledKey(params.ens, props.mApp, currentChainId)
       })
       refetchAccountSubnames()
+      getRecords({
+        fullName: params.ens,
+        chainId: currentChainId,
+      }, true)
       return response
     }
   })

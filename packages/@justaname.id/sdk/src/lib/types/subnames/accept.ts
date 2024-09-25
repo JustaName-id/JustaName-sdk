@@ -1,4 +1,4 @@
-import { ChainId, IRequest, IResponse, IRoute } from '../common';
+import { AddressWithTypedCoins, ChainId, IRequest, IResponse, IRoute, PartialAddressJson } from '../common';
 import { SIWEHeaders } from '../headers';
 
 /**
@@ -114,6 +114,6 @@ export interface SubnameAcceptRoute extends IRoute {
 export interface SubnameAcceptParams extends Omit<SubnameAcceptRequest, 'ensDomain' | 'chainId' | 'addresses' | 'text'> {
   ensDomain?: string;
   chainId?: ChainId;
-  text?: Record<string, string>;
-  addresses?: Record<string, string>;
+  addresses?:  PartialAddressJson  | AddressWithTypedCoins[];
+  text?: Record<string, string> | TextRecord[];
 }

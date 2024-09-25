@@ -15,7 +15,9 @@
     }
   },
   "files": [],
-  "include": [],
+  "include": [
+    "node_modules/viem/**/*",
+  ],
   "references": [
     {
       "path": "./tsconfig.lib.json"

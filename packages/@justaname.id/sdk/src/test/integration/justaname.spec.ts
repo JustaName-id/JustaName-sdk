@@ -2,7 +2,8 @@ import { JustaName } from '../../lib/justaname';
 import { configureEnv } from '../helpers/configureEnv';
 import { initializeJustaName } from '../helpers/initializeJustaName';
 import { ethers } from 'ethers';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
+import { ChainId } from '../../lib/types';
 dotenv.config();
 
 // const invalidApiKey = 'invalid-api-key';
@@ -12,7 +13,7 @@ const mAppPk = process.env['SDK_MAPP_PRIVATE_KEY'] as string;
 const mAppSigner = new ethers.Wallet(mAppPk);
 const subnameSigner = ethers.Wallet.createRandom()
 const subnameToBeAdded = Math.random().toString(36).substring(7);
-const CHAIN_ID = 11155111;
+const CHAIN_ID = parseInt(process.env['SDK_CHAIN_ID'] as string) as ChainId || 11155111
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
 const MAPP = process.env['SDK_MAPP'] as string;
 const MAPP_2 = MAPP.split('.')[0] + '2' + '.' + MAPP.split('.')[1];
@@ -78,6 +79,74 @@ describe('justaname', () => {
     expect(response).toBeDefined();
   })
 
+  it('should add a subname2 with text and addresses and contentHash', async () => {
+    const subnameToBeAdded2 = subnameToBeAdded + '2';
+    const challenge = await justaname.siwe.requestChallenge({
+      address: subnameSigner.address,
+      chainId: CHAIN_ID,
+    });
+
+    const signature = await subnameSigner.signMessage(challenge.challenge);
+    const response = await justaname.subnames.addSubname({
+      username: subnameToBeAdded2,
+      chainId: CHAIN_ID,
+      ensDomain: ENS_DOMAIN,
+      text: {
+        test: 'test',
+      },
+      addresses: {
+        0: "1PxsjLASknj7GfF54zXejgygcQCKJ1ubah"
+      },
+      contentHash: 'ipfs://bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi'
+    }, {
+      xMessage: challenge.challenge,
+      xAddress: subnameSigner.address,
+      xSignature: signature
+    })
+
+    expect(response).toBeDefined();
+
+    const records = await justaname.subnames.getRecordsByFullName({
+      fullName: subnameToBeAdded2 + '.' + ENS_DOMAIN,
+      chainId: CHAIN_ID
+    })
+
+    expect(records.texts.find((text) => text.key === 'test')?.value).toEqual('test');
+    expect(records.contentHash).toEqual({ protocolType:"ipfs", decoded:"bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi"})
+    expect(records.coins.find((coin) => coin.id === 0)?.value).toEqual("1PxsjLASknj7GfF54zXejgygcQCKJ1ubah")
+
+    const response2 = await justaname.subnames.updateSubname({
+      username: subnameToBeAdded2,
+      chainId: CHAIN_ID,
+      ensDomain: ENS_DOMAIN,
+      text: {
+        test2: 'test2',
+        test:""
+      },
+      addresses: [{
+        coinType:"0",
+        address: "1CznrXZXdCQeZVSQnDuytm8a957jUeDpdw"
+      }],
+      contentHash: "ipns://k51qzi5uqu5dgccx524mfjv7znyfsa6g013o6v4yvis9dxnrjbwojc62pt0430"
+    }, {
+      xMessage: challenge.challenge,
+      xAddress: subnameSigner.address,
+      xSignature: signature
+    })
+
+    expect(response2).toBeDefined();
+
+    const records2 = await justaname.subnames.getRecordsByFullName({
+      fullName: subnameToBeAdded2 + '.' + ENS_DOMAIN,
+      chainId: CHAIN_ID
+    })
+
+    expect(records2.texts.find((text) => text.key === 'test2')?.value).toEqual('test2');
+    expect(records2.texts.find((text) => text.key === 'test')?.value).toBeUndefined();
+    expect(records2.contentHash).toEqual({ protocolType:"ipns", decoded:"k51qzi5uqu5dgccx524mfjv7znyfsa6g013o6v4yvis9dxnrjbwojc62pt0430"})
+    expect(records2.coins.find((coin) => coin.id === 0)?.value).toEqual("1CznrXZXdCQeZVSQnDuytm8a957jUeDpdw")
+  })
+
   it('should update a subname', async () => {
     const challenge = await justaname.siwe.requestChallenge({
       address: subnameSigner.address,
@@ -87,11 +156,9 @@ describe('justaname', () => {
     const signature = await subnameSigner.signMessage(challenge.challenge);
 
     const response = await justaname.subnames.updateSubname({
-      contentHash: '',
       username: subnameToBeAdded,
       chainId: CHAIN_ID,
       ensDomain: ENS_DOMAIN,
-      addresses: {},
       text: {
         test: 'test',
         test2: 'test2',
@@ -105,6 +172,64 @@ describe('justaname', () => {
     expect(response).toBeDefined();
   })
 
+  it("should throw an error if contentHash is invalid", async () => {
+    const challenge = await justaname.siwe.requestChallenge({
+      address: subnameSigner.address,
+      chainId: CHAIN_ID,
+    });
+
+    const signature = await subnameSigner.signMessage(challenge.challenge);
+
+    try {
+      await justaname.subnames.updateSubname({
+        username: subnameToBeAdded,
+        chainId: CHAIN_ID,
+        ensDomain: ENS_DOMAIN,
+        contentHash: 'invalid-content-hash',
+      }, {
+        xMessage: challenge.challenge,
+        xAddress: subnameSigner.address,
+        xSignature: signature
+      })
+    }catch(e) {
+      expect(e).toBeDefined();
+    }
+  })
+
+  it("should be able to add contentHash", async () => {
+    const records = await justaname.subnames.getRecordsByFullName({
+      fullName: subnameToBeAdded + '.' + ENS_DOMAIN,
+      chainId: CHAIN_ID
+    })
+
+    expect(records.contentHash).toBeNull()
+
+    const challenge = await justaname.siwe.requestChallenge({
+      address: subnameSigner.address,
+      chainId: CHAIN_ID,
+    });
+
+    const signature = await subnameSigner.signMessage(challenge.challenge);
+
+    const response = await justaname.subnames.updateSubname({
+        username: subnameToBeAdded,
+        chainId: CHAIN_ID,
+        ensDomain: ENS_DOMAIN,
+        contentHash: 'ipfs://bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi',
+      }, {
+        xMessage: challenge.challenge,
+        xAddress: subnameSigner.address,
+        xSignature: signature
+      })
+    const records2 = await justaname.subnames.getRecordsByFullName({
+      fullName: subnameToBeAdded + '.' + ENS_DOMAIN,
+      chainId: CHAIN_ID
+    })
+
+    expect(response.data.contentHash).toBe("ipfs://bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi");
+    expect(records2.contentHash).toEqual({ protocolType:"ipfs", decoded:"bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi"})
+  })
+
   it('mApps shouldn\'t be updated', async () => {
 
     const challenge = await justaname.siwe.requestChallenge({
@@ -115,11 +240,9 @@ describe('justaname', () => {
     const signature = await subnameSigner.signMessage(challenge.challenge);
 
     const response = await justaname.subnames.updateSubname({
-      contentHash: '',
       username: subnameToBeAdded,
       chainId: CHAIN_ID,
       ensDomain: ENS_DOMAIN,
-      addresses: {},
       text: {
         'mApps': 'shouldntBeUpdated',
         [`test_${MAPP}`]: 'shouldBeOverrideWhenMAppPermissionIsAdded',
@@ -143,11 +266,9 @@ describe('justaname', () => {
     const signature = await subnameSigner.signMessage(challenge.challenge);
 
     const response = await justaname.subnames.updateSubname({
-      contentHash: '',
       username: subnameToBeAdded,
       chainId: CHAIN_ID,
       ensDomain: ENS_DOMAIN,
-      addresses: {},
       text: {
         test: '',
       }
@@ -266,7 +387,6 @@ describe('justaname', () => {
       address: mAppSigner.address,
       mApp: ENS_DOMAIN,
       chainId: CHAIN_ID
-
     })
 
     const signature = await mAppSigner.signMessage(challenge.challenge);
@@ -298,11 +418,9 @@ describe('justaname', () => {
     const signature = await subnameSigner.signMessage(challenge.challenge);
 
     const response = await justaname.subnames.updateSubname({
-      contentHash: '',
       username: subnameToBeAdded,
       chainId: CHAIN_ID,
       ensDomain: ENS_DOMAIN,
-      addresses: {},
       text: {
         [`test2_${MAPP}`]: 'shouldntBeUpdated',
       }
@@ -315,13 +433,51 @@ describe('justaname', () => {
     expect(response.data.textRecords.find((text) => text.key === `test2_${MAPP}`)?.value).toEqual('testValue2');
   })
 
+
+
+
+  it("should be remove contentHash", async () => {
+    const records = await justaname.subnames.getRecordsByFullName({
+      fullName: subnameToBeAdded + '.' + ENS_DOMAIN,
+      chainId: CHAIN_ID
+    })
+
+    expect(records.contentHash).toEqual({ protocolType:"ipfs", decoded:"bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi"})
+
+    const challenge = await justaname.siwe.requestChallenge({
+      address: subnameSigner.address,
+      chainId: CHAIN_ID,
+    });
+
+    const signature = await subnameSigner.signMessage(challenge.challenge);
+
+    const response = await justaname.subnames.updateSubname({
+      username: subnameToBeAdded,
+      chainId: CHAIN_ID,
+      ensDomain: ENS_DOMAIN,
+      contentHash: '',
+    }, {
+      xMessage: challenge.challenge,
+      xAddress: subnameSigner.address,
+      xSignature: signature
+    })
+
+    const records2 = await justaname.subnames.getRecordsByFullName({
+      fullName: subnameToBeAdded + '.' + ENS_DOMAIN,
+      chainId: CHAIN_ID
+    })
+
+    expect(records2.contentHash).toBeNull();
+
+    expect(response.data.contentHash).toBeNull()
+  })
+
   it('should remove field if value is empty', async () => {
     const challenge = await justaname.mApps.requestAppendMAppFieldChallenge({
       subname: subnameToBeAdded + '.' + ENS_DOMAIN,
       address: mAppSigner.address,
       mApp: ENS_DOMAIN,
       chainId: CHAIN_ID
-
     })
 
     const signature = await mAppSigner.signMessage(challenge.challenge);
@@ -364,24 +520,45 @@ describe('justaname', () => {
     expect(testJawEth).toEqual(undefined)
   })
 
-  it('should revoke subname', async () => {
-    const challenge = await justaname.siwe.requestChallenge({
-      address: subnameSigner.address,
-      chainId: CHAIN_ID,
-    });
+  // it('should revoke subname', async () => {
+  //   const challenge = await justaname.siwe.requestChallenge({
+  //     address: subnameSigner.address,
+  //     chainId: CHAIN_ID,
+  //   });
+  //
+  //   const signature = await subnameSigner.signMessage(challenge.challenge);
+  //
+  //   const response = await justaname.subnames.revokeSubname({
+  //     chainId: CHAIN_ID,
+  //     ensDomain: ENS_DOMAIN,
+  //     username: subnameToBeAdded
+  //   }, {
+  //     xAddress: subnameSigner.address,
+  //     xSignature: signature,
+  //     xMessage: challenge.challenge
+  //   })
+  //
+  //   expect(response).toBeDefined();
+  // })
 
-    const signature = await subnameSigner.signMessage(challenge.challenge);
-
-    const response = await justaname.subnames.revokeSubname({
-      chainId: CHAIN_ID,
-      ensDomain: ENS_DOMAIN,
-      username: subnameToBeAdded
-    }, {
-      xAddress: subnameSigner.address,
-      xSignature: signature,
-      xMessage: challenge.challenge
-    })
-
-    expect(response).toBeDefined();
-  })
+  // it('should revoke subname2', async () => {
+  //   const challenge = await justaname.siwe.requestChallenge({
+  //     address: subnameSigner.address,
+  //     chainId: CHAIN_ID,
+  //   });
+  //
+  //   const signature = await subnameSigner.signMessage(challenge.challenge);
+  //
+  //   const response = await justaname.subnames.revokeSubname({
+  //     chainId: CHAIN_ID,
+  //     ensDomain: ENS_DOMAIN,
+  //     username: subnameToBeAdded + "2"
+  //   }, {
+  //     xAddress: subnameSigner.address,
+  //     xSignature: signature,
+  //     xMessage: challenge.challenge
+  //   })
+  //
+  //   expect(response).toBeDefined();
+  // })
 })

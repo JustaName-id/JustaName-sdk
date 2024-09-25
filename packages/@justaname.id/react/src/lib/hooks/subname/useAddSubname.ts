@@ -7,7 +7,10 @@ import { useSubnameSignature } from './useSubnameSignature';
 import { SubnameAddParams, SubnameAddResponse } from '@justaname.id/sdk';
 import { useAccountSubnames } from '../account/useAccountSubnames';
 
-export type AddSubnameRequest = SubnameAddParams
+export interface AddSubnameRequest extends SubnameAddParams {
+  backendUrl?: string;
+  addRoute?: string;
+}
 
 /**
  *  Interface defining the parameters needed to add a subname.

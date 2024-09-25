@@ -1,20 +1,21 @@
 import { Subnames} from '../../../lib/features';
 import { TextRecord, Address } from '../../../lib/types'
 import { ApiKeyRequiredException } from '../../../lib/errors/ApiKeyRequired.exception';
+import { sanitizeAddresses, sanitizeTexts } from '../../../lib/utils';
 
 const PROVIDER_URL = 'https://mainnet.infura.io/v3/your-infura-project-id';
 const CHAIN_ID = 1;
 const ENS_DOMAIN = 'justaname.eth';
-const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
+// const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 
 describe('Subnames', () => {
 
-  let subnames = new Subnames(
-    PROVIDER_URL,
-    ENS_DOMAIN,
-    CHAIN_ID,
-    validApiKey
-  )
+  // let subnames = new Subnames(
+  //   PROVIDER_URL,
+  //   ENS_DOMAIN,
+  //   CHAIN_ID,
+  //   validApiKey
+  // )
 
   it('should be able to transform json text records to TextRecord', () => {
     const text = {
@@ -30,7 +31,7 @@ describe('Subnames', () => {
       value: 'justaname'
     }]
 
-    const textArray = subnames.jsonToArrayOfKeyValue(text, 'key', 'value')
+    const textArray = sanitizeTexts(text)
     expect(textArray).toEqual(textRequest)
   })
 
@@ -51,12 +52,7 @@ describe('Subnames', () => {
       }
     ]
 
-    const addressArray = subnames.jsonToArrayOfKeyValue(addresses, 'coinType', 'address').map((address) => {
-      return {
-        address: address.address,
-        coinType: parseInt(address.coinType)
-      }
-    })
+    const addressArray = sanitizeAddresses(addresses)
     expect(addressArray).toEqual(addressRequest)
   })
 

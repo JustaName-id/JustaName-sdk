@@ -8,6 +8,6 @@ export const Loading = () => {
         align="center" justify="center"
   >
 
-    <LoadingSpinner />
+    <LoadingSpinner color={"var(--justaname-primary-color)"} />
   </Flex>)
 }
