@@ -1,6 +1,15 @@
-export const ArrowIcon = ({ width = 20, height = 21}) => {
+import React, { FC } from 'react';
+
+export interface ArrowIconProps extends React.SVGProps<SVGSVGElement> {
+  width?: number;
+  height?: number;
+}
+
+export const ArrowIcon: FC<ArrowIconProps> = ({ width = 20, height = 21, ...props}) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 20 21" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 20 21" fill="none"
+         {...props}
+    >
       <mask id="mask0_108_46" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="21">
         <rect y="0.5" width="20" height="20" fill="#D9D9D9" />
       </mask>

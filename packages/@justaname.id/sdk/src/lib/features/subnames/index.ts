@@ -29,10 +29,10 @@ import {
   SubnameRevokeParams,
   SubnameRejectParams,
   SubnameRecordsParams,
-  ChainId, TextRecord, Address
+  ChainId
 } from '../../types';
-import { ApiKeyRequiredException } from '../../errors/ApiKeyRequired.exception';
-
+import { ApiKeyRequiredException } from '../../errors';
+import { sanitizeTexts, sanitizeAddresses } from '../../utils';
 /**
  * Represents the Subnames class for interacting with the Subnames API.
  * @public
@@ -94,11 +94,13 @@ export class Subnames {
     params: SubnameAcceptParams,
     headers: SIWEHeaders
   ): Promise<SubnameAcceptResponse> {
+    const { chainId, ensDomain, text, addresses, ...rest } = params;
     return restCall('ACCEPT_SUBNAME_ROUTE', 'POST', {
-      chainId: this.chainId,
-      ensDomain: this.ensDomain,
-      ...params,
-      ...this.transformTextAndAddressRecord(params.text, params.addresses),
+      chainId: chainId || this.chainId,
+      ensDomain: ensDomain || this.ensDomain,
+      text: sanitizeTexts(params.text),
+      addresses: sanitizeAddresses(params.addresses),
+      ...rest,
     },
       {
         ...headers,
@@ -138,19 +140,25 @@ export class Subnames {
     params: SubnameAddParams,
     headers: SIWEHeaders
   ): Promise<SubnameAddResponse> {
+    const { chainId, ensDomain, text, addresses, ...rest } = params;
+    const sanitizedAddresses = sanitizeAddresses(params.addresses);
+    const hasAddress60 = sanitizedAddresses?.some((address) => address.coinType === 60);
+
     return this.isNotReadOnlyMode(
        () =>restCall(
           'ADD_SUBNAME_ROUTE',
           'POST',
           {
-            contentHash: '',
-            chainId: this.chainId,
-            ensDomain: this.ensDomain,
-            ...params,
-            ...this.transformTextAndAddressRecord(params.text, {
-              ...params.addresses,
-              '60': headers.xAddress
-            })
+            chainId: chainId || this.chainId,
+            ensDomain: ensDomain || this.ensDomain,
+            text: sanitizeTexts(params.text),
+            addresses: hasAddress60 ? sanitizedAddresses : [
+              {
+                coinType: 60,
+                address: headers.xAddress as string,
+              },...(sanitizedAddresses === undefined ? [] : sanitizedAddresses)
+              ],
+            ...rest
           },
           {
             xApiKey: this.apiKey as string,
@@ -171,12 +179,14 @@ export class Subnames {
     params: SubnameUpdateParams,
     headers: SIWEHeaders
   ): Promise<SubnameUpdateResponse> {
+    const { chainId, ensDomain, text, addresses, ...rest } = params;
 
     return restCall('UPDATE_SUBNAME_ROUTE', 'POST', {
-      chainId: this.chainId,
-      ensDomain: this.ensDomain,
-      ...params,
-      ...this.transformTextAndAddressRecord(params.text, params.addresses),
+      chainId: chainId || this.chainId,
+      ensDomain: ensDomain || this.ensDomain,
+      text: sanitizeTexts(params.text),
+      addresses: sanitizeAddresses(params.addresses),
+      ...rest,
     }, {
         ...headers,
       })
@@ -324,32 +334,6 @@ export class Subnames {
       providerUrl: params.providerUrl || this.providerUrl,
       chainId: params.chainId || this.chainId,
     });
-  }
-
-  transformTextAndAddressRecord(text: Record<string, string> | undefined, addresses: Record<string, string> | undefined): {
-    text: TextRecord[];
-    addresses: Address[];
-  } {
-    return {
-      text: text ? this.jsonToArrayOfKeyValue(text, 'key', 'value') : [],
-      addresses: addresses ?this.jsonToArrayOfKeyValue(addresses, 'coinType', 'address').map(
-        (address) => ({
-          coinType: parseInt(address.coinType),
-          address: address.address,
-        })
-      ) : [],
-    }
-  }
-
-  jsonToArrayOfKeyValue<T extends string, K extends string>(
-    json: Record<string, string>,
-    keyName: T,
-    valueName: K
-  ): Record<T | K, string>[] {
-    return Object.entries(json).map(([key, value]) => ({
-      [keyName]: key,
-      [valueName]: value
-    } as Record<T | K, string>));
   }
 
   /**

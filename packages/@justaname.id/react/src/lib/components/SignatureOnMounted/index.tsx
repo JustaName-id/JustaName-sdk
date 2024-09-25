@@ -4,16 +4,16 @@ import { useSubnameSignature } from '../../hooks/subname/useSubnameSignature';
 
 export const SignatureOnMounted: React.FC = () => {
   const { address, isConnected } = useMountedAccount();
-  const { getSignature } = useSubnameSignature()
+  const { getSignature, isSubnameSignaturePending} = useSubnameSignature()
 
   React.useEffect(() => {
 
-    if (!address || !isConnected) return;
+    if (!address || !isConnected || isSubnameSignaturePending) return;
     const main = async () => {
       await getSignature()
     }
     main();
-  }, [address, isConnected])
+  }, [address, isConnected || isSubnameSignaturePending])
 
   return null
 }

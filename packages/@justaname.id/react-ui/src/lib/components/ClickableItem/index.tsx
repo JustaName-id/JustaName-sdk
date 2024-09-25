@@ -11,6 +11,7 @@ interface ClickableListItemProps {
   disabled?: boolean;
   right?: React.ReactNode;
   onHover?: (hover: boolean) => void;
+  style?: React.CSSProperties;
 }
 
 const ListItemWrapper = styled.div<{ $disabled?: boolean, $loading?: boolean, $hover?:boolean }>`
@@ -41,8 +42,9 @@ export const ClickableItem: React.FC<ClickableListItemProps> = ({
                                                                   right,
                                                                   onClick,
                                                                   onHover,
-                                                                  disabled
-                                                                }) => {
+                                                                  disabled,
+                                                                  style={}
+}) => {
   const [hover, setHover] = React.useState(false);
   return (
     <ListItemWrapper
@@ -67,6 +69,7 @@ export const ClickableItem: React.FC<ClickableListItemProps> = ({
       $disabled={disabled}
       $loading={!!loading}
       $hover={hover}
+      style={style}
     >
       {left && left}
       <Content style={{

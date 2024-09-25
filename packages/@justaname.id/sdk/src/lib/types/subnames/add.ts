@@ -1,5 +1,5 @@
 import { ApiKeyHeaders, SIWEHeaders } from '../headers';
-import { ChainId, IRequest, IResponse, IRoute } from '../common';
+import { AddressWithTypedCoins, ChainId, IRequest, IResponse, IRoute, PartialAddressJson } from '../common';
 
 /**
  * Represents an Ethereum address and its associated coin type.
@@ -51,9 +51,9 @@ export interface SubnameAddRequest extends IRequest{
 
   chainId: number;
 
-  addresses: Address[];
+  addresses?: Address[];
 
-  text: TextRecord[];
+  text?: TextRecord[];
 
   contentHash?: string;
 }
@@ -90,6 +90,6 @@ export interface SubnameAddRoute extends IRoute {
 export interface SubnameAddParams extends Omit<SubnameAddRequest, 'ensDomain' | 'chainId'| 'addresses'|'text'> {
   ensDomain?: string;
   chainId?: ChainId;
-  addresses?: Record<string, string>;
-  text?: Record<string, string>;
+  addresses?:  PartialAddressJson  | AddressWithTypedCoins[];
+  text?: Record<string, string> | TextRecord[];
 }

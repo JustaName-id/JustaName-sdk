@@ -3,12 +3,22 @@
  * This type is used to specify and restrict operations to the following chain IDs:
  * - `1`: Ethereum Mainnet
  * - `11155111`: An example of a testnet or custom network ID
- * 
+ *
  * @type {ChainId}
  */
+import { SupportedCoins } from '../../utils';
 
 export type ChainId = 1 | 11155111;
 
+export type PartialAddressJson = Partial<{
+  [key in SupportedCoins]: string
+}>
+
+export interface AddressWithTypedCoins {
+  address: string;
+
+  coinType: SupportedCoins;
+}
 /**
  * The base interface for all request structures. 
  * It serves as a common ancestor for more specific request interfaces, 

@@ -1,15 +1,18 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { SIWENSProvider, SIWENSProviderConfig, useSignInWithEns } from '../lib';
+import { JustSignInProvider, JustSignInProviderConfig, useSignInWithJustaName } from '../lib';
 import '@rainbow-me/rainbowkit/styles.css';
 import { ConnectButton, getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { ChainId } from '@justaname.id/sdk';
 import { Meta, StoryObj } from '@storybook/react';
+import { useRecords, useUpdateSubname } from '@justaname.id/react';
+import { useState } from 'react';
+import { Button } from '@justaname.id/react-ui';
 
 const queryClient = new QueryClient();
 
-const JustaNameConfig: SIWENSProviderConfig = {
+const JustSignInConfig: JustSignInProviderConfig = {
   config: {
     chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
     origin: import.meta.env.STORYBOOK_APP_ORIGIN,
@@ -26,7 +29,15 @@ const JustaNameConfig: SIWENSProviderConfig = {
 }
 
 const Session = () => {
-  const { connectedEns, handleOpenSignInDialog, signOut} = useSignInWithEns()
+  const { connectedEns, handleOpenSignInDialog, signOut} = useSignInWithJustaName()
+  const { records } = useRecords({
+    fullName: connectedEns?.ens,
+  });
+  const [key, setKey] = useState('')
+  const [value, setValue] = useState('')
+  const [address, setAddress] = useState('')
+
+  const { updateSubname, isUpdateSubnamePending } = useUpdateSubname()
   return (
     <div>
       <h1>Subname Session</h1>
@@ -36,7 +47,50 @@ const Session = () => {
       {
         connectedEns && <button onClick={signOut}>Sign Out</button>
       }
+      {
+        connectedEns &&
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <input type="text" placeholder="key" onChange={(e) => setKey(e.target.value)} />
+          <input type="text" placeholder="value" onChange={(e) => setValue(e.target.value)} />
+          <Button onClick={() => {
+            if (key) {
+              updateSubname({
+                fullEnsDomain: connectedEns.ens,
+                text: [{ key, value }],
+              })
+            }
+          }}
+            disabled={isUpdateSubnamePending || !key}
+          >Update Subname</Button>
+          <input type="text" placeholder="address" onChange={(e) => setAddress(e.target.value)} />
+          <Button onClick={() => {
+              updateSubname({
+                fullEnsDomain: connectedEns.ens,
+                addresses: [{ coinType: "0", address }],
+              })
+
+          }}
+            disabled={isUpdateSubnamePending || !address}
+          >
+            Update Address
+          </Button>
+
+          <Button onClick={() => {
+              updateSubname({
+                fullEnsDomain: connectedEns.ens,
+                addresses: [{ coinType: "0", address }],
+                text: [{ key, value }],
+              })
+
+          }}
+            disabled={isUpdateSubnamePending }
+                  >
+            Update All
+          </Button>
+        </div>
+      }
       <pre>{JSON.stringify(connectedEns, null, 2)}</pre>
+      <pre>{JSON.stringify(records, null, 2)}</pre>
     </div>
   )
 }
@@ -53,10 +107,10 @@ export const Example = () => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <SIWENSProvider config={JustaNameConfig}>
+          <JustSignInProvider config={JustSignInConfig}>
             <ConnectButton />
             <Session />
-          </SIWENSProvider>
+          </JustSignInProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

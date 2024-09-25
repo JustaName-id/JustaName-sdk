@@ -1,4 +1,11 @@
-export const InfoIcon = ({ width = 20, height = 21}) => {
+import React, { FC } from 'react';
+
+export interface InfoIconProps extends React.SVGProps<SVGSVGElement> {
+  width?: number;
+  height?: number;
+}
+
+export const InfoIcon: FC<InfoIconProps> = ({ width = 20, height = 21, ...props}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +13,7 @@ export const InfoIcon = ({ width = 20, height = 21}) => {
       height={height}
       viewBox="0 0 20 21"
       fill="none"
+      {...props}
     >
       <path
         fillRule="evenodd"

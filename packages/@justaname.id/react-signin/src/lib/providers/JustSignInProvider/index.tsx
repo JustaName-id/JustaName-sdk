@@ -10,20 +10,20 @@ import {
   UseEnsAuthReturn, EnsSignInParams
 } from '@justaname.id/react';
 import { JustaThemeProvider, JustaThemeProviderConfig } from '@justaname.id/react-ui';
-import { MAppDialog, SIWENSDialog } from '../../dialogs';
+import { AuthorizeMAppDialog, SignInDialog } from '../../dialogs';
 import { UseMutateAsyncFunction } from '@tanstack/react-query';
 
-export interface SIWENSProviderConfig extends JustaNameProviderConfig, JustaThemeProviderConfig {
+export interface JustSignInProviderConfig extends JustaNameProviderConfig, JustaThemeProviderConfig {
   openOnWalletConnect?: boolean;
   allowedEns: "all" | "platform" | string[];
 }
 
-export interface SIWENSProviderProps {
+export interface JustSignInProviderProps {
   children: ReactNode;
-  config: SIWENSProviderConfig;
+  config: JustSignInProviderConfig;
 }
 
-export interface SIWENSContextProps {
+export interface JustSignInContextProps {
   handleOpenSignInDialog: (open: boolean) => void;
   isSignInOpen: boolean;
   handleOpenMAppDialog: (mApp: string, open: boolean) => void;
@@ -40,14 +40,14 @@ export const MAPPContext = createContext<MAPPContextProps>({
   handleRemoveMApp: () => { },
 });
 
-export const SIWENSContext = createContext<SIWENSContextProps>({
+export const JustSignInContext = createContext<JustSignInContextProps>({
   isSignInOpen: false,
   handleOpenSignInDialog: () => { },
   handleOpenMAppDialog: () => { },
   mApps: []
 });
 
-export const SIWENSProvider: FC<SIWENSProviderProps> = ({
+export const JustSignInProvider: FC<JustSignInProviderProps> = ({
   children,
   config: props
 }) => {
@@ -97,7 +97,7 @@ export const SIWENSProvider: FC<SIWENSProviderProps> = ({
   }
 
   return (
-    <SIWENSContext.Provider value={{
+    <JustSignInContext.Provider value={{
       handleOpenSignInDialog,
       isSignInOpen: signInOpen,
       handleOpenMAppDialog,
@@ -117,22 +117,22 @@ export const SIWENSProvider: FC<SIWENSProviderProps> = ({
           <JustaThemeProvider color={props.color}>
             {children}
             <CheckSession openOnWalletConnect={openOnWalletConnect} handleOpenDialog={handleOpenSignInDialog}/>
-            <SIWENSDialog open={signInOpen} handleOpenDialog={handleOpenSignInDialog} allowedEns={allowedEns} />
+            <SignInDialog open={signInOpen} handleOpenDialog={handleOpenSignInDialog} allowedEns={allowedEns} />
             {
               mApps.map((mApp, i) => (
                 <Fragment key={mApp}>
-                  <MAppDialog open={mAppsOpen[i]} handleOpenDialog={(open) => handleOpenMAppDialog(mApp, open)} mApp={mApp} />
+                  <AuthorizeMAppDialog open={mAppsOpen[i]} handleOpenDialog={(open) => handleOpenMAppDialog(mApp, open)} mApp={mApp} />
                 </Fragment>
               ))
             }
           </JustaThemeProvider>
         </JustaNameProvider>
       </MAPPContext.Provider>
-    </SIWENSContext.Provider>
+    </JustSignInContext.Provider>
   );
 };
 
-export interface UseSignInWithEns {
+export interface UseSignInWithJustaName {
   handleOpenSignInDialog: (open: boolean) => void;
   isSignInOpen: boolean
   handleOpenMAppDialog: (mApp: string, open: boolean) => void;
@@ -147,8 +147,8 @@ export interface UseSignInWithEns {
 }
 
 
-export const useSignInWithEns = (): UseSignInWithEns => {
-  const context = useContext(SIWENSContext);
+export const useSignInWithJustaName = (): UseSignInWithJustaName => {
+  const context = useContext(JustSignInContext);
   const justanameContext = useContext(JustaNameContext);
   const { signIn, isSignInPending } = useEnsSignIn();
   const { signOut, isSignOutPending } = useEnsSignOut();
@@ -171,11 +171,11 @@ export const useSignInWithEns = (): UseSignInWithEns => {
   }, [isSignInPending, isSignOutPending, isEnsAuthPending, connectedEns]);
 
   if (context === undefined) {
-    throw new Error('useSIWENS must be used within a SIWENSProvider');
+    throw new Error('useJustSignIn must be used within a JustSignInProvider');
   }
 
   if (justanameContext === undefined) {
-    throw new Error('useSIWENS must be used within a JustaNameProvider');
+    throw new Error('useJustSignIn must be used within a JustaNameProvider');
   }
 
   return {
@@ -193,7 +193,7 @@ export const useSignInWithEns = (): UseSignInWithEns => {
   };
 }
 
-const CheckSession: React.FC<{ openOnWalletConnect: boolean, handleOpenDialog: (open: boolean) => void }> = ({ openOnWalletConnect, handleOpenDialog }) => {
+const CheckSession: FC<{ openOnWalletConnect: boolean, handleOpenDialog: (open: boolean) => void }> = ({ openOnWalletConnect, handleOpenDialog }) => {
   const { connectedEns, isEnsAuthPending } = useEnsAuth();
   const { signOut } = useEnsSignOut();
   const [wasConnected, setWasConnected] = useState(false);

@@ -1,1 +1,1 @@
-export * from './SIWENSProvider'
+export * from './JustSignInProvider'

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { SIWENSProvider, SIWENSProviderConfig, useSignInWithEns } from '../lib';
+import { JustSignInProvider, JustSignInProviderConfig, useSignInWithJustaName } from '../lib';
 import '@rainbow-me/rainbowkit/styles.css';
 import { ConnectButton, getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { mainnet, sepolia } from 'wagmi/chains';
@@ -8,9 +8,10 @@ import { WagmiProvider } from 'wagmi';
 import { ChainId } from '@justaname.id/sdk';
 import { useMApp } from '../lib/hooks';
 import { Button } from '@justaname.id/react-ui'
+import { useRecords } from '@justaname.id/react';
 const queryClient = new QueryClient();
 
-const JustaNameConfig: SIWENSProviderConfig = {
+const JustSignInConfig: JustSignInProviderConfig = {
   config: {
     chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
     origin: import.meta.env.STORYBOOK_APP_ORIGIN,
@@ -27,7 +28,10 @@ const JustaNameConfig: SIWENSProviderConfig = {
 }
 
 const Session = () => {
-  const { connectedEns, handleOpenSignInDialog, signOut} = useSignInWithEns()
+  const { connectedEns, handleOpenSignInDialog, signOut} = useSignInWithJustaName()
+  const { records } = useRecords({
+    fullName: connectedEns?.ens,
+  });
   const {
     handleOpenMAppDialog,
     revokeMAppPermission,
@@ -48,13 +52,14 @@ const Session = () => {
         !connectedEns && <button onClick={() => handleOpenSignInDialog(true)}>Sign In</button>
       }
       {
-        connectedEns && <button onClick={signOut} >Sign Out</button>
+        connectedEns && <button onClick={signOut}>Sign Out</button>
       }
       <pre>{JSON.stringify(connectedEns, null, 2)}</pre>
+      <pre>{JSON.stringify(records, null, 2)}</pre>
       {
         isMAppEnabled && <Button
           onClick={() => revokeMAppPermission({
-            ens: connectedEns?.ens || ""
+            ens: connectedEns?.ens || ''
           })}
         >Remove Permission</Button>
       }
@@ -74,10 +79,10 @@ export const Example = () => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <SIWENSProvider config={JustaNameConfig}>
+          <JustSignInProvider config={JustSignInConfig}>
             <ConnectButton />
             <Session />
-          </SIWENSProvider>
+          </JustSignInProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

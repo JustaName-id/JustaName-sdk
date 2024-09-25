@@ -142,6 +142,7 @@
     "class-variance-authority": "^0.7.0",
     "cors": "^2.8.5",
     "create-package-json": "^1.1.0",
+    "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
     "ethers": "^6.11.1",
     "expo": "~50.0.3",

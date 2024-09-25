@@ -1,4 +1,4 @@
-import { MAPPContext, MAPPContextProps, useSignInWithEns } from '../../providers';
+import { MAPPContext, MAPPContextProps, useSignInWithJustaName } from '../../providers';
 import { useContext, useEffect, useMemo } from 'react';
 import {
   useCanEnableMApps,
@@ -34,7 +34,7 @@ export const useMApp = ({ mApp, openOnConnect = true }: UseMAppParams) : UseMApp
     handleOpenSignInDialog,
     handleOpenMAppDialog: handleOpenMAppDialogContext,
     connectedEns
-  } = useSignInWithEns();
+  } = useSignInWithJustaName();
   const { revokeMAppPermission } = useRevokeMAppPermission({
     mApp
   })

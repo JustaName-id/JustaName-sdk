@@ -4,6 +4,7 @@ import { AddMAppPermissionResponse, ChainId } from '@justaname.id/sdk';
 import { useSignMessage } from 'wagmi';
 import { useAccountSubnames, useMountedAccount } from '../account';
 import { buildIsMAppEnabledKey } from './useIsMAppEnabled';
+import { useRecords } from '../records';
 
 export interface UseRequestAddMAppPermission {
   addMAppPermission: UseMutateAsyncFunction<AddMAppPermissionResponse, Error, AddMAppPermissionRequest, unknown>;
@@ -21,10 +22,11 @@ export interface UseAddMAppPermissionParams {
 
 
 export const useAddMAppPermission = (props : UseAddMAppPermissionParams): UseRequestAddMAppPermission => {
-  const { justaname, chainId  } = useJustaName()
   const queryClient = useQueryClient()
+  const { justaname, chainId  } = useJustaName()
   const { signMessageAsync } = useSignMessage()
   const { address} = useMountedAccount()
+  const { getRecords } = useRecords()
   const currentChainId = props.chainId || chainId
   const { refetchAccountSubnames } = useAccountSubnames()
   const mutate = useMutation<
@@ -61,6 +63,10 @@ export const useAddMAppPermission = (props : UseAddMAppPermissionParams): UseReq
       queryClient.invalidateQueries({
         queryKey: buildIsMAppEnabledKey(params.subname, props.mApp, currentChainId)
       })
+      getRecords({
+        fullName: params.subname,
+        chainId: currentChainId,
+      }, true)
       return response
     }
   })
