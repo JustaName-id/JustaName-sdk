@@ -71,12 +71,12 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
   }, [subnames, ensDomain]);
 
   const shouldBeAbleToClaimJANDomain = useMemo(() => {
-    return !subnames.find(subname => subname.subname.endsWith(chainId === 1 ? 'justan.id' : 'jaw.eth'));
+    return !subnames.find(subname => subname.subname.endsWith(chainId === 1 ? 'justan.id' : 'justan.eth'));
   }, [subnames, chainId]);
 
   const { isSubnameAvailable, isSubnameAvailablePending } = useIsSubnameAvailable({
     username: debouncedUsername,
-    ensDomain: shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'jaw.eth'
+    ensDomain: shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'justan.eth'
   });
 
   return (
@@ -192,7 +192,7 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
                   <Input
                     id="name"
                     placeholder={`Enter your username...`}
-                    right={'.' + (shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'jaw.eth')}
+                    right={'.' + (shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'justan.eth')}
                     onChange={(e) => setUsername(e.target.value)}
                     value={username}
                     left={<Flex justify={'center'} align={'center'}>
@@ -217,13 +217,13 @@ export const SelectSubnameDialog: React.FC<SelectSubnameDialogProps> = ({ subnam
                     onClick={() => {
                       addSubname({
                         username: username,
-                        ensDomain: shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'jaw.eth',
-                        backendUrl: shouldBeAbleToClaimDomain ? undefined : `https://claim${chainId === 1 ? '' : '-staging'}.justaname.id`,
+                        ensDomain: shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'justan.eth',
+                        backendUrl: shouldBeAbleToClaimDomain ? undefined : `https://claim.justaname.id`,
                         addSubnameRoute: shouldBeAbleToClaimDomain ? undefined : "/api/subnames/add",
                       }).then(() => {
-                        setSubnameSigningIn(username + '.' + shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'jaw.eth');
+                        setSubnameSigningIn(username + '.' + shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'justan.eth');
                         signIn({
-                          ens: username + '.' + shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'jaw.eth'
+                          ens: username + '.' + shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'justan.eth'
                         }).then(() => handleOpenDialog(false)).finally(() => {
                           setSubnameSigningIn('');
                         });
