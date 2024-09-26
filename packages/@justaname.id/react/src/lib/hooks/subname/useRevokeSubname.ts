@@ -68,8 +68,8 @@ export const useRevokeSubname = (): UseRevokeSubname => {
         );
       } else {
         const backendResponse = await fetch(
-          (params.backendUrl ?? backendUrl ?? '') + params.revokeSubnameRoute ??
-            routes.revokeSubnameRoute,
+          (params.backendUrl ?? backendUrl ?? '') +
+            (params.revokeSubnameRoute ?? routes.revokeSubnameRoute),
           {
             method: 'POST',
             headers: {
@@ -78,6 +78,7 @@ export const useRevokeSubname = (): UseRevokeSubname => {
             body: JSON.stringify({
               ...params,
               signature: signature.signature,
+              ensDomain: params.ensDomain,
               address: address,
               message: signature.message,
             }),

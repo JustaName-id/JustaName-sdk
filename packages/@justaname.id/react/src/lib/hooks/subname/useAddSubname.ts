@@ -65,8 +65,8 @@ export const useAddSubname = (): UseAddSubname => {
         );
       } else {
         const backendResponse = await fetch(
-          (params.backendUrl ?? backendUrl ?? '') + params.addSubnameRoute ??
-            routes.addSubnameRoute,
+          (params.backendUrl ?? backendUrl ?? '') +
+            (params.addSubnameRoute ?? routes.addSubnameRoute),
           {
             method: 'POST',
             headers: {
@@ -74,6 +74,7 @@ export const useAddSubname = (): UseAddSubname => {
             },
             body: JSON.stringify({
               username: params.username,
+              ensDomain: params.ensDomain,
               signature: signature.signature,
               address: address,
               message: signature.message,
