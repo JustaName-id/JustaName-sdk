@@ -20,7 +20,7 @@ export default defineConfig({
   plugins: [react(), nxViteTsPaths()],
 
   define: {
-    'process.env': process.env,
+    process: { env: process.env },
   },
   // Uncomment this if you are using workers.
   // worker: {
@@ -35,9 +35,9 @@ export default defineConfig({
     },
   },
 
-  resolve:{
-    alias:{
-      "@justaname.id/react": "packages/@justaname.id/react/src/index.ts",
-    }
-  }
+  resolve: {
+    alias: {
+      '@justaname.id/react': 'packages/@justaname.id/react/src/index.ts',
+    },
+  },
 });
