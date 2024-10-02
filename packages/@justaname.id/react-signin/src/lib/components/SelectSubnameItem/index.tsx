@@ -1,7 +1,7 @@
-import { ArrowIcon, Avatar, ClickableItem, LoadingSpinner } from '@justaname.id/react-ui';
+import { ArrowIcon, Avatar, ClickableItem, Flex, LoadingSpinner } from '@justaname.id/react-ui';
 import React, { useMemo } from 'react';
 import { SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
-
+import { useEnsAvatar } from '@justaname.id/react';
 export interface SelectSubnameItemProps {
   subname: SubnameGetAllByAddressResponse;
   selectedSubname: string;
@@ -10,9 +10,9 @@ export interface SelectSubnameItemProps {
 
 export const SelectSubnameItem: React.FC<SelectSubnameItemProps> = ({ subname, selectedSubname, onClick }) => {
   const [hover, setHover] = React.useState(false);
-  const avatar = useMemo(() => {
-    return subname.data.textRecords?.find((record) => record.key === 'avatar')?.value
-  }, [subname.data.textRecords]);
+  const { avatar } = useEnsAvatar({
+    ens: subname.subname
+  })
   const loading = useMemo(() => selectedSubname === subname.subname, [selectedSubname, subname.subname]);
   return (
     <ClickableItem name={subname.subname}
@@ -25,7 +25,7 @@ export const SelectSubnameItem: React.FC<SelectSubnameItemProps> = ({ subname, s
         borderColor={avatar ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-primary-color)'}
         color="#ffffff"
       />}
-      right={<>
+      right={<Flex>
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -46,7 +46,7 @@ export const SelectSubnameItem: React.FC<SelectSubnameItemProps> = ({ subname, s
         }}>
           <LoadingSpinner color={'var(--justaname-primary-color)'} />
         </div>
-      </>}
+      </Flex>}
       loading={loading}
       onHover={(hover) => setHover(hover)}
                    disabled={!loading && selectedSubname.length > 0}

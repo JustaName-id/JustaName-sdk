@@ -12,26 +12,40 @@ interface ClickableListItemProps {
   right?: React.ReactNode;
   onHover?: (hover: boolean) => void;
   style?: React.CSSProperties;
+  contentStyle?: React.CSSProperties;
+  clickable?: boolean;
 }
 
-const ListItemWrapper = styled.div<{ $disabled?: boolean, $loading?: boolean, $hover?:boolean }>`
+const TruncatedText = styled(P)`
+    font-size: 10px;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+`;
+
+const ListItemWrapper = styled.div<{ $disabled?: boolean, $loading?: boolean, $hover?: boolean }>`
     display: flex;
     align-items: center;
     padding: 10px;
-    cursor: ${(props) => props.$disabled || props.$loading ? 'not-allowed' : 'pointer'};
+    cursor: ${(props) => (props.$disabled || props.$loading ? 'not-allowed' : 'pointer')};
     border-radius: 16px;
-    opacity: ${(props) => props.$disabled ? 0.5 : 1};
-    border: 1px solid ${(props) => (props.$loading || props.$hover)? 'var(--justaname-primary-color)' : 'var(--justaname-foreground-color-4)'};
-    background-color: ${(props) => props.$disabled ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-background-color)'};
+    opacity: ${(props) => (props.$disabled ? 0.5 : 1)};
+    border: 1px solid ${(props) => (props.$loading || props.$hover ? 'var(--justaname-primary-color)' : 'var(--justaname-foreground-color-4)')};
+    background-color: 'var(--justaname-background-color)';
     transition: background-color 0.2s ease;
+    max-width: 100%; 
 `;
 
 const Content = styled.div`
-    flex-grow: 1;
-    margin-left: 16px;
-    height: 30px;
+    flex-grow: 1;  
+    flex-shrink: 1; 
+    flex-basis: 0;  
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 `;
 
 export const ClickableItem: React.FC<ClickableListItemProps> = ({
@@ -42,50 +56,63 @@ export const ClickableItem: React.FC<ClickableListItemProps> = ({
                                                                   right,
                                                                   onClick,
                                                                   onHover,
+                                                                  clickable = true,
                                                                   disabled,
-                                                                  style={}
-}) => {
+                                                                  style = {},
+                                                                  contentStyle = {},
+                                                                }) => {
   const [hover, setHover] = React.useState(false);
   return (
     <ListItemWrapper
-      onClick={
-        () => {
-          if (!loading && !disabled) {
-            onClick && onClick();
-          }
-        }}
+      onClick={() => {
+        if (!loading && !disabled && clickable) {
+          onClick && onClick();
+        }
+      }}
       onPointerEnter={() => {
-        if (!loading && !disabled) {
+        if (!loading && !disabled && clickable) {
           setHover(true);
           onHover && onHover(true);
         }
       }}
       onPointerLeave={() => {
-        if (!loading && !disabled) {
+        if (!loading && !disabled && clickable) {
           setHover(false);
           onHover && onHover(false);
         }
       }}
       $disabled={disabled}
       $loading={!!loading}
-      $hover={hover}
-      style={style}
+      $hover={hover && clickable}
+      style={{
+        ...style,
+        cursor: !clickable ? 'default' : undefined,
+      }}
     >
-      {left && left}
+      {left && (
+        <div style={{ marginRight: '10px', display: 'flex', alignItems: 'center' }}>
+          {left}
+        </div>
+      )}
       <Content style={{
-        justifyContent: status ? 'space-between' : 'center'
+        ...contentStyle
       }}>
-        <P style={{
-          fontSize: '14px',
-          margin: 0
-        }}>{name}</P>
-        {status && <P style={{
-          fontSize: '10px',
-          fontWeight: '900',
-          color: 'var(--justaname-primary-color)'
-        }}>{status}</P>}
+        <P
+          style={{
+            fontSize: '14px',
+            lineHeight: '20px',
+            margin: 0,
+          }}
+        >
+          {name}
+        </P>
+        {status && <TruncatedText>{status}</TruncatedText>}
       </Content>
-      {right && right}
+      {right && (
+        <div style={{ marginLeft: '10px', display: 'flex', alignItems: 'center' }}>
+          {right}
+        </div>
+      )}
     </ListItemWrapper>
   );
 };

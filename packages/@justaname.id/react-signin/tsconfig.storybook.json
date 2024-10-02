@@ -3,11 +3,12 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "outDir": "",
-    "target": "esnext",
     "module": "esnext",
+    "noUnusedLocals": false,
     "paths": {
       "@justaname.id/react": ["packages/@justaname.id/react"],
-      "@justaname.id/react-ui": ["packages/@justaname.id/react-ui"]
+      "@justaname.id/react-ui": ["packages/@justaname.id/react-ui"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"]
     }
   },
   "files": [

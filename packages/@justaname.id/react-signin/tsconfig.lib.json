@@ -4,8 +4,6 @@
     "outDir": "../../dist/out-tsc",
     "declaration": true,
     "declarationMap": true,
-    "target": "esnext",
-    "module": "esnext",
     "types": [
       "node",
       "jest",
@@ -14,7 +12,8 @@
     ],
     "paths": {
       "@justaname.id/react": ["packages/@justaname.id/react"],
-      "@justaname.id/react-ui": ["packages/@justaname.id/react-ui"]
+      "@justaname.id/react-ui": ["packages/@justaname.id/react-ui"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"]
     }
   },
   "exclude": [

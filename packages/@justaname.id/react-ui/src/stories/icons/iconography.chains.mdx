@@ -1,0 +1,20 @@
+import { IconGallery, IconItem, Meta } from '@storybook/blocks';
+import React from 'react';
+import { chains } from '../../lib/icons';
+
+<Meta title="Iconography/Chains" />
+
+# Chains
+
+<IconGallery>
+  {
+    Object.keys(chains).map((icons, index) => {
+      const iconElement = chains[icons];
+      return(
+      <IconItem key={index} name={icons} title={icons}>
+        {React.createElement(iconElement, { size: 32 })}
+      </IconItem>
+    )})
+  }
+
+</IconGallery>

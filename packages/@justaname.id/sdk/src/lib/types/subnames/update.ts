@@ -83,7 +83,7 @@ export interface SubnameUpdateRequest extends IRequest{
 
   text?: TextRecord[];
 
-  contentHash?: string;
+  contentHash?: string | null | undefined;
 }
 
 /**

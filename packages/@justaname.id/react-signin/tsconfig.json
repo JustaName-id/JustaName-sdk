@@ -3,14 +3,13 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowJs": false,
-    "target": "esnext",
-    "module": "esnext",
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "paths": {
       "@justaname.id/react": ["packages/@justaname.id/react"],
       "@justaname.id/react-ui": ["packages/@justaname.id/react-ui"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
 
     }
   },

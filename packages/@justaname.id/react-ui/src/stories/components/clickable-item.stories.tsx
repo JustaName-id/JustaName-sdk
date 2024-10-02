@@ -17,16 +17,14 @@ export const Example = ({
     disabled={disabled}
     onClick={() => console.log('Clicked')}
     onHover={(hover) => setHover(hover)}
-    left={<>
-      <Avatar
+    left={<Avatar
         src={avatarSrc}
         initial={avatarInitial}
         size="28px"
         bgColor={avatarSrc ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-primary-color)'}
         borderColor={avatarSrc ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-primary-color)'}
         color="#ffffff"
-      />
-    </>}
+      />}
     right={
       <>
         <div style={{
@@ -70,5 +68,4 @@ const meta: Meta<typeof Example> = {
 };
 
 export default meta;
-// @ts-ignore
 type Story = StoryObj<typeof Example>

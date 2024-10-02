@@ -25,7 +25,7 @@ export const coinTypeMap : CoinTypeMap = Object.keys(coinTypeToNameMap).reduce((
 export type CoinTypeKeys = keyof typeof coinTypeMap;
 
 
-export const getCoinTypeDetails =  (cointype: CoinTypeKeys):  CoinType  => {
+export const getCoinTypeDetails =  (cointype: SupportedCoins):  CoinType  => {
   const coinTypeDetails = coinTypeMap[cointype];
   if (coinTypeDetails) {
     return {

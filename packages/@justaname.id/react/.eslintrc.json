@@ -9,7 +9,12 @@
     {
       "files": ["*.ts", "*.tsx"],
       "rules": {
-        "@typescript-eslint/ban-types": ["warn"]
+        "@typescript-eslint/ban-types": [
+          "warn"
+        ],
+        "@typescript-eslint/no-empty-function": [
+          "warn"
+        ]
       }
     },
     {

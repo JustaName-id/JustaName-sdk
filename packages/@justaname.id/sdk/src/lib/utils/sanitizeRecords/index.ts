@@ -1,6 +1,6 @@
 import { Coin, ContentHash, SubnameRecordsResponse, Text } from '@justaname.id/sdk';
 import { SUPPORTED_SOCIALS, SupportedSocialsNames } from '../../constants';
-import { CoinType, getCoinTypeDetails } from '../cointypes';
+import { CoinType, getCoinTypeDetails, SupportedCoins } from '../cointypes';
 
 export type CoinAndDetails = Coin & CoinType;
 
@@ -42,7 +42,7 @@ export const createAddresses = (coins: Coin[]): CoinAndDetails[] => {
   return coins.map((coin) => {
     return {
       ...coin,
-      ...getCoinTypeDetails(coin.id)
+      ...getCoinTypeDetails(coin.id.toString() as SupportedCoins),
     }
   });
 }
@@ -81,7 +81,7 @@ export const sanitizeRecords = (records: SubnameRecordsResponse | undefined): Sa
       id: 60,
       name: 'ETH',
       value: '',
-      ...getCoinTypeDetails(60),
+      ...getCoinTypeDetails('60'),
     }
     return {
       display: '',

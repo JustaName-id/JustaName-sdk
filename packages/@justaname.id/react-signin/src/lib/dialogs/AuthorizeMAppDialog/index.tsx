@@ -1,36 +1,52 @@
-import { FC, Fragment, useEffect, useMemo } from 'react';
+import { FC, Fragment, useEffect, useMemo, useState } from 'react';
 import { useAddMAppPermission, useCanEnableMApps, useIsMAppEnabled, useRecords } from '@justaname.id/react';
-import { Badge, Button, Flex, H2, P, SPAN } from '@justaname.id/react-ui';
+import { Badge, Button, ClickableItem, Flex, H2, JustaNameLogoIcon, P, SPAN } from '@justaname.id/react-ui';
 import { isParseable } from '../../utils';
-import { LoadingDialog } from '../LoadingDialog';
-import { useSignInWithJustaName } from '../../providers';
-import { DefaultDialog } from '../../components/DefaultDialog';
+import { DefaultDialog } from '../DefaultDialog';
 
 export interface AuthorizeMAppDialogProps {
-  mApp: string;
-  open: boolean;
+  mApp: {
+    name: string;
+    isOpen: boolean;
+  }
   handleOpenDialog: (open: boolean) => void;
+  logo?: string;
+  isLoggedIn: boolean;
+  handleOpenSignInDialog: (open: boolean) => void;
+  connectedEns:  string | undefined;
+  isEnsAuthPending: boolean;
 }
 
 export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
-                                                  mApp,
-                                                  open,
-                                                  handleOpenDialog
+                                                  mApp: { name: mApp, isOpen: open },
+                                                  handleOpenDialog,
+                                                  logo,
+                                                  isLoggedIn,
+                                                  handleOpenSignInDialog,
+                                                  connectedEns,
+                                                  isEnsAuthPending
                                                 }) => {
-  const { connectedEns, isLoggedIn, isEnsAuthPending, handleOpenSignInDialog } = useSignInWithJustaName();
+  const [openOnConnect] = useState(open);
   const { records: mAppRecords, isRecordsPending: isMAppRecordsPending } = useRecords({
     fullName: mApp || ''
   });
+  const { records } = useRecords({
+    fullName: connectedEns || ''
+  })
   const { canEnableMApps, isCanEnableMAppsPending } = useCanEnableMApps({
-    ens: connectedEns?.ens || ''
+    ens: connectedEns || ''
   });
   const { isMAppEnabled, isMAppEnabledPending } = useIsMAppEnabled({
-    ens: connectedEns?.ens || '',
+    ens: connectedEns || '',
     mApp
   });
   const { addMAppPermission, isAddMAppPermissionPending } = useAddMAppPermission({
     mApp
   });
+
+  const mAppFieldsInEnsRecords = useMemo(() => {
+    return records?.texts?.filter((text) => text.key.endsWith(`_${mApp}`));
+  }, [records, mApp]);
 
   const mAppDescription = useMemo(() => {
     return mAppRecords?.texts?.find((text) => text.key === `mApp_description`)?.value;
@@ -83,36 +99,50 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
         if (isMAppEnabledPending || isMAppEnabled === undefined) {
           return;
         }
-        handleOpenDialogInternal(!isMAppEnabled);
+        handleOpenDialogInternal(!isMAppEnabled && openOnConnect);
       } else {
         handleOpenDialogInternal(false);
       }
     }
   }, [isMAppEnabled, isLoggedIn, isMAppEnabledPending, connectedEns, isCanEnableMAppsPending, canEnableMApps]);
 
-  if (isEnsAuthPending || !connectedEns) {
+  if (isEnsAuthPending || !connectedEns || !records) {
     return null;
   }
 
-
   if ((isMAppRecordsPending || isCanEnableMAppsPending || isMAppEnabledPending) && open) {
-    return <LoadingDialog open={true} />;
+    return null;
   }
 
   return (
-    <DefaultDialog open={open} handleClose={() => handleOpenDialogInternal(false)} leftHeader={<Badge>
-      <SPAN style={{
-        fontSize: '10px',
-        lineHeight: '10px',
-        fontWeight: 900
-      }}>{connectedEns?.ens}</SPAN>
-    </Badge>}
-                   headerStyle={{
-                     paddingTop: '40px',
-                     maxWidth: '500px'
-                   }}
+    <DefaultDialog open={open} handleClose={() => handleOpenDialogInternal(false)} header={
+      <div style={{
+        paddingLeft:'24px',
+        justifyContent: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        flexGrow:1
+      }}>
+        {
+          logo
+            ? <img src={logo} alt="logo" style={{ height: '62px' , width: 'auto' }} />
+            :         <JustaNameLogoIcon height={62} />
+
+        }
+      </div>
+    }
     >
 
+      <Badge>
+        <SPAN
+          style={{
+            fontSize: '10px',
+            lineHeight: '10px',
+            fontWeight: 900,
+          }}>
+          {connectedEns}
+        </SPAN>
+      </Badge>
       <Flex
         justify="space-between"
         direction="column"
@@ -136,6 +166,8 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
         style={{
           maxHeight: '20vh',
           overflowY: 'scroll',
+          scrollbarWidth: 'none', // For Firefox
+          msOverflowStyle: 'none', // For IE and Edge
           }}
       >
 
@@ -164,6 +196,33 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
             );
           })
         }
+
+        {
+          mAppFieldsInEnsRecords && mAppFieldsInEnsRecords.length > 0 &&
+          <>
+            <P>
+              Installing this mApp will remove the following fields:
+            </P>
+            <Flex
+              direction="column"
+              gap="10px"
+            >
+              {
+                mAppFieldsInEnsRecords.map((field) => {
+                  return (
+                    <Fragment key={'mapp-fields-'+field.key}>
+                      <ClickableItem
+                        name={field.key}
+                        status={field.value}
+                        clickable={false}
+                      />
+                    </Fragment>
+                  );
+                })
+              }
+            </Flex>
+          </>
+        }
       </Flex>
 
       <Button
@@ -174,7 +233,7 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
         loading={isAddMAppPermissionPending}
         onClick={() => {
           addMAppPermission({
-            subname: connectedEns?.ens || ''
+            subname: connectedEns || ''
           }).then(() => {
             handleOpenDialogInternal(false);
           });

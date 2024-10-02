@@ -86,8 +86,8 @@
       "options": {
         "fix": true,
         "lintFilePatterns": [
-          "packages/@justaname.id/react/**/*.{ts,tsx,js,jsx}",
-          "packages/@justaname.id/react/package.json"
+          "packages/@justaname.id/react-signin/**/*.{ts,tsx,js,jsx}",
+          "packages/@justaname.id/react-signin/package.json"
         ]
       }
     },

@@ -3,14 +3,14 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowJs": false,
-    "target": "esnext",
-    "module": "esnext",
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true
   },
   "files": [],
-  "include": [],
+  "include": [
+    "src/**/*.ts",
+  ],
   "references": [
     {
       "path": "./tsconfig.lib.json"

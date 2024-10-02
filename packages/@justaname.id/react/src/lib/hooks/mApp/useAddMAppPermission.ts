@@ -1,9 +1,8 @@
-import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { AddMAppPermissionResponse, ChainId } from '@justaname.id/sdk';
 import { useSignMessage } from 'wagmi';
 import { useAccountSubnames, useMountedAccount } from '../account';
-import { buildIsMAppEnabledKey } from './useIsMAppEnabled';
 import { useRecords } from '../records';
 
 export interface UseRequestAddMAppPermission {
@@ -18,16 +17,17 @@ export interface AddMAppPermissionRequest {
 export interface UseAddMAppPermissionParams {
   mApp: string
   chainId?: ChainId
+  providerUrl?: string
 }
 
 
 export const useAddMAppPermission = (props : UseAddMAppPermissionParams): UseRequestAddMAppPermission => {
-  const queryClient = useQueryClient()
-  const { justaname, chainId  } = useJustaName()
+  const { justaname, chainId, providerUrl  } = useJustaName()
   const { signMessageAsync } = useSignMessage()
   const { address} = useMountedAccount()
   const { getRecords } = useRecords()
   const currentChainId = props.chainId || chainId
+  const currentProviderUrl = props.providerUrl || providerUrl
   const { refetchAccountSubnames } = useAccountSubnames()
   const mutate = useMutation<
     AddMAppPermissionResponse,
@@ -44,7 +44,7 @@ export const useAddMAppPermission = (props : UseAddMAppPermissionParams): UseReq
         subname: params.subname,
         address: address,
         mApp: props.mApp,
-        chainId: currentChainId
+        chainId: currentChainId,
       })
 
       const signature = await signMessageAsync({
@@ -60,12 +60,10 @@ export const useAddMAppPermission = (props : UseAddMAppPermissionParams): UseReq
 
       refetchAccountSubnames()
 
-      queryClient.invalidateQueries({
-        queryKey: buildIsMAppEnabledKey(params.subname, props.mApp, currentChainId)
-      })
       getRecords({
         fullName: params.subname,
         chainId: currentChainId,
+        providerUrl: currentProviderUrl
       }, true)
       return response
     }
