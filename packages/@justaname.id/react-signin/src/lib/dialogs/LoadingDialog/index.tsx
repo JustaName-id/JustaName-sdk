@@ -16,7 +16,7 @@ export const LoadingDialog: FC<LoadingDialogProps> = ({ open }) => {
 
         </DialogTitle>
       </div>
-      <DialogContent style={{
+      <DialogContent aria-describedby='loading-dialog' style={{
         padding: 0,
         transition: "all 0.4 ease-in-out"
       }}>

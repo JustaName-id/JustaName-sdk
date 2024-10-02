@@ -9,7 +9,7 @@ import { useAccountSubnames } from '../account/useAccountSubnames';
 
 export interface AddSubnameRequest extends SubnameAddParams {
   backendUrl?: string;
-  addRoute?: string;
+  addSubnameRoute?: string;
 }
 
 /**
@@ -22,9 +22,7 @@ export interface AddSubnameRequest extends SubnameAddParams {
  *  @template T - The type of additional parameters that can be passed to the claim subname mutation, extending the base request.
  */
 export interface UseAddSubname {
-  addSubname: (
-    params:  AddSubnameRequest
-  ) => Promise<SubnameAddResponse>;
+  addSubname: (params: AddSubnameRequest) => Promise<SubnameAddResponse>;
   isAddSubnamePending: boolean;
 }
 /**
@@ -39,11 +37,7 @@ export const useAddSubname = (): UseAddSubname => {
   const { getSignature } = useSubnameSignature();
   const { refetchAccountSubnames } = useAccountSubnames();
 
-  const mutate = useMutation<
-    SubnameAddResponse,
-    Error,
-    AddSubnameRequest
-  >({
+  const mutate = useMutation<SubnameAddResponse, Error, AddSubnameRequest>({
     mutationFn: async (params: AddSubnameRequest) => {
       if (!address) {
         throw new Error('No address found');
@@ -53,33 +47,40 @@ export const useAddSubname = (): UseAddSubname => {
 
       let response: SubnameAddResponse;
 
-      if(apiKey){
-        response = await justaname.subnames.addSubname({
-          username: params.username,
-          ensDomain: params.ensDomain,
-          chainId: params.chainId,
-          addresses: params.addresses,
-          text: params.text,
-          contentHash: params.contentHash,
-        }, {
-          xSignature: signature.signature,
-          xAddress: address,
-          xMessage: signature.message,
-        })
-      }
-      else {
-        const backendResponse = await fetch((backendUrl ?? "") + routes.addSubnameRoute, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+      if (apiKey) {
+        response = await justaname.subnames.addSubname(
+          {
             username: params.username,
-            signature: signature.signature,
-            address: address,
-            message: signature.message,
-          }),
-        });
+            ensDomain: params.ensDomain,
+            chainId: params.chainId,
+            addresses: params.addresses,
+            text: params.text,
+            contentHash: params.contentHash,
+          },
+          {
+            xSignature: signature.signature,
+            xAddress: address,
+            xMessage: signature.message,
+          }
+        );
+      } else {
+        const backendResponse = await fetch(
+          (params.backendUrl ?? backendUrl ?? '') +
+            (params.addSubnameRoute ?? routes.addSubnameRoute),
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              username: params.username,
+              ensDomain: params.ensDomain,
+              signature: signature.signature,
+              address: address,
+              message: signature.message,
+            }),
+          }
+        );
 
         if (!backendResponse.ok) {
           throw new Error('Network response was not ok');

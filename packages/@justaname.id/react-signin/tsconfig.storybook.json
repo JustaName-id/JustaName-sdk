@@ -28,6 +28,7 @@
   ],
   "include": [
     "src/lib/**/index.ts",
+    "src/lib/**/index.tsx",
     "src/**/*.stories.ts",
     "src/**/*.stories.js",
     "src/**/*.stories.jsx",

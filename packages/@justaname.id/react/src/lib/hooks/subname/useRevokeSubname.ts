@@ -7,7 +7,10 @@ import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
 
-export type RevokeSubnameRequest = SubnameRevokeParams
+export interface RevokeSubnameRequest extends SubnameRevokeParams {
+  backendUrl?: string;
+  revokeSubnameRoute?: string;
+}
 
 /**
  *  Interface defining the parameters needed to revoke a subname.
@@ -50,29 +53,37 @@ export const useRevokeSubname = (): UseRevokeSubname => {
 
       let response: SubnameRevokeResponse;
 
-      if(apiKey){
-        response = await justaname.subnames.revokeSubname({
-          username: params.username,
-          ensDomain: params.ensDomain,
-          chainId: params.chainId,
-        }, {
-          xSignature: signature.signature,
-          xAddress: address,
-          xMessage: signature.message,
-        });
-      } else {
-        const backendResponse = await fetch((backendUrl ?? "") + routes.revokeSubnameRoute, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+      if (apiKey) {
+        response = await justaname.subnames.revokeSubname(
+          {
+            username: params.username,
+            ensDomain: params.ensDomain,
+            chainId: params.chainId,
           },
-          body: JSON.stringify({
-            ...params,
-            signature: signature.signature,
-            address: address,
-            message: signature.message,
-          }),
-        });
+          {
+            xSignature: signature.signature,
+            xAddress: address,
+            xMessage: signature.message,
+          }
+        );
+      } else {
+        const backendResponse = await fetch(
+          (params.backendUrl ?? backendUrl ?? '') +
+            (params.revokeSubnameRoute ?? routes.revokeSubnameRoute),
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ...params,
+              signature: signature.signature,
+              ensDomain: params.ensDomain,
+              address: address,
+              message: signature.message,
+            }),
+          }
+        );
 
         if (!backendResponse.ok) {
           throw new Error('Network response was not ok');

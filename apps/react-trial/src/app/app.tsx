@@ -2,6 +2,7 @@ import { SIWENSProvider, SIWENSProviderConfig } from '@justaname.id/react-signin
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultConfig,
+  RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import {
@@ -27,7 +28,7 @@ const JustaNameConfig: SIWENSProviderConfig = {
   providerUrl: import.meta.env.VITE_APP_PROVIDER_URL,
   ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN,
   openOnWalletConnect: true,
-  allowedSubnames:'all'
+  allowedEns: 'all'
 }
 
 export function App() {
@@ -41,9 +42,11 @@ export function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
           <SIWENSProvider config={JustaNameConfig} >
-              <Home />
+            <Home />
           </SIWENSProvider>
+        </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );
