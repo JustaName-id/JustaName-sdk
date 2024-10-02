@@ -63,6 +63,74 @@
       },
       "dependsOn": ["lint"]
     },
+    "transform:logo": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "rm -rf src/lib/icons/components/logo && mkdir src/lib/icons/components/logo && npx @svgr/cli --out-dir src/lib/icons/components/logo --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/logo "
+      }
+    },
+    "transform:chains": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "rm -rf src/lib/icons/components/chains && mkdir src/lib/icons/components/chains && npx @svgr/cli --out-dir src/lib/icons/components/chains --config-file .svgrrc.js --index-template=src/template/index-chain-template.js  -- src/lib/icons/svgs/chains "
+      }
+    },
+    "transform:general": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "rm -rf src/lib/icons/components/general && mkdir src/lib/icons/components/general && npx @svgr/cli --out-dir src/lib/icons/components/general --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/general "
+      }
+    },
+    "transform:socials": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "rm -rf src/lib/icons/components/socials && mkdir src/lib/icons/components/socials && npx @svgr/cli --out-dir src/lib/icons/components/socials --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/socials "
+      }
+    },
+    "transform:contentHash": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "rm -rf src/lib/icons/components/contentHash && mkdir src/lib/icons/components/contentHash && npx @svgr/cli --out-dir src/lib/icons/components/contentHash --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/contentHash "
+      }
+    },
+    "transform:all": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run @justaname.id/react-ui:transform:chains",
+          "nx run @justaname.id/react-ui:transform:general",
+          "nx run @justaname.id/react-ui:transform:socials",
+          "nx run @justaname.id/react-ui:transform:contentHash",
+          "nx run @justaname.id/react-ui:transform:logo"
+        ]
+      }
+    },
+    "missingChains": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "npx tsx src/scripts/missingChains.ts"
+      }
+    },
+    "extraChains": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "npx tsx src/scripts/extraChains.ts"
+      }
+    },
+    "removeExtraChains": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "npx tsx src/scripts/removeExtraChains.ts"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],

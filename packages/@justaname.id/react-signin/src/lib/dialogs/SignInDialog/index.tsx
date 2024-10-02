@@ -4,9 +4,9 @@ import {
   Flex,
   formatText,
   H2,
-  Input,
+  Input, JustaNameLogoIcon,
   OrLine,
-  ProfileIcon,
+  ProfileIcon, SPAN
 } from '@justaname.id/react-ui';
 import {
   SubnamesType,
@@ -17,12 +17,13 @@ import {
   useMountedAccount,
   useAccountEnsNames,
   useAccountSubnames,
+  splitDomain,
 } from '@justaname.id/react';
 import { FC, Fragment, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { useDebounce } from '../../hooks';
-import { SelectSubnameItem } from '../../components';
-import { DefaultDialog } from '../../components/DefaultDialog';
+import { useDebounce } from '../../hooks/useDebounce';
+import { SelectSubnameItem } from '../../components/SelectSubnameItem';
+import { DefaultDialog } from '../DefaultDialog';
 import { SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
 import { LoadingDialog } from '../LoadingDialog';
 
@@ -31,6 +32,7 @@ export interface SignInDialogProps {
   handleOpenDialog: (open: boolean) => void;
   address?: string;
   allowedEns: "all" | "platform" | string[];
+  logo?: string;
 }
 
 const TransitionElement = styled.div<{ maxheight: string }>`
@@ -46,21 +48,7 @@ const TransitionElement = styled.div<{ maxheight: string }>`
   }
 `;
 
-const splitDomain = (domain: string): [string, string] => {
-  const parts = domain.split('.');
-
-  if (parts.length === 2) {
-    return ['', domain];
-  }
-
-  if (parts.length > 2) {
-    return [parts.slice(0, -2).join('.'), parts.slice(-2).join('.')];
-  }
-
-  return ['', ''];
-}
-
-export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, allowedEns }) => {
+export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, allowedEns, logo }) => {
   const { ensDomain } = useJustaName();
   const { isConnected, address } = useMountedAccount();
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
@@ -126,7 +114,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
 
   const shouldBeAbleToSelect = useMemo(() => {
     return subnames.length > 0;
-  }, [subnames, ensDomain]);
+  }, [subnames]);
 
   const shouldBeAbleToClaim = useMemo(() => {
     return !subnames.find(subname => subname.subname.endsWith(ensDomain));
@@ -137,13 +125,32 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
   }
 
   return (
-    <DefaultDialog open={open && !isAccountSubnamesPending && isConnected} handleClose={() => handleOpenDialog(false)} leftHeader={<Badge style={{
-      fontSize: '10px',
-      lineHeight: '10px',
-      fontWeight: 900,
-    }}>
-      {address && formatText(address, 4)}
-    </Badge>}>
+    <DefaultDialog open={open && !isAccountSubnamesPending && isConnected} handleClose={() => handleOpenDialog(false)} header={
+      <div style={{
+        paddingLeft:'24px',
+        justifyContent: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        flexGrow:1
+      }}>
+        {
+          logo
+            ? <img src={logo} alt="logo" style={{ height: '62px' , width: 'auto' }} />
+            :
+        <JustaNameLogoIcon height={62} />
+        }
+      </div>
+    }>
+      <Badge>
+        <SPAN
+          style={{
+            fontSize: '10px',
+            lineHeight: '10px',
+            fontWeight: 900,
+          }}>
+            {address && formatText(address, 4)}
+        </SPAN>
+      </Badge>
       <TransitionElement className={(shouldBeAbleToSelect) ? 'visible' : ''} maxheight={'fit-content'}>
         <Flex
           justify="space-between"
@@ -157,9 +164,11 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
             direction={'column'}
             gap={'15px'}
             style={{
-              maxHeight: '20vh',
+              maxHeight: '200px',
               overflowY: 'scroll',
-              overflowX: 'hidden'
+              overflowX: 'hidden',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
             }}
           >
             {
@@ -207,7 +216,8 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
               value={username}
               left={<Flex justify={'center'} align={'center'}>
                 <ProfileIcon
-                  color={isSubnameAvailable === undefined ? undefined : isSubnameAvailable ? 'var(--justaname-primary-color)' : 'var(--justaname-error-color)'} />
+                  width={'24px'}
+                />
               </Flex>}
               fullWidth
               error={isSubnameAvailable !== undefined && !isSubnameAvailable}

@@ -18,19 +18,19 @@ export interface GetRecordsResult {
   sanitizedRecords: SanitizedRecords | undefined;
 }
 
-interface UseRecordsParams {
+export interface UseRecordsParams {
   fullName?: string | undefined;
   providerUrl?: string;
   chainId?: ChainId;
 }
 
-interface GetRecordsParams {
+export interface GetRecordsParams {
   fullName: string;
   chainId?: ChainId;
   providerUrl?: string;
 }
 
-interface UseRecordsResult {
+export interface UseRecordsResult {
   isRecordsPending: boolean;
   records: SubnameRecordsResponse | undefined;
   sanitizedRecords: SanitizedRecords | undefined;
@@ -104,16 +104,16 @@ export const useRecords = (
   const query = useQuery({
     queryKey: buildRecordsBySubnameKey(params?.fullName || "", currentChainId, currentProviderUrl),
     queryFn: () => getRecordsInternal({
-      fullName: params?.fullName || '',
-      chainId: currentChainId,
-      providerUrl: currentProviderUrl
-    }),
+        fullName: params?.fullName || '',
+        chainId: currentChainId,
+        providerUrl: currentProviderUrl
+      }, true),
     enabled: Boolean(params?.fullName) && Boolean(currentChainId) && Boolean(currentProviderUrl)
   });
 
 
   return {
-    isRecordsPending: query.isPending,
+    isRecordsPending: query.isPending || query.isFetching,
     records: query.data?.records,
     getRecords: getRecordsInternal,
     sanitizedRecords: query.data?.sanitizedRecords,

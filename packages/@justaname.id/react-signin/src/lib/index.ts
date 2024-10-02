@@ -1,10 +1,13 @@
+import { LoadingDialog} from './dialogs/LoadingDialog'
+import { DefaultDialog } from './dialogs/DefaultDialog'
+import { JustaNameFooter } from './components/JustaNameFooter'
+import { JustSignInButton } from './components/JustSignInButton'
+export * from './plugins'
 export * from './providers'
-export * from './dialogs/AuthorizeMAppDialog'
 export * from './hooks'
-import { LoadingDialog} from './dialogs'
-import { Footer } from './components'
-
 export {
-  Footer as JustaNameFooter,
+  JustaNameFooter,
+  JustSignInButton,
+  DefaultDialog as JustaNameDialog,
   LoadingDialog as JustaNameLoadingDialog,
 }

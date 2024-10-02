@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogTitle } from '@justaname.id/react-ui';
-import { Loading } from '../../components';
+import { Loading } from '../../components/Loading';
 import { FC } from 'react';
 
 export interface LoadingDialogProps {

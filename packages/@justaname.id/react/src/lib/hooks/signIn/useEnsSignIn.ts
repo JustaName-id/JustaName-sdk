@@ -14,6 +14,12 @@ export interface EnsSignInParams {
   signinRoute?: string;
 }
 
+export interface UseEnsSignInParams {
+  backendUrl?: string;
+  signinNonceRoute?: string;
+  signinRoute?: string;
+}
+
 export interface UseEnsSignInResult {
   signIn:  UseMutateAsyncFunction<string, Error, EnsSignInParams, unknown>,
   isSignInPending: boolean;
@@ -26,25 +32,30 @@ export interface UseEnsSignInResult {
  * and a boolean indicating if the signature operation is pending (`ensSignaturePending`).
  */
 
-export const useEnsSignIn = (): UseEnsSignInResult => {
-  const { justaname, backendUrl: defaultBackendUrl, routes} = useJustaName();
+export const useEnsSignIn = (params: UseEnsSignInParams = {}): UseEnsSignInResult => {
+  const { justaname, backendUrl, routes} = useJustaName();
   const { address } = useMountedAccount();
   const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
 
   const mutation = useMutation({
-    mutationFn: async ({ ens, backendUrl, signinNonceRoute, signinRoute }: EnsSignInParams) => {
+    mutationFn: async (_params: EnsSignInParams) => {
       if (!address) {
         throw new Error('No address found');
       }
 
-      const nonceResponse = await fetch((backendUrl || defaultBackendUrl || "") + (signinNonceRoute || routes.signinNonceRoute), {
+      const currentBackendUrl = _params.backendUrl || params.backendUrl || backendUrl;
+      const currentSigninNonceRoute = _params.signinNonceRoute || params.signinNonceRoute || routes.signinNonceRoute;
+      const currentSigninRoute = _params.signinRoute || params.signinRoute || routes.signinRoute;
+
+      const nonceResponse = await fetch(
+          currentBackendUrl + currentSigninNonceRoute, {
         credentials: 'include',
       });
 
       const message = justaname.signIn.requestSignIn({
         address,
-        ens,
+        ens: _params.ens,
         nonce: await nonceResponse.text()
       })
 
@@ -54,7 +65,9 @@ export const useEnsSignIn = (): UseEnsSignInResult => {
       })
 
 
-      const response = await fetch((backendUrl || defaultBackendUrl || "") + (signinRoute || routes.signinRoute), {
+      const response = await fetch(
+          currentBackendUrl + currentSigninRoute,
+        {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +80,7 @@ export const useEnsSignIn = (): UseEnsSignInResult => {
       });
 
       queryClient.invalidateQueries({
-        queryKey: buildEnsAuthKey(backendUrl || defaultBackendUrl || "")
+        queryKey: buildEnsAuthKey(currentBackendUrl || "")
       })
 
       return response.text();

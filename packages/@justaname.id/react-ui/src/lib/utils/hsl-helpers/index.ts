@@ -13,7 +13,7 @@ const formatHSL = (color: HSLColor): string => {
   return `hsl(${color.hue}, ${color.saturation}%, ${color.lightness}%)`;
 }
 
-const clamp = (value: number, min: number = 0, max: number = 100): number => {
+const clamp = (value: number, min = 0, max = 100): number => {
   return Math.min(Math.max(value, min), max);
 }
 
@@ -80,9 +80,9 @@ export const convertToHSL = (color: string): string => {
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
 
-  let h: number = 0;
-  let s: number = 0;
-  let l = (max + min) / 2;
+  let h = 0;
+  let s = 0;
+  const l = (max + min) / 2;
 
   if (max !== min) {
     const d = max - min;

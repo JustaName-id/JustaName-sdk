@@ -1,149 +1,198 @@
-import { createContext, FC, Fragment, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import {
+  EnsSignInParams,
   JustaNameContext,
   JustaNameProvider,
   JustaNameProviderConfig,
-  useMountedAccount,
+  SubnameUpdate,
   useEnsAuth,
+  UseEnsAuthReturn,
   useEnsSignIn,
   useEnsSignOut,
-  UseEnsAuthReturn, EnsSignInParams
+  useMountedAccount
 } from '@justaname.id/react';
 import { JustaThemeProvider, JustaThemeProviderConfig } from '@justaname.id/react-ui';
-import { AuthorizeMAppDialog, SignInDialog } from '../../dialogs';
 import { UseMutateAsyncFunction } from '@tanstack/react-query';
+import { SignInDialog } from '../../dialogs/SignInDialog';
+import { MAppsProvider } from '../MAppProvider';
+import { JustaPlugin } from '../../plugins';
+import usePreviousState from '../../hooks/usePreviousState';
+import { UpdateRecordDialog } from '../../dialogs';
 
 export interface JustSignInProviderConfig extends JustaNameProviderConfig, JustaThemeProviderConfig {
   openOnWalletConnect?: boolean;
-  allowedEns: "all" | "platform" | string[];
+  allowedEns: 'all' | 'platform' | string[];
+  logo?: string;
 }
 
 export interface JustSignInProviderProps {
   children: ReactNode;
   config: JustSignInProviderConfig;
+  mApps?: (string | { name: string, openOnConnect: boolean })[];
+  plugins?: JustaPlugin[];
+}
+
+export interface UpdateRecordsParams extends Omit<SubnameUpdate, 'fullEnsDomain' | 'contentHash'> {
+  contentHash?: {
+    protocolType: string;
+    decoded: string;
+  };
 }
 
 export interface JustSignInContextProps {
   handleOpenSignInDialog: (open: boolean) => void;
+  handleUpdateRecords: (records: UpdateRecordsParams) => Promise<void>;
   isSignInOpen: boolean;
-  handleOpenMAppDialog: (mApp: string, open: boolean) => void;
-  mApps: string[];
+  logo?: string;
+  plugins: JustaPlugin[],
+  mApps: string[]
 }
 
-export interface MAPPContextProps {
-  handleAddMApp: (mapp: string, open?: boolean) => void;
-  handleRemoveMApp: (mapp: string, open: boolean) => void;
-}
-
-export const MAPPContext = createContext<MAPPContextProps>({
-  handleAddMApp: () => { },
-  handleRemoveMApp: () => { },
-});
 
 export const JustSignInContext = createContext<JustSignInContextProps>({
   isSignInOpen: false,
-  handleOpenSignInDialog: () => { },
-  handleOpenMAppDialog: () => { },
+  handleOpenSignInDialog: () => {
+  },
+  handleUpdateRecords: async () => {
+  },
+  logo: '',
+  plugins: [],
   mApps: []
 });
 
+
 export const JustSignInProvider: FC<JustSignInProviderProps> = ({
-  children,
-  config: props
-}) => {
-  const openOnWalletConnect = props.openOnWalletConnect || false;
-  const allowedEns = props.allowedEns || "all";
-  const { isConnected } = useMountedAccount()
+                                                                  children,
+                                                                  config: {
+                                                                    openOnWalletConnect = true,
+                                                                    ...configRest
+                                                                  },
+                                                                  mApps = [],
+                                                                  plugins,
+                                                                }) => {
+  const allowedEns = configRest.allowedEns || 'all';
+  const { isConnected } = useMountedAccount();
   const [signInOpen, setSignInOpen] = useState(false);
-  const [mApps, setMApps] = useState<string[]>([]);
-  const [mAppsOpen, setMAppsOpen] = useState<boolean[]>([]);
+  const [updateRecord, setUpdateRecord] = useState<UpdateRecordsParams | null>(null);
+  const updateRecordPromiseResolveRef = useRef<(() => void) | null>(null);
 
-  const handleOpenMAppDialog = (mApp: string, open: boolean) => {
-    const index = mApps.indexOf(mApp);
-    if (index === -1) {
-      handleAddMApp(mApp, open);
+  const pluginsMApps = useMemo(() => plugins
+      ?.map((plugin) => plugin.mApps)
+      .flat()
+      .map((mApp) => ({
+        name: mApp,
+        openOnConnect: false
+      })),
+    [plugins]) as { name: string, openOnConnect: boolean }[] || [];
+
+
+  const handleUpdateRecords = async (records: UpdateRecordsParams) => {
+    setUpdateRecord(records);
+    return new Promise<void>((resolve) => {
+      updateRecordPromiseResolveRef.current = resolve;
+    });
+  };
+
+  useEffect(() => {
+    if (!updateRecord && updateRecordPromiseResolveRef.current) {
+      updateRecordPromiseResolveRef.current();
+      updateRecordPromiseResolveRef.current = null;
     }
-    const newMAppsOpen = [...mAppsOpen];
-    newMAppsOpen[index] = open;
-    setMAppsOpen(newMAppsOpen);
-  }
+  }, [updateRecord]);
 
-  const handleAddMApp = (mApp: string, open= false) => {
-    if (mApps.includes(mApp)) {
-      return;
+  const mAppsWithOpenOnConnect = mApps.map((mApp) => {
+    if (typeof mApp === 'string') {
+      return {
+        name: mApp,
+        openOnConnect: false
+      };
     }
-    setMApps([...mApps, mApp]);
-    setMAppsOpen([...mAppsOpen, open]);
-  }
+    return mApp;
+  });
 
-  const handleRemoveMApp = (mApp: string) => {
-    const index = mApps.indexOf(mApp);
-
-    if (index === -1) {
-      return;
+  const allMApps = [
+    ...mAppsWithOpenOnConnect,
+    ...pluginsMApps
+  ].reduce((acc, mApp) => {
+    if (!acc.find((accMApp) => accMApp.name === mApp.name)) {
+      return [...acc, mApp];
     }
-
-    setMApps([...mApps.slice(0, index), ...mApps.slice(index + 1)]);
-    setMAppsOpen([...mAppsOpen.slice(0, index), ...mAppsOpen.slice(index + 1)]);
-  }
+    return acc;
+  }, [] as { name: string, openOnConnect: boolean }[]);
 
   const handleOpenSignInDialog = (open: boolean) => {
-    if(!isConnected){
+    if (!isConnected) {
       return;
     }
     if (open !== signInOpen) {
       setSignInOpen(open);
     }
-  }
+  };
 
   return (
-    <JustSignInContext.Provider value={{
-      handleOpenSignInDialog,
-      isSignInOpen: signInOpen,
-      handleOpenMAppDialog,
-      mApps
+    <JustaNameProvider config={{
+      config: configRest.config,
+      backendUrl: configRest.backendUrl,
+      providerUrl: configRest.providerUrl,
+      ensDomain: configRest.ensDomain,
+      routes: configRest.routes
     }}>
-      <MAPPContext.Provider value={{
-        handleAddMApp,
-        handleRemoveMApp
-      }}>
-        <JustaNameProvider config={{
-          config: props.config,
-          backendUrl: props.backendUrl,
-          providerUrl: props.providerUrl,
-          ensDomain: props.ensDomain,
-          routes: props.routes
+      <JustaThemeProvider color={configRest.color}>
+
+        <JustSignInContext.Provider value={{
+          handleOpenSignInDialog,
+          isSignInOpen: signInOpen,
+          logo: configRest.logo,
+          plugins: plugins || [],
+          mApps: allMApps.map((mApp) => mApp.name),
+          handleUpdateRecords: handleUpdateRecords
         }}>
-          <JustaThemeProvider color={props.color}>
+          <MAppsProvider
+            logo={configRest.logo}
+            mApps={allMApps}
+            plugins={plugins || []}
+            handleOpenSignInDialog={handleOpenSignInDialog}
+          >
+            <CheckSession openOnWalletConnect={openOnWalletConnect} handleOpenDialog={handleOpenSignInDialog} />
+            <SignInDialog open={signInOpen} handleOpenDialog={handleOpenSignInDialog} allowedEns={allowedEns}
+                          logo={configRest.logo} />
+            {/*{*/}
+            {/*  Boolean(updateRecord) &&*/}
+              <UpdateRecordDialog open={Boolean(updateRecord)} handleOpen={
+                (open) => {
+                  if (!open) {
+                    setUpdateRecord(null);
+                  }
+                }
+              } {...updateRecord} logo={configRest.logo} />
+            {/*}*/}
+
             {children}
-            <CheckSession openOnWalletConnect={openOnWalletConnect} handleOpenDialog={handleOpenSignInDialog}/>
-            <SignInDialog open={signInOpen} handleOpenDialog={handleOpenSignInDialog} allowedEns={allowedEns} />
-            {
-              mApps.map((mApp, i) => (
-                <Fragment key={mApp}>
-                  <AuthorizeMAppDialog open={mAppsOpen[i]} handleOpenDialog={(open) => handleOpenMAppDialog(mApp, open)} mApp={mApp} />
-                </Fragment>
-              ))
-            }
-          </JustaThemeProvider>
-        </JustaNameProvider>
-      </MAPPContext.Provider>
-    </JustSignInContext.Provider>
+          </MAppsProvider>
+
+        </JustSignInContext.Provider>
+      </JustaThemeProvider>
+    </JustaNameProvider>
+
   );
 };
 
 export interface UseSignInWithJustaName {
   handleOpenSignInDialog: (open: boolean) => void;
-  isSignInOpen: boolean
-  handleOpenMAppDialog: (mApp: string, open: boolean) => void;
-  mApps: string[];
-  signIn: UseMutateAsyncFunction<string, Error, EnsSignInParams, unknown>
+  isSignInOpen: boolean;
+  signIn: UseMutateAsyncFunction<string, Error, EnsSignInParams, unknown>;
   signOut: () => void;
   status: 'pending' | 'signedIn' | 'signedOut';
   isLoggedIn: boolean;
   isEnsAuthPending: boolean;
   refreshEnsAuth: () => void;
   connectedEns: UseEnsAuthReturn['connectedEns'];
+  updateRecords: (records: Omit<SubnameUpdate, 'fullEnsDomain' | 'contentHash'> & {
+    contentHash?: {
+      protocolType: string;
+      decoded: string;
+    }
+  }) => Promise<void>;
 }
 
 
@@ -180,48 +229,45 @@ export const useSignInWithJustaName = (): UseSignInWithJustaName => {
 
   return {
     handleOpenSignInDialog: context.handleOpenSignInDialog,
+    updateRecords: context.handleUpdateRecords,
     isSignInOpen: context.isSignInOpen,
-    handleOpenMAppDialog: context.handleOpenMAppDialog,
-    mApps: context.mApps,
     isEnsAuthPending,
     signIn,
     signOut,
     isLoggedIn,
     status,
     connectedEns,
-    refreshEnsAuth,
+    refreshEnsAuth
   };
-}
+};
 
-const CheckSession: FC<{ openOnWalletConnect: boolean, handleOpenDialog: (open: boolean) => void }> = ({ openOnWalletConnect, handleOpenDialog }) => {
+const CheckSession: FC<{
+  openOnWalletConnect: boolean,
+  handleOpenDialog: (open: boolean) => void
+}> = ({ openOnWalletConnect, handleOpenDialog }) => {
   const { connectedEns, isEnsAuthPending } = useEnsAuth();
   const { signOut } = useEnsSignOut();
-  const [wasConnected, setWasConnected] = useState(false);
   const {
     address,
     isConnected,
     isDisconnected,
     isConnecting,
-    isReconnecting,
+    isReconnecting
   } = useMountedAccount();
 
-
-  useEffect(() => {
-    if (isConnected && !wasConnected) {
-      setWasConnected(true);
-    }
-  }, [isConnected, wasConnected])
+  const isConnectedPrevious = usePreviousState(isConnected, [isConnected]);
 
   useEffect(() => {
     if (connectedEns && address) {
       if (connectedEns.address !== address) {
-        signOut()
+        signOut();
         handleOpenDialog(true);
       }
     }
-  }, [connectedEns, address]);
+  }, [connectedEns, address, signOut]);
 
   useEffect(() => {
+
     if (openOnWalletConnect && isConnected && !connectedEns && !isEnsAuthPending) {
       handleOpenDialog(true);
     }
@@ -232,11 +278,11 @@ const CheckSession: FC<{ openOnWalletConnect: boolean, handleOpenDialog: (open: 
 
 
   useEffect(() => {
-      if (isDisconnected && !isConnecting && !isReconnecting && wasConnected) {
-        signOut();
-        handleOpenDialog(false);
-      }
-  }, [isDisconnected, isConnecting, isReconnecting, wasConnected]);
+    if (isDisconnected && !isConnecting && !isReconnecting && isConnectedPrevious) {
+      signOut();
+      handleOpenDialog(false);
+    }
+  }, [isDisconnected, isConnecting, isReconnecting, isConnectedPrevious, signOut]);
 
   return null;
-}
+};

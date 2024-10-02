@@ -48,7 +48,7 @@ export const useEnsAuth = <T extends object = {}>({ backendUrl, currentEnsRoute 
   return{
     isLoggedIn: !!query.data,
     connectedEns: query.data,
-    isEnsAuthPending: query.isLoading,
+    isEnsAuthPending: query.isPending || query.isFetching,
     refreshEnsAuth: query.refetch
   }
 }

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const H2 = styled.h2`
     font-size: 24px;
-    line-height: 2.25rem;
+    line-height: normal;
     font-weight: 600;
     margin: 0;
     font-family: var(--justaname-font-family);

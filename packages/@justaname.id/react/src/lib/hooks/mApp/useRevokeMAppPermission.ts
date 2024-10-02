@@ -1,13 +1,12 @@
-import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { ChainId, RevokeMAppPermissionResponse } from '@justaname.id/sdk';
 import { useSignMessage } from 'wagmi';
 import { useAccountSubnames, useMountedAccount } from '../account';
-import { buildIsMAppEnabledKey } from './useIsMAppEnabled';
 import { useRecords } from '../records';
 
 export interface UseRequestRevokeMAppPermissionResult {
-  revokeMAppPermission: UseMutateFunction<RevokeMAppPermissionResponse, Error, RevokeMAppPermissionRequest, unknown>;
+  revokeMAppPermission: UseMutateAsyncFunction<RevokeMAppPermissionResponse, Error, RevokeMAppPermissionRequest, unknown>;
   isRevokeMAppPermissionPending: boolean;
 }
 
@@ -17,13 +16,14 @@ export interface RevokeMAppPermissionRequest {
 
 export interface UseRevokeMAppPermissionParams {
   mApp: string,
-  chainId?: ChainId
+  chainId?: ChainId,
+  providerUrl?: string
 }
 
 export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): UseRequestRevokeMAppPermissionResult => {
-  const { justaname, chainId } = useJustaName()
-  const queryClient = useQueryClient()
+  const { justaname, chainId, providerUrl } = useJustaName()
   const currentChainId = props.chainId || chainId
+  const currentProviderUrl = props.providerUrl || providerUrl
   const { signMessageAsync } = useSignMessage()
   const { address} = useMountedAccount()
   const { refetchAccountSubnames } = useAccountSubnames()
@@ -57,14 +57,13 @@ export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): U
         signature
       })
 
-      queryClient.invalidateQueries({
-        queryKey: buildIsMAppEnabledKey(params.ens, props.mApp, currentChainId)
-      })
       refetchAccountSubnames()
       getRecords({
         fullName: params.ens,
         chainId: currentChainId,
+        providerUrl: currentProviderUrl
       }, true)
+
       return response
     }
   })
