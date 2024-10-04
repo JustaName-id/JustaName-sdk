@@ -1,5 +1,5 @@
 import { SubnameChallenge } from '../../../lib/features/subname-challenge';
-import rest from '../../../lib/api/rest';
+// import rest from '../../../lib/api/rest';
 import dotenv from 'dotenv';
 import { ethers } from 'ethers';
 dotenv.config();
@@ -8,16 +8,18 @@ describe('subnameChallenge', () => {
 
   let subnameChallenge: SubnameChallenge;
 
-  jest.spyOn(rest, 'restCall').mockResolvedValue({
-challenge: '0x1234',
-  })
+//   jest.spyOn(rest, 'restCall').mockResolvedValue({
+// challenge: '0x1234',
+//   })
 
   beforeEach(() => {
     subnameChallenge = new SubnameChallenge({
-      chainId: 1,
-      domain: 'localhost',
-      origin: 'http://localhost:3333',
-      ttl: 120000,
+      siweConfig: {
+        origin: 'http://localhost:3333',
+        domain: 'localhost',
+      },
+      subnameChallengeTtl: 120000,
+      chainId: 11155111
     })
   })
 

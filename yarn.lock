@@ -6497,6 +6497,7 @@ __metadata:
     "@justaname.id/react": "npm:0.3.94"
     "@justaname.id/react-ui": "npm:0.0.27"
     "@justaname.id/sdk": "npm:0.2.91"
+    lodash: "npm:4.17.21"
     styled-components: "npm:^6.1.12"
     yup: "npm:0.32.11"
   peerDependencies:
@@ -6514,6 +6515,7 @@ __metadata:
     "@radix-ui/react-dialog": "npm:^1.1.1"
     "@radix-ui/react-popover": "npm:^1.1.1"
     embla-carousel-react: "npm:^8.3.0"
+    input-otp: "npm:^1.2.4"
     styled-components: "npm:^6.1.12"
   peerDependencies:
     react: ">=17"
@@ -20721,23 +20723,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-justaname-app@workspace:packages/create-justaname-app":
-  version: 0.0.0-use.local
-  resolution: "create-justaname-app@workspace:packages/create-justaname-app"
-  dependencies:
-    "@inquirer/prompts": "npm:^4.3.0"
-    "@rollup/plugin-commonjs": "npm:^25.0.7"
-    "@rollup/plugin-node-resolve": "npm:^15.2.3"
-    fs-extra: "npm:11.2.0"
-    node-fetch: "npm:2.7.0"
-    ora: "npm:^8.0.1"
-    rollup-plugin-strip-shebang: "npm:^1.2.10"
-    tar: "npm:6.2.1"
-  bin:
-    create-justaname-app: index.esm.js
-  languageName: unknown
-  linkType: soft
-
 "create-package-json@npm:^1.1.0":
   version: 1.1.0
   resolution: "create-package-json@npm:1.1.0"
@@ -25500,17 +25485,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:11.2.0, fs-extra@npm:^11.0.0, fs-extra@npm:^11.1.0, fs-extra@npm:^11.1.1":
-  version: 11.2.0
-  resolution: "fs-extra@npm:11.2.0"
-  dependencies:
-    graceful-fs: "npm:^4.2.0"
-    jsonfile: "npm:^6.0.1"
-    universalify: "npm:^2.0.0"
-  checksum: 10c0/d77a9a9efe60532d2e790e938c81a02c1b24904ef7a3efb3990b835514465ba720e99a6ea56fd5e2db53b4695319b644d76d5a0e9988a2beef80aa7b1da63398
-  languageName: node
-  linkType: hard
-
 "fs-extra@npm:9.0.0":
   version: 9.0.0
   resolution: "fs-extra@npm:9.0.0"
@@ -25543,6 +25517,17 @@ __metadata:
     jsonfile: "npm:^6.0.1"
     universalify: "npm:^2.0.0"
   checksum: 10c0/5f579466e7109719d162a9249abbeffe7f426eb133ea486e020b89bc6d67a741134076bf439983f2eb79276ceaf6bd7b7c1e43c3fd67fe889863e69072fb0a5e
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:^11.0.0, fs-extra@npm:^11.1.0, fs-extra@npm:^11.1.1":
+  version: 11.2.0
+  resolution: "fs-extra@npm:11.2.0"
+  dependencies:
+    graceful-fs: "npm:^4.2.0"
+    jsonfile: "npm:^6.0.1"
+    universalify: "npm:^2.0.0"
+  checksum: 10c0/d77a9a9efe60532d2e790e938c81a02c1b24904ef7a3efb3990b835514465ba720e99a6ea56fd5e2db53b4695319b644d76d5a0e9988a2beef80aa7b1da63398
   languageName: node
   linkType: hard
 
@@ -33018,7 +33003,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.7.0, node-fetch@npm:^2, node-fetch@npm:^2.0.0, node-fetch@npm:^2.2.0, node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.7":
+"node-fetch@npm:^2, node-fetch@npm:^2.0.0, node-fetch@npm:^2.2.0, node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.7":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:
@@ -40594,7 +40579,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar@npm:6.2.1, tar@npm:^6.0.2, tar@npm:^6.0.5, tar@npm:^6.1.11, tar@npm:^6.1.2, tar@npm:^6.2.0, tar@npm:^6.2.1":
+"tar@npm:^6.0.2, tar@npm:^6.0.5, tar@npm:^6.1.11, tar@npm:^6.1.2, tar@npm:^6.2.0, tar@npm:^6.2.1":
   version: 6.2.1
   resolution: "tar@npm:6.2.1"
   dependencies:

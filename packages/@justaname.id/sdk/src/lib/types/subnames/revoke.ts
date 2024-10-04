@@ -1,5 +1,5 @@
 import { ApiKeyHeaders, SIWEHeaders } from '../headers';
-import { IRequest, IResponse, IRoute } from '../common';
+import { ChainId, IRequest, IResponse, IRoute } from '../common';
 
 /**
  * Defines the request structure for revoking a subname under a specific ENS domain.
@@ -17,7 +17,7 @@ export interface SubnameRevokeRequest extends IRequest{
 
     username: string;
 
-    chainId: number;
+    chainId: ChainId;
 }
 
 /**
@@ -51,6 +51,6 @@ export interface SubnameRevokeRoute extends IRoute {
 }
 
 export interface SubnameRevokeParams extends Omit<SubnameRevokeRequest, 'chainId' | 'ensDomain'> {
-    chainId?: number;
+    chainId?: ChainId;
     ensDomain?: string;
 }

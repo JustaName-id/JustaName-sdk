@@ -29,7 +29,7 @@
     "src/**/*.test.js"
   ],
   "include": [
-    "src/lib/**/index.ts",
+    "src/lib/**/*.ts",
     "src/**/*.stories.ts",
     "src/**/*.stories.js",
     "src/**/*.stories.jsx",

@@ -1,11 +1,11 @@
 import { FC, Fragment, useEffect, useMemo, useState } from 'react';
-import { SubnameUpdate, useEnsAuth, useRecords, useUpdateChanges, useUpdateSubname } from '@justaname.id/react';
+import { UseSubnameUpdateFunctionParams, useEnsAuth, useRecords, useUpdateChanges, useUpdateSubname } from '@justaname.id/react';
 import { Badge, Button, Carousel, DialogClose, Flex, H2, JustaNameLogoIcon, SPAN } from '@justaname.id/react-ui';
 import { DefaultDialog } from '../DefaultDialog';
 import { Loading } from '../../components/Loading';
 import { UpdateRecordItem } from '../../components/UpdateRecordItem';
 
-export interface UpdateRecordDialogProps extends Omit<SubnameUpdate, 'fullEnsDomain' | 'contentHash'> {
+export interface UpdateRecordDialogProps extends Omit<UseSubnameUpdateFunctionParams, 'ens' | 'contentHash'> {
   logo?: string;
   contentHash?: {
     protocolType: string;
@@ -28,14 +28,14 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
   const [addresses, setAddresses] = useState(initialAddresses);
   const [contentHash, setContentHash] = useState(initialContentHash);
   const { records, isRecordsPending } = useRecords({
-    fullName: connectedEns?.ens
+    ens: connectedEns?.ens
   });
 
   const sanitizedContentHash = useMemo(() => {
     return contentHash ? contentHash.protocolType === '' ? '' : `${contentHash.protocolType}://${contentHash.decoded}` : undefined;
   }, [contentHash]);
   const { changes, isUpdateChangesPending } = useUpdateChanges({
-    fullEnsDomain: connectedEns?.ens || '',
+    ens: connectedEns?.ens || '',
     text,
     addresses,
     contentHash: sanitizedContentHash
@@ -213,7 +213,7 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                 <Button variant={'primary'} style={{ width: '100%' }} size={'lg'}
                         onClick={() => {
                           updateSubname({
-                            fullEnsDomain: connectedEns?.ens || '',
+                            ens: connectedEns?.ens || '',
                             text: text,
                             addresses: addresses,
                             contentHash: sanitizedContentHashChanges

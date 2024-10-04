@@ -2,7 +2,6 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "module": "commonjs",
     "types": ["jest", "node"],
     "paths": {
       "@justaname.id/siwens": ["packages/@justaname.id/siwens"]

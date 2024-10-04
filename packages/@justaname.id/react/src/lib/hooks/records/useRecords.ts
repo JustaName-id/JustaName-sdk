@@ -1,16 +1,15 @@
 import { useJustaName } from '../../providers';
 import { QueryObserverResult, RefetchOptions, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ChainId, SanitizedRecords, sanitizeRecords, SubnameRecordsResponse } from '@justaname.id/sdk';
+import { ChainId, SanitizedRecords, sanitizeRecords, SubnameRecordsResponse, SubnameRecordsParams } from '@justaname.id/sdk';
+import { useMemo } from 'react';
 
 export const buildRecordsBySubnameKey = (
   subname: string,
   chainId: ChainId,
-  providerUrl: string
 ) => [
   'RECORDS_BY_SUBNAME',
   subname,
   chainId,
-  providerUrl
 ];
 
 export interface GetRecordsResult {
@@ -18,16 +17,12 @@ export interface GetRecordsResult {
   sanitizedRecords: SanitizedRecords | undefined;
 }
 
-export interface UseRecordsParams {
-  fullName?: string | undefined;
-  providerUrl?: string;
-  chainId?: ChainId;
+export interface UseRecordsParams extends Omit<SubnameRecordsParams, "fullName" | "providerUrl">{
+  ens?: string | undefined;
 }
 
-export interface GetRecordsParams {
-  fullName: string;
-  chainId?: ChainId;
-  providerUrl?: string;
+export interface GetRecordsParams extends Omit<SubnameRecordsParams, "fullName" | "providerUrl">{
+  ens: string;
 }
 
 export interface UseRecordsResult {
@@ -43,27 +38,22 @@ export interface UseRecordsResult {
   recordsStatus: 'error' | 'success' | 'pending';
 }
 
-export const useRecords = (
-  params: UseRecordsParams = {}
-): UseRecordsResult => {
+export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
 
-  const { justaname, chainId, providerUrl } = useJustaName();
+  const { justaname, chainId, networks } = useJustaName();
   const queryClient = useQueryClient();
-  const currentChainId = params?.chainId ? params?.chainId : chainId;
-  const currentProviderUrl = params?.providerUrl ? params?.providerUrl : providerUrl;
+  const _chainId = useMemo(()=> params?.chainId || chainId, [params?.chainId, chainId]);
+  const _networks = useMemo(() => networks.find((network) => network.chainId === _chainId), [_chainId, networks]);
+  const _providerUrl = useMemo(() => _networks?.providerUrl, [_networks]);
 
-  const getRecords = async (_fullName: string | undefined,
-                                   _chainId: ChainId,
-                                   _providerUrl: string): Promise<GetRecordsResult> => {
-    if (!_fullName) {
-      throw new Error('Full name is required');
-    }
+  const getRecords = async (_params: SubnameRecordsParams): Promise<GetRecordsResult> => {
 
     const result = await justaname.subnames.getRecordsByFullName({
-      fullName: _fullName,
-      providerUrl: _providerUrl,
-      chainId: _chainId
+      fullName: _params.fullName,
+      providerUrl: _params.providerUrl,
+      chainId: _params.chainId,
     });
+
     if (
       result.resolverAddress ===
       '0x0000000000000000000000000000000000000000'
@@ -91,24 +81,36 @@ export const useRecords = (
 
   const getRecordsInternal = async (_params: GetRecordsParams, forceUpdate=false) => {
     if(!forceUpdate){
-      const cachedRecords = queryClient.getQueryData(buildRecordsBySubnameKey(_params?.fullName, _params?.chainId || currentChainId, _params?.providerUrl || currentProviderUrl)) as GetRecordsResult;
+      const cachedRecords = queryClient.getQueryData(buildRecordsBySubnameKey(_params?.ens, _params?.chainId || _chainId)) as GetRecordsResult;
       if(cachedRecords){
         return cachedRecords;
       }
     }
-    const records = await getRecords(_params?.fullName, _params?.chainId || currentChainId, _params?.providerUrl || currentProviderUrl);
-    queryClient.setQueryData(buildRecordsBySubnameKey(_params.fullName, _params?.chainId || currentChainId, _params?.providerUrl || currentProviderUrl), records);
+    const __chainId = _params?.chainId || _chainId;
+    const __networks = networks.find((network) => network.chainId === __chainId);
+    const __providerUrl = __networks?.providerUrl;
+
+    if (!__providerUrl) {
+      throw new Error('ChainId not found');
+    }
+
+    const records = await getRecords({
+      fullName: _params.ens,
+      chainId: __chainId,
+      providerUrl: __providerUrl,
+    })
+
+    queryClient.setQueryData(buildRecordsBySubnameKey(_params.ens, __chainId), records);
     return records;
   };
 
   const query = useQuery({
-    queryKey: buildRecordsBySubnameKey(params?.fullName || "", currentChainId, currentProviderUrl),
+    queryKey: buildRecordsBySubnameKey(params?.ens || "", _chainId),
     queryFn: () => getRecordsInternal({
-        fullName: params?.fullName || '',
-        chainId: currentChainId,
-        providerUrl: currentProviderUrl
+        ens: params?.ens || "",
+        chainId: _chainId,
       }, true),
-    enabled: Boolean(params?.fullName) && Boolean(currentChainId) && Boolean(currentProviderUrl)
+    enabled: Boolean(params?.ens) && Boolean(_chainId) && Boolean(_providerUrl)
   });
 
 

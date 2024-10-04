@@ -42,10 +42,10 @@ export const RevokeMAppDialog: FC<RevokeMAppDialogProps> = ({
                                                 }) => {
   const [openOnConnect] = useState(open);
   const { records: mAppRecords, isRecordsPending: isMAppRecordsPending } = useRecords({
-    fullName: mApp || ''
+    ens: mApp || ''
   });
   const { records } = useRecords({
-    fullName: connectedEns || ''
+    ens: connectedEns || ''
   })
   const { canEnableMApps, isCanEnableMAppsPending } = useCanEnableMApps({
     ens: connectedEns || ''

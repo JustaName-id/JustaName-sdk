@@ -1,50 +1,47 @@
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
-import { AddMAppPermissionResponse, ChainId } from '@justaname.id/sdk';
+import { AddMAppPermissionResponse, ChainId, RequestAddMAppPermissionChallengeParams } from '@justaname.id/sdk';
 import { useSignMessage } from 'wagmi';
 import { useAccountSubnames, useMountedAccount } from '../account';
 import { useRecords } from '../records';
+import { useMemo } from 'react';
+
+export interface UseAddMAppPermissionFunctionParams extends Omit<RequestAddMAppPermissionChallengeParams, 'mApp' | "address"> {
+  mApp?: string
+}
+
+export interface UseAddMAppPermissionParams extends Omit<UseAddMAppPermissionFunctionParams, 'subname' | 'address'> {
+  mApp: string
+  chainId?: ChainId
+}
 
 export interface UseRequestAddMAppPermission {
-  addMAppPermission: UseMutateAsyncFunction<AddMAppPermissionResponse, Error, AddMAppPermissionRequest, unknown>;
+  addMAppPermission: UseMutateAsyncFunction<AddMAppPermissionResponse, Error, UseAddMAppPermissionFunctionParams, unknown>,
   isAddMAppPermissionPending: boolean;
 }
 
-export interface AddMAppPermissionRequest {
-  subname: string
-}
 
-export interface UseAddMAppPermissionParams {
-  mApp: string
-  chainId?: ChainId
-  providerUrl?: string
-}
-
-
-export const useAddMAppPermission = (props : UseAddMAppPermissionParams): UseRequestAddMAppPermission => {
-  const { justaname, chainId, providerUrl  } = useJustaName()
+export const useAddMAppPermission = (params: UseAddMAppPermissionParams): UseRequestAddMAppPermission => {
+  const { justaname, chainId  } = useJustaName()
   const { signMessageAsync } = useSignMessage()
   const { address} = useMountedAccount()
   const { getRecords } = useRecords()
-  const currentChainId = props.chainId || chainId
-  const currentProviderUrl = props.providerUrl || providerUrl
+  const _chainId = useMemo(() => params.chainId || chainId, [params.chainId, chainId])
+
   const { refetchAccountSubnames } = useAccountSubnames()
-  const mutate = useMutation<
-    AddMAppPermissionResponse,
-    Error,
-    AddMAppPermissionRequest
-  >({
+  const mutate = useMutation({
     mutationFn: async (
-      params:AddMAppPermissionRequest
+      _params: UseAddMAppPermissionFunctionParams
     ) => {
       if (!address) {
         throw new Error('Wallet not connected')
       }
+
       const challengeResponse = await justaname.mApps.requestAddMAppPermissionChallenge({
-        subname: params.subname,
+        subname: _params.subname,
         address: address,
-        mApp: props.mApp,
-        chainId: currentChainId,
+        mApp: _params?.mApp || params.mApp,
+        chainId: _params?.chainId || _chainId
       })
 
       const signature = await signMessageAsync({
@@ -61,9 +58,8 @@ export const useAddMAppPermission = (props : UseAddMAppPermissionParams): UseReq
       refetchAccountSubnames()
 
       getRecords({
-        fullName: params.subname,
-        chainId: currentChainId,
-        providerUrl: currentProviderUrl
+        ens: _params.subname,
+        chainId: _chainId,
       }, true)
       return response
     }

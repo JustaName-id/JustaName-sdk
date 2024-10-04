@@ -1,13 +1,10 @@
 "use client";
 
-import React from 'react';
-import { ChainId, JustaName, JustaNameConfig } from '@justaname.id/sdk';
+import React, { useMemo } from 'react';
+import { ChainId, JustaName, JustaNameConfig, JustaNameConfigDefaults, NetworkWithProvider } from '@justaname.id/sdk';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { defaultRoutes } from '../constants/default-routes';
-
-interface JustaNameConfigWithOptionalApiKey extends Omit<JustaNameConfig, 'apiKey'> {
-  apiKey?: string;
-}
+import { useMountedAccount } from '../hooks/account/useMountedAccount';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,42 +21,26 @@ const queryClient = new QueryClient({
 });
 
 
-/**
- * Type definition for the properties available in the JustaNameContext.
- *
- * @typedef JustaNameContextProps
- * @type {object}
- * @property {JustaName | null} justaname - The JustaName SDK instance.
- * @property {object} routes - An object containing route definitions.
- * @property {string} [backendUrl] - The backend URL for JustaName API requests.
- * @property {1 | 11155111} chainId - The blockchain network identifier.
- */
-export interface JustaNameContextProps extends JustaNameConfigWithOptionalApiKey {
+export type JustaNameConfigWithoutDefaultChainId = Omit<JustaNameConfig, 'defaultChainId'>
+
+export interface JustaNameContextProps extends Omit<JustaNameConfigDefaults, 'defaultChainId'> {
   justaname: JustaName;
   routes: typeof defaultRoutes;
   backendUrl?: string;
-  chainId: ChainId;
+  selectedNetwork: NetworkWithProvider;
+  selectedEnsDomain: string | undefined;
+  chainId: ChainId
 }
 
 
 export const JustaNameContext = React.createContext<JustaNameContextProps | null>(null);
 
-/**
- * Props for the JustaNameProvider component.
- *
- * @typedef JustaNameProvider
- * @type {object}
- * @property {React.ReactNode} children - The child components.
- * @property {object} [routes] - Optional custom API routes.
- * @property {1 | 11155111} [chainId] - Optional blockchain network identifier.
- * @property {string} [backendUrl] - Optional backend URL for API requests.
- */
 export interface JustaNameProviderProps {
   children: React.ReactNode;
   config: JustaNameProviderConfig
 }
 
-export interface JustaNameProviderConfig extends JustaNameConfigWithOptionalApiKey {
+export interface JustaNameProviderConfig extends JustaNameConfigWithoutDefaultChainId {
   routes?: Partial<typeof defaultRoutes>;
   backendUrl?: string;
 }
@@ -77,34 +58,53 @@ export const JustaNameProvider: React.FC<JustaNameProviderProps> = ({
   config: {
     routes,
     backendUrl,
-    providerUrl,
-    ensDomain,
+    ensDomains,
     config,
-    apiKey
+    apiKey,
+    networks
   },
 }: JustaNameProviderProps): React.ReactNode => {
 
+  const { chainId } = useMountedAccount()
+
+  const defaultChain = useMemo(()=> {
+    return chainId === 11155111 ? 11155111 : 1
+  }, [chainId])
+
   const [justaname] = React.useState<JustaName>(JustaName.init({
+    networks,
     config,
-    providerUrl,
-    ensDomain,
-    apiKey,
+    ensDomains,
+    defaultChainId: defaultChain,
+    apiKey
   }));
+
+  const configuredEnsDomains = useMemo(() => {
+    return JustaName.createEnsDomains(ensDomains)
+  }, [ensDomains])
+
+  const selectedEnsDomain = useMemo(() => {
+    return configuredEnsDomains.find((ensDomain) => ensDomain.chainId === defaultChain)?.ensDomain
+  }, [configuredEnsDomains, defaultChain])
+
+  const configuredNetworks = useMemo(() => {
+    return JustaName.createNetworks(networks)
+  }, [networks])
+
+  const selectedNetwork = useMemo(() => {
+    return configuredNetworks.find((network) => network.chainId === defaultChain) as NetworkWithProvider
+  }, [configuredNetworks, defaultChain])
 
   return (
     <QueryClientProvider client={queryClient}>
       <JustaNameContext.Provider value={{
         backendUrl,
-        config: {
-          origin: config.origin,
-          chainId: config.chainId,
-          domain: config.domain,
-          signIn: config.signIn,
-          subnameChallenge: config.subnameChallenge,
-        },
-        ensDomain,
-        chainId: config.chainId,
-        providerUrl,
+        config,
+        ensDomains: configuredEnsDomains,
+        selectedEnsDomain,
+        networks: configuredNetworks,
+        chainId: defaultChain,
+        selectedNetwork,
         justaname,
         routes: {
           ...defaultRoutes,

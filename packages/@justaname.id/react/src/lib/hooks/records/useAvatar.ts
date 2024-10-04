@@ -2,9 +2,10 @@ import { ChainId } from '@justaname.id/sdk';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useEnsPublicClient } from '../client/useEnsPublicClient';
+import { useMemo } from 'react';
 
 export const buildEnsAvatarKey = (
-  ens: string,
+  ens: string | undefined,
   chainId: ChainId
 ) => [
   'ENS_AVATAR',
@@ -13,9 +14,8 @@ export const buildEnsAvatarKey = (
 ]
 
 export interface UseEnsAvatarParams {
-  ens?: string;
+  ens: string | undefined;
   chainId?: ChainId
-  providerUrl?: string
 }
 
 export interface UseEnsAvatarResult {
@@ -24,18 +24,20 @@ export interface UseEnsAvatarResult {
   isLoading: boolean;
 }
 
-export const useEnsAvatar = (params: UseEnsAvatarParams = {}): UseEnsAvatarResult => {
-  const { chainId , providerUrl} = useJustaName();
-  const currentChainId = params.chainId || chainId;
-  const currentProviderUrl = params.providerUrl || providerUrl;
+export const useEnsAvatar = (params?: UseEnsAvatarParams ): UseEnsAvatarResult => {
+  const { chainId} = useJustaName();
+  const _chainId = useMemo(() => params?.chainId || chainId, [params?.chainId, chainId])
+
   const queryClient = useQueryClient();
   const { ensClient } = useEnsPublicClient({
-    providerUrl: currentProviderUrl,
-    chainId: currentChainId
+    chainId: _chainId
   })
 
-  const getEnsAvatar = async (name: string, forceUpdate = false): Promise<string> => {
-    const key = buildEnsAvatarKey(name, currentChainId)
+  const getEnsAvatar = async (name: string | undefined, forceUpdate = false): Promise<string> => {
+    if (!name) {
+      return ''
+    }
+    const key = buildEnsAvatarKey(name, _chainId)
     const cachedData = queryClient.getQueryData(key)
     if (!forceUpdate && cachedData) {
       return cachedData as string
@@ -48,9 +50,9 @@ export const useEnsAvatar = (params: UseEnsAvatarParams = {}): UseEnsAvatarResul
   }
 
   const query = useQuery({
-    queryKey: buildEnsAvatarKey(params.ens || '', currentChainId),
-    queryFn: () => getEnsAvatar(params.ens || ''),
-    enabled: Boolean(params.ens),
+    queryKey: buildEnsAvatarKey(params?.ens, _chainId),
+    queryFn: () => getEnsAvatar(params?.ens),
+    enabled: Boolean(params?.ens),
   })
 
   return {

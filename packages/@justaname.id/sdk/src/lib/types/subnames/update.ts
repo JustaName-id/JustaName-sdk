@@ -1,6 +1,6 @@
 import {  SIWEHeaders } from '../headers';
 import { AddressWithTypedCoins, IRequest, IResponse, IRoute, PartialAddressJson } from '../common';
-import { ChainId } from '@justaname.id/sdk';
+import { ChainId } from '../common';
 
 /**
  * Represents a cryptocurrency address associated with a subname.

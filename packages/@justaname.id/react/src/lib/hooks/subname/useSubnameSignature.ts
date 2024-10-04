@@ -4,22 +4,18 @@ import { useMountedAccount } from '../account/useMountedAccount';
 import { useSignMessage } from 'wagmi';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
+import { ChainId } from '@justaname.id/sdk';
 
-export const buildSignature = (address: string) => ['SUBNAME_SIGNATURE', address]
-
+export const buildSignature = (address: string, chainId: ChainId) => ['SUBNAME_SIGNATURE', address, chainId];
 
 export interface UseSubnameSignatureResult {
   getSignature: () => Promise<{signature: string, message: string, address: string, expirationTime: Date}>,
   isSubnameSignaturePending: boolean;
+  isSubnameSignatureFetching: boolean;
 }
-/**
- * Custom hook to request a challenge for a subname and obtain a signature proving ownership of an address.
- *
- * @returns {UseSubnameSignatureResult} An object containing the function to initiate the signing process (`subnameSignature`)
- * and a boolean indicating if the signature operation is pending (`subnameSignaturePending`).
- */
+
 export const useSubnameSignature = (): UseSubnameSignatureResult => {
-  const { justaname} = useJustaName();
+  const { justaname, chainId} = useJustaName();
   const { address} = useMountedAccount();
   const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
@@ -32,7 +28,8 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
         throw new Error('No address found');
       }
       const message = await justaname.siwe.requestChallenge({
-        address
+        address,
+        chainId
       })
 
       const signature = await signMessageAsync({
@@ -53,12 +50,12 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
         expirationTime
       }
       await queryClient.setQueryData(
-        buildSignature(address),
+        buildSignature(address, chainId),
         signedData
       )
 
       if (isWeb) {
-        localStorage.setItem(buildSignature(address).join('_'), JSON.stringify(signedData));
+        localStorage.setItem(buildSignature(address, chainId).join('_'), JSON.stringify(signedData));
       }
 
       return signedData
@@ -67,7 +64,7 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
 
 
   const query = useQuery({
-    queryKey: buildSignature(address ?? ''),
+    queryKey: buildSignature(address ?? "", chainId),
     queryFn: () => mutation.mutateAsync(),
     enabled: false,
     refetchOnWindowFocus: false,
@@ -83,12 +80,12 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
     }
 
     if (isWeb) {
-      const localData = localStorage.getItem(buildSignature(address ?? '').join('_'));
+      const localData = localStorage.getItem(buildSignature(address ?? '', chainId).join('_'));
       if (localData) {
         const parsedData = JSON.parse(localData);
         if (new Date(parsedData.expirationTime) > now) {
           await queryClient.setQueryData(
-            buildSignature(address ?? ''),
+            buildSignature(address ?? '', chainId),
             parsedData
           )
           return parsedData;
@@ -101,6 +98,7 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
   return {
     getSignature,
     isSubnameSignaturePending: mutation.isPending,
+    isSubnameSignatureFetching: query.isFetching,
   }
 }
 

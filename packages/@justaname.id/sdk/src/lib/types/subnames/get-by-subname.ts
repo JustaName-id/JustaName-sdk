@@ -125,3 +125,7 @@ export interface SubnameGetBySubnameRoute extends IRoute {
     response: SubnameGetBySubnameResponse;
     headers: NonNullable<unknown>;
 }
+
+export interface SubnameGetBySubnameParams extends Omit<SubnameGetBySubnameRequest, 'chainId'> {
+  chainId?: ChainId
+}

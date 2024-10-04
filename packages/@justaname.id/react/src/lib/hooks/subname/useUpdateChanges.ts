@@ -13,9 +13,12 @@ import { useRecords } from '../records';
 
 export const buildUpdateChangesKey = (params: GetUpdateChangesParams) => ['ENS_UPDATE_CHANGES', ...Object.values(params)];
 
-export interface GetUpdateChangesParams extends Omit<SubnameUpdateParams, 'username' | 'ensDomain'> {
-  fullEnsDomain: string;
-  providerUrl?: string;
+export interface GetUpdateChangesParams extends Omit<SubnameUpdateParams, 'username' | 'ensDomain' | 'contentHash'> {
+  contentHash?: {
+    protocolType: string;
+    decoded: string;
+  } | undefined;
+  ens: string;
 }
 
 export interface GetUpdateChangesResult {
@@ -25,20 +28,30 @@ export interface GetUpdateChangesResult {
 }
 
 export interface UseUpdateChangesResult {
-  isUpdateChangesPending: boolean;
-  changes?: GetUpdateChangesResult;
   canUpdateEns?: boolean;
+  isUpdateChangesPending: boolean;
+  isUpdateChangesFetching: boolean;
+  isUpdateChangesLoading: boolean;
+  changes?: GetUpdateChangesResult;
+  refetchUpdateChanges: () => void;
   getUpdateChanges: (params: GetUpdateChangesParams) => Promise<GetUpdateChangesResult>;
   checkIfUpdateIsValid: (params: GetUpdateChangesParams) => Promise<boolean>;
-  refetchUpdateChanges: () => void;
+}
+
+export interface UseUpdateChangesParams extends Omit<SubnameUpdateParams, 'username' | 'ensDomain' | 'contentHash'> {
+  contentHash?: {
+    protocolType: string;
+    decoded: string;
+  };
+  ens?: string;
 }
 
 
-export const useUpdateChanges = (params?: GetUpdateChangesParams): UseUpdateChangesResult => {
-  const { chainId, providerUrl } = useJustaName();
-  const _currentProviderUrl = params?.providerUrl ? params?.providerUrl : providerUrl;
-  const _currentChainId = params?.chainId ? params?.chainId : chainId;
+export const useUpdateChanges = (params?: UseUpdateChangesParams): UseUpdateChangesResult => {
+  const { chainId } = useJustaName();
   const { getRecords } = useRecords();
+
+  const _chainId = params?.chainId || chainId;
 
   const checkIfUpdateIsValid = async (_params: GetUpdateChangesParams) => {
     const {
@@ -52,14 +65,12 @@ export const useUpdateChanges = (params?: GetUpdateChangesParams): UseUpdateChan
   };
 
   const getUpdateChanges = async (_params: GetUpdateChangesParams) => {
-    const { fullEnsDomain } = _params;
+    const { ens } = _params;
 
-    const currentProviderUrl = _params.providerUrl ? _params.providerUrl : _currentProviderUrl;
-    const currentChainId = _params.chainId ? _params.chainId : _currentChainId;
+    const __chainId = _params.chainId || _chainId;
     const records = await getRecords({
-      fullName: fullEnsDomain,
-      providerUrl: currentProviderUrl,
-      chainId: currentChainId
+      ens: ens,
+      chainId: __chainId
     });
     const sanitizedRequestAddress = sanitizeAddresses(_params.addresses)?.filter((address) => address.coinType >= 0);
     const sanitizedRequestText = sanitizeTexts(_params.text)?.filter((text) => !!text.key);
@@ -82,25 +93,22 @@ export const useUpdateChanges = (params?: GetUpdateChangesParams): UseUpdateChan
   const query = useQuery({
     queryKey: buildUpdateChangesKey({
       ...params,
-      fullEnsDomain: params?.fullEnsDomain || '',
-      providerUrl: _currentProviderUrl,
-      chainId: _currentChainId
+      ens: params?.ens || '',
+      chainId: _chainId
     }),
     queryFn: async () => ({
       changes: await getUpdateChanges({
         ...params,
-        fullEnsDomain: params?.fullEnsDomain || '',
-        providerUrl: _currentProviderUrl,
-        chainId: _currentChainId
+        ens: params?.ens || '',
+        chainId: _chainId
       }),
       canUpdate: await checkIfUpdateIsValid({
         ...params,
-        fullEnsDomain: params?.fullEnsDomain || '',
-        providerUrl: _currentProviderUrl,
-        chainId: _currentChainId
+        ens: params?.ens || '',
+        chainId: _chainId
       })
     }),
-    enabled: Boolean(params?.fullEnsDomain) && Boolean(params?.addresses || params?.text || params?.contentHash)
+    enabled: Boolean(params?.ens) && Boolean(params?.addresses || params?.text || params?.contentHash)
   });
 
   return {
@@ -109,7 +117,9 @@ export const useUpdateChanges = (params?: GetUpdateChangesParams): UseUpdateChan
     getUpdateChanges,
     checkIfUpdateIsValid,
     refetchUpdateChanges: query.refetch,
-    isUpdateChangesPending: query.isPending && Boolean(params?.fullEnsDomain) && Boolean(params?.addresses || params?.text || params?.contentHash)
+    isUpdateChangesPending: query.isPending,
+    isUpdateChangesFetching: query.isFetching,
+    isUpdateChangesLoading: query.isPending || query.isFetching
   };
 };
 
@@ -138,8 +148,25 @@ export const getChangedTextRecords = (sanitizedRequestText: TextRecord[] | undef
   return changedTexts.filter((text) => !!text.key);
 };
 
-export const getChangedContentHash = (contentHash: string | null | undefined, records: SubnameRecordsResponse) => {
-  const previousContentHash = records.contentHash ? records.contentHash.protocolType + '://' + records.contentHash.decoded : '';
+export const getChangedContentHash = (contentHash: {
+  protocolType: string;
+  decoded: string;
+} | undefined, records: SubnameRecordsResponse) => {
+  if (!contentHash) {
+    return undefined;
+  }
 
-  return contentHash ? contentHash !== previousContentHash ? contentHash : undefined : undefined;
+  if (!records.contentHash) {
+    return `${contentHash.protocolType}://${contentHash.decoded}`;
+  }
+
+  if(contentHash.protocolType===''){
+    return ''
+  }
+
+  if (records.contentHash.protocolType !== contentHash.protocolType || records.contentHash.decoded !== contentHash.decoded) {
+    return `${contentHash.protocolType}://${contentHash.decoded}`;
+  }
+
+  return undefined;
 };

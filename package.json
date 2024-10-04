@@ -105,7 +105,6 @@
   },
   "workspaces": [
     "packages/@justaname.id/*",
-    "packages/*",
     "examples/**"
   ],
   "packageManager": "yarn@4.1.1",

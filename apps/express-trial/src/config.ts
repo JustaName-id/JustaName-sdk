@@ -8,9 +8,14 @@ const providerUrl = process.env.JUSTANAME_PROVIDER_URL as string;
 const ensDomain = process.env.JUSTANAME_ENS_DOMAIN as string;
 export const config: JustaNameConfig = {
   apiKey,
-  providerUrl: providerUrl,
+  networks: [
+    {
+      chainId,
+      providerUrl
+    }
+  ],
+  defaultChainId: chainId,
   config:{
-    chainId,
     domain,
     origin,
   },

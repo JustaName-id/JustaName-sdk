@@ -7,98 +7,77 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import { ChainId, SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
+import { ChainId, SubnameGetAllByAddressParams, SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
 import { buildSubnameBySubnameKey } from './useSubname';
 
-/**
- * Constructs a unique cache key for storing and retrieving subnames data associated with a wallet address.
- *
- * @param {string | undefined} address - The Ethereum address of the connected wallet.
- * @param chainId
- * @param ensDomain
- * @returns {Array} A unique cache key array for react-query.
- */
 export const buildAddressSubnamesKey = (
   address: string | undefined,
   chainId: ChainId,
-): Array<any> => [
-  'WALLET_SUBNAMES_BY_ADDRESS', address, chainId]
+) => [
+  'WALLET_SUBNAMES_BY_ADDRESS',
+  address,
+  chainId
+]
 
-/**
- * Options for the `useAddressSubnames` hook, allowing customization of the query.
- *
- * @typedef UseAddressSubnamesOptions
- * @type {object}
- * @property {string} address - The Ethereum address to query for subnames.
- * @property {ChainId} [chainId] - The chain ID to query for subnames on.
- */
-export interface UseAddressSubnamesOptions {
-  address: string;
-  chainId?: ChainId;
+export interface UseAddressSubnamesParams extends Omit<SubnameGetAllByAddressParams, 'isClaimed' | 'coinType' | "address"> {
+  address: string | undefined;
+  isClaimed?: boolean;
+  coinType?: number;
 }
 
-/**
- * Type definition for the list of subnames returned by the JustaName service.
- *
- * @typedef SubnameType
- * @type {SubnameGetAllByAddressResponse[]}
- */
-type SubnameType = SubnameGetAllByAddressResponse[];
-
-/**
- * The shape of the object returned by the `useAddressSubnames` hook.
- *
- * @typedef UseAddressSubnamesResult
- * @type {object}
- * @property {SubnameType} subnames - The list of subnames associated with the account.
- * @property {boolean} isLoading - Indicates if the query is currently loading.
- * @property {function} refetchSubnames - Function to manually refetch the subnames data.
- */
 interface UseAddressSubnamesResult {
-  subnames: SubnameType;
+  addressSubnames: SubnameGetAllByAddressResponse;
   isAddressSubnamesPending: boolean;
-  refetchSubnames: (
+  isAddressSubnamesFetching: boolean;
+  isAddressSubnamesLoading: boolean;
+  refetchAddressSubnames: (
     options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<SubnameType | undefined, unknown>>;
+  ) => Promise<QueryObserverResult<SubnameGetAllByAddressResponse | undefined, unknown>>;
 }
 
-/**
- * Custom hook to fetch subnames associated with a wallet's address.
- *
- * @param {UseAddressSubnamesOptions} props - Optional configurations for subname retrieval.
- * @returns {UseAddressSubnamesResult} The result object containing subnames data, loading state, and a refetch function.
- */
 export const useAddressSubnames = (
-  props: UseAddressSubnamesOptions
+  params: UseAddressSubnamesParams
 ): UseAddressSubnamesResult => {
   const queryClient = useQueryClient();
-  const { justaname, chainId } = useJustaName();
+  const { justaname, chainId: defaultChainId } = useJustaName();
+  const { chainId, ...rest } = params;
+  const _chainId = chainId || defaultChainId;
 
   const query = useQuery({
-    queryKey: buildAddressSubnamesKey(props.address, props?.chainId ? props?.chainId : chainId),
+    queryKey: buildAddressSubnamesKey(params.address, _chainId),
     queryFn: async () => {
-      const subnames = await justaname?.subnames.getAllByAddress({
-        address: props.address as string,
-        isClaimed: true,
-        coinType: 60,
-        chainId: props?.chainId ? props?.chainId : chainId,
+      if (!params.address) {
+        throw new Error('Address is required');
+      }
+
+      const response = await justaname?.subnames.getAllByAddress({
+        ...rest,
+        address: params.address,
+        isClaimed: params.isClaimed ?? true,
+        coinType: params.coinType ?? 60,
+        chainId: _chainId,
       });
 
-      subnames?.forEach((subname: SubnameGetAllByAddressResponse) => {
+      response?.subnames.forEach((subname) => {
         queryClient.setQueryData(
-          buildSubnameBySubnameKey(subname.subname, props?.chainId ? props?.chainId : chainId),
+          buildSubnameBySubnameKey(subname.subname, _chainId),
           subname
         );
       });
 
-      return subnames;
+      return response;
     },
-    enabled: Boolean(justaname) && Boolean(props.address),
+    enabled: Boolean(justaname) && Boolean(params.address),
+    initialData: {
+      subnames: [],
+    },
   });
 
   return {
-    subnames: query.data ?? [],
+    addressSubnames: query.data,
     isAddressSubnamesPending: query.isPending,
-    refetchSubnames: query.refetch,
+    isAddressSubnamesFetching: query.isFetching,
+    isAddressSubnamesLoading: query.isPending || query.isFetching,
+    refetchAddressSubnames: query.refetch,
   };
 };

@@ -49,3 +49,7 @@ export interface  IsSubnameAvailableRoute extends IRoute {
   response: IsSubnameAvailableResponse;
   headers: NonNullable<unknown>;
 }
+
+export interface IsSubnameAvailableParams extends Omit<IsSubnameAvailableRequest, 'chainId'> {
+  chainId?: ChainId;
+}

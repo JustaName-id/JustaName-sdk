@@ -2,18 +2,16 @@ import { ChainId } from '@justaname.id/sdk';
 import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useRecords } from '../records';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 
 export const buildEnabledMAppsKey = (
   ens: string,
   chainId: ChainId,
-  providerUrl: string
 ) => [
   'ENABLED_MAPPS',
   ens,
   chainId,
-  providerUrl
 ]
 
 export interface UseEnabledMAppsParams {
@@ -29,20 +27,18 @@ export interface UseEnabledMAppsResult {
 }
 
 export const useEnabledMApps = (params: UseEnabledMAppsParams): UseEnabledMAppsResult => {
-  const { justaname, chainId, providerUrl} = useJustaName();
-  const currentChainId = params.chainId || chainId;
-  const currentProviderUrl = params.providerUrl || providerUrl;
+  const { justaname, chainId} = useJustaName();
+  const _chainId = useMemo(() => params.chainId || chainId, [params.chainId, chainId])
   const { records } = useRecords({
-    fullName: params.ens,
-    chainId: currentChainId,
-    providerUrl: currentProviderUrl
+    ens: params.ens,
+    chainId: _chainId,
   })
 
   const query = useQuery({
-    queryKey: buildEnabledMAppsKey(params.ens, currentChainId,currentProviderUrl),
+    queryKey: buildEnabledMAppsKey(params.ens, _chainId),
     queryFn: async () => {
       if (!records) {
-        return false;
+        return;
       }
       if (!records.isJAN) {
         return false;
@@ -50,7 +46,7 @@ export const useEnabledMApps = (params: UseEnabledMAppsParams): UseEnabledMAppsR
       const mAppField = records.texts.find((text)=>text.key === 'mApps')
       return mAppField ? JSON.parse(mAppField.value).mApps : [];
     },
-    enabled: Boolean(params.ens) && Boolean(justaname) && params.ens.length > 0 && Boolean(currentChainId) && Boolean(records),
+    enabled: Boolean(params.ens) && Boolean(justaname) && params.ens.length > 0 && Boolean(_chainId) && Boolean(records),
   })
 
   useEffect(() => {
@@ -60,6 +56,6 @@ export const useEnabledMApps = (params: UseEnabledMAppsParams): UseEnabledMAppsR
   return {
     enabledMApps: query.data,
     refetchEnabledMApps: query.refetch,
-    isMAppEnabledPending: query.isLoading,
+    isMAppEnabledPending: query.isPending,
   }
 }

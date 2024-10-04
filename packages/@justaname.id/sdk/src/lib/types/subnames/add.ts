@@ -49,7 +49,7 @@ export interface SubnameAddRequest extends IRequest{
 
   ensDomain: string;
 
-  chainId: number;
+  chainId: ChainId;
 
   addresses?: Address[];
 

@@ -12,16 +12,16 @@ export interface SiwensResponse extends SiweResponse {
   ens: string
 }
 
-export interface SiwensConfig {
-  params: string | SiwensParams
-  providerUrl?: string
-}
-
-export interface SiwensParams extends Omit<Partial<SiweMessage>,"statement"> {
+export interface SiwensParams extends Partial<Omit<SiweMessage, "toMessage" | "prepareMessage" | "verify"| "validate">> {
   ens: string,
   ttl?: number,
   expirationTime?: string,
   issuedAt?: string,
+}
+
+export interface SiwensConfig {
+  params: string | SiwensParams
+  providerUrl?: string
 }
 
 export class SIWENS extends SiweMessage {
@@ -55,7 +55,7 @@ export class SIWENS extends SiweMessage {
 
     checkDomainValid(params.ens);
 
-    const statement = constructSignInStatement(params.domain, params.ens);
+    const statement = constructSignInStatement(params.ens, params?.statement || "");
 
 
     super({
@@ -130,5 +130,3 @@ export class SIWENS extends SiweMessage {
     return true;
   }
 }
-
-export default SIWENS;

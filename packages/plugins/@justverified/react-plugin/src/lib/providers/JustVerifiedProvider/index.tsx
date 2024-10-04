@@ -59,9 +59,14 @@ export const JustVerifiedProvider: FC<JustVerifiedProviderProps> = ({
   )
 
 }
+export interface UseJustVerifiedProps {
+  mApp: string;
+}
 
 
-export const useJustVerified = () => {
+export const useJustVerified = ({
+  mApp='justverified.eth'
+                                }: UseJustVerifiedProps) => {
   const context = useContext(JustVerifiedContext);
   const { connectedEns} = useSignInWithJustaName();
   const { records } = useRecords({
@@ -69,8 +74,8 @@ export const useJustVerified = () => {
   })
   const { credentials } = context;
   const credentialKeys = useMemo(() => {
-    return credentials.map(credential => CredentialMetadataKeyStandard[credential] + '_justverified.eth');
-  }, [credentials]);
+    return credentials.map(credential => CredentialMetadataKeyStandard[credential] + mApp);
+  }, [credentials, mApp]);
 
   const credentialRecords = useMemo(() => {
     return records?.texts.filter(text => credentialKeys.includes(text.key));

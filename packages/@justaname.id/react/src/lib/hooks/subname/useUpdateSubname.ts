@@ -4,7 +4,7 @@ import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/r
 import { useJustaName } from '../../providers';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { SubnameUpdateParams } from '@justaname.id/sdk';
+import { ChainId, SubnameUpdateParams } from '@justaname.id/sdk';
 import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useEnsWalletClient } from '../client/useEnsWalletClient';
 import { setAddressRecord, setContentHashRecord, setRecords, setTextRecord } from '@ensdomains/ensjs/wallet';
@@ -12,57 +12,59 @@ import { useRecords } from '../records';
 import { splitDomain } from '../../helpers';
 import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { useUpdateChanges } from './useUpdateChanges';
+import { useMemo } from 'react';
 
-/**
- * Defines the structure for the base request needed to claim a subname.
- * 
- * @typedef BaseClaimSubnameRequest
- * @type {object}
- * @property {string} username - The username part of the subname to be claimed or updated.
- */
-export interface SubnameUpdate extends Omit<SubnameUpdateParams, 'username' | 'ensDomain'> {
-  fullEnsDomain: string;
-  providerUrl?: string;
+export interface UseSubnameUpdateFunctionParams extends Omit<SubnameUpdateParams, 'username' | 'ensDomain' | 'contentHash'> {
+  ens: string;
+  contentHash?: {
+    protocolType: string;
+    decoded: string;
+  };
+}
+
+export interface UseUpdateSubnameParams  {
+  chainId?: ChainId;
 }
 
 export interface UseUpdateSubnameResult {
-  updateSubname: UseMutateAsyncFunction<void, Error, SubnameUpdate>;
+  updateSubname: UseMutateAsyncFunction<void, Error, UseSubnameUpdateFunctionParams>;
   isUpdateSubnamePending: boolean;
 }
 
-/**
- * Custom hook to handle the subname claim or update process.
- *
- * @template T Additional request parameters that can be merged with the base request structure.
- * @returns {UseUpdateSubnameResult} An object containing methods and properties to handle the mutation state.
- */
-
-export const useUpdateSubname = () : UseUpdateSubnameResult => {
-  const { justaname,chainId, providerUrl } = useJustaName();
+export const useUpdateSubname = (params?: UseUpdateSubnameParams): UseUpdateSubnameResult => {
+  const queryClient = useQueryClient()
+  const { justaname, chainId } = useJustaName();
+  const _chainId = useMemo(() => params?.chainId || chainId, [params, chainId])
   const { address } = useMountedAccount()
   const { getSignature} = useSubnameSignature()
-  const { refetchAccountSubnames } = useAccountSubnames()
-  const { getRecords } = useRecords()
-  const queryClient = useQueryClient()
-  const { ensWalletClient } = useEnsWalletClient();
-  const { ensClient } = useEnsPublicClient()
-  const { checkIfUpdateIsValid, getUpdateChanges} = useUpdateChanges()
+  const { refetchAccountSubnames } = useAccountSubnames({
+    chainId: _chainId
+  })
+  const { getRecords } = useRecords({
+    chainId: _chainId
+  })
+  const { ensWalletClient } = useEnsWalletClient({
+    chainId: _chainId
+  });
+  const { ensClient } = useEnsPublicClient({
+    chainId: _chainId
+  })
+  const { checkIfUpdateIsValid, getUpdateChanges} = useUpdateChanges({
+    chainId: _chainId
+  })
 
-  const mutate = useMutation<void,  Error, SubnameUpdate>
+  const mutate = useMutation<void,  Error, UseSubnameUpdateFunctionParams>
   ({
     mutationFn: async (
-      params: SubnameUpdate
+      _params: UseSubnameUpdateFunctionParams
     ) => {
       if (!address) {
         throw new Error('No address found');
       }
-      const { fullEnsDomain } = params;
-      const currentProviderUrl = params.providerUrl ? params.providerUrl : providerUrl;
-      const currentChainId = params.chainId ? params.chainId : chainId;
+
       const records = await getRecords({
-        fullName: fullEnsDomain,
-        providerUrl: currentProviderUrl,
-        chainId: currentChainId,
+        ens: _params.ens,
+        chainId: _params.chainId || _chainId
       })
 
       if (!records || !records.records) {
@@ -72,13 +74,13 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
       if (records.records.isJAN) {
         const signature = await getSignature()
 
-        const [username, ensDomain] = splitDomain(fullEnsDomain)
+        const [username, ensDomain] = splitDomain(_params.ens)
         await justaname.subnames.updateSubname({
-          addresses: params.addresses,
-          chainId: currentChainId,
-          contentHash: params.contentHash,
+          addresses: _params.addresses,
+          chainId: _params.chainId || _chainId,
+          contentHash: _params.contentHash?.protocolType ? _params?.contentHash?.protocolType === '' ? '' : `${_params?.contentHash?.protocolType}://${_params?.contentHash?.decoded}` : undefined,
           ensDomain: ensDomain,
-          text: params.text,
+          text: _params.text,
           username: username,
         }, {
           xAddress: address,
@@ -92,7 +94,7 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
           throw new Error('No wallet client found')
         }
 
-        const changeIsValid = await checkIfUpdateIsValid(params)
+        const changeIsValid = await checkIfUpdateIsValid(_params)
         if (!changeIsValid) {
           return
         }
@@ -103,7 +105,7 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
           changedAddresses,
           changedTexts,
           changedContentHash,
-        } = await getUpdateChanges(params)
+        } = await getUpdateChanges(_params)
 
         if (changedAddresses && changedAddresses.length > 0) {
           changes++
@@ -125,7 +127,7 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
         if (changes === 1) {
           if (changedAddresses && changedAddresses.length === 1) {
             hash = await setAddressRecord(ensWalletClient, {
-              name: fullEnsDomain,
+              name: _params.ens,
               account: address,
               coin: changedAddresses[0].coinType,
               value: changedAddresses[0].address,
@@ -135,7 +137,7 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
 
           if (changedTexts && changedTexts.length === 1) {
             hash = await setTextRecord(ensWalletClient, {
-              name: fullEnsDomain,
+              name: _params.ens,
               account: address,
               key: changedTexts[0].key,
               value: changedTexts[0].value,
@@ -145,7 +147,7 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
 
           if (changedContentHash) {
             hash = await setContentHashRecord(ensWalletClient, {
-              name: fullEnsDomain,
+              name: _params.ens,
               account: address,
               contentHash: changedContentHash,
               resolverAddress: records.records.resolverAddress as `0x${string}`,
@@ -155,7 +157,7 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
 
         if (!hash) {
           hash = await setRecords(ensWalletClient, {
-            name: fullEnsDomain,
+            name: _params.ens,
             account: address,
             coins: changedAddresses && changedAddresses.length > 0 ? changedAddresses.map((address) => ({
               value: address.address,
@@ -171,9 +173,8 @@ export const useUpdateSubname = () : UseUpdateSubnameResult => {
       }
 
       getRecords({
-        fullName: fullEnsDomain,
-        providerUrl: currentProviderUrl,
-        chainId: currentChainId,
+        ens: _params.ens,
+        chainId: _params.chainId || _chainId
       }, true).then(() => {
         queryClient.invalidateQueries({
           predicate: (query) => {

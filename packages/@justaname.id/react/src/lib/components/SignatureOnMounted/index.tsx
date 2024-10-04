@@ -13,7 +13,7 @@ export const SignatureOnMounted: React.FC = () => {
       await getSignature()
     }
     main();
-  }, [address, isConnected || isSubnameSignaturePending])
+  }, [address, isConnected, isSubnameSignaturePending])
 
   return null
 }

@@ -1,18 +1,15 @@
 import { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  EnsSignInParams,
   JustaNameContext,
   JustaNameProvider,
   JustaNameProviderConfig,
-  SubnameUpdate,
   useEnsAuth,
   UseEnsAuthReturn,
   useEnsSignIn,
   useEnsSignOut,
-  useMountedAccount
+  useMountedAccount, UseEnsSignInResult, UseEnsSignOutResult, UseSubnameUpdateFunctionParams
 } from '@justaname.id/react';
 import { JustaThemeProvider, JustaThemeProviderConfig } from '@justaname.id/react-ui';
-import { UseMutateAsyncFunction } from '@tanstack/react-query';
 import { SignInDialog } from '../../dialogs/SignInDialog';
 import { MAppsProvider } from '../MAppProvider';
 import { JustaPlugin } from '../../plugins';
@@ -32,7 +29,7 @@ export interface JustSignInProviderProps {
   plugins?: JustaPlugin[];
 }
 
-export interface UpdateRecordsParams extends Omit<SubnameUpdate, 'fullEnsDomain' | 'contentHash'> {
+export interface UpdateRecordsParams extends Omit<UseSubnameUpdateFunctionParams, 'ens' | 'contentHash'> {
   contentHash?: {
     protocolType: string;
     decoded: string;
@@ -133,8 +130,6 @@ export const JustSignInProvider: FC<JustSignInProviderProps> = ({
     <JustaNameProvider config={{
       config: configRest.config,
       backendUrl: configRest.backendUrl,
-      providerUrl: configRest.providerUrl,
-      ensDomain: configRest.ensDomain,
       routes: configRest.routes
     }}>
       <JustaThemeProvider color={configRest.color}>
@@ -169,7 +164,6 @@ export const JustSignInProvider: FC<JustSignInProviderProps> = ({
 
             {children}
           </MAppsProvider>
-
         </JustSignInContext.Provider>
       </JustaThemeProvider>
     </JustaNameProvider>
@@ -180,14 +174,14 @@ export const JustSignInProvider: FC<JustSignInProviderProps> = ({
 export interface UseSignInWithJustaName {
   handleOpenSignInDialog: (open: boolean) => void;
   isSignInOpen: boolean;
-  signIn: UseMutateAsyncFunction<string, Error, EnsSignInParams, unknown>;
-  signOut: () => void;
+  signIn: UseEnsSignInResult['signIn'];
+  signOut: UseEnsSignOutResult['signOut'];
   status: 'pending' | 'signedIn' | 'signedOut';
   isLoggedIn: boolean;
   isEnsAuthPending: boolean;
   refreshEnsAuth: () => void;
   connectedEns: UseEnsAuthReturn['connectedEns'];
-  updateRecords: (records: Omit<SubnameUpdate, 'fullEnsDomain' | 'contentHash'> & {
+  updateRecords: (records: Omit<UseSubnameUpdateFunctionParams, 'fullEnsDomain' | 'contentHash'> & {
     contentHash?: {
       protocolType: string;
       decoded: string;

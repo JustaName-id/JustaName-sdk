@@ -2,27 +2,24 @@ import { ChainId } from '@justaname.id/sdk';
 import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useRecords } from '../records';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 
 export const buildIsMAppEnabledKey = (
   ens: string,
   mApp: string,
   chainId: ChainId,
-  providerUrl: string
 ) => [
   'IS_MAPP_ENABLED',
   ens,
   mApp,
   chainId,
-  providerUrl
 ]
 
 export interface UseIsMAppEnabledParams {
   ens: string;
   mApp: string;
   chainId?: ChainId;
-  providerUrl?: string;
 }
 
 export interface UseIsMAppEnabledResult {
@@ -32,17 +29,15 @@ export interface UseIsMAppEnabledResult {
 }
 
 export const useIsMAppEnabled = (params: UseIsMAppEnabledParams): UseIsMAppEnabledResult => {
-  const { justaname, chainId, providerUrl} = useJustaName();
-  const currentChainId = params.chainId || chainId;
-  const currentProviderUrl = params.providerUrl || providerUrl;
+  const { justaname, chainId} = useJustaName();
+  const _chainId = useMemo(() => params.chainId || chainId, [params.chainId, chainId])
   const { records } = useRecords({
-    fullName: params.ens,
-    chainId: currentChainId,
-    providerUrl: currentProviderUrl
+    ens: params.ens,
+    chainId: _chainId,
   })
 
   const query = useQuery({
-    queryKey: buildIsMAppEnabledKey(params.ens, params.mApp,currentChainId,currentProviderUrl),
+    queryKey: buildIsMAppEnabledKey(params.ens, params.mApp,_chainId),
     queryFn: async () => {
       if (!records) {
         return false;
@@ -60,7 +55,7 @@ export const useIsMAppEnabled = (params: UseIsMAppEnabledParams): UseIsMAppEnabl
       }
       return mAppFieldValue.mApps.includes(params.mApp);
     },
-    enabled: Boolean(params.ens) && Boolean(justaname) && params.ens.length > 0 && params.mApp.length > 0 && Boolean(currentChainId) && Boolean(records),
+    enabled: Boolean(params.ens) && Boolean(justaname) && params.ens.length > 0 && params.mApp.length > 0 && Boolean(_chainId) && Boolean(records),
   })
 
   useEffect(() => {

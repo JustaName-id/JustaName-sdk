@@ -3,4 +3,3 @@ export * from './useAccountSubnames';
 export * from './useMounted';
 export * from './useMountedAccount';
 export * from './useAccountEnsNames';
-export * from './useAddressEnsNames';
