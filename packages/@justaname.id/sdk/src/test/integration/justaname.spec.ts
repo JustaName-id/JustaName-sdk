@@ -4,6 +4,7 @@ import { initializeJustaName } from '../helpers/initializeJustaName';
 import { ethers } from 'ethers';
 import * as dotenv from 'dotenv';
 import { ChainId } from '../../lib/types';
+import { InvalidConfigurationException } from '../../lib/errors';
 dotenv.config();
 
 // const invalidApiKey = 'invalid-api-key';
@@ -41,6 +42,15 @@ describe('justaname', () => {
       domain: 'justaname.id',
     });
     expect(challenge).toBeDefined();
+  })
+
+  it('should throw an error if domain and origin are not provided in config or function call', async () => {
+    const justaname = JustaName.init()
+    expect(() => {
+      return justaname.siwe.requestChallenge({
+        address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
+      });
+    }).toThrow(InvalidConfigurationException.missingParameters(['origin','domain']));
   })
 
   it('should sign in be 1 day', async () => {
@@ -520,45 +530,45 @@ describe('justaname', () => {
     expect(testJawEth).toEqual(undefined)
   })
 
-  // it('should revoke subname', async () => {
-  //   const challenge = await justaname.siwe.requestChallenge({
-  //     address: subnameSigner.address,
-  //     chainId: CHAIN_ID,
-  //   });
-  //
-  //   const signature = await subnameSigner.signMessage(challenge.challenge);
-  //
-  //   const response = await justaname.subnames.revokeSubname({
-  //     chainId: CHAIN_ID,
-  //     ensDomain: ENS_DOMAIN,
-  //     username: subnameToBeAdded
-  //   }, {
-  //     xAddress: subnameSigner.address,
-  //     xSignature: signature,
-  //     xMessage: challenge.challenge
-  //   })
-  //
-  //   expect(response).toBeDefined();
-  // })
+  it('should revoke subname', async () => {
+    const challenge = await justaname.siwe.requestChallenge({
+      address: subnameSigner.address,
+      chainId: CHAIN_ID,
+    });
 
-  // it('should revoke subname2', async () => {
-  //   const challenge = await justaname.siwe.requestChallenge({
-  //     address: subnameSigner.address,
-  //     chainId: CHAIN_ID,
-  //   });
-  //
-  //   const signature = await subnameSigner.signMessage(challenge.challenge);
-  //
-  //   const response = await justaname.subnames.revokeSubname({
-  //     chainId: CHAIN_ID,
-  //     ensDomain: ENS_DOMAIN,
-  //     username: subnameToBeAdded + "2"
-  //   }, {
-  //     xAddress: subnameSigner.address,
-  //     xSignature: signature,
-  //     xMessage: challenge.challenge
-  //   })
-  //
-  //   expect(response).toBeDefined();
-  // })
+    const signature = await subnameSigner.signMessage(challenge.challenge);
+
+    const response = await justaname.subnames.revokeSubname({
+      chainId: CHAIN_ID,
+      ensDomain: ENS_DOMAIN,
+      username: subnameToBeAdded
+    }, {
+      xAddress: subnameSigner.address,
+      xSignature: signature,
+      xMessage: challenge.challenge
+    })
+
+    expect(response).toBeDefined();
+  })
+
+  it('should revoke subname2', async () => {
+    const challenge = await justaname.siwe.requestChallenge({
+      address: subnameSigner.address,
+      chainId: CHAIN_ID,
+    });
+
+    const signature = await subnameSigner.signMessage(challenge.challenge);
+
+    const response = await justaname.subnames.revokeSubname({
+      chainId: CHAIN_ID,
+      ensDomain: ENS_DOMAIN,
+      username: subnameToBeAdded + "2"
+    }, {
+      xAddress: subnameSigner.address,
+      xSignature: signature,
+      xMessage: challenge.challenge
+    })
+
+    expect(response).toBeDefined();
+  })
 })

@@ -1,4 +1,4 @@
-import { Coin, ContentHash, SubnameRecordsResponse, Text } from '@justaname.id/sdk';
+import { Coin, ContentHash, SubnameRecordsResponse, Text } from '../../types';
 import { SUPPORTED_SOCIALS, SupportedSocialsNames } from '../../constants';
 import { CoinType, getCoinTypeDetails, SupportedCoins } from '../cointypes';
 

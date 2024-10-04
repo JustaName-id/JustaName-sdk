@@ -60,7 +60,7 @@ export const MAppsDialog: FC<AuthorizeMAppDialogProps> = ({
     if (!mApps) {
       return;
     }
-    Promise.all(mApps.map((mApp) => getRecords({  fullName: mApp })))
+    Promise.all(mApps.map((mApp) => getRecords({  ens: mApp })))
       .then((records) => {
         setMAppsDescription(records.map((record, index) => ({ mApp: mApps[index], description: record?.records?.texts.find((text) => text.key === `mApp_description`)?.value || '' })))
 

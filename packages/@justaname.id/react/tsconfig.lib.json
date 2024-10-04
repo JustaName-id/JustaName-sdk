@@ -12,7 +12,8 @@
       "@nx/react/typings/image.d.ts"
     ],
     "paths": {
-      "@justaname.id/sdk": ["packages/@justaname.id/sdk"]
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"]
     }
   },
   "exclude": [

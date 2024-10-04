@@ -130,3 +130,8 @@ export interface SubnameGetByDomainNameChainIdRoute extends IRoute {
     response: SubnameGetByDomainNameChainIdResponse;
     headers: NonNullable<unknown>;
 }
+
+export interface SubnameGetByDomainNameChainIdParams extends Omit<SubnameGetByDomainNameChainIdRequest, 'chainId' | 'ensDomain' > {
+  ensDomain?: string;
+  chainId?: ChainId;
+}

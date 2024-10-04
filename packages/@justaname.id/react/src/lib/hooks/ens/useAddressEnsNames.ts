@@ -26,6 +26,8 @@ export interface GetEnsNamesForAddressResult {
 export interface UseAddressEnsNamesResult {
   addressEnsNames: GetEnsNamesForAddressResult[];
   isAddressEnsNamesPending: boolean;
+  isAddressEnsNamesFetching: boolean;
+  isAddressEnsNamesLoading: boolean;
   getEnsNamesForAddress: (address: Address) => Promise<GetEnsNamesForAddressResult[]>;
   refetchAddressEnsNames: () => void;
 }
@@ -37,9 +39,9 @@ export interface GetEnsNamesForAddressParams {
 export const useAddressEnsNames = (params?: UseAddressEnsNamesParams): UseAddressEnsNamesResult => {
   const {  ensClient } = useEnsPublicClient()
   const queryClient = useQueryClient()
+  const { chainId } = useJustaName()
+  const _chainId = params?.chainId || chainId
   const { getRecords } = useRecords()
-  const { chainId, providerUrl } = useJustaName()
-  const currentChainId = params?.chainId ? params?.chainId : chainId
 
 
   const getEnsNamesForAddress = async (_params: GetEnsNamesForAddressParams): Promise<GetEnsNamesForAddressResult[]> => {
@@ -59,9 +61,8 @@ export const useAddressEnsNames = (params?: UseAddressEnsNamesParams): UseAddres
           .filter((name) => !!name?.name)
           .map(async (name) => {
             const record = await getRecords({
-              fullName: name?.name || "",
-              chainId: currentChainId,
-              providerUrl: providerUrl
+              ens: name?.name || "",
+              chainId: _chainId,
             });
             return {
               ...record,
@@ -77,16 +78,16 @@ export const useAddressEnsNames = (params?: UseAddressEnsNamesParams): UseAddres
 
 
   const query = useQuery({
-    queryKey: buildAddressEnsNames(params?.address || "", currentChainId),
+    queryKey: buildAddressEnsNames(params?.address || "", _chainId),
     queryFn: () => getEnsNamesForAddress({
       address: params?.address
     }),
-    enabled: Boolean(params?.address) && Boolean(currentChainId) ,
+    enabled: Boolean(params?.address) && Boolean(_chainId) ,
   })
 
   const getEnsNamesForAddressInternal = async (address: Address) => {
     const names = await getEnsNamesForAddress({ address })
-    queryClient.setQueryData(buildAddressEnsNames(address, currentChainId), names)
+    queryClient.setQueryData(buildAddressEnsNames(address, _chainId), names)
     return names
   }
 
@@ -94,6 +95,8 @@ export const useAddressEnsNames = (params?: UseAddressEnsNamesParams): UseAddres
     addressEnsNames: query.data ?? [],
     getEnsNamesForAddress: getEnsNamesForAddressInternal,
     isAddressEnsNamesPending: query.isPending,
+    isAddressEnsNamesFetching: query.isFetching,
+    isAddressEnsNamesLoading: query.isLoading,
     refetchAddressEnsNames: query.refetch,
   }
 }

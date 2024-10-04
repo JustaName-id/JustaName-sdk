@@ -1,4 +1,3 @@
-import { ChainId } from '@justaname.id/sdk';
 import { useWalletClient } from 'wagmi';
 import { WalletClient, Transport, Account, Chain, RpcSchema } from 'viem';
 import { addEnsContracts } from '@ensdomains/ensjs';
@@ -9,11 +8,9 @@ export interface UseEnsWalletClientResult {
   isEnsWalletClientPending: boolean
 }
 
-export interface UseEnsWalletClientParams {
-  chainId?: ChainId
-}
+export interface UseEnsWalletClientParams {}
 
-export const useEnsWalletClient = (props?: UseEnsWalletClientParams): UseEnsWalletClientResult => {
+export const useEnsWalletClient = (params?: UseEnsWalletClientParams): UseEnsWalletClientResult => {
   const query = useWalletClient()
 
   const transformWalletToEnsWallet = (wallet: WalletClient<Transport, Chain, Account, RpcSchema> | undefined): WalletClient<Transport, CheckedChainWithEns<Chain>, Account, RpcSchema> | undefined => {

@@ -41,7 +41,7 @@ export const Example = () => {
         <RainbowKitProvider>
           <JustSignInProvider
             config={JustSignInConfig}
-            plugins={[JustVerifiedPlugin(['email','twitter','github', 'discord','telegram'], "http://localhost:3009/verifications/v1")]}
+            plugins={[JustVerifiedPlugin(['email','twitter','github', 'discord','telegram'], "https://api-staging.justaname.id/verifications/v1")]}
           >
             <JustSignInButton>
               <ConnectButton />

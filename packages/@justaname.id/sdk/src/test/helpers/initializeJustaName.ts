@@ -19,16 +19,21 @@ export const initializeJustaName =  (apiKey: string) => {
     config:{
       domain: DOMAIN,
       origin: URI,
-      chainId: CHAIN_ID,
-      subnameChallenge:{
-        ttl: VALID_TTL,
-      },
-      signIn:{
-        ttl: VALID_TTL
-      }
+      subnameChallengeTtl: VALID_TTL,
+      signInTtl: VALID_TTL
     },
-    ensDomain: ENS_DOMAIN,
+    ensDomains: [
+      {
+        ensDomain: ENS_DOMAIN,
+        chainId: CHAIN_ID
+      }
+    ],
     apiKey: apiKey,
-    providerUrl: PROVIDER_URL
+    networks: [
+      {
+        chainId: CHAIN_ID,
+        providerUrl: PROVIDER_URL
+      }
+    ]
   });
 }

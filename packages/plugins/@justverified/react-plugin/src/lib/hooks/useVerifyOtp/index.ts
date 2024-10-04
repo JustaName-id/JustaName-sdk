@@ -1,11 +1,9 @@
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { EmailEthereumEip712Signature } from '../../types/credentials/email.credential';
+import { EmailEthereumEip712Signature } from '../../types/credentials/email-credential';
+import { JustVerifiedResponse } from '../../types';
 
-export interface VerifyOtpResponse {
-  dataKey: string;
-  verifiedCredential: EmailEthereumEip712Signature;
-}
+export type VerifyOtpResponse = JustVerifiedResponse<EmailEthereumEip712Signature>
 
 export interface VerifyOtpParams {
   state: string;

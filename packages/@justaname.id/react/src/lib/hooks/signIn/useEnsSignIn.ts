@@ -1,62 +1,54 @@
 "use client";
 
+import { useMemo } from 'react';
 import { useMountedAccount } from '../account';
-import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useSignMessage } from 'wagmi';
-import { buildEnsAuthKey } from './useEnsAuth';
+import { RequestSignInParams } from '@justaname.id/sdk';
+import { useEnsAuth } from './useEnsAuth';
 
+export type UseEnsSignInFunctionParams = Omit<RequestSignInParams, "nonce" |"address">
 
-export interface EnsSignInParams {
-  ens: string;
-  backendUrl?: string;
-  signinNonceRoute?: string;
-  signinRoute?: string;
-}
-
-export interface UseEnsSignInParams {
+export interface UseEnsSignInParams extends Omit<UseEnsSignInFunctionParams, "ens"> {
   backendUrl?: string;
   signinNonceRoute?: string;
   signinRoute?: string;
 }
 
 export interface UseEnsSignInResult {
-  signIn:  UseMutateAsyncFunction<string, Error, EnsSignInParams, unknown>,
+  signIn:  UseMutateAsyncFunction<string, Error, UseEnsSignInFunctionParams, unknown>,
   isSignInPending: boolean;
 }
 
-/**
- * Custom hook to request a challenge for a ens and obtain a signature proving ownership of an address.
- *
- * @returns {UseEnsSignInResult} An object containing the function to initiate the signing process (`ensSignature`)
- * and a boolean indicating if the signature operation is pending (`ensSignaturePending`).
- */
-
-export const useEnsSignIn = (params: UseEnsSignInParams = {}): UseEnsSignInResult => {
+export const useEnsSignIn = (params?: UseEnsSignInParams): UseEnsSignInResult => {
   const { justaname, backendUrl, routes} = useJustaName();
   const { address } = useMountedAccount();
-  const queryClient = useQueryClient()
   const { signMessageAsync } = useSignMessage()
+  const _backendUrl = useMemo(() => params?.backendUrl || backendUrl || "", [backendUrl, params?.backendUrl]);
+  const _signinNonceRoute = useMemo(() => params?.signinNonceRoute || routes.signinNonceRoute, [routes.signinNonceRoute, params?.signinNonceRoute]);
+  const _signinRoute = useMemo(() => params?.signinRoute || routes.signinRoute, [routes.signinRoute, params?.signinRoute]);
+  const nonceEndpoint = useMemo(() => _backendUrl + _signinNonceRoute, [_backendUrl, _signinNonceRoute]);
+  const signinEndpoint = useMemo(() => _backendUrl + _signinRoute, [_backendUrl, _signinRoute]);
+  const { refreshEnsAuth } = useEnsAuth({
+    backendUrl: _backendUrl
+  })
 
   const mutation = useMutation({
-    mutationFn: async (_params: EnsSignInParams) => {
+    mutationFn: async (_params: UseEnsSignInFunctionParams) => {
       if (!address) {
         throw new Error('No address found');
       }
 
-      const currentBackendUrl = _params.backendUrl || params.backendUrl || backendUrl;
-      const currentSigninNonceRoute = _params.signinNonceRoute || params.signinNonceRoute || routes.signinNonceRoute;
-      const currentSigninRoute = _params.signinRoute || params.signinRoute || routes.signinRoute;
-
-      const nonceResponse = await fetch(
-          currentBackendUrl + currentSigninNonceRoute, {
+      const nonceResponse = await fetch(nonceEndpoint, {
         credentials: 'include',
       });
 
       const message = justaname.signIn.requestSignIn({
+        ...params,
+        ..._params,
         address,
-        ens: _params.ens,
-        nonce: await nonceResponse.text()
+        nonce: await nonceResponse.text(),
       })
 
       const signature = await signMessageAsync({
@@ -64,9 +56,8 @@ export const useEnsSignIn = (params: UseEnsSignInParams = {}): UseEnsSignInResul
         account: address
       })
 
-
       const response = await fetch(
-          currentBackendUrl + currentSigninRoute,
+        signinEndpoint,
         {
         method: 'POST',
         headers: {
@@ -79,9 +70,7 @@ export const useEnsSignIn = (params: UseEnsSignInParams = {}): UseEnsSignInResul
         credentials: 'include'
       });
 
-      queryClient.invalidateQueries({
-        queryKey: buildEnsAuthKey(currentBackendUrl || "")
-      })
+      refreshEnsAuth()
 
       return response.text();
     },
@@ -92,4 +81,3 @@ export const useEnsSignIn = (params: UseEnsSignInParams = {}): UseEnsSignInResul
     isSignInPending: mutation.isPending
   }
 }
-

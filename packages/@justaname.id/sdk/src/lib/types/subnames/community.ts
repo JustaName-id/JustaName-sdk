@@ -197,3 +197,7 @@ export interface SubnameGetAllCommunitiesChainIdRoute extends IRoute {
   response: SubnameGetAllCommunitiesChainIdResponse;
   headers: NonNullable<unknown>;
 }
+
+export interface SubnameGetAllCommunitiesChainIdParams extends Omit<SubnameGetAllCommunitiesChainIdRequest, 'chainId'> {
+  chainId?: ChainId
+}

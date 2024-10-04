@@ -1,6 +1,6 @@
 import { useMountedAccount } from './useMountedAccount';
 import { ChainId, SanitizedRecords, SubnameRecordsResponse } from '@justaname.id/sdk';
-import { useAddressEnsNames } from './useAddressEnsNames';
+import { useAddressEnsNames } from '../ens';
 
 export interface UseAccountEnsNamesParams {
   chainId?: ChainId
@@ -13,12 +13,20 @@ export interface UseAccountEnsNamesResult {
     name: string,
   }[];
   isAccountEnsNamesPending: boolean;
+  isAccountEnsNamesFetching: boolean;
+  isAccountEnsNamesLoading: boolean;
   refetchAccountEnsNames: () => void;
 }
 
 export const useAccountEnsNames = (props?: UseAccountEnsNamesParams): UseAccountEnsNamesResult => {
   const { address } = useMountedAccount()
-  const { addressEnsNames , isAddressEnsNamesPending, refetchAddressEnsNames} = useAddressEnsNames({
+  const {
+    addressEnsNames ,
+    isAddressEnsNamesPending,
+    isAddressEnsNamesFetching,
+    isAddressEnsNamesLoading,
+    refetchAddressEnsNames
+  } = useAddressEnsNames({
     address,
     chainId: props?.chainId
   })
@@ -26,6 +34,8 @@ export const useAccountEnsNames = (props?: UseAccountEnsNamesParams): UseAccount
   return {
     accountEnsNames: addressEnsNames,
     isAccountEnsNamesPending: isAddressEnsNamesPending,
+    isAccountEnsNamesLoading: isAddressEnsNamesLoading,
+    isAccountEnsNamesFetching: isAddressEnsNamesFetching,
     refetchAccountEnsNames: refetchAddressEnsNames
   }
 }

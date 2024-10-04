@@ -31,6 +31,7 @@ loadEnv();
 export function getBaseUrl() {
   return BASE_URL;
 }
+
 /**
  * The instance of axios with the base URL of JustaName API.
  */

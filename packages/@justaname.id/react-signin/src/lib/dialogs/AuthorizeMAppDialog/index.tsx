@@ -28,10 +28,10 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
                                                 }) => {
   const [openOnConnect] = useState(open);
   const { records: mAppRecords, isRecordsPending: isMAppRecordsPending } = useRecords({
-    fullName: mApp || ''
+    ens: mApp || ''
   });
   const { records } = useRecords({
-    fullName: connectedEns || ''
+    ens: connectedEns || ''
   })
   const { canEnableMApps, isCanEnableMAppsPending } = useCanEnableMApps({
     ens: connectedEns || ''

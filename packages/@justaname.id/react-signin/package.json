@@ -7,9 +7,9 @@
     "@justaname.id/react": "0.3.94",
     "@justaname.id/react-ui": "0.0.27",
     "@justaname.id/sdk": "0.2.91",
+    "lodash": "4.17.21",
     "styled-components": "^6.1.12",
-    "yup": "0.32.11",
-    "lodash": "4.17.21"
+    "yup": "0.32.11"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^5.x",

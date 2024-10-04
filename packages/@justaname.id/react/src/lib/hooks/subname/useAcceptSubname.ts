@@ -1,79 +1,55 @@
 'use client';
 
 import {
-  Address,
-  TextRecord,
   SubnameAcceptResponse,
-  ChainId,
   SubnameAcceptParams,
 } from '@justaname.id/sdk';
-import { useMutation } from '@tanstack/react-query';
+import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
 import { useAccountInvitations } from '../account/useAccountInvitations';
+import { splitDomain } from '../../helpers';
+import { useMemo } from 'react';
 
-export interface BaseAcceptSubnameRequest {
-  username: string;
-
-  ensDomain: string;
-
-  chainId: ChainId;
-
-  addresses?: Address[];
-
-  text?: TextRecord[];
-
-  contentHash?: string;
+export interface UseAcceptSubnameFunctionParams extends Omit<SubnameAcceptParams, 'ensDomain' | 'username'> {
+  ens: string;
 }
 
-/**
- *  Interface defining the parameters needed to accept a subname.
- *
- *  @typedef UseAcceptSubname
- *  @type {object}
- *  @property {function} acceptSubname - The function to accept a subname.
- *  @property {boolean} isAcceptSubnamePending - Indicates if the mutation is currently pending.
- */
-export interface UseAcceptSubname {
-  acceptSubname: (
-    params: SubnameAcceptParams
-  ) => Promise<SubnameAcceptResponse>;
+export type UseAcceptSubnameParams = Omit<UseAcceptSubnameFunctionParams, "ens">
+
+export interface UseAcceptSubnameResult {
+  acceptSubname: UseMutateAsyncFunction<SubnameAcceptResponse, Error, UseAcceptSubnameFunctionParams>;
   isAcceptSubnamePending: boolean;
 }
-/**
- * Custom hook for performing a mutation to accept a subname.
- *
- * @returns {UseAcceptSubname} An object containing the `acceptSubname` async function to initiate the subname accept, and a boolean `acceptSubnamePending` indicating the mutation's pending state.
- */
-export const useAcceptSubname = (): UseAcceptSubname => {
-  const { justaname, chainId, ensDomain } = useJustaName();
+
+export const useAcceptSubname = (params?: UseAcceptSubnameParams): UseAcceptSubnameResult => {
+  const { justaname, chainId } = useJustaName();
   const { address } = useMountedAccount();
   const { refetchInvitations } = useAccountInvitations();
   const { getSignature } = useSubnameSignature();
   const { refetchAccountSubnames } = useAccountSubnames();
+  const _chainId = useMemo(() => params?.chainId || chainId, [params?.chainId, chainId]);
 
-  const mutate = useMutation<SubnameAcceptResponse, Error, SubnameAcceptParams>(
+  const mutate = useMutation(
     {
-      mutationFn: async (params: SubnameAcceptParams) => {
+      mutationFn: async (_params: UseAcceptSubnameFunctionParams) => {
         if (!address) {
           throw new Error('No address found');
         }
 
-        const chainIdToUse = params.chainId || chainId;
-        const ensDomainToUse = params.ensDomain || ensDomain;
-
+        const _ens = _params.ens
+        const [_username, _ensDomain] = splitDomain(_ens);
         const signature = await getSignature();
-
         const accepted = await justaname.subnames.acceptSubname(
           {
-            addresses: params.addresses,
-            chainId: chainIdToUse,
-            contentHash: params.contentHash,
-            ensDomain: ensDomainToUse,
-            text: params.text,
-            username: params.username,
+            addresses: _params.addresses,
+            chainId: _params.chainId || _chainId,
+            contentHash: _params.contentHash,
+            ensDomain: _ensDomain,
+            text: _params.text,
+            username: _username,
           },
           {
             xAddress: address,
@@ -91,9 +67,7 @@ export const useAcceptSubname = (): UseAcceptSubname => {
   );
 
   return {
-    acceptSubname: mutate.mutateAsync as (
-      params: SubnameAcceptParams
-    ) => Promise<SubnameAcceptResponse>,
+    acceptSubname: mutate.mutateAsync,
     isAcceptSubnamePending: mutate.isPending,
   };
 };

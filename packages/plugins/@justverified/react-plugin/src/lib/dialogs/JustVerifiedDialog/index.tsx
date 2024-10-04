@@ -4,11 +4,10 @@ import { useEnsAuth, useEnsSignIn, useEnsSignOut, useRecords } from '@justaname.
 import { Badge, Flex, H2, JustaNameLogoIcon, SPAN } from '@justaname.id/react-ui';
 import { SelectCredentialItem } from '../../components/SelectCredentialItem';
 import {
-  Credentials, DiscordEthereumEip712Signature, GithubEthereumEip712Signature,
-  JustVerifiedResponse, TelegramEthereumEip712Signature,
+  Credentials, DiscordEthereumEip712Signature, GithubEthereumEip712Signature, TelegramEthereumEip712Signature,
   TwitterEthereumEip712Signature
 } from '../../types';
-import { usePreviousState } from '../../hooks';
+import { usePreviousState, useSocialVerification } from '../../hooks';
 import { EmailCredentialItem } from '../../components/EmailCredentialItem';
 import { useVerifyRecords } from '../../hooks/useVerifyRecords';
 import { ChainId } from '@justaname.id/sdk';
@@ -44,6 +43,7 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
     currentEnsRoute:"/auth/current"
   })
   const { signIn, isSignInPending} = useEnsSignIn({
+    statement: "I want to verify my identity with JustVerified",
     backendUrl: verificationBackendUrl,
     signinNonceRoute:"/auth/nonce",
     signinRoute:"/auth/signin"
@@ -63,107 +63,16 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
     chainId
   })
 
-  const initiateVerification = async (credential: Credentials) => {
-    const eventSource = new EventSource(
-      verificationBackendUrl + '/credentials/socials/'+ credential,
-      { withCredentials: true }
-    );
 
-    eventSource.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data);
-        if (data.redirectUrl) {
-          setSelectedCredential(credential);
-          const newWindow = window.open(data.redirectUrl, '_blank');
-
-          const intervalId = setInterval(() => {
-            if (newWindow?.closed) {
-              clearInterval(intervalId);
-              setSelectedCredential(undefined);
-            }
-          }, 500);
-        } else if (data.result) {
-          const result = data.result as JustVerifiedResponse;
-          const credentialKey = result.dataKey;
-          const credentialValue = result.verifiableCredential
-          const socialKey = credentialKey.split('_'+mApp)[0];
-          let socialValue = ''
-          switch(credential) {
-            case 'twitter': {
-              const twitterCredential = data.result as JustVerifiedResponse<TwitterEthereumEip712Signature>;
-              socialValue = twitterCredential.verifiableCredential.credentialSubject.username
-              break;
-            }
-            case 'github': {
-              const githubCredential = data.result as JustVerifiedResponse<GithubEthereumEip712Signature>;
-              socialValue = githubCredential.verifiableCredential.credentialSubject.username
-              break;
-            }
-            case 'telegram': {
-              const telegramCredential = data.result as JustVerifiedResponse<TelegramEthereumEip712Signature>;
-              socialValue = telegramCredential.verifiableCredential.credentialSubject.username
-              break;
-            }
-            case 'discord': {
-              const discordCredential = data.result as JustVerifiedResponse<DiscordEthereumEip712Signature>;
-              socialValue = discordCredential.verifiableCredential.credentialSubject.username
-              break;
-            }
-            default: {
-              socialValue = '';
-            }
-          }
-
-          if(mAppsAlreadyEnabled?.includes(mApp)){
-            updateRecords({
-              text: [
-                {
-                  key: socialKey,
-                  value: socialValue
-                }
-              ]
-            }).then(() => {
-              refetchRecords()
-              refetchVerifyRecords()
-            })
-          }
-          else {
-            updateRecords({
-              text: [
-                {
-                  key: socialKey,
-                  value: socialValue
-                },
-                {
-                  key: credentialKey,
-                  value: JSON.stringify(credentialValue)
-                }
-              ]
-            }).then(() => {
-              refetchRecords()
-              refetchVerifyRecords()
-            })
-          }
-
-
-          setSelectedCredential(undefined);
-          eventSource.close();
-        } else if (data.error) {
-          setSelectedCredential(undefined);
-          eventSource.close();
-        }
-      } catch (error) {
-        setSelectedCredential(undefined);
-      }
-    };
-
-    eventSource.onerror = (error) => {
+  const { verifySocial, isVerifyingSocialPending } = useSocialVerification({
+    onWindowClose: () => {
       setSelectedCredential(undefined);
-      refetchRecords();
-      refetchVerifyRecords();
-      eventSource.close();
-    };
-  };
+    },
+    onError: () => {
+      setSelectedCredential(undefined);
+    },
+    verificationBackendUrl
+  })
 
   useEffect(() => {
     if(previousSelectedCredential && !selectedCredential){
@@ -219,6 +128,7 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
   useEffect(() => {
     if (!connectedToVerification && !isSignInPending && !isEnsAuthPending && !isSignOutPending) {
       handleOpenDialog(false);
+      setHasAttemptedSignIn(false);
     }
   }, [connectedToVerification, isSignInPending, isEnsAuthPending, isSignOutPending]);
 
@@ -308,9 +218,73 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                       selectedCredential={selectedCredential}
                       credential={credential}
                       onClick={() => {
-                        initiateVerification(credential)
+                        verifySocial({
+                          credential: credential as Credentials
+                        }).then((value)=>{
+                          if(!value){
+                            return
+                          }
+                          const credentialKey = value.dataKey;
+                          const credentialValue = value.verifiableCredential
+                          const socialKey = credentialKey.split('_'+mApp)[0];
+                          let socialValue = ''
+                          switch(credential) {
+                            case 'twitter': {
+                              socialValue = (credentialValue as TwitterEthereumEip712Signature).credentialSubject.username
+                              break;
+                            }
+                            case 'github': {
+                              socialValue = (credentialValue as GithubEthereumEip712Signature).credentialSubject.username
+                              break;
+                            }
+                            case 'telegram': {
+                              socialValue = (credentialValue as TelegramEthereumEip712Signature).credentialSubject.username
+                              break;
+                            }
+                            case 'discord': {
+                              socialValue = (credentialValue as DiscordEthereumEip712Signature).credentialSubject.username
+                              break;
+                            }
+                            default: {
+                              socialValue = '';
+                            }
+                          }
+
+                          if(mAppsAlreadyEnabled?.includes(mApp)){
+                            updateRecords({
+                              text: [
+                                {
+                                  key: socialKey,
+                                  value: socialValue
+                                }
+                              ]
+                            }).then(() => {
+                              refetchRecords()
+                              refetchVerifyRecords()
+                            })
+                          }
+                          else {
+                            updateRecords({
+                              text: [
+                                {
+                                  key: socialKey,
+                                  value: socialValue
+                                },
+                                {
+                                  key: credentialKey,
+                                  value: JSON.stringify(credentialValue)
+                                }
+                              ]
+                            }).then(() => {
+                              refetchRecords()
+                              refetchVerifyRecords()
+                            })
+                          }
+                        }).catch((error)=> {
+                          setSelectedCredential(undefined)
+                        })
                       }}
-                      disabled={selectedCredential !== undefined || isVerifiedRecordsPending}
+                      disabled={selectedCredential !== undefined || isVerifiedRecordsPending || isVerifyingSocialPending}
                       credentialValue={verifiedRecords?.[credential]}
 
                     />

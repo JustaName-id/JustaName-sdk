@@ -1,9 +1,9 @@
 import { EthereumEip712Signature2021 } from '../ethereumEip712Signature';
-import { GithubEthereumEip712Signature } from './github.credential';
-import { TelegramEthereumEip712Signature } from './telegram.credential';
-import { TwitterEthereumEip712Signature } from './twitter.credential';
-import { DiscordEthereumEip712Signature } from './discord.credential';
-import { EmailEthereumEip712Signature } from './email.credential';
+import { GithubEthereumEip712Signature } from './github-credential';
+import { TelegramEthereumEip712Signature } from './telegram-credential';
+import { TwitterEthereumEip712Signature } from './twitter-credential';
+import { DiscordEthereumEip712Signature } from './discord-credential';
+import { EmailEthereumEip712Signature } from './email-credential';
 export type Credentials = 'github' | 'twitter' | 'discord' | 'telegram' | 'email'
 
 export type CredentialMetadataKey = 'com.github' | 'com.twitter' | 'com.discord' | 'org.telegram' | 'email'
@@ -34,10 +34,10 @@ export type CredentialMetadataValue = {
 
 
 
-export * from './discord.credential'
-export * from './github.credential'
-export * from './telegram.credential'
-export * from './twitter.credential'
+export * from './discord-credential'
+export * from './github-credential'
+export * from './telegram-credential'
+export * from './twitter-credential'
 
 export interface JustVerifiedResponse<T extends EthereumEip712Signature2021 = EthereumEip712Signature2021> {
   dataKey: string;

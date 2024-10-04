@@ -4,13 +4,14 @@ import { ChainId, RevokeMAppPermissionResponse } from '@justaname.id/sdk';
 import { useSignMessage } from 'wagmi';
 import { useAccountSubnames, useMountedAccount } from '../account';
 import { useRecords } from '../records';
+import { useMemo } from 'react';
 
 export interface UseRequestRevokeMAppPermissionResult {
-  revokeMAppPermission: UseMutateAsyncFunction<RevokeMAppPermissionResponse, Error, RevokeMAppPermissionRequest, unknown>;
+  revokeMAppPermission: UseMutateAsyncFunction<RevokeMAppPermissionResponse, Error, UseRevokeMAppPermissionFunctionParams, unknown>;
   isRevokeMAppPermissionPending: boolean;
 }
 
-export interface RevokeMAppPermissionRequest {
+export interface UseRevokeMAppPermissionFunctionParams {
   ens: string
 }
 
@@ -20,10 +21,9 @@ export interface UseRevokeMAppPermissionParams {
   providerUrl?: string
 }
 
-export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): UseRequestRevokeMAppPermissionResult => {
-  const { justaname, chainId, providerUrl } = useJustaName()
-  const currentChainId = props.chainId || chainId
-  const currentProviderUrl = props.providerUrl || providerUrl
+export const useRevokeMAppPermission = (params: UseRevokeMAppPermissionParams): UseRequestRevokeMAppPermissionResult => {
+  const { justaname, chainId } = useJustaName()
+  const _chainId = useMemo(() => params.chainId || chainId, [params.chainId, chainId])
   const { signMessageAsync } = useSignMessage()
   const { address} = useMountedAccount()
   const { refetchAccountSubnames } = useAccountSubnames()
@@ -31,19 +31,19 @@ export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): U
   const mutate = useMutation<
     RevokeMAppPermissionResponse,
     Error,
-    RevokeMAppPermissionRequest
+    UseRevokeMAppPermissionFunctionParams
   >({
     mutationFn: async (
-      params:RevokeMAppPermissionRequest
+      _params:UseRevokeMAppPermissionFunctionParams
     ) => {
       if (!address) {
         throw new Error('Wallet not connected')
       }
       const challengeResponse = await justaname.mApps.requestRevokeMAppPermissionChallenge({
-        subname: params.ens,
+        subname: _params.ens,
         address: address,
-        mApp: props.mApp,
-        chainId: currentChainId
+        mApp: params.mApp,
+        chainId: _chainId
       })
 
       const signature = await signMessageAsync({
@@ -59,9 +59,8 @@ export const useRevokeMAppPermission = (props: UseRevokeMAppPermissionParams): U
 
       refetchAccountSubnames()
       getRecords({
-        fullName: params.ens,
-        chainId: currentChainId,
-        providerUrl: currentProviderUrl
+        ens: _params.ens,
+        chainId: _chainId,
       }, true)
 
       return response

@@ -74,3 +74,7 @@ export interface SubnameSearchRoute extends IRoute {
   response: SubnameSearchResponse;
   headers: NonNullable<unknown>;
 }
+
+export interface SubnameSearchParams extends Omit<SubnameSearchRequest, 'chainId'> {
+  chainId?: ChainId;
+}

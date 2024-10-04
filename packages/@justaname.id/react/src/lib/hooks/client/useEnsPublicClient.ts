@@ -4,6 +4,7 @@ import { ChainId } from '@justaname.id/sdk';
 import { createPublicClient, http } from 'viem';
 import { addEnsContracts } from '@ensdomains/ensjs';
 import { mainnet, sepolia } from 'viem/chains';
+import { useMemo } from 'react';
 
 export const getEnsPublicClient = (providerUrl: string, chainId: ChainId) => {
   return createPublicClient({
@@ -13,11 +14,9 @@ export const getEnsPublicClient = (providerUrl: string, chainId: ChainId) => {
 
 }
 export const buildEnsPublicClientKey = (
-  providerUrl: string,
   chainId: ChainId
 ) => [
   'CLIENT',
-  providerUrl,
   chainId
 ]
 
@@ -27,18 +26,19 @@ export interface UseEnsPublicClientResult {
 }
 
 export interface UseEnsPublicClientParams {
-  providerUrl?: string
   chainId?: ChainId
 }
 
-export const useEnsPublicClient = (props?: UseEnsPublicClientParams): UseEnsPublicClientResult => {
-  const { providerUrl, chainId} = useJustaName()
-  const currentChainId = props?.chainId || chainId
-  const currentProviderUrl = props?.providerUrl || providerUrl
+export const useEnsPublicClient = (params?: UseEnsPublicClientParams): UseEnsPublicClientResult => {
+  const { networks, chainId} = useJustaName()
+  const _chainId = useMemo(() => params?.chainId || chainId, [params?.chainId, chainId])
+  const _network = useMemo(() => networks.find((network) => network.chainId === _chainId), [networks, _chainId])
+
+  const _providerUrl = useMemo(() => _network?.providerUrl || "", [_network])
 
   const query = useQuery({
-    queryKey: buildEnsPublicClientKey(currentProviderUrl, currentChainId),
-    queryFn: () => getEnsPublicClient(currentProviderUrl, currentChainId)
+    queryKey: buildEnsPublicClientKey(_chainId),
+    queryFn: () => getEnsPublicClient(_providerUrl, _chainId)
   })
 
   return {
