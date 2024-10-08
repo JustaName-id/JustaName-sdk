@@ -1,22 +1,16 @@
 import {
-  AddMAppPermissionParams,
-  AddMAppPermissionResponse,
-  AppendMAppFieldParams,
-  AppendMAppFieldResponse,
+  AddMAppPermissionRoute,
+  AppendMAppFieldRoute,
   ChainId,
-  MApp, NetworksWithProvider,
-  RequestAddMAppPermissionChallengeParams,
-  RequestAddMAppPermissionChallengeResponse,
-  RequestAppendMAppFieldChallengeParams,
-  RequestAppendMAppFieldChallengeResponse,
-  RequestRevokeMAppPermissionChallengeParams,
-  RequestRevokeMAppPermissionChallengeResponse,
-  RevokeMAppPermissionParams,
-  RevokeMAppPermissionResponse,
-  SiweConfig,
-  SIWEHeaders
+  MApp,
+  NetworksWithProvider,
+  RequestAddMAppPermissionChallengeRoute,
+  RequestAppendMAppFieldChallengeRoute,
+  RequestRevokeMAppPermissionChallengeRoute,
+  RevokeMAppPermissionRoute,
+  SiweConfig
 } from '../../types';
-import { assertRestCall, restCall } from '../../api/rest';
+import { assertRestCall } from '../../api/rest';
 import { Subnames } from '../subnames';
 
 export interface MAppsParams {
@@ -53,8 +47,8 @@ export class MApps {
 
     const mApp = params.mApp;
     const ens = params.ens;
-    const records = await this.subnames.getRecordsByFullName({
-      fullName: ens,
+    const records = await this.subnames.getRecords({
+      ens,
       chainId,
       providerUrl: network.providerUrl
     });
@@ -67,7 +61,7 @@ export class MApps {
       return false;
     }
 
-    const mAppField = records.texts.find((text) => text.key === 'mApps');
+    const mAppField = records.records.texts.find((text) => text.key === 'mApps');
 
     if (!mAppField) {
       return false;
@@ -88,15 +82,15 @@ export class MApps {
   }): Promise<boolean> {
     const chainId = params.chainId || this.chainId;
     const ens = params.ens;
-    const records = await this.subnames.getRecordsByFullName({
-      fullName: ens,
+    const records = await this.subnames.getRecords({
+      ens,
       chainId
     });
 
     return records.isJAN;
   }
 
-  requestAddMAppPermissionChallenge(params: RequestAddMAppPermissionChallengeParams): Promise<RequestAddMAppPermissionChallengeResponse> {
+  requestAddMAppPermissionChallenge(params: RequestAddMAppPermissionChallengeRoute['params']): Promise<RequestAddMAppPermissionChallengeRoute['response']> {
     const { chainId, ttl, origin, domain,...rest } = params;
 
     const _chainId = chainId || this.chainId;
@@ -112,7 +106,7 @@ export class MApps {
     })(['ttl','chainId','origin','domain'])
   }
 
-  requestAppendMAppFieldChallenge(params: RequestAppendMAppFieldChallengeParams): Promise<RequestAppendMAppFieldChallengeResponse> {
+  requestAppendMAppFieldChallenge(params: RequestAppendMAppFieldChallengeRoute['params']): Promise<RequestAppendMAppFieldChallengeRoute['response']> {
     const { chainId, ttl, origin, domain,...rest } = params;
     const _chainId = chainId || this.chainId;
     const _ttl = ttl || 120000;
@@ -128,7 +122,7 @@ export class MApps {
     })(['ttl','chainId','origin','domain'])
   }
 
-  requestRevokeMAppPermissionChallenge(params: RequestRevokeMAppPermissionChallengeParams): Promise<RequestRevokeMAppPermissionChallengeResponse> {
+  requestRevokeMAppPermissionChallenge(params: RequestRevokeMAppPermissionChallengeRoute['params']): Promise<RequestRevokeMAppPermissionChallengeRoute['response']> {
     const { chainId, ttl, origin, domain,...rest } = params;
     const _chainId = chainId || this.chainId;
     const _ttl = ttl || 120000;
@@ -144,26 +138,30 @@ export class MApps {
     })(['ttl','chainId','origin','domain'])
   }
 
-  addMAppPermission(params: AddMAppPermissionParams): Promise<AddMAppPermissionResponse> {
+  addMAppPermission(
+    params: AddMAppPermissionRoute['params'],
+  ): Promise<AddMAppPermissionRoute['response']> {
     return assertRestCall('MAPP_ADD_PERMISSION_ROUTE', 'POST', {
       ...params
     })(['message','address','signature'])
   }
 
   appendMAppField(
-    params: AppendMAppFieldParams,
-    headers: SIWEHeaders
-  ): Promise<AppendMAppFieldResponse> {
-    return restCall('MAPP_APPEND_FIELD_ROUTE', 'POST', {
+    params: AppendMAppFieldRoute['params'],
+    headers: AppendMAppFieldRoute['headers']
+  ): Promise<AppendMAppFieldRoute['response']> {
+    return assertRestCall('MAPP_APPEND_FIELD_ROUTE', 'POST', {
       ...params
     }, {
       ...headers
-    });
+    })(['subname','fields'],['xAddress','xMessage','xSignature'])
   }
 
-  revokeMAppPermission(params: RevokeMAppPermissionParams): Promise<RevokeMAppPermissionResponse> {
-    return restCall('MAPP_REVOKE_PERMISSION_ROUTE', 'POST', {
+  revokeMAppPermission(
+    params: RevokeMAppPermissionRoute['params']
+  ): Promise<RevokeMAppPermissionRoute['response']> {
+    return assertRestCall('MAPP_REVOKE_PERMISSION_ROUTE', 'POST', {
       ...params
-    });
+    })(['message','address','signature'])
   }
 }

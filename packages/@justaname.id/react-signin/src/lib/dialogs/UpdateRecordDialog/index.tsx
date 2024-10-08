@@ -1,11 +1,12 @@
-import { FC, Fragment, useEffect, useMemo, useState } from 'react';
-import { UseSubnameUpdateFunctionParams, useEnsAuth, useRecords, useUpdateChanges, useUpdateSubname } from '@justaname.id/react';
+import { FC, Fragment, useEffect, useState } from 'react';
+import { UseSubnameUpdateFunctionParams, useRecords, useUpdateChanges, useUpdateSubname } from '@justaname.id/react';
 import { Badge, Button, Carousel, DialogClose, Flex, H2, JustaNameLogoIcon, SPAN } from '@justaname.id/react-ui';
 import { DefaultDialog } from '../DefaultDialog';
 import { Loading } from '../../components/Loading';
 import { UpdateRecordItem } from '../../components/UpdateRecordItem';
 
 export interface UpdateRecordDialogProps extends Omit<UseSubnameUpdateFunctionParams, 'ens' | 'contentHash'> {
+  ens?: string | undefined;
   logo?: string;
   contentHash?: {
     protocolType: string;
@@ -21,29 +22,22 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                                                                   contentHash: initialContentHash,
                                                                   open,
                                                                   handleOpen,
-  logo
+  logo,
+  ens
                                                                 }) => {
-  const { connectedEns } = useEnsAuth();
   const [text, setText] = useState(initialText);
   const [addresses, setAddresses] = useState(initialAddresses);
   const [contentHash, setContentHash] = useState(initialContentHash);
   const { records, isRecordsPending } = useRecords({
-    ens: connectedEns?.ens
+    ens: ens
   });
 
-  const sanitizedContentHash = useMemo(() => {
-    return contentHash ? contentHash.protocolType === '' ? '' : `${contentHash.protocolType}://${contentHash.decoded}` : undefined;
-  }, [contentHash]);
   const { changes, isUpdateChangesPending } = useUpdateChanges({
-    ens: connectedEns?.ens || '',
+    ens: ens || '',
     text,
     addresses,
-    contentHash: sanitizedContentHash
+    contentHash: contentHash
   });
-
-  const sanitizedContentHashChanges = useMemo(() => {
-    return changes?.changedContentHash ? changes.changedContentHash.split('://')[0] + '://' + changes.changedContentHash.split('://')[1] : undefined;
-  }, [changes]);
 
   const { updateSubname, isUpdateSubnamePending } = useUpdateSubname();
 
@@ -91,7 +85,7 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                   lineHeight: '10px',
                   fontWeight: 900
                 }}>
-                {connectedEns?.ens}
+                {ens}
               </SPAN>
             </Badge>
 
@@ -118,9 +112,9 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                       changes.changedAddresses.map((change, index) => (
                         <Fragment key={'address-' + index}>
                           <UpdateRecordItem
-                            previousKey={records?.coins?.find((address) => address.id === change.coinType)?.name || ''}
+                            previousKey={records?.records.coins?.find((address) => address.id === change.coinType)?.name || ''}
                             newKey={change.coinType.toString()}
-                            previousValue={records?.coins?.find((address) => address.id === change.coinType)?.value || ''}
+                            previousValue={records?.records.coins?.find((address) => address.id === change.coinType)?.value || ''}
                             newValue={change.address}
                             type={'address'}
                             onDoNotApply={() => {
@@ -148,9 +142,9 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                       changes.changedTexts.map((change, index) => (
                         <Fragment key={'text-' + index}>
                           <UpdateRecordItem
-                            previousKey={records?.texts?.find((text) => text.key === change.key)?.key || ''}
+                            previousKey={records?.records.texts?.find((text) => text.key === change.key)?.key || ''}
                             newKey={change.key}
-                            previousValue={records?.texts?.find((text) => text.key === change.key)?.value || ''}
+                            previousValue={records?.records.texts?.find((text) => text.key === change.key)?.value || ''}
                             newValue={change.value}
                             onDoNotApply={() => {
                               setText((prevState)=>{
@@ -177,9 +171,9 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                       [],
                     ...(changes?.changedContentHash ? [
                         <UpdateRecordItem
-                          previousKey={records?.contentHash?.protocolType || ''}
+                          previousKey={records?.records.contentHash?.protocolType || ''}
                           newKey={changes?.changedContentHash?.split('://')[0] || ''}
-                          previousValue={records?.contentHash?.decoded || ''}
+                          previousValue={records?.records.contentHash?.decoded || ''}
                           newValue={changes?.changedContentHash?.split('://')[1] || ''}
                           type={'contentHash'}
                           onDoNotApply={() => {
@@ -213,10 +207,10 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                 <Button variant={'primary'} style={{ width: '100%' }} size={'lg'}
                         onClick={() => {
                           updateSubname({
-                            ens: connectedEns?.ens || '',
+                            ens: ens || '',
                             text: text,
                             addresses: addresses,
-                            contentHash: sanitizedContentHashChanges
+                            contentHash: contentHash
                           }).finally(() => {
                             handleOpen(false);
                           });

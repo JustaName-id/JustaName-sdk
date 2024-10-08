@@ -1,70 +1,24 @@
 import { assertRestCall } from '../../api/rest';
 import {
-  IsSubnameAvailableResponse,
-  SIWEHeaders,
-  SubnameAcceptResponse,
-  SubnameAddResponse,
-  SubnameGetAllByAddressResponse,
-  SubnameGetAllByDomainChainIdResponse,
-  SubnameGetByDomainNameChainIdResponse,
-  SubnameGetBySubnameResponse,
-  SubnameReserveResponse,
-  SubnameRevokeResponse,
-  SubnameSearchResponse,
-  SubnameUpdateResponse,
-  SubnameRecordsResponse,
-  SubnameRejectResponse,
-  SubnameGetAllCommunitiesChainIdResponse,
-  SubnameAcceptParams,
-  SubnameReserveParams,
-  SubnameAddParams,
-  SubnameUpdateParams,
-  SubnameRevokeParams,
-  SubnameRejectParams,
-  SubnameRecordsParams,
-  ChainId,
+  SubnameGetAllByAddressRoute,
+  SubnameGetAllByDomainChainIdRoute,
+  SubnameGetBySubnameRoute,
+  SubnameGetAllByEnsDomainWithCountRoute,
   NetworksWithProvider,
   EnsDomainByChainId,
-  SubnameGetAllByAddressParams,
-  SubnameGetBySubnameParams,
-  SubnameGetByDomainNameChainIdParams,
-  SubnameGetAllCommunitiesChainIdParams,
-  SubnameGetAllByDomainChainIdParams,
-  SubnameSearchParams, IsSubnameAvailableParams
+  ChainId,
+  SubnameSearchRoute,
+  IsSubnameAvailableRoute,
+  SubnameRecordsRoute,
+  SubnameAddRoute,
+  SubnameAcceptRoute,
+  SubnameReserveRoute,
+  SubnameUpdateRoute,
+  SubnameRevokeRoute,
+  SubnameRejectRoute,
+  SubnameGetInvitationsByAddressRoute,
 } from '../../types';
 import { sanitizeTexts, sanitizeAddresses } from '../../utils';
-import {
-  SubnameGetInvitationsByAddressParams,
-  SubnameGetInvitationsByAddressResponse
-} from '../../types/subnames/get-invitations-by-address';
-/**
- * Represents the Subnames class for interacting with the Subnames API.
- * @public
- * @class
- * @classdesc Represents the Subnames class for interacting with the Subnames API.
- * @example
- * ```typescript
- * import { JustaName } from '@justaname.id/sdk';
- *
- * const configuration = {
- *  apiKey: 'your-api-key'
- *  };
- *
- *  const justaName = JustaName.init(configuration);
- *
- *  const addedUser = await justaName.subnames.addSubname({
- *  username: 'test',
- *  ensDomain: 'test.eth',
- *  chainId: 1,
- *  },
- *  {
- *    xAddress: '0x59c44836630760F97b74b569B379ca94c37B93ca',
- *    xMessage: '...',
- *    xSignature: '...',
- * });
- *
- *  ```
- */
 
 export interface SubnamesConfig {
   /**
@@ -106,9 +60,9 @@ export class Subnames {
   }
 
   async acceptSubname(
-    params: SubnameAcceptParams,
-    headers: SIWEHeaders
-  ): Promise<SubnameAcceptResponse> {
+    params: SubnameAcceptRoute['params'],
+    headers: SubnameAcceptRoute['headers']
+  ): Promise<SubnameAcceptRoute['response']> {
     const { text, addresses, ensDomain, chainId,...rest } = params;
 
     const _chainId = chainId || this.chainId;
@@ -126,8 +80,8 @@ export class Subnames {
   }
 
   async reserveSubname(
-    params: SubnameReserveParams,
-  ): Promise<SubnameReserveResponse> {
+    params: SubnameReserveRoute['params'],
+  ): Promise<SubnameReserveRoute['response']> {
     const { ensDomain, chainId, ...rest } = params;
 
     const _chainId = chainId || this.chainId;
@@ -145,9 +99,9 @@ export class Subnames {
   }
 
   async addSubname(
-    params: SubnameAddParams,
-    headers: SIWEHeaders & { xApiKey?: string }
-  ): Promise<SubnameAddResponse> {
+    params: SubnameAddRoute['params'],
+    headers: SubnameAddRoute['headers']
+  ): Promise<SubnameAddRoute['response']> {
     const { text, addresses, ensDomain, chainId, ...rest } = params;
     const sanitizedAddresses = sanitizeAddresses(params.addresses);
     const hasAddress60 = sanitizedAddresses?.some((address) => address.coinType === 60);
@@ -156,6 +110,8 @@ export class Subnames {
     const _ensDomain =
       ensDomain ||
       this.ensDomains?.find((ensDomain) => ensDomain.chainId === _chainId)?.ensDomain;
+
+    const _xApiKey = headers.xApiKey || this.ensDomains?.find((ensDomain) => ensDomain.chainId === _chainId)?.apiKey || this.apiKey;
 
     return assertRestCall('ADD_SUBNAME_ROUTE', 'POST', {
       chainId: _chainId,
@@ -170,15 +126,15 @@ export class Subnames {
       ...rest
     }, {
         ...headers,
-        xApiKey: this.apiKey,
+        xApiKey: _xApiKey,
       })(['username','ensDomain','chainId'], ['xApiKey','xAddress','xMessage','xSignature'])
 
   }
 
   async updateSubname(
-    params: SubnameUpdateParams,
-    headers: SIWEHeaders
-  ): Promise<SubnameUpdateResponse> {
+    params: SubnameUpdateRoute['params'],
+    headers: SubnameUpdateRoute['headers']
+  ): Promise<SubnameUpdateRoute['response']> {
     const { text, addresses, ensDomain, chainId, ...rest } = params;
     const _chainId = chainId || this.chainId;
     const _ensDomain =
@@ -198,29 +154,30 @@ export class Subnames {
   }
 
   async revokeSubname(
-    params: SubnameRevokeParams,
-    headers: SIWEHeaders & { xApiKey?: string }
-  ): Promise<SubnameRevokeResponse> {
+    params: SubnameRevokeRoute['params'],
+    headers: SubnameRevokeRoute['headers']
+  ): Promise<SubnameRevokeRoute['response']> {
     const { ensDomain, chainId, ...rest } = params;
     const _chainId = chainId || this.chainId;
     const _ensDomain =
       ensDomain ||
       this.ensDomains?.find((ensDomain) => ensDomain.chainId === _chainId)?.ensDomain;
+    const _xApiKey = headers.xApiKey || this.ensDomains?.find((ensDomain) => ensDomain.chainId === _chainId)?.apiKey || this.apiKey;
 
     return assertRestCall('REVOKE_SUBNAME_ROUTE', 'POST', {
         chainId: _chainId,
         ensDomain: _ensDomain,
         ...rest
       }, {
-        xApiKey: this.apiKey,
         ...headers,
+        xApiKey: _xApiKey,
       })(['username','ensDomain','chainId'], ['xApiKey','xAddress','xMessage','xSignature'])
   }
 
   async rejectSubname(
-    params: SubnameRejectParams,
-    headers: SIWEHeaders
-  ): Promise<SubnameRejectResponse> {
+    params: SubnameRejectRoute['params'],
+    headers: SubnameRejectRoute['headers']
+  ): Promise<SubnameRejectRoute['response']> {
     const { ensDomain, chainId, ...rest } = params;
     const _chainId = chainId || this.chainId;
     const _ensDomain = ensDomain || this.ensDomains?.find((ensDomain) => ensDomain.chainId === _chainId)?.ensDomain;
@@ -234,69 +191,63 @@ export class Subnames {
       })(['username','ensDomain','chainId'], ['xSignature','xMessage','xAddress'])
   }
 
-  async getAllCommunities(
-    params: SubnameGetAllCommunitiesChainIdParams
-  ): Promise<SubnameGetAllCommunitiesChainIdResponse> {
+  async getSubnamesByEnsDomainWithCount(
+    params: SubnameGetAllByEnsDomainWithCountRoute['params']
+  ): Promise<SubnameGetAllByEnsDomainWithCountRoute['response']> {
     const { chainId, ...rest } = params;
 
     const _chainId = chainId || this.chainId;
 
-    return assertRestCall('GET_ALL_COMMUNITIES_WITH_COUNT_ROUTE', 'GET', {
+    return assertRestCall('GET_ALL_ENS_WITH_COUNT_ROUTE', 'GET', {
       chainId: _chainId,
       ...rest,
     })(['chainId']);
   }
 
-  async getByDomainNameChainId(
-    params: SubnameGetByDomainNameChainIdParams
-  ): Promise<SubnameGetByDomainNameChainIdResponse> {
-    const { ensDomain, chainId, ...rest } = params;
-
-    const _chainId = chainId || this.chainId;
-    const _ensDomain = ensDomain || this.ensDomains?.find((ensDomain) => ensDomain.chainId === _chainId)?.ensDomain;
-
-    return assertRestCall('GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE', 'GET', {
-      chainId: _chainId,
-      ensDomain: _ensDomain,
-      ...rest,
-    })(['ensDomain','chainId']);
-  }
-
-  /**
-   * Retrieves details of a subname directly by its name. This is a read-only operation
-   * and does not require an API key.
-   * @param {SubnameGetBySubnameParams} params - The parameters for the lookup.
-   * @returns {Promise<SubnameGetBySubnameResponse>} The details of the subname, if found.
-   */
-  async getBySubname(
-    params: SubnameGetBySubnameParams
-  ): Promise<SubnameGetBySubnameResponse> {
+  async getSubname(
+    params: SubnameGetBySubnameRoute['params']
+  ): Promise<SubnameGetBySubnameRoute['response']> {
     const { chainId, ...rest } = params;
     const _chainId = chainId || this.chainId;
 
     return assertRestCall('GET_SUBNAME_BY_SUBNAME_ROUTE', 'GET', {
       chainId: _chainId,
       ...rest,
-    })(['subname','chainId']);
+    })(['chainId']);
   }
 
-  async getAllByAddress(
-    params: SubnameGetAllByAddressParams
-  ): Promise<SubnameGetAllByAddressResponse> {
+  async getSubnamesByAddress(
+    params: SubnameGetAllByAddressRoute['params']
+  ): Promise<SubnameGetAllByAddressRoute['response']> {
     const { chainId, isClaimed, coinType, ...rest } = params;
     const _chainId = chainId || this.chainId;
 
     return assertRestCall('GET_ALL_SUBNAMES_BY_ADDRESS_ROUTE', 'GET', {
       chainId: _chainId,
-      isClaimed: isClaimed || false,
+      isClaimed: isClaimed,
       coinType: coinType || 60,
       ...rest,
     })(['chainId']);
   }
 
-  async getCommunitySubnamesByDomain(
-    params: SubnameGetAllByDomainChainIdParams
-  ): Promise<SubnameGetAllByDomainChainIdResponse> {
+  async getInvitationsByAddress(
+    params: SubnameGetInvitationsByAddressRoute['params']
+  ): Promise<SubnameGetInvitationsByAddressRoute['response']> {
+    const { chainId, coinType, ...rest } = params;
+    const _chainId = chainId || this.chainId;
+
+    return assertRestCall('GET_ALL_SUBNAMES_BY_INVITATION_ROUTE', 'GET', {
+      chainId: _chainId,
+      coinType: coinType || 60,
+      isClaimed: false,
+      ...rest,
+    })(['chainId']);
+  }
+
+
+  async getSubnamesByEnsDomain(
+    params: SubnameGetAllByDomainChainIdRoute['params']
+  ): Promise<SubnameGetAllByDomainChainIdRoute['response']> {
     const { chainId, ensDomain, ...rest } = params;
     const _chainId = chainId || this.chainId;
     const _ensDomain = ensDomain || this.ensDomains?.find((ensDomain) => ensDomain.chainId === _chainId)?.ensDomain;
@@ -309,8 +260,8 @@ export class Subnames {
   }
 
   async searchSubnames(
-    params: SubnameSearchParams
-  ): Promise<SubnameSearchResponse> {
+    params: SubnameSearchRoute['params']
+  ): Promise<SubnameSearchRoute['response']> {
     const { chainId, ...rest } = params;
     const _chainId = chainId || this.chainId;
 
@@ -320,22 +271,9 @@ export class Subnames {
     })(['chainId']);
   }
 
-  async getInvitations(
-    params: SubnameGetInvitationsByAddressParams
-  ): Promise<SubnameGetInvitationsByAddressResponse> {
-    const { chainId, coinType, ...rest } = params;
-    const _chainId = chainId || this.chainId;
-
-    return assertRestCall('GET_ALL_SUBNAMES_BY_INVITATION_ROUTE', 'GET', {
-      chainId: _chainId,
-      coinType: coinType || 60,
-      ...rest,
-    })(['chainId']);
-  }
-
-  async checkSubnameAvailable(
-    params: IsSubnameAvailableParams
-  ): Promise<IsSubnameAvailableResponse> {
+  async isSubnameAvailable(
+    params: IsSubnameAvailableRoute['params']
+  ): Promise<IsSubnameAvailableRoute['response']> {
     const { chainId, ...rest } = params;
     const _chainId = chainId || this.chainId;
 
@@ -345,15 +283,15 @@ export class Subnames {
     })(['chainId']);
   }
 
-  async getRecordsByFullName(
-    params: SubnameRecordsParams
-  ): Promise<SubnameRecordsResponse> {
-    const chainId = params.chainId || this.chainId;
-    const providerUrl = this.networks.find(network => network.chainId === chainId)?.providerUrl;
+  async getRecords(
+    params: SubnameRecordsRoute['params']
+  ): Promise<SubnameRecordsRoute['response']> {
+    const { chainId, ...rest } = params;
+    const _chainId = chainId || this.chainId;
+    const providerUrl = this.networks.find(network => network.chainId === _chainId)?.providerUrl;
     return assertRestCall('RECORDS_BY_FULLNAME_ROUTE', 'GET', {
       providerUrl,
-      chainId: this.chainId,
-      ...params,
-    })(['chainId', 'providerUrl']);
+      ...rest,
+    })(['providerUrl']);
   }
 }

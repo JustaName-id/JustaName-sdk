@@ -7,8 +7,9 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import { ChainId, SubnameGetAllByAddressParams, SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
+import { ChainId, sanitizeRecords, SubnameGetAllByAddressRoute } from '@justaname.id/sdk';
 import { buildSubnameBySubnameKey } from './useSubname';
+import { Records } from '../../types';
 
 export const buildAddressSubnamesKey = (
   address: string | undefined,
@@ -19,20 +20,20 @@ export const buildAddressSubnamesKey = (
   chainId
 ]
 
-export interface UseAddressSubnamesParams extends Omit<SubnameGetAllByAddressParams, 'isClaimed' | 'coinType' | "address"> {
+export interface UseAddressSubnamesParams extends Omit<SubnameGetAllByAddressRoute['params'], 'isClaimed' | 'coinType' | "address"> {
   address: string | undefined;
   isClaimed?: boolean;
   coinType?: number;
 }
 
 interface UseAddressSubnamesResult {
-  addressSubnames: SubnameGetAllByAddressResponse;
+  addressSubnames: Records[];
   isAddressSubnamesPending: boolean;
   isAddressSubnamesFetching: boolean;
   isAddressSubnamesLoading: boolean;
   refetchAddressSubnames: (
     options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<SubnameGetAllByAddressResponse | undefined, unknown>>;
+  ) => Promise<QueryObserverResult<Records[], unknown>>;
 }
 
 export const useAddressSubnames = (
@@ -50,7 +51,7 @@ export const useAddressSubnames = (
         throw new Error('Address is required');
       }
 
-      const response = await justaname?.subnames.getAllByAddress({
+      const response = await justaname?.subnames.getSubnamesByAddress({
         ...rest,
         address: params.address,
         isClaimed: params.isClaimed ?? true,
@@ -60,21 +61,25 @@ export const useAddressSubnames = (
 
       response?.subnames.forEach((subname) => {
         queryClient.setQueryData(
-          buildSubnameBySubnameKey(subname.subname, _chainId),
-          subname
+          buildSubnameBySubnameKey(subname.ens, _chainId),
+          {
+            ...subname,
+            sanitizedRecords: sanitizeRecords(subname),
+          }
         );
       });
 
-      return response;
+      return  response?.subnames.map((subname) => ({
+          ...subname,
+          sanitizedRecords: sanitizeRecords(subname),
+        })) || []
     },
     enabled: Boolean(justaname) && Boolean(params.address),
-    initialData: {
-      subnames: [],
-    },
+
   });
 
   return {
-    addressSubnames: query.data,
+    addressSubnames: query.data ?? [],
     isAddressSubnamesPending: query.isPending,
     isAddressSubnamesFetching: query.isFetching,
     isAddressSubnamesLoading: query.isPending || query.isFetching,

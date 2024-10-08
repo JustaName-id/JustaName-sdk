@@ -30,7 +30,7 @@ The headers required for the request, left intentionally unspecified to accommod
 
 #### Defined in
 
-[lib/types/subnames/community.ts:198](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L198)
+[lib/types/subnames/get-all-by-ens-domain-with-count.ts:198](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L198)
 
 ___
 
@@ -46,7 +46,7 @@ The request data structure.
 
 #### Defined in
 
-[lib/types/subnames/community.ts:196](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L196)
+[lib/types/subnames/get-all-by-ens-domain-with-count.ts:196](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L196)
 
 ___
 
@@ -62,4 +62,4 @@ The expected response structure.
 
 #### Defined in
 
-[lib/types/subnames/community.ts:197](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L197)
+[lib/types/subnames/get-all-by-ens-domain-with-count.ts:197](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L197)

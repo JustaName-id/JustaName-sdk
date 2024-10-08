@@ -45,7 +45,7 @@ export const useIsMAppEnabled = (params: UseIsMAppEnabledParams): UseIsMAppEnabl
       if (!records.isJAN) {
         return false;
       }
-      const mAppField = records.texts.find((text)=>text.key === 'mApps');
+      const mAppField = records.records.texts.find((text)=>text.key === 'mApps');
       if (!mAppField) {
         return false;
       }

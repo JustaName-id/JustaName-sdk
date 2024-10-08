@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  SubnameAcceptResponse,
-  SubnameAcceptParams,
+  sanitizeRecords,
+  SubnameAcceptRoute
 } from '@justaname.id/sdk';
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
@@ -12,15 +12,16 @@ import { useSubnameSignature } from './useSubnameSignature';
 import { useAccountInvitations } from '../account/useAccountInvitations';
 import { splitDomain } from '../../helpers';
 import { useMemo } from 'react';
+import { Records } from '../../types';
 
-export interface UseAcceptSubnameFunctionParams extends Omit<SubnameAcceptParams, 'ensDomain' | 'username'> {
+export interface UseAcceptSubnameFunctionParams extends Omit<SubnameAcceptRoute['params'], 'ensDomain' | 'username'> {
   ens: string;
 }
 
 export type UseAcceptSubnameParams = Omit<UseAcceptSubnameFunctionParams, "ens">
 
 export interface UseAcceptSubnameResult {
-  acceptSubname: UseMutateAsyncFunction<SubnameAcceptResponse, Error, UseAcceptSubnameFunctionParams>;
+  acceptSubname: UseMutateAsyncFunction<Records, Error, UseAcceptSubnameFunctionParams>;
   isAcceptSubnamePending: boolean;
 }
 
@@ -61,7 +62,10 @@ export const useAcceptSubname = (params?: UseAcceptSubnameParams): UseAcceptSubn
         refetchAccountSubnames();
         refetchInvitations();
 
-        return accepted;
+        return {
+          ...accepted,
+          sanitizedRecords: sanitizeRecords(accepted)
+        }
       },
     }
   );

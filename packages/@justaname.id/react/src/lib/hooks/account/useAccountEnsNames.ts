@@ -1,17 +1,14 @@
 import { useMountedAccount } from './useMountedAccount';
-import { ChainId, SanitizedRecords, SubnameRecordsResponse } from '@justaname.id/sdk';
+import { ChainId } from '@justaname.id/sdk';
 import { useAddressEnsNames } from '../ens';
+import { Records } from '../../types';
 
 export interface UseAccountEnsNamesParams {
   chainId?: ChainId
 }
 
 export interface UseAccountEnsNamesResult {
-  accountEnsNames: {
-    records: SubnameRecordsResponse,
-    sanitizedRecords: SanitizedRecords,
-    name: string,
-  }[];
+  accountEnsNames: Records[];
   isAccountEnsNamesPending: boolean;
   isAccountEnsNamesFetching: boolean;
   isAccountEnsNamesLoading: boolean;

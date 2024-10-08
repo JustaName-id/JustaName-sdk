@@ -1,12 +1,12 @@
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
-import { AddMAppPermissionResponse, ChainId, RequestAddMAppPermissionChallengeParams } from '@justaname.id/sdk';
+import { ChainId, RequestAddMAppPermissionChallengeRoute, AddMAppPermissionRoute } from '@justaname.id/sdk';
 import { useSignMessage } from 'wagmi';
 import { useAccountSubnames, useMountedAccount } from '../account';
 import { useRecords } from '../records';
 import { useMemo } from 'react';
 
-export interface UseAddMAppPermissionFunctionParams extends Omit<RequestAddMAppPermissionChallengeParams, 'mApp' | "address"> {
+export interface UseAddMAppPermissionFunctionParams extends Omit<RequestAddMAppPermissionChallengeRoute['params'], 'mApp' | "address"> {
   mApp?: string
 }
 
@@ -16,7 +16,7 @@ export interface UseAddMAppPermissionParams extends Omit<UseAddMAppPermissionFun
 }
 
 export interface UseRequestAddMAppPermission {
-  addMAppPermission: UseMutateAsyncFunction<AddMAppPermissionResponse, Error, UseAddMAppPermissionFunctionParams, unknown>,
+  addMAppPermission: UseMutateAsyncFunction<AddMAppPermissionRoute['response'], Error, UseAddMAppPermissionFunctionParams, unknown>,
   isAddMAppPermissionPending: boolean;
 }
 

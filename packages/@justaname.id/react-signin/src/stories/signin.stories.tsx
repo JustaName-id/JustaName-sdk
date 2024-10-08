@@ -12,16 +12,17 @@ const queryClient = new QueryClient();
 
 const JustSignInConfig: JustSignInProviderConfig = {
   config: {
-    chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
     origin: import.meta.env.STORYBOOK_APP_ORIGIN,
     domain: import.meta.env.STORYBOOK_APP_DOMAIN,
-    signIn: {
-      ttl: 1000 * 60 * 60 * 24
-    }
+    signInTtl:  1000 * 60 * 60 * 24
   },
   backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
-  providerUrl: import.meta.env.STORYBOOK_APP_PROVIDER_URL,
-  ensDomain: import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
+  ensDomains: [
+    {
+      ensDomain:  import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
+      chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId
+    }
+  ],
   openOnWalletConnect: true,
   allowedEns: 'all'
 };

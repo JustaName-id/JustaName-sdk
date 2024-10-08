@@ -1,13 +1,13 @@
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
-import { ChainId, RevokeMAppPermissionResponse } from '@justaname.id/sdk';
+import { ChainId, RevokeMAppPermissionRoute } from '@justaname.id/sdk';
 import { useSignMessage } from 'wagmi';
 import { useAccountSubnames, useMountedAccount } from '../account';
 import { useRecords } from '../records';
 import { useMemo } from 'react';
 
 export interface UseRequestRevokeMAppPermissionResult {
-  revokeMAppPermission: UseMutateAsyncFunction<RevokeMAppPermissionResponse, Error, UseRevokeMAppPermissionFunctionParams, unknown>;
+  revokeMAppPermission: UseMutateAsyncFunction<RevokeMAppPermissionRoute['response'], Error, UseRevokeMAppPermissionFunctionParams, unknown>;
   isRevokeMAppPermissionPending: boolean;
 }
 
@@ -28,11 +28,7 @@ export const useRevokeMAppPermission = (params: UseRevokeMAppPermissionParams): 
   const { address} = useMountedAccount()
   const { refetchAccountSubnames } = useAccountSubnames()
   const { getRecords } = useRecords()
-  const mutate = useMutation<
-    RevokeMAppPermissionResponse,
-    Error,
-    UseRevokeMAppPermissionFunctionParams
-  >({
+  const mutate = useMutation({
     mutationFn: async (
       _params:UseRevokeMAppPermissionFunctionParams
     ) => {

@@ -22,7 +22,7 @@ export interface UseEnsSignInResult {
 }
 
 export const useEnsSignIn = (params?: UseEnsSignInParams): UseEnsSignInResult => {
-  const { justaname, backendUrl, routes} = useJustaName();
+  const { justaname, backendUrl, config, routes, chainId} = useJustaName();
   const { address } = useMountedAccount();
   const { signMessageAsync } = useSignMessage()
   const _backendUrl = useMemo(() => params?.backendUrl || backendUrl || "", [backendUrl, params?.backendUrl]);
@@ -44,11 +44,16 @@ export const useEnsSignIn = (params?: UseEnsSignInParams): UseEnsSignInResult =>
         credentials: 'include',
       });
 
+      const nonce = await nonceResponse.text();
+
       const message = justaname.signIn.requestSignIn({
         ...params,
         ..._params,
+        uri: config?.origin,
+        domain: config?.domain,
+        chainId: chainId,
         address,
-        nonce: await nonceResponse.text(),
+        nonce,
       })
 
       const signature = await signMessageAsync({

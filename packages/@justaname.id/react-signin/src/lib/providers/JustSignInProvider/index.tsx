@@ -18,7 +18,7 @@ import { UpdateRecordDialog } from '../../dialogs';
 
 export interface JustSignInProviderConfig extends JustaNameProviderConfig, JustaThemeProviderConfig {
   openOnWalletConnect?: boolean;
-  allowedEns: 'all' | 'platform' | string[];
+  allowedEns?: 'all' | 'platform' | string[];
   logo?: string;
 }
 
@@ -38,7 +38,7 @@ export interface UpdateRecordsParams extends Omit<UseSubnameUpdateFunctionParams
 
 export interface JustSignInContextProps {
   handleOpenSignInDialog: (open: boolean) => void;
-  handleUpdateRecords: (records: UpdateRecordsParams) => Promise<void>;
+  handleUpdateRecords: (records: UpdateRecordsParams & {ens: string}) => Promise<void>;
   isSignInOpen: boolean;
   logo?: string;
   plugins: JustaPlugin[],
@@ -70,7 +70,7 @@ export const JustSignInProvider: FC<JustSignInProviderProps> = ({
   const allowedEns = configRest.allowedEns || 'all';
   const { isConnected } = useMountedAccount();
   const [signInOpen, setSignInOpen] = useState(false);
-  const [updateRecord, setUpdateRecord] = useState<UpdateRecordsParams | null>(null);
+  const [updateRecord, setUpdateRecord] = useState<(UpdateRecordsParams & {ens: string}) | null>(null);
   const updateRecordPromiseResolveRef = useRef<(() => void) | null>(null);
 
   const pluginsMApps = useMemo(() => plugins
@@ -83,7 +83,7 @@ export const JustSignInProvider: FC<JustSignInProviderProps> = ({
     [plugins]) as { name: string, openOnConnect: boolean }[] || [];
 
 
-  const handleUpdateRecords = async (records: UpdateRecordsParams) => {
+  const handleUpdateRecords = async (records: UpdateRecordsParams & {ens: string}) => {
     setUpdateRecord(records);
     return new Promise<void>((resolve) => {
       updateRecordPromiseResolveRef.current = resolve;
@@ -130,7 +130,10 @@ export const JustSignInProvider: FC<JustSignInProviderProps> = ({
     <JustaNameProvider config={{
       config: configRest.config,
       backendUrl: configRest.backendUrl,
-      routes: configRest.routes
+      routes: configRest.routes,
+      ensDomains: configRest.ensDomains,
+      networks: configRest.networks,
+      apiKey: configRest.apiKey,
     }}>
       <JustaThemeProvider color={configRest.color}>
 
@@ -181,12 +184,9 @@ export interface UseSignInWithJustaName {
   isEnsAuthPending: boolean;
   refreshEnsAuth: () => void;
   connectedEns: UseEnsAuthReturn['connectedEns'];
-  updateRecords: (records: Omit<UseSubnameUpdateFunctionParams, 'fullEnsDomain' | 'contentHash'> & {
-    contentHash?: {
-      protocolType: string;
-      decoded: string;
-    }
-  }) => Promise<void>;
+  updateRecords: (
+    records: Omit<UseSubnameUpdateFunctionParams, 'ens'> & { ens?: string; }
+  ) => Promise<void>;
 }
 
 
@@ -196,6 +196,21 @@ export const useSignInWithJustaName = (): UseSignInWithJustaName => {
   const { signIn, isSignInPending } = useEnsSignIn();
   const { signOut, isSignOutPending } = useEnsSignOut();
   const { connectedEns, isLoggedIn, isEnsAuthPending, refreshEnsAuth } = useEnsAuth();
+  const { handleUpdateRecords } = context;
+  const handleUpdateRecordsInternal = async (records: Omit<UseSubnameUpdateFunctionParams, 'ens'> & { ens?: string; }) => {
+    if(records.ens){
+      return handleUpdateRecords({
+        ...records,
+        ens: records.ens
+      });
+    }
+    else{
+      return handleUpdateRecords({
+        ...records,
+        ens: connectedEns?.ens || ''
+      });
+    }
+  }
 
   const status = useMemo(() => {
     if (isSignInPending) {
@@ -223,7 +238,7 @@ export const useSignInWithJustaName = (): UseSignInWithJustaName => {
 
   return {
     handleOpenSignInDialog: context.handleOpenSignInDialog,
-    updateRecords: context.handleUpdateRecords,
+    updateRecords: handleUpdateRecordsInternal,
     isSignInOpen: context.isSignInOpen,
     isEnsAuthPending,
     signIn,
@@ -261,7 +276,6 @@ const CheckSession: FC<{
   }, [connectedEns, address, signOut]);
 
   useEffect(() => {
-
     if (openOnWalletConnect && isConnected && !connectedEns && !isEnsAuthPending) {
       handleOpenDialog(true);
     }

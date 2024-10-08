@@ -45,11 +45,11 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
   });
 
   const mAppFieldsInEnsRecords = useMemo(() => {
-    return records?.texts?.filter((text) => text.key.endsWith(`_${mApp}`));
+    return records?.records.texts?.filter((text) => text.key.endsWith(`_${mApp}`));
   }, [records, mApp]);
 
   const mAppDescription = useMemo(() => {
-    return mAppRecords?.texts?.find((text) => text.key === `mApp_description`)?.value;
+    return mAppRecords?.records.texts?.find((text) => text.key === `mApp_description`)?.value;
   }, [mAppRecords]);
 
   const mAppPermissions = useMemo((): string[] => {
@@ -57,7 +57,7 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
       return [];
     }
 
-    const permissions = mAppRecords?.texts?.find((text) => text.key === `mApp_permissions`)?.value;
+    const permissions = mAppRecords?.records.texts?.find((text) => text.key === `mApp_permissions`)?.value;
     if (!permissions) {
       return [];
     }

@@ -1,10 +1,11 @@
 import {  Address } from 'viem';
 import { getNamesForAddress } from '@ensdomains/ensjs/subgraph'
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ChainId, SanitizedRecords, SubnameRecordsResponse } from '@justaname.id/sdk';
+import { ChainId } from '@justaname.id/sdk';
 import { useJustaName } from '../../providers';
 import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { useRecords } from '../records';
+import { Records } from '../../types';
 
 export const buildAddressEnsNames = (address: string, chainId: ChainId) => [
   'ACCOUNT_ENS_NAMES',
@@ -17,18 +18,12 @@ export interface UseAddressEnsNamesParams {
   chainId?: ChainId
 }
 
-export interface GetEnsNamesForAddressResult {
-  records: SubnameRecordsResponse,
-  sanitizedRecords: SanitizedRecords,
-  name: string,
-}
-
 export interface UseAddressEnsNamesResult {
-  addressEnsNames: GetEnsNamesForAddressResult[];
+  addressEnsNames: Records[];
   isAddressEnsNamesPending: boolean;
   isAddressEnsNamesFetching: boolean;
   isAddressEnsNamesLoading: boolean;
-  getEnsNamesForAddress: (address: Address) => Promise<GetEnsNamesForAddressResult[]>;
+  getEnsNamesForAddress: (address: Address) => Promise<Records[]>;
   refetchAddressEnsNames: () => void;
 }
 
@@ -44,7 +39,7 @@ export const useAddressEnsNames = (params?: UseAddressEnsNamesParams): UseAddres
   const { getRecords } = useRecords()
 
 
-  const getEnsNamesForAddress = async (_params: GetEnsNamesForAddressParams): Promise<GetEnsNamesForAddressResult[]> => {
+  const getEnsNamesForAddress = async (_params: GetEnsNamesForAddressParams): Promise<Records[]> => {
       if (!ensClient) {
         throw new Error('Public client not found')
       }
@@ -59,21 +54,18 @@ export const useAddressEnsNames = (params?: UseAddressEnsNamesParams): UseAddres
       const records = await Promise.allSettled([
         ...names
           .filter((name) => !!name?.name)
-          .map(async (name) => {
-            const record = await getRecords({
-              ens: name?.name || "",
-              chainId: _chainId,
-            });
-            return {
-              ...record,
-              name: name.name as string,
-            }
-          })
-      ])
+          .map(async (name) =>  getRecords({
+            ens: name?.name || "",
+            chainId: _chainId,
+          }))
+          ])
 
-      return records.filter((record) => record.status === 'fulfilled').map((record) => record.value).filter((record) =>
-        !!record && !!record.records && !!record.sanitizedRecords && !!record.name
-      ) as GetEnsNamesForAddressResult[]
+      return records
+        .filter((record) => record.status === 'fulfilled')
+        .map((record) => record?.value)
+        .filter((record) =>
+        !!record && !!record.sanitizedRecords
+      ) as Records[]
   }
 
 
@@ -85,7 +77,13 @@ export const useAddressEnsNames = (params?: UseAddressEnsNamesParams): UseAddres
     enabled: Boolean(params?.address) && Boolean(_chainId) ,
   })
 
-  const getEnsNamesForAddressInternal = async (address: Address) => {
+  const getEnsNamesForAddressInternal = async (address: Address, force = false): Promise<Records[]> => {
+    if (!force) {
+      const cachedNames = queryClient.getQueryData(buildAddressEnsNames(address, _chainId)) as Records[]
+      if (cachedNames) {
+        return cachedNames
+      }
+    }
     const names = await getEnsNamesForAddress({ address })
     queryClient.setQueryData(buildAddressEnsNames(address, _chainId), names)
     return names

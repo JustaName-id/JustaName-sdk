@@ -5,15 +5,15 @@ import {
   Address,
   sanitizeAddresses,
   sanitizeTexts,
-  SubnameRecordsResponse,
-  SubnameUpdateParams,
+  SubnameUpdateRoute,
   TextRecord
 } from '@justaname.id/sdk';
 import { useRecords } from '../records';
+import { Records } from '../../types';
 
 export const buildUpdateChangesKey = (params: GetUpdateChangesParams) => ['ENS_UPDATE_CHANGES', ...Object.values(params)];
 
-export interface GetUpdateChangesParams extends Omit<SubnameUpdateParams, 'username' | 'ensDomain' | 'contentHash'> {
+export interface GetUpdateChangesParams extends Omit<SubnameUpdateRoute['params'], 'username' | 'ensDomain' | 'contentHash'> {
   contentHash?: {
     protocolType: string;
     decoded: string;
@@ -38,7 +38,7 @@ export interface UseUpdateChangesResult {
   checkIfUpdateIsValid: (params: GetUpdateChangesParams) => Promise<boolean>;
 }
 
-export interface UseUpdateChangesParams extends Omit<SubnameUpdateParams, 'username' | 'ensDomain' | 'contentHash'> {
+export interface UseUpdateChangesParams extends Omit<SubnameUpdateRoute['params'], 'username' | 'ensDomain' | 'contentHash'> {
   contentHash?: {
     protocolType: string;
     decoded: string;
@@ -75,13 +75,13 @@ export const useUpdateChanges = (params?: UseUpdateChangesParams): UseUpdateChan
     const sanitizedRequestAddress = sanitizeAddresses(_params.addresses)?.filter((address) => address.coinType >= 0);
     const sanitizedRequestText = sanitizeTexts(_params.text)?.filter((text) => !!text.key);
 
-    if (!records || !records.records) {
+    if (!records) {
       throw new Error('No records found');
     }
 
-    const changedAddresses = getChangedAddresses(sanitizedRequestAddress, records.records);
-    const changedTexts = getChangedTextRecords(sanitizedRequestText, records.records);
-    const changedContentHash = getChangedContentHash(_params.contentHash, records.records);
+    const changedAddresses = getChangedAddresses(sanitizedRequestAddress, records);
+    const changedTexts = getChangedTextRecords(sanitizedRequestText, records);
+    const changedContentHash = getChangedContentHash(_params.contentHash, records);
 
     return {
       changedAddresses,
@@ -123,10 +123,10 @@ export const useUpdateChanges = (params?: UseUpdateChangesParams): UseUpdateChan
   };
 };
 
-export const getChangedAddresses = (sanitizedRequestAddress: Address[] | undefined, records: SubnameRecordsResponse) => {
+export const getChangedAddresses = (sanitizedRequestAddress: Address[] | undefined, records: Records) => {
   const changedAddresses: Address[] = [];
   sanitizedRequestAddress?.forEach((address) => {
-    const record = records.coins.find((record) => record.id === address.coinType);
+    const record = records.records.coins.find((record) => record.id === address.coinType);
     if ((!record || record.value !== address.address) && (!!record?.value || !!address.address)) {
       changedAddresses.push(address);
     }
@@ -135,11 +135,11 @@ export const getChangedAddresses = (sanitizedRequestAddress: Address[] | undefin
   return changedAddresses?.filter((address) => address.coinType >=0);
 };
 
-export const getChangedTextRecords = (sanitizedRequestText: TextRecord[] | undefined, records: SubnameRecordsResponse) => {
+export const getChangedTextRecords = (sanitizedRequestText: TextRecord[] | undefined, records: Records) => {
   const changedTexts: TextRecord[] = [];
 
   sanitizedRequestText?.forEach((text) => {
-    const record = records.texts.find((record) => record.key === text.key);
+    const record = records.records.texts.find((record) => record.key === text.key);
     if ((!record || (record.value !== text.value)) && (!!record?.value || !!text.value)) {
       changedTexts.push(text);
     }
@@ -151,12 +151,12 @@ export const getChangedTextRecords = (sanitizedRequestText: TextRecord[] | undef
 export const getChangedContentHash = (contentHash: {
   protocolType: string;
   decoded: string;
-} | undefined, records: SubnameRecordsResponse) => {
+} | undefined, records: Records) => {
   if (!contentHash) {
     return undefined;
   }
 
-  if (!records.contentHash) {
+  if (!records.records.contentHash) {
     return `${contentHash.protocolType}://${contentHash.decoded}`;
   }
 
@@ -164,7 +164,7 @@ export const getChangedContentHash = (contentHash: {
     return ''
   }
 
-  if (records.contentHash.protocolType !== contentHash.protocolType || records.contentHash.decoded !== contentHash.decoded) {
+  if (records.records.contentHash.protocolType !== contentHash.protocolType || records.records.contentHash.decoded !== contentHash.decoded) {
     return `${contentHash.protocolType}://${contentHash.decoded}`;
   }
 

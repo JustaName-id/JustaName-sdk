@@ -7,17 +7,17 @@ import { ChainId } from '../../lib/types';
 import { InvalidConfigurationException } from '../../lib/errors';
 dotenv.config();
 
-// const invalidApiKey = 'invalid-api-key';
 const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 jest.setTimeout(50000);
 const mAppPk = process.env['SDK_MAPP_PRIVATE_KEY'] as string;
 const mAppSigner = new ethers.Wallet(mAppPk);
 const subnameSigner = ethers.Wallet.createRandom()
 const subnameToBeAdded = Math.random().toString(36).substring(7);
-const CHAIN_ID = parseInt(process.env['SDK_CHAIN_ID'] as string) as ChainId || 11155111
+const CHAIN_ID = parseInt(process.env['SDK_CHAIN_ID'] as string) as ChainId
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
 const MAPP = process.env['SDK_MAPP'] as string;
 const MAPP_2 = MAPP.split('.')[0] + '2' + '.' + MAPP.split('.')[1];
+
 describe('justaname', () => {
 
   let justaname: JustaName;
@@ -89,6 +89,15 @@ describe('justaname', () => {
     expect(response).toBeDefined();
   })
 
+  it('should check if subname2 is available', async () => {
+    const response = await justaname.subnames.isSubnameAvailable({
+      subname: subnameToBeAdded + '2' + '.' + ENS_DOMAIN,
+      chainId: CHAIN_ID,
+    })
+
+    expect(response.isAvailable).toBeFalsy();
+  })
+
   it('should add a subname2 with text and addresses and contentHash', async () => {
     const subnameToBeAdded2 = subnameToBeAdded + '2';
     const challenge = await justaname.siwe.requestChallenge({
@@ -116,14 +125,14 @@ describe('justaname', () => {
 
     expect(response).toBeDefined();
 
-    const records = await justaname.subnames.getRecordsByFullName({
-      fullName: subnameToBeAdded2 + '.' + ENS_DOMAIN,
+    const records = await justaname.subnames.getRecords({
+      ens: subnameToBeAdded2 + '.' + ENS_DOMAIN,
       chainId: CHAIN_ID
     })
 
-    expect(records.texts.find((text) => text.key === 'test')?.value).toEqual('test');
-    expect(records.contentHash).toEqual({ protocolType:"ipfs", decoded:"bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi"})
-    expect(records.coins.find((coin) => coin.id === 0)?.value).toEqual("1PxsjLASknj7GfF54zXejgygcQCKJ1ubah")
+    expect(records.records.texts.find((text) => text.key === 'test')?.value).toEqual('test');
+    expect(records.records.contentHash).toEqual({ protocolType:"ipfs", decoded:"bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi"})
+    expect(records.records.coins.find((coin) => coin.id === 0)?.value).toEqual("1PxsjLASknj7GfF54zXejgygcQCKJ1ubah")
 
     const response2 = await justaname.subnames.updateSubname({
       username: subnameToBeAdded2,
@@ -146,15 +155,36 @@ describe('justaname', () => {
 
     expect(response2).toBeDefined();
 
-    const records2 = await justaname.subnames.getRecordsByFullName({
-      fullName: subnameToBeAdded2 + '.' + ENS_DOMAIN,
+    const records2 = await justaname.subnames.getRecords({
+      ens: subnameToBeAdded2 + '.' + ENS_DOMAIN,
       chainId: CHAIN_ID
     })
 
-    expect(records2.texts.find((text) => text.key === 'test2')?.value).toEqual('test2');
-    expect(records2.texts.find((text) => text.key === 'test')?.value).toBeUndefined();
-    expect(records2.contentHash).toEqual({ protocolType:"ipns", decoded:"k51qzi5uqu5dgccx524mfjv7znyfsa6g013o6v4yvis9dxnrjbwojc62pt0430"})
-    expect(records2.coins.find((coin) => coin.id === 0)?.value).toEqual("1CznrXZXdCQeZVSQnDuytm8a957jUeDpdw")
+    expect(records2.records.texts.find((text) => text.key === 'test2')?.value).toEqual('test2');
+    expect(records2.records.texts.find((text) => text.key === 'test')?.value).toBeUndefined();
+    expect(records2.records.contentHash).toEqual({ protocolType:"ipns", decoded:"k51qzi5uqu5dgccx524mfjv7znyfsa6g013o6v4yvis9dxnrjbwojc62pt0430"})
+    expect(records2.records.coins.find((coin) => coin.id === 0)?.value).toEqual("1CznrXZXdCQeZVSQnDuytm8a957jUeDpdw")
+  })
+
+  it('should get the two subnames for this address', async () => {
+    const subnameOne = await justaname.subnames.getSubname({
+      subname: subnameToBeAdded + '.' + ENS_DOMAIN,
+      chainId: CHAIN_ID
+    })
+
+    const subnameTwo = await justaname.subnames.getSubname({
+      subname: subnameToBeAdded + '2.' + ENS_DOMAIN,
+      chainId: CHAIN_ID
+    })
+
+    const subnamesForAddress = await justaname.subnames.getSubnamesByAddress({
+      address: subnameSigner.address,
+      chainId: CHAIN_ID
+    })
+
+    expect(subnamesForAddress.subnames.sort((e)=> {
+      return e.ens === subnameToBeAdded + '.' + ENS_DOMAIN ? -1 : 1
+    })).toEqual([subnameOne, subnameTwo].sort());
   })
 
   it('should update a subname', async () => {
@@ -207,12 +237,12 @@ describe('justaname', () => {
   })
 
   it("should be able to add contentHash", async () => {
-    const records = await justaname.subnames.getRecordsByFullName({
-      fullName: subnameToBeAdded + '.' + ENS_DOMAIN,
+    const records = await justaname.subnames.getRecords({
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       chainId: CHAIN_ID
     })
 
-    expect(records.contentHash).toBeNull()
+    expect(records.records.contentHash).toBeNull()
 
     const challenge = await justaname.siwe.requestChallenge({
       address: subnameSigner.address,
@@ -231,13 +261,13 @@ describe('justaname', () => {
         xAddress: subnameSigner.address,
         xSignature: signature
       })
-    const records2 = await justaname.subnames.getRecordsByFullName({
-      fullName: subnameToBeAdded + '.' + ENS_DOMAIN,
+    const records2 = await justaname.subnames.getRecords({
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       chainId: CHAIN_ID
     })
 
-    expect(response.data.contentHash).toBe("ipfs://bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi");
-    expect(records2.contentHash).toEqual({ protocolType:"ipfs", decoded:"bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi"})
+    expect(response.records.contentHash).toEqual({ protocolType:"ipfs", decoded:"bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi"})
+    expect(records2.records.contentHash).toEqual({ protocolType:"ipfs", decoded:"bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi"})
   })
 
   it('mApps shouldn\'t be updated', async () => {
@@ -263,7 +293,7 @@ describe('justaname', () => {
       xSignature: signature
     })
 
-    const mApps = response.data.textRecords.find((text) => text.key === 'mApps')?.value;
+    const mApps = response.records.texts.find((text) => text.key === 'mApps')?.value;
     expect(mApps).toBeUndefined();
   })
 
@@ -288,7 +318,7 @@ describe('justaname', () => {
       xSignature: signature
     })
 
-    expect(response.data.textRecords.find((text) => text.key === 'test')).toBeUndefined();
+    expect(response.records.texts.find((text) => text.key === 'test')).toBeUndefined();
     expect(response).toBeDefined();
   })
 
@@ -371,12 +401,12 @@ describe('justaname', () => {
   })
 
   it('should have removed test_mApps', async () => {
-    const subname = await justaname.subnames.getRecordsByFullName({
-      fullName: subnameToBeAdded + '.' + ENS_DOMAIN,
+    const subname = await justaname.subnames.getRecords({
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       chainId: CHAIN_ID
     })
 
-    const testMApps = subname.texts.find((text) => text.key === `test_${MAPP}`)?.value;
+    const testMApps = subname.records.texts.find((text) => text.key === `test_${MAPP}`)?.value;
 
     expect(testMApps).toBeUndefined();
   })
@@ -440,19 +470,16 @@ describe('justaname', () => {
       xSignature: signature
     })
 
-    expect(response.data.textRecords.find((text) => text.key === `test2_${MAPP}`)?.value).toEqual('testValue2');
+    expect(response.records.texts.find((text) => text.key === `test2_${MAPP}`)?.value).toEqual('testValue2');
   })
 
-
-
-
   it("should be remove contentHash", async () => {
-    const records = await justaname.subnames.getRecordsByFullName({
-      fullName: subnameToBeAdded + '.' + ENS_DOMAIN,
+    const records = await justaname.subnames.getRecords({
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       chainId: CHAIN_ID
     })
 
-    expect(records.contentHash).toEqual({ protocolType:"ipfs", decoded:"bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi"})
+    expect(records.records.contentHash).toEqual({ protocolType:"ipfs", decoded:"bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi"})
 
     const challenge = await justaname.siwe.requestChallenge({
       address: subnameSigner.address,
@@ -472,14 +499,14 @@ describe('justaname', () => {
       xSignature: signature
     })
 
-    const records2 = await justaname.subnames.getRecordsByFullName({
-      fullName: subnameToBeAdded + '.' + ENS_DOMAIN,
+    const records2 = await justaname.subnames.getRecords({
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       chainId: CHAIN_ID
     })
 
-    expect(records2.contentHash).toBeNull();
+    expect(records2.records.contentHash).toBeNull();
 
-    expect(response.data.contentHash).toBeNull()
+    expect(response.records.contentHash).toBeNull()
   })
 
   it('should remove field if value is empty', async () => {
@@ -503,7 +530,7 @@ describe('justaname', () => {
       xSignature: signature
     })
 
-    expect(response.data.textRecords.find((text) => text.key === `test_${MAPP}`)).toBeUndefined();
+    expect(response.records.texts.find((text) => text.key === `test_${MAPP}`)).toBeUndefined();
   })
 
 
@@ -523,14 +550,38 @@ describe('justaname', () => {
       message: challenge.challenge
     })
 
-    const mApps = response.data.textRecords.find((text) => text.key === 'mApps')?.value
-    const testJawEth = response.data.textRecords.find((text) => text.key === `test_${MAPP}`)?.value
+    const mApps = response.records.texts.find((text) => text.key === 'mApps')?.value
+    const testJawEth = response.records.texts.find((text) => text.key === `test_${MAPP}`)?.value
 
     expect(mApps).toEqual(`{"mApps":["${MAPP_2}"]}`)
     expect(testJawEth).toEqual(undefined)
   })
 
+  it('should get all subnames', async () => {
+    const subnames = await justaname.subnames.getSubnamesByAddress({
+      address: subnameSigner.address,
+      chainId: CHAIN_ID,
+    })
+
+    expect(subnames.subnames.length).toBeGreaterThanOrEqual(2);
+  })
+
+  it('should get all subnames by ens domain', async () => {
+    const subnames = await justaname.subnames.getSubnamesByEnsDomain({
+      ensDomain: ENS_DOMAIN,
+    })
+
+    const registeredSubnames = subnames.data.filter((subname) => subname.ens === subnameToBeAdded + '.' + ENS_DOMAIN || subname.ens === subnameToBeAdded + '2.' + ENS_DOMAIN)
+
+    expect(registeredSubnames.length).toBe(2);
+  })
+
   it('should revoke subname', async () => {
+    const records = await justaname.subnames.getRecords({
+      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
+      chainId: CHAIN_ID
+    })
+
     const challenge = await justaname.siwe.requestChallenge({
       address: subnameSigner.address,
       chainId: CHAIN_ID,
@@ -547,8 +598,9 @@ describe('justaname', () => {
       xSignature: signature,
       xMessage: challenge.challenge
     })
-
+    const { claimedAt, isClaimed, ...rest} = response
     expect(response).toBeDefined();
+    expect(rest).toEqual(records);
   })
 
   it('should revoke subname2', async () => {

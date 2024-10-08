@@ -1,14 +1,15 @@
 'use client';
 
-import { SubnameRevokeParams, SubnameRevokeResponse } from '@justaname.id/sdk';
+import { sanitizeRecords, SubnameRevokeRoute } from '@justaname.id/sdk';
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
 import { useMemo } from 'react';
+import { Records } from '../../types';
 
-export type UseRevokeSubnameFunctionParams = SubnameRevokeParams
+export type UseRevokeSubnameFunctionParams = SubnameRevokeRoute['params'];
 
 export interface UseRevokeSubnameParams extends Omit<UseRevokeSubnameFunctionParams, "username"> {
   backendUrl?: string;
@@ -16,7 +17,7 @@ export interface UseRevokeSubnameParams extends Omit<UseRevokeSubnameFunctionPar
 }
 
 export interface UseRevokeSubnameResult {
-  revokeSubname: UseMutateAsyncFunction<SubnameRevokeResponse, Error, UseRevokeSubnameFunctionParams>;
+  revokeSubname: UseMutateAsyncFunction<Records, Error, UseRevokeSubnameFunctionParams>;
   isRevokeSubnamePending: boolean;
 }
 
@@ -43,9 +44,7 @@ export const useRevokeSubname = (params?: UseRevokeSubnameParams): UseRevokeSubn
         throw new Error('Missing ensDomain name: add the ensDomain to the hook params or the function params or to the provider');
       }
 
-
-
-      let response: SubnameRevokeResponse;
+      let response: SubnameRevokeRoute['response'];
 
       if (apiKey) {
         response = await justaname.subnames.revokeSubname(
@@ -87,8 +86,11 @@ export const useRevokeSubname = (params?: UseRevokeSubnameParams): UseRevokeSubn
       }
 
       refetchAccountSubnames();
-      return response;
-    },
+      return {
+        ...response,
+        sanitizedRecords: sanitizeRecords(response)
+      }
+      },
   });
 
   return {

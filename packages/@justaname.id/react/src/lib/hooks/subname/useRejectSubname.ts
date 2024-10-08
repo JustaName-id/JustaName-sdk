@@ -1,6 +1,6 @@
 'use client';
 
-import { SubnameRejectResponse, SubnameRejectParams } from '@justaname.id/sdk';
+import { sanitizeRecords, SubnameRejectRoute } from '@justaname.id/sdk';
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useAccountSubnames } from '../account/useAccountSubnames';
@@ -9,15 +9,16 @@ import { useSubnameSignature } from './useSubnameSignature';
 import { useAccountInvitations } from '../account/useAccountInvitations';
 import { splitDomain } from '../../helpers';
 import { useMemo } from 'react';
+import { Records } from '../../types';
 
-export interface UseRejectSubnameFunctionParams extends Omit<SubnameRejectParams, 'ensDomain' | 'username'> {
+export interface UseRejectSubnameFunctionParams extends Omit<SubnameRejectRoute['params'], 'ensDomain' | 'username'> {
   ens: string;
 }
 
 export type UseRejectSubnameParams = Omit<UseRejectSubnameFunctionParams, 'ens'>
 
 export interface UseRejectSubnameResult {
-  rejectSubname: UseMutateAsyncFunction<SubnameRejectResponse, Error, UseRejectSubnameFunctionParams>;
+  rejectSubname: UseMutateAsyncFunction<Records, Error, UseRejectSubnameFunctionParams>;
   isRejectSubnamePending: boolean;
 }
 
@@ -41,7 +42,7 @@ export const useRejectSubname = (params?: UseRejectSubnameParams): UseRejectSubn
 
       const signature = await getSignature();
 
-      const accepted = await  justaname.subnames.rejectSubname({
+      const rejected = await  justaname.subnames.rejectSubname({
         ensDomain: _ensDomain,
         chainId: _params.chainId || _chainId,
         username: _username,
@@ -53,7 +54,10 @@ export const useRejectSubname = (params?: UseRejectSubnameParams): UseRejectSubn
 
       refetchAccountSubnames();
       refetchInvitations();
-      return accepted;
+      return {
+        ...rejected,
+        sanitizedRecords: sanitizeRecords(rejected),
+      }
     },
   });
 

@@ -1,6 +1,5 @@
 import { ethers } from 'ethers';
 import * as dotenv from 'dotenv';
-import { SIWENS, checkTTL } from '@justaname.id/siwens'
 import SignIn from '../../../lib/features/sign-in';
 import { OffchainResolvers } from '../../../lib/features';
 import { configureEnv } from '../../helpers/configureEnv';
@@ -62,8 +61,6 @@ describe('SignIn', () => {
   });
 
   it('should generate a nonce', () => {
-    console.log(SIWENS, checkTTL)
-    console.log(SIWENS.generateNonce())
     expect(signIn.generateNonce()).toBeTruthy();
   })
 

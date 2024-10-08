@@ -1,4 +1,4 @@
-import { SubnameSearchParams, SubnameSearchResponse } from '@justaname.id/sdk';
+import { SubnameSearchRoute, SubnameSearchResponse } from '@justaname.id/sdk';
 import {
   QueryObserverResult,
   RefetchOptions,
@@ -6,12 +6,12 @@ import {
 } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 
-export const buildSearchSubnamesKey = (params: SubnameSearchParams) => [
+export const buildSearchSubnamesKey = (params: SubnameSearchRoute['params']) => [
   'SEARCH_SUBNAME',
   ...Object.values(params),
 ];
 
-export interface UseSearchSubnamesParams extends Omit<SubnameSearchParams, 'isClaimed' | 'skip' | 'take' | 'data' | 'ensRegistered'> {
+export interface UseSearchSubnamesParams extends Omit<SubnameSearchRoute['params'], 'isClaimed' | 'skip' | 'take' | 'data' | 'ensRegistered'> {
   skip?: number;
   take?: number;
   data?: boolean;
@@ -34,7 +34,7 @@ export const useSearchSubnames = (params: UseSearchSubnamesParams): UseSearchSub
   const { subname, chainId,  ...rest } = params;
   const _chainId = chainId || defaultChainId;
 
-  const currentParams : SubnameSearchParams = {
+  const currentParams : SubnameSearchRoute['params'] = {
     subname: subname,
     skip: 0,
     take: 10,
@@ -49,11 +49,10 @@ export const useSearchSubnames = (params: UseSearchSubnamesParams): UseSearchSub
     queryKey: buildSearchSubnamesKey(currentParams),
     queryFn: async () => await justaname?.subnames.searchSubnames(currentParams),
     enabled: Boolean(subname) && Boolean(justaname),
-    initialData: { domains: [] }
   });
 
   return {
-    subnames: query.data,
+    subnames: query.data || { domains: [] },
     refetchSearchSubnames: query.refetch,
     isSubnamesPending: query.isPending,
     isSubnamesFetching: query.isFetching,
