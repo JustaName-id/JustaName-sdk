@@ -1,6 +1,6 @@
 {
   "name": "create-justaname-app",
-  "version": "0.3.48",
+  "version": "0.3.80",
   "type": "module",
   "bin": "index.esm.js",
   "dependencies": {
@@ -17,6 +17,13 @@
     "./package.json": "./package.json",
     ".": "./index.esm.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "module": "./index.esm.js",
-  "main": "./index.esm.js"
+  "main": "./index.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JustaName-id/JustaName-sdk"
+  }
 }

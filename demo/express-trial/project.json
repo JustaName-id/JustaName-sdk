@@ -1,0 +1,47 @@
+{
+  "name": "justaname-express-trial",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/express-trial/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "justaname-express-trial:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "justaname-express-trial:build:development"
+        },
+        "production": {
+          "buildTarget": "justaname-express-trial:build:production"
+        }
+      }
+    },
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/express-trial",
+        "main": "apps/express-trial/src/main.ts",
+        "tsConfig": "apps/express-trial/tsconfig.app.json",
+        "webpackConfig": "apps/express-trial/webpack.config.js",
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      },
+      "dependsOn": ["lint",
+        {
+        "projects": ["@justaname.id/sdk"],
+        "target": "build"
+      }]
+    }
+  },
+  "tags": []
+}

@@ -1,3 +1,341 @@
+## 0.2.91 (2024-09-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.24
+
+## 0.2.90 (2024-09-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.23
+
+## 0.2.89 (2024-09-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.22
+
+## 0.2.88 (2024-09-21)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.21
+
+## 0.2.87 (2024-09-21)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.20
+
+## 0.2.86 (2024-09-21)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.19
+
+## 0.2.85 (2024-09-20)
+
+
+### 🚀 Features
+
+- mApp in sdk react and react-signin ([#26](https://github.com/JustaName-id/JustaName-sdk/pull/26))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.18
+
+
+### ❤️  Thank You
+
+- JustHadi @HadiKhai
+
+## 0.2.84 (2024-09-20)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.17
+
+## 0.2.83 (2024-09-19)
+
+
+### 🩹 Fixes
+
+- removed logs ([cbcbb39](https://github.com/JustaName-id/JustaName-sdk/commit/cbcbb39))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.16
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.82 (2024-09-19)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.15
+
+## 0.2.81 (2024-09-19)
+
+
+### 🩹 Fixes
+
+- debug sdk ([38ba1e4](https://github.com/JustaName-id/JustaName-sdk/commit/38ba1e4))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.14
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.80 (2024-09-18)
+
+
+### 🚀 Features
+
+- siwens and ebdc ([87677f3](https://github.com/JustaName-id/JustaName-sdk/commit/87677f3))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.13
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.79 (2024-09-18)
+
+
+### 🚀 Features
+
+- siwens ([48572d1](https://github.com/JustaName-id/JustaName-sdk/commit/48572d1))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.12
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.78 (2024-09-16)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.77 (2024-09-16)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.76 (2024-09-15)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.75 (2024-09-15)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.74 (2024-09-15)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.73 (2024-09-15)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.72 (2024-09-15)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.71 (2024-09-14)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.70 (2024-09-14)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.69 (2024-09-14)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.68 (2024-09-14)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.67 (2024-09-14)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.66 (2024-09-14)
+
+
+### 🚀 Features
+
+- signin widget and privy example ([3f9bc14](https://github.com/JustaName-id/JustaName-sdk/commit/3f9bc14))
+
+- update loading flags in hooks naming convention ([70f70a4](https://github.com/JustaName-id/JustaName-sdk/commit/70f70a4))
+
+- update subname ([12755c4](https://github.com/JustaName-id/JustaName-sdk/commit/12755c4))
+
+
+### 🩹 Fixes
+
+- signIn feature ([fbaf873](https://github.com/JustaName-id/JustaName-sdk/commit/fbaf873))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.65 (2024-09-12)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.64 (2024-09-09)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.63 (2024-09-09)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.62 (2024-09-06)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.61 (2024-08-26)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.60 (2024-08-26)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.59 (2024-08-26)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.58 (2024-08-23)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.57 (2024-08-23)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.56 (2024-08-23)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.55 (2024-08-23)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.54 (2024-08-23)
+
+This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.
+
+## 0.2.53 (2024-08-22)
+
+
+### 🚀 Features
+
+- test release ([501058a](https://github.com/JustaName-id/JustaName-sdk/commit/501058a))
+
+- test release ([c9289f4](https://github.com/JustaName-id/JustaName-sdk/commit/c9289f4))
+
+
+### 🩹 Fixes
+
+- yml release ([113c62d](https://github.com/JustaName-id/JustaName-sdk/commit/113c62d))
+
+- version ([0a1f85b](https://github.com/JustaName-id/JustaName-sdk/commit/0a1f85b))
+
+- token ([8237d29](https://github.com/JustaName-id/JustaName-sdk/commit/8237d29))
+
+- npm ([1ab2e65](https://github.com/JustaName-id/JustaName-sdk/commit/1ab2e65))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.3.2 (2024-08-22)
+
+
+### 🩹 Fixes
+
+- token ([8237d29](https://github.com/JustaName-id/JustaName-sdk/commit/8237d29))
+
+
+### ❤️  Thank You
+
+- anthony2399
+
+## 0.3.1 (2024-08-22)
+
+
+### 🩹 Fixes
+
+- version ([0a1f85b](https://github.com/JustaName-id/JustaName-sdk/commit/0a1f85b))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.3.0 (2024-08-21)
+
+
+### 🚀 Features
+
+- test release ([501058a](https://github.com/JustaName-id/JustaName-sdk/commit/501058a))
+
+- test release ([c9289f4](https://github.com/JustaName-id/JustaName-sdk/commit/c9289f4))
+
+
+### 🩹 Fixes
+
+- yml release ([113c62d](https://github.com/JustaName-id/JustaName-sdk/commit/113c62d))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.52 (2024-08-16)
+
+
+### 🚀 Features
+
+- **sdk, react:** added getoffchainresolvers method and setjustaname resolver ([#22](https://github.com/JustaName-id/JustaName-sdk/pull/22))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.2.51 (2024-08-08)
 
 This was a version bump only for @justaname.id/sdk to align it with other projects, there were no code changes.

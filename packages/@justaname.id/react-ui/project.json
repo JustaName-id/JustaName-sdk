@@ -1,0 +1,168 @@
+{
+  "name": "@justaname.id/react-ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@justaname.id/react-ui/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "storybook": {
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "packages/@justaname.id/react-ui/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx buildProject @justaname.id/react-ui"
+          },
+          {
+            "command": "node update-package-json.js"
+          }
+        ],
+        "cwd": "packages/@justaname.id/react-ui",
+        "parallel": false
+      }
+    },
+    "buildProject": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/@justaname.id/react-ui/dist",
+        "tsConfig": "packages/@justaname.id/react-ui/tsconfig.lib.json",
+        "project": "packages/@justaname.id/react-ui/package.json",
+        "entryFile": "packages/@justaname.id/react-ui/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "generateExportsField": true,
+        "compiler": "swc",
+        "format": ["esm"],
+        "assets": [
+          {
+            "glob": "packages/@justaname.id/react-ui/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      },
+      "dependsOn": ["lint"]
+    },
+    "transform:logo": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "rm -rf src/lib/icons/components/logo && mkdir src/lib/icons/components/logo && npx @svgr/cli --out-dir src/lib/icons/components/logo --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/logo "
+      }
+    },
+    "transform:chains": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "rm -rf src/lib/icons/components/chains && mkdir src/lib/icons/components/chains && npx @svgr/cli --out-dir src/lib/icons/components/chains --config-file .svgrrc.js --index-template=src/template/index-chain-template.js  -- src/lib/icons/svgs/chains "
+      }
+    },
+    "transform:general": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "rm -rf src/lib/icons/components/general && mkdir src/lib/icons/components/general && npx @svgr/cli --out-dir src/lib/icons/components/general --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/general "
+      }
+    },
+    "transform:socials": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "rm -rf src/lib/icons/components/socials && mkdir src/lib/icons/components/socials && npx @svgr/cli --out-dir src/lib/icons/components/socials --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/socials "
+      }
+    },
+    "transform:contentHash": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "rm -rf src/lib/icons/components/contentHash && mkdir src/lib/icons/components/contentHash && npx @svgr/cli --out-dir src/lib/icons/components/contentHash --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/contentHash "
+      }
+    },
+    "transform:all": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run @justaname.id/react-ui:transform:chains",
+          "nx run @justaname.id/react-ui:transform:general",
+          "nx run @justaname.id/react-ui:transform:socials",
+          "nx run @justaname.id/react-ui:transform:contentHash",
+          "nx run @justaname.id/react-ui:transform:logo"
+        ]
+      }
+    },
+    "missingChains": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "npx tsx src/scripts/missingChains.ts"
+      }
+    },
+    "extraChains": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "npx tsx src/scripts/extraChains.ts"
+      }
+    },
+    "removeExtraChains": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justaname.id/react-ui",
+        "command": "npx tsx src/scripts/removeExtraChains.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "fix": true,
+        "lintFilePatterns": [
+          "packages/@justaname.id/react-ui/**/*.{ts,tsx,js,jsx}",
+          "packages/@justaname.id/react-ui/package.json"
+        ]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs @justaname.id/react-ui {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "packages/@justaname.id/react-ui/dist"
+      },
+      "dependsOn": ["^build", "build"]
+    },
+    "release:package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx semantic-release --debug --extends=./packages/@justaname.id/react-ui/release.config.js"
+      }
+    },
+    "update-deps": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx rjp ./packages/@justaname.id/react-ui/dist/package.json $PACKAGE_NAME $VERSION"
+      }
+    }
+  }
+}

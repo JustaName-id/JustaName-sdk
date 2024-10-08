@@ -5,34 +5,84 @@ on:
       - 'main'
 jobs:
   release:
+    runs-on: ubuntu-latest
+    if: ${{!contains(github.event.head_commit.message, format('chore(release){0} publish', ':')) && !contains(github.event.head_commit.message, format('CI{0} Update yarn.lock files', ':'))}}
     permissions:
       contents: write
-
-    runs-on: ubuntu-latest
+      packages: write
+      actions: read
+      id-token: write
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.VERSION_BUMPER_APPID }}
+          private-key: ${{ secrets.VERSION_BUMPER_SECRET }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
-      - name: Install Dependencies
-        run: |
-          yarn install
-          npx nx run-many --target=install --all --parallel
-      
-      - name: Build and Test
-        run: |
-          npx nx affected -t lint
-          npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
-          npx nx affected -t build
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Set up Git user
         run: |
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global user.name "${GITHUB_ACTOR}"
-        
+
+      - name: Install Dependencies with Immutable Flag
+        run: |
+          yarn install --immutable
+
+      - name: Reinstall Dependencies for Specific Projects
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
+        run: |
+          npx nx run-many --target=reinstall --projects=justaname-express,justaname-next-app,justaname-next-pages,justaname-fastify,justaname-nestjs,justaname-expo-full,justaname-react,justaname-hapi,justaname-koa,justaname-expo-frontend --parallel
+
+      - name: Check for Updated yarn.lock Files
+        run: |
+          git add examples/*/yarn.lock
+          git diff --cached --exit-code || (git commit -m "CI: Update yarn.lock files" && git push origin main)
+
+      - name: Build and Test
+        env:
+          SDK_JUSTANAME_ENVIRONMENT: ${{ secrets.SDK_JUSTANAME_ENVIRONMENT }}
+          SDK_JUSTANAME_TEST_API_KEY: ${{ secrets.SDK_JUSTANAME_TEST_API_KEY }}
+          SDK_MAPP_PRIVATE_KEY: ${{ secrets.SDK_MAPP_PRIVATE_KEY }}
+          SDK_PROVIDER_URL: ${{ secrets.SDK_PROVIDER_URL }}
+          SDK_ENS_DOMAIN: ${{ secrets.SDK_ENS_DOMAIN }}
+          SDK_MAPP: ${{ secrets.SDK_MAPP }}
+          SIWENS_PRIVATE_KEY: ${{ secrets.SIWENS_PRIVATE_KEY }}
+          SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
+          SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
+        run: |
+          npx nx affected -t lint
+          npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
+          npx nx affected -t build
+
+      - name: Pull latest changes from main
+        run: git pull origin main
+
+      - name: Setup Node.js with npm Registry
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
+          always-auth: true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Reset Nx Cache
+        run: |
+          npx nx reset
+          echo "Reset completed"
+
       - name: Release
-        run: npx nx release --yes
+        run: |
+          npx nx release  --specifier=patch --yes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true

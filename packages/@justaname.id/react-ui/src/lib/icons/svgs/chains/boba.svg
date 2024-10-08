@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns:xodm="http://www.corel.com/coreldraw/odm/2003" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 2500 2500" style="enable-background:new 0 0 2500 2500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;}
+	.st1{fill:#CCFF00;}
+	.st2{fill-rule:evenodd;clip-rule:evenodd;fill:#1CD7D2;}
+</style>
+<g id="Layer_x0020_1">
+	<g id="_2806320627344">
+		<rect y="0" class="st0" width="2500" height="2500"></rect>
+		<g>
+			<path class="st1" d="M1267,2146c-147,0-280-60-377-156c-96-96-156-230-156-377c0-114,36-219,97-306l35,209c-7,31-11,64-11,97     c0,114,46,217,121,291c75,75,178,121,291,121c114,0,217-46,291-121c75-75,121-178,121-291c0-114-46-217-121-291     c-75-75-178-121-291-121c-109,0-208,42-281,111l-23-136c86-60,191-95,304-95c147,0,280,60,377,156c96,96,156,230,156,377     s-60,280-156,377c-96,96-230,156-377,156V2146z"></path>
+			<circle class="st2" cx="1105" cy="1456" r="71"></circle>
+			<circle class="st2" cx="1287" cy="1614" r="71"></circle>
+			<circle class="st2" cx="1336" cy="1374" r="71"></circle>
+			<circle class="st2" cx="1508" cy="1537" r="71"></circle>
+			<circle class="st2" cx="1058" cy="1690" r="71"></circle>
+			<circle class="st2" cx="1462" cy="1769" r="71"></circle>
+			<circle class="st2" cx="1236" cy="1856" r="71"></circle>
+			<path class="st1" d="M993,1566c9-12,13-27,10-43L814,402c-3-16-11-29-23-37c-12-9-27-13-43-10s-29,11-37,23c-9,12-13,27-10,43     l189,1121c3,16,11,29,23,37c12,9,27,13,43,10S985,1578,993,1566z"></path>
+		</g>
+	</g>
+</g>
+</svg>

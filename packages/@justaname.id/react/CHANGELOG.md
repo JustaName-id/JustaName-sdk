@@ -1,3 +1,334 @@
+## 0.3.94 (2024-09-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.91
+
+## 0.3.93 (2024-09-22)
+
+
+### 🚀 Features
+
+- add routes to auth ([#31](https://github.com/JustaName-id/JustaName-sdk/pull/31))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.90
+
+
+### ❤️  Thank You
+
+- JustHadi @HadiKhai
+
+## 0.3.92 (2024-09-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.89
+
+## 0.3.91 (2024-09-21)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.88
+
+## 0.3.90 (2024-09-21)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.87
+
+## 0.3.89 (2024-09-21)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.86
+
+## 0.3.88 (2024-09-20)
+
+
+### 🚀 Features
+
+- mApp in sdk react and react-signin ([#26](https://github.com/JustaName-id/JustaName-sdk/pull/26))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.85
+
+
+### ❤️  Thank You
+
+- JustHadi @HadiKhai
+
+## 0.3.87 (2024-09-20)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.84
+
+## 0.3.86 (2024-09-19)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.83
+
+## 0.3.85 (2024-09-19)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.82
+
+## 0.3.84 (2024-09-19)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.81
+
+## 0.3.83 (2024-09-18)
+
+
+### 🚀 Features
+
+- siwens and ebdc ([87677f3](https://github.com/JustaName-id/JustaName-sdk/commit/87677f3))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.80
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.3.82 (2024-09-18)
+
+
+### 🚀 Features
+
+- siwens ([48572d1](https://github.com/JustaName-id/JustaName-sdk/commit/48572d1))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.79
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.3.81 (2024-09-16)
+
+
+### 🩹 Fixes
+
+- trial action ([d6c9afd](https://github.com/JustaName-id/JustaName-sdk/commit/d6c9afd))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.78
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.3.80 (2024-09-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.77
+
+## 0.3.79 (2024-09-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.76
+
+## 0.3.78 (2024-09-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.75
+
+## 0.3.77 (2024-09-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.74
+
+## 0.3.76 (2024-09-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.73
+
+## 0.3.75 (2024-09-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.72
+
+## 0.3.74 (2024-09-14)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.71
+
+## 0.3.73 (2024-09-14)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.70
+
+## 0.3.72 (2024-09-14)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.69
+
+## 0.3.71 (2024-09-14)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.68
+
+## 0.3.70 (2024-09-14)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.67
+
+## 0.3.69 (2024-09-14)
+
+
+### 🚀 Features
+
+- signin widget and privy example ([3f9bc14](https://github.com/JustaName-id/JustaName-sdk/commit/3f9bc14))
+
+- update loading flags in hooks naming convention ([70f70a4](https://github.com/JustaName-id/JustaName-sdk/commit/70f70a4))
+
+- update subname ([12755c4](https://github.com/JustaName-id/JustaName-sdk/commit/12755c4))
+
+
+### 🩹 Fixes
+
+- signIn feature ([fbaf873](https://github.com/JustaName-id/JustaName-sdk/commit/fbaf873))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.66
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.3.68 (2024-09-12)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.67 (2024-09-09)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.66 (2024-09-09)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.65 (2024-09-06)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.64 (2024-08-26)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.63 (2024-08-26)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.62 (2024-08-26)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.61 (2024-08-23)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.60 (2024-08-23)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.59 (2024-08-23)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.58 (2024-08-23)
+
+This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.
+
+## 0.3.57 (2024-08-22)
+
+
+### 🩹 Fixes
+
+- token ([8237d29](https://github.com/JustaName-id/JustaName-sdk/commit/8237d29))
+
+
+### ❤️  Thank You
+
+- anthony2399
+
+## 0.3.56 (2024-08-22)
+
+
+### 🩹 Fixes
+
+- version ([0a1f85b](https://github.com/JustaName-id/JustaName-sdk/commit/0a1f85b))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.3.55 (2024-08-16)
+
+
+### 🚀 Features
+
+- **sdk, react:** added getoffchainresolvers method and setjustaname resolver ([#22](https://github.com/JustaName-id/JustaName-sdk/pull/22))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.3.54 (2024-08-08)
 
 This was a version bump only for @justaname.id/react to align it with other projects, there were no code changes.

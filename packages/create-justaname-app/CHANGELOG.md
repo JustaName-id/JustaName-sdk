@@ -1,3 +1,139 @@
+## 0.3.80 (2024-09-22)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.79 (2024-09-22)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.78 (2024-09-22)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.77 (2024-09-21)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.76 (2024-09-21)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.75 (2024-09-21)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.74 (2024-09-20)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.73 (2024-09-20)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.72 (2024-09-19)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.71 (2024-09-19)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.70 (2024-09-19)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.69 (2024-09-18)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.68 (2024-09-18)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.67 (2024-09-16)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.66 (2024-09-16)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.65 (2024-09-15)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.64 (2024-09-15)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.63 (2024-09-15)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.62 (2024-09-15)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.61 (2024-09-15)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.60 (2024-09-14)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.59 (2024-09-14)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.58 (2024-09-14)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.57 (2024-09-14)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.56 (2024-08-26)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.55 (2024-08-23)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.54 (2024-08-23)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.53 (2024-08-23)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.52 (2024-08-23)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.51 (2024-08-22)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.50 (2024-08-22)
+
+This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.
+
+## 0.3.49 (2024-08-16)
+
+
+### 🚀 Features
+
+- **sdk, react:** added getoffchainresolvers method and setjustaname resolver ([#22](https://github.com/JustaName-id/JustaName-sdk/pull/22))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.3.48 (2024-08-08)
 
 This was a version bump only for create-justaname-app to align it with other projects, there were no code changes.

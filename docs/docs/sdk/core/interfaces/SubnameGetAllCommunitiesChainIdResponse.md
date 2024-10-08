@@ -25,7 +25,7 @@ including an array of subname details and pagination information.
 
 #### Defined in
 
-[lib/types/subnames/community.ts:180](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L180)
+[lib/types/subnames/get-all-by-ens-domain-with-count.ts:180](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L180)
 
 ___
 
@@ -37,4 +37,4 @@ Pagination information for navigating through the subnames.
 
 #### Defined in
 
-[lib/types/subnames/community.ts:182](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L182)
+[lib/types/subnames/get-all-by-ens-domain-with-count.ts:182](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L182)
