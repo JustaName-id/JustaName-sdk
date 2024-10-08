@@ -1,0 +1,20 @@
+{
+  "customDomain": "docs.justaname.id",
+  "guides": [
+    {
+      "name": "My awesome documentation",
+      "sidebar": [
+        {
+          "path": "docs/introduction.md",
+          "type": "page"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "name": "API Reference",
+      "path": "api/openapi.json"
+    }
+  ]
+}
