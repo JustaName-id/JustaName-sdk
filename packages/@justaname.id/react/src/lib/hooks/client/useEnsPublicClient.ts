@@ -11,8 +11,8 @@ export const getEnsPublicClient = (providerUrl: string, chainId: ChainId) => {
     chain: addEnsContracts(chainId === 1 ? mainnet : sepolia),
     transport: http(providerUrl)
   });
-
 }
+
 export const buildEnsPublicClientKey = (
   chainId: ChainId
 ) => [

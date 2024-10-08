@@ -4,11 +4,12 @@ import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { SubnameAddParams, SubnameAddResponse } from '@justaname.id/sdk';
+import { sanitizeRecords, SubnameAddRoute } from '@justaname.id/sdk';
 import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useMemo } from 'react';
+import { Records } from '../../types';
 
-export type UseAddSubnameFunctionParams = SubnameAddParams
+export type UseAddSubnameFunctionParams = SubnameAddRoute['params'];
 
 export interface UseAddSubnameParams extends Omit<UseAddSubnameFunctionParams, "username"> {
   backendUrl?: string;
@@ -16,7 +17,7 @@ export interface UseAddSubnameParams extends Omit<UseAddSubnameFunctionParams, "
 }
 
 export interface UseAddSubnameResult {
-  addSubname: UseMutateAsyncFunction<SubnameAddResponse, Error, UseAddSubnameFunctionParams>;
+  addSubname: UseMutateAsyncFunction<Records, Error, UseAddSubnameFunctionParams>;
   isAddSubnamePending: boolean;
 }
 
@@ -39,7 +40,7 @@ export const useAddSubname = (params?: UseAddSubnameParams): UseAddSubnameResult
 
       const signature = await getSignature();
 
-      let response: SubnameAddResponse;
+      let response: SubnameAddRoute['response'];
 
       if (apiKey) {
         response = await justaname.subnames.addSubname(
@@ -82,8 +83,11 @@ export const useAddSubname = (params?: UseAddSubnameParams): UseAddSubnameResult
       }
 
       refetchAccountSubnames();
-      return response;
-    },
+      return {
+        ...response,
+        sanitizedRecords: sanitizeRecords(response)
+      }
+      },
   });
 
   return {

@@ -50,7 +50,6 @@ describe('SIWENS', () => {
   });
 
   it('should create the message', () => {
-    console.log(siwens.prepareMessage())
     expect(siwens.prepareMessage()).toBeTruthy();
   });
 
@@ -135,7 +134,7 @@ describe('SIWENS', () => {
 
   it('should verify a valid signature', async () => {
     const signature = await signer.signMessage(message);
-    console.log(message)
+
     const address = await new SIWENS({
       params:message,
       providerUrl: PROVIDER_URL

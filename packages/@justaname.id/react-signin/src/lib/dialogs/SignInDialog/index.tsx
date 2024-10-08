@@ -16,15 +16,14 @@ import {
   useMountedAccount,
   useAccountEnsNames,
   useAccountSubnames,
-  splitDomain,
+  Records,
 } from '@justaname.id/react';
 import { FC, Fragment, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { useDebounce } from '../../hooks/useDebounce';
-import { SelectSubnameItem } from '../../components/SelectSubnameItem';
 import { DefaultDialog } from '../DefaultDialog';
-import { SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
 import { LoadingDialog } from '../LoadingDialog';
+import { SelectSubnameItem } from '../../components/SelectSubnameItem';
 
 export interface SignInDialogProps {
   open: boolean;
@@ -55,53 +54,48 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
 
   const [username, setUsername] = useState('');
   const [subnameSigningIn, setSubnameSigningIn] = useState('');
-  const { addSubname, isAddSubnamePending } = useAddSubname();
+  const { addSubname: addEnsSubname, isAddSubnamePending: isAddEnsSubnamePending } = useAddSubname();
+  const { addSubname: addDefaultSubname, isAddSubnamePending: isAddDefaultSubnamePending } = useAddSubname({
+    backendUrl: `https://claim.justaname.id`,
+    addSubnameRoute: "/api/subnames/add"
+  });
+
   const {
     debouncedValue: debouncedUsername,
     isDebouncing
   } = useDebounce(username, 500);
 
+  const addSubname = useMemo(() => {
+    return selectedEnsDomain ? addEnsSubname : addDefaultSubname;
+  }, [selectedEnsDomain, addEnsSubname, addDefaultSubname]);
+
+  const isAddSubnamePending = useMemo(() => {
+    return selectedEnsDomain ? isAddEnsSubnamePending : isAddDefaultSubnamePending;
+  }, [selectedEnsDomain, isAddEnsSubnamePending, isAddDefaultSubnamePending]);
+
+  const claimableEns = useMemo(() => {
+    return selectedEnsDomain ? selectedEnsDomain : chainId === 1 ? 'justan.id' : 'justan.eth';
+  }, [selectedEnsDomain, chainId]);
+
   const { signIn } = useEnsSignIn();
 
   const subnames = useMemo(() => {
-    let accountNames = [];
+    let accountNames: Records[] = [];
     if (isAccountSubnamesPending || isAccountEnsNamesPending) {
       return accountNames;
     }
 
     if (allowedEns === 'all') {
-      accountNames = [...accountNames, ...accountSubnames.subnames];
-      accountNames = [...accountNames, ...accountEnsNames
-        .filter(name => !name.records.isJAN)
-        .map<SubnameGetAllByAddressResponse>(name => {
-            const [username] = splitDomain(name.name);
-            const recordToName: SubnameGetAllByAddressResponse = {
-              data: {
-                textRecords: name.records.texts.map(text => ({ key: text.key, value: text.value, id: '', dataId: '' })),
-                addresses: name.sanitizedRecords.allAddresses.map(address => ({ address: address.value, coinType: address.id, id: '', dataId: '' })),
-                contentHash: name?.records?.contentHash?.decoded || "",
-                id: '',
-                subdomainId: '',
-              },
-              isClaimed: false,
-              id: '',
-              ensId: "",
-              subname: name.name,
-              username: username,
-            }
-
-            return recordToName;
-          }
-        )];
+      accountNames = [...accountEnsNames, ...accountSubnames];
     }
 
     if (allowedEns === 'platform') {
-      accountNames = [...accountNames, ...accountSubnames.filter(subname => subname.subname.endsWith(selectedEnsDomain))];
+      accountNames = [...accountEnsNames, ...accountSubnames].filter(subname => subname.ens.endsWith(selectedEnsDomain || ''));
     }
 
     if (Array.isArray(allowedEns)) {
       allowedEns.forEach(ens => {
-        accountNames = [...accountNames, ...accountSubnames.filter(subname => subname.subname.endsWith(ens))];
+        accountNames = [...accountEnsNames, ...accountSubnames].filter(subname => subname.ens.endsWith(ens))
       });
     }
 
@@ -113,18 +107,34 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
   }, [subnames]);
 
   const shouldBeAbleToClaimDomain = useMemo(() => {
-    const filteredSubnames = subnames.filter(subname => subname.subname.split('.').length === 3);
-    return !filteredSubnames.find(subname => subname.subname.endsWith(ensDomain));
+    return selectedEnsDomain ? !subnames.find(subname => subname.ens.endsWith(selectedEnsDomain)) : false;
   }, [subnames, selectedEnsDomain]);
 
   const shouldBeAbleToClaimJANDomain = useMemo(() => {
-    return !subnames.find(subname => subname.subname.endsWith(chainId === 1 ? 'justan.id' : 'justan.eth'));
+    return !subnames.find(subname => subname.ens.endsWith(chainId === 1 ? 'justan.id' : 'justan.eth'));
   }, [subnames, chainId]);
 
-  const { isSubnameAvailable, isSubnameAvailablePending } = useIsSubnameAvailable({
+  const shouldBeAbleToClaim = useMemo(() => {
+    return selectedEnsDomain ? shouldBeAbleToClaimDomain : shouldBeAbleToClaimJANDomain;
+  }, [shouldBeAbleToClaimDomain, shouldBeAbleToClaimJANDomain, selectedEnsDomain]);
+
+  const { isSubnameAvailable: isSelectedEnsDomainAvailable, isSubnameAvailablePending: isSelectedEnsDomainAvailablePending } = useIsSubnameAvailable({
     username: debouncedUsername,
-    ensDomain: shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'justan.eth'
+    ensDomain: selectedEnsDomain,
   });
+
+  const { isSubnameAvailable: isDefaultSubnameAvailable, isSubnameAvailablePending: isDefaultSubnameAvailablePending } = useIsSubnameAvailable({
+    username: debouncedUsername,
+    ensDomain: chainId === 1 ? 'justan.id' : 'justan.eth',
+  });
+
+  const isSubnameAvailable = useMemo(() => {
+    return selectedEnsDomain ? isSelectedEnsDomainAvailable : isDefaultSubnameAvailable;
+  }, [selectedEnsDomain, isSelectedEnsDomainAvailable, isDefaultSubnameAvailable]);
+
+  const isSubnameAvailablePending = useMemo(() => {
+    return selectedEnsDomain ? isSelectedEnsDomainAvailablePending : isDefaultSubnameAvailablePending;
+  }, [selectedEnsDomain, isSelectedEnsDomainAvailablePending, isDefaultSubnameAvailablePending]);
 
   if (isConnected && (isAccountSubnamesPending || isAccountEnsNamesPending) && open) {
     return <LoadingDialog open={true} />
@@ -185,8 +195,8 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
                       selectedSubname={subnameSigningIn}
                       subname={subname}
                       onClick={() => {
-                        setSubnameSigningIn(subname.subname);
-                        signIn({ ens: subname.subname }).then(() => handleOpenDialog(false)).finally(() => {
+                        setSubnameSigningIn(subname.ens);
+                        signIn({ ens: subname.ens }).then(() => handleOpenDialog(false)).finally(() => {
                           setSubnameSigningIn('');
                         });
                       }}
@@ -198,11 +208,11 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
           </Flex>
         </Flex>
       </TransitionElement>
-      <TransitionElement className={(shouldBeAbleToSelect && (shouldBeAbleToClaimDomain || shouldBeAbleToClaimJANDomain)) ? 'visible' : ''} maxheight={'100px'}>
+      <TransitionElement className={(shouldBeAbleToSelect && shouldBeAbleToClaim) ? 'visible' : ''} maxheight={'100px'}>
         <OrLine />
       </TransitionElement>
 
-      <TransitionElement className={(shouldBeAbleToClaimDomain || shouldBeAbleToClaimJANDomain) ? 'visible' : ''} maxheight={'100px'}>
+      <TransitionElement className={shouldBeAbleToClaim ? 'visible' : ''} maxheight={'100px'}>
         <Flex
           justify="space-between"
           direction="column"
@@ -217,7 +227,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
             <Input
               id="name"
               placeholder={`Enter your username...`}
-              right={'.' + (shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'justan.eth')}
+              right={'.' + claimableEns}
               onChange={(e) => setUsername(e.target.value)}
               value={username}
               left={<Flex justify={'center'} align={'center'}>
@@ -241,17 +251,16 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
                 fontWeight: '900'
               }}
               onClick={() => {
+
                 addSubname({
                   username: username,
-                  ensDomain: shouldBeAbleToClaimDomain ? ensDomain : chainId === 1 ? 'justan.id' : 'justan.eth',
-                  backendUrl: shouldBeAbleToClaimDomain ? undefined : `https://claim.justaname.id`,
-                  addSubnameRoute: shouldBeAbleToClaimDomain ? undefined : "/api/subnames/add",
+                  ensDomain: claimableEns,
                 }).then(() => {
-                  setSubnameSigningIn(username + '.' + ensDomain);
-                  signIn({ ens: username + '.' + ensDomain }).then(() => handleOpenDialog(false)).finally(() => {
+                  setSubnameSigningIn(username + '.' + claimableEns);
+                  signIn({ ens: username + '.' + claimableEns   }).then(() => handleOpenDialog(false)).finally(() => {
                     setSubnameSigningIn('');
                   });
-                });
+                })
               }}
             >
               Claim

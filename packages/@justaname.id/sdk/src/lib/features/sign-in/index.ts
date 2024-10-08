@@ -41,7 +41,7 @@ export class SignIn {
 
     const uri = params.origin || this.siweConfig?.origin;
     const domain = params.domain || this.siweConfig?.domain;
-    const ttl = params.ttl || this.signInTtl
+    const ttl = params.ttl || this.signInTtl || 60000;
 
     const missingParams = [];
     if (!uri) {
@@ -55,7 +55,6 @@ export class SignIn {
       throw InvalidConfigurationException.missingParameters(missingParams);
     }
 
-    console.log(missingParams, uri, domain, chainId, ttl);
     const siwens = new SIWENS({
       params: {
         ...params,
@@ -85,6 +84,7 @@ export class SignIn {
     if(extractedChainId !== 1 && extractedChainId !== 11155111){
       throw new Error('Chain ID not supported');
     }
+
     const chainId = extractedChainId as ChainId;
 
     const network = this.networks.find(network => network.chainId === chainId);
@@ -122,7 +122,7 @@ export class SignIn {
 
     const [resolverAddress,resolvers] = await Promise.all([network.provider.getResolver(ens),this.offchainResolvers.getAllOffchainResolvers()]);
 
-    const currentOffchainResolver = resolvers.find(resolver => resolver.chainId === chainId)
+    const currentOffchainResolver = resolvers.offchainResolvers.find(resolver => resolver.chainId === chainId)
 
     if(!currentOffchainResolver){
       throw InvalidENSException.chainNotSupported(
@@ -140,7 +140,6 @@ export class SignIn {
   }
 
   generateNonce(): string {
-    console.log(SIWENS.generateNonce());
     return SIWENS.generateNonce();
   }
 }

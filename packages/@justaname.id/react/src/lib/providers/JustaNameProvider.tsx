@@ -71,6 +71,7 @@ export const JustaNameProvider: React.FC<JustaNameProviderProps> = ({
     return chainId === 11155111 ? 11155111 : 1
   }, [chainId])
 
+
   const [justaname] = React.useState<JustaName>(JustaName.init({
     networks,
     config,
@@ -79,13 +80,9 @@ export const JustaNameProvider: React.FC<JustaNameProviderProps> = ({
     apiKey
   }));
 
-  const configuredEnsDomains = useMemo(() => {
-    return JustaName.createEnsDomains(ensDomains)
-  }, [ensDomains])
-
   const selectedEnsDomain = useMemo(() => {
-    return configuredEnsDomains.find((ensDomain) => ensDomain.chainId === defaultChain)?.ensDomain
-  }, [configuredEnsDomains, defaultChain])
+    return ensDomains?.find((ensDomain) => ensDomain.chainId === defaultChain)?.ensDomain
+  }, [ensDomains, defaultChain])
 
   const configuredNetworks = useMemo(() => {
     return JustaName.createNetworks(networks)
@@ -100,7 +97,7 @@ export const JustaNameProvider: React.FC<JustaNameProviderProps> = ({
       <JustaNameContext.Provider value={{
         backendUrl,
         config,
-        ensDomains: configuredEnsDomains,
+        ensDomains: ensDomains || [],
         selectedEnsDomain,
         networks: configuredNetworks,
         chainId: defaultChain,

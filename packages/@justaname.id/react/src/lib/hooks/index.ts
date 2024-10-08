@@ -1,5 +1,4 @@
 export * from './account'
-export * from './communities';
 export * from './ens';
 export * from './mApp';
 export * from './records';

@@ -28,7 +28,7 @@ The blockchain network identifier where the subname exists.
 
 #### Defined in
 
-[lib/types/subnames/available.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L16)
+[lib/types/subnames/is-subname-available.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L16)
 
 ___
 
@@ -40,4 +40,4 @@ The subname to check for availability.
 
 #### Defined in
 
-[lib/types/subnames/available.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L15)
+[lib/types/subnames/is-subname-available.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/available.ts#L15)

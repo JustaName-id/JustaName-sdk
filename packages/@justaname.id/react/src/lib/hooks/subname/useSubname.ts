@@ -2,7 +2,8 @@
 
 import { useJustaName } from '../../providers';
 import { QueryObserverResult, RefetchOptions, useQuery } from '@tanstack/react-query';
-import { ChainId, SubnameGetBySubnameParams, SubnameGetBySubnameResponse } from '@justaname.id/sdk';
+import { ChainId, sanitizeRecords, SubnameGetBySubnameRoute } from '@justaname.id/sdk';
+import { Records } from '../../types';
 
 
 export const buildSubnameBySubnameKey = (
@@ -10,14 +11,14 @@ export const buildSubnameBySubnameKey = (
   chainId: ChainId
 ) => ['SUBNAME_BY_SUBNAME', subname, chainId]
 
-export type UseSubnameParams = SubnameGetBySubnameParams
+export type UseSubnameParams = SubnameGetBySubnameRoute['params']
 
 interface UseSubnameResult {
-  subname: SubnameGetBySubnameResponse | undefined;
+  subname: Records | undefined;
   isSubnamePending: boolean;
   isSubnameFetching: boolean;
   isSubnameLoading: boolean;
-  refetchSubname: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<SubnameGetBySubnameResponse | undefined, unknown>>;
+  refetchSubname: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<Records | undefined, unknown>>;
 }
 
 export const useSubname = (params: UseSubnameParams) : UseSubnameResult => {
@@ -26,10 +27,17 @@ export const useSubname = (params: UseSubnameParams) : UseSubnameResult => {
 
   const query = useQuery({
     queryKey: buildSubnameBySubnameKey(params.subname, _chainId),
-    queryFn: () => justaname?.subnames.getBySubname({
-      subname: params.subname,
-      chainId: _chainId
-    }),
+    queryFn: async () => {
+      const subname = await justaname.subnames.getSubname({
+        subname: params.subname,
+        chainId: _chainId
+      });
+
+      return {
+        ...subname,
+        sanitizedRecords: sanitizeRecords(subname)
+      }
+    },
     enabled:  Boolean(justaname) && Boolean(params.subname),
   })
 

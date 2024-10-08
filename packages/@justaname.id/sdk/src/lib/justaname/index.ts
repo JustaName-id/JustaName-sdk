@@ -4,7 +4,7 @@ import {
   NetworksWithProvider,
   ChainId,
   JustaNameConfigDefaults,
-  NetworkWithProvider, EnsDomainByChainId, EnsDomains
+  NetworkWithProvider
 } from '../types';
 import { OffchainResolvers, SignIn, SubnameChallenge, Subnames, MApps } from '../features';
 import { InvalidConfigurationException } from '../errors/InvalidConfiguration.exception';
@@ -84,21 +84,13 @@ export class JustaName {
     this.mApps = mApps;
   }
 
-  /**
-   * Initializes the JustaName SDK.
-   * @param {JustaNameConfig} configuration - The configuration object.
-   * @returns {JustaName} - A promise that resolves with the JustaName SDK.
-   * @public
-   * @static
-   */
   static init(configuration: JustaNameConfig = {}): JustaName {
     const defaultChainId = configuration.defaultChainId ||
       (configuration && configuration?.networks && configuration.networks[0]?.chainId ) ||
       1 as ChainId;
 
     const networks = JustaName.createNetworks(configuration.networks)
-    const ensDomains = JustaName.createEnsDomains(configuration.ensDomains)
-
+    const ensDomains = configuration.ensDomains || [];
     const sanitizedConfiguration:JustaNameConfigDefaults = {
       ...configuration,
       defaultChainId,
@@ -152,7 +144,6 @@ export class JustaName {
     const defaultMainnetProviderUrl = 'https://cloudflare-eth.com';
     const defaultTestnetProviderUrl = 'https://rpc.sepolia.org';
 
-
     const defaultMainnetProvider = new ethers.JsonRpcProvider(defaultMainnetProviderUrl, 1)
     const defaultTestnetProvider = new ethers.JsonRpcProvider(defaultTestnetProviderUrl, 11155111)
 
@@ -166,6 +157,11 @@ export class JustaName {
         chainId: 11155111 as ChainId,
         provider: defaultTestnetProvider,
         providerUrl: defaultTestnetProviderUrl
+      },
+      {
+        chainId: 31337 as ChainId,
+        provider: new ethers.JsonRpcProvider('http://localhost:8545'),
+        providerUrl: 'http://localhost:8545',
       }
     ] as NetworksWithProvider
 
@@ -184,7 +180,7 @@ export class JustaName {
 
     const mainnetNetwork = baseNetworksConfig.find(n => n.chainId === 1) as NetworkWithProvider<1>
     const testnetNetwork = baseNetworksConfig.find(n => n.chainId === 11155111) as NetworkWithProvider<11155111>
-
+    const localNetwork = baseNetworksConfig.find(n => n.chainId === 31337) as NetworkWithProvider<31337>
     if (!mainnetNetwork) {
       throw new InvalidConfigurationException('The mainnet network is missing');
     }
@@ -196,26 +192,8 @@ export class JustaName {
     return [
       mainnetNetwork,
       testnetNetwork,
+      localNetwork
     ]
-  }
-
-  static createEnsDomains(ensDomains: EnsDomains =[]): EnsDomainByChainId[] {
-    let _ensDomains: EnsDomainByChainId[] = []
-
-    if(ensDomains){
-      if(typeof ensDomains === 'string') {
-        _ensDomains.push(
-          { chainId: 11155111, ensDomain: ensDomains },
-          { chainId: 1, ensDomain: ensDomains }
-        )
-      }
-
-      if(Array.isArray(ensDomains)) {
-        _ensDomains = ensDomains
-      }
-    }
-
-    return _ensDomains
   }
 
   private static checkConfig(configuration: JustaNameConfigDefaults): void {
@@ -232,6 +210,9 @@ export class JustaName {
       }, [] as ChainId[])
 
       networks.forEach(network => {
+        if(network.chainId === 31337){
+          return
+        }
         const provider = new ethers.JsonRpcProvider(network.providerUrl)
         provider.getNetwork().then(_network => {
           if (network.chainId.toString() !== _network.chainId.toString() ) {

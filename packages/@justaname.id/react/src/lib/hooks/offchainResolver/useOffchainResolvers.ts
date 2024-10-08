@@ -1,11 +1,11 @@
-import { OffchainResolverResponse } from '@justaname.id/sdk';
+import { OffchainResolversGetAllRoute } from '@justaname.id/sdk';
 import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 
 export const OFFCHAIN_RESOLVERS_KEY = ['OFFCHAIN_RESOLVERS'];
 
 interface UseOffchainResolversResult {
-  offchainResolvers: OffchainResolverResponse[];
+  offchainResolvers: OffchainResolversGetAllRoute['response'] | undefined;
   isOffchainResolversPending: boolean;
 }
 
@@ -16,11 +16,10 @@ export const useOffchainResolvers = (): UseOffchainResolversResult => {
     queryKey: OFFCHAIN_RESOLVERS_KEY,
     queryFn: () => justaname?.offchainResolvers.getAllOffchainResolvers(),
     enabled: Boolean(justaname),
-    initialData: [],
   });
 
   return {
-    offchainResolvers: query.data,
+    offchainResolvers: query.data || { offchainResolvers: [] },
     isOffchainResolversPending: query.isPending,
   };
 };

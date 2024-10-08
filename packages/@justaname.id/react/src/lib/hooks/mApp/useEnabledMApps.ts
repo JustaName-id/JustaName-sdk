@@ -43,7 +43,7 @@ export const useEnabledMApps = (params: UseEnabledMAppsParams): UseEnabledMAppsR
       if (!records.isJAN) {
         return false;
       }
-      const mAppField = records.texts.find((text)=>text.key === 'mApps')
+      const mAppField = records.records.texts.find((text)=>text.key === 'mApps')
       return mAppField ? JSON.parse(mAppField.value).mApps : [];
     },
     enabled: Boolean(params.ens) && Boolean(justaname) && params.ens.length > 0 && Boolean(_chainId) && Boolean(records),

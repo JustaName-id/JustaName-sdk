@@ -1,4 +1,4 @@
-import { ChainId, SubnameGetInvitationsByAddressParams, SubnameGetInvitationsByAddressResponse } from '@justaname.id/sdk';
+import { ChainId, sanitizeRecords, SubnameGetInvitationsByAddressRoute } from '@justaname.id/sdk';
 import {
   QueryObserverResult,
   RefetchOptions,
@@ -7,6 +7,7 @@ import {
 import { useJustaName } from '../../providers/JustaNameProvider';
 import { useMemo } from 'react';
 import { useMountedAccount } from './useMountedAccount';
+import { Records } from '../../types';
 
 export const buildAccountInvitationsKey = (
   address: string | undefined,
@@ -18,14 +19,14 @@ export const buildAccountInvitationsKey = (
 ];
 
 interface UseAccountInvitationsResult {
-  invitations: SubnameGetInvitationsByAddressResponse;
+  invitations: Records[];
   isInvitationsPending: boolean;
   refetchInvitations: (
     options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<SubnameGetInvitationsByAddressResponse | undefined, unknown>>;
+  ) => Promise<QueryObserverResult<Records[]  | undefined, unknown>>;
 }
 
-export type UseAccountInvitationsParams = Omit<SubnameGetInvitationsByAddressParams, 'address'>
+export type UseAccountInvitationsParams = Omit<SubnameGetInvitationsByAddressRoute['params'] , 'address'>
 
 export const useAccountInvitations = (
   params?: UseAccountInvitationsParams
@@ -37,20 +38,22 @@ export const useAccountInvitations = (
 
   const query = useQuery({
     queryKey: buildAccountInvitationsKey(address, _chainId),
-    queryFn: async () =>
-      justaname.subnames.getInvitations({
+    queryFn: async () =>{
+      const invitations = await justaname.subnames.getInvitationsByAddress({
         address: address as string,
         coinType: params?.coinType || 60,
         chainId: _chainId,
-      }),
-    enabled: Boolean(address),
-    initialData: {
-      subnames: [],
+      })
+      return  invitations?.subnames.map((subname) => ({
+        ...subname,
+        sanitizedRecords: sanitizeRecords(subname),
+      })) || []
     },
+    enabled: Boolean(address),
   });
 
   return {
-    invitations: query.data,
+    invitations: query.data || [],
     isInvitationsPending: query.isPending,
     refetchInvitations: query.refetch,
   };

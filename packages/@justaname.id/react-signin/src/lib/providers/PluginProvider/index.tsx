@@ -40,7 +40,7 @@ export const PluginProvider: FC<PluginProviderProps> = ({
                                                         }) => {
   const { connectedEns, isEnsAuthPending, isLoggedIn } = useEnsAuth();
   const { records } = useRecords({
-    fullName: connectedEns?.ens || "",
+    ens: connectedEns?.ens || "",
   });
   const { enabledMApps } = useEnabledMApps({
     ens: connectedEns?.ens || ''

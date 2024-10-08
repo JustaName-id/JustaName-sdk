@@ -15,6 +15,7 @@ export type Networks = Network[];
 export type NetworksWithProvider = [
   NetworkWithProvider<1>,
   NetworkWithProvider<11155111>,
+  NetworkWithProvider<31337>
 ];
 
 export interface Configuration {
@@ -27,9 +28,10 @@ export interface Configuration {
 export interface  EnsDomainByChainId {
   chainId: ChainId;
   ensDomain: string;
+  apiKey?: string;
 }
 
-export type EnsDomains = string | EnsDomainByChainId[];
+export type EnsDomains = EnsDomainByChainId[];
 
 export interface JustaNameConfig<
   Config extends Configuration = Configuration,

@@ -4,7 +4,7 @@ import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/r
 import { useJustaName } from '../../providers';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { ChainId, SubnameUpdateParams } from '@justaname.id/sdk';
+import { ChainId, SubnameUpdateRoute } from '@justaname.id/sdk';
 import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useEnsWalletClient } from '../client/useEnsWalletClient';
 import { setAddressRecord, setContentHashRecord, setRecords, setTextRecord } from '@ensdomains/ensjs/wallet';
@@ -14,7 +14,7 @@ import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { useUpdateChanges } from './useUpdateChanges';
 import { useMemo } from 'react';
 
-export interface UseSubnameUpdateFunctionParams extends Omit<SubnameUpdateParams, 'username' | 'ensDomain' | 'contentHash'> {
+export interface UseSubnameUpdateFunctionParams extends Omit<SubnameUpdateRoute['params'], 'username' | 'ensDomain' | 'contentHash'> {
   ens: string;
   contentHash?: {
     protocolType: string;
@@ -67,11 +67,11 @@ export const useUpdateSubname = (params?: UseUpdateSubnameParams): UseUpdateSubn
         chainId: _params.chainId || _chainId
       })
 
-      if (!records || !records.records) {
+      if (!records) {
         throw new Error('No records found')
       }
 
-      if (records.records.isJAN) {
+      if (records.isJAN) {
         const signature = await getSignature()
 
         const [username, ensDomain] = splitDomain(_params.ens)

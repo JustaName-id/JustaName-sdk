@@ -27,7 +27,7 @@ The blockchain network identifier.
 
 #### Defined in
 
-[lib/types/subnames/community.ts:157](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L157)
+[lib/types/subnames/get-all-by-ens-domain-with-count.ts:157](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L157)
 
 ___
 
@@ -39,7 +39,7 @@ Optional limit on the number of items per page.
 
 #### Defined in
 
-[lib/types/subnames/community.ts:161](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L161)
+[lib/types/subnames/get-all-by-ens-domain-with-count.ts:161](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L161)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/community.ts:163](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L163)
+[lib/types/subnames/get-all-by-ens-domain-with-count.ts:163](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L163)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/types/subnames/community.ts:165](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L165)
+[lib/types/subnames/get-all-by-ens-domain-with-count.ts:165](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L165)
 
 ___
 
@@ -71,4 +71,4 @@ Optional page number for pagination.
 
 #### Defined in
 
-[lib/types/subnames/community.ts:159](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L159)
+[lib/types/subnames/get-all-by-ens-domain-with-count.ts:159](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/sdk/src/lib/types/subnames/community.ts#L159)

@@ -59,11 +59,11 @@ export const RevokeMAppDialog: FC<RevokeMAppDialogProps> = ({
   });
 
   const mAppDescription = useMemo(() => {
-    return mAppRecords?.texts?.find((text) => text.key === `mApp_description`)?.value;
+    return mAppRecords?.records.texts?.find((text) => text.key === `mApp_description`)?.value;
   }, [mAppRecords]);
 
   const mAppFieldsInEnsRecords = useMemo(() => {
-    return records?.texts?.filter((text) => text.key.endsWith(`_${mApp}`));
+    return records?.records.texts?.filter((text) => text.key.endsWith(`_${mApp}`));
   }, [records, mApp]);
 
   const handleOpenDialogInternal = (_open: boolean) => {

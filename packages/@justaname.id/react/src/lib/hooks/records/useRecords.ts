@@ -1,7 +1,8 @@
 import { useJustaName } from '../../providers';
 import { QueryObserverResult, RefetchOptions, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ChainId, SanitizedRecords, sanitizeRecords, SubnameRecordsResponse, SubnameRecordsParams } from '@justaname.id/sdk';
+import { ChainId, SanitizedRecords, sanitizeRecords, SubnameRecordsRoute } from '@justaname.id/sdk';
 import { useMemo } from 'react';
+import { Records } from '../../types';
 
 export const buildRecordsBySubnameKey = (
   subname: string,
@@ -13,27 +14,26 @@ export const buildRecordsBySubnameKey = (
 ];
 
 export interface GetRecordsResult {
-  records: SubnameRecordsResponse | undefined;
+  rawRecords: SubnameRecordsRoute['response'] | undefined;
   sanitizedRecords: SanitizedRecords | undefined;
 }
 
-export interface UseRecordsParams extends Omit<SubnameRecordsParams, "fullName" | "providerUrl">{
+export interface UseRecordsParams extends Omit<SubnameRecordsRoute['params'], "ens" | "providerUrl">{
   ens?: string | undefined;
 }
 
-export interface GetRecordsParams extends Omit<SubnameRecordsParams, "fullName" | "providerUrl">{
+export interface GetRecordsParams extends Omit<SubnameRecordsRoute['params'], "ens" | "providerUrl">{
   ens: string;
 }
 
 export interface UseRecordsResult {
   isRecordsPending: boolean;
-  records: SubnameRecordsResponse | undefined;
-  sanitizedRecords: SanitizedRecords | undefined;
-  getRecords: (params: GetRecordsParams, forceUpdate? :boolean) => Promise<GetRecordsResult>;
+  records: Records | undefined;
+  getRecords: (params: GetRecordsParams, forceUpdate? :boolean) => Promise<Records>;
   refetchRecords: (
     options?: RefetchOptions | undefined
   ) => Promise<QueryObserverResult<
-    GetRecordsResult | undefined
+    Records | undefined
     , unknown>>;
   recordsStatus: 'error' | 'success' | 'pending';
 }
@@ -46,16 +46,16 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
   const _networks = useMemo(() => networks.find((network) => network.chainId === _chainId), [_chainId, networks]);
   const _providerUrl = useMemo(() => _networks?.providerUrl, [_networks]);
 
-  const getRecords = async (_params: SubnameRecordsParams): Promise<GetRecordsResult> => {
+  const getRecords = async (_params: SubnameRecordsRoute['params']): Promise<Records> => {
 
-    const result = await justaname.subnames.getRecordsByFullName({
-      fullName: _params.fullName,
+    const result = await justaname.subnames.getRecords({
+      ens: _params.ens,
       providerUrl: _params.providerUrl,
       chainId: _params.chainId,
     });
 
     if (
-      result.resolverAddress ===
+      result.records.resolverAddress ===
       '0x0000000000000000000000000000000000000000'
     ) {
       throw new Error('Resolver address not found');
@@ -63,7 +63,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
 
     let ethAddress = null;
     if (result) {
-      ethAddress = result?.coins?.find((coin) => coin.id === 60)?.value;
+      ethAddress = result?.records.coins?.find((coin) => coin.id === 60)?.value;
 
       if (!ethAddress) {
         throw new Error('ETH address not found');
@@ -73,15 +73,15 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     const sanitized = sanitizeRecords(result);
 
     return {
-      records: result,
-      sanitizedRecords: sanitized
+      ...result,
+      sanitizedRecords: sanitized,
     };
   };
 
 
-  const getRecordsInternal = async (_params: GetRecordsParams, forceUpdate=false) => {
+  const getRecordsInternal = async (_params: GetRecordsParams, forceUpdate=false): Promise<Records> => {
     if(!forceUpdate){
-      const cachedRecords = queryClient.getQueryData(buildRecordsBySubnameKey(_params?.ens, _params?.chainId || _chainId)) as GetRecordsResult;
+      const cachedRecords = queryClient.getQueryData(buildRecordsBySubnameKey(_params?.ens, _params?.chainId || _chainId)) as Records;
       if(cachedRecords){
         return cachedRecords;
       }
@@ -95,7 +95,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     }
 
     const records = await getRecords({
-      fullName: _params.ens,
+      ens: _params.ens,
       chainId: __chainId,
       providerUrl: __providerUrl,
     })
@@ -116,9 +116,8 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
 
   return {
     isRecordsPending: query.isPending || query.isFetching,
-    records: query.data?.records,
+    records: query.data,
     getRecords: getRecordsInternal,
-    sanitizedRecords: query.data?.sanitizedRecords,
     refetchRecords: query.refetch,
     recordsStatus: query.status
   };

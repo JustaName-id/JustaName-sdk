@@ -29,6 +29,7 @@ function loadEnv() {
 loadEnv();
 
 export function getBaseUrl() {
+  // return 'http://localhost:3000';
   return BASE_URL;
 }
 

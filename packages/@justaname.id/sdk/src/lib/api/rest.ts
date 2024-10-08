@@ -23,23 +23,6 @@ type HeaderTypes = {
   'x-address': string | undefined;
 };
 
-/**
- * Makes a REST call to the JustaName API, dynamically handling the request based on
- * the specified route, method, and request data. Supports optional customization
- * of headers.
- * 
- * @typeparam T - The type of the route, inferred from the `ROUTES` type to ensure
- *                type safety for the route, request, and response objects.
- * @param route - The route of the API, which determines the endpoint to be called.
- * @param method - The HTTP method (e.g., 'GET', 'POST') for the request.
- * @param request - The request payload or parameters, structured according to the
- *                  route's expected input.
- * @param headers - Optional. Additional headers to be sent with the request. Supports
- *                  'x-api-key', 'x-message', 'x-signature', and 'x-address'. 
- * @returns A Promise resolved with the response data of the specified type. The promise
- *          is controlled by `controlledAxiosPromise` to manage API call success and failure
- *          states effectively.
- */
 export const restCall = <
   T extends keyof ROUTES,
   K extends 'GET' | 'POST',
