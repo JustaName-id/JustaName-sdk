@@ -36,13 +36,7 @@ export const REVOKE_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/revoke';
 /**
  * Routes to reject subname
  */
-export const REJECT_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/reject-invitation';
-
-/**
- * Routes to get subname by domain, name and chain id
- */
-export const GET_SUBNAME_BY_DOMAIN_NAME_CHAIN_ID_ROUTE =
-  SUBNAME_BASE_ROUTE + '/username';
+export const REJECT_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/reject';
 
 /**
  * Routes to get subname by full subname
@@ -53,19 +47,13 @@ export const GET_SUBNAME_BY_SUBNAME_ROUTE = SUBNAME_BASE_ROUTE + '/subname';
  * Routes to get all subnames by domain
  */
 export const GET_ALL_SUBNAMES_BY_DOMAIN_ROUTE =
-  SUBNAME_BASE_ROUTE + '/ens-domain';
+  SUBNAME_BASE_ROUTE + '/ens';
 
 /**
  * Routes to get all subnames by address
  */
 export const GET_ALL_SUBNAMES_BY_ADDRESS_ROUTE =
   SUBNAME_BASE_ROUTE + '/address';
-
-/**
- * Routes to get all subnames by invitation
- */
-export const GET_ALL_SUBNAMES_BY_INVITATION_ROUTE =
-  SUBNAME_BASE_ROUTE + '/invitations';
 
 /**
  * Routes to check subname availability
@@ -83,4 +71,4 @@ export const SEARCH_SUBNAMES_ROUTE = SUBNAME_BASE_ROUTE + '/search';
  */
 export const RECORDS_BY_FULLNAME_ROUTE = SUBNAME_BASE_ROUTE + '/records';
 
-export const GET_ALL_COMMUNITIES_WITH_COUNT_ROUTE = SUBNAME_BASE_ROUTE + '/community/all';
+export const GET_ALL_ENS_WITH_COUNT_ROUTE = SUBNAME_BASE_ROUTE + '/ens/list';

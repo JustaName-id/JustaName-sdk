@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "allowJs": false,
+    "target": "esnext",
+    "module": "esnext",
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "types": ["vite/client", "vitest", "dom"],
+    "paths": {
+      "@justaname.id/react": ["packages/@justaname.id/react"],
+      "@justaname.id/react-ui": ["packages/@justaname.id/react-ui"],
+      "@justaname.id/react-signin": ["packages/@justaname.id/react-signin"],
+    }
+  },
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ],
+  "extends": "../../tsconfig.base.json"
+}

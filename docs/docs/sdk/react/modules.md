@@ -63,9 +63,9 @@ The provider component wrapping children.
 
 ___
 
-### SignatureOnMounted
+### Index
 
-▸ **SignatureOnMounted**(`props`, `context?`): `ReactNode`
+▸ **Index**(`props`, `context?`): `ReactNode`
 
 #### Parameters
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/components/SignatureOnMounted.tsx:5](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/components/SignatureOnMounted.tsx#L5)
+[packages/@justaname.id/react/src/lib/components/index.tsx:5](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/components/SignatureOnMounted.tsx#L5)
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useCommunities.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useCommunities.ts#L5)
+[packages/@justaname.id/react/src/lib/hooks/useAllEns.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useCommunities.ts#L5)
 
 ___
 
@@ -444,9 +444,9 @@ The result object containing subnames data, loading state, and a refetch functio
 
 ___
 
-### useCommunities
+### useAllEns
 
-▸ **useCommunities**(`props`): `UseInfiniteQueryResult`<`InfiniteData`<`SubnameGetAllCommunitiesChainIdResponse`, `unknown`\>, `Error`\>
+▸ **useAllEns**(`props`): `UseInfiniteQueryResult`<`InfiniteData`<`SubnameGetAllCommunitiesChainIdResponse`, `unknown`\>, `Error`\>
 
 #### Parameters
 
@@ -460,7 +460,7 @@ ___
 
 #### Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/useCommunities.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useCommunities.ts#L21)
+[packages/@justaname.id/react/src/lib/hooks/useAllEns.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/0b5bd45/packages/@justaname.id/react/src/lib/hooks/useCommunities.ts#L21)
 
 ___
 

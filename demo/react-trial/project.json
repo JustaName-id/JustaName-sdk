@@ -1,0 +1,32 @@
+{
+  "name": "react-trial",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/react-trial/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "react-trial:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "react-trial:build:production"
+        }
+      },
+      "dependsOn": [
+        {
+          "projects": [
+            "@justaname.id/react-signin",
+            "@justaname.id/react-ui",
+            "@justaname.id/react",
+            "@justaname.id/sdk"
+          ],
+          "target": "build"
+        }
+      ]
+    }
+  },
+  "tags": []
+}

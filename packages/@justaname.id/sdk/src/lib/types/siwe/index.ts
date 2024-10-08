@@ -1,2 +1,6 @@
 export * from './request-challenge'
 export * from './verify-challenge'
+export * from './add-mApp-permission-challenge'
+export * from './append-mApp-field-challenge'
+export * from './revoke-mApp-permission-challenge'
+export * from './siwe-config'

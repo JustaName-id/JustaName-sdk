@@ -40,6 +40,7 @@ testem.log
 Thumbs.db
 
 .nx/cache
+.nx/workspace-data
 
 # Next.js
 .next
@@ -58,3 +59,7 @@ npm-debug.*
 *.orig.*
 web-build/
 cache/
+
+.yarn/install-state.gz
+
+storybook-static

@@ -53,12 +53,11 @@
       "cache": true
     }
   },
-  "affected": {
-    "defaultBase": "main"
-  },
   "tasksRunnerOptions": {
     "default": {
-      "options": {}
+      "options": {
+        "cacheableOperations": ["build-storybook"]
+      }
     }
   },
   "plugins": [
@@ -72,7 +71,8 @@
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
-      }
+      },
+      "exclude": ["apps/express-app-e2e/**/*"]
     },
     {
       "plugin": "@nx/webpack/plugin",
@@ -99,6 +99,24 @@
         "targetName": "e2e",
         "componentTestingTargetName": "component-test"
       }
+    },
+    {
+      "plugin": "@nx/storybook/plugin",
+      "options": {
+        "buildStorybookTargetName": "build-storybook",
+        "serveStorybookTargetName": "storybook",
+        "testStorybookTargetName": "test-storybook",
+        "staticStorybookTargetName": "static-storybook"
+      }
+    },
+    {
+      "plugin": "@nx/next/plugin",
+      "options": {
+        "startTargetName": "next:start",
+        "buildTargetName": "next:build",
+        "devTargetName": "next:dev",
+        "serveStaticTargetName": "serve-static"
+      }
     }
   ],
   "generators": {
@@ -117,6 +135,12 @@
         "linter": "eslint",
         "unitTestRunner": "jest"
       }
+    },
+    "@nx/next": {
+      "application": {
+        "style": "tailwind",
+        "linter": "eslint"
+      }
     }
   },
   "release": {
@@ -134,9 +158,13 @@
     },
     "projectsRelationship": "independent",
     "projects": [
-      "packages/@justaname.id/react",
+      "packages/create-justaname-app",
       "packages/@justaname.id/sdk",
-      "packages/create-justaname-app"
+      "packages/@justaname.id/react",
+      "packages/@justaname.id/siwens",
+      "packages/@justaname.id/react-ui",
+      "packages/@justaname.id/react-signin"
     ]
-  }
+  },
+  "defaultBase": "main"
 }

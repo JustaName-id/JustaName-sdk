@@ -7,22 +7,21 @@ const strip = require('rollup-plugin-strip-shebang');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const commonjs = require('@rollup/plugin-commonjs').default;
 
-
 module.exports = (config) => {
   return {
     ...config,
     output: {
-      ...config.output,
+      ...config.output[0],
       banner: '#!/usr/bin/env node', // Adds the shebang
     },
     plugins: [
       ...config.plugins,
       strip(), // Strips the shebang
-      nodeResolve(), // Resolves node modules
-      commonjs(), // Converts CommonJS modules to ES6
+      nodeResolve({ browser: false, exportConditions: ['node'] }), // Resolves node modules
+      commonjs({ sourceMap: false }), // Converts CommonJS modules to ES6
     ],
-  }
-}
+  };
+};
 //   input: 'packages/create-justaname-app/src/index.ts',
 //   output: {
 //     file: 'packages/create-justaname-app/dist/index.js',
