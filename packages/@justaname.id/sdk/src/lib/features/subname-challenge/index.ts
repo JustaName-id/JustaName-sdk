@@ -1,13 +1,10 @@
 import { assertRestCall } from '../../api/rest';
 import {
-  RequestChallengeResponse, RequestChallengeParams,
-  VerifyChallengeRequest,
-  VerifyChallengeResponse, ChainId
+  RequestChallengeRoute,
+  VerifyMessageRoute,
+  ChainId
 } from '../../types';
 import { SiweConfig } from '../../types/siwe/siwe-config';
-
-
-
 
 /**
  * Represents the Sign-In with Ethereum (SIWE) functionality, providing methods
@@ -61,7 +58,7 @@ export class SubnameChallenge {
    * @returns {Promise<RequestChallengeResponse>} - A promise that resolves with the response.
    * @public
    */
-  requestChallenge (params: RequestChallengeParams): Promise<RequestChallengeResponse> {
+  requestChallenge (params: RequestChallengeRoute['params']): Promise<RequestChallengeRoute['response']> {
     const { chainId, ttl, origin, domain, ...rest } = params;
     const _ttl = this.subnameChallengeTtl || ttl || 120000;
     const _chainId = this.chainId || chainId;
@@ -85,8 +82,8 @@ export class SubnameChallenge {
    * @public
    */
   verifyMessage (
-    params: VerifyChallengeRequest
-  ) : Promise<VerifyChallengeResponse> {
+    params: VerifyMessageRoute['params']
+  ) : Promise<VerifyMessageRoute['response']> {
     return assertRestCall('SIWE_VERIFY_MESSAGE_ROUTE', 'POST', params)(['address', 'signature', 'message'])
   }
 }

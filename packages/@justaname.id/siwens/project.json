@@ -5,6 +5,18 @@
   "projectType": "library",
   "tags": [],
   "targets": {
+    "typedoc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "typedoc"
+          }
+        ],
+        "cwd": "packages/@justaname.id/siwens",
+        "parallel": false
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "options": {
