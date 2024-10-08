@@ -1,0 +1,3514 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/ens/v1/mapp/permission/add": {
+      "post": {
+        "operationId": "MAppWriteController_addPermission",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MAppAddPermissionApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "mApp"
+        ]
+      }
+    },
+    "/ens/v1/mapp/field/append": {
+      "post": {
+        "operationId": "MAppWriteController_appendField",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MAppAppendFieldApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "mApp"
+        ]
+      }
+    },
+    "/ens/v1/mapp/permission/revoke": {
+      "post": {
+        "operationId": "MAppWriteController_revokePermission",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MAppRevokePermissionApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "mApp"
+        ]
+      }
+    },
+    "/ens/v1/siwe/request-challenge": {
+      "post": {
+        "operationId": "SiweChallengeController_requestChallenge",
+        "summary": "Request a challenge",
+        "description": "Request a challenge.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SiweRequestChallengeApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The challenge was requested successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiweRequestChallengeApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Siwe"
+        ]
+      }
+    },
+    "/ens/v1/siwe/mapp/add-permission": {
+      "post": {
+        "operationId": "SiweChallengeController_requestAddMAppChallenge",
+        "summary": "Request a challenge to add mApp permission",
+        "description": "Request a challenge to add mApp permission.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SiweRequestAddMAppPermissionChallengeApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The challenge was requested successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiweRequestAddMAppPermissionChallengeApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Siwe"
+        ]
+      }
+    },
+    "/ens/v1/siwe/mapp/append-field": {
+      "post": {
+        "operationId": "SiweChallengeController_requestAppendMAppFieldChallenge",
+        "summary": "Request a challenge to append mApp field",
+        "description": "Request a challenge to append mApp field.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SiweRequestAppendMAppFieldChallengeApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The challenge was requested successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiweRequestAppendMAppFieldChallengeApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Siwe"
+        ]
+      }
+    },
+    "/ens/v1/siwe/mapp/revoke-permission": {
+      "post": {
+        "operationId": "SiweChallengeController_requestRevokeMAppChallenge",
+        "summary": "Request a challenge to revoke mApp permission",
+        "description": "Request a challenge to revoke mApp permission.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SiweRequestRevokeMAppPermissionChallengeApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The challenge was requested successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiweRequestRevokeMAppPermissionChallengeApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Siwe"
+        ]
+      }
+    },
+    "/ens/v1/siwe/verify-message": {
+      "post": {
+        "operationId": "SiweVerifyController_verify",
+        "summary": "Verify a message",
+        "description": "Verify a message.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SiweVerifyMessageApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The message was verified successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiweVerifyMessageApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Siwe"
+        ]
+      }
+    },
+    "/ens/v1/subname/accept": {
+      "post": {
+        "operationId": "SubdomainWriteController_accept",
+        "summary": "Accept Subname",
+        "description": "Accept a reserved Subname.",
+        "parameters": [
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubnameAcceptApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subname was claimed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubnameAcceptApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/reserve": {
+      "post": {
+        "operationId": "SubdomainWriteController_apiReserve",
+        "summary": "Reserve Subname",
+        "description": "Reserve Subname to be claimed later.",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "The Api Key.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubnameReserveApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subname was reserved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubnameReserveApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/add": {
+      "post": {
+        "operationId": "SubdomainWriteController_add",
+        "summary": "Add Subname",
+        "description": "Add a new subname",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "The Api Key.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubnameAddApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subname was added successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubnameAddApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/update": {
+      "post": {
+        "operationId": "SubdomainWriteController_update",
+        "summary": "Update Subname",
+        "description": "Update the specified subname's data",
+        "parameters": [
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubnameUpdateApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subname was updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubnameUpdateApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/revoke": {
+      "post": {
+        "operationId": "SubdomainWriteController_revoke",
+        "summary": "Revoke Subname",
+        "description": "Revoke the specified subname",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "The Api Key.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubnameRevokeApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subname was revoked successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubnameRevokeApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/reject": {
+      "post": {
+        "operationId": "SubdomainWriteController_revokeInvitation",
+        "summary": "Reject Subname Invitation",
+        "description": "Reject the specified subname invitation",
+        "parameters": [
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubnameRevokeApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The Subname invitation was rejected successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubnameRevokeApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/subname": {
+      "get": {
+        "operationId": "SubdomainReadController_getSubname",
+        "summary": "Get by Subname",
+        "description": "Retrieves subname details based on the specified subname and chainId",
+        "parameters": [
+          {
+            "name": "subname",
+            "required": true,
+            "in": "query",
+            "description": "The subname",
+            "example": "ghadi.justan.id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subname was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/SubnameGetByNameAndChainIdApiResponse"
+                            },
+                            "error": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/ens": {
+      "get": {
+        "operationId": "SubdomainReadController_getSubnamesByEnsDomain",
+        "summary": "Get all by ENS Domain",
+        "description": "Retrieves all subnames associated with the provided ens domain",
+        "parameters": [
+          {
+            "name": "ensDomain",
+            "required": true,
+            "in": "query",
+            "description": "The ENS domain",
+            "example": "jan.eth",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "The page number (defaults to 1)",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "The number of items per page (defaults to 20)",
+            "example": 20,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "isClaimed",
+            "required": false,
+            "in": "query",
+            "description": "if true, will return claimed subdomain, if false, will return unclaimed subdomain, if not provided, will return all subdomains",
+            "example": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subnames were fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/SubnameGetAllEnsAndChainIdApiResponse"
+                            },
+                            "error": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/address": {
+      "get": {
+        "operationId": "SubdomainReadController_getSubnamesByAddress",
+        "summary": "Get all by Address",
+        "description": "Retrieves all subnames associated with an address",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "description": "The address of the subdomain",
+            "example": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "coinType",
+            "required": false,
+            "in": "query",
+            "description": "The coin type of the address",
+            "example": 60,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "isClaimed",
+            "required": false,
+            "in": "query",
+            "description": "if true, will return claimed subdomain, if false, will return unclaimed subdomain, if not provided, will return all subdomains",
+            "example": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "ensDomains",
+            "required": false,
+            "in": "query",
+            "description": "Array of ensDomains to filter the subnames by",
+            "example": [
+              "jan.eth"
+            ],
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subnames were fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/SubnameGetSubnamesByAddressApiResponse"
+                            },
+                            "error": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/records": {
+      "get": {
+        "operationId": "SubdomainReadController_getSubnameRecords",
+        "summary": "Fetch Records - onchain",
+        "description": "Retrieves all records associated with a subname - goes through CCIP-Read flow to fetch records",
+        "parameters": [
+          {
+            "name": "ens",
+            "required": true,
+            "in": "query",
+            "description": "The subname",
+            "example": "justanexample.eth",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providerUrl",
+            "required": true,
+            "in": "query",
+            "description": "Provider URL",
+            "example": "https://cloudflare-eth.com",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Records were fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/SubnameGetRecordsApiResponse"
+                            },
+                            "error": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/available": {
+      "get": {
+        "operationId": "SubdomainReadController_isUsernameAvailable",
+        "summary": "Is Subname Available",
+        "description": "Checks if a username is available for a given ENS domain",
+        "parameters": [
+          {
+            "name": "subname",
+            "required": true,
+            "in": "query",
+            "description": "The subname",
+            "example": "ghadi.justan.id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subname was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/SubnameIsSubnameAvailableApiResponse"
+                            },
+                            "error": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/search": {
+      "get": {
+        "operationId": "SubdomainReadController_searchSubnames",
+        "summary": "Get All Ens with Subname count",
+        "description": "Get All Ens with Subname count",
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "in": "query",
+            "description": "The full name of the subdomain",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "The chain id",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subnames search was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/SubnameSearchApiResponse"
+                            },
+                            "error": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/subname/ens/list": {
+      "get": {
+        "operationId": "SubdomainReadController_getAllEnsWithSubnameCount",
+        "summary": "Get All Ens with Subname count",
+        "description": "Get All Ens with Subname count",
+        "parameters": [
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "The page number (defaults to 1)",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "The number of items per page (defaults to 20)",
+            "example": 20,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "description": "The field to order by",
+            "example": "subnameCount",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderDirection",
+            "required": false,
+            "in": "query",
+            "description": "The direction to order by",
+            "example": "asc",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ens were fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/SubnameGetAllEnsWithSubnameCountApiResponse"
+                            },
+                            "error": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Subname"
+        ]
+      }
+    },
+    "/ens/v1/primary-name/address": {
+      "get": {
+        "operationId": "PrimaryNameReadController_getPrimaryNameByAddress",
+        "summary": "Get by Address",
+        "description": "Retrieves primary name for a given address",
+        "parameters": [
+          {
+            "name": "address",
+            "required": true,
+            "in": "query",
+            "description": "The address of the primary name",
+            "example": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The primary name was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrimaryNameApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Primary Name"
+        ]
+      }
+    },
+    "/ens/v1/primary-name/name-hash": {
+      "get": {
+        "operationId": "PrimaryNameReadController_getPrimaryNameByNameHash",
+        "summary": "Get by NameHash",
+        "description": "Retrieves primary name for a given namehash",
+        "parameters": [
+          {
+            "name": "nameHash",
+            "required": true,
+            "in": "query",
+            "description": "The namehash of the primary name",
+            "example": "0x820ad628dad8b8bcff67bbf7c77eb1e0c82c603a8720bec9794730178c4171f8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "query",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "The primary name was fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrimaryNameApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Primary Name"
+        ]
+      }
+    },
+    "/ens/v1/primary-name/set-primary-name": {
+      "post": {
+        "operationId": "PrimaryNameWriteController_setPrimaryName",
+        "summary": "Set Primary Name",
+        "description": "Set a Subname as Primary Name for an address.",
+        "parameters": [
+          {
+            "name": "x-signature",
+            "in": "header",
+            "description": "The signature.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-message",
+            "in": "header",
+            "description": "The Message.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-address",
+            "in": "header",
+            "description": "The Address.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrimaryNameAddApiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "The primary name was set successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrimaryNameAddApiResponseSuccessSwagger"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Primary Name"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Title",
+    "description": "description",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Siwe",
+      "description": ""
+    },
+    {
+      "name": "Subname",
+      "description": ""
+    },
+    {
+      "name": "Primary Name",
+      "description": ""
+    },
+    {
+      "name": "mApp",
+      "description": ""
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://api.justaname.id"
+    },
+    {
+      "url": "https://api-staging.justaname.id"
+    },
+    {
+      "url": "http://localhost:8000"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "MAppAddPermissionApiRequest": {
+        "type": "object",
+        "properties": {
+          "signature": {
+            "type": "string",
+            "example": "0x0a"
+          },
+          "message": {
+            "type": "string",
+            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+          },
+          "address": {
+            "type": "string",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": [
+          "signature",
+          "message",
+          "address"
+        ]
+      },
+      "MAppFieldRequest": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "example": "Key"
+          },
+          "value": {
+            "type": "string",
+            "example": "Value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "MAppAppendFieldApiRequest": {
+        "type": "object",
+        "properties": {
+          "subname": {
+            "type": "string",
+            "example": "example.justan.id"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MAppFieldRequest"
+            }
+          }
+        },
+        "required": [
+          "subname",
+          "fields"
+        ]
+      },
+      "MAppRevokePermissionApiRequest": {
+        "type": "object",
+        "properties": {
+          "signature": {
+            "type": "string",
+            "example": "0x0a"
+          },
+          "message": {
+            "type": "string",
+            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+          },
+          "address": {
+            "type": "string",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": [
+          "signature",
+          "message",
+          "address"
+        ]
+      },
+      "SiweRequestChallengeApiRequest": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Domain name",
+            "example": "justaname"
+          },
+          "address": {
+            "type": "string",
+            "description": "Address",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "origin": {
+            "type": "string",
+            "description": "Origin",
+            "example": "https://justaname.id"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": "11155111"
+          },
+          "ttl": {
+            "type": "number",
+            "description": "Time to Live (TTL) in milliseconds (ms), default is 2 minutes (2 * 60 * 1000 = 120000 ms)",
+            "example": 120000,
+            "default": 120000
+          }
+        },
+        "required": [
+          "domain",
+          "address",
+          "origin",
+          "chainId"
+        ]
+      },
+      "SiweRequestChallengeApiResponse": {
+        "type": "object",
+        "properties": {
+          "challenge": {
+            "type": "string",
+            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+          }
+        },
+        "required": [
+          "challenge"
+        ]
+      },
+      "SiweRequestChallengeApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SiweRequestChallengeApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SiweRequestChallengeApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SiweRequestChallengeApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "SiweRequestAddMAppPermissionChallengeApiRequest": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Domain name",
+            "example": "justaname"
+          },
+          "address": {
+            "type": "string",
+            "description": "Address",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "origin": {
+            "type": "string",
+            "description": "Origin",
+            "example": "https://justaname.id"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": "11155111"
+          },
+          "ttl": {
+            "type": "number",
+            "description": "Time to Live (TTL) in milliseconds (ms), default is 2 minutes (2 * 60 * 1000 = 120000 ms)",
+            "example": 120000,
+            "default": 120000
+          },
+          "subname": {
+            "type": "string",
+            "description": "Subname requesting the mApp Permission",
+            "example": "test.justan.id"
+          },
+          "mApp": {
+            "type": "string",
+            "description": "Subname requesting the mApp Permission",
+            "example": "justan.id"
+          }
+        },
+        "required": [
+          "domain",
+          "address",
+          "origin",
+          "chainId",
+          "subname",
+          "mApp"
+        ]
+      },
+      "SiweRequestAddMAppPermissionChallengeApiResponse": {
+        "type": "object",
+        "properties": {
+          "challenge": {
+            "type": "string",
+            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+          }
+        },
+        "required": [
+          "challenge"
+        ]
+      },
+      "SiweRequestAddMAppPermissionChallengeApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SiweRequestAddMAppPermissionChallengeApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SiweRequestAddMAppPermissionChallengeApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SiweRequestAddMAppPermissionChallengeApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "SiweRequestAppendMAppFieldChallengeApiRequest": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Domain name",
+            "example": "justaname"
+          },
+          "address": {
+            "type": "string",
+            "description": "Address",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "origin": {
+            "type": "string",
+            "description": "Origin",
+            "example": "https://justaname.id"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": "11155111"
+          },
+          "ttl": {
+            "type": "number",
+            "description": "Time to Live (TTL) in milliseconds (ms), default is 2 minutes (2 * 60 * 1000 = 120000 ms)",
+            "example": 120000,
+            "default": 120000
+          },
+          "subname": {
+            "type": "string",
+            "description": "Subname requesting the mApp Permission",
+            "example": "test.justan.id"
+          },
+          "mApp": {
+            "type": "string",
+            "description": "Subname requesting the mApp Permission",
+            "example": "justan.id"
+          }
+        },
+        "required": [
+          "domain",
+          "address",
+          "origin",
+          "chainId",
+          "subname",
+          "mApp"
+        ]
+      },
+      "SiweRequestAppendMAppFieldChallengeApiResponse": {
+        "type": "object",
+        "properties": {
+          "challenge": {
+            "type": "string",
+            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+          }
+        },
+        "required": [
+          "challenge"
+        ]
+      },
+      "SiweRequestAppendMAppFieldChallengeApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SiweRequestAppendMAppFieldChallengeApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SiweRequestAppendMAppFieldChallengeApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SiweRequestAppendMAppFieldChallengeApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "SiweRequestRevokeMAppPermissionChallengeApiRequest": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Domain name",
+            "example": "justaname"
+          },
+          "address": {
+            "type": "string",
+            "description": "Address",
+            "example": "0x1234567890123456789012345678901234567890"
+          },
+          "origin": {
+            "type": "string",
+            "description": "Origin",
+            "example": "https://justaname.id"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": "11155111"
+          },
+          "ttl": {
+            "type": "number",
+            "description": "Time to Live (TTL) in milliseconds (ms), default is 2 minutes (2 * 60 * 1000 = 120000 ms)",
+            "example": 120000,
+            "default": 120000
+          },
+          "subname": {
+            "type": "string",
+            "description": "Subname requesting the mApp Permission",
+            "example": "test.justan.id"
+          },
+          "mApp": {
+            "type": "string",
+            "description": "Subname requesting the mApp Permission",
+            "example": "justan.id"
+          }
+        },
+        "required": [
+          "domain",
+          "address",
+          "origin",
+          "chainId",
+          "subname",
+          "mApp"
+        ]
+      },
+      "SiweRequestRevokeMAppPermissionChallengeApiResponse": {
+        "type": "object",
+        "properties": {
+          "challenge": {
+            "type": "string",
+            "example": "domain wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+          }
+        },
+        "required": [
+          "challenge"
+        ]
+      },
+      "SiweRequestRevokeMAppPermissionChallengeApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SiweRequestRevokeMAppPermissionChallengeApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SiweRequestRevokeMAppPermissionChallengeApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SiweRequestRevokeMAppPermissionChallengeApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "SiweVerifyMessageApiRequest": {
+        "type": "object",
+        "properties": {
+          "signature": {
+            "type": "string",
+            "example": "0x6d2991c1b49e2cf6e6eeeead319fdb5ce213d79d4598517c582a5d9e3935c8323dd3aed9ec542b8f842cac899767bd7922d09ba5d97e9d6760458e2cf08cee1a1c"
+          },
+          "message": {
+            "type": "string",
+            "example": "justaname wants you to sign in with your Ethereum account:\nAddress\n\nPlease sign this message to verify that you want to add/update your subdomain provided by justawallet to your account Address using JustAName\n\nURI: uri\nVersion: 1\nChain ID: ChainId\nNonce: nonce\nIssued At: Date\nExpiration Time: Date"
+          },
+          "address": {
+            "type": "string",
+            "example": "0x1234567890123456789012345678901234567890"
+          }
+        },
+        "required": [
+          "signature",
+          "message",
+          "address"
+        ]
+      },
+      "SiweVerifyMessageApiResponse": {
+        "type": "object",
+        "properties": {
+          "verified": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "required": [
+          "verified"
+        ]
+      },
+      "SiweVerifyMessageApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SiweVerifyMessageApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SiweVerifyMessageApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SiweVerifyMessageApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "EnsAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensDomain": {
+            "type": "string"
+          },
+          "offchainResolverId": {
+            "type": "string"
+          },
+          "workspaceId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ensDomain",
+          "offchainResolverId",
+          "workspaceId"
+        ]
+      },
+      "EnsAddApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "EnsAddApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EnsAddApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "EnsAddApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/EnsAddApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "UpdateUserChosenLimitApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensId": {
+            "type": "string"
+          },
+          "userChosenLimit": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "ensId",
+          "userChosenLimit"
+        ]
+      },
+      "RemoveUserChosenLimitApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ensId"
+        ]
+      },
+      "EnsDeleteApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ensId"
+        ]
+      },
+      "UpdateIsBlockedApiRequest": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "isBlocked": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ens",
+          "chainId",
+          "isBlocked"
+        ]
+      },
+      "TransferEnsToNewWorkspaceApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensId": {
+            "type": "string"
+          },
+          "newWorkspaceId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ensId",
+          "newWorkspaceId"
+        ]
+      },
+      "EnsApiResponse": {
+        "type": "object",
+        "properties": {
+          "ensId": {
+            "type": "string"
+          },
+          "domainName": {
+            "type": "string"
+          },
+          "userChosenLimit": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "ensId",
+          "domainName",
+          "userChosenLimit"
+        ]
+      },
+      "EnsApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EnsApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "EnsApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/EnsApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "EnsGetExpiryApiRequest": {
+        "type": "object",
+        "properties": {
+          "names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "names"
+        ]
+      },
+      "EnsGetSubscriptionApiResponse": {
+        "type": "object",
+        "properties": {
+          "isSubscribed": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "isSubscribed"
+        ]
+      },
+      "EnsGetSubscriptionApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EnsGetSubscriptionApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "EnsGetSubscriptionApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/EnsGetSubscriptionApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "OffchainResolverApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "resolverAddress": {
+            "type": "string"
+          },
+          "ensRegistryAddress": {
+            "type": "string"
+          },
+          "nodeProvider": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "chainName": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resolverAddress",
+          "ensRegistryAddress",
+          "nodeProvider",
+          "chainId",
+          "chainName",
+          "environment"
+        ]
+      },
+      "OffchainResolverGetAllApiResponse": {
+        "type": "object",
+        "properties": {
+          "offchainResolvers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OffchainResolverApiResponse"
+            }
+          }
+        },
+        "required": [
+          "offchainResolvers"
+        ]
+      },
+      "OffchainResolverGetAllApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/OffchainResolverGetAllApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "OffchainResolverGetByIdApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "resolverAddress": {
+            "type": "string"
+          },
+          "ensRegistryAddress": {
+            "type": "string"
+          },
+          "nodeProvider": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "chainName": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resolverAddress",
+          "ensRegistryAddress",
+          "nodeProvider",
+          "chainId",
+          "chainName",
+          "environment"
+        ]
+      },
+      "OffchainResolverGetByIdApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/OffchainResolverGetByIdApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "OffchainResolverUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "resolverAddress": {
+            "type": "string"
+          },
+          "ensRegistryAddress": {
+            "type": "string"
+          },
+          "nodeProvider": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "resolverAddress",
+          "ensRegistryAddress",
+          "nodeProvider",
+          "environment"
+        ]
+      },
+      "OffchainResolverUpdateApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "resolverAddress": {
+            "type": "string"
+          },
+          "ensRegistryAddress": {
+            "type": "string"
+          },
+          "nodeProvider": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "resolverAddress",
+          "ensRegistryAddress",
+          "nodeProvider",
+          "environment"
+        ]
+      },
+      "OffchainResolverUpdateApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/OffchainResolverUpdateApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "OffchainResolverUpdateApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/OffchainResolverUpdateApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "AddressEnsDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "coinType": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "address",
+          "coinType"
+        ]
+      },
+      "TextRecordDto": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "SubnameAcceptApiRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username",
+            "example": "dev"
+          },
+          "ensDomain": {
+            "type": "string",
+            "description": "The second-level domain",
+            "example": "jan.eth"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          },
+          "addresses": {
+            "description": "The new addresses associated with the subdomain",
+            "example": [
+              {
+                "address": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+                "coinType": 60
+              },
+              {
+                "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+                "coinType": 0
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressEnsDto"
+            }
+          },
+          "text": {
+            "description": "The new texts of the subdomain",
+            "example": [
+              {
+                "key": "twitter.com",
+                "value": "@justaname"
+              },
+              {
+                "key": "youtube.com",
+                "value": "justaname"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextRecordDto"
+            }
+          },
+          "contentHash": {
+            "type": "string",
+            "description": "The new contentHash of the subdomain",
+            "example": "ipfs://QmRAQB6YaCyidP37UdDnjFY5vQuiBrcqdyoW1CuDgwxkD4"
+          }
+        },
+        "required": [
+          "username",
+          "ensDomain",
+          "chainId"
+        ]
+      },
+      "Text": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "Coin": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "value"
+        ]
+      },
+      "ContentHash": {
+        "type": "object",
+        "properties": {
+          "protocolType": {
+            "type": "string"
+          },
+          "decoded": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "protocolType",
+          "decoded"
+        ]
+      },
+      "RecordApiResponse": {
+        "type": "object",
+        "properties": {
+          "resolverAddress": {
+            "type": "string"
+          },
+          "texts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Text"
+            }
+          },
+          "coins": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coin"
+            }
+          },
+          "contentHash": {
+            "$ref": "#/components/schemas/ContentHash"
+          }
+        },
+        "required": [
+          "resolverAddress",
+          "texts",
+          "coins",
+          "contentHash"
+        ]
+      },
+      "SubnameAcceptApiResponse": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string",
+            "example": "ghadi.justan.id"
+          },
+          "isClaimed": {
+            "type": "boolean",
+            "example": true
+          },
+          "claimedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-05-22T11:55:29.000Z"
+          },
+          "isJAN": {
+            "type": "boolean",
+            "example": true
+          },
+          "records": {
+            "$ref": "#/components/schemas/RecordApiResponse"
+          }
+        },
+        "required": [
+          "ens",
+          "isClaimed",
+          "claimedAt",
+          "isJAN",
+          "records"
+        ]
+      },
+      "SubnameAcceptApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubnameAcceptApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SubnameAcceptApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubnameAcceptApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "SubnameReserveApiRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username",
+            "example": "dev"
+          },
+          "ensDomain": {
+            "type": "string",
+            "description": "The second-level domain",
+            "example": "jan.eth"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "ethAddress": {
+            "type": "string",
+            "description": "The eth address to reserve the subdomain for",
+            "example": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8"
+          }
+        },
+        "required": [
+          "username",
+          "ensDomain",
+          "chainId",
+          "ethAddress"
+        ]
+      },
+      "SubnameReserveApiResponse": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string",
+            "example": "ghadi.justan.id"
+          },
+          "isClaimed": {
+            "type": "boolean",
+            "example": true
+          },
+          "claimedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-05-22T11:55:29.000Z"
+          },
+          "isJAN": {
+            "type": "boolean",
+            "example": true
+          },
+          "records": {
+            "$ref": "#/components/schemas/RecordApiResponse"
+          }
+        },
+        "required": [
+          "ens",
+          "isClaimed",
+          "claimedAt",
+          "isJAN",
+          "records"
+        ]
+      },
+      "SubnameReserveApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubnameReserveApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SubnameReserveApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubnameReserveApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "SubnameAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username",
+            "example": "dev"
+          },
+          "ensDomain": {
+            "type": "string",
+            "description": "The second-level domain",
+            "example": "jan.eth"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          },
+          "addresses": {
+            "description": "The addresses corresponding to the subname",
+            "example": [
+              {
+                "address": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+                "coinType": 60
+              },
+              {
+                "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+                "coinType": 0
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressEnsDto"
+            }
+          },
+          "text": {
+            "description": "The texts records corresponding to the subname",
+            "example": [
+              {
+                "key": "twitter.com",
+                "value": "@justaname"
+              },
+              {
+                "key": "youtube.com",
+                "value": "justaname"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextRecordDto"
+            }
+          },
+          "contentHash": {
+            "type": "string",
+            "description": "The content hash of the subname",
+            "example": "ipfs://QmRAQB6YaCyidP37UdDnjFY5vQuiBrcqdyoW1CuDgwxkD4"
+          }
+        },
+        "required": [
+          "username",
+          "ensDomain",
+          "chainId",
+          "addresses"
+        ]
+      },
+      "SubnameAddApiResponse": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string",
+            "example": "ghadi.justan.id"
+          },
+          "isClaimed": {
+            "type": "boolean",
+            "example": true
+          },
+          "claimedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-05-22T11:55:29.000Z"
+          },
+          "isJAN": {
+            "type": "boolean",
+            "example": true
+          },
+          "records": {
+            "$ref": "#/components/schemas/RecordApiResponse"
+          }
+        },
+        "required": [
+          "ens",
+          "isClaimed",
+          "claimedAt",
+          "isJAN",
+          "records"
+        ]
+      },
+      "SubnameAddApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubnameAddApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SubnameAddApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubnameAddApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "SubnameUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username",
+            "example": "dev"
+          },
+          "ensDomain": {
+            "type": "string",
+            "description": "The second-level domain",
+            "example": "jan.eth"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          },
+          "addresses": {
+            "description": "The new addresses associated with the subdomain",
+            "example": [
+              {
+                "address": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+                "coinType": 60
+              },
+              {
+                "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+                "coinType": 0
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressEnsDto"
+            }
+          },
+          "text": {
+            "description": "The new texts of the subdomain",
+            "example": [
+              {
+                "key": "twitter.com",
+                "value": "@justaname"
+              },
+              {
+                "key": "youtube.com",
+                "value": "justaname"
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextRecordDto"
+            }
+          },
+          "contentHash": {
+            "type": "string",
+            "description": "The new contentHash of the subdomain",
+            "example": "ipfs://QmRAQB6YaCyidP37UdDnjFY5vQuiBrcqdyoW1CuDgwxkD4"
+          }
+        },
+        "required": [
+          "username",
+          "ensDomain",
+          "chainId"
+        ]
+      },
+      "SubnameUpdateApiResponse": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string",
+            "example": "ghadi.justan.id"
+          },
+          "isClaimed": {
+            "type": "boolean",
+            "example": true
+          },
+          "claimedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-05-22T11:55:29.000Z"
+          },
+          "isJAN": {
+            "type": "boolean",
+            "example": true
+          },
+          "records": {
+            "$ref": "#/components/schemas/RecordApiResponse"
+          }
+        },
+        "required": [
+          "ens",
+          "isClaimed",
+          "claimedAt",
+          "isJAN",
+          "records"
+        ]
+      },
+      "SubnameUpdateApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubnameUpdateApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SubnameUpdateApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubnameUpdateApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "SubnameAddContractApiRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username",
+            "example": "dev"
+          },
+          "ensDomain": {
+            "type": "string",
+            "description": "The second-level domain",
+            "example": "jan.eth"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          },
+          "addresses": {
+            "description": "The contract address",
+            "example": [
+              {
+                "address": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8",
+                "coinType": 60
+              }
+            ],
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AddressEnsDto"
+            }
+          },
+          "providerUrls": {
+            "description": "The node provider url",
+            "example": "https://eth-mainnet.g.alchemy.com/v2",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "username",
+          "ensDomain",
+          "chainId",
+          "addresses",
+          "providerUrls"
+        ]
+      },
+      "SubnameAddContractApiResponse": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string",
+            "example": "ghadi.justan.id"
+          },
+          "isClaimed": {
+            "type": "boolean",
+            "example": true
+          },
+          "claimedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-05-22T11:55:29.000Z"
+          },
+          "isJAN": {
+            "type": "boolean",
+            "example": true
+          },
+          "records": {
+            "$ref": "#/components/schemas/RecordApiResponse"
+          }
+        },
+        "required": [
+          "ens",
+          "isClaimed",
+          "claimedAt",
+          "isJAN",
+          "records"
+        ]
+      },
+      "SubnameAddContractApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubnameAddContractApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SubnameAddContractApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubnameAddContractApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "SubnameRevokeApiRequest": {
+        "type": "object",
+        "properties": {
+          "ensDomain": {
+            "type": "string",
+            "description": "The second-level domain",
+            "example": "jan.eth"
+          },
+          "username": {
+            "type": "string",
+            "description": "The username",
+            "example": "dev"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          }
+        },
+        "required": [
+          "ensDomain",
+          "username",
+          "chainId"
+        ]
+      },
+      "SubnameRevokeApiResponse": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string",
+            "example": "ghadi.justan.id"
+          },
+          "isClaimed": {
+            "type": "boolean",
+            "example": true
+          },
+          "claimedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-05-22T11:55:29.000Z"
+          },
+          "isJAN": {
+            "type": "boolean",
+            "example": true
+          },
+          "records": {
+            "$ref": "#/components/schemas/RecordApiResponse"
+          }
+        },
+        "required": [
+          "ens",
+          "isClaimed",
+          "claimedAt",
+          "isJAN",
+          "records"
+        ]
+      },
+      "SubnameRevokeApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SubnameRevokeApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "SubnameRevokeApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/SubnameRevokeApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "BaseApiResponseSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          }
+        },
+        "required": [
+          "statusCode"
+        ]
+      },
+      "SubnameGetByNameAndChainIdApiResponse": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string",
+            "example": "ghadi.justan.id"
+          },
+          "isClaimed": {
+            "type": "boolean",
+            "example": true
+          },
+          "claimedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-05-22T11:55:29.000Z"
+          },
+          "isJAN": {
+            "type": "boolean",
+            "example": true
+          },
+          "records": {
+            "$ref": "#/components/schemas/RecordApiResponse"
+          }
+        },
+        "required": [
+          "ens",
+          "isClaimed",
+          "claimedAt",
+          "isJAN",
+          "records"
+        ]
+      },
+      "SubnameApiResponse": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string",
+            "example": "ghadi.justan.id"
+          },
+          "isClaimed": {
+            "type": "boolean",
+            "example": true
+          },
+          "claimedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-05-22T11:55:29.000Z"
+          },
+          "isJAN": {
+            "type": "boolean",
+            "example": true
+          },
+          "records": {
+            "$ref": "#/components/schemas/RecordApiResponse"
+          }
+        },
+        "required": [
+          "ens",
+          "isClaimed",
+          "claimedAt",
+          "isJAN",
+          "records"
+        ]
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "number",
+            "example": 20
+          },
+          "page": {
+            "type": "number",
+            "example": 1
+          },
+          "limit": {
+            "type": "number",
+            "example": 10
+          },
+          "totalPages": {
+            "type": "number",
+            "example": 2
+          },
+          "nextPage": {
+            "type": "number",
+            "example": 2,
+            "nullable": true
+          },
+          "prevPage": {
+            "type": "number",
+            "example": null,
+            "nullable": true
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "example": true
+          },
+          "hasPrevPage": {
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "required": [
+          "totalCount",
+          "page",
+          "limit",
+          "totalPages",
+          "nextPage",
+          "prevPage",
+          "hasNextPage",
+          "hasPrevPage"
+        ]
+      },
+      "SubnameGetAllEnsAndChainIdApiResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubnameApiResponse"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "required": [
+          "data",
+          "pagination"
+        ]
+      },
+      "SubnameGetSubnamesByAddressApiResponse": {
+        "type": "object",
+        "properties": {
+          "subnames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubnameApiResponse"
+            }
+          }
+        },
+        "required": [
+          "subnames"
+        ]
+      },
+      "SubnameGetRecordsApiResponse": {
+        "type": "object",
+        "properties": {
+          "ens": {
+            "type": "string",
+            "example": "ghadi.justan.id"
+          },
+          "isClaimed": {
+            "type": "boolean",
+            "example": true
+          },
+          "claimedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-05-22T11:55:29.000Z"
+          },
+          "isJAN": {
+            "type": "boolean",
+            "example": true
+          },
+          "records": {
+            "$ref": "#/components/schemas/RecordApiResponse"
+          }
+        },
+        "required": [
+          "ens",
+          "isClaimed",
+          "claimedAt",
+          "isJAN",
+          "records"
+        ]
+      },
+      "SubnameIsSubnameAvailableApiResponse": {
+        "type": "object",
+        "properties": {
+          "isAvailable": {
+            "type": "boolean",
+            "example": true,
+            "description": "True if the subname is available, otherwise false."
+          }
+        },
+        "required": [
+          "isAvailable"
+        ]
+      },
+      "SubnameSearchApiResponse": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "registered": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "domains",
+          "registered"
+        ]
+      },
+      "SubnameAllEnsWithSubnameCountApiResponse": {
+        "type": "object",
+        "properties": {
+          "ensDomain": {
+            "type": "string",
+            "example": "justan.id"
+          },
+          "subnameCount": {
+            "type": "number",
+            "example": 2
+          },
+          "ensSubname": {
+            "$ref": "#/components/schemas/SubnameApiResponse"
+          }
+        },
+        "required": [
+          "ensDomain",
+          "subnameCount",
+          "ensSubname"
+        ]
+      },
+      "SubnameGetAllEnsWithSubnameCountApiResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubnameAllEnsWithSubnameCountApiResponse"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        },
+        "required": [
+          "data",
+          "pagination"
+        ]
+      },
+      "PrimaryNameApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "justghadi.jaw.eth"
+          },
+          "address": {
+            "type": "string",
+            "example": "0x23d3957be879aba6ca925ee4f072d1a8c4e8c890"
+          },
+          "nameHash": {
+            "type": "string",
+            "example": "0xe16944c2d7405e74b0263328cc8ad84415ba33fbcebd86e57718c72bc7f9442f"
+          },
+          "chainId": {
+            "type": "number",
+            "example": 11155111
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "address",
+          "nameHash",
+          "chainId"
+        ]
+      },
+      "PrimaryNameApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PrimaryNameApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "PrimaryNameApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/PrimaryNameApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      },
+      "PrimaryNameAddApiRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The subname",
+            "example": "ghadi.jan.eth"
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the primary name",
+            "example": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          }
+        },
+        "required": [
+          "name",
+          "address",
+          "chainId"
+        ]
+      },
+      "PrimaryNameUpdateApiRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The full name",
+            "example": "ghadi.jan.eth"
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the primary name",
+            "example": "0xb965a5f3a0fC18D84E68883ccAd508445a7917A8"
+          },
+          "chainId": {
+            "type": "number",
+            "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
+            "example": 11155111
+          }
+        },
+        "required": [
+          "name",
+          "address",
+          "chainId"
+        ]
+      },
+      "PrimaryNameAddApiResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "id"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "PrimaryNameAddApiResponseResultSwagger": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PrimaryNameAddApiResponse"
+          },
+          "error": {
+            "type": "string",
+            "description": "Null if no error occurred, otherwise the error message."
+          }
+        },
+        "required": [
+          "data",
+          "error"
+        ]
+      },
+      "PrimaryNameAddApiResponseSuccessSwagger": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 200,
+            "description": "The status code of the response."
+          },
+          "result": {
+            "$ref": "#/components/schemas/PrimaryNameAddApiResponseResultSwagger"
+          }
+        },
+        "required": [
+          "statusCode",
+          "result"
+        ]
+      }
+    }
+  }
+}
