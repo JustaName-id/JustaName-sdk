@@ -53,23 +53,21 @@ import { ethers } from 'ethers';
 // Define your provider URL (e.g., Infura)
 const providerUrl = 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY';
 
-// Create a new SIWENS instance with configuration
-const siwens = new SIWENS({
-    params: {
-        domain: 'example.eth',       // The domain you're authenticating for
-        ttl: 3600000,                // Time-to-Live (TTL) in milliseconds (1 hour)
-        ens: 'user.example.eth',     // The ENS subname being used
-        statement: 'Signing into dApp',  // Optional custom sign-in statement
-    }, 
-    providerUrl
-});
+const signer = new ethers.Wallet('YOUR_PRIVATE_KEY_ENS_HOLDER')
 
 async function signInUser() {
-    const message = await siwens.prepareMessage();
-    const signer = ethers.Wallet.createRandom();
-    const signature = await signer.signMessage(message);
-    
-    return signature;
+   const siwens = new SIWENS({
+      params: {
+         domain: 'example.eth',       // The domain you're authenticating for
+         ttl: 3600000,                // Time-to-Live (TTL) in milliseconds (1 hour)
+         ens: 'user.example.eth',     // The ENS name being used
+         statement: 'Signing into dApp',  // Optional custom sign-in statement
+      },
+      providerUrl
+    });
+   const message = await siwens.prepareMessage();
+   const signature = await signer.signMessage(message);
+   return signature;
 }
 
 // Verifying a user's sign-in request

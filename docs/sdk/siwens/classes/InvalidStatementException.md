@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/errors/InvalidStatement.exception.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/siwens/src/lib/errors/InvalidStatement.exception.ts#L2)
+[packages/@justaname.id/siwens/src/lib/errors/InvalidStatement.exception.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/siwens/src/lib/errors/InvalidStatement.exception.ts#L2)
 
 ## Properties
 
@@ -170,4 +170,4 @@ node\_modules/@types/node/globals.d.ts:4
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/errors/InvalidStatement.exception.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/siwens/src/lib/errors/InvalidStatement.exception.ts#L6)
+[packages/@justaname.id/siwens/src/lib/errors/InvalidStatement.exception.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/siwens/src/lib/errors/InvalidStatement.exception.ts#L6)
