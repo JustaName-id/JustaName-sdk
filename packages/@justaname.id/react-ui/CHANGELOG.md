@@ -1,3 +1,15 @@
+## 0.0.29 (2024-10-09)
+
+
+### 🚀 Features
+
+- added disableOverlay prop ([9592ed2](https://github.com/JustaName-id/JustaName-sdk/commit/9592ed2))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.28 (2024-10-09)
 
 

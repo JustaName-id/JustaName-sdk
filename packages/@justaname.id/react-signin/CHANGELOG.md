@@ -1,3 +1,22 @@
+## 0.0.29 (2024-10-09)
+
+
+### 🚀 Features
+
+- added disableOverlay prop ([9592ed2](https://github.com/JustaName-id/JustaName-sdk/commit/9592ed2))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.93
+- Updated @justaname.id/react to 0.3.96
+- Updated @justaname.id/react-ui to 0.0.29
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.28 (2024-10-09)
 
 
