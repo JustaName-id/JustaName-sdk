@@ -1,3 +1,34 @@
+## 0.3.95 (2024-10-09)
+
+
+### 🚀 Features
+
+- updated add and revoke in react to handle jan domains ([0a35f64](https://github.com/JustaName-id/JustaName-sdk/commit/0a35f64))
+
+- icons and refactoring of hooks for enhanced functionality ([fe18784](https://github.com/JustaName-id/JustaName-sdk/commit/fe18784))
+
+- justsign in mapps and update records and justverified ([8d40bd1](https://github.com/JustaName-id/JustaName-sdk/commit/8d40bd1))
+
+- new routes structure and react adjustments ([dc95caf](https://github.com/JustaName-id/JustaName-sdk/commit/dc95caf))
+
+
+### 🩹 Fixes
+
+- changed backendurl and jaw.eth to justan.eth ([10ca9a4](https://github.com/JustaName-id/JustaName-sdk/commit/10ca9a4))
+
+- remove provider url and change the configuration scheme ([8366a87](https://github.com/JustaName-id/JustaName-sdk/commit/8366a87))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.92
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- HadiKhai
+
 ## 0.3.94 (2024-09-22)
 
 

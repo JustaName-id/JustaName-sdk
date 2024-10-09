@@ -1,3 +1,26 @@
+## 0.0.25 (2024-10-09)
+
+
+### 🚀 Features
+
+- new routes structure and react adjustments ([dc95caf](https://github.com/JustaName-id/JustaName-sdk/commit/dc95caf))
+
+- sdk reference for siwens and core-sdk ([7430def](https://github.com/JustaName-id/JustaName-sdk/commit/7430def))
+
+- new readme for siwens and sdk ([626b4b6](https://github.com/JustaName-id/JustaName-sdk/commit/626b4b6))
+
+
+### 🩹 Fixes
+
+- remove provider url and change the configuration scheme ([8366a87](https://github.com/JustaName-id/JustaName-sdk/commit/8366a87))
+
+- page names ([f344cd1](https://github.com/JustaName-id/JustaName-sdk/commit/f344cd1))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.24 (2024-09-22)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.

@@ -1,3 +1,22 @@
+## 0.0.28 (2024-10-09)
+
+
+### 🚀 Features
+
+- icons and refactoring of hooks for enhanced functionality ([fe18784](https://github.com/JustaName-id/JustaName-sdk/commit/fe18784))
+
+- justsign in mapps and update records and justverified ([8d40bd1](https://github.com/JustaName-id/JustaName-sdk/commit/8d40bd1))
+
+
+### 🩹 Fixes
+
+- remove provider url and change the configuration scheme ([8366a87](https://github.com/JustaName-id/JustaName-sdk/commit/8366a87))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.27 (2024-09-22)
 
 This was a version bump only for @justaname.id/react-ui to align it with other projects, there were no code changes.
