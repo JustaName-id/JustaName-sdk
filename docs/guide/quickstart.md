@@ -1,8 +1,8 @@
 ---
+icon: gauge-max
 description: >-
   The JustWeb3 Widget is the easiest way to get the best digital identity suite
   in your dApp.
-icon: gauge-max
 ---
 
 # Quickstart
@@ -46,16 +46,16 @@ yarn add @justaname.id/react
 
 ### 2. Create an Account
 
-#### 1. Sign Up:
+#### 2.1. Sign Up:
 
 Navigate to the [Admin Dashboard](https://dashboard.justaname.id/) and follow the simple sign-up process to create your account.
 
-#### 2. Configure ENS Domain:
+#### 2.2. Configure ENS Domain:
 
 * Once your workspace is set up, configure your ENS domain.
 * If you don’t own an ENS domain, you can purchase one during this step.
 
-#### 3. **Generate API Key**:
+#### 2.3. **Generate API Key**:
 
 * In the dashboard, go to the API Key section.
 * Generate your API key and make sure to **save it securely**—we won't be able to retrieve it later if it’s lost.
