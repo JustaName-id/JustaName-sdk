@@ -1,9 +1,9 @@
 {
   "name": "@justaname.id/react",
-  "version": "0.3.98",
+  "version": "0.3.99",
   "dependencies": {
     "@ensdomains/ensjs": "4.0.1-alpha.0",
-    "@justaname.id/sdk": "0.2.95"
+    "@justaname.id/sdk": "0.2.96"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^5.x",

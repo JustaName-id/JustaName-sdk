@@ -1,3 +1,20 @@
+## 0.3.99 (2024-10-09)
+
+
+### 🩹 Fixes
+
+- search subname ([4196d5c](https://github.com/JustaName-id/JustaName-sdk/commit/4196d5c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.96
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.98 (2024-10-09)
 
 
