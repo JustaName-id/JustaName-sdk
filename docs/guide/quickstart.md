@@ -22,24 +22,24 @@ While we take care of setting up your admin dashboard in the background, to prov
 
 ### 1. Install the JustaName React SDK
 
-Install the latest version of the [JustaName React SDK](https://www.npmjs.com/package/@justaname.id/react) using your package manager of choice:
+Install the latest version of the [JustaName React SDK](https://www.npmjs.com/package/@justaname.id/react-signin) using your package manager of choice:
 
 {% tabs %}
 {% tab title="npm" %}
 ```bash
-npm install @justaname.id/react
+npm install @justaname.id/react-signin
 ```
 {% endtab %}
 
 {% tab title="pnpm" %}
 ```bash
-pnpm add @justaname.id/react
+pnpm add @justaname.id/react-signin
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```bash
-yarn add @justaname.id/react
+yarn add @justaname.id/react-signin
 ```
 {% endtab %}
 {% endtabs %}
