@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 
@@ -20,17 +21,23 @@ export interface UseEnsAuthReturn<T extends object = {}> {
   isLoggedIn: boolean;
   connectedEns: EnsAuth<T> | null | undefined;
   isEnsAuthPending: boolean;
+  isEnsAuthFetching: boolean;
+  isEnsAuthLoading: boolean;
   refreshEnsAuth: () => void;
 }
 
-export const useEnsAuth = <T extends object = {}>({ backendUrl, currentEnsRoute }: UseEnsAuthParams = {}): UseEnsAuthReturn<T> => {
-  const { backendUrl: defaultBackendUrl , routes} = useJustaName()
+export const useEnsAuth = <T extends object = {}>(params?: UseEnsAuthParams): UseEnsAuthReturn<T> => {
+  const { backendUrl, routes} = useJustaName();
+
+  const _backendUrl = useMemo(() => params?.backendUrl || backendUrl || "", [backendUrl, params?.backendUrl]);
+  const _currentEnsRoute = useMemo(() => params?.currentEnsRoute || routes.currentEnsRoute, [routes.currentEnsRoute, params?.currentEnsRoute]);
+  const currentEnsEndpoint = useMemo(() => _backendUrl + _currentEnsRoute, [_backendUrl, _currentEnsRoute]);
 
   const query = useQuery({
-    queryKey: buildEnsAuthKey(backendUrl || defaultBackendUrl || ''),
+    queryKey: buildEnsAuthKey(_backendUrl),
     queryFn: async () => {
       try {
-        const response = await fetch((backendUrl || defaultBackendUrl || '') + (currentEnsRoute || routes.currentEnsRoute), {
+        const response = await fetch(currentEnsEndpoint, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -48,7 +55,9 @@ export const useEnsAuth = <T extends object = {}>({ backendUrl, currentEnsRoute 
   return{
     isLoggedIn: !!query.data,
     connectedEns: query.data,
-    isEnsAuthPending: query.isLoading,
+    isEnsAuthPending: query.isPending,
+    isEnsAuthFetching: query.isFetching,
+    isEnsAuthLoading: query.isPending || query.isFetching,
     refreshEnsAuth: query.refetch
   }
 }

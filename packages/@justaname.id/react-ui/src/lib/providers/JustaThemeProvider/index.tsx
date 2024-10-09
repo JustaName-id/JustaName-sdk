@@ -20,6 +20,18 @@ const getPrimaryColorVariations = (color: string) => {
   }
 }
 
+const getDestructiveColorVariations = (color: string) => {
+  const hsl = convertToHSL(color);
+  const isTooLight = detectLightColor(hsl);
+  return {
+    '--justaname-destructive-color': hsl,
+    '--justaname-destructive-color-light': generateLightVariation(hsl),
+    '--justaname-destructive-color-dark': generateDarkVariation(hsl),
+    '--justaname-destructive-color-foreground': isTooLight ? '#000000' : '#ffffff'
+  }
+}
+
+
 const getBackgroundVariations = (color: string) => {
   const hsl = convertToHSL(color);
   const isTooLight = detectLightColor(hsl);
@@ -34,13 +46,13 @@ const getBackgroundVariations = (color: string) => {
 }
 
 const defaultFontFamily = "ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji";
-const defaultErrorColor = 'hsl(0, 100%, 50%)';
+const defaultDestructiveColor = 'hsl(0, 100%, 50%)';
 const defaultPrimaryColor = 'hsl(216, 90%, 58%)';
 const defaultBackground = 'hsl(0, 0%, 100%)';
 
 const defaultTheme = {
   '--justaname-font-family': defaultFontFamily,
-  '--justaname-error-color': defaultErrorColor,
+  ...getDestructiveColorVariations(defaultDestructiveColor),
   ...getPrimaryColorVariations(defaultPrimaryColor),
   ...getBackgroundVariations(defaultBackground)
 
@@ -62,6 +74,7 @@ export interface JustaThemeProviderConfig {
   color?: {
     primary?: string;
     background?:string;
+    destructive?: string;
   }
 }
 
@@ -74,7 +87,8 @@ export const JustaThemeProvider: React.FC<JustaThemeProviderProps> = ({ children
     {
       ...defaultTheme,
       ...getPrimaryColorVariations(color?.primary || defaultTheme['--justaname-primary-color']),
-      ...getBackgroundVariations(color?.background || defaultTheme["--justaname-background-color"])
+      ...getBackgroundVariations(color?.background || defaultTheme["--justaname-background-color"]),
+      ...getDestructiveColorVariations(color?.destructive || defaultTheme["--justaname-destructive-color"])
     }
   )
 

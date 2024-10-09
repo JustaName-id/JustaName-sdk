@@ -4,6 +4,18 @@
   "sourceRoot": "packages/@justaname.id/sdk/src",
   "projectType": "library",
   "targets": {
+    "typedoc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "typedoc"
+          }
+        ],
+        "cwd": "packages/@justaname.id/sdk",
+        "parallel": false
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "options": {

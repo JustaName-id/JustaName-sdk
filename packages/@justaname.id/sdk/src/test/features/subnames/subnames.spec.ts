@@ -1,20 +1,13 @@
 import { Subnames} from '../../../lib/features';
 import { TextRecord, Address } from '../../../lib/types'
-import { ApiKeyRequiredException } from '../../../lib/errors/ApiKeyRequired.exception';
+import { sanitizeAddresses, sanitizeTexts } from '../../../lib/utils';
+import { JustaName } from '../../../lib/justaname';
+import { InvalidConfigurationException } from '../../../lib/errors';
 
-const PROVIDER_URL = 'https://mainnet.infura.io/v3/your-infura-project-id';
 const CHAIN_ID = 1;
 const ENS_DOMAIN = 'justaname.eth';
-const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 
 describe('Subnames', () => {
-
-  let subnames = new Subnames(
-    PROVIDER_URL,
-    ENS_DOMAIN,
-    CHAIN_ID,
-    validApiKey
-  )
 
   it('should be able to transform json text records to TextRecord', () => {
     const text = {
@@ -30,7 +23,7 @@ describe('Subnames', () => {
       value: 'justaname'
     }]
 
-    const textArray = subnames.jsonToArrayOfKeyValue(text, 'key', 'value')
+    const textArray = sanitizeTexts(text)
     expect(textArray).toEqual(textRequest)
   })
 
@@ -51,28 +44,23 @@ describe('Subnames', () => {
       }
     ]
 
-    const addressArray = subnames.jsonToArrayOfKeyValue(addresses, 'coinType', 'address').map((address) => {
-      return {
-        address: address.address,
-        coinType: parseInt(address.coinType)
-      }
-    })
+    const addressArray = sanitizeAddresses(addresses)
     expect(addressArray).toEqual(addressRequest)
   })
 
   it('should throw error on operation needs an apiKey', async () => {
-    const subnamesWithoutApiKey = new Subnames(
-      PROVIDER_URL,
-      ENS_DOMAIN,
-      CHAIN_ID,
-    )
+    const subnamesWithoutApiKey = new Subnames({
+      chainId: CHAIN_ID,
+      networks: JustaName.createNetworks(),
+      ensDomains: [{chainId: CHAIN_ID, ensDomain: ENS_DOMAIN}]
+    })
 
-    expect(subnamesWithoutApiKey.addSubname({
+    expect(() => subnamesWithoutApiKey.addSubname({
       username: 'jan',
     }, {
       xSignature: 'signature',
       xMessage: 'message',
       xAddress: 'address',
-    })).rejects.toThrow(ApiKeyRequiredException.apiKeyRequired())
+    })).rejects.toThrow(InvalidConfigurationException.missingHeaders(['xApiKey']))
   })
 })

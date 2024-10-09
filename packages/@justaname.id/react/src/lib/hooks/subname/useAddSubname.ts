@@ -1,82 +1,79 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
+import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
-import { SubnameAddParams, SubnameAddResponse } from '@justaname.id/sdk';
+import { sanitizeRecords, SubnameAddRoute } from '@justaname.id/sdk';
 import { useAccountSubnames } from '../account/useAccountSubnames';
+import { useMemo } from 'react';
+import { Records } from '../../types';
 
-export type AddSubnameRequest = SubnameAddParams
+export type UseAddSubnameFunctionParams = SubnameAddRoute['params'];
 
-/**
- *  Interface defining the parameters needed to add a subname.
- *
- *  @typedef UseAddSubname
- *  @type {object}
- *  @property {function} addSubname - The function to add a subname.
- *  @property {boolean} isAddSubnamePending - Indicates if the mutation is currently pending.
- *  @template T - The type of additional parameters that can be passed to the claim subname mutation, extending the base request.
- */
-export interface UseAddSubname {
-  addSubname: (
-    params:  AddSubnameRequest
-  ) => Promise<SubnameAddResponse>;
+export interface UseAddSubnameParams extends Omit<UseAddSubnameFunctionParams, "username"> {
+  backendUrl?: string;
+  addSubnameRoute?: string;
+}
+
+export interface UseAddSubnameResult {
+  addSubname: UseMutateAsyncFunction<Records, Error, UseAddSubnameFunctionParams>;
   isAddSubnamePending: boolean;
 }
-/**
- * Custom hook for performing a mutation to add a subname.
- *
- * @template T - The type of additional parameters that can be passed to the claim subname mutation, extending the base request.
- * @returns {UseAddSubname} An object containing the `addSubname` async function to initiate the subname claim, and a boolean `claimSubnamePending` indicating the mutation's pending state.
- */
-export const useAddSubname = (): UseAddSubname => {
-  const { justaname, backendUrl, routes, apiKey } = useJustaName();
+
+export const useAddSubname = (params?: UseAddSubnameParams): UseAddSubnameResult => {
+  const { justaname, backendUrl, routes, apiKey, chainId, ensDomains } = useJustaName();
   const { address } = useMountedAccount();
   const { getSignature } = useSubnameSignature();
   const { refetchAccountSubnames } = useAccountSubnames();
+  const _chainId = useMemo(() => params?.chainId || chainId, [params?.chainId, chainId]);
+  const _ensDomain = useMemo(() => params?.ensDomain || ensDomains.find((ensDomain) => ensDomain.chainId === _chainId)?.ensDomain, [params?.ensDomain, ensDomains, _chainId]);
+  const _backendUrl = useMemo(() => params?.backendUrl || backendUrl, [params?.backendUrl, backendUrl]);
+  const _addSubnameRoute = useMemo(() => params?.addSubnameRoute || routes.addSubnameRoute, [params?.addSubnameRoute, routes.addSubnameRoute]);
+  const addSubnameEndpoint = useMemo(() => _backendUrl + _addSubnameRoute, [_backendUrl, _addSubnameRoute]);
 
-  const mutate = useMutation<
-    SubnameAddResponse,
-    Error,
-    AddSubnameRequest
-  >({
-    mutationFn: async (params: AddSubnameRequest) => {
+  const mutate = useMutation({
+    mutationFn: async (_params: UseAddSubnameFunctionParams) => {
       if (!address) {
         throw new Error('No address found');
       }
 
       const signature = await getSignature();
 
-      let response: SubnameAddResponse;
+      let response: SubnameAddRoute['response'];
 
-      if(apiKey){
-        response = await justaname.subnames.addSubname({
-          username: params.username,
-          ensDomain: params.ensDomain,
-          chainId: params.chainId,
-          addresses: params.addresses,
-          text: params.text,
-          contentHash: params.contentHash,
-        }, {
-          xSignature: signature.signature,
-          xAddress: address,
-          xMessage: signature.message,
-        })
-      }
-      else {
-        const backendResponse = await fetch((backendUrl ?? "") + routes.addSubnameRoute, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+      if (apiKey) {
+        response = await justaname.subnames.addSubname(
+          {
+            username: _params.username,
+            ensDomain: _params.ensDomain || _ensDomain,
+            chainId: _params.chainId || _chainId,
+            addresses: params?.addresses,
+            text: params?.text,
+            contentHash: params?.contentHash,
           },
-          body: JSON.stringify({
-            username: params.username,
-            signature: signature.signature,
-            address: address,
-            message: signature.message,
-          }),
-        });
+          {
+            xSignature: signature.signature,
+            xAddress: address,
+            xMessage: signature.message,
+          }
+        );
+      } else {
+        const backendResponse = await fetch(addSubnameEndpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              username: _params.username,
+              ensDomain: _params.ensDomain || _ensDomain,
+              chainId: _params.chainId || _chainId,
+              signature: signature.signature,
+              address: address,
+              message: signature.message,
+            }),
+          }
+        );
 
         if (!backendResponse.ok) {
           throw new Error('Network response was not ok');
@@ -86,14 +83,15 @@ export const useAddSubname = (): UseAddSubname => {
       }
 
       refetchAccountSubnames();
-      return response;
-    },
+      return {
+        ...response,
+        sanitizedRecords: sanitizeRecords(response)
+      }
+      },
   });
 
   return {
-    addSubname: mutate.mutateAsync as (
-      params: AddSubnameRequest
-    ) => Promise<SubnameAddResponse>,
+    addSubname: mutate.mutateAsync,
     isAddSubnamePending: mutate.isPending,
   };
 };

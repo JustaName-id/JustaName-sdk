@@ -1,6 +1,6 @@
-import { Coin, ContentHash, SubnameRecordsResponse, Text } from '@justaname.id/sdk';
+import { Coin, ContentHash, SubnameResponse, Text } from '../../types';
 import { SUPPORTED_SOCIALS, SupportedSocialsNames } from '../../constants';
-import { CoinType, getCoinTypeDetails } from '../cointypes';
+import { CoinType, getCoinTypeDetails, SupportedCoins } from '../cointypes';
 
 export type CoinAndDetails = Coin & CoinType;
 
@@ -42,7 +42,7 @@ export const createAddresses = (coins: Coin[]): CoinAndDetails[] => {
   return coins.map((coin) => {
     return {
       ...coin,
-      ...getCoinTypeDetails(coin.id)
+      ...getCoinTypeDetails(coin.id.toString() as SupportedCoins),
     }
   });
 }
@@ -75,13 +75,37 @@ export const createGenerals = (texts: Text[]): Text[] => {
     });
 }
 
-export const sanitizeRecords = (records: SubnameRecordsResponse | undefined): SanitizedRecords => {
+export const sanitizeRecords = (subnameResponse: SubnameResponse | undefined): SanitizedRecords => {
+  if (!subnameResponse) {
+    const ethAddress: CoinAndDetails = {
+      id: 60,
+      name: 'ETH',
+      value: '',
+      ...getCoinTypeDetails('60'),
+    }
+    return {
+      display: '',
+      email: '',
+      description: '',
+      ethAddress,
+      generals: [],
+      allAddresses: [ethAddress],
+      otherAddresses: [],
+      socials: [],
+      allOtherTexts: [],
+      otherTextsWithoutStandard: [],
+      contentHash: null
+    };
+  }
+
+  const { records } = subnameResponse
+
   if (!records) {
     const ethAddress: CoinAndDetails = {
       id: 60,
       name: 'ETH',
       value: '',
-      ...getCoinTypeDetails(60),
+      ...getCoinTypeDetails('60'),
     }
     return {
       display: '',

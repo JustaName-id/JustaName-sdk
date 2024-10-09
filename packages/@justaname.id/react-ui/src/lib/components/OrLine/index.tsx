@@ -1,6 +1,7 @@
 import { Divider, SPAN } from '../../ui';
+import { FC } from 'react';
 
-export const OrLine: React.FC = () => {
+export const OrLine: FC = () => {
   return (
     <div
       style={{

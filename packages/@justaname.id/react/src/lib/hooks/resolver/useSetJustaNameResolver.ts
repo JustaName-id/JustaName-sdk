@@ -124,7 +124,7 @@ export const useSetJustaNameResolver = <
 
   const currentResolver = useMemo(() => {
     if (!chainId || !offchainResolvers || isOffchainResolversPending) return;
-    return offchainResolvers?.find((resolver) => resolver.chainId === chainId)
+    return offchainResolvers?.offchainResolvers.find((resolver) => resolver.chainId === chainId)
       ?.resolverAddress;
   }, [offchainResolvers, chainId, isOffchainResolversPending]);
 

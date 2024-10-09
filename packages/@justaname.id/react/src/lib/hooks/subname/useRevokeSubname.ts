@@ -1,78 +1,82 @@
 'use client';
 
-import { SubnameRevokeParams, SubnameRevokeResponse } from '@justaname.id/sdk';
-import { useMutation } from '@tanstack/react-query';
+import { sanitizeRecords, SubnameRevokeRoute } from '@justaname.id/sdk';
+import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
+import { useMemo } from 'react';
+import { Records } from '../../types';
 
-export type RevokeSubnameRequest = SubnameRevokeParams
+export type UseRevokeSubnameFunctionParams = SubnameRevokeRoute['params'];
 
-/**
- *  Interface defining the parameters needed to revoke a subname.
- *
- *  @typedef UseRevokeSubname
- *  @type {object}
- *  @property {function} revokeSubname - The function to revoke a subname.
- *  @property {boolean} isRevokeSubnamePending - Indicates if the mutation is currently pending.
- *  @template T - The type of additional parameters that can be passed to the revoke subname mutation, extending the base request.
- */
-export interface UseRevokeSubname {
-  revokeSubname: (
-    params: RevokeSubnameRequest
-  ) => Promise<SubnameRevokeResponse>;
+export interface UseRevokeSubnameParams extends Omit<UseRevokeSubnameFunctionParams, "username"> {
+  backendUrl?: string;
+  revokeSubnameRoute?: string;
+}
+
+export interface UseRevokeSubnameResult {
+  revokeSubname: UseMutateAsyncFunction<Records, Error, UseRevokeSubnameFunctionParams>;
   isRevokeSubnamePending: boolean;
 }
-/**
- * Custom hook for performing a mutation to revoke a subname.
- *
- * @template T - The type of additional parameters that can be passed to the revoke subname mutation, extending the base request.
- * @returns {UseRevokeSubname} An object containing the `revokeSubname` async function to initiate the subname revoke, and a boolean `revokeSubnamePending` indicating the mutation's pending state.
- */
-export const useRevokeSubname = (): UseRevokeSubname => {
-  const { backendUrl, routes, apiKey, justaname } = useJustaName();
+
+export const useRevokeSubname = (params?: UseRevokeSubnameParams): UseRevokeSubnameResult => {
+  const { backendUrl, routes, apiKey, justaname, chainId, ensDomains } = useJustaName();
   const { address } = useMountedAccount();
   const { getSignature } = useSubnameSignature();
   const { refetchAccountSubnames } = useAccountSubnames();
+  const _chainId = useMemo(() => params?.chainId || chainId, [params?.chainId, chainId]);
+  const _ensDomain = useMemo(() => params?.ensDomain || ensDomains.find((ensDomain) => ensDomain.chainId === _chainId)?.ensDomain, [params?.ensDomain, ensDomains, _chainId]);
+  const _backendUrl = useMemo(() => params?.backendUrl || backendUrl, [params?.backendUrl, backendUrl]);
+  const _revokeSubnameRoute = useMemo(() => params?.revokeSubnameRoute || routes.revokeSubnameRoute, [params?.revokeSubnameRoute, routes.revokeSubnameRoute]);
+  const revokeEndpoint = useMemo(() => _backendUrl + _revokeSubnameRoute, [_backendUrl, _revokeSubnameRoute]);
 
-  const mutate = useMutation<
-    SubnameRevokeResponse,
-    Error,
-    RevokeSubnameRequest
-  >({
-    mutationFn: async (params: RevokeSubnameRequest) => {
+  const mutate = useMutation({
+    mutationFn: async (_params: UseRevokeSubnameFunctionParams) => {
       if (!address) {
         throw new Error('No address found');
       }
 
       const signature = await getSignature();
 
-      let response: SubnameRevokeResponse;
+      if(!_ensDomain) {
+        throw new Error('Missing ensDomain name: add the ensDomain to the hook params or the function params or to the provider');
+      }
 
-      if(apiKey){
-        response = await justaname.subnames.revokeSubname({
-          username: params.username,
-          ensDomain: params.ensDomain,
-          chainId: params.chainId,
-        }, {
-          xSignature: signature.signature,
-          xAddress: address,
-          xMessage: signature.message,
-        });
-      } else {
-        const backendResponse = await fetch((backendUrl ?? "") + routes.revokeSubnameRoute, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+      let response: SubnameRevokeRoute['response'];
+
+      if (apiKey) {
+        response = await justaname.subnames.revokeSubname(
+          {
+            username: _params.username,
+            ensDomain: _params.ensDomain || _ensDomain,
+            chainId: _params.chainId || _chainId,
           },
-          body: JSON.stringify({
-            ...params,
-            signature: signature.signature,
-            address: address,
-            message: signature.message,
-          }),
-        });
+          {
+            xSignature: signature.signature,
+            xAddress: address,
+            xMessage: signature.message,
+          }
+        );
+      } else {
+
+        const backendResponse = await fetch(revokeEndpoint,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ...params,
+              signature: signature.signature,
+              ensDomain: _ensDomain,
+              chainId: _chainId,
+              address: address,
+              message: signature.message,
+            }),
+          }
+        );
 
         if (!backendResponse.ok) {
           throw new Error('Network response was not ok');
@@ -82,14 +86,15 @@ export const useRevokeSubname = (): UseRevokeSubname => {
       }
 
       refetchAccountSubnames();
-      return response;
-    },
+      return {
+        ...response,
+        sanitizedRecords: sanitizeRecords(response)
+      }
+      },
   });
 
   return {
-    revokeSubname: mutate.mutateAsync as (
-      params: RevokeSubnameRequest
-    ) => Promise<SubnameRevokeResponse>,
+    revokeSubname: mutate.mutateAsync,
     isRevokeSubnamePending: mutate.isPending,
   };
 };

@@ -111,7 +111,6 @@ describe('SIWENS', () => {
       throw new Error('Statement is empty');
     }
     expect(extractDataFromStatement(siwens.statement)).toEqual({
-      domain: DOMAIN,
       ens: VALID_ENS,
     });
   });
@@ -135,6 +134,7 @@ describe('SIWENS', () => {
 
   it('should verify a valid signature', async () => {
     const signature = await signer.signMessage(message);
+
     const address = await new SIWENS({
       params:message,
       providerUrl: PROVIDER_URL

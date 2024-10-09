@@ -6,4 +6,5 @@ export * from './justaname';
 export * from './offchain-resolver';
 export * from './siwe';
 export * from './subnames';
-export * from './mapp';
+export * from './mApps';
+export * from './signin'

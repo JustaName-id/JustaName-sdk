@@ -1,9 +1,15 @@
 {
   "name": "@justaname.id/react-ui",
   "version": "0.0.27",
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-popover": "^1.1.1",
+    "embla-carousel-react": "^8.3.0",
+    "input-otp": "^1.2.4",
+    "styled-components": "^6.1.12"
+  },
   "peerDependencies": {
-    "react": ">=17",
-    "react-dom": ">=17"
+    "react": ">=17"
   },
   "exports": {
     "./package.json": "./dist/package.json",
@@ -12,6 +18,7 @@
   "module": "./dist/index.esm.js",
   "main": "./dist/index.esm.js",
   "types": "./dist/index.esm.d.ts",
+  "typings": "./dist/index.esm.d.ts",
   "publishConfig": {
     "access": "public"
   },

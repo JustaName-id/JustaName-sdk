@@ -27,5 +27,5 @@ export interface SIWEHeaders {
  *                              requests to authenticate and authorize the client's access to the API.
  */
 export interface ApiKeyHeaders {
-  xApiKey: string;
+  xApiKey?: string;
 }

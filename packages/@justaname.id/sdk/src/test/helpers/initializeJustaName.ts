@@ -1,4 +1,4 @@
-import { JustaName } from '../../../src';
+import { ChainId, JustaName } from '../../../src';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -6,7 +6,7 @@ const PROVIDER_URL = process.env['SDK_PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
-const CHAIN_ID = 11155111;
+const CHAIN_ID = parseInt(process.env['SDK_CHAIN_ID'] as string) as ChainId
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 
 /**
@@ -19,16 +19,21 @@ export const initializeJustaName =  (apiKey: string) => {
     config:{
       domain: DOMAIN,
       origin: URI,
-      chainId: CHAIN_ID,
-      subnameChallenge:{
-        ttl: VALID_TTL,
-      },
-      signIn:{
-        ttl: VALID_TTL
-      }
+      subnameChallengeTtl: VALID_TTL,
+      signInTtl: VALID_TTL
     },
-    ensDomain: ENS_DOMAIN,
+    ensDomains: [
+      {
+        ensDomain: ENS_DOMAIN,
+        chainId: CHAIN_ID
+      }
+    ],
     apiKey: apiKey,
-    providerUrl: PROVIDER_URL
+    networks: [
+      {
+        chainId: CHAIN_ID,
+        providerUrl: PROVIDER_URL
+      }
+    ]
   });
 }
