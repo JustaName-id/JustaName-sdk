@@ -68,25 +68,31 @@ const StyledDescription = styled(DialogPrimitive.Description)`
     line-height: 1.5;
 `;
 
+interface DialogContentProps extends React.ComponentPropsWithoutRef<typeof StyledContent> {
+    disableOverlay?: boolean;
+}
+
 // Compound components
-export const Dialog : React.FC<DialogPrimitive.DialogProps> = ({ children, ...props }) => (
+export const Dialog: React.FC<DialogPrimitive.DialogProps> = ({ children, ...props }) => (
     <DialogPrimitive.Root
 
-      {...props}>
+        {...props}>
         {children}
     </DialogPrimitive.Root>
 );
 export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogContent = React.forwardRef<
-  React.ElementRef<typeof StyledContent>,
-  React.ComponentPropsWithoutRef<typeof StyledContent>
->(({ children, ...props }, forwardedRef) => (
-  <DialogPrimitive.Portal>
-    <StyledOverlay />
-    <StyledContent {...props} ref={forwardedRef}>
-      {children}
-    </StyledContent>
-  </DialogPrimitive.Portal>
+    React.ElementRef<typeof StyledContent>,
+    DialogContentProps
+>(({ children, disableOverlay, ...props }, forwardedRef) => (
+    <DialogPrimitive.Portal>
+        {!disableOverlay &&
+            <StyledOverlay />
+        }
+        <StyledContent {...props} ref={forwardedRef}>
+            {children}
+        </StyledContent>
+    </DialogPrimitive.Portal>
 ));
 DialogContent.displayName = 'DialogContent';
 

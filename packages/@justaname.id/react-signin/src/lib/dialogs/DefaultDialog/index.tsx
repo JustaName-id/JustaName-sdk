@@ -19,13 +19,15 @@ export interface DefaultDialogProps {
   header?: ReactNode;
   headerStyle?: React.CSSProperties;
   trigger?: ReactNode;
+  disableOverlay?: boolean;
 }
 
 export const DefaultDialog: FC<DefaultDialogProps> = ({
-                                                        onOpenChange,
-                                                        trigger,
-                                                        open, handleClose, children, header, headerStyle = {}
-                                                      }) => {
+  onOpenChange,
+  trigger,
+  disableOverlay,
+  open, handleClose, children, header, headerStyle = {}
+}) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -37,7 +39,7 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
         )
       }
 
-      <DialogContent style={{
+      <DialogContent disableOverlay={disableOverlay} style={{
         padding: 0,
         transition: 'all 0.4 ease-in-out'
       }}>
@@ -76,13 +78,13 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
 
               {
                 handleClose ? (
-                    <CloseIcon
-                      style={{
-                        cursor: 'pointer'
-                      }}
-                      onClick={handleClose}
-                      width={24}
-                    />)
+                  <CloseIcon
+                    style={{
+                      cursor: 'pointer'
+                    }}
+                    onClick={handleClose}
+                    width={24}
+                  />)
                   :
                   <DialogClose style={{
                     border: '0px',
