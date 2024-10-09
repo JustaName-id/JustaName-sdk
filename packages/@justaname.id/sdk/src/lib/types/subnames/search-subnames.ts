@@ -1,4 +1,11 @@
-import { ChainId, EmptyHeaders, IRequest, IResponse, IRoute, SubnameResponse } from '../common';
+import {
+  ChainId,
+  EmptyHeaders,
+  IRequest,
+  IResponse,
+  IRoute,
+  SubnameResponse,
+} from '../common';
 
 export interface SubnameSearchResponse extends IResponse {
   domains: SubnameResponse[] | string[];
@@ -6,7 +13,7 @@ export interface SubnameSearchResponse extends IResponse {
 }
 
 export interface SubnameSearchRequest extends IRequest {
-  subname: string;
+  name: string;
 
   skip: number;
 
@@ -21,4 +28,10 @@ export interface SubnameSearchRequest extends IRequest {
   isClaimed: boolean;
 }
 
-export interface SubnameSearchRoute extends IRoute<SubnameSearchRequest, SubnameSearchResponse, EmptyHeaders, 'chainId'> {}
+export interface SubnameSearchRoute
+  extends IRoute<
+    SubnameSearchRequest,
+    SubnameSearchResponse,
+    EmptyHeaders,
+    'chainId'
+  > {}
