@@ -1,12 +1,12 @@
 {
   "name": "@justaname.id/react-signin",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "dependencies": {
     "@ensdomains/address-encoder": "^1.1.2",
     "@ensdomains/ensjs": "4.0.1-alpha.0",
-    "@justaname.id/react": "0.3.97",
-    "@justaname.id/react-ui": "0.0.30",
-    "@justaname.id/sdk": "0.2.94",
+    "@justaname.id/react": "0.3.98",
+    "@justaname.id/react-ui": "0.0.31",
+    "@justaname.id/sdk": "0.2.95",
     "lodash": "4.17.21",
     "styled-components": "^6.1.12",
     "yup": "0.32.11"

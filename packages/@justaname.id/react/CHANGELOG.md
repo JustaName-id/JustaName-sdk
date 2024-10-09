@@ -1,3 +1,20 @@
+## 0.3.98 (2024-10-09)
+
+
+### 🩹 Fixes
+
+- exports ([1307932](https://github.com/JustaName-id/JustaName-sdk/commit/1307932))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.95
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.97 (2024-10-09)
 
 
