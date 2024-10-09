@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L11)
+[packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L11)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L9)
+[packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L9)
 
 ***
 
@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L13)
+[packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L13)
 
 ***
 
@@ -48,4 +48,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L7)
+[packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/reserve.ts#L7)

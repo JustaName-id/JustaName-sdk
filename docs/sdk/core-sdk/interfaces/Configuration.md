@@ -14,7 +14,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L22)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L22)
 
 ***
 
@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L23)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L23)
 
 ***
 
@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L25)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L25)
 
 ***
 
@@ -44,4 +44,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L24)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L24)

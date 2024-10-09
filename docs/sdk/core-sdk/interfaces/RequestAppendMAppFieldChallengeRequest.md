@@ -23,7 +23,7 @@ Represents the ethereum address to be challenged.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L21)
+[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L21)
 
 ***
 
@@ -35,7 +35,7 @@ Represents the chainId of the blockchain to be used.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L33)
+[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L33)
 
 ***
 
@@ -47,7 +47,7 @@ Represents the ENS domain
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L15)
+[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L15)
 
 ***
 
@@ -59,7 +59,7 @@ Subname requesting the MApps Permission
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:54](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L54)
+[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:54](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L54)
 
 ***
 
@@ -71,7 +71,7 @@ Represents the origin of the request (e.g. the domain of the website).
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L27)
+[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L27)
 
 ***
 
@@ -83,7 +83,7 @@ Subname requesting the ABDC Permission
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L48)
+[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L48)
 
 ***
 
@@ -104,4 +104,4 @@ default: 120000 ms, 2 minutes ( 2 * 60 * 1000 )
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L42)
+[packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/append-mApp-field-challenge.ts#L42)

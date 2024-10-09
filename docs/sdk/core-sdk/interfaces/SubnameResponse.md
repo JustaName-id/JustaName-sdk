@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts#L39)
+[packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts#L39)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts#L35)
+[packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts#L35)
 
 ***
 
@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts#L37)
+[packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts:37](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts#L37)
 
 ***
 
@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts#L41)
+[packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts:41](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts#L41)
 
 ***
 
@@ -58,4 +58,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts#L43)
+[packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/common/subname.response.ts#L43)

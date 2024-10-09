@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L27)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L27)
 
 ## Properties
 
@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L25)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L25)
 
 ***
 
@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L24)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L24)
 
 ***
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L26)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L26)
 
 ***
 
@@ -62,7 +62,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L23)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L23)
 
 ***
 
@@ -72,7 +72,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L22)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L22)
 
 ## Methods
 
@@ -86,7 +86,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:142](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L142)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:142](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L142)
 
 ***
 
@@ -104,7 +104,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L35)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L35)
 
 ***
 
@@ -124,4 +124,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L71)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L71)

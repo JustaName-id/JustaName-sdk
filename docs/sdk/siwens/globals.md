@@ -6,7 +6,7 @@
 
 ## Classes
 
-- [InvalidDomainException](classes/InvalidDomainException.md)
+- [InvalidConfigurationException](classes/InvalidConfigurationException.md)
 - [InvalidENSException](classes/InvalidENSException.md)
 - [InvalidStatementException](classes/InvalidStatementException.md)
 - [InvalidTimeException](classes/InvalidTimeException.md)

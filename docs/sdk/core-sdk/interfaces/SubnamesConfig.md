@@ -16,7 +16,7 @@ Represents the API key.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L28)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L28)
 
 ***
 
@@ -28,7 +28,7 @@ Represents the chainId of the blockchain to be used.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L43)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L43)
 
 ***
 
@@ -40,7 +40,7 @@ Represents the ENS ensDomain.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L38)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L38)
 
 ***
 
@@ -52,4 +52,4 @@ Represents the provider URL.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L33)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L33)

@@ -68,7 +68,7 @@ node\_modules/siwe/dist/client.d.ts:7
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L16)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L16)
 
 ***
 
@@ -85,7 +85,7 @@ authentication message is no longer valid.
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L18)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L18)
 
 ***
 
@@ -101,7 +101,7 @@ ISO 8601 datetime string of the current time.
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L19)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L19)
 
 ***
 
@@ -213,7 +213,7 @@ node\_modules/siwe/dist/client.d.ts:13
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L17)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L17)
 
 ***
 
