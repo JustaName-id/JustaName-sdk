@@ -20,18 +20,17 @@ import { ethers } from 'ethers';
  * import { JustaName } from '@justaname.id/sdk';
  *
  * const configuration = {
- *  apiKey: 'your-api-key'
+ *  apiKey: 'your-api-key',
+ *  networks: [
+ *  {
+ *  chainId: 1,
+ *  providerUrl: 'https://mainnet.infura.io/v3/your-infura-key'
+ *  },
+ *  ],
+ *  ensDomains: ['justan.id']
  *  };
  *
  *  const justaName = JustaName.init(configuration);
- *
- *  const requestChallengeResponse = await justaName.siwe.requestChallenge({
- *  chainId: 1,
- *  origin: 'http://localhost:3333',
- *  address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
- *  domain: 'localhost',
- *  ttl?: 120000,
- *  });
  *
  *  ```
  */
