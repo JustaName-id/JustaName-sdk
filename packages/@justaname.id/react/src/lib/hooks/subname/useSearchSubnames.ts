@@ -6,12 +6,15 @@ import {
 } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 
-export const buildSearchSubnamesKey = (params: SubnameSearchRoute['params']) => [
-  'SEARCH_SUBNAME',
-  ...Object.values(params),
-];
+export const buildSearchSubnamesKey = (
+  params: SubnameSearchRoute['params']
+) => ['SEARCH_SUBNAME', ...Object.values(params)];
 
-export interface UseSearchSubnamesParams extends Omit<SubnameSearchRoute['params'], 'isClaimed' | 'skip' | 'take' | 'data' | 'ensRegistered'> {
+export interface UseSearchSubnamesParams
+  extends Omit<
+    SubnameSearchRoute['params'],
+    'isClaimed' | 'skip' | 'take' | 'data' | 'ensRegistered'
+  > {
   skip?: number;
   take?: number;
   data?: boolean;
@@ -29,26 +32,29 @@ interface UseSearchSubnamesResult {
   ) => Promise<QueryObserverResult<SubnameSearchResponse | undefined, unknown>>;
 }
 
-export const useSearchSubnames = (params: UseSearchSubnamesParams): UseSearchSubnamesResult => {
+export const useSearchSubnames = (
+  params: UseSearchSubnamesParams
+): UseSearchSubnamesResult => {
   const { justaname, chainId: defaultChainId } = useJustaName();
-  const { subname, chainId,  ...rest } = params;
+  const { name, chainId, ...rest } = params;
   const _chainId = chainId || defaultChainId;
 
-  const currentParams : SubnameSearchRoute['params'] = {
-    subname: subname,
+  const currentParams: SubnameSearchRoute['params'] = {
+    name,
     skip: 0,
     take: 10,
     data: true,
     ensRegistered: false,
     isClaimed: true,
     chainId: _chainId,
-    ...rest
+    ...rest,
   };
 
   const query = useQuery({
     queryKey: buildSearchSubnamesKey(currentParams),
-    queryFn: async () => await justaname?.subnames.searchSubnames(currentParams),
-    enabled: Boolean(subname) && Boolean(justaname),
+    queryFn: async () =>
+      await justaname?.subnames.searchSubnames(currentParams),
+    enabled: Boolean(name) && Boolean(justaname),
   });
 
   return {
