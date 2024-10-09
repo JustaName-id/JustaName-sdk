@@ -1,3 +1,20 @@
+## 0.2.94 (2024-10-09)
+
+
+### 🩹 Fixes
+
+- acceptsubname ([2196405](https://github.com/JustaName-id/JustaName-sdk/commit/2196405))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.27
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.2.93 (2024-10-09)
 
 
