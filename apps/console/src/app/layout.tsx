@@ -1,4 +1,6 @@
+import { Navbar } from '../layout/navbar';
 import './global.css';
+import { Providers } from './providers';
 
 export const metadata = {
   title: 'Welcome to console',
@@ -12,7 +14,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers >
+          <div className="w-screen  flex flex-col items-center justify-start h-screen">
+            <Navbar />
+            {children}
+          </div>
+        </Providers>
+      </body>
     </html>
   );
 }
