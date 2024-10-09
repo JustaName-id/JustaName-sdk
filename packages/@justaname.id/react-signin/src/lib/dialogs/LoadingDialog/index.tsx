@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogTitle } from '@justaname.id/react-ui';
-import { Loading } from '../../components';
+import { Loading } from '../../components/Loading';
 import { FC } from 'react';
 
 export interface LoadingDialogProps {
@@ -16,7 +16,7 @@ export const LoadingDialog: FC<LoadingDialogProps> = ({ open }) => {
 
         </DialogTitle>
       </div>
-      <DialogContent style={{
+      <DialogContent aria-describedby='loading-dialog' style={{
         padding: 0,
         transition: "all 0.4 ease-in-out"
       }}>

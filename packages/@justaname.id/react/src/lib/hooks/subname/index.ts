@@ -8,3 +8,4 @@ export * from './useSearchSubnames';
 export * from './useSubname';
 export * from './useSubnameSignature';
 export * from './useUpdateSubname';
+export * from './useUpdateChanges';

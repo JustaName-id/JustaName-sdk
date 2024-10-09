@@ -29,8 +29,10 @@ function loadEnv() {
 loadEnv();
 
 export function getBaseUrl() {
+  // return 'http://localhost:3000';
   return BASE_URL;
 }
+
 /**
  * The instance of axios with the base URL of JustaName API.
  */

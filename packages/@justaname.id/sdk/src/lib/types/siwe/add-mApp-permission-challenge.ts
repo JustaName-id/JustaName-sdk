@@ -1,4 +1,4 @@
-import { ChainId, IRequest, IResponse, IRoute } from '../common';
+import { ChainId, EmptyHeaders, IRequest, IResponse, IRoute } from '../common';
 
 /**
  * Represents a request to challenge to add mApp permission.
@@ -67,15 +67,4 @@ export interface RequestAddMAppPermissionChallengeResponse extends IResponse{
   challenge: string;
 }
 
-export interface RequestAddMAppPermissionChallengeRoute extends IRoute {
-  request: RequestAddMAppPermissionChallengeRequest;
-  response: RequestAddMAppPermissionChallengeResponse;
-  headers: NonNullable<unknown>;
-}
-
-export interface RequestAddMAppPermissionChallengeParams extends Omit<RequestAddMAppPermissionChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl' > {
-  origin?: string,
-  domain?: string,
-  chainId?: ChainId,
-  ttl?: number
-}
+export interface RequestAddMAppPermissionChallengeRoute extends IRoute<RequestAddMAppPermissionChallengeRequest, RequestAddMAppPermissionChallengeResponse, EmptyHeaders, 'origin' | 'domain' | 'chainId' | 'ttl'> {}

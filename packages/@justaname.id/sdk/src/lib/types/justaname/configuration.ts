@@ -1,34 +1,59 @@
 import { ChainId } from '../common';
-import { SigninConfig } from '../signin';
-import { SiweConfig } from '../siwe/siwe-config';
+import { JsonRpcProvider } from 'ethers';
 
-/**
- * Represents the configuration options available for initializing the application.
- *
- * This interface is designed to be flexible, allowing for future expansion with additional
- * configuration options as needed.
- *
- * @interface JustaNameConfig
- * @property {object} config - The configuration object.
- * @property {ChainId} config.chainId - Represents the chainId of the blockchain to be used.
- * @property {string} config.origin - Represents the origin of the request (e.g. the domain of the website).
- * @property {string} config.domain - Represents the ENS domain.
- * @property {SiweConfig} [config.subnameChallenge] - The subname challenge configuration.
- * @property {SigninConfig} [config.signIn] - The sign-in configuration.
- * @property {string} ensDomain - The ENS domain.
- * @property {string} providerUrl - The provider URL.
- * @property {string} [apiKey] - The API key.
- **/
+export interface NetworkWithProvider<Chain extends ChainId = ChainId> extends Network<Chain> {
+  provider: JsonRpcProvider;
+}
 
-export interface JustaNameConfig {
-  config: {
-    chainId: ChainId;
-    origin: string;
-    domain: string;
-    subnameChallenge?:Omit<SiweConfig,'origin' | 'domain' | 'chainId'>;
-    signIn?:SigninConfig
-  };
-  ensDomain: string;
+export interface Network<Chain extends ChainId = ChainId> {
+  chainId: Chain;
   providerUrl: string;
+}
+
+export type Networks = Network[];
+
+export type NetworksWithProvider = [
+  NetworkWithProvider<1>,
+  NetworkWithProvider<11155111>,
+  NetworkWithProvider<31337>
+];
+
+export interface Configuration {
+  domain: string;
+  origin: string;
+  subnameChallengeTtl?: number;
+  signInTtl?: number;
+}
+
+export interface  EnsDomainByChainId {
+  chainId: ChainId;
+  ensDomain: string;
   apiKey?: string;
+}
+
+export type EnsDomains = EnsDomainByChainId[];
+
+export interface JustaNameConfig<
+  Config extends Configuration = Configuration,
+  NetworksConfig extends Networks = Networks,
+  EnsDomainConfig extends EnsDomains | undefined = EnsDomains | undefined,
+  DefaultChainId extends ChainId | undefined = ChainId | undefined,
+  ApiKey extends string | undefined = string | undefined
+> {
+  config?: Config;
+  networks?: NetworksConfig;
+  ensDomains?: EnsDomainConfig;
+  defaultChainId?: DefaultChainId;
+  apiKey?: ApiKey;
+}
+
+export interface JustaNameConfigDefaults<
+  NetworksWithProviderConfig extends NetworksWithProvider = NetworksWithProvider,
+> extends JustaNameConfig<
+    Configuration,
+    NetworksWithProviderConfig,
+    EnsDomainByChainId[]
+> {
+  networks: NetworksWithProviderConfig;
+  ensDomains: EnsDomainByChainId[];
 }

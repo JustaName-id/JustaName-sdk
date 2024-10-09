@@ -1,1 +1,1 @@
-export * from './get-offchain-resolvers';
+export * from './get-all-offchain-resolvers';

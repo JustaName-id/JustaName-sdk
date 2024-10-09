@@ -1,12 +1,13 @@
-import { ChainId, SubnameGetAllByAddressResponse } from '@justaname.id/sdk';
+import { ChainId, sanitizeRecords, SubnameGetInvitationsByAddressRoute } from '@justaname.id/sdk';
 import {
   QueryObserverResult,
   RefetchOptions,
   useQuery,
 } from '@tanstack/react-query';
-import { useAccount } from 'wagmi';
-import { useJustaName } from '../../providers';
-import { useMounted } from './useMounted';
+import { useJustaName } from '../../providers/JustaNameProvider';
+import { useMemo } from 'react';
+import { useMountedAccount } from './useMountedAccount';
+import { Records } from '../../types';
 
 export const buildAccountInvitationsKey = (
   address: string | undefined,
@@ -17,48 +18,42 @@ export const buildAccountInvitationsKey = (
   chainId,
 ];
 
-type SubnameType = SubnameGetAllByAddressResponse[];
-
 interface UseAccountInvitationsResult {
-  invitations: SubnameType;
+  invitations: Records[];
   isInvitationsPending: boolean;
   refetchInvitations: (
     options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<SubnameType | undefined, unknown>>;
+  ) => Promise<QueryObserverResult<Records[]  | undefined, unknown>>;
 }
 
-/**
- * Options for the `useAccountSubnames` hook, allowing customization of the query.
- *
- * @typedef UseAccountInvitationsOptions
- * @type {object}
- * @property {ChainId} [chainId] - An optional chain ID to filter the subnames by.
- */
-export interface UseAccountInvitationsOptions {
-  chainId?: ChainId;
-}
+export type UseAccountInvitationsParams = Omit<SubnameGetInvitationsByAddressRoute['params'] , 'address'>
 
 export const useAccountInvitations = (
-  props: UseAccountInvitationsOptions = {}
+  params?: UseAccountInvitationsParams
 ): UseAccountInvitationsResult => {
-  const mounted = useMounted();
-  const { address } = useAccount();
+  const { address } = useMountedAccount();
   const { justaname, chainId } = useJustaName();
+  const _chainId = useMemo(() => params?.chainId || chainId, [params, chainId]);
+
 
   const query = useQuery({
-    queryKey: buildAccountInvitationsKey(address, props?.chainId ? props?.chainId : chainId),
-    queryFn: async () =>
-      justaname.subnames.getInvitations({
+    queryKey: buildAccountInvitationsKey(address, _chainId),
+    queryFn: async () =>{
+      const invitations = await justaname.subnames.getInvitationsByAddress({
         address: address as string,
-        isClaimed: true,
-        coinType: 60,
-        chainId: props?.chainId ? props?.chainId : chainId,
-      }),
-    enabled: Boolean(mounted) && Boolean(address),
+        coinType: params?.coinType || 60,
+        chainId: _chainId,
+      })
+      return  invitations?.subnames.map((subname) => ({
+        ...subname,
+        sanitizedRecords: sanitizeRecords(subname),
+      })) || []
+    },
+    enabled: Boolean(address),
   });
 
   return {
-    invitations: query.data ?? [],
+    invitations: query.data || [],
     isInvitationsPending: query.isPending,
     refetchInvitations: query.refetch,
   };

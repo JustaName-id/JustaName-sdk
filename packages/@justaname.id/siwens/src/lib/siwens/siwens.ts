@@ -2,9 +2,9 @@ import { JsonRpcProvider } from 'ethers';
 import { generateNonce, SiweMessage, SiweResponse, VerifyOpts, VerifyParams, } from 'siwe';
 import {
   InvalidStatementException,
-  InvalidENSException,
+  InvalidConfigurationException,
   InvalidTimeException,
-  InvalidDomainException
+  InvalidENSException
 } from '../errors';
 import { checkDomainValid, checkTTL, constructSignInStatement, extractDataFromStatement } from '../utils';
 
@@ -12,16 +12,16 @@ export interface SiwensResponse extends SiweResponse {
   ens: string
 }
 
-export interface SiwensConfig {
-  params: string | SiwensParams
-  providerUrl?: string
-}
-
-export interface SiwensParams extends Omit<Partial<SiweMessage>,"statement"> {
+export interface SiwensParams extends Partial<Omit<SiweMessage, "toMessage" | "prepareMessage" | "verify"| "validate">> {
   ens: string,
   ttl?: number,
   expirationTime?: string,
   issuedAt?: string,
+}
+
+export interface SiwensConfig {
+  params: string | SiwensParams
+  providerUrl?: string
 }
 
 export class SIWENS extends SiweMessage {
@@ -31,6 +31,9 @@ export class SIWENS extends SiweMessage {
     const { params, providerUrl } = signInConfig;
     if(typeof params === "string"){
       super(params)
+      if (!providerUrl) {
+        throw InvalidConfigurationException.providerUrlRequired()
+      }
       this.provider = new JsonRpcProvider(providerUrl);
       return;
     }
@@ -40,7 +43,7 @@ export class SIWENS extends SiweMessage {
     }
 
     if(!params.domain){
-      throw InvalidDomainException.domainRequired()
+      throw InvalidConfigurationException.domainRequired()
     }
 
     let issuedAt = params.issuedAt;
@@ -55,7 +58,7 @@ export class SIWENS extends SiweMessage {
 
     checkDomainValid(params.ens);
 
-    const statement = constructSignInStatement(params.domain, params.ens);
+    const statement = constructSignInStatement(params.ens, params?.statement || "");
 
 
     super({
@@ -130,5 +133,3 @@ export class SIWENS extends SiweMessage {
     return true;
   }
 }
-
-export default SIWENS;

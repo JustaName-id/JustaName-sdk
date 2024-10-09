@@ -1,13 +1,10 @@
-import { restCall } from '../../api/rest';
+import { assertRestCall } from '../../api/rest';
 import {
-  RequestChallengeResponse, RequestChallengeParams,
-  VerifyChallengeRequest,
-  VerifyChallengeResponse
+  ChainId,
+  RequestChallengeRoute,
+  VerifyMessageRoute,
 } from '../../types';
 import { SiweConfig } from '../../types/siwe/siwe-config';
-
-
-
 
 /**
  * Represents the Sign-In with Ethereum (SIWE) functionality, providing methods
@@ -34,12 +31,24 @@ import { SiweConfig } from '../../types/siwe/siwe-config';
  *
  *  ```
  */
+
+export interface SubnameChallengeSiweConfig
+  extends Omit<SiweConfig, 'chainId' | 'ttl'> {}
+
+export interface SubnameChallengeParams {
+  siweConfig?: SubnameChallengeSiweConfig;
+  chainId: ChainId;
+  subnameChallengeTtl?: number;
+}
+
 export class SubnameChallenge {
-
-  siweConfig: SiweConfig;
-
-  constructor(config: SiweConfig) {
-    this.siweConfig = config;
+  siweConfig?: SubnameChallengeSiweConfig;
+  chainId: ChainId;
+  subnameChallengeTtl?: number;
+  constructor(config: SubnameChallengeParams) {
+    this.siweConfig = config.siweConfig;
+    this.chainId = config.chainId;
+    this.subnameChallengeTtl = config.subnameChallengeTtl;
   }
 
   /**
@@ -49,13 +58,23 @@ export class SubnameChallenge {
    * @returns {Promise<RequestChallengeResponse>} - A promise that resolves with the response.
    * @public
    */
-  requestChallenge  (params: RequestChallengeParams): Promise<RequestChallengeResponse> {
-    return restCall('SIWE_REQUEST_CHALLENGE_ROUTE','POST', {
-      ...this.siweConfig,
-      ...params
-    })
-  }
+  requestChallenge(
+    params: RequestChallengeRoute['params']
+  ): Promise<RequestChallengeRoute['response']> {
+    const { chainId, ttl, origin, domain, ...rest } = params;
+    const _ttl = this.subnameChallengeTtl || ttl || 120000;
+    const _chainId = this.chainId || chainId;
+    const _origin = this.siweConfig?.origin || origin;
+    const _domain = this.siweConfig?.domain || domain;
 
+    return assertRestCall('SIWE_REQUEST_CHALLENGE_ROUTE', 'POST', {
+      ttl: _ttl,
+      chainId: _chainId,
+      origin: _origin,
+      domain: _domain,
+      ...rest,
+    })(['origin', 'domain', 'chainId']);
+  }
 
   /**
    * Sends a request to verify a specific address using SIWE.
@@ -63,9 +82,13 @@ export class SubnameChallenge {
    * @returns {Promise<VerifyChallengeResponse>} - A promise that resolves with the response.
    * @public
    */
-  verifyMessage (
-    params: VerifyChallengeRequest
-  ) : Promise<VerifyChallengeResponse> {
-    return restCall('SIWE_VERIFY_MESSAGE_ROUTE','POST', params)
+  verifyMessage(
+    params: VerifyMessageRoute['params']
+  ): Promise<VerifyMessageRoute['response']> {
+    return assertRestCall(
+      'SIWE_VERIFY_MESSAGE_ROUTE',
+      'POST',
+      params
+    )(['address', 'signature', 'message']);
   }
 }

@@ -1,4 +1,4 @@
-import { ChainId } from '@justaname.id/sdk';
+import { ChainId } from '../../types'
 
 export interface SiweConfig {
   /**

@@ -1,18 +1,20 @@
-import { coinTypeToNameMap} from '@ensdomains/address-encoder';
+import { coinTypeToNameMap, } from '@ensdomains/address-encoder';
 
+export type SupportedCoins = keyof typeof coinTypeToNameMap
 export interface CoinType {
   coin: string;
   symbol: string;
-  coinType: string;
+  coinType: SupportedCoins | '-1'
 }
 
-export interface CoinTypeMap {
-  [key: string]: CoinType;
-}
+export type CoinTypeMap = {
+  [key in SupportedCoins]: CoinType;
+};
+
 export const coinTypeMap : CoinTypeMap = Object.keys(coinTypeToNameMap).reduce((acc, key) => {
-  const coin = key as keyof typeof coinTypeToNameMap;
+  const coin = key as SupportedCoins;
   const symbol = coinTypeToNameMap[coin];
-  acc[key] = {
+  acc[coin] = {
     coin: symbol[1],
     symbol: symbol[0],
     coinType: coin,
@@ -23,7 +25,7 @@ export const coinTypeMap : CoinTypeMap = Object.keys(coinTypeToNameMap).reduce((
 export type CoinTypeKeys = keyof typeof coinTypeMap;
 
 
-export const getCoinTypeDetails =  (cointype: CoinTypeKeys):  CoinType  => {
+export const getCoinTypeDetails =  (cointype: SupportedCoins):  CoinType  => {
   const coinTypeDetails = coinTypeMap[cointype];
   if (coinTypeDetails) {
     return {
@@ -36,3 +38,4 @@ export const getCoinTypeDetails =  (cointype: CoinTypeKeys):  CoinType  => {
     coinType: "-1",
   };
 }
+

@@ -6,3 +6,6 @@ export * from './Badge';
 export * from './Dialog';
 export * from './Text';
 export * from './LoadingSpinner';
+export * from './Carousel';
+export * from './Popover'
+export * from './OTPInput'

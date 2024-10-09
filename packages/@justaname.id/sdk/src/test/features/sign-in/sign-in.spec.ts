@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import SignIn from '../../../lib/features/sign-in';
 import { OffchainResolvers } from '../../../lib/features';
 import { configureEnv } from '../../helpers/configureEnv';
@@ -7,7 +7,6 @@ import { initializeJustaName } from '../../helpers/initializeJustaName';
 import { JustaName } from '../../../lib/justaname';
 dotenv.config();
 
-const PROVIDER_URL = process.env['SDK_PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
 const CHAIN_ID = 11155111;
@@ -28,13 +27,15 @@ describe('SignIn', () => {
     await configureEnv();
     justaname = initializeJustaName(validApiKey);
     signIn = new SignIn({
-      origin: URI,
-      domain: DOMAIN,
+      siweConfig: {
+        domain: DOMAIN,
+        origin: URI,
+      },
+      signInTtl: VALID_TTL,
       chainId: CHAIN_ID,
-      ttl: VALID_TTL,
-    }, PROVIDER_URL,
-      new OffchainResolvers()
-      );
+      offchainResolvers: new OffchainResolvers(),
+      networks: JustaName.createNetworks()
+    });
   });
 
 
@@ -123,7 +124,7 @@ describe('SignIn', () => {
     const signature = await subnameSigner.signMessage(challenge.challenge);
 
     const response = await justaname.subnames.revokeSubname({
-      chainId: 11155111,
+      chainId: CHAIN_ID,
       username: subnameToBeAdded
     }, {
       xAddress: subnameSigner.address,

@@ -1,12 +1,6 @@
-import { ChainId, IRequest, IResponse, IRoute } from '../common';
+import { ChainId, EmptyHeaders, IRequest, IResponse, IRoute } from '../common';
 
-/**
- * Represents a request to challenge to add mApp permission.
- * @interface RequestRevokeMAppFieldChallengeRequest
- * @public
- */
-
-export interface RequestRevokeMAppFieldChallengeRequest extends IRequest {
+export interface RequestRevokeMAppPermissionChallengeRequest extends IRequest {
 
   /**
    *  Represents the ENS domain
@@ -67,15 +61,4 @@ export interface RequestRevokeMAppPermissionChallengeResponse extends IResponse{
   challenge: string;
 }
 
-export interface RequestRevokeMAppFieldChallengeRoute extends IRoute {
-  request: RequestRevokeMAppFieldChallengeRequest;
-  response: RequestRevokeMAppPermissionChallengeResponse;
-  headers: NonNullable<unknown>;
-}
-
-export interface RequestRevokeMAppPermissionChallengeParams extends Omit<RequestRevokeMAppFieldChallengeRequest, 'origin' | 'domain' | 'chainId' | 'ttl' > {
-  origin?: string,
-  domain?: string,
-  chainId?: ChainId,
-  ttl?: number
-}
+export interface RequestRevokeMAppPermissionChallengeRoute extends IRoute<RequestRevokeMAppPermissionChallengeRequest, RequestRevokeMAppPermissionChallengeResponse, EmptyHeaders, 'origin' | 'domain' | 'chainId' | 'ttl'> {}

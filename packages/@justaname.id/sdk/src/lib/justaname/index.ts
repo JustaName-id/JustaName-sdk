@@ -1,6 +1,14 @@
-import { JustaNameConfig } from '../types';
+import {
+  JustaNameConfig,
+  Networks,
+  NetworksWithProvider,
+  ChainId,
+  JustaNameConfigDefaults,
+  NetworkWithProvider
+} from '../types';
 import { OffchainResolvers, SignIn, SubnameChallenge, Subnames, MApps } from '../features';
 import { InvalidConfigurationException } from '../errors/InvalidConfiguration.exception';
+import { ethers } from 'ethers';
 
 /**
  * The main class for the JustaName SDK.
@@ -12,18 +20,17 @@ import { InvalidConfigurationException } from '../errors/InvalidConfiguration.ex
  * import { JustaName } from '@justaname.id/sdk';
  *
  * const configuration = {
- *  apiKey: 'your-api-key'
+ *  apiKey: 'your-api-key',
+ *  networks: [
+ *  {
+ *  chainId: 1,
+ *  providerUrl: 'https://mainnet.infura.io/v3/your-infura-key'
+ *  },
+ *  ],
+ *  ensDomains: ['justan.id']
  *  };
  *
  *  const justaName = JustaName.init(configuration);
- *
- *  const requestChallengeResponse = await justaName.siwe.requestChallenge({
- *  chainId: 1,
- *  origin: 'http://localhost:3333',
- *  address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
- *  domain: 'localhost',
- *  ttl?: 120000,
- *  });
  *
  *  ```
  */
@@ -76,43 +83,52 @@ export class JustaName {
     this.mApps = mApps;
   }
 
-  /**
-   * Initializes the JustaName SDK.
-   * @param {JustaNameConfig} configuration - The configuration object.
-   * @returns {JustaName} - A promise that resolves with the JustaName SDK.
-   * @public
-   * @static
-   */
-  static init(configuration: JustaNameConfig): JustaName {
-    this.checkConfig(configuration);
+  static init(configuration: JustaNameConfig = {}): JustaName {
+    const defaultChainId = configuration.defaultChainId ||
+      (configuration && configuration?.networks && configuration.networks[0]?.chainId ) ||
+      1 as ChainId;
+
+    const networks = JustaName.createNetworks(configuration.networks)
+    const ensDomains = configuration.ensDomains || [];
+    const sanitizedConfiguration:JustaNameConfigDefaults = {
+      ...configuration,
+      defaultChainId,
+      networks,
+      ensDomains
+    }
+
+    this.checkConfig(sanitizedConfiguration);
+
+    const siweConfig = configuration.config ? { domain: configuration.config.domain, origin: configuration.config.origin } : undefined;
 
     const subnameChallenge = new SubnameChallenge({
-      ...configuration.config,
-      ttl: configuration.config.subnameChallenge?.ttl || 120000
+      siweConfig,
+      chainId: defaultChainId,
     });
 
-    const subnames = new Subnames(
-      configuration.providerUrl,
-      configuration.ensDomain,
-      configuration.config.chainId,
-      configuration.apiKey
-    );
+    const subnames = new Subnames({
+      apiKey: configuration.apiKey,
+      networks,
+      chainId: defaultChainId,
+      ensDomains
+    });
 
     const offchainResolvers = new OffchainResolvers();
 
-    const signIn = new SignIn(
-      {
-        ...configuration.config,
-        ttl: configuration.config.signIn?.ttl || 120000
-      },
-      configuration.providerUrl,
+    const signIn = new SignIn({
+      siweConfig,
+      networks,
+      chainId: defaultChainId,
       offchainResolvers
+      }
     );
 
-    const mApps = new MApps(
-      configuration.config,
-      subnames
-    );
+    const mApps = new MApps({
+      siweConfig,
+      chainId: defaultChainId,
+      networks,
+      subnames,
+    });
 
     return new JustaName(
       subnameChallenge,
@@ -123,38 +139,86 @@ export class JustaName {
     );
   }
 
-  /**
-   * Checks if the API key is present.
-   * @throws {Error} - If the API key is not present.
-   * @private
-   * @static
-   */
-  private static checkConfig(configuration: JustaNameConfig): void {
-    const { providerUrl, config, ensDomain } = configuration;
+  static createNetworks(networks: Networks = []): NetworksWithProvider {
+    const defaultMainnetProviderUrl = 'https://cloudflare-eth.com';
+    const defaultTestnetProviderUrl = 'https://rpc.sepolia.org';
 
-    if (!ensDomain) {
-      throw InvalidConfigurationException.ensDomainRequired();
+    const defaultMainnetProvider = new ethers.JsonRpcProvider(defaultMainnetProviderUrl, 1)
+    const defaultTestnetProvider = new ethers.JsonRpcProvider(defaultTestnetProviderUrl, 11155111)
+
+    const baseNetworks = [
+      {
+        chainId: 1 as ChainId,
+        provider: defaultMainnetProvider,
+        providerUrl: defaultMainnetProviderUrl
+      },
+      {
+        chainId: 11155111 as ChainId,
+        provider: defaultTestnetProvider,
+        providerUrl: defaultTestnetProviderUrl
+      },
+      {
+        chainId: 31337 as ChainId,
+        provider: new ethers.JsonRpcProvider('http://localhost:8545'),
+        providerUrl: 'http://localhost:8545',
+      }
+    ] as NetworksWithProvider
+
+    const baseNetworksConfig = baseNetworks.map(_network => {
+      const network = networks.find(n => n.chainId === _network.chainId)
+      if (network) {
+        return {
+          chainId: network.chainId,
+          provider: new ethers.JsonRpcProvider(network.providerUrl),
+          providerUrl: network.providerUrl
+        }
+      } else {
+        return _network
+      }
+    })
+
+    const mainnetNetwork = baseNetworksConfig.find(n => n.chainId === 1) as NetworkWithProvider<1>
+    const testnetNetwork = baseNetworksConfig.find(n => n.chainId === 11155111) as NetworkWithProvider<11155111>
+    const localNetwork = baseNetworksConfig.find(n => n.chainId === 31337) as NetworkWithProvider<31337>
+    if (!mainnetNetwork) {
+      throw new InvalidConfigurationException('The mainnet network is missing');
     }
 
-    if (!providerUrl) {
-      throw InvalidConfigurationException.providerUrlRequired();
+    if (!testnetNetwork) {
+      throw new InvalidConfigurationException('The testnet network is missing');
     }
 
-    if (!config) {
-      throw InvalidConfigurationException.configRequired();
-    }
+    return [
+      mainnetNetwork,
+      testnetNetwork,
+      localNetwork
+    ]
+  }
 
-    if (!config.chainId) {
-      throw InvalidConfigurationException.chainIdRequired();
-    }
+  private static checkConfig(configuration: JustaNameConfigDefaults): void {
+    this.checkNetworks(configuration.networks);
+  }
 
-    if (!config.domain) {
-      throw InvalidConfigurationException.domainRequired();
-    }
+  private static checkNetworks(networks: Networks): void {
+    if (networks && networks.length > 0) {
+      networks.reduce((acc, network) => {
+        if (acc.includes(network.chainId)) {
+          throw new InvalidConfigurationException('The chainId is duplicated');
+        }
+        return [...acc, network.chainId]
+      }, [] as ChainId[])
 
-    if (!config.origin) {
-      throw InvalidConfigurationException.originRequired();
+      networks.forEach(network => {
+        if(network.chainId === 31337){
+          return
+        }
+        const provider = new ethers.JsonRpcProvider(network.providerUrl)
+        provider.getNetwork().then(_network => {
+          if (network.chainId.toString() !== _network.chainId.toString() ) {
+            throw new InvalidConfigurationException('The chainId does not match the chainId of the providerUrl');
+          }
+        })
+      })
     }
-
   }
 }

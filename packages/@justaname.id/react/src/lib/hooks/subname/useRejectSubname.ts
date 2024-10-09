@@ -1,63 +1,51 @@
 'use client';
 
-import { SubnameRejectResponse } from '@justaname.id/sdk';
-import { useMutation } from '@tanstack/react-query';
+import { sanitizeRecords, SubnameRejectRoute } from '@justaname.id/sdk';
+import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { useSubnameSignature } from './useSubnameSignature';
 import { useAccountInvitations } from '../account/useAccountInvitations';
+import { splitDomain } from '../../helpers';
+import { useMemo } from 'react';
+import { Records } from '../../types';
 
-export interface BaseRejectSubnameRequest {
-  username: string;
-
-  ensDomain: string;
-
-  chainId: number;
+export interface UseRejectSubnameFunctionParams extends Omit<SubnameRejectRoute['params'], 'ensDomain' | 'username'> {
+  ens: string;
 }
 
-/**
- *  Interface defining the parameters needed to reject a subname.
- *
- *  @typedef UseRejectSubname
- *  @type {object}
- *  @property {function} rejectSubname - The function to reject a subname.
- *  @property {boolean} isRejectSubnamePending - Indicates if the mutation is currently pending.
- */
-export interface UseRejectSubname {
-  rejectSubname: (
-    params: BaseRejectSubnameRequest
-  ) => Promise<SubnameRejectResponse>;
+export type UseRejectSubnameParams = Omit<UseRejectSubnameFunctionParams, 'ens'>
+
+export interface UseRejectSubnameResult {
+  rejectSubname: UseMutateAsyncFunction<Records, Error, UseRejectSubnameFunctionParams>;
   isRejectSubnamePending: boolean;
 }
-/**
- * Custom hook for performing a mutation to reject a subname.
- *
- * @returns {UseRejectSubname} An object containing the `rejectSubname` async function to initiate the subname reject, and a boolean `rejectSubnamePending` indicating the mutation's pending state.
- */
-export const useRejectSubname = (): UseRejectSubname => {
-  const { justaname } = useJustaName();
+
+export const useRejectSubname = (params?: UseRejectSubnameParams): UseRejectSubnameResult => {
+  const { justaname, chainId } = useJustaName();
   const { address } = useMountedAccount();
   const { refetchInvitations } = useAccountInvitations();
   const { getSignature } = useSubnameSignature();
   const { refetchAccountSubnames } = useAccountSubnames();
+  const _chainId = useMemo(() => params?.chainId || chainId, [params?.chainId, chainId]);
 
-  const mutate = useMutation<
-    SubnameRejectResponse,
-    Error,
-    BaseRejectSubnameRequest
-  >({
-    mutationFn: async (params: BaseRejectSubnameRequest) => {
+  const mutate = useMutation({
+    mutationFn: async (_params: UseRejectSubnameFunctionParams) => {
       if (!address) {
         throw new Error('No address found');
       }
 
+      const _ens = _params.ens
+
+      const [_username, _ensDomain] = splitDomain(_ens);
+
       const signature = await getSignature();
 
-      const accepted = await  justaname.subnames.rejectSubname({
-        chainId: params.chainId,
-        ensDomain: params.ensDomain,
-        username: params.username,
+      const rejected = await  justaname.subnames.rejectSubname({
+        ensDomain: _ensDomain,
+        chainId: _params.chainId || _chainId,
+        username: _username,
       }, {
         xAddress: address,
         xSignature: signature.signature,
@@ -66,14 +54,15 @@ export const useRejectSubname = (): UseRejectSubname => {
 
       refetchAccountSubnames();
       refetchInvitations();
-      return accepted;
+      return {
+        ...rejected,
+        sanitizedRecords: sanitizeRecords(rejected),
+      }
     },
   });
 
   return {
-    rejectSubname: mutate.mutateAsync as (
-      params: BaseRejectSubnameRequest
-    ) => Promise<SubnameRejectResponse>,
+    rejectSubname: mutate.mutateAsync,
     isRejectSubnamePending: mutate.isPending,
   };
 };

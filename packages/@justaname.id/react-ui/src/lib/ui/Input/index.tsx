@@ -17,7 +17,7 @@ const InputWrapper = styled.div<InputWrapperProps>`
     display: flex;
     align-items: center;
     border-radius: 16px;
-    border: 1px solid ${props => props.$error ? 'var(--justaname-error-color)' : 'var(--justaname-primary-color)'};
+    border: 1px solid ${props => props.$error ? 'var(--justaname-destructive-color)' : 'var(--justaname-primary-color)'};
     background-color: var(--justaname-background-color);
     padding: 10px;
     gap: 12px;
@@ -35,7 +35,7 @@ const StyledInput = styled.input<StyledInputProps>`
     font-family: var(--justaname-font-family), serif;
     line-height: 20px;
     padding: 0;
-    text-transform: capitalize;
+    text-transform: none;
     color: var(--justaname-foreground-color-2);
     transition: border-color 0.2s ease-in-out;
 
@@ -57,6 +57,7 @@ const StyledInput = styled.input<StyledInputProps>`
 const LeftElement = styled.div`
     font-family: var(--justaname-font-family),serif;
     align-items: center;
+    display: flex;
     pointer-events: none;
     font-size: 12px;
     font-weight: 900;
@@ -67,7 +68,7 @@ const LeftElement = styled.div`
 const RightElement = styled.div`
     font-family: var(--justaname-font-family),serif;
     align-items: center;
-    pointer-events: none;
+    display: flex;
     font-size: 12px;
     font-weight: 900;
     line-height: 20px;

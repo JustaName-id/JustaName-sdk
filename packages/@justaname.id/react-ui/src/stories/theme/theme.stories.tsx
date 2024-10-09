@@ -1,15 +1,15 @@
 import { StoryObj } from '@storybook/react';
 import { OrLine } from '../../lib/components';
 import { A, Badge, Button, H2, Input, SPAN } from '../../lib/ui';
-import { useJustaTheme } from '../../lib/providers';
 import Chrome from '@uiw/react-color-chrome';
 import { GithubPlacement } from '@uiw/react-color-github';
 import { Popover } from 'react-tiny-popover';
 import React from 'react';
-import Flex from '../../lib/common/Flex';
 import { formatText } from '../../lib/utils';
 import ClickableItem from '../../lib/components/ClickableItem';
 import { JustaNameLogoIcon, ProfileIcon } from '../../lib/icons';
+import { Flex } from '../../lib/common';
+import { useJustaTheme } from '../../lib/providers';
 
 const ThemeChange = () => {
   const { changeTheme } = useJustaTheme();
@@ -117,10 +117,10 @@ const ThemeChange = () => {
           height: '40px',
           width: '40px',
           borderRadius: '50%',
-          backgroundColor: '#3280F4',
+          backgroundColor: 'var(--justaname-primary-color)',
           cursor: 'pointer',
           border: '1px solid hsl(0,0%,92%)'
-        }} onClick={() => changeTheme('primary', '#3280F4')}></button>
+        }} onClick={() => changeTheme('primary', 'var(--justaname-primary-color)')}></button>
 
         <button style={{
           height: '40px',

@@ -1,50 +1,102 @@
 import { SiweConfig } from '../../types/siwe/siwe-config';
-import { ChainId } from '../../types';
-import { SIWENS, SiwensParams, SiwensResponse } from '@justaname.id/siwens';
-import { InvalidENSException } from '../../errors';
+import { ChainId, NetworksWithProvider } from '../../types';
+import { SIWENS, SiwensResponse } from '@justaname.id/siwens';
+import { InvalidConfigurationException, InvalidENSException } from '../../errors';
 import { OffchainResolvers } from '../offchain-resolvers';
-import { JsonRpcProvider } from 'ethers';
+import { RequestSignInParams } from '../../types/signin';
 
 export interface SignInResponse extends SiwensResponse {
   isJustaName: boolean
   chainId: ChainId
 }
 
+export interface SignInParams {
+  siweConfig?: Omit<SiweConfig, 'chainId' | 'ttl'>;
+  signInTtl?: number;
+  networks: NetworksWithProvider;
+  offchainResolvers: OffchainResolvers;
+  chainId: ChainId;
+}
+
 export class SignIn {
-  readonly config: SiweConfig;
-  readonly providerUrl: string;
-  readonly offchainResolver: OffchainResolvers;
-  readonly provider: JsonRpcProvider;
-  constructor(signInConfig: SiweConfig,providerUrl:string, offchainResolver: OffchainResolvers){
-    this.config = signInConfig;
-    this.providerUrl = providerUrl;
-    this.offchainResolver = offchainResolver;
-    this.provider = new JsonRpcProvider(providerUrl);
+  readonly siweConfig?: Omit<SiweConfig, 'chainId' | 'ttl'>;
+  readonly signInTtl?: number;
+  readonly networks: NetworksWithProvider;
+  readonly chainId: ChainId;
+  readonly offchainResolvers: OffchainResolvers;
+  constructor(params: SignInParams) {
+    this.siweConfig = params.siweConfig;
+    this.networks = params.networks;
+    this.chainId = params.chainId;
+    this.offchainResolvers = params.offchainResolvers;
+    this.signInTtl = params.signInTtl;
   }
 
-  requestSignIn(params: Omit<SiwensParams, 'domain' | 'origin' | 'chainId'> &{
-    origin?: string,
-    domain?: string,
-    chainId?: ChainId
-    ttl?: number
-  }): string {
+  requestSignIn(params: RequestSignInParams): string {
+    const chainId = params.chainId || this.chainId;
+    const network = this.networks.find(network => network.chainId === chainId);
+    if (!network) {
+      throw new Error(`ChainId ${chainId} not supported`);
+    }
+
+    const uri = params.origin || this.siweConfig?.origin;
+    const domain = params.domain || this.siweConfig?.domain;
+    const ttl = params.ttl || this.signInTtl || 60000;
+
+    const missingParams = [];
+    if (!uri) {
+      missingParams.push('origin');
+    }
+    if (!domain) {
+      missingParams.push('domain');
+    }
+
+    if (missingParams.length > 0) {
+      throw InvalidConfigurationException.missingParameters(missingParams);
+    }
+
     const siwens = new SIWENS({
       params: {
         ...params,
-        uri: params.origin || this.config.origin,
-        domain: params.domain || this.config.domain,
-        chainId: params.chainId || this.config.chainId,
-        ttl: params?.ttl || this.config.ttl || 1000 * 60 * 60 * 24
+        uri,
+        domain,
+        chainId: chainId,
+        ttl: ttl
       },
-      providerUrl: this.providerUrl
+      providerUrl: network.providerUrl
     })
     return siwens.prepareMessage();
   }
 
   async signIn(message: string, signature: string): Promise<SignInResponse>{
+    const chainIdMatch = message.match(/Chain ID: (\d+)/);
+    const extractChainId = chainIdMatch ? chainIdMatch[1] : null;
+    if (!extractChainId) {
+      throw new Error('Chain ID not found in message');
+    }
+
+    const extractedChainId = parseInt(extractChainId);
+
+    if(isNaN(extractedChainId)){
+      throw new Error('Chain ID is not a number');
+    }
+
+    if(extractedChainId !== 1 && extractedChainId !== 11155111){
+      throw new Error('Chain ID not supported');
+    }
+
+    const chainId = extractedChainId as ChainId;
+
+    const network = this.networks.find(network => network.chainId === chainId);
+
+    if (!network) {
+      throw new Error(`ChainId ${chainId} not supported`);
+    }
+
+
     const siwens = new SIWENS({
       params: message,
-      providerUrl: this.providerUrl
+      providerUrl: network.providerUrl
     })
 
 
@@ -52,7 +104,7 @@ export class SignIn {
       signature
     })
 
-    const isJustaName = await this.checkIfJustaNameResolver(siwensResponse.ens);
+    const isJustaName = await this.checkIfJustaNameResolver(siwensResponse.ens, chainId);
 
     return {
       ...siwensResponse,
@@ -61,14 +113,20 @@ export class SignIn {
     }
   }
 
-  private async checkIfJustaNameResolver(ens:string){
-    const [resolverAddress,resolvers] = await Promise.all([this.provider.getResolver(ens),this.offchainResolver.getAllOffchainResolvers()]);
+  private async checkIfJustaNameResolver(ens:string, chainId: ChainId){
+    const network = this.networks.find(network => network.chainId === chainId);
+    if (!network) {
+      throw new Error(`ChainId ${chainId} not supported`);
+    }
 
-    const currentOffchainResolver = resolvers.find(resolver => resolver.chainId === this.config.chainId)
+
+    const [resolverAddress,resolvers] = await Promise.all([network.provider.getResolver(ens),this.offchainResolvers.getAllOffchainResolvers()]);
+
+    const currentOffchainResolver = resolvers.offchainResolvers.find(resolver => resolver.chainId === chainId)
 
     if(!currentOffchainResolver){
       throw InvalidENSException.chainNotSupported(
-        this.config.chainId.toString()
+        chainId.toString()
       )
     }
 
