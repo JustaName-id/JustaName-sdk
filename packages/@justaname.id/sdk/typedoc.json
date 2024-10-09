@@ -2,6 +2,6 @@
   "$schema": "https://typedoc-plugin-markdown.org/schema.json",
   "entryPoints": ["./src/index.ts"],
   "plugin": ["typedoc-plugin-markdown"],
-  "out": "../../../docs/sdk/core-sdk",
+  "out": "../../../docs/sdk/JustaName Core SDK",
   "cleanOutputDir": true
 }
