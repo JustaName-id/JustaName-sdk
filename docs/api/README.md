@@ -49,7 +49,7 @@ The JustaName API is divided into the following main categories:
 
 #### 4. **mApp Integration**
 
-Manage permissions and data for mobile applications interacting with JustaName.
+Manage permissions and data for applications interacting with JustaName.
 
 * **Add mApp Permission:** Grants a trusted third-party application permission to update specific metadata fields of a user's subname dynamically.
 * **Append mApp Field** Allows an mApp to append or update data fields in a user's subname metadata.
@@ -59,7 +59,7 @@ Manage permissions and data for mobile applications interacting with JustaName.
 
 To begin using the JustaName API:
 
-1. **Obtain an API Key**: If required, register and obtain an API key from [https://dashboard.justaname.id](https://dashboard.justaname.id)
+1. **Obtain an API Key**: Register and obtain an API key from [https://dashboard.justaname.id](https://dashboard.justaname.id)
 2. **Explore the API**: Familiarize yourself with the API categories and endpoints.
 3. **Integrate Endpoints**: Use the base URLs and appropriate headers to integrate the API into your application.
 
