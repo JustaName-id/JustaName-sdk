@@ -1,3 +1,38 @@
+## 0.2.92 (2024-10-09)
+
+
+### 🚀 Features
+
+- icons and refactoring of hooks for enhanced functionality ([fe18784](https://github.com/JustaName-id/JustaName-sdk/commit/fe18784))
+
+- justsign in mapps and update records and justverified ([8d40bd1](https://github.com/JustaName-id/JustaName-sdk/commit/8d40bd1))
+
+- new routes structure and react adjustments ([dc95caf](https://github.com/JustaName-id/JustaName-sdk/commit/dc95caf))
+
+- sdk reference for siwens and core-sdk ([7430def](https://github.com/JustaName-id/JustaName-sdk/commit/7430def))
+
+- new readme for siwens and sdk ([626b4b6](https://github.com/JustaName-id/JustaName-sdk/commit/626b4b6))
+
+
+### 🩹 Fixes
+
+- remove provider url and change the configuration scheme ([8366a87](https://github.com/JustaName-id/JustaName-sdk/commit/8366a87))
+
+- page names ([f344cd1](https://github.com/JustaName-id/JustaName-sdk/commit/f344cd1))
+
+- routes ([0e3ef4d](https://github.com/JustaName-id/JustaName-sdk/commit/0e3ef4d))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.25
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- HadiKhai
+
 ## 0.2.91 (2024-09-22)
 
 
