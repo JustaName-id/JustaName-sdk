@@ -20,6 +20,7 @@ export interface JustSignInProviderConfig extends JustaNameProviderConfig, Justa
   openOnWalletConnect?: boolean;
   allowedEns?: 'all' | 'platform' | string[];
   logo?: string;
+  disableOverlay?: boolean;
 }
 
 export interface JustSignInProviderProps {
@@ -38,7 +39,7 @@ export interface UpdateRecordsParams extends Omit<UseSubnameUpdateFunctionParams
 
 export interface JustSignInContextProps {
   handleOpenSignInDialog: (open: boolean) => void;
-  handleUpdateRecords: (records: UpdateRecordsParams & {ens: string}) => Promise<void>;
+  handleUpdateRecords: (records: UpdateRecordsParams & { ens: string }) => Promise<void>;
   isSignInOpen: boolean;
   logo?: string;
   plugins: JustaPlugin[],
@@ -59,31 +60,31 @@ export const JustSignInContext = createContext<JustSignInContextProps>({
 
 
 export const JustSignInProvider: FC<JustSignInProviderProps> = ({
-                                                                  children,
-                                                                  config: {
-                                                                    openOnWalletConnect = true,
-                                                                    ...configRest
-                                                                  },
-                                                                  mApps = [],
-                                                                  plugins,
-                                                                }) => {
+  children,
+  config: {
+    openOnWalletConnect = true,
+    ...configRest
+  },
+  mApps = [],
+  plugins,
+}) => {
   const allowedEns = configRest.allowedEns || 'all';
   const { isConnected } = useMountedAccount();
   const [signInOpen, setSignInOpen] = useState(false);
-  const [updateRecord, setUpdateRecord] = useState<(UpdateRecordsParams & {ens: string}) | null>(null);
+  const [updateRecord, setUpdateRecord] = useState<(UpdateRecordsParams & { ens: string }) | null>(null);
   const updateRecordPromiseResolveRef = useRef<(() => void) | null>(null);
 
   const pluginsMApps = useMemo(() => plugins
-      ?.map((plugin) => plugin.mApps)
-      .flat()
-      .map((mApp) => ({
-        name: mApp,
-        openOnConnect: false
-      })),
+    ?.map((plugin) => plugin.mApps)
+    .flat()
+    .map((mApp) => ({
+      name: mApp,
+      openOnConnect: false
+    })),
     [plugins]) as { name: string, openOnConnect: boolean }[] || [];
 
 
-  const handleUpdateRecords = async (records: UpdateRecordsParams & {ens: string}) => {
+  const handleUpdateRecords = async (records: UpdateRecordsParams & { ens: string }) => {
     setUpdateRecord(records);
     return new Promise<void>((resolve) => {
       updateRecordPromiseResolveRef.current = resolve;
@@ -153,16 +154,16 @@ export const JustSignInProvider: FC<JustSignInProviderProps> = ({
           >
             <CheckSession openOnWalletConnect={openOnWalletConnect} handleOpenDialog={handleOpenSignInDialog} />
             <SignInDialog open={signInOpen} handleOpenDialog={handleOpenSignInDialog} allowedEns={allowedEns}
-                          logo={configRest.logo} />
+              logo={configRest.logo} disableOverlay={configRest.disableOverlay} />
             {/*{*/}
             {/*  Boolean(updateRecord) &&*/}
-              <UpdateRecordDialog open={Boolean(updateRecord)} handleOpen={
-                (open) => {
-                  if (!open) {
-                    setUpdateRecord(null);
-                  }
+            <UpdateRecordDialog open={Boolean(updateRecord)} handleOpen={
+              (open) => {
+                if (!open) {
+                  setUpdateRecord(null);
                 }
-              } {...updateRecord} logo={configRest.logo} />
+              }
+            } {...updateRecord} logo={configRest.logo} />
             {/*}*/}
 
             {children}
@@ -198,13 +199,13 @@ export const useSignInWithJustaName = (): UseSignInWithJustaName => {
   const { connectedEns, isLoggedIn, isEnsAuthPending, refreshEnsAuth } = useEnsAuth();
   const { handleUpdateRecords } = context;
   const handleUpdateRecordsInternal = async (records: Omit<UseSubnameUpdateFunctionParams, 'ens'> & { ens?: string; }) => {
-    if(records.ens){
+    if (records.ens) {
       return handleUpdateRecords({
         ...records,
         ens: records.ens
       });
     }
-    else{
+    else {
       return handleUpdateRecords({
         ...records,
         ens: connectedEns?.ens || ''

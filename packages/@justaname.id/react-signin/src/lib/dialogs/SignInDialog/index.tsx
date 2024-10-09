@@ -31,6 +31,7 @@ export interface SignInDialogProps {
   address?: string;
   allowedEns: "all" | "platform" | string[];
   logo?: string;
+  disableOverlay?: boolean;
 }
 
 const TransitionElement = styled.div<{ maxheight: string }>`
@@ -46,8 +47,8 @@ const TransitionElement = styled.div<{ maxheight: string }>`
   }
 `;
 
-export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, allowedEns, logo }) => {
-  const { chainId, selectedEnsDomain} = useJustaName();
+export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, allowedEns, logo, disableOverlay }) => {
+  const { chainId, selectedEnsDomain } = useJustaName();
   const { isConnected, address } = useMountedAccount();
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
   const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
@@ -141,19 +142,19 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
   }
 
   return (
-    <DefaultDialog open={open && !isAccountSubnamesPending && isConnected} handleClose={() => handleOpenDialog(false)} header={
+    <DefaultDialog disableOverlay={disableOverlay} open={open && !isAccountSubnamesPending && isConnected} handleClose={() => handleOpenDialog(false)} header={
       <div style={{
-        paddingLeft:'24px',
+        paddingLeft: '24px',
         justifyContent: 'center',
         display: 'flex',
         alignItems: 'center',
-        flexGrow:1
+        flexGrow: 1
       }}>
         {
           logo
-            ? <img src={logo} alt="logo" style={{ height: '62px' , width: 'auto' }} />
+            ? <img src={logo} alt="logo" style={{ height: '62px', width: 'auto' }} />
             :
-        <JustaNameLogoIcon height={62} />
+            <JustaNameLogoIcon height={62} />
         }
       </div>
     }>
@@ -164,7 +165,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
             lineHeight: '10px',
             fontWeight: 900,
           }}>
-            {address && formatText(address, 4)}
+          {address && formatText(address, 4)}
         </SPAN>
       </Badge>
       <TransitionElement className={(shouldBeAbleToSelect) ? 'visible' : ''} maxheight={'fit-content'}>
@@ -257,7 +258,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
                   ensDomain: claimableEns,
                 }).then(() => {
                   setSubnameSigningIn(username + '.' + claimableEns);
-                  signIn({ ens: username + '.' + claimableEns   }).then(() => handleOpenDialog(false)).finally(() => {
+                  signIn({ ens: username + '.' + claimableEns }).then(() => handleOpenDialog(false)).finally(() => {
                     setSubnameSigningIn('');
                   });
                 })
