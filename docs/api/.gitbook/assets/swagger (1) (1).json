@@ -1057,7 +1057,7 @@
         ]
       }
     },
-    "/ens/v1/subname/ens-list": {
+    "/ens/v1/subname/ens/list": {
       "get": {
         "operationId": "SubdomainReadController_getAllEnsWithSubnameCount",
         "summary": "Get All Ens with Subname count",
