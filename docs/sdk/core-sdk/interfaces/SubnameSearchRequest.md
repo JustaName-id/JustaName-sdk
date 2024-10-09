@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L15)
+[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L15)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L17)
+[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L17)
 
 ***
 
@@ -38,7 +38,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L19)
+[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L19)
 
 ***
 
@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L21)
+[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L21)
 
 ***
 
@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L11)
+[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L11)
 
 ***
 
@@ -68,7 +68,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L9)
+[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L9)
 
 ***
 
@@ -78,4 +78,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L13)
+[packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/search-subnames.ts#L13)

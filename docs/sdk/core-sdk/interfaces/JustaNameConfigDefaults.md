@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L47)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L47)
 
 ***
 
@@ -40,7 +40,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L43)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L43)
 
 ***
 
@@ -54,7 +54,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L46)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L46)
 
 ***
 
@@ -68,7 +68,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L58)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L58)
 
 ***
 
@@ -82,4 +82,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L57)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L57)

@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L48)
+[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L48)
 
 ## Properties
 
@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L46)
+[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L46)
 
 ***
 
@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L45)
+[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L45)
 
 ***
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L47)
+[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L47)
 
 ## Methods
 
@@ -76,7 +76,7 @@ The request parameters.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:61](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L61)
+[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:61](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L61)
 
 ***
 
@@ -100,4 +100,4 @@ The request parameters.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:84](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L84)
+[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:84](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L84)

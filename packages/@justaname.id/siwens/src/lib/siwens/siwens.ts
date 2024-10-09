@@ -2,9 +2,9 @@ import { JsonRpcProvider } from 'ethers';
 import { generateNonce, SiweMessage, SiweResponse, VerifyOpts, VerifyParams, } from 'siwe';
 import {
   InvalidStatementException,
-  InvalidENSException,
+  InvalidConfigurationException,
   InvalidTimeException,
-  InvalidDomainException
+  InvalidENSException
 } from '../errors';
 import { checkDomainValid, checkTTL, constructSignInStatement, extractDataFromStatement } from '../utils';
 
@@ -31,6 +31,9 @@ export class SIWENS extends SiweMessage {
     const { params, providerUrl } = signInConfig;
     if(typeof params === "string"){
       super(params)
+      if (!providerUrl) {
+        throw InvalidConfigurationException.providerUrlRequired()
+      }
       this.provider = new JsonRpcProvider(providerUrl);
       return;
     }
@@ -40,7 +43,7 @@ export class SIWENS extends SiweMessage {
     }
 
     if(!params.domain){
-      throw InvalidDomainException.domainRequired()
+      throw InvalidConfigurationException.domainRequired()
     }
 
     let issuedAt = params.issuedAt;

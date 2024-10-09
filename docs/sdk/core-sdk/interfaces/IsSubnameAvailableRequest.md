@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/is-subname-available.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/is-subname-available.ts#L5)
+[packages/@justaname.id/sdk/src/lib/types/subnames/is-subname-available.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/is-subname-available.ts#L5)
 
 ***
 
@@ -28,4 +28,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/is-subname-available.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/is-subname-available.ts#L4)
+[packages/@justaname.id/sdk/src/lib/types/subnames/is-subname-available.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/is-subname-available.ts#L4)

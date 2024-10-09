@@ -16,7 +16,7 @@ Represents the chainId of the blockchain to be used.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts#L18)
+[packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts#L18)
 
 ***
 
@@ -28,7 +28,7 @@ Represents the ENS domain
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts#L8)
+[packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts#L8)
 
 ***
 
@@ -40,7 +40,7 @@ Represents the origin of the request (e.g. the domain of the website).
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts#L13)
+[packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts#L13)
 
 ***
 
@@ -61,4 +61,4 @@ default: 120000 ms, 2 minutes ( 2 * 60 * 1000 )
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts#L26)
+[packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/siwe-config.ts#L26)

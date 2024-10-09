@@ -1,8 +1,8 @@
-[**@justaname.id/sdk**](../README.md) • **Docs**
+[**@justaname.id/siwens**](../README.md) • **Docs**
 
 ***
 
-[@justaname.id/sdk](../globals.md) / InvalidConfigurationException
+[@justaname.id/siwens](../globals.md) / InvalidConfigurationException
 
 # Class: InvalidConfigurationException
 
@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts#L2)
+[packages/@justaname.id/siwens/src/lib/errors/InvalidConfiguration.exception.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/siwens/src/lib/errors/InvalidConfiguration.exception.ts#L2)
 
 ## Properties
 
@@ -160,13 +160,9 @@ node\_modules/@types/node/globals.d.ts:4
 
 ***
 
-### missingHeaders()
+### domainRequired()
 
-> `static` **missingHeaders**(`headers`): [`InvalidConfigurationException`](InvalidConfigurationException.md)
-
-#### Parameters
-
-• **headers**: `string`[]
+> `static` **domainRequired**(): [`InvalidConfigurationException`](InvalidConfigurationException.md)
 
 #### Returns
 
@@ -174,17 +170,13 @@ node\_modules/@types/node/globals.d.ts:4
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts#L11)
+[packages/@justaname.id/siwens/src/lib/errors/InvalidConfiguration.exception.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/siwens/src/lib/errors/InvalidConfiguration.exception.ts#L12)
 
 ***
 
-### missingParameters()
+### providerUrlRequired()
 
-> `static` **missingParameters**(`parameters`): [`InvalidConfigurationException`](InvalidConfigurationException.md)
-
-#### Parameters
-
-• **parameters**: `string`[]
+> `static` **providerUrlRequired**(): [`InvalidConfigurationException`](InvalidConfigurationException.md)
 
 #### Returns
 
@@ -192,4 +184,4 @@ node\_modules/@types/node/globals.d.ts:4
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts#L7)
+[packages/@justaname.id/siwens/src/lib/errors/InvalidConfiguration.exception.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/siwens/src/lib/errors/InvalidConfiguration.exception.ts#L7)

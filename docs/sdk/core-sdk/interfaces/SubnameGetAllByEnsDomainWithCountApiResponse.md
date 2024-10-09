@@ -14,7 +14,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts#L12)
+[packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts#L12)
 
 ***
 
@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts#L16)
+[packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts#L16)
 
 ***
 
@@ -34,4 +34,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts#L14)
+[packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/subnames/get-all-by-ens-domain-with-count.ts#L14)

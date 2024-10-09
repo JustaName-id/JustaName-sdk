@@ -20,7 +20,7 @@ Represents the ethereum address to be challenged.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L15)
+[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L15)
 
 ***
 
@@ -32,7 +32,7 @@ Represents the chainId of the blockchain to be used.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L27)
+[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L27)
 
 ***
 
@@ -44,7 +44,7 @@ Represents the ENS domain
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L9)
+[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L9)
 
 ***
 
@@ -56,7 +56,7 @@ Subname requesting the MApps Permission
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L48)
+[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L48)
 
 ***
 
@@ -68,7 +68,7 @@ Represents the origin of the request (e.g. the domain of the website).
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L21)
+[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L21)
 
 ***
 
@@ -80,7 +80,7 @@ Subname requesting the ABDC Permission
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L42)
+[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L42)
 
 ***
 
@@ -101,4 +101,4 @@ default: 120000 ms, 2 minutes ( 2 * 60 * 1000 )
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/577c5c787ef18bf8ddf8b997f021738a0e8ca336/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L36)
+[packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/7430def13fc61cd3fc8b89d25e0869ee390cc2d0/packages/@justaname.id/sdk/src/lib/types/siwe/revoke-mApp-permission-challenge.ts#L36)
