@@ -55,7 +55,9 @@ Navigate to the [Admin Dashboard](https://dashboard.justaname.id/) and follow th
 * Once your workspace is set up, configure your ENS domain.
 * If you don’t own an ENS domain, you can purchase one during this step.
 
-#### 2.3. **Generate API Key**:
+### 3. Generate an API Key
+
+After having set up your account, you can now issue an api key:
 
 * In the dashboard, go to the API Key section.
 * Generate your API key and make sure to **save it securely**—we won't be able to retrieve it later if it’s lost.
@@ -63,6 +65,24 @@ Navigate to the [Admin Dashboard](https://dashboard.justaname.id/) and follow th
 **Congratulations!**\
 You're all set. Now, you can move forward with configuring the widget.
 
+### 4. Widget Configuration
+
+In your project, import the JustWeb3Provider component and wrap your app with it.
+
+An example set up for a [NextJs](https://nextjs.org/) or [Create React App](https://create-react-app.dev/) project, can be found below:\
 
 
-### 3. Widget Configuration
+{% tabs %}
+{% tab title="NextJS" %}
+
+{% endtab %}
+
+{% tab title="Create React App" %}
+
+{% endtab %}
+{% endtabs %}
+
+
+
+### 5. You're all set!  🎉
+
