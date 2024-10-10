@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@justaname.id/react-ui";
+import { Button } from "@justweb3/ui";
 import Image from "next/image";
 
 export const Navbar = () => {

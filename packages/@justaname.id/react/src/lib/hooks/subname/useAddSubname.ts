@@ -1,9 +1,8 @@
 'use client';
 
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
-import { useJustaName } from '../../providers';
+import { useJustaName, useSubnameSignature } from '../../providers';
 import { useMountedAccount } from '../account/useMountedAccount';
-import { useSubnameSignature } from './useSubnameSignature';
 import { sanitizeRecords, SubnameAddRoute } from '@justaname.id/sdk';
 import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useMemo } from 'react';

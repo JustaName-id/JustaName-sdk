@@ -2,10 +2,9 @@
 
 import { sanitizeRecords, SubnameRevokeRoute } from '@justaname.id/sdk';
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
-import { useJustaName } from '../../providers';
+import { useJustaName, useSubnameSignature } from '../../providers';
 import { useAccountSubnames } from '../account/useAccountSubnames';
 import { useMountedAccount } from '../account/useMountedAccount';
-import { useSubnameSignature } from './useSubnameSignature';
 import { useMemo } from 'react';
 import { Records } from '../../types';
 

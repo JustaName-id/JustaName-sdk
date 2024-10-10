@@ -19,7 +19,14 @@
     "types": [
       "jest",
       "node"
-    ]
+    ],
+    "paths": {
+      "@justweb3/widget": ["packages/@justweb3/widget"],
+      "@justweb3/ui": ["packages/@justweb3/ui"],
+      "@justaname.id/react": ["packages/@justaname.id/react"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"],
+    }
   },
   "include": [
     "**/*.ts",
