@@ -1,6 +1,6 @@
 "use client"
-import { Button } from "@justweb3/ui";
 import Image from "next/image";
+import { Button } from "../../components/ui/button";
 
 export const Navbar = () => {
     return (
