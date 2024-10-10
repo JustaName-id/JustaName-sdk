@@ -1,7 +1,10 @@
 import { JustSignInProviderConfig, useDebounce } from '@justaname.id/react-signin';
-import { ColorSelector } from './colorSelector';
 import { useEffect, useMemo, useState } from 'react';
-import { OptionSelect } from './optionSelect';
+import { Input } from '../ui/input';
+import { ClaimSection } from './claimSection';
+import { ColorSelector } from './colorSelector';
+import { SignSection } from './signSection';
+import { VerifiedSection } from './verifiedSection';
 
 interface CustomizerProps {
     config: JustSignInProviderConfig
@@ -24,7 +27,8 @@ export const Customizer = ({ config, onConfigChange }: CustomizerProps) => {
     }, [config.ensDomains]);
 
     return (
-        <div className="flex flex-col gap-[5px] w-[300px] border-r-[1px] z-[100] pointer-events-auto py-5 px-2.5 max-h-[100vh] overflow-y-auto">
+        <div className="flex flex-col gap-[5px] min-w-[300px] w-[300px] border-r-[1px] z-[100] pointer-events-auto py-5 px-2.5 max-h-[calc(100vh-60px)] overflow-y-auto">
+            {/* Colors */}
             <div className="flex flex-col gap-2.5">
                 <p className="text-base text-black font-bold leading-[125%] my-[5px]">Customize Interface</p>
                 <div className="flex flex-row justify-between gap-2.5 z-[10000]">
@@ -45,21 +49,19 @@ export const Customizer = ({ config, onConfigChange }: CustomizerProps) => {
                 </div>
                 <div className="flex flex-row justify-between items-center max-w-full py-2.5 px-[5px] gap-2">
                     <p className="text-sm text-black font-medium leading-[100%] whitespace-nowrap">Add Logo</p>
-                    <input
-                        value={logoUrl}
+                    <Input value={logoUrl}
                         onChange={(e) => setLogoUrl(e.target.value)}
-                        className='h-9 py-2.5 flex-grow px-4 border-[1px] w-[150px] border-black rounded-[6px] focus:outline-none focus:ring-2 focus:ring-blue-500'
                         placeholder='Logo URL'
+                        className='pointer-events-auto'
                     />
                 </div>
             </div>
             <div className='w-full h-[1px] bg-[#CBD5E180]' />
-            <div className="flex flex-col gap-2.5">
-                <p className="text-base text-black font-bold leading-[125%] my-[5px]">Claim A Subname</p>
-                <OptionSelect label='Justan.id' showFree selected={isJustanIdSelected ?? false} onSelect={(selected) => {
-                    console.log(selected)
-                }} />
-            </div>
+            <ClaimSection />
+            <div className='w-full h-[1px] bg-[#CBD5E180]' />
+            <SignSection />
+            <div className='w-full h-[1px] bg-[#CBD5E180]' />
+            <VerifiedSection />
         </div>
     )
 }

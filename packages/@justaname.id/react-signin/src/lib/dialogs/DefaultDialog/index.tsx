@@ -30,7 +30,7 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
 }) => {
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog modal={!disableOverlay} open={open} onOpenChange={onOpenChange}>
       {
         trigger && (
           <DialogTrigger asChild>
