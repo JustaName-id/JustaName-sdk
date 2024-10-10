@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Introduction](README.md)
+* [Overview](README.md)
 * [API reference](api-reference/README.md)
   * [Siwe](api-reference/siwe/README.md)
     * [Request challenge](api-reference/siwe/request-challenge.md)
