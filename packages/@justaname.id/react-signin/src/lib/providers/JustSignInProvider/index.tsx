@@ -163,7 +163,7 @@ export const JustSignInProvider: FC<JustSignInProviderProps> = ({
                   setUpdateRecord(null);
                 }
               }
-            } {...updateRecord} logo={configRest.logo} />
+            } {...updateRecord} logo={configRest.logo} disableOverlay={configRest.disableOverlay} />
             {/*}*/}
 
             {children}

@@ -27,19 +27,21 @@ export interface RevokeMAppDialogProps {
   logo?: string;
   isLoggedIn: boolean;
   handleOpenSignInDialog: (open: boolean) => void;
-  connectedEns:  string | undefined;
+  connectedEns: string | undefined;
   isEnsAuthPending: boolean;
+  disableOverlay?: boolean;
 }
 
 export const RevokeMAppDialog: FC<RevokeMAppDialogProps> = ({
-                                                  mApp: { name: mApp, isOpen: open },
-                                                  handleOpenDialog,
-                                                  logo,
-                                                  isLoggedIn,
-                                                  handleOpenSignInDialog,
-                                                  connectedEns,
-                                                  isEnsAuthPending
-                                                }) => {
+  mApp: { name: mApp, isOpen: open },
+  handleOpenDialog,
+  logo,
+  isLoggedIn,
+  handleOpenSignInDialog,
+  connectedEns,
+  isEnsAuthPending,
+  disableOverlay
+}) => {
   const [openOnConnect] = useState(open);
   const { records: mAppRecords, isRecordsPending: isMAppRecordsPending } = useRecords({
     ens: mApp || ''
@@ -109,20 +111,21 @@ export const RevokeMAppDialog: FC<RevokeMAppDialogProps> = ({
   return (
     <DefaultDialog open={open} handleClose={() => handleOpenDialogInternal(false)} header={
       <div style={{
-        paddingLeft:'24px',
+        paddingLeft: '24px',
         justifyContent: 'center',
         display: 'flex',
         alignItems: 'center',
-        flexGrow:1
+        flexGrow: 1
       }}>
         {
           logo
-            ? <img src={logo} alt="logo" style={{ height: '62px' , width: 'auto' }} />
-            :         <JustaNameLogoIcon height={62} />
+            ? <img src={logo} alt="logo" style={{ height: '62px', width: 'auto' }} />
+            : <JustaNameLogoIcon height={62} />
 
         }
       </div>
     }
+      disableOverlay={disableOverlay}
     >
 
       <Badge>
@@ -172,7 +175,7 @@ export const RevokeMAppDialog: FC<RevokeMAppDialogProps> = ({
               {
                 mAppFieldsInEnsRecords.map((field) => {
                   return (
-                    <Fragment key={'mapp-fields-'+field.key}>
+                    <Fragment key={'mapp-fields-' + field.key}>
                       <ClickableItem
                         name={field.key}
                         status={field.value}
@@ -219,7 +222,7 @@ export const RevokeMAppDialog: FC<RevokeMAppDialogProps> = ({
               handleOpenDialogInternal(false);
             });
           }}
-          rightIcon={<TrashWhiteIcon width={15}/>}
+          rightIcon={<TrashWhiteIcon width={15} />}
         >
           Revoke
         </Button>

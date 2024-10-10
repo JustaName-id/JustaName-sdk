@@ -51,15 +51,17 @@ interface MAppsProviderProps {
     openOnConnect: boolean;
   }[];
   plugins: JustaPlugin[];
+  disableOverlay?: boolean;
 }
 
 export const MAppsProvider: FC<MAppsProviderProps> = ({
-                                                        logo,
-                                                        handleOpenSignInDialog,
-                                                        children,
+  logo,
+  handleOpenSignInDialog,
+  children,
+  disableOverlay,
   mApps: initialMApps = [],
   plugins
-                                                      }) => {
+}) => {
   const { isEnsAuthPending, isLoggedIn, connectedEns } = useEnsAuth();
   const [mAppsToEnableOpen, setMAppsToEnableOpen] = useState<{ name: string; isOpen: boolean }[] | undefined>(undefined);
   const [mAppsAlreadyEnabledOpen, setMAppsAlreadyEnabledOpen] = useState<{ name: string; isOpen: boolean }[] | undefined>(undefined);
@@ -67,7 +69,7 @@ export const MAppsProvider: FC<MAppsProviderProps> = ({
   const { canEnableMApps } = useCanEnableMApps({
     ens: connectedEns?.ens || '',
   })
-  const { enabledMApps} = useEnabledMApps({
+  const { enabledMApps } = useEnabledMApps({
     ens: connectedEns?.ens || ''
   });
 
@@ -101,7 +103,7 @@ export const MAppsProvider: FC<MAppsProviderProps> = ({
 
 
   const handleOpenAuthorizeMAppDialog = useCallback(
-    (mAppName: string, open= true) => {
+    (mAppName: string, open = true) => {
       setMAppsToEnableOpen((prev) => prev?.map((mApp) => {
         if (mApp.name === mAppName) {
           return {
@@ -116,7 +118,7 @@ export const MAppsProvider: FC<MAppsProviderProps> = ({
   );
 
   const handleOpenRevokeMAppDialog = useCallback(
-    (mAppName: string, open= true) => {
+    (mAppName: string, open = true) => {
       setMAppsAlreadyEnabledOpen((prev) => prev?.map((mApp) => {
         if (mApp.name === mAppName) {
           return {
@@ -158,22 +160,24 @@ export const MAppsProvider: FC<MAppsProviderProps> = ({
               connectedEns={connectedEns?.ens}
               isEnsAuthPending={isEnsAuthPending}
               isLoggedIn={isLoggedIn}
+              disableOverlay={disableOverlay}
             />
           </Fragment>
         ))}
         {mAppsAlreadyEnabledOpen && mAppsAlreadyEnabledOpen.map((mApp) => (
-            <Fragment key={`mApp-${mApp.name}`}>
-              <RevokeMAppDialog
-                handleOpenDialog={(open) => handleOpenRevokeMAppDialog(mApp.name, open)}
-                mApp={mApp}
-                logo={logo}
-                handleOpenSignInDialog={handleOpenSignInDialog}
-                connectedEns={connectedEns?.ens}
-                isEnsAuthPending={isEnsAuthPending}
-                isLoggedIn={isLoggedIn}
-              />
-            </Fragment>
-          ))
+          <Fragment key={`mApp-${mApp.name}`}>
+            <RevokeMAppDialog
+              handleOpenDialog={(open) => handleOpenRevokeMAppDialog(mApp.name, open)}
+              mApp={mApp}
+              logo={logo}
+              handleOpenSignInDialog={handleOpenSignInDialog}
+              connectedEns={connectedEns?.ens}
+              isEnsAuthPending={isEnsAuthPending}
+              isLoggedIn={isLoggedIn}
+              disableOverlay={disableOverlay}
+            />
+          </Fragment>
+        ))
         }
         {children}
       </PluginProvider>
@@ -194,15 +198,15 @@ interface UseMAppResult {
 }
 
 export const useMApp = ({
-                          mApp,
-                        }: UseMAppParams): UseMAppResult => {
+  mApp,
+}: UseMAppParams): UseMAppResult => {
   const {
     handleOpenAuthorizeMAppDialog: contextOpenAuthorizeMAppDialog,
     handleOpenRevokeMAppDialog: contextOpenRevokeMAppDialog,
     handleOpenSignInDialog,
   } = useContext<MAppContextProps>(MAppContext);
 
-  const { connectedEns} = useEnsAuth()
+  const { connectedEns } = useEnsAuth()
   const { isMAppEnabled, isMAppEnabledPending } = useIsMAppEnabled({
     ens: connectedEns?.ens || '',
     mApp,
@@ -275,7 +279,7 @@ export const useMApp = ({
     handleOpenAuthorizeMAppDialog,
     handleOpenRevokeMAppDialog,
     isMAppEnabled,
-    canOpenMAppDialog : Boolean(canOpenMAppDialog),
+    canOpenMAppDialog: Boolean(canOpenMAppDialog),
     isPending,
   };
 };
