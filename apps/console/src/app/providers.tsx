@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
+import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
 
 interface ProviderProps {
     children: React.ReactNode
@@ -31,6 +32,18 @@ export const Providers: React.FC<ProviderProps> = (props) => {
         ssr: true,
     });
 
+    const justweb3Config: JustWeb3ProviderConfig = {
+        config: {
+            origin: process.env.NEXT_PUBLIC_ORIGIN ?? '',
+            domain: process.env.NEXT_PUBLIC_DOMAIN ?? '',
+            signInTtl: 1000 * 60 * 60 * 24,
+        },
+        backendUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
+        openOnWalletConnect: true,
+        allowedEns: 'all'
+    }
+
+
     const queryClient = new QueryClient();
 
 
@@ -38,9 +51,11 @@ export const Providers: React.FC<ProviderProps> = (props) => {
     return (
         <WagmiProvider config={config}>
             <QueryClientProvider client={queryClient}>
-                <RainbowKitProvider>
-                    {props.children}
-                </RainbowKitProvider>
+                <JustWeb3Provider config={justweb3Config}>
+                    <RainbowKitProvider>
+                        {props.children}
+                    </RainbowKitProvider>
+                </JustWeb3Provider>
             </QueryClientProvider>
         </WagmiProvider>
     )

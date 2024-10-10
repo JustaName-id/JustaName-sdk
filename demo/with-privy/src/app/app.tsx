@@ -1,4 +1,4 @@
-import { SIWENSProvider, SIWENSProviderConfig } from '@justaname.id/react-signin'
+import { SIWENSProvider, SIWENSProviderConfig } from '@justweb3/widget'
 import '@rainbow-me/rainbowkit/styles.css';
 import { http } from 'wagmi';
 import {

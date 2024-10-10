@@ -162,8 +162,8 @@
       "packages/@justaname.id/sdk",
       "packages/@justaname.id/react",
       "packages/@justaname.id/siwens",
-      "packages/@justaname.id/react-ui",
-      "packages/@justaname.id/react-signin"
+      "packages/@justweb3/ui",
+      "packages/@justweb3/widget"
     ]
   },
   "defaultBase": "main"

@@ -18,8 +18,8 @@
       "dependsOn": [
         {
           "projects": [
-            "@justaname.id/react-signin",
-            "@justaname.id/react-ui",
+            "@justweb3/widget",
+            "@justweb3/ui",
             "@justaname.id/react",
             "@justaname.id/sdk"
           ],
