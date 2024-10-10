@@ -138,7 +138,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({ open, handleOpenDialog, al
   }, [selectedEnsDomain, isSelectedEnsDomainAvailablePending, isDefaultSubnameAvailablePending]);
 
   if (isConnected && (isAccountSubnamesPending || isAccountEnsNamesPending) && open) {
-    return <LoadingDialog open={true} />
+    return <LoadingDialog disableOverlay={disableOverlay} open={true} />
   }
 
   return (
