@@ -28,7 +28,7 @@ export const Customizer = () => {
                 <div className="flex flex-row justify-between gap-2.5 z-[10000]">
                     <ColorSelector colors={['#FFFFFF', '#000000']} title="Background Color" onColorChange={(color: string) =>
                       changeTheme('background', color)
-                    }/>
+                    } />
                     <ColorSelector colors={['#FEA801', '#C90018']} title="Accent Color" onColorChange={(color: string) =>
                       changeTheme('primary', color)
                     } />
