@@ -1,14 +1,10 @@
-import { JustSignInProviderConfig, useDebounce } from '@justaname.id/react-signin';
-import { useEffect, useMemo, useState } from 'react';
 import { Input } from '../ui/input';
 import { ClaimSection } from './claimSection';
-import { ColorSelector } from './colorSelector';
 import { SignSection } from './signSection';
 import { VerifiedSection } from './verifiedSection';
 import { JustWeb3Context, useDebounce } from '@justweb3/widget';
 import { ColorSelector } from './colorSelector';
-import { useContext, useEffect, useMemo, useState } from 'react';
-import { OptionSelect } from './optionSelect';
+import { useContext, useEffect, useState } from 'react';
 import { useJustWeb3Theme } from '@justweb3/ui';
 
 export const Customizer = () => {
@@ -23,10 +19,6 @@ export const Customizer = () => {
             logo: logoUrlDebounced
         });
     }, [logoUrlDebounced]);
-
-    const isJustanIdSelected = useMemo(() => {
-        return config.ensDomains?.some(domain => domain.ensDomain === 'justan.id');
-    }, [config.ensDomains]);
 
     return (
         <div className="flex flex-col gap-[5px] min-w-[300px] w-[300px] border-r-[1px] z-[100] pointer-events-auto py-5 px-2.5 max-h-[calc(100vh-60px)] overflow-y-auto">

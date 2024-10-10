@@ -1,12 +1,6 @@
-import { JustSignInProviderConfig } from "@justaname.id/react-signin";
 import { Button } from "../ui/button";
 
-
-interface CodeSectionProps {
-    config: JustSignInProviderConfig;
-}
-
-export const CodeSection: React.FC<CodeSectionProps> = ({ config }) => {
+export const CodeSection: React.FC = () => {
 
     return (
         <div className="h-full min-w-[300px] w-[300px] border-l-[1px] z-[100] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto py-5 px-2.5 gap-5 justify-between">

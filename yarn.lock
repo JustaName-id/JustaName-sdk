@@ -6511,6 +6511,7 @@ __metadata:
     "@ensdomains/ensjs": "npm:4.0.1-alpha.0"
     "@justaname.id/sdk": "npm:0.2.92"
     jest: "npm:^29.4.1"
+    lodash: "npm:4.17.21"
   peerDependencies:
     "@tanstack/react-query": ^5.x
     ethers: ^6.x
