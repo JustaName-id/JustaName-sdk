@@ -33,7 +33,7 @@ npm install @justaname.id/react-signin
 
 {% tab title="pnpm" %}
 ```bash
-pnpm add @justaname.id/react-signin
+pnpm install @justaname.id/react-signin
 ```
 {% endtab %}
 
