@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const PROVIDER_URL = process.env['SDK_PROVIDER_URL'] as string;
+const SEPOLIA_PROVIDER_URL = process.env['SDK_SEPOLIA_PROVIDER_URL'] as string;
+const MAINNET_PROVIDER_URL = process.env['SDK_MAINNET_PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
@@ -33,8 +34,12 @@ export const initializeJustaName = (apiKey: string) => {
     ],
     networks: [
       {
-        chainId: CHAIN_ID,
-        providerUrl: PROVIDER_URL,
+        chainId: 11155111,
+        providerUrl: SEPOLIA_PROVIDER_URL,
+      },
+      {
+        chainId: 1,
+        providerUrl: MAINNET_PROVIDER_URL,
       },
     ],
   });

@@ -33,7 +33,8 @@ jobs:
         env:
           SDK_JUSTANAME_TEST_API_KEY: ${{ secrets.SDK_JUSTANAME_TEST_API_KEY }}
           SDK_MAPP_PRIVATE_KEY: ${{ secrets.SDK_MAPP_PRIVATE_KEY }}
-          SDK_PROVIDER_URL: ${{ secrets.SDK_PROVIDER_URL }}
+          SDK_SEPOLIA_PROVIDER_URL: ${{ secrets.SDK_SEPOLIA_PROVIDER_URL }}
+          SDK_MAINNET_PROVIDER_URL: ${{ secrets.SDK_MAINNET_PROVIDER_URL }}
           SDK_ENS_DOMAIN: ${{ secrets.SDK_ENS_DOMAIN }}
           SDK_MAPP: ${{ secrets.SDK_MAPP }}
           SDK_CHAIN_ID: ${{ secrets.SDK_CHAIN_ID }}

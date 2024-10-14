@@ -21,6 +21,8 @@ const subnameSigner = ethers.Wallet.createRandom();
 const subnameToBeAdded = Math.random().toString(36).substring(7);
 const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 const JUSTANAME_ENV = process.env['SDK_JUSTANAME_DEV'] === 'true';
+const SEPOLIA_PROVIDER_URL = process.env['SDK_SEPOLIA_PROVIDER_URL'] as string;
+const MAINNET_PROVIDER_URL = process.env['SDK_MAINNET_PROVIDER_URL'] as string;
 
 describe('SignIn', () => {
   let signIn: SignIn;
@@ -39,7 +41,16 @@ describe('SignIn', () => {
       offchainResolvers: new OffchainResolvers({
         dev: JUSTANAME_ENV,
       }),
-      networks: JustaName.createNetworks(),
+      networks: JustaName.createNetworks([
+        {
+          chainId: 11155111,
+          providerUrl: SEPOLIA_PROVIDER_URL,
+        },
+        {
+          chainId: 1,
+          providerUrl: MAINNET_PROVIDER_URL,
+        },
+      ]),
     });
   });
 
