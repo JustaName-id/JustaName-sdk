@@ -4,7 +4,7 @@ import { ChainId, Pagination, sanitizeRecords } from '@justaname.id/sdk';
 import { Records } from '../../types';
 
 export const buildAllEnsKey = (
-  chainId: ChainId,
+  chainId: ChainId| undefined,
   orderBy: string,
   orderDirection: string,
 ) => [

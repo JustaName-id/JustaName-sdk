@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 
 export const buildCanEnableMAppsKey = (
   ens: string,
-  chainId: ChainId,
+  chainId: ChainId| undefined,
 ) => [
   'CAN_ENABLE_MAPPS',
   ens,

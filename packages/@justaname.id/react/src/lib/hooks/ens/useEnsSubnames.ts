@@ -6,7 +6,7 @@ import { Records } from '../../types';
 export const buildEnsSubnamesKey = (
   domainName: string | undefined,
   isClaimed: boolean,
-  chainId: ChainId,
+  chainId: ChainId| undefined,
   page: number,
   limit: number
 ) => [

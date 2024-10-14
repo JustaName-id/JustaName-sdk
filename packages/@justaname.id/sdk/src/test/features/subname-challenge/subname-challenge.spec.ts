@@ -3,6 +3,7 @@ import { SubnameChallenge } from '../../../lib/features/subname-challenge';
 import dotenv from 'dotenv';
 import { ethers } from 'ethers';
 dotenv.config();
+const JUSTANAME_ENV = process.env['SDK_JUSTANAME_DEV'] === 'true'
 const signer = ethers.Wallet.createRandom();
 describe('subnameChallenge', () => {
 
@@ -19,7 +20,8 @@ describe('subnameChallenge', () => {
         domain: 'localhost',
       },
       subnameChallengeTtl: 120000,
-      chainId: 11155111
+      chainId: 11155111,
+      dev: JUSTANAME_ENV,
     })
   })
 

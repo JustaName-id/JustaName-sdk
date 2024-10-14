@@ -1,0 +1,22 @@
+import { IconGallery, IconItem, Meta } from '@storybook/blocks';
+import React from 'react';
+import { general } from '../../lib/icons';
+import { JustWeb3ThemeProvider } from '../../lib/providers';
+
+<Meta title="Iconography/General" />
+
+# General
+<JustWeb3ThemeProvider>
+  <IconGallery>
+    {
+      Object.keys(general).map((icons, index) => {
+        const iconElement = general[icons];
+        return(
+          <IconItem key={index} name={icons} title={icons}>
+            {React.createElement(iconElement, { size: 32 })}
+          </IconItem>
+        )})
+    }
+  </IconGallery>
+</JustWeb3ThemeProvider>
+

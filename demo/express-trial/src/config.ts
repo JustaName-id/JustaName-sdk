@@ -7,22 +7,22 @@ const apiKey = process.env.JUSTANAME_API_KEY as string;
 const providerUrl = process.env.JUSTANAME_PROVIDER_URL as string;
 const ensDomain = process.env.JUSTANAME_ENS_DOMAIN as string;
 export const config: JustaNameConfig = {
-  apiKey,
   networks: [
     {
       chainId,
-      providerUrl
-    }
+      providerUrl,
+    },
   ],
   defaultChainId: chainId,
-  config:{
+  config: {
     domain,
     origin,
   },
   ensDomains: [
     {
       chainId,
-      ensDomain
-    }
-  ]
-}
+      ensDomain,
+      apiKey,
+    },
+  ],
+};

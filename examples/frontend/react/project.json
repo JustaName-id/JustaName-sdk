@@ -38,6 +38,13 @@
           "command": "yarn install",
           "cwd": "examples/frontend/react"
       }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn tsc --noEmit",
+        "cwd": "examples/frontend/react"
+      }
     }
   },
   "tags": []

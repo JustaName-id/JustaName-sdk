@@ -7,7 +7,7 @@ import { ChainId, IsSubnameAvailableRoute } from '@justaname.id/sdk';
 export const buildIsSubnameAvailableKey = (
   username: string,
   ensDomain: string | undefined,
-  chainId: ChainId
+  chainId: ChainId| undefined
 ) => ['IS_SUBNAME_AVAILABLE', username, ensDomain, chainId]
 
 export interface UseIsSubnameAvailableParams {

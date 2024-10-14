@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 
 export const buildEnsAvatarKey = (
   ens: string | undefined,
-  chainId: ChainId
+  chainId: ChainId| undefined
 ) => [
   'ENS_AVATAR',
   ens,

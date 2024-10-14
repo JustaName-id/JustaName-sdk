@@ -1,7 +1,7 @@
 {
   "name": "justaname-express-trial",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/express-trial/src",
+  "sourceRoot": "demo/express-trial/src",
   "projectType": "application",
   "targets": {
     "serve": {
@@ -26,10 +26,10 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/express-trial",
-        "main": "apps/express-trial/src/main.ts",
-        "tsConfig": "apps/express-trial/tsconfig.app.json",
-        "webpackConfig": "apps/express-trial/webpack.config.js",
+        "outputPath": "dist/demo/express-trial",
+        "main": "demo/express-trial/src/main.ts",
+        "tsConfig": "demo/express-trial/tsconfig.app.json",
+        "webpackConfig": "demo/express-trial/webpack.config.js",
         "generatePackageJson": true
       },
       "configurations": {

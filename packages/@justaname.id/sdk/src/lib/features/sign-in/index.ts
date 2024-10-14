@@ -1,13 +1,12 @@
 import { SiweConfig } from '../../types/siwe/siwe-config';
 import { ChainId, NetworksWithProvider } from '../../types';
 import { SIWENS, SiwensResponse } from '@justaname.id/siwens';
-import { InvalidConfigurationException, InvalidENSException } from '../../errors';
+import { InvalidConfigurationException, InvalidENSException, InvalidSignInException } from '../../errors';
 import { OffchainResolvers } from '../offchain-resolvers';
-import { RequestSignInParams } from '../../types/signin';
+import { RequestSignInParams, SignInFunctionParams } from '../../types/signin';
 
 export interface SignInResponse extends SiwensResponse {
   isJustaName: boolean
-  chainId: ChainId
 }
 
 export interface SignInParams {
@@ -19,11 +18,11 @@ export interface SignInParams {
 }
 
 export class SignIn {
-  readonly siweConfig?: Omit<SiweConfig, 'chainId' | 'ttl'>;
-  readonly signInTtl?: number;
-  readonly networks: NetworksWithProvider;
-  readonly chainId: ChainId;
-  readonly offchainResolvers: OffchainResolvers;
+  private readonly siweConfig?: Omit<SiweConfig, 'chainId' | 'ttl'>;
+  private readonly signInTtl?: number;
+  private readonly networks: NetworksWithProvider;
+  private readonly chainId: ChainId;
+  private readonly offchainResolvers: OffchainResolvers;
   constructor(params: SignInParams) {
     this.siweConfig = params.siweConfig;
     this.networks = params.networks;
@@ -68,8 +67,8 @@ export class SignIn {
     return siwens.prepareMessage();
   }
 
-  async signIn(message: string, signature: string): Promise<SignInResponse>{
-    const chainIdMatch = message.match(/Chain ID: (\d+)/);
+  async signIn(params: SignInFunctionParams): Promise<SignInResponse>{
+    const chainIdMatch = params.message.match(/Chain ID: (\d+)/);
     const extractChainId = chainIdMatch ? chainIdMatch[1] : null;
     if (!extractChainId) {
       throw new Error('Chain ID not found in message');
@@ -82,7 +81,7 @@ export class SignIn {
     }
 
     if(extractedChainId !== 1 && extractedChainId !== 11155111){
-      throw new Error('Chain ID not supported');
+      throw InvalidSignInException.chainIdNotSupported(extractedChainId.toString());
     }
 
     const chainId = extractedChainId as ChainId;
@@ -90,26 +89,52 @@ export class SignIn {
     const network = this.networks.find(network => network.chainId === chainId);
 
     if (!network) {
-      throw new Error(`ChainId ${chainId} not supported`);
+      throw InvalidSignInException.chainIdNotSupported(chainId.toString());
     }
 
 
     const siwens = new SIWENS({
-      params: message,
-      providerUrl: network.providerUrl
+      params: params.message,
+      providerUrl: network.providerUrl,
     })
 
 
     const siwensResponse = await siwens.verify({
-      signature
+      signature: params.signature,
+      nonce: params.nonce,
+      domain: params.domain
     })
+
+    if (siwensResponse.data.chainId !== chainId) {
+      throw InvalidSignInException.chainIdMismatch(
+        chainId.toString(),
+        siwensResponse.data.chainId.toString()
+      )
+    }
+
+    if(params.domain) {
+      if (siwensResponse.data.domain !== params.domain) {
+        throw InvalidSignInException.domainMismatch(
+          params?.domain,
+          siwensResponse.data.domain
+        )
+      }
+    }
+
+    if(params.nonce) {
+      if (siwensResponse.data.nonce !== params.nonce) {
+        throw InvalidSignInException.nonceMismatch(
+          params?.nonce,
+          siwensResponse.data.nonce
+        )
+      }
+    }
 
     const isJustaName = await this.checkIfJustaNameResolver(siwensResponse.ens, chainId);
 
     return {
       ...siwensResponse,
       isJustaName,
-      chainId: siwensResponse.data.chainId as ChainId
     }
   }
 

@@ -11,15 +11,21 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
+
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "types": [
-      "jest",
-      "node"
-    ]
+    "types": ["jest", "node"],
+    "paths": {
+      "@justweb3/widget": ["packages/@justweb3/widget"],
+      "@justweb3/ui": ["packages/@justweb3/ui"],
+      "@justaname.id/react": ["packages/@justaname.id/react"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"],
+      "@justverified/plugin": ["packages/@justverified/plugin"]
+    }
   },
   "include": [
     "**/*.ts",
@@ -31,10 +37,5 @@
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "jest.config.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }
