@@ -6,7 +6,12 @@ import { addEnsContracts } from '@ensdomains/ensjs';
 import { mainnet, sepolia } from 'viem/chains';
 import { useMemo } from 'react';
 
-export const getEnsPublicClient = (providerUrl: string, chainId: ChainId) => {
+export const getEnsPublicClient = (providerUrl: string, chainId: ChainId| undefined) => {
+
+  if (!chainId) {
+    throw new Error('Chain ID is required')
+  }
+
   return createPublicClient({
     chain: addEnsContracts(chainId === 1 ? mainnet : sepolia),
     transport: http(providerUrl)
@@ -14,7 +19,7 @@ export const getEnsPublicClient = (providerUrl: string, chainId: ChainId) => {
 }
 
 export const buildEnsPublicClientKey = (
-  chainId: ChainId
+  chainId: ChainId| undefined
 ) => [
   'CLIENT',
   chainId

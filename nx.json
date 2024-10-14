@@ -8,7 +8,7 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "workspaceLayout": {
     "libsDir": "packages",
-    "appsDir": "examples"
+    "appsDir": "apps"
   },
   "targetDefaults": {
     "release": {
@@ -71,8 +71,7 @@
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
-      },
-      "exclude": ["apps/express-app-e2e/**/*"]
+      }
     },
     {
       "plugin": "@nx/webpack/plugin",
@@ -163,7 +162,8 @@
       "packages/@justaname.id/react",
       "packages/@justaname.id/siwens",
       "packages/@justweb3/ui",
-      "packages/@justweb3/widget"
+      "packages/@justweb3/widget",
+      "packages/@justverified/plugin"
     ]
   },
   "defaultBase": "main"

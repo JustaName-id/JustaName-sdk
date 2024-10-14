@@ -1,13 +1,22 @@
 import { ApiKeyHeaders, SIWEHeaders } from '../headers';
 import { ChainId, IRequest, IRoute, SubnameResponse } from '../common';
 
-export interface SubnameRevokeRequest extends IRequest{
+export interface SubnameRevokeRequest extends IRequest {
+  ensDomain: string;
 
-    ensDomain: string;
+  username: string;
 
-    username: string;
-
-    chainId: ChainId;
+  chainId: ChainId;
 }
 
-export interface SubnameRevokeRoute extends IRoute<SubnameRevokeRequest, SubnameResponse, ApiKeyHeaders & SIWEHeaders, 'ensDomain' | 'chainId'> {}
+export interface SubnameRevokeRoute
+  extends IRoute<
+    SubnameRevokeRequest,
+    SubnameResponse,
+    ApiKeyHeaders & SIWEHeaders,
+    'ensDomain' | 'chainId',
+    never,
+    {
+      apiKey?: string;
+    }
+  > {}

@@ -37,7 +37,7 @@
       "@justaname.id/sdk": ["packages/@justaname.id/sdk/src/index.ts"],
       "@justaname.id/siwens": ["packages/@justaname.id/siwens/src/index.ts"],
       "@justverified/plugin": [
-        "packages/plugins/@justverified/plugin/src/index.ts"
+        "packages/plugins/@justverified/src/index.ts"
       ],
       "create-justaname-app": ["packages/create-justaname-app/src/index.ts"]
     }

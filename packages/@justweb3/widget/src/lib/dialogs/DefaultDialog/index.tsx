@@ -39,7 +39,7 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
         )
       }
 
-      <DialogContent disableOverlay={disableOverlay} style={{
+      <DialogContent onInteractOutside={(e) => disableOverlay &&  e.preventDefault()} disableOverlay={disableOverlay} style={{
         padding: 0,
         transition: 'all 0.4 ease-in-out'
       }}>
@@ -54,7 +54,7 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
           style={{
             padding: '0px 0 0 0',
             borderRadius: '16px',
-            background: 'var(--justaname-foreground-color-4)'
+            background: 'var(--justweb3-foreground-color-4)'
           }}
           direction={'column'}
         >
@@ -62,7 +62,7 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
             style={{
               padding: '20px',
               borderRadius: '16px',
-              background: 'var(--justaname-background-color)',
+              background: 'var(--justweb3-background-color)',
               gap: '20px',
               display: 'flex',
               flexDirection: 'column',

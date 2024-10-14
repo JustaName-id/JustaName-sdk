@@ -26,6 +26,13 @@
           "target": "build"
         }
       ]
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn tsc --noEmit",
+        "cwd": "apps/react-trial"
+      }
     }
   },
   "tags": []

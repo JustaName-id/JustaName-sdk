@@ -34,7 +34,7 @@ const ListItemWrapper = styled.div<{ $disabled?: boolean, $loading?: boolean, $h
     border-radius: 16px;
     opacity: ${(props) => (props.$disabled ? 0.5 : 1)};
     border: 1px solid ${(props) => (props.$loading || props.$hover ? 'var(--justweb3-primary-color)' : 'var(--justweb3-foreground-color-4)')};
-    background-color: 'var(--justweb3-background-color)';
+    background-color: var(--justweb3-background-color);
     transition: background-color 0.2s ease;
     max-width: 100%; 
 `;

@@ -23,7 +23,7 @@ export const BasePopoverContent: FC<BasePopoverContentProps> = ({ children, styl
         style={{
           padding: '0px 0 0 0',
           borderRadius: '16px',
-          background: 'var(--justaname-foreground-color-4)'
+          background: 'var(--justweb3-foreground-color-4)'
         }}
         direction={'column'}
       >
@@ -32,7 +32,7 @@ export const BasePopoverContent: FC<BasePopoverContentProps> = ({ children, styl
           style={{
             padding: '20px',
             borderRadius: '16px',
-            background: 'var(--justaname-background-color)',
+            background: 'var(--justweb3-background-color)',
             gap: '20px',
             display: 'flex',
             flexDirection: 'column',

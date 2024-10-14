@@ -73,6 +73,7 @@
         "lint",
         {
           "projects": [
+            "@justaname.id/siwens",
             "@justaname.id/sdk",
             "@justaname.id/react",
             "@justweb3/ui"

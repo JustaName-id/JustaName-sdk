@@ -65,7 +65,7 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
                        height: '30px',
                        width: loading? '30px' : '0'
                      }}>
-                       <LoadingSpinner color={'var(--justaname-primary-color)'} />
+                       <LoadingSpinner color={'var(--justweb3-primary-color)'} />
                      </div>
                    </>}
                    contentStyle={{

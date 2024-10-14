@@ -24,7 +24,6 @@ const StyledBadge = styled.div<BadgeProps>`
     border-radius: 9999px;
     width: fit-content;
     padding: 5px 10px;
-    height: 12px;
     font-size: 10px;
     font-weight: 900;
     line-height: 1;

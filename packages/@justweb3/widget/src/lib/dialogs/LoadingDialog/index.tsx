@@ -4,11 +4,12 @@ import { FC } from 'react';
 
 export interface LoadingDialogProps {
   open: boolean;
+  disableOverlay?: boolean;
 }
 
-export const LoadingDialog: FC<LoadingDialogProps> = ({ open }) => {
+export const LoadingDialog: FC<LoadingDialogProps> = ({ open, disableOverlay }) => {
   return (
-    <Dialog open={open}>
+    <Dialog open={open} modal={!disableOverlay} >
       <div style={{
         display: 'hidden'
       }}>
@@ -16,7 +17,7 @@ export const LoadingDialog: FC<LoadingDialogProps> = ({ open }) => {
 
         </DialogTitle>
       </div>
-      <DialogContent aria-describedby='loading-dialog' style={{
+      <DialogContent  onInteractOutside={(e) => disableOverlay &&  e.preventDefault()} aria-describedby='loading-dialog' style={{
         padding: 0,
         transition: "all 0.4 ease-in-out"
       }}>

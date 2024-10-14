@@ -7,7 +7,7 @@ import { useEffect, useMemo } from 'react';
 
 export const buildEnabledMAppsKey = (
   ens: string,
-  chainId: ChainId,
+  chainId: ChainId| undefined,
 ) => [
   'ENABLED_MAPPS',
   ens,
@@ -46,7 +46,7 @@ export const useEnabledMApps = (params: UseEnabledMAppsParams): UseEnabledMAppsR
       const mAppField = records.records.texts.find((text)=>text.key === 'mApps')
       return mAppField ? JSON.parse(mAppField.value).mApps : [];
     },
-    enabled: Boolean(params.ens) && Boolean(justaname) && params.ens.length > 0 && Boolean(_chainId) && Boolean(records),
+    enabled: Boolean(params.ens) && Boolean(justaname) && Boolean(params.ens.length > 0) && Boolean(_chainId) && Boolean(records),
   })
 
   useEffect(() => {

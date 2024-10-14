@@ -119,7 +119,6 @@ export const useVerifyRecords = ({
       return
     }
 
-    console.log('previousRecords', previousRecords, 'records', records)
     if(!isEqual(previousRecords, records)){
       query.refetch()
     }

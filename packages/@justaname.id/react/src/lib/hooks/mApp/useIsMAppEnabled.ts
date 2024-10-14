@@ -8,7 +8,7 @@ import { useEffect, useMemo } from 'react';
 export const buildIsMAppEnabledKey = (
   ens: string,
   mApp: string,
-  chainId: ChainId,
+  chainId: ChainId| undefined,
 ) => [
   'IS_MAPP_ENABLED',
   ens,

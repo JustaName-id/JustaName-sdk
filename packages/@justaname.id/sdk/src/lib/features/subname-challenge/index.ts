@@ -39,16 +39,19 @@ export interface SubnameChallengeParams {
   siweConfig?: SubnameChallengeSiweConfig;
   chainId: ChainId;
   subnameChallengeTtl?: number;
+  dev: boolean;
 }
 
 export class SubnameChallenge {
-  siweConfig?: SubnameChallengeSiweConfig;
-  chainId: ChainId;
-  subnameChallengeTtl?: number;
-  constructor(config: SubnameChallengeParams) {
-    this.siweConfig = config.siweConfig;
-    this.chainId = config.chainId;
-    this.subnameChallengeTtl = config.subnameChallengeTtl;
+  private readonly siweConfig?: SubnameChallengeSiweConfig;
+  private readonly chainId: ChainId;
+  private readonly subnameChallengeTtl?: number;
+  private readonly dev: boolean;
+  constructor(params: SubnameChallengeParams) {
+    this.siweConfig = params.siweConfig;
+    this.chainId = params.chainId;
+    this.subnameChallengeTtl = params.subnameChallengeTtl;
+    this.dev = params.dev;
   }
 
   /**
@@ -73,7 +76,7 @@ export class SubnameChallenge {
       origin: _origin,
       domain: _domain,
       ...rest,
-    })(['origin', 'domain', 'chainId']);
+    }, undefined , this.dev)(['origin', 'domain', 'chainId']);
   }
 
   /**
@@ -88,7 +91,9 @@ export class SubnameChallenge {
     return assertRestCall(
       'SIWE_VERIFY_MESSAGE_ROUTE',
       'POST',
-      params
+      params,
+      undefined ,
+      this.dev
     )(['address', 'signature', 'message']);
   }
 }

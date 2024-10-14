@@ -4,17 +4,18 @@
     "outDir": "../../dist/out-tsc",
     "declaration": true,
     "declarationMap": true,
+    "moduleResolution": "node",
     "types": [
       "node",
       "jest",
       "@nx/react/typings/cssmodule.d.ts",
       "@nx/react/typings/image.d.ts"
     ],
-    "preserveSymlinks": true,
     "paths": {
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
       "@justaname.id/react": ["packages/@justaname.id/react"],
-      "@justweb3/ui": ["packages/@justweb3/ui"],
-      "@justaname.id/sdk": ["packages/@justaname.id/sdk"]
+      "@justweb3/ui": ["packages/@justweb3/ui"]
     }
   },
   "exclude": [

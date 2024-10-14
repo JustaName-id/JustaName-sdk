@@ -6,6 +6,7 @@ import { InvalidConfigurationException } from '../../../lib/errors';
 
 const CHAIN_ID = 1;
 const ENS_DOMAIN = 'justaname.eth';
+const JUSTANAME_ENV = process.env['SDK_JUSTANAME_DEV'] === 'true'
 
 describe('Subnames', () => {
 
@@ -52,7 +53,8 @@ describe('Subnames', () => {
     const subnamesWithoutApiKey = new Subnames({
       chainId: CHAIN_ID,
       networks: JustaName.createNetworks(),
-      ensDomains: [{chainId: CHAIN_ID, ensDomain: ENS_DOMAIN}]
+      ensDomains: [{chainId: CHAIN_ID, ensDomain: ENS_DOMAIN}],
+      dev: JUSTANAME_ENV,
     })
 
     expect(() => subnamesWithoutApiKey.addSubname({

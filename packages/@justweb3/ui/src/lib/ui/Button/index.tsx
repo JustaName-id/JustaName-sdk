@@ -91,12 +91,12 @@ const StyledButton = styled.button<StyledButtonProps>`
     `}
 
     ${props => props.size === 'md' && css`
-        height: 42px;
-        padding: 0 12px;
+        height: 48px;
+        padding: 10px 12px;
     `}
 
     ${props => props.size === 'lg' && css`
-        height: 50px;
+        height: 52px;
         font-size: 14px;
         padding: 0 12px;
     `}

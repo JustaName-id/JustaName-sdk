@@ -73,7 +73,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           height: '30px',
           width: '30px'
         }}>
-          <LoadingSpinner color={'var(--justaname-primary-color)'} />
+          <LoadingSpinner color={'var(--justweb3-primary-color)'} />
         </div>
       }
     />;
@@ -86,8 +86,8 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
         onClick={() => handleOpenSignInDialog(true)}
         left={<Avatar
           size="28px"
-          bgColor={avatar ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-primary-color)'}
-          borderColor={avatar ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-primary-color)'}
+          bgColor={avatar ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)'}
+          borderColor={avatar ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)'}
           color="#ffffff"
         />}
         style={{
@@ -118,13 +118,14 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
             left={<Avatar
               src={avatar}
               size="28px"
-              bgColor={avatar ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-primary-color)'}
-              borderColor={avatar ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-primary-color)'}
+              bgColor={avatar ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)'}
+              borderColor={avatar ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)'}
               color="#ffffff"
             />}
 
             style={{
-              maxWidth: '300px'
+              maxWidth: '300px',
+              backgroundColor: 'var(--justweb3-background-color)',
             }}
 
             contentStyle={{

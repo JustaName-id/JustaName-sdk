@@ -1,7 +1,9 @@
-import Chrome from '@uiw/react-color-chrome';
 import { GithubPlacement } from '@uiw/react-color-github';
 import { useState } from 'react';
-import { Popover } from 'react-tiny-popover';
+import dynamic from 'next/dynamic';
+
+const Chrome = dynamic(() => import('@uiw/react-color-chrome'), { ssr: false });
+const Popover = dynamic(() => import('react-tiny-popover').then((e) => e.Popover), { ssr: false });
 
 interface ColorSelectorProps {
     colors: string[];
@@ -18,7 +20,9 @@ export const ColorSelector = ({ colors, title, onColorChange }: ColorSelectorPro
             <p className="text-sm text-black font-medium leading-[100%]">{title}</p>
             <div className="flex flex-row gap-[5px]">
                 {colors.map(color =>
-                    <button style={{
+                    <button
+                      key={"color-"+color}
+                      style={{
                         background: color
                     }} className={`w-[20px] h-[20px] rounded-full border-black border-[1px] bg-[${color}]`} onClick={() => onColorChange(color)}></button>
                 )}

@@ -7,7 +7,7 @@ export const JustaNameFooter = () => {
       justify={'space-between'}
       style={{
         padding: '10px 20px',
-        background: 'var(--justaname-foreground-color-4)',
+        background: 'var(--justweb3-foreground-color-4)',
         borderRadius: ' 0 0 16px 16px'
       }}
     >
@@ -26,7 +26,7 @@ export const JustaNameFooter = () => {
         >
           Powered by <A
           style={{
-            color: 'var(--justaname-primary-color)',
+            color: 'var(--justweb3-primary-color)',
             fontWeight: '700',
             fontSize: '12px'
 

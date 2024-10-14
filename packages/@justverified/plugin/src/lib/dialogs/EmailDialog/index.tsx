@@ -1,5 +1,9 @@
 import { FC, useContext, useEffect, useState } from 'react';
-import { JustaNameDialog, JustWeb3Context, useJustWeb3 } from '@justweb3/widget';
+import {
+  JustaNameDialog,
+  JustWeb3Context,
+  useJustWeb3,
+} from '@justweb3/widget';
 import {
   Badge,
   Button,
@@ -13,7 +17,12 @@ import {
   SPAN,
 } from '@justweb3/ui';
 import { useEnsAuth } from '@justaname.id/react';
-import { useClearOtp, useGenerateOtp, useResendOtp, useVerifyOtp } from '../../hooks';
+import {
+  useClearOtp,
+  useGenerateOtp,
+  useResendOtp,
+  useVerifyOtp,
+} from '../../hooks';
 
 export interface EmailDialogProps {
   refetchVerifyRecords: () => void;
@@ -31,35 +40,44 @@ export const EmailDialog: FC<EmailDialogProps> = ({
   mApp,
   mAppsAlreadyEnabled,
   refetchVerifyRecords,
-                                                    open,
-                                                    email,
-                                                    handleOpenDialog,
-                                                    verificationBackendUrl,
-                                                  }) => {
-  const { logo } = useContext(JustWeb3Context);
+  open,
+  email,
+  handleOpenDialog,
+  verificationBackendUrl,
+}) => {
+  const {
+    config: { logo },
+  } = useContext(JustWeb3Context);
   const [otp, setOtp] = useState('');
   const { connectedEns: connectedToVerification } = useEnsAuth({
     backendUrl: verificationBackendUrl,
     currentEnsRoute: '/auth/current',
   });
-  const { updateRecords } = useJustWeb3()
+  const { updateRecords } = useJustWeb3();
 
-  const { state , isGenerateOtpPending, clearState, refetchGenerateOtp } = useGenerateOtp({
-    email,
+  const { state, isGenerateOtpPending, clearState, refetchGenerateOtp } =
+    useGenerateOtp({
+      email,
+      verificationBackendUrl,
+    });
+
+  const {
+    resendOtp,
+    isResendOtpPending,
+    timeLeft,
+    resetTimeLeft,
+    startCountdown,
+  } = useResendOtp({
     verificationBackendUrl,
-  })
+  });
 
-  const { resendOtp, isResendOtpPending, timeLeft, resetTimeLeft, startCountdown } = useResendOtp({
-    verificationBackendUrl
-  })
-
-  const {  clearOtp} = useClearOtp({
-    verificationBackendUrl
-  })
+  const { clearOtp } = useClearOtp({
+    verificationBackendUrl,
+  });
 
   const { verifyOtp, isVerifyOtpPending } = useVerifyOtp({
-    verificationBackendUrl
-  })
+    verificationBackendUrl,
+  });
 
   useEffect(() => {
     if (open && email) {
@@ -72,11 +90,11 @@ export const EmailDialog: FC<EmailDialogProps> = ({
     if (!open) {
       setOtp('');
       clearOtp({
-        state: state || ''
+        state: state || '',
       }).then(() => {
         clearState();
         resetTimeLeft();
-      })
+      });
     }
     handleOpenDialog(open);
   };
@@ -92,7 +110,6 @@ export const EmailDialog: FC<EmailDialogProps> = ({
   if (!email) {
     return null;
   }
-
 
   return (
     <JustaNameDialog
@@ -124,7 +141,7 @@ export const EmailDialog: FC<EmailDialogProps> = ({
         <Flex
           style={{
             borderRadius: '16px',
-            background: 'var(--justaname-background-color)',
+            background: 'var(--justweb3-background-color)',
             gap: '20px',
             display: 'flex',
             flexDirection: 'column',
@@ -150,7 +167,7 @@ export const EmailDialog: FC<EmailDialogProps> = ({
 
             <P
               style={{
-                color: 'var(--justaname-primary-color)',
+                color: 'var(--justweb3-primary-color)',
               }}
             >
               {email}
@@ -193,15 +210,15 @@ export const EmailDialog: FC<EmailDialogProps> = ({
               }}
               size={'lg'}
               onClick={() => {
-                if(!state){
+                if (!state) {
                   return;
                 }
 
                 resendOtp({
-                  state
+                  state,
                 }).then(() => {
                   startCountdown();
-                })
+                });
               }}
               disabled={timeLeft > 0 || !state}
               loading={isResendOtpPending}
@@ -218,7 +235,7 @@ export const EmailDialog: FC<EmailDialogProps> = ({
               }}
               size={'lg'}
               onClick={() => {
-                if(!state){
+                if (!state) {
                   return;
                 }
 
@@ -227,40 +244,39 @@ export const EmailDialog: FC<EmailDialogProps> = ({
                   otp,
                 }).then((res) => {
                   const key = 'email';
-                  const vc = res.verifiableCredential
+                  const vc = res.verifiableCredential;
                   const value = vc.credentialSubject.email;
-                  if(mAppsAlreadyEnabled?.includes(mApp)){
+                  if (mAppsAlreadyEnabled?.includes(mApp)) {
                     updateRecords({
                       text: [
                         {
                           key: key,
-                          value: value
-                        }
-                      ]
+                          value: value,
+                        },
+                      ],
                     }).then(() => {
-                      refetchRecords()
-                      refetchVerifyRecords()
-                    })
-                  }
-                  else {
+                      refetchRecords();
+                      refetchVerifyRecords();
+                    });
+                  } else {
                     updateRecords({
                       text: [
                         {
                           key: key,
-                          value: value
+                          value: value,
                         },
                         {
                           key: res.dataKey,
-                          value: JSON.stringify(vc)
-                        }
-                      ]
+                          value: JSON.stringify(vc),
+                        },
+                      ],
                     }).then(() => {
-                      refetchRecords()
-                      refetchVerifyRecords()
-                    })
+                      refetchRecords();
+                      refetchVerifyRecords();
+                    });
                   }
                   handleInternalOpenDialog(false);
-                })
+                });
               }}
               loading={isVerifyOtpPending}
               disabled={otp.length !== 8 || !state}

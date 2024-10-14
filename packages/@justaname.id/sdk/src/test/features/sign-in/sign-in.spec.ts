@@ -17,6 +17,8 @@ const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
 const subnameSigner = ethers.Wallet.createRandom()
 const subnameToBeAdded = Math.random().toString(36).substring(7);
 const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
+const JUSTANAME_ENV = process.env['SDK_JUSTANAME_DEV'] === 'true'
+
 describe('SignIn', () => {
 
   let signIn: SignIn;
@@ -33,7 +35,9 @@ describe('SignIn', () => {
       },
       signInTtl: VALID_TTL,
       chainId: CHAIN_ID,
-      offchainResolvers: new OffchainResolvers(),
+      offchainResolvers: new OffchainResolvers({
+        dev: JUSTANAME_ENV,
+      }),
       networks: JustaName.createNetworks()
     });
   });

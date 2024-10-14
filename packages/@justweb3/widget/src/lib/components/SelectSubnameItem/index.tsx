@@ -20,8 +20,8 @@ export const SelectSubnameItem: React.FC<SelectSubnameItemProps> = ({ subname, s
         src={avatar}
         initial={subname.ens[0]}
         size="28px"
-        bgColor={avatar ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-primary-color)'}
-        borderColor={avatar ? 'var(--justaname-foreground-color-4)' : 'var(--justaname-primary-color)'}
+        bgColor={avatar ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)'}
+        borderColor={avatar ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)'}
         color="#ffffff"
       />}
       right={<Flex>
@@ -43,7 +43,7 @@ export const SelectSubnameItem: React.FC<SelectSubnameItemProps> = ({ subname, s
           height: '30px',
           width: loading? '30px' : '0'
         }}>
-          <LoadingSpinner color={'var(--justaname-primary-color)'} />
+          <LoadingSpinner color={'var(--justweb3-primary-color)'} />
         </div>
       </Flex>}
       loading={loading}

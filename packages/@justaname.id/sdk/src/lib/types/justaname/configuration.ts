@@ -1,7 +1,8 @@
 import { ChainId } from '../common';
 import { JsonRpcProvider } from 'ethers';
 
-export interface NetworkWithProvider<Chain extends ChainId = ChainId> extends Network<Chain> {
+export interface NetworkWithProvider<Chain extends ChainId = ChainId>
+  extends Network<Chain> {
   provider: JsonRpcProvider;
 }
 
@@ -25,7 +26,7 @@ export interface Configuration {
   signInTtl?: number;
 }
 
-export interface  EnsDomainByChainId {
+export interface EnsDomainByChainId {
   chainId: ChainId;
   ensDomain: string;
   apiKey?: string;
@@ -37,23 +38,22 @@ export interface JustaNameConfig<
   Config extends Configuration = Configuration,
   NetworksConfig extends Networks = Networks,
   EnsDomainConfig extends EnsDomains | undefined = EnsDomains | undefined,
-  DefaultChainId extends ChainId | undefined = ChainId | undefined,
-  ApiKey extends string | undefined = string | undefined
+  DefaultChainId extends ChainId | undefined = ChainId | undefined
 > {
   config?: Config;
   networks?: NetworksConfig;
   ensDomains?: EnsDomainConfig;
   defaultChainId?: DefaultChainId;
-  apiKey?: ApiKey;
+  dev?: boolean;
 }
 
 export interface JustaNameConfigDefaults<
-  NetworksWithProviderConfig extends NetworksWithProvider = NetworksWithProvider,
+  NetworksWithProviderConfig extends NetworksWithProvider = NetworksWithProvider
 > extends JustaNameConfig<
     Configuration,
     NetworksWithProviderConfig,
     EnsDomainByChainId[]
-> {
+  > {
   networks: NetworksWithProviderConfig;
   ensDomains: EnsDomainByChainId[];
 }

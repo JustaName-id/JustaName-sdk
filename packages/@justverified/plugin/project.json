@@ -1,7 +1,7 @@
 {
   "name": "@justverified/plugin",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/plugins/@justverified/plugin/src",
+  "sourceRoot": "packages/@justverified/plugin/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -9,7 +9,7 @@
       "executor": "@nx/storybook:storybook",
       "options": {
         "port": 4401,
-        "configDir": "packages/plugins/@justverified/plugin/.storybook"
+        "configDir": "packages/@justverified/plugin/.storybook"
       },
       "configurations": {
         "ci": {
@@ -28,7 +28,7 @@
             "command": "node update-package-json.js"
           }
         ],
-        "cwd": "packages/plugins/@justverified/plugin",
+        "cwd": "packages/@justverified/plugin",
         "parallel": false
       }
     },
@@ -37,10 +37,10 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "packages/plugins/@justverified/plugin/dist",
-        "tsConfig": "packages/plugins/@justverified/plugin/tsconfig.lib.json",
-        "project": "packages/plugins/@justverified/plugin/package.json",
-        "entryFile": "packages/plugins/@justverified/plugin/src/index.ts",
+        "outputPath": "packages/@justverified/plugin/dist",
+        "tsConfig": "packages/@justverified/plugin/tsconfig.lib.json",
+        "project": "packages/@justverified/plugin/package.json",
+        "entryFile": "packages/@justverified/plugin/src/index.ts",
         "external": [
           "react",
           "react-dom",
@@ -50,13 +50,13 @@
           "@justaname.id/sdk",
           "@justweb3/widget"
         ],
-        "rollupConfig": "packages/plugins/@justverified/plugin/rollup.config.cjs",
+        "rollupConfig": "packages/@justverified/plugin/rollup.config.cjs",
         "generateExportsField": true,
         "compiler": "swc",
         "format": ["esm"],
         "assets": [
           {
-            "glob": "packages/plugins/@justverified/plugin/README.md",
+            "glob": "packages/@justverified/plugin/README.md",
             "input": ".",
             "output": "."
           }
@@ -75,6 +75,7 @@
         "lint",
         {
           "projects": [
+            "@justaname.id/siwens",
             "@justaname.id/sdk",
             "@justaname.id/react",
             "@justweb3/ui",
@@ -90,8 +91,8 @@
       "options": {
         "fix": true,
         "lintFilePatterns": [
-          "packages/plugins/@justverified/plugin/**/*.{ts,tsx,js,jsx}",
-          "packages/plugins/@justverified/plugin/package.json"
+          "packages/@justverified/plugin/**/*.{ts,tsx,js,jsx}",
+          "packages/@justverified/plugin/package.json"
         ]
       }
     },
@@ -101,20 +102,20 @@
     },
     "nx-release-publish": {
       "options": {
-        "packageRoot": "packages/plugins/@justverified/plugin/dist"
+        "packageRoot": "packages/@justverified/plugin/dist"
       },
       "dependsOn": ["^build", "build", "^@justaname.id/react:build"]
     },
     "release:package": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx semantic-release --debug --extends=./packages/plugins/@justverified/plugin/release.config.js"
+        "command": "npx semantic-release --debug --extends=./packages/@justverified/plugin/release.config.js"
       }
     },
     "update-deps": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx rjp ./packages/plugins/@justverified/plugin/dist/package.json $PACKAGE_NAME $VERSION"
+        "command": "npx rjp ./packages/@justverified/plugin/dist/package.json $PACKAGE_NAME $VERSION"
       }
     }
   }

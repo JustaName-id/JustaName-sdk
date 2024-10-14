@@ -3,16 +3,15 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowJs": false,
+    "moduleResolution": "node",
     "esModuleInterop": false,
-    "declaration": true,
-    "declarationMap": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "preserveSymlinks": true,
     "paths": {
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
       "@justaname.id/react": ["packages/@justaname.id/react"],
-      "@justweb3/ui": ["packages/@justweb3/ui"],
-      "@justaname.id/sdk": ["packages/@justaname.id/sdk"]
+      "@justweb3/ui": ["packages/@justweb3/ui"]
     }
   },
   "files": [],

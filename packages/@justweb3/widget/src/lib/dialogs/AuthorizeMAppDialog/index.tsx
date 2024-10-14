@@ -180,7 +180,7 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
                   style={{
                     padding: '10px',
                     borderRadius: '16px',
-                    border: '1px solid var(--justaname-foreground-color-4)'
+                    border: '1px solid var(--justweb3-foreground-color-4)'
                   }}
                 >
 

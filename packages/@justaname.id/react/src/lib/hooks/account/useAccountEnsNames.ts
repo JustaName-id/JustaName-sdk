@@ -2,6 +2,7 @@ import { useMountedAccount } from './useMountedAccount';
 import { ChainId } from '@justaname.id/sdk';
 import { useAddressEnsNames } from '../ens';
 import { Records } from '../../types';
+import { useJustaName } from '../../providers';
 
 export interface UseAccountEnsNamesParams {
   chainId?: ChainId
@@ -16,6 +17,7 @@ export interface UseAccountEnsNamesResult {
 }
 
 export const useAccountEnsNames = (props?: UseAccountEnsNamesParams): UseAccountEnsNamesResult => {
+  const { chainId } = useJustaName()
   const { address } = useMountedAccount()
   const {
     addressEnsNames ,
@@ -25,7 +27,7 @@ export const useAccountEnsNames = (props?: UseAccountEnsNamesParams): UseAccount
     refetchAddressEnsNames
   } = useAddressEnsNames({
     address,
-    chainId: props?.chainId
+    chainId: props?.chainId || chainId
   })
 
   return {

@@ -8,7 +8,7 @@ const URI = 'https://' + DOMAIN;
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
 const CHAIN_ID = parseInt(process.env['SDK_CHAIN_ID'] as string) as ChainId
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
-
+const JUSTANAME_ENV = process.env['SDK_JUSTANAME_DEV'] === 'true'
 /**
  * Initializes the JustaName service with the provided API key.
  * @param {string} apiKey - The API key for authenticating with the JustaName service.
@@ -16,6 +16,7 @@ const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
  */
 export const initializeJustaName =  (apiKey: string) => {
   return JustaName.init({
+    dev: JUSTANAME_ENV,
     config:{
       domain: DOMAIN,
       origin: URI,

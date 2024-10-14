@@ -64,7 +64,7 @@ export const EmailCredentialItem: FC<EmailCredentialItemProps> = ({
         />
         <Input
           style={{
-            borderColor: 'var(--justaname-foreground-color-4)',
+            borderColor: 'var(--justweb3-foreground-color-4)',
             height: '31px',
           }}
           left={<EmailIcon width={30} />}

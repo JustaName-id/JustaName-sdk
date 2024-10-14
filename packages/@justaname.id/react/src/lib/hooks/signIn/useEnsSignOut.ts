@@ -31,7 +31,8 @@ export const useEnsSignOut = ( params?: UseEnsSignOutParams): UseEnsSignOutResul
     mutationFn: async () => {
       await fetch(signoutEndpoint,
         {
-        credentials: 'include',
+          method: 'POST',
+          credentials: 'include',
       });
 
       refreshEnsAuth()

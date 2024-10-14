@@ -11,7 +11,7 @@ import { Records } from '../../types';
 
 export const buildAccountInvitationsKey = (
   address: string | undefined,
-  chainId: ChainId
+  chainId: ChainId| undefined
 ) => [
   'INVITATIONS_BY_ADDRESS',
   address,

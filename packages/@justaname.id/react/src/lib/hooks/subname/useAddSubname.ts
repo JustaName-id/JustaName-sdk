@@ -10,26 +10,53 @@ import { Records } from '../../types';
 
 export type UseAddSubnameFunctionParams = SubnameAddRoute['params'];
 
-export interface UseAddSubnameParams extends Omit<UseAddSubnameFunctionParams, "username"> {
+export interface UseAddSubnameParams
+  extends Omit<UseAddSubnameFunctionParams, 'username'> {
   backendUrl?: string;
   addSubnameRoute?: string;
 }
 
 export interface UseAddSubnameResult {
-  addSubname: UseMutateAsyncFunction<Records, Error, UseAddSubnameFunctionParams>;
+  addSubname: UseMutateAsyncFunction<
+    Records,
+    Error,
+    UseAddSubnameFunctionParams
+  >;
   isAddSubnamePending: boolean;
 }
 
-export const useAddSubname = (params?: UseAddSubnameParams): UseAddSubnameResult => {
-  const { justaname, backendUrl, routes, apiKey, chainId, ensDomains } = useJustaName();
+export const useAddSubname = (
+  params?: UseAddSubnameParams
+): UseAddSubnameResult => {
+  const { justaname, backendUrl, routes, chainId, ensDomains } = useJustaName();
   const { address } = useMountedAccount();
   const { getSignature } = useSubnameSignature();
   const { refetchAccountSubnames } = useAccountSubnames();
-  const _chainId = useMemo(() => params?.chainId || chainId, [params?.chainId, chainId]);
-  const _ensDomain = useMemo(() => params?.ensDomain || ensDomains.find((ensDomain) => ensDomain.chainId === _chainId)?.ensDomain, [params?.ensDomain, ensDomains, _chainId]);
-  const _backendUrl = useMemo(() => params?.backendUrl || backendUrl, [params?.backendUrl, backendUrl]);
-  const _addSubnameRoute = useMemo(() => params?.addSubnameRoute || routes.addSubnameRoute, [params?.addSubnameRoute, routes.addSubnameRoute]);
-  const addSubnameEndpoint = useMemo(() => _backendUrl + _addSubnameRoute, [_backendUrl, _addSubnameRoute]);
+  const _chainId = useMemo(
+    () => params?.chainId || chainId,
+    [params?.chainId, chainId]
+  );
+  const _ensDomain = useMemo(
+    () =>
+      params?.ensDomain ||
+      ensDomains.find((ensDomain) => ensDomain.chainId === _chainId)?.ensDomain,
+    [params?.ensDomain, ensDomains, _chainId]
+  );
+  const _backendUrl = useMemo(
+    () => params?.backendUrl || backendUrl,
+    [params?.backendUrl, backendUrl]
+  );
+  const _addSubnameRoute = useMemo(
+    () => params?.addSubnameRoute || routes.addSubnameRoute,
+    [params?.addSubnameRoute, routes.addSubnameRoute]
+  );
+  const addSubnameEndpoint = useMemo(
+    () => _backendUrl + _addSubnameRoute,
+    [_backendUrl, _addSubnameRoute]
+  );
+  const _apiKey =
+    params?.apiKey ||
+    ensDomains.find((ensDomain) => ensDomain.chainId === _chainId)?.apiKey;
 
   const mutate = useMutation({
     mutationFn: async (_params: UseAddSubnameFunctionParams) => {
@@ -38,15 +65,17 @@ export const useAddSubname = (params?: UseAddSubnameParams): UseAddSubnameResult
       }
 
       const signature = await getSignature();
-
+      const __apiKey = _params.apiKey || _apiKey;
+      const __ensDomain = _params.ensDomain || _ensDomain;
+      const __chainId = _params.chainId || _chainId;
       let response: SubnameAddRoute['response'];
 
-      if (apiKey) {
+      if (__apiKey) {
         response = await justaname.subnames.addSubname(
           {
             username: _params.username,
-            ensDomain: _params.ensDomain || _ensDomain,
-            chainId: _params.chainId || _chainId,
+            ensDomain: __ensDomain,
+            chainId: __chainId,
             addresses: params?.addresses,
             text: params?.text,
             contentHash: params?.contentHash,
@@ -55,24 +84,24 @@ export const useAddSubname = (params?: UseAddSubnameParams): UseAddSubnameResult
             xSignature: signature.signature,
             xAddress: address,
             xMessage: signature.message,
+            xApiKey: __apiKey,
           }
         );
       } else {
         const backendResponse = await fetch(addSubnameEndpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              username: _params.username,
-              ensDomain: _params.ensDomain || _ensDomain,
-              chainId: _params.chainId || _chainId,
-              signature: signature.signature,
-              address: address,
-              message: signature.message,
-            }),
-          }
-        );
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: _params.username,
+            ensDomain: __ensDomain,
+            chainId: __chainId,
+            signature: signature.signature,
+            address: address,
+            message: signature.message,
+          }),
+        });
 
         if (!backendResponse.ok) {
           throw new Error('Network response was not ok');
@@ -84,9 +113,9 @@ export const useAddSubname = (params?: UseAddSubnameParams): UseAddSubnameResult
       refetchAccountSubnames();
       return {
         ...response,
-        sanitizedRecords: sanitizeRecords(response)
-      }
-      },
+        sanitizedRecords: sanitizeRecords(response),
+      };
+    },
   });
 
   return {

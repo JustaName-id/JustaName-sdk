@@ -5,7 +5,11 @@
     "module": "commonjs",
     "types": ["jest", "node"],
     "paths": {
-      "@justweb3/ui": ["packages/@justweb3/ui"]
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
+      "@justaname.id/react": ["packages/@justaname.id/react"],
+      "@justweb3/ui": ["packages/@justweb3/ui"],
+      "@justweb3/widget": ["packages/@justweb3/widget"]
     }
   },
   "include": [
