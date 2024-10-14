@@ -1,11 +1,11 @@
 {
   "name": "@justweb3/widget",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "dependencies": {
     "@ensdomains/address-encoder": "^1.1.2",
     "@ensdomains/ensjs": "4.0.1-alpha.0",
     "@justaname.id/react": "0.3.101",
-    "@justweb3/ui": "0.0.30",
+    "@justweb3/ui": "0.0.31",
     "@justaname.id/sdk": "0.2.98",
     "lodash": "4.17.21",
     "styled-components": "^6.1.12",
