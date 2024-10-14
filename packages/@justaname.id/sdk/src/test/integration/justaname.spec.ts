@@ -18,7 +18,8 @@ const CHAIN_ID = parseInt(process.env['SDK_CHAIN_ID'] as string) as ChainId;
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
 const MAPP = process.env['SDK_MAPP'] as string;
 const MAPP_2 = MAPP.split('.')[0] + '2' + '.' + MAPP.split('.')[1];
-
+const SEPOLIA_PROVIDER_URL = process.env['SDK_SEPOLIA_PROVIDER_URL'] as string;
+const MAINNET_PROVIDER_URL = process.env['SDK_MAINNET_PROVIDER_URL'] as string;
 describe('justaname', () => {
   let justaname: JustaName;
 
@@ -45,7 +46,18 @@ describe('justaname', () => {
   });
 
   it('should throw an error if domain and origin are not provided in config or function call', async () => {
-    const justaname = JustaName.init();
+    const justaname = JustaName.init({
+      networks: [
+        {
+          chainId: 1,
+          providerUrl: MAINNET_PROVIDER_URL,
+        },
+        {
+          chainId: 11155111,
+          providerUrl: SEPOLIA_PROVIDER_URL,
+        },
+      ],
+    });
     expect(() => {
       return justaname.siwe.requestChallenge({
         address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
