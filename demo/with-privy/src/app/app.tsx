@@ -1,37 +1,40 @@
-import { SIWENSProvider, SIWENSProviderConfig } from '@justweb3/widget'
+import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
 import '@rainbow-me/rainbowkit/styles.css';
 import { http } from 'wagmi';
-import {
-  mainnet,
-  sepolia
-} from 'wagmi/chains';
-import {
-  QueryClientProvider,
-  QueryClient,
-} from "@tanstack/react-query";
+import { mainnet, sepolia } from 'wagmi/chains';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ChainId } from '@justaname.id/sdk';
 import { PrivyProvider, usePrivy } from '@privy-io/react-auth';
-import {createConfig, WagmiProvider} from '@privy-io/wagmi';
+import { createConfig, WagmiProvider } from '@privy-io/wagmi';
 import { useEnsAuth } from '@justaname.id/react';
 
 const queryClient = new QueryClient();
 
-const JustaNameConfig: SIWENSProviderConfig = {
+const JustaNameConfig: JustWeb3ProviderConfig = {
   config: {
-    chainId: parseInt(import.meta.env.VITE_APP_CHAIN_ID) as ChainId,
     origin: import.meta.env.VITE_APP_ORIGIN,
     domain: import.meta.env.VITE_APP_DOMAIN,
   },
   backendUrl: import.meta.env.VITE_APP_BACKEND_URL,
-  providerUrl: import.meta.env.VITE_APP_PROVIDER_URL,
-  ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN,
+  networks: [
+    {
+      chainId: parseInt(import.meta.env.VITE_APP_CHAIN_ID) as ChainId,
+      providerUrl: import.meta.env.VITE_APP_PROVIDER_URL,
+    },
+  ],
+  ensDomains: [
+    {
+      ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN,
+      chainId: parseInt(import.meta.env.VITE_APP_CHAIN_ID) as ChainId,
+    },
+  ],
   openOnWalletConnect: true,
-  allowedSubnames:'all'
-}
+  allowedEns: 'all',
+};
 
 const Connect = () => {
   const { ready, authenticated, user, login, logout } = usePrivy();
-  const { connectedEns} = useEnsAuth();
+  const { connectedEns } = useEnsAuth();
   if (!ready) {
     return null;
   }
@@ -46,34 +49,52 @@ const Connect = () => {
             <textarea
               readOnly
               value={JSON.stringify(user, null, 2)}
-              style={{ width: "600px", height: "250px", borderRadius: "6px" }}
+              style={{ width: '600px', height: '250px', borderRadius: '6px' }}
             />
             <br />
-            <button onClick={logout} style={{ marginTop: "20px", padding: "12px", backgroundColor: "#069478", color: "#FFF", border: "none", borderRadius: "6px" }}>
+            <button
+              onClick={logout}
+              style={{
+                marginTop: '20px',
+                padding: '12px',
+                backgroundColor: '#069478',
+                color: '#FFF',
+                border: 'none',
+                borderRadius: '6px',
+              }}
+            >
               Log Out
             </button>
           </div>
         ) : (
-          <button onClick={login} style={{padding: "12px", backgroundColor: "#069478", color: "#FFF", border: "none", borderRadius: "6px" }}>Log In</button>
+          <button
+            onClick={login}
+            style={{
+              padding: '12px',
+              backgroundColor: '#069478',
+              color: '#FFF',
+              border: 'none',
+              borderRadius: '6px',
+            }}
+          >
+            Log In
+          </button>
         )}
-        {
-          connectedEns && <div>
+        {connectedEns && (
+          <div>
             <textarea
               readOnly
               value={JSON.stringify(connectedEns, null, 2)}
-              style={{ width: "600px", height: "250px", borderRadius: "6px" }}
+              style={{ width: '600px', height: '250px', borderRadius: '6px' }}
             />
           </div>
-        }
+        )}
       </header>
     </div>
-  )
-}
-
-
+  );
+};
 
 export function App() {
-
   const config = createConfig({
     chains: [mainnet, sepolia], // Pass your required chains as an array
     transports: {
@@ -97,9 +118,9 @@ export function App() {
     >
       <QueryClientProvider client={queryClient}>
         <WagmiProvider config={config}>
-            <SIWENSProvider config={JustaNameConfig} >
-              <Connect />
-            </SIWENSProvider>
+          <JustWeb3Provider config={JustaNameConfig}>
+            <Connect />
+          </JustWeb3Provider>
         </WagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>
