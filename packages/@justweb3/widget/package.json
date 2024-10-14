@@ -4,9 +4,9 @@
   "dependencies": {
     "@ensdomains/address-encoder": "^1.1.2",
     "@ensdomains/ensjs": "4.0.1-alpha.0",
-    "@justaname.id/react": "0.3.95",
-    "@justweb3/ui": "0.0.28",
-    "@justaname.id/sdk": "0.2.92",
+    "@justaname.id/react": "0.3.100",
+    "@justweb3/ui": "0.0.33",
+    "@justaname.id/sdk": "0.2.97",
     "lodash": "4.17.21",
     "styled-components": "^6.1.12",
     "yup": "0.32.11"

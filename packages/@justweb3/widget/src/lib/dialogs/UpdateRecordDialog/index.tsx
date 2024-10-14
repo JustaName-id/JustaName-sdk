@@ -14,17 +14,19 @@ export interface UpdateRecordDialogProps extends Omit<UseSubnameUpdateFunctionPa
   };
   open: boolean;
   handleOpen: (open: boolean) => void;
+  disableOverlay?: boolean;
 }
 
 export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
-                                                                  text: initialText,
-                                                                  addresses: initialAddresses,
-                                                                  contentHash: initialContentHash,
-                                                                  open,
-                                                                  handleOpen,
+  text: initialText,
+  addresses: initialAddresses,
+  contentHash: initialContentHash,
+  open,
+  handleOpen,
+  disableOverlay,
   logo,
   ens
-                                                                }) => {
+}) => {
   const [text, setText] = useState(initialText);
   const [addresses, setAddresses] = useState(initialAddresses);
   const [contentHash, setContentHash] = useState(initialContentHash);
@@ -68,6 +70,7 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
       }
       open={open}
       onOpenChange={(_open) => handleOpen(_open)}
+      disableOverlay={disableOverlay}
     >
       {
         isUpdateChangesPending || isRecordsPending ?
@@ -100,7 +103,7 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
             </Flex>
 
             {
-              changes && ((changes?.changedAddresses && changes?.changedAddresses?.length > 0)  ||
+              changes && ((changes?.changedAddresses && changes?.changedAddresses?.length > 0) ||
                 (changes?.changedTexts && changes?.changedTexts?.length > 0) ||
                 changes?.changedContentHash) ?
 
@@ -118,15 +121,15 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                             newValue={change.address}
                             type={'address'}
                             onDoNotApply={() => {
-                              setAddresses((prevState)=>{
-                                if(!prevState) {
+                              setAddresses((prevState) => {
+                                if (!prevState) {
                                   return prevState
                                 }
 
-                                if(Array.isArray(prevState)){
-                                  return prevState.filter((address)=>address.address!==change.address)
+                                if (Array.isArray(prevState)) {
+                                  return prevState.filter((address) => address.address !== change.address)
                                 }
-                                else{
+                                else {
                                   return {
                                     ...prevState,
                                     [change.coinType]: undefined
@@ -147,15 +150,15 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                             previousValue={records?.records.texts?.find((text) => text.key === change.key)?.value || ''}
                             newValue={change.value}
                             onDoNotApply={() => {
-                              setText((prevState)=>{
-                                if(!prevState) {
+                              setText((prevState) => {
+                                if (!prevState) {
                                   return prevState
                                 }
 
-                                if(Array.isArray(prevState)){
-                                  return prevState.filter((text)=>text.key!==change.key)
+                                if (Array.isArray(prevState)) {
+                                  return prevState.filter((text) => text.key !== change.key)
                                 }
-                                else{
+                                else {
                                   return {
                                     ...prevState,
                                     [change.key]: undefined
@@ -170,17 +173,17 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                       )) :
                       [],
                     ...(changes?.changedContentHash ? [
-                        <UpdateRecordItem
-                          previousKey={records?.records.contentHash?.protocolType || ''}
-                          newKey={changes?.changedContentHash?.split('://')[0] || ''}
-                          previousValue={records?.records.contentHash?.decoded || ''}
-                          newValue={changes?.changedContentHash?.split('://')[1] || ''}
-                          type={'contentHash'}
-                          onDoNotApply={() => {
-                            setContentHash(undefined);
-                          }}
-                        />
-                      ] : []
+                      <UpdateRecordItem
+                        previousKey={records?.records.contentHash?.protocolType || ''}
+                        newKey={changes?.changedContentHash?.split('://')[0] || ''}
+                        previousValue={records?.records.contentHash?.decoded || ''}
+                        newValue={changes?.changedContentHash?.split('://')[1] || ''}
+                        type={'contentHash'}
+                        onDoNotApply={() => {
+                          setContentHash(undefined);
+                        }}
+                      />
+                    ] : []
                     )
                   ]}
                 />)
@@ -205,18 +208,18 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                 </DialogClose>
 
                 <Button variant={'primary'} style={{ width: '100%' }} size={'lg'}
-                        onClick={() => {
-                          updateSubname({
-                            ens: ens || '',
-                            text: text,
-                            addresses: addresses,
-                            contentHash: contentHash
-                          }).finally(() => {
-                            handleOpen(false);
-                          });
-                        }}
-                        loading={isUpdateSubnamePending}
-                        disabled={!changes || (changes?.changedAddresses?.length === 0 && changes?.changedTexts?.length === 0 && !changes.changedContentHash)}
+                  onClick={() => {
+                    updateSubname({
+                      ens: ens || '',
+                      text: text,
+                      addresses: addresses,
+                      contentHash: contentHash
+                    }).finally(() => {
+                      handleOpen(false);
+                    });
+                  }}
+                  loading={isUpdateSubnamePending}
+                  disabled={!changes || (changes?.changedAddresses?.length === 0 && changes?.changedTexts?.length === 0 && !changes.changedContentHash)}
                 >
                   Update All
                 </Button>

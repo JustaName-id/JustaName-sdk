@@ -13,19 +13,21 @@ export interface AuthorizeMAppDialogProps {
   logo?: string;
   isLoggedIn: boolean;
   handleOpenSignInDialog: (open: boolean) => void;
-  connectedEns:  string | undefined;
+  connectedEns: string | undefined;
   isEnsAuthPending: boolean;
+  disableOverlay?: boolean;
 }
 
 export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
-                                                  mApp: { name: mApp, isOpen: open },
-                                                  handleOpenDialog,
-                                                  logo,
-                                                  isLoggedIn,
-                                                  handleOpenSignInDialog,
-                                                  connectedEns,
-                                                  isEnsAuthPending
-                                                }) => {
+  mApp: { name: mApp, isOpen: open },
+  handleOpenDialog,
+  logo,
+  isLoggedIn,
+  handleOpenSignInDialog,
+  connectedEns,
+  isEnsAuthPending,
+  disableOverlay
+}) => {
   const [openOnConnect] = useState(open);
   const { records: mAppRecords, isRecordsPending: isMAppRecordsPending } = useRecords({
     ens: mApp || ''
@@ -117,20 +119,21 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
   return (
     <DefaultDialog open={open} handleClose={() => handleOpenDialogInternal(false)} header={
       <div style={{
-        paddingLeft:'24px',
+        paddingLeft: '24px',
         justifyContent: 'center',
         display: 'flex',
         alignItems: 'center',
-        flexGrow:1
+        flexGrow: 1
       }}>
         {
           logo
-            ? <img src={logo} alt="logo" style={{ height: '62px' , width: 'auto' }} />
-            :         <JustaNameLogoIcon height={62} />
+            ? <img src={logo} alt="logo" style={{ height: '62px', width: 'auto' }} />
+            : <JustaNameLogoIcon height={62} />
 
         }
       </div>
     }
+      disableOverlay={disableOverlay}
     >
 
       <Badge>
@@ -168,31 +171,31 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
           overflowY: 'scroll',
           scrollbarWidth: 'none', // For Firefox
           msOverflowStyle: 'none', // For IE and Edge
-          }}
+        }}
       >
 
         {
           mAppPermissions.map((permission, index) => {
             return (<Fragment key={'permission_' + index}>
-                <Flex
-                  direction={'column'}
-                  gap={'5px'}
-                  style={{
-                    padding: '10px',
-                    borderRadius: '16px',
-                    border: '1px solid var(--justweb3-foreground-color-4)'
-                  }}
-                >
+              <Flex
+                direction={'column'}
+                gap={'5px'}
+                style={{
+                  padding: '10px',
+                  borderRadius: '16px',
+                  border: '1px solid var(--justweb3-foreground-color-4)'
+                }}
+              >
 
-                  <P>
-                    Permission
-                  </P>
+                <P>
+                  Permission
+                </P>
 
-                  <P>
-                    {permission}
-                  </P>
-                </Flex>
-              </Fragment>
+                <P>
+                  {permission}
+                </P>
+              </Flex>
+            </Fragment>
             );
           })
         }
@@ -210,7 +213,7 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
               {
                 mAppFieldsInEnsRecords.map((field) => {
                   return (
-                    <Fragment key={'mapp-fields-'+field.key}>
+                    <Fragment key={'mapp-fields-' + field.key}>
                       <ClickableItem
                         name={field.key}
                         status={field.value}

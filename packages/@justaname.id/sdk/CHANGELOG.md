@@ -1,3 +1,58 @@
+## 0.2.97 (2024-10-10)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.30
+
+## 0.2.96 (2024-10-09)
+
+
+### 🩹 Fixes
+
+- search subname ([4196d5c](https://github.com/JustaName-id/JustaName-sdk/commit/4196d5c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.29
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.95 (2024-10-09)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.28
+
+## 0.2.94 (2024-10-09)
+
+
+### 🩹 Fixes
+
+- acceptsubname ([2196405](https://github.com/JustaName-id/JustaName-sdk/commit/2196405))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.27
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.93 (2024-10-09)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.26
+
 ## 0.2.92 (2024-10-09)
 
 

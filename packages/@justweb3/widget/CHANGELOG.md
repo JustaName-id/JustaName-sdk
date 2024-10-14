@@ -1,3 +1,68 @@
+## 0.0.33 (2024-10-10)
+
+
+### 🩹 Fixes
+
+- added disableOverlay for all dialogs ([04fea32](https://github.com/JustaName-id/JustaName-sdk/commit/04fea32))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.97
+- Updated @justaname.id/react to 0.3.100
+- Updated @justaname.id/react-ui to 0.0.33
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.32 (2024-10-09)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.96
+- Updated @justaname.id/react to 0.3.99
+- Updated @justaname.id/react-ui to 0.0.32
+
+## 0.0.31 (2024-10-09)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.95
+- Updated @justaname.id/react to 0.3.98
+- Updated @justaname.id/react-ui to 0.0.31
+
+## 0.0.30 (2024-10-09)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.94
+- Updated @justaname.id/react to 0.3.97
+- Updated @justaname.id/react-ui to 0.0.30
+
+## 0.0.29 (2024-10-09)
+
+
+### 🚀 Features
+
+- added disableOverlay prop ([9592ed2](https://github.com/JustaName-id/JustaName-sdk/commit/9592ed2))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.93
+- Updated @justaname.id/react to 0.3.96
+- Updated @justaname.id/react-ui to 0.0.29
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.28 (2024-10-09)
 
 

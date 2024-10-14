@@ -66,6 +66,10 @@ export class Subnames {
     headers: SubnameAcceptRoute['headers']
   ): Promise<SubnameAcceptRoute['response']> {
     const { text, addresses, ensDomain, chainId, ...rest } = params;
+    const sanitizedAddresses = sanitizeAddresses(params.addresses);
+    const hasAddress60 = sanitizedAddresses?.some(
+      (address) => address.coinType === 60
+    );
 
     const _chainId = chainId || this.chainId;
     const _ensDomain =
@@ -80,9 +84,17 @@ export class Subnames {
         chainId: _chainId,
         ensDomain: _ensDomain,
         text: sanitizeTexts(params.text),
-        addresses: sanitizeAddresses(params.addresses),
-        ...rest,
-      },
+        addresses: hasAddress60
+          ? sanitizedAddresses
+          : [
+              {
+                coinType: 60,
+                address: headers.xAddress as string,
+              },
+              ...(sanitizedAddresses === undefined ? [] : sanitizedAddresses),
+            ],
+        ...rest,},
+
       headers,
       this.dev
     )(
@@ -194,7 +206,8 @@ export class Subnames {
       },
       {
         ...headers,
-      },
+      }
+    ,
       this.dev
     )(
       ['username', 'ensDomain', 'chainId'],
@@ -258,7 +271,8 @@ export class Subnames {
       },
       {
         ...headers,
-      },
+      }
+    ,
       this.dev
     )(
       ['username', 'ensDomain', 'chainId'],
