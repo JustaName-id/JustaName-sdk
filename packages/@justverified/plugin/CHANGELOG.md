@@ -1,3 +1,11 @@
+## 0.0.29 (2024-10-14)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justweb3/ui to 0.0.30
+- Updated @justweb3/widget to 0.0.30
+
 ## 0.0.28 (2024-10-14)
 
 
