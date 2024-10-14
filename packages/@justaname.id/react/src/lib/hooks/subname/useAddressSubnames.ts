@@ -13,7 +13,7 @@ import { Records } from '../../types';
 
 export const buildAddressSubnamesKey = (
   address: string | undefined,
-  chainId: ChainId,
+  chainId: ChainId| undefined,
 ) => [
   'WALLET_SUBNAMES_BY_ADDRESS',
   address,

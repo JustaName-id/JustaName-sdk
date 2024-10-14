@@ -1,0 +1,31 @@
+{
+  "name": "@justverified/plugin",
+  "version": "0.0.27",
+  "dependencies": {
+    "@justaname.id/react": "0.3.100",
+    "@justweb3/ui": "0.0.28",
+    "@justaname.id/sdk": "0.2.97",
+    "@justweb3/widget": "0.0.28",
+    "axios": "^1.6.0",
+    "qs": "^6.12.0",
+    "lodash": "4.17.21"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.x",
+    "react": ">=17"
+  },
+  "exports": {
+    "./package.json": "./dist/package.json",
+    ".": "./dist/index.esm.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "module": "./dist/index.esm.js",
+  "main": "./dist/index.esm.js",
+  "types": "./dist/index.esm.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JustaName-id/JustaName-sdk"
+  }
+}

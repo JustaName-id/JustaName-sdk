@@ -18,19 +18,22 @@ export interface MAppsParams {
   chainId: ChainId;
   networks: NetworksWithProvider
   subnames: Subnames;
+  dev: boolean;
 }
 
 export class MApps {
-  siweConfig?: Omit<SiweConfig, 'chainId' | 'ttl'>;
-  chainId: ChainId;
-  subnames: Subnames;
-  networks: NetworksWithProvider;
+  private readonly siweConfig?: Omit<SiweConfig, 'chainId' | 'ttl'>;
+  private readonly chainId: ChainId;
+  private readonly subnames: Subnames;
+  private readonly networks: NetworksWithProvider;
+  private readonly dev: boolean;
 
-  constructor({ siweConfig, chainId, subnames, networks }: MAppsParams) {
-    this.siweConfig = siweConfig;
-    this.chainId = chainId;
-    this.subnames = subnames;
-    this.networks = networks;
+  constructor(params: MAppsParams) {
+    this.siweConfig = params.siweConfig;
+    this.chainId = params.chainId;
+    this.subnames = params.subnames;
+    this.networks = params.networks;
+    this.dev = params.dev;
   }
 
   async checkIfMAppIsEnabled(params: {
@@ -103,7 +106,7 @@ export class MApps {
       origin: _origin,
       domain: _domain,
       ...rest
-    })(['ttl','chainId','origin','domain'])
+    }, undefined, this.dev)(['ttl','chainId','origin','domain'])
   }
 
   requestAppendMAppFieldChallenge(params: RequestAppendMAppFieldChallengeRoute['params']): Promise<RequestAppendMAppFieldChallengeRoute['response']> {
@@ -119,7 +122,7 @@ export class MApps {
       origin: _origin,
       domain: _domain,
       ...rest
-    })(['ttl','chainId','origin','domain'])
+    }, undefined, this.dev)(['ttl','chainId','origin','domain'])
   }
 
   requestRevokeMAppPermissionChallenge(params: RequestRevokeMAppPermissionChallengeRoute['params']): Promise<RequestRevokeMAppPermissionChallengeRoute['response']> {
@@ -135,7 +138,7 @@ export class MApps {
       origin: _origin,
       domain: _domain,
       ...rest
-    })(['ttl','chainId','origin','domain'])
+    }, undefined, this.dev)(['ttl','chainId','origin','domain'])
   }
 
   addMAppPermission(
@@ -143,7 +146,7 @@ export class MApps {
   ): Promise<AddMAppPermissionRoute['response']> {
     return assertRestCall('MAPP_ADD_PERMISSION_ROUTE', 'POST', {
       ...params
-    })(['message','address','signature'])
+    }, undefined, this.dev)(['message','address','signature'])
   }
 
   appendMAppField(
@@ -154,7 +157,7 @@ export class MApps {
       ...params
     }, {
       ...headers
-    })(['subname','fields'],['xAddress','xMessage','xSignature'])
+    }, this.dev)(['subname','fields'],['xAddress','xMessage','xSignature'])
   }
 
   revokeMAppPermission(
@@ -162,6 +165,6 @@ export class MApps {
   ): Promise<RevokeMAppPermissionRoute['response']> {
     return assertRestCall('MAPP_REVOKE_PERMISSION_ROUTE', 'POST', {
       ...params
-    })(['message','address','signature'])
+    }, undefined, this.dev)(['message','address','signature'])
   }
 }

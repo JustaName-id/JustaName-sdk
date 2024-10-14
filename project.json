@@ -12,6 +12,14 @@
         "config": ".verdaccio/config.yml",
         "storage": "tmp/local-registry/storage"
       }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+        "options": {
+            "commands": [
+              "echo 'Running tests for all packages'"
+            ]
+        }
     }
   }
 }

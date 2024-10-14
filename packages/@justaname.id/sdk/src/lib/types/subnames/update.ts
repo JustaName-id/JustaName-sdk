@@ -1,4 +1,4 @@
-import { ApiKeyHeaders, SIWEHeaders } from '../headers';
+import { SIWEHeaders } from '../headers';
 import {
   AddressWithTypedCoins,
   ChainId,
@@ -40,7 +40,7 @@ export interface SubnameUpdateRequest extends IRequest{
 export interface SubnameUpdateRoute extends IRoute<
   SubnameUpdateRequest,
   SubnameResponse,
-  ApiKeyHeaders & SIWEHeaders,
+  SIWEHeaders,
   'ensDomain' | 'chainId' ,
   'addresses' | 'text',
   { addresses?: PartialAddressJson | AddressWithTypedCoins[]; text?: Record<string, string> | TextRecordUpdateRequest[] }
