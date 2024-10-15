@@ -791,16 +791,6 @@
             }
           },
           {
-            "name": "coinType",
-            "required": false,
-            "in": "query",
-            "description": "The coin type of the address",
-            "example": 60,
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
             "name": "isClaimed",
             "required": false,
             "in": "query",
@@ -2502,7 +2492,6 @@
             "example": true
           },
           "claimedAt": {
-            "format": "date-time",
             "type": "string",
             "example": "2024-05-22T11:55:29.000Z"
           },
@@ -2598,7 +2587,6 @@
             "example": true
           },
           "claimedAt": {
-            "format": "date-time",
             "type": "string",
             "example": "2024-05-22T11:55:29.000Z"
           },
@@ -2728,7 +2716,6 @@
             "example": true
           },
           "claimedAt": {
-            "format": "date-time",
             "type": "string",
             "example": "2024-05-22T11:55:29.000Z"
           },
@@ -2857,7 +2844,6 @@
             "example": true
           },
           "claimedAt": {
-            "format": "date-time",
             "type": "string",
             "example": "2024-05-22T11:55:29.000Z"
           },
@@ -2970,7 +2956,6 @@
             "example": true
           },
           "claimedAt": {
-            "format": "date-time",
             "type": "string",
             "example": "2024-05-22T11:55:29.000Z"
           },
@@ -3060,7 +3045,6 @@
             "example": true
           },
           "claimedAt": {
-            "format": "date-time",
             "type": "string",
             "example": "2024-05-22T11:55:29.000Z"
           },
@@ -3138,7 +3122,6 @@
             "example": true
           },
           "claimedAt": {
-            "format": "date-time",
             "type": "string",
             "example": "2024-05-22T11:55:29.000Z"
           },
@@ -3170,7 +3153,6 @@
             "example": true
           },
           "claimedAt": {
-            "format": "date-time",
             "type": "string",
             "example": "2024-05-22T11:55:29.000Z"
           },
@@ -3311,7 +3293,6 @@
             "example": true
           },
           "claimedAt": {
-            "format": "date-time",
             "type": "string",
             "example": "2024-05-22T11:55:29.000Z"
           },
