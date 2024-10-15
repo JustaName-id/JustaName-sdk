@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import { CopiedIcon, CopyIcon } from '../../icons/components/general';
 
 type BadgeVariant = 'default';
 
 interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: BadgeVariant;
+  withCopy?: boolean;
+  value?: string;
 }
 
 const badgeVariants = {
@@ -15,6 +18,10 @@ const badgeVariants = {
         font-size: 14px;
     font-style: normal;
     font-weight: 900;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
   `,
 };
 
@@ -33,13 +40,32 @@ const StyledBadge = styled.div<BadgeProps>`
 `;
 
 export const Badge: React.FC<BadgeProps> = ({
-                                              children,
-                                              variant = 'default',
-                                              ...props
-                                            }) => {
+  children,
+  variant = 'default',
+  withCopy,
+  value,
+  ...props
+}) => {
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+
+  const copyToClipboard = () => {
+    navigator.clipboard
+      .writeText(value ?? '')
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 3000);
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+      });
+  };
+
   return (
     <StyledBadge variant={variant} {...props}>
       {children}
+      {withCopy && isCopied ?
+        <CopiedIcon width={10} />
+        : <CopyIcon width={10} style={{ cursor: "pointer" }} onClick={copyToClipboard} />}
     </StyledBadge>
   );
 };

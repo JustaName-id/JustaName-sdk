@@ -2,6 +2,7 @@ import AddressIcon from './Address';
 import ArrowIcon from './Arrow';
 import ClipIcon from './Clip';
 import CloseIcon from './Close';
+import CopiedIcon from './Copied';
 import CopyIcon from './Copy';
 import DeleteIcon from './Delete';
 import DoneIcon from './Done';
@@ -23,6 +24,7 @@ const general = {
   arrow: ArrowIcon,
   clip: ClipIcon,
   close: CloseIcon,
+  copied: CopiedIcon,
   copy: CopyIcon,
   delete: DeleteIcon,
   done: DoneIcon,
@@ -47,6 +49,7 @@ export {
   ArrowIcon,
   ClipIcon,
   CloseIcon,
+  CopiedIcon,
   CopyIcon,
   DeleteIcon,
   DoneIcon,
