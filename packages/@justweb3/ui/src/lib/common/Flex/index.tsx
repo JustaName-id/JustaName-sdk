@@ -5,7 +5,10 @@ interface FlexProps {
   justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
   align?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline';
   wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
+  padding?: string;
   gap?: string;
+  border?: string;
+  borderRadius?: string;
 }
 
 export const Flex = styled.div<FlexProps>`
@@ -15,6 +18,9 @@ export const Flex = styled.div<FlexProps>`
     align-items: ${({ align = 'stretch' }) => align};
     flex-wrap: ${({ wrap = 'nowrap' }) => wrap};
     gap: ${({ gap = '0' }) => gap};
+    padding: ${({ padding = '' }) => padding};
+    border: ${({ border = '' }) => border};
+    border-radius: ${({ borderRadius = '0px' }) => borderRadius};
 `;
 
 export default Flex;
