@@ -21,6 +21,7 @@ While we take care of setting up your admin dashboard in the background, to prov
 In order to Integrate the JustWeb3 Widget, your project must run on:
 
 * a [minimum react version of 18](https://react.dev/learn/start-a-new-react-project)
+* a minimun typescript version of 4
 
 ### 1. Install the JustWeb3 Widget
 
@@ -62,7 +63,7 @@ Navigate to the [Admin Dashboard](https://dashboard.justaname.id/) and follow th
 After having set up your account, you can now issue an api key:
 
 * In the dashboard, go to the API Key section.
-* Generate your API key and make sure to **save it securely**—we won't be able to retrieve it later if it’s lost.
+* Generate your API key and make sure to **save it securely**—we won't be able to retrieve it for you later if it’s lost.
 
 **Congratulations!**\
 You're all set. Now, you can move forward with configuring the widget.

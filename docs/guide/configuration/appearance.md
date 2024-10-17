@@ -62,7 +62,7 @@ While the widget doesn't directly expose a font customization option, you can ap
 ```css
 /* In your global CSS file */
 body {
-  font-family: 'YourCustomFont', sans-serif;
+  --justweb3-font-family: 'YourCustomFont', sans-serif;
 }
 ```
 
