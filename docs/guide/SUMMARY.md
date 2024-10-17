@@ -8,3 +8,4 @@
 * [Appearance](configuration/appearance.md)
 * [JustVerified](configuration/justverified.md)
 * [Sign-In](configuration/sign-in.md)
+* [Networks](configuration/networks.md)
