@@ -18,28 +18,31 @@ While we take care of setting up your admin dashboard in the background, to prov
 
 ### 0. Prerequisites
 
+In order to Integrate the JustWeb3 Widget, your project must run on:
 
+* a minimum react version of 17
+* a minimum version of [wagmi](https://wagmi.sh/) of 2
 
-### 1. Install the JustaName React SDK
+### 1. Install the JustWeb3 Widget
 
-Install the latest version of the [JustaName React SDK](https://www.npmjs.com/package/@justaname.id/react-signin) using your package manager of choice:
+Install the latest version of the [JustWeb3 Widget ](https://www.npmjs.com/package/@justweb3/widget)using your package manager of choice:
 
 {% tabs %}
 {% tab title="npm" %}
 ```bash
-npm install @justaname.id/react-signin
+npm install @justweb3/widget
 ```
 {% endtab %}
 
 {% tab title="pnpm" %}
 ```bash
-pnpm install @justaname.id/react-signin
+pnpm install @justweb3/widget
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```bash
-yarn add @justaname.id/react-signin
+yarn add @justweb3/widget
 ```
 {% endtab %}
 {% endtabs %}
