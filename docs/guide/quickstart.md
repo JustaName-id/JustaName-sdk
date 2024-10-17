@@ -20,8 +20,7 @@ While we take care of setting up your admin dashboard in the background, to prov
 
 In order to Integrate the JustWeb3 Widget, your project must run on:
 
-* a minimum react version of 17
-* a minimum version of [wagmi](https://wagmi.sh/) of 2
+* a [minimum react version of 18](https://react.dev/learn/start-a-new-react-project)
 
 ### 1. Install the JustWeb3 Widget
 
@@ -72,20 +71,202 @@ You're all set. Now, you can move forward with configuring the widget.
 
 In your project, import the JustWeb3Provider component and wrap your app with it.
 
-An example set up for a [NextJs](https://nextjs.org/) or [Create React App](https://create-react-app.dev/) project, can be found below:\
+An example set up for a [NextJs](https://nextjs.org/) or a [React Vite](https://vite.dev/guide/) project, can be found below:\
 
+
+{% hint style="info" %}
+Please note the below example uses [RainbowKit](https://www.rainbowkit.com/). You can replace it with any web3 wallet provider. ([WalletConnect](https://explorer.walletconnect.com/), [Web3Auth](https://web3auth.io/), [Privy](https://www.privy.io/) ...)
+{% endhint %}
 
 {% tabs %}
 {% tab title="NextJS" %}
+```tsx
+'use client';
 
+import "@rainbow-me/rainbowkit/styles.css";
+import {
+  getDefaultConfig,
+  getDefaultWallets,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
+import {
+  argentWallet,
+  ledgerWallet,
+  trustWallet,
+} from "@rainbow-me/rainbowkit/wallets";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WagmiProvider } from "wagmi";
+import { mainnet, sepolia } from "wagmi/chains";
+import {
+  JustWeb3Provider,
+  JustWeb3ProviderConfig,
+  JustWeb3Button,
+} from "@justweb3/widget";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
+export default function Providers({children}: {children: React.ReactNode}) {
+ const { wallets } = getDefaultWallets();
+
+  const config = getDefaultConfig({
+    appName: "RainbowKit demo",
+    projectId: "YOUR_PROJECT_ID",
+    wallets: [
+      ...wallets,
+      {
+        groupName: "Other",
+        wallets: [argentWallet, trustWallet, ledgerWallet],
+      },
+    ],
+    chains: [mainnet, sepolia],
+    ssr: true,
+  });
+
+  const justweb3Config: JustWeb3ProviderConfig = {
+    config: {
+      origin: "http://localhost:3000/",
+      domain: "localhost",
+      signInTtl: 86400000,
+    },
+    openOnWalletConnect: true,
+    allowedEns: "all",
+    logo: "",
+    ensDomains: [
+      {
+        ensDomain: "YOUR ENS DOMAIN",
+        apiKey: "YOUR JUSTANAME API KEY",
+        chainId: 1,
+      },
+    ],
+    color: {
+      primary: "hsl(216, 90%, 58%)",
+      background: "hsl(0, 0%, 100%)",
+      destructive: "hsl(0, 100%, 50%)",
+    },
+  };
+
+  const queryClient = new QueryClient();
+
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
+          <JustWeb3Provider config={justweb3Config}>
+            {children}
+          </JustWeb3Provider>
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+};
+```
 {% endtab %}
 
-{% tab title="Create React App" %}
+{% tab title="React" %}
+```tsx
+import "@rainbow-me/rainbowkit/styles.css";
+import React from "react";
+import {
+  getDefaultConfig,
+  getDefaultWallets,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
+import {
+  argentWallet,
+  ledgerWallet,
+  trustWallet,
+} from "@rainbow-me/rainbowkit/wallets";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WagmiProvider } from "wagmi";
+import { mainnet, sepolia } from "wagmi/chains";
+import {
+  JustWeb3Provider,
+  JustWeb3ProviderConfig,
+  JustWeb3Button,
+} from "@justweb3/widget";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
+export const App: React.FC = () => {
+  const { wallets } = getDefaultWallets();
+
+  const config = getDefaultConfig({
+    appName: "RainbowKit demo",
+    projectId: "YOUR_PROJECT_ID",
+    wallets: [
+      ...wallets,
+      {
+        groupName: "Other",
+        wallets: [argentWallet, trustWallet, ledgerWallet],
+      },
+    ],
+    chains: [mainnet, sepolia],
+    ssr: true,
+  });
+
+  const justweb3Config: JustWeb3ProviderConfig = {
+    config: {
+      origin: "http://localhost:3000/",
+      domain: "localhost",
+      signInTtl: 86400000,
+    },
+    openOnWalletConnect: true,
+    allowedEns: "all",
+    logo: "",
+    ensDomains: [
+      {
+        ensDomain: "YOUR ENS DOMAIN",
+        apiKey: "JUSTANAME API KEY",
+        chainId: 1,
+      },
+    ],
+    color: {
+      primary: "hsl(216, 90%, 58%)",
+      background: "hsl(0, 0%, 100%)",
+      destructive: "hsl(0, 100%, 50%)",
+    },
+  };
+
+  const queryClient = new QueryClient();
+
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
+          <JustWeb3Provider config={justweb3Config}>
+            <JustWeb3Button>
+              <ConnectButton />
+            </JustWeb3Button>
+          </JustWeb3Provider>
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+};
+
+```
 {% endtab %}
 {% endtabs %}
 
+To install the required dependencies, run the following command in your terminal:
 
+{% tabs %}
+{% tab title="npm" %}
+```bash
+npm install wagmi @rainbow-me/rainbowkit @tanstack/react-query
+```
+{% endtab %}
+
+{% tab title="pnpm" %}
+```bash
+pnpm install wagmi @rainbow-me/rainbowkit @tanstack/react-query
+```
+{% endtab %}
+
+{% tab title="yarn" %}
+```bash
+yarn add wagmi @rainbow-me/rainbowkit @tanstack/react-query
+```
+{% endtab %}
+{% endtabs %}
 
 ### 5. You're all set!  🎉
 
