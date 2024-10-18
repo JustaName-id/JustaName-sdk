@@ -189,7 +189,7 @@ Here's the full implementation combining Privy, and JustWeb3:
 ```tsx
 import "@rainbow-me/rainbowkit/styles.css";
 import React from "react";
-import { JustWeb3Provider, JustWeb3ProviderConfig } from "@justweb3/widget";
+import { JustWeb3Provider, JustWeb3ProviderConfig, JustWeb3Button } from "@justweb3/widget";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http } from "wagmi";
 import { mainnet, sepolia } from "wagmi/chains";
@@ -307,7 +307,9 @@ export const App: React.FC = () => {
       <QueryClientProvider client={queryClient}>
         <WagmiProvider config={config}>
           <JustWeb3Provider config={justweb3Config}>
-            <Connect />
+            <JustWeb3Button>
+              <Connect />
+            </JustWeb3Button>  
           </JustWeb3Provider>
         </WagmiProvider>
       </QueryClientProvider>
