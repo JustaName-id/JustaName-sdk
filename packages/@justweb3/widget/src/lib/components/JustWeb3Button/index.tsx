@@ -11,14 +11,18 @@ import {
   LogoutIcon, MappIcon,
   P,
   Popover,
-  PopoverTrigger, SPAN
+  PopoverTrigger, SPAN, ArrowWhiteIcon,
+  LinkCard
 } from '@justweb3/ui';
-import { useEnsAvatar, useCanEnableMApps, useEnabledMApps, useMountedAccount } from '@justaname.id/react';
+import { useEnsAvatar, useCanEnableMApps, useEnabledMApps, useMountedAccount, useRecords } from '@justaname.id/react';
 import { useBalance } from 'wagmi';
 import { formatUnits } from 'viem';
 import { BasePopoverContent } from '../DefaultPopover';
 import { PluginContext } from '../../providers/PluginProvider';
 import { MAppsDialog } from '../../dialogs/MAppsDialog';
+import { getChainIcon } from '../../icons/chain-icons';
+import { getTextRecordIcon } from '../../icons/records-icons';
+import { ProfileDialog } from '../../dialogs';
 
 export interface JustWeb3Buttonrops {
   children: ReactNode;
@@ -28,6 +32,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   children
 }) => {
   const [openMApps, setOpenMApps] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
   const { plugins, mApps } = useContext(JustWeb3Context)
   const { createPluginApi } = useContext(PluginContext)
   const { address } = useMountedAccount()
@@ -38,6 +43,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const { enabledMApps } = useEnabledMApps({
     ens: connectedEns?.ens || "",
   })
+  const { records } = useRecords({ ens: connectedEns?.ens })
   const mAppsToEnable = useMemo(() => {
     if (!mApps || !enabledMApps) {
       return undefined;
@@ -52,10 +58,20 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
     address: connectedEns?.address as `0x${string}`
   });
 
+  const hasTwitterOrX = useMemo(() => {
+    return records?.sanitizedRecords.socials.find((social) => social.key === 'com.twitter' || social.key === 'com.x')
+  }, [records])
+
 
   const handleOpenMAppsDialog = (open: boolean) => {
     if (open !== openMApps) {
       setOpenMApps(open)
+    }
+  }
+
+  const handleOpenProfileDialog = (open: boolean) => {
+    if (open !== openProfile) {
+      setOpenProfile(open)
     }
   }
 
@@ -108,16 +124,19 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
         open={openMApps}
         handleOpenDialog={handleOpenMAppsDialog}
       />
+      <ProfileDialog
+        open={openProfile}
+        handleOpenDialog={handleOpenProfileDialog}
+      />
       <Popover>
         <PopoverTrigger
           style={{
-            maxWidth: '300px',
+            maxWidth: '400px',
             width: '100%'
           }}
         >
           <ClickableItem
             name={connectedEns?.ens}
-
             left={<Avatar
               src={avatar}
               size="28px"
@@ -162,7 +181,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           />
         </PopoverTrigger>
 
-        <BasePopoverContent style={{ minWidth: "400px" }}>
+        <BasePopoverContent style={{ minWidth: "400px", width: "400px" }}>
           <Flex
             direction="column"
             gap={"20px"}
@@ -186,13 +205,13 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
                 </P>
                 <Button
                   variant={'primary'}
-                  rightIcon={<ArrowIcon width={15} fill='white' color='white' />}
+                  rightIcon={<ArrowWhiteIcon width={15} />}
                   style={{
                     fontSize: '10px',
                     padding: "5px 10px",
                     height: "22px"
                   }}
-                  onClick={() => { }}
+                  onClick={() => { handleOpenProfileDialog(true) }}
                 >
                   View Full Profile
                 </Button>
@@ -206,13 +225,18 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
                     bgColor={avatar ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)'}
                     borderColor={avatar ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)'}
                     color="#ffffff"
+                    style={{
+                      outline: "1px solid white",
+                      boxShadow: "0px 0px 5px 0px rgba(0, 0, 0, 0.25)"
+                    }}
                   />
-                  <Flex direction='column' gap='5px'>
+                  <Flex direction='column' gap='5px' justify='flex-start'>
                     <P style={{
                       color: 'black',
                       fontSize: '14px',
                       fontWeight: 700,
-                    }}>{connectedEns.ens}</P>
+                      textAlign: "left"
+                    }}>{records?.sanitizedRecords.display ?? connectedEns.ens}</P>
                     <Badge variant='default' style={{
                       fontSize: "10px",
                       color: "#3280F4",
@@ -220,7 +244,30 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
                     }} withCopy value={connectedEns.ens}>{connectedEns.ens}</Badge>
                   </Flex>
                 </Flex>
-
+                <Flex direction='row' align='center' gap="10px" justify='flex-start'>
+                  <LinkCard
+                    variant='address'
+                    title='Address'
+                    value={connectedEns.address}
+                    icon={getChainIcon('eth')}
+                  />
+                  {!!hasTwitterOrX && (
+                    <LinkCard
+                      variant='social'
+                      title={hasTwitterOrX.key}
+                      value={hasTwitterOrX.value}
+                      icon={getTextRecordIcon(hasTwitterOrX.key)}
+                    />
+                  )}
+                  {!!records?.sanitizedRecords.email && (
+                    <LinkCard
+                      variant='social'
+                      title='Email'
+                      value={records?.sanitizedRecords.email}
+                      icon={getTextRecordIcon('email')}
+                    />
+                  )}
+                </Flex>
               </Flex>
 
             </Flex>
@@ -255,7 +302,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
               {
                 plugins.map((plugin) => {
                   const component = plugin.components?.SignInMenu;
-
                   if (!component) {
                     return null;
                   }

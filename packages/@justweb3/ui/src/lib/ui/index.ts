@@ -4,8 +4,11 @@ export * from './Divider';
 export * from './Input';
 export * from './Badge';
 export * from './Dialog';
+export * from './Dropdown';
 export * from './Text';
 export * from './LoadingSpinner';
 export * from './Carousel';
-export * from './Popover'
-export * from './OTPInput'
+export * from './Popover';
+export * from './Separator';
+export * from './OTPInput';
+export * from './Form';
