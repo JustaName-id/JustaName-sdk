@@ -15,8 +15,7 @@ export type Networks = Network[];
 
 export type NetworksWithProvider = [
   NetworkWithProvider<1>,
-  NetworkWithProvider<11155111>,
-  NetworkWithProvider<31337>
+  NetworkWithProvider<11155111>
 ];
 
 export interface Configuration {

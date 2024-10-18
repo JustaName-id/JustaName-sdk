@@ -42,7 +42,11 @@ import {
 import {
   ConnectButton 
 } from '@rainbow-me/rainbowkit';
-import { JustVerifiedPlugin } from '@justverified/plugin';
+${
+  justVerified
+    ? "import { JustVerifiedPlugin } from '@justverified/plugin';"
+    : ''
+}
         
 export const App: React.FC = () => {
     const { wallets } = getDefaultWallets();
@@ -96,6 +100,8 @@ export const App: React.FC = () => {
       </WagmiProvider>
     );
 };
+
+export default App;
       `,
     [color, config, justVerified]
   );

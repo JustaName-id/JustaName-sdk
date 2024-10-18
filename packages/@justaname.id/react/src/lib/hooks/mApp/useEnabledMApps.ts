@@ -4,15 +4,10 @@ import { useJustaName } from '../../providers';
 import { useRecords } from '../records';
 import { useEffect, useMemo } from 'react';
 
-
 export const buildEnabledMAppsKey = (
   ens: string,
-  chainId: ChainId| undefined,
-) => [
-  'ENABLED_MAPPS',
-  ens,
-  chainId,
-]
+  chainId: ChainId | undefined
+) => ['ENABLED_MAPPS', ens, chainId];
 
 export interface UseEnabledMAppsParams {
   ens: string;
@@ -26,13 +21,18 @@ export interface UseEnabledMAppsResult {
   isMAppEnabledPending: boolean;
 }
 
-export const useEnabledMApps = (params: UseEnabledMAppsParams): UseEnabledMAppsResult => {
-  const { justaname, chainId} = useJustaName();
-  const _chainId = useMemo(() => params.chainId || chainId, [params.chainId, chainId])
+export const useEnabledMApps = (
+  params: UseEnabledMAppsParams
+): UseEnabledMAppsResult => {
+  const { justaname, chainId } = useJustaName();
+  const _chainId = useMemo(
+    () => params.chainId || chainId,
+    [params.chainId, chainId]
+  );
   const { records } = useRecords({
     ens: params.ens,
     chainId: _chainId,
-  })
+  });
 
   const query = useQuery({
     queryKey: buildEnabledMAppsKey(params.ens, _chainId),
@@ -43,19 +43,26 @@ export const useEnabledMApps = (params: UseEnabledMAppsParams): UseEnabledMAppsR
       if (!records.isJAN) {
         return false;
       }
-      const mAppField = records.records.texts.find((text)=>text.key === 'mApps')
+      const mAppField = records.records.texts.find(
+        (text) => text.key === 'mApps'
+      );
       return mAppField ? JSON.parse(mAppField.value).mApps : [];
     },
-    enabled: Boolean(params.ens) && Boolean(justaname) && Boolean(params.ens.length > 0) && Boolean(_chainId) && Boolean(records),
-  })
+    enabled:
+      Boolean(params.ens) &&
+      Boolean(justaname) &&
+      Boolean(params.ens.length > 0) &&
+      Boolean(_chainId) &&
+      Boolean(records),
+  });
 
   useEffect(() => {
-    query.refetch()
-  }, [records])
+    if (records) query.refetch();
+  }, [records]);
 
   return {
     enabledMApps: query.data,
     refetchEnabledMApps: query.refetch,
     isMAppEnabledPending: query.isPending,
-  }
-}
+  };
+};

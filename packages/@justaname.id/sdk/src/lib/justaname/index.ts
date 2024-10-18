@@ -181,11 +181,11 @@ export class JustaName {
         provider: defaultTestnetProvider,
         providerUrl: defaultTestnetProviderUrl,
       },
-      {
-        chainId: 31337 as ChainId,
-        provider: new ethers.JsonRpcProvider('http://localhost:8545'),
-        providerUrl: 'http://localhost:8545',
-      },
+      // {
+      //   chainId: 31337 as ChainId,
+      //   provider: new ethers.JsonRpcProvider('http://localhost:8545'),
+      //   providerUrl: 'http://localhost:8545',
+      // },
     ] as NetworksWithProvider;
 
     const baseNetworksConfig = baseNetworks.map((_network) => {
@@ -207,9 +207,9 @@ export class JustaName {
     const testnetNetwork = baseNetworksConfig.find(
       (n) => n.chainId === 11155111
     ) as NetworkWithProvider<11155111>;
-    const localNetwork = baseNetworksConfig.find(
-      (n) => n.chainId === 31337
-    ) as NetworkWithProvider<31337>;
+    // const localNetwork = baseNetworksConfig.find(
+    //   (n) => n.chainId === 31337
+    // ) as NetworkWithProvider<31337>;
     if (!mainnetNetwork) {
       throw new InvalidConfigurationException('The mainnet network is missing');
     }
@@ -218,7 +218,7 @@ export class JustaName {
       throw new InvalidConfigurationException('The testnet network is missing');
     }
 
-    return [mainnetNetwork, testnetNetwork, localNetwork];
+    return [mainnetNetwork, testnetNetwork];
   }
 
   private static checkConfig(configuration: JustaNameConfigDefaults): void {
@@ -235,9 +235,6 @@ export class JustaName {
       }, [] as ChainId[]);
 
       networks.forEach((network) => {
-        if (network.chainId === 31337) {
-          return;
-        }
         const provider = new ethers.JsonRpcProvider(network.providerUrl);
         provider.getNetwork().then((_network) => {
           if (network.chainId.toString() !== _network.chainId.toString()) {
