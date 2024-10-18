@@ -75,7 +75,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { WagmiProvider } from "wagmi";
-import { JustWeb3Provider, JustWeb3ProviderConfig } from "@justweb3/widget";
+import { JustWeb3Provider, JustWeb3ProviderConfig, JustWeb3Button } from "@justweb3/widget";
 
 import App from "./App.tsx";
 import { config } from "./wagmi.ts";  // Importing Wagmi config
@@ -116,8 +116,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <JustWeb3Provider config={justweb3Config}>
-          <App />
+       <JustWeb3Provider config={justweb3Config}>
+          <JustWeb3Button>
+            <App />
+          </JustWeb3Button>
         </JustWeb3Provider>
       </QueryClientProvider>
     </WagmiProvider>
