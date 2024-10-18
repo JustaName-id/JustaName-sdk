@@ -247,6 +247,8 @@ export interface useJustWeb3 {
   status: 'pending' | 'signedIn' | 'signedOut';
   isLoggedIn: boolean;
   isEnsAuthPending: boolean;
+  isEnsAuthLoading: boolean;
+  isEnsAuthFetching: boolean;
   refreshEnsAuth: () => void;
   connectedEns: UseEnsAuthReturn['connectedEns'];
   updateRecords: (
@@ -260,8 +262,14 @@ export const useJustWeb3 = (): useJustWeb3 => {
   const justanameContext = useContext(JustaNameContext);
   const { signIn, isSignInPending } = useEnsSignIn();
   const { signOut, isSignOutPending } = useEnsSignOut();
-  const { connectedEns, isLoggedIn, isEnsAuthPending, refreshEnsAuth } =
-    useEnsAuth();
+  const {
+    connectedEns,
+    isLoggedIn,
+    isEnsAuthPending,
+    isEnsAuthLoading,
+    isEnsAuthFetching,
+    refreshEnsAuth,
+  } = useEnsAuth();
   const { handleUpdateRecords } = context;
   const handleUpdateRecordsInternal = async (
     records: Omit<UseSubnameUpdateFunctionParams, 'ens'> & {
@@ -288,14 +296,14 @@ export const useJustWeb3 = (): useJustWeb3 => {
     if (isSignOutPending) {
       return 'pending';
     }
-    if (isEnsAuthPending) {
+    if (isEnsAuthLoading) {
       return 'pending';
     }
     if (connectedEns) {
       return 'signedIn';
     }
     return 'signedOut';
-  }, [isSignInPending, isSignOutPending, isEnsAuthPending, connectedEns]);
+  }, [isSignInPending, isSignOutPending, isEnsAuthLoading, connectedEns]);
 
   if (context === undefined) {
     throw new Error('useJustWeb3 must be used within a JustWeb3Provider');
@@ -310,6 +318,8 @@ export const useJustWeb3 = (): useJustWeb3 => {
     updateRecords: handleUpdateRecordsInternal,
     isSignInOpen: context.isSignInOpen,
     isEnsAuthPending,
+    isEnsAuthFetching,
+    isEnsAuthLoading,
     signIn,
     signOut,
     isLoggedIn,

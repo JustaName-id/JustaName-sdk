@@ -1,17 +1,11 @@
 import { FC, Fragment, useContext, useEffect, useState } from 'react';
 import {
   JustaNameDialog,
-  JustaNameLoadingDialog,
   JustWeb3Context,
   useJustWeb3,
   useMApps,
 } from '@justweb3/widget';
-import {
-  useEnsAuth,
-  useEnsSignIn,
-  useEnsSignOut,
-  useRecords,
-} from '@justaname.id/react';
+import { useRecords } from '@justaname.id/react';
 import { Badge, Flex, H2, JustaNameLogoIcon, SPAN } from '@justweb3/ui';
 import { SelectCredentialItem } from '../../components/SelectCredentialItem';
 import {
@@ -44,35 +38,18 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
   chainId,
 }) => {
   const {
-    config: { logo },
+    config: { logo, disableOverlay },
   } = useContext(JustWeb3Context);
   const [selectedCredential, setSelectedCredential] = useState<
     Credentials | undefined
-  >(undefined);
+  >();
   const previousSelectedCredential = usePreviousState(selectedCredential, [
     selectedCredential,
   ]);
   const { connectedEns, updateRecords } = useJustWeb3();
-  const { mAppsAlreadyEnabled, canEnableMApps } = useMApps();
+  const { mAppsAlreadyEnabled } = useMApps();
   const { refetchRecords } = useRecords({
     ens: connectedEns?.ens || '',
-  });
-  const [hasAttemptedSignIn, setHasAttemptedSignIn] = useState(false);
-  const { connectedEns: connectedToVerification, isEnsAuthPending } =
-    useEnsAuth({
-      backendUrl: verificationBackendUrl,
-      currentEnsRoute: '/auth/current',
-    });
-  const { signIn, isSignInPending } = useEnsSignIn({
-    statement: 'I want to verify my identity with JustVerified',
-    backendUrl: verificationBackendUrl,
-    signinNonceRoute: '/auth/nonce',
-    signinRoute: '/auth/signin',
-  });
-
-  const { signOut, isSignOutPending } = useEnsSignOut({
-    backendUrl: verificationBackendUrl,
-    signoutRoute: '/auth/signout',
   });
 
   const { verifiedRecords, refetchVerifyRecords, isVerifiedRecordsPending } =
@@ -80,7 +57,7 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
       credentials,
       ens: connectedEns?.ens || '',
       verificationBackendUrl,
-      mApp: mApp,
+      mApp,
       chainId,
     });
 
@@ -100,102 +77,18 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
     }
   }, [selectedCredential, previousSelectedCredential]);
 
-  useEffect(() => {
-    if (
-      isSignInPending ||
-      isEnsAuthPending ||
-      isSignOutPending ||
-      !open ||
-      hasAttemptedSignIn
-    ) {
-      return;
-    }
-
-    if (connectedEns) {
-      if (!connectedToVerification) {
-        setHasAttemptedSignIn(true);
-        signIn({
-          ens: connectedEns.ens,
-        }).finally(() => {
-          setHasAttemptedSignIn(false);
-        });
-      }
-
-      if (
-        connectedToVerification &&
-        connectedEns.ens !== connectedToVerification.ens
-      ) {
-        signOut()
-          .then(() => {
-            setHasAttemptedSignIn(true);
-            signIn({
-              ens: connectedEns.ens,
-            }).finally(() => {
-              setHasAttemptedSignIn(false);
-            });
-          })
-          .catch(() => {
-            setHasAttemptedSignIn(false);
-          });
-      }
-    }
-
-    if (!connectedEns && connectedToVerification) {
-      signOut();
-    }
-  }, [
-    connectedEns,
-    connectedToVerification,
-    open,
-    isSignInPending,
-    isEnsAuthPending,
-    isSignOutPending,
-    hasAttemptedSignIn,
-  ]);
-
-  useEffect(() => {
-    if (
-      !connectedToVerification &&
-      !isSignInPending &&
-      !isEnsAuthPending &&
-      !isSignOutPending
-    ) {
-      handleOpenDialog(false);
-      setHasAttemptedSignIn(false);
-    }
-  }, [
-    connectedToVerification,
-    isSignInPending,
-    isEnsAuthPending,
-    isSignOutPending,
-  ]);
-
-  useEffect(() => {
-    if (!open) {
+  const handleOpenDialogInternal = (_open: boolean) => {
+    if (!_open) {
       setSelectedCredential(undefined);
     }
-  }, [open]);
-
-  if (
-    (!verifiedRecords ||
-      !connectedToVerification ||
-      isSignInPending ||
-      isEnsAuthPending ||
-      isSignOutPending ||
-      (canEnableMApps && mAppsAlreadyEnabled === undefined)) &&
-    open &&
-    connectedEns
-  ) {
-    return <JustaNameLoadingDialog open={true} />;
-  }
-  if (!connectedEns) {
-    return null;
-  }
+    handleOpenDialog(_open);
+  };
 
   return (
     <JustaNameDialog
       open={open}
-      handleClose={() => handleOpenDialog(false)}
+      handleClose={() => handleOpenDialogInternal(false)}
+      disableOverlay={disableOverlay}
       header={
         <div
           style={{
@@ -238,7 +131,7 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                   fontWeight: 900,
                 }}
               >
-                {connectedToVerification?.ens}
+                {connectedEns?.ens}
               </SPAN>
             </Badge>
           </Flex>
@@ -265,13 +158,11 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                       selectedCredential={selectedCredential}
                       credential={credential}
                       onClick={() => {
+                        setSelectedCredential(credential);
                         verifySocial({
                           credential: credential as Credentials,
                         })
                           .then((value) => {
-                            if (!value) {
-                              return;
-                            }
                             const credentialKey = value.dataKey;
                             const credentialValue = value.verifiableCredential;
                             const socialKey = credentialKey.split(
@@ -307,7 +198,6 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                                 socialValue = '';
                               }
                             }
-
                             if (mAppsAlreadyEnabled?.includes(mApp)) {
                               updateRecords({
                                 text: [
@@ -353,7 +243,17 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                 );
               })}
 
-            {credentials.includes('email') && (
+            {credentials.includes('email') && verifiedRecords?.email ? (
+              <SelectCredentialItem
+                credential={'email'}
+                selectedCredential={selectedCredential}
+                onClick={() => {
+                  setSelectedCredential('email');
+                }}
+                credentialValue={verifiedRecords?.email}
+                disabled={isVerifiedRecordsPending}
+              />
+            ) : (
               <EmailCredentialItem
                 mApp={mApp}
                 mAppsAlreadyEnabled={mAppsAlreadyEnabled}

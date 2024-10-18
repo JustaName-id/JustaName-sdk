@@ -106,7 +106,8 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     backendUrl:
       claimableTestnetEns === testnetFreeEns
         ? dev
-          ? 'https://claim-staging.justaname.id'
+          ? // ? 'http://localhost:3333'
+            'https://claim-staging.justaname.id'
           : 'https://claim.justaname.id'
         : undefined,
     chainId: 11155111,
@@ -120,7 +121,8 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     backendUrl:
       claimableMainnetEns === mainnetFreeEns
         ? dev
-          ? 'https://claim-staging.justaname.id'
+          ? // ? 'http://localhost:3333'
+            'https://claim-staging.justaname.id'
           : 'https://claim.justaname.id'
         : undefined,
     chainId: 1,

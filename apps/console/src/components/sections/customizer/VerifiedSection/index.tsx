@@ -45,8 +45,8 @@ export const VerifiedSection = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
   const { justVerified, setJustVerified } = useConsole();
 
-  useEffect(() => {
-    if (justVerified) {
+  const handleJustVerifiedConfig = (enabled: boolean) => {
+    if (enabled) {
       handleJustWeb3Config({
         ...config,
         plugins: [
@@ -55,6 +55,7 @@ export const VerifiedSection = () => {
           ),
           JustVerifiedPlugin(
             justVerified,
+            // 'http://localhost:3009/verifications/v1'
             config.dev
               ? 'https://api-staging.justaname.id/verifications/v1'
               : 'https://api.justaname.id/verifications/v1'
@@ -69,6 +70,10 @@ export const VerifiedSection = () => {
         ),
       });
     }
+  };
+
+  useEffect(() => {
+    handleJustVerifiedConfig(true);
   }, [justVerified]);
 
   return (
@@ -82,7 +87,7 @@ export const VerifiedSection = () => {
             !!config?.plugins?.find((plugin) => plugin.name === 'justverified')
           }
           onCheckedChange={(checked) => {
-            setJustVerified(checked ? [] : undefined);
+            handleJustVerifiedConfig(checked);
           }}
         />
       </div>
@@ -90,7 +95,9 @@ export const VerifiedSection = () => {
         {socials.map((social) => (
           <SocialCard
             {...social}
-            disabled={!justVerified}
+            disabled={
+              !config?.plugins?.find((plugin) => plugin.name === 'justverified')
+            }
             key={social.credential}
             value={social.credential}
             checked={

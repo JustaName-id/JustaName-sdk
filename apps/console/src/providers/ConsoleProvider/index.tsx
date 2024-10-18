@@ -2,11 +2,12 @@ import { Credentials } from '@justverified/plugin';
 import { createContext, FC, ReactNode, useContext, useState } from 'react';
 
 export interface ConsoleContext {
-  justVerified: Credentials[] | undefined;
-  setJustVerified: (justverified: Credentials[] | undefined) => void;
+  justVerified: Credentials[];
+  setJustVerified: (justverified: Credentials[]) => void;
 }
+
 export const ConsoleContext = createContext<ConsoleContext>({
-  justVerified: undefined,
+  justVerified: [],
   setJustVerified: () => {},
 });
 
@@ -14,9 +15,13 @@ export interface ConsoleProviderProps {
   children: ReactNode;
 }
 export const ConsoleProvider: FC<ConsoleProviderProps> = ({ children }) => {
-  const [justVerified, setJustVerified] = useState<Credentials[] | undefined>(
-    undefined
-  );
+  const [justVerified, setJustVerified] = useState<Credentials[]>([
+    'twitter',
+    'telegram',
+    'github',
+    'discord',
+    'email',
+  ]);
   return (
     <ConsoleContext.Provider
       value={{

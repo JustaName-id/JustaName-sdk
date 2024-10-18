@@ -46,7 +46,7 @@ export const EmailDialog: FC<EmailDialogProps> = ({
   verificationBackendUrl,
 }) => {
   const {
-    config: { logo },
+    config: { logo, disableOverlay },
   } = useContext(JustWeb3Context);
   const [otp, setOtp] = useState('');
   const { connectedEns: connectedToVerification } = useEnsAuth({
@@ -114,6 +114,7 @@ export const EmailDialog: FC<EmailDialogProps> = ({
   return (
     <JustaNameDialog
       open={open}
+      disableOverlay={disableOverlay}
       handleClose={() => handleInternalOpenDialog(false)}
       header={
         <div
@@ -243,8 +244,11 @@ export const EmailDialog: FC<EmailDialogProps> = ({
                   state,
                   otp,
                 }).then((res) => {
+                  console.log('res', res);
                   const key = 'email';
                   const vc = res.verifiableCredential;
+                  console.log('vc', vc);
+                  console.log('credentialSubject', vc.credentialSubject);
                   const value = vc.credentialSubject.email;
                   if (mAppsAlreadyEnabled?.includes(mApp)) {
                     updateRecords({

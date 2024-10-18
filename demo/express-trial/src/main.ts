@@ -107,7 +107,7 @@ app.get('/api/current', function (req, res) {
     .send({ ens: req.session.siwj?.ens, address: req.session.siwj?.address });
 });
 
-app.get('/api/signout', function (req, res) {
+app.post('/api/signout', function (req, res) {
   req.session.siwj = null;
   req.session.nonce = null;
   req.session.save(() => res.status(200).send(true));

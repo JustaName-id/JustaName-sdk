@@ -1,10 +1,10 @@
 import { SupportedCoins } from '../../utils';
 
-export type ChainId = 1 | 11155111 | 31337;
+export type ChainId = 1 | 11155111;
 
 export type PartialAddressJson = Partial<{
-  [key in SupportedCoins]: string
-}>
+  [key in SupportedCoins]: string;
+}>;
 
 export interface AddressWithTypedCoins {
   address: string;

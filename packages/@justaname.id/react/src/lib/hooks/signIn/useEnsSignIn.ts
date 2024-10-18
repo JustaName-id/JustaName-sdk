@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useMemo } from 'react';
 import { useMountedAccount } from '../account';
@@ -8,31 +8,63 @@ import { useSignMessage } from 'wagmi';
 import { RequestSignInParams } from '@justaname.id/sdk';
 import { useEnsAuth } from './useEnsAuth';
 
-export type UseEnsSignInFunctionParams = Omit<RequestSignInParams, "nonce" |"address">
+export type UseEnsSignInFunctionParams = Omit<
+  RequestSignInParams,
+  'nonce' | 'address'
+>;
 
-export interface UseEnsSignInParams extends Omit<UseEnsSignInFunctionParams, "ens"> {
+export interface UseEnsSignInParams
+  extends Omit<UseEnsSignInFunctionParams, 'ens'> {
   backendUrl?: string;
   signinNonceRoute?: string;
   signinRoute?: string;
+  currentEnsRoute?: string;
 }
 
 export interface UseEnsSignInResult {
-  signIn:  UseMutateAsyncFunction<string, Error, UseEnsSignInFunctionParams, unknown>,
+  signIn: UseMutateAsyncFunction<
+    string,
+    Error,
+    UseEnsSignInFunctionParams,
+    unknown
+  >;
   isSignInPending: boolean;
 }
 
-export const useEnsSignIn = (params?: UseEnsSignInParams): UseEnsSignInResult => {
-  const { justaname, backendUrl, config, routes, chainId} = useJustaName();
+export const useEnsSignIn = (
+  params?: UseEnsSignInParams
+): UseEnsSignInResult => {
+  const { justaname, backendUrl, config, routes, chainId } = useJustaName();
   const { address } = useMountedAccount();
-  const { signMessageAsync } = useSignMessage()
-  const _backendUrl = useMemo(() => params?.backendUrl || backendUrl || "", [backendUrl, params?.backendUrl]);
-  const _signinNonceRoute = useMemo(() => params?.signinNonceRoute || routes.signinNonceRoute, [routes.signinNonceRoute, params?.signinNonceRoute]);
-  const _signinRoute = useMemo(() => params?.signinRoute || routes.signinRoute, [routes.signinRoute, params?.signinRoute]);
-  const nonceEndpoint = useMemo(() => _backendUrl + _signinNonceRoute, [_backendUrl, _signinNonceRoute]);
-  const signinEndpoint = useMemo(() => _backendUrl + _signinRoute, [_backendUrl, _signinRoute]);
+  const { signMessageAsync } = useSignMessage();
+  const _backendUrl = useMemo(
+    () => params?.backendUrl || backendUrl || '',
+    [backendUrl, params?.backendUrl]
+  );
+  const _signinNonceRoute = useMemo(
+    () => params?.signinNonceRoute || routes.signinNonceRoute,
+    [routes.signinNonceRoute, params?.signinNonceRoute]
+  );
+  const _signinRoute = useMemo(
+    () => params?.signinRoute || routes.signinRoute,
+    [routes.signinRoute, params?.signinRoute]
+  );
+  const nonceEndpoint = useMemo(
+    () => _backendUrl + _signinNonceRoute,
+    [_backendUrl, _signinNonceRoute]
+  );
+  const signinEndpoint = useMemo(
+    () => _backendUrl + _signinRoute,
+    [_backendUrl, _signinRoute]
+  );
+  const _currentEnsRoute = useMemo(
+    () => params?.currentEnsRoute || routes.currentEnsRoute,
+    [routes.currentEnsRoute, params?.currentEnsRoute]
+  );
   const { refreshEnsAuth } = useEnsAuth({
-    backendUrl: _backendUrl
-  })
+    backendUrl: _backendUrl,
+    currentEnsRoute: _currentEnsRoute,
+  });
 
   const mutation = useMutation({
     mutationFn: async (_params: UseEnsSignInFunctionParams) => {
@@ -54,16 +86,14 @@ export const useEnsSignIn = (params?: UseEnsSignInParams): UseEnsSignInResult =>
         chainId: chainId,
         address,
         nonce,
-      })
+      });
 
       const signature = await signMessageAsync({
         message: message,
-        account: address
-      })
+        account: address,
+      });
 
-      const response = await fetch(
-        signinEndpoint,
-        {
+      const response = await fetch(signinEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,10 +102,10 @@ export const useEnsSignIn = (params?: UseEnsSignInParams): UseEnsSignInResult =>
           signature: signature,
           message: message,
         }),
-        credentials: 'include'
+        credentials: 'include',
       });
 
-      refreshEnsAuth()
+      refreshEnsAuth();
 
       return response.text();
     },
@@ -83,6 +113,6 @@ export const useEnsSignIn = (params?: UseEnsSignInParams): UseEnsSignInResult =>
 
   return {
     signIn: mutation.mutateAsync,
-    isSignInPending: mutation.isPending
-  }
-}
+    isSignInPending: mutation.isPending,
+  };
+};
