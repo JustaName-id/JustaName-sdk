@@ -42,6 +42,16 @@ export const Providers: React.FC<ProviderProps> = (props) => {
       domain: process.env.NEXT_PUBLIC_DOMAIN as string,
       signInTtl: 1000 * 60 * 60 * 24,
     },
+    networks: [
+      {
+        chainId: 1,
+        providerUrl: process.env.NEXT_PUBLIC_MAINNET_PROVIDER_URL as string,
+      },
+      {
+        chainId: 11155111,
+        providerUrl: process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER_URL as string,
+      },
+    ],
     openOnWalletConnect: true,
     allowedEns: 'all',
     disableOverlay: true,
