@@ -18,7 +18,7 @@
 ## Plugins
 
 * [Overview](plugins/overview.md)
-* [Page 1](plugins/page-1.md)
+* [JustVerified](plugins/justverified.md)
 
 ## Wallet Providers
 
