@@ -159,6 +159,8 @@ export default function Providers({children}: {children: React.ReactNode}) {
     </WagmiProvider>
   );
 };
+
+export default App;
 ```
 {% endtab %}
 

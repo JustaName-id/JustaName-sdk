@@ -125,7 +125,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </WagmiProvider>
   </React.StrictMode>
 );
-
 ```
 
 ## Running Your App

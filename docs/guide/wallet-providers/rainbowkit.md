@@ -126,6 +126,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   );
 }
 
+export default App;
 ```
 
 ## Additional Wallet Configuration

@@ -36,7 +36,7 @@ In your main file (e.g., `App.tsx` or `Providers.tsx`), import the necessary com
 ```tsx
 import "@rainbow-me/rainbowkit/styles.css";
 import React from "react";
-import { JustWeb3Provider, JustWeb3ProviderConfig } from "@justweb3/widget";
+import { JustWeb3Provider, JustWeb3ProviderConfig, JustWeb3Button } from "@justweb3/widget";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http } from "wagmi";
 import { mainnet, sepolia } from "wagmi/chains";
@@ -101,7 +101,7 @@ For additional configuration settings, please refer to the [Privy Documentation]
 
 ### Using Privy for Authentication
 
-The `Connect` component handles the authentication flow using Privy. It displays login and logout buttons, and if the user is authenticated, it shows the user object and ENS information.
+The `Connect` component handles the authentication flow using Privy. It displays a login button, and if the user is authenticated, it shows the user object and ENS information.
 
 ```tsx
 const Connect = () => {
@@ -115,29 +115,7 @@ const Connect = () => {
   return (
     <div className="App">
       <header className="App-header">
-        {ready && authenticated ? (
-          <div>
-            <textarea
-              readOnly
-              value={JSON.stringify(user, null, 2)}
-              style={{ width: "600px", height: "250px", borderRadius: "6px" }}
-            />
-            <br />
-            <button
-              onClick={logout}
-              style={{
-                marginTop: "20px",
-                padding: "12px",
-                backgroundColor: "#069478",
-                color: "#FFF",
-                border: "none",
-                borderRadius: "6px",
-              }}
-            >
-              Log Out
-            </button>
-          </div>
-        ) : (
+         <JustWeb3Button>
           <button
             onClick={login}
             style={{
@@ -150,6 +128,7 @@ const Connect = () => {
           >
             Log In
           </button>
+         </JustWeb3Button>
         )}
         {connectedEns && (
           <div>
@@ -232,29 +211,7 @@ const Connect = () => {
       <header className="App-header">
         {/* If the user is not authenticated, show a login button */}
         {/* If the user is authenticated, show the user object and a logout button */}
-        {ready && authenticated ? (
-          <div>
-            <textarea
-              readOnly
-              value={JSON.stringify(user, null, 2)}
-              style={{ width: "600px", height: "250px", borderRadius: "6px" }}
-            />
-            <br />
-            <button
-              onClick={logout}
-              style={{
-                marginTop: "20px",
-                padding: "12px",
-                backgroundColor: "#069478",
-                color: "#FFF",
-                border: "none",
-                borderRadius: "6px",
-              }}
-            >
-              Log Out
-            </button>
-          </div>
-        ) : (
+          <JustWeb3Button>
           <button
             onClick={login}
             style={{
@@ -267,7 +224,7 @@ const Connect = () => {
           >
             Log In
           </button>
-        )}
+          </JustWeb3Button>
         {connectedEns && (
           <div>
             <textarea
@@ -307,15 +264,15 @@ export const App: React.FC = () => {
       <QueryClientProvider client={queryClient}>
         <WagmiProvider config={config}>
           <JustWeb3Provider config={justweb3Config}>
-            <JustWeb3Button>
-              <Connect />
-            </JustWeb3Button>  
+           <Connect />
           </JustWeb3Provider>
         </WagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>
   );
 };
+
+export default App;
 ```
 
 
