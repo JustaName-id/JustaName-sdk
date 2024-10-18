@@ -25,7 +25,6 @@
 * [RainbowKit](wallet-providers/rainbowkit.md)
 * [Privy](wallet-providers/privy.md)
 * [Coinbase Smart Wallet](wallet-providers/coinbase-smart-wallet.md)
-* [Web3Auth](wallet-providers/web3auth.md)
 * [UseCapsule](wallet-providers/usecapsule.md)
 
 ## Use Cases
