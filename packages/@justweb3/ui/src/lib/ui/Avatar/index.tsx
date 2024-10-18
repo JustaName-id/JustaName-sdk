@@ -48,24 +48,26 @@ interface AvatarProps {
   loading?: boolean;
   color?: string;
   fontSize?: string;
+  style?: React.CSSProperties;
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
-                                         src,
-                                         alt,
-                                         initial,
-                                         size,
-                                         bgColor,
-                                                borderColor,
-                                                color,
-                                         fontSize
-                                       }) => {
+  src,
+  alt,
+  initial,
+  size,
+  bgColor,
+  borderColor,
+  color,
+  fontSize,
+  style
+}) => {
   return (
     <AvatarWrapper $size={size} $bgColor={bgColor} $borderColor={borderColor}>
       {
         src ? (
-        <AvatarImage src={src} alt={alt || 'Avatar'} />
-      ) : <JustSomeone width={28} />
+          <AvatarImage src={src} alt={alt || 'Avatar'} style={style} />
+        ) : <JustSomeone width={28} />
       }
     </AvatarWrapper>
   );
