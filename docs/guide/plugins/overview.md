@@ -1,6 +1,12 @@
+---
+description: >-
+  The JustWeb3 Widget offers a flexible plugin system that allows developers to
+  extend the widget’s functionality with custom features.
+---
+
 # Overview
 
-The JustWeb3 Widget offers a flexible plugin system that allows developers to extend the widget’s functionality with custom features. Plugins can handle a variety of tasks such as enhancing user authentication, integrating social verification (e.g., JustVerified), or interacting with decentralized applications (dApps). This section introduces the plugin system and how developers can create their own plugins by implementing the provided [interfaces](https://github.com/JustaName-id/JustaName-sdk/blob/main/packages/%40justweb3/widget/src/lib/plugins/index.ts).
+Plugins can handle a variety of tasks such as enhancing user authentication, integrating social verification (e.g., JustVerified), or interacting with decentralized applications (dApps). This section introduces the plugin system and how developers can create their own plugins by implementing the provided [interfaces](https://github.com/JustaName-id/JustaName-sdk/blob/main/packages/%40justweb3/widget/src/lib/plugins/index.ts).
 
 ## Overview of the Plugin System
 
