@@ -21,11 +21,11 @@ export interface MetadataFieldProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: UseFormReturn<any>;
   fieldName:
-    | `addresses.${number}.address`
-    | `generals.${number}.value`
-    | `contentHash.${number}.decoded`
-    | `socials.${number}.value`
-    | `otherTexts.${number}.value`;
+  | `addresses.${number}.address`
+  | `generals.${number}.value`
+  | `contentHash.${number}.decoded`
+  | `socials.${number}.value`
+  | `otherTexts.${number}.value`;
 }
 
 export const MetadataField: React.FC<MetadataFieldProps> = ({
@@ -53,13 +53,13 @@ export const MetadataField: React.FC<MetadataFieldProps> = ({
   return (
     <Flex
       direction="column"
-      gap="4px"
+      gap="5px"
       style={{
         width: '100%',
       }}
     >
       <FormLabel htmlFor={fieldName}>{label}</FormLabel>
-      <Flex direction="row" gap="10px" align="flex-start">
+      <Flex direction="row" gap="5px" align="flex-start">
         <FormField
           control={form.control}
           name={fieldName}
@@ -74,6 +74,10 @@ export const MetadataField: React.FC<MetadataFieldProps> = ({
                       style: { width: '20px', height: '20px' },
                     })
                   }
+                  style={{
+                    borderRadius: '10px',
+                    height: "22px"
+                  }}
                   {...field}
                   disabled={disabled || field.disabled}
                 />
@@ -84,8 +88,8 @@ export const MetadataField: React.FC<MetadataFieldProps> = ({
         />
         {onDelete && (
           <TrashIcon
-            height={24}
-            width={24}
+            height={20}
+            width={20}
             fill="red"
             style={{
               cursor: 'pointer',

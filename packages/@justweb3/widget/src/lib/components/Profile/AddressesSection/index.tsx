@@ -138,8 +138,8 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                   address.coin === '60'
                     ? undefined
                     : () => {
-                        remove(index);
-                      }
+                      remove(index);
+                    }
                 }
               />
             );
@@ -153,7 +153,8 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
             onChange={(e) => setAddress(e.target.value)}
             value={address}
             style={{
-              paddingRight: '100px',
+              // paddingRight: '50px',
+              height: '22px'
             }}
             right={
               <DropdownMenu
@@ -168,32 +169,33 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                     gap="4px"
                     align="center"
                     style={{
-                      backgroundColor: 'white',
+                      backgroundColor: '#E5E5E5',
+                      padding: "5px 10px",
+                      borderRadius: "100px"
                     }}
                   >
                     {selectedCoin ? (
                       <Flex direction="row" gap="10px" align="center">
-                        {getChainIcon(selectedCoinDetails.symbol)}
+                        {getChainIcon(selectedCoinDetails.symbol, 15)}
                         <P
                           style={{
-                            fontSize: '12px',
+                            fontSize: '10px',
                             fontWeight: 700,
                             color: 'var(--justweb3-primary-color)',
                             transform: 'capitalize',
                           }}
                         >
-                          {`${selectedCoinDetails.symbol.split('Legacy')[0]} ${
-                            selectedCoinDetails.symbol.includes('Legacy')
-                              ? 'Legacy'
-                              : ''
-                          }`}
+                          {`${selectedCoinDetails.symbol.split('Legacy')[0]} ${selectedCoinDetails.symbol.includes('Legacy')
+                            ? 'Legacy'
+                            : ''
+                            }`}
                         </P>
                       </Flex>
                     ) : (
                       <P
                         style={{
-                          fontSize: '12px',
-                          fontWeight: 700,
+                          fontSize: '10px',
+                          fontWeight: 900,
                           color: 'var(--justweb3-primary-color)',
                         }}
                       >
@@ -202,7 +204,8 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                     )}
                     {filteredSuggestedCoins.length > 0 && (
                       <ChevronDown
-                        size={24}
+                        size={15}
+                        color='var(--justweb3-primary-color)'
                         style={{
                           transition: 'all 0.3s',
                           transform: chainDropdownOpen
@@ -219,10 +222,14 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                     padding: '10px',
                     gap: '10px',
                     overflowY: 'scroll',
+                    pointerEvents: "auto",
                     maxHeight: '300px',
                     display: 'flex',
+                    width: '100px',
                     flexDirection: 'column',
+                    zIndex: 100000,
                   }}
+                  className='justweb3scrollbar'
                 >
                   {filteredSuggestedCoins?.map((coin) => {
                     const coinDetails = getCoinTypeDetails(
@@ -243,8 +250,8 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                         }}
                         key={coin}
                       >
-                        {selectedCoin === coin && <CheckIcon size={24} />}
-                        {getChainIcon(coinDetails.symbol)}
+                        {selectedCoin === coin && <CheckIcon size={15} />}
+                        {getChainIcon(coinDetails.symbol, 15)}
                         <P
                           style={{
                             fontSize: '12px',
@@ -254,11 +261,10 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                             textAlign: 'center',
                           }}
                         >
-                          {`${coinDetails.symbol.split('Legacy')[0]} ${
-                            coinDetails.symbol.includes('Legacy')
-                              ? 'Legacy'
-                              : ''
-                          }`}
+                          {`${coinDetails.symbol.split('Legacy')[0]} ${coinDetails.symbol.includes('Legacy')
+                            ? 'Legacy'
+                            : ''
+                            }`}
                         </P>
                       </ChainCard>
                     );
@@ -281,7 +287,6 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
             disabled={!selectedCoin || !debouncedAddress}
             style={{
               width: 'fit-content',
-              border: '1px solid #000000',
             }}
           >
             Add Address

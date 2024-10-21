@@ -55,6 +55,7 @@ interface AvatarProps {
   color?: string;
   fontSize?: string;
   style?: React.CSSProperties;
+  containerStyle?: React.CSSProperties;
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
@@ -68,6 +69,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   color,
   fontSize,
   style,
+  containerStyle,
 }) => {
   return (
     <AvatarWrapper
@@ -75,6 +77,7 @@ export const Avatar: React.FC<AvatarProps> = ({
       $bgColor={bgColor}
       $border={border}
       $borderColor={borderColor}
+      style={containerStyle}
     >
       {src ? (
         <AvatarImage src={src} alt={alt || 'Avatar'} style={style} />

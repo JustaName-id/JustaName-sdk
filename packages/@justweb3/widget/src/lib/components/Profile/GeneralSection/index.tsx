@@ -101,8 +101,8 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
             style={{
               overflow: 'hidden',
               position: 'relative',
-              width: 'fit-content',
-              marginTop: '-60px',
+              width: '100%',
+              marginTop: '-40px',
             }}
           >
             <AvatarEditorDialog
@@ -121,10 +121,11 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
         <Flex direction="column" gap="20px">
           <Flex
             direction="column"
-            gap="20px"
+            gap="15px"
             style={{
               overflowY: 'auto',
             }}
+            className={'justweb3scrollbar'}
           >
             {form
               .getValues('generals')

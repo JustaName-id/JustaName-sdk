@@ -1,14 +1,12 @@
 // import { useAllNFTSForCurrentAddress } from '@query/api/nft';
+import { AddIcon, Avatar, Button, Flex, MinusIcon, P, PenIcon } from '@justweb3/ui';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
 import React from 'react';
-import { Popover } from 'react-tiny-popover';
-import { DefaultDialog } from '../DefaultDialog';
-import { Button, P, Flex, Avatar } from '@justweb3/ui';
 import styled from 'styled-components';
-import { MinusIcon, AddIcon, PenIcon } from '@justweb3/ui';
-import { ResponsiveDiv } from '../BannerSelectorDialog';
 import { useUploadToCdn } from '../../query/api';
+import { ResponsiveDiv } from '../BannerSelectorDialog';
+import { DefaultDialog } from '../DefaultDialog';
 
 export interface AvatarEditorDialogProps {
   onImageChange: (image: string) => void;
@@ -114,7 +112,6 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
 }) => {
   const [isEditorOpen, setIsEditorOpen] = React.useState(false);
   // const [isNFTDialogOpen, setIsNFTDialogOpen] = React.useState(false);
-  const [isPopupOpen, setIsPopupOpen] = React.useState(false);
   const [imageSrc, setImageSrc] = React.useState('');
   const imageElement = React.useRef<HTMLImageElement>(null);
   const cropper = React.useRef<Cropper>();
@@ -141,7 +138,6 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
       reader.onload = (e) => {
         setImageSrc(e.target?.result as string);
         setIsEditorOpen(true);
-        setIsPopupOpen(false);
       };
       reader.readAsDataURL(event.target.files[0]);
     }
@@ -266,7 +262,42 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
           </Flex >
         </DefaultDialog>
       } */}
-      <DefaultDialog open={isEditorOpen} onOpenChange={(open: boolean) => {
+      <Flex direction='row' justify='center' align="center" style={{
+        width: "100%",
+        flex: "1",
+      }} onClick={handleButtonClick}>
+        <input
+          type="file"
+          accept="image/jpeg, image/png, image/heic, image/heif, image/gif, image/avif"
+          onChange={handleImageChange}
+          style={{ display: 'none' }}
+          ref={fileInputRef}
+        />
+        <Avatar
+          src={avatar || "/justsomeone.webp"}
+          size='75px'
+          containerStyle={{
+            border: '4px solid white',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: '0px 20px',
+            display: 'flex',
+            flexDirection: 'column',
+            placeContent: 'center',
+            justifyContent: 'center',
+            alignItems: 'center',
+            cursor: 'pointer'
+          }}
+        >
+          <PenIcon height={24} width={24} style={{
+            cursor: 'pointer'
+          }} />
+        </div>
+      </Flex>
+      <DefaultDialog withoutFooter open={isEditorOpen} onOpenChange={(open: boolean) => {
         setIsEditorOpen(open);
       }}
         header={
@@ -280,82 +311,6 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
           </P>
         }
       >
-        <Popover
-          isOpen={isPopupOpen}
-          positions={['right']}
-          reposition={false}
-          containerStyle={{
-            zIndex: "100",
-          }}
-          onClickOutside={() => setIsPopupOpen(false)}
-          padding={10}
-          content={(props) =>
-            <Flex
-              direction='column'
-              gap="10px"
-              style={{
-                padding: '10px',
-                border: '1px solid black',
-                minHeight: 'min-content',
-                pointerEvents: 'auto'
-              }}
-            >
-
-              <Flex direction='column' gap="10px">
-                {/* {!!address &&
-                  <Button type="button" variant="primary"
-                    onClick={handleNFTDialog}
-                  >
-                    Select NFT
-                  </Button>
-                } */}
-                <input
-                  type="file"
-                  accept="image/jpeg, image/png, image/heic, image/heif, image/gif, image/avif"
-                  onChange={handleImageChange}
-                  style={{ display: 'none' }}
-                  ref={fileInputRef}
-                />
-                <Button
-                  type="button"
-                  variant="primary"
-                  onClick={handleButtonClick}
-                >Upload Image
-                </Button>
-              </Flex>
-            </Flex>
-          }
-        >
-          <div onClick={() => setIsPopupOpen(true)}>
-
-            <Avatar
-              src={avatar || "/justsomeone.webp"}
-              style={{
-                width: '114px',
-                height: '114px',
-                margin: '0px 5px'
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                inset: '0px 20px',
-                display: 'flex',
-                flexDirection: 'column',
-                placeContent: 'center',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: '#8714e347',
-                cursor: 'pointer'
-              }}
-
-            >
-              <PenIcon height={24} width={24} style={{
-                cursor: 'pointer'
-              }} />
-            </div>
-          </div>
-        </Popover>
         <ResponsiveDiv>
           <ImageWrapper>
             <img

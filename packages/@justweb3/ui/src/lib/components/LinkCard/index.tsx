@@ -106,6 +106,8 @@ export const LinkCard: React.FC<LinkCardProps> = ({
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
+    lineHeight: '120%',
+    margin: "0px",
     fontFamily: 'var(--justweb3-font-family)',
     ...textExtraStyle,
   };
@@ -123,8 +125,8 @@ export const LinkCard: React.FC<LinkCardProps> = ({
     href:
       variant === 'social'
         ? socialLinks
-            .find((social) => social.identifier === title)
-            ?.link(value) || ''
+          .find((social) => social.identifier === title)
+          ?.link(value) || ''
         : value,
     target: '_blank',
     rel: 'noopener noreferrer',
@@ -136,7 +138,8 @@ export const LinkCard: React.FC<LinkCardProps> = ({
       width: 'fit-content',
       textDecoration: 'underline',
       textUnderlineOffset: '3px',
-      lineHeight: '15px',
+      lineHeight: '100%',
+      margin: '0px'
     },
   };
 
@@ -182,7 +185,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
           )}
 
           {variant === 'other' && value && (
-            <p style={textStyle}>{formatText(value)}</p>
+            <P style={textStyle}>{formatText(value)}</P>
           )}
 
           {variant === 'contentHash' && (

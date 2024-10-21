@@ -71,7 +71,7 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
             return (
               <Flex
                 direction="column"
-                gap="10px"
+                gap="5px"
                 style={{
                   cursor: 'pointer',
                   width: '100%',
@@ -79,7 +79,7 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
                 }}
                 key={other.key + index}
               >
-                <Flex direction="row" gap="10px" align="center">
+                <Flex direction="row" gap="5px" align="center">
                   <FormField
                     control={form.control}
                     name={`otherTexts.${index}.key`}
@@ -90,7 +90,9 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
                         }}
                       >
                         <FormControl>
-                          <Input placeholder={'Key'} {...field} />
+                          <Input placeholder={'Key'} {...field} style={{
+                            height: "22px"
+                          }} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -106,7 +108,9 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
                         }}
                       >
                         <FormControl>
-                          <Input placeholder={'Value'} {...field} />
+                          <Input placeholder={'Value'} {...field} style={{
+                            height: "22px"
+                          }} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -138,23 +142,29 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
             Add Another Field
           </P>
 
-          <Flex direction="row" gap="10px" align="center">
+          <Flex direction="row" gap="5px" align="center">
             <Input
               placeholder={'Key'}
               onChange={(e) => setCustomKey(e.target.value)}
               value={customKey}
+              style={{
+                height: "22px"
+              }}
             />
 
             <Input
               placeholder={'Value'}
               onChange={(e) => setCustomValue(e.target.value)}
               value={customValue}
+              style={{
+                height: "22px"
+              }}
             />
           </Flex>
 
           <Button
             variant="secondary"
-            leftIcon={<AddIcon height={24} width={24} />}
+            leftIcon={<AddIcon height={20} width={20} />}
             onClick={() => {
               append({
                 key: customKey,
@@ -165,10 +175,10 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
             }}
             disabled={customKey === '' || customValue === ''}
             style={{
-              width: 'fit-content',
+              width: '100%',
             }}
           >
-            Add Field
+            Add Custom Field
           </Button>
         </Flex>
       </Flex>
