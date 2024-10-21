@@ -1,6 +1,6 @@
 {
   "name": "create-justaname-app",
-  "version": "0.3.87",
+  "version": "0.3.88",
   "type": "module",
   "bin": "index.esm.js",
   "dependencies": {
