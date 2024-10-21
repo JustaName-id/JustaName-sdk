@@ -39,7 +39,6 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
   const { records } = useRecords({
     ens: fullSubname,
   });
-  const { avatar, banner } = records?.sanitizedRecords!;
   const { connectedEns } = useJustWeb3();
 
   const handleAvatarChange = (newImageUrl: string) => {
@@ -91,7 +90,7 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
             onImageChange={handleBannerChange}
             banner={
               tempBanner ||
-              banner ||
+              records?.sanitizedRecords?.banner ||
               'https://justaname-bucket.s3.eu-central-1.amazonaws.com/default-banner.png'
             }
             subname={fullSubname}
@@ -108,7 +107,12 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
           >
             <AvatarEditorDialog
               onImageChange={handleAvatarChange}
-              avatar={tempAvatar || avatar || '/sample/justsomeone.webp'}
+              avatar={
+                tempAvatar ||
+                // TODO: useAvatar instead of reading records
+                records?.sanitizedRecords?.avatar ||
+                '/sample/justsomeone.webp'
+              }
               subname={fullSubname}
               address={(connectedEns?.address ?? '0x00') as `0x${string}`}
             />
