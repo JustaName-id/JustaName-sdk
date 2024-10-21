@@ -11,6 +11,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
   loading?: boolean;
   rightIcon?: React.ReactNode;
+  leftIcon?: React.ReactNode;
 }
 
 interface StyledButtonProps {
@@ -119,16 +120,17 @@ const SpinnerWrapper = styled.div`
 `;
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
-                                                                   className,
-                                                                   variant = 'primary',
-                                                                   size = 'sm',
-                                                                   asChild = false,
-                                                                   loading = false,
-                                                                   children,
-                                                                   disabled = false,
-                                                                   rightIcon,
-                                                                   ...props
-                                                                 }, ref) => {
+  className,
+  variant = 'primary',
+  size = 'sm',
+  asChild = false,
+  loading = false,
+  children,
+  disabled = false,
+  rightIcon,
+  leftIcon,
+  ...props
+}, ref) => {
 
   return (
     <StyledButton
@@ -142,10 +144,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
     >
       <ButtonContent $loading={loading}>
         {
+          (leftIcon && !loading) && leftIcon
+        }
+        {
           children
         }
         {
-          (rightIcon && !loading ) && rightIcon
+          (rightIcon && !loading) && rightIcon
         }
       </ButtonContent>
       {loading && (
@@ -153,11 +158,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
           <LoadingSpinner
             color={variant === 'primary' ?
               'var(--justweb3-foreground-color-4)' :
-                variant === "destructive-outline" ?
-                  'var(--justweb3-destructive-color)' :
-                    variant === "destructive" ?
-                      'var(--justweb3-foreground-color-4)' :
-                        'var(--justweb3-primary-color)'}
+              variant === "destructive-outline" ?
+                'var(--justweb3-destructive-color)' :
+                variant === "destructive" ?
+                  'var(--justweb3-foreground-color-4)' :
+                  'var(--justweb3-primary-color)'}
           />
         </SpinnerWrapper>
       )}

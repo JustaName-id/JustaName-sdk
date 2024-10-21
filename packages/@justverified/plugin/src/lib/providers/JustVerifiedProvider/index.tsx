@@ -1,9 +1,21 @@
-import { createContext, FC, ReactNode, useContext, useMemo } from 'react';
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import { JustVerifiedDialog } from '../../dialogs/JustVerifiedDialog';
-import { CredentialMetadataKeyStandard, Credentials } from '../../types';
-import { useRecords } from '@justaname.id/react';
+import { Credentials } from '../../types';
+import { useEnsAuth, useEnsSignIn, useEnsSignOut } from '@justaname.id/react';
 import { ChainId } from '@justaname.id/sdk';
-import { useJustWeb3 } from '@justweb3/widget';
+import {
+  JustaNameLoadingDialog,
+  JustWeb3Context,
+  useJustWeb3,
+} from '@justweb3/widget';
 
 interface JustVerifiedContextProps {
   handleOpenVerificationDialog: (open: boolean) => void;
@@ -13,81 +25,176 @@ interface JustVerifiedContextProps {
 }
 
 const JustVerifiedContext = createContext<JustVerifiedContextProps>({
-  handleOpenVerificationDialog: () => { },
+  handleOpenVerificationDialog: () => {},
   openVerificationDialog: false,
   credentials: [],
-  verificationBackendUrl: undefined
+  verificationBackendUrl: undefined,
 });
 
 interface JustVerifiedProviderProps {
   children: ReactNode;
   handleOpenVerificationDialog: (open: boolean) => void;
   openVerificationDialog: boolean;
-  credentials: Credentials[],
+  credentials: Credentials[];
   verificationBackendUrl: string;
   mApp: string;
   chainId: ChainId;
 }
 
 export const JustVerifiedProvider: FC<JustVerifiedProviderProps> = ({
-                                                               children,
-                                                               handleOpenVerificationDialog,
-                                                               openVerificationDialog,
-                                                               credentials,
-                                                               verificationBackendUrl,
+  children,
+  handleOpenVerificationDialog,
+  openVerificationDialog,
+  credentials,
+  verificationBackendUrl,
   mApp,
-  chainId
-}) =>
-{
-  return (
-    <JustVerifiedContext.Provider value={{
-      handleOpenVerificationDialog,
-      openVerificationDialog,
-      credentials,
-      verificationBackendUrl
-    }}>
-      {children}
-      <JustVerifiedDialog
-        open={openVerificationDialog}
-        handleOpenDialog={handleOpenVerificationDialog}
-        credentials={credentials}
-        verificationBackendUrl={verificationBackendUrl}
-        mApp={mApp}
-        chainId={chainId}
-      />
-    </JustVerifiedContext.Provider>
-  )
+  chainId,
+}) => {
+  const { connectedEns, isEnsAuthLoading: isBaseEnsAuthLoading } =
+    useJustWeb3();
+  const signInInProgressRef = useRef(false);
 
-}
-export interface UseJustVerifiedProps {
-  mApp: string;
-}
+  const { connectedEns: connectedToVerification, isEnsAuthLoading } =
+    useEnsAuth({
+      backendUrl: verificationBackendUrl,
+      currentEnsRoute: '/auth/current',
+    });
 
+  const { signIn, isSignInPending } = useEnsSignIn({
+    statement: 'I want to verify my identity with JustVerified',
+    backendUrl: verificationBackendUrl,
+    signinNonceRoute: '/auth/nonce',
+    signinRoute: '/auth/signin',
+    currentEnsRoute: '/auth/current',
+  });
 
-export const useJustVerified = ({
-  mApp='justverified.eth'
-                                }: UseJustVerifiedProps) => {
-  const context = useContext(JustVerifiedContext);
-  const { connectedEns} = useJustWeb3();
-  const { records } = useRecords({
-    ens: connectedEns?.ens
-  })
-  const { credentials } = context;
-  const credentialKeys = useMemo(() => {
-    return credentials.map(credential => CredentialMetadataKeyStandard[credential] + mApp);
-  }, [credentials, mApp]);
+  const { signOut, isSignOutPending } = useEnsSignOut({
+    backendUrl: verificationBackendUrl,
+    signoutRoute: '/auth/signout',
+    currentEnsRoute: '/auth/current',
+  });
 
-  const credentialRecords = useMemo(() => {
-    return records?.records?.texts.filter(text => credentialKeys.includes(text.key));
-  }, [records?.records?.texts, credentialKeys]);
+  const {
+    config: { disableOverlay },
+  } = useContext(JustWeb3Context);
 
-  if (!context) {
-    throw new Error('useJustVerified must be used within a JustVerifiedProvider');
-  }
-  return {
-    ...context,
-    configuredCredentials: credentials.filter(credential => credentialRecords?.find(record => record.key === CredentialMetadataKeyStandard[credential] + '_justverified.eth')),
-    missingCredentials: credentials.filter(credential => !credentialRecords?.find(record => record.key === CredentialMetadataKeyStandard[credential] + '_justverified.eth')),
-    verifiableCredentialRecords: credentialRecords
+  const handleOpenDialogInternal = (_open: boolean) => {
+    if (openVerificationDialog !== _open) {
+      handleOpenVerificationDialog(_open);
+    }
   };
-}
+
+  useEffect(() => {
+    const previousSigninInProgress = !!signInInProgressRef.current;
+    if (!isSignInPending) {
+      signInInProgressRef.current = false;
+    }
+    if (
+      isBaseEnsAuthLoading ||
+      !connectedEns ||
+      isEnsAuthLoading ||
+      isSignInPending ||
+      isSignOutPending ||
+      connectedToVerification ||
+      previousSigninInProgress ||
+      !openVerificationDialog
+    ) {
+      return;
+    }
+
+    signInInProgressRef.current = true;
+
+    signIn({
+      ens: connectedEns.ens,
+    })
+      .then(() => {
+        signInInProgressRef.current = false;
+      })
+      .catch(() => {
+        handleOpenDialogInternal(false);
+      });
+  }, [
+    connectedEns,
+    connectedToVerification,
+    isBaseEnsAuthLoading,
+    isEnsAuthLoading,
+    isSignInPending,
+    isSignOutPending,
+    openVerificationDialog,
+  ]);
+
+  useEffect(() => {
+    if (
+      isEnsAuthLoading ||
+      isSignInPending ||
+      isSignOutPending ||
+      isBaseEnsAuthLoading ||
+      !openVerificationDialog
+    ) {
+      return;
+    }
+
+    if (!connectedEns && connectedToVerification) {
+      signOut();
+    }
+
+    if (connectedEns && connectedToVerification) {
+      if (connectedEns.ens !== connectedToVerification.ens) {
+        signOut();
+      }
+    }
+  }, [
+    connectedEns,
+    connectedToVerification,
+    isBaseEnsAuthLoading,
+    isEnsAuthLoading,
+    isSignInPending,
+    isSignOutPending,
+    openVerificationDialog,
+  ]);
+
+  const loading = useMemo(() => {
+    return (
+      !connectedToVerification ||
+      isSignInPending ||
+      isEnsAuthLoading ||
+      isSignOutPending ||
+      isBaseEnsAuthLoading
+    );
+  }, [
+    connectedToVerification,
+    isSignInPending,
+    isEnsAuthLoading,
+    isSignOutPending,
+    isBaseEnsAuthLoading,
+  ]);
+
+  // useEffect(() => {
+  //   signInInProgressRef.current = false;
+  // }, [openVerificationDialog]);
+
+  return (
+    <JustVerifiedContext.Provider
+      value={{
+        handleOpenVerificationDialog,
+        openVerificationDialog,
+        credentials,
+        verificationBackendUrl,
+      }}
+    >
+      {children}
+      {loading && openVerificationDialog && connectedEns ? (
+        <JustaNameLoadingDialog disableOverlay={disableOverlay} open={true} />
+      ) : (
+        <JustVerifiedDialog
+          open={openVerificationDialog}
+          handleOpenDialog={handleOpenDialogInternal}
+          credentials={credentials}
+          verificationBackendUrl={verificationBackendUrl}
+          mApp={mApp}
+          chainId={chainId}
+        />
+      )}
+    </JustVerifiedContext.Provider>
+  );
+};

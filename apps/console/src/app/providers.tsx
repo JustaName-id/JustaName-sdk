@@ -15,7 +15,6 @@ import React from 'react';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
-import { ConsoleProvider } from '../providers/ConsoleProvider';
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -43,6 +42,16 @@ export const Providers: React.FC<ProviderProps> = (props) => {
       domain: process.env.NEXT_PUBLIC_DOMAIN as string,
       signInTtl: 1000 * 60 * 60 * 24,
     },
+    networks: [
+      {
+        chainId: 1,
+        providerUrl: process.env.NEXT_PUBLIC_MAINNET_PROVIDER_URL as string,
+      },
+      {
+        chainId: 11155111,
+        providerUrl: process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER_URL as string,
+      },
+    ],
     openOnWalletConnect: true,
     allowedEns: 'all',
     disableOverlay: true,
@@ -52,14 +61,12 @@ export const Providers: React.FC<ProviderProps> = (props) => {
   const queryClient = new QueryClient();
 
   return (
-    <ConsoleProvider>
-      <WagmiProvider config={config}>
-        <QueryClientProvider client={queryClient}>
-          <JustWeb3Provider config={justweb3Config}>
-            <RainbowKitProvider>{props.children}</RainbowKitProvider>
-          </JustWeb3Provider>
-        </QueryClientProvider>
-      </WagmiProvider>
-    </ConsoleProvider>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <JustWeb3Provider config={justweb3Config}>
+          <RainbowKitProvider>{props.children}</RainbowKitProvider>
+        </JustWeb3Provider>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 };

@@ -11,9 +11,10 @@ export function getBaseUrl(dev = false) {
 /**
  * The instance of axios with the base URL of JustaName API.
  */
-export const justANameInstance = (dev= false) => axios.create({
-  baseURL: getBaseUrl(dev),
-});
+export const justANameInstance = (dev = false) =>
+  axios.create({
+    baseURL: getBaseUrl(dev),
+  });
 
 /**
  * Represents the Controlled Axios Promise type.
@@ -40,9 +41,11 @@ export const controlledAxiosPromise = <T extends NonNullable<unknown>>(
       return res.data.result.data as T;
     })
     .catch((err: AxiosError<BaseResponse<null>>) => {
-      if (err.response) {
-        if (err.response.data.result !== null) {
-          throw new Error(err.response.data.result.error);
+      if (err?.response) {
+        if (err?.response?.data?.result) {
+          if (err?.response?.data?.result?.error) {
+            throw new Error(err.response.data.result.error);
+          }
         }
       }
       throw err;

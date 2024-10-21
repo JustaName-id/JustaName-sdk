@@ -93,7 +93,8 @@ export class Subnames {
               },
               ...(sanitizedAddresses === undefined ? [] : sanitizedAddresses),
             ],
-        ...rest,},
+        ...rest,
+      },
 
       headers,
       this.dev
@@ -206,8 +207,7 @@ export class Subnames {
       },
       {
         ...headers,
-      }
-    ,
+      },
       this.dev
     )(
       ['username', 'ensDomain', 'chainId'],
@@ -271,8 +271,7 @@ export class Subnames {
       },
       {
         ...headers,
-      }
-    ,
+      },
       this.dev
     )(
       ['username', 'ensDomain', 'chainId'],
@@ -329,7 +328,7 @@ export class Subnames {
       {
         chainId: _chainId,
         isClaimed: isClaimed,
-        coinType: coinType || 60,
+        coinType: coinType,
         ...rest,
       },
       undefined,

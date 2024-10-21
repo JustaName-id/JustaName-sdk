@@ -63,50 +63,97 @@
       },
       "dependsOn": ["lint"]
     },
-    "transform:logo": {
+    "transform:logo-linux": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "packages/@justweb3/ui",
-        "command": "rm -rf src/lib/icons/components/logo && mkdir src/lib/icons/components/logo && npx @svgr/cli --out-dir src/lib/icons/components/logo --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/logo "
+        "command": "rm -rf src/lib/icons/components/logo && mkdir src/lib/icons/components/logo && npx @svgr/cli --out-dir src/lib/icons/components/logo --config-file .svgrrc.js --index-template=src/template/linux/index-template.js  -- src/lib/icons/svgs/logo "
       }
     },
-    "transform:chains": {
+    "transform:chains-linux": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "packages/@justweb3/ui",
-        "command": "rm -rf src/lib/icons/components/chains && mkdir src/lib/icons/components/chains && npx @svgr/cli --out-dir src/lib/icons/components/chains --config-file .svgrrc.js --index-template=src/template/index-chain-template.js  -- src/lib/icons/svgs/chains "
+        "command": "rm -rf src/lib/icons/components/chains && mkdir src/lib/icons/components/chains && npx @svgr/cli --out-dir src/lib/icons/components/chains --config-file .svgrrc.js --index-template=src/template/linux/index-chain-template.js  -- src/lib/icons/svgs/chains "
       }
     },
-    "transform:general": {
+    "transform:general-linux": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "packages/@justweb3/ui",
-        "command": "rm -rf src/lib/icons/components/general && mkdir src/lib/icons/components/general && npx @svgr/cli --out-dir src/lib/icons/components/general --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/general "
+        "command": "rm -rf src/lib/icons/components/general && mkdir src/lib/icons/components/general && npx @svgr/cli --out-dir src/lib/icons/components/general --config-file .svgrrc.js --index-template=src/template/linux/index-template.js  -- src/lib/icons/svgs/general "
       }
     },
-    "transform:socials": {
+    "transform:socials-linux": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "packages/@justweb3/ui",
-        "command": "rm -rf src/lib/icons/components/socials && mkdir src/lib/icons/components/socials && npx @svgr/cli --out-dir src/lib/icons/components/socials --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/socials "
+        "command": "rm -rf src/lib/icons/components/socials && mkdir src/lib/icons/components/socials && npx @svgr/cli --out-dir src/lib/icons/components/socials --config-file .svgrrc.js --index-template=src/template/linux/index-template.js  -- src/lib/icons/svgs/socials "
       }
     },
-    "transform:contentHash": {
+    "transform:contentHash-linux": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "packages/@justweb3/ui",
-        "command": "rm -rf src/lib/icons/components/contentHash && mkdir src/lib/icons/components/contentHash && npx @svgr/cli --out-dir src/lib/icons/components/contentHash --config-file .svgrrc.js --index-template=src/template/index-template.js  -- src/lib/icons/svgs/contentHash "
+        "command": "rm -rf src/lib/icons/components/contentHash && mkdir src/lib/icons/components/contentHash && npx @svgr/cli --out-dir src/lib/icons/components/contentHash --config-file .svgrrc.js --index-template=src/template/linux/index-template.js  -- src/lib/icons/svgs/contentHash "
       }
     },
-    "transform:all": {
+    "transform:all-linux": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "nx run @justweb3/ui:transform:chains",
-          "nx run @justweb3/ui:transform:general",
-          "nx run @justweb3/ui:transform:socials",
-          "nx run @justweb3/ui:transform:contentHash",
-          "nx run @justweb3/ui:transform:logo"
+          "nx run @justweb3/ui:transform:chains-linux",
+          "nx run @justweb3/ui:transform:general-linux",
+          "nx run @justweb3/ui:transform:socials-linux",
+          "nx run @justweb3/ui:transform:contentHash-linux",
+          "nx run @justweb3/ui:transform:logo-linux"
+        ]
+      }
+    },
+    "transform:logo-windows": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justweb3/ui",
+        "command": "if exist src\\lib\\icons\\components\\logo (rmdir /s /q src\\lib\\icons\\components\\logo) && mkdir src\\lib\\icons\\components\\logo && npx @svgr/cli --out-dir src/lib/icons/components/logo --config-file .svgrrc.js --index-template=src/template/windows/index-template.js  -- src/lib/icons/svgs/logo "
+      }
+    },
+    "transform:chains-windows": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justweb3/ui",
+        "command": "if exist src\\lib\\icons\\components\\chains (rmdir /s /q src\\lib\\icons\\components\\chains) && mkdir src\\lib\\icons\\components\\chains && npx @svgr/cli --out-dir src/lib/icons/components/chains --config-file .svgrrc.js --index-template=src/template/windows/index-chain-template.js  -- src/lib/icons/svgs/chains "
+      }
+    },
+    "transform:general-windows": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justweb3/ui",
+        "command": "if exist src\\lib\\icons\\components\\general (rmdir /s /q src\\lib\\icons\\components\\general) && mkdir src\\lib\\icons\\components\\general && npx @svgr/cli --out-dir src/lib/icons/components/general --config-file .svgrrc.js --index-template=src/template/windows/index-template.js  -- src/lib/icons/svgs/general "
+      }
+    },
+    "transform:socials-windows": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justweb3/ui",
+        "command": "if exist src\\lib\\icons\\components\\socials (rmdir /s /q src\\lib\\icons\\components\\socials) && mkdir src\\lib\\icons\\components\\socials && npx @svgr/cli --out-dir src/lib/icons/components/socials --config-file .svgrrc.js --index-template=src/template/windows/index-template.js  -- src/lib/icons/svgs/socials "
+      }
+    },
+    "transform:contentHash-windows": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/@justweb3/ui",
+        "command": "if exist src\\lib\\icons\\components\\contentHash (rmdir /s /q src\\lib\\icons\\components\\contentHash) && mkdir src\\lib\\icons\\components\\contentHash && npx @svgr/cli --out-dir src/lib/icons/components/contentHash --config-file .svgrrc.js --index-template=src/template/windows/index-template.js  -- src/lib/icons/svgs/contentHash "
+      }
+    },
+    "transform:all-windows": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run @justweb3/ui:transform:chains-windows",
+          "nx run @justweb3/ui:transform:general-windows",
+          "nx run @justweb3/ui:transform:socials-windows",
+          "nx run @justweb3/ui:transform:contentHash-windows",
+          "nx run @justweb3/ui:transform:logo-windows"
         ]
       }
     },
