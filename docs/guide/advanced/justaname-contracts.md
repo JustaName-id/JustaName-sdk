@@ -1,2 +1,0 @@
-# JustaName Contracts
-
