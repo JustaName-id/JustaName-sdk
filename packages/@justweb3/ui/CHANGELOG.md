@@ -1,3 +1,15 @@
+## 0.0.39 (2024-10-21)
+
+
+### 🩹 Fixes
+
+- design ([7fe1219](https://github.com/JustaName-id/JustaName-sdk/commit/7fe1219))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.38 (2024-10-21)
 
 

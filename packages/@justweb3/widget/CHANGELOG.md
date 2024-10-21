@@ -1,3 +1,22 @@
+## 0.0.39 (2024-10-21)
+
+
+### 🩹 Fixes
+
+- design ([7fe1219](https://github.com/JustaName-id/JustaName-sdk/commit/7fe1219))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.100
+- Updated @justaname.id/react to 0.3.103
+- Updated @justweb3/ui to 0.0.39
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.38 (2024-10-21)
 
 
