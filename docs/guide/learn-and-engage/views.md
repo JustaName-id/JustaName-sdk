@@ -1,5 +1,7 @@
 # Views
 
+The Admin Dashboard provides a clear and detailed view of all subnames issued under your ENS domain, offering key information such as addresses, claim dates, resolution counts, social handles, and verifications.
+
 ## Viewing Subname Data on the Dashboard
 
 When an admin navigates to the **Admin Dashboard**, they will have access to a comprehensive view of all subnames issued under the ENS domains they've configured. This default view provides key insights about each subname and its associated metadata.
