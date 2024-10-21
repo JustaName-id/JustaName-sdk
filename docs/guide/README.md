@@ -1,51 +1,41 @@
----
-description: >-
-  This documentation contains everything you need to start building using
-  JustaName.
----
-
 # 👋 Overview
 
-{% hint style="info" %}
-**GitBook tip:** your product docs aren't just a reference of all your features! use them to encourage folks to perform certain actions and discover the value in your product.
-{% endhint %}
+Welcome to the JustaName documentation. This guide covers everything you need to know about integrating and using both the **JustWeb3 Widget** and the **Admin Dashboard** to manage your ENS subnames and engage with your community. The documentation is organized into the following sections:
 
-## Overview
+**Quickstart**: A fast and easy setup guide to help you integrate the JustWeb3 Widget and get started with issuing ENS subnames on your platform.
 
-Here are a couple of example overviews from products with really great docs:
+{% content-ref url="quickstart.md" %}
+[quickstart.md](quickstart.md)
+{% endcontent-ref %}
 
-> Loom is a video messaging tool that helps you get your message across through instantly shareable videos.
->
-> With Loom, you can record your camera, microphone, and desktop simultaneously. Your video is then instantly available to share through Loom's patented technology.
->
-> — From the [Loom Docs](https://support.loom.com/hc/en-us/articles/360002158057-What-is-Loom-)
-
-> The Mailchimp Marketing API provides programmatic access to Mailchimp data and functionality, allowing developers to build custom features to do things like sync email activity and campaign analytics with their database, manage audiences and campaigns, and more.
->
-> — From the [Mailchimp Marketing API docs](https://mailchimp.com/developer/marketing/docs/fundamentals/)
-
-## Quick links
+**Configuration**: Learn how to customize the widget’s appearance, configure ENS subname issuance, manage social verifications, and set up network settings.
 
 {% content-ref url="broken-reference" %}
 [Broken link](broken-reference)
 {% endcontent-ref %}
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
-
-## Get Started
-
-We've put together some helpful guides for you to get setup with our product quickly and easily.
+**Learn & Engage**: Explore the Admin Dashboard, where you can monitor and manage subname data, filter user information, and gain insights to engage with your community more effectively.
 
 {% content-ref url="broken-reference" %}
 [Broken link](broken-reference)
 {% endcontent-ref %}
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+**Plugins**: Discover how to extend the platform’s capabilities using plugins. Learn how to create, configure, and enable plugins to enhance both the widget and dashboard functionality.
 
 {% content-ref url="broken-reference" %}
 [Broken link](broken-reference)
 {% endcontent-ref %}
+
+**Wallet Providers**: Understand how to configure various wallet providers with the widget, including RainbowKit, Privy, and Coinbase Smart Wallet.
+
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
+{% endcontent-ref %}
+
+**Use Cases**: Explore practical examples of how JustaName can be utilized across different industries and platforms, highlighting the platform's flexibility in decentralized applications.
+
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
+{% endcontent-ref %}
+
+This documentation will guide you through every aspect of the JustaName platform, empowering you to leverage the widget and dashboard to optimize your platform’s user experience and engagement.
