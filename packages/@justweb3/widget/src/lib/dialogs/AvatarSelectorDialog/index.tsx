@@ -188,10 +188,10 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
     fileInputRef.current?.click();
   };
 
-  const handleNFTDialog = () => {
-    // setIsNFTDialogOpen(true);
-    setIsPopupOpen(false);
-  };
+  // const handleNFTDialog = () => {
+  //   setIsNFTDialogOpen(true);
+  //   setIsPopupOpen(false);
+  // };
 
 
   return (
