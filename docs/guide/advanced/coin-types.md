@@ -1,6 +1,6 @@
 # Coin Types
 
-This markdown page provides a comprehensive explanation on how to understand and use coin types, particularly within EVM (Ethereum Virtual Machine) compatible chains. We will reference formal specifications such as [**SLIP-0044**](https://github.com/satoshilabs/slips/blob/master/slip-0044.md) for non-EVM coins and **ENSIP-11** for EVM compatible chains.
+This section provides a comprehensive explanation on how to understand and use coin types, particularly within EVM (Ethereum Virtual Machine) compatible chains. We will reference formal specifications such as [**SLIP-0044**](https://github.com/satoshilabs/slips/blob/master/slip-0044.md) for non-EVM coins and **ENSIP-11** for EVM compatible chains.
 
 ## Introduction to Coin Types
 

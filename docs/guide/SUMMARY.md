@@ -16,12 +16,17 @@
 * [Overview](learn-and-engage/overview.md)
 * [Views](learn-and-engage/views.md)
 * [Filters](learn-and-engage/filters.md)
-* [Engage](learn-and-engage/engage.md)
 
 ## Plugins
 
 * [Overview](plugins/overview.md)
 * [JustVerified](plugins/justverified.md)
+
+## Advanced
+
+* [Server Configuration](advanced/server-configuration.md)
+* [JustaName Deployment Addresses](advanced/justaname-deployment-addresses.md)
+* [Coin Types](advanced/coin-types.md)
 
 ## Wallet Providers
 
@@ -30,12 +35,6 @@
 * [Privy](wallet-providers/privy.md)
 * [Coinbase Smart Wallet](wallet-providers/coinbase-smart-wallet.md)
 * [UseCapsule](wallet-providers/usecapsule.md)
-
-## Advanced
-
-* [Server Configuration](advanced/server-configuration.md)
-* [Coin Types](advanced/coin-types.md)
-* [JustaName Deployment Addresses](advanced/justaname-deployment-addresses.md)
 
 ## Use Cases
 
