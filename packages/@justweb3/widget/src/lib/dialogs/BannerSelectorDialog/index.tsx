@@ -2,11 +2,13 @@
 import { AddIcon, Button, Flex, MinusIcon, P, PenIcon } from '@justweb3/ui';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useUploadToCdn } from '../../query/api';
 import { SliderInput } from '../AvatarSelectorDialog';
 import { DefaultDialog } from '../DefaultDialog';
+import { useUploadMedia } from '@justaname.id/react';
+import { JustWeb3Context } from '../../providers';
+import { Loading } from '../../components';
 
 export interface BannerEditorDialogProps {
     onImageChange: (image: string) => void;
@@ -44,7 +46,13 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
     const imageElement = React.useRef<HTMLImageElement>(null);
     const cropper = React.useRef<Cropper>();
     const fileInputRef = React.useRef<HTMLInputElement>(null);
-    const { mutateAsync: uploadAvatar } = useUploadToCdn(subname, "Banner");
+    const { config } = useContext(JustWeb3Context);
+
+    const { isUploadPending, uploadMedia } = useUploadMedia({
+        subname,
+        type: "Banner",
+        isDev: config.dev ?? true
+    });
     const handleImageLoaded = () => {
         if (imageElement.current) {
             cropper.current = new Cropper(imageElement.current, {
@@ -92,11 +100,11 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
                 const formData = new FormData();
                 formData.append('file', blob);
                 try {
-                    const response = await uploadAvatar({ form: formData, type: "banner" });
-                    if (!response.response) {
-                        throw new Error(`Error: ${response.response}`);
+                    const response = await uploadMedia({ form: formData });
+                    if (!response.data) {
+                        throw new Error(`Error: ${response.data}`);
                     }
-                    onImageChange(response.response as string);
+                    onImageChange(response.data.url);
                     if (fileInputRef.current) {
                         fileInputRef.current.value = '';
                     }
@@ -200,14 +208,18 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
                         {/* </div> */}
                     </Flex>
                 </ResponsiveDiv>
-                <Flex direction='row' gap='5px'>
-                    <Button type="button" variant="secondary" onClick={() => {
-                        if (fileInputRef.current) {
-                            fileInputRef.current.value = '';
-                        }
-                    }} style={{ flexGrow: '0.5' }}>Cancel</Button>
-                    <Button type="button" onClick={handleSave} variant="primary" style={{ flexGrow: '0.5' }}>Upload</Button>
-                </Flex >
+                {isUploadPending ?
+                    <Loading />
+                    :
+                    <Flex direction='row' gap='5px'>
+                        <Button type="button" variant="secondary" onClick={() => {
+                            if (fileInputRef.current) {
+                                fileInputRef.current.value = '';
+                            }
+                        }} style={{ flexGrow: '0.5' }}>Cancel</Button>
+                        <Button type="button" onClick={handleSave} variant="primary" style={{ flexGrow: '0.5' }}>Upload</Button>
+                    </Flex >
+                }
             </DefaultDialog >
         </>
     );

@@ -2,11 +2,13 @@
 import { AddIcon, Avatar, Button, Flex, MinusIcon, P, PenIcon } from '@justweb3/ui';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useUploadToCdn } from '../../query/api';
 import { ResponsiveDiv } from '../BannerSelectorDialog';
 import { DefaultDialog } from '../DefaultDialog';
+import { useUploadMedia } from '@justaname.id/react';
+import { JustWeb3Context } from '../../providers';
+import { Loading } from '../../components';
 
 export interface AvatarEditorDialogProps {
   onImageChange: (image: string) => void;
@@ -113,11 +115,16 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
   const [isEditorOpen, setIsEditorOpen] = React.useState(false);
   // const [isNFTDialogOpen, setIsNFTDialogOpen] = React.useState(false);
   const [imageSrc, setImageSrc] = React.useState('');
+  const { config } = useContext(JustWeb3Context);
   const imageElement = React.useRef<HTMLImageElement>(null);
   const cropper = React.useRef<Cropper>();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   // const { nfts } = useAllNFTSForCurrentAddress();
-  const { mutateAsync: uploadAvatar } = useUploadToCdn(subname, "Avatar");
+  const { uploadMedia, isUploadPending } = useUploadMedia({
+    subname,
+    isDev: config.dev ?? true,
+    type: "Avatar"
+  });
   // const [selectedNFT, setSelectedNFT] = React.useState<number>(-1);
   const handleImageLoaded = () => {
     if (imageElement.current) {
@@ -167,11 +174,11 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
         formData.append('file', blob);
 
         try {
-          const response = await uploadAvatar({ form: formData, type: "avatar" });
-          if (!response.response) {
+          const response = await uploadMedia({ form: formData });
+          if (!response.data) {
             throw new Error(`Error: ${response}`);
           }
-          onImageChange(response.response as string);
+          onImageChange(response.data.url);
           setIsEditorOpen(false);
         } catch (error) {
           console.error('Upload error', error);
@@ -348,10 +355,14 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
             {/* </div> */}
           </Flex>
         </ResponsiveDiv>
-        <Flex direction='row' gap="10px">
-          <Button type="button" variant="secondary" style={{ flexGrow: '0.5' }}>Cancel</Button>
-          <Button type="button" onClick={handleSave} variant="primary" style={{ flexGrow: '0.5' }}>Upload</Button>
-        </Flex >
+        {isUploadPending ?
+          <Loading />
+          :
+          <Flex direction='row' gap="10px">
+            <Button type="button" variant="secondary" style={{ flexGrow: '0.5' }}>Cancel</Button>
+            <Button type="button" onClick={handleSave} variant="primary" style={{ flexGrow: '0.5' }}>Upload</Button>
+          </Flex >
+        }
       </DefaultDialog >
     </>
 
