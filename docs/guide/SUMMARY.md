@@ -31,6 +31,12 @@
 * [Coinbase Smart Wallet](wallet-providers/coinbase-smart-wallet.md)
 * [UseCapsule](wallet-providers/usecapsule.md)
 
+## Advanced
+
+* [Server Configuration](advanced/server-configuration.md)
+* [Coin Types](advanced/coin-types.md)
+* [JustaName Contracts](advanced/justaname-contracts.md)
+
 ## Use Cases
 
 * [Overview](use-cases/overview.md)
