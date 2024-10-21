@@ -35,7 +35,7 @@
 
 * [Server Configuration](advanced/server-configuration.md)
 * [Coin Types](advanced/coin-types.md)
-* [JustaName Contracts](advanced/justaname-contracts.md)
+* [JustaName Deployment Addresses](advanced/justaname-deployment-addresses.md)
 
 ## Use Cases
 
