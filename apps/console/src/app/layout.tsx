@@ -3,8 +3,8 @@ import './global.css';
 import { Providers } from './providers';
 
 export const metadata = {
-  title: 'JAN Console',
-  description: 'Customize ur sdk to your requirements',
+  title: 'JustWeb3 Console',
+  description: 'Your decentralized identity toolkit',
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers >
+        <Providers>
           <div className="w-screen  flex flex-col items-center justify-start h-screen">
             <Navbar />
             {children}
