@@ -1,6 +1,11 @@
-# Overview
+---
+description: >-
+  After setting up the JustWeb3 Widget on your platform and issuing subnames
+  under your configured ENS domain, the Admin Dashboard becomes your central hub
+  for managing, viewing, and analyzing user data
+---
 
-After setting up the JustWeb3 Widget on your platform and issuing subnames under your configured ENS domain, the **Admin Dashboard** becomes your central hub for managing, viewing, and analyzing user data. This dashboard is designed to give you full visibility into the subnames associated with your ENS domain, enabling you to better understand user activity, interactions, and engagement within your community.
+# Overview
 
 In this section, you'll learn how to:
 
