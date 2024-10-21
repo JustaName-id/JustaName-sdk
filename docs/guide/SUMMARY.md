@@ -14,6 +14,9 @@
 ## Learn & Engage
 
 * [Overview](learn-and-engage/overview.md)
+* [Views](learn-and-engage/views.md)
+* [Filters](learn-and-engage/filters.md)
+* [Engage](learn-and-engage/engage.md)
 
 ## Plugins
 
