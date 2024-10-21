@@ -244,11 +244,8 @@ export const EmailDialog: FC<EmailDialogProps> = ({
                   state,
                   otp,
                 }).then((res) => {
-                  console.log('res', res);
                   const key = 'email';
                   const vc = res.verifiableCredential;
-                  console.log('vc', vc);
-                  console.log('credentialSubject', vc.credentialSubject);
                   const value = vc.credentialSubject.email;
                   if (mAppsAlreadyEnabled?.includes(mApp)) {
                     updateRecords({

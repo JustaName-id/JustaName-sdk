@@ -79,8 +79,8 @@ export const useEnsSignIn = (
       const nonce = await nonceResponse.text();
 
       const message = justaname.signIn.requestSignIn({
-        ...params,
-        ..._params,
+        ens: _params.ens,
+        ttl: config?.signInTtl,
         uri: config?.origin,
         domain: config?.domain,
         chainId: chainId,

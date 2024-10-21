@@ -29,19 +29,19 @@ interface SubnameAdd {
 
 let justaname: JustaName;
 
-type Siwj = { address: string; ens: string };
+type Siwens = { address: string; ens: string; chainId: number };
 
 declare module 'express-session' {
   interface SessionData {
     nonce: string | null;
-    siwj: Siwj | null;
+    siwens: Siwens | null;
   }
 }
 
 app.use(
   Session({
-    name: 'siwj-quickstart',
-    secret: 'siwj-quickstart-secret',
+    name: 'siwens-quickstart',
+    secret: 'siwens-quickstart-secret',
     resave: true,
     saveUninitialized: true,
     cookie: { secure: false, sameSite: true },
@@ -82,13 +82,18 @@ app.post('/api/signin', async (req: Request, res) => {
       res.status(500).json({ message: 'No expirationTime returned.' });
     }
 
-    req.session.siwj = { address: message.address, ens };
+    console.log(message.expirationTime);
+    req.session.siwens = {
+      address: message.address,
+      ens,
+      chainId: message.chainId,
+    };
     req.session.cookie.expires = new Date(
       message?.expirationTime || new Date()
     );
     req.session.save(() => res.status(200).send(true));
   } catch (e) {
-    req.session.siwj = null;
+    req.session.siwens = null;
     req.session.nonce = null;
     req.session.save(() => res.status(500).json({ message: e.message }));
     console.error(e);
@@ -96,7 +101,7 @@ app.post('/api/signin', async (req: Request, res) => {
 });
 
 app.get('/api/current', function (req, res) {
-  if (!req.session.siwj) {
+  if (!req.session.siwens) {
     res.status(401).json({ message: 'You have to first sign_in' });
     return;
   }
@@ -104,11 +109,15 @@ app.get('/api/current', function (req, res) {
   res.setHeader('Content-Type', 'text/plain');
   res
     .status(200)
-    .send({ ens: req.session.siwj?.ens, address: req.session.siwj?.address });
+    .send({
+      ens: req.session.siwens?.ens,
+      address: req.session.siwens?.address,
+      chainId: req.session.siwens?.chainId,
+    });
 });
 
 app.post('/api/signout', function (req, res) {
-  req.session.siwj = null;
+  req.session.siwens = null;
   req.session.nonce = null;
   req.session.save(() => res.status(200).send(true));
 });

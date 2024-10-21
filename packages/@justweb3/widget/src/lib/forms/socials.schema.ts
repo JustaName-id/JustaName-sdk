@@ -13,16 +13,10 @@ const socialRegexes = {
   'org.telegram': /^[A-Za-z0-9_]+$/,
   'com.reddit': /^[A-Za-z0-9_-]+$/,
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-}
+};
 
-export interface SocialSchemaType {
-  identifier: SocialsIdentifier;
-  value: string;
-}
-
-
-export const socialsSchema = yup.object().shape({
-  identifier: yup
+export const socialsSchema = yup.object({
+  handle: yup
     .mixed<SocialsIdentifier>()
     .oneOf([
       'com.twitter',
@@ -36,31 +30,31 @@ export const socialsSchema = yup.object().shape({
     ])
     .required(),
   value: yup.string().test((value, context) => {
-    const { identifier } = context.parent
+    const { handle } = context.parent;
 
     const social = SUPPORTED_SOCIALS.find(
-      (social) => social.identifier === identifier,
-    )
+      (social) => social.identifier === handle
+    );
 
     if (!social) {
-      return true
+      return true;
     }
     if (value && value?.length > 0) {
-      if (identifier === 'email') {
+      if (handle === 'email') {
         if (!socialRegexes.email.test(value)) {
           return context.createError({
             message: `Invalid email`,
-          })
+          });
         }
       } else {
-        const usernameRegex = socialRegexes[social.identifier]
+        const usernameRegex = socialRegexes[social.identifier];
         if (usernameRegex && !usernameRegex.test(value)) {
           return context.createError({
             message: `Invalid social handle `,
-          })
+          });
         }
       }
     }
-    return true
+    return true;
   }),
-})
+});

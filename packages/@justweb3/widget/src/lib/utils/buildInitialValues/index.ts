@@ -11,7 +11,6 @@ export const initialSanitizedRecords: metadataForm = {
   generals: [],
   otherTexts: [],
   contentHash: [],
-  ethAddress: '',
 };
 
 export const buildInitialValues = (
@@ -39,12 +38,13 @@ export const buildInitialValues = (
           address: address.value,
         })),
     ],
-    socials: SUPPORTED_SOCIALS.map((supportedSocial) => ({
-      identifier: supportedSocial.identifier,
-      value:
-        socials.find((social) => social.key === supportedSocial.identifier)
-          ?.value || '',
-    })),
+    socials:
+      SUPPORTED_SOCIALS.map((supportedSocial) => ({
+        handle: supportedSocial.identifier,
+        value:
+          socials.find((social) => social.key === supportedSocial.identifier)
+            ?.value || ('' as string),
+      })) || [],
     generals: GENERAL_FIELDS.map((general) => ({
       key: general.identifier,
       value:

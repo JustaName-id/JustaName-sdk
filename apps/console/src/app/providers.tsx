@@ -55,16 +55,6 @@ export const Providers: React.FC<ProviderProps> = (props) => {
     openOnWalletConnect: true,
     allowedEns: 'all',
     disableOverlay: true,
-    networks: [
-      {
-        chainId: 1,
-        providerUrl: process.env.NEXT_PUBLIC_MAINNET_PROVIDER as string,
-      },
-      {
-        chainId: 11155111,
-        providerUrl: process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER as string,
-      },
-    ],
     dev: process.env.NEXT_PUBLIC_DEV === 'true',
   };
 

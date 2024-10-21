@@ -5,11 +5,10 @@ import {
   DialogContent,
   DialogTitle,
   DialogTrigger,
-  Flex
+  Flex,
 } from '@justweb3/ui';
 import { FC, ReactNode } from 'react';
 import { JustaNameFooter } from '../../components/JustaNameFooter';
-
 
 export interface DefaultDialogProps {
   open?: boolean;
@@ -17,44 +16,48 @@ export interface DefaultDialogProps {
   onOpenChange?: (open: boolean) => void;
   children: ReactNode;
   header?: ReactNode;
-  headerStyle?: React.CSSProperties;
+  innerStyle?: React.CSSProperties;
   trigger?: ReactNode;
   disableOverlay?: boolean;
+  contentStyle?: React.CSSProperties;
 }
 
 export const DefaultDialog: FC<DefaultDialogProps> = ({
   onOpenChange,
   trigger,
   disableOverlay,
-  open, handleClose, children, header, headerStyle = {}
+  open,
+  handleClose,
+  children,
+  header,
+  innerStyle = {},
+  contentStyle = {},
 }) => {
-
   return (
     <Dialog modal={!disableOverlay} open={open} onOpenChange={onOpenChange}>
-      {
-        trigger && (
-          <DialogTrigger asChild>
-            {trigger}
-          </DialogTrigger>
-        )
-      }
+      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
 
-      <DialogContent onInteractOutside={(e) => disableOverlay &&  e.preventDefault()} disableOverlay={disableOverlay} style={{
-        padding: 0,
-        transition: 'all 0.4 ease-in-out'
-      }}>
-        <div style={{
-          display: 'hidden'
-        }}>
-          <DialogTitle>
-
-          </DialogTitle>
+      <DialogContent
+        onInteractOutside={(e) => disableOverlay && e.preventDefault()}
+        disableOverlay={disableOverlay}
+        style={{
+          padding: 0,
+          transition: 'all 0.4 ease-in-out',
+          ...contentStyle,
+        }}
+      >
+        <div
+          style={{
+            display: 'hidden',
+          }}
+        >
+          <DialogTitle></DialogTitle>
         </div>
         <Flex
           style={{
             padding: '0px 0 0 0',
             borderRadius: '16px',
-            background: 'var(--justweb3-foreground-color-4)'
+            background: 'var(--justweb3-foreground-color-4)',
           }}
           direction={'column'}
         >
@@ -66,42 +69,39 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
               gap: '20px',
               display: 'flex',
               flexDirection: 'column',
-              maxWidth: '400px',
-              ...headerStyle
+              ...innerStyle,
             }}
           >
-            <Flex
-              justify="space-between"
-              direction="row"
-            >
+            <Flex justify="space-between" direction="row">
               {header}
 
-              {
-                handleClose ? (
-                  <CloseIcon
-                    style={{
-                      cursor: 'pointer'
-                    }}
-                    onClick={handleClose}
-                    width={24}
-                  />)
-                  :
-                  <DialogClose style={{
+              {handleClose ? (
+                <CloseIcon
+                  style={{
+                    cursor: 'pointer',
+                  }}
+                  onClick={handleClose}
+                  width={24}
+                />
+              ) : (
+                <DialogClose
+                  style={{
                     border: '0px',
                     background: 'none',
                     padding: 0,
                     height: '24px',
                     display: 'flex',
-                    placeContent: 'center'
-                  }}>
-                    <CloseIcon
-                      style={{
-                        cursor: 'pointer'
-                      }}
-                      width={24}
-                    />
-                  </DialogClose>
-              }
+                    placeContent: 'center',
+                  }}
+                >
+                  <CloseIcon
+                    style={{
+                      cursor: 'pointer',
+                    }}
+                    width={24}
+                  />
+                </DialogClose>
+              )}
             </Flex>
             {children}
           </Flex>

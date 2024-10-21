@@ -14,56 +14,68 @@ interface SocialsSectionProps {
   form: UseFormReturn<metadataForm>;
 }
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0px 20px 20px 20px;
   gap: 20px;
-  max-height: calc(100vh-255px);
-
-  @media (min-width: 850px) {
-    height: calc(100vh - 180px);
-  }
+  max-height: calc(100% - 62px);
+  height: 100%;
 `;
 
-export const SocialsSection: React.FC<SocialsSectionProps> = ({ onBack, form }) => {
-
+export const SocialsSection: React.FC<SocialsSectionProps> = ({
+  onBack,
+  form,
+}) => {
   return (
     <Container>
       <Flex direction="row" gap="10px" align="center">
         <ComicIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
-          <P style={{ fontSize: '10px', fontWeight: 700, color: 'black' }}>Edit Profile</P>
-          <P style={{ fontSize: '16px', fontWeight: 700, color: 'black' }}>Socials</P>
+          <P style={{ fontSize: '10px', fontWeight: 700, color: 'black' }}>
+            Edit Profile
+          </P>
+          <P style={{ fontSize: '16px', fontWeight: 700, color: 'black' }}>
+            Socials
+          </P>
         </Flex>
       </Flex>
 
-      <Flex direction="column" gap="10px" style={{
-        overflowY: 'scroll',
-        maxHeight: '100%'
-      }}>
-        <Flex direction="column" gap="10px" style={{
-          padding: '20px 0px'
-        }}>
-          <Flex direction="column" gap="20px" style={{
-            overflowY: 'auto',
-          }}>
+      <Flex
+        direction="column"
+        gap="10px"
+        className="justweb3scrollbar"
+        style={{
+          overflowY: 'scroll',
+          // maxHeight: 'calc(-90px + 85vh - 30px - 20px - 52px - 10px - 16px)',
+          maxHeight: 'calc(100% - 62px)',
+        }}
+      >
+        <Flex direction="column" gap="10px">
+          <Flex
+            direction="column"
+            gap="20px"
+            style={{
+              overflowY: 'auto',
+            }}
+          >
             {form.getValues('socials').map((social, index) => {
-              const supportedSocial = SUPPORTED_SOCIALS.find((s) => s.identifier === social.identifier);
+              const supportedSocial = SUPPORTED_SOCIALS.find(
+                (s) => s.identifier === social.handle
+              );
               if (!supportedSocial) return null;
               return (
                 <MetadataField
-                  key={`socials-metadata-${social.identifier}`}
+                  key={`socials-metadata-${social.handle}`}
                   label={supportedSocial?.name}
-                  metadataKey={social.identifier}
+                  metadataKey={social.handle}
                   form={form}
-                  leftIcon={getTextRecordIcon(social.identifier)}
+                  leftIcon={getTextRecordIcon(social.handle)}
                   fieldName={`socials.${index}.value`}
                   onDelete={() => {
                     form.setValue(`socials.${index}.value`, '', {
                       shouldTouch: true,
-                      shouldValidate: true
+                      shouldValidate: true,
+                      shouldDirty: true,
                     });
                   }}
                 />

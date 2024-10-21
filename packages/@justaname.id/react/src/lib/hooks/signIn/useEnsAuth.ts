@@ -1,12 +1,14 @@
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
+import { ChainId } from '@justaname.id/sdk';
 
 export const buildEnsAuthKey = (backendUrl: string) => ['ENS_AUTH', backendUrl];
 
 export type EnsAuth<T extends object = {}> = T & {
   ens: string;
   address: string;
+  chainId: ChainId;
 };
 
 export interface UseEnsAuthParams {

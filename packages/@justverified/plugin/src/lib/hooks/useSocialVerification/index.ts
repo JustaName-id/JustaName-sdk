@@ -93,7 +93,6 @@ export const useSocialVerification = ({
 
       eventSource.close();
 
-      console.log(result);
       return result;
     },
   });

@@ -29,7 +29,7 @@ import { SignInDialog } from '../../dialogs/SignInDialog';
 import { MAppsProvider } from '../MAppProvider';
 import { JustaPlugin } from '../../plugins';
 import usePreviousState from '../../hooks/usePreviousState';
-import { UpdateRecordDialog } from '../../dialogs';
+import { ProfileDialog, UpdateRecordDialog } from '../../dialogs';
 import { isEqual } from 'lodash';
 import { ChainId } from '@justaname.id/sdk';
 
@@ -63,6 +63,7 @@ export interface JustWeb3ContextProps {
     records: UpdateRecordsParams & { ens: string }
   ) => Promise<void>;
   handleJustWeb3Config: (config: JustWeb3ProviderConfig) => void;
+  handleOpenEnsProfile: (ens: string, chainId?: ChainId) => void;
   isSignInOpen: boolean;
   config: JustWeb3ProviderConfig;
   plugins: JustaPlugin[];
@@ -73,6 +74,7 @@ export const JustWeb3Context = createContext<JustWeb3ContextProps>({
   isSignInOpen: false,
   handleOpenSignInDialog: () => {},
   handleUpdateRecords: async () => {},
+  handleOpenEnsProfile: () => {},
   handleJustWeb3Config: () => {},
   config: {},
   plugins: [],
@@ -97,6 +99,10 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
   const allowedEns = config.allowedEns || 'all';
   const { isConnected } = useMountedAccount();
   const [signInOpen, setSignInOpen] = useState(false);
+  const [ensOpen, setEnsOpen] = useState<{
+    ens: string;
+    chainId?: ChainId;
+  } | null>(null);
   const [updateRecord, setUpdateRecord] = useState<
     (UpdateRecordsParams & { ens: string }) | null
   >(null);
@@ -133,6 +139,10 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
     return new Promise<void>((resolve) => {
       updateRecordPromiseResolveRef.current = resolve;
     });
+  };
+
+  const handleOpenEnsProfile = (ens: string, chainId?: ChainId) => {
+    setEnsOpen({ ens, chainId });
   };
 
   useEffect(() => {
@@ -201,6 +211,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
             mApps: allMApps.map((mApp) => mApp.name),
             handleUpdateRecords: handleUpdateRecords,
             handleJustWeb3Config,
+            handleOpenEnsProfile,
           }}
         >
           <MAppsProvider
@@ -213,6 +224,16 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
               openOnWalletConnect={config.openOnWalletConnect || true}
               handleOpenDialog={handleOpenSignInDialog}
             />
+            {ensOpen && (
+              <ProfileDialog
+                // open={!!ensOpen}
+                // handleOpenDialog={(open) => setEnsOpen( null)}
+                handleOnClose={() => setEnsOpen(null)}
+                ens={ensOpen?.ens}
+                chainId={ensOpen?.chainId}
+              />
+            )}
+
             <SignInDialog
               open={signInOpen}
               handleOpenDialog={handleOpenSignInDialog}
@@ -251,6 +272,7 @@ export interface useJustWeb3 {
   isEnsAuthFetching: boolean;
   refreshEnsAuth: () => void;
   connectedEns: UseEnsAuthReturn['connectedEns'];
+  openEnsProfile: (ens: string, chainId?: ChainId) => void;
   updateRecords: (
     records: Omit<UseSubnameUpdateFunctionParams, 'ens'> & { ens?: string }
   ) => Promise<void>;
@@ -270,7 +292,7 @@ export const useJustWeb3 = (): useJustWeb3 => {
     isEnsAuthFetching,
     refreshEnsAuth,
   } = useEnsAuth();
-  const { handleUpdateRecords } = context;
+  const { handleUpdateRecords, handleOpenEnsProfile } = context;
   const handleUpdateRecordsInternal = async (
     records: Omit<UseSubnameUpdateFunctionParams, 'ens'> & {
       ens?: string;
@@ -326,6 +348,7 @@ export const useJustWeb3 = (): useJustWeb3 => {
     status,
     connectedEns,
     refreshEnsAuth,
+    openEnsProfile: handleOpenEnsProfile,
     chainId: justanameContext?.chainId,
   };
 };
