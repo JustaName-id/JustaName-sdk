@@ -36,6 +36,8 @@ export interface GetRecordsParams
 
 export interface UseRecordsResult {
   isRecordsPending: boolean;
+  isRecordsFetching: boolean;
+  isRecordsLoading: boolean;
   records: Records | undefined;
   getRecords: (
     params: GetRecordsParams,
@@ -142,7 +144,9 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
   });
 
   return {
-    isRecordsPending: query.isPending || query.isFetching,
+    isRecordsPending: query.isPending,
+    isRecordsFetching: query.isFetching,
+    isRecordsLoading: query.isLoading,
     records: query.data,
     getRecords: getRecordsInternal,
     refetchRecords: query.refetch,

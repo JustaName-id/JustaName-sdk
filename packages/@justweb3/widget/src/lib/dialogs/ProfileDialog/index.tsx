@@ -1,493 +1,507 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FC, useMemo } from 'react';
-
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { Records, useRecords, useUpdateSubname } from '@justaname.id/react';
 import {
-    useRecords,
-    useUpdateSubname
-} from '@justaname.id/react';
-import { Address, getCoinTypeDetails, sanitizeRecords, SubnameRecordsRoute, SupportedCoins, TextRecord } from '@justaname.id/sdk';
+  Address,
+  getCoinTypeDetails,
+  sanitizeRecords,
+  SubnameRecordsRoute,
+  SupportedCoins,
+  TextRecord,
+} from '@justaname.id/sdk';
 import {
-    ArrowIcon,
-    AttachmentIcon,
-    Button,
-    ComicIcon,
-    ContactsIcon,
-    Flex,
-    Form,
-    LinkCard,
-    P,
-    WalletIcon,
-    WebsiteIcon
+  ArrowIcon,
+  AttachmentIcon,
+  Badge,
+  Button,
+  ClickableItem,
+  ComicIcon,
+  ContactsIcon,
+  Flex,
+  Form,
+  LoadingSpinner,
+  SPAN,
+  WalletIcon,
+  WebsiteIcon,
 } from '@justweb3/ui';
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { AddressesSection, ContentHashSection, CustomSection, GeneralSection, SocialsSection } from '../../components/Profile';
+import {
+  AddressesSection,
+  ContentHashSection,
+  CustomSection,
+  GeneralSection,
+  SocialsSection,
+} from '../../components/Profile';
 import ContentSection from '../../components/Profile/ContentSection';
 import { metadataForm } from '../../forms';
-import { useJustWeb3 } from '../../providers';
-import { buildInitialValues, filterUpdatedAddresses, filterUpdatedContentHash, filterUpdatedMetadata } from '../../utils';
+import {
+  buildInitialValues,
+  filterUpdatedAddresses,
+  filterUpdatedContentHash,
+  filterUpdatedMetadata,
+} from '../../utils';
 import { DefaultDialog } from '../DefaultDialog';
-import { LoadingDialog } from '../LoadingDialog';
 import { UnsavedChangesDialog } from '../UnsavedChangesDialog';
+import useMatchSize from '../../hooks/useMatchSize';
 
-const FormContainer = styled.div<{ editMode: boolean }>`
+const FormContainer = styled.div<{ $editMode: boolean }>`
   background-color: white;
-  transition: width 300ms;
   transform-origin: left;
   display: flex;
   flex-direction: column;
+  gap: 10px;
   justify-content: space-between;
-  transform: translateZ(0);
 
-  @media (min-width: 850px) {
-    height: ${(props) => (props.editMode ? '100%' : 'auto')};
-  }
+  // @media (min-width: 850px) {
+  //   height: ${(props) => (props.$editMode ? '100%' : 'auto')};
+  // }
 
-  ${(props) =>
-        props.editMode
-            ? `
+  max-width: 0;
+  min-width: 0;
+  overflow: hidden;
+  transition: all 300ms ease-in-out;
+  padding-right: 0px;
+  ${(props) => {
+    return props.$editMode
+      ? `
     flex: 1 1 0%;
     min-width: 100%;
-
+    padding-right: 20px;
+    
     @media (min-width: 850px) {
-      min-width: 350px;
-      max-width: 350px;
+      min-width: 250px;
+      max-width: 250px;
     }
   `
-            : `
-    max-width: 0;
-    min-width: 0;
-    overflow: hidden;
-  `}
+      : '';
+  }};
 `;
-
-const DialogContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-family: 'Poppins', sans-serif;
-  max-height: calc(100vh - 220px);
-  position: relative;
-  height: 100%;
-
-  @media (min-width: 850px) {
-    max-height: calc(100vh - 123px);
-  }
-`;
-
 
 export interface ProfileDialogProps {
-    open: boolean;
-    handleOpenDialog: (open: boolean) => void;
+  ens: string;
+  chainId?: 1 | 11155111;
+  handleOnClose: () => void;
 }
 
-const ContentSectionWrapper = styled.div<{ editMode: boolean }>`
+const ContentSectionWrapper = styled.div<{ $editMode: boolean }>`
   flex: 1 1 0%;
   overflow-y: auto;
   transition: all 300ms linear;
-  transform: translate3d(0, 0, 0) scale(1); 
-
-  ${(props) =>
-        props.editMode
-            ? `
-    transform: translate3d(0, 0, 0) scale(0);
-    background-color: white;
-    border-radius: 20px;
-
-    @media (min-width: 850px) {
-      transform: translate3d(0, 0, 0) scale(0.9);
-    }
-  `
-            : `
-    @media (min-width: 850px) {
-      padding-left: 1.25rem;
-    }
-  `}
+  height: fit-content;
 `;
 
 const menuTabs = [
-    {
-        title: 'General',
-        icon: <ContactsIcon height={24} width={24} />
-    },
-    {
-        title: 'Socials',
-        icon: <ComicIcon height={24} width={24} />
-    },
-    {
-        title: 'Addresses',
-        icon: <WalletIcon height={24} width={24} />
-    },
-    {
-        title: 'Content Hash',
-        icon: <WebsiteIcon height={24} width={24} />
-    },
-    {
-        title: 'Custom',
-        icon: <AttachmentIcon height={24} width={24} />
-    }
+  {
+    title: 'General',
+    icon: <ContactsIcon height={30} width={30} />,
+  },
+  {
+    title: 'Socials',
+    icon: <ComicIcon height={30} width={30} />,
+  },
+  {
+    title: 'Addresses',
+    icon: <WalletIcon height={30} width={30} />,
+  },
+  {
+    title: 'Content Hash',
+    icon: <WebsiteIcon height={30} width={30} />,
+  },
+  {
+    title: 'Custom',
+    icon: <AttachmentIcon height={30} width={30} />,
+  },
 ];
 
 export const ProfileDialog: FC<ProfileDialogProps> = ({
-    open,
-    handleOpenDialog
+  ens,
+  chainId,
+  handleOnClose,
 }) => {
+  const { records, isRecordsPending, refetchRecords } = useRecords({
+    ens: ens,
+    chainId,
+  });
+  const [sourceElement, setSourceElementState] = useState<HTMLElement | null>(
+    null
+  );
+  const [targetElement, setTargetElementState] = useState<HTMLElement | null>(
+    null
+  );
+  const setSourceElement = useCallback((node: HTMLElement | null) => {
+    setSourceElementState(node);
+  }, []);
 
-    const { connectedEns, isEnsAuthPending } = useJustWeb3()
-    const { records, isRecordsPending, refetchRecords } = useRecords({
-        ens: connectedEns?.ens || ''
-    })
-    const [selectedState, setSelectedState] = React.useState<string | undefined>(undefined);
-    const [editMode, setEditMode] = React.useState<boolean>(false);
-    const [unsavedChangesDialogOpen, setUnsavedChangesDialogOpen] = React.useState<boolean>(false);
-    const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
-    const { updateSubname } = useUpdateSubname();
-    const [tempAvatar, setTempAvatar] = React.useState<string | null>(null);
-    const [tempBanner, setTempBanner] = React.useState<string | null>(null);
+  const setTargetElement = useCallback((node: HTMLElement | null) => {
+    setTargetElementState(node);
+  }, []);
+  useMatchSize(sourceElement, targetElement, {
+    matchWidth: true,
+    matchHeight: true,
+  });
 
-    const form = useForm<metadataForm>({
-        resolver: yupResolver(metadataForm),
-        defaultValues: buildInitialValues(records?.sanitizedRecords),
-        mode: 'onChange',
-    });
+  const [selectedState, setSelectedState] = React.useState<string | undefined>(
+    undefined
+  );
+  const [editMode, setEditMode] = React.useState<boolean>(false);
+  const [unsavedChangesDialogOpen, setUnsavedChangesDialogOpen] =
+    React.useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
+  const { updateSubname } = useUpdateSubname();
+  const [tempAvatar, setTempAvatar] = React.useState<string | null>(null);
+  const [tempBanner, setTempBanner] = React.useState<string | null>(null);
 
-    const editedRecords = useMemo<SubnameRecordsRoute["response"]>(() => {
-        const newRecord = form.getValues();
-        const texts = [
-            ...newRecord.otherTexts,
-            ...newRecord.generals,
-            ...newRecord.socials.map((social) => ({
-                key: social.identifier,
-                value: social.value
-            }))
-        ].filter(text => text?.value !== '').map((text) => ({
-            key: text.key,
-            value: text.value as string
-        }));
+  const form = useForm<metadataForm>({
+    resolver: yupResolver(metadataForm),
+    mode: 'onChange',
+  });
 
-        const coins = newRecord.addresses
-            .filter((address) => address.address !== '' && address.coin !== '')
-            .map((address) => ({
-                id: parseInt(address.coin),
-                name: getCoinTypeDetails(address.coin as SupportedCoins).symbol.toLowerCase(),
-                value: address.address as string
-            }));
+  useEffect(() => {
+    if (records) {
+      form.reset(buildInitialValues(records?.sanitizedRecords));
+    }
+  }, [records]);
 
+  const editedRecords = useMemo<Records | undefined>(() => {
+    if (!records || Object.entries(form.getValues()).length === 0) {
+      return undefined;
+    }
+    const newRecord = form.getValues();
+    const texts = [
+      ...newRecord.otherTexts,
+      ...newRecord.generals,
+      ...newRecord.socials.map((social) => ({
+        key: social.handle,
+        value: social.value,
+      })),
+    ]
+      .filter((text) => text?.value !== '')
+      .map((text) => ({
+        key: text.key,
+        value: text.value as string,
+      }));
 
-        return {
-            ens: connectedEns?.ens || '',
-            records: {
-                texts,
-                coins,
-                contentHash: newRecord?.contentHash?.length > 0 ? {
-                    protocolType: newRecord.contentHash[0].protocolType as string,
-                    decoded: newRecord.contentHash[0].decoded as string
-                } : null,
-                resolverAddress: records?.records.resolverAddress || ''
-            },
-            isJAN: true,
-        };
-    }, [form.getValues(), records, records?.sanitizedRecords, form.watch()]);
+    const coins = newRecord.addresses
+      .filter((address) => address.address !== '' && address.coin !== '')
+      .map((address) => ({
+        id: parseInt(address.coin),
+        name: getCoinTypeDetails(
+          address.coin as SupportedCoins
+        ).symbol.toLowerCase(),
+        value: address.address as string,
+      }));
 
-    const editedSanitized = useMemo(() => {
-        return sanitizeRecords(editedRecords);
-    }, [editedRecords]);
-
-
-    const renderMenuTabs = () => (
-        <Flex direction="column" gap="10px" style={{
-            width: '100%',
-            padding: '10px',
-        }}>
-            {menuTabs.map((item, index) => (
-                <Flex direction='column' gap='5px' key={`menu-tab-${index}`} >
-                    <Flex direction='row' gap='5px' align='center' justify='space-between' style={{
-                        cursor: 'pointer',
-                        padding: "10px",
-                        borderRadius: "100px",
-                        border: "1px solid #E5E5E5"
-                    }}
-                        onClick={() => {
-                            setSelectedState(item.title)
-                        }}
-                    >
-                        <Flex direction='row' gap='5px' align='center' justify='flex-start'>
-                            {item.icon}
-                            <P style={{
-                                fontSize: '14px',
-                                fontWeight: 500,
-                                color: '#000000'
-                            }}>{item.title}</P>
-                        </Flex>
-                        <ArrowIcon width={15} height={15} />
-                    </Flex>
-                </Flex>
-            ))}
-        </Flex>
-    );
-
-    const renderSelectedState = () => {
-        switch (selectedState) {
-            case 'General':
-                return <GeneralSection form={form} fullSubname={connectedEns?.ens || ''} tempAvatar={tempAvatar} tempBanner={tempBanner} setTempAvatar={setTempAvatar} setTempBanner={setTempBanner} />;
-            case 'Socials':
-                return <SocialsSection form={form} />;
-            case 'Addresses':
-                return <AddressesSection form={form} />;
-            case 'Content Hash':
-                return <ContentHashSection form={form} />;
-            case 'Custom':
-                return <CustomSection form={form} fullSubname={connectedEns?.ens || ''} />;
-
-        }
+    const subnameRecord: SubnameRecordsRoute['response'] = {
+      ens: ens || '',
+      records: {
+        resolverAddress: records?.records.resolverAddress || '',
+        coins: coins,
+        texts: texts,
+        contentHash:
+          newRecord.contentHash.length === 1 ? newRecord.contentHash[0] : null,
+      },
+      claimedAt: records?.claimedAt,
+      isClaimed: records?.isClaimed,
+      isJAN: !!records?.isJAN,
     };
 
-    const handleSaveMetadata = async (data: metadataForm) => {
-        setIsSubmitting(true);
-        const avatar = data.otherTexts.find((text) => text.key === 'avatar')?.value;
-        const banner = data.otherTexts.find((text) => text.key === 'banner')?.value;
-
-
-        const addresses = data.addresses
-            .reduce((acc: Address[], address) => {
-                if (address.address !== '' && address.coin !== '') {
-                    acc.push({
-                        address: address.address as string,
-                        coinType: parseInt(address.coin) as number
-                    });
-                }
-                return acc;
-            }, [])
-
-        const texts = [
-            ...data.otherTexts.filter((text) => text.key !== 'avatar' && text.key !== 'banner'),
-            ...data.generals,
-            ...data.socials.map((social) => ({
-                key: social.identifier,
-                value: social.value
-            }))
-        ].reduce((acc: TextRecord[], text) => {
-            if (text.value !== '' && text.key !== '') {
-                acc.push({
-                    key: text.key as string,
-                    value: text.value as string
-                });
-            }
-            return acc;
-        }, [])
-
-        if (avatar) {
-            texts.push({
-                key: 'avatar',
-                value: avatar
-            });
-        }
-
-        if (banner) {
-            texts.push({
-                key: 'banner',
-                value: banner
-            });
-        }
-
-        updateSubname({
-            ens: connectedEns?.ens || '',
-            addresses: Object.fromEntries(filterUpdatedAddresses(records?.records.coins || [], addresses).map(address => [address.coinType.toString(), address.address])),
-            text: Object.fromEntries(filterUpdatedMetadata(records?.records.texts || [], texts).map(text => [text.key, text.value])),
-            contentHash: filterUpdatedContentHash(records?.records.contentHash, data.contentHash.length > 0 ? [{ ...data.contentHash[0], decoded: data.contentHash[0].decoded ?? '' }] : []),
-        }).then(() => {
-            refetchRecords().then((data) => {
-                setEditMode(false);
-                setIsSubmitting(false);
-                setTempAvatar(null);
-                setTempBanner(null);
-                if (data?.data?.sanitizedRecords)
-                    form.reset(
-                        buildInitialValues(data.data.sanitizedRecords)
-                    )
-                setSelectedState(undefined);
-            });
-        }).catch(() => {
-            console.log('error');
-            setIsSubmitting(false);
-        })
+    return {
+      sanitizedRecords: sanitizeRecords(subnameRecord),
+      ...subnameRecord,
     };
+  }, [form.getValues(), records, records?.sanitizedRecords, form.watch()]);
 
+  const renderMenuTabs = () => (
+    <Flex
+      direction="column"
+      gap="10px"
+      style={{
+        width: '100%',
+        flex: 1,
+      }}
+    >
+      {menuTabs.map((item, index) => (
+        <ClickableItem
+          key={'menu-tab-' + index}
+          name={item.title}
+          onClick={() => setSelectedState(item.title)}
+          left={item.icon}
+          right={<ArrowIcon width={15} height={15} />}
+        />
+      ))}
+    </Flex>
+  );
 
-    if (!connectedEns || isEnsAuthPending || isRecordsPending) {
-        return <LoadingDialog open={true} />
+  const renderSelectedState = () => {
+    switch (selectedState) {
+      case 'General':
+        return (
+          <GeneralSection
+            form={form}
+            fullSubname={ens}
+            tempAvatar={tempAvatar}
+            tempBanner={tempBanner}
+            setTempAvatar={setTempAvatar}
+            setTempBanner={setTempBanner}
+          />
+        );
+      case 'Socials':
+        return <SocialsSection form={form} />;
+      case 'Addresses':
+        return <AddressesSection form={form} />;
+      case 'Content Hash':
+        return <ContentHashSection form={form} />;
+      case 'Custom':
+        return <CustomSection form={form} fullSubname={ens} />;
+      default:
+        return <></>;
+    }
+  };
+
+  const handleSaveMetadata = async (data: metadataForm) => {
+    setIsSubmitting(true);
+    const avatar = data.otherTexts.find((text) => text.key === 'avatar')?.value;
+    const banner = data.otherTexts.find((text) => text.key === 'banner')?.value;
+
+    const addresses = data.addresses.reduce((acc: Address[], address) => {
+      if (address.address !== '' && address.coin !== '') {
+        acc.push({
+          address: address.address as string,
+          coinType: parseInt(address.coin) as number,
+        });
+      }
+      return acc;
+    }, []);
+
+    const texts = [
+      ...data.otherTexts.filter(
+        (text) => text.key !== 'avatar' && text.key !== 'banner'
+      ),
+      ...data.generals,
+      ...data.socials.map((social) => ({
+        key: social.handle,
+        value: social.value,
+      })),
+    ].reduce((acc: TextRecord[], text) => {
+      if (text.value !== '' && text.key !== '') {
+        acc.push({
+          key: text.key as string,
+          value: text.value as string,
+        });
+      }
+      return acc;
+    }, []);
+
+    if (avatar) {
+      texts.push({
+        key: 'avatar',
+        value: avatar,
+      });
     }
 
-    return (
-        <DefaultDialog
-            open={open}
-            handleClose={() => handleOpenDialog(false)}
-            header={
-                <LinkCard
-                    variant='address'
-                    title='Ens'
-                    value={connectedEns.ens}
-                    icon={<></>}
-                    textExtraStyle={{
-                        color: '#3280F4'
-                    }}
-                />
-            }
+    if (banner) {
+      texts.push({
+        key: 'banner',
+        value: banner,
+      });
+    }
+
+    updateSubname({
+      ens: ens,
+      addresses: Object.fromEntries(
+        filterUpdatedAddresses(records?.records.coins || [], addresses).map(
+          (address) => [address.coinType.toString(), address.address]
+        )
+      ),
+      text: Object.fromEntries(
+        filterUpdatedMetadata(records?.records.texts || [], texts).map(
+          (text) => [text.key, text.value]
+        )
+      ),
+      contentHash: filterUpdatedContentHash(
+        records?.records.contentHash,
+        data.contentHash.length > 0
+          ? [
+              {
+                ...data.contentHash[0],
+                decoded: data.contentHash[0].decoded ?? '',
+              },
+            ]
+          : []
+      ),
+    })
+      .then(() => {
+        refetchRecords().then((data) => {
+          setEditMode(false);
+          setIsSubmitting(false);
+          setTempAvatar(null);
+          setTempBanner(null);
+          if (data?.data?.sanitizedRecords)
+            form.reset(buildInitialValues(data.data.sanitizedRecords));
+          setSelectedState(undefined);
+        });
+      })
+      .catch(() => {
+        console.log('error');
+        setIsSubmitting(false);
+      });
+  };
+
+  useEffect(() => {
+    return () => {
+      setEditMode(false);
+      setSelectedState(undefined);
+      form.reset(buildInitialValues(records?.sanitizedRecords));
+      handleOnClose();
+    };
+  }, []);
+
+  return (
+    <DefaultDialog
+      open={true}
+      handleClose={() => {
+        handleOnClose();
+        setEditMode(false);
+        setSelectedState(undefined);
+        form.reset(buildInitialValues(records?.sanitizedRecords));
+      }}
+      contentStyle={{
+        width: '100%',
+      }}
+      header={
+        ens && (
+          <Badge>
+            <SPAN
+              style={{
+                fontSize: '10px',
+                lineHeight: '10px',
+                fontWeight: 900,
+                color: 'var(--justweb3-primary-color)',
+              }}
+            >
+              {ens}
+            </SPAN>
+          </Badge>
+        )
+      }
+    >
+      {isRecordsPending || !records || !editedRecords ? (
+        <div
+          style={{
+            position: 'relative',
+            padding: '24px',
+          }}
         >
-            <DialogContent>
-                <FormContainer
-                    editMode={editMode}
+          <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+        </div>
+      ) : (
+        <Flex>
+          <FormContainer $editMode={editMode} ref={setTargetElement}>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(handleSaveMetadata)}
+                style={{
+                  display: 'flex',
+                  gap: '10px',
+                  maxHeight: '100%',
+                  height: '100%',
+                  width: '100%',
+                  flexDirection: 'column',
+                  justifyContent: 'between',
+                }}
+              >
+                {!selectedState ? renderMenuTabs() : renderSelectedState()}
+                <UnsavedChangesDialog
+                  open={unsavedChangesDialogOpen}
+                  onContinue={() => {
+                    setUnsavedChangesDialogOpen(false);
+                  }}
+                  onDiscard={(e) => {
+                    form.reset(buildInitialValues(records?.sanitizedRecords));
+                    setTempAvatar(null);
+                    setTempBanner(null);
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (selectedState) {
+                      setSelectedState(undefined);
+                    } else {
+                      setEditMode(false);
+                    }
+                    setUnsavedChangesDialogOpen(false);
+                  }}
+                />
+                <Flex
+                  direction="row"
+                  justify="flex-end"
+                  align="flex-end"
+                  gap="10px"
+                  style={{
+                    marginTop: 'auto',
+                  }}
                 >
-                    <Form {...form}>
-                        <form
-                            onSubmit={form.handleSubmit(
-                                handleSaveMetadata,
-                            )}
-                            style={{
-                                display: 'flex',
-                                height: '100%',
-                                width: '100%',
-                                flexDirection: 'column',
-                                justifyContent: 'between'
-                            }}
-                        >
-                            {!selectedState
-                                ? renderMenuTabs()
-                                : renderSelectedState()}
-                            <UnsavedChangesDialog
-                                open={unsavedChangesDialogOpen}
-                                onContinue={() => {
-                                    setUnsavedChangesDialogOpen(false)
-                                }}
-                                onDiscard={(e) => {
-                                    form.reset(buildInitialValues(records?.sanitizedRecords))
-                                    setTempAvatar(null)
-                                    setTempBanner(null)
-                                    e.preventDefault()
-                                    e.stopPropagation()
-                                    if (selectedState) {
-                                        setSelectedState(undefined)
-                                    } else {
-                                        setEditMode(false)
-                                    }
-                                    setUnsavedChangesDialogOpen(false)
-                                }}
-                            />
-                            <Flex direction="row" justify="flex-end" align="flex-end" gap="5px" style={{
-                                padding: '0px 5px'
-                            }}>
-                                <Button
-                                    variant={'secondary'}
-                                    onClick={(e) => {
-                                        if (
-                                            form.formState.isDirty ||
-                                            tempAvatar ||
-                                            tempBanner
-                                        ) {
-                                            setUnsavedChangesDialogOpen(
-                                                true,
-                                            )
-                                            e.preventDefault()
-                                            e.stopPropagation()
-                                        } else {
-                                            e.preventDefault()
-                                            e.stopPropagation()
-                                            if (selectedState) {
-                                                setSelectedState(
-                                                    undefined,
-                                                )
-                                            } else {
-                                                setEditMode(false)
-                                            }
-                                        }
-                                    }}
-                                    style={{
-                                        width: 'fit-content',
-                                        display: selectedState ? 'block' : 'hidden'
-                                    }}
-                                    disabled={isSubmitting}
-                                >
-                                    Cancel
-                                </Button>
-                                <Button
-                                    variant={'primary'}
-                                    style={{
-                                        width: 'fit-content',
-                                        display: selectedState ? 'block' : 'hidden'
-                                    }}
-                                    type={'submit'}
-                                    disabled={isSubmitting}
-                                >
-                                    SAVE CHANGES
-                                </Button>
-                                <Button
-                                    variant={'secondary'}
-                                    style={{
-                                        width: 'fit-content',
-                                        display: selectedState ? 'hidden' : 'block'
-                                    }}
-                                    onClick={() => {
-                                        setEditMode(false)
-                                    }}
-                                >
-                                    Back
-                                </Button>
-                            </Flex>
-                        </form>
-                    </Form>
-                </FormContainer>
-                <ContentSectionWrapper
-                    editMode={editMode}
-                    id={'contentSectionScrollId'}
-                >
-                    <ContentSection
-                        fullSubname={connectedEns?.ens || ''}
-                        sanitized={
-                            editMode
-                                ? editedSanitized
-                                : records?.sanitizedRecords
-                                    ? records?.sanitizedRecords
-                                    : {
-                                        ethAddress: {
-                                            coin: '60',
-                                            coinType: '2147483658',
-                                            id: 60,
-                                            name: 'Ethereum',
-                                            value: '',
-                                            symbol: 'ETH',
-                                        },
-                                        otherAddresses: [],
-                                        generals: [],
-                                        socials: [],
-                                        allOtherTexts: [],
-                                        contentHash: null,
-                                        allAddresses: [],
-                                        otherTextsWithoutStandard: [],
-                                    }
+                  <Button
+                    variant={'secondary'}
+                    size={'lg'}
+                    onClick={(e) => {
+                      if (form.formState.isDirty || tempAvatar || tempBanner) {
+                        setUnsavedChangesDialogOpen(true);
+                        e.preventDefault();
+                        e.stopPropagation();
+                      } else {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (selectedState) {
+                          setSelectedState(undefined);
+                        } else {
+                          setEditMode(false);
                         }
-                        records={
-                            editMode
-                                ? editedRecords
-                                : records
-                                    ? records
-                                    : {
-                                        ens: '',
-                                        isClaimed: false,
-                                        claimedAt: null,
-                                        isJAN: true,
-                                        records: {
-                                            texts: [],
-                                            coins: [],
-                                            contentHash: null,
-                                            resolverAddress: '',
-                                        }
-                                    }
-                        }
-                        onEdit={() => setEditMode(!editMode)}
-                        editMode={editMode}
-                    />
-                </ContentSectionWrapper>
-            </DialogContent>
-        </DefaultDialog>
-    );
+                      }
+                    }}
+                    style={{
+                      display: selectedState ? 'block' : 'hidden',
+                      width: '100%',
+                    }}
+                    disabled={isSubmitting}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant={'primary'}
+                    size={'lg'}
+                    style={{
+                      display: selectedState ? 'block' : 'hidden',
+                      width: '100%',
+                    }}
+                    type={'submit'}
+                    disabled={isSubmitting}
+                  >
+                    Save
+                  </Button>
+                </Flex>
+              </form>
+            </Form>
+          </FormContainer>
+          <ContentSectionWrapper
+            ref={setSourceElement}
+            $editMode={editMode}
+            id={'contentSectionScrollId'}
+          >
+            <ContentSection
+              chainId={chainId}
+              fullSubname={ens}
+              sanitized={
+                editMode
+                  ? editedRecords?.sanitizedRecords
+                  : records?.sanitizedRecords
+              }
+              records={editMode && editedRecords ? editedRecords : records}
+              onEdit={() => setEditMode(!editMode)}
+              editMode={editMode}
+            />
+          </ContentSectionWrapper>
+        </Flex>
+      )}
+    </DefaultDialog>
+  );
 };

@@ -113,8 +113,7 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
     };
 
     return (
-        <>
-            <DefaultDialog open={isEditorOpen} onOpenChange={(open: boolean) => {
+        <DefaultDialog open={isEditorOpen} onOpenChange={(open: boolean) => {
                 setIsEditorOpen(open);
             }}
                 header={
@@ -219,7 +218,6 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
                     <Button type="button" onClick={handleSave} variant="primary" style={{ flexGrow: '0.5' }}>Upload</Button>
                 </Flex >
             </DefaultDialog >
-        </>
 
 
     );

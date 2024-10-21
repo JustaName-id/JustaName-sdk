@@ -6,28 +6,30 @@ export interface BasePopoverContentProps extends PopoverContentProps {
   children: ReactNode;
 }
 
-
-export const BasePopoverContent: FC<BasePopoverContentProps> = ({ children, style, ...props }) => {
-
+export const BasePopoverContent: FC<BasePopoverContentProps> = ({
+  children,
+  style,
+  ...props
+}) => {
   return (
     <PopoverContent
       style={{
-        width: "var(--radix-popover-trigger-width)",
+        // width: "var(--radix-popover-trigger-width)",
+        transformOrigin: 'var(--radix-popover-content-transform-origin)',
+        width: '400px',
         padding: '0',
+        ...style,
       }}
-
       {...props}
-
     >
       <Flex
         style={{
           padding: '0px 0 0 0',
           borderRadius: '16px',
-          background: 'var(--justweb3-foreground-color-4)'
+          background: 'var(--justweb3-foreground-color-4)',
         }}
         direction={'column'}
       >
-
         <Flex
           style={{
             padding: '20px',
@@ -43,5 +45,5 @@ export const BasePopoverContent: FC<BasePopoverContentProps> = ({ children, styl
         <JustaNameFooter />
       </Flex>
     </PopoverContent>
-  )
-}
+  );
+};
