@@ -227,9 +227,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                   variant={'primary'}
                   rightIcon={<ArrowWhiteIcon width={15} />}
                   style={{
-                    fontSize: '10px',
+                    fontSize: '8px',
                     padding: '5px 10px',
-                    height: '22px',
+                    height: '25px',
                   }}
                   onClick={() => {
                     openEnsProfile(connectedEns?.ens, connectedEns?.chainId);
@@ -299,6 +299,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                   style={{
                     overflowX: 'scroll',
                     width: '100%',
+                    paddingBottom: '0px'
                   }}
                 >
                   <LinkCard

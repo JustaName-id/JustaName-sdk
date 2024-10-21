@@ -120,6 +120,9 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
 
             <Input
               placeholder={'0x...'}
+              style={{
+                height: "22px"
+              }}
               onChange={(e) => setContentHash(e.target.value)}
               value={contentHash}
             />

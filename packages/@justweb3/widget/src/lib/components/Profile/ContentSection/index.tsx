@@ -30,7 +30,7 @@ const Container = styled.div`
 
 const BannerContainer = styled.div`
   width: 100%;
-  height: 150px;
+  height: 100px;
   aspect-ratio: 7 / 1;
   //box-shadow: 1px 1px 0px 0px #000;
   overflow: hidden;
@@ -49,6 +49,15 @@ const SectionCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+`;
+
+const SectionCardTitle = styled.p`
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 100%;
+  font-family: var(--justweb3-font-family);
+  color: #0F172A;
 `;
 
 const SectionItemList = styled.div`
@@ -119,7 +128,7 @@ const ContentSection: React.FC<ContentProps> = ({
             alt="profile-banner"
             style={{
               objectFit: 'cover',
-              height: '150px',
+              height: '100px',
               width: '100%',
               borderRadius: '15px',
             }}
@@ -129,21 +138,24 @@ const ContentSection: React.FC<ContentProps> = ({
             align="center"
             style={{
               position: 'absolute',
-              top: '8px',
-              right: '10px',
+              top: '15px',
+              right: '15px',
             }}
           >
             {!editMode && isProfileSelf && (
               <Button
                 variant={'secondary'}
-                size={'md'}
                 onClick={() => {
                   onEdit && onEdit();
                 }}
                 style={{
                   color: 'var(--justweb3-primary-color)',
+                  height: '20px',
+                  padding: "5px 10px",
+                  fontSize: '8px',
+                  border: 'none'
                 }}
-                leftIcon={<PersonEditIcon height={20} width={20} />}
+                leftIcon={<PersonEditIcon height={10} width={10} />}
               >
                 Edit Profile
               </Button>
@@ -152,11 +164,10 @@ const ContentSection: React.FC<ContentProps> = ({
         </BannerContainer>
         <Flex
           direction={'column'}
-          gap={'10px'}
+          gap={'5px'}
           style={{
             marginTop: '-50px',
             zIndex: 1,
-            paddingBottom: '10px',
           }}
         >
           <div
@@ -183,6 +194,7 @@ const ContentSection: React.FC<ContentProps> = ({
                 color: 'black',
                 fontSize: '20px',
                 fontWeight: '700',
+                lineHeight: '100%'
               }}
             >
               {decodeURIComponent(
@@ -200,6 +212,7 @@ const ContentSection: React.FC<ContentProps> = ({
                   fontSize: '10px',
                   lineHeight: '10px',
                   fontWeight: 900,
+                  color: '#797979'
                 }}
               >
                 {decodeURIComponent(fullSubname)}
@@ -223,10 +236,12 @@ const ContentSection: React.FC<ContentProps> = ({
                     href={url}
                     target={'_blank'}
                     style={{
-                      fontSize: '14px',
+                      fontSize: '10px',
                       color: 'var(--justweb3-primary-color)',
                       textDecoration: 'underline',
                       width: 'fit-content',
+                      fontWeight: 500,
+                      lineHeight: '100%'
                     }}
                   >
                     {sanitized.url}
@@ -237,7 +252,7 @@ const ContentSection: React.FC<ContentProps> = ({
                 return (
                   <P
                     style={{
-                      fontSize: '14px',
+                      fontSize: '10px',
                       fontWeight: 500,
                       textDecoration: 'underline',
                       width: 'fit-content',
@@ -251,10 +266,10 @@ const ContentSection: React.FC<ContentProps> = ({
 
           {records?.records.texts?.find((text) => text.key === 'location') && (
             <Flex direction={'row'} gap={'5px'} align={'center'}>
-              <LocationIcon width={16} height={16} />
+              <LocationIcon width={10} height={10} />
               <P
                 style={{
-                  fontSize: '14px',
+                  fontSize: '10px',
                   fontWeight: 500,
                 }}
               >
@@ -276,14 +291,14 @@ const ContentSection: React.FC<ContentProps> = ({
       >
         <Flex
           direction={'column'}
-          gap={'5px'}
+          gap={'10px'}
           style={{
             flex: '1',
           }}
         >
           {sanitized?.socials?.length > 0 && (
             <SectionCard>
-              <P>Handles</P>
+              <SectionCardTitle>Handles</SectionCardTitle>
               <SectionItemList className={'justweb3scrollbar'}>
                 {sanitized?.socials
                   ?.filter((social) => social.value !== '')
@@ -302,7 +317,7 @@ const ContentSection: React.FC<ContentProps> = ({
             </SectionCard>
           )}
           <SectionCard>
-            <P>Addresses</P>
+            <SectionCardTitle>Addresses</SectionCardTitle>
             <SectionItemList className={'justweb3scrollbar'}>
               {sanitized?.allAddresses?.map((address) => {
                 return (
@@ -321,7 +336,7 @@ const ContentSection: React.FC<ContentProps> = ({
           </SectionCard>
           {sanitized?.otherTextsWithoutStandard?.length > 0 && (
             <SectionCard>
-              <P>Custom</P>
+              <SectionCardTitle>Custom</SectionCardTitle>
               <SectionItemList className={'justweb3scrollbar'}>
                 {sanitized?.otherTextsWithoutStandard?.map((other) => (
                   <SectionItem key={other.key}>

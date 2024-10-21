@@ -1,10 +1,10 @@
 import { chains } from '@justweb3/ui';
 
-export const getChainIcon = (chain: string): JSX.Element => {
+export const getChainIcon = (chain: string, size?: number): JSX.Element => {
   const Icon = chains[chain.toLowerCase() as keyof typeof chains];
 
   if (Icon) {
-    return <Icon width={24} height={24} />;
+    return <Icon width={size ?? 24} height={size ?? 24} />;
   }
 
   return (
@@ -13,8 +13,8 @@ export const getChainIcon = (chain: string): JSX.Element => {
         backgroundColor: 'white',
         borderColor: 'black',
         display: 'flex',
-        height: '24px',
-        width: '24px',
+        height: `${size ?? 24}px`,
+        width: `${size ?? 24}px`,
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',

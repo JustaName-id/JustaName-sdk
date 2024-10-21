@@ -20,6 +20,7 @@ export interface DefaultDialogProps {
   trigger?: ReactNode;
   disableOverlay?: boolean;
   contentStyle?: React.CSSProperties;
+  withoutFooter?: boolean;
 }
 
 export const DefaultDialog: FC<DefaultDialogProps> = ({
@@ -32,6 +33,7 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
   header,
   innerStyle = {},
   contentStyle = {},
+  withoutFooter,
 }) => {
   return (
     <Dialog modal={!disableOverlay} open={open} onOpenChange={onOpenChange}>
@@ -105,7 +107,9 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
             </Flex>
             {children}
           </Flex>
-          <JustaNameFooter />
+          {!withoutFooter && (
+            <JustaNameFooter />
+          )}
         </Flex>
       </DialogContent>
     </Dialog>

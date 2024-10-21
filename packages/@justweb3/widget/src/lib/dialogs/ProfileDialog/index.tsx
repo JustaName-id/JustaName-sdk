@@ -20,6 +20,7 @@ import {
   Flex,
   Form,
   LoadingSpinner,
+  P,
   SPAN,
   WalletIcon,
   WebsiteIcon,
@@ -94,23 +95,23 @@ const ContentSectionWrapper = styled.div<{ $editMode: boolean }>`
 const menuTabs = [
   {
     title: 'General',
-    icon: <ContactsIcon height={30} width={30} />,
+    icon: <ContactsIcon height={20} width={20} />,
   },
   {
     title: 'Socials',
-    icon: <ComicIcon height={30} width={30} />,
+    icon: <ComicIcon height={20} width={20} />,
   },
   {
     title: 'Addresses',
-    icon: <WalletIcon height={30} width={30} />,
+    icon: <WalletIcon height={20} width={20} />,
   },
   {
     title: 'Content Hash',
-    icon: <WebsiteIcon height={30} width={30} />,
+    icon: <WebsiteIcon height={20} width={20} />,
   },
   {
     title: 'Custom',
-    icon: <AttachmentIcon height={30} width={30} />,
+    icon: <AttachmentIcon height={20} width={20} />,
   },
 ];
 
@@ -215,21 +216,34 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
   const renderMenuTabs = () => (
     <Flex
       direction="column"
-      gap="10px"
+      gap="15px"
       style={{
         width: '100%',
         flex: 1,
       }}
     >
-      {menuTabs.map((item, index) => (
-        <ClickableItem
-          key={'menu-tab-' + index}
-          name={item.title}
-          onClick={() => setSelectedState(item.title)}
-          left={item.icon}
-          right={<ArrowIcon width={15} height={15} />}
-        />
-      ))}
+      <P style={{
+        fontSize: '16px',
+        color: 'black',
+        fontWeight: 700
+      }}>Edit Profile</P>
+      <Flex
+        direction="column"
+        gap="10px"
+      >
+        {menuTabs.map((item, index) => (
+          <ClickableItem
+            key={'menu-tab-' + index}
+            name={item.title}
+            style={{
+              borderRadius: '100px'
+            }}
+            onClick={() => setSelectedState(item.title)}
+            left={item.icon}
+            right={<ArrowIcon width={15} height={15} />}
+          />
+        ))}
+      </Flex>
     </Flex>
   );
 
@@ -323,11 +337,11 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
         records?.records.contentHash,
         data.contentHash.length > 0
           ? [
-              {
-                ...data.contentHash[0],
-                decoded: data.contentHash[0].decoded ?? '',
-              },
-            ]
+            {
+              ...data.contentHash[0],
+              decoded: data.contentHash[0].decoded ?? '',
+            },
+          ]
           : []
       ),
     })
@@ -442,7 +456,6 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                 >
                   <Button
                     variant={'secondary'}
-                    size={'lg'}
                     onClick={(e) => {
                       if (form.formState.isDirty || tempAvatar || tempBanner) {
                         setUnsavedChangesDialogOpen(true);
@@ -461,6 +474,10 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                     style={{
                       display: selectedState ? 'block' : 'hidden',
                       width: '100%',
+                      padding: '10px 12px',
+                      borderRadius: '15px',
+                      fontSize: '14px',
+                      height: '40px'
                     }}
                     disabled={isSubmitting}
                   >
@@ -468,10 +485,13 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                   </Button>
                   <Button
                     variant={'primary'}
-                    size={'lg'}
                     style={{
                       display: selectedState ? 'block' : 'hidden',
                       width: '100%',
+                      padding: '10px 12px',
+                      borderRadius: '15px',
+                      fontSize: '14px',
+                      height: '40px'
                     }}
                     type={'submit'}
                     disabled={isSubmitting}

@@ -12,8 +12,9 @@ const StyledButton = styled.button`
   margin-left: 0.5rem;
   color: var(--justweb3-primary-color);
   text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: normal;
 
   &:hover {
     text-decoration: underline;

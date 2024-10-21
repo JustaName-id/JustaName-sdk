@@ -17,11 +17,16 @@ const InputWrapper = styled.div<InputWrapperProps>`
     display: flex;
     align-items: center;
     border-radius: 16px;
-    border: 1px solid ${props => props.$error ? 'var(--justweb3-destructive-color)' : 'var(--justweb3-primary-color)'};
+    border: 1px solid ${props => props.$error ? 'var(--justweb3-destructive-color)' : '#E5E5E5'};
     background-color: var(--justweb3-background-color);
     padding: 10px;
     gap: 12px;
     width: ${props => props.$fullWidth ? '100%' : 'auto'};
+
+    &:focus-within {
+        outline: none;
+        border-color: ${props => props.$error ? 'var(--input-error-border-color)' : 'var(--justweb3-primary-color)'};
+    }
 `;
 
 const StyledInput = styled.input<StyledInputProps>`
@@ -41,7 +46,6 @@ const StyledInput = styled.input<StyledInputProps>`
 
     &:focus {
         outline: none;
-        border-color: ${props => props.$error ? 'var(--input-error-border-color)' : 'var(--justweb3-border-color)'};
     }
 
     &::placeholder {

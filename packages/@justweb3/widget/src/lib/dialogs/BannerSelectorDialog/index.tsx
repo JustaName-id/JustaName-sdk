@@ -1,12 +1,12 @@
 
+import { AddIcon, Button, Flex, MinusIcon, P, PenIcon } from '@justweb3/ui';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
 import React from 'react';
-import { DefaultDialog } from '../DefaultDialog';
-import { AddIcon, Button, Flex, MinusIcon, P, PenIcon } from '@justweb3/ui';
-import { SliderInput } from '../AvatarSelectorDialog';
 import styled from 'styled-components';
 import { useUploadToCdn } from '../../query/api';
+import { SliderInput } from '../AvatarSelectorDialog';
+import { DefaultDialog } from '../DefaultDialog';
 
 export interface BannerEditorDialogProps {
     onImageChange: (image: string) => void;
@@ -113,7 +113,45 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
     };
 
     return (
-        <DefaultDialog open={isEditorOpen} onOpenChange={(open: boolean) => {
+        <>
+            <div style={{
+                width: '100%',
+                height: '100px',
+                borderRadius: '5px',
+                overflow: 'hidden',
+                position: 'relative',
+            }}>
+                <img
+                    src={banner}
+                    alt="profile-banner"
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover'
+                    }}
+                />
+                <div style={{
+                    position: 'absolute',
+                    top: '15px',
+                    right: '15px',
+                }}>
+                    <PenIcon width={20} height={20} style={{
+                        cursor: 'pointer'
+                    }} onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleButtonClick();
+                    }} />
+                    <input
+                        type="file"
+                        accept="image/jpeg, image/png, image/heic, image/heif, image/gif, image/avif"
+                        onChange={handleImageChange}
+                        style={{ display: 'none' }}
+                        ref={fileInputRef}
+                    />
+                </div>
+            </div>
+            <DefaultDialog withoutFooter open={isEditorOpen} onOpenChange={(open: boolean) => {
                 setIsEditorOpen(open);
             }}
                 header={
@@ -127,53 +165,6 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
                     </P>
                 }
             >
-                <div style={{
-                    width: '100%',
-                    height: '160px',
-                    borderRadius: '6px',
-                    overflow: 'hidden',
-                    position: 'relative',
-                    border: '1px solid black'
-                }}>
-                    <img
-                        src={banner}
-                        alt="profile-banner"
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover'
-                        }}
-                    />
-                    <div style={{
-                        position: 'absolute',
-                        top: '25%',
-                        right: '25%',
-                    }}>
-                        <Button
-                            variant={'secondary'}
-                            style={{
-                                border: '1px solid black'
-                            }}
-                            rightIcon={<PenIcon width={20} height={20} style={{
-                                cursor: 'pointer'
-                            }} />}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                handleButtonClick();
-                            }}
-                        >
-                            Edit Banner
-                        </Button>
-                        <input
-                            type="file"
-                            accept="image/jpeg, image/png, image/heic, image/heif, image/gif, image/avif"
-                            onChange={handleImageChange}
-                            style={{ display: 'none' }}
-                            ref={fileInputRef}
-                        />
-                    </div>
-                </div>
                 <ResponsiveDiv>
                     <StyledDiv>
                         <img
@@ -218,7 +209,6 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
                     <Button type="button" onClick={handleSave} variant="primary" style={{ flexGrow: '0.5' }}>Upload</Button>
                 </Flex >
             </DefaultDialog >
-
-
+        </>
     );
 };

@@ -53,7 +53,7 @@ export const SocialsSection: React.FC<SocialsSectionProps> = ({
         <Flex direction="column" gap="10px">
           <Flex
             direction="column"
-            gap="20px"
+            gap="15px"
             style={{
               overflowY: 'auto',
             }}
