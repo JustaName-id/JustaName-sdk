@@ -1,3 +1,20 @@
+## 0.0.38 (2024-10-21)
+
+
+### 🚀 Features
+
+- working on update dialog ([cbf154a](https://github.com/JustaName-id/JustaName-sdk/commit/cbf154a))
+
+- working on update ([a693846](https://github.com/JustaName-id/JustaName-sdk/commit/a693846))
+
+- update functionality ([69c4761](https://github.com/JustaName-id/JustaName-sdk/commit/69c4761))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- HadiKhai
+
 ## 0.0.37 (2024-10-14)
 
 This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.

@@ -1,3 +1,36 @@
+## 0.0.38 (2024-10-21)
+
+
+### 🚀 Features
+
+- working on update dialog ([cbf154a](https://github.com/JustaName-id/JustaName-sdk/commit/cbf154a))
+
+- working on update ([a693846](https://github.com/JustaName-id/JustaName-sdk/commit/a693846))
+
+- justverified fixes and double vc signature due to rerending fixed ([57965f5](https://github.com/JustaName-id/JustaName-sdk/commit/57965f5))
+
+- update functionality ([69c4761](https://github.com/JustaName-id/JustaName-sdk/commit/69c4761))
+
+
+### 🩹 Fixes
+
+- lint error on justweb3/widget ([88f6904](https://github.com/JustaName-id/JustaName-sdk/commit/88f6904))
+
+- lint ([ddad78a](https://github.com/JustaName-id/JustaName-sdk/commit/ddad78a))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.99
+- Updated @justaname.id/react to 0.3.102
+- Updated @justweb3/ui to 0.0.38
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- HadiKhai
+
 ## 0.0.37 (2024-10-14)
 
 
