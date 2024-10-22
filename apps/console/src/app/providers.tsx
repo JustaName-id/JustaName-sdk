@@ -23,8 +23,8 @@ export const Providers: React.FC<ProviderProps> = (props) => {
   const { wallets } = getDefaultWallets();
 
   const config = getDefaultConfig({
-    appName: 'RainbowKit demo',
-    projectId: 'YOUR_PROJECT_ID',
+    appName: 'JAN Console Demo',
+    projectId: '',
     wallets: [
       ...wallets,
       {
