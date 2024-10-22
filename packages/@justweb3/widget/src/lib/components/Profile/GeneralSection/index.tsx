@@ -81,7 +81,7 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
         gap="10px"
         className={'justweb3scrollbar'}
         style={{
-          overflowY: 'scroll',
+          overflowY: 'auto',
           maxHeight: 'calc(100% - 62px)',
         }}
       >

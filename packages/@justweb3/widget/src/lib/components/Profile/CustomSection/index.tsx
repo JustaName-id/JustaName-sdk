@@ -62,7 +62,7 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
         gap="10px"
         className="justweb3scrollbar"
         style={{
-          overflowY: 'scroll',
+          overflowY: 'auto',
           maxHeight: 'calc(100% - 62px)',
         }}
       >
@@ -90,9 +90,13 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
                         }}
                       >
                         <FormControl>
-                          <Input placeholder={'Key'} {...field} style={{
-                            height: "22px"
-                          }} />
+                          <Input
+                            placeholder={'Key'}
+                            {...field}
+                            style={{
+                              height: '22px',
+                            }}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -108,9 +112,13 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
                         }}
                       >
                         <FormControl>
-                          <Input placeholder={'Value'} {...field} style={{
-                            height: "22px"
-                          }} />
+                          <Input
+                            placeholder={'Value'}
+                            {...field}
+                            style={{
+                              height: '22px',
+                            }}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -148,7 +156,7 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
               onChange={(e) => setCustomKey(e.target.value)}
               value={customKey}
               style={{
-                height: "22px"
+                height: '22px',
               }}
             />
 
@@ -157,7 +165,7 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
               onChange={(e) => setCustomValue(e.target.value)}
               value={customValue}
               style={{
-                height: "22px"
+                height: '22px',
               }}
             />
           </Flex>
