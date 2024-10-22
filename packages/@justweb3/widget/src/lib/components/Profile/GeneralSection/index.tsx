@@ -19,6 +19,7 @@ interface GeneralSectionProps {
   setTempBanner: (newImageUrl: string | null) => void;
   tempAvatar: string | null;
   setTempAvatar: (newImageUrl: string | null) => void;
+  disableOverlay?: boolean;
 }
 
 const Container = styled.div`
@@ -37,6 +38,7 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
   setTempAvatar,
   setTempBanner,
   tempBanner,
+  disableOverlay,
 }) => {
   const { records } = useRecords({
     ens: fullSubname,
@@ -87,6 +89,7 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
       >
         <Flex direction="column">
           <BannerEditorDialog
+            disableOverlay={disableOverlay}
             onImageChange={handleBannerChange}
             banner={
               tempBanner ||
@@ -106,6 +109,7 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
             }}
           >
             <AvatarEditorDialog
+              disableOverlay={disableOverlay}
               onImageChange={handleAvatarChange}
               avatar={
                 tempAvatar ||

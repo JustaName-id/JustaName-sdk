@@ -2,7 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { LoadingSpinner } from '../LoadingSpinner';
 
-type ButtonVariant = 'primary' | 'secondary' | 'destructive-outline' | 'destructive';
+type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'destructive-outline'
+  | 'destructive';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -25,81 +29,97 @@ interface StyledButtonProps {
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 16px;
-    border: none;
-    font-weight: 900;
-    font-family: var(--justweb3-font-family), serif;
-    letter-spacing: 0;
-    font-size: 12px;
-    line-height: 1;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    position: relative; // Added this line
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  border: none;
+  font-weight: 900;
+  font-family: var(--justweb3-font-family), serif;
+  letter-spacing: 0;
+  font-size: 12px;
+  line-height: 1;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative; // Added this line
 
-    ${props => props.variant === 'primary' && css`
-        background-color: var(--justweb3-primary-color);
-        color: var(--justweb3-primary-color-foreground);
+  ${(props) =>
+    props.variant === 'primary' &&
+    css`
+      background-color: var(--justweb3-primary-color);
+      color: var(--justweb3-primary-color-foreground);
 
-        &:hover {
-            background-color: var(--justweb3-primary-color-dark);
-        }
+      &:hover {
+        background-color: var(--justweb3-primary-color-dark);
+      }
     `}
 
-    ${props => props.variant === 'secondary' && css`
+  ${(props) =>
+    props.variant === 'secondary' &&
+    css`
+      background-color: var(--justweb3-background-color);
+      color: var(--justweb3-primary-color);
+      border: 1px solid var(--justweb3-primary-color);
+
+      &:hover {
         background-color: var(--justweb3-background-color);
-        color: var(--justweb3-primary-color);
-        border: 1px solid var(--justweb3-primary-color);
-        
-        &:hover {
-            background-color: var(--justweb3-background-color);
-            color: var(--justweb3-primary-color-dark);
-            border: 1px solid var(--justweb3-primary-color-dark);
-        }
+        color: var(--justweb3-primary-color-dark);
+        border: 1px solid var(--justweb3-primary-color-dark);
+      }
     `}
     
-    ${props => props.variant === 'destructive-outline' && css`
+    ${(props) =>
+    props.variant === 'destructive-outline' &&
+    css`
+      background-color: var(--justweb3-background-color);
+      color: var(--justweb3-destructive-color);
+      border: 1px solid var(--justweb3-destructive-color);
+
+      &:hover {
         background-color: var(--justweb3-background-color);
-        color: var(--justweb3-destructive-color);
-        border: 1px solid var(--justweb3-destructive-color);
-        
-        &:hover {
-            background-color: var(--justweb3-background-color);
-            color: var(--justweb3-destructive-color-dark);
-            border: 1px solid var(--justweb3-destructive-color-dark);
-        }
+        color: var(--justweb3-destructive-color-dark);
+        border: 1px solid var(--justweb3-destructive-color-dark);
+      }
     `}
     
-    ${props => props.variant === 'destructive' && css`
-        background-color: var(--justweb3-destructive-color);
-        color: var(--justweb3-destructive-color-foreground);
-        
-        &:hover {
-            background-color: var(--justweb3-destructive-color-dark);
-        }
+    ${(props) =>
+    props.variant === 'destructive' &&
+    css`
+      background-color: var(--justweb3-destructive-color);
+      color: var(--justweb3-destructive-color-foreground);
+
+      &:hover {
+        background-color: var(--justweb3-destructive-color-dark);
+      }
     `}
     
-    ${props => props.disabled && css`
-        opacity: 0.5;
-        cursor: not-allowed;
+    ${(props) =>
+    props.disabled &&
+    css`
+      opacity: 0.5;
+      cursor: not-allowed;
     `}
 
-    ${props => props.size === 'sm' && css`
-        height: 34px;
-        padding: 0 12px;
+    ${(props) =>
+    props.size === 'sm' &&
+    css`
+      height: 34px;
+      padding: 0 12px;
     `}
 
-    ${props => props.size === 'md' && css`
-        height: 48px;
-        padding: 10px 12px;
+    ${(props) =>
+    props.size === 'md' &&
+    css`
+      height: 28px;
+      padding: 10px 12px;
     `}
 
-    ${props => props.size === 'lg' && css`
-        height: 52px;
-        font-size: 14px;
-        padding: 0 12px;
+    ${(props) =>
+    props.size === 'lg' &&
+    css`
+      height: 52px;
+      font-size: 14px;
+      padding: 0 12px;
     `}
 `;
 
@@ -107,9 +127,9 @@ const ButtonContent = styled.span<{ $loading: boolean }>`
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-    gap: 6px;
-  opacity: ${props => props.$loading ? 0 : 1};
-  visibility: ${props => props.$loading ? 'hidden' : 'visible'};
+  gap: 6px;
+  opacity: ${(props) => (props.$loading ? 0 : 1)};
+  visibility: ${(props) => (props.$loading ? 'hidden' : 'visible')};
 `;
 
 const SpinnerWrapper = styled.div`
@@ -119,56 +139,56 @@ const SpinnerWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
-  className,
-  variant = 'primary',
-  size = 'sm',
-  asChild = false,
-  loading = false,
-  children,
-  disabled = false,
-  rightIcon,
-  leftIcon,
-  ...props
-}, ref) => {
-
-  return (
-    <StyledButton
-      as={'button'}
-      className={className}
-      variant={variant}
-      size={size}
-      ref={ref}
-      disabled={loading || disabled}
-      {...props}
-    >
-      <ButtonContent $loading={loading}>
-        {
-          (leftIcon && !loading) && leftIcon
-        }
-        {
-          children
-        }
-        {
-          (rightIcon && !loading) && rightIcon
-        }
-      </ButtonContent>
-      {loading && (
-        <SpinnerWrapper>
-          <LoadingSpinner
-            color={variant === 'primary' ?
-              'var(--justweb3-foreground-color-4)' :
-              variant === "destructive-outline" ?
-                'var(--justweb3-destructive-color)' :
-                variant === "destructive" ?
-                  'var(--justweb3-foreground-color-4)' :
-                  'var(--justweb3-primary-color)'}
-          />
-        </SpinnerWrapper>
-      )}
-    </StyledButton>
-  );
-});
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      className,
+      variant = 'primary',
+      size = 'sm',
+      asChild = false,
+      loading = false,
+      children,
+      disabled = false,
+      rightIcon,
+      leftIcon,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <StyledButton
+        as={'button'}
+        className={className}
+        variant={variant}
+        size={size}
+        ref={ref}
+        disabled={loading || disabled}
+        {...props}
+      >
+        <ButtonContent $loading={loading}>
+          {leftIcon && !loading && leftIcon}
+          {children}
+          {rightIcon && !loading && rightIcon}
+        </ButtonContent>
+        {loading && (
+          <SpinnerWrapper>
+            <LoadingSpinner
+              color={
+                variant === 'primary'
+                  ? 'var(--justweb3-foreground-color-4)'
+                  : variant === 'destructive-outline'
+                  ? 'var(--justweb3-destructive-color)'
+                  : variant === 'destructive'
+                  ? 'var(--justweb3-foreground-color-4)'
+                  : 'var(--justweb3-primary-color)'
+              }
+            />
+          </SpinnerWrapper>
+        )}
+      </StyledButton>
+    );
+  }
+);
 
 Button.displayName = 'Button';
 

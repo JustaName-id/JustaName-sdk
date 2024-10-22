@@ -83,6 +83,7 @@ export interface ProfileDialogProps {
   ens: string;
   chainId?: 1 | 11155111;
   handleOnClose: () => void;
+  disableOverlay?: boolean;
 }
 
 const ContentSectionWrapper = styled.div<{ $editMode: boolean }>`
@@ -119,6 +120,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
   ens,
   chainId,
   handleOnClose,
+  disableOverlay,
 }) => {
   const { records, isRecordsPending, refetchRecords } = useRecords({
     ens: ens,
@@ -253,6 +255,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       case 'General':
         return (
           <GeneralSection
+            disableOverlay={disableOverlay}
             address={records?.sanitizedRecords?.ethAddress?.value || ''}
             form={form}
             fullSubname={ens}
@@ -364,20 +367,10 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       });
   };
 
-  useEffect(() => {
-    return () => {
-      setEditMode(false);
-      setSelectedState(undefined);
-      form.reset(buildInitialValues(records?.sanitizedRecords));
-      handleOnClose();
-    };
-  }, []);
-
-  console.log(ens, chainId);
-
   return (
     <DefaultDialog
       open={true}
+      disableOverlay={disableOverlay}
       handleClose={() => {
         handleOnClose();
         setEditMode(false);
@@ -475,13 +468,10 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                         }
                       }
                     }}
+                    size={'md'}
                     style={{
                       display: selectedState ? 'block' : 'hidden',
                       width: '100%',
-                      padding: '10px 12px',
-                      borderRadius: '15px',
-                      fontSize: '14px',
-                      height: '40px',
                     }}
                     disabled={isSubmitting}
                   >
@@ -489,13 +479,10 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                   </Button>
                   <Button
                     variant={'primary'}
+                    size={'md'}
                     style={{
                       display: selectedState ? 'block' : 'hidden',
                       width: '100%',
-                      padding: '10px 12px',
-                      borderRadius: '15px',
-                      fontSize: '14px',
-                      height: '40px',
                     }}
                     type={'submit'}
                     disabled={isSubmitting}

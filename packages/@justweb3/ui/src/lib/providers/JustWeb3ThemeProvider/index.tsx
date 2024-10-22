@@ -199,26 +199,43 @@ export const JustWeb3ThemeProvider: React.FC<JustWeb3ThemeProviderProps> = ({
         .map(([key, value]) => `${key}: ${value};`)
         .join('\n')}
         
+         * {
+          box-sizing: content-box;
+        }
+
         .justweb3scrollbar::-webkit-scrollbar {
-          width: 12px;
-          height: 12px;
+          width: 0;
+          height: 0;
         }
         
-        .justweb3scrollbar::-webkit-scrollbar-track {
-          background: var(--justweb3-background-color);
-          
+         .justweb3scrollbar::-webkit-scrollbar-track {  
+            display: none;
         }
-        
+
         .justweb3scrollbar::-webkit-scrollbar-thumb {
-          background: var(--justweb3-primary-color);
-          border-radius: 10px;
-          border: 4px solid white;
-          cursor: pointer;
+           display: none;
         }
         
-        .justweb3scrollbar::-webkit-scrollbar-thumb:hover {
-          background: var(--justweb3-forground-color-4);
-        }  
+        // .justweb3scrollbar::-webkit-scrollbar {
+        //   width: 12px;
+        //   height: 12px;
+        // }
+        //
+        // .justweb3scrollbar::-webkit-scrollbar-track {
+        //   background: var(--justweb3-background-color);
+        //  
+        // }
+        //
+        // .justweb3scrollbar::-webkit-scrollbar-thumb {
+        //   background: var(--justweb3-primary-color);
+        //   border-radius: 10px;
+        //   border: 4px solid white;
+        //   cursor: pointer;
+        // }
+        //
+        // .justweb3scrollbar::-webkit-scrollbar-thumb:hover {
+        //   background: var(--justweb3-forground-color-4);
+        // }  
     }`;
     document.head.appendChild(style);
 

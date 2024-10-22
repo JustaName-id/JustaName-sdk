@@ -10,9 +10,9 @@ interface AvatarWrapperProps {
 }
 
 const AvatarWrapper = styled.div<AvatarWrapperProps>`
-  width: ${(props) => props.$size || '40px'};
-  height: ${(props) => props.$size || '40px'};
-  min-width: ${(props) => props.$size || '40px'};
+  width: ${(props) => props.$size || '28px'};
+  height: ${(props) => props.$size || '28px'};
+  min-width: ${(props) => props.$size || '28px'};
   background-color: ${(props) =>
     props.$bgColor || 'var(--justweb3-primary-color)'};
   border-radius: 50%;

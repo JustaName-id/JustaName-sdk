@@ -10,22 +10,21 @@ import {
 } from '@justweb3/ui';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ResponsiveDiv } from '../BannerSelectorDialog';
 import { DefaultDialog } from '../DefaultDialog';
 import { useUploadMedia } from '@justaname.id/react';
-import { JustWeb3Context } from '../../providers';
-import { Loading } from '../../components';
+import { Loading } from '../../components/Loading';
 
 export interface AvatarEditorDialogProps {
   onImageChange: (image: string) => void;
   avatar: string;
   subname: string;
   address?: `0x${string}`;
+  disableOverlay?: boolean;
 }
 
-export const SliderInput = styled.input.attrs({ type: 'range' })`
+const SliderInput = styled.input.attrs({ type: 'range' })`
   width: 100%;
   height: 0.5rem;
   background-color: #bfdbfe;
@@ -73,6 +72,13 @@ export const SliderInput = styled.input.attrs({ type: 'range' })`
   }
 `;
 
+const ResponsiveDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 768px) {
+    max-width: 360px;
+  }
+`;
 // const NFTCardWrapper = styled.div`
 //   display: grid;
 //   grid-template-columns: repeat(12, 1fr);
@@ -118,11 +124,11 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
   avatar,
   subname,
   address,
+  disableOverlay,
 }) => {
   const [isEditorOpen, setIsEditorOpen] = React.useState(false);
   // const [isNFTDialogOpen, setIsNFTDialogOpen] = React.useState(false);
   const [imageSrc, setImageSrc] = React.useState('');
-  const { config } = useContext(JustWeb3Context);
   const imageElement = React.useRef<HTMLImageElement>(null);
   const cropper = React.useRef<Cropper>();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -324,6 +330,7 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
         </div>
       </Flex>
       <DefaultDialog
+        disableOverlay={disableOverlay}
         withoutFooter
         open={isEditorOpen}
         onOpenChange={(open: boolean) => {
