@@ -4,8 +4,29 @@
   "sourceRoot": "apps/console",
   "projectType": "application",
   "tags": [],
-  "// targets": "to see all targets run: nx show project console --web",
   "targets": {
-
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/console",
+        "outputPath": "dist/apps/console",
+        "config": "apps/console/next.config.js"
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "options": {
+        "buildTarget": "console:build",
+        "dev": true
+      }
+    },
+    "dev": {
+      "executor": "@nx/next:dev",
+      "options": {
+        "buildTarget": "console:build"
+      }
+    }
   }
 }
