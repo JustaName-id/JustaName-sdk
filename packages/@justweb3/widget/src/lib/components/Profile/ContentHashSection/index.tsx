@@ -108,7 +108,7 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
           gap="10px"
           className="justweb3scrollbar"
           style={{
-            overflowY: 'scroll',
+            overflowY: 'auto',
             maxHeight: 'calc(100% - 62px)',
           }}
           ref={contentHashesRef}
@@ -121,7 +121,7 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
             <Input
               placeholder={'0x...'}
               style={{
-                height: "22px"
+                height: '22px',
               }}
               onChange={(e) => setContentHash(e.target.value)}
               value={contentHash}
