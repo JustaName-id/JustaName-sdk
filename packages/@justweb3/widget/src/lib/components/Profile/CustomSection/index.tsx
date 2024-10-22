@@ -182,9 +182,6 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
               setCustomValue('');
             }}
             disabled={customKey === '' || customValue === ''}
-            style={{
-              width: '100%',
-            }}
           >
             Add Custom Field
           </Button>
