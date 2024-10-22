@@ -141,6 +141,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
     return children;
   }
 
+  console.log(connectedEns?.ens, records);
   return (
     <>
       <MAppsDialog open={openMApps} handleOpenDialog={handleOpenMAppsDialog} />
@@ -299,7 +300,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                   style={{
                     overflowX: 'scroll',
                     width: '100%',
-                    paddingBottom: '0px'
+                    paddingBottom: '0px',
                   }}
                 >
                   <LinkCard

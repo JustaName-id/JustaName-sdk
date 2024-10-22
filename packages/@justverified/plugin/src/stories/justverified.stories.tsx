@@ -42,8 +42,8 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   dev: import.meta.env.STORYBOOK_APP_ENV === 'development',
   plugins: [
     JustVerifiedPlugin(
-      ['email', 'twitter', 'github', 'discord', 'telegram'],
-      'http://localhost:3009/verifications/v1'
+      ['email', 'twitter', 'github', 'discord', 'telegram']
+      // 'http://localhost:3009/verifications/v1'
       // 'https://api-staging.justaname.id/verifications/v1'
     ),
   ],

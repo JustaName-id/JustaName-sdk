@@ -9,7 +9,6 @@ export const JustaNameFooter = () => {
         padding: '10px 20px',
         background: 'var(--justweb3-foreground-color-4)',
         borderRadius: ' 0 0 16px 16px',
-        height: '25px',
       }}
     >
       <Flex
