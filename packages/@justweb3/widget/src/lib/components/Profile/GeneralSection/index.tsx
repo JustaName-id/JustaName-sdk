@@ -7,12 +7,13 @@ import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { metadataForm } from '../../../forms';
 import styled from 'styled-components';
-import { useJustWeb3 } from '../../../providers';
-import { AvatarEditorDialog, BannerEditorDialog } from '../../../dialogs';
 import { MetadataField } from '../MetadataField';
+import { AvatarEditorDialog } from '../../../dialogs/AvatarSelectorDialog';
+import { BannerEditorDialog } from '../../../dialogs/BannerSelectorDialog';
 
 interface GeneralSectionProps {
   form: UseFormReturn<metadataForm>;
+  address: string;
   fullSubname: string;
   tempBanner: string | null;
   setTempBanner: (newImageUrl: string | null) => void;
@@ -30,6 +31,7 @@ const Container = styled.div`
 
 export const GeneralSection: React.FC<GeneralSectionProps> = ({
   form,
+  address,
   fullSubname,
   tempAvatar,
   setTempAvatar,
@@ -39,8 +41,6 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
   const { records } = useRecords({
     ens: fullSubname,
   });
-  const { connectedEns } = useJustWeb3();
-
   const handleAvatarChange = (newImageUrl: string) => {
     setTempAvatar(newImageUrl);
     const index = GENERAL_FIELDS.findIndex(
@@ -114,7 +114,7 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
                 '/sample/justsomeone.webp'
               }
               subname={fullSubname}
-              address={(connectedEns?.address ?? '0x00') as `0x${string}`}
+              address={(address ?? '0x00') as `0x${string}`}
             />
           </Flex>
         </Flex>

@@ -142,6 +142,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
   };
 
   const handleOpenEnsProfile = (ens: string, chainId?: ChainId) => {
+    console.log('handleOpenEnsProfile', ens, chainId);
     setEnsOpen({ ens, chainId });
   };
 
@@ -199,6 +200,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
     }
   };
 
+  console.log(ensOpen);
   return (
     <JustaNameProvider config={justanameConfig}>
       <JustWeb3ThemeProvider color={config.color}>

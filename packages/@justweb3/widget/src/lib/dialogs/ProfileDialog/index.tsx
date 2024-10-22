@@ -222,21 +222,22 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
         flex: 1,
       }}
     >
-      <P style={{
-        fontSize: '16px',
-        color: 'black',
-        fontWeight: 700
-      }}>Edit Profile</P>
-      <Flex
-        direction="column"
-        gap="10px"
+      <P
+        style={{
+          fontSize: '16px',
+          color: 'black',
+          fontWeight: 700,
+        }}
       >
+        Edit Profile
+      </P>
+      <Flex direction="column" gap="10px">
         {menuTabs.map((item, index) => (
           <ClickableItem
             key={'menu-tab-' + index}
             name={item.title}
             style={{
-              borderRadius: '100px'
+              borderRadius: '100px',
             }}
             onClick={() => setSelectedState(item.title)}
             left={item.icon}
@@ -252,6 +253,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       case 'General':
         return (
           <GeneralSection
+            address={records?.sanitizedRecords?.ethAddress?.value || ''}
             form={form}
             fullSubname={ens}
             tempAvatar={tempAvatar}
@@ -337,11 +339,11 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
         records?.records.contentHash,
         data.contentHash.length > 0
           ? [
-            {
-              ...data.contentHash[0],
-              decoded: data.contentHash[0].decoded ?? '',
-            },
-          ]
+              {
+                ...data.contentHash[0],
+                decoded: data.contentHash[0].decoded ?? '',
+              },
+            ]
           : []
       ),
     })
@@ -370,6 +372,8 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       handleOnClose();
     };
   }, []);
+
+  console.log(ens, chainId);
 
   return (
     <DefaultDialog
@@ -456,7 +460,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                 >
                   <Button
                     variant={'secondary'}
-                    onClick={(e) => {
+                    onClick={(e: React.MouseEvent) => {
                       if (form.formState.isDirty || tempAvatar || tempBanner) {
                         setUnsavedChangesDialogOpen(true);
                         e.preventDefault();
@@ -477,7 +481,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                       padding: '10px 12px',
                       borderRadius: '15px',
                       fontSize: '14px',
-                      height: '40px'
+                      height: '40px',
                     }}
                     disabled={isSubmitting}
                   >
@@ -491,7 +495,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                       padding: '10px 12px',
                       borderRadius: '15px',
                       fontSize: '14px',
-                      height: '40px'
+                      height: '40px',
                     }}
                     type={'submit'}
                     disabled={isSubmitting}
