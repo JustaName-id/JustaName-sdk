@@ -243,27 +243,31 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                 );
               })}
 
-            {credentials.includes('email') && verifiedRecords?.email ? (
-              <SelectCredentialItem
-                credential={'email'}
-                selectedCredential={selectedCredential}
-                onClick={() => {
-                  setSelectedCredential('email');
-                }}
-                credentialValue={verifiedRecords?.email}
-                disabled={isVerifiedRecordsPending}
-              />
-            ) : (
-              <EmailCredentialItem
-                mApp={mApp}
-                mAppsAlreadyEnabled={mAppsAlreadyEnabled}
-                refetchRecords={refetchRecords}
-                refetchVerifyRecords={refetchVerifyRecords}
-                verificationBackendUrl={verificationBackendUrl}
-                selectedCredential={selectedCredential}
-                credentialValue={verifiedRecords?.email}
-                disabled={isVerifiedRecordsPending}
-              />
+            {credentials.includes('email') && (
+              <>
+                {verifiedRecords?.email ? (
+                  <SelectCredentialItem
+                    credential={'email'}
+                    selectedCredential={selectedCredential}
+                    onClick={() => {
+                      setSelectedCredential('email');
+                    }}
+                    credentialValue={verifiedRecords?.email}
+                    disabled={isVerifiedRecordsPending}
+                  />
+                ) : (
+                  <EmailCredentialItem
+                    mApp={mApp}
+                    mAppsAlreadyEnabled={mAppsAlreadyEnabled}
+                    refetchRecords={refetchRecords}
+                    refetchVerifyRecords={refetchVerifyRecords}
+                    verificationBackendUrl={verificationBackendUrl}
+                    selectedCredential={selectedCredential}
+                    credentialValue={verifiedRecords?.email}
+                    disabled={isVerifiedRecordsPending}
+                  />
+                )}
+              </>
             )}
           </Flex>
         </Flex>
