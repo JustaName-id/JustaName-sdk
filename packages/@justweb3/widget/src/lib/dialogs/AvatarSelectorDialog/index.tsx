@@ -1,5 +1,13 @@
 // import { useAllNFTSForCurrentAddress } from '@query/api/nft';
-import { AddIcon, Avatar, Button, Flex, MinusIcon, P, PenIcon } from '@justweb3/ui';
+import {
+  AddIcon,
+  Avatar,
+  Button,
+  Flex,
+  MinusIcon,
+  P,
+  PenIcon,
+} from '@justweb3/ui';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
 import React, { useContext } from 'react';
@@ -13,7 +21,7 @@ import { Loading } from '../../components';
 export interface AvatarEditorDialogProps {
   onImageChange: (image: string) => void;
   avatar: string;
-  subname: string
+  subname: string;
   address?: `0x${string}`;
 }
 
@@ -105,7 +113,6 @@ const ImageWrapper = styled.div`
   }
 `;
 
-
 export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
   onImageChange,
   avatar,
@@ -121,9 +128,8 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   // const { nfts } = useAllNFTSForCurrentAddress();
   const { uploadMedia, isUploadPending } = useUploadMedia({
-    subname,
-    isDev: config.dev ?? true,
-    type: "Avatar"
+    ens: subname,
+    type: 'Avatar',
   });
   // const [selectedNFT, setSelectedNFT] = React.useState<number>(-1);
   const handleImageLoaded = () => {
@@ -150,7 +156,6 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
     }
   };
 
-
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newZoomLevel = parseFloat(e.target.value);
     if (cropper.current) {
@@ -158,7 +163,6 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
       cropper.current.zoomTo(zoomRatio);
     }
   };
-
 
   const handleSave = () => {
     if (cropper.current) {
@@ -195,7 +199,6 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
   //   setIsNFTDialogOpen(true);
   //   setIsPopupOpen(false);
   // };
-
 
   return (
     <>
@@ -269,10 +272,16 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
           </Flex >
         </DefaultDialog>
       } */}
-      <Flex direction='row' justify='center' align="center" style={{
-        width: "100%",
-        flex: "1",
-      }} onClick={handleButtonClick}>
+      <Flex
+        direction="row"
+        justify="center"
+        align="center"
+        style={{
+          width: '100%',
+          flex: '1',
+        }}
+        onClick={handleButtonClick}
+      >
         <input
           type="file"
           accept="image/jpeg, image/png, image/heic, image/heif, image/gif, image/avif"
@@ -280,13 +289,19 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
           style={{ display: 'none' }}
           ref={fileInputRef}
         />
-        <Avatar
-          src={avatar || "/justsomeone.webp"}
-          size='75px'
-          containerStyle={{
+        <div
+          style={{
+            boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.25)',
             border: '4px solid white',
+            width: '75px',
+            height: '75px',
+            borderRadius: '50%',
+            margin: '0 15px',
+            backgroundColor: 'white',
           }}
-        />
+        >
+          <Avatar src={avatar} size={'75px'} border={false} bgColor={'white'} />
+        </div>
         <div
           style={{
             position: 'absolute',
@@ -296,24 +311,33 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
             placeContent: 'center',
             justifyContent: 'center',
             alignItems: 'center',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         >
-          <PenIcon height={24} width={24} style={{
-            cursor: 'pointer'
-          }} />
+          <PenIcon
+            height={24}
+            width={24}
+            style={{
+              cursor: 'pointer',
+            }}
+          />
         </div>
       </Flex>
-      <DefaultDialog withoutFooter open={isEditorOpen} onOpenChange={(open: boolean) => {
-        setIsEditorOpen(open);
-      }}
+      <DefaultDialog
+        withoutFooter
+        open={isEditorOpen}
+        onOpenChange={(open: boolean) => {
+          setIsEditorOpen(open);
+        }}
         header={
-          <P style={{
-            fontSize: '20px',
-            fontWeight: 900,
-            lineHeight: '20px',
-            textAlign: 'center'
-          }}>
+          <P
+            style={{
+              fontSize: '20px',
+              fontWeight: 900,
+              lineHeight: '20px',
+              textAlign: 'center',
+            }}
+          >
             Zoom & Crop
           </P>
         }
@@ -345,27 +369,34 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
             {/* <div className='bg-[#dfdfdf] w-[31px] h-[25px] rounded-full flex justify-center items-center'> */}
             <MinusIcon width={27} height={27} />
             {/* </div> */}
-            <SliderInput
-              min="1"
-              max="100"
-              onChange={handleSliderChange}
-            />
+            <SliderInput min="1" max="100" onChange={handleSliderChange} />
             {/* <div className='bg-[#dfdfdf] w-[31px] h-[25px] rounded-full flex justify-center items-center'> */}
             <AddIcon width={27} height={27} />
             {/* </div> */}
           </Flex>
         </ResponsiveDiv>
-        {isUploadPending ?
+        {isUploadPending ? (
           <Loading />
-          :
-          <Flex direction='row' gap="10px">
-            <Button type="button" variant="secondary" style={{ flexGrow: '0.5' }}>Cancel</Button>
-            <Button type="button" onClick={handleSave} variant="primary" style={{ flexGrow: '0.5' }}>Upload</Button>
-          </Flex >
-        }
-      </DefaultDialog >
+        ) : (
+          <Flex direction="row" gap="10px">
+            <Button
+              type="button"
+              variant="secondary"
+              style={{ flexGrow: '0.5' }}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="button"
+              onClick={handleSave}
+              variant="primary"
+              style={{ flexGrow: '0.5' }}
+            >
+              Upload
+            </Button>
+          </Flex>
+        )}
+      </DefaultDialog>
     </>
-
-
   );
 };

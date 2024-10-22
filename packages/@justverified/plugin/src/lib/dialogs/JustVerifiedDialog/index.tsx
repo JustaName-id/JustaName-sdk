@@ -145,7 +145,7 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
             gap={'15px'}
             style={{
               maxHeight: '40vh',
-              overflowY: 'scroll',
+              overflowY: 'auto',
               overflowX: 'hidden',
             }}
           >

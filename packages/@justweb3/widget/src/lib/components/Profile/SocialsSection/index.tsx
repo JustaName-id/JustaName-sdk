@@ -45,7 +45,7 @@ export const SocialsSection: React.FC<SocialsSectionProps> = ({
         gap="10px"
         className="justweb3scrollbar"
         style={{
-          overflowY: 'scroll',
+          overflowY: 'auto',
           // maxHeight: 'calc(-90px + 85vh - 30px - 20px - 52px - 10px - 16px)',
           maxHeight: 'calc(100% - 62px)',
         }}

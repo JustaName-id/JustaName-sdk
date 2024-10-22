@@ -106,7 +106,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     backendUrl:
       claimableTestnetEns === testnetFreeEns
         ? dev
-          ? // ? 'http://localhost:3333'
+          ? // ? 'http://localhost:3334'
             'https://claim-staging.justaname.id'
           : 'https://claim.justaname.id'
         : undefined,
@@ -121,7 +121,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     backendUrl:
       claimableMainnetEns === mainnetFreeEns
         ? dev
-          ? // ? 'http://localhost:3333'
+          ? // ? 'http://localhost:3334'
             'https://claim-staging.justaname.id'
           : 'https://claim.justaname.id'
         : undefined,
@@ -260,10 +260,8 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                 gap={'15px'}
                 style={{
                   maxHeight: '50vh',
-                  overflowY: 'scroll',
+                  overflowY: 'auto',
                   overflowX: 'hidden',
-                  scrollbarWidth: 'none',
-                  msOverflowStyle: 'none',
                 }}
               >
                 {subnames.map((subname, index) => {
