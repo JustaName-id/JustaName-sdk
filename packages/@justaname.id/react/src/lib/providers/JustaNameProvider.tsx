@@ -147,6 +147,7 @@ export const JustaNameProvider: FC<JustaNameProviderProps> = memo(
             handleJustaNameConfig,
             backendUrl: config.backendUrl,
             config: config.config,
+            dev: config.dev,
             ensDomains: config.ensDomains || [],
             selectedEnsDomain,
             networks: configuredNetworks,

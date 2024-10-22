@@ -57,7 +57,7 @@ const SectionCardTitle = styled.p`
   font-weight: 400;
   line-height: 100%;
   font-family: var(--justweb3-font-family);
-  color: #0F172A;
+  color: #0f172a;
 `;
 
 const SectionItemList = styled.div`
@@ -65,7 +65,7 @@ const SectionItemList = styled.div`
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: center;
   gap: 1.25rem;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   @media (max-width: 850px) {
     gap: 0.625rem;
@@ -151,9 +151,9 @@ const ContentSection: React.FC<ContentProps> = ({
                 style={{
                   color: 'var(--justweb3-primary-color)',
                   height: '20px',
-                  padding: "5px 10px",
+                  padding: '5px 10px',
                   fontSize: '8px',
-                  border: 'none'
+                  border: 'none',
                 }}
                 leftIcon={<PersonEditIcon height={10} width={10} />}
               >
@@ -194,7 +194,7 @@ const ContentSection: React.FC<ContentProps> = ({
                 color: 'black',
                 fontSize: '20px',
                 fontWeight: '700',
-                lineHeight: '100%'
+                lineHeight: '100%',
               }}
             >
               {decodeURIComponent(
@@ -212,7 +212,7 @@ const ContentSection: React.FC<ContentProps> = ({
                   fontSize: '10px',
                   lineHeight: '10px',
                   fontWeight: 900,
-                  color: '#797979'
+                  color: '#797979',
                 }}
               >
                 {decodeURIComponent(fullSubname)}
@@ -241,7 +241,7 @@ const ContentSection: React.FC<ContentProps> = ({
                       textDecoration: 'underline',
                       width: 'fit-content',
                       fontWeight: 500,
-                      lineHeight: '100%'
+                      lineHeight: '100%',
                     }}
                   >
                     {sanitized.url}
