@@ -22,6 +22,7 @@ const InputWrapper = styled.div<InputWrapperProps>`
   padding: 10px;
   gap: 12px;
   width: ${(props) => (props.$fullWidth ? '100%' : 'auto')};
+  box-sizing: content-box;
 
   &:focus-within {
     outline: none;

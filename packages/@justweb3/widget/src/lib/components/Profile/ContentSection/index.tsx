@@ -3,7 +3,6 @@ import { SanitizedRecords, SubnameRecordsRoute } from '@justaname.id/sdk';
 import {
   A,
   Avatar,
-  Badge,
   Button,
   ExpandableText,
   Flex,
@@ -11,7 +10,6 @@ import {
   LocationIcon,
   P,
   PersonEditIcon,
-  SPAN,
 } from '@justweb3/ui';
 import React, { useMemo } from 'react';
 import { getChainIcon } from '../../../icons/chain-icons';
@@ -44,20 +42,10 @@ const BannerContainer = styled.div`
 const SectionCard = styled.div`
   padding: 10px;
   border-radius: 10px;
-  background: white;
   border: 1px solid var(--justweb3-foreground-color-4);
   display: flex;
   flex-direction: column;
   gap: 5px;
-`;
-
-const SectionCardTitle = styled.p`
-  margin: 0;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 100%;
-  font-family: var(--justweb3-font-family);
-  color: #0f172a;
 `;
 
 const SectionItemList = styled.div`
@@ -145,17 +133,17 @@ const ContentSection: React.FC<ContentProps> = ({
             {!editMode && isProfileSelf && (
               <Button
                 variant={'secondary'}
+                size={'sm'}
                 onClick={() => {
                   onEdit && onEdit();
                 }}
                 style={{
                   color: 'var(--justweb3-primary-color)',
-                  height: '20px',
-                  padding: '5px 10px',
-                  fontSize: '8px',
+                  height: '16px',
+                  fontSize: '12px',
                   border: 'none',
                 }}
-                leftIcon={<PersonEditIcon height={10} width={10} />}
+                leftIcon={<PersonEditIcon height={16} width={16} />}
               >
                 Edit Profile
               </Button>
@@ -192,7 +180,6 @@ const ContentSection: React.FC<ContentProps> = ({
           <Flex direction={'column'} gap={'5px'}>
             <P
               style={{
-                color: 'black',
                 fontSize: '20px',
                 fontWeight: '700',
                 lineHeight: '100%',
@@ -202,23 +189,22 @@ const ContentSection: React.FC<ContentProps> = ({
                 sanitized?.display || fullSubname.split('.')[0]
               )}
             </P>
-            <Badge
-              withCopy={false}
-              style={{
-                padding: '5px',
-              }}
-            >
-              <SPAN
-                style={{
-                  fontSize: '10px',
-                  lineHeight: '10px',
-                  fontWeight: 900,
-                  color: '#797979',
-                }}
-              >
-                {decodeURIComponent(fullSubname)}
-              </SPAN>
-            </Badge>
+            {/*<Badge*/}
+            {/*  withCopy={false}*/}
+            {/*  style={{*/}
+            {/*    padding: '5px',*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  <SPAN*/}
+            {/*    style={{*/}
+            {/*      fontSize: '10px',*/}
+            {/*      lineHeight: '10px',*/}
+            {/*      fontWeight: 900,*/}
+            {/*    }}*/}
+            {/*  >*/}
+            {/*    {decodeURIComponent(fullSubname)}*/}
+            {/*  </SPAN>*/}
+            {/*</Badge>*/}
           </Flex>
           <ExpandableText
             text={sanitized?.description || 'No description available'}
@@ -299,7 +285,7 @@ const ContentSection: React.FC<ContentProps> = ({
         >
           {sanitized?.socials?.length > 0 && (
             <SectionCard>
-              <SectionCardTitle>Handles</SectionCardTitle>
+              <P>Handles</P>
               <SectionItemList className={'justweb3scrollbar'}>
                 {sanitized?.socials
                   ?.filter((social) => social.value !== '')
@@ -318,7 +304,7 @@ const ContentSection: React.FC<ContentProps> = ({
             </SectionCard>
           )}
           <SectionCard>
-            <SectionCardTitle>Addresses</SectionCardTitle>
+            <P>Addresses</P>
             <SectionItemList className={'justweb3scrollbar'}>
               {sanitized?.allAddresses?.map((address) => {
                 return (
@@ -337,7 +323,7 @@ const ContentSection: React.FC<ContentProps> = ({
           </SectionCard>
           {sanitized?.otherTextsWithoutStandard?.length > 0 && (
             <SectionCard>
-              <SectionCardTitle>Custom</SectionCardTitle>
+              <P>Custom</P>
               <SectionItemList className={'justweb3scrollbar'}>
                 {sanitized?.otherTextsWithoutStandard?.map((other) => (
                   <SectionItem key={other.key}>

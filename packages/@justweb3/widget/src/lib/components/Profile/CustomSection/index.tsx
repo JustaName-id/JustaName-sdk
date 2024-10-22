@@ -48,12 +48,8 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
       <Flex direction="row" gap="10px" align="center">
         <WalletIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
-          <P style={{ fontSize: '10px', fontWeight: 700, color: 'black' }}>
-            Edit Profile
-          </P>
-          <P style={{ fontSize: '16px', fontWeight: 700, color: 'black' }}>
-            Custom
-          </P>
+          <P style={{ fontSize: '10px', fontWeight: 700 }}>Edit Profile</P>
+          <P style={{ fontSize: '16px', fontWeight: 700 }}>Custom</P>
         </Flex>
       </Flex>
 
@@ -144,7 +140,6 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
             style={{
               fontSize: '16px',
               fontWeight: 700,
-              color: 'black',
             }}
           >
             Add Another Field

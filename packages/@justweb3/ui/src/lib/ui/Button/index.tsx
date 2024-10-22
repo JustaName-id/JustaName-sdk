@@ -42,7 +42,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   transition: all 0.2s ease;
   cursor: pointer;
   position: relative; // Added this line
-
+  box-sizing: content-box;
   ${(props) =>
     props.variant === 'primary' &&
     css`
@@ -103,23 +103,24 @@ const StyledButton = styled.button<StyledButtonProps>`
     ${(props) =>
     props.size === 'sm' &&
     css`
-      height: 34px;
-      padding: 0 12px;
+      height: 12px;
+      padding: 5px 10px;
+      font-size: 10px;
     `}
 
     ${(props) =>
     props.size === 'md' &&
     css`
-      height: 48px;
+      height: 28px;
       padding: 10px 12px;
     `}
 
     ${(props) =>
     props.size === 'lg' &&
     css`
-      height: 52px;
+      height: 32px;
       font-size: 14px;
-      padding: 0 12px;
+      padding: 10px 12px;
     `}
 `;
 

@@ -102,12 +102,8 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
       <Flex direction="row" gap="10px" align="center">
         <WalletIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
-          <P style={{ fontSize: '10px', fontWeight: 700, color: 'black' }}>
-            Edit Profile
-          </P>
-          <P style={{ fontSize: '16px', fontWeight: 700, color: 'black' }}>
-            Addresses
-          </P>
+          <P style={{ fontSize: '10px', fontWeight: 700 }}>Edit Profile</P>
+          <P style={{ fontSize: '16px', fontWeight: 700 }}>Addresses</P>
         </Flex>
       </Flex>
       <Flex
@@ -145,9 +141,7 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
             );
           })}
 
-          <P style={{ fontSize: '16px', fontWeight: 500, color: 'black' }}>
-            Add Address
-          </P>
+          <P style={{ fontSize: '16px', fontWeight: 500 }}>Add Address</P>
           <Input
             placeholder={'0x...'}
             onChange={(e) => setAddress(e.target.value)}

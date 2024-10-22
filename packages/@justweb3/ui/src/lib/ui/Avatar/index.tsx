@@ -24,6 +24,7 @@ const AvatarWrapper = styled.div<AvatarWrapperProps>`
     props.$border
       ? `1px solid  ${props.$borderColor || 'var(--justweb3-primary-color)'}`
       : 'none'};
+  box-sizing: border-box;
 `;
 
 const AvatarImage = styled.img`

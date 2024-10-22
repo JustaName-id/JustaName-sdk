@@ -22,7 +22,7 @@ export default function Copy(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#copy_svg__a)">
         <path
-          fill="#3280F4"
+          fill="var(--justweb3-primary-color)"
           d="M4.25 7.5a.8.8 0 0 1-.589-.245.8.8 0 0 1-.244-.588v-5q0-.345.244-.589A.8.8 0 0 1 4.25.833H8q.344 0 .589.245.244.245.244.589v5q0 .343-.244.588A.8.8 0 0 1 8 7.5zM2.583 9.167a.8.8 0 0 1-.588-.245.8.8 0 0 1-.245-.588V2.5h.833v5.834h4.584v.833z"
         />
       </g>
