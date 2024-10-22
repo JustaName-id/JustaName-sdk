@@ -31,6 +31,10 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
       providerUrl: import.meta.env.STORYBOOK_APP_SEPOLIA_PROVIDER_URL,
     },
   ],
+  color: {
+    background: '#000000',
+    primary: '#ff0000',
+  },
   openOnWalletConnect: true,
   allowedEns: 'all',
   dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
@@ -66,7 +70,7 @@ export const Example = () => {
 
 const meta: Meta<typeof Example> = {
   component: Example,
-  title: 'Connect/SignIn',
+  title: 'Connect/DarkMode',
 };
 export default meta;
 type Story = StoryObj<typeof Example>;

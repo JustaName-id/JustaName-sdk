@@ -31,12 +31,8 @@ export const SocialsSection: React.FC<SocialsSectionProps> = ({
       <Flex direction="row" gap="10px" align="center">
         <ComicIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
-          <P style={{ fontSize: '10px', fontWeight: 700, color: 'black' }}>
-            Edit Profile
-          </P>
-          <P style={{ fontSize: '16px', fontWeight: 700, color: 'black' }}>
-            Socials
-          </P>
+          <P style={{ fontSize: '10px', fontWeight: 700 }}>Edit Profile</P>
+          <P style={{ fontSize: '16px', fontWeight: 700 }}>Socials</P>
         </Flex>
       </Flex>
 

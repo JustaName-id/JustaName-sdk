@@ -18,10 +18,13 @@ export default function Add(props: SVGProps<SVGSVGElement>) {
           maskType: 'alpha',
         }}
       >
-        <path fill="#3280F4" d="M0 .5h24v24H0z" />
+        <path fill="var(--justweb3-primary-color)" d="M0 .5h24v24H0z" />
       </mask>
       <g mask="url(#add_svg__a)">
-        <path fill="#3280F4" d="M11 13.5H5v-2h6v-6h2v6h6v2h-6v6h-2z" />
+        <path
+          fill="var(--justweb3-primary-color)"
+          d="M11 13.5H5v-2h6v-6h2v6h6v2h-6v6h-2z"
+        />
       </g>
     </svg>
   );

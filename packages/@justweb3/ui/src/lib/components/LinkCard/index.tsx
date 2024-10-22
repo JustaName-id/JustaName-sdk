@@ -99,7 +99,6 @@ export const LinkCard: React.FC<LinkCardProps> = ({
   textExtraStyle,
 }) => {
   const textStyle: React.CSSProperties = {
-    color: 'black',
     fontSize: '10px',
     fontWeight: 800,
     maxWidth: '100%',
@@ -107,7 +106,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     lineHeight: '120%',
-    margin: "0px",
+    margin: '0px',
     fontFamily: 'var(--justweb3-font-family)',
     ...textExtraStyle,
   };
@@ -125,8 +124,8 @@ export const LinkCard: React.FC<LinkCardProps> = ({
     href:
       variant === 'social'
         ? socialLinks
-          .find((social) => social.identifier === title)
-          ?.link(value) || ''
+            .find((social) => social.identifier === title)
+            ?.link(value) || ''
         : value,
     target: '_blank',
     rel: 'noopener noreferrer',
@@ -139,7 +138,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
       textDecoration: 'underline',
       textUnderlineOffset: '3px',
       lineHeight: '100%',
-      margin: '0px'
+      margin: '0px',
     },
   };
 

@@ -17,50 +17,61 @@ interface ClickableListItemProps {
 }
 
 const TruncatedText = styled(P)`
-    font-size: 10px;
-    font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  font-size: 10px;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
-const ListItemWrapper = styled.div<{ $disabled?: boolean, $loading?: boolean, $hover?: boolean }>`
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    cursor: ${(props) => (props.$disabled || props.$loading ? 'not-allowed' : 'pointer')};
-    border-radius: 16px;
-    opacity: ${(props) => (props.$disabled ? 0.5 : 1)};
-    border: 1px solid ${(props) => (props.$loading || props.$hover ? 'var(--justweb3-primary-color)' : 'var(--justweb3-foreground-color-4)')};
-    background-color: var(--justweb3-background-color);
-    transition: background-color 0.2s ease;
-    max-width: 100%; 
+const ListItemWrapper = styled.div<{
+  $disabled?: boolean;
+  $loading?: boolean;
+  $hover?: boolean;
+}>`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: ${(props) =>
+    props.$disabled || props.$loading ? 'not-allowed' : 'pointer'};
+  border-radius: 16px;
+  box-sizing: border-box;
+  width: 300px;
+  opacity: ${(props) => (props.$disabled ? 0.5 : 1)};
+  border: 1px solid
+    ${(props) =>
+      props.$loading || props.$hover
+        ? 'var(--justweb3-primary-color)'
+        : 'var(--justweb3-foreground-color-4)'};
+  background-color: var(--justweb3-background-color);
+  transition: background-color 0.2s ease;
+  max-width: 100%;
 `;
 
 const Content = styled.div`
-    flex-grow: 1;  
-    flex-shrink: 1; 
-    flex-basis: 0;  
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 export const ClickableItem: React.FC<ClickableListItemProps> = ({
-                                                                  name,
-                                                                  status,
-                                                                  left,
-                                                                  loading,
-                                                                  right,
-                                                                  onClick,
-                                                                  onHover,
-                                                                  clickable = true,
-                                                                  disabled,
-                                                                  style = {},
-                                                                  contentStyle = {},
-                                                                }) => {
+  name,
+  status,
+  left,
+  loading,
+  right,
+  onClick,
+  onHover,
+  clickable = true,
+  disabled,
+  style = {},
+  contentStyle = {},
+}) => {
   const [hover, setHover] = React.useState(false);
   return (
     <ListItemWrapper
@@ -90,13 +101,17 @@ export const ClickableItem: React.FC<ClickableListItemProps> = ({
       }}
     >
       {left && (
-        <div style={{ marginRight: '10px', display: 'flex', alignItems: 'center' }}>
+        <div
+          style={{ marginRight: '10px', display: 'flex', alignItems: 'center' }}
+        >
           {left}
         </div>
       )}
-      <Content style={{
-        ...contentStyle
-      }}>
+      <Content
+        style={{
+          ...contentStyle,
+        }}
+      >
         <P
           style={{
             fontSize: '14px',
@@ -109,7 +124,9 @@ export const ClickableItem: React.FC<ClickableListItemProps> = ({
         {status && <TruncatedText>{status}</TruncatedText>}
       </Content>
       {right && (
-        <div style={{ marginLeft: '10px', display: 'flex', alignItems: 'center' }}>
+        <div
+          style={{ marginLeft: '10px', display: 'flex', alignItems: 'center' }}
+        >
           {right}
         </div>
       )}

@@ -47,17 +47,11 @@ import { UnsavedChangesDialog } from '../UnsavedChangesDialog';
 import useMatchSize from '../../hooks/useMatchSize';
 
 const FormContainer = styled.div<{ $editMode: boolean }>`
-  background-color: white;
   transform-origin: left;
   display: flex;
   flex-direction: column;
   gap: 10px;
   justify-content: space-between;
-
-  // @media (min-width: 850px) {
-  //   height: ${(props) => (props.$editMode ? '100%' : 'auto')};
-  // }
-
   max-width: 0;
   min-width: 0;
   overflow: hidden;

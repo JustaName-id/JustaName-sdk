@@ -336,7 +336,6 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                   style={{
                     borderRadius: '0 16px 16px 0',
                     fontWeight: '900',
-                    padding: '0px 12px',
                   }}
                   onClick={() => {
                     addSubname({

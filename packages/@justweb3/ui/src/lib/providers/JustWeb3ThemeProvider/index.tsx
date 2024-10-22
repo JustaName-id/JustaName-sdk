@@ -57,7 +57,7 @@ const getBackgroundVariations = (color: string) => {
       : generateLightVariation(foreground2),
     '--justweb3-foreground-color-4': detectLightColor(hsl, 50)
       ? generateDarkVariation(hsl, 0.05)
-      : generateLightVariation(hsl, 0.4),
+      : generateLightVariation(hsl, 0.12),
     '--justweb3-border-color': isTooLight
       ? 'hsl(0, 0%, 0%)'
       : 'hsl(0, 0%, 100%)',

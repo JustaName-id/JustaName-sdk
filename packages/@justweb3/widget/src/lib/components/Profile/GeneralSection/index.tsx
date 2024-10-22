@@ -69,12 +69,8 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
       <Flex direction="row" gap="10px" align="center">
         <ContactsIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
-          <P style={{ fontSize: '10px', fontWeight: 700, color: 'black' }}>
-            Edit Profile
-          </P>
-          <P style={{ fontSize: '16px', fontWeight: 700, color: 'black' }}>
-            General
-          </P>
+          <P style={{ fontSize: '10px', fontWeight: 700 }}>Edit Profile</P>
+          <P style={{ fontSize: '16px', fontWeight: 700 }}>General</P>
         </Flex>
       </Flex>
 

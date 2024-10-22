@@ -82,15 +82,10 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   };
 
   if (isEnsAuthPending || isLoading || (connectedEns && isRecordsPending)) {
-    // if (true) {
     return (
       <ClickableItem
         name={'loading'}
         clickable={false}
-        style={{
-          maxWidth: '278px',
-          width: '100%',
-        }}
         left={
           <div
             style={{
@@ -131,10 +126,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               color="#ffffff"
             />
           }
-          style={{
-            maxWidth: '278px',
-            width: '100%',
-          }}
         />
       );
     }
@@ -152,12 +143,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
       {/*  />*/}
       {/*)}*/}
       <Popover>
-        <PopoverTrigger
-          style={{
-            maxWidth: '278px',
-            width: '100%',
-          }}
-        >
+        <PopoverTrigger>
           <ClickableItem
             name={connectedEns?.ens}
             left={
@@ -178,7 +164,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               />
             }
             style={{
-              maxWidth: '278px',
               backgroundColor: 'var(--justweb3-background-color)',
             }}
             contentStyle={{
@@ -217,7 +202,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               <Flex direction="row" align="center" justify="space-between">
                 <P
                   style={{
-                    color: '#0F172A',
                     fontSize: '12px',
                     fontWeight: 300,
                   }}
@@ -226,12 +210,8 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                 </P>
                 <Button
                   variant={'primary'}
+                  size={'sm'}
                   rightIcon={<ArrowWhiteIcon width={15} />}
-                  style={{
-                    fontSize: '8px',
-                    padding: '5px 10px',
-                    height: '25px',
-                  }}
                   onClick={() => {
                     openEnsProfile(connectedEns?.ens, connectedEns?.chainId);
                   }}
@@ -269,7 +249,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                   <Flex direction="column" gap="5px" justify="flex-start">
                     <P
                       style={{
-                        color: 'black',
                         fontSize: '14px',
                         fontWeight: 700,
                         textAlign: 'left',
@@ -281,7 +260,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                       variant="default"
                       style={{
                         fontSize: '10px',
-                        color: '#3280F4',
+                        color: 'var(--justweb3-primary-color)',
                       }}
                       withCopy
                       value={connectedEns.ens}
@@ -331,6 +310,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               <ClickableItem
                 left={<MappIcon width={20} />}
                 name={'mApps'}
+                style={{
+                  width: '100%',
+                }}
                 onClick={() => setOpenMApps(true)}
                 right={
                   <Flex justify={'space-between'} align={'center'} gap={'5px'}>
@@ -347,7 +329,10 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                           Configuration Required
                         </SPAN>
                       )}
-                    <ArrowIcon width={20} />
+                    <ArrowIcon
+                      width={20}
+                      color={'var(--justweb3-foreground-color-2)'}
+                    />
                   </Flex>
                 }
                 disabled={!canEnableMApps}
@@ -367,6 +352,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               })}
 
               <ClickableItem
+                style={{
+                  width: '100%',
+                }}
                 left={<LogoutIcon width={20} />}
                 name={'Sign Out'}
                 onClick={signOut}
