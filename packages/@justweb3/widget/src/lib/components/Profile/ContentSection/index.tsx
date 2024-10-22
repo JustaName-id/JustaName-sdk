@@ -179,6 +179,7 @@ const ContentSection: React.FC<ContentProps> = ({
               borderRadius: '50%',
               margin: '0 15px',
               backgroundColor: 'white',
+              boxSizing: 'content-box',
             }}
           >
             <Avatar

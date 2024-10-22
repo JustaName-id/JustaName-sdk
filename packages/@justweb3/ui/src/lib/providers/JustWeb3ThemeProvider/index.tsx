@@ -198,10 +198,6 @@ export const JustWeb3ThemeProvider: React.FC<JustWeb3ThemeProviderProps> = ({
       ${Object.entries(theme)
         .map(([key, value]) => `${key}: ${value};`)
         .join('\n')}
-        
-         * {
-          box-sizing: content-box;
-        }
 
         .justweb3scrollbar::-webkit-scrollbar {
           width: 0;

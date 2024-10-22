@@ -110,7 +110,7 @@ const StyledButton = styled.button<StyledButtonProps>`
     ${(props) =>
     props.size === 'md' &&
     css`
-      height: 28px;
+      height: 48px;
       padding: 10px 12px;
     `}
 

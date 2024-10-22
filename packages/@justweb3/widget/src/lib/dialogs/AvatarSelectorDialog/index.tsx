@@ -304,6 +304,7 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
             borderRadius: '50%',
             margin: '0 15px',
             backgroundColor: 'white',
+            boxSizing: 'content-box',
           }}
         >
           <Avatar src={avatar} size={'75px'} border={false} bgColor={'white'} />

@@ -154,7 +154,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
       <Popover>
         <PopoverTrigger
           style={{
-            maxWidth: '300px',
+            maxWidth: '278px',
             width: '100%',
           }}
         >
@@ -256,6 +256,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                       height: '62px',
                       borderRadius: '50%',
                       backgroundColor: 'white',
+                      boxSizing: 'content-box',
                     }}
                   >
                     <Avatar
