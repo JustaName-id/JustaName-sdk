@@ -24,7 +24,7 @@ export const Providers: React.FC<ProviderProps> = (props) => {
 
   const config = getDefaultConfig({
     appName: 'JAN Console Demo',
-    projectId: '',
+    projectId: 'PROJECT_ID',
     wallets: [
       ...wallets,
       {
