@@ -1,4 +1,11 @@
-import { FC, Fragment, ReactNode, useContext, useMemo, useState } from 'react';
+import React, {
+  FC,
+  Fragment,
+  ReactNode,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 import { JustWeb3Context, useJustWeb3 } from '../../providers';
 import {
   ArrowIcon,
@@ -247,25 +254,23 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                 borderRadius="16px"
               >
                 <Flex direction="row" align="center" gap="10px">
-                  <Avatar
-                    src={avatar}
-                    size="55px"
-                    bgColor={
-                      avatar
-                        ? 'var(--justweb3-foreground-color-4)'
-                        : 'var(--justweb3-primary-color)'
-                    }
-                    borderColor={
-                      avatar
-                        ? 'var(--justweb3-foreground-color-4)'
-                        : 'var(--justweb3-primary-color)'
-                    }
-                    color="#ffffff"
+                  <div
                     style={{
-                      outline: '1px solid white',
-                      boxShadow: '0px 0px 5px 0px rgba(0, 0, 0, 0.25)',
+                      boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.25)',
+                      border: '2px solid white',
+                      width: '62px',
+                      height: '62px',
+                      borderRadius: '50%',
+                      backgroundColor: 'white',
                     }}
-                  />
+                  >
+                    <Avatar
+                      src={avatar}
+                      size={'62px'}
+                      border={false}
+                      bgColor={'white'}
+                    />
+                  </div>
                   <Flex direction="column" gap="5px" justify="flex-start">
                     <P
                       style={{
@@ -297,9 +302,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                   justify="flex-start"
                   className={'justweb3scrollbar'}
                   style={{
-                    overflowX: 'scroll',
+                    overflowX: 'auto',
                     width: '100%',
-                    paddingBottom: '0px'
+                    paddingBottom: '0px',
                   }}
                 >
                   <LinkCard
