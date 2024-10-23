@@ -44,7 +44,7 @@ export const useUploadMedia = (
             : 'https://api.justaname.id'
         }/ens/v1/subname/upload-to-cdn` +
           '?' +
-          query(params.subname || '', params.type),
+          query(params.subname, params.type),
         _params.form
       );
       return result;
