@@ -132,8 +132,6 @@ app.post("/api/subnames/add", async (req: Request<SubnameRequest>, res) => {
     return res.status(400).send({ message: "Required fields are missing" });
   }
 
-  const chainId = ensDomain === "justan.id" ? 1 : 11155111;
-
   const existingNames = await justaname.subnames.getAllByAddress({
     address,
     isClaimed: true,
@@ -164,8 +162,6 @@ app.post("/api/subnames/revoke", async (req: Request<SubnameRequest>, res) => {
   if (!username || !ensDomain || !address || !signature || !message) {
     return res.status(400).send({ message: "Required fields are missing" });
   }
-
-  const chainId = ensDomain === "justan.id" ? 1 : 11155111;
 
   try {
     const result = await justaname.subnames.revokeSubname(
