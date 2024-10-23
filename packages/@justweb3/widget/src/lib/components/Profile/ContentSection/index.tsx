@@ -150,12 +150,12 @@ const ContentSection: React.FC<ContentProps> = ({
                 }}
                 style={{
                   color: 'var(--justweb3-primary-color)',
-                  height: '20px',
+                  height: '25px',
                   padding: "5px 10px",
-                  fontSize: '8px',
+                  fontSize: '10px',
                   border: 'none'
                 }}
-                leftIcon={<PersonEditIcon height={10} width={10} />}
+                leftIcon={<PersonEditIcon height={14} width={14} />}
               >
                 Edit Profile
               </Button>
