@@ -24,7 +24,7 @@
 
 ## Advanced
 
-* [Server Configuration](advanced/server-configuration.md)
+* [Best Practice: Securely Handling API Keys with a Backend](advanced/best-practice-securely-handling-api-keys-with-a-backend.md)
 * [JustaName Deployment Addresses](advanced/justaname-deployment-addresses.md)
 * [Coin Types](advanced/coin-types.md)
 
