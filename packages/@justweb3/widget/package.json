@@ -1,12 +1,12 @@
 {
   "name": "@justweb3/widget",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "dependencies": {
     "@ensdomains/address-encoder": "^1.1.2",
     "@ensdomains/ensjs": "4.0.1-alpha.0",
-    "@justaname.id/react": "0.3.104",
-    "@justweb3/ui": "0.0.40",
-    "@justaname.id/sdk": "0.2.101",
+    "@justaname.id/react": "0.3.105",
+    "@justweb3/ui": "0.0.41",
+    "@justaname.id/sdk": "0.2.102",
     "lodash": "4.17.21",
     "styled-components": "^6.1.12",
     "yup": "0.32.11",

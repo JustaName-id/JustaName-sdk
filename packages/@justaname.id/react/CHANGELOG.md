@@ -1,3 +1,20 @@
+## 0.3.105 (2024-10-23)
+
+
+### 🩹 Fixes
+
+- **react-sdk:** revoke subname ([d0d4776](https://github.com/JustaName-id/JustaName-sdk/commit/d0d4776))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.102
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.104 (2024-10-23)
 
 
