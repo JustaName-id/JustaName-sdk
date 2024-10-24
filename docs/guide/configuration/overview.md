@@ -22,9 +22,14 @@ description: 'This section covers four key areas of configuration:'
 [allowed-ens-names.md](allowed-ens-names.md)
 {% endcontent-ref %}
 
+**ENS Domains**: Configure the ENS domains your platform will use for issuing and managing subnames. By default, `justan.id` for mainnet and `justan.eth` for testnet are used, but you can specify your own ENS domain along with the required API key to manage subnames for your platform.
+
+{% content-ref url="ens-domains.md" %}
+[ens-domains.md](ens-domains.md)
+{% endcontent-ref %}
+
 **Network Configuration**: Define custom network providers for **mainnet** and **sepolia**, or default to public RPC URLs if none are specified.
 
 {% content-ref url="networks.md" %}
 [networks.md](networks.md)
 {% endcontent-ref %}
-
