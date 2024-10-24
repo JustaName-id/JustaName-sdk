@@ -16,10 +16,10 @@ description: 'This section covers four key areas of configuration:'
 [justverified.md](justverified.md)
 {% endcontent-ref %}
 
-**ENS Name Sign-In**: Control how users sign in with ENS names. You can allow all ENS names, restrict sign-ins to subnames from a specific domain, or specify multiple ENS domains.
+**Allowed ENS Names**: Control how users sign in with ENS names. You can allow all ENS names, restrict sign-ins to subnames from a specific domain, or specify multiple ENS domains.
 
-{% content-ref url="sign-in.md" %}
-[sign-in.md](sign-in.md)
+{% content-ref url="allowed-ens-names.md" %}
+[allowed-ens-names.md](allowed-ens-names.md)
 {% endcontent-ref %}
 
 **Network Configuration**: Define custom network providers for **mainnet** and **sepolia**, or default to public RPC URLs if none are specified.

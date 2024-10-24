@@ -14,6 +14,12 @@ Welcome to the JustaName documentation. This guide covers everything you need to
 [Broken link](broken-reference)
 {% endcontent-ref %}
 
+**Backend Configuration**: Learn how to securely handle sensitive operations by setting up a backend to manage API key usage, sign-in processes, and subname management. This section covers how to configure your backend to communicate with the widget and securely manage operations like user authentication and subname handling.
+
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
+{% endcontent-ref %}
+
 **Learn & Engage**: Explore the Admin Dashboard, where you can monitor and manage subname data, filter user information, and gain insights to engage with your community more effectively.
 
 {% content-ref url="broken-reference" %}

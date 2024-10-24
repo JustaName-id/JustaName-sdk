@@ -1,48 +1,10 @@
-# Best Practice: Securely Handling API Keys with a Backend
+# Subname Management Routes
 
 When integrating the JustaName Widget into your platform, it's important to avoid exposing sensitive information, such as your API key, in the frontend. A best practice approach is to set up a backend service to handle calls to JustaName, ensuring that your API key remains secure. In this guide, we'll walk you through configuring the widget and setting up a backend to manage these requests.
 
-## Step 1: Modify your Widget Configuration
+## Install JustaName SDK
 
-Instead of directly adding your API key to the widget configuration on the frontend, you can point your widget to a backend URL that will handle all the sensitive operations. This way, the API key remains safely stored on your server, and the widget communicates with the backend.
-
-Your widget configuration will now include a `backendUrl` like this:
-
-```tsx
-const justweb3Config: JustWeb3ProviderConfig = {
-  config: {
-    origin: "http://localhost:3000/",
-    domain: "localhost",
-    signInTtl: 86400000,
-  },
-  backendUrl: "http://localhost:3333/",  // Pointing to the backend server
-  openOnWalletConnect: true,
-  allowedEns: "all",
-  logo: "",
-  ensDomains: [
-    {
-      ensDomain: "YOUR ENS DOMAIN",
-      chainId: 1,
-    },
-  ],
-  color: {
-    primary: "hsl(216, 90%, 58%)",
-    background: "hsl(0, 0%, 100%)",
-    destructive: "hsl(0, 100%, 50%)",
-  },
-};
-
-```
-
-## Step 2: Set Up Your Backend with JustaName SDK
-
-To securely handle API requests, you need to create a backend service using the **JustaName SDK**. This backend will manage subname issuance and revocation requests, ensuring your API key is never exposed.
-
-{% hint style="info" %}
-This setup can also be achieved using serverless functions, such as AWS Lambda, Google Cloud Functions, or Vercel Functions. Simply deploy the backend logic to your serverless environment and configure your `backendUrl` to point to the appropriate endpoint.
-{% endhint %}
-
-1\. **Install JustaName SDK**: Install the JustaName SDK in your backend by running the following command:
+Install the JustaName SDK in your backend by running the following command:
 
 {% tabs %}
 {% tab title="npm" %}
@@ -64,7 +26,15 @@ yarn add @justaname.id/sdk
 {% endtab %}
 {% endtabs %}
 
-2. **Backend Configuration**: Create a backend that will handle API requests from the frontend. Below is a simple example of an Express.js server that can handle subname issuance and revocation:
+## Set Up Your Backend with JustaName SDK
+
+To securely handle API requests, you need to create a backend service using the **JustaName SDK**. This backend will manage subname issuance and revocation requests, ensuring your API key is never exposed.
+
+{% hint style="info" %}
+This setup can also be achieved using serverless functions, such as AWS Lambda, Google Cloud Functions, or Vercel Functions. Simply deploy the backend logic to your serverless environment and configure your `backendUrl` in the Widget  to point to the appropriate endpoint.
+{% endhint %}
+
+Create a backend that will handle API requests from the frontend. Below is a simple example of an Express.js server that can handle subname issuance and revocation:
 
 ```typescript
 import dotenv from "dotenv";
@@ -175,11 +145,6 @@ app.post("/api/subnames/revoke", async (req: Request<SubnameRequest>, res) => {
   }
 });
 
-// Default API response
-app.get("/api", (req, res) => {
-  res.send({ message: "Welcome to JustaName Express!" });
-});
-
 const port = process.env.PORT || 3333;
 
 const server = app.listen(port, async () => {
@@ -191,7 +156,7 @@ server.on("error", console.error);
 
 ```
 
-3. **Backend Explanation**:
+**Backend Explanation**:
 
 * **Subname Issuance**: The `/api/subnames/add` endpoint issues new subnames for users. It checks if the address already holds a subname for the given ENS domain before adding the new subname.
 * **Subname Revocation**: The `/api/subnames/revoke` endpoint revokes a subname for a specific address.

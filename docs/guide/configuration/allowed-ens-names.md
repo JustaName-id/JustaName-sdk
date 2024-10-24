@@ -1,8 +1,8 @@
-# Sign-In
+# Allowed ENS Names
 
 The JustWeb3 Widget allows you to control which ENS names or subnames users can use to sign in. You can either allow **all ENS names**, **restrict sign-ins to subnames derived from specific ENS domains**, or **restrict sign-ins to specific ENS domains and their subnames**.
 
-## Default Settings: Alllow All ENS Names
+## Default Settings: Allow All ENS Names
 
 By default, the JustWeb3 Widget is configured to allow users to sign in with any ENS name. This setting is controlled by the `"allowedEns": "all"` configuration.
 
