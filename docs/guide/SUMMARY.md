@@ -7,9 +7,17 @@
 
 * [Overview](configuration/overview.md)
 * [Appearance](configuration/appearance.md)
+* [Allowed ENS Names](configuration/allowed-ens-names.md)
+* [ENS Domains](configuration/ens-domains.md)
 * [JustVerified](configuration/justverified.md)
-* [Sign-In](configuration/sign-in.md)
 * [Networks](configuration/networks.md)
+
+## Backend Configuration
+
+* [Overview](backend-configuration/overview.md)
+* [Sign In Routes](backend-configuration/sign-in-routes.md)
+* [Subname Management Routes](backend-configuration/subname-management-routes.md)
+* [Full Implementation](backend-configuration/full-implementation.md)
 
 ## Learn & Engage
 
@@ -24,9 +32,9 @@
 
 ## Advanced
 
-* [Best Practice: Securely Handling API Keys with a Backend](advanced/best-practice-securely-handling-api-keys-with-a-backend.md)
 * [JustaName Deployment Addresses](advanced/justaname-deployment-addresses.md)
 * [Coin Types](advanced/coin-types.md)
+* [JustaName - Under the Hood](advanced/justaname-under-the-hood.md)
 
 ## Wallet Providers
 
