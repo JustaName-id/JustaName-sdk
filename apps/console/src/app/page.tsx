@@ -11,6 +11,7 @@ export default function Page() {
     <div className="flex flex-row justify-between w-full h-full relative">
       <ConsoleProvider>
         <Customizer />
+
         <Split style={{ width: '100%' }}>
           <div
             className={`flex-1 h-full gap-3 flex-col relative bg-[url('/bg/widget-bg.png')] bg-repeat-x bg-cover flex justify-center items-center`}
