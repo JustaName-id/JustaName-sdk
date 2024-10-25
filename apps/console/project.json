@@ -13,7 +13,8 @@
         "root": "apps/console",
         "outputPath": "dist/apps/console",
         "config": "apps/console/next.config.js"
-      }
+      },
+      "dependsOn": ["^buildProject"]
     },
     "serve": {
       "executor": "@nx/next:server",
