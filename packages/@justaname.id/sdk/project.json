@@ -67,9 +67,7 @@
       "dependsOn": [
         "lint",
         {
-          "projects": [
-            "@justaname.id/siwens"
-          ],
+          "dependencies": true,
           "target": "build"
         }
       ]

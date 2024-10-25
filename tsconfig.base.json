@@ -27,13 +27,13 @@
     "useUnknownInCatchVariables": false,
     "rootDir": ".",
     "paths": {
-      "@justaname.id/react": ["packages/@justaname.id/react/src/index.ts"],
-      "@justaname.id/sdk": ["packages/@justaname.id/sdk/src/index.ts"],
-      "@justaname.id/siwens": ["packages/@justaname.id/siwens/src/index.ts"],
-      "@justverified/plugin": ["packages/plugins/@justverified/src/index.ts"],
-      "@justweb3/ui": ["packages/@justweb3/ui/src/index.ts"],
-      "@justweb3/widget": ["packages/@justweb3/widget/src/index.ts"],
-      "create-justaname-app": ["packages/create-justaname-app/src/index.ts"]
+      "@justaname.id/react": ["packages/@justaname.id/react"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"],
+      "@justverified/plugin": ["packages/plugins/@justverified"],
+      "@justweb3/ui": ["packages/@justweb3/ui"],
+      "@justweb3/widget": ["packages/@justweb3/widget"],
+      "create-justaname-app": ["packages/create-justaname-app"]
     }
   },
   "exclude": [

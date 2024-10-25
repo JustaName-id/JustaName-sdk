@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import styled from 'styled-components';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 
@@ -38,26 +38,24 @@ const StyledContent = styled(DialogPrimitive.Content)<{
   max-width: ${(props) => (props.$fullScreen ? '100vw' : 'min(1200px, 90vw)')};
   min-width: ${(props) => (props.$fullScreen ? '100vw' : '390px')};
 
-  //height: 100%;
   min-height: ${(props) => (props.$fullScreen ? '100vh' : '200px')};
   max-height: ${(props) => (props.$fullScreen ? '100vh' : '80vh')};
 
   padding: 40px;
-
   transition: all 0.4s ease-in-out;
-
   animation: contentShow 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
   @keyframes contentShow {
     from {
       opacity: 0;
       transform: translate(-50%, -50%) scale(0.6);
     }
-
     to {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
     }
   }
+
   @media (max-width: 640px) {
     width: 100vw;
     max-width: 100vw;
@@ -87,14 +85,15 @@ const StyledDescription = styled(DialogPrimitive.Description)`
   line-height: 1.5;
 `;
 
+// Define Props Interface for DialogContent
 interface DialogContentProps
-  extends React.ComponentPropsWithoutRef<typeof StyledContent> {
-  disableOverlay?: boolean;
+  extends ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
   fullScreen?: boolean;
+  disableOverlay?: boolean;
 }
 
 // Compound components
-export const Dialog: React.FC<DialogPrimitive.DialogProps> = ({
+const Dialog: React.FC<DialogPrimitive.DialogProps> = ({
   children,
   ...props
 }) => (
@@ -102,24 +101,26 @@ export const Dialog: React.FC<DialogPrimitive.DialogProps> = ({
     {children}
   </DialogPrimitive.Root>
 );
-export const DialogTrigger = DialogPrimitive.Trigger;
-export const DialogContent = React.forwardRef<
-  React.ElementRef<typeof StyledContent>,
+
+const DialogTrigger = DialogPrimitive.Trigger;
+
+const DialogContent = forwardRef<
+  ElementRef<typeof DialogPrimitive.Content>,
   DialogContentProps
 >(({ children, fullScreen, disableOverlay, ...props }, forwardedRef) => (
   <DialogPrimitive.Portal>
     {!disableOverlay && <StyledOverlay />}
-    <StyledContent {...props} ref={forwardedRef} $fullScreen={fullScreen}>
+    <StyledContent ref={forwardedRef} $fullScreen={fullScreen} {...props}>
       {children}
     </StyledContent>
   </DialogPrimitive.Portal>
 ));
 DialogContent.displayName = 'DialogContent';
 
-export const DialogTitle = StyledTitle;
-export const DialogDescription = StyledDescription;
+const DialogTitle = StyledTitle;
+const DialogDescription = StyledDescription;
 
-export const DialogHeader = styled.div`
+const DialogHeader = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -129,7 +130,7 @@ export const DialogHeader = styled.div`
   }
 `;
 
-export const DialogFooter = styled.div`
+const DialogFooter = styled.div`
   display: flex;
   flex-direction: column-reverse;
   padding-top: 20px;
@@ -143,4 +144,17 @@ export const DialogFooter = styled.div`
   }
 `;
 
-export const DialogClose = DialogPrimitive.Close;
+const DialogClose = DialogPrimitive.Close;
+
+export {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogHeader,
+  DialogFooter,
+  DialogClose,
+};
+
+export type { DialogContentProps };
