@@ -1,7 +1,7 @@
 import { chains } from '@justweb3/ui';
 
 export const getChainIcon = (chain: string, size?: number): JSX.Element => {
-  const Icon = chains[chain.toLowerCase() as keyof typeof chains];
+  const Icon = chains[chain as keyof typeof chains];
 
   if (Icon) {
     return <Icon width={size ?? 24} height={size ?? 24} />;

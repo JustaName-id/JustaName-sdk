@@ -1,42 +1,42 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import styled, { css, keyframes } from "styled-components";
-import { OTPInput, OTPInputContext } from "input-otp";
+import * as React from 'react';
+import styled, { css, keyframes } from 'styled-components';
+import { OTPInput, OTPInputContext } from 'input-otp';
 
 type InputOTPProps = React.ComponentPropsWithoutRef<typeof OTPInput> & {
   containerClassName?: string;
 };
 
-type InputOTPGroupProps = React.ComponentPropsWithoutRef<"div">;
+type InputOTPGroupProps = React.ComponentPropsWithoutRef<'div'>;
 
-type InputOTPSlotProps = React.ComponentPropsWithoutRef<"div"> & {
+type InputOTPSlotProps = React.ComponentPropsWithoutRef<'div'> & {
   index: number;
 };
 
-type InputOTPSeparatorProps = React.ComponentPropsWithoutRef<"div">;
+type InputOTPSeparatorProps = React.ComponentPropsWithoutRef<'div'>;
 
 const StyledOTPInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Equivalent to gap-2 */
+  width: 100%;
+  > div {
     display: flex;
-    align-items: center;
-    gap: 0.5rem; /* Equivalent to gap-2 */
+    justify-content: space-between;
     width: 100%;
-     > div {
-        display: flex;
-         justify-content: space-between;
-         width: 100%;
-         align-items: center;
-    }
-    &:has(:disabled) {
-        opacity: 0.5;
-    }
+    align-items: center;
+  }
+  &:has(:disabled) {
+    opacity: 0.5;
+  }
 `;
 
 const StyledOTPInput = styled(OTPInput)`
-    display: flex;
-    &:disabled {
-        cursor: not-allowed;
-    }
+  display: flex;
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 const InputOTP = React.forwardRef<HTMLInputElement, InputOTPProps>(
@@ -46,7 +46,7 @@ const InputOTP = React.forwardRef<HTMLInputElement, InputOTPProps>(
     </StyledOTPInputContainer>
   )
 );
-InputOTP.displayName = "InputOTP";
+InputOTP.displayName = 'InputOTP';
 
 const StyledInputOTPGroup = styled.div`
   display: flex;
@@ -58,7 +58,7 @@ const InputOTPGroup = React.forwardRef<HTMLDivElement, InputOTPGroupProps>(
     <StyledInputOTPGroup ref={ref} className={className} {...props} />
   )
 );
-InputOTPGroup.displayName = "InputOTPGroup";
+InputOTPGroup.displayName = 'InputOTPGroup';
 
 const blinkAnimation = keyframes`
   0%, 50% { opacity: 1; }
@@ -66,7 +66,7 @@ const blinkAnimation = keyframes`
 `;
 
 const StyledCaret = styled.div`
-  height: 1rem; 
+  height: 1rem;
   width: 1px;
   background-color: var(--justweb3-background-color);
   animation: ${blinkAnimation} 1s steps(1) infinite;
@@ -81,7 +81,7 @@ const StyledCaretWrapper = styled.div`
   justify-content: center;
 `;
 
-const StyledInputOTPSlot = styled.div<{ isActive: boolean }>`
+const StyledInputOTPSlot = styled.div<{ $isActive: boolean }>`
   position: relative;
   display: flex;
   height: 2.5rem; /* h-10 */
@@ -89,8 +89,8 @@ const StyledInputOTPSlot = styled.div<{ isActive: boolean }>`
   align-items: center;
   justify-content: center;
   border-top: 1px solid var(--justweb3-foreground-color-4);
-  border-right: 1px solid var(--justweb3-foreground-color-4);;
-  border-bottom: 1px solid var(--justweb3-foreground-color-4);;
+  border-right: 1px solid var(--justweb3-foreground-color-4);
+  border-bottom: 1px solid var(--justweb3-foreground-color-4);
   font-size: 1.25rem; /* text-lg */
   transition: all 0.2s;
 
@@ -106,8 +106,8 @@ const StyledInputOTPSlot = styled.div<{ isActive: boolean }>`
   }
 
   ${({ isActive }) =>
-  isActive &&
-  css`
+    isActive &&
+    css`
       z-index: 10;
       box-shadow: 0 0 0 2px var(--justweb3-primary-color);
     `}
@@ -121,7 +121,7 @@ const InputOTPSlot = React.forwardRef<HTMLDivElement, InputOTPSlotProps>(
     return (
       <StyledInputOTPSlot
         ref={ref}
-        isActive={isActive}
+        $isActive={isActive}
         className={className}
         {...props}
       >
@@ -135,19 +135,22 @@ const InputOTPSlot = React.forwardRef<HTMLDivElement, InputOTPSlotProps>(
     );
   }
 );
-InputOTPSlot.displayName = "InputOTPSlot";
+InputOTPSlot.displayName = 'InputOTPSlot';
 
-const InputOTPSeparator = React.forwardRef<HTMLDivElement, InputOTPSeparatorProps>(
-  (props, ref) => (
-    <div ref={ref} role="separator" {...props}>
-      <div style={{
+const InputOTPSeparator = React.forwardRef<
+  HTMLDivElement,
+  InputOTPSeparatorProps
+>((props, ref) => (
+  <div ref={ref} role="separator" {...props}>
+    <div
+      style={{
         width: '5px',
         height: '2px',
         backgroundColor: 'var(--justweb3-primary-color)',
-      }} />
-    </div>
-  )
-);
-InputOTPSeparator.displayName = "InputOTPSeparator";
+      }}
+    />
+  </div>
+));
+InputOTPSeparator.displayName = 'InputOTPSeparator';
 
 export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };

@@ -8,10 +8,10 @@ import {
   Button,
   ClickableItem,
   Flex,
-  LinkCard,
   LoadingSpinner,
   LogoutIcon,
   MappIcon,
+  MetadataCard,
   P,
   Popover,
   PopoverTrigger,
@@ -82,9 +82,10 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   };
 
   if (isEnsAuthPending || isLoading || (connectedEns && isRecordsPending)) {
+    // if (true) {
     return (
       <ClickableItem
-        name={'loading'}
+        title={'loading'}
         clickable={false}
         left={
           <div
@@ -93,8 +94,8 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               position: 'relative',
               alignItems: 'center',
               justifyContent: 'center',
-              height: '30px',
-              width: '30px',
+              height: '32px',
+              width: '32px',
             }}
           >
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
@@ -108,31 +109,24 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
     if (address) {
       return (
         <ClickableItem
-          name={'Sign In'}
-          onClick={() => handleOpenSignInDialog(true)}
-          left={
-            <Avatar
-              size="28px"
-              bgColor={
-                avatar
-                  ? 'var(--justweb3-foreground-color-4)'
-                  : 'var(--justweb3-primary-color)'
-              }
-              borderColor={
-                avatar
-                  ? 'var(--justweb3-foreground-color-4)'
-                  : 'var(--justweb3-primary-color)'
-              }
-              color="#ffffff"
-            />
+          title={
+            <P
+              style={{
+                color: 'var(--justweb3-primary-color)',
+                fontWeight: 700,
+              }}
+            >
+              Sign In
+            </P>
           }
+          onClick={() => handleOpenSignInDialog(true)}
+          left={<Avatar />}
         />
       );
     }
     return children;
   }
 
-  console.log(connectedEns?.ens, records);
   return (
     <>
       <MAppsDialog open={openMApps} handleOpenDialog={handleOpenMAppsDialog} />
@@ -145,26 +139,19 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
       <Popover>
         <PopoverTrigger>
           <ClickableItem
-            name={connectedEns?.ens}
-            left={
-              <Avatar
-                src={avatar}
-                size="28px"
-                bgColor={
-                  avatar
-                    ? 'var(--justweb3-foreground-color-4)'
-                    : 'var(--justweb3-primary-color)'
-                }
-                borderColor={
-                  avatar
-                    ? 'var(--justweb3-foreground-color-4)'
-                    : 'var(--justweb3-primary-color)'
-                }
-                color="#ffffff"
-              />
+            title={
+              <P
+                style={{
+                  color: 'var(--justweb3-primary-color)',
+                }}
+              >
+                {connectedEns.ens}
+              </P>
             }
+            left={<Avatar src={avatar} />}
             style={{
               backgroundColor: 'var(--justweb3-background-color)',
+              color: 'var(--justweb3-primary-color)',
             }}
             contentStyle={{
               alignItems: 'start',
@@ -228,24 +215,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                 borderRadius="16px"
               >
                 <Flex direction="row" align="center" gap="10px">
-                  <div
-                    style={{
-                      boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.25)',
-                      border: '2px solid white',
-                      width: '62px',
-                      height: '62px',
-                      borderRadius: '50%',
-                      backgroundColor: 'white',
-                      boxSizing: 'content-box',
-                    }}
-                  >
-                    <Avatar
-                      src={avatar}
-                      size={'62px'}
-                      border={false}
-                      bgColor={'white'}
-                    />
-                  </div>
+                  <Avatar src={avatar} size={62} borderSize={'4px'} />
                   <Flex direction="column" gap="5px" justify="flex-start">
                     <P
                       style={{
@@ -281,14 +251,14 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                     paddingBottom: '0px',
                   }}
                 >
-                  <LinkCard
+                  <MetadataCard
                     variant="address"
                     title="Address"
                     value={connectedEns.address}
                     icon={getChainIcon('eth')}
                   />
                   {!!hasTwitterOrX && (
-                    <LinkCard
+                    <MetadataCard
                       variant="social"
                       title={hasTwitterOrX.key}
                       value={hasTwitterOrX.value}
@@ -296,7 +266,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                     />
                   )}
                   {!!records?.sanitizedRecords.email && (
-                    <LinkCard
+                    <MetadataCard
                       variant="social"
                       title="Email"
                       value={records?.sanitizedRecords.email}
@@ -309,7 +279,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
             <Flex direction="column" gap={'10px'}>
               <ClickableItem
                 left={<MappIcon width={20} />}
-                name={'mApps'}
+                title={'mApps'}
                 style={{
                   width: '100%',
                 }}
@@ -356,7 +326,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                   width: '100%',
                 }}
                 left={<LogoutIcon width={20} />}
-                name={'Sign Out'}
+                title={'Sign Out'}
                 onClick={signOut}
                 right={<ArrowIcon width={20} />}
               />

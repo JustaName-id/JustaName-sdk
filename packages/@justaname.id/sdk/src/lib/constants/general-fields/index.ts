@@ -1,39 +1,49 @@
-export type GeneralsName = 'Nickname' | 'Description' | 'Website' | 'Location' | 'Avatar' | 'Banner'
+export type GeneralsName =
+  | 'Nickname'
+  | 'Description'
+  | 'Website'
+  | 'Location'
+  | 'Avatar'
+  | 'Header';
 
-export type GeneralsIdentifier = 'display' | 'description' | 'url' | 'location' | 'avatar' | 'banner'
-
+export type GeneralsIdentifier =
+  | 'display'
+  | 'description'
+  | 'url'
+  | 'location'
+  | 'avatar'
+  | 'header';
 
 export interface Generals {
   name: GeneralsName;
   identifier: GeneralsIdentifier;
 }
 
-
 export const GENERAL_FIELDS: readonly Generals[] = [
   {
-    name: "Avatar",
-    identifier: "avatar",
+    name: 'Avatar',
+    identifier: 'avatar',
   },
   {
-    name: "Banner",
-    identifier: "banner",
+    name: 'Header',
+    identifier: 'header',
   },
   {
-    name: "Nickname",
-    identifier: "display"
+    name: 'Nickname',
+    identifier: 'display',
   },
   {
-    name: "Description",
-    identifier: "description"
+    name: 'Description',
+    identifier: 'description',
   },
   {
-    name: "Location",
-    identifier: "location"
+    name: 'Location',
+    identifier: 'location',
   },
   {
-    name: "Website",
-    identifier: "url"
-  }
+    name: 'Website',
+    identifier: 'url',
+  },
 ] as const;
 
-export type SupportedGeneralsNames = typeof GENERAL_FIELDS[number]['name']
+export type SupportedGeneralsNames = (typeof GENERAL_FIELDS)[number]['name'];

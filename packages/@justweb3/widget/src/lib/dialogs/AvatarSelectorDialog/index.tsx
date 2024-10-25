@@ -13,13 +13,14 @@ import 'cropperjs/dist/cropper.min.css';
 import React from 'react';
 import styled from 'styled-components';
 import { DefaultDialog } from '../DefaultDialog';
-import { useUploadMedia } from '@justaname.id/react';
-import { Loading } from '../../components/Loading';
+import { useEnsAvatar, useUploadMedia } from '@justaname.id/react';
+import { ChainId } from '@justaname.id/sdk';
 
 export interface AvatarEditorDialogProps {
   onImageChange: (image: string) => void;
-  avatar: string;
+  avatar?: string | null;
   subname: string;
+  chainId?: ChainId;
   address?: `0x${string}`;
   disableOverlay?: boolean;
 }
@@ -124,8 +125,13 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
   avatar,
   subname,
   address,
+  chainId,
   disableOverlay,
 }) => {
+  const { avatar: ensAvatar } = useEnsAvatar({
+    ens: subname,
+    chainId: chainId,
+  });
   const [isEditorOpen, setIsEditorOpen] = React.useState(false);
   // const [isNFTDialogOpen, setIsNFTDialogOpen] = React.useState(false);
   const [imageSrc, setImageSrc] = React.useState('');
@@ -152,6 +158,7 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.files);
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -185,10 +192,7 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
 
         try {
           const response = await uploadMedia({ form: formData });
-          if (!response.data) {
-            throw new Error(`Error: ${response}`);
-          }
-          onImageChange(response.data.url);
+          onImageChange(response.url);
           setIsEditorOpen(false);
         } catch (error) {
           console.error('Upload error', error);
@@ -285,6 +289,7 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
         style={{
           width: '100%',
           flex: '1',
+          position: 'relative',
         }}
         onClick={handleButtonClick}
       >
@@ -295,20 +300,14 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
           style={{ display: 'none' }}
           ref={fileInputRef}
         />
-        <div
+        <Avatar
+          src={avatar || ensAvatar}
+          size={75}
+          borderSize={'4px'}
           style={{
-            boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.25)',
-            border: '4px solid white',
-            width: '75px',
-            height: '75px',
-            borderRadius: '50%',
             margin: '0 15px',
-            backgroundColor: 'white',
-            boxSizing: 'content-box',
           }}
-        >
-          <Avatar src={avatar} size={'75px'} border={false} bgColor={'white'} />
-        </div>
+        />
         <div
           style={{
             position: 'absolute',
@@ -383,27 +382,31 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
             {/* </div> */}
           </Flex>
         </ResponsiveDiv>
-        {isUploadPending ? (
-          <Loading />
-        ) : (
-          <Flex direction="row" gap="10px">
-            <Button
-              type="button"
-              variant="secondary"
-              style={{ flexGrow: '0.5' }}
-            >
-              Cancel
-            </Button>
-            <Button
-              type="button"
-              onClick={handleSave}
-              variant="primary"
-              style={{ flexGrow: '0.5' }}
-            >
-              Upload
-            </Button>
-          </Flex>
-        )}
+        <Flex direction="row" gap="10px">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => {
+              if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+              }
+              setIsEditorOpen(false);
+            }}
+            style={{ flexGrow: '0.5' }}
+            disabled={isUploadPending}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="button"
+            onClick={handleSave}
+            variant="primary"
+            style={{ flexGrow: '0.5' }}
+            loading={isUploadPending}
+          >
+            Upload
+          </Button>
+        </Flex>
       </DefaultDialog>
     </>
   );

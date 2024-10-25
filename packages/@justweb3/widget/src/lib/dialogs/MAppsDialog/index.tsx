@@ -64,28 +64,36 @@ export const MAppsDialog: FC<AuthorizeMAppDialogProps> = ({
     if (!mApps) {
       return;
     }
-    Promise.all(mApps.map((mApp) => getRecords({ ens: mApp }))).then(
+    Promise.allSettled(mApps.map((mApp) => getRecords({ ens: mApp }))).then(
       (records) => {
         setMAppsDescription(
-          records.map((record, index) => ({
-            mApp: mApps[index],
-            description:
-              record?.records?.texts.find(
-                (text) => text.key === `mApp_description`
-              )?.value || '',
-          }))
+          records
+            ?.filter((record) => record.status === 'fulfilled')
+            .map((record) => record.value)
+            .map((record, index) => ({
+              mApp: mApps[index],
+              description:
+                record?.records?.texts.find(
+                  (text) => text.key === `mApp_description`
+                )?.value || '',
+            }))
         );
       }
     );
 
-    Promise.all(mApps.map((mApp) => getEnsAvatar(mApp))).then((avatars) => {
-      setMAppsAvatar(
-        avatars.map((avatar, index) => ({
-          mApp: mApps[index],
-          avatar: avatar || '',
-        }))
-      );
-    });
+    Promise.allSettled(mApps.map((mApp) => getEnsAvatar(mApp))).then(
+      (avatars) => {
+        setMAppsAvatar(
+          avatars
+            ?.filter((avatar) => avatar.status === 'fulfilled')
+            .map((avatar) => avatar.value)
+            .map((avatar, index) => ({
+              mApp: mApps[index],
+              avatar: avatar || '',
+            }))
+        );
+      }
+    );
   }, [mApps]);
 
   // if (!connectedEns || isEnsAuthPending || isMAppEnabledPending) {
@@ -94,6 +102,9 @@ export const MAppsDialog: FC<AuthorizeMAppDialogProps> = ({
 
   return (
     <DefaultDialog
+      contentStyle={{
+        maxWidth: '400px',
+      }}
       open={open}
       disableOverlay={disableOverlay}
       handleClose={() => handleOpenDialog(false)}
@@ -136,6 +147,7 @@ export const MAppsDialog: FC<AuthorizeMAppDialogProps> = ({
                 fontSize: '10px',
                 lineHeight: '10px',
                 fontWeight: 900,
+                color: 'var(--justweb3-primary-color)',
               }}
             >
               {connectedEns.ens}
@@ -147,101 +159,106 @@ export const MAppsDialog: FC<AuthorizeMAppDialogProps> = ({
 
           <Flex direction="column" gap="15px">
             {mAppsToEnable && mAppsToEnable.length > 0 && (
-              <>
-                <Divider />
+              <Flex direction="column" gap="10px">
+                <P>Installable mApps</P>
 
-                <Flex direction="column" gap="10px">
-                  <P>Installable mApps</P>
-
-                  <Flex direction="column" gap="5px">
-                    {mAppsToEnable.map((mApp, index) => {
-                      return (
-                        <Fragment key={'mApp-' + mApp}>
-                          <ClickableItem
-                            name={mApp}
-                            left={
-                              <Avatar
-                                src={
-                                  mAppsAvatar?.find(
-                                    (avatar) => avatar.mApp === mApp
-                                  )?.avatar
-                                }
-                                size="34px"
-                              />
-                            }
-                            status={
-                              mAppsDescription?.find(
-                                (description) => description.mApp === mApp
-                              )?.description
-                            }
-                            clickable={false}
-                            right={
-                              <Button
-                                variant={'secondary'}
-                                size={'md'}
-                                rightIcon={<ArrowIcon width={15} />}
-                                onClick={() =>
-                                  handleOpenAuthorizeMAppDialog(mApp)
-                                }
-                              >
-                                Install
-                              </Button>
-                            }
-                          />
-                        </Fragment>
-                      );
-                    })}
-                  </Flex>
+                <Flex direction="column" gap="5px">
+                  {mAppsToEnable.map((mApp, index) => {
+                    return (
+                      <Fragment key={'mApp-' + mApp}>
+                        <ClickableItem
+                          title={mApp}
+                          left={
+                            <Avatar
+                              src={
+                                mAppsAvatar?.find(
+                                  (avatar) => avatar.mApp === mApp
+                                )?.avatar
+                              }
+                              size={34}
+                            />
+                          }
+                          style={{
+                            width: '100%',
+                          }}
+                          subtitle={
+                            mAppsDescription?.find(
+                              (description) => description.mApp === mApp
+                            )?.description
+                          }
+                          clickable={false}
+                          right={
+                            <Button
+                              variant={'secondary'}
+                              size={'md'}
+                              rightIcon={<ArrowIcon width={15} />}
+                              onClick={() =>
+                                handleOpenAuthorizeMAppDialog(mApp)
+                              }
+                            >
+                              Install
+                            </Button>
+                          }
+                        />
+                      </Fragment>
+                    );
+                  })}
                 </Flex>
-              </>
+              </Flex>
             )}
 
+            {mAppsToEnable &&
+            mAppsToEnable.length > 0 &&
+            mAppsAlreadyEnabled &&
+            mAppsAlreadyEnabled.length > 0 ? (
+              <Divider />
+            ) : null}
+
             {mAppsAlreadyEnabled && mAppsAlreadyEnabled.length > 0 && (
-              <>
-                <Divider />
+              <Flex direction="column" gap="10px">
+                <P>Configured mApps</P>
 
-                <Flex direction="column" gap="10px">
-                  <P>Installed mApps</P>
-
-                  <Flex direction="column" gap="5px">
-                    {mAppsAlreadyEnabled.map((mApp, index) => {
-                      return (
-                        <Fragment key={'mApp-' + mApp}>
-                          <ClickableItem
-                            name={mApp}
-                            left={
-                              <Avatar
-                                src={
-                                  mAppsAvatar?.find(
-                                    (avatar) => avatar.mApp === mApp
-                                  )?.avatar
-                                }
-                                size="34px"
-                              />
-                            }
-                            status={
-                              mAppsDescription?.find(
-                                (description) => description.mApp === mApp
-                              )?.description
-                            }
-                            clickable={false}
-                            right={
-                              <Button
-                                variant={'destructive-outline'}
-                                size={'md'}
-                                rightIcon={<TrashIcon width={15} />}
-                                onClick={() => handleOpenRevokeMAppDialog(mApp)}
-                              >
-                                Revoke
-                              </Button>
-                            }
-                          />
-                        </Fragment>
-                      );
-                    })}
-                  </Flex>
+                <Flex direction="column" gap="5px">
+                  {mAppsAlreadyEnabled.map((mApp, index) => {
+                    return (
+                      <Fragment key={'mApp-' + mApp}>
+                        <ClickableItem
+                          title={mApp}
+                          left={
+                            <Avatar
+                              src={
+                                mAppsAvatar?.find(
+                                  (avatar) => avatar.mApp === mApp
+                                )?.avatar
+                              }
+                              size={34}
+                            />
+                          }
+                          subtitle={
+                            mAppsDescription?.find(
+                              (description) => description.mApp === mApp
+                            )?.description
+                          }
+                          clickable={false}
+                          style={{
+                            width: '100%',
+                          }}
+                          right={
+                            <Button
+                              variant={'destructive-outline'}
+                              size={'md'}
+                              rightIcon={<TrashIcon width={15} />}
+                              onClick={() => handleOpenRevokeMAppDialog(mApp)}
+                            >
+                              Revoke
+                            </Button>
+                          }
+                        />
+                      </Fragment>
+                    );
+                  })}
                 </Flex>
-              </>
+              </Flex>
             )}
           </Flex>
         </Flex>

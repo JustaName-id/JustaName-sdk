@@ -10,7 +10,7 @@ const StyledOverlay = styled(DialogPrimitive.Overlay)`
   transition: backdrop-filter 100ms ease;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: overlayShow 400ms cubic-bezier(0.16, 1, 0.3, 1);
 
   @keyframes overlayShow {
     from {
@@ -22,31 +22,49 @@ const StyledOverlay = styled(DialogPrimitive.Overlay)`
   }
 `;
 
-const StyledContent = styled(DialogPrimitive.Content)`
+const StyledContent = styled(DialogPrimitive.Content)<{
+  $fullScreen?: boolean;
+}>`
   background-color: var(--justweb3-background-color);
-  border-radius: 16px;
+  border-radius: ${(props) => (props.$fullScreen ? '0' : '24px')};
   box-shadow: 2px 4px 20px 0px rgb(0 0 0 / 33%);
   position: fixed;
   z-index: 9999;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: fit-content;
-  max-width: min(1200px, 90vw);
-  min-width: 400px;
+
+  width: ${(props) => (props.$fullScreen ? '100vw' : 'fit-content')};
+  max-width: ${(props) => (props.$fullScreen ? '100vw' : 'min(1200px, 90vw)')};
+  min-width: ${(props) => (props.$fullScreen ? '100vw' : '390px')};
+
+  //height: 100%;
+  min-height: ${(props) => (props.$fullScreen ? '100vh' : '200px')};
+  max-height: ${(props) => (props.$fullScreen ? '100vh' : '80vh')};
+
   padding: 40px;
-  //animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  //
-  //@keyframes contentShow {
-  //  from {
-  //    opacity: 0;
-  //    transform: translate(-50%, -48%) scale(0.96);
-  //  }
-  //  to {
-  //    opacity: 1;
-  //    transform: translate(-50%, -50%) scale(1);
-  //  }
-  //}
+
+  transition: all 0.4s ease-in-out;
+
+  animation: contentShow 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  @keyframes contentShow {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  @media (max-width: 640px) {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+  }
 
   &:focus {
     outline: none;
@@ -72,6 +90,7 @@ const StyledDescription = styled(DialogPrimitive.Description)`
 interface DialogContentProps
   extends React.ComponentPropsWithoutRef<typeof StyledContent> {
   disableOverlay?: boolean;
+  fullScreen?: boolean;
 }
 
 // Compound components
@@ -87,10 +106,10 @@ export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof StyledContent>,
   DialogContentProps
->(({ children, disableOverlay, ...props }, forwardedRef) => (
+>(({ children, fullScreen, disableOverlay, ...props }, forwardedRef) => (
   <DialogPrimitive.Portal>
     {!disableOverlay && <StyledOverlay />}
-    <StyledContent {...props} ref={forwardedRef}>
+    <StyledContent {...props} ref={forwardedRef} $fullScreen={fullScreen}>
       {children}
     </StyledContent>
   </DialogPrimitive.Portal>

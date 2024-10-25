@@ -5,21 +5,21 @@ import {
   getCoinTypeDetails,
   SupportedCoins,
 } from '@justaname.id/sdk';
-import { CheckIcon, ChevronDown } from 'lucide-react';
 import React, { useMemo } from 'react';
 import { useFieldArray, UseFormReturn } from 'react-hook-form';
 import { useDebounce } from '../../../hooks';
 import { metadataForm } from '../../../forms';
 import { validateCryptoAddress } from '../../../forms/addresses.schema';
 import {
-  AddIcon,
-  Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
+  AddCircleIcon,
+  ArrowIcon,
+  Badge,
   Flex,
   Input,
   P,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   WalletIcon,
 } from '@justweb3/ui';
 import { getChainIcon } from '../../../icons/chain-icons';
@@ -30,17 +30,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-height: calc(100% - 62px);
+  max-height: calc(100% - 67px);
   height: 100%;
 `;
 
-const ChainCard = styled.div<{ isNotAllowed: boolean }>`
+const ChainCard = styled.div<{ $isNotAllowed: boolean }>`
   display: flex;
   flex-direction: row;
   width: 100%;
   gap: 0.5rem;
   align-items: center;
-  cursor: ${(props) => (props.isNotAllowed ? 'not-allowed' : 'pointer')};
+  cursor: ${(props) => (props.$isNotAllowed ? 'not-allowed' : 'pointer')};
 `;
 
 interface AddressesSectionProps {
@@ -65,13 +65,6 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
   const suggestedCoins = useMemo(() => {
     if (isDebouncing) return [];
     if (!debouncedAddress) return [];
-
-    setTimeout(() => {
-      addressesRef.current?.scrollTo({
-        behavior: 'smooth',
-        top: addressesRef.current.scrollHeight,
-      });
-    }, 200);
 
     return Object.keys(coinTypeMap).reduce((acc: string[], coin: string) => {
       if (
@@ -112,7 +105,7 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
         className="justweb3scrollbar"
         style={{
           overflowY: 'auto',
-          maxHeight: 'calc(100% - 62px)',
+          maxHeight: 'calc(100% - 50px)',
         }}
         ref={addressesRef}
       >
@@ -142,151 +135,195 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
           })}
 
           <P style={{ fontSize: '16px', fontWeight: 500 }}>Add Address</P>
-          <Input
-            placeholder={'0x...'}
-            onChange={(e) => setAddress(e.target.value)}
-            value={address}
-            style={{
-              // paddingRight: '50px',
-              height: '22px',
-            }}
-            right={
-              <DropdownMenu
-                open={chainDropdownOpen}
-                onOpenChange={(open) => setChainDropdownOpen(open)}
-              >
-                <DropdownMenuTrigger
-                  disabled={filteredSuggestedCoins.length === 0}
+          <Flex gap={'5px'} justify={'center'} align={'center'}>
+            <Input
+              placeholder={'0x...'}
+              onChange={(e) => setAddress(e.target.value)}
+              value={address}
+              style={{
+                borderRadius: '10px',
+                height: '22px',
+                width: '100%',
+              }}
+              right={
+                <Popover
+                  open={chainDropdownOpen}
+                  onOpenChange={(open) => setChainDropdownOpen(open)}
                 >
-                  <Flex
-                    direction="row"
-                    gap="4px"
-                    align="center"
-                    style={{
-                      backgroundColor: '#E5E5E5',
-                      padding: '5px 10px',
-                      borderRadius: '100px',
-                    }}
+                  <PopoverTrigger
+                    disabled={filteredSuggestedCoins.length === 0}
                   >
-                    {selectedCoin ? (
-                      <Flex direction="row" gap="10px" align="center">
-                        {getChainIcon(selectedCoinDetails.symbol, 15)}
+                    <Badge
+                      withCopy={false}
+                      style={{
+                        padding: '5px',
+                      }}
+                    >
+                      {selectedCoin ? (
+                        <Flex direction="row" gap="10px" align="center">
+                          {getChainIcon(selectedCoinDetails.symbol, 15)}
+                          <P
+                            style={{
+                              fontSize: '10px',
+                              fontWeight: 700,
+                              color: 'var(--justweb3-primary-color)',
+                              transform: 'capitalize',
+                            }}
+                          >
+                            {`${
+                              selectedCoinDetails.symbol.split('Legacy')[0]
+                            } ${
+                              selectedCoinDetails.symbol.includes('Legacy')
+                                ? 'Legacy'
+                                : ''
+                            }`}
+                          </P>
+                        </Flex>
+                      ) : (
                         <P
                           style={{
                             fontSize: '10px',
-                            fontWeight: 700,
+                            fontWeight: 900,
                             color: 'var(--justweb3-primary-color)',
-                            transform: 'capitalize',
                           }}
                         >
-                          {`${selectedCoinDetails.symbol.split('Legacy')[0]} ${
-                            selectedCoinDetails.symbol.includes('Legacy')
-                              ? 'Legacy'
-                              : ''
-                          }`}
+                          CHAIN
                         </P>
-                      </Flex>
-                    ) : (
-                      <P
-                        style={{
-                          fontSize: '10px',
-                          fontWeight: 900,
-                          color: 'var(--justweb3-primary-color)',
-                        }}
-                      >
-                        CHAIN
-                      </P>
-                    )}
-                    {filteredSuggestedCoins.length > 0 && (
-                      <ChevronDown
-                        size={15}
-                        color="var(--justweb3-primary-color)"
-                        style={{
-                          transition: 'all 0.3s',
-                          transform: chainDropdownOpen
-                            ? 'rotate(180deg)'
-                            : 'rotate(0deg)',
-                        }}
-                      />
-                    )}
-                  </Flex>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  style={{
-                    backgroundColor: 'white',
-                    padding: '10px',
-                    gap: '10px',
-                    overflowY: 'auto',
-                    pointerEvents: 'auto',
-                    maxHeight: '300px',
-                    display: 'flex',
-                    width: '100px',
-                    flexDirection: 'column',
-                    zIndex: 100000,
-                  }}
-                  className="justweb3scrollbar"
-                >
-                  {filteredSuggestedCoins?.map((coin) => {
-                    const coinDetails = getCoinTypeDetails(
-                      coin as SupportedCoins
-                    );
-                    return (
-                      <ChainCard
-                        isNotAllowed={form
-                          .getValues('addresses')
-                          .some((address) => address.coin === coin)}
-                        onClick={() => {
-                          if (selectedCoin === coin) {
-                            setSelectedCoin('');
-                          } else {
-                            setSelectedCoin(coin);
-                          }
-                          setChainDropdownOpen(false);
-                        }}
-                        key={coin}
-                      >
-                        {selectedCoin === coin && <CheckIcon size={15} />}
-                        {getChainIcon(coinDetails.symbol, 15)}
-                        <P
+                      )}
+                      {filteredSuggestedCoins.length > 0 && (
+                        <ArrowIcon
+                          width={10}
+                          color="var(--justweb3-primary-color)"
                           style={{
-                            fontSize: '12px',
-                            fontWeight: 700,
-                            color: 'var(--justweb3-primary-color)',
-                            transform: 'capitalize',
-                            textAlign: 'center',
+                            transition: 'all 0.3s',
+                            transform: chainDropdownOpen
+                              ? 'rotate(-90deg)'
+                              : 'rotate(90deg)',
                           }}
-                        >
-                          {`${coinDetails.symbol.split('Legacy')[0]} ${
-                            coinDetails.symbol.includes('Legacy')
-                              ? 'Legacy'
-                              : ''
-                          }`}
-                        </P>
-                      </ChainCard>
-                    );
-                  })}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            }
-          />
-          <Button
-            variant="secondary"
-            leftIcon={<AddIcon height={20} width={20} />}
-            onClick={() => {
-              append({
-                coin: selectedCoin,
-                address: debouncedAddress,
-              });
-              setSelectedCoin('');
-              setAddress('');
-            }}
-            disabled={!selectedCoin || !debouncedAddress}
-            style={{
-              width: 'fit-content',
-            }}
-          >
-            Add Address
-          </Button>
+                        />
+                      )}
+                    </Badge>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    portal={false}
+                    sideOffset={5}
+                    style={{
+                      backgroundColor: 'white',
+                      padding: '10px',
+                      gap: '10px',
+                      overflowY: 'auto',
+                      pointerEvents: 'auto',
+                      maxHeight: '300px',
+                      display: 'flex',
+                      width: '120px',
+                      flexDirection: 'column',
+                      zIndex: 100000,
+                    }}
+                    className="justweb3scrollbar"
+                  >
+                    {filteredSuggestedCoins
+                      ?.filter((coin) => coin !== '60')
+                      .sort((a, b) => {
+                        return getCoinTypeDetails(
+                          a as SupportedCoins
+                        ).symbol.localeCompare(
+                          getCoinTypeDetails(b as SupportedCoins).symbol
+                        );
+                      })
+                      ?.map((coin) => {
+                        const coinDetails = getCoinTypeDetails(
+                          coin as SupportedCoins
+                        );
+                        return (
+                          <ChainCard
+                            $isNotAllowed={form
+                              .getValues('addresses')
+                              .some((address) => address.coin === coin)}
+                            onClick={() => {
+                              if (selectedCoin === coin) {
+                                setSelectedCoin('');
+                              } else {
+                                setSelectedCoin(coin);
+                              }
+                              setChainDropdownOpen(false);
+                            }}
+                            key={coin}
+                          >
+                            {selectedCoin === coin && <ArrowIcon width={15} />}
+                            {getChainIcon(coinDetails.symbol, 15)}
+                            <P
+                              style={{
+                                fontSize: '12px',
+                                fontWeight: 700,
+                                color: 'var(--justweb3-primary-color)',
+                                transform: 'capitalize',
+                                textAlign: 'center',
+                              }}
+                            >
+                              {`${coinDetails.symbol.split('Legacy')[0]} ${
+                                coinDetails.symbol.includes('Legacy')
+                                  ? 'Legacy'
+                                  : ''
+                              }`}
+                            </P>
+                          </ChainCard>
+                        );
+                      })}
+                  </PopoverContent>
+                </Popover>
+              }
+            />
+            <AddCircleIcon
+              width={20}
+              height={20}
+              style={{
+                cursor:
+                  selectedCoin && debouncedAddress ? 'pointer' : 'not-allowed',
+                flexShrink: 0,
+                opacity: selectedCoin && debouncedAddress ? 1 : 0.5,
+              }}
+              onClick={() => {
+                if (!selectedCoin || !debouncedAddress) return;
+                append(
+                  {
+                    coin: selectedCoin,
+                    address: debouncedAddress,
+                  },
+                  {
+                    shouldFocus: true,
+                  }
+                );
+                form.trigger();
+                setSelectedCoin('');
+                setAddress('');
+                setTimeout(() => {
+                  addressesRef.current?.scrollTo({
+                    behavior: 'smooth',
+                    top: addressesRef.current.scrollHeight,
+                  });
+                }, 200);
+              }}
+            />
+          </Flex>
+
+          {/*<Button*/}
+          {/*  variant="secondary"*/}
+          {/*  leftIcon={<AddIcon height={20} width={20} />}*/}
+          {/*  onClick={() => {*/}
+          {/*    append({*/}
+          {/*      coin: selectedCoin,*/}
+          {/*      address: debouncedAddress,*/}
+          {/*    });*/}
+          {/*    setSelectedCoin('');*/}
+          {/*    setAddress('');*/}
+          {/*  }}*/}
+          {/*  disabled={!selectedCoin || !debouncedAddress}*/}
+          {/*  style={{*/}
+          {/*    width: 'fit-content',*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  Add Address*/}
+          {/*</Button>*/}
         </Flex>
       </Flex>
     </Container>

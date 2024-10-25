@@ -70,6 +70,9 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
   }, [loading, hover]);
   return (
     <ClickableItem
+      style={{
+        width: '100%',
+      }}
       name={
         (credential === 'twitter'
           ? 'Twitter (X)'

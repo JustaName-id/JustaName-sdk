@@ -56,6 +56,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     () => params?.chainId || chainId,
     [params?.chainId, chainId]
   );
+
   const _networks = useMemo(
     () => networks.find((network) => network.chainId === _chainId),
     [_chainId, networks]

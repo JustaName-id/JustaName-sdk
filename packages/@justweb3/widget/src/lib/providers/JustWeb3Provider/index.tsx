@@ -49,13 +49,7 @@ export interface JustWeb3ProviderProps {
   config: JustWeb3ProviderConfig;
 }
 
-export interface UpdateRecordsParams
-  extends Omit<UseSubnameUpdateFunctionParams, 'ens' | 'contentHash'> {
-  contentHash?: {
-    protocolType: string;
-    decoded: string;
-  };
-}
+export type UpdateRecordsParams = Omit<UseSubnameUpdateFunctionParams, 'ens'>;
 
 export interface JustWeb3ContextProps {
   handleOpenSignInDialog: (open: boolean) => void;
@@ -142,7 +136,6 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
   };
 
   const handleOpenEnsProfile = (ens: string, chainId?: ChainId) => {
-    console.log('handleOpenEnsProfile', ens, chainId);
     setEnsOpen({ ens, chainId });
   };
 
@@ -200,7 +193,6 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
     }
   };
 
-  console.log(ensOpen);
   return (
     <JustaNameProvider config={justanameConfig}>
       <JustWeb3ThemeProvider color={config.color}>
@@ -223,7 +215,11 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
             handleOpenSignInDialog={handleOpenSignInDialog}
           >
             <CheckSession
-              openOnWalletConnect={config.openOnWalletConnect || true}
+              openOnWalletConnect={
+                config.openOnWalletConnect !== undefined
+                  ? config.openOnWalletConnect
+                  : true
+              }
               handleOpenDialog={handleOpenSignInDialog}
             />
             {ensOpen && (

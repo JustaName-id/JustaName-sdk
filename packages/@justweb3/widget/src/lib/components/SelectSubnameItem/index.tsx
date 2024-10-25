@@ -29,29 +29,12 @@ export const SelectSubnameItem: React.FC<SelectSubnameItemProps> = ({
   );
   return (
     <ClickableItem
-      name={subname.ens}
+      title={subname.ens}
       onClick={onClick}
       style={{
         width: '100%',
       }}
-      left={
-        <Avatar
-          src={avatar}
-          initial={subname.ens[0]}
-          size="28px"
-          bgColor={
-            avatar
-              ? 'var(--justweb3-foreground-color-4)'
-              : 'var(--justweb3-primary-color)'
-          }
-          borderColor={
-            avatar
-              ? 'var(--justweb3-foreground-color-4)'
-              : 'var(--justweb3-primary-color)'
-          }
-          color="#ffffff"
-        />
-      }
+      left={<Avatar src={avatar} initial={subname.ens[0]} />}
       right={
         <Flex>
           <div

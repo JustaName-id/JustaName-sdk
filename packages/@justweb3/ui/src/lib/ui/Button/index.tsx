@@ -32,7 +32,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 16px;
+  border-radius: 100px;
   border: none;
   font-weight: 900;
   font-family: var(--justweb3-font-family), serif;
@@ -48,6 +48,7 @@ const StyledButton = styled.button<StyledButtonProps>`
     css`
       background-color: var(--justweb3-primary-color);
       color: var(--justweb3-primary-color-foreground);
+      border: 1px solid var(--justweb3-primary-color);
 
       &:hover {
         background-color: var(--justweb3-primary-color-dark);
@@ -111,14 +112,14 @@ const StyledButton = styled.button<StyledButtonProps>`
     ${(props) =>
     props.size === 'md' &&
     css`
-      height: 28px;
+      height: 20px;
       padding: 10px 12px;
     `}
 
     ${(props) =>
     props.size === 'lg' &&
     css`
-      height: 32px;
+      height: 28px;
       font-size: 14px;
       padding: 10px 12px;
     `}
@@ -145,7 +146,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     {
       className,
       variant = 'primary',
-      size = 'sm',
+      size = 'md',
       asChild = false,
       loading = false,
       children,

@@ -10,7 +10,6 @@
     "lodash": "4.17.21",
     "styled-components": "^6.1.12",
     "yup": "0.32.11",
-    "lucide-react": "^0.436.0",
     "react-hook-form": "^7.53.0",
     "cropperjs": "^1.6.2",
     "@hookform/resolvers": "^3.9.0"

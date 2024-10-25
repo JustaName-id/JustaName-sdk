@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { P } from '../../ui';
 
 interface ClickableListItemProps {
-  name: string;
-  status?: string;
+  title: string | React.ReactNode;
+  subtitle?: string | React.ReactNode;
   left?: React.ReactNode;
   loading?: boolean;
   onClick?: () => void;
@@ -36,7 +36,7 @@ const ListItemWrapper = styled.div<{
   padding: 10px;
   cursor: ${(props) =>
     props.$disabled || props.$loading ? 'not-allowed' : 'pointer'};
-  border-radius: 16px;
+  border-radius: 100px;
   box-sizing: border-box;
   width: 300px;
   opacity: ${(props) => (props.$disabled ? 0.5 : 1)};
@@ -48,6 +48,7 @@ const ListItemWrapper = styled.div<{
   background-color: var(--justweb3-background-color);
   transition: background-color 0.2s ease;
   max-width: 100%;
+  height: fit-content;
 `;
 
 const Content = styled.div`
@@ -60,8 +61,8 @@ const Content = styled.div`
 `;
 
 export const ClickableItem: React.FC<ClickableListItemProps> = ({
-  name,
-  status,
+  title,
+  subtitle,
   left,
   loading,
   right,
@@ -98,30 +99,37 @@ export const ClickableItem: React.FC<ClickableListItemProps> = ({
       style={{
         ...style,
         cursor: !clickable ? 'default' : undefined,
+        gap: '10px',
+        alignItems: title && subtitle ? 'stretch' : 'center',
       }}
     >
       {left && (
-        <div
-          style={{ marginRight: '10px', display: 'flex', alignItems: 'center' }}
-        >
-          {left}
-        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>{left}</div>
       )}
       <Content
         style={{
           ...contentStyle,
+          placeContent: 'space-around',
         }}
       >
-        <P
-          style={{
-            fontSize: '14px',
-            lineHeight: '20px',
-            margin: 0,
-          }}
-        >
-          {name}
-        </P>
-        {status && <TruncatedText>{status}</TruncatedText>}
+        {typeof title === 'string' ? (
+          <P
+            style={{
+              fontSize: '14px',
+              lineHeight: '20px',
+              margin: 0,
+            }}
+          >
+            {title}
+          </P>
+        ) : (
+          title
+        )}
+        {subtitle && typeof subtitle === 'string' ? (
+          <TruncatedText>{subtitle}</TruncatedText>
+        ) : (
+          subtitle
+        )}
       </Content>
       {right && (
         <div

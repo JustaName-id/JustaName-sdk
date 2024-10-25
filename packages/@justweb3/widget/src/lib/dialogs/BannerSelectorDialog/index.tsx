@@ -5,7 +5,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { DefaultDialog } from '../DefaultDialog';
 import { useUploadMedia } from '@justaname.id/react';
-import { Loading } from '../../components/Loading';
 
 export interface BannerEditorDialogProps {
   onImageChange: (image: string) => void;
@@ -101,7 +100,7 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
   const handleImageLoaded = () => {
     if (imageElement.current) {
       cropper.current = new Cropper(imageElement.current, {
-        aspectRatio: 5 / 1,
+        aspectRatio: 3 / 1,
         viewMode: 1,
         autoCropArea: 1,
         cropBoxResizable: true,
@@ -112,6 +111,7 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('event', event.target.files);
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -144,10 +144,7 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
         formData.append('file', blob);
         try {
           const response = await uploadMedia({ form: formData });
-          if (!response.data) {
-            throw new Error(`Error: ${response.data}`);
-          }
-          onImageChange(response.data.url);
+          onImageChange(response.url);
           if (fileInputRef.current) {
             fileInputRef.current.value = '';
           }
@@ -276,32 +273,32 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
             {/* </div> */}
           </Flex>
         </ResponsiveDiv>
-        {isUploadPending ? (
-          <Loading />
-        ) : (
-          <Flex direction="row" gap="5px">
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() => {
-                if (fileInputRef.current) {
-                  fileInputRef.current.value = '';
-                }
-              }}
-              style={{ flexGrow: '0.5' }}
-            >
-              Cancel
-            </Button>
-            <Button
-              type="button"
-              onClick={handleSave}
-              variant="primary"
-              style={{ flexGrow: '0.5' }}
-            >
-              Upload
-            </Button>
-          </Flex>
-        )}
+
+        <Flex direction="row" gap="5px">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => {
+              if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+              }
+              setIsEditorOpen(false);
+            }}
+            style={{ flexGrow: '0.5' }}
+            disabled={isUploadPending}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="button"
+            onClick={handleSave}
+            variant="primary"
+            style={{ flexGrow: '0.5' }}
+            loading={isUploadPending}
+          >
+            Upload
+          </Button>
+        </Flex>
       </DefaultDialog>
     </>
   );

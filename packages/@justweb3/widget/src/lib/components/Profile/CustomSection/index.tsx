@@ -1,8 +1,7 @@
 'use client';
 
 import {
-  AddIcon,
-  Button,
+  AddCircleIcon,
   Flex,
   FormControl,
   FormField,
@@ -22,7 +21,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-height: calc(100% - 62px);
+  max-height: calc(100% - 67px);
   height: 100%;
 `;
 
@@ -59,80 +58,88 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
         className="justweb3scrollbar"
         style={{
           overflowY: 'auto',
-          maxHeight: 'calc(100% - 62px)',
+          maxHeight: 'calc(100% - 50px)',
         }}
       >
         <Flex direction="column" gap="20px">
           {form.getValues('otherTexts').map((other, index) => {
             return (
+              // <Flex
+              //   direction="column"
+              //   gap="5px"
+              //   style={{
+              //     cursor: 'pointer',
+              //     width: '100%',
+              //     flexGrow: 1,
+              //   }}
+              //   key={other.key + index}
+              // >
               <Flex
-                direction="column"
+                direction="row"
                 gap="5px"
-                style={{
-                  cursor: 'pointer',
-                  width: '100%',
-                  flexGrow: 1,
-                }}
+                align="center"
                 key={other.key + index}
               >
-                <Flex direction="row" gap="5px" align="center">
-                  <FormField
-                    control={form.control}
-                    name={`otherTexts.${index}.key`}
-                    render={({ field }) => (
-                      <FormItem
-                        style={{
-                          flex: 1,
-                        }}
-                      >
-                        <FormControl>
-                          <Input
-                            placeholder={'Key'}
-                            {...field}
-                            style={{
-                              height: '22px',
-                            }}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name={`otherTexts.${index}.value`}
-                    render={({ field }) => (
-                      <FormItem
-                        style={{
-                          flex: 1,
-                        }}
-                      >
-                        <FormControl>
-                          <Input
-                            placeholder={'Value'}
-                            {...field}
-                            style={{
-                              height: '22px',
-                            }}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <TrashIcon
-                    height={20}
-                    width={20}
-                    style={{
-                      cursor: 'pointer',
-                      margin: 'auto 0',
-                    }}
-                    onClick={() => {
-                      remove(index);
-                    }}
-                  />
-                </Flex>
+                <FormField
+                  control={form.control}
+                  name={`otherTexts.${index}.key`}
+                  render={({ field }) => (
+                    <FormItem
+                      style={{
+                        width: '100%',
+                      }}
+                    >
+                      <FormControl>
+                        <Input
+                          placeholder={'Key'}
+                          {...field}
+                          style={{
+                            borderRadius: '10px',
+                            height: '22px',
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name={`otherTexts.${index}.value`}
+                  render={({ field }) => (
+                    <FormItem
+                      style={{
+                        width: '100%',
+                      }}
+                    >
+                      <FormControl>
+                        <Input
+                          placeholder={'Value'}
+                          {...field}
+                          style={{
+                            borderRadius: '10px',
+                            height: '22px',
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <TrashIcon
+                  height={20}
+                  width={20}
+                  style={{
+                    cursor: 'pointer',
+                    margin: 'auto 0',
+                    flexShrink: 0,
+                  }}
+                  onClick={() => {
+                    remove(index);
+                  }}
+                />
               </Flex>
+              // </Flex>
             );
           })}
 
@@ -151,7 +158,9 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
               onChange={(e) => setCustomKey(e.target.value)}
               value={customKey}
               style={{
+                borderRadius: '10px',
                 height: '22px',
+                width: '100%',
               }}
             />
 
@@ -160,26 +169,31 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
               onChange={(e) => setCustomValue(e.target.value)}
               value={customValue}
               style={{
+                borderRadius: '10px',
                 height: '22px',
+                width: '100%',
+              }}
+            />
+
+            <AddCircleIcon
+              width={20}
+              height={20}
+              style={{
+                cursor: customKey && customValue ? 'pointer' : 'not-allowed',
+                opacity: customKey && customValue ? 1 : 0.5,
+                flexShrink: 0,
+              }}
+              onClick={() => {
+                if (!customKey || !customValue) return;
+                append({
+                  key: customKey,
+                  value: customValue,
+                });
+                setCustomKey('');
+                setCustomValue('');
               }}
             />
           </Flex>
-
-          <Button
-            variant="secondary"
-            leftIcon={<AddIcon height={20} width={20} />}
-            onClick={() => {
-              append({
-                key: customKey,
-                value: customValue,
-              });
-              setCustomKey('');
-              setCustomValue('');
-            }}
-            disabled={customKey === '' || customValue === ''}
-          >
-            Add Custom Field
-          </Button>
         </Flex>
       </Flex>
     </Container>

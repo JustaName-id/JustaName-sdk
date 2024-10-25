@@ -5,10 +5,10 @@ import styled from 'styled-components';
 const StyledPopoverContent = styled(PopoverPrimitive.Content)`
   z-index: 50;
   width: 18rem;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  border: 1px solid var(--justweb3-foreground-color-4);
   background: var(--justweb3-background-color);
-  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 2px 4px 20px 0px rgb(0 0 0 / 33%);
   padding: 1rem;
   outline: none;
 
@@ -102,20 +102,27 @@ const StyledPopoverTrigger = styled(PopoverPrimitive.Trigger)`
   cursor: pointer;
 `;
 
-type PopoverContentProps = React.ComponentPropsWithoutRef<
-  typeof PopoverPrimitive.Content
->;
+interface PopoverContentProps
+  extends React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> {
+  portal?: boolean;
+}
 
 const Popover = PopoverPrimitive.Root;
 
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
   PopoverContentProps
->(({ ...props }, ref) => (
-  <PopoverPrimitive.Portal>
-    <StyledPopoverContent ref={ref} {...props} />
-  </PopoverPrimitive.Portal>
-));
+>(({ portal = true, ...props }, ref) => {
+  if (!portal) {
+    return <StyledPopoverContent ref={ref} {...props} />;
+  }
+
+  return (
+    <PopoverPrimitive.Portal>
+      <StyledPopoverContent ref={ref} {...props} />
+    </PopoverPrimitive.Portal>
+  );
+});
 
 PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 

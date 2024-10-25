@@ -14,7 +14,7 @@ export type ContentHashProvider = (typeof ContentHashProviders)[number];
 
 export type ContentHashProviderOrAll = ContentHashProvider | 'all';
 
-const contentHashToProtocols = {
+export const contentHashToProtocols = {
   ipfs: ['ipfs', 'ipns'],
   swarm: ['bzz'],
   onion: ['onion', 'onion3'],
@@ -36,6 +36,7 @@ export const validateContentHash =
 
     if (!output) return 'Invalid content hash';
     const { protocolType, decoded } = output;
+
     if (
       provider !== 'all' &&
       !contentHashToProtocols[provider]?.includes(protocolType)
@@ -59,6 +60,30 @@ export const validateContentHash =
       return 'Invalid content hash';
     }
   };
+
+// export const contentHashSchema = yup.string().test((value, context) => {
+//   if (!value) return true;
+//   const split = value.split('://');
+//   if (split.length !== 2) {
+//     return context.createError({
+//       message: 'Invalid content hash',
+//     });
+//   }
+//   const provider = split[0] as ContentHashProviderOrAll;
+//   const contentHash = split[1];
+//
+//   const validator = validateContentHash(provider)(contentHash);
+//
+//   if (validator !== true) {
+//     return context.createError({
+//       message:
+//         typeof validator === 'string' ? validator : 'Invalid content hash',
+//     });
+//   }
+//
+//   return true;
+// });
+
 export const contentHashSchema = yup.object({
   protocolType: yup.string().required(),
   decoded: yup
@@ -77,7 +102,13 @@ export const contentHashSchema = yup.object({
         });
       }
 
-      const validator = validateContentHash(protocolType)(value);
+      const provider = Object.keys(contentHashToProtocols).find((key) =>
+        contentHashToProtocols[
+          key as keyof typeof contentHashToProtocols
+        ].includes(protocolType)
+      ) as ContentHashProviderOrAll;
+
+      const validator = validateContentHash(provider)(value);
 
       if (validator !== true) {
         return context.createError({

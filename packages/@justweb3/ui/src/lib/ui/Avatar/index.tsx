@@ -3,27 +3,27 @@ import styled from 'styled-components';
 import JustSomeone from '../../icons/components/logo/JustSomeone';
 
 interface AvatarWrapperProps {
-  $size?: string;
-  $border?: boolean;
-  $bgColor?: string;
+  $size: number;
+  $borderSize?: string;
   $borderColor?: string;
 }
 
 const AvatarWrapper = styled.div<AvatarWrapperProps>`
-  width: ${(props) => props.$size || '28px'};
-  height: ${(props) => props.$size || '28px'};
-  min-width: ${(props) => props.$size || '28px'};
-  background-color: ${(props) =>
-    props.$bgColor || 'var(--justweb3-primary-color)'};
+  width: ${(props) => props.$size + 'px'};
+  height: ${(props) => props.$size + 'px'};
+  min-width: ${(props) => props.$size + 'px'};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   border: ${(props) =>
-    props.$border
-      ? `1px solid  ${props.$borderColor || 'var(--justweb3-primary-color)'}`
-      : 'none'};
+    `${props.$borderSize || '2px'} solid ${
+      props.$borderColor || 'var(--justweb3-foreground-color-4)'
+    }`};
+  box-shadow: 0px 0px ${(props) => (props?.$size > 32 ? '10px' : '5px')} 0px
+    rgba(0, 0, 0, 0.25);
+  background-color: var(--justweb3-foreground-color-4);
   box-sizing: border-box;
 `;
 
@@ -48,42 +48,31 @@ interface AvatarProps {
   src?: string;
   alt?: string;
   initial?: string;
-  size?: string;
-  border?: boolean;
-  bgColor?: string;
+  size?: number;
+  borderSize?: string;
   borderColor?: string;
-  loading?: boolean;
-  color?: string;
-  fontSize?: string;
   style?: React.CSSProperties;
-  containerStyle?: React.CSSProperties;
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
   src,
   alt,
-  initial,
-  size,
-  bgColor,
-  border = true,
+  size = 32,
+  borderSize,
   borderColor,
-  color,
-  fontSize,
   style,
-  containerStyle,
 }) => {
   return (
     <AvatarWrapper
       $size={size}
-      $bgColor={bgColor}
-      $border={border}
+      $borderSize={borderSize}
       $borderColor={borderColor}
-      style={containerStyle}
+      style={style}
     >
       {src ? (
-        <AvatarImage src={src} alt={alt || 'Avatar'} style={style} />
+        <AvatarImage src={src} alt={alt || 'Avatar'} />
       ) : (
-        <JustSomeone width={28} />
+        <JustSomeone width={size} />
       )}
     </AvatarWrapper>
   );

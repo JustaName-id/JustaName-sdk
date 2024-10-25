@@ -151,6 +151,9 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
   return (
     <DefaultDialog
       open={open}
+      contentStyle={{
+        maxWidth: '400px',
+      }}
       handleClose={() => handleOpenDialogInternal(false)}
       header={
         <div
@@ -175,90 +178,110 @@ export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
       }
       disableOverlay={disableOverlay}
     >
-      <Badge>
-        <SPAN
-          style={{
-            fontSize: '10px',
-            lineHeight: '10px',
-            fontWeight: 900,
-          }}
-        >
-          {connectedEns}
-        </SPAN>
-      </Badge>
-      <Flex justify="space-between" direction="column" gap="10px">
-        <H2>Authorise {mApp} mApp</H2>
-      </Flex>
+      <Flex gap={'20px'} direction={'column'}>
+        <Flex gap={'10px'} justify={'space-between'} direction={'column'}>
+          <Badge>
+            <SPAN
+              style={{
+                fontSize: '10px',
+                lineHeight: '10px',
+                fontWeight: 900,
+                color: 'var(--justweb3-primary-color)',
+              }}
+            >
+              {connectedEns}
+            </SPAN>
+          </Badge>
+          <Flex justify="space-between" direction="column" gap="10px">
+            <H2>Authorise {mApp} mApp</H2>
+          </Flex>
+        </Flex>
 
-      <Flex>
-        <P>{mAppDescription}</P>
-      </Flex>
+        <Flex style={{ padding: '10px 0' }} direction={'column'} gap={'10px'}>
+          {!mAppDescription && !mAppPermissions.length && (
+            <P>
+              This mApp does not have any permissions or description, be
+              cautious when authorising it.
+            </P>
+          )}
 
-      <Flex
-        direction={'column'}
-        gap={'15px'}
-        className={'justweb3scrollbar'}
-        style={{
-          maxHeight: '20vh',
-          overflowY: 'auto',
-        }}
-      >
-        {mAppPermissions.map((permission, index) => {
-          return (
-            <Fragment key={'permission_' + index}>
-              <Flex
-                direction={'column'}
-                gap={'5px'}
-                style={{
-                  padding: '10px',
-                  borderRadius: '16px',
-                  border: '1px solid var(--justweb3-foreground-color-4)',
-                }}
-              >
-                <P>Permission</P>
+          {mAppDescription && (
+            <Flex>
+              <P>{mAppDescription}</P>
+            </Flex>
+          )}
 
-                <P>{permission}</P>
-              </Flex>
-            </Fragment>
-          );
-        })}
-
-        {mAppFieldsInEnsRecords && mAppFieldsInEnsRecords.length > 0 && (
-          <>
-            <P>Installing this mApp will remove the following fields:</P>
-            <Flex direction="column" gap="10px">
-              {mAppFieldsInEnsRecords.map((field) => {
+          {mAppPermissions?.length > 0 ||
+          (mAppFieldsInEnsRecords && mAppFieldsInEnsRecords?.length > 0) ? (
+            <Flex
+              direction={'column'}
+              gap={'15px'}
+              className={'justweb3scrollbar'}
+              style={{
+                maxHeight: '20vh',
+                overflowY: 'auto',
+              }}
+            >
+              {mAppPermissions.map((permission, index) => {
                 return (
-                  <Fragment key={'mapp-fields-' + field.key}>
-                    <ClickableItem
-                      name={field.key}
-                      status={field.value}
-                      clickable={false}
-                    />
+                  <Fragment key={'permission_' + index}>
+                    <Flex
+                      direction={'column'}
+                      gap={'5px'}
+                      style={{
+                        padding: '10px',
+                        borderRadius: '16px',
+                        border: '1px solid var(--justweb3-foreground-color-4)',
+                      }}
+                    >
+                      <P>Permission</P>
+
+                      <P style={{ fontSize: '10px' }}>{permission}</P>
+                    </Flex>
                   </Fragment>
                 );
               })}
-            </Flex>
-          </>
-        )}
-      </Flex>
 
-      <Button
-        style={{
-          width: '100%',
-        }}
-        size="lg"
-        loading={isAddMAppPermissionPending}
-        onClick={() => {
-          addMAppPermission({
-            subname: connectedEns || '',
-          }).then(() => {
-            handleOpenDialogInternal(false);
-          });
-        }}
-      >
-        Authorise
-      </Button>
+              {mAppFieldsInEnsRecords && mAppFieldsInEnsRecords.length > 0 && (
+                <>
+                  <P>Installing this mApp will remove the following fields:</P>
+                  <Flex direction="column" gap="15px">
+                    {mAppFieldsInEnsRecords.map((field) => {
+                      return (
+                        <Fragment key={'mapp-fields-' + field.key}>
+                          <ClickableItem
+                            title={field.key}
+                            subtitle={field.value}
+                            style={{
+                              width: '100%',
+                              borderRadius: '16px',
+                            }}
+                            clickable={false}
+                          />
+                        </Fragment>
+                      );
+                    })}
+                  </Flex>
+                </>
+              )}
+            </Flex>
+          ) : null}
+        </Flex>
+        <Button
+          style={{}}
+          size="lg"
+          loading={isAddMAppPermissionPending}
+          onClick={() => {
+            addMAppPermission({
+              subname: connectedEns || '',
+            }).then(() => {
+              handleOpenDialogInternal(false);
+            });
+          }}
+        >
+          Authorise
+        </Button>
+      </Flex>
     </DefaultDialog>
   );
 };

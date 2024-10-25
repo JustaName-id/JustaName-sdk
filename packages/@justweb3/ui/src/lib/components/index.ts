@@ -1,4 +1,4 @@
 export * from './OrLine';
-export * from './LinkCard';
+export * from './MetadataCard';
 export * from './ClickableItem';
 export * from './ExpandableText';

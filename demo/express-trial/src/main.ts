@@ -82,7 +82,6 @@ app.post('/api/signin', async (req: Request, res) => {
       res.status(500).json({ message: 'No expirationTime returned.' });
     }
 
-    console.log(message.expirationTime);
     req.session.siwens = {
       address: message.address,
       ens,
@@ -107,13 +106,11 @@ app.get('/api/current', function (req, res) {
   }
   console.log('User is authenticated!');
   res.setHeader('Content-Type', 'text/plain');
-  res
-    .status(200)
-    .send({
-      ens: req.session.siwens?.ens,
-      address: req.session.siwens?.address,
-      chainId: req.session.siwens?.chainId,
-    });
+  res.status(200).send({
+    ens: req.session.siwens?.ens,
+    address: req.session.siwens?.address,
+    chainId: req.session.siwens?.chainId,
+  });
 });
 
 app.post('/api/signout', function (req, res) {

@@ -83,7 +83,7 @@ const socialLinks = [
   },
 ] as const;
 
-interface LinkCardProps {
+interface MetadataCardProps {
   variant: 'address' | 'other' | 'social' | 'contentHash';
   icon?: React.ReactNode;
   title: string;
@@ -91,7 +91,7 @@ interface LinkCardProps {
   textExtraStyle?: React.CSSProperties;
 }
 
-export const LinkCard: React.FC<LinkCardProps> = ({
+export const MetadataCard: React.FC<MetadataCardProps> = ({
   title,
   value,
   variant,
@@ -136,7 +136,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
       maxWidth: '100%',
       width: 'fit-content',
       textDecoration: 'underline',
-      textUnderlineOffset: '3px',
+      textUnderlineOffset: '1px',
       lineHeight: '100%',
       margin: '0px',
     },
@@ -179,7 +179,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
 
           {variant === 'social' && (
             <A {...linkProps}>
-              <P style={textStyle}>{formatText(value)}</P>
+              <P style={textStyle}>{value}</P>
             </A>
           )}
 
@@ -198,6 +198,6 @@ export const LinkCard: React.FC<LinkCardProps> = ({
   );
 };
 
-LinkCard.displayName = 'LinkCard';
+MetadataCard.displayName = 'MetadataCard';
 
-export default LinkCard;
+export default MetadataCard;

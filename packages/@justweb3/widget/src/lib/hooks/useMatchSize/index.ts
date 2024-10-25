@@ -5,6 +5,13 @@ interface UseMatchSizeOptions {
   matchHeight?: boolean;
 }
 
+interface UseMatchSizeReturn {
+  sourceWidth: number;
+  sourceHeight: number;
+  targetWidth: number;
+  targetHeight: number;
+}
+
 export const useMatchSize = (
   sourceElement: HTMLElement | null,
   targetElement: HTMLElement | null,
@@ -35,6 +42,13 @@ export const useMatchSize = (
       resizeObserver.disconnect();
     };
   }, [sourceElement, targetElement, matchWidth, matchHeight]);
+
+  return {
+    sourceWidth: sourceElement?.clientWidth ?? 0,
+    sourceHeight: sourceElement?.clientHeight ?? 0,
+    targetWidth: targetElement?.clientWidth ?? 0,
+    targetHeight: targetElement?.clientHeight ?? 0,
+  };
 };
 
 export default useMatchSize;

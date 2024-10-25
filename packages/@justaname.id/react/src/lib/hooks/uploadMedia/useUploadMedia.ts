@@ -1,5 +1,5 @@
 import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import * as qs from 'qs';
 import { useJustaName, useSubnameSignature } from '../../providers';
 import { ChainId } from '@justaname.id/sdk';
@@ -23,7 +23,7 @@ export interface UseUploadMediaResponse {
 
 export interface UseUploadMediaResult {
   uploadMedia: UseMutateAsyncFunction<
-    AxiosResponse<UseUploadMediaResponse>,
+    UseUploadMediaResponse,
     Error,
     UseUploadMediaFunctionParams,
     unknown
@@ -68,7 +68,15 @@ export const useUploadMedia = (
       const baseUrl = dev
         ? 'https://api-staging.justaname.id'
         : 'https://api.justaname.id';
-      const result = axios.post(
+      const result = await axios.post<{
+        result: {
+          data: {
+            url: string;
+          };
+          error: null;
+        };
+        statusCode: number;
+      }>(
         `${baseUrl}/ens/v1/subname/upload-to-cdn` +
           '?' +
           query(_ens, _type, _chainId),
@@ -81,7 +89,16 @@ export const useUploadMedia = (
           },
         }
       );
-      return result;
+
+      let url = '';
+
+      if (result.data.statusCode === 200) {
+        url = result.data.result.data.url;
+      }
+
+      return {
+        url,
+      };
     },
   });
 

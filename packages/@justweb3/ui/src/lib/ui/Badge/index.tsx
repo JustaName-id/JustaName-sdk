@@ -26,7 +26,11 @@ const badgeVariants = {
   `,
 };
 
-const StyledBadge = styled.div<BadgeProps>`
+interface StyledBadgeProps {
+  $variant?: BadgeVariant;
+}
+
+const StyledBadge = styled.div<StyledBadgeProps>`
   display: inline-flex;
   align-items: center;
   border-radius: 16px;
@@ -37,7 +41,7 @@ const StyledBadge = styled.div<BadgeProps>`
   line-height: 1;
   white-space: nowrap;
 
-  ${(props) => badgeVariants[props.variant || 'default']}
+  ${(props) => badgeVariants[props.$variant || 'default']}
 `;
 
 export const Badge: React.FC<BadgeProps> = ({
@@ -63,7 +67,7 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   return (
-    <StyledBadge variant={variant} {...props}>
+    <StyledBadge $variant={variant} {...props}>
       {children}
       {withCopy &&
         (isCopied ? (

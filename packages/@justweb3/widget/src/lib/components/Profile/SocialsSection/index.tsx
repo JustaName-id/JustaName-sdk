@@ -18,7 +18,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-height: calc(100% - 62px);
+  max-height: calc(100% - 67px);
   height: 100%;
 `;
 
@@ -43,7 +43,7 @@ export const SocialsSection: React.FC<SocialsSectionProps> = ({
         style={{
           overflowY: 'auto',
           // maxHeight: 'calc(-90px + 85vh - 30px - 20px - 52px - 10px - 16px)',
-          maxHeight: 'calc(100% - 62px)',
+          maxHeight: 'calc(100% - 50px)',
         }}
       >
         <Flex direction="column" gap="10px">
