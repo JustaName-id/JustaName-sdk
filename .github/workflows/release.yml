@@ -35,17 +35,6 @@ jobs:
         run: |
           yarn install --immutable
 
-      - name: Reinstall Dependencies for Specific Projects
-        env:
-          YARN_ENABLE_IMMUTABLE_INSTALLS: false
-        run: |
-          npx nx run-many --target=reinstall --projects=justaname-express,justaname-next-app,justaname-next-pages,justaname-fastify,justaname-nestjs,justaname-expo-full,justaname-react,justaname-hapi,justaname-koa,justaname-expo-frontend --parallel
-
-      - name: Check for Updated yarn.lock Files
-        run: |
-          git add examples/*/yarn.lock
-          git diff --cached --exit-code || (git commit -m "CI: Update yarn.lock files" && git push origin main)
-
       - name: Build and Test
         env:
           SDK_JUSTANAME_TEST_API_KEY: ${{ secrets.SDK_JUSTANAME_TEST_API_KEY }}

@@ -85,14 +85,6 @@ const StyledDescription = styled(DialogPrimitive.Description)`
   line-height: 1.5;
 `;
 
-// Define Props Interface for DialogContent
-interface DialogContentProps
-  extends ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
-  fullScreen?: boolean;
-  disableOverlay?: boolean;
-}
-
-// Compound components
 const Dialog: React.FC<DialogPrimitive.DialogProps> = ({
   children,
   ...props
@@ -103,6 +95,12 @@ const Dialog: React.FC<DialogPrimitive.DialogProps> = ({
 );
 
 const DialogTrigger = DialogPrimitive.Trigger;
+
+interface DialogContentProps
+  extends ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
+  fullScreen?: boolean;
+  disableOverlay?: boolean;
+}
 
 const DialogContent = forwardRef<
   ElementRef<typeof DialogPrimitive.Content>,
