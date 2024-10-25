@@ -73,13 +73,13 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
       style={{
         width: '100%',
       }}
-      name={
+      title={
         (credential === 'twitter'
           ? 'Twitter (X)'
           : credential.charAt(0).toUpperCase() + credential.slice(1)) +
         (username ? `: ${username}` : '')
       }
-      status={
+      subtitle={
         username ? 'Expires in ' + moment(expirationDate).fromNow() : undefined
       }
       onClick={onClick}

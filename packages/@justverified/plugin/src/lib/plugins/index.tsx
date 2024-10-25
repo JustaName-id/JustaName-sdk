@@ -37,7 +37,7 @@ export const JustVerifiedPlugin = (
     SignInMenu: (pluginApi) => {
       return (
         <ClickableItem
-          name={'Verifications'}
+          title={'Verifications'}
           left={<VerificationsIcon width={20} />}
           style={{
             width: '100%',
