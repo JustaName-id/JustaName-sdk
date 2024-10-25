@@ -105,8 +105,8 @@ const StyledInputOTPSlot = styled.div<{ $isActive: boolean }>`
     border-bottom-right-radius: 0.375rem;
   }
 
-  ${({ isActive }) =>
-    isActive &&
+  ${({ $isActive }) =>
+    $isActive &&
     css`
       z-index: 10;
       box-shadow: 0 0 0 2px var(--justweb3-primary-color);

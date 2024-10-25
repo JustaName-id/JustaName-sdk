@@ -81,7 +81,7 @@ export const MAppsDialog: FC<AuthorizeMAppDialogProps> = ({
       }
     );
 
-    Promise.allSettled(mApps.map((mApp) => getEnsAvatar(mApp))).then(
+    Promise.allSettled(mApps.map((mApp) => getEnsAvatar({ name: mApp }))).then(
       (avatars) => {
         setMAppsAvatar(
           avatars
