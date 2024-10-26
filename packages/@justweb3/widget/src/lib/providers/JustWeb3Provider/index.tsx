@@ -33,6 +33,8 @@ import { ProfileDialog, UpdateRecordDialog } from '../../dialogs';
 import { isEqual } from 'lodash';
 import { ChainId } from '@justaname.id/sdk';
 
+// import '@justweb3/ui/styles.css';
+
 export interface JustWeb3ProviderConfig
   extends JustaNameProviderConfig,
     JustWeb3ThemeProviderConfig {
@@ -177,6 +179,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
   };
 
   const handleJustWeb3Config = (_config: JustWeb3ProviderConfig) => {
+    console.log('handleJustWeb3Config', _config);
     const _justanameConfig = {
       config: _config.config,
       backendUrl: _config.backendUrl,

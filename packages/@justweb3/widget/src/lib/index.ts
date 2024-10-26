@@ -1,7 +1,7 @@
+import './global.css';
 import { LoadingDialog } from './dialogs/LoadingDialog';
 import { DefaultDialog } from './dialogs/DefaultDialog';
 import { JustaNameFooter } from './components/JustaNameFooter';
-
 import { JustWeb3Button } from './components/JustWeb3Button';
 import { JustEnsCard } from './components/JustEnsCard';
 

@@ -40,7 +40,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   const [openMApps, setOpenMApps] = useState(false);
   const { plugins, mApps } = useContext(JustWeb3Context);
   const { createPluginApi } = useContext(PluginContext);
-  const { address } = useMountedAccount();
+  const { address, isConnected } = useMountedAccount();
   const {
     connectedEns,
     signOut,
@@ -106,7 +106,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   }
 
   if (!connectedEns) {
-    if (address) {
+    if (address && isConnected) {
       return (
         <ClickableItem
           title={
@@ -119,7 +119,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               Sign In
             </P>
           }
-          onClick={() => handleOpenSignInDialog(true)}
+          onClick={() => {
+            handleOpenSignInDialog(true);
+          }}
           left={<Avatar />}
         />
       );
@@ -142,7 +144,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
             title={
               <P
                 style={{
+                  fontWeight: 700,
                   color: 'var(--justweb3-primary-color)',
+                  fontSize: '12px',
                 }}
               >
                 {connectedEns.ens}
@@ -227,7 +231,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                       {records?.sanitizedRecords.display ?? connectedEns.ens}
                     </P>
                     <Badge
-                      variant="default"
                       style={{
                         fontSize: '10px',
                         color: 'var(--justweb3-primary-color)',

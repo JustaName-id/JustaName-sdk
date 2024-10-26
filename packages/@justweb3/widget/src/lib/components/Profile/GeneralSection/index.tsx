@@ -6,7 +6,6 @@ import { ChainId, GENERAL_FIELDS } from '@justaname.id/sdk';
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { metadataForm } from '../../../forms';
-import styled from 'styled-components';
 import { MetadataField } from '../MetadataField';
 import { AvatarEditorDialog } from '../../../dialogs/AvatarSelectorDialog';
 import { BannerEditorDialog } from '../../../dialogs/BannerSelectorDialog';
@@ -23,14 +22,6 @@ interface GeneralSectionProps {
   setTempAvatar: (newImageUrl: string | null) => void;
   disableOverlay?: boolean;
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-height: calc(100% - 67px);
-  height: 100%;
-`;
 
 export const GeneralSection: React.FC<GeneralSectionProps> = ({
   form,
@@ -62,7 +53,15 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
     });
   };
   return (
-    <Container>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        maxHeight: 'calc(100% - 59px)',
+        height: '100%',
+      }}
+    >
       <Flex direction="row" gap="10px" align="center">
         <ContactsIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
@@ -158,6 +157,6 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
           </Flex>
         </Flex>
       </Flex>
-    </Container>
+    </div>
   );
 };

@@ -5,6 +5,7 @@ import {
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
+import '@justweb3/widget/styles.css';
 import {
   argentWallet,
   ledgerWallet,

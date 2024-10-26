@@ -14,16 +14,7 @@ import {
 } from '@justweb3/ui';
 import React from 'react';
 import { useFieldArray, UseFormReturn } from 'react-hook-form';
-import styled from 'styled-components';
 import { metadataForm } from '../../../forms';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-height: calc(100% - 67px);
-  height: 100%;
-`;
 
 interface CustomSectionProps {
   fullSubname: string;
@@ -43,7 +34,15 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
   });
 
   return (
-    <Container>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        maxHeight: 'calc(100% - 59px)',
+        height: '100%',
+      }}
+    >
       <Flex direction="row" gap="10px" align="center">
         <WalletIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
@@ -196,6 +195,6 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
           </Flex>
         </Flex>
       </Flex>
-    </Container>
+    </div>
   );
 };

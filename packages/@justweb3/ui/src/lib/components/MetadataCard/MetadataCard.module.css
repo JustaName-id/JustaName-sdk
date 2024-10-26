@@ -1,0 +1,51 @@
+.badge {
+    padding: 5px;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 5px;
+    align-items: center;
+}
+
+.icon {
+    width: 15px;
+    height: 15px;
+    min-width: 15px;
+    min-height: 15px;
+    text-align: center;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.textStyle {
+    font-size: 10px;
+    font-weight: 800;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 120%;
+    margin: 0;
+    font-family: var(--justweb3-font-family);
+}
+
+.link {
+    color: black;
+    font-size: 10px;
+    font-weight: 800;
+    max-width: 100%;
+    width: fit-content;
+    text-decoration: underline;
+    text-underline-offset: 1px;
+    line-height: 100%;
+    margin: 0;
+}

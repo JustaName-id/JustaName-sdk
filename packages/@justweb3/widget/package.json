@@ -11,8 +11,8 @@
     "cropperjs": "^1.6.2",
     "lodash": "4.17.21",
     "react-hook-form": "^7.53.0",
-    "styled-components": "^6.1.12",
-    "yup": "0.32.11"
+    "yup": "0.32.11",
+    "clsx": "1.2.1"
   },
   "peerDependencies": {
     "react": ">=17",
@@ -21,6 +21,7 @@
   },
   "exports": {
     "./package.json": "./dist/package.json",
+    "./styles.css": "./dist/index.esm.css",
     ".": "./dist/index.esm.js"
   },
   "main": "./dist/index.esm.js",

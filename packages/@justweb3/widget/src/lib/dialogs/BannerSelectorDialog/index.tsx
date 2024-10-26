@@ -1,10 +1,10 @@
+import React from 'react';
 import { AddIcon, Button, Flex, MinusIcon, P, PenIcon } from '@justweb3/ui';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
-import React from 'react';
-import styled from 'styled-components';
 import { DefaultDialog } from '../DefaultDialog';
 import { useUploadMedia } from '@justaname.id/react';
+import styles from './BannerSelectorDialog.module.css';
 
 export interface BannerEditorDialogProps {
   onImageChange: (image: string) => void;
@@ -12,74 +12,6 @@ export interface BannerEditorDialogProps {
   subname: string;
   disableOverlay?: boolean;
 }
-
-const StyledDiv = styled.div`
-  width: 360px;
-  height: 360px;
-  margin: auto;
-  border-radius: 10px;
-
-  @media (max-width: 768px) {
-    width: 75%;
-    height: 270px;
-  }
-`;
-
-const SliderInput = styled.input.attrs({ type: 'range' })`
-  width: 100%;
-  height: 0.5rem;
-  background-color: #bfdbfe;
-  border-radius: 0.5rem;
-  appearance: none;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
-
-  /* Slider thumb styling */
-  &::-webkit-slider-thumb {
-    appearance: none;
-    width: 1rem;
-    height: 1rem;
-    background-color: #2563eb;
-    border-radius: 50%;
-    cursor: pointer;
-    margin-top: -0.25rem;
-  }
-
-  &::-moz-range-thumb {
-    width: 1rem;
-    height: 1rem;
-    background-color: #2563eb;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  &::-ms-thumb {
-    width: 1rem;
-    height: 1rem;
-    background-color: #2563eb;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  &::-webkit-slider-runnable-track {
-    height: 0.5rem;
-    background: transparent;
-    border-radius: 0.5rem;
-  }
-`;
-
-const ResponsiveDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  @media (min-width: 768px) {
-    max-width: 360px;
-  }
-`;
 
 export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
   onImageChange,
@@ -92,15 +24,15 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
   const imageElement = React.useRef<HTMLImageElement>(null);
   const cropper = React.useRef<Cropper>();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
-
-  const { isUploadPending, uploadMedia } = useUploadMedia({
+  const { uploadMedia, isUploadPending } = useUploadMedia({
     ens: subname,
     type: 'Banner',
   });
+
   const handleImageLoaded = () => {
     if (imageElement.current) {
       cropper.current = new Cropper(imageElement.current, {
-        aspectRatio: 3 / 1,
+        aspectRatio: 3,
         viewMode: 1,
         autoCropArea: 1,
         cropBoxResizable: true,
@@ -111,7 +43,6 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('event', event.target.files);
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -142,12 +73,10 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
 
         const formData = new FormData();
         formData.append('file', blob);
+
         try {
           const response = await uploadMedia({ form: formData });
           onImageChange(response.url);
-          if (fileInputRef.current) {
-            fileInputRef.current.value = '';
-          }
           setIsEditorOpen(false);
         } catch (error) {
           console.error('Upload error', error);
@@ -162,31 +91,9 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
 
   return (
     <>
-      <div
-        style={{
-          width: '100%',
-          height: '100px',
-          borderRadius: '5px',
-          overflow: 'hidden',
-          position: 'relative',
-        }}
-      >
-        <img
-          src={banner}
-          alt="profile-banner"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: '15px',
-            right: '15px',
-          }}
-        >
+      <div className={styles.bannerContainer}>
+        <img src={banner} alt="profile-banner" className={styles.bannerImage} />
+        <div className={styles.penIconContainer}>
           <PenIcon
             width={20}
             height={20}
@@ -228,8 +135,8 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
           </P>
         }
       >
-        <ResponsiveDiv>
-          <StyledDiv>
+        <div className={styles.responsiveDiv}>
+          <div className={styles.styledDiv}>
             <img
               ref={imageElement}
               src={imageSrc}
@@ -239,7 +146,7 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
               crossOrigin="anonymous"
               onLoad={handleImageLoaded}
             />
-          </StyledDiv>
+          </div>
           <Flex
             direction="row"
             justify="space-between"
@@ -252,7 +159,6 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
               paddingLeft: '2px',
             }}
           >
-            {/* <div className='bg-[#dfdfdf] w-[31px] h-[25px] rounded-full flex justify-center items-center'> */}
             <MinusIcon
               width={27}
               height={27}
@@ -260,9 +166,13 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
                 cursor: 'pointer',
               }}
             />
-            {/* </div> */}
-            <SliderInput min="1" max="100" onChange={handleSliderChange} />
-            {/* <div className='bg-[#dfdfdf] w-[31px] h-[25px] rounded-full flex justify-center items-center'> */}
+            <input
+              className={styles.sliderInput}
+              min="1"
+              max="100"
+              type="range"
+              onChange={handleSliderChange}
+            />
             <AddIcon
               width={27}
               height={27}
@@ -270,10 +180,8 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
                 cursor: 'pointer',
               }}
             />
-            {/* </div> */}
           </Flex>
-        </ResponsiveDiv>
-
+        </div>
         <Flex direction="row" gap="5px">
           <Button
             type="button"

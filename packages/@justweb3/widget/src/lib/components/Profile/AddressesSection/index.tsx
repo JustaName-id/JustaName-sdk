@@ -23,25 +23,7 @@ import {
   WalletIcon,
 } from '@justweb3/ui';
 import { getChainIcon } from '../../../icons/chain-icons';
-import styled from 'styled-components';
 import { MetadataField } from '../MetadataField';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-height: calc(100% - 67px);
-  height: 100%;
-`;
-
-const ChainCard = styled.div<{ $isNotAllowed: boolean }>`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 0.5rem;
-  align-items: center;
-  cursor: ${(props) => (props.$isNotAllowed ? 'not-allowed' : 'pointer')};
-`;
 
 interface AddressesSectionProps {
   form: UseFormReturn<metadataForm>;
@@ -91,7 +73,15 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
   }, [suggestedCoins, form.getValues('addresses')]);
 
   return (
-    <Container>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        maxHeight: 'calc(100% - 59px)',
+        height: '100%',
+      }}
+    >
       <Flex direction="row" gap="10px" align="center">
         <WalletIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
@@ -235,10 +225,19 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                           coin as SupportedCoins
                         );
                         return (
-                          <ChainCard
-                            $isNotAllowed={form
-                              .getValues('addresses')
-                              .some((address) => address.coin === coin)}
+                          <div
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              width: '100%',
+                              gap: '0.5rem',
+                              alignItems: 'center',
+                              cursor: form
+                                .getValues('addresses')
+                                .some((address) => address.coin === coin)
+                                ? 'not-allowed'
+                                : 'pointer',
+                            }}
                             onClick={() => {
                               if (selectedCoin === coin) {
                                 setSelectedCoin('');
@@ -266,7 +265,7 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                                   : ''
                               }`}
                             </P>
-                          </ChainCard>
+                          </div>
                         );
                       })}
                   </PopoverContent>
@@ -326,6 +325,6 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
           {/*</Button>*/}
         </Flex>
       </Flex>
-    </Container>
+    </div>
   );
 };

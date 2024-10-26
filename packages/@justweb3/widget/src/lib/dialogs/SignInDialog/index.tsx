@@ -1,3 +1,4 @@
+import React, { FC, Fragment, useMemo, useState } from 'react';
 import {
   Badge,
   Button,
@@ -21,11 +22,35 @@ import {
   useJustaName,
   useMountedAccount,
 } from '@justaname.id/react';
-import { FC, Fragment, useMemo, useState } from 'react';
-import styled from 'styled-components';
 import { useDebounce } from '../../hooks/useDebounce';
 import { DefaultDialog } from '../DefaultDialog';
 import { SelectSubnameItem } from '../../components/SelectSubnameItem';
+import styles from './SignInDialog.module.css';
+import clsx from 'clsx';
+
+interface TransitionElementProps extends React.HTMLAttributes<HTMLDivElement> {
+  maxheight: string;
+  visible: boolean;
+}
+
+const TransitionElement: FC<TransitionElementProps> = ({
+  maxheight,
+  visible,
+  children,
+  ...props
+}) => {
+  const classNames = clsx(styles.transitionElement, {
+    [styles.visible]: visible,
+  });
+
+  const inlineStyle = visible ? { maxHeight: maxheight } : undefined;
+
+  return (
+    <div className={classNames} style={inlineStyle} {...props}>
+      {children}
+    </div>
+  );
+};
 
 export interface SignInDialogProps {
   open: boolean;
@@ -36,19 +61,6 @@ export interface SignInDialogProps {
   disableOverlay?: boolean;
   dev?: boolean;
 }
-
-const TransitionElement = styled.div<{ $maxheight: string }>`
-  max-height: 0;
-  overflow: hidden;
-  display: none;
-  padding: 0;
-  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-
-  &.visible {
-    display: block;
-    max-height: ${(props) => props.$maxheight};
-  }
-`;
 
 export const SignInDialog: FC<SignInDialogProps> = ({
   open,
@@ -106,8 +118,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     backendUrl:
       claimableTestnetEns === testnetFreeEns
         ? dev
-          ? // ? 'http://localhost:3334'
-            'https://claim-staging.justaname.id'
+          ? 'https://claim-staging.justaname.id'
           : 'https://claim.justaname.id'
         : undefined,
     chainId: 11155111,
@@ -121,8 +132,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     backendUrl:
       claimableMainnetEns === mainnetFreeEns
         ? dev
-          ? // ? 'http://localhost:3334'
-            'https://claim-staging.justaname.id'
+          ? 'https://claim-staging.justaname.id'
           : 'https://claim.justaname.id'
         : undefined,
     chainId: 1,
@@ -206,102 +216,75 @@ export const SignInDialog: FC<SignInDialogProps> = ({
       open={open && !isAccountSubnamesPending && isConnected}
       handleClose={() => handleOpenDialog(false)}
       header={
-        <div
+        <Flex
+          align="center"
+          justify="center"
+          gap="20px"
           style={{
+            flex: 1,
             paddingLeft: '24px',
-            justifyContent: 'center',
-            display: 'flex',
-            alignItems: 'center',
-            flexGrow: 1,
           }}
         >
           {logo ? (
-            <img
-              src={logo}
-              alt="logo"
-              style={{ height: '62px', width: 'auto' }}
-            />
+            <img src={logo} alt="logo" className={styles.logoImg} />
           ) : (
             <JustaNameLogoIcon height={62} />
           )}
-        </div>
+        </Flex>
       }
     >
-      <Flex direction={'column'} gap={'10px'}>
+      <Flex direction="column" gap="10px">
         <Badge>
-          <SPAN
-            style={{
-              fontSize: '10px',
-              lineHeight: '10px',
-              fontWeight: 900,
-              color: 'var(--justweb3-primary-color)',
-            }}
-          >
+          <SPAN className={styles.badgeText}>
             {address && formatText(address, 4)}
           </SPAN>
         </Badge>
         {isAccountSubnamesPending || isAccountEnsNamesPending ? (
-          <div
-            style={{
-              position: 'relative',
-              padding: '24px',
-            }}
-          >
+          <div className={styles.loadingContainer}>
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
           </div>
         ) : (
-          <Flex direction={'column'} gap={'20px'}>
+          <Flex direction="column" gap="20px">
             <TransitionElement
-              className={shouldBeAbleToSelect ? 'visible' : ''}
-              $maxheight={'fit-content'}
+              visible={shouldBeAbleToSelect}
+              maxheight="fit-content"
             >
-              <Flex justify="space-between" direction="column" gap="20px">
+              <Flex direction="column" gap="20px" justify={'space-between'}>
                 <H2>Select an ENS</H2>
                 <Flex
-                  direction={'column'}
-                  gap={'15px'}
-                  style={{
-                    maxHeight: '50vh',
-                    overflowY: 'auto',
-                    overflowX: 'hidden',
-                  }}
+                  direction="column"
+                  gap="15px"
+                  className={clsx(styles.contentWrapper)}
                 >
-                  {subnames.map((subname, index) => {
-                    return (
-                      <Fragment key={'subname-' + index}>
-                        <SelectSubnameItem
-                          selectedSubname={subnameSigningIn}
-                          subname={subname}
-                          onClick={() => {
-                            setSubnameSigningIn(subname.ens);
-                            signIn({ ens: subname.ens })
-                              .then(() => handleOpenDialog(false))
-                              .finally(() => {
-                                setSubnameSigningIn('');
-                              });
-                          }}
-                        />
-                      </Fragment>
-                    );
-                  })}
+                  {subnames.map((subname, index) => (
+                    <Fragment key={'subname-' + index}>
+                      <SelectSubnameItem
+                        selectedSubname={subnameSigningIn}
+                        subname={subname}
+                        onClick={() => {
+                          setSubnameSigningIn(subname.ens);
+                          signIn({ ens: subname.ens })
+                            .then(() => handleOpenDialog(false))
+                            .finally(() => {
+                              setSubnameSigningIn('');
+                            });
+                        }}
+                      />
+                    </Fragment>
+                  ))}
                 </Flex>
               </Flex>
             </TransitionElement>
             <TransitionElement
-              className={
-                shouldBeAbleToSelect && shouldBeAbleToClaim ? 'visible' : ''
-              }
-              $maxheight={'100px'}
+              visible={shouldBeAbleToSelect && shouldBeAbleToClaim}
+              maxheight="100px"
             >
               <OrLine />
             </TransitionElement>
-            <TransitionElement
-              className={shouldBeAbleToClaim ? 'visible' : ''}
-              $maxheight={'102px'}
-            >
-              <Flex justify="space-between" direction="column" gap="20px">
+            <TransitionElement visible={shouldBeAbleToClaim} maxheight="102px">
+              <Flex direction="column" gap="20px" justify={'space-between'}>
                 <H2>Claim a Subname</H2>
-                <Flex align={'center'}>
+                <Flex align="center">
                   <Input
                     id="name"
                     placeholder={`Enter your username...`}
@@ -309,7 +292,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                     onChange={(e) => setUsername(e.target.value)}
                     value={username}
                     left={
-                      <Flex justify={'center'} align={'center'}>
+                      <Flex justify="center" align="center">
                         <ProfileIcon width={'24px'} />
                       </Flex>
                     }
@@ -317,6 +300,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                     error={
                       isSubnameAvailable !== undefined && !isSubnameAvailable
                     }
+                    className={styles.inputFullWidth}
                     style={{
                       borderRadius: '100px 0 0 100px',
                       textTransform: 'lowercase',
@@ -335,11 +319,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                       isSubnameAvailable === undefined ||
                       !isSubnameAvailable.isAvailable
                     }
-                    style={{
-                      borderRadius: '0 100px 100px 0',
-                      fontWeight: '900',
-                      height: '32px',
-                    }}
+                    className={styles.buttonStyle}
                     onClick={() => {
                       addSubname({
                         username: username,

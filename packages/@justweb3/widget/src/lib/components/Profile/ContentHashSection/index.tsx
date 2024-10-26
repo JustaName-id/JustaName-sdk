@@ -3,7 +3,6 @@
 import { AddCircleIcon, Flex, Input, P, WalletIcon } from '@justweb3/ui';
 import React, { useMemo } from 'react';
 import { useFieldArray, UseFormReturn } from 'react-hook-form';
-import styled from 'styled-components';
 import { MetadataField } from '../MetadataField';
 import { metadataForm } from '../../../forms';
 import { getContentHashIcon } from '../../../icons/contentHash-icons';
@@ -12,26 +11,6 @@ import {
   contentHashToProtocols,
   validateContentHash,
 } from '../../../forms/contenthash.schema';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-height: calc(100% - 67px);
-  height: 100%;
-`;
-
-// const ContentHashCard = styled.div<{ isSelected: boolean }>`
-//   min-width: 87px;
-//   max-width: 87px;
-//   height: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   cursor: pointer;
-//   background-color: ${(props) =>
-//     props.isSelected ? '[bg-shadow color]' : 'white'};
-// `;
 
 interface ContentHashSectionProps {
   form: UseFormReturn<metadataForm>;
@@ -85,7 +64,15 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
   // }, [debouncedContentHash]);
 
   return (
-    <Container>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        maxHeight: 'calc(100% - 59px)',
+        height: '100%',
+      }}
+    >
       <Flex direction="row" gap="10px" align="center">
         <WalletIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
@@ -113,7 +100,7 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
           className="justweb3scrollbar"
           style={{
             overflowY: 'auto',
-            maxHeight: 'calc(100% - 67px)',
+            maxHeight: 'calc(100% - 59px)',
           }}
           ref={contentHashesRef}
         >
@@ -172,6 +159,6 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
           </Flex>
         </Flex>
       )}
-    </Container>
+    </div>
   );
 };

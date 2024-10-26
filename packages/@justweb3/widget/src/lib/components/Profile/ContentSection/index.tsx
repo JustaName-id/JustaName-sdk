@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react';
 import {
   useAccountEnsNames,
   useAccountSubnames,
@@ -15,70 +16,10 @@ import {
   P,
   PersonEditIcon,
 } from '@justweb3/ui';
-import React, { useMemo } from 'react';
 import { getChainIcon } from '../../../icons/chain-icons';
 import { getContentHashIcon } from '../../../icons/contentHash-icons';
 import { getTextRecordIcon } from '../../../icons/records-icons';
-import styled from 'styled-components';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 850px) {
-    padding-left: 0;
-  }
-`;
-
-const BannerContainer = styled.div`
-  width: 100%;
-  height: 200px;
-  aspect-ratio: 7 / 1;
-  //box-shadow: 1px 1px 0px 0px #000;
-  overflow: hidden;
-  position: relative;
-
-  @media (max-width: 850px) {
-    aspect-ratio: 2 / 1;
-  }
-`;
-
-const SectionCard = styled.div`
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid var(--justweb3-foreground-color-4);
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-`;
-
-const SectionItemList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-items: center;
-  gap: 10px;
-  overflow-x: auto;
-
-  @media (max-width: 850px) {
-    gap: 0.625rem;
-  }
-
-  @media (min-width: 768px) {
-    display: flex;
-    flex-direction: row;
-  }
-`;
-
-const SectionItem = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1.25rem;
-
-  @media (max-width: 768px) {
-    grid-column: span 6 / span 6;
-  }
-`;
+import styles from './ContentSection.module.css';
 
 export interface ContentProps {
   fullSubname: string;
@@ -111,8 +52,8 @@ const ContentSection: React.FC<ContentProps> = ({
 
   return (
     <Flex direction={'column'} gap={'10px'}>
-      <Container>
-        <BannerContainer>
+      <div className={styles.container}>
+        <div className={styles.bannerContainer}>
           <img
             src={
               sanitizeEnsImage({
@@ -158,7 +99,7 @@ const ContentSection: React.FC<ContentProps> = ({
               </Button>
             )}
           </Flex>
-        </BannerContainer>
+        </div>
         <Flex
           direction={'column'}
           gap={'5px'}
@@ -191,22 +132,6 @@ const ContentSection: React.FC<ContentProps> = ({
                 sanitized?.display || fullSubname.split('.')[0]
               )}
             </P>
-            {/*<Badge*/}
-            {/*  withCopy={false}*/}
-            {/*  style={{*/}
-            {/*    padding: '5px',*/}
-            {/*  }}*/}
-            {/*>*/}
-            {/*  <SPAN*/}
-            {/*    style={{*/}
-            {/*      fontSize: '10px',*/}
-            {/*      lineHeight: '10px',*/}
-            {/*      fontWeight: 900,*/}
-            {/*    }}*/}
-            {/*  >*/}
-            {/*    {decodeURIComponent(fullSubname)}*/}
-            {/*  </SPAN>*/}
-            {/*</Badge>*/}
           </Flex>
           <ExpandableText
             text={sanitized?.description || 'No description available'}
@@ -271,7 +196,7 @@ const ContentSection: React.FC<ContentProps> = ({
             </Flex>
           )}
         </Flex>
-      </Container>
+      </div>
       <div
         style={{
           width: '100%',
@@ -286,13 +211,13 @@ const ContentSection: React.FC<ContentProps> = ({
           }}
         >
           {sanitized?.socials?.length > 0 && (
-            <SectionCard>
+            <div className={styles.sectionCard}>
               <P>Handles</P>
-              <SectionItemList className={'justweb3scrollbar'}>
+              <div className={`${styles.sectionItemList} justweb3scrollbar`}>
                 {sanitized?.socials
                   ?.filter((social) => social.value !== '')
                   .map((social) => (
-                    <SectionItem key={social.key}>
+                    <div className={styles.sectionItem} key={social.key}>
                       <MetadataCard
                         key={social.key}
                         variant={'social'}
@@ -300,17 +225,17 @@ const ContentSection: React.FC<ContentProps> = ({
                         value={social.value}
                         icon={getTextRecordIcon(social.key)}
                       />
-                    </SectionItem>
+                    </div>
                   ))}
-              </SectionItemList>
-            </SectionCard>
+              </div>
+            </div>
           )}
-          <SectionCard>
+          <div className={styles.sectionCard}>
             <P>Addresses</P>
-            <SectionItemList className={'justweb3scrollbar'}>
+            <div className={`${styles.sectionItemList} justweb3scrollbar`}>
               {sanitized?.allAddresses?.map((address) => {
                 return (
-                  <SectionItem key={address.id}>
+                  <div className={styles.sectionItem} key={address.id}>
                     <MetadataCard
                       key={address.id}
                       variant={'address'}
@@ -318,36 +243,36 @@ const ContentSection: React.FC<ContentProps> = ({
                       value={address.value}
                       icon={getChainIcon(address.symbol)}
                     />
-                  </SectionItem>
+                  </div>
                 );
               })}
-            </SectionItemList>
-          </SectionCard>
+            </div>
+          </div>
           {sanitized?.allTexts?.length > 0 && (
-            <SectionCard>
+            <div className={styles.sectionCard}>
               <P>Custom</P>
-              <SectionItemList className={'justweb3scrollbar'}>
+              <div className={`${styles.sectionItemList} justweb3scrollbar`}>
                 {sanitized?.allTexts
                   ?.sort((a, b) => a.key.localeCompare(b.key))
                   .map((other) => (
-                    <SectionItem key={other.key}>
+                    <div className={styles.sectionItem} key={other.key}>
                       <MetadataCard
                         key={other.key}
                         variant={'other'}
                         title={other.key}
                         value={other.value}
                       />
-                    </SectionItem>
+                    </div>
                   ))}
-              </SectionItemList>
-            </SectionCard>
+              </div>
+            </div>
           )}
 
           {sanitized?.contentHash && (
-            <SectionCard>
+            <div className={styles.sectionCard}>
               <P>Content Hash</P>
-              <SectionItemList className={'justweb3scrollbar'}>
-                <SectionItem>
+              <div className={`${styles.sectionItemList} justweb3scrollbar`}>
+                <div className={styles.sectionItem}>
                   <MetadataCard
                     variant={'contentHash'}
                     title={'Content Hash'}
@@ -360,9 +285,9 @@ const ContentSection: React.FC<ContentProps> = ({
                       sanitized?.contentHash?.protocolType
                     )}
                   />
-                </SectionItem>
-              </SectionItemList>
-            </SectionCard>
+                </div>
+              </div>
+            </div>
           )}
         </Flex>
       </div>

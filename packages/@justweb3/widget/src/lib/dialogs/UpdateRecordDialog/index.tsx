@@ -62,9 +62,11 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
 
   return (
     <DefaultDialog
-      contentStyle={{
-        maxWidth: '400px',
-      }}
+      // contentStyle={{
+      //   maxWidth: '400px',
+      //   minWidth: '300px',
+      //   width: '100%',
+      // }}
       header={
         <div
           style={{
@@ -91,7 +93,9 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
       disableOverlay={disableOverlay}
     >
       {isUpdateChangesPending || isRecordsPending ? (
-        <Loading />
+        <div style={{ height: '200px', position: 'relative' }}>
+          <Loading />
+        </div>
       ) : (
         <Flex justify="space-between" direction="column" gap="20px">
           <Badge>

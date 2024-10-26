@@ -9,7 +9,12 @@ import {
 } from 'react';
 import { JustVerifiedDialog } from '../../dialogs/JustVerifiedDialog';
 import { Credentials } from '../../types';
-import { useEnsAuth, useEnsSignIn, useEnsSignOut } from '@justaname.id/react';
+import {
+  useEnsAuth,
+  useEnsSignIn,
+  useEnsSignOut,
+  useJustaName,
+} from '@justaname.id/react';
 import { ChainId } from '@justaname.id/sdk';
 import {
   JustaNameLoadingDialog,
@@ -50,6 +55,8 @@ export const JustVerifiedProvider: FC<JustVerifiedProviderProps> = ({
   mApp,
   chainId,
 }) => {
+  const { config } = useJustaName();
+  console.log('config', config);
   const { connectedEns, isEnsAuthLoading: isBaseEnsAuthLoading } =
     useJustWeb3();
   const signInInProgressRef = useRef(false);

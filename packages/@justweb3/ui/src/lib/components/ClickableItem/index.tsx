@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import styles from './ClickableItem.module.css'; // Import the CSS module
 import { P } from '../../ui';
+import clsx from 'clsx';
 
 interface ClickableListItemProps {
   title: string | React.ReactNode;
@@ -14,51 +15,8 @@ interface ClickableListItemProps {
   style?: React.CSSProperties;
   contentStyle?: React.CSSProperties;
   clickable?: boolean;
+  className?: string;
 }
-
-const TruncatedText = styled(P)`
-  font-size: 10px;
-  font-weight: 400;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-`;
-
-const ListItemWrapper = styled.div<{
-  $disabled?: boolean;
-  $loading?: boolean;
-  $hover?: boolean;
-}>`
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  cursor: ${(props) =>
-    props.$disabled || props.$loading ? 'not-allowed' : 'pointer'};
-  border-radius: 100px;
-  box-sizing: border-box;
-  width: 300px;
-  opacity: ${(props) => (props.$disabled ? 0.5 : 1)};
-  border: 1px solid
-    ${(props) =>
-      props.$loading || props.$hover
-        ? 'var(--justweb3-primary-color)'
-        : 'var(--justweb3-foreground-color-4)'};
-  background-color: var(--justweb3-background-color);
-  transition: background-color 0.2s ease;
-  max-width: 100%;
-  height: fit-content;
-`;
-
-const Content = styled.div`
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
 
 export const ClickableItem: React.FC<ClickableListItemProps> = ({
   title,
@@ -72,10 +30,20 @@ export const ClickableItem: React.FC<ClickableListItemProps> = ({
   disabled,
   style = {},
   contentStyle = {},
+  className,
 }) => {
   const [hover, setHover] = React.useState(false);
+
+  const wrapperClassNames = [
+    styles.listItemWrapper,
+    disabled ? styles.disabled : styles.enabled,
+    loading ? styles.loading : '',
+    hover && clickable ? styles.hover : styles.default,
+  ].join(' ');
+
   return (
-    <ListItemWrapper
+    <div
+      className={clsx(wrapperClassNames, className)}
       onClick={() => {
         if (!loading && !disabled && clickable) {
           onClick && onClick();
@@ -93,44 +61,29 @@ export const ClickableItem: React.FC<ClickableListItemProps> = ({
           onHover && onHover(false);
         }
       }}
-      $disabled={disabled}
-      $loading={!!loading}
-      $hover={hover && clickable}
       style={{
         ...style,
         cursor: !clickable ? 'default' : undefined,
-        gap: '10px',
         alignItems: title && subtitle ? 'stretch' : 'center',
       }}
     >
       {left && (
         <div style={{ display: 'flex', alignItems: 'center' }}>{left}</div>
       )}
-      <Content
-        style={{
-          ...contentStyle,
-          placeContent: 'space-around',
-        }}
-      >
+      <div className={styles.content} style={contentStyle}>
         {typeof title === 'string' ? (
-          <P
-            style={{
-              fontSize: '14px',
-              lineHeight: '20px',
-              margin: 0,
-            }}
-          >
+          <P style={{ fontSize: '14px', lineHeight: '20px', margin: 0 }}>
             {title}
           </P>
         ) : (
           title
         )}
         {subtitle && typeof subtitle === 'string' ? (
-          <TruncatedText>{subtitle}</TruncatedText>
+          <P className={styles.truncatedText}>{subtitle}</P>
         ) : (
           subtitle
         )}
-      </Content>
+      </div>
       {right && (
         <div
           style={{ marginLeft: '10px', display: 'flex', alignItems: 'center' }}
@@ -138,7 +91,7 @@ export const ClickableItem: React.FC<ClickableListItemProps> = ({
           {right}
         </div>
       )}
-    </ListItemWrapper>
+    </div>
   );
 };
 

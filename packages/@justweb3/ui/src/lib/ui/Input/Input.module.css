@@ -1,0 +1,75 @@
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+    border: 1px solid #e5e5e5;
+    background-color: var(--justweb3-background-color);
+    padding: 10px;
+    height: 32px;
+    gap: 12px;
+    width: auto;
+    box-sizing: content-box;
+}
+
+.inputWrapperFullWidth {
+    width: 100%;
+}
+
+.inputWrapperError {
+    border-color: var(--justweb3-destructive-color);
+}
+
+.inputWrapper:focus-within {
+    outline: none;
+    border-color: var(--justweb3-primary-color);
+}
+
+.inputWrapper:focus-within.inputWrapperError {
+    border-color: var(--input-error-border-color);
+}
+
+.styledInput {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--justweb3-font-family), serif;
+    line-height: 20px;
+    padding: 0;
+    color: var(--justweb3-foreground-color-2);
+    text-transform: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.styledInput::placeholder {
+    color: var(--justweb3-foreground-color-3);
+}
+
+.styledInput:focus {
+    outline: none;
+}
+
+.styledInput:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.leftElement,
+.rightElement {
+    font-family: var(--justweb3-font-family), serif;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 20px;
+    color: var(--justweb3-foreground-color-2);
+}
+
+.leftElement {
+    pointer-events: none;
+}

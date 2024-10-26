@@ -3,12 +3,10 @@
 import {
   createContext,
   FC,
-  memo,
   ReactNode,
   useContext,
   useEffect,
   useMemo,
-  useState,
 } from 'react';
 import {
   ChainId,
@@ -27,7 +25,6 @@ import {
 import { defaultRoutes } from '../constants/default-routes';
 import { useMountedAccount } from '../hooks/account/useMountedAccount';
 import { useSignMessage } from 'wagmi';
-import { isEqual } from 'lodash';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -51,7 +48,7 @@ export type JustaNameConfigWithoutDefaultChainId = Omit<
 export interface JustaNameContextProps
   extends Omit<JustaNameConfigDefaults, 'defaultChainId'> {
   justanameConfig: JustaNameProviderConfig;
-  handleJustaNameConfig: (config: JustaNameProviderConfig) => void;
+  // handleJustaNameConfig: (config: JustaNameProviderConfig) => void;
   justaname: JustaName;
   routes: typeof defaultRoutes;
   backendUrl?: string;
@@ -84,89 +81,94 @@ export interface JustaNameProviderConfig
  * @param {JustaNameProviderProps} props - The props for the JustaNameProvider component.
  * @returns {ReactNode} The provider component wrapping children.
  */
-export const JustaNameProvider: FC<JustaNameProviderProps> = memo(
-  ({ children, config: initialConfig }) => {
-    const { chainId } = useMountedAccount();
+export const JustaNameProvider: FC<JustaNameProviderProps> = ({
+  children,
+  config: initialConfig,
+}) => {
+  const { chainId } = useMountedAccount();
 
-    const defaultChain = useMemo(() => {
-      return !chainId
-        ? undefined
-        : chainId !== 1 && chainId !== 11155111
-        ? 1
-        : chainId;
-    }, [chainId]);
+  const defaultChain = useMemo(() => {
+    return !chainId
+      ? undefined
+      : chainId !== 1 && chainId !== 11155111
+      ? 1
+      : chainId;
+  }, [chainId]);
 
-    const [config, setConfig] =
-      useState<JustaNameProviderConfig>(initialConfig);
-    const justanameConfig: JustaNameProviderConfig = useMemo(
-      () => ({
-        config: config.config,
-        ensDomains: config.ensDomains,
-        networks: config.networks,
-        defaultChainId: defaultChain,
-        dev: config.dev,
-      }),
-      [config, defaultChain]
-    );
-    const justaname = useMemo(
-      () => JustaName.init(justanameConfig),
-      [justanameConfig]
-    );
+  // const [config, setConfig] = useState<JustaNameProviderConfig>(initialConfig);
+  const config: JustaNameProviderConfig = useMemo(
+    () => initialConfig,
+    [initialConfig]
+  );
+  const justanameConfig: JustaNameConfig = useMemo(
+    () => ({
+      config: config.config,
+      ensDomains: config.ensDomains,
+      networks: config.networks,
+      defaultChainId: defaultChain,
+      dev: config.dev,
+    }),
+    [config, defaultChain]
+  );
+  const justaname = useMemo(() => {
+    console.log('recalculating justaname');
+    return JustaName.init(justanameConfig);
+  }, [justanameConfig]);
 
-    const selectedEnsDomain = useMemo(() => {
-      return justanameConfig.ensDomains?.find(
-        (ensDomain) => ensDomain.chainId === defaultChain
-      )?.ensDomain;
-    }, [justanameConfig.ensDomains, defaultChain]);
+  const selectedEnsDomain = useMemo(() => {
+    return justanameConfig.ensDomains?.find(
+      (ensDomain) => ensDomain.chainId === defaultChain
+    )?.ensDomain;
+  }, [justanameConfig.ensDomains, defaultChain]);
 
-    const configuredNetworks = useMemo(() => {
-      return JustaName.createNetworks(justanameConfig.networks);
-    }, [justanameConfig.networks]);
+  const configuredNetworks = useMemo(() => {
+    return JustaName.createNetworks(justanameConfig.networks);
+  }, [justanameConfig.networks]);
 
-    const selectedNetwork = useMemo(() => {
-      return configuredNetworks.find(
-        (network) => network.chainId === defaultChain
-      ) as NetworkWithProvider;
-    }, [configuredNetworks, defaultChain]);
+  const selectedNetwork = useMemo(() => {
+    return configuredNetworks.find(
+      (network) => network.chainId === defaultChain
+    ) as NetworkWithProvider;
+  }, [configuredNetworks, defaultChain]);
 
-    const handleJustaNameConfig = (_config: JustaNameProviderConfig) => {
-      if (isEqual(_config, config)) return;
-      setConfig(_config);
-    };
-
-    useEffect(() => {
-      if (isEqual(initialConfig, config)) return;
-      setConfig(initialConfig);
-    }, [config, initialConfig]);
-
-    return (
-      <QueryClientProvider client={queryClient}>
-        <JustaNameContext.Provider
-          value={{
-            justanameConfig: config,
-            handleJustaNameConfig,
-            backendUrl: config.backendUrl,
-            config: config.config,
-            dev: config.dev,
-            ensDomains: config.ensDomains || [],
-            selectedEnsDomain,
-            networks: configuredNetworks,
-            chainId: defaultChain,
-            selectedNetwork,
-            justaname,
-            routes: {
-              ...defaultRoutes,
-              ...config.routes,
-            },
-          }}
-        >
-          {children}
-          {config.signOnMounted && <SignatureOnMounted />}
-        </JustaNameContext.Provider>
-      </QueryClientProvider>
-    );
-  }
-);
+  // const handleJustaNameConfig = (_config: JustaNameProviderConfig) => {
+  //   // console.log('handleJustaNameConfig', _config, config);
+  //   // if (isEqual(_config, config)) return;
+  //   // setConfig(_config);
+  // };
+  //
+  // useEffect(() => {
+  //   handleJustaNameConfig(initialConfig);
+  // }, [initialConfig]);
+  //
+  // console.log('justanameConfig', justanameConfig);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <JustaNameContext.Provider
+        value={{
+          justanameConfig: justanameConfig,
+          // handleJustaNameConfig,
+          backendUrl: config.backendUrl,
+          config: justanameConfig.config,
+          dev: justanameConfig.dev,
+          ensDomains: justanameConfig.ensDomains || [],
+          selectedEnsDomain,
+          networks: configuredNetworks,
+          chainId: defaultChain,
+          selectedNetwork,
+          justaname,
+          routes: {
+            ...defaultRoutes,
+            ...config.routes,
+          },
+        }}
+      >
+        {children}
+        {config.signOnMounted && <SignatureOnMounted />}
+      </JustaNameContext.Provider>
+    </QueryClientProvider>
+  );
+};
 
 export default JustaNameProvider;
 

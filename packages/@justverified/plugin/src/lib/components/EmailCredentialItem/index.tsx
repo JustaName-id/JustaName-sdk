@@ -32,6 +32,10 @@ export const EmailCredentialItem: FC<EmailCredentialItemProps> = ({
     () => credentialValue?.credentialSubject?.email,
     [credentialValue]
   );
+  const loading = useMemo(
+    () => selectedCredential === 'email',
+    [selectedCredential, 'email']
+  );
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);

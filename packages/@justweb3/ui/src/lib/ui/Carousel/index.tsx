@@ -1,140 +1,100 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import styled from 'styled-components'
-
-const CarouselContainer = styled.div`
-  position: relative;
-  width: 100%;
-`
-
-const Viewport = styled.div`
-    overflow: hidden;
-    padding-right: 10px;
-`
-
-const Container = styled.div`
-    display: flex;
-    user-select: none;
-    -webkit-touch-callout: none;
-    -khtml-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    margin-left: -10px; /* Negative margin to offset slide padding */
-`
-
-const Slide = styled.div`
-    position: relative;
-    min-width: 100%;
-    padding-left: 10px; /* Add padding to create space between slides */
-`
-
-const SlideInner = styled.div`
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-`
-
-const DotsContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-`
-
-const Dot = styled.button<{ isSelected: boolean }>`
-    background-color: ${props => props.isSelected ? 'var(--justweb3-primary-color)' : 'transparent'};
-    border: 1px solid var(--justweb3-primary-color);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin: 0 5px;
-    padding: 0;
-    cursor: pointer;
-`
+import React, { useCallback, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import styles from './Carousel.module.css'; // Import CSS module
 
 interface CarouselProps {
-  slides: React.ReactNode[]
-  autoPlaySpeed?: number
-  autoPlay?: boolean
+  slides: React.ReactNode[];
+  autoPlaySpeed?: number;
+  autoPlay?: boolean;
 }
 
 export const Carousel: React.FC<CarouselProps> = ({
-                                                    slides,
-                                                    autoPlaySpeed = 5000,
-                                                    autoPlay = true
-                                                  }) => {
+  slides,
+  autoPlaySpeed = 5000,
+  autoPlay = true,
+}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: 'start',
-    containScroll: 'trimSnaps'
-  })
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [autoPlayEnabled, setAutoPlayEnabled] = useState(autoPlay)
+    containScroll: 'trimSnaps',
+  });
 
-  const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi])
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [autoPlayEnabled, setAutoPlayEnabled] = useState(autoPlay);
+
+  const scrollTo = useCallback(
+    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    [emblaApi]
+  );
 
   const onSelect = useCallback(() => {
-    if (!emblaApi) return
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-  }, [emblaApi, setSelectedIndex])
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
 
   const nextSlide = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext()
-  }, [emblaApi])
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
   useEffect(() => {
-    if (!emblaApi) return
-    onSelect()
-    emblaApi.on('select', onSelect)
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
     return () => {
-      emblaApi.off('select', onSelect)
-    }
-  }, [emblaApi, onSelect])
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   useEffect(() => {
     if (autoPlayEnabled && emblaApi) {
       const intervalId = setInterval(() => {
-        nextSlide()
-      }, autoPlaySpeed)
+        nextSlide();
+      }, autoPlaySpeed);
 
       return () => {
-        clearInterval(intervalId)
-      }
+        clearInterval(intervalId);
+      };
     }
-
-    return undefined
-  }, [emblaApi, autoPlayEnabled, autoPlaySpeed, nextSlide])
+    return undefined;
+  }, [emblaApi, autoPlayEnabled, autoPlaySpeed, nextSlide]);
 
   const handleMouseEnter = () => {
-    setAutoPlayEnabled(false)
-  }
+    setAutoPlayEnabled(false);
+  };
 
   const handleMouseLeave = () => {
-    setAutoPlayEnabled(autoPlay)
-  }
+    setAutoPlayEnabled(autoPlay);
+  };
 
   return (
-    <CarouselContainer
+    <div
+      className={styles.carouselContainer}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <Viewport ref={emblaRef}>
-        <Container>
+      <div className={styles.viewport} ref={emblaRef}>
+        <div className={styles.container}>
           {slides.map((slide, index) => (
-            <Slide key={index}>
-              <SlideInner>{slide}</SlideInner>
-            </Slide>
+            <div className={styles.slide} key={index}>
+              <div className={styles.slideInner}>{slide}</div>
+            </div>
           ))}
-        </Container>
-      </Viewport>
-      <DotsContainer>
+        </div>
+      </div>
+      <div className={styles.dotsContainer}>
         {slides.map((_, index) => (
-          <Dot
+          <button
             key={index}
-            isSelected={index === selectedIndex}
+            className={`${styles.dot} ${
+              index === selectedIndex ? styles.dotSelected : ''
+            }`}
             onClick={() => scrollTo(index)}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
-      </DotsContainer>
-    </CarouselContainer>
-  )
-}
+      </div>
+    </div>
+  );
+};
+
+export default Carousel;

@@ -1,5 +1,6 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 import { Records, useRecords, useUpdateSubname } from '@justaname.id/react';
 import {
   getCoinTypeDetails,
@@ -25,8 +26,6 @@ import {
   WalletIcon,
   WebsiteIcon,
 } from '@justweb3/ui';
-import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
 import {
   AddressesSection,
   ContentHashSection,
@@ -39,48 +38,8 @@ import { metadataForm } from '../../forms';
 import { buildInitialValues } from '../../utils';
 import { DefaultDialog } from '../DefaultDialog';
 import { UnsavedChangesDialog } from '../UnsavedChangesDialog';
-
-const FormContainer = styled.div<{ $editMode: boolean }>`
-  transform-origin: left;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: space-between;
-  max-width: 0;
-  min-width: 0;
-  overflow: hidden;
-  transition: all 300ms ease-in-out;
-  ${(props) => {
-    return props.$editMode
-      ? `
-    flex: 1 1 0%;
-    min-width: 100%;
-    max-width: 100%;
-    
-    @media (min-width: 850px) {
-      min-width: 250px;
-      max-width: 250px;
-    }
-  `
-      : '';
-  }};
-`;
-
-const FormInnerContainer = styled.div`
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  min-width: calc(max(min(1200px, 90vw), 390px) - 40px);
-  max-width: calc(max(min(1200px, 90vw), 390px) - 40px);
-  @media (min-width: 850px) {
-    min-width: 230px;
-    max-width: 230px;
-  }
-`;
+import styles from './ProfileDialog.module.css';
+import clsx from 'clsx';
 
 export interface ProfileDialogProps {
   ens: string;
@@ -88,14 +47,6 @@ export interface ProfileDialogProps {
   handleOnClose: () => void;
   disableOverlay?: boolean;
 }
-
-const ContentSectionWrapper = styled.div<{ $editMode: boolean }>`
-  flex: 1 1 0%;
-  overflow-y: auto;
-  transition: all 300ms linear;
-  //height: fit-content;
-  //min-height: 500px;
-`;
 
 const menuTabs = [
   {
@@ -126,24 +77,22 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
   handleOnClose,
   disableOverlay,
 }) => {
-  console.log(ens, chainId);
   const { records, isRecordsPending, refetchRecords } = useRecords({
     ens: ens,
     chainId,
   });
 
   const [minimized, setMinimized] = useState<boolean>(false);
-
-  const [selectedState, setSelectedState] = React.useState<string | undefined>(
+  const [selectedState, setSelectedState] = useState<string | undefined>(
     undefined
   );
-  const [editMode, setEditMode] = React.useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
   const [unsavedChangesDialogOpen, setUnsavedChangesDialogOpen] =
-    React.useState<boolean>(false);
-  const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
+    useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { updateSubname } = useUpdateSubname();
-  const [tempAvatar, setTempAvatar] = React.useState<string | null>(null);
-  const [tempBanner, setTempBanner] = React.useState<string | null>(null);
+  const [tempAvatar, setTempAvatar] = useState<string | null>(null);
+  const [tempBanner, setTempBanner] = useState<string | null>(null);
 
   const form = useForm<metadataForm>({
     resolver: yupResolver(metadataForm),
@@ -322,7 +271,6 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                 value: social.value,
               })),
             ].find((otherText) => otherText.key === text.key)
-          // !data.otherTexts.find((otherText) => otherText.key === text.key)
         )
         .reduce((acc, text) => {
           acc[text.key] = '';
@@ -330,28 +278,29 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
         }, {} as Record<string, string>),
     };
 
-    updateSubname({
-      ens: ens,
-      addresses,
-      text: texts,
-      contentHash: data.contentHash[0]
-        ? data.contentHash[0].protocolType + '://' + data.contentHash[0].decoded
-        : '',
-    })
-      .then(() => {
-        refetchRecords().then((data) => {
-          setIsSubmitting(false);
-          setTempAvatar(null);
-          setTempBanner(null);
-          if (data?.data?.sanitizedRecords)
-            form.reset(buildInitialValues(data.data.sanitizedRecords));
-          // setSelectedState(undefined);
-        });
-      })
-      .catch(() => {
-        console.log('error');
-        setIsSubmitting(false);
+    try {
+      await updateSubname({
+        ens: ens,
+        addresses,
+        text: texts,
+        contentHash: data.contentHash[0]
+          ? data.contentHash[0].protocolType +
+            '://' +
+            data.contentHash[0].decoded
+          : '',
       });
+      await refetchRecords();
+      setIsSubmitting(false);
+      setTempAvatar(null);
+      setTempBanner(null);
+      if (records?.sanitizedRecords) {
+        form.reset(buildInitialValues(records.sanitizedRecords));
+      }
+      setEditMode(false);
+    } catch (error) {
+      console.error('Error updating subname:', error);
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -371,14 +320,12 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       fullScreen={minimized}
       header={
         ens && (
-          <Flex gap={'5px'}>
+          <Flex gap={'5px'} className={styles.header}>
             {minimized ? (
               <MinimizeIcon
                 height={25}
                 width={25}
-                style={{
-                  cursor: 'pointer',
-                }}
+                className={styles.iconButton}
                 onClick={() => {
                   setMinimized(false);
                 }}
@@ -387,38 +334,21 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
               <MaximizeIcon
                 height={25}
                 width={25}
-                style={{
-                  cursor: 'pointer',
-                }}
+                className={styles.iconButton}
                 onClick={() => {
                   setMinimized(true);
                 }}
               />
             )}
             <Badge>
-              <SPAN
-                style={{
-                  fontSize: '10px',
-                  lineHeight: '10px',
-                  fontWeight: 900,
-                  color: 'var(--justweb3-primary-color)',
-                }}
-              >
-                {ens}
-              </SPAN>
+              <SPAN className={styles.badgeText}>{ens}</SPAN>
             </Badge>
           </Flex>
         )
       }
     >
       {isRecordsPending || !records || !editedRecords ? (
-        <div
-          style={{
-            height: '100%',
-            position: 'relative',
-            padding: '24px',
-          }}
-        >
+        <div className={styles.loadingContainer}>
           <LoadingSpinner color={'var(--justweb3-primary-color)'} />
         </div>
       ) : (
@@ -428,25 +358,20 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
             maxHeight: 'calc(100% - 20px - 25px)',
           }}
         >
-          <FormContainer
-            $editMode={editMode}
+          <div
+            className={clsx(
+              styles.formContainer,
+              editMode && styles.formContainerEditMode
+            )}
             style={{
               position: 'relative',
             }}
           >
-            <FormInnerContainer>
+            <div className={styles.formInnerContainer}>
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(handleSaveMetadata)}
-                  style={{
-                    display: 'flex',
-                    gap: '10px',
-                    maxHeight: '100%',
-                    height: '100%',
-                    width: '100%',
-                    flexDirection: 'column',
-                    justifyContent: 'between',
-                  }}
+                  className={styles.form}
                 >
                   {!selectedState ? renderMenuTabs() : renderSelectedState()}
                   <UnsavedChangesDialog
@@ -463,21 +388,9 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                       setEditMode(false);
                     }}
                   />
-                  <Flex
-                    direction={'column'}
-                    style={{
-                      marginTop: 'auto',
-                      height: '57px',
-                    }}
-                  >
-                    <div style={{ height: '15px' }}>
-                      <P
-                        style={{
-                          fontSize: '10px',
-                          lineHeight: '10px',
-                          textAlign: 'center',
-                        }}
-                      >
+                  <Flex direction={'column'} className={styles.buttonContainer}>
+                    <div className={styles.errorMessage}>
+                      <P>
                         {Object.keys(form.formState.errors).length > 0
                           ? 'Invalid fields in ' +
                             Object.keys(form.formState.errors).join(', ')
@@ -493,23 +406,6 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                       <Button
                         variant={'secondary'}
                         onClick={(e: React.MouseEvent) => {
-                          // if (
-                          //   form.formState.isDirty ||
-                          //   tempAvatar ||
-                          //   tempBanner
-                          // ) {
-                          //   setUnsavedChangesDialogOpen(true);
-                          //   e.preventDefault();
-                          //   e.stopPropagation();
-                          // } else {
-                          //   e.preventDefault();
-                          //   e.stopPropagation();
-                          //   if (selectedState) {
-                          //     setSelectedState(undefined);
-                          //   } else {
-                          //     setEditMode(false);
-                          //   }
-                          // }
                           e.preventDefault();
                           e.stopPropagation();
 
@@ -527,7 +423,6 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                         }}
                         size={'md'}
                         style={{
-                          display: selectedState ? 'block' : 'hidden',
                           width: '100%',
                         }}
                         disabled={isSubmitting}
@@ -541,7 +436,6 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                           variant={'primary'}
                           size={'md'}
                           style={{
-                            display: selectedState ? 'block' : 'hidden',
                             width: '100%',
                           }}
                           type={'submit'}
@@ -558,10 +452,10 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                   </Flex>
                 </form>
               </Form>
-            </FormInnerContainer>
-          </FormContainer>
-          <ContentSectionWrapper
-            $editMode={editMode}
+            </div>
+          </div>
+          <div
+            className={styles.contentSectionWrapper}
             id={'contentSectionScrollId'}
           >
             <ContentSection
@@ -576,7 +470,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
               onEdit={() => setEditMode(!editMode)}
               editMode={editMode}
             />
-          </ContentSectionWrapper>
+          </div>
         </Flex>
       )}
     </DefaultDialog>

@@ -52,6 +52,7 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
           flexDirection: 'column',
           borderRadius: fullScreen ? '0' : '24px',
           background: 'var(--justweb3-foreground-color-4)',
+          boxSizing: 'content-box',
           ...contentStyle,
         }}
       >
@@ -72,40 +73,50 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
-            maxHeight: 'calc(100% - 40px - 45px )',
+            maxHeight: 'calc(100% - 45px)',
+            boxSizing: 'border-box',
             ...innerStyle,
           }}
         >
           <Flex justify="space-between" direction="row">
             {header}
 
-            {handleClose ? (
-              <CloseIcon
-                style={{
-                  cursor: 'pointer',
-                }}
-                onClick={handleClose}
-                width={24}
-              />
-            ) : (
-              <DialogClose
-                style={{
-                  border: '0px',
-                  background: 'none',
-                  padding: 0,
-                  height: '24px',
-                  display: 'flex',
-                  placeContent: 'center',
-                }}
-              >
+            <Flex
+              direction="column"
+              justify="center"
+              align="center"
+              style={{
+                width: '24px',
+              }}
+            >
+              {handleClose ? (
                 <CloseIcon
                   style={{
                     cursor: 'pointer',
                   }}
+                  onClick={handleClose}
                   width={24}
                 />
-              </DialogClose>
-            )}
+              ) : (
+                <DialogClose
+                  style={{
+                    border: '0px',
+                    background: 'none',
+                    padding: 0,
+                    height: '24px',
+                    display: 'flex',
+                    placeContent: 'center',
+                  }}
+                >
+                  <CloseIcon
+                    style={{
+                      cursor: 'pointer',
+                    }}
+                    width={24}
+                  />
+                </DialogClose>
+              )}
+            </Flex>
           </Flex>
           {/*<Flex direction={'column'} style={{ flex: 1 }}>*/}
           {children}

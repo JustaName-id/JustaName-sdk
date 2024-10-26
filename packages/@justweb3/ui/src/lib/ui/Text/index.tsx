@@ -1,38 +1,48 @@
-import styled from 'styled-components';
+import React from 'react';
+import styles from './Text.module.css';
+import clsx from 'clsx';
 
-export const H2 = styled.h2`
-  font-size: 24px;
-  line-height: normal;
-  font-weight: 600;
-  margin: 0;
-  font-family: var(--justweb3-font-family);
-  color: var(--justweb3-foreground-color-2);
-`;
+export const H2: React.FC<
+  React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLHeadingElement>,
+    HTMLHeadingElement
+  >
+> = ({ children, className, ...props }) => (
+  <h2 className={clsx(className, styles.h2)} {...props}>
+    {children}
+  </h2>
+);
+export const P: React.FC<
+  React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLParagraphElement>,
+    HTMLParagraphElement
+  >
+> = ({ children, className, ...props }) => (
+  <p className={clsx(styles.p, className)} {...props}>
+    {children}
+  </p>
+);
 
-export const P = styled.p`
-  font-size: 14px;
-  font-weight: 400;
-  margin: 0;
-  font-family: var(--justweb3-font-family);
-  color: var(--justweb3-foreground-color-2);
-`;
+export const A: React.FC<
+  React.DetailedHTMLProps<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    HTMLAnchorElement
+  >
+> = ({ children, className, ...props }) => (
+  <a className={clsx(className, styles.a)} {...props}>
+    {children}
+  </a>
+);
 
-export const A = styled.a`
-  font-size: 8px;
-  line-height: 8px;
-  font-weight: 400;
-  margin: 0;
-  font-family: var(--justweb3-font-family);
-  color: var(--justweb3-foreground-color-2);
-  text-decoration: none;
-  cursor: pointer;
-`;
+export const SPAN: React.FC<
+  React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLSpanElement>,
+    HTMLSpanElement
+  >
+> = ({ children, className, ...props }) => (
+  <span className={clsx(className, styles.span)} {...props}>
+    {children}
+  </span>
+);
 
-export const SPAN = styled.span`
-  font-size: 8px;
-  line-height: 8px;
-  font-weight: 400;
-  margin: 0;
-  font-family: var(--justweb3-font-family);
-  color: var(--justweb3-foreground-color-2);
-`;
+export default { H2, P, A, SPAN };

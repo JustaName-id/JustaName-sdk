@@ -1,55 +1,21 @@
+// Badge.tsx
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styles from './Badge.module.css'; // Import the CSS module
 import { CopiedIcon, CopyIcon } from '../../icons/components/general';
-
-type BadgeVariant = 'default';
+import clsx from 'clsx';
 
 interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: BadgeVariant;
   withCopy?: boolean;
   value?: string;
   copyStyle?: React.CSSProperties;
 }
 
-const badgeVariants = {
-  default: css`
-    background-color: var(--justweb3-foreground-color-4);
-    color: hsl(from var(--justweb3-foreground-color-2) h s l / 0.5);
-    font-family: var(--justweb3-font-family), serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 900;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-  `,
-};
-
-interface StyledBadgeProps {
-  $variant?: BadgeVariant;
-}
-
-const StyledBadge = styled.div<StyledBadgeProps>`
-  display: inline-flex;
-  align-items: center;
-  border-radius: 16px;
-  width: fit-content;
-  padding: 5px 10px;
-  font-size: 10px;
-  font-weight: 900;
-  line-height: 1;
-  white-space: nowrap;
-
-  ${(props) => badgeVariants[props.$variant || 'default']}
-`;
-
 export const Badge: React.FC<BadgeProps> = ({
   children,
-  variant = 'default',
   withCopy = true,
   value,
   copyStyle,
+  className,
   ...props
 }) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
@@ -67,7 +33,7 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   return (
-    <StyledBadge $variant={variant} {...props}>
+    <div className={clsx(styles.badge, className)} {...props}>
       {children}
       {withCopy &&
         (isCopied ? (
@@ -80,6 +46,8 @@ export const Badge: React.FC<BadgeProps> = ({
             onClick={copyToClipboard}
           />
         ))}
-    </StyledBadge>
+    </div>
   );
 };
+
+export default Badge;

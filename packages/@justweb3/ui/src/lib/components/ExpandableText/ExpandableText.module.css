@@ -1,0 +1,16 @@
+.button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    margin-left: 0.5rem;
+    color: var(--justweb3-primary-color);
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button:hover {
+    text-decoration: underline;
+}
