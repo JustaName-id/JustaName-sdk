@@ -4517,7 +4517,6 @@ __metadata:
     "@justaname.id/sdk": "npm:0.2.100"
     axios: "npm:^1.6.0"
     jest: "npm:^29.4.1"
-    lodash: "npm:4.17.21"
     qs: "npm:^6.12.0"
   peerDependencies:
     "@tanstack/react-query": ^5.x
@@ -4578,10 +4577,10 @@ __metadata:
     "@radix-ui/react-label": "npm:^2.1.0"
     "@radix-ui/react-popover": "npm:^1.1.1"
     "@radix-ui/react-slot": "npm:1.1.0"
+    clsx: "npm:1.2.1"
     embla-carousel-react: "npm:^8.3.0"
     input-otp: "npm:^1.2.4"
     react-hook-form: "npm:^7.49.2"
-    styled-components: "npm:^6.1.12"
   peerDependencies:
     react: ">=17"
   languageName: unknown
@@ -4597,10 +4596,10 @@ __metadata:
     "@justaname.id/react": "npm:0.3.103"
     "@justaname.id/sdk": "npm:0.2.100"
     "@justweb3/ui": "npm:^0.0.41"
+    clsx: "npm:1.2.1"
     cropperjs: "npm:^1.6.2"
     lodash: "npm:4.17.21"
     react-hook-form: "npm:^7.53.0"
-    styled-components: "npm:^6.1.12"
     yup: "npm:0.32.11"
   peerDependencies:
     react: ">=17"
@@ -16545,6 +16544,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:1.2.1, clsx@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "clsx@npm:1.2.1"
+  checksum: 10c0/34dead8bee24f5e96f6e7937d711978380647e936a22e76380290e35486afd8634966ce300fc4b74a32f3762c7d4c0303f442c3e259f4ce02374eb0c82834f27
+  languageName: node
+  linkType: hard
+
 "clsx@npm:2.0.0":
   version: 2.0.0
   resolution: "clsx@npm:2.0.0"
@@ -16556,13 +16562,6 @@ __metadata:
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10c0/c4c8eb865f8c82baab07e71bfa8897c73454881c4f99d6bc81585aecd7c441746c1399d08363dc096c550cceaf97bd4ce1e8854e1771e9998d9f94c4fe075839
-  languageName: node
-  linkType: hard
-
-"clsx@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "clsx@npm:1.2.1"
-  checksum: 10c0/34dead8bee24f5e96f6e7937d711978380647e936a22e76380290e35486afd8634966ce300fc4b74a32f3762c7d4c0303f442c3e259f4ce02374eb0c82834f27
   languageName: node
   linkType: hard
 

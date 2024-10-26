@@ -10,7 +10,7 @@ export const JustVerifiedPlugin = (
   verificationBackendUrl = 'https://api.justaname.id/verifications/v1',
   mApp = 'justverified.eth'
 ): JustaPlugin => ({
-  name: 'justverified',
+  name: 'JustVerifiedPlugin',
   mApps: [mApp],
   components: {
     Providers: (pluginApi, children) => {

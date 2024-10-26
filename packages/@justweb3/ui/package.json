@@ -7,10 +7,10 @@
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-slot": "1.1.0",
+    "clsx": "1.2.1",
     "embla-carousel-react": "^8.3.0",
     "input-otp": "^1.2.4",
-    "react-hook-form": "^7.49.2",
-    "clsx": "1.2.1"
+    "react-hook-form": "^7.49.2"
   },
   "peerDependencies": {
     "react": ">=17"
@@ -27,7 +27,6 @@
   "publishConfig": {
     "access": "public"
   },
-
   "repository": {
     "type": "git",
     "url": "https://github.com/JustaName-id/JustaName-sdk"

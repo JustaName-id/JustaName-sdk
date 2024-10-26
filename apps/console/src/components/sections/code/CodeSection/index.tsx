@@ -10,8 +10,8 @@ export const CodeSection: React.FC = () => {
   const { justVerified } = useConsole();
 
   const code = useMemo(
-    () =>
-      `import '@rainbow-me/rainbowkit/styles.css'
+    () => `import '@rainbow-me/rainbowkit/styles.css'
+import '@justweb3/widget/styles.css'
 import React from 'react';
 import { 
   getDefaultConfig,
@@ -43,7 +43,7 @@ import {
   ConnectButton 
 } from '@rainbow-me/rainbowkit';
 ${
-  justVerified
+  config.plugins?.find((p) => p.name === 'JustVerifiedPlugin')
     ? "import { JustVerifiedPlugin } from '@justverified/plugin';"
     : ''
 }
@@ -71,7 +71,7 @@ export const App: React.FC = () => {
         dev: undefined,
         disableOverlay: undefined,
         // plugins: justVerified ? [JustVerifiedPlugin(justVerified)] : undefined,
-        plugins: justVerified
+        plugins: config.plugins?.find((p) => p.name === 'JustVerifiedPlugin')
           ? [
               `JustVerifiedPlugin([${justVerified
                 .map((v) => `'${v}'`)
@@ -114,6 +114,9 @@ export default App;
           .replace(`"JustVerified`, `JustVerified`)
           .replace('])"', '])')}
         language={'tsx'}
+        customStyle={{
+          fontSize: '12px',
+        }}
         showLineNumbers={true}
         theme={a11yLight}
       />

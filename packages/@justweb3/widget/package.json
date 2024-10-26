@@ -8,11 +8,11 @@
     "@justaname.id/react": "0.3.103",
     "@justaname.id/sdk": "0.2.100",
     "@justweb3/ui": "^0.0.41",
+    "clsx": "1.2.1",
     "cropperjs": "^1.6.2",
     "lodash": "4.17.21",
     "react-hook-form": "^7.53.0",
-    "yup": "0.32.11",
-    "clsx": "1.2.1"
+    "yup": "0.32.11"
   },
   "peerDependencies": {
     "react": ">=17",

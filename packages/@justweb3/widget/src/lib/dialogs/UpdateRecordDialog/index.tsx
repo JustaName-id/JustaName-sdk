@@ -62,11 +62,11 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
 
   return (
     <DefaultDialog
-      // contentStyle={{
-      //   maxWidth: '400px',
-      //   minWidth: '300px',
-      //   width: '100%',
-      // }}
+      contentStyle={{
+        maxWidth: '400px',
+        minWidth: '300px',
+        width: '100%',
+      }}
       header={
         <div
           style={{
