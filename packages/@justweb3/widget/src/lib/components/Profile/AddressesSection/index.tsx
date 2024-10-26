@@ -198,7 +198,7 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                     portal={false}
                     sideOffset={5}
                     style={{
-                      backgroundColor: 'white',
+                      // backgroundColor: 'white',
                       padding: '10px',
                       gap: '10px',
                       overflowY: 'auto',

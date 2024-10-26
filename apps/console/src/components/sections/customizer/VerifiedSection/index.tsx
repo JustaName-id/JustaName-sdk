@@ -45,11 +45,8 @@ export const VerifiedSection = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
   const { justVerified, setJustVerified } = useConsole();
 
-  console.log('justVerified', justVerified, config);
   const handleJustVerifiedConfig = (enabled: boolean) => {
-    console.log('enabled', enabled);
     if (enabled) {
-      console.log('enabled', enabled);
       handleJustWeb3Config({
         ...config,
         plugins: [

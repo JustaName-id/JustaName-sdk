@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import styles from './Popover.module.css'; // Import CSS module
+import styles from './Popover.module.css';
+import clsx from 'clsx'; // Import CSS module
 
 interface PopoverContentProps
   extends React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> {
@@ -25,11 +26,11 @@ PopoverTrigger.displayName = PopoverPrimitive.Trigger.displayName;
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
   PopoverContentProps
->(({ portal = true, ...props }, ref) => {
+>(({ portal = true, className, ...props }, ref) => {
   const content = (
     <PopoverPrimitive.Content
       ref={ref}
-      className={styles.popoverContent}
+      className={clsx(styles.popoverContent, className)}
       {...props}
     />
   );

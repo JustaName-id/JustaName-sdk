@@ -111,7 +111,6 @@ export const JustaNameProvider: FC<JustaNameProviderProps> = ({
     [config, defaultChain]
   );
   const justaname = useMemo(() => {
-    console.log('recalculating justaname');
     return JustaName.init(justanameConfig);
   }, [justanameConfig]);
 

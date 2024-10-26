@@ -22,7 +22,6 @@ import { JustVerifiedPlugin } from '../lib';
 
 const queryClient = new QueryClient();
 
-console.log(import.meta.env);
 const JustWeb3Config: JustWeb3ProviderConfig = {
   config: {
     origin: import.meta.env.STORYBOOK_APP_ORIGIN,

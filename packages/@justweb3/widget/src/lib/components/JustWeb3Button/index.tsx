@@ -44,7 +44,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   const {
     connectedEns,
     signOut,
-    isEnsAuthPending,
+    isEnsAuthLoading,
     handleOpenSignInDialog,
     openEnsProfile,
   } = useJustWeb3();
@@ -81,7 +81,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
     }
   };
 
-  if (isEnsAuthPending || isLoading || (connectedEns && isRecordsPending)) {
+  if (isEnsAuthLoading || isLoading || (connectedEns && isRecordsPending)) {
     // if (true) {
     return (
       <ClickableItem

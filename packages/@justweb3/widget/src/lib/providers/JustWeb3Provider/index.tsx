@@ -179,7 +179,6 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
   };
 
   const handleJustWeb3Config = (_config: JustWeb3ProviderConfig) => {
-    console.log('handleJustWeb3Config', _config);
     const _justanameConfig = {
       config: _config.config,
       backendUrl: _config.backendUrl,
