@@ -34,12 +34,19 @@ export const Customizer = () => {
           <ColorSelector
             colors={['#FFFFFF', '#000000']}
             title="Background Color"
-            onColorChange={(color: string) => changeTheme('background', color)}
+            onColorChange={(color: string) => {
+              changeTheme('background', color);
+              document.documentElement.style.setProperty('--background', color);
+            }}
           />
           <ColorSelector
             colors={['#FEA801', '#C90018']}
             title="Accent Color"
-            onColorChange={(color: string) => changeTheme('primary', color)}
+            onColorChange={(color: string) => {
+              changeTheme('primary', color);
+              document.documentElement.style.setProperty('--primary', color);
+              document.documentElement.style.setProperty('--rk-colors-accentColor', color);
+            }}
           />
         </div>
         <div className="flex flex-row justify-between items-center max-w-full py-2.5 px-[5px] gap-2">

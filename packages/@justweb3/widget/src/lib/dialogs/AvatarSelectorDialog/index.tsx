@@ -84,19 +84,55 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
       croppedCanvas.toBlob(async (blob) => {
         if (!blob) return;
         if (blob.size > 3000000) {
-          setIsEditorOpen(false);
-          return;
+          // setIsEditorOpen(false);
+          // return;
+
+          const resizedCanvas = document.createElement('canvas');
+          const resizedContext = resizedCanvas.getContext('2d');
+          if (!resizedContext) return;
+          const MAX_SIZE = 1000;
+          let width = croppedCanvas.width;
+          let height = croppedCanvas.height;
+          if (width > height) {
+            if (width > MAX_SIZE) {
+              height *= MAX_SIZE / width;
+              width = MAX_SIZE;
+            }
+          } else {
+            if (height > MAX_SIZE) {
+              width *= MAX_SIZE / height;
+              height = MAX_SIZE;
+            }
+          }
+          resizedCanvas.width = width;
+          resizedCanvas.height = height;
+          resizedContext.drawImage(croppedCanvas, 0, 0, width, height);
+          resizedCanvas.toBlob(async (resizedBlob) => {
+            if (!resizedBlob) return;
+            const formData = new FormData();
+            formData.append('file', resizedBlob);
+            try {
+              const response = await uploadMedia({ form: formData });
+              onImageChange(response.url);
+              setIsEditorOpen(false);
+              return;
+            } catch (error) {
+              console.error('Upload error', error);
+              return;
+            }
+          });
         }
+        else{
+          const formData = new FormData();
+          formData.append('file', blob);
 
-        const formData = new FormData();
-        formData.append('file', blob);
-
-        try {
-          const response = await uploadMedia({ form: formData });
-          onImageChange(response.url);
-          setIsEditorOpen(false);
-        } catch (error) {
-          console.error('Upload error', error);
+          try {
+            const response = await uploadMedia({ form: formData });
+            onImageChange(response.url);
+            setIsEditorOpen(false);
+          } catch (error) {
+            console.error('Upload error', error);
+          }
         }
       });
     }

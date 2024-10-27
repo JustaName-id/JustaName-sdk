@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { Fragment, useContext, useMemo } from 'react';
 import {
   useAccountEnsNames,
   useAccountSubnames,
@@ -20,6 +20,9 @@ import { getChainIcon } from '../../../icons/chain-icons';
 import { getContentHashIcon } from '../../../icons/contentHash-icons';
 import { getTextRecordIcon } from '../../../icons/records-icons';
 import styles from './ContentSection.module.css';
+import { JustaPlugin } from '../../../plugins';
+import { PluginContext } from '../../../providers/PluginProvider';
+import { ProfileSection } from '../ProfileSection';
 
 export interface ContentProps {
   fullSubname: string;
@@ -28,15 +31,17 @@ export interface ContentProps {
   sanitized: SanitizedRecords;
   onEdit?: () => void;
   editMode?: boolean;
+  plugins: JustaPlugin[]
 }
 
 const ContentSection: React.FC<ContentProps> = ({
   fullSubname,
-  chainId,
+  chainId= 1,
   editMode,
   sanitized,
   records,
   onEdit,
+  plugins,
 }) => {
   const { accountSubnames } = useAccountSubnames();
   const { accountEnsNames } = useAccountEnsNames();
@@ -47,6 +52,7 @@ const ContentSection: React.FC<ContentProps> = ({
       accountEnsNames?.map((ens) => ens.ens).includes(fullSubname)
     );
   }, [fullSubname, accountSubnames, accountEnsNames]);
+  const { createPluginApi } = useContext(PluginContext);
 
   const { sanitizeEnsImage } = useEnsAvatar();
 
@@ -210,85 +216,87 @@ const ContentSection: React.FC<ContentProps> = ({
             flex: '1',
           }}
         >
+
+          {plugins.map((plugin) => {
+            const component = plugin.components?.ProfileSection;
+            if (!component) {
+              return null;
+            }
+
+            return (
+              <Fragment key={'profile-item-' + plugin.name}>
+                {component(createPluginApi(plugin.name), fullSubname, chainId)}
+              </Fragment>
+            );
+          })}
+
           {sanitized?.socials?.length > 0 && (
-            <div className={styles.sectionCard}>
-              <P>Handles</P>
-              <div className={`${styles.sectionItemList} justweb3scrollbar`}>
-                {sanitized?.socials
-                  ?.filter((social) => social.value !== '')
-                  .map((social) => (
-                    <div className={styles.sectionItem} key={social.key}>
-                      <MetadataCard
-                        key={social.key}
-                        variant={'social'}
-                        title={social.key}
-                        value={social.value}
-                        icon={getTextRecordIcon(social.key)}
-                      />
-                    </div>
-                  ))}
-              </div>
-            </div>
-          )}
-          <div className={styles.sectionCard}>
-            <P>Addresses</P>
-            <div className={`${styles.sectionItemList} justweb3scrollbar`}>
-              {sanitized?.allAddresses?.map((address) => {
-                return (
-                  <div className={styles.sectionItem} key={address.id}>
+            <ProfileSection title={'Handles'} items={
+              sanitized?.socials
+                ?.filter((social) => social.value !== '')
+                .map((social) => (
                     <MetadataCard
-                      key={address.id}
-                      variant={'address'}
-                      title={address.name}
-                      value={address.value}
-                      icon={getChainIcon(address.symbol)}
+                      key={social.key}
+                      variant={'social'}
+                      title={social.key}
+                      value={social.value}
+                      icon={getTextRecordIcon(social.key)}
                     />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          {sanitized?.allTexts?.length > 0 && (
-            <div className={styles.sectionCard}>
-              <P>Custom</P>
-              <div className={`${styles.sectionItemList} justweb3scrollbar`}>
-                {sanitized?.allTexts
-                  ?.sort((a, b) => a.key.localeCompare(b.key))
-                  .map((other) => (
-                    <div className={styles.sectionItem} key={other.key}>
-                      <MetadataCard
-                        key={other.key}
-                        variant={'other'}
-                        title={other.key}
-                        value={other.value}
-                      />
-                    </div>
-                  ))}
-              </div>
-            </div>
+                ))
+            }
+            />
+
           )}
 
-          {sanitized?.contentHash && (
-            <div className={styles.sectionCard}>
-              <P>Content Hash</P>
-              <div className={`${styles.sectionItemList} justweb3scrollbar`}>
-                <div className={styles.sectionItem}>
+          <ProfileSection
+            title={'Addresses'}
+            items={sanitized?.allAddresses?.map((address) => {
+              return (
                   <MetadataCard
-                    variant={'contentHash'}
-                    title={'Content Hash'}
-                    value={
-                      sanitized?.contentHash?.protocolType +
-                      '://' +
-                      sanitized?.contentHash?.decoded
-                    }
-                    icon={getContentHashIcon(
-                      sanitized?.contentHash?.protocolType
-                    )}
+                    key={address.id}
+                    variant={'address'}
+                    title={address.name}
+                    value={address.value}
+                    icon={getChainIcon(address.symbol)}
                   />
-                </div>
-              </div>
-            </div>
+              );
+            })}
+          />
+          {sanitized?.allTexts?.length > 0 && (
+          <ProfileSection
+            title={'Custom'}
+            items={sanitized?.allTexts
+              ?.sort((a, b) => a.key.localeCompare(b.key))
+              .map((other) => (
+                  <MetadataCard
+                    key={other.key}
+                    variant={'other'}
+                    title={other.key}
+                    value={other.value}
+                  />
+              ))}
+          />
           )}
+
+          {sanitized?.contentHash &&
+          <ProfileSection
+            title={'Content Hash'}
+            items={ [
+                    <MetadataCard
+                      key={sanitized.contentHash.protocolType}
+                      variant={'contentHash'}
+                      title={'Content Hash'}
+                      value={
+                        sanitized.contentHash.protocolType +
+                        '://' +
+                        sanitized.contentHash.decoded
+                      }
+                      icon={getContentHashIcon(sanitized.contentHash.protocolType)}
+                    />,
+                  ]
+            }
+            />
+          }
         </Flex>
       </div>
     </Flex>

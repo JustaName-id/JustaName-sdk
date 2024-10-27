@@ -1,6 +1,7 @@
 import { UseEnsAuthReturn, UseRecordsResult } from '@justaname.id/react';
 import { EventEmitter } from './eventEmitter';
 import { ReactNode } from 'react';
+import { ChainId } from '@justaname.id/sdk';
 
 export interface PluginApi {
   connectedEns: UseEnsAuthReturn['connectedEns'];
@@ -21,11 +22,12 @@ export interface PluginApi {
 
 type PluginProviderComponent = (pluginApi: PluginApi, children: ReactNode) => ReactNode;
 type PluginComponent = (pluginApi: PluginApi) => ReactNode;
-
+type SectionPluginComponent = (pluginApi: PluginApi, ens: string, chainId: ChainId) => ReactNode;
 interface PluginComponents {
   Providers?: PluginProviderComponent;
   Global?: PluginComponent;
   SignInMenu?: PluginComponent;
+  ProfileSection?: SectionPluginComponent;
 }
 
 type OnMountHook = (pluginApi: PluginApi) => void;

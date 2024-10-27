@@ -140,7 +140,6 @@ export const JustaNameProvider: FC<JustaNameProviderProps> = ({
   //   handleJustaNameConfig(initialConfig);
   // }, [initialConfig]);
   //
-  // console.log('justanameConfig', justanameConfig);
   return (
     <QueryClientProvider client={queryClient}>
       <JustaNameContext.Provider

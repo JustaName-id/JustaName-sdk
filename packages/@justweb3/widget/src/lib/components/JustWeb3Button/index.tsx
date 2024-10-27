@@ -7,7 +7,7 @@ import {
   Badge,
   Button,
   ClickableItem,
-  Flex,
+  Flex, formatText,
   LoadingSpinner,
   LogoutIcon,
   MappIcon,
@@ -15,7 +15,7 @@ import {
   P,
   Popover,
   PopoverTrigger,
-  SPAN,
+  SPAN, WalletIcon
 } from '@justweb3/ui';
 import {
   useCanEnableMApps,
@@ -123,6 +123,22 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
             handleOpenSignInDialog(true);
           }}
           left={<Avatar />}
+          right={
+          <Badge
+            withCopy={false}
+            style={{
+              padding: '5px',
+              fontSize: '10px',
+              fontWeight: 800,
+            }}
+          >
+            {formatText(address, 4)}
+
+            <WalletIcon
+              width={15}
+              />
+          </Badge>
+          }
         />
       );
     }
@@ -132,12 +148,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   return (
     <>
       <MAppsDialog open={openMApps} handleOpenDialog={handleOpenMAppsDialog} />
-      {/*{records && (*/}
-      {/*  <ProfileDialog*/}
-      {/*    open={openProfile}*/}
-      {/*    handleOpenDialog={handleOpenProfileDialog}*/}
-      {/*  />*/}
-      {/*)}*/}
       <Popover>
         <PopoverTrigger>
           <ClickableItem
@@ -161,28 +171,32 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               alignItems: 'start',
             }}
             right={
-              <Flex align={'center'} justify={'center'} gap={'10px'}>
-                <SPAN>
-                  {data ? (
-                    <>
-                      {parseFloat(
-                        formatUnits(data?.value, data?.decimals)
-                      ).toFixed(2)}{' '}
-                      {data?.symbol}
-                    </>
-                  ) : (
-                    '0'
-                  )}
-                </SPAN>
-
-                <LogoutIcon
-                  width={20}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    signOut();
-                  }}
-                />
-              </Flex>
+              <Badge
+                withCopy={false}
+                style={{
+                  padding: '5px',
+                  fontSize: '10px',
+                  fontWeight: 800,
+                }}
+              >
+                     {data ? (
+                       <>
+                         {parseFloat(
+                           formatUnits(data?.value, data?.decimals)
+                         ).toFixed(2)}{' '}
+                         {data?.symbol}
+                       </>
+                     ) : (
+                       '0'
+                     )}
+                   <LogoutIcon
+                     width={15}
+                     onClick={(e) => {
+                       e.stopPropagation();
+                       signOut();
+                     }}
+                   />
+              </Badge>
             }
           />
         </PopoverTrigger>
@@ -280,6 +294,19 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               </Flex>
             </Flex>
             <Flex direction="column" gap={'10px'}>
+              {plugins.map((plugin) => {
+                const component = plugin.components?.SignInMenu;
+                if (!component) {
+                  return null;
+                }
+
+                return (
+                  <Fragment key={'signin-item-' + plugin.name}>
+                    {component(createPluginApi(plugin.name))}
+                  </Fragment>
+                );
+              })}
+
               <ClickableItem
                 left={<MappIcon width={20} />}
                 title={'mApps'}
@@ -311,18 +338,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                 disabled={!canEnableMApps}
                 loading={isCanEnableMAppsPending}
               />
-              {plugins.map((plugin) => {
-                const component = plugin.components?.SignInMenu;
-                if (!component) {
-                  return null;
-                }
-
-                return (
-                  <Fragment key={'signin-item-' + plugin.name}>
-                    {component(createPluginApi(plugin.name))}
-                  </Fragment>
-                );
-              })}
 
               <ClickableItem
                 style={{

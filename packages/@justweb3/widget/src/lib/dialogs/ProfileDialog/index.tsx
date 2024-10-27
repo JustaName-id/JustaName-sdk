@@ -40,12 +40,14 @@ import { DefaultDialog } from '../DefaultDialog';
 import { UnsavedChangesDialog } from '../UnsavedChangesDialog';
 import styles from './ProfileDialog.module.css';
 import clsx from 'clsx';
+import { JustaPlugin } from '../../plugins';
 
 export interface ProfileDialogProps {
   ens: string;
   chainId?: 1 | 11155111;
   handleOnClose: () => void;
   disableOverlay?: boolean;
+  plugins:JustaPlugin[];
 }
 
 const menuTabs = [
@@ -76,6 +78,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
   chainId = 1,
   handleOnClose,
   disableOverlay,
+  plugins,
 }) => {
   const { records, isRecordsPending, refetchRecords } = useRecords({
     ens: ens,
@@ -461,6 +464,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
             <ContentSection
               chainId={chainId}
               fullSubname={ens}
+              plugins={plugins}
               sanitized={
                 editMode
                   ? editedRecords?.sanitizedRecords

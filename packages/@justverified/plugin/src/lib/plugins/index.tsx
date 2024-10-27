@@ -4,6 +4,7 @@ import { JustVerifiedProvider } from '../providers';
 import { Credentials } from '../types';
 import { verifyRecords } from '../hooks/useVerifyRecords';
 import { ChainId } from '@justaname.id/sdk';
+import { VerificationSection } from '../components/VerificationSection';
 
 export const JustVerifiedPlugin = (
   credentials: Credentials[],
@@ -48,6 +49,9 @@ export const JustVerifiedPlugin = (
         />
       );
     },
+    ProfileSection: (pluginApi, ens, chainId) => {
+      return <VerificationSection ens={ens} credentials={credentials} chainId={chainId} mApp={mApp} verificationBackendUrl={verificationBackendUrl} />;
+    }
   },
   hooks: {
     onWalletDisconnected: (pluginApi) => {

@@ -67,19 +67,46 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
       croppedCanvas.toBlob(async (blob) => {
         if (!blob) return;
         if (blob.size > 3000000) {
-          setIsEditorOpen(false);
-          return;
+          const resizedCanvas = document.createElement('canvas');
+          const resizedContext = resizedCanvas.getContext('2d');
+          if (!resizedContext) return;
+          const MAX_WIDTH = 1500;
+          const MAX_HEIGHT = 500;
+          const width = croppedCanvas.width;
+          const height = croppedCanvas.height;
+          if (width > height) {
+            resizedCanvas.width = MAX_WIDTH;
+            resizedCanvas.height = (MAX_WIDTH * height) / width;
+          } else {
+            resizedCanvas.height = MAX_HEIGHT;
+            resizedCanvas.width = (MAX_HEIGHT * width) / height;
+          }
+          resizedContext.drawImage(croppedCanvas, 0, 0, resizedCanvas.width, resizedCanvas.height);
+          resizedCanvas.toBlob(async (resizedBlob) => {
+            if (!resizedBlob) return;
+            const formData = new FormData();
+            try {
+              const response = await uploadMedia({ form: formData });
+              onImageChange(response.url);
+              setIsEditorOpen(false);
+              return;
+            } catch (error) {
+              console.error('Upload error', error);
+              return;
+            }
+          })
         }
+        else{
+          const formData = new FormData();
+          formData.append('file', blob);
 
-        const formData = new FormData();
-        formData.append('file', blob);
-
-        try {
-          const response = await uploadMedia({ form: formData });
-          onImageChange(response.url);
-          setIsEditorOpen(false);
-        } catch (error) {
-          console.error('Upload error', error);
+          try {
+            const response = await uploadMedia({ form: formData });
+            onImageChange(response.url);
+            setIsEditorOpen(false);
+          } catch (error) {
+            console.error('Upload error', error);
+          }
         }
       });
     }
