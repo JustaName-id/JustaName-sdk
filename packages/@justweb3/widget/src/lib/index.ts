@@ -4,6 +4,7 @@ import { DefaultDialog } from './dialogs/DefaultDialog';
 import { JustaNameFooter } from './components/JustaNameFooter';
 import { ProfileSection } from './components/Profile/ProfileSection';
 import { JustWeb3Button } from './components/JustWeb3Button';
+import { MetadataCard } from './components/MetadataCard';
 import { JustEnsCard } from './components/JustEnsCard';
 
 export * from './plugins';
@@ -14,6 +15,7 @@ export {
   JustaNameFooter,
   JustWeb3Button,
   JustEnsCard,
+  MetadataCard as EnsMetadataBadge,
   DefaultDialog as JustaNameDialog,
   LoadingDialog as JustaNameLoadingDialog,
   ProfileSection,

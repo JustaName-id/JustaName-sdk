@@ -359,10 +359,18 @@ const CheckSession: FC<{
 }> = ({ openOnWalletConnect, handleOpenDialog }) => {
   const { connectedEns, isEnsAuthPending } = useEnsAuth();
   const { signOut } = useEnsSignOut();
-  const { address, isConnected, isDisconnected, isConnecting, isReconnecting } =
+  const { address, isConnected, isDisconnected, isConnecting, isReconnecting, chainId } =
     useMountedAccount();
-
   const isConnectedPrevious = usePreviousState(isConnected, [isConnected]);
+
+  useEffect(() => {
+    if(connectedEns && chainId) {
+      if(connectedEns?.chainId !== chainId) {
+        signOut();
+        handleOpenDialog(true);
+      }
+    }
+  }, [chainId, connectedEns]);
 
   useEffect(() => {
     if (connectedEns && address) {

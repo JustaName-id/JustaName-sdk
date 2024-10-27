@@ -4,15 +4,13 @@ import {
   ClickableItem,
   DoneIcon,
   LoadingSpinner,
-} from '@justweb3/ui';
-import { Credentials } from '../../types';
-import {
   DiscordIcon,
   EmailIcon,
   GithubIcon,
   TelegramIcon,
   TwitterIcon,
-} from '../../icons';
+} from '@justweb3/ui';
+import { Credentials } from '../../types';
 import { EthereumEip712Signature2021 } from '../../types/ethereumEip712Signature';
 import moment from 'moment';
 

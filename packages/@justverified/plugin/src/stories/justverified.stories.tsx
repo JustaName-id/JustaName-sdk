@@ -82,8 +82,7 @@ export const Example = () => {
   const config = getDefaultConfig({
     appName: 'My RainbowKit App',
     projectId: 'YOUR_PROJECT_ID',
-    chains:
-      import.meta.env.STORYBOOK_APP_CHAIN_ID === '1' ? [mainnet] : [sepolia],
+    chains: [mainnet,sepolia],
   });
 
   return (

@@ -140,13 +140,15 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
         value: address.address as string,
       }));
 
+    const contentHash = newRecord.contentHash[0]
+
     const subnameRecord: SubnameRecordsRoute['response'] = {
       ens: ens || '',
       records: {
         resolverAddress: records?.records.resolverAddress || '',
         coins: coins,
         texts: texts,
-        contentHash: records?.sanitizedRecords?.contentHash,
+        contentHash: contentHash,
       },
       claimedAt: records?.claimedAt,
       isClaimed: records?.isClaimed,

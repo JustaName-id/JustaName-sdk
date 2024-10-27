@@ -39,11 +39,11 @@ export const SignSection = () => {
         </p>
         <OptionSelect label="Claimable ENS" value="claimable" />
         <OptionSelect label="Any ENS & Subname" value="all" />
-        <div className="flex flex-col gap-2.5 ">
+        <div className="flex flex-col gap-2.5 p-2.5 ">
           <p className="text-xs font-medium text-black">
             Claimable and Specific ENS
           </p>
-          <div className="flex flex-row justify-between items-center gap-2.5 pr-2.5">
+          <div className="flex flex-row justify-between items-center gap-2.5">
             <Input
               value={ensInput}
               onChange={(e) => setEnsInput(e.target.value)}

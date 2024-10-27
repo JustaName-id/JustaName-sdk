@@ -11,7 +11,6 @@ import {
   LoadingSpinner,
   LogoutIcon,
   MappIcon,
-  MetadataCard,
   P,
   Popover,
   PopoverTrigger,
@@ -31,6 +30,7 @@ import { PluginContext } from '../../providers/PluginProvider';
 import { MAppsDialog } from '../../dialogs/MAppsDialog';
 import { getChainIcon } from '../../icons/chain-icons';
 import { getTextRecordIcon } from '../../icons/records-icons';
+import MetadataCard from '../MetadataCard';
 
 export interface JustWeb3Buttonrops {
   children: ReactNode;

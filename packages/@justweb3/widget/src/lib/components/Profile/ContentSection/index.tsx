@@ -12,7 +12,6 @@ import {
   ExpandableText,
   Flex,
   LocationIcon,
-  MetadataCard,
   P,
   PersonEditIcon,
 } from '@justweb3/ui';
@@ -23,6 +22,7 @@ import styles from './ContentSection.module.css';
 import { JustaPlugin } from '../../../plugins';
 import { PluginContext } from '../../../providers/PluginProvider';
 import { ProfileSection } from '../ProfileSection';
+import MetadataCard from '../../MetadataCard';
 
 export interface ContentProps {
   fullSubname: string;
@@ -57,7 +57,10 @@ const ContentSection: React.FC<ContentProps> = ({
   const { sanitizeEnsImage } = useEnsAvatar();
 
   return (
-    <Flex direction={'column'} gap={'10px'}>
+    <Flex direction={'column'} gap={'10px'} style={{
+      overflow:'hidden',
+      maxHeight: '100%',
+    }}>
       <div className={styles.container}>
         <div className={styles.bannerContainer}>
           <img
@@ -207,6 +210,7 @@ const ContentSection: React.FC<ContentProps> = ({
         style={{
           width: '100%',
           height: '100%',
+          overflowY: 'auto',
         }}
       >
         <Flex

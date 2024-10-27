@@ -12,6 +12,7 @@ const socialRegexes = {
   'com.github': /^[A-Za-z0-9-]+$/,
   'org.telegram': /^[A-Za-z0-9_]+$/,
   'com.reddit': /^[A-Za-z0-9_-]+$/,
+  'com.discord': /^[A-Za-z0-9_]+$/,
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
 };
 
@@ -27,6 +28,7 @@ export const socialsSchema = yup.object({
       'com.github',
       'email',
       'org.telegram',
+      'com.discord',
     ])
     .required(),
   value: yup.string().test((value, context) => {

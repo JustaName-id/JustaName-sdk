@@ -129,6 +129,7 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                   fontSize: '10px',
                   lineHeight: '10px',
                   fontWeight: 900,
+                  color: 'var(--justweb3-primary-color)',
                 }}
               >
                 {connectedEns?.ens}

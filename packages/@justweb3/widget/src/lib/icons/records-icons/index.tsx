@@ -2,6 +2,7 @@ import {
   EditIcon,
   EmailIcon,
   FacebookIcon,
+  DiscordIcon,
   GithubIcon,
   InstagramIcon,
   LocationIcon,
@@ -29,6 +30,8 @@ export const getTextRecordIcon = (key: string) => {
       return <LocationIcon width={24} height={24} />;
     case 'com.twitter':
       return <TwitterIcon width={24} height={24} />;
+    case 'com.discord':
+      return <DiscordIcon width={24} height={24} />;
     case 'com.facebook':
       return <FacebookIcon width={24} height={24} />;
     case 'com.instagram':

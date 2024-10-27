@@ -1,21 +1,9 @@
 'use client';
 import React from 'react';
-import { Flex } from '../../common';
-import { A, Badge, P } from '../../ui';
-import styles from './MetadataCard.module.css'; // Import CSS module
+import { A, Badge, P, Flex } from '@justweb3/ui';
+import styles from './MetadataCard.module.css';
+import { SUPPORTED_SOCIALS } from '@justaname.id/sdk'; // Import CSS module
 
-const socialLinks = [
-  {
-    name: 'Twitter',
-    identifier: 'com.twitter',
-    link(handle: string) {
-      return handle.includes('twitter.com/')
-        ? handle
-        : `https://twitter.com/${handle.replace('@', '')}`;
-    },
-  },
-  // Additional social links...
-];
 
 interface MetadataCardProps {
   variant: 'address' | 'other' | 'social' | 'contentHash';
@@ -40,7 +28,7 @@ export const MetadataCard: React.FC<MetadataCardProps> = ({
   const linkProps = {
     href:
       variant === 'social'
-        ? socialLinks
+        ? SUPPORTED_SOCIALS
             .find((social) => social.identifier === title)
             ?.link(value) || ''
         : value,
@@ -48,6 +36,10 @@ export const MetadataCard: React.FC<MetadataCardProps> = ({
     rel: 'noopener noreferrer',
     className: styles.link,
   };
+
+  if(variant === 'social'){
+    console.log(linkProps);
+  }
 
   return (
     <Badge className={styles.badge} value={value}>
