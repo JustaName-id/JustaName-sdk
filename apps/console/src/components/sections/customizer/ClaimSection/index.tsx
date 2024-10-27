@@ -116,7 +116,7 @@ export const ClaimSection = () => {
           value={chainId === 1 ? defaultMainnetValue : defaultTestnetValue}
           showFree
         />
-        <div className="flex flex-col gap-2.5 ">
+        <div className="flex flex-col gap-2.5 p-2.5">
           <p className="text-xs font-medium text-black">My ENS</p>
           <Input
             value={apiKey}
