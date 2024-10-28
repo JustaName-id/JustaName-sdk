@@ -4577,6 +4577,7 @@ __metadata:
     "@radix-ui/react-label": "npm:^2.1.0"
     "@radix-ui/react-popover": "npm:^1.1.1"
     "@radix-ui/react-slot": "npm:1.1.0"
+    "@radix-ui/react-tabs": "npm:^1.1.1"
     clsx: "npm:1.2.1"
     embla-carousel-react: "npm:^8.3.0"
     input-otp: "npm:^1.2.4"
