@@ -24,10 +24,12 @@ type PluginProviderComponent = (pluginApi: PluginApi, children: ReactNode) => Re
 type PluginComponent = (pluginApi: PluginApi) => ReactNode;
 type SectionPluginComponent = (pluginApi: PluginApi, ens: string, chainId: ChainId) => ReactNode;
 interface PluginComponents {
-  Providers?: PluginProviderComponent;
+  Provider?: PluginProviderComponent;
   Global?: PluginComponent;
   SignInMenu?: PluginComponent;
   ProfileSection?: SectionPluginComponent;
+  ProfileHeader?: SectionPluginComponent;
+  ProfileTab?: SectionPluginComponent;
 }
 
 type OnMountHook = (pluginApi: PluginApi) => void;

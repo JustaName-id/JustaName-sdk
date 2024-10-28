@@ -141,7 +141,7 @@ export const MAppsDialog: FC<AuthorizeMAppDialogProps> = ({
         </div>
       ) : (
         <Flex justify="space-between" direction="column" gap="20px">
-          <Badge>
+          <Badge value={connectedEns?.ens}>
             <SPAN
               style={{
                 fontSize: '10px',

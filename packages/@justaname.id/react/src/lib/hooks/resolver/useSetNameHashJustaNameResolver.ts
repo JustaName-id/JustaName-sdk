@@ -97,28 +97,28 @@ const recordExistsABI = [
 /**
  *  Interface defining the parameters needed to set the JustaName resolver.
  *
- *  @typedef UseSetJustaNameResolver
+ *  @typedef UseSetNameHashJustaNameResolver
  *  @type {object}
- *  @property {function} setJustaNameResolver - The function to set the JustaName resolver.
- *  @property {boolean} justanameResolverSet - Indicates if the JustaName resolver is set.
- *  @property {boolean} isSetJustaNameResolverPending - Indicates if the mutation is currently pending.
- *  @property {boolean} setJustaNameResolverError - Indicates if the mutation has led to an error.
+ *  @property {function} setNameHashJustaNameResolver - The function to set the JustaName resolver.
+ *  @property {boolean} NameHashJustaNameResolverSet - Indicates if the JustaName resolver is set.
+ *  @property {boolean} isSetNameHashJustaNameResolverPending - Indicates if the mutation is currently pending.
+ *  @property {boolean} setNameHashJustaNameResolverError - Indicates if the mutation has led to an error.
  */
-export interface UseSetJustaNameResolver<T = any> {
-  setJustaNameResolver: () => Promise<void>;
-  justanameResolverSet: boolean;
-  isSetJustaNameResolverPending: boolean;
-  setJustaNameResolverError: boolean;
+export interface UseSetNameHashJustaNameResolver<T = any> {
+  setNameHashJustaNameResolver: () => Promise<void>;
+  NameHashJustaNameResolverSet: boolean;
+  isSetNameHashJustaNameResolverPending: boolean;
+  setNameHashJustaNameResolverError: boolean;
 }
 /**
  * Custom hook for performing a mutation to set the JustaName resolver.
  *
  * @template T - The type of additional parameters that can be passed to the set JustaName resolver mutation, extending the base request.
- * @returns {UseSetJustaNameResolver} An object containing the `setJustaNameResolver` async function to initiate the JustaName resolve,a boolean `justanameResolverSet` indicating if the resolver is set,a boolean `setJustaNameResolverPending` indicating the state of the process, and a boolean `setJustaNameResolverError` indicating if an error has occured.
+ * @returns {UseSetNameHashJustaNameResolver} An object containing the `setNameHashJustaNameResolver` async function to initiate the JustaName resolve,a boolean `NameHashJustaNameResolverSet` indicating if the resolver is set,a boolean `setNameHashJustaNameResolverPending` indicating the state of the process, and a boolean `setNameHashJustaNameResolverError` indicating if an error has occured.
  */
-export const useSetJustaNameResolver = <
+export const useSetNameHashJustaNameResolver = <
   T = any
->(): UseSetJustaNameResolver<T> => {
+>(): UseSetNameHashJustaNameResolver<T> => {
   const { chainId, address } = useMountedAccount();
   const { offchainResolvers, isOffchainResolversPending } = useOffchainResolvers();
 
@@ -278,13 +278,13 @@ export const useSetJustaNameResolver = <
   });
 
   return {
-    setJustaNameResolver: mutate.mutateAsync as () => Promise<void>,
-    justanameResolverSet:
+    setNameHashJustaNameResolver: mutate.mutateAsync as () => Promise<void>,
+    NameHashJustaNameResolverSet:
       isResolverConfigured && getResolverABIStatus !== 'pending',
-    isSetJustaNameResolverPending:
+    isSetNameHashJustaNameResolverPending:
       !noResultData &&
       (setResolverConfigPending || setClaimWithResolverPending),
-    setJustaNameResolverError:
+    setNameHashJustaNameResolverError:
       !noResultData &&
       (setResolverConfigDataIsError || setClaimWithResolverIsError),
   };

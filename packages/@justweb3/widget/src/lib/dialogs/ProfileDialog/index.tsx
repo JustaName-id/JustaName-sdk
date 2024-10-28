@@ -345,7 +345,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                 }}
               />
             )}
-            <Badge>
+            <Badge value={ens}>
               <SPAN className={styles.badgeText}>{ens}</SPAN>
             </Badge>
           </Flex>

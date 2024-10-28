@@ -234,7 +234,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
       }
     >
       <Flex direction="column" gap="10px">
-        <Badge>
+        <Badge value={address}>
           <SPAN className={styles.badgeText}>
             {address && formatText(address, 4)}
           </SPAN>

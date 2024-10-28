@@ -1,6 +1,5 @@
 import { FC, useMemo, useState } from 'react';
-import { ArrowIcon, DoneIcon, Input } from '@justweb3/ui';
-import { EmailIcon } from '../../icons';
+import { ArrowIcon, DoneIcon, EmailIcon, Input } from '@justweb3/ui';
 import { Credentials } from '../../types';
 import { EmailDialog } from '../../dialogs/EmailDialog';
 import { EthereumEip712Signature2021 } from '../../types/ethereumEip712Signature';

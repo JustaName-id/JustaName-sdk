@@ -150,7 +150,9 @@ export const EmailDialog: FC<EmailDialogProps> = ({
           }}
         >
           <Flex justify="space-between" direction="row" gap="10px">
-            <Badge>
+            <Badge
+              value={connectedToVerification?.ens}
+            >
               <SPAN
                 style={{
                   fontSize: '10px',

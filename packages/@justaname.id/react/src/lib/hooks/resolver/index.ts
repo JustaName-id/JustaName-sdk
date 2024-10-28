@@ -1,1 +1,1 @@
-export * from './useSetJustaNameResolver';
+export * from './useSetNameHashJustaNameResolver';

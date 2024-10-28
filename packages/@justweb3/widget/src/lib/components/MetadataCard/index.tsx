@@ -37,10 +37,6 @@ export const MetadataCard: React.FC<MetadataCardProps> = ({
     className: styles.link,
   };
 
-  if(variant === 'social'){
-    console.log(linkProps);
-  }
-
   return (
     <Badge className={styles.badge} value={value}>
       <Flex className={styles.flexRow}>

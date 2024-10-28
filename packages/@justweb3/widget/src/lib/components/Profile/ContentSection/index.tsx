@@ -235,7 +235,7 @@ const ContentSection: React.FC<ContentProps> = ({
           })}
 
           {sanitized?.socials?.length > 0 && (
-            <ProfileSection title={'Handles'} items={
+            <ProfileSection title={'Socials'} items={
               sanitized?.socials
                 ?.filter((social) => social.value !== '')
                 .map((social) => (
