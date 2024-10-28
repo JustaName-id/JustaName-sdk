@@ -2,17 +2,10 @@
   "name": "justweb3-efp-plugin",
   "version": "0.0.38",
   "dependencies": {
-    "@justaname.id/react": "0.3.103",
-    "@justaname.id/sdk": "0.2.100",
     "@justweb3/ui": "0.0.41",
-    "@justweb3/widget": "0.0.41",
-    "axios": "^1.6.0",
-    "lodash": "4.17.21",
-    "moment": "^2.30.1",
-    "qs": "^6.12.0"
+    "@justweb3/widget": "0.0.41"
   },
   "peerDependencies": {
-    "@tanstack/react-query": "^5.x",
     "react": ">=17"
   },
   "exports": {

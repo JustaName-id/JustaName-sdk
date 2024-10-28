@@ -2,13 +2,15 @@ import { ReactNode, useContext, useEffect } from 'react';
 import { JustWeb3Context } from '@justweb3/widget';
 import {
   Credentials,
+  JustVerifiedPlugin,
+} from '@justverified/plugin';
+import {
   DiscordIcon,
   EmailIcon,
   GithubIcon,
-  JustVerifiedPlugin,
   TelegramIcon,
   TwitterIcon,
-} from '@justverified/plugin';
+} from '@justweb3/ui';
 import { useConsole } from '../../../../providers/ConsoleProvider';
 import { Switch } from '../../../ui/switch';
 import { SocialCard } from './socialCard';
