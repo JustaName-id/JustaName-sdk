@@ -47,7 +47,7 @@ export interface ProfileDialogProps {
   chainId?: 1 | 11155111;
   handleOnClose: () => void;
   disableOverlay?: boolean;
-  plugins:JustaPlugin[];
+  plugins: JustaPlugin[];
 }
 
 const menuTabs = [
@@ -140,7 +140,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
         value: address.address as string,
       }));
 
-    const contentHash = newRecord.contentHash[0]
+    const contentHash = newRecord.contentHash[0];
 
     const subnameRecord: SubnameRecordsRoute['response'] = {
       ens: ens || '',

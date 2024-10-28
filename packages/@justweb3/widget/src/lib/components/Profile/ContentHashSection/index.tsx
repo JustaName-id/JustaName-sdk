@@ -10,7 +10,7 @@ import {
   ContentHashProviderOrAll,
   contentHashToProtocols,
   validateContentHash,
-} from '../../../forms/contenthash.schema';
+} from '../../../forms/contenthash-schema';
 
 interface ContentHashSectionProps {
   form: UseFormReturn<metadataForm>;

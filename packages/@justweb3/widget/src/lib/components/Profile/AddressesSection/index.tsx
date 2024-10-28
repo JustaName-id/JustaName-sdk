@@ -9,7 +9,7 @@ import React, { useMemo } from 'react';
 import { useFieldArray, UseFormReturn } from 'react-hook-form';
 import { useDebounce } from '../../../hooks';
 import { metadataForm } from '../../../forms';
-import { validateCryptoAddress } from '../../../forms/addresses.schema';
+import { validateCryptoAddress } from '../../../forms/addresses-schema';
 import {
   AddCircleIcon,
   ArrowIcon,
@@ -117,8 +117,8 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                   address.coin === '60'
                     ? undefined
                     : () => {
-                        remove(index);
-                      }
+                      remove(index);
+                    }
                 }
               />
             );
@@ -160,13 +160,11 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                               transform: 'capitalize',
                             }}
                           >
-                            {`${
-                              selectedCoinDetails.symbol.split('Legacy')[0]
-                            } ${
-                              selectedCoinDetails.symbol.includes('Legacy')
+                            {`${selectedCoinDetails.symbol.split('Legacy')[0]
+                              } ${selectedCoinDetails.symbol.includes('Legacy')
                                 ? 'Legacy'
                                 : ''
-                            }`}
+                              }`}
                           </P>
                         </Flex>
                       ) : (
@@ -259,11 +257,10 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                                 textAlign: 'center',
                               }}
                             >
-                              {`${coinDetails.symbol.split('Legacy')[0]} ${
-                                coinDetails.symbol.includes('Legacy')
+                              {`${coinDetails.symbol.split('Legacy')[0]} ${coinDetails.symbol.includes('Legacy')
                                   ? 'Legacy'
                                   : ''
-                              }`}
+                                }`}
                             </P>
                           </div>
                         );

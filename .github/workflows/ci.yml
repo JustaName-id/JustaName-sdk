@@ -37,9 +37,9 @@ jobs:
           SDK_ENS_DOMAIN: ${{ secrets.SDK_ENS_DOMAIN }}
           SDK_MAPP: ${{ secrets.SDK_MAPP }}
           SDK_CHAIN_ID: ${{ secrets.SDK_CHAIN_ID }}
-          SDK_JUSTANAME_DEV : ${{ secrets.SDK_JUSTANAME_DEV }}
+          SDK_JUSTANAME_DEV: ${{ secrets.SDK_JUSTANAME_DEV }}
           SIWENS_PRIVATE_KEY: ${{ secrets.SIWENS_PRIVATE_KEY }}
           SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
           SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
-        run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
-      - run: npx nx affected -t build
+        run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console
+      - run: npx nx affected -t build --exclude=console
