@@ -397,7 +397,7 @@ export const PluginProvider: FC<PluginProviderProps> = ({
 
   const wrappedContent = plugins.reduceRight(
     (acc: ReactNode, plugin: JustaPlugin) => {
-      const ProvidersComponent = plugin.components?.Providers;
+      const ProvidersComponent = plugin.components?.Provider;
 
       if (ProvidersComponent) {
         return ProvidersComponent(createPluginApi(plugin.name), acc);

@@ -25,18 +25,7 @@ export const Example = ({
         <Avatar
           src={avatarSrc}
           initial={avatarInitial}
-          size="28px"
-          bgColor={
-            avatarSrc
-              ? 'var(--justweb3-foreground-color-4)'
-              : 'var(--justweb3-primary-color)'
-          }
-          borderColor={
-            avatarSrc
-              ? 'var(--justweb3-foreground-color-4)'
-              : 'var(--justweb3-primary-color)'
-          }
-          color="#ffffff"
+          size={28}
         />
       }
       right={

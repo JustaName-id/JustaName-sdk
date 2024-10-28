@@ -123,7 +123,9 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
           }}
         >
           <Flex justify="space-between" direction="row" gap="10px">
-            <Badge>
+            <Badge
+              value={connectedEns?.ens}
+            >
               <SPAN
                 style={{
                   fontSize: '10px',
