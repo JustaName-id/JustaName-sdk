@@ -85,6 +85,7 @@ Please note the below example uses [RainbowKit](https://www.rainbowkit.com/). Yo
 'use client';
 
 import "@rainbow-me/rainbowkit/styles.css";
+import '@justweb3/widget/styles.css';
 import {
   getDefaultConfig,
   getDefaultWallets,
@@ -167,6 +168,7 @@ export default App;
 {% tab title="React" %}
 ```tsx
 import "@rainbow-me/rainbowkit/styles.css";
+import '@justweb3/widget/styles.css';
 import React from "react";
 import {
   getDefaultConfig,

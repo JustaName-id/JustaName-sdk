@@ -70,6 +70,7 @@ Next, you'll configure the JustWeb3 Widget by adding it to your `main.tsx`. This
 In your `main.tsx`, you’ll integrate **Wagmi** and the JustWeb3 Widget as shown below:
 
 ```tsx
+import '@justweb3/widget/styles.css';
 import { Buffer } from "buffer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";

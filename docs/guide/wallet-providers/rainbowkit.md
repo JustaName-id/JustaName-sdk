@@ -34,6 +34,7 @@ In your main provider file (e.g., `Providers.tsx` or `App.tsx`), import the nece
 
 ```tsx
 import "@rainbow-me/rainbowkit/styles.css";
+import '@justweb3/widget/styles.css';
 import {
   getDefaultConfig,
   getDefaultWallets,

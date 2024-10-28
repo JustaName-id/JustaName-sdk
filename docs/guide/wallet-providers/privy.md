@@ -35,6 +35,7 @@ In your main file (e.g., `App.tsx` or `Providers.tsx`), import the necessary com
 
 ```tsx
 import "@rainbow-me/rainbowkit/styles.css";
+import '@justweb3/widget/styles.css';
 import React from "react";
 import { JustWeb3Provider, JustWeb3ProviderConfig, JustWeb3Button } from "@justweb3/widget";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -167,6 +168,7 @@ Here's the full implementation combining Privy, and JustWeb3:
 
 ```tsx
 import "@rainbow-me/rainbowkit/styles.css";
+import '@justweb3/widget/styles.css';
 import React from "react";
 import { JustWeb3Provider, JustWeb3ProviderConfig, JustWeb3Button } from "@justweb3/widget";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
