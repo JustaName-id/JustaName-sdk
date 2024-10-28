@@ -1,5 +1,3 @@
-'use client';
-
 import * as React from 'react';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
@@ -11,7 +9,7 @@ import {
   FormProvider,
   useFormContext,
 } from 'react-hook-form';
-import styled from 'styled-components';
+import styles from './Form.module.css'; // Import CSS module
 
 const Form = FormProvider;
 
@@ -49,7 +47,6 @@ const useFormField = () => {
   }
 
   const fieldState = getFieldState(fieldContext.name, formState);
-
   const { id } = itemContext;
 
   return {
@@ -70,45 +67,39 @@ const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue
 );
 
-const FormItemWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-`;
-
 const FormItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const id = React.useId();
-
   return (
     <FormItemContext.Provider value={{ id }}>
-      <FormItemWrapper ref={ref} {...props} />
+      <div
+        ref={ref}
+        className={`${styles.formItemWrapper} ${className || ''}`}
+        {...props}
+      />
     </FormItemContext.Provider>
   );
 });
 FormItem.displayName = 'FormItem';
-
-const StyledLabel = styled(LabelPrimitive.Root)<{ error?: boolean }>`
-  font-size: 1rem;
-  font-weight: 400;
-  margin: 0;
-  font-family: var(--justweb3-font-family);
-  color: ${({ error }) =>
-    error
-      ? 'var(--justweb3-destructive-color)'
-      : 'var(--justweb3-foreground-color-2)'};
-`;
 
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
 >(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField();
+  const labelClassName = `${styles.styledLabel} ${
+    error ? styles.styledLabelError : ''
+  } ${className || ''}`;
 
   return (
-    <StyledLabel ref={ref} htmlFor={formItemId} error={!!error} {...props} />
+    <LabelPrimitive.Root
+      ref={ref}
+      htmlFor={formItemId}
+      className={labelClassName}
+      {...props}
+    />
   );
 });
 FormLabel.displayName = 'FormLabel';
@@ -125,7 +116,7 @@ const FormControl = React.forwardRef<
       ref={ref}
       id={formItemId}
       aria-describedby={
-        error ? `${formDescriptionId} ${formMessageId}` : `${formDescriptionId}`
+        error ? `${formDescriptionId} ${formMessageId}` : formDescriptionId
       }
       aria-invalid={!!error}
       {...props}
@@ -134,42 +125,40 @@ const FormControl = React.forwardRef<
 });
 FormControl.displayName = 'FormControl';
 
-const FormDescriptionText = styled.p`
-  font-size: 0.8rem;
-  color: var(--justweb3-foreground-color-2);
-`;
-
 const FormDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => {
   const { formDescriptionId } = useFormField();
-
-  return <FormDescriptionText ref={ref} id={formDescriptionId} {...props} />;
+  return (
+    <p
+      ref={ref}
+      id={formDescriptionId}
+      className={`${styles.formDescriptionText} ${className || ''}`}
+      {...props}
+    />
+  );
 });
 FormDescription.displayName = 'FormDescription';
-
-const FormMessageText = styled.p`
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--justweb3-foreground-color-2);
-`;
 
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField();
-  const body = error ? String(error?.message) : children;
+  const body = error ? String(error.message) : children;
 
-  if (!body) {
-    return null;
-  }
+  if (!body) return null;
 
   return (
-    <FormMessageText ref={ref} id={formMessageId} {...props}>
+    <p
+      ref={ref}
+      id={formMessageId}
+      className={`${styles.formMessageText} ${className || ''}`}
+      {...props}
+    >
       {body}
-    </FormMessageText>
+    </p>
   );
 });
 FormMessage.displayName = 'FormMessage';

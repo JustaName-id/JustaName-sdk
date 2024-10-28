@@ -1,39 +1,14 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
-
-const rotate = keyframes`
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-`;
-
-const SpinnerWrapper = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
-const StyledSvg = styled.svg`
-    width: 20px;
-    height: 20px;
-    animation: ${rotate} 1s linear infinite;
-`;
+import styles from './LoadingSpinner.module.css'; // Import the CSS module
 
 export interface LoadingSpinnerProps {
   color?: string;
 }
 
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({color}) => {
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ color }) => {
   return (
-    <SpinnerWrapper>
-      <StyledSvg viewBox="0 0 50 50">
+    <div className={styles.spinnerWrapper}>
+      <svg className={styles.styledSvg} viewBox="0 0 50 50">
         <circle
           cx="25"
           cy="25"
@@ -44,7 +19,9 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({color}) => {
           strokeLinecap="round"
           strokeDasharray="80, 200"
         />
-      </StyledSvg>
-    </SpinnerWrapper>
+      </svg>
+    </div>
   );
 };
+
+export default LoadingSpinner;

@@ -7,15 +7,14 @@ import {
   Badge,
   Button,
   ClickableItem,
-  Flex,
-  LinkCard,
+  Flex, formatText,
   LoadingSpinner,
   LogoutIcon,
   MappIcon,
   P,
   Popover,
   PopoverTrigger,
-  SPAN,
+  SPAN, WalletIcon
 } from '@justweb3/ui';
 import {
   useCanEnableMApps,
@@ -31,6 +30,7 @@ import { PluginContext } from '../../providers/PluginProvider';
 import { MAppsDialog } from '../../dialogs/MAppsDialog';
 import { getChainIcon } from '../../icons/chain-icons';
 import { getTextRecordIcon } from '../../icons/records-icons';
+import MetadataCard from '../MetadataCard';
 
 export interface JustWeb3Buttonrops {
   children: ReactNode;
@@ -40,11 +40,11 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   const [openMApps, setOpenMApps] = useState(false);
   const { plugins, mApps } = useContext(JustWeb3Context);
   const { createPluginApi } = useContext(PluginContext);
-  const { address } = useMountedAccount();
+  const { address, isConnected } = useMountedAccount();
   const {
     connectedEns,
     signOut,
-    isEnsAuthPending,
+    isEnsAuthLoading,
     handleOpenSignInDialog,
     openEnsProfile,
   } = useJustWeb3();
@@ -81,16 +81,12 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
     }
   };
 
-  if (isEnsAuthPending || isLoading || (connectedEns && isRecordsPending)) {
+  if (isEnsAuthLoading || isLoading || (connectedEns && isRecordsPending)) {
     // if (true) {
     return (
       <ClickableItem
-        name={'loading'}
+        title={'loading'}
         clickable={false}
-        style={{
-          maxWidth: '278px',
-          width: '100%',
-        }}
         left={
           <div
             style={{
@@ -98,8 +94,8 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               position: 'relative',
               alignItems: 'center',
               justifyContent: 'center',
-              height: '30px',
-              width: '30px',
+              height: '32px',
+              width: '32px',
             }}
           >
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
@@ -110,31 +106,39 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   }
 
   if (!connectedEns) {
-    if (address) {
+    if (address && isConnected) {
       return (
         <ClickableItem
-          name={'Sign In'}
-          onClick={() => handleOpenSignInDialog(true)}
-          left={
-            <Avatar
-              size="28px"
-              bgColor={
-                avatar
-                  ? 'var(--justweb3-foreground-color-4)'
-                  : 'var(--justweb3-primary-color)'
-              }
-              borderColor={
-                avatar
-                  ? 'var(--justweb3-foreground-color-4)'
-                  : 'var(--justweb3-primary-color)'
-              }
-              color="#ffffff"
-            />
+          title={
+            <P
+              style={{
+                color: 'var(--justweb3-primary-color)',
+                fontWeight: 700,
+              }}
+            >
+              Sign In
+            </P>
           }
-          style={{
-            maxWidth: '278px',
-            width: '100%',
+          onClick={() => {
+            handleOpenSignInDialog(true);
           }}
+          left={<Avatar />}
+          right={
+          <Badge
+            withCopy={false}
+            style={{
+              padding: '5px',
+              fontSize: '10px',
+              fontWeight: 800,
+            }}
+          >
+            {formatText(address, 4)}
+
+            <WalletIcon
+              width={15}
+              />
+          </Badge>
+          }
         />
       );
     }
@@ -144,68 +148,55 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   return (
     <>
       <MAppsDialog open={openMApps} handleOpenDialog={handleOpenMAppsDialog} />
-      {/*{records && (*/}
-      {/*  <ProfileDialog*/}
-      {/*    open={openProfile}*/}
-      {/*    handleOpenDialog={handleOpenProfileDialog}*/}
-      {/*  />*/}
-      {/*)}*/}
       <Popover>
-        <PopoverTrigger
-          style={{
-            maxWidth: '300px',
-            width: '100%',
-          }}
-        >
+        <PopoverTrigger>
           <ClickableItem
-            name={connectedEns?.ens}
-            left={
-              <Avatar
-                src={avatar}
-                size="28px"
-                bgColor={
-                  avatar
-                    ? 'var(--justweb3-foreground-color-4)'
-                    : 'var(--justweb3-primary-color)'
-                }
-                borderColor={
-                  avatar
-                    ? 'var(--justweb3-foreground-color-4)'
-                    : 'var(--justweb3-primary-color)'
-                }
-                color="#ffffff"
-              />
+            title={
+              <P
+                style={{
+                  fontWeight: 700,
+                  color: 'var(--justweb3-primary-color)',
+                  fontSize: '12px',
+                }}
+              >
+                {connectedEns.ens}
+              </P>
             }
+            left={<Avatar src={avatar} />}
             style={{
-              maxWidth: '278px',
               backgroundColor: 'var(--justweb3-background-color)',
+              color: 'var(--justweb3-primary-color)',
             }}
             contentStyle={{
               alignItems: 'start',
             }}
             right={
-              <Flex align={'center'} justify={'center'} gap={'10px'}>
-                <SPAN>
-                  {data ? (
-                    <>
-                      {parseFloat(
-                        formatUnits(data?.value, data?.decimals)
-                      ).toFixed(2)}{' '}
-                      {data?.symbol}
-                    </>
-                  ) : (
-                    '0'
-                  )}
-                </SPAN>
-
-                <LogoutIcon
-                  width={20}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    signOut();
-                  }}
-                />
-              </Flex>
+              <Badge
+                withCopy={false}
+                style={{
+                  padding: '5px',
+                  fontSize: '10px',
+                  fontWeight: 800,
+                }}
+              >
+                     {data ? (
+                       <>
+                         {parseFloat(
+                           formatUnits(data?.value, data?.decimals)
+                         ).toFixed(2)}{' '}
+                         {data?.symbol}
+                       </>
+                     ) : (
+                       '0'
+                     )}
+                   <LogoutIcon
+                     width={15}
+                     onClick={(e) => {
+                       e.stopPropagation();
+                       signOut();
+                     }}
+                   />
+              </Badge>
             }
           />
         </PopoverTrigger>
@@ -216,7 +207,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               <Flex direction="row" align="center" justify="space-between">
                 <P
                   style={{
-                    color: '#0F172A',
                     fontSize: '12px',
                     fontWeight: 300,
                   }}
@@ -225,12 +215,8 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                 </P>
                 <Button
                   variant={'primary'}
+                  size={'sm'}
                   rightIcon={<ArrowWhiteIcon width={15} />}
-                  style={{
-                    fontSize: '8px',
-                    padding: '5px 10px',
-                    height: '25px',
-                  }}
                   onClick={() => {
                     openEnsProfile(connectedEns?.ens, connectedEns?.chainId);
                   }}
@@ -247,29 +233,10 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                 borderRadius="16px"
               >
                 <Flex direction="row" align="center" gap="10px">
-                  <Avatar
-                    src={avatar}
-                    size="55px"
-                    bgColor={
-                      avatar
-                        ? 'var(--justweb3-foreground-color-4)'
-                        : 'var(--justweb3-primary-color)'
-                    }
-                    borderColor={
-                      avatar
-                        ? 'var(--justweb3-foreground-color-4)'
-                        : 'var(--justweb3-primary-color)'
-                    }
-                    color="#ffffff"
-                    style={{
-                      outline: '1px solid white',
-                      boxShadow: '0px 0px 5px 0px rgba(0, 0, 0, 0.25)',
-                    }}
-                  />
+                  <Avatar src={avatar} size={62} borderSize={'4px'} />
                   <Flex direction="column" gap="5px" justify="flex-start">
                     <P
                       style={{
-                        color: 'black',
                         fontSize: '14px',
                         fontWeight: 700,
                         textAlign: 'left',
@@ -278,10 +245,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                       {records?.sanitizedRecords.display ?? connectedEns.ens}
                     </P>
                     <Badge
-                      variant="default"
                       style={{
                         fontSize: '10px',
-                        color: '#3280F4',
+                        color: 'var(--justweb3-primary-color)',
                       }}
                       withCopy
                       value={connectedEns.ens}
@@ -297,19 +263,19 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                   justify="flex-start"
                   className={'justweb3scrollbar'}
                   style={{
-                    overflowX: 'scroll',
+                    overflowX: 'auto',
                     width: '100%',
-                    paddingBottom: '0px'
+                    paddingBottom: '0px',
                   }}
                 >
-                  <LinkCard
+                  <MetadataCard
                     variant="address"
                     title="Address"
                     value={connectedEns.address}
                     icon={getChainIcon('eth')}
                   />
                   {!!hasTwitterOrX && (
-                    <LinkCard
+                    <MetadataCard
                       variant="social"
                       title={hasTwitterOrX.key}
                       value={hasTwitterOrX.value}
@@ -317,7 +283,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                     />
                   )}
                   {!!records?.sanitizedRecords.email && (
-                    <LinkCard
+                    <MetadataCard
                       variant="social"
                       title="Email"
                       value={records?.sanitizedRecords.email}
@@ -328,9 +294,25 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
               </Flex>
             </Flex>
             <Flex direction="column" gap={'10px'}>
+              {plugins.map((plugin) => {
+                const component = plugin.components?.SignInMenu;
+                if (!component) {
+                  return null;
+                }
+
+                return (
+                  <Fragment key={'signin-item-' + plugin.name}>
+                    {component(createPluginApi(plugin.name))}
+                  </Fragment>
+                );
+              })}
+
               <ClickableItem
                 left={<MappIcon width={20} />}
-                name={'mApps'}
+                title={'mApps'}
+                style={{
+                  width: '100%',
+                }}
                 onClick={() => setOpenMApps(true)}
                 right={
                   <Flex justify={'space-between'} align={'center'} gap={'5px'}>
@@ -347,28 +329,22 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                           Configuration Required
                         </SPAN>
                       )}
-                    <ArrowIcon width={20} />
+                    <ArrowIcon
+                      width={20}
+                      color={'var(--justweb3-foreground-color-2)'}
+                    />
                   </Flex>
                 }
                 disabled={!canEnableMApps}
                 loading={isCanEnableMAppsPending}
               />
-              {plugins.map((plugin) => {
-                const component = plugin.components?.SignInMenu;
-                if (!component) {
-                  return null;
-                }
-
-                return (
-                  <Fragment key={'signin-item-' + plugin.name}>
-                    {component(createPluginApi(plugin.name))}
-                  </Fragment>
-                );
-              })}
 
               <ClickableItem
+                style={{
+                  width: '100%',
+                }}
                 left={<LogoutIcon width={20} />}
-                name={'Sign Out'}
+                title={'Sign Out'}
                 onClick={signOut}
                 right={<ArrowIcon width={20} />}
               />

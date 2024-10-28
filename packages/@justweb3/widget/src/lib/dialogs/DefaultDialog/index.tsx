@@ -18,6 +18,7 @@ export interface DefaultDialogProps {
   header?: ReactNode;
   innerStyle?: React.CSSProperties;
   trigger?: ReactNode;
+  fullScreen?: boolean;
   disableOverlay?: boolean;
   contentStyle?: React.CSSProperties;
   withoutFooter?: boolean;
@@ -31,6 +32,7 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
   handleClose,
   children,
   header,
+  fullScreen,
   innerStyle = {},
   contentStyle = {},
   withoutFooter,
@@ -40,11 +42,17 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
 
       <DialogContent
+        fullScreen={fullScreen}
         onInteractOutside={(e) => disableOverlay && e.preventDefault()}
         disableOverlay={disableOverlay}
         style={{
           padding: 0,
           transition: 'all 0.4 ease-in-out',
+          display: 'flex',
+          flexDirection: 'column',
+          borderRadius: fullScreen ? '0' : '24px',
+          background: 'var(--justweb3-foreground-color-4)',
+          boxSizing: 'content-box',
           ...contentStyle,
         }}
       >
@@ -55,28 +63,32 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
         >
           <DialogTitle></DialogTitle>
         </div>
+
         <Flex
           style={{
-            padding: '0px 0 0 0',
-            borderRadius: '16px',
-            background: 'var(--justweb3-foreground-color-4)',
+            padding: '20px',
+            borderRadius: fullScreen ? '0' : '24px',
+            gap: '20px',
+            background: 'var(--justweb3-background-color)',
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            maxHeight: 'calc(100% - 45px)',
+            boxSizing: 'border-box',
+            ...innerStyle,
           }}
-          direction={'column'}
         >
-          <Flex
-            style={{
-              padding: '20px',
-              borderRadius: '16px',
-              background: 'var(--justweb3-background-color)',
-              gap: '20px',
-              display: 'flex',
-              flexDirection: 'column',
-              ...innerStyle,
-            }}
-          >
-            <Flex justify="space-between" direction="row">
-              {header}
+          <Flex justify="space-between" direction="row">
+            {header}
 
+            <Flex
+              direction="column"
+              justify="center"
+              align="center"
+              style={{
+                width: '24px',
+              }}
+            >
               {handleClose ? (
                 <CloseIcon
                   style={{
@@ -105,12 +117,13 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
                 </DialogClose>
               )}
             </Flex>
-            {children}
           </Flex>
-          {!withoutFooter && (
-            <JustaNameFooter />
-          )}
+          {/*<Flex direction={'column'} style={{ flex: 1 }}>*/}
+          {children}
+          {/*</Flex>*/}
         </Flex>
+        {!withoutFooter && <JustaNameFooter />}
+        {/*</Flex>*/}
       </DialogContent>
     </Dialog>
   );

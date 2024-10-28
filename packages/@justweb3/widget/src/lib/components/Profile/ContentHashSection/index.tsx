@@ -1,38 +1,16 @@
 'use client';
 
-import { AddIcon, Button, Flex, Input, P, WalletIcon } from '@justweb3/ui';
+import { AddCircleIcon, Flex, Input, P, WalletIcon } from '@justweb3/ui';
 import React, { useMemo } from 'react';
 import { useFieldArray, UseFormReturn } from 'react-hook-form';
-import styled from 'styled-components';
-import {
-  ContentHashProvider,
-  ContentHashProviders,
-  validateContentHash,
-} from '../../../forms/contenthash.schema';
 import { MetadataField } from '../MetadataField';
-import { useDebounce } from '../../../hooks';
 import { metadataForm } from '../../../forms';
 import { getContentHashIcon } from '../../../icons/contentHash-icons';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-height: calc(100% - 62px);
-  height: 100%;
-`;
-
-const ContentHashCard = styled.div<{ isSelected: boolean }>`
-  min-width: 87px;
-  max-width: 87px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background-color: ${(props) =>
-    props.isSelected ? '[bg-shadow color]' : 'white'};
-`;
+import {
+  ContentHashProviderOrAll,
+  contentHashToProtocols,
+  validateContentHash,
+} from '../../../forms/contenthash-schema';
 
 interface ContentHashSectionProps {
   form: UseFormReturn<metadataForm>;
@@ -43,50 +21,64 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
 }) => {
   const contentHashesRef = React.useRef<HTMLDivElement>(null);
   const [contentHash, setContentHash] = React.useState<string>('');
-  const [selectedContentHashProtocol, setSelectedContentHashProtocol] =
-    React.useState<string>('');
-  const { debouncedValue: debouncedContentHash, isDebouncing } = useDebounce(
-    contentHash,
-    500
-  );
-  const { append, remove } = useFieldArray({
+  // const [selectedContentHashProtocol, setSelectedContentHashProtocol] =
+  React.useState<string>('');
+  // const { debouncedValue: debouncedContentHash, isDebouncing } = useDebounce(
+  //   contentHash,
+  //   500
+  // );
+  const { remove, append } = useFieldArray({
     control: form.control,
     name: 'contentHash',
   });
 
-  const suggestedContentHashProtocols = useMemo(() => {
-    if (isDebouncing) return [];
-    if (!debouncedContentHash) return [];
+  console.log('form', form.getValues('contentHash'));
+  const contentHashValid = useMemo(() => {
+    const protocol = contentHash.split('://')[0];
+    if (!protocol) return false;
+    const decoded = contentHash.split('://')[1];
 
-    setTimeout(() => {
-      contentHashesRef.current?.scrollTo({
-        behavior: 'smooth',
-        top: contentHashesRef.current.scrollHeight,
-      });
-    }, 200);
+    if (!decoded) return false;
 
-    return ContentHashProviders.reduce(
-      (acc: string[], provider: ContentHashProvider) => {
-        if (validateContentHash(provider)(debouncedContentHash) === true) {
-          acc.push(provider);
-        }
-        return acc;
-      },
-      []
-    );
-  }, [debouncedContentHash]);
+    const provider = Object.keys(contentHashToProtocols).find((key) =>
+      contentHashToProtocols[
+        key as keyof typeof contentHashToProtocols
+      ].includes(protocol)
+    ) as ContentHashProviderOrAll;
+
+    return validateContentHash(provider)(decoded) === true;
+  }, [contentHash]);
+
+  // const suggestedContentHashProtocols = useMemo(() => {
+  //   if (isDebouncing) return [];
+  //   if (!debouncedContentHash) return [];
+  //
+  //   return ContentHashProviders.reduce(
+  //     (acc: string[], provider: ContentHashProvider) => {
+  //       if (validateContentHash(provider)(debouncedContentHash) === true) {
+  //         acc.push(provider);
+  //       }
+  //       return acc;
+  //     },
+  //     []
+  //   );
+  // }, [debouncedContentHash]);
 
   return (
-    <Container>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        maxHeight: 'calc(100% - 59px)',
+        height: '100%',
+      }}
+    >
       <Flex direction="row" gap="10px" align="center">
         <WalletIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
-          <P style={{ fontSize: '10px', fontWeight: 700, color: 'black' }}>
-            Edit Profile
-          </P>
-          <P style={{ fontSize: '16px', fontWeight: 700, color: 'black' }}>
-            ContentHash
-          </P>
+          <P style={{ fontSize: '10px', fontWeight: 700 }}>Edit Profile</P>
+          <P style={{ fontSize: '16px', fontWeight: 700 }}>ContentHash</P>
         </Flex>
       </Flex>
 
@@ -108,110 +100,66 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
           gap="10px"
           className="justweb3scrollbar"
           style={{
-            overflowY: 'scroll',
-            maxHeight: 'calc(100% - 62px)',
+            overflowY: 'auto',
+            maxHeight: 'calc(100% - 59px)',
           }}
           ref={contentHashesRef}
         >
-          <Flex direction="column" gap="20px">
+          <Flex direction="column" gap="5px">
             <P style={{ fontSize: '16px', fontWeight: 700, color: 'black' }}>
               Add ContentHash
             </P>
 
-            <Input
-              placeholder={'0x...'}
-              style={{
-                height: "22px"
-              }}
-              onChange={(e) => setContentHash(e.target.value)}
-              value={contentHash}
-            />
-
             <Flex
-              direction="row"
-              gap="10px"
-              align="center"
-              style={{ flexWrap: 'wrap' }}
-            >
-              {suggestedContentHashProtocols?.map((contentHashProcotol) => {
-                return (
-                  <ContentHashCard
-                    isSelected={
-                      selectedContentHashProtocol === contentHashProcotol
-                    }
-                    onClick={() => {
-                      if (selectedContentHashProtocol === contentHashProcotol) {
-                        setSelectedContentHashProtocol('');
-                      } else {
-                        setSelectedContentHashProtocol(contentHashProcotol);
-                      }
-                    }}
-                    key={contentHashProcotol}
-                  >
-                    <Flex
-                      direction="column"
-                      gap="10px"
-                      align="center"
-                      style={{ maxWidth: '100px' }}
-                    >
-                      {getContentHashIcon(contentHashProcotol)}
-
-                      <P
-                        style={{
-                          color: 'var(--justweb3-primary-color)',
-                          fontSize: '12px',
-                          textAlign: 'center',
-                          textTransform: 'capitalize',
-                          fontWeight: 500,
-                        }}
-                      >
-                        {contentHashProcotol}
-                      </P>
-                    </Flex>
-                  </ContentHashCard>
-                );
-              })}
-            </Flex>
-
-            {!isDebouncing &&
-              debouncedContentHash &&
-              suggestedContentHashProtocols.length === 0 && (
-                <P
-                  style={{
-                    color: 'var(--justweb3-primary-color)',
-                    fontSize: '12px',
-                    fontWeight: 500,
-                    textTransform: 'capitalize',
-                    textAlign: 'center',
-                  }}
-                >
-                  No Protocol Found
-                </P>
-              )}
-            <Button
-              variant="secondary"
-              leftIcon={<AddIcon height={24} width={24} />}
-              onClick={() => {
-                append({
-                  protocolType: selectedContentHashProtocol,
-                  decoded:
-                    debouncedContentHash.split('://').length > 1
-                      ? debouncedContentHash.split('://')[1]
-                      : debouncedContentHash,
-                });
-                setSelectedContentHashProtocol('');
-                setContentHash('');
-              }}
-              disabled={!selectedContentHashProtocol || !debouncedContentHash}
+              gap={'5px'}
               style={{
-                width: 'fit-content',
+                alignItems: 'center',
               }}
             >
-              Add ContentHash
-            </Button>
+              <Input
+                placeholder={'0x...'}
+                style={{
+                  height: '22px',
+                  borderRadius: '10px',
+                  width: '100%',
+                }}
+                left={
+                  contentHash
+                    ? contentHash.split('://')[0]
+                      ? getContentHashIcon(contentHash.split('://')[0])
+                      : null
+                    : null
+                }
+                onChange={(e) => setContentHash(e.target.value)}
+                value={contentHash}
+              />
+              <AddCircleIcon
+                width={20}
+                height={20}
+                style={{
+                  cursor: contentHashValid ? 'pointer' : 'not-allowed',
+                  opacity: contentHashValid ? 1 : 0.5,
+                  flexShrink: 0,
+                }}
+                onClick={() => {
+                  if (!contentHashValid) return;
+                  append(
+                    {
+                      protocolType: contentHash.split('://')[0],
+                      decoded: contentHash.split('://')[1],
+                    },
+                    {
+                      shouldFocus: true,
+                    }
+                  );
+                  form.trigger();
+                  setContentHash('');
+                }}
+              />
+            </Flex>
           </Flex>
         </Flex>
       )}
-    </Container>
+    </div>
   );
 };

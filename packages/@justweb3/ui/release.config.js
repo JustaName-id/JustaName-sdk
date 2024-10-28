@@ -1,7 +1,7 @@
-const libName = 'react-ui';
-const artifactName = 'justaname-react-ui';
-const libPath = `packages/@justaname.id/${libName}`;
-const importPath = `@justaname.id/${libName}`;
+const libName = 'ui';
+const artifactName = 'justweb3-ui';
+const libPath = `packages/@justweb3/ui`;
+const importPath = `@justweb3/ui`;
 
 module.exports = {
   name: libName,

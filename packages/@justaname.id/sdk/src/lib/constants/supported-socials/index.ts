@@ -6,6 +6,7 @@ export type SocialsName =
   | 'X'
   | 'Github'
   | 'Email'
+  | 'Discord'
   | 'Telegram';
 
 export type SocialsIdentifier =
@@ -16,7 +17,8 @@ export type SocialsIdentifier =
   | 'com.x'
   | 'com.github'
   | 'email'
-  | 'org.telegram';
+  | 'org.telegram'
+  | 'com.discord';
 
 export interface Socials {
   name: SocialsName;
@@ -102,6 +104,16 @@ export const SUPPORTED_SOCIALS: readonly Socials[] = [
       return `https://t.me/${handle}`;
     },
   },
+  {
+    name: 'Discord',
+    identifier: 'com.discord',
+    link: (handle: string) => {
+      if (handle.includes('discord.gg/')) {
+        return handle;
+      }
+      return `https://discord.gg/${handle}`;
+    },
+  }
 ] as const;
 
 export type SupportedSocialsNames = (typeof SUPPORTED_SOCIALS)[number]['name'];

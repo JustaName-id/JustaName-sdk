@@ -1,13 +1,12 @@
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Records, useRecords, useUpdateSubname } from '@justaname.id/react';
 import {
-  Address,
   getCoinTypeDetails,
   sanitizeRecords,
   SubnameRecordsRoute,
   SupportedCoins,
-  TextRecord,
 } from '@justaname.id/sdk';
 import {
   ArrowIcon,
@@ -20,13 +19,13 @@ import {
   Flex,
   Form,
   LoadingSpinner,
+  MaximizeIcon,
+  MinimizeIcon,
   P,
   SPAN,
   WalletIcon,
   WebsiteIcon,
 } from '@justweb3/ui';
-import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
 import {
   AddressesSection,
   ContentHashSection,
@@ -36,61 +35,20 @@ import {
 } from '../../components/Profile';
 import ContentSection from '../../components/Profile/ContentSection';
 import { metadataForm } from '../../forms';
-import {
-  buildInitialValues,
-  filterUpdatedAddresses,
-  filterUpdatedContentHash,
-  filterUpdatedMetadata,
-} from '../../utils';
+import { buildInitialValues } from '../../utils';
 import { DefaultDialog } from '../DefaultDialog';
 import { UnsavedChangesDialog } from '../UnsavedChangesDialog';
-import useMatchSize from '../../hooks/useMatchSize';
-
-const FormContainer = styled.div<{ $editMode: boolean }>`
-  background-color: white;
-  transform-origin: left;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: space-between;
-
-  // @media (min-width: 850px) {
-  //   height: ${(props) => (props.$editMode ? '100%' : 'auto')};
-  // }
-
-  max-width: 0;
-  min-width: 0;
-  overflow: hidden;
-  transition: all 300ms ease-in-out;
-  padding-right: 0px;
-  ${(props) => {
-    return props.$editMode
-      ? `
-    flex: 1 1 0%;
-    min-width: 100%;
-    padding-right: 20px;
-    
-    @media (min-width: 850px) {
-      min-width: 250px;
-      max-width: 250px;
-    }
-  `
-      : '';
-  }};
-`;
+import styles from './ProfileDialog.module.css';
+import clsx from 'clsx';
+import { JustaPlugin } from '../../plugins';
 
 export interface ProfileDialogProps {
   ens: string;
   chainId?: 1 | 11155111;
   handleOnClose: () => void;
+  disableOverlay?: boolean;
+  plugins: JustaPlugin[];
 }
-
-const ContentSectionWrapper = styled.div<{ $editMode: boolean }>`
-  flex: 1 1 0%;
-  overflow-y: auto;
-  transition: all 300ms linear;
-  height: fit-content;
-`;
 
 const menuTabs = [
   {
@@ -117,50 +75,39 @@ const menuTabs = [
 
 export const ProfileDialog: FC<ProfileDialogProps> = ({
   ens,
-  chainId,
+  chainId = 1,
   handleOnClose,
+  disableOverlay,
+  plugins,
 }) => {
   const { records, isRecordsPending, refetchRecords } = useRecords({
     ens: ens,
     chainId,
   });
-  const [sourceElement, setSourceElementState] = useState<HTMLElement | null>(
-    null
-  );
-  const [targetElement, setTargetElementState] = useState<HTMLElement | null>(
-    null
-  );
-  const setSourceElement = useCallback((node: HTMLElement | null) => {
-    setSourceElementState(node);
-  }, []);
 
-  const setTargetElement = useCallback((node: HTMLElement | null) => {
-    setTargetElementState(node);
-  }, []);
-  useMatchSize(sourceElement, targetElement, {
-    matchWidth: true,
-    matchHeight: true,
-  });
-
-  const [selectedState, setSelectedState] = React.useState<string | undefined>(
+  const [minimized, setMinimized] = useState<boolean>(false);
+  const [selectedState, setSelectedState] = useState<string | undefined>(
     undefined
   );
-  const [editMode, setEditMode] = React.useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
   const [unsavedChangesDialogOpen, setUnsavedChangesDialogOpen] =
-    React.useState<boolean>(false);
-  const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
+    useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { updateSubname } = useUpdateSubname();
-  const [tempAvatar, setTempAvatar] = React.useState<string | null>(null);
-  const [tempBanner, setTempBanner] = React.useState<string | null>(null);
+  const [tempAvatar, setTempAvatar] = useState<string | null>(null);
+  const [tempBanner, setTempBanner] = useState<string | null>(null);
 
   const form = useForm<metadataForm>({
     resolver: yupResolver(metadataForm),
     mode: 'onChange',
+    criteriaMode: 'firstError',
+    reValidateMode: 'onChange',
   });
 
   useEffect(() => {
     if (records) {
       form.reset(buildInitialValues(records?.sanitizedRecords));
+      form.trigger();
     }
   }, [records]);
 
@@ -193,14 +140,15 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
         value: address.address as string,
       }));
 
+    const contentHash = newRecord.contentHash[0];
+
     const subnameRecord: SubnameRecordsRoute['response'] = {
       ens: ens || '',
       records: {
         resolverAddress: records?.records.resolverAddress || '',
         coins: coins,
         texts: texts,
-        contentHash:
-          newRecord.contentHash.length === 1 ? newRecord.contentHash[0] : null,
+        contentHash: contentHash,
       },
       claimedAt: records?.claimedAt,
       isClaimed: records?.isClaimed,
@@ -222,21 +170,22 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
         flex: 1,
       }}
     >
-      <P style={{
-        fontSize: '16px',
-        color: 'black',
-        fontWeight: 700
-      }}>Edit Profile</P>
-      <Flex
-        direction="column"
-        gap="10px"
+      <P
+        style={{
+          fontSize: '16px',
+          fontWeight: 700,
+        }}
       >
+        Edit Profile
+      </P>
+      <Flex direction="column" gap="10px">
         {menuTabs.map((item, index) => (
           <ClickableItem
             key={'menu-tab-' + index}
-            name={item.title}
+            title={item.title}
             style={{
-              borderRadius: '100px'
+              borderRadius: '100px',
+              width: '100%',
             }}
             onClick={() => setSelectedState(item.title)}
             left={item.icon}
@@ -252,6 +201,9 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       case 'General':
         return (
           <GeneralSection
+            chainId={chainId}
+            disableOverlay={disableOverlay}
+            address={records?.sanitizedRecords?.ethAddress?.value || ''}
             form={form}
             fullSubname={ens}
             tempAvatar={tempAvatar}
@@ -275,105 +227,91 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
 
   const handleSaveMetadata = async (data: metadataForm) => {
     setIsSubmitting(true);
-    const avatar = data.otherTexts.find((text) => text.key === 'avatar')?.value;
-    const banner = data.otherTexts.find((text) => text.key === 'banner')?.value;
 
-    const addresses = data.addresses.reduce((acc: Address[], address) => {
-      if (address.address !== '' && address.coin !== '') {
-        acc.push({
-          address: address.address as string,
-          coinType: parseInt(address.coin) as number,
-        });
-      }
-      return acc;
-    }, []);
-
-    const texts = [
-      ...data.otherTexts.filter(
-        (text) => text.key !== 'avatar' && text.key !== 'banner'
-      ),
-      ...data.generals,
-      ...data.socials.map((social) => ({
-        key: social.handle,
-        value: social.value,
-      })),
-    ].reduce((acc: TextRecord[], text) => {
-      if (text.value !== '' && text.key !== '') {
-        acc.push({
-          key: text.key as string,
-          value: text.value as string,
-        });
-      }
-      return acc;
-    }, []);
-
-    if (avatar) {
-      texts.push({
-        key: 'avatar',
-        value: avatar,
-      });
-    }
-
-    if (banner) {
-      texts.push({
-        key: 'banner',
-        value: banner,
-      });
-    }
-
-    updateSubname({
-      ens: ens,
-      addresses: Object.fromEntries(
-        filterUpdatedAddresses(records?.records.coins || [], addresses).map(
-          (address) => [address.coinType.toString(), address.address]
+    const addresses = {
+      ...data.addresses.reduce((acc, address) => {
+        acc[parseInt(address.coin)] = address.address;
+        return acc;
+      }, {} as Record<number, string>),
+      ...records?.records?.coins
+        .filter(
+          (coin) =>
+            !data.addresses.find(
+              (address) => address.coin === coin.id.toString()
+            )
         )
-      ),
-      text: Object.fromEntries(
-        filterUpdatedMetadata(records?.records.texts || [], texts).map(
-          (text) => [text.key, text.value]
-        )
-      ),
-      contentHash: filterUpdatedContentHash(
-        records?.records.contentHash,
-        data.contentHash.length > 0
-          ? [
-            {
-              ...data.contentHash[0],
-              decoded: data.contentHash[0].decoded ?? '',
-            },
-          ]
-          : []
-      ),
-    })
-      .then(() => {
-        refetchRecords().then((data) => {
-          setEditMode(false);
-          setIsSubmitting(false);
-          setTempAvatar(null);
-          setTempBanner(null);
-          if (data?.data?.sanitizedRecords)
-            form.reset(buildInitialValues(data.data.sanitizedRecords));
-          setSelectedState(undefined);
-        });
-      })
-      .catch(() => {
-        console.log('error');
-        setIsSubmitting(false);
-      });
-  };
-
-  useEffect(() => {
-    return () => {
-      setEditMode(false);
-      setSelectedState(undefined);
-      form.reset(buildInitialValues(records?.sanitizedRecords));
-      handleOnClose();
+        .reduce((acc, coin) => {
+          acc[coin.id] = '';
+          return acc;
+        }, {} as Record<number, string>),
     };
-  }, []);
+
+    const texts = {
+      ...data.otherTexts.reduce((acc, text) => {
+        acc[text.key] = text.value;
+        return acc;
+      }, {} as Record<string, string>),
+      ...data.generals.reduce((acc, general) => {
+        if (general.key === undefined) {
+          return acc;
+        }
+        acc[general.key] = general.value || '';
+        return acc;
+      }, {} as Record<string, string>),
+      ...data.socials.reduce((acc, social) => {
+        if (social.handle === undefined) {
+          return acc;
+        }
+        acc[social.handle] = social.value || '';
+        return acc;
+      }, {} as Record<string, string>),
+      ...records?.records?.texts
+        .filter(
+          (text) =>
+            ![
+              ...data.otherTexts,
+              ...data.generals,
+              ...data.socials.map((social) => ({
+                key: social.handle,
+                value: social.value,
+              })),
+            ].find((otherText) => otherText.key === text.key)
+        )
+        .reduce((acc, text) => {
+          acc[text.key] = '';
+          return acc;
+        }, {} as Record<string, string>),
+    };
+
+    try {
+      await updateSubname({
+        ens: ens,
+        addresses,
+        text: texts,
+        contentHash: data.contentHash[0]
+          ? data.contentHash[0].protocolType +
+            '://' +
+            data.contentHash[0].decoded
+          : '',
+      });
+      await refetchRecords();
+      setIsSubmitting(false);
+      setTempAvatar(null);
+      setTempBanner(null);
+      if (records?.sanitizedRecords) {
+        form.reset(buildInitialValues(records.sanitizedRecords));
+      }
+      setEditMode(false);
+    } catch (error) {
+      console.error('Error updating subname:', error);
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <DefaultDialog
       open={true}
+      disableOverlay={disableOverlay}
       handleClose={() => {
         handleOnClose();
         setEditMode(false);
@@ -382,134 +320,153 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       }}
       contentStyle={{
         width: '100%',
+        height: '100%',
       }}
+      fullScreen={minimized}
       header={
         ens && (
-          <Badge>
-            <SPAN
-              style={{
-                fontSize: '10px',
-                lineHeight: '10px',
-                fontWeight: 900,
-                color: 'var(--justweb3-primary-color)',
-              }}
-            >
-              {ens}
-            </SPAN>
-          </Badge>
+          <Flex gap={'5px'} className={styles.header}>
+            {minimized ? (
+              <MinimizeIcon
+                height={25}
+                width={25}
+                className={styles.iconButton}
+                onClick={() => {
+                  setMinimized(false);
+                }}
+              />
+            ) : (
+              <MaximizeIcon
+                height={25}
+                width={25}
+                className={styles.iconButton}
+                onClick={() => {
+                  setMinimized(true);
+                }}
+              />
+            )}
+            <Badge>
+              <SPAN className={styles.badgeText}>{ens}</SPAN>
+            </Badge>
+          </Flex>
         )
       }
     >
       {isRecordsPending || !records || !editedRecords ? (
-        <div
-          style={{
-            position: 'relative',
-            padding: '24px',
-          }}
-        >
+        <div className={styles.loadingContainer}>
           <LoadingSpinner color={'var(--justweb3-primary-color)'} />
         </div>
       ) : (
-        <Flex>
-          <FormContainer $editMode={editMode} ref={setTargetElement}>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(handleSaveMetadata)}
-                style={{
-                  display: 'flex',
-                  gap: '10px',
-                  maxHeight: '100%',
-                  height: '100%',
-                  width: '100%',
-                  flexDirection: 'column',
-                  justifyContent: 'between',
-                }}
-              >
-                {!selectedState ? renderMenuTabs() : renderSelectedState()}
-                <UnsavedChangesDialog
-                  open={unsavedChangesDialogOpen}
-                  onContinue={() => {
-                    setUnsavedChangesDialogOpen(false);
-                  }}
-                  onDiscard={(e) => {
-                    form.reset(buildInitialValues(records?.sanitizedRecords));
-                    setTempAvatar(null);
-                    setTempBanner(null);
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (selectedState) {
-                      setSelectedState(undefined);
-                    } else {
-                      setEditMode(false);
-                    }
-                    setUnsavedChangesDialogOpen(false);
-                  }}
-                />
-                <Flex
-                  direction="row"
-                  justify="flex-end"
-                  align="flex-end"
-                  gap="10px"
-                  style={{
-                    marginTop: 'auto',
-                  }}
+        <Flex
+          style={{
+            flex: 1,
+            maxHeight: 'calc(100% - 20px - 25px)',
+          }}
+        >
+          <div
+            className={clsx(
+              styles.formContainer,
+              editMode && styles.formContainerEditMode
+            )}
+            style={{
+              position: 'relative',
+            }}
+          >
+            <div className={styles.formInnerContainer}>
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(handleSaveMetadata)}
+                  className={styles.form}
                 >
-                  <Button
-                    variant={'secondary'}
-                    onClick={(e) => {
-                      if (form.formState.isDirty || tempAvatar || tempBanner) {
-                        setUnsavedChangesDialogOpen(true);
-                        e.preventDefault();
-                        e.stopPropagation();
-                      } else {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if (selectedState) {
-                          setSelectedState(undefined);
-                        } else {
-                          setEditMode(false);
-                        }
-                      }
+                  {!selectedState ? renderMenuTabs() : renderSelectedState()}
+                  <UnsavedChangesDialog
+                    open={unsavedChangesDialogOpen}
+                    onContinue={() => {
+                      setUnsavedChangesDialogOpen(false);
                     }}
-                    style={{
-                      display: selectedState ? 'block' : 'hidden',
-                      width: '100%',
-                      padding: '10px 12px',
-                      borderRadius: '15px',
-                      fontSize: '14px',
-                      height: '40px'
+                    onDiscard={(e) => {
+                      form.reset(buildInitialValues(records?.sanitizedRecords));
+                      form.trigger();
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setUnsavedChangesDialogOpen(false);
+                      setEditMode(false);
                     }}
-                    disabled={isSubmitting}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    variant={'primary'}
-                    style={{
-                      display: selectedState ? 'block' : 'hidden',
-                      width: '100%',
-                      padding: '10px 12px',
-                      borderRadius: '15px',
-                      fontSize: '14px',
-                      height: '40px'
-                    }}
-                    type={'submit'}
-                    disabled={isSubmitting}
-                  >
-                    Save
-                  </Button>
-                </Flex>
-              </form>
-            </Form>
-          </FormContainer>
-          <ContentSectionWrapper
-            ref={setSourceElement}
-            $editMode={editMode}
+                  />
+                  <Flex direction={'column'} className={styles.buttonContainer}>
+                    <div className={styles.errorMessage}>
+                      <P>
+                        {Object.keys(form.formState.errors).length > 0
+                          ? 'Invalid fields in ' +
+                            Object.keys(form.formState.errors).join(', ')
+                          : ''}
+                      </P>
+                    </div>
+                    <Flex
+                      direction="row"
+                      justify="flex-end"
+                      align="flex-end"
+                      gap="10px"
+                    >
+                      <Button
+                        variant={'secondary'}
+                        onClick={(e: React.MouseEvent) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+
+                          if (selectedState) {
+                            setSelectedState(undefined);
+                          }
+
+                          if (!selectedState && form.formState.isDirty) {
+                            setUnsavedChangesDialogOpen(true);
+                          }
+
+                          if (!selectedState && !form.formState.isDirty) {
+                            setEditMode(false);
+                          }
+                        }}
+                        size={'md'}
+                        style={{
+                          width: '100%',
+                        }}
+                        disabled={isSubmitting}
+                      >
+                        {!selectedState && form.formState.isDirty
+                          ? 'Cancel'
+                          : 'Back'}
+                      </Button>
+                      {!selectedState && (
+                        <Button
+                          variant={'primary'}
+                          size={'md'}
+                          style={{
+                            width: '100%',
+                          }}
+                          type={'submit'}
+                          loading={isSubmitting}
+                          disabled={
+                            !form.formState.isDirty ||
+                            (form.formState.isDirty && !form.formState.isValid)
+                          }
+                        >
+                          Save
+                        </Button>
+                      )}
+                    </Flex>
+                  </Flex>
+                </form>
+              </Form>
+            </div>
+          </div>
+          <div
+            className={styles.contentSectionWrapper}
             id={'contentSectionScrollId'}
           >
             <ContentSection
               chainId={chainId}
               fullSubname={ens}
+              plugins={plugins}
               sanitized={
                 editMode
                   ? editedRecords?.sanitizedRecords
@@ -519,7 +476,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
               onEdit={() => setEditMode(!editMode)}
               editMode={editMode}
             />
-          </ContentSectionWrapper>
+          </div>
         </Flex>
       )}
     </DefaultDialog>

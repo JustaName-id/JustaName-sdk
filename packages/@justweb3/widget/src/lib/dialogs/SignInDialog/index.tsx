@@ -1,3 +1,4 @@
+import React, { FC, Fragment, useMemo, useState } from 'react';
 import {
   Badge,
   Button,
@@ -21,11 +22,35 @@ import {
   useJustaName,
   useMountedAccount,
 } from '@justaname.id/react';
-import { FC, Fragment, useMemo, useState } from 'react';
-import styled from 'styled-components';
 import { useDebounce } from '../../hooks/useDebounce';
 import { DefaultDialog } from '../DefaultDialog';
 import { SelectSubnameItem } from '../../components/SelectSubnameItem';
+import styles from './SignInDialog.module.css';
+import clsx from 'clsx';
+
+interface TransitionElementProps extends React.HTMLAttributes<HTMLDivElement> {
+  maxheight: string;
+  visible: boolean;
+}
+
+const TransitionElement: FC<TransitionElementProps> = ({
+  maxheight,
+  visible,
+  children,
+  ...props
+}) => {
+  const classNames = clsx(styles.transitionElement, {
+    [styles.visible]: visible,
+  });
+
+  const inlineStyle = visible ? { maxHeight: maxheight } : undefined;
+
+  return (
+    <div className={classNames} style={inlineStyle} {...props}>
+      {children}
+    </div>
+  );
+};
 
 export interface SignInDialogProps {
   open: boolean;
@@ -36,19 +61,6 @@ export interface SignInDialogProps {
   disableOverlay?: boolean;
   dev?: boolean;
 }
-
-const TransitionElement = styled.div<{ maxheight: string }>`
-  max-height: 0;
-  overflow: hidden;
-  display: none;
-  padding: 0;
-  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-
-  &.visible {
-    display: block;
-    max-height: ${(props) => props.maxheight};
-  }
-`;
 
 export const SignInDialog: FC<SignInDialogProps> = ({
   open,
@@ -106,8 +118,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     backendUrl:
       claimableTestnetEns === testnetFreeEns
         ? dev
-          ? // ? 'http://localhost:3333'
-            'https://claim-staging.justaname.id'
+          ? 'https://claim-staging.justaname.id'
           : 'https://claim.justaname.id'
         : undefined,
     chainId: 11155111,
@@ -121,8 +132,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     backendUrl:
       claimableMainnetEns === mainnetFreeEns
         ? dev
-          ? // ? 'http://localhost:3333'
-            'https://claim-staging.justaname.id'
+          ? 'https://claim-staging.justaname.id'
           : 'https://claim.justaname.id'
         : undefined,
     chainId: 1,
@@ -206,68 +216,47 @@ export const SignInDialog: FC<SignInDialogProps> = ({
       open={open && !isAccountSubnamesPending && isConnected}
       handleClose={() => handleOpenDialog(false)}
       header={
-        <div
+        <Flex
+          align="center"
+          justify="center"
+          gap="20px"
           style={{
+            flex: 1,
             paddingLeft: '24px',
-            justifyContent: 'center',
-            display: 'flex',
-            alignItems: 'center',
-            flexGrow: 1,
           }}
         >
           {logo ? (
-            <img
-              src={logo}
-              alt="logo"
-              style={{ height: '62px', width: 'auto' }}
-            />
+            <img src={logo} alt="logo" className={styles.logoImg} />
           ) : (
             <JustaNameLogoIcon height={62} />
           )}
-        </div>
+        </Flex>
       }
     >
-      <Badge>
-        <SPAN
-          style={{
-            fontSize: '10px',
-            lineHeight: '10px',
-            fontWeight: 900,
-          }}
-        >
-          {address && formatText(address, 4)}
-        </SPAN>
-      </Badge>
-      {isAccountSubnamesPending || isAccountEnsNamesPending ? (
-        <div
-          style={{
-            position: 'relative',
-            padding: '24px',
-          }}
-        >
-          <LoadingSpinner color={'var(--justweb3-primary-color)'} />
-        </div>
-      ) : (
-        <>
-          <TransitionElement
-            className={shouldBeAbleToSelect ? 'visible' : ''}
-            maxheight={'fit-content'}
-          >
-            <Flex justify="space-between" direction="column" gap="10px">
-              <H2>Select an ENS</H2>
-              <Flex
-                direction={'column'}
-                gap={'15px'}
-                style={{
-                  maxHeight: '50vh',
-                  overflowY: 'scroll',
-                  overflowX: 'hidden',
-                  scrollbarWidth: 'none',
-                  msOverflowStyle: 'none',
-                }}
-              >
-                {subnames.map((subname, index) => {
-                  return (
+      <Flex direction="column" gap="10px">
+        <Badge>
+          <SPAN className={styles.badgeText}>
+            {address && formatText(address, 4)}
+          </SPAN>
+        </Badge>
+        {isAccountSubnamesPending || isAccountEnsNamesPending ? (
+          <div className={styles.loadingContainer}>
+            <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+          </div>
+        ) : (
+          <Flex direction="column" gap="20px">
+            <TransitionElement
+              visible={shouldBeAbleToSelect}
+              maxheight="fit-content"
+            >
+              <Flex direction="column" gap="20px" justify={'space-between'}>
+                <H2>Select an ENS</H2>
+                <Flex
+                  direction="column"
+                  gap="15px"
+                  className={clsx(styles.contentWrapper)}
+                >
+                  {subnames.map((subname, index) => (
                     <Fragment key={'subname-' + index}>
                       <SelectSubnameItem
                         selectedSubname={subnameSigningIn}
@@ -282,85 +271,77 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                         }}
                       />
                     </Fragment>
-                  );
-                })}
+                  ))}
+                </Flex>
               </Flex>
-            </Flex>
-          </TransitionElement>
-          <TransitionElement
-            className={
-              shouldBeAbleToSelect && shouldBeAbleToClaim ? 'visible' : ''
-            }
-            maxheight={'100px'}
-          >
-            <OrLine />
-          </TransitionElement>
-          <TransitionElement
-            className={shouldBeAbleToClaim ? 'visible' : ''}
-            maxheight={'100px'}
-          >
-            <Flex justify="space-between" direction="column" gap="10px">
-              <H2>Claim a Subname</H2>
-              <Flex align={'center'}>
-                <Input
-                  id="name"
-                  placeholder={`Enter your username...`}
-                  right={'.' + claimableEns}
-                  onChange={(e) => setUsername(e.target.value)}
-                  value={username}
-                  left={
-                    <Flex justify={'center'} align={'center'}>
-                      <ProfileIcon width={'24px'} />
-                    </Flex>
-                  }
-                  fullWidth
-                  error={
-                    isSubnameAvailable !== undefined && !isSubnameAvailable
-                  }
-                  style={{
-                    borderRadius: '16px 0 0 16px',
-                    textTransform: 'lowercase',
-                  }}
-                />
-                <Button
-                  size={'lg'}
-                  loading={
-                    (username.length !== 0 && isSubnameAvailablePending) ||
-                    isDebouncing ||
-                    isAddSubnamePending
-                  }
-                  disabled={
-                    username.length === 0 ||
-                    isDebouncing ||
-                    isSubnameAvailable === undefined ||
-                    !isSubnameAvailable.isAvailable
-                  }
-                  style={{
-                    borderRadius: '0 16px 16px 0',
-                    fontWeight: '900',
-                    padding: '0px 12px',
-                  }}
-                  onClick={() => {
-                    addSubname({
-                      username: username,
-                      ensDomain: claimableEns,
-                    }).then(() => {
-                      setSubnameSigningIn(username + '.' + claimableEns);
-                      signIn({ ens: username + '.' + claimableEns })
-                        .then(() => handleOpenDialog(false))
-                        .finally(() => {
-                          setSubnameSigningIn('');
-                        });
-                    });
-                  }}
-                >
-                  Claim
-                </Button>
+            </TransitionElement>
+            <TransitionElement
+              visible={shouldBeAbleToSelect && shouldBeAbleToClaim}
+              maxheight="100px"
+            >
+              <OrLine />
+            </TransitionElement>
+            <TransitionElement visible={shouldBeAbleToClaim} maxheight="102px">
+              <Flex direction="column" gap="20px" justify={'space-between'}>
+                <H2>Claim a Subname</H2>
+                <Flex align="center">
+                  <Input
+                    id="name"
+                    placeholder={`Enter your username...`}
+                    right={'.' + claimableEns}
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                    left={
+                      <Flex justify="center" align="center">
+                        <ProfileIcon width={'24px'} />
+                      </Flex>
+                    }
+                    fullWidth
+                    error={
+                      isSubnameAvailable !== undefined && !isSubnameAvailable
+                    }
+                    className={styles.inputFullWidth}
+                    style={{
+                      borderRadius: '100px 0 0 100px',
+                      textTransform: 'lowercase',
+                    }}
+                  />
+                  <Button
+                    size={'lg'}
+                    loading={
+                      (username.length !== 0 && isSubnameAvailablePending) ||
+                      isDebouncing ||
+                      isAddSubnamePending
+                    }
+                    disabled={
+                      username.length === 0 ||
+                      isDebouncing ||
+                      isSubnameAvailable === undefined ||
+                      !isSubnameAvailable.isAvailable
+                    }
+                    className={styles.buttonStyle}
+                    onClick={() => {
+                      addSubname({
+                        username: username,
+                        ensDomain: claimableEns,
+                      }).then(() => {
+                        setSubnameSigningIn(username + '.' + claimableEns);
+                        signIn({ ens: username + '.' + claimableEns })
+                          .then(() => handleOpenDialog(false))
+                          .finally(() => {
+                            setSubnameSigningIn('');
+                          });
+                      });
+                    }}
+                  >
+                    Claim
+                  </Button>
+                </Flex>
               </Flex>
-            </Flex>
-          </TransitionElement>
-        </>
-      )}
+            </TransitionElement>
+          </Flex>
+        )}
+      </Flex>
     </DefaultDialog>
   );
 };

@@ -1,3 +1,4 @@
+import DiscordIcon from './Discord';
 import EmailIcon from './Email';
 import FacebookIcon from './Facebook';
 import FarcasterIcon from './Farcaster';
@@ -14,6 +15,7 @@ import WarpcastIcon from './Warpcast';
 import WebsiteIcon from './Website';
 import XIcon from './X';
 const socials = {
+  discord: DiscordIcon,
   email: EmailIcon,
   facebook: FacebookIcon,
   farcaster: FarcasterIcon,
@@ -33,6 +35,7 @@ const socials = {
 
 export {
   socials,
+  DiscordIcon,
   EmailIcon,
   FacebookIcon,
   FarcasterIcon,

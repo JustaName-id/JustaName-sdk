@@ -45,6 +45,8 @@
           "react",
           "react-dom",
           "react/jsx-runtime",
+          "@justaname.id/siwens",
+          "@justaname.id/sdk",
           "@justaname.id/react",
           "@justweb3/ui"
         ],
@@ -72,13 +74,8 @@
       "dependsOn": [
         "lint",
         {
-          "projects": [
-            "@justaname.id/siwens",
-            "@justaname.id/sdk",
-            "@justaname.id/react",
-            "@justweb3/ui"
-          ],
-          "target": "build"
+          "dependencies": true,
+          "target": "buildProject"
         }
       ]
     },

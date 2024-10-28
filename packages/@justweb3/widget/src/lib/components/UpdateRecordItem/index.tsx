@@ -2,7 +2,14 @@ import { FC, useMemo } from 'react';
 import { getChainIcon } from '../../icons/chain-icons';
 import { getTextRecordIcon } from '../../icons/records-icons';
 import { getContentHashIcon } from '../../icons/contentHash-icons';
-import { Button, ClickableItem, Divider, Flex, SPAN, TrashIcon } from '@justweb3/ui';
+import {
+  Button,
+  ClickableItem,
+  Divider,
+  Flex,
+  SPAN,
+  TrashIcon,
+} from '@justweb3/ui';
 import { getCoinTypeDetails, SupportedCoins } from '@justaname.id/sdk';
 
 export interface UpdateRecordItemProps {
@@ -15,14 +22,13 @@ export interface UpdateRecordItemProps {
 }
 
 export const UpdateRecordItem: FC<UpdateRecordItemProps> = ({
-                                                              newKey,
-                                                              previousKey,
-                                                              previousValue,
-                                                              newValue,
-                                                              type,
-    onDoNotApply
-                                                            }) => {
-
+  newKey,
+  previousKey,
+  previousValue,
+  newValue,
+  type,
+  onDoNotApply,
+}) => {
   const action = useMemo<'update' | 'add' | 'remove'>(() => {
     if (!newValue) {
       return 'remove';
@@ -45,7 +51,9 @@ export const UpdateRecordItem: FC<UpdateRecordItemProps> = ({
 
   const previousKeySanitized = useMemo(() => {
     if (type === 'address') {
-      return getCoinTypeDetails(previousKey as SupportedCoins)?.symbol.toUpperCase();
+      return getCoinTypeDetails(
+        previousKey as SupportedCoins
+      )?.symbol.toUpperCase();
     }
 
     return previousKey;
@@ -64,7 +72,9 @@ export const UpdateRecordItem: FC<UpdateRecordItemProps> = ({
   }, [newKeySanitized, postFix]);
 
   const previousFullKey = useMemo(() => {
-    const _previousKeySanitized = previousKeySanitized ? previousKeySanitized + postFix : 'No Previous Value';
+    const _previousKeySanitized = previousKeySanitized
+      ? previousKeySanitized + postFix
+      : 'No Previous Value';
     return _previousKeySanitized;
   }, [previousKeySanitized, postFix]);
 
@@ -101,26 +111,25 @@ export const UpdateRecordItem: FC<UpdateRecordItemProps> = ({
   }, [newKeySanitized, type]);
 
   return (
-    <Flex
-      justify="space-between"
-      direction="column"
-      gap="10px"
-    >
-
+    <Flex justify="space-between" direction="column" gap="10px">
       <Button
         variant={'destructive-outline'}
         rightIcon={<TrashIcon width={10} />}
+        size={'sm'}
         style={{
-          alignSelf: 'flex-end'
+          alignSelf: 'flex-end',
         }}
         onClick={onDoNotApply}
       >
         Do Not Apply
       </Button>
       <ClickableItem
-        name={previousFullKey}
-        status={previousValue}
+        title={previousFullKey}
+        subtitle={previousValue}
         clickable={false}
+        style={{
+          width: '100%',
+        }}
         left={previousIcon}
       />
 
@@ -128,7 +137,7 @@ export const UpdateRecordItem: FC<UpdateRecordItemProps> = ({
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '20px'
+          gap: '20px',
         }}
       >
         <Divider />
@@ -137,38 +146,42 @@ export const UpdateRecordItem: FC<UpdateRecordItemProps> = ({
             fontSize: '14px',
             fontStyle: 'normal',
             fontWeight: 900,
-            textWrap:"nowrap"
+            textWrap: 'nowrap',
           }}
         >
-          {
-            action === 'update' ? 'Field will be Updated To' :
-              action === 'add' ? 'Field will be Added' :
-                'Field will be Deleted'
-          }
+          {action === 'update'
+            ? 'Field will be Updated To'
+            : action === 'add'
+            ? 'Field will be Added'
+            : 'Field will be Deleted'}
         </SPAN>
         <Divider />
       </div>
 
       <ClickableItem
-        name={newFullKey}
-        status={action === 'remove' ? 'Will be Deleted' : newValue}
+        title={newFullKey}
+        subtitle={action === 'remove' ? 'Will be Deleted' : newValue}
         clickable={false}
-        left={<Flex
-          justify="center"
-          align="center"
-          style={{
-            width: '24px',
-            height: '24px',
-            minWidth: '24px',
-          }}
-        >
-          {newIcon}
-          </Flex>}
+        left={
+          <Flex
+            justify="center"
+            align="center"
+            style={{
+              width: '24px',
+              height: '24px',
+              minWidth: '24px',
+            }}
+          >
+            {newIcon}
+          </Flex>
+        }
         right={action === 'remove' ? <TrashIcon width={24} /> : undefined}
         style={{
-          backgroundColor: action === 'remove' ? 'rgba(255, 0, 0, 0.10)' : undefined
+          backgroundColor:
+            action === 'remove' ? 'rgba(255, 0, 0, 0.10)' : undefined,
+          width: '100%',
         }}
       />
     </Flex>
   );
-}
+};

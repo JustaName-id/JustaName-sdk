@@ -1,5 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { JustWeb3Provider, JustWeb3ProviderConfig, useJustWeb3 } from '../lib';
+import {
+  JustEnsCard,
+  JustWeb3Provider,
+  JustWeb3ProviderConfig,
+  useJustWeb3,
+} from '../lib';
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   ConnectButton,
@@ -11,6 +16,7 @@ import { mainnet, sepolia } from 'wagmi/chains';
 import { Meta, StoryObj } from '@storybook/react';
 import { JustWeb3Button } from '../lib/components';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Button } from '@justweb3/ui';
 
 const queryClient = new QueryClient();
 
@@ -31,68 +37,34 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
       providerUrl: import.meta.env.STORYBOOK_APP_SEPOLIA_PROVIDER_URL,
     },
   ],
-  openOnWalletConnect: true,
+  mApps: ['justverified.eth', 'justweb3.eth'],
+  openOnWalletConnect: false,
   allowedEns: 'all',
   dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
 };
 
-export const Vitalik = () => {
-  const { openEnsProfile } = useJustWeb3();
+const UpdateButton = () => {
+  const { updateRecords } = useJustWeb3();
 
   return (
-    <div
-      style={{
-        cursor: 'pointer',
-        padding: '10px',
-        backgroundColor: 'lightgray',
-        border: '1px solid black',
-        borderRadius: '5px',
-        margin: '10px',
+    <Button
+      onClick={() => {
+        updateRecords({
+          ens: 'hadikhai.jaw.eth',
+          chainId: 11155111,
+          text: [
+            {
+              key: 'com.twitter',
+              value: 'justhadi_eth',
+            },
+          ],
+          contentHash:
+            'ipns://k51qzi5uqu5dgccx524mfjv7znyfsa6g013o6v4yvis9dxnrjbwojc62pt0430',
+        });
       }}
-      onClick={() => openEnsProfile('vitalik.eth', 1)}
     >
-      Vitalik.eth
-    </div>
-  );
-};
-
-export const Nick = () => {
-  const { openEnsProfile } = useJustWeb3();
-
-  return (
-    <div
-      style={{
-        cursor: 'pointer',
-        padding: '10px',
-        backgroundColor: 'lightgray',
-        border: '1px solid black',
-        borderRadius: '5px',
-        margin: '10px',
-      }}
-      onClick={() => openEnsProfile('nick.eth', 1)}
-    >
-      Nick.eth
-    </div>
-  );
-};
-
-export const Drea = () => {
-  const { openEnsProfile } = useJustWeb3();
-
-  return (
-    <div
-      style={{
-        cursor: 'pointer',
-        padding: '10px',
-        backgroundColor: 'lightgray',
-        border: '1px solid black',
-        borderRadius: '5px',
-        margin: '10px',
-      }}
-      onClick={() => openEnsProfile('dr3a.eth', 1)}
-    >
-      Dr3a.eth
-    </div>
+      Update
+    </Button>
   );
 };
 
@@ -108,14 +80,45 @@ export const Example = () => {
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
           <JustWeb3Provider config={JustWeb3Config}>
-            <div style={{ display: 'flex', justifyContent: 'end' }}>
-              <JustWeb3Button>
-                <ConnectButton />
-              </JustWeb3Button>
+            <h1>JustWeb3 Sign In</h1>
+
+            <div
+              style={{
+                gap: '20px',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'end' }}>
+                <JustWeb3Button>
+                  <ConnectButton />
+                </JustWeb3Button>
+              </div>
+
+              <UpdateButton />
+
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <JustEnsCard ens={'mely.eth'} />
+                <JustEnsCard ens={'nick.eth'} />
+                <JustEnsCard ens={'brantly.eth'} />
+                <JustEnsCard ens={'vitalik.eth'} />
+                <JustEnsCard ens={'dr3a.eth'} />
+                <JustEnsCard ens={'josh.box'} />
+                <JustEnsCard ens={'hadikhai.jaw.eth'} chainId={11155111} />
+              </div>
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <JustEnsCard ens={'mely.eth'} expanded />
+                <JustEnsCard ens={'nick.eth'} expanded />
+                <JustEnsCard ens={'brantly.eth'} expanded />
+                <JustEnsCard ens={'vitalik.eth'} expanded />
+                <JustEnsCard ens={'dr3a.eth'} expanded />
+                <JustEnsCard
+                  ens={'hadikhai.jaw.eth'}
+                  chainId={11155111}
+                  expanded
+                />
+              </div>
             </div>
-            <Vitalik />
-            <Nick />
-            <Drea />
           </JustWeb3Provider>
         </RainbowKitProvider>
         <ReactQueryDevtools initialIsOpen={false} />

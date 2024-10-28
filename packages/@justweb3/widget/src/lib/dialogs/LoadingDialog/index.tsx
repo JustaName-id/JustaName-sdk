@@ -7,22 +7,29 @@ export interface LoadingDialogProps {
   disableOverlay?: boolean;
 }
 
-export const LoadingDialog: FC<LoadingDialogProps> = ({ open, disableOverlay }) => {
+export const LoadingDialog: FC<LoadingDialogProps> = ({
+  open,
+  disableOverlay,
+}) => {
   return (
-    <Dialog open={open} modal={!disableOverlay} >
-      <div style={{
-        display: 'hidden'
-      }}>
-        <DialogTitle>
-
-        </DialogTitle>
+    <Dialog open={open} modal={!disableOverlay}>
+      <div
+        style={{
+          display: 'hidden',
+        }}
+      >
+        <DialogTitle></DialogTitle>
       </div>
-      <DialogContent  onInteractOutside={(e) => disableOverlay &&  e.preventDefault()} aria-describedby='loading-dialog' style={{
-        padding: 0,
-        transition: "all 0.4 ease-in-out"
-      }}>
+      <DialogContent
+        onInteractOutside={(e) => disableOverlay && e.preventDefault()}
+        aria-describedby="loading-dialog"
+        style={{
+          padding: 0,
+          transition: 'all 0.4 ease-in-out',
+        }}
+      >
         <Loading />
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

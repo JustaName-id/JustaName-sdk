@@ -51,11 +51,10 @@ export const VerifiedSection = () => {
         ...config,
         plugins: [
           ...(config?.plugins || []).filter(
-            (plugin) => plugin.name !== 'justverified'
+            (plugin) => plugin.name !== 'JustVerifiedPlugin'
           ),
           JustVerifiedPlugin(
             justVerified,
-            // 'http://localhost:3009/verifications/v1'
             config.dev
               ? 'https://api-staging.justaname.id/verifications/v1'
               : 'https://api.justaname.id/verifications/v1'
@@ -66,7 +65,7 @@ export const VerifiedSection = () => {
       handleJustWeb3Config({
         ...config,
         plugins: (config?.plugins || []).filter(
-          (plugin) => plugin.name !== 'justverified'
+          (plugin) => plugin.name !== 'JustVerifiedPlugin'
         ),
       });
     }
@@ -84,7 +83,9 @@ export const VerifiedSection = () => {
         </p>
         <Switch
           checked={
-            !!config?.plugins?.find((plugin) => plugin.name === 'justverified')
+            !!config?.plugins?.find(
+              (plugin) => plugin.name === 'JustVerifiedPlugin'
+            )
           }
           onCheckedChange={(checked) => {
             handleJustVerifiedConfig(checked);
@@ -96,7 +97,9 @@ export const VerifiedSection = () => {
           <SocialCard
             {...social}
             disabled={
-              !config?.plugins?.find((plugin) => plugin.name === 'justverified')
+              !config?.plugins?.find(
+                (plugin) => plugin.name === 'JustVerifiedPlugin'
+              )
             }
             key={social.credential}
             value={social.credential}

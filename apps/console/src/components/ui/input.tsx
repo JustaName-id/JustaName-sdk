@@ -4,7 +4,7 @@ import { InputHTMLAttributes, ReactNode, forwardRef } from 'react';
 import { cn } from '../../lib/utils';
 
 const inputStyles = cva(
-    "relative font-poppins font-medium rounded-[6px] flex w-full  bg-white px-4 py-2.5 text-base  flex items-center rounded-[6px] border border-black justify-center w-full h-full ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[#3280F4] focus-visible:outline-none focus-visible:border-primary  disabled:cursor-not-allowed disabled:opacity-50  focus-visible:ring-offset-0 dark:placeholder:text-primary ",
+    "relative font-poppins font-medium rounded-[6px] flex w-full  bg-white px-4 py-2.5 text-base  flex items-center rounded-[6px] border border-black justify-center w-full h-full ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-primary focus-visible:outline-none focus-visible:border-primary  disabled:cursor-not-allowed disabled:opacity-50  focus-visible:ring-offset-0 dark:placeholder:text-primary ",
     {
         variants: {
             hasLeftIcon: {

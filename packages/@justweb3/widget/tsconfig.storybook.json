@@ -31,6 +31,7 @@
     "src/lib/plugins/eventEmitter.ts",
     "src/lib/plugins/index.ts",
     "src/lib/**/index.ts",
+    "src/lib/forms/**.ts",
     "src/lib/**/index.tsx",
     "src/**/*.stories.ts",
     "src/**/*.stories.js",

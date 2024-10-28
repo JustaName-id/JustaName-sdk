@@ -1,92 +1,28 @@
-import { useEnsAuth, useEnsAvatar } from '@justaname.id/react';
+import React, { Fragment, useContext, useMemo } from 'react';
+import {
+  useAccountEnsNames,
+  useAccountSubnames,
+  useEnsAvatar,
+} from '@justaname.id/react';
 import { SanitizedRecords, SubnameRecordsRoute } from '@justaname.id/sdk';
 import {
   A,
   Avatar,
-  Badge,
   Button,
   ExpandableText,
   Flex,
-  LinkCard,
   LocationIcon,
   P,
   PersonEditIcon,
-  SPAN,
 } from '@justweb3/ui';
-import React, { useMemo } from 'react';
 import { getChainIcon } from '../../../icons/chain-icons';
 import { getContentHashIcon } from '../../../icons/contentHash-icons';
 import { getTextRecordIcon } from '../../../icons/records-icons';
-import styled from 'styled-components';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 850px) {
-    padding-left: 0;
-  }
-`;
-
-const BannerContainer = styled.div`
-  width: 100%;
-  height: 100px;
-  aspect-ratio: 7 / 1;
-  //box-shadow: 1px 1px 0px 0px #000;
-  overflow: hidden;
-  position: relative;
-
-  @media (max-width: 850px) {
-    aspect-ratio: 2 / 1;
-  }
-`;
-
-const SectionCard = styled.div`
-  padding: 10px;
-  border-radius: 10px;
-  background: white;
-  border: 1px solid var(--justweb3-foreground-color-4);
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-`;
-
-const SectionCardTitle = styled.p`
-  margin: 0;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 100%;
-  font-family: var(--justweb3-font-family);
-  color: #0F172A;
-`;
-
-const SectionItemList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-items: center;
-  gap: 1.25rem;
-  overflow-x: scroll;
-
-  @media (max-width: 850px) {
-    gap: 0.625rem;
-  }
-
-  @media (min-width: 768px) {
-    display: flex;
-    flex-direction: row;
-  }
-`;
-
-const SectionItem = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1.25rem;
-
-  @media (max-width: 768px) {
-    grid-column: span 6 / span 6;
-  }
-`;
+import styles from './ContentSection.module.css';
+import { JustaPlugin } from '../../../plugins';
+import { PluginContext } from '../../../providers/PluginProvider';
+import { ProfileSection } from '../ProfileSection';
+import MetadataCard from '../../MetadataCard';
 
 export interface ContentProps {
   fullSubname: string;
@@ -95,42 +31,53 @@ export interface ContentProps {
   sanitized: SanitizedRecords;
   onEdit?: () => void;
   editMode?: boolean;
+  plugins: JustaPlugin[]
 }
 
 const ContentSection: React.FC<ContentProps> = ({
   fullSubname,
-  chainId,
+  chainId = 1,
   editMode,
   sanitized,
   records,
   onEdit,
+  plugins,
 }) => {
-  const { connectedEns } = useEnsAuth();
+  const { accountSubnames } = useAccountSubnames();
+  const { accountEnsNames } = useAccountEnsNames();
 
   const isProfileSelf = useMemo(() => {
-    return fullSubname === connectedEns?.ens;
-  }, [connectedEns, fullSubname]);
+    return (
+      accountSubnames?.map((subname) => subname.ens).includes(fullSubname) ||
+      accountEnsNames?.map((ens) => ens.ens).includes(fullSubname)
+    );
+  }, [fullSubname, accountSubnames, accountEnsNames]);
+  const { createPluginApi } = useContext(PluginContext);
 
-  const { avatar } = useEnsAvatar({
-    ens: fullSubname,
-    chainId,
-  });
+  const { sanitizeEnsImage } = useEnsAvatar();
 
   return (
-    <Flex direction={'column'} gap={'10px'}>
-      <Container>
-        <BannerContainer>
+    <Flex direction={'column'} gap={'10px'} style={{
+      overflow: 'hidden',
+      maxHeight: '100%',
+    }}>
+      <div className={styles.container}>
+        <div className={styles.bannerContainer}>
           <img
             src={
-              sanitized?.banner ||
+              sanitizeEnsImage({
+                name: fullSubname,
+                chainId,
+                image: sanitized?.header || sanitized?.banner,
+              }) ||
               'https://justaname-bucket.s3.eu-central-1.amazonaws.com/default-banner.png'
             }
             alt="profile-banner"
             style={{
               objectFit: 'cover',
-              height: '100px',
+              height: '200px',
               width: '100%',
-              borderRadius: '15px',
+              borderRadius: '16px',
             }}
           />
           <Flex
@@ -145,23 +92,23 @@ const ContentSection: React.FC<ContentProps> = ({
             {!editMode && isProfileSelf && (
               <Button
                 variant={'secondary'}
+                size={'sm'}
                 onClick={() => {
                   onEdit && onEdit();
                 }}
                 style={{
                   color: 'var(--justweb3-primary-color)',
-                  height: '25px',
-                  padding: "5px 10px",
-                  fontSize: '10px',
-                  border: 'none'
+                  height: '16px',
+                  fontSize: '12px',
+                  border: 'none',
                 }}
-                leftIcon={<PersonEditIcon height={14} width={14} />}
+                leftIcon={<PersonEditIcon height={16} width={16} />}
               >
                 Edit Profile
               </Button>
             )}
           </Flex>
-        </BannerContainer>
+        </div>
         <Flex
           direction={'column'}
           gap={'5px'}
@@ -170,54 +117,30 @@ const ContentSection: React.FC<ContentProps> = ({
             zIndex: 1,
           }}
         >
-          <div
+          <Avatar
+            src={sanitizeEnsImage({
+              image: sanitized?.avatar,
+              name: fullSubname,
+              chainId,
+            })}
+            size={74}
+            borderSize={'4px'}
             style={{
-              boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.25)',
-              border: '4px solid white',
-              width: '75px',
-              height: '75px',
-              borderRadius: '50%',
               margin: '0 15px',
-              backgroundColor: 'white',
             }}
-          >
-            <Avatar
-              src={avatar}
-              size={'75px'}
-              border={false}
-              bgColor={'white'}
-            />
-          </div>
+          />
           <Flex direction={'column'} gap={'5px'}>
             <P
               style={{
-                color: 'black',
                 fontSize: '20px',
                 fontWeight: '700',
-                lineHeight: '100%'
+                lineHeight: '100%',
               }}
             >
               {decodeURIComponent(
                 sanitized?.display || fullSubname.split('.')[0]
               )}
             </P>
-            <Badge
-              withCopy={false}
-              style={{
-                padding: '5px',
-              }}
-            >
-              <SPAN
-                style={{
-                  fontSize: '10px',
-                  lineHeight: '10px',
-                  fontWeight: 900,
-                  color: '#797979'
-                }}
-              >
-                {decodeURIComponent(fullSubname)}
-              </SPAN>
-            </Badge>
           </Flex>
           <ExpandableText
             text={sanitized?.description || 'No description available'}
@@ -241,7 +164,7 @@ const ContentSection: React.FC<ContentProps> = ({
                       textDecoration: 'underline',
                       width: 'fit-content',
                       fontWeight: 500,
-                      lineHeight: '100%'
+                      lineHeight: '100%',
                     }}
                   >
                     {sanitized.url}
@@ -282,11 +205,12 @@ const ContentSection: React.FC<ContentProps> = ({
             </Flex>
           )}
         </Flex>
-      </Container>
+      </div>
       <div
         style={{
           width: '100%',
           height: '100%',
+          overflowY: 'auto',
         }}
       >
         <Flex
@@ -296,83 +220,87 @@ const ContentSection: React.FC<ContentProps> = ({
             flex: '1',
           }}
         >
+
+          {plugins.map((plugin) => {
+            const component = plugin.components?.ProfileSection;
+            if (!component) {
+              return null;
+            }
+
+            return (
+              <Fragment key={'profile-item-' + plugin.name}>
+                {component(createPluginApi(plugin.name), fullSubname, chainId)}
+              </Fragment>
+            );
+          })}
+
           {sanitized?.socials?.length > 0 && (
-            <SectionCard>
-              <SectionCardTitle>Handles</SectionCardTitle>
-              <SectionItemList className={'justweb3scrollbar'}>
-                {sanitized?.socials
-                  ?.filter((social) => social.value !== '')
-                  .map((social) => (
-                    <SectionItem key={social.key}>
-                      <LinkCard
-                        key={social.key}
-                        variant={'social'}
-                        title={social.key}
-                        value={social.value}
-                        icon={getTextRecordIcon(social.key)}
-                      />
-                    </SectionItem>
-                  ))}
-              </SectionItemList>
-            </SectionCard>
-          )}
-          <SectionCard>
-            <SectionCardTitle>Addresses</SectionCardTitle>
-            <SectionItemList className={'justweb3scrollbar'}>
-              {sanitized?.allAddresses?.map((address) => {
-                return (
-                  <SectionItem key={address.id}>
-                    <LinkCard
-                      key={address.id}
-                      variant={'address'}
-                      title={address.name}
-                      value={address.value}
-                      icon={getChainIcon(address.symbol)}
-                    />
-                  </SectionItem>
-                );
-              })}
-            </SectionItemList>
-          </SectionCard>
-          {sanitized?.otherTextsWithoutStandard?.length > 0 && (
-            <SectionCard>
-              <SectionCardTitle>Custom</SectionCardTitle>
-              <SectionItemList className={'justweb3scrollbar'}>
-                {sanitized?.otherTextsWithoutStandard?.map((other) => (
-                  <SectionItem key={other.key}>
-                    <LinkCard
-                      key={other.key}
-                      variant={'other'}
-                      title={other.key}
-                      value={other.value}
-                    />
-                  </SectionItem>
-                ))}
-              </SectionItemList>
-            </SectionCard>
+            <ProfileSection title={'Handles'} items={
+              sanitized?.socials
+                ?.filter((social) => social.value !== '')
+                .map((social) => (
+                  <MetadataCard
+                    key={social.key}
+                    variant={'social'}
+                    title={social.key}
+                    value={social.value}
+                    icon={getTextRecordIcon(social.key)}
+                  />
+                ))
+            }
+            />
+
           )}
 
-          {sanitized?.contentHash && (
-            <SectionCard>
-              <P>Content Hash</P>
-              <SectionItemList className={'justweb3scrollbar'}>
-                <SectionItem>
-                  <LinkCard
-                    variant={'contentHash'}
-                    title={'Content Hash'}
-                    value={
-                      sanitized?.contentHash?.protocolType +
-                      '://' +
-                      sanitized?.contentHash?.decoded
-                    }
-                    icon={getContentHashIcon(
-                      sanitized?.contentHash?.protocolType
-                    )}
+          <ProfileSection
+            title={'Addresses'}
+            items={sanitized?.allAddresses?.map((address) => {
+              return (
+                <MetadataCard
+                  key={address.id}
+                  variant={'address'}
+                  title={address.name}
+                  value={address.value}
+                  icon={getChainIcon(address.symbol)}
+                />
+              );
+            })}
+          />
+          {sanitized?.allTexts?.length > 0 && (
+            <ProfileSection
+              title={'Custom'}
+              items={sanitized?.allTexts
+                ?.sort((a, b) => a.key.localeCompare(b.key))
+                .map((other) => (
+                  <MetadataCard
+                    key={other.key}
+                    variant={'other'}
+                    title={other.key}
+                    value={other.value}
                   />
-                </SectionItem>
-              </SectionItemList>
-            </SectionCard>
+                ))}
+            />
           )}
+
+          {sanitized?.contentHash &&
+            <ProfileSection
+              title={'Content Hash'}
+              items={[
+                <MetadataCard
+                  key={sanitized.contentHash.protocolType}
+                  variant={'contentHash'}
+                  title={'Content Hash'}
+                  value={
+                    sanitized.contentHash.protocolType +
+                    '://' +
+                    sanitized.contentHash.decoded
+                  }
+                  icon={getContentHashIcon(sanitized.contentHash.protocolType)}
+                />,
+              ]
+              }
+            />
+          }
         </Flex>
       </div>
     </Flex>

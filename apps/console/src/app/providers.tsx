@@ -5,6 +5,7 @@ import {
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
+import '@justweb3/widget/styles.css';
 import {
   argentWallet,
   ledgerWallet,
@@ -23,7 +24,7 @@ export const Providers: React.FC<ProviderProps> = (props) => {
   const { wallets } = getDefaultWallets();
 
   const config = getDefaultConfig({
-    appName: 'RainbowKit demo',
+    appName: 'JustaName Console',
     projectId: 'YOUR_PROJECT_ID',
     wallets: [
       ...wallets,

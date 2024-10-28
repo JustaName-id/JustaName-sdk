@@ -21,11 +21,11 @@ export interface MetadataFieldProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: UseFormReturn<any>;
   fieldName:
-  | `addresses.${number}.address`
-  | `generals.${number}.value`
-  | `contentHash.${number}.decoded`
-  | `socials.${number}.value`
-  | `otherTexts.${number}.value`;
+    | `addresses.${number}.address`
+    | `generals.${number}.value`
+    | `contentHash.${number}.decoded`
+    | `socials.${number}.value`
+    | `otherTexts.${number}.value`;
 }
 
 export const MetadataField: React.FC<MetadataFieldProps> = ({
@@ -66,38 +66,48 @@ export const MetadataField: React.FC<MetadataFieldProps> = ({
           render={({ field }) => (
             <FormItem style={{ flex: 1, width: '100%' }}>
               <FormControl>
-                <Input
-                  placeholder={label}
-                  left={
-                    leftIcon &&
-                    React.cloneElement(icon as React.ReactElement, {
-                      style: { width: '20px', height: '20px' },
-                    })
-                  }
-                  style={{
-                    borderRadius: '10px',
-                    height: "22px"
-                  }}
-                  {...field}
-                  disabled={disabled || field.disabled}
-                />
+                <Flex
+                  direction="row"
+                  gap="5px"
+                  align="center"
+                  justify={'space-between'}
+                >
+                  <Input
+                    placeholder={label}
+                    left={
+                      leftIcon &&
+                      React.cloneElement(icon as React.ReactElement, {
+                        style: { width: '20px', height: '20px' },
+                      })
+                    }
+                    style={{
+                      borderRadius: '10px',
+                      height: '22px',
+                      width: '100%',
+                    }}
+                    {...field}
+                    disabled={disabled || field.disabled}
+                  />
+                  {onDelete && (
+                    <TrashIcon
+                      height={20}
+                      width={20}
+                      fill="red"
+                      style={{
+                        cursor: 'pointer',
+                        margin: 'auto 0',
+                        minWidth: '20px',
+                        flexShrink: 0,
+                      }}
+                      onClick={onDelete}
+                    />
+                  )}
+                </Flex>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        {onDelete && (
-          <TrashIcon
-            height={20}
-            width={20}
-            fill="red"
-            style={{
-              cursor: 'pointer',
-              margin: 'auto 0',
-            }}
-            onClick={onDelete}
-          />
-        )}
       </Flex>
     </Flex>
   );

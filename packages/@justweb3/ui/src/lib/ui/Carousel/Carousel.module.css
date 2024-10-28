@@ -1,0 +1,52 @@
+
+.carouselContainer {
+    position: relative;
+    width: 100%;
+}
+
+.viewport {
+    overflow: hidden;
+    padding-right: 10px;
+}
+
+.container {
+    display: flex;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    margin-left: -10px; /* Negative margin to offset slide padding */
+}
+
+.slide {
+    position: relative;
+    min-width: 100%;
+    padding-left: 10px; /* Add padding to create space between slides */
+}
+
+.slideInner {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.dotsContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.dot {
+    border: 1px solid var(--justweb3-primary-color);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.dotSelected {
+    background-color: var(--justweb3-primary-color);
+}

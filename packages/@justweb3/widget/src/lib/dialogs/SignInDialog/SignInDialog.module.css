@@ -1,0 +1,56 @@
+/* TransitionElement styles */
+.transitionElement {
+    max-height: 0;
+    overflow: hidden;
+    display: none;
+    padding: 0;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.transitionElement.visible {
+    display: block;
+}
+
+/* Other styles */
+
+
+.logoImg {
+    height: 62px;
+    width: auto;
+}
+
+.loadingContainer {
+    position: relative;
+    padding: 24px;
+}
+
+.contentWrapper {
+    max-height: 50vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Badge styles */
+.badgeText {
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: 900;
+    color: var(--justweb3-primary-color);
+}
+
+/* Input styles */
+.inputFullWidth {
+    width: 100%;
+}
+
+.inputStyle {
+    border-radius: 100px 0 0 100px;
+    text-transform: lowercase;
+}
+
+/* Button styles */
+.buttonStyle {
+    border-radius: 0 100px 100px 0;
+    font-weight: 900;
+    height: 32px;
+}

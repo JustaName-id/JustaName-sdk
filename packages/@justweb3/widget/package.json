@@ -4,16 +4,15 @@
   "dependencies": {
     "@ensdomains/address-encoder": "^1.1.2",
     "@ensdomains/ensjs": "4.0.1-alpha.0",
+    "@hookform/resolvers": "^3.9.0",
     "@justaname.id/react": "0.3.105",
-    "@justweb3/ui": "0.0.41",
     "@justaname.id/sdk": "0.2.102",
-    "lodash": "4.17.21",
-    "styled-components": "^6.1.12",
-    "yup": "0.32.11",
-    "lucide-react": "^0.436.0",
-    "react-hook-form": "^7.53.0",
+    "@justweb3/ui": "^0.0.41",
+    "clsx": "1.2.1",
     "cropperjs": "^1.6.2",
-    "@hookform/resolvers": "^3.9.0"
+    "lodash": "4.17.21",
+    "react-hook-form": "^7.53.0",
+    "yup": "0.32.11"
   },
   "peerDependencies": {
     "react": ">=17",
@@ -22,6 +21,7 @@
   },
   "exports": {
     "./package.json": "./dist/package.json",
+    "./styles.css": "./dist/index.esm.css",
     ".": "./dist/index.esm.js"
   },
   "main": "./dist/index.esm.js",

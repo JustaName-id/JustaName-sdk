@@ -5,6 +5,7 @@
     "declaration": true,
     "declarationMap": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "types": [
       "node",
       "jest",
