@@ -1,9 +1,9 @@
 {
   "name": "@justverified/plugin",
-  "version": "0.0.38",
+  "version": "0.0.40",
   "dependencies": {
-    "@justaname.id/react": "0.3.103",
-    "@justaname.id/sdk": "0.2.100",
+    "@justaname.id/react": "0.3.105",
+    "@justaname.id/sdk": "0.2.102",
     "@justweb3/ui": "0.0.41",
     "@justweb3/widget": "0.0.41",
     "axios": "^1.6.0",

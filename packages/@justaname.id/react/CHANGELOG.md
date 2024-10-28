@@ -1,3 +1,41 @@
+## 0.3.105 (2024-10-23)
+
+
+### 🩹 Fixes
+
+- **react-sdk:** revoke subname ([d0d4776](https://github.com/JustaName-id/JustaName-sdk/commit/d0d4776))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.102
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.3.104 (2024-10-23)
+
+
+### 🩹 Fixes
+
+- upload cdn hook ([8dcb1c0](https://github.com/JustaName-id/JustaName-sdk/commit/8dcb1c0))
+
+- building react sdk ([65cbbc5](https://github.com/JustaName-id/JustaName-sdk/commit/65cbbc5))
+
+- package ([50cf05a](https://github.com/JustaName-id/JustaName-sdk/commit/50cf05a))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.101
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.103 (2024-10-21)
 
 

@@ -36,7 +36,7 @@ export interface ContentProps {
 
 const ContentSection: React.FC<ContentProps> = ({
   fullSubname,
-  chainId= 1,
+  chainId = 1,
   editMode,
   sanitized,
   records,
@@ -58,7 +58,7 @@ const ContentSection: React.FC<ContentProps> = ({
 
   return (
     <Flex direction={'column'} gap={'10px'} style={{
-      overflow:'hidden',
+      overflow: 'hidden',
       maxHeight: '100%',
     }}>
       <div className={styles.container}>
@@ -239,13 +239,13 @@ const ContentSection: React.FC<ContentProps> = ({
               sanitized?.socials
                 ?.filter((social) => social.value !== '')
                 .map((social) => (
-                    <MetadataCard
-                      key={social.key}
-                      variant={'social'}
-                      title={social.key}
-                      value={social.value}
-                      icon={getTextRecordIcon(social.key)}
-                    />
+                  <MetadataCard
+                    key={social.key}
+                    variant={'social'}
+                    title={social.key}
+                    value={social.value}
+                    icon={getTextRecordIcon(social.key)}
+                  />
                 ))
             }
             />
@@ -256,49 +256,49 @@ const ContentSection: React.FC<ContentProps> = ({
             title={'Addresses'}
             items={sanitized?.allAddresses?.map((address) => {
               return (
-                  <MetadataCard
-                    key={address.id}
-                    variant={'address'}
-                    title={address.name}
-                    value={address.value}
-                    icon={getChainIcon(address.symbol)}
-                  />
+                <MetadataCard
+                  key={address.id}
+                  variant={'address'}
+                  title={address.name}
+                  value={address.value}
+                  icon={getChainIcon(address.symbol)}
+                />
               );
             })}
           />
           {sanitized?.allTexts?.length > 0 && (
-          <ProfileSection
-            title={'Custom'}
-            items={sanitized?.allTexts
-              ?.sort((a, b) => a.key.localeCompare(b.key))
-              .map((other) => (
+            <ProfileSection
+              title={'Custom'}
+              items={sanitized?.allTexts
+                ?.sort((a, b) => a.key.localeCompare(b.key))
+                .map((other) => (
                   <MetadataCard
                     key={other.key}
                     variant={'other'}
                     title={other.key}
                     value={other.value}
                   />
-              ))}
-          />
+                ))}
+            />
           )}
 
           {sanitized?.contentHash &&
-          <ProfileSection
-            title={'Content Hash'}
-            items={ [
-                    <MetadataCard
-                      key={sanitized.contentHash.protocolType}
-                      variant={'contentHash'}
-                      title={'Content Hash'}
-                      value={
-                        sanitized.contentHash.protocolType +
-                        '://' +
-                        sanitized.contentHash.decoded
-                      }
-                      icon={getContentHashIcon(sanitized.contentHash.protocolType)}
-                    />,
-                  ]
-            }
+            <ProfileSection
+              title={'Content Hash'}
+              items={[
+                <MetadataCard
+                  key={sanitized.contentHash.protocolType}
+                  variant={'contentHash'}
+                  title={'Content Hash'}
+                  value={
+                    sanitized.contentHash.protocolType +
+                    '://' +
+                    sanitized.contentHash.decoded
+                  }
+                  icon={getContentHashIcon(sanitized.contentHash.protocolType)}
+                />,
+              ]
+              }
             />
           }
         </Flex>

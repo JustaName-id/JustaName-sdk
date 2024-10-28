@@ -1,3 +1,38 @@
+## 0.0.41 (2024-10-23)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.102
+- Updated @justaname.id/react to 0.3.105
+- Updated @justweb3/ui to 0.0.41
+
+## 0.0.40 (2024-10-23)
+
+
+### 🚀 Features
+
+- added target scripts for console before deploying ([9e330de](https://github.com/JustaName-id/JustaName-sdk/commit/9e330de))
+
+
+### 🩹 Fixes
+
+- upload cdn hook ([8dcb1c0](https://github.com/JustaName-id/JustaName-sdk/commit/8dcb1c0))
+
+- building react sdk ([65cbbc5](https://github.com/JustaName-id/JustaName-sdk/commit/65cbbc5))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.101
+- Updated @justaname.id/react to 0.3.104
+- Updated @justweb3/ui to 0.0.40
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.39 (2024-10-21)
 
 

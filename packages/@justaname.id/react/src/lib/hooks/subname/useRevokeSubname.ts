@@ -105,6 +105,7 @@ export const useRevokeSubname = (
             chainId: __chainId,
             address: address,
             message: signature.message,
+            username: _params.username,
           }),
         });
 
