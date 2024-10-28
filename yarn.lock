@@ -4517,7 +4517,6 @@ __metadata:
     "@justaname.id/sdk": "npm:0.2.102"
     axios: "npm:^1.6.0"
     jest: "npm:^29.4.1"
-    lodash: "npm:4.17.21"
     qs: "npm:^6.12.0"
   peerDependencies:
     "@tanstack/react-query": ^5.x
@@ -26154,6 +26153,7 @@ __metadata:
     jest-environment-node: "npm:^29.7.0"
     jest-expo: "npm:~50.0.1"
     jsdom: "npm:~22.1.0"
+    lodash: "npm:4.17.21"
     lucide-react: "npm:^0.436.0"
     moment: "npm:^2.30.1"
     next: "npm:14.2.3"
