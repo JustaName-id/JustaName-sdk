@@ -1,3 +1,17 @@
+## 0.0.42 (2024-10-28)
+
+
+### 🚀 Features
+
+- upload cdn and scrollbar fixes ([fc3035e](https://github.com/JustaName-id/JustaName-sdk/commit/fc3035e))
+
+- added discord and fixed height in the profile dialog ([e2712e6](https://github.com/JustaName-id/JustaName-sdk/commit/e2712e6))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.41 (2024-10-23)
 
 This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.

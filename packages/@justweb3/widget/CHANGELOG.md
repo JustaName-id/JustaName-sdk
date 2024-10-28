@@ -1,3 +1,35 @@
+## 0.0.42 (2024-10-28)
+
+
+### 🚀 Features
+
+- upload cdn and scrollbar fixes ([fc3035e](https://github.com/JustaName-id/JustaName-sdk/commit/fc3035e))
+
+- add plugin ability to add to the profile section ([7970570](https://github.com/JustaName-id/JustaName-sdk/commit/7970570))
+
+- added discord and fixed height in the profile dialog ([e2712e6](https://github.com/JustaName-id/JustaName-sdk/commit/e2712e6))
+
+
+### 🩹 Fixes
+
+- storybook config forms ([c7c1365](https://github.com/JustaName-id/JustaName-sdk/commit/c7c1365))
+
+- build fix ([81402e1](https://github.com/JustaName-id/JustaName-sdk/commit/81402e1))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.103
+- Updated @justaname.id/react to 0.3.106
+- Updated @justweb3/ui to 0.0.42
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- Ghadi Mhawej
+- HadiKhai
+
 ## 0.0.41 (2024-10-23)
 
 

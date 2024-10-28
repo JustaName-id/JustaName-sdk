@@ -1,3 +1,20 @@
+## 0.2.103 (2024-10-28)
+
+
+### 🚀 Features
+
+- added discord and fixed height in the profile dialog ([e2712e6](https://github.com/JustaName-id/JustaName-sdk/commit/e2712e6))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.36
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.2.102 (2024-10-23)
 
 
