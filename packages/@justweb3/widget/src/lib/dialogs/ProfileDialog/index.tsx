@@ -140,7 +140,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
         value: address.address as string,
       }));
 
-    const contentHash = newRecord.contentHash[0]
+    const contentHash = newRecord.contentHash[0];
 
     const subnameRecord: SubnameRecordsRoute['response'] = {
       ens: ens || '',
@@ -290,8 +290,8 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
         text: texts,
         contentHash: data.contentHash[0]
           ? data.contentHash[0].protocolType +
-          '://' +
-          data.contentHash[0].decoded
+            '://' +
+            data.contentHash[0].decoded
           : '',
       });
       await refetchRecords();
@@ -398,7 +398,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
                       <P>
                         {Object.keys(form.formState.errors).length > 0
                           ? 'Invalid fields in ' +
-                          Object.keys(form.formState.errors).join(', ')
+                            Object.keys(form.formState.errors).join(', ')
                           : ''}
                       </P>
                     </div>
