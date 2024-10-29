@@ -2,28 +2,46 @@
 import React, { FC } from 'react';
 import { ChainId } from '@justaname.id/sdk';
 import { useJustWeb3 } from '../../providers';
-import { useEnsAvatar, useRecords } from '@justaname.id/react';
-import { Avatar, ClickableItem, Flex, P } from '@justweb3/ui';
+import { useEnsAvatar, usePrimaryName, useRecords } from '@justaname.id/react';
+import { Avatar, ClickableItem, Flex, formatText, P } from '@justweb3/ui';
 import { getTextRecordIcon } from '../../icons/records-icons';
 import styles from './JustEnsCard.module.css'; // Import CSS module
 
 export interface JustEnsCardProps {
-  ens: string;
+  addressOrEns: string;
   chainId?: ChainId;
   expanded?: boolean;
+  style?: React.CSSProperties;
 }
 
 export const JustEnsCard: FC<JustEnsCardProps> = ({
-  ens,
+  addressOrEns,
   chainId = 1,
   expanded = false,
+  style,
 }) => {
   const { openEnsProfile } = useJustWeb3();
+  const isEns = addressOrEns?.includes('.');
+  const { primaryName } = usePrimaryName({
+    address: isEns ? undefined : (addressOrEns as `0x${string}`),
+    chainId,
+  });
+
+  const ens =
+    (isEns ? addressOrEns : primaryName) || formatText(addressOrEns, 4);
   const { records } = useRecords({
-    ens,
+    ens: isEns ? addressOrEns : primaryName,
     chainId,
   });
   const { sanitizeEnsImage } = useEnsAvatar();
+
+  const handleEnsClick = () => {
+    if (!isEns && !primaryName) {
+      return;
+    }
+
+    openEnsProfile(ens, chainId);
+  };
 
   if (expanded) {
     return (
@@ -61,6 +79,7 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
 
   return (
     <ClickableItem
+      style={style}
       title={<P className={styles.titleText}>{ens}</P>}
       subtitle={
         records &&
@@ -86,7 +105,8 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
           })}
         />
       }
-      onClick={() => openEnsProfile(ens, chainId)}
+      disabled={!isEns && !primaryName}
+      onClick={() => handleEnsClick()}
     />
   );
 };

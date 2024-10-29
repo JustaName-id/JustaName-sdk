@@ -55,6 +55,10 @@ export const useEnsAvatar = (
       }/avatar/${_params.name}`;
     }
 
+    if (_params.image?.startsWith('ipfs')) {
+      avatar = `https://ipfs.io/ipfs/${_params.image.replace('ipfs://', '')}`;
+    }
+
     return avatar;
   };
 

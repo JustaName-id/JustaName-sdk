@@ -1,14 +1,30 @@
+
 .tabsList {
-    display: inline-flex;
-    height: 2.5rem; /* h-10 */
     align-items: center;
     justify-content: center;
-    border-radius: 0.375rem; /* rounded-md */
-    background-color: var(--justweb3-background-color);
-    padding: 0.25rem; /* p-1 */
-    color: var(--justweb3-foreground-color-4);
+    border-radius: 0.375rem;
+    margin-bottom: 10px;
 }
 
+/* Underlined variant */
+.underlinedTabs .tabsTrigger {
+    margin-right: 1rem;
+    transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    background-color: transparent;
+    border: unset;
+    color: var(--justweb3-primary-color);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 18px;
+    font-family: var(--justweb3-font-family);
+}
+
+.underlinedTabs .tabsTrigger[data-state='active'] {
+    border-bottom: 2px solid var(--justweb3-primary-color);
+}
+
+/* Shared Trigger Styles */
 .tabsTrigger {
     display: inline-flex;
     align-items: center;
@@ -19,8 +35,8 @@
     font-size: 0.875rem; /* text-sm */
     font-weight: 500; /* font-medium */
     line-height: 1.25rem;
-    transition: all 0.2s ease-in-out;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .tabsTrigger:focus-visible {
@@ -33,14 +49,8 @@
     opacity: 0.5;
 }
 
-.tabsTrigger[data-state="active"] {
-    background-color: var(--background);
-    color: var(--foreground);
-    box-shadow: var(--justweb3-foreground-color-4);
-}
-
 .tabsContent {
-    margin-top: 0.5rem; /* mt-2 */
+    /*margin-top: 0.5rem; !* mt-2 *!*/
     position: relative;
     overflow: hidden;
 }

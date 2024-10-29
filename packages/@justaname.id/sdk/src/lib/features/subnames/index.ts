@@ -19,6 +19,7 @@ import {
   SubnameUpdateRoute,
 } from '../../types';
 import { sanitizeAddresses, sanitizeTexts } from '../../utils';
+import { PrimaryNameGetByAddressRoute } from '../../types/primary-name';
 
 export interface SubnamesConfig {
   /**
@@ -254,7 +255,7 @@ export class Subnames {
     params: SubnameRejectRoute['params'],
     headers: SubnameRejectRoute['headers']
   ): Promise<SubnameRejectRoute['response']> {
-    const { ensDomain, chainId, ...rest } = params;
+    const { ensDomain, chainId, username } = params;
     const _chainId = chainId || this.chainId;
     const _ensDomain =
       ensDomain ||
@@ -267,7 +268,7 @@ export class Subnames {
       {
         chain: _chainId,
         ensDomain: _ensDomain,
-        ...rest,
+        username,
       },
       {
         ...headers,
@@ -433,5 +434,22 @@ export class Subnames {
       undefined,
       this.dev
     )(['providerUrl']);
+  }
+
+  async getPrimaryNameByAddress(
+    params: PrimaryNameGetByAddressRoute['params']
+  ): Promise<PrimaryNameGetByAddressRoute['response']> {
+    const { chainId, address } = params;
+    const _chainId = chainId || this.chainId;
+    return assertRestCall(
+      'GET_PRIMARY_NAME_BY_ADDRESS_ROUTE',
+      'GET',
+      {
+        address,
+        chainId: _chainId,
+      },
+      undefined,
+      this.dev
+    )(['chainId']);
   }
 }

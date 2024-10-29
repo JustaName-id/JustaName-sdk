@@ -1,53 +1,46 @@
-// Tabs.tsx
-
 import React from 'react';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
-
 import styles from './Tabs.module.css';
 
-interface AnimatedTabsProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root> {
+interface AnimatedTabsProps
+  extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root> {
   defaultValue: string;
-  tabValues: string[];
+  // tabValues: string[];
   children: React.ReactNode;
 }
 
-type Direction = 'left' | 'right';
-
-const TabsAnimationContext = React.createContext<Direction>('right');
-
-const AnimatedTabs: React.FC<AnimatedTabsProps> = ({ defaultValue, tabValues, children, ...props }) => {
+const AnimatedTabs: React.FC<AnimatedTabsProps> = ({
+  defaultValue,
+  // tabValues,
+  children,
+  ...props
+}) => {
   const [value, setValue] = React.useState(defaultValue);
-  const [prevValue, setPrevValue] = React.useState(defaultValue);
-  const [direction, setDirection] = React.useState<Direction>('right');
 
   const handleValueChange = (newValue: string) => {
-    const prevIndex = tabValues.indexOf(prevValue);
-    const currIndex = tabValues.indexOf(newValue);
-    setDirection(currIndex > prevIndex ? 'right' : 'left');
-    setPrevValue(value);
     setValue(newValue);
   };
 
   return (
-    <TabsAnimationContext.Provider value={direction}>
-      <TabsPrimitive.Root
-        value={value}
-        onValueChange={handleValueChange}
-        {...props}
-      >
-        {children}
-      </TabsPrimitive.Root>
-    </TabsAnimationContext.Provider>
+    <TabsPrimitive.Root
+      value={value}
+      onValueChange={handleValueChange}
+      {...props}
+    >
+      {children}
+    </TabsPrimitive.Root>
   );
 };
 
+type TabsListProps = React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>;
+
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
+  TabsListProps
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.List
     ref={ref}
-    className={`${styles.tabsList} ${className || ''}`}
+    className={`${styles.tabsList} ${styles.underlinedTabs} ${className || ''}`}
     {...props}
   />
 ));
@@ -69,13 +62,10 @@ const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 >(({ className, ...props }, ref) => {
-  const direction = React.useContext(TabsAnimationContext);
   return (
     <TabsPrimitive.Content
       ref={ref}
-      className={`${styles.tabsContent} ${
-        direction === 'left' ? styles.slideInLeft : styles.slideInRight
-      } ${className || ''}`}
+      className={`${styles.tabsContent} ${className || ''}`}
       {...props}
     />
   );

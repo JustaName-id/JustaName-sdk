@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useMemo } from 'react';
+import React, { Fragment, useContext, useEffect, useMemo } from 'react';
 import {
   useAccountEnsNames,
   useAccountSubnames,
@@ -14,6 +14,10 @@ import {
   LocationIcon,
   P,
   PersonEditIcon,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
 } from '@justweb3/ui';
 import { getChainIcon } from '../../../icons/chain-icons';
 import { getContentHashIcon } from '../../../icons/contentHash-icons';
@@ -31,7 +35,7 @@ export interface ContentProps {
   sanitized: SanitizedRecords;
   onEdit?: () => void;
   editMode?: boolean;
-  plugins: JustaPlugin[]
+  plugins: JustaPlugin[];
 }
 
 const ContentSection: React.FC<ContentProps> = ({
@@ -45,7 +49,7 @@ const ContentSection: React.FC<ContentProps> = ({
 }) => {
   const { accountSubnames } = useAccountSubnames();
   const { accountEnsNames } = useAccountEnsNames();
-
+  const [tab, setTab] = React.useState('Main');
   const isProfileSelf = useMemo(() => {
     return (
       accountSubnames?.map((subname) => subname.ens).includes(fullSubname) ||
@@ -56,11 +60,126 @@ const ContentSection: React.FC<ContentProps> = ({
 
   const { sanitizeEnsImage } = useEnsAvatar();
 
+  useEffect(() => {
+    setTab('Main');
+  }, [fullSubname, chainId]);
+
+  const hasTabs = useMemo(() => {
+    return plugins.some((plugin) => plugin.components?.ProfileTab);
+  }, [plugins]);
+
+  const MainTab = (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        overflowY: 'auto',
+      }}
+    >
+      <Flex
+        direction={'column'}
+        gap={'10px'}
+        style={{
+          flex: '1',
+        }}
+      >
+        {plugins.map((plugin) => {
+          const component = plugin.components?.ProfileSection;
+          if (!component) {
+            return null;
+          }
+
+          return (
+            <Fragment key={'profile-item-' + plugin.name}>
+              {component(
+                createPluginApi(plugin.name),
+                fullSubname,
+                chainId,
+                sanitized.ethAddress.value
+              )}
+            </Fragment>
+          );
+        })}
+
+        {sanitized?.socials?.length > 0 && (
+          <ProfileSection
+            title={'Socials'}
+            items={sanitized?.socials
+              ?.filter((social) => social.value !== '')
+              .map((social) => (
+                <MetadataCard
+                  key={social.key}
+                  variant={'social'}
+                  title={social.key}
+                  value={social.value}
+                  icon={getTextRecordIcon(social.key)}
+                />
+              ))}
+          />
+        )}
+
+        <ProfileSection
+          title={'Addresses'}
+          items={sanitized?.allAddresses?.map((address) => {
+            return (
+              <MetadataCard
+                key={address.id}
+                variant={'address'}
+                title={address.name}
+                value={address.value}
+                icon={getChainIcon(address.symbol)}
+              />
+            );
+          })}
+        />
+        {sanitized?.allTexts?.length > 0 && (
+          <ProfileSection
+            title={'Custom'}
+            items={sanitized?.allTexts
+              ?.sort((a, b) => a.key.localeCompare(b.key))
+              .map((other) => (
+                <MetadataCard
+                  key={other.key}
+                  variant={'other'}
+                  title={other.key}
+                  value={other.value}
+                />
+              ))}
+          />
+        )}
+
+        {sanitized?.contentHash && (
+          <ProfileSection
+            title={'Content Hash'}
+            items={[
+              <MetadataCard
+                key={sanitized.contentHash.protocolType}
+                variant={'contentHash'}
+                title={'Content Hash'}
+                value={
+                  sanitized.contentHash.protocolType +
+                  '://' +
+                  sanitized.contentHash.decoded
+                }
+                icon={getContentHashIcon(sanitized.contentHash.protocolType)}
+              />,
+            ]}
+          />
+        )}
+      </Flex>
+    </div>
+  );
+
   return (
-    <Flex direction={'column'} gap={'10px'} style={{
-      overflow: 'hidden',
-      maxHeight: '100%',
-    }}>
+    <Flex
+      direction={'column'}
+      gap={'10px'}
+      style={{
+        overflow: 'hidden',
+        maxHeight: '100%',
+        height: '100%',
+      }}
+    >
       <div className={styles.container}>
         <div className={styles.bannerContainer}>
           <img
@@ -129,23 +248,39 @@ const ContentSection: React.FC<ContentProps> = ({
               margin: '0 15px',
             }}
           />
-          <Flex direction={'column'} gap={'5px'}>
+          <Flex direction={'row'} justify={'space-between'} align={'center'}>
             <P
               style={{
                 fontSize: '20px',
                 fontWeight: '700',
-                lineHeight: '100%',
+                lineHeight: '20px',
               }}
             >
-              {decodeURIComponent(
-                sanitized?.display || fullSubname.split('.')[0]
-              )}
+              {decodeURIComponent(sanitized?.display || fullSubname)}
             </P>
+            <Flex direction={'row'} gap={'5px'} align={'center'}>
+              {plugins.map((plugin) => {
+                const component = plugin.components?.ProfileHeader;
+                if (!component) {
+                  return null;
+                }
+
+                return (
+                  <Fragment key={'profile-item-' + plugin.name}>
+                    {component(
+                      createPluginApi(plugin.name),
+                      fullSubname,
+                      chainId,
+                      sanitized.ethAddress.value
+                    )}
+                  </Fragment>
+                );
+              })}
+            </Flex>
           </Flex>
-          <ExpandableText
-            text={sanitized?.description || 'No description available'}
-            maxLength={100}
-          />
+          {sanitized?.description && (
+            <ExpandableText text={sanitized?.description} maxLength={100} />
+          )}
 
           {sanitized?.url &&
             (() => {
@@ -208,100 +343,84 @@ const ContentSection: React.FC<ContentProps> = ({
       </div>
       <div
         style={{
-          width: '100%',
-          height: '100%',
-          overflowY: 'auto',
+          flex: '1',
+          overflow: 'hidden',
+          maxHeight: '100%',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
-        <Flex
-          direction={'column'}
-          gap={'10px'}
-          style={{
-            flex: '1',
-          }}
-        >
+        {hasTabs ? (
+          <Tabs
+            defaultValue={'Main'}
+            value={tab}
+            onValueChange={(value) => setTab(value)}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginBottom: '0px',
+              overflow: 'hidden',
+              flex: '1',
+            }}
+          >
+            <TabsList>
+              <TabsTrigger value={'Main'}>Main</TabsTrigger>
+              {plugins.map((plugin) => {
+                const component = plugin.components?.ProfileTab;
+                if (!component) {
+                  return null;
+                }
+                const componentApi = component(
+                  createPluginApi(plugin.name),
+                  fullSubname,
+                  chainId,
+                  sanitized.ethAddress.value
+                );
+                if (!componentApi) {
+                  return null;
+                }
 
-          {plugins.map((plugin) => {
-            const component = plugin.components?.ProfileSection;
-            if (!component) {
-              return null;
-            }
+                return (
+                  <TabsTrigger key={plugin.name} value={plugin.name}>
+                    {componentApi.title}
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+            <TabsContent value={'Main'}>
+              {React.cloneElement(MainTab)}
+            </TabsContent>
+            {plugins.map((plugin) => {
+              const component = plugin.components?.ProfileTab;
+              if (!component) {
+                return null;
+              }
+              const componentApi = component(
+                createPluginApi(plugin.name),
+                fullSubname,
+                chainId,
+                sanitized.ethAddress.value
+              );
+              if (!componentApi) {
+                return null;
+              }
 
-            return (
-              <Fragment key={'profile-item-' + plugin.name}>
-                {component(createPluginApi(plugin.name), fullSubname, chainId)}
-              </Fragment>
-            );
-          })}
-
-          {sanitized?.socials?.length > 0 && (
-            <ProfileSection title={'Socials'} items={
-              sanitized?.socials
-                ?.filter((social) => social.value !== '')
-                .map((social) => (
-                  <MetadataCard
-                    key={social.key}
-                    variant={'social'}
-                    title={social.key}
-                    value={social.value}
-                    icon={getTextRecordIcon(social.key)}
-                  />
-                ))
-            }
-            />
-
-          )}
-
-          <ProfileSection
-            title={'Addresses'}
-            items={sanitized?.allAddresses?.map((address) => {
               return (
-                <MetadataCard
-                  key={address.id}
-                  variant={'address'}
-                  title={address.name}
-                  value={address.value}
-                  icon={getChainIcon(address.symbol)}
-                />
+                <TabsContent
+                  key={plugin.name}
+                  value={plugin.name}
+                  style={{
+                    flex: 1,
+                  }}
+                >
+                  {componentApi.content}
+                </TabsContent>
               );
             })}
-          />
-          {sanitized?.allTexts?.length > 0 && (
-            <ProfileSection
-              title={'Custom'}
-              items={sanitized?.allTexts
-                ?.sort((a, b) => a.key.localeCompare(b.key))
-                .map((other) => (
-                  <MetadataCard
-                    key={other.key}
-                    variant={'other'}
-                    title={other.key}
-                    value={other.value}
-                  />
-                ))}
-            />
-          )}
-
-          {sanitized?.contentHash &&
-            <ProfileSection
-              title={'Content Hash'}
-              items={[
-                <MetadataCard
-                  key={sanitized.contentHash.protocolType}
-                  variant={'contentHash'}
-                  title={'Content Hash'}
-                  value={
-                    sanitized.contentHash.protocolType +
-                    '://' +
-                    sanitized.contentHash.decoded
-                  }
-                  icon={getContentHashIcon(sanitized.contentHash.protocolType)}
-                />,
-              ]
-              }
-            />
-          }
-        </Flex>
+          </Tabs>
+        ) : (
+          React.cloneElement(MainTab)
+        )}
       </div>
     </Flex>
   );

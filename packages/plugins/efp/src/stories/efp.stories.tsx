@@ -7,7 +7,6 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
-import { ChainId } from '@justaname.id/sdk';
 import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@justweb3/ui';
 import {
@@ -31,17 +30,15 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
   networks: [
     {
-      providerUrl: import.meta.env.STORYBOOK_APP_PROVIDER_URL,
-      chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
+      chainId: 1,
+      providerUrl: import.meta.env.STORYBOOK_APP_MAINNET_PROVIDER_URL,
     },
-  ],
-  ensDomains: [
     {
-      ensDomain: import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
-      chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
+      chainId: 11155111,
+      providerUrl: import.meta.env.STORYBOOK_APP_SEPOLIA_PROVIDER_URL,
     },
   ],
-  openOnWalletConnect: true,
+  openOnWalletConnect: false,
   allowedEns: 'all',
   dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
   plugins: [EFPPlugin],
@@ -76,7 +73,7 @@ export const Example = () => {
   const config = getDefaultConfig({
     appName: 'My RainbowKit App',
     projectId: 'YOUR_PROJECT_ID',
-    chains: [mainnet,sepolia],
+    chains: [mainnet, sepolia],
   });
 
   return (
@@ -102,22 +99,30 @@ export const Example = () => {
               <UpdateButton />
 
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <JustEnsCard ens={'mely.eth'} />
-                <JustEnsCard ens={'nick.eth'} />
-                <JustEnsCard ens={'brantly.eth'} />
-                <JustEnsCard ens={'vitalik.eth'} />
-                <JustEnsCard ens={'dr3a.eth'} />
-                <JustEnsCard ens={'josh.box'} />
-                <JustEnsCard ens={'hadikhai.jaw.eth'} chainId={11155111} />
+                <JustEnsCard addressOrEns={'mely.eth'} />
+                <JustEnsCard addressOrEns={'nick.eth'} />
+                <JustEnsCard addressOrEns={'brantly.eth'} />
+                <JustEnsCard addressOrEns={'vitalik.eth'} />
+                <JustEnsCard addressOrEns={'dr3a.eth'} />
+                <JustEnsCard addressOrEns={'josh.box'} />
+                <JustEnsCard addressOrEns={'justghadi.eth'} />
+                <JustEnsCard
+                  addressOrEns={'0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1'}
+                  chainId={1}
+                />
+                <JustEnsCard
+                  addressOrEns={'hadikhai.jaw.eth'}
+                  chainId={11155111}
+                />
               </div>
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <JustEnsCard ens={'mely.eth'} expanded />
-                <JustEnsCard ens={'nick.eth'} expanded />
-                <JustEnsCard ens={'brantly.eth'} expanded />
-                <JustEnsCard ens={'vitalik.eth'} expanded />
-                <JustEnsCard ens={'dr3a.eth'} expanded />
+                <JustEnsCard addressOrEns={'mely.eth'} expanded />
+                <JustEnsCard addressOrEns={'nick.eth'} expanded />
+                <JustEnsCard addressOrEns={'brantly.eth'} expanded />
+                <JustEnsCard addressOrEns={'vitalik.eth'} expanded />
+                <JustEnsCard addressOrEns={'dr3a.eth'} expanded />
                 <JustEnsCard
-                  ens={'hadikhai.jaw.eth'}
+                  addressOrEns={'hadikhai.jaw.eth'}
                   chainId={11155111}
                   expanded
                 />

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import JustSomeone from '../../icons/components/logo/JustSomeone';
 import styles from './Avatar.module.css';
-import clsx from 'clsx'; // Import CSS module
+import clsx from 'clsx';
 
 interface AvatarProps {
   src?: string;
@@ -23,6 +23,8 @@ export const Avatar: React.FC<AvatarProps> = ({
   style,
   className,
 }) => {
+  const [isImageError, setIsImageError] = useState(false); // State to track if image fails to load
+
   const boxShadowSize = size > 32 ? '10px' : '5px';
 
   return (
@@ -37,8 +39,13 @@ export const Avatar: React.FC<AvatarProps> = ({
         ...style,
       }}
     >
-      {src ? (
-        <img className={styles.avatarImage} src={src} alt={alt || 'Avatar'} />
+      {src && !isImageError ? (
+        <img
+          className={styles.avatarImage}
+          src={src}
+          alt={alt || 'Avatar'}
+          onError={() => setIsImageError(true)} // Set error state when image fails to load
+        />
       ) : (
         <JustSomeone width={size} />
       )}

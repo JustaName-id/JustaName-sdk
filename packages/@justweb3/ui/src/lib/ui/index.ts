@@ -12,3 +12,4 @@ export * from './Popover';
 export * from './Separator';
 export * from './OTPInput';
 export * from './Form';
+export * from './Tabs';
