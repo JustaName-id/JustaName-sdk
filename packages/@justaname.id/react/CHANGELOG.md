@@ -1,3 +1,20 @@
+## 0.3.107 (2024-10-30)
+
+
+### 🩹 Fixes
+
+- release packages ([faee72c](https://github.com/JustaName-id/JustaName-sdk/commit/faee72c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.104
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.106 (2024-10-28)
 
 
