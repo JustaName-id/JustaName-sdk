@@ -2,7 +2,7 @@ import { AccordionItem, AccordionTrigger } from '../../../../ui/accordion';
 import { Switch } from '../../../../ui/switch';
 import { useContext } from 'react';
 import { JustWeb3Context } from '@justweb3/widget';
-import { EFPPlugin } from 'justweb3-efp-plugin';
+import { EFPPlugin } from '@justweb3/efp-plugin';
 
 export const EFP = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);

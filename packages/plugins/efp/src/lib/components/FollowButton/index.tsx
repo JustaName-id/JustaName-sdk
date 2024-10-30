@@ -22,7 +22,12 @@ export const FollowButton: React.FC<FollowButtonProps> = ({ ens }) => {
         target={'_blank'}
         rel="noreferrer"
       >
-        <Button leftIcon={<EFPIcon color={'white'} />} variant={'primary'}>
+        <Button
+          leftIcon={
+            <EFPIcon color={'var(--justweb3-primary-color-foreground)'} />
+          }
+          variant={'primary'}
+        >
           Follow
         </Button>
       </a>
@@ -32,7 +37,9 @@ export const FollowButton: React.FC<FollowButtonProps> = ({ ens }) => {
   if (isFollowStateLoading) {
     return (
       <Button
-        leftIcon={<EFPIcon color={'white'} />}
+        leftIcon={
+          <EFPIcon color={'var(--justweb3-primary-color-foreground)'} />
+        }
         variant={'primary'}
         loading={true}
       >
@@ -43,7 +50,12 @@ export const FollowButton: React.FC<FollowButtonProps> = ({ ens }) => {
 
   return (
     <a href={'https://ethfollow.xyz/' + ens} target={'_blank'} rel="noreferrer">
-      <Button leftIcon={<EFPIcon color={'white'} />} variant={'primary'}>
+      <Button
+        leftIcon={
+          <EFPIcon color={'var(--justweb3-primary-color-foreground)'} />
+        }
+        variant={'primary'}
+      >
         {followState?.state.follow ? 'Following' : 'Follow'}
       </Button>
     </a>

@@ -97,3 +97,6 @@ signInUser().then(async (signature) => {
     await verifyUserSignature(signature, 'Signing into dApp');
 });
 ```
+
+### Contributing
+Contributions are welcome! If you have suggestions or find issues, please open an issue or submit a pull request on the GitHub repository.

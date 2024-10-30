@@ -61,7 +61,7 @@ ${
 }
 ${
   config.plugins?.find((p) => p.name === 'EFPPlugin')
-    ? "import { EFPPlugin } from 'justweb3-efp-plugin';"
+    ? "import { EFPPlugin } from '@justweb3/efp-plugin';"
     : ''
 }
         

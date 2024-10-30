@@ -1,5 +1,5 @@
 {
-  "name": "justweb3-efp-plugin",
+  "name": "@justweb3/efp-plugin",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/plugins/efp/src",
   "projectType": "library",
@@ -17,12 +17,24 @@
         }
       }
     },
+    "typedoc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "typedoc"
+          }
+        ],
+        "cwd": "packages/plugins/efp",
+        "parallel": false
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
-            "command": "nx buildProject justweb3-efp-plugin"
+            "command": "nx buildProject @justweb3/efp-plugin"
           },
           {
             "command": "node update-package-json.js"

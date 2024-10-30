@@ -16,20 +16,6 @@
 
 ## Properties
 
-### apiKey?
-
-> `optional` **apiKey**: `string`
-
-#### Inherited from
-
-[`JustaNameConfig`](JustaNameConfig.md).[`apiKey`](JustaNameConfig.md#apikey)
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L47)
-
-***
-
 ### config?
 
 > `optional` **config**: [`Configuration`](Configuration.md)
@@ -40,7 +26,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L43)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L42)
 
 ***
 
@@ -54,7 +40,21 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L46)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L45)
+
+***
+
+### dev?
+
+> `optional` **dev**: `boolean`
+
+#### Inherited from
+
+[`JustaNameConfig`](JustaNameConfig.md).[`dev`](JustaNameConfig.md#dev)
+
+#### Defined in
+
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L46)
 
 ***
 
@@ -68,7 +68,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L58)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L57)
 
 ***
 
@@ -82,4 +82,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:57](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L57)
+[packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts:56](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/justaname/configuration.ts#L56)

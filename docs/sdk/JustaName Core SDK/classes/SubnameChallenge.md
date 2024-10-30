@@ -10,11 +10,11 @@
 
 ### new SubnameChallenge()
 
-> **new SubnameChallenge**(`config`): [`SubnameChallenge`](SubnameChallenge.md)
+> **new SubnameChallenge**(`params`): [`SubnameChallenge`](SubnameChallenge.md)
 
 #### Parameters
 
-• **config**: [`SubnameChallengeParams`](../interfaces/SubnameChallengeParams.md)
+• **params**: [`SubnameChallengeParams`](../interfaces/SubnameChallengeParams.md)
 
 #### Returns
 
@@ -22,37 +22,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L48)
-
-## Properties
-
-### chainId
-
-> **chainId**: [`ChainId`](../type-aliases/ChainId.md)
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:46](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L46)
-
-***
-
-### siweConfig?
-
-> `optional` **siweConfig**: [`SubnameChallengeSiweConfig`](../interfaces/SubnameChallengeSiweConfig.md)
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:45](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L45)
-
-***
-
-### subnameChallengeTtl?
-
-> `optional` **subnameChallengeTtl**: `number`
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:47](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L47)
+[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L50)
 
 ## Methods
 
@@ -76,7 +46,7 @@ The request parameters.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:61](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L61)
+[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:64](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L64)
 
 ***
 
@@ -100,4 +70,4 @@ The request parameters.
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:84](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L84)
+[packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts:88](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subname-challenge/index.ts#L88)

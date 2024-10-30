@@ -9,10 +9,7 @@
     "strict": true
   },
   "files": [],
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-  ],
+  "include": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"

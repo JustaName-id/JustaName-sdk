@@ -18,7 +18,6 @@ The SDK supports both Ethereum Mainnet and Testnet environments.
     - [Subname Management](#subname-management)
     - [SIWE](#siwe)
     - [Sign-In with ENS](#sign-in-with-ens)
-    - [MApp Management](#mapp-management)
     - [Offchain Resolvers](#offchain-resolvers)
 - [Contributing](#contributing)
 
@@ -61,18 +60,19 @@ import { ethers } from 'ethers';
 
 // Initialize the SDK with your configuration
 const justaname = JustaName.init({
-    apiKey: 'your-api-key',
     networks: [
         {
-        chainId: 1, // Ethereum Mainnet
-        providerUrl: 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY'
+          chainId: 1, // Ethereum Mainnet
+          providerUrl: 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY'
         }
     ],
     ensDomains: [
         {
-        chainId: 1,
-        domain: 'your_ens_domain.eth'
+          chainId: 1,
+          domain: 'your_ens_domain.eth',
+          apiKey: 'your-api-key',
         }
+            
     ],
     config: {
         domain: 'yourdapp.com',
@@ -204,21 +204,26 @@ main().catch(console.error);
 - requestSignIn
 - signIn
 - generateNonce 
-### MApp Management
-- checkIfMAppIsEnabled
-- canEnableMApps
-- requestAddMAppPermissionChallenge
-- requestAppendMAppFieldChallenge
-- requestRevokeMAppPermissionChallenge
-- addMAppPermission
-- appendMAppField
-- revokeMAppPermission
+
+[//]: # (### MApp Management)
+
+[//]: # (- checkIfMAppIsEnabled)
+
+[//]: # (- canEnableMApps)
+
+[//]: # (- requestAddMAppPermissionChallenge)
+
+[//]: # (- requestAppendMAppFieldChallenge)
+
+[//]: # (- requestRevokeMAppPermissionChallenge)
+
+[//]: # (- addMAppPermission)
+
+[//]: # (- appendMAppField)
+
+[//]: # (- revokeMAppPermission)
 ### Offchain Resolvers
 - getAllOffchainResolvers
-
-Contributing
-Contributions are welcome! If you have suggestions or find issues, please open an issue or submit a pull request on the GitHub repository.
-
 
 ### Benefits
 Simplified ENS Integration: Abstracts the complexities of interacting with the Ethereum blockchain and ENS smart contracts.

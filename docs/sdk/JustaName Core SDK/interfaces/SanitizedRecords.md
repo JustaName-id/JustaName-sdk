@@ -14,7 +14,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L15)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L15)
 
 ***
 
@@ -24,7 +24,17 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L24)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L26)
+
+***
+
+### allTexts
+
+> **allTexts**: [`Text`](Text.md)[]
+
+#### Defined in
+
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L25)
 
 ***
 
@@ -34,7 +44,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L17)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L17)
 
 ***
 
@@ -44,7 +54,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L18)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L18)
 
 ***
 
@@ -54,7 +64,17 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L26)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:29](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L29)
+
+***
+
+### contentHashUri
+
+> **contentHashUri**: `null` \| `string`
+
+#### Defined in
+
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L28)
 
 ***
 
@@ -64,7 +84,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L21)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L22)
 
 ***
 
@@ -74,7 +94,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L19)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:20](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L20)
 
 ***
 
@@ -84,7 +104,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:20](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L20)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:21](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L21)
 
 ***
 
@@ -94,7 +114,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L13)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L13)
 
 ***
 
@@ -104,7 +124,17 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L12)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L12)
+
+***
+
+### header?
+
+> `optional` **header**: `string`
+
+#### Defined in
+
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L19)
 
 ***
 
@@ -114,7 +144,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L23)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L24)
 
 ***
 
@@ -124,7 +154,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L14)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L14)
 
 ***
 
@@ -134,7 +164,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L25)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L27)
 
 ***
 
@@ -144,7 +174,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L16)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L16)
 
 ***
 
@@ -154,4 +184,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L22)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L23)

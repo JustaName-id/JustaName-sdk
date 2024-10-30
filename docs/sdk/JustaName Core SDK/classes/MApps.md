@@ -10,11 +10,11 @@
 
 ### new MApps()
 
-> **new MApps**(`__namedParameters`): [`MApps`](MApps.md)
+> **new MApps**(`params`): [`MApps`](MApps.md)
 
 #### Parameters
 
-• **\_\_namedParameters**: [`MAppsParams`](../interfaces/MAppsParams.md)
+• **params**: [`MAppsParams`](../interfaces/MAppsParams.md)
 
 #### Returns
 
@@ -22,47 +22,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:29](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L29)
-
-## Properties
-
-### chainId
-
-> **chainId**: [`ChainId`](../type-aliases/ChainId.md)
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L25)
-
-***
-
-### networks
-
-> **networks**: [`NetworksWithProvider`](../type-aliases/NetworksWithProvider.md)
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L27)
-
-***
-
-### siweConfig?
-
-> `optional` **siweConfig**: `Omit`\<[`SiweConfig`](../interfaces/SiweConfig.md), `"chainId"` \| `"ttl"`\>
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L24)
-
-***
-
-### subnames
-
-> **subnames**: [`Subnames`](Subnames.md)
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L26)
+[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:31](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L31)
 
 ## Methods
 
@@ -80,7 +40,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:141](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L141)
+[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:144](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L144)
 
 ***
 
@@ -100,7 +60,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:149](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L149)
+[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:152](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L152)
 
 ***
 
@@ -122,7 +82,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:79](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L79)
+[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:82](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L82)
 
 ***
 
@@ -146,7 +106,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:36](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L36)
+[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:39](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L39)
 
 ***
 
@@ -164,7 +124,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:93](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L93)
+[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:96](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L96)
 
 ***
 
@@ -182,7 +142,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:109](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L109)
+[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:112](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L112)
 
 ***
 
@@ -200,7 +160,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:125](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L125)
+[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:128](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L128)
 
 ***
 
@@ -218,4 +178,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:160](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L160)
+[packages/@justaname.id/sdk/src/lib/features/mApps/index.ts:163](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/mApps/index.ts#L163)

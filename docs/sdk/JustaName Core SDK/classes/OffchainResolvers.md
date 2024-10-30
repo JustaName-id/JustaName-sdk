@@ -10,11 +10,19 @@
 
 ### new OffchainResolvers()
 
-> **new OffchainResolvers**(): [`OffchainResolvers`](OffchainResolvers.md)
+> **new OffchainResolvers**(`params`): [`OffchainResolvers`](OffchainResolvers.md)
+
+#### Parameters
+
+• **params**: [`OffchainResolversParams`](../interfaces/OffchainResolversParams.md)
 
 #### Returns
 
 [`OffchainResolvers`](OffchainResolvers.md)
+
+#### Defined in
+
+[packages/@justaname.id/sdk/src/lib/features/offchain-resolvers/index.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/offchain-resolvers/index.ts#L12)
 
 ## Methods
 
@@ -28,4 +36,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/offchain-resolvers/index.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/offchain-resolvers/index.ts#L7)
+[packages/@justaname.id/sdk/src/lib/features/offchain-resolvers/index.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/offchain-resolvers/index.ts#L17)

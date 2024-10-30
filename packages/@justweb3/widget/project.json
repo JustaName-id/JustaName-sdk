@@ -32,6 +32,18 @@
         "parallel": false
       }
     },
+    "typedoc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "typedoc"
+          }
+        ],
+        "cwd": "packages/@justweb3/widget",
+        "parallel": false
+      }
+    },
     "buildProject": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],

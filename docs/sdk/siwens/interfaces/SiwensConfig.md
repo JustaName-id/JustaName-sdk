@@ -14,7 +14,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L23)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L23)
 
 ***
 
@@ -24,4 +24,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L24)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L24)
