@@ -41,5 +41,5 @@ jobs:
           SIWENS_PRIVATE_KEY: ${{ secrets.SIWENS_PRIVATE_KEY }}
           SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
           SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
-        run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console --verbose
+        run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console
       - run: npx nx affected -t build --exclude=justaname-mono-sdk,console

@@ -199,13 +199,6 @@ export const SignInDialog: FC<SignInDialogProps> = ({
           (resolver) => resolver.chainId === chainId
         );
 
-        console.log(
-          name.ens,
-          resolverAddress,
-          offchainResolver?.resolverAddress,
-          name.records.resolverAddress
-        );
-
         return !(
           name.records.resolverAddress !== resolverAddress &&
           name.records.resolverAddress !== offchainResolver?.resolverAddress
