@@ -30,8 +30,7 @@
         ],
         "cwd": "packages/@justweb3/widget",
         "parallel": false
-      },
-      "dependsOn": ["^build"]
+      }
     },
     "typedoc": {
       "executor": "nx:run-commands",
@@ -83,14 +82,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      },
-      "dependsOn": [
-        "lint",
-        {
-          "dependencies": true,
-          "target": "buildProject"
-        }
-      ]
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
