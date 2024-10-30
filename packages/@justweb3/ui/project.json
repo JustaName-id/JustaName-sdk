@@ -42,7 +42,8 @@
         ],
         "cwd": "packages/@justweb3/ui",
         "parallel": false
-      }
+      },
+      "dependsOn": ["^build"]
     },
     "buildProject": {
       "executor": "@nx/rollup:rollup",

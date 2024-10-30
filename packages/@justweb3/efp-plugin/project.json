@@ -1,7 +1,7 @@
 {
   "name": "@justweb3/efp-plugin",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/plugins/efp/src",
+  "sourceRoot": "packages/@justweb3/efp-plugin/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -9,7 +9,7 @@
       "executor": "@nx/storybook:storybook",
       "options": {
         "port": 4404,
-        "configDir": "packages/plugins/efp/.storybook"
+        "configDir": "packages/@justweb3/efp-plugin/.storybook"
       },
       "configurations": {
         "ci": {
@@ -25,7 +25,7 @@
             "command": "typedoc"
           }
         ],
-        "cwd": "packages/plugins/efp",
+        "cwd": "packages/@justweb3/efp-plugin",
         "parallel": false
       }
     },
@@ -40,19 +40,20 @@
             "command": "node update-package-json.js"
           }
         ],
-        "cwd": "packages/plugins/efp",
+        "cwd": "packages/@justweb3/efp-plugin",
         "parallel": false
-      }
+      },
+      "dependsOn": ["^build"]
     },
     "buildProject": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "packages/plugins/efp/dist",
-        "tsConfig": "packages/plugins/efp/tsconfig.lib.json",
-        "project": "packages/plugins/efp/package.json",
-        "entryFile": "packages/plugins/efp/src/index.ts",
+        "outputPath": "packages/@justweb3/efp-plugin/dist",
+        "tsConfig": "packages/@justweb3/efp-plugin/tsconfig.lib.json",
+        "project": "packages/@justweb3/efp-plugin/package.json",
+        "entryFile": "packages/@justweb3/efp-plugin/src/index.ts",
         "external": [
           "react",
           "react-dom",
@@ -62,13 +63,13 @@
           "@justaname.id/sdk",
           "@justweb3/widget"
         ],
-        "rollupConfig": "packages/plugins/efp/rollup.config.cjs",
+        "rollupConfig": "packages/@justweb3/efp-plugin/rollup.config.cjs",
         "generateExportsField": true,
         "compiler": "swc",
         "format": ["esm"],
         "assets": [
           {
-            "glob": "packages/plugins/efp/README.md",
+            "glob": "packages/@justweb3/efp-plugin/README.md",
             "input": ".",
             "output": "."
           }
@@ -103,31 +104,31 @@
       "options": {
         "fix": true,
         "lintFilePatterns": [
-          "packages/plugins/efp/**/*.{ts,tsx,js,jsx}",
-          "packages/plugins/efp/package.json"
+          "packages/@justweb3/efp-plugin/**/*.{ts,tsx,js,jsx}",
+          "packages/@justweb3/efp-plugin/package.json"
         ]
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs plugins/efp {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs @justweb3/efp-plugin {args.ver} {args.tag}",
       "dependsOn": ["build"]
     },
     "nx-release-publish": {
       "options": {
-        "packageRoot": "packages/plugins/efp/dist"
+        "packageRoot": "packages/@justweb3/efp-plugin/dist"
       },
       "dependsOn": ["^build", "build", "^@justaname.id/react:build"]
     },
     "release:package": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx semantic-release --debug --extends=./packages/plugins/efp/release.config.js"
+        "command": "npx semantic-release --debug --extends=./packages/@justweb3/efp-plugin/release.config.js"
       }
     },
     "update-deps": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx rjp ./packages/plugins/efp/dist/package.json $PACKAGE_NAME $VERSION"
+        "command": "npx rjp ./packages/@justweb3/efp-plugin/dist/package.json $PACKAGE_NAME $VERSION"
       }
     }
   }

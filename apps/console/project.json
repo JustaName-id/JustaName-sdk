@@ -15,10 +15,7 @@
         "config": "apps/console/next.config.js"
       },
       "dependsOn": [
-        {
-          "dependencies": true,
-          "target": "buildProject"
-        }
+        "^build"
       ]
     },
     "serve": {

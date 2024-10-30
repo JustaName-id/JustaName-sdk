@@ -42,7 +42,8 @@
         ],
         "cwd": "packages/@justverified/plugin",
         "parallel": false
-      }
+      },
+      "dependsOn": ["^build"]
     },
     "buildProject": {
       "executor": "@nx/rollup:rollup",

@@ -30,7 +30,8 @@
         ],
         "cwd": "packages/@justweb3/widget",
         "parallel": false
-      }
+      },
+      "dependsOn": ["^build"]
     },
     "typedoc": {
       "executor": "nx:run-commands",

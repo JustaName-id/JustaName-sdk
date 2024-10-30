@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[packages/plugins/efp/src/lib/hooks/useFollowers/index.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/plugins/efp/src/lib/hooks/useFollowers/index.ts#L43)
+[packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts:43](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts#L43)
 
 ***
 
@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[packages/plugins/efp/src/lib/hooks/useFollowers/index.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/plugins/efp/src/lib/hooks/useFollowers/index.ts#L42)
+[packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts:42](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts#L42)
 
 ***
 
@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[packages/plugins/efp/src/lib/hooks/useFollowers/index.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/plugins/efp/src/lib/hooks/useFollowers/index.ts#L48)
+[packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts:48](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts#L48)
 
 ***
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[packages/plugins/efp/src/lib/hooks/useFollowers/index.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/plugins/efp/src/lib/hooks/useFollowers/index.ts#L50)
+[packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts#L50)
 
 ***
 
@@ -62,7 +62,7 @@
 
 #### Defined in
 
-[packages/plugins/efp/src/lib/hooks/useFollowers/index.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/plugins/efp/src/lib/hooks/useFollowers/index.ts#L51)
+[packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts#L51)
 
 ***
 
@@ -72,4 +72,4 @@
 
 #### Defined in
 
-[packages/plugins/efp/src/lib/hooks/useFollowers/index.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/plugins/efp/src/lib/hooks/useFollowers/index.ts#L49)
+[packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts:49](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/efp-plugin/src/lib/hooks/useFollowers/index.ts#L49)

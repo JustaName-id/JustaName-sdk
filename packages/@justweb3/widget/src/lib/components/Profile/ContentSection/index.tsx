@@ -3,6 +3,7 @@ import {
   useAccountEnsNames,
   useAccountSubnames,
   useEnsAvatar,
+  useMountedAccount,
 } from '@justaname.id/react';
 import { SanitizedRecords, SubnameRecordsRoute } from '@justaname.id/sdk';
 import {
@@ -47,15 +48,23 @@ const ContentSection: React.FC<ContentProps> = ({
   onEdit,
   plugins,
 }) => {
+  const { chainId: connectedWalletChainId } = useMountedAccount();
   const { accountSubnames } = useAccountSubnames();
   const { accountEnsNames } = useAccountEnsNames();
   const [tab, setTab] = React.useState('Main');
   const isProfileSelf = useMemo(() => {
     return (
-      accountSubnames?.map((subname) => subname.ens).includes(fullSubname) ||
-      accountEnsNames?.map((ens) => ens.ens).includes(fullSubname)
+      (accountSubnames?.map((subname) => subname.ens).includes(fullSubname) ||
+        accountEnsNames?.map((ens) => ens.ens).includes(fullSubname)) &&
+      chainId === connectedWalletChainId
     );
-  }, [fullSubname, accountSubnames, accountEnsNames]);
+  }, [
+    fullSubname,
+    accountSubnames,
+    accountEnsNames,
+    connectedWalletChainId,
+    chainId,
+  ]);
   const { createPluginApi } = useContext(PluginContext);
 
   const { sanitizeEnsImage } = useEnsAvatar();

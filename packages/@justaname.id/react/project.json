@@ -42,7 +42,8 @@
         ],
         "cwd": "packages/@justaname.id/react",
         "parallel": false
-      }
+      },
+      "dependsOn": ["^build"]
     },
     "buildProject": {
       "executor": "@nx/rollup:rollup",

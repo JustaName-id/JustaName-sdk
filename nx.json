@@ -163,7 +163,7 @@
       "packages/@justweb3/ui",
       "packages/@justweb3/widget",
       "packages/@justverified/plugin",
-      "packages/plugins/efp"
+      "packages/@justweb3/efp-plugin"
     ]
   },
   "defaultBase": "main"

@@ -14,7 +14,7 @@
 
 #### Defined in
 
-[packages/plugins/efp/src/lib/hooks/useFollowState/index.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/plugins/efp/src/lib/hooks/useFollowState/index.ts#L13)
+[packages/@justweb3/efp-plugin/src/lib/hooks/useFollowState/index.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/efp-plugin/src/lib/hooks/useFollowState/index.ts#L13)
 
 ***
 
@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[packages/plugins/efp/src/lib/hooks/useFollowState/index.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/plugins/efp/src/lib/hooks/useFollowState/index.ts#L12)
+[packages/@justweb3/efp-plugin/src/lib/hooks/useFollowState/index.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/efp-plugin/src/lib/hooks/useFollowState/index.ts#L12)
 
 ***
 
@@ -46,4 +46,4 @@
 
 #### Defined in
 
-[packages/plugins/efp/src/lib/hooks/useFollowState/index.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/plugins/efp/src/lib/hooks/useFollowState/index.ts#L14)
+[packages/@justweb3/efp-plugin/src/lib/hooks/useFollowState/index.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/efp-plugin/src/lib/hooks/useFollowState/index.ts#L14)

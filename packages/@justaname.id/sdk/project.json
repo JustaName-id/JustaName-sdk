@@ -32,7 +32,8 @@
         ],
         "cwd": "packages/@justaname.id/sdk",
         "parallel": false
-      }
+      },
+      "dependsOn": ["^build"]
     },
     "buildProject": {
       "executor": "@nx/rollup:rollup",
