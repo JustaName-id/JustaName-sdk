@@ -24,7 +24,9 @@
       "@justaname.id/react": ["packages/@justaname.id/react"],
       "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
       "@justaname.id/siwens": ["packages/@justaname.id/siwens"],
-      "@justverified/plugin": ["packages/@justverified/plugin"]
+      "@justverified/plugin": ["packages/@justverified/plugin"],
+      "justweb3-efp-plugin": ["packages/plugins/efp"],
+
     }
   },
   "include": [

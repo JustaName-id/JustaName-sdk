@@ -10,7 +10,8 @@
 
 /* SectionItemList styles */
 .sectionItemList {
-    display: grid;
+    display: flex;
+    flex-direction: row;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     align-items: center;
     gap: 10px;
@@ -20,13 +21,7 @@
 @media (max-width: 768px) {
     .sectionItemList {
         gap: 10px;
-    }
-}
-
-@media (min-width: 768px) {
-    .sectionItemList {
-        display: flex;
-        flex-direction: row;
+        flex-wrap: wrap;
     }
 }
 

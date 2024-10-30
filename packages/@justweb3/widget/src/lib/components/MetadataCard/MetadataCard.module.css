@@ -38,6 +38,18 @@
     font-family: var(--justweb3-font-family);
 }
 
+.textOther {
+    font-size: 10px;
+    font-weight: 800;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 120%;
+    margin: 0;
+    font-family: var(--justweb3-font-family);
+}
+
 .link {
     color: black;
     font-size: 10px;

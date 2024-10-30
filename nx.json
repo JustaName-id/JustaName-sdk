@@ -162,7 +162,8 @@
       "packages/@justaname.id/siwens",
       "packages/@justweb3/ui",
       "packages/@justweb3/widget",
-      "packages/@justverified/plugin"
+      "packages/@justverified/plugin",
+      "packages/plugins/efp"
     ]
   },
   "defaultBase": "main"

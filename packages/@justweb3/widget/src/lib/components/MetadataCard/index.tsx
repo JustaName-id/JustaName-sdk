@@ -1,9 +1,8 @@
 'use client';
 import React from 'react';
-import { A, Badge, P, Flex } from '@justweb3/ui';
+import { A, Badge, Flex, P } from '@justweb3/ui';
 import styles from './MetadataCard.module.css';
 import { SUPPORTED_SOCIALS } from '@justaname.id/sdk'; // Import CSS module
-
 
 interface MetadataCardProps {
   variant: 'address' | 'other' | 'social' | 'contentHash';
@@ -28,9 +27,9 @@ export const MetadataCard: React.FC<MetadataCardProps> = ({
   const linkProps = {
     href:
       variant === 'social'
-        ? SUPPORTED_SOCIALS
-            .find((social) => social.identifier === title)
-            ?.link(value) || ''
+        ? SUPPORTED_SOCIALS.find((social) => social.identifier === title)?.link(
+            value
+          ) || ''
         : value,
     target: '_blank',
     rel: 'noopener noreferrer',
@@ -38,7 +37,13 @@ export const MetadataCard: React.FC<MetadataCardProps> = ({
   };
 
   return (
-    <Badge className={styles.badge} value={value}>
+    <Badge
+      className={styles.badge}
+      value={value}
+      style={{
+        borderRadius: variant === 'other' ? '5px' : '16px',
+      }}
+    >
       <Flex className={styles.flexRow}>
         {(variant === 'address' ||
           variant === 'social' ||
@@ -55,9 +60,9 @@ export const MetadataCard: React.FC<MetadataCardProps> = ({
                 : 'calc(100%-2*24px-2*5px)',
           }}
         >
-          {(variant === 'address' || variant === 'other') && (
+          {variant === 'address' && (
             <P className={styles.textStyle}>
-              {variant === 'address' && value ? formatText(value, 10) : title}
+              {variant === 'address' && value ? formatText(value, 10) : ''}
             </P>
           )}
 
@@ -67,8 +72,21 @@ export const MetadataCard: React.FC<MetadataCardProps> = ({
             </A>
           )}
 
+          {variant === 'other' && (
+            <P className={styles.textOther}>
+              {variant === 'other' && title ? title : ''}
+            </P>
+          )}
+
           {variant === 'other' && value && (
-            <P className={styles.textStyle}>{formatText(value)}</P>
+            <P
+              className={styles.textStyle}
+              style={{
+                fontWeight: 500,
+              }}
+            >
+              {formatText(value)}
+            </P>
           )}
 
           {variant === 'contentHash' && (

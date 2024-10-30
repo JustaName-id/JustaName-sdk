@@ -89,6 +89,11 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
       open={open}
       handleClose={() => handleOpenDialogInternal(false)}
       disableOverlay={disableOverlay}
+      contentStyle={{
+        maxWidth: '400px',
+        width: '100%',
+        minWidth: '300px',
+      }}
       header={
         <div
           style={{
@@ -123,9 +128,7 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
           }}
         >
           <Flex justify="space-between" direction="row" gap="10px">
-            <Badge
-              value={connectedEns?.ens}
-            >
+            <Badge value={connectedEns?.ens}>
               <SPAN
                 style={{
                   fontSize: '10px',

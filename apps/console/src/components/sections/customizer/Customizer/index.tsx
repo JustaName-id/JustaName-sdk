@@ -1,7 +1,6 @@
 import { Input } from '../../../ui/input';
 import { ClaimSection } from '../ClaimSection';
 import { SignSection } from '../SignSection';
-import { VerifiedSection } from '../VerifiedSection';
 import { JustWeb3Context, useDebounce } from '@justweb3/widget';
 import { ColorSelector } from '../ColorSelector';
 import { useContext, useEffect, useState } from 'react';
@@ -9,6 +8,7 @@ import { useJustWeb3Theme } from '@justweb3/ui';
 import { Switch } from '../../../ui/switch';
 import { useSwitchChain } from 'wagmi';
 import { useMountedAccount } from '@justaname.id/react';
+import { PluginsSection } from '../PluginsSection';
 
 export const Customizer = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
@@ -25,7 +25,7 @@ export const Customizer = () => {
   }, [logoUrlDebounced]);
 
   return (
-    <div className="flex flex-col gap-[5px] min-w-[350px] w-[350px] border-r-[1px] pointer-events-auto py-5 px-2.5 max-h-[calc(100vh-60px)] overflow-y-auto">
+    <div className="flex flex-col gap-[5px] min-w-[350px] w-[350px] border-r-[1px] pointer-events-auto py-5 px-2.5 max-h-[calc(100vh-60px)] overflow-y-scroll">
       <div className="flex flex-col gap-2.5">
         <p className="text-base text-black font-bold leading-[125%] my-[5px]">
           Customize Interface
@@ -45,7 +45,10 @@ export const Customizer = () => {
             onColorChange={(color: string) => {
               changeTheme('primary', color);
               document.documentElement.style.setProperty('--primary', color);
-              document.documentElement.style.setProperty('--rk-colors-accentColor', color);
+              document.documentElement.style.setProperty(
+                '--rk-colors-accentColor',
+                color
+              );
             }}
           />
         </div>
@@ -62,7 +65,7 @@ export const Customizer = () => {
         </div>
       </div>
 
-      <div className="w-full h-[1px] bg-[#CBD5E180]" />
+      <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
 
       <div className="flex flex-row items-center justify-between w-full py-[5px]">
         <p className="text-base text-black font-bold leading-[125%] my-[5px]">
@@ -82,12 +85,12 @@ export const Customizer = () => {
           />
         </div>
       </div>
-      <div className="w-full h-[1px] bg-[#CBD5E180]" />
+      <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
       <ClaimSection />
-      <div className="w-full h-[1px] bg-[#CBD5E180]" />
+      <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
       <SignSection />
-      <div className="w-full h-[1px] bg-[#CBD5E180]" />
-      <VerifiedSection />
+      <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
+      <PluginsSection />
     </div>
   );
 };

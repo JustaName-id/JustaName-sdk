@@ -4,7 +4,6 @@
     "emitDecoratorMetadata": true,
     "outDir": "",
     "module": "esnext",
-    "moduleResolution": "node",
     "noUnusedLocals": false,
     "paths": {
       "@justaname.id/siwens": ["packages/@justaname.id/siwens"],

@@ -112,10 +112,6 @@ const Session = () => {
                     coinType: coinType as SupportedCoins,
                   },
                 ],
-                contentHash: {
-                  protocolType: contentHashProtocol,
-                  decoded: contentHash,
-                },
               });
             }}
           >
