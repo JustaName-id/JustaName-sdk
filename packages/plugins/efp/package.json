@@ -1,6 +1,6 @@
 {
-  "name": "justweb3-efp-plugin",
-  "version": "0.1.3",
+  "name": "@justweb3/efp-plugin",
+  "version": "0.1.4",
   "dependencies": {
     "@justweb3/ui": "0.0.41",
     "@justweb3/widget": "0.0.41",
