@@ -1,3 +1,19 @@
+## 0.1.0 (2024-10-30)
+
+
+### 🚀 Features
+
+- remove mapps from justverified ([2898c52](https://github.com/JustaName-id/JustaName-sdk/commit/2898c52))
+
+- efp ([36fcc15](https://github.com/JustaName-id/JustaName-sdk/commit/36fcc15))
+
+- efp and storybook for react sdk ([f0c5c7a](https://github.com/JustaName-id/JustaName-sdk/commit/f0c5c7a))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.38 (2024-10-21)
 
 
