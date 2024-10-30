@@ -1,3 +1,20 @@
+## 0.2.105 (2024-10-30)
+
+
+### 🩹 Fixes
+
+- **swdk:** reject subname ([4baeb1c](https://github.com/JustaName-id/JustaName-sdk/commit/4baeb1c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.38
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.2.104 (2024-10-30)
 
 
