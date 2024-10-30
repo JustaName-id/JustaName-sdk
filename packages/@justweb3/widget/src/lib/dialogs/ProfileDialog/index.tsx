@@ -298,9 +298,6 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       setIsSubmitting(false);
       setTempAvatar(null);
       setTempBanner(null);
-      if (records?.sanitizedRecords) {
-        form.reset(buildInitialValues(records.sanitizedRecords));
-      }
       setEditMode(false);
     } catch (error) {
       console.error('Error updating subname:', error);

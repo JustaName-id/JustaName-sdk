@@ -1,5 +1,5 @@
 {
-  "name": "efp-plugin",
+  "name": "justweb3-efp-plugin",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/plugins/efp/src",
   "projectType": "library",
@@ -8,7 +8,7 @@
     "storybook": {
       "executor": "@nx/storybook:storybook",
       "options": {
-        "port": 4401,
+        "port": 4404,
         "configDir": "packages/plugins/efp/.storybook"
       },
       "configurations": {
@@ -22,7 +22,7 @@
       "options": {
         "commands": [
           {
-            "command": "nx buildProject plugins/efp"
+            "command": "nx buildProject justweb3-efp-plugin"
           },
           {
             "command": "node update-package-json.js"

@@ -1,6 +1,6 @@
 import { useFollowing } from '../../hooks/useFollowing';
 import { useFollowers, useStats } from '../../hooks';
-import { FC, useRef, useState } from 'react';
+import { FC, Fragment, useRef, useState } from 'react';
 import { Flex, LoadingSpinner, P } from '@justweb3/ui';
 import { JustEnsCard } from '@justweb3/widget';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
@@ -178,13 +178,15 @@ export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
           {following?.pages
             .flatMap((follow) => follow.following)
             .map((follow) => (
-              <JustEnsCard
-                addressOrEns={follow.data}
-                chainId={1}
-                style={{
-                  width: '100%',
-                }}
-              />
+              <Fragment key={ens + follow.data}>
+                <JustEnsCard
+                  addressOrEns={follow.data}
+                  chainId={1}
+                  style={{
+                    width: '100%',
+                  }}
+                />
+              </Fragment>
             ))}
 
           {isFollowingFetching && hasMoreFollowing && (
@@ -216,13 +218,15 @@ export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
           {followers?.pages
             .flatMap((follow) => follow.followers)
             .map((follow) => (
-              <JustEnsCard
-                addressOrEns={follow.address}
-                chainId={1}
-                style={{
-                  width: '100%',
-                }}
-              />
+              <Fragment key={ens + follow.address}>
+                <JustEnsCard
+                  addressOrEns={follow.address}
+                  chainId={1}
+                  style={{
+                    width: '100%',
+                  }}
+                />
+              </Fragment>
             ))}
 
           {isFollowersFetching && hasMoreFollowers && (
