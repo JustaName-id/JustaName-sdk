@@ -33,4 +33,4 @@
       * [Revoke](api-reference/mapp/permission/revoke.md)
     * [Field](api-reference/mapp/field/README.md)
       * [Append](api-reference/mapp/field/append.md)
-* [Specification](https://firebasestorage.googleapis.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FvyoXIYjGGjTqA4R1wGF2%2Fimports%2FdhJ5K8cABqMqQzbBs5xb%2Fswagger.json?alt=media\&token=655cefba-620e-403a-996f-86f17011649b)
+* [Specification](https://firebasestorage.googleapis.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FvyoXIYjGGjTqA4R1wGF2%2Fimports%2FezRE3W4qiB2JfGTurbkv%2Fswagger.json?alt=media\&token=0f9ec4ae-aa72-4b12-9e5a-8d09bb9a6fdd)
