@@ -1,10 +1,10 @@
 {
   "name": "@justweb3/efp-plugin",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "dependencies": {
-    "@justaname.id/react": "0.3.121",
-    "@justweb3/ui": "0.0.57",
-    "@justweb3/widget": "0.0.57",
+    "@justaname.id/react": "0.3.122",
+    "@justweb3/ui": "0.0.58",
+    "@justweb3/widget": "0.0.58",
     "@tanstack/react-query": "^5.28.4",
     "axios": "^1.6.0"
   },
