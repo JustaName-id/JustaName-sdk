@@ -92,7 +92,6 @@ export const useAddSubname = (
           }
         );
       } else {
-        console.log(params);
         const backendResponse = await fetch(addSubnameEndpoint, {
           method: 'POST',
           headers: {
