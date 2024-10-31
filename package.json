@@ -6,6 +6,11 @@
   "author": "JustaLab",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "remove:cache": "rm -rf node_modules/.cache/rollup-plugin-typescript2",
+    "build:all": "yarn remove:cache && nx run-many -t build --all --parallel=1",
+    "test:all": "yarn remove:cache && nx run-many -t test --all --parallel=1"
+  },
   "dependencies": {
     "@docusaurus/eslint-plugin": "^3.5.2",
     "@ensdomains/address-encoder": "^1.1.2",
