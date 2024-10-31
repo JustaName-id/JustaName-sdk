@@ -6,7 +6,15 @@ import {
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import { useAccount, WagmiProvider } from 'wagmi';
-import { mainnet, sepolia } from 'wagmi/chains';
+import {
+  arbitrum,
+  base,
+  bsc,
+  gnosis,
+  mainnet,
+  optimism,
+  polygon,
+} from 'wagmi/chains';
 import { Meta, StoryObj } from '@storybook/react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { JustaNameProvider, JustaNameProviderConfig } from '../lib/providers';
@@ -185,7 +193,7 @@ export const Example = () => {
   const config = getDefaultConfig({
     appName: 'My RainbowKit App',
     projectId: 'YOUR_PROJECT_ID',
-    chains: [mainnet, sepolia],
+    chains: [mainnet, polygon, bsc, arbitrum, optimism, gnosis, base],
   });
 
   return (
@@ -205,7 +213,7 @@ export const Example = () => {
 
 const meta: Meta<typeof Example> = {
   component: Example,
-  title: 'Hooks/React',
+  title: 'Hooks/MultiChain',
 };
 export default meta;
 type Story = StoryObj<typeof Example>;

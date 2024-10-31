@@ -7,6 +7,6 @@ export default {
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/react/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/packages/plugins/@justweb3/efp-plugin',
+  coverageDirectory: '../../../coverage/packages/@justweb3/efp-plugin',
   passWithNoTests: true,
 };
