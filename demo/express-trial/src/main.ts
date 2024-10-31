@@ -124,6 +124,12 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
 
   const username = req.body.username;
 
+  const text = req.body.text;
+
+  const addresses = req.body.addresses;
+
+  const contentHash = req.body.contentHash;
+
   if (!username) {
     res.status(400).send({ message: 'Username is required' });
     return;
@@ -141,6 +147,9 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
       {
         username,
         ensDomain,
+        text: text,
+        addresses: addresses,
+        contentHash,
       },
       {
         xSignature: req.body.signature,
@@ -150,6 +159,43 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
     );
 
     res.status(201).send(add);
+    return;
+  } catch (error) {
+    if (error instanceof Error) res.status(500).send({ error: error.message });
+  }
+});
+
+app.post('/api/subnames/revoke', async (req: Request<SubnameAdd>, res) => {
+  const ensDomain = process.env.JUSTANAME_ENS_DOMAIN as string;
+
+  const username = req.body.username;
+
+  if (!username) {
+    res.status(400).send({ message: 'Username is required' });
+    return;
+  }
+
+  if (!req.body.address || !req.body.signature || !req.body.message) {
+    res
+      .status(400)
+      .send({ message: 'Address, signature and message are required' });
+    return;
+  }
+
+  try {
+    const revoke = await justaname.subnames.revokeSubname(
+      {
+        username,
+        ensDomain,
+      },
+      {
+        xSignature: req.body.signature,
+        xAddress: req.body.address,
+        xMessage: req.body.message,
+      }
+    );
+
+    res.status(200).send(revoke);
     return;
   } catch (error) {
     if (error instanceof Error) res.status(500).send({ error: error.message });

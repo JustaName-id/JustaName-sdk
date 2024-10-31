@@ -51,7 +51,7 @@ export interface JustaNameContextProps
   // handleJustaNameConfig: (config: JustaNameProviderConfig) => void
   justaname: JustaName;
   routes: typeof defaultRoutes;
-  backendUrl?: string;
+  backendUrl: string;
   selectedNetwork: NetworkWithProvider;
   selectedEnsDomain: string | undefined;
   chainId: ChainId | undefined;
@@ -91,8 +91,8 @@ export const JustaNameProvider: FC<JustaNameProviderProps> = ({
     return !chainId
       ? undefined
       : chainId !== 1 && chainId !== 11155111
-        ? 1
-        : chainId;
+      ? 1
+      : chainId;
   }, [chainId]);
 
   // const [config, setConfig] = useState<JustaNameProviderConfig>(initialConfig);
@@ -130,23 +130,13 @@ export const JustaNameProvider: FC<JustaNameProviderProps> = ({
     ) as NetworkWithProvider;
   }, [configuredNetworks, defaultChain]);
 
-  // const handleJustaNameConfig = (_config: JustaNameProviderConfig) => {
-  //   // console.log('handleJustaNameConfig', _config, config);
-  //   // if (isEqual(_config, config)) return;
-  //   // setConfig(_config);
-  // };
-  //
-  // useEffect(() => {
-  //   handleJustaNameConfig(initialConfig);
-  // }, [initialConfig]);
-  //
   return (
     <QueryClientProvider client={queryClient}>
       <JustaNameContext.Provider
         value={{
           justanameConfig: justanameConfig,
           // handleJustaNameConfig,
-          backendUrl: config.backendUrl,
+          backendUrl: config.backendUrl || '',
           config: justanameConfig.config,
           dev: justanameConfig.dev,
           ensDomains: justanameConfig.ensDomains || [],
