@@ -42,8 +42,7 @@
         ],
         "cwd": "packages/@justaname.id/react",
         "parallel": false
-      },
-      "dependsOn": ["^build"]
+      }
     },
     "buildProject": {
       "executor": "@nx/rollup:rollup",
@@ -75,14 +74,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      },
-      "dependsOn": [
-        "lint",
-        {
-          "dependencies": true,
-          "target": "build"
-        }
-      ]
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",

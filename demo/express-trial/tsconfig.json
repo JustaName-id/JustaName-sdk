@@ -14,8 +14,8 @@
     "esModuleInterop": true,
     "declarationMap": false,
     "paths": {
-      "@justaname.id/sdk": ["packages/@justaname.id/sdk/dist"],
-      "@justaname.id/siwens": ["packages/@justaname.id/siwens/dist"]
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"]
     }
   }
 }

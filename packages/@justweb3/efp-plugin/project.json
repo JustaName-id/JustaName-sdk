@@ -42,8 +42,7 @@
         ],
         "cwd": "packages/@justweb3/efp-plugin",
         "parallel": false
-      },
-      "dependsOn": ["^build"]
+      }
     },
     "buildProject": {
       "executor": "@nx/rollup:rollup",
@@ -83,20 +82,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      },
-      "dependsOn": [
-        "lint",
-        {
-          "projects": [
-            "@justaname.id/siwens",
-            "@justaname.id/sdk",
-            "@justaname.id/react",
-            "@justweb3/ui",
-            "@justweb3/widget"
-          ],
-          "target": "build"
-        }
-      ]
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
