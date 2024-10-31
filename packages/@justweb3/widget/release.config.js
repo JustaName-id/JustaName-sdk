@@ -16,6 +16,7 @@ module.exports = {
   ],
   tagFormat: artifactName + '-v${version}',
   commitPaths: [`${libPath}/*`],
+
   assets: [`${libPath}/README.md`, `${libPath}/CHANGELOG.md`],
   plugins: [
     '@semantic-release/commit-analyzer',
