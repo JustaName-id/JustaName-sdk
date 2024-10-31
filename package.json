@@ -6,6 +6,9 @@
   "author": "JustaLab",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build:all": "rm -rf node_modules/.cache/rollup-plugin-typescript2 && nx run-many -t build --all"
+  },
   "dependencies": {
     "@docusaurus/eslint-plugin": "^3.5.2",
     "@ensdomains/address-encoder": "^1.1.2",

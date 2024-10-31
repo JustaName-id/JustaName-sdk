@@ -26,16 +26,16 @@ if (packageJson.exports) {
   });
 }
 
-// Write the modified package.json to the dist folder
-console.log('Writing package.json to dist folder');
-// I want to see the content of __dirname
-fs.readdirSync(__dirname).forEach((file) => {
-  console.log(file);
-});
-
-fs.readdirSync(path.join(__dirname, 'dist')).forEach((file) => {
-  console.log(file);
-});
+// // Write the modified package.json to the dist folder
+// console.log('Writing package.json to dist folder');
+// // I want to see the content of __dirname
+// fs.readdirSync(__dirname).forEach((file) => {
+//   console.log(file);
+// });
+//
+// fs.readdirSync(path.join(__dirname, 'dist')).forEach((file) => {
+//   console.log(file);
+// });
 
 const distPath = path.join(__dirname, 'dist', 'package.json');
 fs.writeFileSync(distPath, JSON.stringify(packageJson, null, 2));
