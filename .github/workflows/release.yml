@@ -35,6 +35,7 @@ jobs:
         run: |
           yarn install --immutable
       - run: npx nx reset
+      - run: rm -rf node_modules/.cache/rollup-plugin-typescript2
       - name: Build and Test
         env:
           SDK_JUSTANAME_TEST_API_KEY: ${{ secrets.SDK_JUSTANAME_TEST_API_KEY }}
@@ -49,7 +50,7 @@ jobs:
           SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
           SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
         run: |
-          npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console
+          npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console --parallel=1
 
       - name: Pull latest changes from main
         run: git pull origin main
@@ -63,6 +64,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - run: rm -rf node_modules/.cache/rollup-plugin-typescript2
       - name: Release
         run: |
           npx nx release  --specifier=patch --yes
