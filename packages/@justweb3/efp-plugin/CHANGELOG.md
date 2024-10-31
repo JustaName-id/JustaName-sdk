@@ -1,3 +1,12 @@
+## 0.1.5 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.109
+- Updated @justweb3/ui to 0.0.45
+- Updated @justweb3/widget to 0.0.45
+
 ## 0.1.4 (2024-10-30)
 
 This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
