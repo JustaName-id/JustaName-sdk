@@ -28,6 +28,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: yarn install
       - run: npx nx reset
+      - run: rm -rf node_modules/.cache/rollup-plugin-typescript2
       - name: Run Tests
         env:
           SDK_JUSTANAME_TEST_API_KEY: ${{ secrets.SDK_JUSTANAME_TEST_API_KEY }}
@@ -41,5 +42,6 @@ jobs:
           SIWENS_PRIVATE_KEY: ${{ secrets.SIWENS_PRIVATE_KEY }}
           SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
           SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
-        run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console
-      - run: npx nx affected -t build --exclude=justaname-mono-sdk,console
+        run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console --parallel=1
+      - run: rm -rf node_modules/.cache/rollup-plugin-typescript2
+      - run: npx nx affected -t build --exclude=justaname-mono-sdk,console --parallel=1
