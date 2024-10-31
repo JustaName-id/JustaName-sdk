@@ -1,3 +1,10 @@
+## 0.3.123 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.120
+
 ## 0.3.122 (2024-10-31)
 
 
