@@ -1,3 +1,20 @@
+## 0.3.127 (2024-10-31)
+
+
+### 🚀 Features
+
+- remove console.log ([9c75dcc](https://github.com/JustaName-id/JustaName-sdk/commit/9c75dcc))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.124
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.126 (2024-10-31)
 
 
