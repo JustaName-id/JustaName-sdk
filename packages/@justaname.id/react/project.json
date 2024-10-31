@@ -38,6 +38,9 @@
           },
           {
             "command": "node update-package-json.js"
+          },
+          {
+            "command": "rm -rf node_modules"
           }
         ],
         "cwd": "packages/@justaname.id/react",

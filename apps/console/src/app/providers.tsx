@@ -60,7 +60,6 @@ export const Providers: React.FC<ProviderProps> = (props) => {
   };
 
   const queryClient = new QueryClient();
-
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
