@@ -7,7 +7,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build:all": "rm -rf node_modules/.cache/rollup-plugin-typescript2 && nx run-many -t build --all"
+    "remove:cache": "rm -rf node_modules/.cache/rollup-plugin-typescript2",
+    "build:all": "yarn remove:cache && nx run-many -t build --all",
+    "test:all": "yarn remove:cache && nx run-many -t test --all"
   },
   "dependencies": {
     "@docusaurus/eslint-plugin": "^3.5.2",
