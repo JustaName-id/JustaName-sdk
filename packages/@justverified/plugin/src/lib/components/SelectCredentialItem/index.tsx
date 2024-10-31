@@ -4,15 +4,13 @@ import {
   ClickableItem,
   DoneIcon,
   LoadingSpinner,
-} from '@justweb3/ui';
-import { Credentials } from '../../types';
-import {
   DiscordIcon,
   EmailIcon,
   GithubIcon,
   TelegramIcon,
   TwitterIcon,
-} from '../../icons';
+} from '@justweb3/ui';
+import { Credentials } from '../../types';
 import { EthereumEip712Signature2021 } from '../../types/ethereumEip712Signature';
 import moment from 'moment';
 
@@ -70,13 +68,16 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
   }, [loading, hover]);
   return (
     <ClickableItem
-      name={
+      style={{
+        width: '100%',
+      }}
+      title={
         (credential === 'twitter'
           ? 'Twitter (X)'
           : credential.charAt(0).toUpperCase() + credential.slice(1)) +
         (username ? `: ${username}` : '')
       }
-      status={
+      subtitle={
         username ? 'Expires in ' + moment(expirationDate).fromNow() : undefined
       }
       onClick={onClick}

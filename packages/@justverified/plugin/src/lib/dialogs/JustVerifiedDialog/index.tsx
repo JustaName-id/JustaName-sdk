@@ -89,6 +89,11 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
       open={open}
       handleClose={() => handleOpenDialogInternal(false)}
       disableOverlay={disableOverlay}
+      contentStyle={{
+        maxWidth: '400px',
+        width: '100%',
+        minWidth: '300px',
+      }}
       header={
         <div
           style={{
@@ -123,12 +128,13 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
           }}
         >
           <Flex justify="space-between" direction="row" gap="10px">
-            <Badge>
+            <Badge value={connectedEns?.ens}>
               <SPAN
                 style={{
                   fontSize: '10px',
                   lineHeight: '10px',
                   fontWeight: 900,
+                  color: 'var(--justweb3-primary-color)',
                 }}
               >
                 {connectedEns?.ens}
@@ -145,7 +151,7 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
             gap={'15px'}
             style={{
               maxHeight: '40vh',
-              overflowY: 'scroll',
+              overflowY: 'auto',
               overflowX: 'hidden',
             }}
           >
@@ -243,27 +249,31 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                 );
               })}
 
-            {credentials.includes('email') && verifiedRecords?.email ? (
-              <SelectCredentialItem
-                credential={'email'}
-                selectedCredential={selectedCredential}
-                onClick={() => {
-                  setSelectedCredential('email');
-                }}
-                credentialValue={verifiedRecords?.email}
-                disabled={isVerifiedRecordsPending}
-              />
-            ) : (
-              <EmailCredentialItem
-                mApp={mApp}
-                mAppsAlreadyEnabled={mAppsAlreadyEnabled}
-                refetchRecords={refetchRecords}
-                refetchVerifyRecords={refetchVerifyRecords}
-                verificationBackendUrl={verificationBackendUrl}
-                selectedCredential={selectedCredential}
-                credentialValue={verifiedRecords?.email}
-                disabled={isVerifiedRecordsPending}
-              />
+            {credentials.includes('email') && (
+              <>
+                {verifiedRecords?.email ? (
+                  <SelectCredentialItem
+                    credential={'email'}
+                    selectedCredential={selectedCredential}
+                    onClick={() => {
+                      setSelectedCredential('email');
+                    }}
+                    credentialValue={verifiedRecords?.email}
+                    disabled={isVerifiedRecordsPending}
+                  />
+                ) : (
+                  <EmailCredentialItem
+                    mApp={mApp}
+                    mAppsAlreadyEnabled={mAppsAlreadyEnabled}
+                    refetchRecords={refetchRecords}
+                    refetchVerifyRecords={refetchVerifyRecords}
+                    verificationBackendUrl={verificationBackendUrl}
+                    selectedCredential={selectedCredential}
+                    credentialValue={verifiedRecords?.email}
+                    disabled={isVerifiedRecordsPending}
+                  />
+                )}
+              </>
             )}
           </Flex>
         </Flex>

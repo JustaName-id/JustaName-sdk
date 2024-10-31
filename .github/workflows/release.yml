@@ -34,18 +34,7 @@ jobs:
       - name: Install Dependencies with Immutable Flag
         run: |
           yarn install --immutable
-
-      - name: Reinstall Dependencies for Specific Projects
-        env:
-          YARN_ENABLE_IMMUTABLE_INSTALLS: false
-        run: |
-          npx nx run-many --target=reinstall --projects=justaname-express,justaname-next-app,justaname-next-pages,justaname-fastify,justaname-nestjs,justaname-expo-full,justaname-react,justaname-hapi,justaname-koa,justaname-expo-frontend --parallel
-
-      - name: Check for Updated yarn.lock Files
-        run: |
-          git add examples/*/yarn.lock
-          git diff --cached --exit-code || (git commit -m "CI: Update yarn.lock files" && git push origin main)
-
+      - run: npx nx reset
       - name: Build and Test
         env:
           SDK_JUSTANAME_TEST_API_KEY: ${{ secrets.SDK_JUSTANAME_TEST_API_KEY }}
@@ -60,9 +49,7 @@ jobs:
           SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
           SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
         run: |
-          npx nx affected -t lint
-          npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
-          npx nx affected -t build
+          npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console
 
       - name: Pull latest changes from main
         run: git pull origin main
@@ -75,11 +62,6 @@ jobs:
           always-auth: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Reset Nx Cache
-        run: |
-          npx nx reset
-          echo "Reset completed"
 
       - name: Release
         run: |

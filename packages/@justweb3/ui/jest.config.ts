@@ -7,6 +7,6 @@ export default {
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/react/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/packages/@justaname.id/react-auth',
+  coverageDirectory: '../../../coverage/packages/@justweb3/ui',
   passWithNoTests: true,
 };

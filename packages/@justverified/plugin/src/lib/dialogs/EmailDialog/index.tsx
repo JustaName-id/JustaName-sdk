@@ -8,11 +8,11 @@ import {
   Badge,
   Button,
   Flex,
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
   JustaNameLogoIcon,
+  OTPInput,
+  OTPInputGroup,
+  OTPInputSeparator,
+  OTPInputSlot,
   P,
   SPAN,
 } from '@justweb3/ui';
@@ -150,12 +150,15 @@ export const EmailDialog: FC<EmailDialogProps> = ({
           }}
         >
           <Flex justify="space-between" direction="row" gap="10px">
-            <Badge>
+            <Badge
+              value={connectedToVerification?.ens}
+            >
               <SPAN
                 style={{
                   fontSize: '10px',
                   lineHeight: '10px',
                   fontWeight: 900,
+                  color: 'var(--justweb3-primary-color)',
                 }}
               >
                 {connectedToVerification?.ens}
@@ -176,26 +179,26 @@ export const EmailDialog: FC<EmailDialogProps> = ({
           </Flex>
 
           <Flex>
-            <InputOTP
+            <OTPInput
               maxLength={8}
               value={otp}
               onChange={(e) => setOtp(e)}
               disabled={isVerifyOtpPending || isGenerateOtpPending}
             >
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={3} />
-              </InputOTPGroup>
-              <InputOTPSeparator />
-              <InputOTPGroup>
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
-                <InputOTPSlot index={6} />
-                <InputOTPSlot index={7} />
-              </InputOTPGroup>
-            </InputOTP>
+              <OTPInputGroup>
+                <OTPInputSlot index={0} />
+                <OTPInputSlot index={1} />
+                <OTPInputSlot index={2} />
+                <OTPInputSlot index={3} />
+              </OTPInputGroup>
+              <OTPInputSeparator />
+              <OTPInputGroup>
+                <OTPInputSlot index={4} />
+                <OTPInputSlot index={5} />
+                <OTPInputSlot index={6} />
+                <OTPInputSlot index={7} />
+              </OTPInputGroup>
+            </OTPInput>
           </Flex>
 
           <Flex
@@ -225,7 +228,7 @@ export const EmailDialog: FC<EmailDialogProps> = ({
               loading={isResendOtpPending}
             >
               {timeLeft > 0
-                ? `Resend OTP in ${formatTimeLeft(timeLeft)}`
+                ? `Resend in ${formatTimeLeft(timeLeft)}`
                 : 'Resend OTP'}
             </Button>
 

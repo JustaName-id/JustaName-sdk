@@ -1,6 +1,5 @@
 import { FC, useMemo, useState } from 'react';
-import { ArrowIcon, DoneIcon, Input } from '@justweb3/ui';
-import { EmailIcon } from '../../icons';
+import { ArrowIcon, DoneIcon, EmailIcon, Input } from '@justweb3/ui';
 import { Credentials } from '../../types';
 import { EmailDialog } from '../../dialogs/EmailDialog';
 import { EthereumEip712Signature2021 } from '../../types/ethereumEip712Signature';
@@ -31,6 +30,10 @@ export const EmailCredentialItem: FC<EmailCredentialItemProps> = ({
   const verifiedEmail = useMemo(
     () => credentialValue?.credentialSubject?.email,
     [credentialValue]
+  );
+  const loading = useMemo(
+    () => selectedCredential === 'email',
+    [selectedCredential, 'email']
   );
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,6 +71,7 @@ export const EmailCredentialItem: FC<EmailCredentialItemProps> = ({
       <Input
         style={{
           borderColor: 'var(--justweb3-foreground-color-4)',
+          opacity: loading ? 0.5 : 1,
         }}
         left={<EmailIcon width={30} />}
         right={

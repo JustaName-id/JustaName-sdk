@@ -30,10 +30,9 @@
       "@justaname.id/react": ["packages/@justaname.id/react/src/index.ts"],
       "@justaname.id/sdk": ["packages/@justaname.id/sdk/src/index.ts"],
       "@justaname.id/siwens": ["packages/@justaname.id/siwens/src/index.ts"],
-      "@justverified/plugin": ["packages/plugins/@justverified/src/index.ts"],
+      "@justverified/plugin": ["packages/@justverified/plugin/src/index.ts"],
       "@justweb3/ui": ["packages/@justweb3/ui/src/index.ts"],
-      "@justweb3/widget": ["packages/@justweb3/widget/src/index.ts"],
-      "create-justaname-app": ["packages/create-justaname-app/src/index.ts"]
+      "@justweb3/widget": ["packages/@justweb3/widget/src/index.ts"]
     }
   },
   "exclude": [

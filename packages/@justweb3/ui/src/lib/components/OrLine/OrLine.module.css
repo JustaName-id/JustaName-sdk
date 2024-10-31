@@ -1,0 +1,13 @@
+/* OrLine.module.css */
+
+.orLineContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.spanText {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 900;
+}

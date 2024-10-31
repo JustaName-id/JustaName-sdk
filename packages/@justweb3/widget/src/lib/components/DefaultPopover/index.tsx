@@ -16,7 +16,7 @@ export const BasePopoverContent: FC<BasePopoverContentProps> = ({
       style={{
         // width: "var(--radix-popover-trigger-width)",
         transformOrigin: 'var(--radix-popover-content-transform-origin)',
-        width: '400px',
+        width: 'min(90vw, 350px)',
         padding: '0',
         ...style,
       }}
@@ -25,7 +25,7 @@ export const BasePopoverContent: FC<BasePopoverContentProps> = ({
       <Flex
         style={{
           padding: '0px 0 0 0',
-          borderRadius: '16px',
+          borderRadius: '24px',
           background: 'var(--justweb3-foreground-color-4)',
         }}
         direction={'column'}
@@ -33,7 +33,7 @@ export const BasePopoverContent: FC<BasePopoverContentProps> = ({
         <Flex
           style={{
             padding: '20px',
-            borderRadius: '16px',
+            borderRadius: '24px',
             background: 'var(--justweb3-background-color)',
             gap: '20px',
             display: 'flex',

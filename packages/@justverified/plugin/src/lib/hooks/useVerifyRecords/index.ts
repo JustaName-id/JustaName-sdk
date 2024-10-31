@@ -67,7 +67,9 @@ export interface UseVerifyRecordsParams {
 
 export interface UseVerifyRecordsReturn {
   verifiedRecords: Record<string, boolean> | undefined;
-  isPending: boolean;
+  isVerifiedRecordsPending: boolean;
+  isVerifiedRecordsFetching: boolean;
+  isVerifiedRecordsLoading: boolean;
   refetchVerifyRecords: () => void;
 }
 
@@ -82,6 +84,7 @@ export const useVerifyRecords = ({
 
   const { records } = useRecords({
     ens: ens,
+    chainId: chainId
   })
   const previousRecords = usePreviousState(records, [records])
 
@@ -126,7 +129,9 @@ export const useVerifyRecords = ({
 
   return {
     verifiedRecords: query.data,
-    isVerifiedRecordsPending: query.isPending || query.isFetching,
+    isVerifiedRecordsPending: query.isPending,
+    isVerifiedRecordsFetching: query.isFetching,
+    isVerifiedRecordsLoading: query.isLoading,
     refetchVerifyRecords: query.refetch
   }
 }

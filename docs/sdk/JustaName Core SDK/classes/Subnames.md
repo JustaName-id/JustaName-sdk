@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:55](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L55)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:58](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L58)
 
 ## Methods
 
@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:62](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L62)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:65](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L65)
 
 ***
 
@@ -62,7 +62,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:101](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L101)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:137](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L137)
 
 ***
 
@@ -80,7 +80,25 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:233](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L233)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:340](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L340)
+
+***
+
+### getPrimaryNameByAddress()
+
+> **getPrimaryNameByAddress**(`params`): `Promise`\<`PrimaryNameGetByAddressResponse`\>
+
+#### Parameters
+
+• **params**: `Omit`\<[`MakeOptionalProps`](../type-aliases/MakeOptionalProps.md)\<`PrimaryNameGetByAddressRequest`, `"chainId"`\>, `never`\>
+
+#### Returns
+
+`Promise`\<`PrimaryNameGetByAddressResponse`\>
+
+#### Defined in
+
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:439](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L439)
 
 ***
 
@@ -98,7 +116,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:286](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L286)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:419](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L419)
 
 ***
 
@@ -116,7 +134,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:207](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L207)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:302](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L302)
 
 ***
 
@@ -134,7 +152,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:219](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L219)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:320](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L320)
 
 ***
 
@@ -152,7 +170,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:248](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L248)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:360](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L360)
 
 ***
 
@@ -170,7 +188,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:194](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L194)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:283](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L283)
 
 ***
 
@@ -188,7 +206,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:274](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L274)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:401](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L401)
 
 ***
 
@@ -208,7 +226,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:177](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L177)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:254](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L254)
 
 ***
 
@@ -218,7 +236,7 @@
 
 #### Parameters
 
-• **params**: `Omit`\<[`MakeOptionalProps`](../type-aliases/MakeOptionalProps.md)\<[`SubnameReserveRequest`](../interfaces/SubnameReserveRequest.md), `"chainId"` \| `"ensDomain"`\>, `never`\>
+• **params**: `Omit`\<[`MakeOptionalProps`](../type-aliases/MakeOptionalProps.md)\<[`SubnameReserveRequest`](../interfaces/SubnameReserveRequest.md), `"chainId"` \| `"ensDomain"`\>, `never`\> & `object`
 
 #### Returns
 
@@ -226,7 +244,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:82](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L82)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:108](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L108)
 
 ***
 
@@ -236,7 +254,7 @@
 
 #### Parameters
 
-• **params**: `Omit`\<[`MakeOptionalProps`](../type-aliases/MakeOptionalProps.md)\<[`SubnameRevokeRequest`](../interfaces/SubnameRevokeRequest.md), `"chainId"` \| `"ensDomain"`\>, `never`\>
+• **params**: `Omit`\<[`MakeOptionalProps`](../type-aliases/MakeOptionalProps.md)\<[`SubnameRevokeRequest`](../interfaces/SubnameRevokeRequest.md), `"chainId"` \| `"ensDomain"`\>, `never`\> & `object`
 
 • **headers**: [`ApiKeyHeaders`](../interfaces/ApiKeyHeaders.md) & [`SIWEHeaders`](../interfaces/SIWEHeaders.md)
 
@@ -246,7 +264,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:156](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L156)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:219](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L219)
 
 ***
 
@@ -264,7 +282,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:262](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L262)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:383](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L383)
 
 ***
 
@@ -276,7 +294,7 @@
 
 • **params**: `Omit`\<[`MakeOptionalProps`](../type-aliases/MakeOptionalProps.md)\<[`SubnameUpdateRequest`](../interfaces/SubnameUpdateRequest.md), `"chainId"` \| `"ensDomain"`\>, `"addresses"` \| `"text"`\> & `object`
 
-• **headers**: [`ApiKeyHeaders`](../interfaces/ApiKeyHeaders.md) & [`SIWEHeaders`](../interfaces/SIWEHeaders.md)
+• **headers**: [`SIWEHeaders`](../interfaces/SIWEHeaders.md)
 
 #### Returns
 
@@ -284,4 +302,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:134](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L134)
+[packages/@justaname.id/sdk/src/lib/features/subnames/index.ts:188](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/subnames/index.ts#L188)

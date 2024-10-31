@@ -3,18 +3,13 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowJs": false,
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": false,
+    "moduleResolution": "node",
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true
   },
   "files": [],
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-  ],
+  "include": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"

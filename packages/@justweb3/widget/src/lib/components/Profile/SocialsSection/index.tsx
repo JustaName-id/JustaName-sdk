@@ -5,7 +5,6 @@ import { SUPPORTED_SOCIALS } from '@justaname.id/sdk';
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { metadataForm } from '../../../forms';
-import styled from 'styled-components';
 import { MetadataField } from '../MetadataField';
 import { getTextRecordIcon } from '../../../icons/records-icons';
 
@@ -14,29 +13,25 @@ interface SocialsSectionProps {
   form: UseFormReturn<metadataForm>;
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-height: calc(100% - 62px);
-  height: 100%;
-`;
-
 export const SocialsSection: React.FC<SocialsSectionProps> = ({
   onBack,
   form,
 }) => {
   return (
-    <Container>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        maxHeight: 'calc(100% - 59px)',
+        height: '100%',
+      }}
+    >
       <Flex direction="row" gap="10px" align="center">
         <ComicIcon height={24} width={24} />
         <Flex direction="column" gap="0px">
-          <P style={{ fontSize: '10px', fontWeight: 700, color: 'black' }}>
-            Edit Profile
-          </P>
-          <P style={{ fontSize: '16px', fontWeight: 700, color: 'black' }}>
-            Socials
-          </P>
+          <P style={{ fontSize: '10px', fontWeight: 700 }}>Edit Profile</P>
+          <P style={{ fontSize: '16px', fontWeight: 700 }}>Socials</P>
         </Flex>
       </Flex>
 
@@ -45,9 +40,9 @@ export const SocialsSection: React.FC<SocialsSectionProps> = ({
         gap="10px"
         className="justweb3scrollbar"
         style={{
-          overflowY: 'scroll',
+          overflowY: 'auto',
           // maxHeight: 'calc(-90px + 85vh - 30px - 20px - 52px - 10px - 16px)',
-          maxHeight: 'calc(100% - 62px)',
+          maxHeight: 'calc(100% - 50px)',
         }}
       >
         <Flex direction="column" gap="10px">
@@ -84,6 +79,6 @@ export const SocialsSection: React.FC<SocialsSectionProps> = ({
           </Flex>
         </Flex>
       </Flex>
-    </Container>
+    </div>
   );
 };

@@ -1,3 +1,4 @@
+import AddCircleIcon from './AddCircle';
 import AddIcon from './Add';
 import AddressIcon from './Address';
 import ArrowWhiteIcon from './ArrowWhite';
@@ -16,6 +17,8 @@ import GeneralIcon from './General';
 import LocationIcon from './Location';
 import LogoutIcon from './Logout';
 import MappIcon from './Mapp';
+import MaximizeIcon from './Maximize';
+import MinimizeIcon from './Minimize';
 import MinusIcon from './Minus';
 import NotificationIcon from './Notification';
 import PenIcon from './Pen';
@@ -28,6 +31,7 @@ import TrashIcon from './Trash';
 import VerificationsIcon from './Verifications';
 import WalletIcon from './Wallet';
 const general = {
+  'add-circle': AddCircleIcon,
   add: AddIcon,
   address: AddressIcon,
   'arrow-white': ArrowWhiteIcon,
@@ -46,6 +50,8 @@ const general = {
   location: LocationIcon,
   logout: LogoutIcon,
   mapp: MappIcon,
+  maximize: MaximizeIcon,
+  minimize: MinimizeIcon,
   minus: MinusIcon,
   notification: NotificationIcon,
   pen: PenIcon,
@@ -61,6 +67,7 @@ const general = {
 
 export {
   general,
+  AddCircleIcon,
   AddIcon,
   AddressIcon,
   ArrowWhiteIcon,
@@ -79,6 +86,8 @@ export {
   LocationIcon,
   LogoutIcon,
   MappIcon,
+  MaximizeIcon,
+  MinimizeIcon,
   MinusIcon,
   NotificationIcon,
   PenIcon,

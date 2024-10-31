@@ -7,3 +7,4 @@ export * from './resolver';
 export * from './signIn';
 export * from './subname';
 export * from './offchainResolver';
+export * from './primaryName';

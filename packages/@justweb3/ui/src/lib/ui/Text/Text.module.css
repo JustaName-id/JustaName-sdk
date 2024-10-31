@@ -1,0 +1,37 @@
+
+.h2 {
+    font-size: 24px;
+    line-height: normal;
+    font-weight: 600;
+    margin: 0;
+    font-family: var(--justweb3-font-family);
+    color: var(--justweb3-foreground-color-2);
+}
+
+.p {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    font-family: var(--justweb3-font-family);
+    color: var(--justweb3-foreground-color-2);
+}
+
+.a {
+    font-size: 8px;
+    line-height: 8px;
+    font-weight: 400;
+    margin: 0;
+    font-family: var(--justweb3-font-family);
+    color: var(--justweb3-foreground-color-2);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.span {
+    font-size: 8px;
+    line-height: 8px;
+    font-weight: 400;
+    margin: 0;
+    font-family: var(--justweb3-font-family);
+    color: var(--justweb3-foreground-color-2);
+}

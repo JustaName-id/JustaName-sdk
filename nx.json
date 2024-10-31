@@ -157,13 +157,13 @@
     },
     "projectsRelationship": "independent",
     "projects": [
-      "packages/create-justaname-app",
       "packages/@justaname.id/sdk",
       "packages/@justaname.id/react",
       "packages/@justaname.id/siwens",
       "packages/@justweb3/ui",
       "packages/@justweb3/widget",
-      "packages/@justverified/plugin"
+      "packages/@justverified/plugin",
+      "packages/@justweb3/efp-plugin"
     ]
   },
   "defaultBase": "main"

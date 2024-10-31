@@ -1,8 +1,7 @@
 import { ChainId } from '@justaname.id/sdk';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
-import { useEnsPublicClient } from '../client/useEnsPublicClient';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useRecords } from './useRecords';
 
 export const buildEnsAvatarKey = (
@@ -10,17 +9,26 @@ export const buildEnsAvatarKey = (
   chainId: ChainId | undefined
 ) => ['ENS_AVATAR', ens, chainId];
 
+export interface SanitizeImageParams {
+  name: string;
+  image?: string;
+  chainId?: ChainId;
+}
+
 export interface UseEnsAvatarParams {
   ens: string | undefined;
   chainId?: ChainId;
 }
 
+export interface GetEnsAvatarParams {
+  name: string;
+  chainId?: ChainId;
+}
+
 export interface UseEnsAvatarResult {
   avatar?: string;
-  getEnsAvatar: (
-    name: string,
-    forceUpdate?: boolean
-  ) => Promise<string | undefined>;
+  getEnsAvatar: (params: GetEnsAvatarParams) => Promise<string | undefined>;
+  sanitizeEnsImage: (params: SanitizeImageParams) => string | undefined;
   isLoading: boolean;
 }
 
@@ -33,54 +41,78 @@ export const useEnsAvatar = (
     [params?.chainId, chainId]
   );
 
-  const { getRecords } = useRecords({
+  const { records, getRecords } = useRecords({
     chainId: _chainId,
+    ens: params?.ens,
   });
 
-  const queryClient = useQueryClient();
-  const { ensClient } = useEnsPublicClient({
-    chainId: _chainId,
-  });
+  const sanitizeEnsImage = (_params: SanitizeImageParams) => {
+    const _chainId = _params.chainId || chainId || 1;
+    let avatar = _params.image;
+    if (_params.image?.startsWith('eip')) {
+      avatar = `https://metadata.ens.domains/${
+        _chainId === 1 ? 'mainnet' : 'sepolia'
+      }/avatar/${_params.name}`;
+    }
 
-  const getEnsAvatar = async (
-    name: string | undefined,
-    forceUpdate = false
-  ): Promise<string> => {
+    if (_params.image?.startsWith('ipfs')) {
+      avatar = `https://ipfs.io/ipfs/${_params.image.replace('ipfs://', '')}`;
+    }
+
+    return avatar;
+  };
+
+  const getEnsAvatar = async (_params: GetEnsAvatarParams): Promise<string> => {
+    let _records = records;
+    const name = _params.name;
+    const __chainId = _params.chainId || _chainId || 1;
     if (!name) {
       return '';
     }
-    const key = buildEnsAvatarKey(name, _chainId);
-    const cachedData = queryClient.getQueryData(key);
-    if (!forceUpdate && cachedData) {
-      return cachedData as string;
-    }
-    const records = await getRecords({
-      ens: name,
-      chainId: _chainId,
-    });
-    let avatar =
-      (await ensClient?.getEnsAvatar({
-        name,
-      })) || records?.sanitizedRecords.avatar;
 
-    if (avatar?.startsWith('eip')) {
-      avatar = `https://metadata.ens.domains/${
-        _chainId === 1 ? 'mainnet' : 'sepolia'
-      }/avatar/${name}`;
+    if (!_records) {
+      _records = await getRecords({
+        ens: name,
+        chainId: __chainId,
+      });
     }
-    queryClient.setQueryData(key, avatar);
+
+    let avatar: string | undefined = '';
+
+    if (_records?.sanitizedRecords.avatar) {
+      avatar = sanitizeEnsImage({
+        name: _params.name,
+        image: _records?.sanitizedRecords.avatar,
+        chainId: __chainId,
+      });
+    }
     return avatar ? avatar : '';
   };
 
   const query = useQuery({
     queryKey: buildEnsAvatarKey(params?.ens, _chainId),
-    queryFn: () => getEnsAvatar(params?.ens),
-    enabled: Boolean(params?.ens),
+    queryFn: async () => {
+      if (!params?.ens) {
+        return undefined;
+      }
+      return getEnsAvatar({
+        name: params?.ens,
+        chainId: _chainId,
+      });
+    },
+    enabled: Boolean(params?.ens) && Boolean(records),
   });
+
+  useEffect(() => {
+    if (records) {
+      query.refetch();
+    }
+  }, [records]);
 
   return {
     avatar: query.data === null ? undefined : query.data,
     getEnsAvatar,
+    sanitizeEnsImage,
     isLoading: query.isLoading,
   };
 };

@@ -8,13 +8,25 @@
     "storybook": {
       "executor": "@nx/storybook:storybook",
       "options": {
-        "port": 4401,
+        "port": 4403,
         "configDir": "packages/@justverified/plugin/.storybook"
       },
       "configurations": {
         "ci": {
           "quiet": true
         }
+      }
+    },
+    "typedoc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "typedoc"
+          }
+        ],
+        "cwd": "packages/@justverified/plugin",
+        "parallel": false
       }
     },
     "build": {
@@ -70,20 +82,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      },
-      "dependsOn": [
-        "lint",
-        {
-          "projects": [
-            "@justaname.id/siwens",
-            "@justaname.id/sdk",
-            "@justaname.id/react",
-            "@justweb3/ui",
-            "@justweb3/widget"
-          ],
-          "target": "build"
-        }
-      ]
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",

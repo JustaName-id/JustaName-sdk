@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts#L2)
+[packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts:2](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts#L2)
 
 ## Properties
 
@@ -174,7 +174,7 @@ node\_modules/@types/node/globals.d.ts:4
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts#L11)
+[packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts#L11)
 
 ***
 
@@ -192,4 +192,4 @@ node\_modules/@types/node/globals.d.ts:4
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts#L7)
+[packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/errors/InvalidConfiguration.exception.ts#L7)

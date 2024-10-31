@@ -1,3 +1,243 @@
+## 0.3.127 (2024-10-31)
+
+
+### 🚀 Features
+
+- remove console.log ([9c75dcc](https://github.com/JustaName-id/JustaName-sdk/commit/9c75dcc))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.124
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.3.126 (2024-10-31)
+
+
+### 🩹 Fixes
+
+- justanameprovider backend url and add hook include text and addresses ([14f68a7](https://github.com/JustaName-id/JustaName-sdk/commit/14f68a7))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.123
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.3.125 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.122
+
+## 0.3.124 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.121
+
+## 0.3.123 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.120
+
+## 0.3.122 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.119
+
+## 0.3.121 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.118
+
+## 0.3.120 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.117
+
+## 0.3.119 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.116
+
+## 0.3.118 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.115
+
+## 0.3.117 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.114
+
+## 0.3.116 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.113
+
+## 0.3.115 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.112
+
+## 0.3.114 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.111
+
+## 0.3.113 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.110
+
+## 0.3.112 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.109
+
+## 0.3.111 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.108
+
+## 0.3.110 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.107
+
+## 0.3.109 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.106
+
+## 0.3.108 (2024-10-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.105
+
+## 0.3.107 (2024-10-30)
+
+
+### 🩹 Fixes
+
+- release packages ([faee72c](https://github.com/JustaName-id/JustaName-sdk/commit/faee72c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.104
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.3.106 (2024-10-28)
+
+
+### 🚀 Features
+
+- upload cdn and scrollbar fixes ([fc3035e](https://github.com/JustaName-id/JustaName-sdk/commit/fc3035e))
+
+- add plugin ability to add to the profile section ([7970570](https://github.com/JustaName-id/JustaName-sdk/commit/7970570))
+
+
+### 🩹 Fixes
+
+- build fix ([81402e1](https://github.com/JustaName-id/JustaName-sdk/commit/81402e1))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.103
+
+
+### ❤️  Thank You
+
+- Ghadi Mhawej
+- HadiKhai
+
+## 0.3.105 (2024-10-23)
+
+
+### 🩹 Fixes
+
+- **react-sdk:** revoke subname ([d0d4776](https://github.com/JustaName-id/JustaName-sdk/commit/d0d4776))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.102
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.3.104 (2024-10-23)
+
+
+### 🩹 Fixes
+
+- upload cdn hook ([8dcb1c0](https://github.com/JustaName-id/JustaName-sdk/commit/8dcb1c0))
+
+- building react sdk ([65cbbc5](https://github.com/JustaName-id/JustaName-sdk/commit/65cbbc5))
+
+- package ([50cf05a](https://github.com/JustaName-id/JustaName-sdk/commit/50cf05a))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.101
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.103 (2024-10-21)
 
 

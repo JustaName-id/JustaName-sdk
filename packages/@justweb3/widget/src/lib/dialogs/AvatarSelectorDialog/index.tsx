@@ -1,131 +1,51 @@
-// import { useAllNFTSForCurrentAddress } from '@query/api/nft';
-import { AddIcon, Avatar, Button, Flex, MinusIcon, P, PenIcon } from '@justweb3/ui';
+import React from 'react';
+import {
+  AddIcon,
+  Avatar,
+  Button,
+  Flex,
+  MinusIcon,
+  P,
+  PenIcon,
+} from '@justweb3/ui';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
-import React, { useContext } from 'react';
-import styled from 'styled-components';
-import { ResponsiveDiv } from '../BannerSelectorDialog';
 import { DefaultDialog } from '../DefaultDialog';
-import { useUploadMedia } from '@justaname.id/react';
-import { JustWeb3Context } from '../../providers';
-import { Loading } from '../../components';
+import { useEnsAvatar, useUploadMedia } from '@justaname.id/react';
+import { ChainId } from '@justaname.id/sdk';
+import styles from './AvatarSelectorDialog.module.css';
 
 export interface AvatarEditorDialogProps {
   onImageChange: (image: string) => void;
-  avatar: string;
-  subname: string
+  avatar?: string | null;
+  subname: string;
+  chainId?: ChainId;
   address?: `0x${string}`;
+  disableOverlay?: boolean;
 }
-
-export const SliderInput = styled.input.attrs({ type: 'range' })`
-  width: 100%;
-  height: 0.5rem;
-  background-color: #bfdbfe;
-  border-radius: 0.5rem;
-  appearance: none;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
-
-  /* Slider thumb styling */
-  &::-webkit-slider-thumb {
-    appearance: none;
-    width: 1rem;
-    height: 1rem;
-    background-color: #2563eb;
-    border-radius: 50%;
-    cursor: pointer;
-    margin-top: -0.25rem;
-  }
-
-  &::-moz-range-thumb {
-    width: 1rem;
-    height: 1rem;
-    background-color: #2563eb;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  &::-ms-thumb {
-    width: 1rem;
-    height: 1rem;
-    background-color: #2563eb;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  &::-webkit-slider-runnable-track {
-    height: 0.5rem;
-    background: transparent;
-    border-radius: 0.5rem;
-  }
-`;
-
-// const NFTCardWrapper = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(12, 1fr);
-//   gap: 1rem;
-// `;
-
-// const NFTCard = styled.div<{ isSelected: boolean }>`
-//   grid-column: span 6;
-//   cursor: pointer;
-//   padding: 0.5rem;
-//   border-radius: 10px;
-//   border: 2px solid;
-//   transition-duration: 200ms;
-
-//   @media (min-width: 768px) {
-//     grid-column: span 4;
-//   }
-//   ${(props) =>
-//     props.isSelected
-//       ? `
-//     border-color: var(--justweb3-primary-color);
-//     transform: scale(1.05);
-//   `
-//       : `
-//     background-color: white;
-//   `}
-// `;
-
-const ImageWrapper = styled.div`
-  width: 360px;
-  height: 360px;
-  margin: auto;
-  border-radius: 10px;
-
-  @media (max-width: 768px) {
-    width: 75%;
-    height: 270px;
-  }
-`;
-
 
 export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
   onImageChange,
   avatar,
   subname,
   address,
+  chainId,
+  disableOverlay,
 }) => {
+  const { avatar: ensAvatar } = useEnsAvatar({
+    ens: subname,
+    chainId: chainId,
+  });
   const [isEditorOpen, setIsEditorOpen] = React.useState(false);
-  // const [isNFTDialogOpen, setIsNFTDialogOpen] = React.useState(false);
   const [imageSrc, setImageSrc] = React.useState('');
-  const { config } = useContext(JustWeb3Context);
   const imageElement = React.useRef<HTMLImageElement>(null);
   const cropper = React.useRef<Cropper>();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
-  // const { nfts } = useAllNFTSForCurrentAddress();
   const { uploadMedia, isUploadPending } = useUploadMedia({
-    subname,
-    isDev: config.dev ?? true,
-    type: "Avatar"
+    ens: subname,
+    type: 'Avatar',
   });
-  // const [selectedNFT, setSelectedNFT] = React.useState<number>(-1);
+
   const handleImageLoaded = () => {
     if (imageElement.current) {
       cropper.current = new Cropper(imageElement.current, {
@@ -150,7 +70,6 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
     }
   };
 
-
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newZoomLevel = parseFloat(e.target.value);
     if (cropper.current) {
@@ -159,29 +78,61 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
     }
   };
 
-
   const handleSave = () => {
     if (cropper.current) {
       const croppedCanvas = cropper.current.getCroppedCanvas();
       croppedCanvas.toBlob(async (blob) => {
         if (!blob) return;
         if (blob.size > 3000000) {
-          setIsEditorOpen(false);
-          return;
-        }
+          // setIsEditorOpen(false);
+          // return;
 
-        const formData = new FormData();
-        formData.append('file', blob);
-
-        try {
-          const response = await uploadMedia({ form: formData });
-          if (!response.data) {
-            throw new Error(`Error: ${response}`);
+          const resizedCanvas = document.createElement('canvas');
+          const resizedContext = resizedCanvas.getContext('2d');
+          if (!resizedContext) return;
+          const MAX_SIZE = 1000;
+          let width = croppedCanvas.width;
+          let height = croppedCanvas.height;
+          if (width > height) {
+            if (width > MAX_SIZE) {
+              height *= MAX_SIZE / width;
+              width = MAX_SIZE;
+            }
+          } else {
+            if (height > MAX_SIZE) {
+              width *= MAX_SIZE / height;
+              height = MAX_SIZE;
+            }
           }
-          onImageChange(response.data.url);
-          setIsEditorOpen(false);
-        } catch (error) {
-          console.error('Upload error', error);
+          resizedCanvas.width = width;
+          resizedCanvas.height = height;
+          resizedContext.drawImage(croppedCanvas, 0, 0, width, height);
+          resizedCanvas.toBlob(async (resizedBlob) => {
+            if (!resizedBlob) return;
+            const formData = new FormData();
+            formData.append('file', resizedBlob);
+            try {
+              const response = await uploadMedia({ form: formData });
+              onImageChange(response.url);
+              setIsEditorOpen(false);
+              return;
+            } catch (error) {
+              console.error('Upload error', error);
+              return;
+            }
+          });
+        }
+        else{
+          const formData = new FormData();
+          formData.append('file', blob);
+
+          try {
+            const response = await uploadMedia({ form: formData });
+            onImageChange(response.url);
+            setIsEditorOpen(false);
+          } catch (error) {
+            console.error('Upload error', error);
+          }
         }
       });
     }
@@ -191,88 +142,15 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
     fileInputRef.current?.click();
   };
 
-  // const handleNFTDialog = () => {
-  //   setIsNFTDialogOpen(true);
-  //   setIsPopupOpen(false);
-  // };
-
-
   return (
     <>
-      {/* {!!address &&
-        <DefaultDialog
-          open={isNFTDialogOpen}
-          onOpenChange={(open: boolean) => {
-            setIsNFTDialogOpen(open);
-          }}
-          header={
-            <P style={{
-              fontSize: '20px',
-              fontWeight: 900,
-              lineHeight: '20px',
-              textAlign: 'center'
-            }}>
-              Select NFT
-            </P>
-          }
-        >
-          <Flex direction='column' style={{
-            maxHeight: 'calc(100vh - 220px)',
-            maxWidth: '455px'
-          }}>
-            <NFTCardWrapper>
-              {
-                nfts?.map((nft, index) => (
-                  <NFTCard key={index} isSelected={selectedNFT === index}
-                    onClick={() => {
-                      if (selectedNFT === index) {
-                        setSelectedNFT(-1);
-                      }
-                      else {
-                        setSelectedNFT(index);
-                      }
-                    }}
-                  >
-                    <div style={{ aspectRatio: '1/1', position: 'relative' }} >
-                      <img
-                        src={nft.image?.pngUrl || nft.image?.originalUrl || ''}
-                        alt="NFT"
-                        style={{
-                          borderRadius: '10px',
-                        }}
-                      />
-                    </div>
-
-                    <P style={{
-                      textAlign: 'center',
-                      fontSize: '10px',
-                      fontWeight: 'bold',
-                      marginTop: '2px'
-                    }}>{nft.name}</P>
-                  </NFTCard>
-                ))
-              }
-            </NFTCardWrapper>
-          </Flex>
-          <Flex direction='row' justify='space-between' align='center' gap={"20px"}>
-            <Button onClick={() => setIsNFTDialogOpen(false)} variant="secondary" style={{ flexGrow: '0.5' }}>Cancel</Button>
-            <Button onClick={
-              () => {
-                setIsNFTDialogOpen(false);
-                onImageChange(nfts?.find((nft, index) => index === selectedNFT)?.image?.pngUrl || nfts?.find((nft, index) => index === selectedNFT)?.image?.originalUrl || '');
-              }
-
-            } variant="primary"
-              disabled={selectedNFT === -1}
-              style={{ flexGrow: '0.5' }}>Save</Button>
-
-          </Flex >
-        </DefaultDialog>
-      } */}
-      <Flex direction='row' justify='center' align="center" style={{
-        width: "100%",
-        flex: "1",
-      }} onClick={handleButtonClick}>
+      <Flex
+        direction="row"
+        justify="center"
+        align="center"
+        className={styles.flexCentered}
+        onClick={handleButtonClick}
+      >
         <input
           type="file"
           accept="image/jpeg, image/png, image/heic, image/heif, image/gif, image/avif"
@@ -281,45 +159,45 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
           ref={fileInputRef}
         />
         <Avatar
-          src={avatar || "/justsomeone.webp"}
-          size='75px'
-          containerStyle={{
-            border: '4px solid white',
+          src={avatar || ensAvatar}
+          size={75}
+          borderSize={'4px'}
+          style={{
+            margin: '0 15px',
           }}
         />
-        <div
-          style={{
-            position: 'absolute',
-            inset: '0px 20px',
-            display: 'flex',
-            flexDirection: 'column',
-            placeContent: 'center',
-            justifyContent: 'center',
-            alignItems: 'center',
-            cursor: 'pointer'
-          }}
-        >
-          <PenIcon height={24} width={24} style={{
-            cursor: 'pointer'
-          }} />
+        <div className={styles.overlay}>
+          <PenIcon
+            height={24}
+            width={24}
+            style={{
+              cursor: 'pointer',
+            }}
+          />
         </div>
       </Flex>
-      <DefaultDialog withoutFooter open={isEditorOpen} onOpenChange={(open: boolean) => {
-        setIsEditorOpen(open);
-      }}
+      <DefaultDialog
+        disableOverlay={disableOverlay}
+        withoutFooter
+        open={isEditorOpen}
+        onOpenChange={(open: boolean) => {
+          setIsEditorOpen(open);
+        }}
         header={
-          <P style={{
-            fontSize: '20px',
-            fontWeight: 900,
-            lineHeight: '20px',
-            textAlign: 'center'
-          }}>
+          <P
+            style={{
+              fontSize: '20px',
+              fontWeight: 900,
+              lineHeight: '20px',
+              textAlign: 'center',
+            }}
+          >
             Zoom & Crop
           </P>
         }
       >
-        <ResponsiveDiv>
-          <ImageWrapper>
+        <div className={styles.responsiveDiv}>
+          <div className={styles.imageWrapper}>
             <img
               ref={imageElement}
               src={imageSrc}
@@ -329,7 +207,7 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
               crossOrigin="anonymous"
               onLoad={handleImageLoaded}
             />
-          </ImageWrapper>
+          </div>
           <Flex
             direction="row"
             justify="space-between"
@@ -342,30 +220,43 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
               padding: '0px 2px',
             }}
           >
-            {/* <div className='bg-[#dfdfdf] w-[31px] h-[25px] rounded-full flex justify-center items-center'> */}
             <MinusIcon width={27} height={27} />
-            {/* </div> */}
-            <SliderInput
+            <input
+              className={styles.sliderInput}
               min="1"
               max="100"
+              type="range"
               onChange={handleSliderChange}
             />
-            {/* <div className='bg-[#dfdfdf] w-[31px] h-[25px] rounded-full flex justify-center items-center'> */}
             <AddIcon width={27} height={27} />
-            {/* </div> */}
           </Flex>
-        </ResponsiveDiv>
-        {isUploadPending ?
-          <Loading />
-          :
-          <Flex direction='row' gap="10px">
-            <Button type="button" variant="secondary" style={{ flexGrow: '0.5' }}>Cancel</Button>
-            <Button type="button" onClick={handleSave} variant="primary" style={{ flexGrow: '0.5' }}>Upload</Button>
-          </Flex >
-        }
-      </DefaultDialog >
+        </div>
+        <Flex direction="row" gap="10px">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => {
+              if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+              }
+              setIsEditorOpen(false);
+            }}
+            style={{ flexGrow: '0.5' }}
+            disabled={isUploadPending}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="button"
+            onClick={handleSave}
+            variant="primary"
+            style={{ flexGrow: '0.5' }}
+            loading={isUploadPending}
+          >
+            Upload
+          </Button>
+        </Flex>
+      </DefaultDialog>
     </>
-
-
   );
 };

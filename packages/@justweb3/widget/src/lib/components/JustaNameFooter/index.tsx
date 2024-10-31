@@ -8,8 +8,7 @@ export const JustaNameFooter = () => {
       style={{
         padding: '10px 20px',
         background: 'var(--justweb3-foreground-color-4)',
-        borderRadius: ' 0 0 16px 16px',
-        height: '25px',
+        borderRadius: ' 0 0 24px 24px',
       }}
     >
       <Flex
@@ -40,7 +39,7 @@ export const JustaNameFooter = () => {
           </A>
         </SPAN>
       </Flex>
-      <JustaNameLogoIcon width={54} />
+      <JustaNameLogoIcon width={54} height={25} />
     </Flex>
   );
 };

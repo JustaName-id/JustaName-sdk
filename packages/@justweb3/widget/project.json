@@ -8,7 +8,7 @@
     "storybook": {
       "executor": "@nx/storybook:storybook",
       "options": {
-        "port": 4401,
+        "port": 4402,
         "configDir": "packages/@justweb3/widget/.storybook"
       },
       "configurations": {
@@ -32,6 +32,18 @@
         "parallel": false
       }
     },
+    "typedoc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "typedoc"
+          }
+        ],
+        "cwd": "packages/@justweb3/widget",
+        "parallel": false
+      }
+    },
     "buildProject": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
@@ -45,6 +57,8 @@
           "react",
           "react-dom",
           "react/jsx-runtime",
+          "@justaname.id/siwens",
+          "@justaname.id/sdk",
           "@justaname.id/react",
           "@justweb3/ui"
         ],
@@ -68,19 +82,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      },
-      "dependsOn": [
-        "lint",
-        {
-          "projects": [
-            "@justaname.id/siwens",
-            "@justaname.id/sdk",
-            "@justaname.id/react",
-            "@justweb3/ui"
-          ],
-          "target": "build"
-        }
-      ]
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",

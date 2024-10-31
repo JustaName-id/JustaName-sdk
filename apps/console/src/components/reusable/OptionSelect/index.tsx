@@ -17,7 +17,7 @@ export const OptionSelect = ({ label, value, showFree }: OptionSelectProps) => {
           {label}
         </label>
         {showFree && (
-          <p className="text-[10px] text-[#3280F4] font-black leading-[100%]">
+          <p className="text-[10px] text-primary font-black leading-[100%]">
             Free
           </p>
         )}

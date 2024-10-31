@@ -1,9 +1,9 @@
 import * as yup from 'yup';
-import { generalsSchema } from './generals.schema';
-import { addressSchema } from './addresses.schema';
-import { socialsSchema } from './socials.schema';
-import { otherTextSchema } from './other-text.schema';
-import { contentHashSchema } from './contenthash.schema';
+import { generalsSchema } from './generals-schema';
+import { addressSchema } from './addresses-schema';
+import { socialsSchema } from './socials-schema';
+import { otherTextSchema } from './other-text-schema';
+import { contentHashSchema } from './contenthash-schema';
 import { SUPPORTED_SOCIALS } from '@justaname.id/sdk';
 
 export const metadataForm = yup.object({

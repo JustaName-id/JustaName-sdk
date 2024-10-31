@@ -23,7 +23,7 @@ The Ethereum address of the user. This address is expected to match the
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/headers/index.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/headers/index.ts#L17)
+[packages/@justaname.id/sdk/src/lib/types/headers/index.ts:17](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/headers/index.ts#L17)
 
 ***
 
@@ -36,7 +36,7 @@ The original message that was signed by the user. This message typically
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/headers/index.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/headers/index.ts#L15)
+[packages/@justaname.id/sdk/src/lib/types/headers/index.ts:15](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/headers/index.ts#L15)
 
 ***
 
@@ -49,4 +49,4 @@ The digital signature produced by signing `xMessage` with the user's
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/headers/index.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/headers/index.ts#L16)
+[packages/@justaname.id/sdk/src/lib/types/headers/index.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/headers/index.ts#L16)

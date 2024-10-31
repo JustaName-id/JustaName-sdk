@@ -28,42 +28,57 @@ export const UnsavedChangesDialog: React.FC<UnsavedChangesDialogProps> = ({
           Discard Changes
         </P>
       }
+      contentStyle={{
+        maxWidth: '300px',
+        minWidth: '200px',
+      }}
       handleClose={onContinue}
     >
       <Flex
+        gap={'20px'}
         direction="column"
         justify="space-between"
         align="center"
-        gap={'24px'}
       >
-        <P
-          style={{
-            fontSize: '16px',
-            fontWeight: 400,
-            lineHeight: '16px',
-            textAlign: 'center',
-          }}
+        <Flex
+          direction="column"
+          justify="space-between"
+          align="center"
+          gap={'24px'}
         >
-          Are you sure you want to discard changes?
-        </P>
-      </Flex>
-      <Flex direction="row" justify="space-between" align="center" gap={'24px'}>
-        <Button
-          size={'md'}
-          onClick={onDiscard}
-          variant="secondary"
-          style={{ flexGrow: '0.5' }}
+          <P
+            style={{
+              fontWeight: 400,
+              textAlign: 'center',
+            }}
+          >
+            Are you sure you want to discard changes?
+          </P>
+        </Flex>
+        <Flex
+          direction="row"
+          justify="space-between"
+          align="center"
+          gap={'10px'}
+          style={{ width: '100%' }}
         >
-          Discard
-        </Button>
-        <Button
-          size={'md'}
-          onClick={onContinue}
-          variant="primary"
-          style={{ flexGrow: '0.5' }}
-        >
-          Continue
-        </Button>
+          <Button
+            size={'md'}
+            onClick={onDiscard}
+            variant="secondary"
+            style={{ flexGrow: '0.5' }}
+          >
+            Discard
+          </Button>
+          <Button
+            size={'md'}
+            onClick={onContinue}
+            variant="primary"
+            style={{ flexGrow: '0.5' }}
+          >
+            Continue
+          </Button>
+        </Flex>
       </Flex>
     </DefaultDialog>
   );

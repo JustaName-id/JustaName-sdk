@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L4)
+[packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts:4](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L4)
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L6)
+[packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts:6](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L6)
 
 ***
 
@@ -38,4 +38,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L5)
+[packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts:5](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/siwe/verify-challenge.ts#L5)

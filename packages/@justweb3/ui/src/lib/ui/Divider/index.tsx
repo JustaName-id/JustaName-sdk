@@ -1,19 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const StyledDivider = styled.hr`
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border: 0;
-    border-bottom: 1px solid var(--justweb3-foreground-color-4);
-    margin: 10px 0;
-`;
+import styles from './Divider.module.css'; // Import the CSS module
 
 export const Divider: React.FC = () => {
-    return (
-        <StyledDivider />
-    );
-}
+  return <hr className={styles.divider} />;
+};
 
 export default Divider;

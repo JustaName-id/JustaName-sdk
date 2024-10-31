@@ -11,13 +11,6 @@ import {
   generateDarkVariation,
   generateLightVariation,
 } from '../../utils';
-// import { createGlobalStyle } from 'styled-components';
-
-// const GlobalStyle = createGlobalStyle<{ theme: { [key: string]: string } }>`
-//     :root {
-//     ${({ theme }) => Object.entries(theme).map(([key, value]) => `${key}: ${value};`).join('\n')}
-//   }
-// `;
 
 const getPrimaryColorVariations = (color: string) => {
   const hsl = convertToHSL(color);
@@ -57,7 +50,7 @@ const getBackgroundVariations = (color: string) => {
       : generateLightVariation(foreground2),
     '--justweb3-foreground-color-4': detectLightColor(hsl, 50)
       ? generateDarkVariation(hsl, 0.05)
-      : generateLightVariation(hsl, 0.4),
+      : generateLightVariation(hsl, 0.12),
     '--justweb3-border-color': isTooLight
       ? 'hsl(0, 0%, 0%)'
       : 'hsl(0, 0%, 100%)',
@@ -190,45 +183,81 @@ export const JustWeb3ThemeProvider: React.FC<JustWeb3ThemeProviderProps> = ({
     });
   }, [initialColor]);
 
-  React.useEffect(() => {
-    const style = document.createElement('style');
-    style.innerHTML = `
-    
-    :root {
-      ${Object.entries(theme)
-        .map(([key, value]) => `${key}: ${value};`)
-        .join('\n')}
-        
-        .justweb3scrollbar::-webkit-scrollbar {
-          width: 12px;
-          height: 12px;
-        }
-        
-        .justweb3scrollbar::-webkit-scrollbar-track {
-          background: var(--justweb3-background-color);
-          
-        }
-        
-        .justweb3scrollbar::-webkit-scrollbar-thumb {
-          background: var(--justweb3-primary-color);
-          border-radius: 10px;
-          border: 4px solid white;
-          cursor: pointer;
-        }
-        
-        .justweb3scrollbar::-webkit-scrollbar-thumb:hover {
-          background: var(--justweb3-forground-color-4);
-        }  
-    }`;
-    document.head.appendChild(style);
-
-    return () => {
-      document.head.removeChild(style);
-    };
-  }, [theme]);
+  // React.useEffect(() => {
+  //   const style = document.createElement('style');
+  //   style.innerHTML = `
+  //
+  //   :root {
+  //     ${Object.entries(theme)
+  //       .map(([key, value]) => `${key}: ${value};`)
+  //       .join('\n')}
+  //
+  //       .justweb3scrollbar::-webkit-scrollbar {
+  //         width: 0;
+  //         height: 0;
+  //       }
+  //
+  //        .justweb3scrollbar::-webkit-scrollbar-track {
+  //           display: none;
+  //       }
+  //
+  //       .justweb3scrollbar::-webkit-scrollbar-thumb {
+  //          display: none;
+  //       }
+  //
+  //       // .justweb3scrollbar::-webkit-scrollbar {
+  //       //   width: 12px;
+  //       //   height: 12px;
+  //       // }
+  //       //
+  //       // .justweb3scrollbar::-webkit-scrollbar-track {
+  //       //   background: var(--justweb3-background-color);
+  //       //
+  //       // }
+  //       //
+  //       // .justweb3scrollbar::-webkit-scrollbar-thumb {
+  //       //   background: var(--justweb3-primary-color);
+  //       //   border-radius: 10px;
+  //       //   border: 4px solid white;
+  //       //   cursor: pointer;
+  //       // }
+  //       //
+  //       // .justweb3scrollbar::-webkit-scrollbar-thumb:hover {
+  //       //   background: var(--justweb3-forground-color-4);
+  //       // }
+  //   }`;
+  //   document.head.appendChild(style);
+  //
+  //   return () => {
+  //     document.head.removeChild(style);
+  //   };
+  // }, [theme]);
 
   return (
     <JustWeb3ThemeContext.Provider value={{ changeTheme, theme, color }}>
+      <style>{`
+      
+        :root {
+          ${Object.entries(theme)
+            .map(([key, value]) => `${key}: ${value};`)
+            .join('\n')}
+        }
+
+        /* Include your scrollbar styles here if needed */
+        .justweb3scrollbar::-webkit-scrollbar {
+          width: 0;
+          height: 0;
+        }
+
+        .justweb3scrollbar::-webkit-scrollbar-track {  
+          display: none;
+        }
+
+        .justweb3scrollbar::-webkit-scrollbar-thumb {
+          display: none;
+        
+       }
+      `}</style>
       {children}
     </JustWeb3ThemeContext.Provider>
   );
@@ -241,3 +270,24 @@ export const useJustWeb3Theme = () => {
   }
   return context;
 };
+
+//   /* Uncomment and adjust the styles below if you need visible scrollbars
+//         .justweb3scrollbar::-webkit-scrollbar {
+//           width: 12px;
+//           height: 12px;
+//         }
+//
+//         .justweb3scrollbar::-webkit-scrollbar-track {
+//           background: var(--justweb3-background-color);
+//         }
+//
+//         .justweb3scrollbar::-webkit-scrollbar-thumb {
+//           background: var(--justweb3-primary-color);
+//           border-radius: 10px;
+//           border: 4px solid white;
+//           cursor: pointer;
+//         }
+//
+//         .justweb3scrollbar::-webkit-scrollbar-thumb:hover {
+//           background: var(--justweb3-foreground-color-4);
+//         }

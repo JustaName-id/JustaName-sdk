@@ -1,23 +1,24 @@
 import {
   EditIcon,
-  ProfileEditIcon,
   EmailIcon,
   FacebookIcon,
+  DiscordIcon,
   GithubIcon,
   InstagramIcon,
   LocationIcon,
+  ProfileEditIcon,
   RedditIcon,
   TelegramIcon,
   TwitterIcon,
   WebsiteIcon,
-  XIcon
+  XIcon,
 } from '@justweb3/ui';
 
 export const getTextRecordIcon = (key: string) => {
   switch (key) {
     case 'avatar':
       return <ProfileEditIcon width={24} height={24} />;
-    case 'banner':
+    case 'header':
       return <ProfileEditIcon width={24} height={24} />;
     case 'display':
       return <ProfileEditIcon width={24} height={24} />;
@@ -29,6 +30,8 @@ export const getTextRecordIcon = (key: string) => {
       return <LocationIcon width={24} height={24} />;
     case 'com.twitter':
       return <TwitterIcon width={24} height={24} />;
+    case 'com.discord':
+      return <DiscordIcon width={24} height={24} />;
     case 'com.facebook':
       return <FacebookIcon width={24} height={24} />;
     case 'com.instagram':
@@ -44,17 +47,22 @@ export const getTextRecordIcon = (key: string) => {
     case 'org.telegram':
       return <TelegramIcon width={24} height={24} />;
     default:
-      return <div style={{
-        backgroundColor: 'white',
-        borderColor: 'black',
-        display: 'flex',
-        height: '24px',
-        width: '24px',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: '50%',
-        border: '1px solid'
-      }}>?</div>
+      return (
+        <div
+          style={{
+            backgroundColor: 'white',
+            borderColor: 'black',
+            display: 'flex',
+            height: '24px',
+            width: '24px',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '50%',
+            border: '1px solid',
+          }}
+        >
+          ?
+        </div>
+      );
   }
-
-}
+};

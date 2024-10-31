@@ -82,7 +82,6 @@ app.post('/api/signin', async (req: Request, res) => {
       res.status(500).json({ message: 'No expirationTime returned.' });
     }
 
-    console.log(message.expirationTime);
     req.session.siwens = {
       address: message.address,
       ens,
@@ -107,13 +106,11 @@ app.get('/api/current', function (req, res) {
   }
   console.log('User is authenticated!');
   res.setHeader('Content-Type', 'text/plain');
-  res
-    .status(200)
-    .send({
-      ens: req.session.siwens?.ens,
-      address: req.session.siwens?.address,
-      chainId: req.session.siwens?.chainId,
-    });
+  res.status(200).send({
+    ens: req.session.siwens?.ens,
+    address: req.session.siwens?.address,
+    chainId: req.session.siwens?.chainId,
+  });
 });
 
 app.post('/api/signout', function (req, res) {
@@ -126,6 +123,12 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
   const ensDomain = process.env.JUSTANAME_ENS_DOMAIN as string;
 
   const username = req.body.username;
+
+  const text = req.body.text;
+
+  const addresses = req.body.addresses;
+
+  const contentHash = req.body.contentHash;
 
   if (!username) {
     res.status(400).send({ message: 'Username is required' });
@@ -144,6 +147,9 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
       {
         username,
         ensDomain,
+        text: text,
+        addresses: addresses,
+        contentHash,
       },
       {
         xSignature: req.body.signature,
@@ -153,6 +159,43 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
     );
 
     res.status(201).send(add);
+    return;
+  } catch (error) {
+    if (error instanceof Error) res.status(500).send({ error: error.message });
+  }
+});
+
+app.post('/api/subnames/revoke', async (req: Request<SubnameAdd>, res) => {
+  const ensDomain = process.env.JUSTANAME_ENS_DOMAIN as string;
+
+  const username = req.body.username;
+
+  if (!username) {
+    res.status(400).send({ message: 'Username is required' });
+    return;
+  }
+
+  if (!req.body.address || !req.body.signature || !req.body.message) {
+    res
+      .status(400)
+      .send({ message: 'Address, signature and message are required' });
+    return;
+  }
+
+  try {
+    const revoke = await justaname.subnames.revokeSubname(
+      {
+        username,
+        ensDomain,
+      },
+      {
+        xSignature: req.body.signature,
+        xAddress: req.body.address,
+        xMessage: req.body.message,
+      }
+    );
+
+    res.status(200).send(revoke);
     return;
   } catch (error) {
     if (error instanceof Error) res.status(500).send({ error: error.message });

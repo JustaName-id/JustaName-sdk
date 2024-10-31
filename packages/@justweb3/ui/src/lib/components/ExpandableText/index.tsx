@@ -2,24 +2,7 @@
 import React, { useState } from 'react';
 import { Flex } from '../../common';
 import { P } from '../../ui';
-import styled from 'styled-components';
-
-const StyledButton = styled.button`
-  cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0;
-  margin-left: 0.5rem;
-  color: var(--justweb3-primary-color);
-  text-decoration: none;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: normal;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
+import styles from './ExpandableText.module.css'; // Import the CSS module
 
 interface ExpandableTextProps {
   text: string;
@@ -40,14 +23,14 @@ export const ExpandableText: React.FC<ExpandableTextProps> = ({
   const readMoreLessText = isTruncated ? 'Read More' : 'Read Less';
 
   return (
-    <Flex justify={'flex-start'} gap={'10px'} align={'center'}>
+    <Flex justify="flex-start" gap="10px" align="center">
       <P>
         {resultString}
         {isTruncated && text.length > maxLength && '... '}
         {isTruncated && text.length > maxLength && (
-          <StyledButton onClick={toggleTruncated}>
+          <button onClick={toggleTruncated} className={styles.button}>
             {readMoreLessText}
-          </StyledButton>
+          </button>
         )}
       </P>
     </Flex>
@@ -55,3 +38,4 @@ export const ExpandableText: React.FC<ExpandableTextProps> = ({
 };
 
 ExpandableText.displayName = 'ExpandableText';
+export default ExpandableText;

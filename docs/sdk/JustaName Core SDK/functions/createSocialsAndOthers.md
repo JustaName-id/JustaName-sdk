@@ -18,4 +18,4 @@
 
 ## Defined in
 
-[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:50](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L50)
+[packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts:51](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/utils/sanitizeRecords/index.ts#L51)

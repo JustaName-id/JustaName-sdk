@@ -63,16 +63,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      },
-      "dependsOn": [
-        "lint",
-        {
-          "projects": [
-            "@justaname.id/siwens"
-          ],
-          "target": "build"
-        }
-      ]
+      }
     },
     "publish": {
       "command": "node tools/scripts/publish.mjs @justaname.id/sdk {args.ver} {args.tag}",

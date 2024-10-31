@@ -1,0 +1,28 @@
+.formItemWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.styledLabel {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+    font-family: var(--justweb3-font-family);
+    color: var(--justweb3-foreground-color-2);
+}
+
+.styledLabelError {
+    color: var(--justweb3-destructive-color);
+}
+
+.formDescriptionText {
+    font-size: 0.8rem;
+    color: var(--justweb3-foreground-color-2);
+}
+
+.formMessageText {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--justweb3-foreground-color-2);
+}

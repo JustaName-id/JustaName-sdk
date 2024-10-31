@@ -18,8 +18,8 @@ import {
   UseEnsSignInResult,
   useEnsSignOut,
   UseEnsSignOutResult,
-  useMountedAccount,
-  UseSubnameUpdateFunctionParams,
+  useMountedAccount, useRecords,
+  UseSubnameUpdateFunctionParams
 } from '@justaname.id/react';
 import {
   JustWeb3ThemeProvider,
@@ -32,6 +32,8 @@ import usePreviousState from '../../hooks/usePreviousState';
 import { ProfileDialog, UpdateRecordDialog } from '../../dialogs';
 import { isEqual } from 'lodash';
 import { ChainId } from '@justaname.id/sdk';
+
+// import '@justweb3/ui/styles.css';
 
 export interface JustWeb3ProviderConfig
   extends JustaNameProviderConfig,
@@ -49,13 +51,7 @@ export interface JustWeb3ProviderProps {
   config: JustWeb3ProviderConfig;
 }
 
-export interface UpdateRecordsParams
-  extends Omit<UseSubnameUpdateFunctionParams, 'ens' | 'contentHash'> {
-  contentHash?: {
-    protocolType: string;
-    decoded: string;
-  };
-}
+export type UpdateRecordsParams = Omit<UseSubnameUpdateFunctionParams, 'ens'>;
 
 export interface JustWeb3ContextProps {
   handleOpenSignInDialog: (open: boolean) => void;
@@ -123,6 +119,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
     (useMemo(
       () =>
         plugins
+          ?.filter((plugin) => plugin.mApps)
           ?.map((plugin) => plugin.mApps)
           .flat()
           .map((mApp) => ({
@@ -221,13 +218,17 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
             handleOpenSignInDialog={handleOpenSignInDialog}
           >
             <CheckSession
-              openOnWalletConnect={config.openOnWalletConnect || true}
+              openOnWalletConnect={
+                config.openOnWalletConnect !== undefined
+                  ? config.openOnWalletConnect
+                  : true
+              }
               handleOpenDialog={handleOpenSignInDialog}
             />
             {ensOpen && (
               <ProfileDialog
-                // open={!!ensOpen}
-                // handleOpenDialog={(open) => setEnsOpen( null)}
+                plugins={plugins}
+                disableOverlay={config.disableOverlay}
                 handleOnClose={() => setEnsOpen(null)}
                 ens={ensOpen?.ens}
                 chainId={ensOpen?.chainId}
@@ -358,11 +359,34 @@ const CheckSession: FC<{
   handleOpenDialog: (open: boolean) => void;
 }> = ({ openOnWalletConnect, handleOpenDialog }) => {
   const { connectedEns, isEnsAuthPending } = useEnsAuth();
+  const { getRecords } = useRecords()
   const { signOut } = useEnsSignOut();
-  const { address, isConnected, isDisconnected, isConnecting, isReconnecting } =
+  const { address, isConnected, isDisconnected, isConnecting, isReconnecting, chainId } =
     useMountedAccount();
-
   const isConnectedPrevious = usePreviousState(isConnected, [isConnected]);
+
+  useEffect(() => {
+    if(connectedEns && chainId) {
+      if(connectedEns?.chainId !== chainId) {
+        signOut();
+        handleOpenDialog(true);
+      }
+    }
+  }, [chainId, connectedEns]);
+
+  useEffect(() => {
+    if (connectedEns) {
+      getRecords({
+        ens: connectedEns.ens,
+        chainId: connectedEns.chainId,
+      }, true).catch((e) => {
+        if(e.message.includes('NotFound')) {
+          signOut();
+          handleOpenDialog(true);
+        }
+      })
+    }
+  }, [connectedEns]);
 
   useEffect(() => {
     if (connectedEns && address) {
