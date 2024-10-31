@@ -1,3 +1,20 @@
+## 0.3.126 (2024-10-31)
+
+
+### 🩹 Fixes
+
+- justanameprovider backend url and add hook include text and addresses ([14f68a7](https://github.com/JustaName-id/JustaName-sdk/commit/14f68a7))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.123
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.125 (2024-10-31)
 
 
