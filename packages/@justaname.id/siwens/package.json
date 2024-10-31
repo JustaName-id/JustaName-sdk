@@ -1,6 +1,6 @@
 {
   "name": "@justaname.id/siwens",
-  "version": "0.0.46",
+  "version": "0.0.47",
   "dependencies": {
     "ethers": "^6.11.1",
     "siwe": "^2.3.2"
