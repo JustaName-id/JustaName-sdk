@@ -1,3 +1,44 @@
+## 0.2.105 (2024-10-30)
+
+
+### 🩹 Fixes
+
+- **swdk:** reject subname ([4baeb1c](https://github.com/JustaName-id/JustaName-sdk/commit/4baeb1c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.38
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.104 (2024-10-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.37
+
+## 0.2.103 (2024-10-28)
+
+
+### 🚀 Features
+
+- added discord and fixed height in the profile dialog ([e2712e6](https://github.com/JustaName-id/JustaName-sdk/commit/e2712e6))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.36
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.2.102 (2024-10-23)
 
 

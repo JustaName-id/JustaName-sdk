@@ -48,7 +48,7 @@ export type JustaNameConfigWithoutDefaultChainId = Omit<
 export interface JustaNameContextProps
   extends Omit<JustaNameConfigDefaults, 'defaultChainId'> {
   justanameConfig: JustaNameProviderConfig;
-  // handleJustaNameConfig: (config: JustaNameProviderConfig) => void;
+  // handleJustaNameConfig: (config: JustaNameProviderConfig) => void
   justaname: JustaName;
   routes: typeof defaultRoutes;
   backendUrl?: string;
@@ -91,8 +91,8 @@ export const JustaNameProvider: FC<JustaNameProviderProps> = ({
     return !chainId
       ? undefined
       : chainId !== 1 && chainId !== 11155111
-      ? 1
-      : chainId;
+        ? 1
+        : chainId;
   }, [chainId]);
 
   // const [config, setConfig] = useState<JustaNameProviderConfig>(initialConfig);

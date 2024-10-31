@@ -1,3 +1,52 @@
+## 0.3.108 (2024-10-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.105
+
+## 0.3.107 (2024-10-30)
+
+
+### 🩹 Fixes
+
+- release packages ([faee72c](https://github.com/JustaName-id/JustaName-sdk/commit/faee72c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.104
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.3.106 (2024-10-28)
+
+
+### 🚀 Features
+
+- upload cdn and scrollbar fixes ([fc3035e](https://github.com/JustaName-id/JustaName-sdk/commit/fc3035e))
+
+- add plugin ability to add to the profile section ([7970570](https://github.com/JustaName-id/JustaName-sdk/commit/7970570))
+
+
+### 🩹 Fixes
+
+- build fix ([81402e1](https://github.com/JustaName-id/JustaName-sdk/commit/81402e1))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.103
+
+
+### ❤️  Thank You
+
+- Ghadi Mhawej
+- HadiKhai
+
 ## 0.3.105 (2024-10-23)
 
 

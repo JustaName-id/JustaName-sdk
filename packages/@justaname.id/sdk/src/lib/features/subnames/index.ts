@@ -266,7 +266,7 @@ export class Subnames {
       'REJECT_SUBNAME_ROUTE',
       'POST',
       {
-        chain: _chainId,
+        chainId: _chainId,
         ensDomain: _ensDomain,
         username,
       },
