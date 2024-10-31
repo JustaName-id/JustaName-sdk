@@ -18,8 +18,8 @@ import {
   UseEnsSignInResult,
   useEnsSignOut,
   UseEnsSignOutResult,
-  useMountedAccount,
-  UseSubnameUpdateFunctionParams,
+  useMountedAccount, useRecords,
+  UseSubnameUpdateFunctionParams
 } from '@justaname.id/react';
 import {
   JustWeb3ThemeProvider,
@@ -119,6 +119,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
     (useMemo(
       () =>
         plugins
+          ?.filter((plugin) => plugin.mApps)
           ?.map((plugin) => plugin.mApps)
           .flat()
           .map((mApp) => ({
@@ -358,6 +359,7 @@ const CheckSession: FC<{
   handleOpenDialog: (open: boolean) => void;
 }> = ({ openOnWalletConnect, handleOpenDialog }) => {
   const { connectedEns, isEnsAuthPending } = useEnsAuth();
+  const { getRecords } = useRecords()
   const { signOut } = useEnsSignOut();
   const { address, isConnected, isDisconnected, isConnecting, isReconnecting, chainId } =
     useMountedAccount();
@@ -371,6 +373,20 @@ const CheckSession: FC<{
       }
     }
   }, [chainId, connectedEns]);
+
+  useEffect(() => {
+    if (connectedEns) {
+      getRecords({
+        ens: connectedEns.ens,
+        chainId: connectedEns.chainId,
+      }, true).catch((e) => {
+        if(e.message.includes('NotFound')) {
+          signOut();
+          handleOpenDialog(true);
+        }
+      })
+    }
+  }, [connectedEns]);
 
   useEffect(() => {
     if (connectedEns && address) {

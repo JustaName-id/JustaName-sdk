@@ -8,7 +8,7 @@
     "storybook": {
       "executor": "@nx/storybook:storybook",
       "options": {
-        "port": 4401,
+        "port": 4402,
         "configDir": "packages/@justweb3/widget/.storybook"
       },
       "configurations": {
@@ -26,6 +26,18 @@
           },
           {
             "command": "node update-package-json.js"
+          }
+        ],
+        "cwd": "packages/@justweb3/widget",
+        "parallel": false
+      }
+    },
+    "typedoc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "typedoc"
           }
         ],
         "cwd": "packages/@justweb3/widget",
@@ -70,14 +82,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      },
-      "dependsOn": [
-        "lint",
-        {
-          "dependencies": true,
-          "target": "buildProject"
-        }
-      ]
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",

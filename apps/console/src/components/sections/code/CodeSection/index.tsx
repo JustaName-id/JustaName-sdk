@@ -9,8 +9,20 @@ export const CodeSection: React.FC = () => {
   const { color } = useJustWeb3Theme();
   const { justVerified } = useConsole();
 
-  const code = useMemo(
-    () => `import '@rainbow-me/rainbowkit/styles.css'
+  const code = useMemo(() => {
+    const plugins = [];
+
+    if (config.plugins?.find((p) => p.name === 'JustVerifiedPlugin')) {
+      plugins.push(
+        `JustVerifiedPlugin([${justVerified.map((v) => `'${v}'`).join(', ')}])`
+      );
+    }
+
+    if (config.plugins?.find((p) => p.name === 'EFPPlugin')) {
+      plugins.push('EFPPlugin');
+    }
+
+    return `import '@rainbow-me/rainbowkit/styles.css'
 import '@justweb3/widget/styles.css'
 import React from 'react';
 import { 
@@ -47,6 +59,11 @@ ${
     ? "import { JustVerifiedPlugin } from '@justverified/plugin';"
     : ''
 }
+${
+  config.plugins?.find((p) => p.name === 'EFPPlugin')
+    ? "import { EFPPlugin } from '@justweb3/efp-plugin';"
+    : ''
+}
         
 export const App: React.FC = () => {
     const { wallets } = getDefaultWallets();
@@ -70,14 +87,7 @@ export const App: React.FC = () => {
         ...config,
         dev: undefined,
         disableOverlay: undefined,
-        // plugins: justVerified ? [JustVerifiedPlugin(justVerified)] : undefined,
-        plugins: config.plugins?.find((p) => p.name === 'JustVerifiedPlugin')
-          ? [
-              `JustVerifiedPlugin([${justVerified
-                .map((v) => `'${v}'`)
-                .join(', ')}])`,
-            ]
-          : undefined,
+        plugins: plugins.length > 0 ? plugins : undefined,
         color: color,
       },
       null,
@@ -102,9 +112,8 @@ export const App: React.FC = () => {
 };
 
 export default App;
-      `,
-    [color, config, justVerified]
-  );
+      `;
+  }, [color, config, justVerified]);
 
   return (
     <div className="h-full w-[30%] min-w-[300px] border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto py-5 px-2.5 gap-5 justify-between">
@@ -112,7 +121,8 @@ export default App;
       <CopyBlock
         text={code
           .replace(`"JustVerified`, `JustVerified`)
-          .replace('])"', '])')}
+          .replace('])"', '])')
+          .replace(`"EFPPlugin"`, `EFPPlugin`)}
         language={'tsx'}
         customStyle={{
           fontSize: '12px',

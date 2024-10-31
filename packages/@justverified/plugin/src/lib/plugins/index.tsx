@@ -1,10 +1,10 @@
 import { JustaPlugin } from '@justweb3/widget';
-import { ClickableItem, VerificationsIcon } from '@justweb3/ui';
+import { ArrowIcon, ClickableItem, VerificationsIcon } from '@justweb3/ui';
 import { JustVerifiedProvider } from '../providers';
 import { Credentials } from '../types';
 import { verifyRecords } from '../hooks/useVerifyRecords';
-import { ChainId } from '@justaname.id/sdk';
 import { VerificationSection } from '../components/VerificationSection';
+import { ChainId } from '@justaname.id/sdk';
 
 export const JustVerifiedPlugin = (
   credentials: Credentials[],
@@ -12,9 +12,9 @@ export const JustVerifiedPlugin = (
   mApp = 'justverified.eth'
 ): JustaPlugin => ({
   name: 'JustVerifiedPlugin',
-  mApps: [mApp],
+  // mApps: [mApp],
   components: {
-    Providers: (pluginApi, children) => {
+    Provider: (pluginApi, children) => {
       const chainId = pluginApi.chainId;
       if ((chainId !== 1 && chainId !== 11155111) || !chainId) {
         return children;
@@ -46,11 +46,18 @@ export const JustVerifiedPlugin = (
           onClick={() => {
             pluginApi.setState('verificationOpen', true);
           }}
+          right={<ArrowIcon width={20} />}
         />
       );
     },
     ProfileSection: (pluginApi, ens, chainId) => {
-      return <VerificationSection ens={ens} credentials={credentials} chainId={chainId} mApp={mApp} verificationBackendUrl={verificationBackendUrl} />;
+      return <VerificationSection ens={ens} credentials={[
+        'twitter',
+        'email',
+        'telegram',
+        'discord',
+        'github'
+      ]} chainId={chainId} mApp={mApp} verificationBackendUrl={verificationBackendUrl} />;
     }
   },
   hooks: {
@@ -60,10 +67,7 @@ export const JustVerifiedPlugin = (
     onEnsSignIn: async (
       pluginApi,
       ens,
-      chainId,
-      records,
-      enabledMApps,
-      canEnableMApps
+      chainId
     ) => {
       if (chainId !== 1 && chainId !== 11155111) {
         return;
@@ -84,15 +88,15 @@ export const JustVerifiedPlugin = (
 
       pluginApi.setState('verificationOpen', true);
 
-      setTimeout(() => {
-        if (
-          canEnableMApps &&
-          !enabledMApps.includes('justverified.eth') &&
-          !Object.values(verifiableRecords).some((value) => value)
-        ) {
-          pluginApi.handleOpenAuthorizeMAppDialog(mApp, true);
-        }
-      }, 1000);
+      // setTimeout(() => {
+      //   if (
+      //     canEnableMApps &&
+      //     !enabledMApps.includes('justverified.eth') &&
+      //     !Object.values(verifiableRecords).some((value) => value)
+      //   ) {
+      //     pluginApi.handleOpenAuthorizeMAppDialog(mApp, true);
+      //   }
+      // }, 1000);
     },
     onEnsSignOut: (pluginApi, ens) => {
       pluginApi.setState('verificationOpen', false);

@@ -1,48 +1,58 @@
 import {
+  AddMAppPermissionRoute,
+  AppendMAppFieldRoute,
   IsSubnameAvailableRoute,
+  OffchainResolversGetAllRoute,
+  RequestAddMAppPermissionChallengeRoute,
+  RequestAppendMAppFieldChallengeRoute,
   RequestChallengeRoute,
-  VerifyMessageRoute,
+  RequestRevokeMAppPermissionChallengeRoute,
+  RevokeMAppPermissionRoute,
   SubnameAcceptRoute,
   SubnameAddRoute,
   SubnameGetAllByAddressRoute,
   SubnameGetAllByDomainChainIdRoute,
   SubnameGetAllByEnsDomainWithCountRoute,
   SubnameGetBySubnameRoute,
+  SubnameGetInvitationsByAddressRoute,
   SubnameRecordsRoute,
   SubnameRejectRoute,
   SubnameReserveRoute,
   SubnameRevokeRoute,
   SubnameSearchRoute,
   SubnameUpdateRoute,
-  RequestAddMAppPermissionChallengeRoute,
-  RequestAppendMAppFieldChallengeRoute,
-  RequestRevokeMAppPermissionChallengeRoute,
-  AddMAppPermissionRoute,
-  AppendMAppFieldRoute,
-  RevokeMAppPermissionRoute,
-  SubnameGetInvitationsByAddressRoute,
-  OffchainResolversGetAllRoute
+  VerifyMessageRoute,
 } from '../../types';
 import {
   ACCEPT_SUBNAME_ROUTE,
   ADD_SUBNAME_ROUTE,
-  CHECK_SUBNAME_AVAILABILITY_ROUTE, GET_ALL_ENS_WITH_COUNT_ROUTE,
+  CHECK_SUBNAME_AVAILABILITY_ROUTE,
+  GET_ALL_ENS_WITH_COUNT_ROUTE,
   GET_ALL_SUBNAMES_BY_ADDRESS_ROUTE,
   GET_ALL_SUBNAMES_BY_DOMAIN_ROUTE,
-  GET_SUBNAME_BY_SUBNAME_ROUTE, RECORDS_BY_FULLNAME_ROUTE,
+  GET_SUBNAME_BY_SUBNAME_ROUTE,
+  RECORDS_BY_FULLNAME_ROUTE,
   REJECT_SUBNAME_ROUTE,
   RESERVE_SUBNAME_ROUTE,
-  REVOKE_SUBNAME_ROUTE, SEARCH_SUBNAMES_ROUTE,
-  UPDATE_SUBNAME_ROUTE
+  REVOKE_SUBNAME_ROUTE,
+  SEARCH_SUBNAMES_ROUTE,
+  UPDATE_SUBNAME_ROUTE,
 } from './subnames';
 import {
   SIWE_MAPP_ADD_PERMISSION_ROUTE,
-  SIWE_MAPP_APPEND_FIELD_ROUTE, SIWE_MAPP_REVOKE_PERMISSION_ROUTE,
+  SIWE_MAPP_APPEND_FIELD_ROUTE,
+  SIWE_MAPP_REVOKE_PERMISSION_ROUTE,
   SIWE_REQUEST_CHALLENGE_ROUTE,
-  SIWE_VERIFY_MESSAGE_ROUTE
+  SIWE_VERIFY_MESSAGE_ROUTE,
 } from './siwe';
-import { MAPP_ADD_PERMISSION_ROUTE, MAPP_APPEND_FIELD_ROUTE, MAPP_REVOKE_PERMISSION_ROUTE } from './mapp';
+import {
+  MAPP_ADD_PERMISSION_ROUTE,
+  MAPP_APPEND_FIELD_ROUTE,
+  MAPP_REVOKE_PERMISSION_ROUTE,
+} from './mapp';
 import { GET_ALL_OFFCHAIN_RESOLVERS_ROUTE } from './offchain-resolver';
+import { GET_PRIMARY_NAME_BY_ADDRESS_ROUTE } from './primary-name';
+import { PrimaryNameGetByAddressRoute } from '../../types/primary-name';
 
 export interface ROUTES {
   SIWE_VERIFY_MESSAGE_ROUTE: VerifyMessageRoute;
@@ -68,6 +78,7 @@ export interface ROUTES {
   RECORDS_BY_FULLNAME_ROUTE: SubnameRecordsRoute;
   GET_ALL_ENS_WITH_COUNT_ROUTE: SubnameGetAllByEnsDomainWithCountRoute;
   GET_ALL_OFFCHAIN_RESOLVERS_ROUTE: OffchainResolversGetAllRoute;
+  GET_PRIMARY_NAME_BY_ADDRESS_ROUTE: PrimaryNameGetByAddressRoute;
 }
 
 export const Routes: Record<keyof ROUTES, string> = {
@@ -93,5 +104,6 @@ export const Routes: Record<keyof ROUTES, string> = {
   SEARCH_SUBNAMES_ROUTE,
   RECORDS_BY_FULLNAME_ROUTE,
   GET_ALL_ENS_WITH_COUNT_ROUTE,
-  GET_ALL_OFFCHAIN_RESOLVERS_ROUTE
-}
+  GET_ALL_OFFCHAIN_RESOLVERS_ROUTE,
+  GET_PRIMARY_NAME_BY_ADDRESS_ROUTE,
+};

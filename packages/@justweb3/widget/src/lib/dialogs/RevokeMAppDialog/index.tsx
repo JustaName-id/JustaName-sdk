@@ -156,7 +156,7 @@ export const RevokeMAppDialog: FC<RevokeMAppDialogProps> = ({
     >
       <Flex gap={'20px'} direction={'column'}>
         <Flex gap={'10px'} justify={'space-between'} direction={'column'}>
-          <Badge>
+          <Badge value={connectedEns}>
             <SPAN
               style={{
                 fontSize: '10px',

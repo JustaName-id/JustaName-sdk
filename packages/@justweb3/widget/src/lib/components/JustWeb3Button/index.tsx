@@ -7,14 +7,16 @@ import {
   Badge,
   Button,
   ClickableItem,
-  Flex, formatText,
+  Flex,
+  formatText,
   LoadingSpinner,
   LogoutIcon,
   MappIcon,
   P,
   Popover,
   PopoverTrigger,
-  SPAN, WalletIcon
+  SPAN,
+  WalletIcon,
 } from '@justweb3/ui';
 import {
   useCanEnableMApps,
@@ -124,20 +126,18 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
           }}
           left={<Avatar />}
           right={
-          <Badge
-            withCopy={false}
-            style={{
-              padding: '5px',
-              fontSize: '10px',
-              fontWeight: 800,
-            }}
-          >
-            {formatText(address, 4)}
+            <Badge
+              withCopy={false}
+              style={{
+                padding: '5px',
+                fontSize: '10px',
+                fontWeight: 800,
+              }}
+            >
+              {formatText(address, 4)}
 
-            <WalletIcon
-              width={15}
-              />
-          </Badge>
+              <WalletIcon width={15} />
+            </Badge>
           }
         />
       );
@@ -179,23 +179,23 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                   fontWeight: 800,
                 }}
               >
-                     {data ? (
-                       <>
-                         {parseFloat(
-                           formatUnits(data?.value, data?.decimals)
-                         ).toFixed(2)}{' '}
-                         {data?.symbol}
-                       </>
-                     ) : (
-                       '0'
-                     )}
-                   <LogoutIcon
-                     width={15}
-                     onClick={(e) => {
-                       e.stopPropagation();
-                       signOut();
-                     }}
-                   />
+                {data ? (
+                  <>
+                    {parseFloat(
+                      formatUnits(data?.value, data?.decimals)
+                    ).toFixed(2)}{' '}
+                    {data?.symbol}
+                  </>
+                ) : (
+                  '0'
+                )}
+                <LogoutIcon
+                  width={15}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    signOut();
+                  }}
+                />
               </Badge>
             }
           />
@@ -216,7 +216,12 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
                 <Button
                   variant={'primary'}
                   size={'sm'}
-                  rightIcon={<ArrowWhiteIcon width={15} />}
+                  rightIcon={
+                    <ArrowWhiteIcon
+                      width={15}
+                      color={'var(--justweb3-primary-color-foreground)'}
+                    />
+                  }
                   onClick={() => {
                     openEnsProfile(connectedEns?.ens, connectedEns?.chainId);
                   }}

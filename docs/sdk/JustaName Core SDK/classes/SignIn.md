@@ -22,57 +22,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:27](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L27)
-
-## Properties
-
-### chainId
-
-> `readonly` **chainId**: [`ChainId`](../type-aliases/ChainId.md)
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:25](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L25)
-
-***
-
-### networks
-
-> `readonly` **networks**: [`NetworksWithProvider`](../type-aliases/NetworksWithProvider.md)
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:24](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L24)
-
-***
-
-### offchainResolvers
-
-> `readonly` **offchainResolvers**: [`OffchainResolvers`](OffchainResolvers.md)
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:26](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L26)
-
-***
-
-### signInTtl?
-
-> `readonly` `optional` **signInTtl**: `number`
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:23](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L23)
-
-***
-
-### siweConfig?
-
-> `readonly` `optional` **siweConfig**: `Omit`\<[`SiweConfig`](../interfaces/SiweConfig.md), `"chainId"` \| `"ttl"`\>
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:22](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L22)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L30)
 
 ## Methods
 
@@ -86,7 +36,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:142](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L142)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:152](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L152)
 
 ***
 
@@ -104,19 +54,17 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L35)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:38](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L38)
 
 ***
 
 ### signIn()
 
-> **signIn**(`message`, `signature`): `Promise`\<[`SignInResponse`](../interfaces/SignInResponse.md)\>
+> **signIn**(`params`): `Promise`\<[`SignInResponse`](../interfaces/SignInResponse.md)\>
 
 #### Parameters
 
-• **message**: `string`
-
-• **signature**: `string`
+• **params**: [`SignInFunctionParams`](../interfaces/SignInFunctionParams.md)
 
 #### Returns
 
@@ -124,4 +72,4 @@
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:71](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L71)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:76](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L76)

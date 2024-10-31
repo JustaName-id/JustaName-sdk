@@ -32,7 +32,6 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
     name: 'contentHash',
   });
 
-  console.log('form', form.getValues('contentHash'));
   const contentHashValid = useMemo(() => {
     const protocol = contentHash.split('://')[0];
     if (!protocol) return false;

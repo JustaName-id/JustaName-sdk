@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L30)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:30](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L30)
 
 ## Properties
 
@@ -157,7 +157,7 @@ node\_modules/siwe/dist/client.d.ts:32
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L28)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L28)
 
 ***
 
@@ -370,7 +370,7 @@ This object if valid.
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:74](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L74)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:74](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L74)
 
 ***
 
@@ -396,7 +396,7 @@ This object if valid.
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:105](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L105)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:105](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L105)
 
 ***
 
@@ -410,4 +410,4 @@ This object if valid.
 
 #### Defined in
 
-[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:115](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L115)
+[packages/@justaname.id/siwens/src/lib/siwens/siwens.ts:115](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/siwens/src/lib/siwens/siwens.ts#L115)

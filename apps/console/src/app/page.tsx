@@ -20,12 +20,12 @@ export default function Page() {
               <ConnectButton />
             </JustWeb3Button>
 
-            <JustEnsCard ens={'justhadi.eth'} />
-            <JustEnsCard ens={'mely.eth'} />
-            <JustEnsCard ens={'nick.eth'} />
-            <JustEnsCard ens={'vitalik.eth'} />
-            <JustEnsCard ens={'brantly.eth'} />
-            <JustEnsCard ens={'dr3a.eth'} />
+            <JustEnsCard addressOrEns={'justhadi.eth'} />
+            <JustEnsCard addressOrEns={'mely.eth'} />
+            <JustEnsCard addressOrEns={'nick.eth'} />
+            <JustEnsCard addressOrEns={'vitalik.eth'} />
+            <JustEnsCard addressOrEns={'brantly.eth'} />
+            <JustEnsCard addressOrEns={'dr3a.eth'} />
           </div>
           <CodeSection />
         </Split>

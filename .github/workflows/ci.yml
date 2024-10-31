@@ -14,20 +14,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+#      - name: Get yarn cache directory path
+#        id: yarn-cache-dir-path
+#        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v3
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.OS }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-yarn-
+#      - uses: actions/cache@v3
+#        id: yarn-cache
+#        with:
+#          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+#          key: ${{ runner.OS }}-yarn-${{ hashFiles('**/yarn.lock') }}
+#          restore-keys: |
+#            ${{ runner.OS }}-yarn-
       - uses: nrwl/nx-set-shas@v3
       - run: yarn install
-      - run: npx nx affected -t lint
+      - run: npx nx reset
       - name: Run Tests
         env:
           SDK_JUSTANAME_TEST_API_KEY: ${{ secrets.SDK_JUSTANAME_TEST_API_KEY }}
@@ -42,4 +42,4 @@ jobs:
           SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
           SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
         run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console
-      - run: npx nx affected -t build --exclude=console
+      - run: npx nx affected -t build --exclude=justaname-mono-sdk,console

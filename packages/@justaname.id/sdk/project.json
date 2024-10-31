@@ -63,14 +63,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      },
-      "dependsOn": [
-        "lint",
-        {
-          "dependencies": true,
-          "target": "build"
-        }
-      ]
+      }
     },
     "publish": {
       "command": "node tools/scripts/publish.mjs @justaname.id/sdk {args.ver} {args.tag}",

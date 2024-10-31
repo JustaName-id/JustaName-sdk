@@ -12,16 +12,6 @@
 
 ## Properties
 
-### chainId
-
-> **chainId**: [`ChainId`](../type-aliases/ChainId.md)
-
-#### Defined in
-
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L10)
-
-***
-
 ### data
 
 > **data**: `SiweMessage`
@@ -74,7 +64,7 @@ node\_modules/siwe/dist/types.d.ts:32
 
 #### Defined in
 
-[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/626b4b68604f3125538c424811e641247a5bd58d/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L9)
+[packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/features/sign-in/index.ts#L13)
 
 ***
 

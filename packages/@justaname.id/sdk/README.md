@@ -1,137 +1,241 @@
-# JustaName Core SDK
+# JustaName SDK
 
-The **JustaName Core SDK** enables seamless integration of decentralized identity and ENS (Ethereum Name Service) management into your dApps, offering a modern, gasless, and user-friendly experience. Whether you want to issue ENS subnames, update records for free, or authenticate users with their ENS, JustaName provides an easy-to-use solution.
+JustaName SDK is a toolkit for managing Ethereum Name Service (ENS) domains and subnames. It simplifies the integration of ENS functionalities into any application, including resolving ENS names, issuing off-chain subnames, and enabling Sign-In with ENS (SIWENS). 
+The SDK supports both Ethereum Mainnet and Testnet environments.
 
-## Key Features
+## Table of Contents
+- [Motivation](#motivation)
+- [Features](#features)
+- [How It Works](#how-it-works)
+- [Installation](#installation)
+- [Quickstart Guide](#quickstart-guide)
+    - [Initialization](#initialization)
+    - [Issuing a Subname](#issuing-a-subname)
+    - [Updating a Subname](#updating-a-subname)
+    - [Signing In with ENS](#signing-in-with-ens)
+- [Benefits](#benefits)
+- [Available Methods](#available-methods)
+    - [Subname Management](#subname-management)
+    - [SIWE](#siwe)
+    - [Sign-In with ENS](#sign-in-with-ens)
+    - [Offchain Resolvers](#offchain-resolvers)
+- [Contributing](#contributing)
 
-### 1. **Gasless Subname Issuance**
-Issue ENS subnames without users having to worry about gas fees. The SDK supports gasless transactions, allowing you to provide a frictionless experience when users claim or manage their subnames.
+## Motivation
 
-### 2. **Free ENS Record Updates**
-Update your ENS records for free! Modify subname information like avatars, descriptions, and more without incurring any gas fees. This feature allows for fast and frequent updates, giving users more control over their ENS profiles and metadata.
+Managing ENS domains and integrating them into applications can be complex and time-consuming. JustaName SDK aims to streamline this process by providing an easy-to-use interface for off-chain ENS management, subname issuance, and authentication using ENS domains. By abstracting the underlying complexities, developers can focus on building feature-rich applications without worrying about ENS integration details.
 
-### 3. **SIWENS: Authentication Using ENS**
-Authenticate users with **SIWENS (Sign-In with Ethereum + ENS)**, ensuring not only that users control their Ethereum wallet, but also verifying ownership of the ENS domain used during login. This adds an extra layer of security and simplifies the login process for users.
+## Features
 
-### 4. **ENS Name Resolution**
-Easily resolve ENS names to their corresponding Ethereum addresses, allowing you to build ENS-powered applications that rely on human-readable identifiers. This makes it simpler for users to interact with decentralized applications using familiar ENS names rather than long, complex wallet addresses.
+- **ENS Management:** Manage ENS domains and subnames off-chain effortlessly.
+- **Subname Issuance:** Issue and update subnames without interacting directly with smart contracts.
+- **ENS Resolution:** Resolve on-chain and off-chain ENS easily within your application.
+- **Sign-In with ENS (SIWENS):** Authenticate users using their ENS domains for a decentralized and secure sign-in experience.
+- **Mainnet and Testnet Support:** Compatible with Ethereum Mainnet and Testnet environments.
+- **Easy Integration:** Simplifies the incorporation of ENS functionalities into any application.
 
-### 5. **Metadata Applications (mApps)**
-Leverage **mApps (Metadata Applications)** to manage custom fields and permissions associated with ENS records. Add, modify, or revoke mApp permissions dynamically, allowing for decentralized, role-based access to your dApp’s features.
+## How It Works
 
-### 6. **Cross-Chain Support**
-The SDK is designed to support multiple blockchains, including Ethereum mainnet, testnets, and other EVM-compatible networks. This cross-chain support ensures your dApp is scalable and adaptable to different blockchain ecosystems.
+JustaName SDK interacts with the JustaName API to perform off-chain operations related to ENS domains and subnames. It handles the necessary cryptographic operations, such as signing messages and verifying signatures, to ensure secure interactions. By using the SDK, developers can perform tasks like issuing subnames, updating records, and authenticating users without dealing with the complexities of the Ethereum blockchain directly.
 
-## Why Choose JustaName SDK?
+## Installation
 
-- **Gasless & User-Friendly**: Enable users to issue and manage ENS subnames without needing to pay gas fees.
-- **Effortless ENS Management**: Free record updates for ENS profiles, making it simple to keep user data current and relevant.
-- **Enhanced Security**: With SIWENS authentication, users' ENS domain ownership is verified, providing a secure and decentralized identity solution.
-- **Easy ENS Resolution**: Quickly resolve ENS names to Ethereum addresses for seamless transactions and interactions.
-- **Custom Metadata Management**: mApps allow you to extend ENS profiles with custom data and permissions, perfect for complex, role-based dApps.
-- **Multi-Chain Flexibility**: Build dApps that are blockchain-agnostic, with full support for Ethereum and EVM-compatible chains.
-
-## Quickstart
-
-Install the SDK via npm or yarn:
+Install the package using npm or yarn:
 
 ```bash
 npm install @justaname.id/sdk
 
-or
+# or
 
 yarn add @justaname.id/sdk
 ```
 
-## Example Usage
+## Quickstart Guide
+### Initialization
+First, import the JustaName SDK and initialize it with your configuration:
 
 ```typescript
 import { JustaName } from '@justaname.id/sdk';
+import { ethers } from 'ethers';
 
 // Initialize the SDK with your configuration
 const justaname = JustaName.init({
-  apiKey: 'your-api-key',
-  networks: [
-    {
-      chainId: 1, // Ethereum Mainnet
-      providerUrl: 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY'
+    networks: [
+        {
+          chainId: 1, // Ethereum Mainnet
+          providerUrl: 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY'
+        }
+    ],
+    ensDomains: [
+        {
+          chainId: 1,
+          domain: 'your_ens_domain.eth',
+          apiKey: 'your-api-key',
+        }
+            
+    ],
+    config: {
+        domain: 'yourdapp.com',
+        origin: 'https://yourdapp.com'
     }
-  ],
-  ensDomains: [{
-    chainId: 1,
-    domain: 'your_ens_domain.eth'
-  }],
-  config:{
-    domain: 'yourdapp.com',
-    origin: 'https://yourdapp.com'
-  }
 });
 
+// Create a signer (for example purposes, we're creating a random wallet)
 const signer = ethers.Wallet.createRandom();
+```
 
+### Issuing a Subname
+To issue a subname off-chain, you can use the following code:
+
+```typescript
 async function issueSubname() {
-  const challenge = await justaname.siwe.requestChallenge({
-    address: signer.address,
-    chainId: CHAIN_ID,
-  });
-
-  const signature = await signer.signMessage(challenge.challenge);
-  const response = await justaname.subnames.addSubname({
-    username: 'username1',
-    chainId: CHAIN_ID,
-  }, {
-    xMessage: challenge.challenge,
-    xAddress: signer.address,
-    xSignature: signature
-  })
-  
-  return response;
-}
-
-async function updateSubname() {
     const challenge = await justaname.siwe.requestChallenge({
         address: signer.address,
-        chainId: CHAIN_ID,
+        chainId: 1 // Ethereum Mainnet
     });
     
     const signature = await signer.signMessage(challenge.challenge);
     
-    const response = await justaname.subnames.updateSubname({
+    const response = await justaname.subnames.addSubname(
+    {
         username: 'username1',
-        chainId: CHAIN_ID,
-        text: [{
-            key: 'avatar',
-            value: 'https://youravatar.com/avatar.png'
-        }]
-    }, {
+        chainId: 1
+    },
+    {
         xMessage: challenge.challenge,
         xAddress: signer.address,
         xSignature: signature
     });
     
+    console.log('Subname issued successfully:', response);
     return response;
 }
+```
+### Updating a Subname
+To update records associated with a subname, such as setting an avatar:
 
-
-async function signIn() {
-  
-  const requestChallenge = await justaname.signIn.requestSignIn({
-    ens: 'your_ens_domain.eth',
-    address: signer.address
-  }) // usually this will be done on the frontend
-  const signature = await signer.signMessage(requestChallenge.message);
-  
-  const response = await justaname.signIn.signIn(
-    requestChallenge.message,
-    signature
-  ) // usually this will be done on the backend
-  
-  console.log('User signed in with ENS:', response.ens);
-}
-
-async function main() {
-  await issueSubname();
-  await updateSubname();
-  await signIn();
+```typescript
+async function updateSubname() {
+    const challenge = await justaname.siwe.requestChallenge({
+        address: signer.address,
+        chainId: 1
+    });
+    
+    const signature = await signer.signMessage(challenge.challenge);
+    
+    const response = await justaname.subnames.updateSubname(
+    {
+        username: 'username1',
+        chainId: 1,
+        text: [
+            {
+            key: 'avatar',
+            value: 'https://youravatar.com/avatar.png'
+            }
+        ]
+    },
+    {
+        xMessage: challenge.challenge,
+        xAddress: signer.address,
+        xSignature: signature
+    });
+    
+    console.log('Subname updated successfully:', response);
+    return response;
 }
 ```
+
+### Signing In with ENS
+Enable users to sign in to your application using their ENS domain:
+
+```typescript
+async function signIn() {
+    const message = await justaname.signIn.requestSignIn({
+        ens: 'your_ens_domain.eth',
+        address: signer.address
+    });
+    
+    const signature = await signer.signMessage(message);
+    
+    const response = await justaname.signIn.signIn({
+        message: message,
+        signature: signature
+    });
+    
+    console.log('User signed in with ENS:', response.ens);
+    return response;
+}
+```
+
+### Putting It All Together
+You can combine these functions to manage subnames and authenticate users:
+
+```typescript
+async function main() {
+    await issueSubname();
+    await updateSubname();
+    await signIn();
+}
+
+main().catch(console.error);
+```
+
+## Available Methods
+### Subname Management
+- acceptSubname
+- reserveSubname
+- addSubname
+- updateSubname
+- revokeSubname
+- rejectSubname
+- getSubnamesByEnsDomainWithCount
+- getSubname
+- getSubnamesByAddress
+-  getInvitationsByAddress
+- getSubnamesByEnsDomain
+- searchSubnames
+- isSubnameAvailable
+- getRecords
+- getPrimaryNameByAddress
+### SIWE
+- requestChallenge
+- verifyChallenge
+### Sign-In with ENS
+- requestSignIn
+- signIn
+- generateNonce 
+
+[//]: # (### MApp Management)
+
+[//]: # (- checkIfMAppIsEnabled)
+
+[//]: # (- canEnableMApps)
+
+[//]: # (- requestAddMAppPermissionChallenge)
+
+[//]: # (- requestAppendMAppFieldChallenge)
+
+[//]: # (- requestRevokeMAppPermissionChallenge)
+
+[//]: # (- addMAppPermission)
+
+[//]: # (- appendMAppField)
+
+[//]: # (- revokeMAppPermission)
+### Offchain Resolvers
+- getAllOffchainResolvers
+
+### Benefits
+Simplified ENS Integration: Abstracts the complexities of interacting with the Ethereum blockchain and ENS smart contracts.
+
+Off-Chain Management: Perform ENS domain and subname operations off-chain, reducing gas costs and improving performance.
+
+Enhanced Security: Utilizes cryptographic signatures to ensure secure operations.
+
+User-Friendly Authentication: Allows users to sign in with their ENS domains, enhancing user experience and security.
+
+Flexible Environment Support: Works seamlessly with both Ethereum Mainnet and Testnet networks.
+
+### Contributing
+Contributions are welcome! If you have suggestions or find issues, please open an issue or submit a pull request on the GitHub repository.
+

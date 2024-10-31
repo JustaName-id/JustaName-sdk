@@ -1,0 +1,27 @@
+[**@justaname.id/react**](../README.md) • **Docs**
+
+***
+
+[@justaname.id/react](../globals.md) / UseRequestRevokeMAppPermissionResult
+
+# Interface: UseRequestRevokeMAppPermissionResult
+
+## Properties
+
+### isRevokeMAppPermissionPending
+
+> **isRevokeMAppPermissionPending**: `boolean`
+
+#### Defined in
+
+[packages/@justaname.id/react/src/lib/hooks/mApp/useRevokeMAppPermission.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/react/src/lib/hooks/mApp/useRevokeMAppPermission.ts#L11)
+
+***
+
+### revokeMAppPermission
+
+> **revokeMAppPermission**: `UseMutateAsyncFunction`\<`SubnameResponse`, `Error`, [`UseRevokeMAppPermissionFunctionParams`](UseRevokeMAppPermissionFunctionParams.md), `unknown`\>
+
+#### Defined in
+
+[packages/@justaname.id/react/src/lib/hooks/mApp/useRevokeMAppPermission.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/react/src/lib/hooks/mApp/useRevokeMAppPermission.ts#L10)

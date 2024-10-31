@@ -57,9 +57,9 @@ export const Example = () => {
                 <ConnectButton />
               </JustWeb3Button>
             </div>
-            <JustEnsCard ens={'nick.eth'} />
-            <JustEnsCard ens={'vitalik.eth'} />
-            <JustEnsCard ens={'dr3a.eth'} />
+            <JustEnsCard addressOrEns={'nick.eth'} />
+            <JustEnsCard addressOrEns={'vitalik.eth'} />
+            <JustEnsCard addressOrEns={'dr3a.eth'} />
           </JustWeb3Provider>
         </RainbowKitProvider>
         <ReactQueryDevtools initialIsOpen={false} />

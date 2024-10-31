@@ -34,7 +34,7 @@ jobs:
       - name: Install Dependencies with Immutable Flag
         run: |
           yarn install --immutable
-
+      - run: npx nx reset
       - name: Build and Test
         env:
           SDK_JUSTANAME_TEST_API_KEY: ${{ secrets.SDK_JUSTANAME_TEST_API_KEY }}
@@ -49,9 +49,7 @@ jobs:
           SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
           SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
         run: |
-          npx nx affected -t lint
           npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console
-          npx nx affected -t build --exclude=console
 
       - name: Pull latest changes from main
         run: git pull origin main
@@ -64,11 +62,6 @@ jobs:
           always-auth: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Reset Nx Cache
-        run: |
-          npx nx reset
-          echo "Reset completed"
 
       - name: Release
         run: |

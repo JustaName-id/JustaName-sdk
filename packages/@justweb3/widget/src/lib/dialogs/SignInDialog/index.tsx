@@ -21,12 +21,16 @@ import {
   useIsSubnameAvailable,
   useJustaName,
   useMountedAccount,
+  useOffchainResolvers,
 } from '@justaname.id/react';
 import { useDebounce } from '../../hooks/useDebounce';
 import { DefaultDialog } from '../DefaultDialog';
 import { SelectSubnameItem } from '../../components/SelectSubnameItem';
 import styles from './SignInDialog.module.css';
 import clsx from 'clsx';
+
+const ENS_MAINNET_RESOLVER = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
+const ENS_SEPOLIA_RESOLVER = '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD';
 
 interface TransitionElementProps extends React.HTMLAttributes<HTMLDivElement> {
   maxheight: string;
@@ -150,6 +154,8 @@ export const SignInDialog: FC<SignInDialogProps> = ({
 
   const { signIn } = useEnsSignIn();
 
+  const { offchainResolvers, isOffchainResolversPending } =
+    useOffchainResolvers();
   const subnames = useMemo(() => {
     const allNames = [...accountEnsNames, ...accountSubnames].reduce(
       (acc, subname) => {
@@ -185,14 +191,33 @@ export const SignInDialog: FC<SignInDialogProps> = ({
       );
     }
 
+    accountNames = accountNames
+      .filter((name) => {
+        const resolverAddress =
+          chainId === 1 ? ENS_MAINNET_RESOLVER : ENS_SEPOLIA_RESOLVER;
+        const offchainResolver = offchainResolvers?.offchainResolvers.find(
+          (resolver) => resolver.chainId === chainId
+        );
+
+        return !(
+          name.records.resolverAddress !== resolverAddress &&
+          name.records.resolverAddress !== offchainResolver?.resolverAddress
+        );
+      })
+      .sort((a, b) => {
+        return a.ens.localeCompare(b.ens);
+      });
+
     return accountNames;
   }, [
+    accountEnsNames,
     accountSubnames,
+    isAccountSubnamesPending,
+    isAccountEnsNamesPending,
     allowedEns,
     claimableEns,
-    accountEnsNames,
-    isAccountEnsNamesPending,
-    isAccountSubnamesPending,
+    chainId,
+    offchainResolvers?.offchainResolvers,
   ]);
 
   const shouldBeAbleToSelect = useMemo(() => {
@@ -234,12 +259,14 @@ export const SignInDialog: FC<SignInDialogProps> = ({
       }
     >
       <Flex direction="column" gap="10px">
-        <Badge>
+        <Badge value={address}>
           <SPAN className={styles.badgeText}>
             {address && formatText(address, 4)}
           </SPAN>
         </Badge>
-        {isAccountSubnamesPending || isAccountEnsNamesPending ? (
+        {isAccountSubnamesPending ||
+        isAccountEnsNamesPending ||
+        isOffchainResolversPending ? (
           <div className={styles.loadingContainer}>
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
           </div>

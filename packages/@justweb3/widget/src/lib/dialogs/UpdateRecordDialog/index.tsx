@@ -98,7 +98,7 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
         </div>
       ) : (
         <Flex justify="space-between" direction="column" gap="20px">
-          <Badge>
+          <Badge value={ens}>
             <SPAN
               style={{
                 fontSize: '10px',

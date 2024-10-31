@@ -98,22 +98,26 @@ export const Example = () => {
               <UpdateButton />
 
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <JustEnsCard ens={'mely.eth'} />
-                <JustEnsCard ens={'nick.eth'} />
-                <JustEnsCard ens={'brantly.eth'} />
-                <JustEnsCard ens={'vitalik.eth'} />
-                <JustEnsCard ens={'dr3a.eth'} />
-                <JustEnsCard ens={'josh.box'} />
-                <JustEnsCard ens={'hadikhai.jaw.eth'} chainId={11155111} />
+                <JustEnsCard addressOrEns={'mely.eth'} />
+                <JustEnsCard addressOrEns={'nick.eth'} />
+                <JustEnsCard addressOrEns={'brantly.eth'} />
+                <JustEnsCard addressOrEns={'vitalik.eth'} />
+                <JustEnsCard addressOrEns={'dr3a.eth'} />
+                <JustEnsCard addressOrEns={'josh.box'} />
+                <JustEnsCard addressOrEns={'justhadi.eth'} />
+                <JustEnsCard
+                  addressOrEns={'hadikhai.jaw.eth'}
+                  chainId={11155111}
+                />
               </div>
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <JustEnsCard ens={'mely.eth'} expanded />
-                <JustEnsCard ens={'nick.eth'} expanded />
-                <JustEnsCard ens={'brantly.eth'} expanded />
-                <JustEnsCard ens={'vitalik.eth'} expanded />
-                <JustEnsCard ens={'dr3a.eth'} expanded />
+                <JustEnsCard addressOrEns={'mely.eth'} expanded />
+                <JustEnsCard addressOrEns={'nick.eth'} expanded />
+                <JustEnsCard addressOrEns={'brantly.eth'} expanded />
+                <JustEnsCard addressOrEns={'vitalik.eth'} expanded />
+                <JustEnsCard addressOrEns={'dr3a.eth'} expanded />
                 <JustEnsCard
-                  ens={'hadikhai.jaw.eth'}
+                  addressOrEns={'hadikhai.jaw.eth'}
                   chainId={11155111}
                   expanded
                 />
