@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "remove:cache": "rm -rf node_modules/.cache/rollup-plugin-typescript2",
-    "build:all": "yarn remove:cache && nx run-many -t build --verbose --all",
+    "build:all": "yarn remove:cache && nx run-many -t build --verbose --all --parallel=1",
     "test:all": "yarn remove:cache && nx run-many -t test --all"
   },
   "dependencies": {
