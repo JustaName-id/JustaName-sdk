@@ -1,3 +1,174 @@
+## 0.0.63 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.124
+- Updated @justaname.id/react to 0.3.127
+- Updated @justweb3/ui to 0.0.63
+
+## 0.0.62 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.123
+- Updated @justaname.id/react to 0.3.126
+- Updated @justweb3/ui to 0.0.62
+
+## 0.0.61 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.122
+- Updated @justaname.id/react to 0.3.125
+- Updated @justweb3/ui to 0.0.61
+
+## 0.0.60 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.121
+- Updated @justaname.id/react to 0.3.124
+- Updated @justweb3/ui to 0.0.60
+
+## 0.0.59 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.120
+- Updated @justaname.id/react to 0.3.123
+- Updated @justweb3/ui to 0.0.59
+
+## 0.0.58 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.119
+- Updated @justaname.id/react to 0.3.122
+- Updated @justweb3/ui to 0.0.58
+
+## 0.0.57 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.118
+- Updated @justaname.id/react to 0.3.121
+- Updated @justweb3/ui to 0.0.57
+
+## 0.0.56 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.117
+- Updated @justaname.id/react to 0.3.120
+- Updated @justweb3/ui to 0.0.56
+
+## 0.0.55 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.116
+- Updated @justaname.id/react to 0.3.119
+- Updated @justweb3/ui to 0.0.55
+
+## 0.0.54 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.115
+- Updated @justaname.id/react to 0.3.118
+- Updated @justweb3/ui to 0.0.54
+
+## 0.0.53 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.114
+- Updated @justaname.id/react to 0.3.117
+- Updated @justweb3/ui to 0.0.53
+
+## 0.0.52 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.113
+- Updated @justaname.id/react to 0.3.116
+- Updated @justweb3/ui to 0.0.52
+
+## 0.0.51 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.112
+- Updated @justaname.id/react to 0.3.115
+- Updated @justweb3/ui to 0.0.51
+
+## 0.0.50 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.111
+- Updated @justaname.id/react to 0.3.114
+- Updated @justweb3/ui to 0.0.50
+
+## 0.0.49 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.110
+- Updated @justaname.id/react to 0.3.113
+- Updated @justweb3/ui to 0.0.49
+
+## 0.0.48 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.109
+- Updated @justaname.id/react to 0.3.112
+- Updated @justweb3/ui to 0.0.48
+
+## 0.0.47 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.108
+- Updated @justaname.id/react to 0.3.111
+- Updated @justweb3/ui to 0.0.47
+
+## 0.0.46 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.107
+- Updated @justaname.id/react to 0.3.110
+- Updated @justweb3/ui to 0.0.46
+
+## 0.0.45 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.106
+- Updated @justaname.id/react to 0.3.109
+- Updated @justweb3/ui to 0.0.45
+
 ## 0.0.44 (2024-10-30)
 
 

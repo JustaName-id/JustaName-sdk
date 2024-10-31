@@ -1,3 +1,174 @@
+## 0.1.23 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.127
+- Updated @justweb3/ui to 0.0.63
+- Updated @justweb3/widget to 0.0.63
+
+## 0.1.22 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.126
+- Updated @justweb3/ui to 0.0.62
+- Updated @justweb3/widget to 0.0.62
+
+## 0.1.21 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.125
+- Updated @justweb3/ui to 0.0.61
+- Updated @justweb3/widget to 0.0.61
+
+## 0.1.20 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.124
+- Updated @justweb3/ui to 0.0.60
+- Updated @justweb3/widget to 0.0.60
+
+## 0.1.19 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.123
+- Updated @justweb3/ui to 0.0.59
+- Updated @justweb3/widget to 0.0.59
+
+## 0.1.18 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.122
+- Updated @justweb3/ui to 0.0.58
+- Updated @justweb3/widget to 0.0.58
+
+## 0.1.17 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.121
+- Updated @justweb3/ui to 0.0.57
+- Updated @justweb3/widget to 0.0.57
+
+## 0.1.16 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.120
+- Updated @justweb3/ui to 0.0.56
+- Updated @justweb3/widget to 0.0.56
+
+## 0.1.15 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.119
+- Updated @justweb3/ui to 0.0.55
+- Updated @justweb3/widget to 0.0.55
+
+## 0.1.14 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.118
+- Updated @justweb3/ui to 0.0.54
+- Updated @justweb3/widget to 0.0.54
+
+## 0.1.13 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.117
+- Updated @justweb3/ui to 0.0.53
+- Updated @justweb3/widget to 0.0.53
+
+## 0.1.12 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.116
+- Updated @justweb3/ui to 0.0.52
+- Updated @justweb3/widget to 0.0.52
+
+## 0.1.11 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.115
+- Updated @justweb3/ui to 0.0.51
+- Updated @justweb3/widget to 0.0.51
+
+## 0.1.10 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.114
+- Updated @justweb3/ui to 0.0.50
+- Updated @justweb3/widget to 0.0.50
+
+## 0.1.9 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.113
+- Updated @justweb3/ui to 0.0.49
+- Updated @justweb3/widget to 0.0.49
+
+## 0.1.8 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.112
+- Updated @justweb3/ui to 0.0.48
+- Updated @justweb3/widget to 0.0.48
+
+## 0.1.7 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.111
+- Updated @justweb3/ui to 0.0.47
+- Updated @justweb3/widget to 0.0.47
+
+## 0.1.6 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.110
+- Updated @justweb3/ui to 0.0.46
+- Updated @justweb3/widget to 0.0.46
+
+## 0.1.5 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.109
+- Updated @justweb3/ui to 0.0.45
+- Updated @justweb3/widget to 0.0.45
+
 ## 0.1.4 (2024-10-30)
 
 This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.

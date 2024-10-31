@@ -1,3 +1,156 @@
+## 0.3.127 (2024-10-31)
+
+
+### 🚀 Features
+
+- remove console.log ([9c75dcc](https://github.com/JustaName-id/JustaName-sdk/commit/9c75dcc))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.124
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.3.126 (2024-10-31)
+
+
+### 🩹 Fixes
+
+- justanameprovider backend url and add hook include text and addresses ([14f68a7](https://github.com/JustaName-id/JustaName-sdk/commit/14f68a7))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.123
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.3.125 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.122
+
+## 0.3.124 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.121
+
+## 0.3.123 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.120
+
+## 0.3.122 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.119
+
+## 0.3.121 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.118
+
+## 0.3.120 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.117
+
+## 0.3.119 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.116
+
+## 0.3.118 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.115
+
+## 0.3.117 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.114
+
+## 0.3.116 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.113
+
+## 0.3.115 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.112
+
+## 0.3.114 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.111
+
+## 0.3.113 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.110
+
+## 0.3.112 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.109
+
+## 0.3.111 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.108
+
+## 0.3.110 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.107
+
+## 0.3.109 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.106
+
 ## 0.3.108 (2024-10-30)
 
 

@@ -67,7 +67,11 @@ export const useAddSubname = (
       const signature = await getSignature();
       const __apiKey = _params.apiKey || _apiKey;
       const __ensDomain = _params.ensDomain || _ensDomain;
+
       const __chainId = _params.chainId || _chainId;
+      const __addresses = _params.addresses || params?.addresses;
+      const __text = _params.text || params?.text;
+      const __contentHash = _params.contentHash || params?.contentHash;
       let response: SubnameAddRoute['response'];
 
       if (__apiKey) {
@@ -76,9 +80,9 @@ export const useAddSubname = (
             username: _params.username,
             ensDomain: __ensDomain,
             chainId: __chainId,
-            addresses: params?.addresses,
-            text: params?.text,
-            contentHash: params?.contentHash,
+            addresses: __addresses,
+            text: __text,
+            contentHash: __contentHash,
           },
           {
             xSignature: signature.signature,
@@ -100,6 +104,9 @@ export const useAddSubname = (
             signature: signature.signature,
             address: address,
             message: signature.message,
+            text: __text,
+            contentHash: __contentHash,
+            addresses: __addresses,
           }),
         });
 
