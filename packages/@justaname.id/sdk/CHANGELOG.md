@@ -1,3 +1,10 @@
+## 0.2.112 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.45
+
 ## 0.2.111 (2024-10-31)
 
 
