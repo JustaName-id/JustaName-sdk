@@ -5,8 +5,7 @@
     "@ensdomains/ensjs": "4.0.1-alpha.0",
     "@justaname.id/sdk": "0.2.105",
     "axios": "^1.6.0",
-    "qs": "^6.12.0",
-    "vite": "~5.0.0"
+    "qs": "^6.12.0"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^5.x",

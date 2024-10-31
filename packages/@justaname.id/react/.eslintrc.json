@@ -31,7 +31,12 @@
         "@nx/dependency-checks": [
           "error",
           {
-            "ignoredFiles": ["{projectRoot}/rollup.config.{js,ts,mjs,mts,cjs}"]
+            "ignoredFiles": [
+              "{projectRoot}/rollup.config.{js,ts,mjs,mts,cjs}",
+              "{projectRoot}/.storybook/main.{js,ts}",
+              "{projectRoot}/src/stories/**/*.{js,ts,jsx,tsx}",
+              "{projectRoot}/src/stories/**.{js,ts,jsx,tsx}"
+            ]
           }
         ]
       }
