@@ -8,7 +8,7 @@ import { Records } from '../../types';
 
 export const buildSubnameBySubnameKey = (
   subname: string,
-  chainId: ChainId
+  chainId: ChainId| undefined
 ) => ['SUBNAME_BY_SUBNAME', subname, chainId]
 
 export type UseSubnameParams = SubnameGetBySubnameRoute['params']

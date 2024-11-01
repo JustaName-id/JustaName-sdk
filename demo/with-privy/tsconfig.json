@@ -10,8 +10,8 @@
     "types": ["vite/client", "vitest", "dom"],
     "paths": {
       "@justaname.id/react": ["packages/@justaname.id/react"],
-      "@justaname.id/react-ui": ["packages/@justaname.id/react-ui"],
-      "@justaname.id/react-signin": ["packages/@justaname.id/react-signin"],
+      "@justweb3/ui": ["packages/@justweb3/ui"],
+      "@justweb3/widget": ["packages/@justweb3/widget"],
     }
   },
   "files": [],

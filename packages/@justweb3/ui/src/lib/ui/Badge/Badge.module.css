@@ -1,0 +1,16 @@
+.badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 16px;
+    width: fit-content;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+    background-color: var(--justweb3-foreground-color-4);
+    color: hsl(from var(--justweb3-foreground-color-2) h s l / 0.5);
+    font-family: var(--justweb3-font-family), serif;
+    font-style: normal;
+    gap: 5px;
+}

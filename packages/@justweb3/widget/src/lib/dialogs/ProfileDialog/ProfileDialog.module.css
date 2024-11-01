@@ -1,0 +1,104 @@
+/* FormContainer styles */
+.formContainer {
+    transform-origin: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+    max-width: 0;
+    min-width: 0;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+}
+
+.formContainerEditMode {
+    flex: 1 1 0%;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .formContainerEditMode {
+        min-width: 250px;
+        max-width: 250px;
+    }
+}
+
+/* FormInnerContainer styles */
+.formInnerContainer {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    max-width: 100%;
+    /*min-width: calc(max(min(1200px, 90vw), 390px) - 40px);*/
+    /*max-width: calc(max(min(1200px, 90vw), 390px) - 40px);*/
+}
+
+@media (min-width: 768px) {
+    .formInnerContainer {
+        min-width: 230px;
+        max-width: 230px;
+    }
+}
+
+/* ContentSectionWrapper styles */
+.contentSectionWrapper {
+    flex: 1 1 0%;
+    overflow-y: auto;
+    transition: all 300ms linear;
+}
+
+/* Header styles */
+.header {
+    display: flex;
+    gap: 5px;
+}
+
+/* Badge text styles */
+.badgeText {
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: 900;
+    color: var(--justweb3-primary-color);
+}
+
+/* Loading container styles */
+.loadingContainer {
+    height: 100%;
+    position: relative;
+    padding: 24px;
+}
+
+/* Form styles */
+.form {
+    display: flex;
+    gap: 10px;
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Error message styles */
+.errorMessage {
+    height: 15px;
+    font-size: 10px;
+    line-height: 10px;
+    text-align: center;
+}
+
+/* Button container styles */
+.buttonContainer {
+    margin-top: auto;
+    height: 49px;
+}
+
+/* Minimize and Maximize icons styles */
+.iconButton {
+    cursor: pointer;
+}

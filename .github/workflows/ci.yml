@@ -14,31 +14,34 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+#      - name: Get yarn cache directory path
+#        id: yarn-cache-dir-path
+#        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v3
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.OS }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-yarn-
+#      - uses: actions/cache@v3
+#        id: yarn-cache
+#        with:
+#          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+#          key: ${{ runner.OS }}-yarn-${{ hashFiles('**/yarn.lock') }}
+#          restore-keys: |
+#            ${{ runner.OS }}-yarn-
       - uses: nrwl/nx-set-shas@v3
       - run: yarn install
-      - run: npx nx run-many --target=install --all -parallel
-      - run: npx nx affected -t lint
+      - run: npx nx reset
+      - run: rm -rf node_modules/.cache/rollup-plugin-typescript2
       - name: Run Tests
         env:
-          SDK_JUSTANAME_ENVIRONMENT: ${{ secrets.SDK_JUSTANAME_ENVIRONMENT }}
           SDK_JUSTANAME_TEST_API_KEY: ${{ secrets.SDK_JUSTANAME_TEST_API_KEY }}
           SDK_MAPP_PRIVATE_KEY: ${{ secrets.SDK_MAPP_PRIVATE_KEY }}
-          SDK_PROVIDER_URL: ${{ secrets.SDK_PROVIDER_URL }}
+          SDK_SEPOLIA_PROVIDER_URL: ${{ secrets.SDK_SEPOLIA_PROVIDER_URL }}
+          SDK_MAINNET_PROVIDER_URL: ${{ secrets.SDK_MAINNET_PROVIDER_URL }}
           SDK_ENS_DOMAIN: ${{ secrets.SDK_ENS_DOMAIN }}
           SDK_MAPP: ${{ secrets.SDK_MAPP }}
+          SDK_CHAIN_ID: ${{ secrets.SDK_CHAIN_ID }}
+          SDK_JUSTANAME_DEV: ${{ secrets.SDK_JUSTANAME_DEV }}
           SIWENS_PRIVATE_KEY: ${{ secrets.SIWENS_PRIVATE_KEY }}
           SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
           SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
-        run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk
-      - run: npx nx affected -t build
+        run: npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console --parallel=1
+      - run: rm -rf node_modules/.cache/rollup-plugin-typescript2
+      - run: npx nx affected -t build --exclude=justaname-mono-sdk,console --parallel=1

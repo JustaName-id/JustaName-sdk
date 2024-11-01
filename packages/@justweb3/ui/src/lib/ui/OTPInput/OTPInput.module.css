@@ -1,0 +1,85 @@
+.otpInputContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.otpInputContainer > div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.otpInputContainer:has(:disabled) {
+    opacity: 0.5;
+}
+
+.otpInput {
+    display: flex;
+}
+
+.otpInput:disabled {
+    cursor: not-allowed;
+}
+
+.otpInputGroup {
+    display: flex;
+    align-items: center;
+}
+
+.caret {
+    height: 1rem;
+    width: 1px;
+    background-color: var(--justweb3-background-color);
+    animation: blinkAnimation 1s steps(1) infinite;
+}
+
+.caretWrapper {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.otpInputSlot {
+    position: relative;
+    display: flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--justweb3-foreground-color-4);
+    border-right: 1px solid var(--justweb3-foreground-color-4);
+    border-bottom: 1px solid var(--justweb3-foreground-color-4);
+    font-size: 1.25rem;
+    transition: all 0.2s;
+}
+
+.otpInputSlot:first-child {
+    border-left: 1px solid var(--justweb3-foreground-color-4);
+    border-top-left-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+}
+
+.otpInputSlot:last-child {
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
+
+.otpInputSlotActive {
+    z-index: 10;
+    box-shadow: 0 0 0 2px var(--justweb3-primary-color);
+}
+
+@keyframes blinkAnimation {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}

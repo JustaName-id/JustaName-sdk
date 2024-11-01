@@ -5,6 +5,30 @@
   "projectType": "library",
   "tags": [],
   "targets": {
+    "storybook": {
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "packages/@justaname.id/react/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "typedoc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "typedoc"
+          }
+        ],
+        "cwd": "packages/@justaname.id/react",
+        "parallel": false
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "options": {
@@ -14,6 +38,9 @@
           },
           {
             "command": "node update-package-json.js"
+          },
+          {
+            "command": "rm -rf node_modules"
           }
         ],
         "cwd": "packages/@justaname.id/react",
@@ -50,14 +77,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      },
-      "dependsOn": [
-        "lint",
-        {
-          "projects": ["@justaname.id/sdk"],
-          "target": "build"
-        }
-      ]
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",

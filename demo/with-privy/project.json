@@ -3,6 +3,14 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/with-privy/src",
   "projectType": "application",
-  "targets": {},
+  "targets": {
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn tsc --noEmit",
+        "cwd": "apps/with-privy"
+      }
+    }
+  },
   "tags": []
 }

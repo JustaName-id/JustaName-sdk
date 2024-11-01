@@ -28,6 +28,9 @@
           },
           {
             "command": "node copy-to-outside-dist.js"
+          },
+          {
+            "command": "rm -rf node_modules"
           }
         ],
         "cwd": "packages/@justaname.id/sdk",
@@ -63,8 +66,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         }
-      },
-      "dependsOn": ["lint"]
+      }
     },
     "publish": {
       "command": "node tools/scripts/publish.mjs @justaname.id/sdk {args.ver} {args.tag}",

@@ -9,3 +9,10 @@ export interface RequestSignInParams extends Omit<SiwensParams, 'domain' | 'orig
   chainId?: ChainId
   ttl?: number
 }
+
+export interface SignInFunctionParams {
+  message: string,
+  signature: string
+  nonce?: string
+  domain?: string
+}

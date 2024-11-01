@@ -1,0 +1,40 @@
+
+.expandableCard {
+    height: 250px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--justweb3-foreground-color-4);
+}
+
+.bannerImage {
+    object-fit: cover;
+    height: 100px;
+    width: 100%;
+}
+
+.avatarContainer {
+    padding: 0 20px;
+    position: absolute;
+    top: 50px;
+}
+
+.titleText {
+    font-weight: 700;
+    color: var(--justweb3-primary-color);
+    font-size: 12px;
+}
+
+.clickableItem {
+    color: var(--justweb3-primary-color);
+}
+
+.socialIconsContainer {
+    display: flex;
+    gap: 5px;
+}

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useJustaName } from '../../providers';
 import {
@@ -7,20 +7,24 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import { ChainId, sanitizeRecords, SubnameGetAllByAddressRoute } from '@justaname.id/sdk';
+import {
+  ChainId,
+  sanitizeRecords,
+  SubnameGetAllByAddressRoute,
+} from '@justaname.id/sdk';
 import { buildSubnameBySubnameKey } from './useSubname';
 import { Records } from '../../types';
 
 export const buildAddressSubnamesKey = (
   address: string | undefined,
-  chainId: ChainId,
-) => [
-  'WALLET_SUBNAMES_BY_ADDRESS',
-  address,
-  chainId
-]
+  chainId: ChainId | undefined
+) => ['WALLET_SUBNAMES_BY_ADDRESS', address, chainId];
 
-export interface UseAddressSubnamesParams extends Omit<SubnameGetAllByAddressRoute['params'], 'isClaimed' | 'coinType' | "address"> {
+export interface UseAddressSubnamesParams
+  extends Omit<
+    SubnameGetAllByAddressRoute['params'],
+    'isClaimed' | 'coinType' | 'address'
+  > {
   address: string | undefined;
   isClaimed?: boolean;
   coinType?: number;
@@ -55,7 +59,7 @@ export const useAddressSubnames = (
         ...rest,
         address: params.address,
         isClaimed: params.isClaimed ?? true,
-        coinType: params.coinType ?? 60,
+        coinType: params.coinType,
         chainId: _chainId,
       });
 
@@ -69,13 +73,14 @@ export const useAddressSubnames = (
         );
       });
 
-      return  response?.subnames.map((subname) => ({
+      return (
+        response?.subnames.map((subname) => ({
           ...subname,
           sanitizedRecords: sanitizeRecords(subname),
         })) || []
+      );
     },
     enabled: Boolean(justaname) && Boolean(params.address),
-
   });
 
   return {

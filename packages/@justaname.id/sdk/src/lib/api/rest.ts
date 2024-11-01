@@ -32,7 +32,8 @@ export const restCall = <
   route: T,
   method: K,
   request: U,
-  headers?: V
+  headers?: V,
+  dev?: boolean
 ): Promise<ROUTES[T]['response']> => {
 
   const currentHeaders:  HeaderTypes = {
@@ -61,7 +62,7 @@ export const restCall = <
   }
 
   return controlledAxiosPromise<ROUTES[T]['response']>(
-    justANameInstance.request({
+    justANameInstance(dev).request({
       url: Routes[route],
       method,
       params: method === 'GET' ? request : undefined,
@@ -83,7 +84,8 @@ export function assertRestCall<
   route: T,
   method: K,
   request: U,
-  headers?: undefined
+  headers?: undefined,
+  dev?: boolean
 ): <R extends Array<keyof Partial<ROUTES[T]['request']>>>(
   requiredFields: R
 ) => Promise<ROUTES[T]['response']>;
@@ -98,7 +100,8 @@ export function assertRestCall<
   route: T,
   method: K,
   request: U,
-  headers: V
+  headers: V,
+  dev?: boolean
 ): <
   R extends Array<keyof Partial<ROUTES[T]['request']>>,
   RO extends Array<keyof Partial<ROUTES[T]['headers']>>
@@ -117,7 +120,8 @@ export function assertRestCall<
   route: T,
   method: K,
   request: U,
-  headers?: V
+  headers?: V,
+  dev?: boolean
 ) {
   return (
     requiredFields: Array<keyof Partial<ROUTES[T]['request']>>,
@@ -139,7 +143,7 @@ export function assertRestCall<
       throw InvalidConfigurationException.missingHeaders(requiredHeaders.map(header => header.toString()));
     }
 
-    return restCall(route, method, request, headers);
+    return restCall(route, method, request, headers, dev);
   };
 }
 export default {

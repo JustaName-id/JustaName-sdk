@@ -1,44 +1,20 @@
 import axios, { AxiosError, AxiosPromise } from 'axios';
 import { BaseResponse } from '../types';
-/**
- * The base URL of JustaName API.
- */
 
-export let BASE_URL = 'https://api.justaname.id';
-
-function loadEnv() {
-  let isDevelopment = false;
-
-  if (typeof process !== 'undefined' && process.env) {
-    try {
-      isDevelopment =
-        process.env['JUSTANAME_ENVIRONMENT'] === 'development' ||
-        process.env['NEXT_PUBLIC_JUSTANAME_ENVIRONMENT'] === 'development' ||
-        process.env['VITE_JUSTANAME_ENVIRONMENT'] === 'development' ||
-        process.env['NODE_ENV'] === 'test';
-    } catch (e) {
-      console.warn('Unable to load dotenv', e);
-    }
+export function getBaseUrl(dev = false) {
+  if (dev) {
+    return 'https://api-staging.justaname.id';
   }
-
-  BASE_URL = isDevelopment
-    ? 'https://api-staging.justaname.id'
-    : 'https://api.justaname.id';
-}
-
-loadEnv();
-
-export function getBaseUrl() {
-  // return 'http://localhost:3000';
-  return BASE_URL;
+  return 'https://api.justaname.id';
 }
 
 /**
  * The instance of axios with the base URL of JustaName API.
  */
-export const justANameInstance = axios.create({
-  baseURL: getBaseUrl(),
-});
+export const justANameInstance = (dev = false) =>
+  axios.create({
+    baseURL: getBaseUrl(dev),
+  });
 
 /**
  * Represents the Controlled Axios Promise type.
@@ -65,9 +41,11 @@ export const controlledAxiosPromise = <T extends NonNullable<unknown>>(
       return res.data.result.data as T;
     })
     .catch((err: AxiosError<BaseResponse<null>>) => {
-      if (err.response) {
-        if (err.response.data.result !== null) {
-          throw new Error(err.response.data.result.error);
+      if (err?.response) {
+        if (err?.response?.data?.result) {
+          if (err?.response?.data?.result?.error) {
+            throw new Error(err.response.data.result.error);
+          }
         }
       }
       throw err;

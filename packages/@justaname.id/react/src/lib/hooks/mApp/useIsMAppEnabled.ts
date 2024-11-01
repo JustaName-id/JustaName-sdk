@@ -8,7 +8,7 @@ import { useEffect, useMemo } from 'react';
 export const buildIsMAppEnabledKey = (
   ens: string,
   mApp: string,
-  chainId: ChainId,
+  chainId: ChainId| undefined,
 ) => [
   'IS_MAPP_ENABLED',
   ens,
@@ -53,9 +53,9 @@ export const useIsMAppEnabled = (params: UseIsMAppEnabledParams): UseIsMAppEnabl
       if (!mAppFieldValue) {
         return false;
       }
-      return mAppFieldValue.mApps.includes(params.mApp);
+      return mAppFieldValue.mApps.includes(params?.mApp);
     },
-    enabled: Boolean(params.ens) && Boolean(justaname) && params.ens.length > 0 && params.mApp.length > 0 && Boolean(_chainId) && Boolean(records),
+    enabled: Boolean(params.ens) && Boolean(justaname) && params.ens.length > 0 && params?.mApp?.length > 0 && Boolean(_chainId) && Boolean(records),
   })
 
   useEffect(() => {

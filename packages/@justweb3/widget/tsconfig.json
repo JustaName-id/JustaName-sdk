@@ -1,0 +1,33 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "allowJs": false,
+    "moduleResolution": "node",
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
+      "@justaname.id/react": ["packages/@justaname.id/react"],
+      "@justweb3/ui": ["packages/@justweb3/ui"]
+    }
+  },
+  "files": [],
+  "include": [
+    "node_modules/viem/**/*",
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfig.storybook.json"
+    }
+  ]
+}

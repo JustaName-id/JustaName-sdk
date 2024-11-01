@@ -1,0 +1,40 @@
+/* SectionCard styles */
+.sectionCard {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--justweb3-foreground-color-4);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* SectionItemList styles */
+.sectionItemList {
+    display: flex;
+    flex-direction: row;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .sectionItemList {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}
+
+/* SectionItem styles */
+.sectionItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .sectionItem {
+        grid-column: span 6 / span 6;
+    }
+}

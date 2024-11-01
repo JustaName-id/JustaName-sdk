@@ -1,48 +1,76 @@
-"use client";
+'use client';
 
-import React, { useMemo } from 'react';
-import { ChainId, JustaName, JustaNameConfig, JustaNameConfigDefaults, NetworkWithProvider } from '@justaname.id/sdk';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+} from 'react';
+import {
+  ChainId,
+  JustaName,
+  JustaNameConfig,
+  JustaNameConfigDefaults,
+  NetworkWithProvider,
+} from '@justaname.id/sdk';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { defaultRoutes } from '../constants/default-routes';
 import { useMountedAccount } from '../hooks/account/useMountedAccount';
+import { useSignMessage } from 'wagmi';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 1000 * 60 * 5,
-      networkMode: "offlineFirst",
+      networkMode: 'offlineFirst',
       refetchOnWindowFocus: false,
-      retry: 0
+      retry: 0,
     },
     mutations: {
-      networkMode: "offlineFirst"
-    }
-  }
+      networkMode: 'offlineFirst',
+    },
+  },
 });
 
+export type JustaNameConfigWithoutDefaultChainId = Omit<
+  JustaNameConfig,
+  'defaultChainId'
+>;
 
-export type JustaNameConfigWithoutDefaultChainId = Omit<JustaNameConfig, 'defaultChainId'>
-
-export interface JustaNameContextProps extends Omit<JustaNameConfigDefaults, 'defaultChainId'> {
+export interface JustaNameContextProps
+  extends Omit<JustaNameConfigDefaults, 'defaultChainId'> {
+  justanameConfig: JustaNameProviderConfig;
+  // handleJustaNameConfig: (config: JustaNameProviderConfig) => void
   justaname: JustaName;
   routes: typeof defaultRoutes;
-  backendUrl?: string;
+  backendUrl: string;
   selectedNetwork: NetworkWithProvider;
   selectedEnsDomain: string | undefined;
-  chainId: ChainId
+  chainId: ChainId | undefined;
 }
 
-
-export const JustaNameContext = React.createContext<JustaNameContextProps | null>(null);
+export const JustaNameContext = createContext<JustaNameContextProps | null>(
+  null
+);
 
 export interface JustaNameProviderProps {
-  children: React.ReactNode;
-  config: JustaNameProviderConfig
+  children: ReactNode;
+  config: JustaNameProviderConfig;
 }
 
-export interface JustaNameProviderConfig extends JustaNameConfigWithoutDefaultChainId {
+export interface JustaNameProviderConfig
+  extends JustaNameConfigWithoutDefaultChainId {
   routes?: Partial<typeof defaultRoutes>;
   backendUrl?: string;
+  signOnMounted?: boolean;
 }
 
 /**
@@ -51,69 +79,84 @@ export interface JustaNameProviderConfig extends JustaNameConfigWithoutDefaultCh
  *
  * @component
  * @param {JustaNameProviderProps} props - The props for the JustaNameProvider component.
- * @returns {React.ReactNode} The provider component wrapping children.
+ * @returns {ReactNode} The provider component wrapping children.
  */
-export const JustaNameProvider: React.FC<JustaNameProviderProps> = ({
+export const JustaNameProvider: FC<JustaNameProviderProps> = ({
   children,
-  config: {
-    routes,
-    backendUrl,
-    ensDomains,
-    config,
-    apiKey,
-    networks
-  },
-}: JustaNameProviderProps): React.ReactNode => {
+  config: initialConfig,
+}) => {
+  const { chainId } = useMountedAccount();
 
-  const { chainId } = useMountedAccount()
+  const defaultChain = useMemo(() => {
+    return !chainId
+      ? undefined
+      : chainId !== 1 && chainId !== 11155111
+      ? 1
+      : chainId;
+  }, [chainId]);
 
-  const defaultChain = useMemo(()=> {
-    return chainId === 11155111 ? 11155111 : 1
-  }, [chainId])
-
-
-  const [justaname] = React.useState<JustaName>(JustaName.init({
-    networks,
-    config,
-    ensDomains,
-    defaultChainId: defaultChain,
-    apiKey
-  }));
+  // const [config, setConfig] = useState<JustaNameProviderConfig>(initialConfig);
+  const config: JustaNameProviderConfig = useMemo(
+    () => initialConfig,
+    [initialConfig]
+  );
+  const justanameConfig: JustaNameConfig = useMemo(
+    () => ({
+      config: config.config,
+      ensDomains: config.ensDomains,
+      networks: config.networks,
+      defaultChainId: defaultChain,
+      dev: config.dev,
+    }),
+    [config, defaultChain]
+  );
+  const justaname = useMemo(() => {
+    return JustaName.init(justanameConfig);
+  }, [justanameConfig]);
 
   const selectedEnsDomain = useMemo(() => {
-    return ensDomains?.find((ensDomain) => ensDomain.chainId === defaultChain)?.ensDomain
-  }, [ensDomains, defaultChain])
+    return justanameConfig.ensDomains?.find(
+      (ensDomain) => ensDomain.chainId === defaultChain
+    )?.ensDomain;
+  }, [justanameConfig.ensDomains, defaultChain]);
 
   const configuredNetworks = useMemo(() => {
-    return JustaName.createNetworks(networks)
-  }, [networks])
+    return JustaName.createNetworks(justanameConfig.networks);
+  }, [justanameConfig.networks]);
 
   const selectedNetwork = useMemo(() => {
-    return configuredNetworks.find((network) => network.chainId === defaultChain) as NetworkWithProvider
-  }, [configuredNetworks, defaultChain])
+    return configuredNetworks.find(
+      (network) => network.chainId === defaultChain
+    ) as NetworkWithProvider;
+  }, [configuredNetworks, defaultChain]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <JustaNameContext.Provider value={{
-        backendUrl,
-        config,
-        ensDomains: ensDomains || [],
-        selectedEnsDomain,
-        networks: configuredNetworks,
-        chainId: defaultChain,
-        selectedNetwork,
-        justaname,
-        routes: {
-          ...defaultRoutes,
-          ...routes,
-        },
-        apiKey
-      }}>
+      <JustaNameContext.Provider
+        value={{
+          justanameConfig: justanameConfig,
+          // handleJustaNameConfig,
+          backendUrl: config.backendUrl || '',
+          config: justanameConfig.config,
+          dev: justanameConfig.dev,
+          ensDomains: justanameConfig.ensDomains || [],
+          selectedEnsDomain,
+          networks: configuredNetworks,
+          chainId: defaultChain,
+          selectedNetwork,
+          justaname,
+          routes: {
+            ...defaultRoutes,
+            ...config.routes,
+          },
+        }}
+      >
         {children}
+        {config.signOnMounted && <SignatureOnMounted />}
       </JustaNameContext.Provider>
     </QueryClientProvider>
-  )
-}
+  );
+};
 
 export default JustaNameProvider;
 
@@ -125,10 +168,139 @@ export default JustaNameProvider;
  * @throws {Error} If the hook is used outside a JustaNameProvider.
  */
 export const useJustaName = (): JustaNameContextProps => {
-  const context = React.useContext(JustaNameContext);
+  const context = useContext(JustaNameContext);
   if (!context) {
     throw new Error('useJustaName must be used within a JustaNameProvider');
   }
   return context;
+};
+
+export const buildSignature = (
+  address: string,
+  chainId: ChainId | undefined
+) => ['SUBNAME_SIGNATURE', address, chainId];
+
+export interface UseSubnameSignatureResult {
+  getSignature: () => Promise<{
+    signature: string;
+    message: string;
+    address: string;
+    expirationTime: Date;
+  }>;
+  isSubnameSignaturePending: boolean;
+  isSubnameSignatureFetching: boolean;
 }
 
+export const useSubnameSignature = (): UseSubnameSignatureResult => {
+  const { justaname, chainId } = useJustaName();
+  const { address } = useMountedAccount();
+  const queryClient = useQueryClient();
+  const { signMessageAsync } = useSignMessage();
+
+  const isWeb = typeof window !== 'undefined';
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      if (!address) {
+        throw new Error('No address found');
+      }
+
+      if (!chainId) {
+        throw new Error('No chainId found');
+      }
+
+      const message = await justaname.siwe.requestChallenge({
+        address,
+        chainId,
+      });
+
+      const signature = await signMessageAsync({
+        message: message.challenge,
+        account: address,
+      });
+
+      if (!signature) {
+        throw new Error('Message not signed');
+      }
+
+      const expirationTime = new Date(
+        message.challenge.split('Expiration Time: ')[1]
+      );
+
+      const signedData = {
+        signature,
+        message: message.challenge,
+        address,
+        expirationTime,
+      };
+      await queryClient.setQueryData(
+        buildSignature(address, chainId),
+        signedData
+      );
+
+      if (isWeb) {
+        localStorage.setItem(
+          buildSignature(address, chainId).join('_'),
+          JSON.stringify(signedData)
+        );
+      }
+
+      return signedData;
+    },
+  });
+
+  const query = useQuery({
+    queryKey: buildSignature(address ?? '', chainId ?? 1),
+    queryFn: () => mutation.mutateAsync(),
+    enabled: false,
+    refetchOnWindowFocus: false,
+  });
+
+  const getSignature = async () => {
+    const now = new Date();
+
+    if (query.data) {
+      if (query.data.expirationTime > now) {
+        return query.data;
+      }
+    }
+
+    if (isWeb) {
+      const localData = localStorage.getItem(
+        buildSignature(address ?? '', chainId).join('_')
+      );
+      if (localData) {
+        const parsedData = JSON.parse(localData);
+        if (new Date(parsedData.expirationTime) > now) {
+          await queryClient.setQueryData(
+            buildSignature(address ?? '', chainId),
+            parsedData
+          );
+          return parsedData;
+        }
+      }
+    }
+
+    return await mutation.mutateAsync();
+  };
+  return {
+    getSignature,
+    isSubnameSignaturePending: mutation.isPending,
+    isSubnameSignatureFetching: query.isFetching,
+  };
+};
+
+const SignatureOnMounted: FC = () => {
+  const { address, isConnected } = useMountedAccount();
+  const { getSignature, isSubnameSignaturePending } = useSubnameSignature();
+
+  useEffect(() => {
+    if (!address || !isConnected || isSubnameSignaturePending) return;
+    const main = async () => {
+      await getSignature();
+    };
+    main();
+  }, [address, isConnected, isSubnameSignaturePending]);
+
+  return null;
+};
