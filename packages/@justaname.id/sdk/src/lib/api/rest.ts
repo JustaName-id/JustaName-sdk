@@ -35,28 +35,30 @@ export const restCall = <
   headers?: V,
   dev?: boolean
 ): Promise<ROUTES[T]['response']> => {
-
-  const currentHeaders:  HeaderTypes = {
+  const currentHeaders: HeaderTypes = {
     'x-api-key': undefined,
     'x-message': undefined,
     'x-signature': undefined,
     'x-address': undefined,
-  }
+  };
 
-  if(headers){
+  if (headers) {
     if ('xApiKey' in headers) {
       currentHeaders['x-api-key'] = headers.xApiKey as string;
     }
 
-    if('xMessage' in headers){
-      currentHeaders['x-message'] = headers['xMessage'].replace(/\n/g, '\\n') as string;
+    if ('xMessage' in headers) {
+      currentHeaders['x-message'] = headers['xMessage'].replace(
+        /\n/g,
+        '\\n'
+      ) as string;
     }
 
-    if('xSignature' in headers){
+    if ('xSignature' in headers) {
       currentHeaders['x-signature'] = headers['xSignature'] as string;
     }
 
-    if('xAddress' in headers){
+    if ('xAddress' in headers) {
       currentHeaders['x-address'] = headers['xAddress'] as string;
     }
   }
@@ -70,10 +72,10 @@ export const restCall = <
         return qs.stringify(params, { arrayFormat: 'repeat' });
       },
       data: method === 'POST' ? request : undefined,
-      headers: currentHeaders
+      headers: currentHeaders,
     })
-  )
-}
+  );
+};
 
 // Function overload when headers are not provided
 export function assertRestCall<
@@ -116,31 +118,33 @@ export function assertRestCall<
   K extends 'GET' | 'POST',
   U extends Partial<ROUTES[T]['request']>,
   V extends Partial<ROUTES[T]['headers']> | undefined
->(
-  route: T,
-  method: K,
-  request: U,
-  headers?: V,
-  dev?: boolean
-) {
+>(route: T, method: K, request: U, headers?: V, dev?: boolean) {
   return (
     requiredFields: Array<keyof Partial<ROUTES[T]['request']>>,
     requiredHeaders?: Array<keyof Partial<ROUTES[T]['headers']>>
   ): Promise<ROUTES[T]['response']> => {
-    const missingFields = requiredFields.filter(field => !request[field]);
+    const missingFields = requiredFields.filter(
+      (field) => request[field] === undefined
+    );
     if (missingFields.length) {
-      throw InvalidConfigurationException.missingParameters(missingFields.map(field => field.toString()));
+      throw InvalidConfigurationException.missingParameters(
+        missingFields.map((field) => field.toString())
+      );
     }
 
     if (headers && requiredHeaders) {
       const missingHeaders = requiredHeaders.filter(
-        header => !headers[header]
+        (header) => headers[header] === undefined
       );
       if (missingHeaders.length) {
-        throw InvalidConfigurationException.missingHeaders(missingHeaders.map(header => header.toString()));
+        throw InvalidConfigurationException.missingHeaders(
+          missingHeaders.map((header) => header.toString())
+        );
       }
     } else if (requiredHeaders && requiredHeaders.length > 0) {
-      throw InvalidConfigurationException.missingHeaders(requiredHeaders.map(header => header.toString()));
+      throw InvalidConfigurationException.missingHeaders(
+        requiredHeaders.map((header) => header.toString())
+      );
     }
 
     return restCall(route, method, request, headers, dev);
@@ -148,5 +152,5 @@ export function assertRestCall<
 }
 export default {
   restCall,
-  assertRestCall
-}
+  assertRestCall,
+};

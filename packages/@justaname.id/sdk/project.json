@@ -30,7 +30,7 @@
             "command": "node copy-to-outside-dist.js"
           },
           {
-            "command": "rm -rf node_modules"
+            "command": "rm -rf node_modules || rmdir /s /q node_modules"
           }
         ],
         "cwd": "packages/@justaname.id/sdk",
@@ -87,7 +87,7 @@
       "options": {
         "packageRoot": "packages/@justaname.id/sdk/dist"
       },
-      "dependsOn": ["build","^build"]
+      "dependsOn": ["build", "^build"]
     },
     "release:package": {
       "executor": "nx:run-commands",

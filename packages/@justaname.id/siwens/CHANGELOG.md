@@ -1,3 +1,19 @@
+## 0.0.61 (2024-10-31)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.60 (2024-10-31)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.59 (2024-10-31)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.58 (2024-10-31)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
 ## 0.0.57 (2024-10-31)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
