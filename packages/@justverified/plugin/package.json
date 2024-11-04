@@ -1,11 +1,11 @@
 {
   "name": "@justverified/plugin",
-  "version": "0.0.66",
+  "version": "0.0.71",
   "dependencies": {
-    "@justaname.id/react": "0.3.131",
-    "@justaname.id/sdk": "0.2.128",
-    "@justweb3/ui": "0.0.67",
-    "@justweb3/widget": "0.0.67",
+    "@justaname.id/react": "0.3.136",
+    "@justaname.id/sdk": "0.2.133",
+    "@justweb3/ui": "0.0.72",
+    "@justweb3/widget": "0.0.72",
     "axios": "^1.6.0",
     "lodash": "4.17.21",
     "moment": "^2.30.1",
