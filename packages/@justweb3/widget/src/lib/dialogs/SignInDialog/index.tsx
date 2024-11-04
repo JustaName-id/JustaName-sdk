@@ -265,8 +265,8 @@ export const SignInDialog: FC<SignInDialogProps> = ({
           </SPAN>
         </Badge>
         {isAccountSubnamesPending ||
-        isAccountEnsNamesPending ||
-        isOffchainResolversPending ? (
+          isAccountEnsNamesPending ||
+          isOffchainResolversPending ? (
           <div className={styles.loadingContainer}>
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
           </div>
@@ -304,11 +304,10 @@ export const SignInDialog: FC<SignInDialogProps> = ({
             </TransitionElement>
             <TransitionElement
               visible={shouldBeAbleToSelect && shouldBeAbleToClaim}
-              maxheight="100px"
-            >
+              maxheight="100px">
               <OrLine />
             </TransitionElement>
-            <TransitionElement visible={shouldBeAbleToClaim} maxheight="102px">
+            <TransitionElement visible={shouldBeAbleToClaim} maxheight="107px">
               <Flex direction="column" gap="20px" justify={'space-between'}>
                 <H2>Claim a Subname</H2>
                 <Flex align="center">

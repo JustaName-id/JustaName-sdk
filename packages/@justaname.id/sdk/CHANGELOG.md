@@ -1,3 +1,66 @@
+## 0.2.133 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.66
+
+## 0.2.132 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.65
+
+## 0.2.131 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.64
+
+## 0.2.130 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.63
+
+## 0.2.129 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.62
+
+## 0.2.128 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.61
+
+## 0.2.127 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.60
+
+## 0.2.126 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.59
+
+## 0.2.125 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.58
+
 ## 0.2.124 (2024-10-31)
 
 

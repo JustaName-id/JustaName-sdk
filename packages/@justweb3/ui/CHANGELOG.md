@@ -1,3 +1,39 @@
+## 0.0.72 (2024-11-04)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.71 (2024-11-04)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.70 (2024-11-04)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.69 (2024-11-04)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.68 (2024-11-04)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.67 (2024-10-31)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.66 (2024-10-31)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.65 (2024-10-31)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.64 (2024-10-31)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
 ## 0.0.63 (2024-10-31)
 
 This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.

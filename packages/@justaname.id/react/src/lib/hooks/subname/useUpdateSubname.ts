@@ -107,7 +107,9 @@ export const useUpdateSubname = (
         );
       } else {
         if (!ensWalletClient) {
-          throw new Error('No wallet client found');
+          throw new Error(
+            'No Wallet Client found, chain not supported, only mainnet and sepolia are supported'
+          );
         }
 
         const changeIsValid = await checkIfUpdateIsValid(_params);
