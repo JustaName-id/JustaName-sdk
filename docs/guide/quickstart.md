@@ -277,7 +277,6 @@ yarn add wagmi @rainbow-me/rainbowkit @tanstack/react-query
 
 You can find more information on how to customize your widget in the configuration section
 
-{% content-ref url="configuration/overview.md" %}
-[overview.md](configuration/overview.md)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
-
