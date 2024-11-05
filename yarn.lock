@@ -26291,6 +26291,7 @@ __metadata:
     postcss-import: "npm:^16.1.0"
     prettier: "npm:^2.6.2"
     prism-react-renderer: "npm:^2.4.0"
+    punycode: "npm:^2.3.1"
     qs: "npm:^6.12.0"
     react: "npm:18.3.1"
     react-code-blocks: "npm:^0.1.6"
@@ -32211,7 +32212,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"punycode@npm:^2.1.0, punycode@npm:^2.1.1, punycode@npm:^2.3.0":
+"punycode@npm:^2.1.0, punycode@npm:^2.1.1, punycode@npm:^2.3.0, punycode@npm:^2.3.1":
   version: 2.3.1
   resolution: "punycode@npm:2.3.1"
   checksum: 10c0/14f76a8206bc3464f794fb2e3d3cc665ae416c01893ad7a02b23766eb07159144ee612ad67af5e84fa4479ccfe67678c4feb126b0485651b302babf66f04f9e9
