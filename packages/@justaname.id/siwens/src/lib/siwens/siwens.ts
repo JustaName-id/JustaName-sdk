@@ -18,7 +18,7 @@ import {
   constructSignInStatement,
   extractDataFromStatement,
 } from '../utils';
-import punycode from 'punycode';
+import { toASCII, toUnicode } from 'punycode';
 
 export interface SiwensResponse extends SiweResponse {
   ens: string;
@@ -77,7 +77,7 @@ export class SIWENS extends SiweMessage {
     checkDomainValid(params.ens);
 
     const statement = constructSignInStatement(
-      punycode.toASCII(params.ens),
+      toASCII(params.ens),
       params?.statement || ''
     );
 
@@ -104,7 +104,7 @@ export class SIWENS extends SiweMessage {
       const { ens } = extractDataFromStatement(statement);
       throw {
         ...e,
-        ens: punycode.toUnicode(ens),
+        ens: toUnicode(ens),
       };
     }
 
@@ -113,7 +113,7 @@ export class SIWENS extends SiweMessage {
       throw InvalidStatementException.invalidStatement();
     }
     const { ens: asciiEns } = extractDataFromStatement(statement);
-    const ens = punycode.toUnicode(asciiEns);
+    const ens = toUnicode(asciiEns);
     await this.verifyEnsAddress(ens, this.address);
 
     return {
