@@ -11633,6 +11633,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prismjs@npm:^1.26.0":
+  version: 1.26.5
+  resolution: "@types/prismjs@npm:1.26.5"
+  checksum: 10c0/5619cb449e0d8df098c8759d6f47bf8fdd510abf5dbdfa999e55c6a2545efbd1e209cc85a33d8d9f4ff2898089a1a6d9a70737c9baffaae635c46852c40d384a
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.13
   resolution: "@types/prop-types@npm:15.7.13"
@@ -16681,7 +16688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:2.1.1":
+"clsx@npm:2.1.1, clsx@npm:^2.0.0":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10c0/c4c8eb865f8c82baab07e71bfa8897c73454881c4f99d6bc81585aecd7c441746c1399d08363dc096c550cceaf97bd4ce1e8854e1771e9998d9f94c4fe075839
@@ -26283,6 +26290,7 @@ __metadata:
     postcss: "npm:8.4.38"
     postcss-import: "npm:^16.1.0"
     prettier: "npm:^2.6.2"
+    prism-react-renderer: "npm:^2.4.0"
     qs: "npm:^6.12.0"
     react: "npm:18.3.1"
     react-code-blocks: "npm:^0.1.6"
@@ -31875,6 +31883,18 @@ __metadata:
   dependencies:
     parse-ms: "npm:^4.0.0"
   checksum: 10c0/fd111aad8800a04dfd654e6016da69bdaa6fc6a4c280f8e727cffd8b5960558e94942f1a94d4aa6e4d179561a0fbb0366a9ebe0ccefbbb0f8ff853b129cdefb9
+  languageName: node
+  linkType: hard
+
+"prism-react-renderer@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "prism-react-renderer@npm:2.4.0"
+  dependencies:
+    "@types/prismjs": "npm:^1.26.0"
+    clsx: "npm:^2.0.0"
+  peerDependencies:
+    react: ">=16.0.0"
+  checksum: 10c0/3d6969b057da0efe39e3e637bf93601cd5757de5919180e8df16daf1d1b8eedc39b70c7f6f28724fba0a01bc857c6b78312ab027f4e913159d1165c5aba235bb
   languageName: node
   linkType: hard
 
