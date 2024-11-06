@@ -2,6 +2,7 @@
 
 The **@justweb3/ui** library provides a unified UI experience and handles theme generation for the **@justweb3/widget** package. It simplifies theming across widgets by dynamically generating color variations and supports custom theming through its context provider.
 
+This library was inspired by [shadcn](https://ui.shadcn.com/)
 ## Table of Contents
 
 - [Installation](#installation)
