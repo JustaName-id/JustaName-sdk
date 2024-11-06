@@ -41,6 +41,7 @@ export interface SiwensConfig {
 
 export class SIWENS extends SiweMessage {
   readonly provider: JsonRpcProvider;
+  readonly providerUrl: string | undefined;
 
   constructor(signInConfig: SiwensConfig) {
     const { params, providerUrl } = signInConfig;
@@ -50,6 +51,7 @@ export class SIWENS extends SiweMessage {
         throw InvalidConfigurationException.providerUrlRequired();
       }
       this.provider = new JsonRpcProvider(providerUrl);
+      this.providerUrl = providerUrl;
       return;
     }
 
@@ -88,12 +90,13 @@ export class SIWENS extends SiweMessage {
       issuedAt,
       expirationTime,
     });
+    this.providerUrl = providerUrl;
     this.provider = new JsonRpcProvider(providerUrl);
   }
 
   override async verify(
     params: VerifyParams,
-    opts?: VerifyOpts
+    opts: VerifyOpts
   ): Promise<SiwensResponse> {
     let verification: SiweResponse;
 

@@ -8,6 +8,8 @@ import {
 } from '../../errors';
 import { OffchainResolvers } from '../offchain-resolvers';
 import { RequestSignInParams, SignInFunctionParams } from '../../types/signin';
+import { createPublicClient, http } from 'viem';
+import { mainnet, sepolia } from 'viem/chains';
 
 export interface SignInResponse extends SiwensResponse {
   isJustaName: boolean;
@@ -107,11 +109,47 @@ export class SignIn {
       providerUrl: network.providerUrl,
     });
 
-    const siwensResponse = await siwens.verify({
-      signature: params.signature,
-      nonce: params.nonce,
-      domain: params.domain,
-    });
+    const siwensResponse = await siwens.verify(
+      {
+        signature: params.signature,
+        nonce: params.nonce,
+        domain: params.domain,
+      },
+      {
+        provider: network.provider,
+        verificationFallback: async (params, opts, message, EIP1271Promise) => {
+          const publicClient = createPublicClient({
+            chain: this.chainId === 1 ? mainnet : sepolia,
+            transport: http(network.providerUrl),
+          });
+
+          const result = await EIP1271Promise;
+
+          if (result.success) {
+            return result;
+          } else {
+            const viemResponse = await publicClient.verifySiweMessage({
+              message: message.toMessage(),
+              signature: params.signature as `0x${string}`,
+              address: result.data.address as `0x${string}`,
+              nonce: params.nonce,
+              domain: params.domain as string,
+              time: params.time ? new Date(params.time) : undefined,
+              scheme: params.scheme as string,
+            });
+
+            if (viemResponse) {
+              return {
+                data: result.data,
+                success: true,
+              };
+            }
+
+            return result;
+          }
+        },
+      }
+    );
 
     if (siwensResponse.data.chainId !== chainId) {
       throw InvalidSignInException.chainIdMismatch(
