@@ -1,0 +1,17 @@
+.desktopSection {
+  display: none;
+}
+
+.mobileSection {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .desktopSection {
+    display: block;
+  }
+
+  .mobileSection {
+    display: none;
+  }
+}
