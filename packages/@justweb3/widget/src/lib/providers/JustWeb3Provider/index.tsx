@@ -33,7 +33,6 @@ import usePreviousState from '../../hooks/usePreviousState';
 import { ProfileDialog, UpdateRecordDialog } from '../../dialogs';
 import { isEqual } from 'lodash';
 import { ChainId } from '@justaname.id/sdk';
-import * as chains from 'viem/chains';
 
 // import '@justweb3/ui/styles.css';
 
@@ -375,10 +374,6 @@ const CheckSession: FC<{
 
   useEffect(() => {
     if (connectedEns && chainId) {
-      const currentChain = Object.values(chains).find(
-        (chain) => chainId === connectedEns?.chainId
-      );
-
       if (
         (connectedEns?.chainId === 1 && chainId === 11155111) ||
         (connectedEns?.chainId === 11155111 && chainId !== 11155111)
