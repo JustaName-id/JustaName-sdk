@@ -126,7 +126,7 @@ export const Example = () => {
                 <JustEnsCard addressOrEns={'vitalik.eth'} expanded />
                 <JustEnsCard addressOrEns={'dr3a.eth'} expanded />
                 <JustEnsCard
-                  ens={'hadikhai.jaw.eth'}
+                  addressOrEns={'hadikhai.jaw.eth'}
                   chainId={11155111}
                   expanded
                 />

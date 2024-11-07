@@ -1,18 +1,18 @@
 {
-  "name": "react-trial",
+  "name": "with-rainbow",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/react-trial/src",
+  "sourceRoot": "apps/with-rainbow/src",
   "projectType": "application",
   "targets": {
     "serve": {
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "react-trial:build"
+        "buildTarget": "with-rainbow:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "react-trial:build:production"
+          "buildTarget": "with-rainbow:build:production"
         }
       },
       "dependsOn": [
@@ -31,7 +31,7 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "yarn tsc --noEmit",
-        "cwd": "apps/react-trial"
+        "cwd": "apps/with-rainbow"
       }
     }
   },

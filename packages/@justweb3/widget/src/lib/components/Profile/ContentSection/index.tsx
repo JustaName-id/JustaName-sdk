@@ -53,10 +53,17 @@ const ContentSection: React.FC<ContentProps> = ({
   const { accountEnsNames } = useAccountEnsNames();
   const [tab, setTab] = React.useState('Main');
   const isProfileSelf = useMemo(() => {
+    const isEns = accountEnsNames?.map((ens) => ens.ens).includes(fullSubname);
+
+    if (isEns) {
+      return chainId === connectedWalletChainId;
+    }
+
     return (
       (accountSubnames?.map((subname) => subname.ens).includes(fullSubname) ||
         accountEnsNames?.map((ens) => ens.ens).includes(fullSubname)) &&
-      chainId === connectedWalletChainId
+      !(chainId === 1 && connectedWalletChainId === 11155111) &&
+      !(chainId === 11155111 && connectedWalletChainId !== 11155111)
     );
   }, [
     fullSubname,

@@ -5,7 +5,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/apps/react-trial',
+  cacheDir: '../../node_modules/.vite/apps/with-rainbow',
 
   server: {
     port: 3000,
@@ -28,7 +28,7 @@ export default defineConfig({
   // },
 
   build: {
-    outDir: '../../dist/apps/react-trial',
+    outDir: '../../dist/apps/with-rainbow',
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,

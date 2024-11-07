@@ -16,7 +16,6 @@ import {
   Popover,
   PopoverTrigger,
   SPAN,
-  WalletIcon,
 } from '@justweb3/ui';
 import {
   useCanEnableMApps,
@@ -25,8 +24,7 @@ import {
   useMountedAccount,
   useRecords,
 } from '@justaname.id/react';
-import { useBalance } from 'wagmi';
-import { formatUnits } from 'viem';
+import { useDisconnect } from 'wagmi';
 import { BasePopoverContent } from '../DefaultPopover';
 import { PluginContext } from '../../providers/PluginProvider';
 import { MAppsDialog } from '../../dialogs/MAppsDialog';
@@ -36,13 +34,18 @@ import MetadataCard from '../MetadataCard';
 
 export interface JustWeb3Buttonrops {
   children: ReactNode;
+  logout?: () => void;
 }
 
-export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
+export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
+  children,
+  logout,
+}) => {
   const [openMApps, setOpenMApps] = useState(false);
   const { plugins, mApps } = useContext(JustWeb3Context);
   const { createPluginApi } = useContext(PluginContext);
-  const { address, isConnected } = useMountedAccount();
+  const { address } = useMountedAccount();
+  const { disconnect } = useDisconnect();
   const {
     connectedEns,
     signOut,
@@ -67,9 +70,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   const { avatar } = useEnsAvatar({
     ens: connectedEns?.ens,
   });
-  const { data, isLoading } = useBalance({
-    address: connectedEns?.address as `0x${string}`,
-  });
+  // const { data, isLoading } = useBalance({
+  //   address: connectedEns?.address as `0x${string}`,
+  // });
 
   const hasTwitterOrX = useMemo(() => {
     return records?.sanitizedRecords.socials.find(
@@ -83,8 +86,8 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
     }
   };
 
-  if (isEnsAuthLoading || isLoading || (connectedEns && isRecordsPending)) {
-    // if (true) {
+  // if (isEnsAuthLoading || isLoading || (connectedEns && isRecordsPending)) {
+  if (isEnsAuthLoading || (connectedEns && isRecordsPending)) {
     return (
       <ClickableItem
         title={'loading'}
@@ -108,7 +111,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
   }
 
   if (!connectedEns) {
-    if (address && isConnected) {
+    if (address) {
       return (
         <ClickableItem
           title={
@@ -136,7 +139,14 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
             >
               {formatText(address, 4)}
 
-              <WalletIcon width={15} />
+              <LogoutIcon
+                width={15}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  disconnect();
+                  logout && logout();
+                }}
+              />
             </Badge>
           }
         />
@@ -170,34 +180,19 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({ children }) => {
             contentStyle={{
               alignItems: 'start',
             }}
-            right={
-              <Badge
-                withCopy={false}
-                style={{
-                  padding: '5px',
-                  fontSize: '10px',
-                  fontWeight: 800,
-                }}
-              >
-                {data ? (
-                  <>
-                    {parseFloat(
-                      formatUnits(data?.value, data?.decimals)
-                    ).toFixed(2)}{' '}
-                    {data?.symbol}
-                  </>
-                ) : (
-                  '0'
-                )}
-                <LogoutIcon
-                  width={15}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    signOut();
-                  }}
-                />
-              </Badge>
-            }
+            // right={
+            //   <Badge
+            //     withCopy={false}
+            //     style={{
+            //       padding: '5px',
+            //       fontSize: '10px',
+            //       fontWeight: 800,
+            //     }}
+            //   >
+            //     {address && formatText(address, 4)}
+            //     <WalletIcon width={15} />
+            //   </Badge>
+            // }
           />
         </PopoverTrigger>
 
