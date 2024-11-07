@@ -4536,17 +4536,18 @@ __metadata:
     jest: "npm:^29.4.1"
     qs: "npm:^6.12.0"
   peerDependencies:
-    ethers: ^6.11.1
-    siwe: ^2.3.2
+    ethers: ">=6.0.0"
+    siwe: ">=2.0.0"
+    viem: ">=2.0.0"
   languageName: unknown
   linkType: soft
 
 "@justaname.id/siwens@npm:0.0.66, @justaname.id/siwens@workspace:packages/@justaname.id/siwens":
   version: 0.0.0-use.local
   resolution: "@justaname.id/siwens@workspace:packages/@justaname.id/siwens"
-  dependencies:
-    ethers: "npm:^6.11.1"
-    siwe: "npm:^2.3.2"
+  peerDependencies:
+    ethers: ">=6.0.0"
+    siwe: ">=2.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4554,15 +4555,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justverified/plugin@workspace:packages/@justverified/plugin"
   dependencies:
-    "@justaname.id/react": "npm:0.3.136"
-    "@justaname.id/sdk": "npm:0.2.133"
-    "@justweb3/ui": "npm:0.0.72"
-    "@justweb3/widget": "npm:0.0.72"
     axios: "npm:^1.6.0"
     lodash: "npm:4.17.21"
     moment: "npm:^2.30.1"
     qs: "npm:^6.12.0"
   peerDependencies:
+    "@justweb3/widget": ">=0.0.0"
     "@tanstack/react-query": ^5.x
     react: ">=17"
   languageName: unknown
@@ -4572,17 +4570,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justweb3/efp-plugin@workspace:packages/@justweb3/efp-plugin"
   dependencies:
-    "@justaname.id/react": "npm:0.3.136"
-    "@justweb3/ui": "npm:0.0.72"
-    "@justweb3/widget": "npm:0.0.72"
-    "@tanstack/react-query": "npm:^5.28.4"
     axios: "npm:^1.6.0"
   peerDependencies:
+    "@justweb3/widget": ">=0.0.0"
+    "@tanstack/react-query": ^5.x
     react: ">=17"
   languageName: unknown
   linkType: soft
 
-"@justweb3/ui@npm:0.0.72, @justweb3/ui@npm:^0.0.72, @justweb3/ui@workspace:packages/@justweb3/ui":
+"@justweb3/ui@npm:^0.0.72, @justweb3/ui@workspace:packages/@justweb3/ui":
   version: 0.0.0-use.local
   resolution: "@justweb3/ui@workspace:packages/@justweb3/ui"
   dependencies:
@@ -4595,13 +4591,13 @@ __metadata:
     clsx: "npm:1.2.1"
     embla-carousel-react: "npm:^8.3.0"
     input-otp: "npm:^1.2.4"
-    react-hook-form: "npm:^7.49.2"
+    react-hook-form: "npm:^7.53.0"
   peerDependencies:
     react: ">=17"
   languageName: unknown
   linkType: soft
 
-"@justweb3/widget@npm:0.0.72, @justweb3/widget@workspace:packages/@justweb3/widget":
+"@justweb3/widget@workspace:packages/@justweb3/widget":
   version: 0.0.0-use.local
   resolution: "@justweb3/widget@workspace:packages/@justweb3/widget"
   dependencies:
@@ -4614,7 +4610,6 @@ __metadata:
     clsx: "npm:1.2.1"
     cropperjs: "npm:^1.6.2"
     lodash: "npm:4.17.21"
-    react-hook-form: "npm:^7.53.0"
     yup: "npm:0.32.11"
   peerDependencies:
     react: ">=17"
@@ -11633,6 +11628,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prismjs@npm:^1.26.0":
+  version: 1.26.5
+  resolution: "@types/prismjs@npm:1.26.5"
+  checksum: 10c0/5619cb449e0d8df098c8759d6f47bf8fdd510abf5dbdfa999e55c6a2545efbd1e209cc85a33d8d9f4ff2898089a1a6d9a70737c9baffaae635c46852c40d384a
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.13
   resolution: "@types/prop-types@npm:15.7.13"
@@ -16681,7 +16683,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:2.1.1":
+"clsx@npm:2.1.1, clsx@npm:^2.0.0":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10c0/c4c8eb865f8c82baab07e71bfa8897c73454881c4f99d6bc81585aecd7c441746c1399d08363dc096c550cceaf97bd4ce1e8854e1771e9998d9f94c4fe075839
@@ -26283,6 +26285,8 @@ __metadata:
     postcss: "npm:8.4.38"
     postcss-import: "npm:^16.1.0"
     prettier: "npm:^2.6.2"
+    prism-react-renderer: "npm:^2.4.0"
+    punycode: "npm:^2.3.1"
     qs: "npm:^6.12.0"
     react: "npm:18.3.1"
     react-code-blocks: "npm:^0.1.6"
@@ -31878,6 +31882,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prism-react-renderer@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "prism-react-renderer@npm:2.4.0"
+  dependencies:
+    "@types/prismjs": "npm:^1.26.0"
+    clsx: "npm:^2.0.0"
+  peerDependencies:
+    react: ">=16.0.0"
+  checksum: 10c0/3d6969b057da0efe39e3e637bf93601cd5757de5919180e8df16daf1d1b8eedc39b70c7f6f28724fba0a01bc857c6b78312ab027f4e913159d1165c5aba235bb
+  languageName: node
+  linkType: hard
+
 "prismjs@npm:^1.27.0":
   version: 1.29.0
   resolution: "prismjs@npm:1.29.0"
@@ -32191,7 +32207,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"punycode@npm:^2.1.0, punycode@npm:^2.1.1, punycode@npm:^2.3.0":
+"punycode@npm:^2.1.0, punycode@npm:^2.1.1, punycode@npm:^2.3.0, punycode@npm:^2.3.1":
   version: 2.3.1
   resolution: "punycode@npm:2.3.1"
   checksum: 10c0/14f76a8206bc3464f794fb2e3d3cc665ae416c01893ad7a02b23766eb07159144ee612ad67af5e84fa4479ccfe67678c4feb126b0485651b302babf66f04f9e9
@@ -32569,7 +32585,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.49.2, react-hook-form@npm:^7.53.0":
+"react-hook-form@npm:^7.53.0":
   version: 7.53.1
   resolution: "react-hook-form@npm:7.53.1"
   peerDependencies:

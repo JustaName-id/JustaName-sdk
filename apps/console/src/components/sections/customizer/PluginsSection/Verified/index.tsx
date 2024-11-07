@@ -80,25 +80,35 @@ export const Verified = () => {
   }, [justVerified]);
 
   return (
-    <AccordionItem value="justverified">
+    <AccordionItem
+      value="justverified"
+      style={{
+        position: 'relative',
+      }}
+    >
+      <Switch
+        checked={
+          !!config?.plugins?.find(
+            (plugin) => plugin.name === 'JustVerifiedPlugin'
+          )
+        }
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        onCheckedChange={(checked) => {
+          handleJustVerifiedConfig(checked);
+        }}
+        style={{
+          position: 'absolute',
+          right: 0,
+          top: '24px',
+        }}
+      />
       <AccordionTrigger>
         <div className="flex flex-row items-center justify-between w-full py-[5px]">
           <p className="text-base text-black font-bold leading-[125%] my-[5px]">
             JustVerified
           </p>
-          <Switch
-            checked={
-              !!config?.plugins?.find(
-                (plugin) => plugin.name === 'JustVerifiedPlugin'
-              )
-            }
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            onCheckedChange={(checked) => {
-              handleJustVerifiedConfig(checked);
-            }}
-          />
         </div>
       </AccordionTrigger>
       <AccordionContent>

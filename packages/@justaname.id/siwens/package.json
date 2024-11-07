@@ -1,9 +1,9 @@
 {
   "name": "@justaname.id/siwens",
   "version": "0.0.66",
-  "dependencies": {
-    "ethers": "^6.11.1",
-    "siwe": "^2.3.2"
+  "peerDependencies": {
+    "ethers": ">=6.0.0",
+    "siwe": ">=2.0.0"
   },
   "exports": {
     "./package.json": "./dist/package.json",

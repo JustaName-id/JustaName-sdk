@@ -1,21 +1,21 @@
 {
-  "name": "justaname-express-trial",
+  "name": "server",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "demo/express-trial/src",
+  "sourceRoot": "demo/server/src",
   "projectType": "application",
   "targets": {
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "justaname-express-trial:build"
+        "buildTarget": "server:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "justaname-express-trial:build:development"
+          "buildTarget": "server:build:development"
         },
         "production": {
-          "buildTarget": "justaname-express-trial:build:production"
+          "buildTarget": "server:build:production"
         }
       }
     },
@@ -26,10 +26,10 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/demo/express-trial",
-        "main": "demo/express-trial/src/main.ts",
-        "tsConfig": "demo/express-trial/tsconfig.app.json",
-        "webpackConfig": "demo/express-trial/webpack.config.js",
+        "outputPath": "dist/demo/server",
+        "main": "demo/server/src/main.ts",
+        "tsConfig": "demo/server/tsconfig.app.json",
+        "webpackConfig": "demo/server/webpack.config.js",
         "generatePackageJson": true
       },
       "configurations": {

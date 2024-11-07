@@ -18,8 +18,9 @@ import {
   UseEnsSignInResult,
   useEnsSignOut,
   UseEnsSignOutResult,
-  useMountedAccount, useRecords,
-  UseSubnameUpdateFunctionParams
+  useMountedAccount,
+  useRecords,
+  UseSubnameUpdateFunctionParams,
 } from '@justaname.id/react';
 import {
   JustWeb3ThemeProvider,
@@ -359,15 +360,24 @@ const CheckSession: FC<{
   handleOpenDialog: (open: boolean) => void;
 }> = ({ openOnWalletConnect, handleOpenDialog }) => {
   const { connectedEns, isEnsAuthPending } = useEnsAuth();
-  const { getRecords } = useRecords()
+  const { getRecords } = useRecords();
   const { signOut } = useEnsSignOut();
-  const { address, isConnected, isDisconnected, isConnecting, isReconnecting, chainId } =
-    useMountedAccount();
+  const {
+    address,
+    isConnected,
+    isDisconnected,
+    isConnecting,
+    isReconnecting,
+    chainId,
+  } = useMountedAccount();
   const isConnectedPrevious = usePreviousState(isConnected, [isConnected]);
 
   useEffect(() => {
-    if(connectedEns && chainId) {
-      if(connectedEns?.chainId !== chainId) {
+    if (connectedEns && chainId) {
+      if (
+        (connectedEns?.chainId === 1 && chainId === 11155111) ||
+        (connectedEns?.chainId === 11155111 && chainId !== 11155111)
+      ) {
         signOut();
         handleOpenDialog(true);
       }
@@ -376,15 +386,18 @@ const CheckSession: FC<{
 
   useEffect(() => {
     if (connectedEns) {
-      getRecords({
-        ens: connectedEns.ens,
-        chainId: connectedEns.chainId,
-      }, true).catch((e) => {
-        if(e.message.includes('NotFound')) {
+      getRecords(
+        {
+          ens: connectedEns.ens,
+          chainId: connectedEns.chainId,
+        },
+        true
+      ).catch((e) => {
+        if (e.message.includes('NotFound')) {
           signOut();
           handleOpenDialog(true);
         }
-      })
+      });
     }
   }, [connectedEns]);
 
