@@ -226,15 +226,14 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
               }
               handleOpenDialog={handleOpenSignInDialog}
             />
-            {ensOpen && (
-              <ProfileDialog
-                plugins={plugins}
-                disableOverlay={config.disableOverlay}
-                handleOnClose={() => setEnsOpen(null)}
-                ens={ensOpen?.ens}
-                chainId={ensOpen?.chainId}
-              />
-            )}
+
+            <ProfileDialog
+              plugins={plugins}
+              disableOverlay={config.disableOverlay}
+              handleOnClose={() => setEnsOpen(null)}
+              ens={ensOpen?.ens}
+              chainId={ensOpen?.chainId}
+            />
 
             <SignInDialog
               open={signInOpen}

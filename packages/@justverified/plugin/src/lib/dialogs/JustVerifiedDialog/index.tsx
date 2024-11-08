@@ -61,6 +61,8 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
       chainId,
     });
 
+  console.log(verifiedRecords);
+
   const { verifySocial, isVerifyingSocialPending } = useSocialVerification({
     onWindowClose: () => {
       setSelectedCredential(undefined);

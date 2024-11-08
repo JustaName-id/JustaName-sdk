@@ -51,24 +51,22 @@ export const JustVerifiedPlugin = (
       );
     },
     ProfileSection: (pluginApi, ens, chainId) => {
-      return <VerificationSection ens={ens} credentials={[
-        'twitter',
-        'email',
-        'telegram',
-        'discord',
-        'github'
-      ]} chainId={chainId} mApp={mApp} verificationBackendUrl={verificationBackendUrl} />;
-    }
+      return (
+        <VerificationSection
+          ens={ens}
+          credentials={['twitter', 'email', 'telegram', 'discord', 'github']}
+          chainId={chainId}
+          mApp={mApp}
+          verificationBackendUrl={verificationBackendUrl}
+        />
+      );
+    },
   },
   hooks: {
     onWalletDisconnected: (pluginApi) => {
       pluginApi.setState('verificationOpen', false);
     },
-    onEnsSignIn: async (
-      pluginApi,
-      ens,
-      chainId
-    ) => {
+    onEnsSignIn: async (pluginApi, ens, chainId) => {
       if (chainId !== 1 && chainId !== 11155111) {
         return;
       }
@@ -82,10 +80,13 @@ export const JustVerifiedPlugin = (
         verificationBackendUrl
       );
 
+      console.log('verifiableRecords', verifiableRecords);
       if (Object.values(verifiableRecords).every((value) => value)) {
+        console.log('all verified');
         return;
       }
 
+      console.log('not all verified');
       pluginApi.setState('verificationOpen', true);
 
       // setTimeout(() => {

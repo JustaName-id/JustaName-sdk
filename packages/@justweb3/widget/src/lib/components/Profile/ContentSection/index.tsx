@@ -30,7 +30,7 @@ import { ProfileSection } from '../ProfileSection';
 import MetadataCard from '../../MetadataCard';
 
 export interface ContentProps {
-  fullSubname: string;
+  fullSubname?: string;
   chainId: 1 | 11155111 | undefined;
   records: SubnameRecordsRoute['response'];
   sanitized: SanitizedRecords;
@@ -40,7 +40,7 @@ export interface ContentProps {
 }
 
 const ContentSection: React.FC<ContentProps> = ({
-  fullSubname,
+  fullSubname = '',
   chainId = 1,
   editMode,
   sanitized,
@@ -208,12 +208,7 @@ const ContentSection: React.FC<ContentProps> = ({
               'https://justaname-bucket.s3.eu-central-1.amazonaws.com/default-banner.png'
             }
             alt="profile-banner"
-            style={{
-              objectFit: 'cover',
-              height: '200px',
-              width: '100%',
-              borderRadius: '16px',
-            }}
+            className={styles.bannerImage}
           />
           <Flex
             gap="12px"
