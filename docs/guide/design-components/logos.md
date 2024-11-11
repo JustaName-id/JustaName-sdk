@@ -7,4 +7,4 @@ List of JustaName Logos in various file formats.\
 | :-------------------: | :------------------------------------------------------------------------: | :-------------------------------------------: |
 |       JustaName       |       <p><img src="../.gitbook/assets/JustaName.svg" alt=""><br></p>       |     ![](../.gitbook/assets/JustaName.png)     |
 | JustaName (dark mode) |                ![](../.gitbook/assets/JustaNameDarkMode.svg)               | ![](../.gitbook/assets/JustaNameDarkMode.png) |
-|       Head Only       | <img src="../.gitbook/assets/JustSomeone.svg" alt="" data-size="original"> |    ![](../.gitbook/assets/JustSomeone.png)    |
+|      JustSomeone      | <img src="../.gitbook/assets/JustSomeone.svg" alt="" data-size="original"> |    ![](../.gitbook/assets/JustSomeone.png)    |
