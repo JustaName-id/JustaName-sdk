@@ -43,6 +43,10 @@
 * [Privy](wallet-providers/privy.md)
 * [Coinbase Smart Wallet](wallet-providers/coinbase-smart-wallet.md)
 
+## Design Components
+
+* [Logos](design-components/logos.md)
+
 ## Use Cases
 
 * [Overview](use-cases/overview.md)
