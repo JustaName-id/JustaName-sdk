@@ -39,7 +39,7 @@ The **Sign-In Routes** section explains how to securely manage user authenticati
 [sign-in-routes.md](sign-in-routes.md)
 {% endcontent-ref %}
 
-## Subaname Management Routes
+## Subname Management Routes
 
 The **Subname Management Routes** section demonstrates how to securely manage subnames, including adding and revoking subnames through backend APIs. These routes handle all API key operations on the server side, ensuring that users can claim or revoke subnames without exposing sensitive data in the frontend.
 
