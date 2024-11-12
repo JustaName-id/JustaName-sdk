@@ -84,7 +84,6 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    console.log('useEffect', initialEns, ens);
     if (timeoutRef.current !== null) {
       clearTimeout(timeoutRef.current);
     }
@@ -104,8 +103,6 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       }
     };
   }, [initialEns]);
-
-  console.log('ens', initialEns, ens);
 
   const { records, isRecordsPending, refetchRecords } = useRecords({
     ens: ens,

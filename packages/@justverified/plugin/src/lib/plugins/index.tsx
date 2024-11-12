@@ -80,13 +80,10 @@ export const JustVerifiedPlugin = (
         verificationBackendUrl
       );
 
-      console.log('verifiableRecords', verifiableRecords);
       if (Object.values(verifiableRecords).every((value) => value)) {
-        console.log('all verified');
         return;
       }
 
-      console.log('not all verified');
       pluginApi.setState('verificationOpen', true);
 
       // setTimeout(() => {

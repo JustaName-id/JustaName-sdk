@@ -12,7 +12,6 @@ import {
   trustWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React from 'react';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
@@ -20,6 +19,9 @@ import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
 interface ProviderProps {
   children: React.ReactNode;
 }
+
+const queryClient = new QueryClient();
+
 export const Providers: React.FC<ProviderProps> = (props) => {
   const { wallets } = getDefaultWallets();
 
@@ -59,7 +61,6 @@ export const Providers: React.FC<ProviderProps> = (props) => {
     dev: process.env.NEXT_PUBLIC_DEV === 'true',
   };
 
-  const queryClient = new QueryClient();
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
