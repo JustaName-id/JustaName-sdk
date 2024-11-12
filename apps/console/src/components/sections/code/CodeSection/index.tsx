@@ -4,7 +4,11 @@ import { useJustWeb3Theme } from '@justweb3/ui';
 import { useConsole } from '../../../../providers/ConsoleProvider';
 import { Highlight, themes } from 'prism-react-renderer';
 
-export const CodeSection: React.FC = () => {
+interface CodeSectionProps {
+  mobile?: boolean;
+}
+
+export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
   const { config } = useContext(JustWeb3Context);
   const { color } = useJustWeb3Theme();
   const { justVerified } = useConsole();
@@ -48,16 +52,14 @@ import {
   JustWeb3Button
 } from '@justweb3/widget';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-${
-  config.plugins?.find((p) => p.name === 'JustVerifiedPlugin')
-    ? "import { JustVerifiedPlugin } from '@justverified/plugin';"
-    : ''
-}
-${
-  config.plugins?.find((p) => p.name === 'EFPPlugin')
-    ? "import { EFPPlugin } from '@justweb3/efp-plugin';"
-    : ''
-}
+${config.plugins?.find((p) => p.name === 'JustVerifiedPlugin')
+        ? "import { JustVerifiedPlugin } from '@justverified/plugin';"
+        : ''
+      }
+${config.plugins?.find((p) => p.name === 'EFPPlugin')
+        ? "import { EFPPlugin } from '@justweb3/efp-plugin';"
+        : ''
+      }
 
 export const App: React.FC = () => {
     const { wallets } = getDefaultWallets();
@@ -77,26 +79,26 @@ export const App: React.FC = () => {
     });
   
     const justweb3Config: JustWeb3ProviderConfig = ${JSON.stringify(
-      {
-        ...config,
-        networks: [
-          {
-            chainId: 1,
-            providerUrl: `<MAINNET_PROVIDER_URL>`,
-          },
-          {
-            chainId: 11155111,
-            providerUrl: `<SEPOLIA_PROVIDER_URL>`,
-          },
-        ],
-        dev: undefined,
-        disableOverlay: undefined,
-        plugins: plugins.length > 0 ? plugins : undefined,
-        color: color,
-      },
-      null,
-      2
-    )};
+        {
+          ...config,
+          networks: [
+            {
+              chainId: 1,
+              providerUrl: `<MAINNET_PROVIDER_URL>`,
+            },
+            {
+              chainId: 11155111,
+              providerUrl: `<SEPOLIA_PROVIDER_URL>`,
+            },
+          ],
+          dev: undefined,
+          disableOverlay: undefined,
+          plugins: plugins.length > 0 ? plugins : undefined,
+          color: color,
+        },
+        null,
+        2
+      )};
   
     const queryClient = new QueryClient();
   
@@ -123,9 +125,11 @@ export default App;`.trim();
   };
 
   return (
-    <div className="h-full w-[30%] min-w-[300px] border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto py-5 px-2.5 gap-5 justify-between">
-      <div className="flex justify-between items-center">
-        <p className="text-sm font-medium leading-[140%]">Code</p>
+    <div className={`h-full mobile:w-[30%] min-w-[300px] border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto ${mobile ? 'pb-5' : 'py-5'} px-2.5 gap-5 justify-between`}>
+      <div className={`flex justify-between items-center ${mobile ? 'absolute top-4 right-6 ' : ''}`}>
+        {!mobile && (
+          <p className="text-sm font-medium leading-[140%]">Code</p>
+        )}
         <button
           onClick={handleCopy}
           className="text-sm font-medium leading-[140%] text-blue-500 hover:text-blue-700"

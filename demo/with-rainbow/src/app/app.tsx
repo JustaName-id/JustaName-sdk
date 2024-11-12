@@ -41,7 +41,6 @@ const JustaNameConfig: JustWeb3ProviderConfig = {
 };
 
 export function App() {
-  console.log('rainbow', import.meta.env.VITE_APP_CHAIN_ID);
   const config = getDefaultConfig({
     appName: 'My RainbowKit App',
     projectId: 'YOUR_PROJECT_ID',

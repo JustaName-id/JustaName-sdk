@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ChainId } from '@justaname.id/sdk';
 import { useJustaName } from '../../providers';
 import { useEnsPublicClient } from '../client/useEnsPublicClient';
+import { defaultOptions } from '../../query';
 
 export const buildPrimaryName = (
   address: string,
@@ -77,6 +78,7 @@ export const usePrimaryName = (
   };
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildPrimaryName(params?.address || '', _chainId),
     queryFn: () =>
       getPrimaryName({

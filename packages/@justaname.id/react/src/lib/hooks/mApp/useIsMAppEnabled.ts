@@ -3,18 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useRecords } from '../records';
 import { useEffect, useMemo } from 'react';
-
+import { defaultOptions } from '../../query';
 
 export const buildIsMAppEnabledKey = (
   ens: string,
   mApp: string,
-  chainId: ChainId| undefined,
-) => [
-  'IS_MAPP_ENABLED',
-  ens,
-  mApp,
-  chainId,
-]
+  chainId: ChainId | undefined
+) => ['IS_MAPP_ENABLED', ens, mApp, chainId];
 
 export interface UseIsMAppEnabledParams {
   ens: string;
@@ -28,16 +23,22 @@ export interface UseIsMAppEnabledResult {
   refetchIsMAppEnabled: () => void;
 }
 
-export const useIsMAppEnabled = (params: UseIsMAppEnabledParams): UseIsMAppEnabledResult => {
-  const { justaname, chainId} = useJustaName();
-  const _chainId = useMemo(() => params.chainId || chainId, [params.chainId, chainId])
+export const useIsMAppEnabled = (
+  params: UseIsMAppEnabledParams
+): UseIsMAppEnabledResult => {
+  const { justaname, chainId } = useJustaName();
+  const _chainId = useMemo(
+    () => params.chainId || chainId,
+    [params.chainId, chainId]
+  );
   const { records } = useRecords({
     ens: params.ens,
     chainId: _chainId,
-  })
+  });
 
   const query = useQuery({
-    queryKey: buildIsMAppEnabledKey(params.ens, params.mApp,_chainId),
+    ...defaultOptions,
+    queryKey: buildIsMAppEnabledKey(params.ens, params.mApp, _chainId),
     queryFn: async () => {
       if (!records) {
         return false;
@@ -45,7 +46,9 @@ export const useIsMAppEnabled = (params: UseIsMAppEnabledParams): UseIsMAppEnabl
       if (!records.isJAN) {
         return false;
       }
-      const mAppField = records.records.texts.find((text)=>text.key === 'mApps');
+      const mAppField = records.records.texts.find(
+        (text) => text.key === 'mApps'
+      );
       if (!mAppField) {
         return false;
       }
@@ -55,16 +58,22 @@ export const useIsMAppEnabled = (params: UseIsMAppEnabledParams): UseIsMAppEnabl
       }
       return mAppFieldValue.mApps.includes(params?.mApp);
     },
-    enabled: Boolean(params.ens) && Boolean(justaname) && params.ens.length > 0 && params?.mApp?.length > 0 && Boolean(_chainId) && Boolean(records),
-  })
+    enabled:
+      Boolean(params.ens) &&
+      Boolean(justaname) &&
+      params.ens.length > 0 &&
+      params?.mApp?.length > 0 &&
+      Boolean(_chainId) &&
+      Boolean(records),
+  });
 
   useEffect(() => {
-    query.refetch()
-  }, [records])
+    query.refetch();
+  }, [records]);
 
   return {
     isMAppEnabled: query.data,
     refetchIsMAppEnabled: query.refetch,
-    isMAppEnabledPending: query.isPending
-  }
-}
+    isMAppEnabledPending: query.isPending,
+  };
+};

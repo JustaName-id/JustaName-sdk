@@ -36,7 +36,7 @@ export const Avatar: React.FC<AvatarProps> = ({
         minWidth: `${size}px`,
         border: `${borderSize} solid ${borderColor}`,
         boxShadow: `0px 0px ${boxShadowSize} 0px rgba(0, 0, 0, 0.25)`,
-        padding: src && !isImageError ? '0' : '1px 1px 2px 2px',
+        padding: src && !isImageError ? '0' : '2px 1px 1px 1px',
         ...style,
       }}
     >
