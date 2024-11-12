@@ -21,12 +21,9 @@ interface ProviderProps {
   children: React.ReactNode;
 }
 
-
 export const Providers: React.FC<ProviderProps> = (props) => {
   const { wallets } = getDefaultWallets();
-  const [queryClient] = useState(new QueryClient({
-
-  }));
+  const [queryClient] = useState(() => new QueryClient());
 
   const config = getDefaultConfig({
     appName: 'JustaName Console',
