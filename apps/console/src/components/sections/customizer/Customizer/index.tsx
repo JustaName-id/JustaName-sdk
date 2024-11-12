@@ -10,7 +10,11 @@ import { useSwitchChain } from 'wagmi';
 import { useMountedAccount } from '@justaname.id/react';
 import { PluginsSection } from '../PluginsSection';
 
-export const Customizer = () => {
+interface CustomizerProps {
+  mobile?: boolean;
+}
+
+export const Customizer = ({ mobile }: CustomizerProps) => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
   const { changeTheme } = useJustWeb3Theme();
   const [logoUrl, setLogoUrl] = useState(config.logo ?? '');
@@ -25,11 +29,13 @@ export const Customizer = () => {
   }, [logoUrlDebounced]);
 
   return (
-    <div className="flex flex-col gap-[5px] min-w-[350px] w-[350px] border-r-[1px] pointer-events-auto py-5 px-2.5 max-h-[calc(100vh-60px)] overflow-y-scroll">
+    <div className={`flex flex-col gap-[5px] min-w-[350px] mobile:w-[350px] border-r-[1px] pointer-events-auto ${mobile ? 'pb-5' : 'py-5'} px-2.5 mobile:max-h-[calc(100vh-60px)] overflow-y-auto `}>
       <div className="flex flex-col gap-2.5">
-        <p className="text-base text-black font-bold leading-[125%] my-[5px]">
-          Customize Interface
-        </p>
+        {!mobile && (
+          <p className="text-base text-black font-bold leading-[125%] my-[5px]">
+            Customize Interface
+          </p>
+        )}
         <div className="flex flex-row justify-between gap-2.5">
           <ColorSelector
             colors={['#FFFFFF', '#000000']}

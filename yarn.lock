@@ -26324,6 +26324,7 @@ __metadata:
     typedoc-plugin-markdown: "npm:^4.2.9"
     typescript: "npm:5.5.4"
     url-loader: "npm:^4.1.1"
+    vaul: "npm:^1.1.1"
     verdaccio: "npm:^5.0.4"
     viem: "npm:2.x"
     vite: "npm:~5.0.0"
@@ -37834,6 +37835,18 @@ __metadata:
   version: 1.1.2
   resolution: "vary@npm:1.1.2"
   checksum: 10c0/f15d588d79f3675135ba783c91a4083dcd290a2a5be9fcb6514220a1634e23df116847b1cc51f66bfb0644cf9353b2abb7815ae499bab06e46dd33c1a6bf1f4f
+  languageName: node
+  linkType: hard
+
+"vaul@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "vaul@npm:1.1.1"
+  dependencies:
+    "@radix-ui/react-dialog": "npm:^1.1.1"
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0
+  checksum: 10c0/94f1b9e942db00c74dfd2d979da8113f88324393810e227ed829840f5c7e29aab45deb82cbd65ad2f1b84faa31132de98baea0ecd5d7dc6cb4996f9955f37685
   languageName: node
   linkType: hard
 
