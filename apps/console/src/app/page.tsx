@@ -17,9 +17,9 @@ export default function Page() {
         <div className='mobile:hidden'>
           <SectionSlider
             trigger={
-              <button className='py-[7px] px-2.5 bg-[#3280F4] font-xs font-black text-white border border-black rounded-[8px_8px_0px_0px] rotate-90'>
+              <div className='py-[7px] px-2.5 bg-[#3280F4] font-xs font-black text-white border border-black rounded-[8px_8px_0px_0px] rotate-90'>
                 Customise
-              </button>
+              </div>
             }
             side='left' title='Customizer'>
             <Customizer mobile />
@@ -48,9 +48,9 @@ export default function Page() {
         <div className='mobile:hidden overflow-hidden w-full'>
           <SectionSlider
             trigger={
-              <button className='py-[7px] px-2.5 bg-[#FEA801] font-xs font-black text-white border border-black rounded-[8px_8px_0px_0px] translate-y-[10px] -rotate-90'>
+              <div className='py-[7px] px-2.5 bg-[#FEA801] font-xs font-black text-white border border-black rounded-[8px_8px_0px_0px] translate-y-[10px] -rotate-90'>
                 Code Output
-              </button>
+              </div>
             }
             side='right' title='Code'>
             <CodeSection mobile />
