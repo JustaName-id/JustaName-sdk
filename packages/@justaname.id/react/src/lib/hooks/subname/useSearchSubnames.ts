@@ -1,10 +1,11 @@
-import { SubnameSearchRoute, SubnameSearchResponse } from '@justaname.id/sdk';
+import { SubnameSearchResponse, SubnameSearchRoute } from '@justaname.id/sdk';
 import {
   QueryObserverResult,
   RefetchOptions,
   useQuery,
 } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
+import { defaultOptions } from '../../query';
 
 export const buildSearchSubnamesKey = (
   params: SubnameSearchRoute['params']
@@ -51,6 +52,7 @@ export const useSearchSubnames = (
   };
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildSearchSubnamesKey(currentParams),
     queryFn: async () =>
       await justaname?.subnames.searchSubnames(currentParams),

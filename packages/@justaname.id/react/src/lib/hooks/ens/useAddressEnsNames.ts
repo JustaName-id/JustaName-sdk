@@ -6,6 +6,7 @@ import { useJustaName } from '../../providers';
 import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { useRecords } from '../records';
 import { Records } from '../../types';
+import { defaultOptions } from '../../query';
 
 export const buildAddressEnsNames = (
   address: string,
@@ -72,6 +73,7 @@ export const useAddressEnsNames = (
   };
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildAddressEnsNames(params?.address || '', _chainId),
     queryFn: () =>
       getEnsNamesForAddress({

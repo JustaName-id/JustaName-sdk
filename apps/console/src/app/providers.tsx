@@ -15,15 +15,15 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
+import { useState } from 'react';
 
 interface ProviderProps {
   children: React.ReactNode;
 }
 
-const queryClient = new QueryClient();
-
 export const Providers: React.FC<ProviderProps> = (props) => {
   const { wallets } = getDefaultWallets();
+  const [queryClient] = useState(() => new QueryClient());
 
   const config = getDefaultConfig({
     appName: 'JustaName Console',

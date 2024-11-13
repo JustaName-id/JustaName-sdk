@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { ChainId } from '@justaname.id/sdk';
+import { defaultOptions } from '../../query';
 
 export const buildEnsAuthKey = (backendUrl: string) => ['ENS_AUTH', backendUrl];
 
@@ -43,6 +44,7 @@ export const useEnsAuth = <T extends object = {}>(
     [_backendUrl, _currentEnsRoute]
   );
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildEnsAuthKey(_backendUrl),
     queryFn: async () => {
       try {
