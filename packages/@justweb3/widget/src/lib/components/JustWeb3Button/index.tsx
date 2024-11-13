@@ -44,7 +44,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   logout,
 }) => {
   const [openMApps, setOpenMApps] = useState(false);
-  const { plugins, mApps } = useContext(JustWeb3Context);
+  const { plugins, mApps, config } = useContext(JustWeb3Context);
   const { createPluginApi } = useContext(PluginContext);
   const { address } = useMountedAccount();
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
@@ -375,6 +375,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
         {connectedEnsBtn(true)}
         <DefaultDialog
           open={mobileDialogOpen}
+          disableOverlay={config.disableOverlay}
           handleClose={() => setMobileDialogOpen(false)}
           contentStyle={{
             width: '100%',

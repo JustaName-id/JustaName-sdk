@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useEffect, useMemo } from 'react';
 import { useRecords } from './useRecords';
+import { defaultOptions } from '../../query';
 
 export const buildEnsAvatarKey = (
   ens: string | undefined,
@@ -90,6 +91,7 @@ export const useEnsAvatar = (
   };
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildEnsAvatarKey(params?.ens, _chainId),
     queryFn: async () => {
       if (!params?.ens) {

@@ -14,6 +14,7 @@ import {
 } from '@justaname.id/sdk';
 import { buildSubnameBySubnameKey } from './useSubname';
 import { Records } from '../../types';
+import { defaultOptions } from '../../query';
 
 export const buildAddressSubnamesKey = (
   address: string | undefined,
@@ -49,6 +50,7 @@ export const useAddressSubnames = (
   const _chainId = chainId || defaultChainId;
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildAddressSubnamesKey(params.address, _chainId),
     queryFn: async () => {
       if (!params.address) {

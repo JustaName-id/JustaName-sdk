@@ -15,30 +15,10 @@ import {
   JustaNameConfigDefaults,
   NetworkWithProvider,
 } from '@justaname.id/sdk';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { defaultRoutes } from '../constants/default-routes';
 import { useMountedAccount } from '../hooks/account/useMountedAccount';
 import { useSignMessage } from 'wagmi';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5,
-      networkMode: 'offlineFirst',
-      refetchOnWindowFocus: false,
-      retry: 0,
-    },
-    mutations: {
-      networkMode: 'offlineFirst',
-    },
-  },
-});
 
 export type JustaNameConfigWithoutDefaultChainId = Omit<
   JustaNameConfig,
@@ -131,30 +111,28 @@ export const JustaNameProvider: FC<JustaNameProviderProps> = ({
   }, [configuredNetworks, defaultChain]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <JustaNameContext.Provider
-        value={{
-          justanameConfig: justanameConfig,
-          // handleJustaNameConfig,
-          backendUrl: config.backendUrl || '',
-          config: justanameConfig.config,
-          dev: justanameConfig.dev,
-          ensDomains: justanameConfig.ensDomains || [],
-          selectedEnsDomain,
-          networks: configuredNetworks,
-          chainId: defaultChain,
-          selectedNetwork,
-          justaname,
-          routes: {
-            ...defaultRoutes,
-            ...config.routes,
-          },
-        }}
-      >
-        {children}
-        {config.signOnMounted && <SignatureOnMounted />}
-      </JustaNameContext.Provider>
-    </QueryClientProvider>
+    <JustaNameContext.Provider
+      value={{
+        justanameConfig: justanameConfig,
+        // handleJustaNameConfig,
+        backendUrl: config.backendUrl || '',
+        config: justanameConfig.config,
+        dev: justanameConfig.dev,
+        ensDomains: justanameConfig.ensDomains || [],
+        selectedEnsDomain,
+        networks: configuredNetworks,
+        chainId: defaultChain,
+        selectedNetwork,
+        justaname,
+        routes: {
+          ...defaultRoutes,
+          ...config.routes,
+        },
+      }}
+    >
+      {children}
+      {config.signOnMounted && <SignatureOnMounted />}
+    </JustaNameContext.Provider>
   );
 };
 

@@ -11,7 +11,9 @@
     "paths": {
       "@justaname.id/react": ["packages/@justaname.id/react"],
       "@justweb3/ui": ["packages/@justweb3/ui"],
-      "@justweb3/widget": ["packages/@justweb3/widget"]
+      "@justweb3/widget": ["packages/@justweb3/widget"],
+      "@justweb3/efp-plugin": ["packages/@justweb3/efp-plugin"],
+      "@justverified/plugin": ["packages/@justverified/plugin"]
     }
   },
   "exclude": [

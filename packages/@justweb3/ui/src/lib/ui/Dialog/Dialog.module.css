@@ -28,13 +28,17 @@
   transform: translate(-50%, -50%);
   padding: 40px;
   transition: all 0.4s ease-in-out;
-  animation: contentShow 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: contentShow 500ms cubic-bezier(0.16, 1, 0.3, 1);
   border-radius: 24px;
   width: fit-content;
   max-width: min(1200px, 90vw);
   min-width: 390px;
   min-height: 200px;
   max-height: 80vh;
+}
+
+.content[data-state='closed'] {
+  animation: contentHide 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .content:focus {
@@ -44,11 +48,22 @@
 @keyframes contentShow {
   from {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.6);
+    /*transform: translate(-50%, -50%) scale(0.6);*/
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    /*transform: translate(-50%, -50%) scale(1);*/
+  }
+}
+
+@keyframes contentHide {
+  from {
+    opacity: 1;
+    /*transform: translate(-50%, -50%) scale(1);*/
+  }
+  to {
+    opacity: 0;
+    /*transform: translate(-50%, -50%) scale(0.6);*/
   }
 }
 
