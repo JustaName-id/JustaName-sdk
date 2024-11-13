@@ -187,7 +187,7 @@ export const useSubnameSignature = (): UseSubnameSignatureResult => {
         throw new Error('No chainId found');
       }
 
-      const message = await justaname.siwe.requestChallenge({
+      const message = justaname.siwe.requestChallenge({
         address,
         chainId,
       });

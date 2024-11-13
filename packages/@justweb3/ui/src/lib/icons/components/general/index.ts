@@ -4,6 +4,8 @@ import AddressIcon from './Address';
 import ArrowWhiteIcon from './ArrowWhite';
 import ArrowIcon from './Arrow';
 import AttachmentIcon from './Attachment';
+import AvatarIcon from './Avatar';
+import BannerIcon from './Banner';
 import ClipIcon from './Clip';
 import CloseIcon from './Close';
 import ComicIcon from './Comic';
@@ -20,6 +22,7 @@ import MappIcon from './Mapp';
 import MaximizeIcon from './Maximize';
 import MinimizeIcon from './Minimize';
 import MinusIcon from './Minus';
+import NicknameIcon from './Nickname';
 import NotificationIcon from './Notification';
 import PenIcon from './Pen';
 import PersonEditIcon from './PersonEdit';
@@ -37,6 +40,8 @@ const general = {
   'arrow-white': ArrowWhiteIcon,
   arrow: ArrowIcon,
   attachment: AttachmentIcon,
+  avatar: AvatarIcon,
+  banner: BannerIcon,
   clip: ClipIcon,
   close: CloseIcon,
   comic: ComicIcon,
@@ -53,6 +58,7 @@ const general = {
   maximize: MaximizeIcon,
   minimize: MinimizeIcon,
   minus: MinusIcon,
+  nickname: NicknameIcon,
   notification: NotificationIcon,
   pen: PenIcon,
   'person-edit': PersonEditIcon,
@@ -73,6 +79,8 @@ export {
   ArrowWhiteIcon,
   ArrowIcon,
   AttachmentIcon,
+  AvatarIcon,
+  BannerIcon,
   ClipIcon,
   CloseIcon,
   ComicIcon,
@@ -89,6 +97,7 @@ export {
   MaximizeIcon,
   MinimizeIcon,
   MinusIcon,
+  NicknameIcon,
   NotificationIcon,
   PenIcon,
   PersonEditIcon,

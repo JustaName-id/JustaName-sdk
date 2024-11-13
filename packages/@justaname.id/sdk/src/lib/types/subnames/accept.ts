@@ -3,19 +3,17 @@ import {
   IRequest,
   IRoute,
   PartialAddressJson,
-  SubnameResponse
+  SubnameResponse,
 } from '../common';
 import { ApiKeyHeaders, SIWEHeaders } from '../headers';
 
 interface AddressAcceptRequest {
-
   address: string;
 
   coinType: number;
 }
 
 interface TextRecordAcceptRequest {
-
   key: string;
 
   value: string;
@@ -33,14 +31,19 @@ export interface SubnameAcceptRequest extends IRequest {
   text?: TextRecordAcceptRequest[];
 
   contentHash?: string;
+
+  signature?: string;
 }
 
-
-export interface SubnameAcceptRoute extends IRoute<
-  SubnameAcceptRequest,
-  SubnameResponse,
-  ApiKeyHeaders & SIWEHeaders,
-  'ensDomain' | 'chainId',
-  'addresses' | 'text',
-  { addresses?: PartialAddressJson | AddressWithTypedCoins[]; text?: Record<string, string> | TextRecordAcceptRequest[] }
-> {}
+export interface SubnameAcceptRoute
+  extends IRoute<
+    SubnameAcceptRequest,
+    SubnameResponse,
+    ApiKeyHeaders & SIWEHeaders,
+    'ensDomain' | 'chainId',
+    'addresses' | 'text',
+    {
+      addresses?: PartialAddressJson | AddressWithTypedCoins[];
+      text?: Record<string, string> | TextRecordAcceptRequest[];
+    }
+  > {}
