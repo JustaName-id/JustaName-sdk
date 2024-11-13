@@ -150,9 +150,9 @@ app.post('/api/subnames/add', async (req: Request<SubnameAdd>, res) => {
         text: text,
         addresses: addresses,
         contentHash,
+        signature: req.body.signature,
       },
       {
-        xSignature: req.body.signature,
         xAddress: req.body.address,
         xMessage: req.body.message,
       }
@@ -187,9 +187,9 @@ app.post('/api/subnames/revoke', async (req: Request<SubnameAdd>, res) => {
       {
         username,
         ensDomain,
+        signature: req.body.signature,
       },
       {
-        xSignature: req.body.signature,
         xAddress: req.body.address,
         xMessage: req.body.message,
       }

@@ -7,6 +7,8 @@ export interface SubnameRevokeRequest extends IRequest {
   username: string;
 
   chainId: ChainId;
+
+  signature?: string;
 }
 
 export interface SubnameRevokeRoute

@@ -37,7 +37,8 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
       providerUrl: import.meta.env.STORYBOOK_APP_SEPOLIA_PROVIDER_URL,
     },
   ],
-  openOnWalletConnect: false,
+  openOnWalletConnect: true,
+  dev: true,
   allowedEns: 'all',
 };
 
@@ -102,6 +103,8 @@ export const Example = () => {
                 <JustEnsCard addressOrEns={'vitalik.eth'} />
                 <JustEnsCard addressOrEns={'dr3a.eth'} />
                 <JustEnsCard addressOrEns={'josh.box'} />
+                <JustEnsCard addressOrEns={'justhadi.eth'} />
+                <JustEnsCard addressOrEns={'testt2.justan.id'} />
                 <JustEnsCard
                   addressOrEns={'hadikhai.jaw.eth'}
                   chainId={11155111}

@@ -71,6 +71,7 @@ export const JustVerifiedProvider: FC<JustVerifiedProviderProps> = ({
   const { signOut, isSignOutPending } = useEnsSignOut({
     backendUrl: verificationBackendUrl,
     signoutRoute: '/auth/signout',
+    signinNonceRoute: '/auth/nonce',
     currentEnsRoute: '/auth/current',
   });
 

@@ -46,7 +46,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const [openMApps, setOpenMApps] = useState(false);
   const { plugins, mApps, config } = useContext(JustWeb3Context);
   const { createPluginApi } = useContext(PluginContext);
-  const { address } = useMountedAccount();
+  const { address, isConnected } = useMountedAccount();
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
   const { disconnect } = useDisconnect();
   const {
@@ -73,10 +73,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const { avatar } = useEnsAvatar({
     ens: connectedEns?.ens,
   });
-  // const { data, isLoading } = useBalance({
-  //   address: connectedEns?.address as `0x${string}`,
-  // });
-
   const hasTwitterOrX = useMemo(() => {
     return records?.sanitizedRecords.socials.find(
       (social) => social.key === 'com.twitter' || social.key === 'com.x'
@@ -89,7 +85,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
     }
   };
 
-  // if (isEnsAuthLoading || isLoading || (connectedEns && isRecordsPending)) {
   if (isEnsAuthLoading || (connectedEns && isRecordsPending)) {
     return (
       <ClickableItem
@@ -114,7 +109,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   }
 
   if (!connectedEns) {
-    if (address) {
+    if (isConnected && address) {
       return (
         <ClickableItem
           title={
@@ -146,6 +141,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
                 width={15}
                 onClick={(e) => {
                   e.stopPropagation();
+                  e.preventDefault();
                   disconnect();
                   logout && logout();
                 }}
@@ -185,22 +181,22 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
             setMobileDialogOpen(true);
           }
         }}
-      // right={
-      //   <Badge
-      //     withCopy={false}
-      //     style={{
-      //       padding: '5px',
-      //       fontSize: '10px',
-      //       fontWeight: 800,
-      //     }}
-      //   >
-      //     {address && formatText(address, 4)}
-      //     <WalletIcon width={15} />
-      //   </Badge>
-      // }
+        // right={
+        //   <Badge
+        //     withCopy={false}
+        //     style={{
+        //       padding: '5px',
+        //       fontSize: '10px',
+        //       fontWeight: 800,
+        //     }}
+        //   >
+        //     {address && formatText(address, 4)}
+        //     <WalletIcon width={15} />
+        //   </Badge>
+        // }
       />
-    )
-  }
+    );
+  };
 
   const connectedEnsProfileContent = (
     <Flex direction="column" gap={'10px'}>
@@ -322,19 +318,17 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           onClick={() => setOpenMApps(true)}
           right={
             <Flex justify={'space-between'} align={'center'} gap={'5px'}>
-              {mAppsToEnable &&
-                canEnableMApps &&
-                mAppsToEnable.length > 0 && (
-                  <SPAN
-                    style={{
-                      color: '#FEA801',
-                      fontSize: '10px',
-                      fontWeight: 900,
-                    }}
-                  >
-                    Configuration Required
-                  </SPAN>
-                )}
+              {mAppsToEnable && canEnableMApps && mAppsToEnable.length > 0 && (
+                <SPAN
+                  style={{
+                    color: '#FEA801',
+                    fontSize: '10px',
+                    fontWeight: 900,
+                  }}
+                >
+                  Configuration Required
+                </SPAN>
+              )}
               <ArrowIcon
                 width={20}
                 color={'var(--justweb3-foreground-color-2)'}
@@ -356,17 +350,15 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
         />
       </Flex>
     </Flex>
-  )
+  );
 
   return (
     <>
       <MAppsDialog open={openMApps} handleOpenDialog={handleOpenMAppsDialog} />
       <div className={styles.desktopSection}>
         <Popover>
-          <PopoverTrigger>
-            {connectedEnsBtn(false)}
-          </PopoverTrigger>
-          <BasePopoverContent sideOffset={10} align={'end'} side='bottom'>
+          <PopoverTrigger>{connectedEnsBtn(false)}</PopoverTrigger>
+          <BasePopoverContent sideOffset={10} align={'end'} side="bottom">
             {connectedEnsProfileContent}
           </BasePopoverContent>
         </Popover>
@@ -382,7 +374,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           }}
           header={<Flex />}
           fullScreen={false}
-
         >
           {connectedEnsProfileContent}
         </DefaultDialog>

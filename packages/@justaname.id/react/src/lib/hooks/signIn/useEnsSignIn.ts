@@ -7,6 +7,7 @@ import { useJustaName } from '../../providers';
 import { useSignMessage } from 'wagmi';
 import { RequestSignInParams } from '@justaname.id/sdk';
 import { useEnsAuth } from './useEnsAuth';
+import { useEnsNonce } from './useEnsNonce';
 
 export type UseEnsSignInFunctionParams = Omit<
   RequestSignInParams,
@@ -41,18 +42,12 @@ export const useEnsSignIn = (
     () => params?.backendUrl || backendUrl || '',
     [backendUrl, params?.backendUrl]
   );
-  const _signinNonceRoute = useMemo(
-    () => params?.signinNonceRoute || routes.signinNonceRoute,
-    [routes.signinNonceRoute, params?.signinNonceRoute]
-  );
+
   const _signinRoute = useMemo(
     () => params?.signinRoute || routes.signinRoute,
     [routes.signinRoute, params?.signinRoute]
   );
-  const nonceEndpoint = useMemo(
-    () => _backendUrl + _signinNonceRoute,
-    [_backendUrl, _signinNonceRoute]
-  );
+
   const signinEndpoint = useMemo(
     () => _backendUrl + _signinRoute,
     [_backendUrl, _signinRoute]
@@ -66,48 +61,57 @@ export const useEnsSignIn = (
     currentEnsRoute: _currentEnsRoute,
   });
 
+  const { nonce, refetchNonce } = useEnsNonce({
+    backendUrl: params?.backendUrl,
+    signinNonceRoute: params?.signinNonceRoute,
+    address,
+  });
+
   const mutation = useMutation({
     mutationFn: async (_params: UseEnsSignInFunctionParams) => {
       if (!address) {
         throw new Error('No address found');
       }
 
-      const nonceResponse = await fetch(nonceEndpoint, {
-        credentials: 'include',
-      });
+      if (!nonce) {
+        throw new Error('No nonce found');
+      }
 
-      const nonce = await nonceResponse.text();
+      try {
+        const message = justaname.signIn.requestSignIn({
+          ens: _params.ens,
+          ttl: config?.signInTtl,
+          uri: config?.origin,
+          domain: config?.domain,
+          chainId: chainId,
+          address,
+          nonce,
+        });
 
-      const message = justaname.signIn.requestSignIn({
-        ens: _params.ens,
-        ttl: config?.signInTtl,
-        uri: config?.origin,
-        domain: config?.domain,
-        chainId: chainId,
-        address,
-        nonce,
-      });
-
-      const signature = await signMessageAsync({
-        message: message,
-        account: address,
-      });
-
-      const response = await fetch(signinEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          signature: signature,
+        const signature = await signMessageAsync({
           message: message,
-        }),
-        credentials: 'include',
-      });
+          account: address,
+        });
 
-      refreshEnsAuth();
+        const response = await fetch(signinEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            signature: signature,
+            message: message,
+          }),
+          credentials: 'include',
+        });
 
-      return response.text();
+        refreshEnsAuth();
+
+        return response.text();
+      } catch (e) {
+        refetchNonce();
+        throw e;
+      }
     },
   });
 

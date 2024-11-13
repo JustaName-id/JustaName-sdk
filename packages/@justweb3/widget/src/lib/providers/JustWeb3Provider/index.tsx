@@ -363,12 +363,16 @@ const CheckSession: FC<{
   const { signOut } = useEnsSignOut();
   const {
     address,
-    isConnected,
+    isConnected: isConnectedAccount,
     isDisconnected,
     isConnecting,
     isReconnecting,
     chainId,
   } = useMountedAccount();
+  const isConnected = useMemo(
+    () => isConnectedAccount && address,
+    [isConnectedAccount, address]
+  );
   const isConnectedPrevious = usePreviousState(isConnected, [isConnected]);
 
   useEffect(() => {
