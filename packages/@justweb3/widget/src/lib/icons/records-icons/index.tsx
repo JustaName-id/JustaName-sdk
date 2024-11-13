@@ -1,27 +1,29 @@
 import {
+  AvatarIcon,
+  BannerIcon,
+  DiscordIcon,
   EditIcon,
   EmailIcon,
   FacebookIcon,
-  DiscordIcon,
   GithubIcon,
   InstagramIcon,
   LocationIcon,
-  ProfileEditIcon,
+  NicknameIcon,
   RedditIcon,
   TelegramIcon,
   TwitterIcon,
   WebsiteIcon,
-  XIcon,
+  XIcon
 } from '@justweb3/ui';
 
 export const getTextRecordIcon = (key: string) => {
   switch (key) {
     case 'avatar':
-      return <ProfileEditIcon width={24} height={24} />;
+      return <AvatarIcon width={24} height={24} />;
     case 'header':
-      return <ProfileEditIcon width={24} height={24} />;
+      return <BannerIcon width={24} height={24} />;
     case 'display':
-      return <ProfileEditIcon width={24} height={24} />;
+      return <NicknameIcon width={24} height={24} />;
     case 'description':
       return <EditIcon width={24} height={24} />;
     case 'url':
