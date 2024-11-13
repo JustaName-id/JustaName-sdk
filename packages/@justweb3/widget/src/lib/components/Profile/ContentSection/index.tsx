@@ -28,6 +28,7 @@ import { JustaPlugin } from '../../../plugins';
 import { PluginContext } from '../../../providers/PluginProvider';
 import { ProfileSection } from '../ProfileSection';
 import MetadataCard from '../../MetadataCard';
+import MembersSection from '../MembersSection';
 
 export interface ContentProps {
   fullSubname: string;
@@ -72,6 +73,11 @@ const ContentSection: React.FC<ContentProps> = ({
     connectedWalletChainId,
     chainId,
   ]);
+
+  const isProfileCommunity = useMemo(() => {
+    return fullSubname.split('.').length == 2
+  }, [fullSubname])
+
   const { createPluginApi } = useContext(PluginContext);
 
   const { sanitizeEnsImage } = useEnsAvatar();
@@ -81,8 +87,8 @@ const ContentSection: React.FC<ContentProps> = ({
   }, [fullSubname, chainId]);
 
   const hasTabs = useMemo(() => {
-    return plugins.some((plugin) => plugin.components?.ProfileTab);
-  }, [plugins]);
+    return plugins.some((plugin) => plugin.components?.ProfileTab) || isProfileCommunity;
+  }, [plugins, isProfileCommunity]);
 
   const MainTab = (
     <div
@@ -381,6 +387,9 @@ const ContentSection: React.FC<ContentProps> = ({
           >
             <TabsList>
               <TabsTrigger value={'Main'}>Main</TabsTrigger>
+              {isProfileCommunity && (
+                <TabsTrigger value={'Members'}>Members</TabsTrigger>
+              )}
               {plugins.map((plugin) => {
                 const component = plugin.components?.ProfileTab;
                 if (!component) {
@@ -406,6 +415,11 @@ const ContentSection: React.FC<ContentProps> = ({
             <TabsContent value={'Main'}>
               {React.cloneElement(MainTab)}
             </TabsContent>
+            {isProfileCommunity && (
+              <TabsContent value={'Members'}>
+                <MembersSection fullSubname={fullSubname} chainId={chainId} />
+              </TabsContent>
+            )}
             {plugins.map((plugin) => {
               const component = plugin.components?.ProfileTab;
               if (!component) {

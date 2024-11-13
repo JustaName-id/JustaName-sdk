@@ -57,7 +57,7 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
 
   if (expanded) {
     return (
-      <div className={styles.expandableCard} onClick={() => handleEnsClick()}
+      <div style={style} className={styles.expandableCard} onClick={() => handleEnsClick()}
       >
         <Flex>
           <img
