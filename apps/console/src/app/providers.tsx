@@ -16,6 +16,7 @@ import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
 import { useState } from 'react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -67,6 +68,7 @@ export const Providers: React.FC<ProviderProps> = (props) => {
         <JustWeb3Provider config={justweb3Config}>
           <RainbowKitProvider>{props.children}</RainbowKitProvider>
         </JustWeb3Provider>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </WagmiProvider>
   );

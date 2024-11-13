@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosPromise } from 'axios';
 import { BaseResponse } from '../types';
 
 export function getBaseUrl(dev = false) {
+  // return 'http://localhost:3000';
   if (dev) {
     return 'https://api-staging.justaname.id';
   }

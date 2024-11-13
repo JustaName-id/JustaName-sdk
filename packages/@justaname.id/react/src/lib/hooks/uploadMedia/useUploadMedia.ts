@@ -65,9 +65,12 @@ export const useUploadMedia = (
       }
 
       const { signature, message, address } = await getSignature();
+
+      _params.form.append('signature', signature);
+      // const baseUrl = 'http://localhost:3000';
       const baseUrl = dev
         ? 'https://api-staging.justaname.id'
-        : 'https://api.justaname.id';
+        : 'http://localhost:3000';
       const result = await axios.post<{
         result: {
           data: {
@@ -83,7 +86,6 @@ export const useUploadMedia = (
         _params.form,
         {
           headers: {
-            'x-signature': signature,
             'x-message': message.replace(/\n/g, '\\n'),
             'x-address': address,
           },

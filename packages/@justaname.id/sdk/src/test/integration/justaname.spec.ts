@@ -4,7 +4,7 @@ import { initializeJustaName } from '../helpers/initializeJustaName';
 import { ethers } from 'ethers';
 import * as dotenv from 'dotenv';
 import { ChainId } from '../../lib/types';
-import { InvalidConfigurationException } from '../../lib/errors';
+import { ChallengeRequestException } from '../../lib/errors/ChallengeRequest.expection';
 
 dotenv.config();
 
@@ -62,9 +62,7 @@ describe('justaname', () => {
       return justaname.siwe.requestChallenge({
         address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
       });
-    }).toThrow(
-      InvalidConfigurationException.missingParameters(['origin', 'domain'])
-    );
+    }).toThrow(ChallengeRequestException.originRequired());
   });
 
   it('should sign in be 1 day', async () => {
@@ -97,6 +95,7 @@ describe('justaname', () => {
       {
         username: subnameToBeAdded,
         chainId: CHAIN_ID,
+        // signature,
       },
       {
         xMessage: challenge.challenge,
@@ -138,11 +137,11 @@ describe('justaname', () => {
         },
         contentHash:
           'ipfs://bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi',
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -181,11 +180,11 @@ describe('justaname', () => {
         ],
         contentHash:
           'ipns://k51qzi5uqu5dgccx524mfjv7znyfsa6g013o6v4yvis9dxnrjbwojc62pt0430',
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -251,11 +250,11 @@ describe('justaname', () => {
           test: 'test',
           test2: 'test2',
         },
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -277,11 +276,11 @@ describe('justaname', () => {
           chainId: CHAIN_ID,
           ensDomain: ENS_DOMAIN,
           contentHash: 'invalid-content-hash',
+          signature,
         },
         {
           xMessage: challenge.challenge,
           xAddress: subnameSigner.address,
-          xSignature: signature,
         }
       );
     } catch (e) {
@@ -311,11 +310,11 @@ describe('justaname', () => {
         ensDomain: ENS_DOMAIN,
         contentHash:
           'ipfs://bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi',
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
     const records2 = await justaname.subnames.getRecords({
@@ -350,11 +349,11 @@ describe('justaname', () => {
           mApps: 'shouldntBeUpdated',
           [`test_${MAPP}`]: 'shouldBeOverrideWhenMAppPermissionIsAdded',
         },
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -380,11 +379,11 @@ describe('justaname', () => {
         text: {
           test: '',
         },
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -547,11 +546,11 @@ describe('justaname', () => {
         text: {
           [`test2_${MAPP}`]: 'shouldntBeUpdated',
         },
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -584,11 +583,11 @@ describe('justaname', () => {
         chainId: CHAIN_ID,
         ensDomain: ENS_DOMAIN,
         contentHash: '',
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -703,10 +702,10 @@ describe('justaname', () => {
         chainId: CHAIN_ID,
         ensDomain: ENS_DOMAIN,
         username: subnameToBeAdded,
+        signature,
       },
       {
         xAddress: subnameSigner.address,
-        xSignature: signature,
         xMessage: challenge.challenge,
       }
     );
@@ -728,10 +727,10 @@ describe('justaname', () => {
         chainId: CHAIN_ID,
         ensDomain: ENS_DOMAIN,
         username: subnameToBeAdded + '2',
+        signature,
       },
       {
         xAddress: subnameSigner.address,
-        xSignature: signature,
         xMessage: challenge.challenge,
       }
     );

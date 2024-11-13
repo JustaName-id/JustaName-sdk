@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useEnsAuth } from './useEnsAuth';
+import { useEnsNonce } from './useEnsNonce';
 
 export interface UseEnsSignOutResult {
   signOut: () => Promise<void>;
@@ -14,6 +15,7 @@ export interface UseEnsSignOutParams {
   backendUrl?: string;
   signoutRoute?: string;
   currentEnsRoute?: string;
+  signinNonceRoute?: string;
 }
 
 export const useEnsSignOut = (
@@ -36,9 +38,20 @@ export const useEnsSignOut = (
     () => params?.currentEnsRoute || routes.currentEnsRoute,
     [routes.currentEnsRoute, params?.currentEnsRoute]
   );
-  const { refreshEnsAuth } = useEnsAuth({
+  const _signinNonceRoute = useMemo(
+    () => params?.signinNonceRoute || routes.signinNonceRoute,
+    [routes.signinNonceRoute, params?.signinNonceRoute]
+  );
+
+  const { refreshEnsAuth, connectedEns } = useEnsAuth({
     backendUrl: _backendUrl,
     currentEnsRoute: _currentEnsRoute,
+  });
+
+  const { refetchNonce } = useEnsNonce({
+    backendUrl: _backendUrl,
+    signinNonceRoute: _signinNonceRoute,
+    address: connectedEns?.address,
   });
 
   const mutation = useMutation({
@@ -49,6 +62,7 @@ export const useEnsSignOut = (
       });
 
       refreshEnsAuth();
+      refetchNonce();
     },
   });
 
