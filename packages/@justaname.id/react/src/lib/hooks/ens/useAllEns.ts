@@ -13,10 +13,12 @@ export const buildAllEnsKey = (
   orderBy: string,
   orderDirection: string
 ) => ['ALL_ENS', chainId, orderBy, orderDirection];
+
 export interface UseAllEnsParams {
   orderBy?: 'subnameCount' | 'createdAt';
   orderDirection?: 'asc' | 'desc';
   chainId?: ChainId;
+  enabled?: boolean;
 }
 
 export const useAllEns = (
@@ -36,6 +38,7 @@ export const useAllEns = (
   Error
 > => {
   const orderDirection = params.orderDirection || 'desc';
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const orderBy = params.orderBy || 'subnameCount';
   const { justaname, chainId: justChainId } = useJustaName();
   const chainId = params.chainId || justChainId;
@@ -87,6 +90,6 @@ export const useAllEns = (
       }
       return undefined;
     },
-    enabled: Boolean(justaname),
+    enabled: Boolean(justaname) && Boolean(_enabled),
   });
 };

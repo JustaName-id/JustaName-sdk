@@ -3,9 +3,14 @@ import {
   useAccountEnsNames,
   useAccountSubnames,
   useEnsAvatar,
+  useEnsSubnames,
   useMountedAccount,
 } from '@justaname.id/react';
-import { SanitizedRecords, SubnameRecordsRoute } from '@justaname.id/sdk';
+import {
+  ChainId,
+  SanitizedRecords,
+  SubnameRecordsRoute,
+} from '@justaname.id/sdk';
 import {
   A,
   Avatar,
@@ -74,9 +79,29 @@ const ContentSection: React.FC<ContentProps> = ({
     chainId,
   ]);
 
+  const { data } = useEnsSubnames({
+    ensDomain: decodeURIComponent(fullSubname),
+    chainId: chainId as ChainId,
+    isClaimed: true,
+    limit: 15,
+    enabled: fullSubname.split('.').length === 2,
+  });
+
   const isProfileCommunity = useMemo(() => {
-    return fullSubname.split('.').length == 2
-  }, [fullSubname])
+    return (
+      data?.pages &&
+      data?.pages
+        .flatMap((subnameData) => subnameData.data)
+        .flatMap((sub) => sub.ens).length > 0
+    );
+  }, [data]);
+
+  const memberTabName = useMemo(() => {
+    return `Members (${
+      data?.pages?.flatMap((subnameData) => subnameData)[0].pagination
+        .totalCount
+    })`;
+  }, [data]);
 
   const { createPluginApi } = useContext(PluginContext);
 
@@ -87,7 +112,10 @@ const ContentSection: React.FC<ContentProps> = ({
   }, [fullSubname, chainId]);
 
   const hasTabs = useMemo(() => {
-    return plugins.some((plugin) => plugin.components?.ProfileTab) || isProfileCommunity;
+    return (
+      plugins.some((plugin) => plugin.components?.ProfileTab) ||
+      isProfileCommunity
+    );
   }, [plugins, isProfileCommunity]);
 
   const MainTab = (
@@ -383,7 +411,7 @@ const ContentSection: React.FC<ContentProps> = ({
             <TabsList>
               <TabsTrigger value={'Main'}>Main</TabsTrigger>
               {isProfileCommunity && (
-                <TabsTrigger value={'Members'}>Members</TabsTrigger>
+                <TabsTrigger value={'Members'}>{memberTabName}</TabsTrigger>
               )}
               {plugins.map((plugin) => {
                 const component = plugin.components?.ProfileTab;

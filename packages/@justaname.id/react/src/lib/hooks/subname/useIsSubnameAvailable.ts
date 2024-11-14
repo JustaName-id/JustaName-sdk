@@ -15,6 +15,7 @@ export interface UseIsSubnameAvailableParams {
   username: string;
   ensDomain?: string;
   chainId?: ChainId;
+  enabled?: boolean;
 }
 
 export interface UseIsSubnameAvailableResult {
@@ -28,6 +29,7 @@ export const useIsSubnameAvailable = (
   params: UseIsSubnameAvailableParams
 ): UseIsSubnameAvailableResult => {
   const { justaname, chainId, ensDomains } = useJustaName();
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
 
   const _username = params.username;
   const _ensDomain =
@@ -43,7 +45,11 @@ export const useIsSubnameAvailable = (
         subname: _username + '.' + _ensDomain,
         chainId: _chainId,
       }),
-    enabled: Boolean(_username) && Boolean(_chainId) && Boolean(_ensDomain),
+    enabled:
+      Boolean(_username) &&
+      Boolean(_chainId) &&
+      Boolean(_ensDomain) &&
+      Boolean(_enabled),
   });
 
   return {

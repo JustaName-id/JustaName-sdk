@@ -1,10 +1,10 @@
 import { useEnsSubnames } from '@justaname.id/react';
 import { ChainId } from '@justaname.id/sdk';
 import { LoadingSpinner } from '@justweb3/ui';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import JustEnsCard from '../../JustEnsCard';
 import styles from './MembersSection.module.css';
-;
+import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 
 export interface MembersSectionProps {
   fullSubname: string;
@@ -15,61 +15,91 @@ const MembersSection: React.FC<MembersSectionProps> = ({
   fullSubname,
   chainId = 1,
 }) => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const scrollContainerRef = useRef<HTMLDivElement>(null); // Add a ref for the scrollable container
+  const { data, hasNextPage, fetchNextPage, isPending, isFetching } =
+    useEnsSubnames({
+      ensDomain: decodeURIComponent(fullSubname),
+      chainId: chainId as ChainId,
+      isClaimed: true,
+      limit: 30,
+      enabled: fullSubname.split('.').length === 2,
+    });
 
-  const {
-    data,
-    hasNextPage,
-    fetchNextPage,
-    isLoading
-  } = useEnsSubnames({
-    ensDomain: decodeURIComponent(fullSubname),
-    chainId: chainId as ChainId,
-    isClaimed: true,
-    limit: 15,
-  });
-
+  const [nbOfCardsPerRow, setNbOfCardsPerRow] = useState(0);
+  const subnames = useMemo(() => {
+    return data?.pages
+      .flatMap((subnameData) => subnameData.data)
+      .flatMap((sub) => sub.ens);
+  }, [data]);
 
   useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    console.log("container", container.scrollTop, container.scrollHeight, container.clientHeight)
+    const element = scrollContainerRef.current;
 
-    const handleScroll = () => {
-      if (
-        container.scrollTop + container.clientHeight >=
-        container.scrollHeight - 200
-      ) {
-        if (!isLoading && hasNextPage) {
-          fetchNextPage();
+    if (!element) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.contentRect) {
+          const width = entry.contentRect.width;
+          let nbOfCardsPerRowTemp = Math.floor(width / 335);
+          if (nbOfCardsPerRowTemp < 1) {
+            nbOfCardsPerRowTemp = 1;
+          }
+          setNbOfCardsPerRow(nbOfCardsPerRowTemp);
         }
       }
-    };
+    });
 
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [isLoading, hasNextPage]);
+    resizeObserver.observe(element);
+
+    return () => {
+      resizeObserver.unobserve(element); // Cleanup observer on unmount
+    };
+  }, []);
+
+  useInfiniteScroll(
+    scrollContainerRef,
+    fetchNextPage,
+    !(isPending || isFetching) && hasNextPage,
+    50
+  );
 
   return (
-    <div className={styles.container}>
-      <div className={styles.grid} ref={scrollContainerRef}>
-        {data?.pages
-          .flatMap((subnameData) => subnameData.data).flatMap((sub) => sub.ens)
-          .map((subname) => (
-            <div key={`display-record-members-${subname}`}>
-              <JustEnsCard
-                addressOrEns={subname}
-                expanded
-                style={{ width: '100%', height: '100%' }}
-              />
+    <div className={styles.container} ref={scrollContainerRef}>
+      {subnames?.map((subname) => (
+        <div
+          key={`display-record-members-${fullSubname}-${subname}`}
+          className={styles.memberCard}
+        >
+          <JustEnsCard addressOrEns={subname} style={{ width: '100%' }} />
+        </div>
+      ))}
+
+      {subnames &&
+        subnames?.length > 0 &&
+        Array.from(
+          {
+            length:
+              nbOfCardsPerRow - (subnames?.length % nbOfCardsPerRow) ===
+              nbOfCardsPerRow
+                ? 0
+                : nbOfCardsPerRow - (subnames?.length % nbOfCardsPerRow),
+          },
+          (_, i) => (
+            <div
+              key={`display-record-members-${fullSubname}-${i}`}
+              className={styles.memberCard}
+            >
+              <div style={{ width: '100%' }} />
             </div>
-          ))}
-      </div>
-      {isLoading && <div className={styles.loadingContainer}>
-        <LoadingSpinner color={'var(--justweb3-primary-color)'} />
-      </div>
-      }
+          )
+        )}
+      {(isPending || isFetching) && (
+        <div className={styles.loadingContainer}>
+          <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+        </div>
+      )}
     </div>
   );
 };

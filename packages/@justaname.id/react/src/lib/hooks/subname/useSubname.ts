@@ -19,7 +19,11 @@ export const buildSubnameBySubnameKey = (
   chainId: ChainId | undefined
 ) => ['SUBNAME_BY_SUBNAME', subname, chainId];
 
-export type UseSubnameParams = SubnameGetBySubnameRoute['params'];
+export interface UseSubnameParams
+  extends Omit<SubnameGetBySubnameRoute['params'], 'subname'> {
+  enabled?: boolean;
+  subname?: string;
+}
 
 interface UseSubnameResult {
   subname: Records | undefined;
@@ -34,13 +38,14 @@ interface UseSubnameResult {
 export const useSubname = (params: UseSubnameParams): UseSubnameResult => {
   const { justaname, chainId } = useJustaName();
   const _chainId = params?.chainId || chainId;
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
 
   const query = useQuery({
     ...defaultOptions,
-    queryKey: buildSubnameBySubnameKey(params.subname, _chainId),
+    queryKey: buildSubnameBySubnameKey(params?.subname || '', _chainId),
     queryFn: async () => {
       const subname = await justaname.subnames.getSubname({
-        subname: params.subname,
+        subname: params.subname || '',
         chainId: _chainId,
       });
 
@@ -49,7 +54,7 @@ export const useSubname = (params: UseSubnameParams): UseSubnameResult => {
         sanitizedRecords: sanitizeRecords(subname),
       };
     },
-    enabled: Boolean(justaname) && Boolean(params.subname),
+    enabled: Boolean(justaname) && Boolean(params.subname) && _enabled,
   });
 
   return {
