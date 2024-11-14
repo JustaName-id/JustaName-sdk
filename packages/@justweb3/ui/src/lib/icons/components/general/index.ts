@@ -6,6 +6,8 @@ import ArrowIcon from './Arrow';
 import AttachmentIcon from './Attachment';
 import AvatarIcon from './Avatar';
 import BannerIcon from './Banner';
+import CalendarClockIcon from './CalendarClock';
+import CalendarMonthIcon from './CalendarMonth';
 import ClipIcon from './Clip';
 import CloseIcon from './Close';
 import ComicIcon from './Comic';
@@ -16,6 +18,7 @@ import DeleteIcon from './Delete';
 import DoneIcon from './Done';
 import EditIcon from './Edit';
 import GeneralIcon from './General';
+import LocationOnIcon from './LocationOn';
 import LocationIcon from './Location';
 import LogoutIcon from './Logout';
 import MappIcon from './Mapp';
@@ -42,6 +45,8 @@ const general = {
   attachment: AttachmentIcon,
   avatar: AvatarIcon,
   banner: BannerIcon,
+  'calendar-clock': CalendarClockIcon,
+  'calendar-month': CalendarMonthIcon,
   clip: ClipIcon,
   close: CloseIcon,
   comic: ComicIcon,
@@ -52,6 +57,7 @@ const general = {
   done: DoneIcon,
   edit: EditIcon,
   general: GeneralIcon,
+  'location-on': LocationOnIcon,
   location: LocationIcon,
   logout: LogoutIcon,
   mapp: MappIcon,
@@ -81,6 +87,8 @@ export {
   AttachmentIcon,
   AvatarIcon,
   BannerIcon,
+  CalendarClockIcon,
+  CalendarMonthIcon,
   ClipIcon,
   CloseIcon,
   ComicIcon,
@@ -91,6 +99,7 @@ export {
   DoneIcon,
   EditIcon,
   GeneralIcon,
+  LocationOnIcon,
   LocationIcon,
   LogoutIcon,
   MappIcon,
