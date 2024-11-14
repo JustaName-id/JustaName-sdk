@@ -40,7 +40,7 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   ],
   openOnWalletConnect: false,
   allowedEns: 'all',
-  dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
   plugins: [EFPPlugin],
 };
 

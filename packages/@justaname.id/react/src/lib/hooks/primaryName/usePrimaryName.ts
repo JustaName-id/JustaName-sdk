@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ChainId } from '@justaname.id/sdk';
 import { useJustaName } from '../../providers';
 import { useEnsPublicClient } from '../client/useEnsPublicClient';
+import { defaultOptions } from '../../query';
 
 export const buildPrimaryName = (
   address: string,
@@ -13,6 +14,7 @@ export const buildPrimaryName = (
 export interface UsePrimaryNameParams {
   address?: Address;
   chainId?: ChainId;
+  enabled?: boolean;
 }
 
 export interface UsePrimaryNameResult {
@@ -36,6 +38,7 @@ export const usePrimaryName = (
   params?: UsePrimaryNameParams
 ): UsePrimaryNameResult => {
   const { chainId, justaname } = useJustaName();
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const _chainId = params?.chainId || chainId;
   const { ensClient } = useEnsPublicClient({
     chainId: _chainId,
@@ -77,12 +80,14 @@ export const usePrimaryName = (
   };
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildPrimaryName(params?.address || '', _chainId),
     queryFn: () =>
       getPrimaryName({
         address: params?.address,
       }),
-    enabled: Boolean(params?.address) && Boolean(ensClient),
+    enabled:
+      Boolean(params?.address) && Boolean(ensClient) && Boolean(_enabled),
   });
 
   const getPrimaryNameInternal = async (

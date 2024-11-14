@@ -59,15 +59,15 @@ export const useFollowers = ({
     queryFn: async ({ pageParam: { offset, limit } }) => {
       return getFollowers(addressOrEns, limit, offset);
     },
-    initialPageParam: { offset: 0, limit: 10 },
+    initialPageParam: { offset: 0, limit: 100 },
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.followers.length < 10) {
+      if (lastPage.followers.length < 20) {
         return undefined;
       }
 
       return {
         offset: allPages.flatMap((page) => page.followers).length,
-        limit: 10,
+        limit: 20,
       };
     },
     enabled: Boolean(addressOrEns),

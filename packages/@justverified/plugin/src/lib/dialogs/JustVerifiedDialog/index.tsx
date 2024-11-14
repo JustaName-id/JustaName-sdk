@@ -124,7 +124,6 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
             gap: '20px',
             display: 'flex',
             flexDirection: 'column',
-            maxWidth: '500px',
           }}
         >
           <Flex justify="space-between" direction="row" gap="10px">

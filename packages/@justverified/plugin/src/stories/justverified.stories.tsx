@@ -44,6 +44,7 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   openOnWalletConnect: true,
   allowedEns: 'all',
   dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  disableOverlay: true,
   plugins: [
     JustVerifiedPlugin(
       ['email', 'twitter', 'github', 'discord', 'telegram'],
@@ -113,7 +114,7 @@ export const Example = () => {
                 <JustEnsCard addressOrEns={'brantly.eth'} />
                 <JustEnsCard addressOrEns={'vitalik.eth'} />
                 <JustEnsCard addressOrEns={'dr3a.eth'} />
-                <JustEnsCard addressOrEns={'josh.box'} />
+                <JustEnsCard addressOrEns={'jaw.eth'} chainId={11155111} />
                 <JustEnsCard
                   addressOrEns={'hadikhai.jaw.eth'}
                   chainId={11155111}
@@ -126,7 +127,7 @@ export const Example = () => {
                 <JustEnsCard addressOrEns={'vitalik.eth'} expanded />
                 <JustEnsCard addressOrEns={'dr3a.eth'} expanded />
                 <JustEnsCard
-                  ens={'hadikhai.jaw.eth'}
+                  addressOrEns={'hadikhai.jaw.eth'}
                   chainId={11155111}
                   expanded
                 />

@@ -46,6 +46,7 @@
         "outputPath": "packages/@justaname.id/sdk/dist",
         "tsConfig": "packages/@justaname.id/sdk/tsconfig.lib.json",
         "project": "packages/@justaname.id/sdk/package.json",
+        "rollupConfig": "packages/@justaname.id/sdk/rollup.config.cjs",
         "generateExportsField": true,
         "allowJs": true,
         "compiler": "swc",

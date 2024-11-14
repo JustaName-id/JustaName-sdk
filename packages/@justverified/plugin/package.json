@@ -2,16 +2,13 @@
   "name": "@justverified/plugin",
   "version": "0.0.71",
   "dependencies": {
-    "@justaname.id/react": "0.3.136",
-    "@justaname.id/sdk": "0.2.133",
-    "@justweb3/ui": "0.0.72",
-    "@justweb3/widget": "0.0.72",
     "axios": "^1.6.0",
     "lodash": "4.17.21",
     "moment": "^2.30.1",
     "qs": "^6.12.0"
   },
   "peerDependencies": {
+    "@justweb3/widget": ">=0.0.0",
     "@tanstack/react-query": "^5.x",
     "react": ">=17"
   },

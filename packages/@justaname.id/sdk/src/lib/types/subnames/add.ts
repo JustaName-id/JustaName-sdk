@@ -32,6 +32,8 @@ export interface SubnameAddRequest extends IRequest {
   text?: TextRecordAddRequest[];
 
   contentHash?: string;
+
+  signature?: string;
 }
 
 export interface SubnameAddRoute

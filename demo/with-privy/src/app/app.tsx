@@ -1,9 +1,12 @@
-import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
+import {
+  JustWeb3Button,
+  JustWeb3Provider,
+  JustWeb3ProviderConfig,
+} from '@justweb3/widget';
 import '@rainbow-me/rainbowkit/styles.css';
 import { http } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ChainId } from '@justaname.id/sdk';
 import { PrivyProvider, usePrivy } from '@privy-io/react-auth';
 import { createConfig, WagmiProvider } from '@privy-io/wagmi';
 import { useEnsAuth } from '@justaname.id/react';
@@ -18,14 +21,12 @@ const JustaNameConfig: JustWeb3ProviderConfig = {
   backendUrl: import.meta.env.VITE_APP_BACKEND_URL,
   networks: [
     {
-      chainId: parseInt(import.meta.env.VITE_APP_CHAIN_ID) as ChainId,
-      providerUrl: import.meta.env.VITE_APP_PROVIDER_URL,
+      chainId: 1,
+      providerUrl: import.meta.env.VITE_APP_MAINNET_PROVIDER_URL,
     },
-  ],
-  ensDomains: [
     {
-      ensDomain: import.meta.env.VITE_APP_ENS_DOMAIN,
-      chainId: parseInt(import.meta.env.VITE_APP_CHAIN_ID) as ChainId,
+      chainId: 11155111,
+      providerUrl: import.meta.env.VITE_APP_SEPOLIA_PROVIDER_URL,
     },
   ],
   openOnWalletConnect: true,
@@ -42,33 +43,17 @@ const Connect = () => {
   return (
     <div className="App">
       <header className="App-header">
-        {/* If the user is not authenticated, show a login button */}
-        {/* If the user is authenticated, show the user object and a logout button */}
-        {ready && authenticated ? (
-          <div>
-            <textarea
-              readOnly
-              value={JSON.stringify(user, null, 2)}
-              style={{ width: '600px', height: '250px', borderRadius: '6px' }}
-            />
-            <br />
-            <button
-              onClick={logout}
-              style={{
-                marginTop: '20px',
-                padding: '12px',
-                backgroundColor: '#069478',
-                color: '#FFF',
-                border: 'none',
-                borderRadius: '6px',
-              }}
-            >
-              Log Out
-            </button>
-          </div>
-        ) : (
+        <JustWeb3Button logout={logout}>
           <button
-            onClick={login}
+            onClick={() => {
+              if (!authenticated) {
+                login();
+              } else {
+                logout().then(() => {
+                  login();
+                });
+              }
+            }}
             style={{
               padding: '12px',
               backgroundColor: '#069478',
@@ -79,12 +64,17 @@ const Connect = () => {
           >
             Log In
           </button>
-        )}
+        </JustWeb3Button>
         {connectedEns && (
           <div>
             <textarea
               readOnly
               value={JSON.stringify(connectedEns, null, 2)}
+              style={{ width: '600px', height: '250px', borderRadius: '6px' }}
+            />
+            <textarea
+              readOnly
+              value={JSON.stringify(user, null, 2)}
               style={{ width: '600px', height: '250px', borderRadius: '6px' }}
             />
           </div>
@@ -100,8 +90,6 @@ export function App() {
     transports: {
       [mainnet.id]: http(),
       [sepolia.id]: http(),
-      // For each of your required chains, add an entry to `transports` with
-      // a key of the chain's `id` and a value of `http()`
     },
   });
 

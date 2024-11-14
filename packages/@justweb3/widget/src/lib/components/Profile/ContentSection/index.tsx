@@ -3,9 +3,14 @@ import {
   useAccountEnsNames,
   useAccountSubnames,
   useEnsAvatar,
+  useEnsSubnames,
   useMountedAccount,
 } from '@justaname.id/react';
-import { SanitizedRecords, SubnameRecordsRoute } from '@justaname.id/sdk';
+import {
+  ChainId,
+  SanitizedRecords,
+  SubnameRecordsRoute,
+} from '@justaname.id/sdk';
 import {
   A,
   Avatar,
@@ -28,9 +33,10 @@ import { JustaPlugin } from '../../../plugins';
 import { PluginContext } from '../../../providers/PluginProvider';
 import { ProfileSection } from '../ProfileSection';
 import MetadataCard from '../../MetadataCard';
+import MembersSection from '../MembersSection';
 
 export interface ContentProps {
-  fullSubname: string;
+  fullSubname?: string;
   chainId: 1 | 11155111 | undefined;
   records: SubnameRecordsRoute['response'];
   sanitized: SanitizedRecords;
@@ -40,7 +46,7 @@ export interface ContentProps {
 }
 
 const ContentSection: React.FC<ContentProps> = ({
-  fullSubname,
+  fullSubname = '',
   chainId = 1,
   editMode,
   sanitized,
@@ -53,10 +59,17 @@ const ContentSection: React.FC<ContentProps> = ({
   const { accountEnsNames } = useAccountEnsNames();
   const [tab, setTab] = React.useState('Main');
   const isProfileSelf = useMemo(() => {
+    const isEns = accountEnsNames?.map((ens) => ens.ens).includes(fullSubname);
+
+    if (isEns) {
+      return chainId === connectedWalletChainId;
+    }
+
     return (
       (accountSubnames?.map((subname) => subname.ens).includes(fullSubname) ||
         accountEnsNames?.map((ens) => ens.ens).includes(fullSubname)) &&
-      chainId === connectedWalletChainId
+      !(chainId === 1 && connectedWalletChainId === 11155111) &&
+      !(chainId === 11155111 && connectedWalletChainId !== 11155111)
     );
   }, [
     fullSubname,
@@ -65,6 +78,31 @@ const ContentSection: React.FC<ContentProps> = ({
     connectedWalletChainId,
     chainId,
   ]);
+
+  const { data } = useEnsSubnames({
+    ensDomain: decodeURIComponent(fullSubname),
+    chainId: chainId as ChainId,
+    isClaimed: true,
+    limit: 15,
+    enabled: fullSubname.split('.').length === 2,
+  });
+
+  const isProfileCommunity = useMemo(() => {
+    return (
+      data?.pages &&
+      data?.pages
+        .flatMap((subnameData) => subnameData.data)
+        .flatMap((sub) => sub.ens).length > 0
+    );
+  }, [data]);
+
+  const memberTabName = useMemo(() => {
+    return `Members (${
+      data?.pages?.flatMap((subnameData) => subnameData)[0].pagination
+        .totalCount
+    })`;
+  }, [data]);
+
   const { createPluginApi } = useContext(PluginContext);
 
   const { sanitizeEnsImage } = useEnsAvatar();
@@ -74,8 +112,11 @@ const ContentSection: React.FC<ContentProps> = ({
   }, [fullSubname, chainId]);
 
   const hasTabs = useMemo(() => {
-    return plugins.some((plugin) => plugin.components?.ProfileTab);
-  }, [plugins]);
+    return (
+      plugins.some((plugin) => plugin.components?.ProfileTab) ||
+      isProfileCommunity
+    );
+  }, [plugins, isProfileCommunity]);
 
   const MainTab = (
     <div
@@ -201,12 +242,7 @@ const ContentSection: React.FC<ContentProps> = ({
               'https://justaname-bucket.s3.eu-central-1.amazonaws.com/default-banner.png'
             }
             alt="profile-banner"
-            style={{
-              objectFit: 'cover',
-              height: '200px',
-              width: '100%',
-              borderRadius: '16px',
-            }}
+            className={styles.bannerImage}
           />
           <Flex
             gap="12px"
@@ -374,6 +410,9 @@ const ContentSection: React.FC<ContentProps> = ({
           >
             <TabsList>
               <TabsTrigger value={'Main'}>Main</TabsTrigger>
+              {isProfileCommunity && (
+                <TabsTrigger value={'Members'}>{memberTabName}</TabsTrigger>
+              )}
               {plugins.map((plugin) => {
                 const component = plugin.components?.ProfileTab;
                 if (!component) {
@@ -399,6 +438,11 @@ const ContentSection: React.FC<ContentProps> = ({
             <TabsContent value={'Main'}>
               {React.cloneElement(MainTab)}
             </TabsContent>
+            {isProfileCommunity && (
+              <TabsContent value={'Members'}>
+                <MembersSection fullSubname={fullSubname} chainId={chainId} />
+              </TabsContent>
+            )}
             {plugins.map((plugin) => {
               const component = plugin.components?.ProfileTab;
               if (!component) {

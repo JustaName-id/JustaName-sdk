@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useEffect, useMemo } from 'react';
 import { useRecords } from './useRecords';
+import { defaultOptions } from '../../query';
 
 export const buildEnsAvatarKey = (
   ens: string | undefined,
@@ -18,6 +19,7 @@ export interface SanitizeImageParams {
 export interface UseEnsAvatarParams {
   ens: string | undefined;
   chainId?: ChainId;
+  enabled?: boolean;
 }
 
 export interface GetEnsAvatarParams {
@@ -40,10 +42,11 @@ export const useEnsAvatar = (
     () => params?.chainId || chainId,
     [params?.chainId, chainId]
   );
-
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const { records, getRecords } = useRecords({
     chainId: _chainId,
     ens: params?.ens,
+    enabled: _enabled,
   });
 
   const sanitizeEnsImage = (_params: SanitizeImageParams) => {
@@ -90,6 +93,7 @@ export const useEnsAvatar = (
   };
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildEnsAvatarKey(params?.ens, _chainId),
     queryFn: async () => {
       if (!params?.ens) {
@@ -100,7 +104,7 @@ export const useEnsAvatar = (
         chainId: _chainId,
       });
     },
-    enabled: Boolean(params?.ens) && Boolean(records),
+    enabled: Boolean(params?.ens) && Boolean(records) && Boolean(_enabled),
   });
 
   useEffect(() => {

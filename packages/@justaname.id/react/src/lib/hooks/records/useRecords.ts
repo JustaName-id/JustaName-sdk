@@ -13,6 +13,7 @@ import {
 } from '@justaname.id/sdk';
 import { useMemo } from 'react';
 import { Records } from '../../types';
+import { defaultOptions } from '../../query';
 
 export const buildRecordsBySubnameKey = (
   subname: string,
@@ -27,6 +28,7 @@ export interface GetRecordsResult {
 export interface UseRecordsParams
   extends Omit<SubnameRecordsRoute['params'], 'ens' | 'providerUrl'> {
   ens?: string | undefined;
+  enabled?: boolean;
 }
 
 export interface GetRecordsParams
@@ -52,6 +54,7 @@ export interface UseRecordsResult {
 export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
   const { justaname, chainId, networks } = useJustaName();
   const queryClient = useQueryClient();
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const _chainId = useMemo(
     () => params?.chainId || chainId,
     [params?.chainId, chainId]
@@ -132,6 +135,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
   };
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildRecordsBySubnameKey(params?.ens || '', _chainId),
     queryFn: () =>
       getRecordsInternal(
@@ -141,7 +145,11 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
         },
         true
       ),
-    enabled: Boolean(params?.ens) && Boolean(_chainId) && Boolean(_providerUrl),
+    enabled:
+      Boolean(params?.ens) &&
+      Boolean(_chainId) &&
+      Boolean(_providerUrl) &&
+      Boolean(_enabled),
   });
 
   return {

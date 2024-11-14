@@ -6,6 +6,7 @@ import { useJustaName } from '../../providers';
 import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { useRecords } from '../records';
 import { Records } from '../../types';
+import { defaultOptions } from '../../query';
 
 export const buildAddressEnsNames = (
   address: string,
@@ -15,6 +16,7 @@ export const buildAddressEnsNames = (
 export interface UseAddressEnsNamesParams {
   address?: Address;
   chainId?: ChainId;
+  enabled?: boolean;
 }
 
 export interface UseAddressEnsNamesResult {
@@ -37,6 +39,7 @@ export const useAddressEnsNames = (
   const queryClient = useQueryClient();
   const { chainId } = useJustaName();
   const _chainId = params?.chainId || chainId;
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const { getRecords } = useRecords();
 
   const getEnsNamesForAddress = async (
@@ -72,13 +75,17 @@ export const useAddressEnsNames = (
   };
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildAddressEnsNames(params?.address || '', _chainId),
     queryFn: () =>
       getEnsNamesForAddress({
         address: params?.address,
       }),
     enabled:
-      Boolean(params?.address) && Boolean(_chainId) && Boolean(ensClient),
+      Boolean(params?.address) &&
+      Boolean(_chainId) &&
+      Boolean(ensClient) &&
+      Boolean(_enabled),
   });
 
   const getEnsNamesForAddressInternal = async (

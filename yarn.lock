@@ -1665,16 +1665,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime-corejs3@npm:^7.24.4":
-  version: 7.26.0
-  resolution: "@babel/runtime-corejs3@npm:7.26.0"
-  dependencies:
-    core-js-pure: "npm:^3.30.2"
-    regenerator-runtime: "npm:^0.14.0"
-  checksum: 10c0/921fa27c004cf2b92f0d49efc2006cfc1a72d2a35c7374da8ec88d8b63543963e6ef29d4820e068a7892a7d553dc2bac7208aef8fef30642bc843b63255b650b
-  languageName: node
-  linkType: hard
-
 "@babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.6, @babel/runtime@npm:^7.19.4, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.22.6, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.25.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.26.0
   resolution: "@babel/runtime@npm:7.26.0"
@@ -4536,17 +4526,18 @@ __metadata:
     jest: "npm:^29.4.1"
     qs: "npm:^6.12.0"
   peerDependencies:
-    ethers: ^6.11.1
-    siwe: ^2.3.2
+    ethers: ">=6.0.0"
+    siwe: ">=2.0.0"
+    viem: ">=2.0.0"
   languageName: unknown
   linkType: soft
 
 "@justaname.id/siwens@npm:0.0.66, @justaname.id/siwens@workspace:packages/@justaname.id/siwens":
   version: 0.0.0-use.local
   resolution: "@justaname.id/siwens@workspace:packages/@justaname.id/siwens"
-  dependencies:
-    ethers: "npm:^6.11.1"
-    siwe: "npm:^2.3.2"
+  peerDependencies:
+    ethers: ">=6.0.0"
+    siwe: ">=2.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4554,15 +4545,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justverified/plugin@workspace:packages/@justverified/plugin"
   dependencies:
-    "@justaname.id/react": "npm:0.3.136"
-    "@justaname.id/sdk": "npm:0.2.133"
-    "@justweb3/ui": "npm:0.0.72"
-    "@justweb3/widget": "npm:0.0.72"
     axios: "npm:^1.6.0"
     lodash: "npm:4.17.21"
     moment: "npm:^2.30.1"
     qs: "npm:^6.12.0"
   peerDependencies:
+    "@justweb3/widget": ">=0.0.0"
     "@tanstack/react-query": ^5.x
     react: ">=17"
   languageName: unknown
@@ -4572,17 +4560,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justweb3/efp-plugin@workspace:packages/@justweb3/efp-plugin"
   dependencies:
-    "@justaname.id/react": "npm:0.3.136"
-    "@justweb3/ui": "npm:0.0.72"
-    "@justweb3/widget": "npm:0.0.72"
-    "@tanstack/react-query": "npm:^5.28.4"
     axios: "npm:^1.6.0"
   peerDependencies:
+    "@justweb3/widget": ">=0.0.0"
+    "@tanstack/react-query": ^5.x
     react: ">=17"
   languageName: unknown
   linkType: soft
 
-"@justweb3/ui@npm:0.0.72, @justweb3/ui@npm:^0.0.72, @justweb3/ui@workspace:packages/@justweb3/ui":
+"@justweb3/ui@npm:^0.0.72, @justweb3/ui@workspace:packages/@justweb3/ui":
   version: 0.0.0-use.local
   resolution: "@justweb3/ui@workspace:packages/@justweb3/ui"
   dependencies:
@@ -4595,13 +4581,13 @@ __metadata:
     clsx: "npm:1.2.1"
     embla-carousel-react: "npm:^8.3.0"
     input-otp: "npm:^1.2.4"
-    react-hook-form: "npm:^7.49.2"
+    react-hook-form: "npm:^7.53.0"
   peerDependencies:
     react: ">=17"
   languageName: unknown
   linkType: soft
 
-"@justweb3/widget@npm:0.0.72, @justweb3/widget@workspace:packages/@justweb3/widget":
+"@justweb3/widget@workspace:packages/@justweb3/widget":
   version: 0.0.0-use.local
   resolution: "@justweb3/widget@workspace:packages/@justweb3/widget"
   dependencies:
@@ -4614,7 +4600,6 @@ __metadata:
     clsx: "npm:1.2.1"
     cropperjs: "npm:^1.6.2"
     lodash: "npm:4.17.21"
-    react-hook-form: "npm:^7.53.0"
     yup: "npm:0.32.11"
   peerDependencies:
     react: ">=17"
@@ -5187,6 +5172,15 @@ __metadata:
     got: "npm:^11.8.5"
     os-filter-obj: "npm:^2.0.0"
   checksum: 10c0/70cfed319a46b1b8e3878dc4bdff4ced81aa913a6d9ab557b41e40f7ebdd5d39b0506b008609d8620739b63c2e4396fe0deec072487e84c717a1f3b24836ef94
+  languageName: node
+  linkType: hard
+
+"@moonpay/moonpay-react@npm:^1.8.0":
+  version: 1.8.2
+  resolution: "@moonpay/moonpay-react@npm:1.8.2"
+  peerDependencies:
+    react: ">=16"
+  checksum: 10c0/8a394eb6147ee596974a3b43103811638c552fc6b419284cbc650f55227b578150ec7098b1bd480d7b5a8311d9941ec865d69fd5fb24968f3e5590e2f7fc234e
   languageName: node
   linkType: hard
 
@@ -7665,7 +7659,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ramp-network/ramp-instant-sdk@npm:^4.0.2":
+"@ramp-network/ramp-instant-sdk@npm:^4.0.5":
   version: 4.0.7
   resolution: "@ramp-network/ramp-instant-sdk@npm:4.0.7"
   dependencies:
@@ -11633,6 +11627,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prismjs@npm:^1.26.0":
+  version: 1.26.5
+  resolution: "@types/prismjs@npm:1.26.5"
+  checksum: 10c0/5619cb449e0d8df098c8759d6f47bf8fdd510abf5dbdfa999e55c6a2545efbd1e209cc85a33d8d9f4ff2898089a1a6d9a70737c9baffaae635c46852c40d384a
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.13
   resolution: "@types/prop-types@npm:15.7.13"
@@ -12477,56 +12478,74 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@usecapsule/core-components@npm:3.4.1":
-  version: 3.4.1
-  resolution: "@usecapsule/core-components@npm:3.4.1"
+"@usecapsule/core-components@npm:3.11.1":
+  version: 3.11.1
+  resolution: "@usecapsule/core-components@npm:3.11.1"
   dependencies:
     "@stencil/core": "npm:^4.7.0"
     color-blend: "npm:^4.0.0"
     color2k: "npm:^2.0.3"
     gsap: "npm:^3.12.5"
-    imask: "npm:7.6.1"
+    inputmask: "npm:5.0.9"
     qrcode-with-logos: "npm:1.1.1"
-  checksum: 10c0/b0fdedabc6e6fa8651c48e83727486f1b5792061c7418d0cb553439b8a853b00417867b55069a4c5048318a78e194b738df0b8b4512ab19ab27b0be19a639f35
+  checksum: 10c0/d511c9de167a7b14901b675dc00bb22828b2abc9e5265605ec78b7a98e7146665981cf029f1e09d34e35b4cb22c13d92f8a338d9d242e45f63539a754d49cb5f
   languageName: node
   linkType: hard
 
-"@usecapsule/core-sdk@npm:1.24.1":
-  version: 1.24.1
-  resolution: "@usecapsule/core-sdk@npm:1.24.1"
+"@usecapsule/core-sdk@npm:2.6.1":
+  version: 2.6.1
+  resolution: "@usecapsule/core-sdk@npm:2.6.1"
   dependencies:
     "@celo/utils": "npm:^6.0.1"
     "@cosmjs/encoding": "npm:^0.32.4"
     "@noble/hashes": "npm:^1.5.0"
-    "@usecapsule/user-management-client": "npm:1.21.1"
+    "@usecapsule/user-management-client": "npm:1.28.1"
     base64url: "npm:^3.0.1"
     buffer: "npm:6.0.3"
     ethereumjs-util: "npm:7.1.5"
     libphonenumber-js: "npm:1.11.2"
     node-forge: "npm:^1.3.1"
-  checksum: 10c0/0d610ed9ae533839ff2e2687474f3ed7580fb509e8dac5de5cc3471bdb03c91f5ccacfbb8835c080c2cbe73b00d65b1303a41c58137d8cd632db30d7f50a9aa0
+    qs: "npm:^6.12.0"
+  checksum: 10c0/5a8a2f932ab35a92703601d0dda1c14adbd8d579b8a689d039bc78c1beb06b85541d379fc908962c8614b82bf444401acec99a0db4ce3ee07fd5de4b61f06f2c
   languageName: node
   linkType: hard
 
-"@usecapsule/react-components@npm:3.4.1":
-  version: 3.4.1
-  resolution: "@usecapsule/react-components@npm:3.4.1"
+"@usecapsule/react-common@npm:1.3.1":
+  version: 1.3.1
+  resolution: "@usecapsule/react-common@npm:1.3.1"
   dependencies:
-    "@usecapsule/core-components": "npm:3.4.1"
-  checksum: 10c0/32c01030e38ba98519ef922c71f79e9630774dbc403dd2f0f278fd83a6ee0d750a000e1e3fc21bddbb3d058b1143ef460a7c8b7c93d07758c4680ec0091e042f
-  languageName: node
-  linkType: hard
-
-"@usecapsule/react-sdk@npm:3.20.1, @usecapsule/react-sdk@npm:^3.19.0":
-  version: 3.20.1
-  resolution: "@usecapsule/react-sdk@npm:3.20.1"
-  dependencies:
-    "@ramp-network/ramp-instant-sdk": "npm:^4.0.2"
+    "@moonpay/moonpay-react": "npm:^1.8.0"
+    "@ramp-network/ramp-instant-sdk": "npm:^4.0.5"
     "@stripe/crypto": "npm:^0.0.4"
     "@stripe/stripe-js": "npm:^3.4.0"
-    "@usecapsule/react-components": "npm:3.4.1"
-    "@usecapsule/web-sdk": "npm:1.26.1"
+    "@usecapsule/web-sdk": "npm:2.6.1"
+    libphonenumber-js: "npm:^1.11.1"
+    styled-components: "npm:^6.1.8"
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+  checksum: 10c0/5ed594c9bb5364ea5b3a3fcb2ea55b90dcff039a7b3ea231cfe826a5f64f067e3067e16052cfe9e4bcca2099e404def3efdd50045364fd97e7f96b2519725f22
+  languageName: node
+  linkType: hard
+
+"@usecapsule/react-components@npm:3.11.1":
+  version: 3.11.1
+  resolution: "@usecapsule/react-components@npm:3.11.1"
+  dependencies:
+    "@usecapsule/core-components": "npm:3.11.1"
+  checksum: 10c0/b406a3c8c6381c932b707e42fc0daa7d107f8412a0c50d3d607a4af9863d0e489826763b74ef608ba4960538b005ec74d75aa43fb454bda0f7bd060b09ff8a88
+  languageName: node
+  linkType: hard
+
+"@usecapsule/react-sdk@npm:4.6.1, @usecapsule/react-sdk@npm:^4.6.1":
+  version: 4.6.1
+  resolution: "@usecapsule/react-sdk@npm:4.6.1"
+  dependencies:
+    "@usecapsule/react-common": "npm:1.3.1"
+    "@usecapsule/react-components": "npm:3.11.1"
+    "@usecapsule/web-sdk": "npm:2.6.1"
     date-fns: "npm:^3.6.0"
+    detect-browser: "npm:^5.3.0"
     framer-motion: "npm:11.3.28"
     libphonenumber-js: "npm:^1.11.1"
     styled-components: "npm:^6.1.8"
@@ -12534,58 +12553,59 @@ __metadata:
   peerDependencies:
     react: "*"
     react-dom: "*"
-  checksum: 10c0/d8baabaa98465189ef6f2973735823859bd5567d41a4f849a214b81aebb8a5eec1bc8efcea3ba23926d27ffb8c9f023349ee1a3dec1732c1409dc708fbb93222
+  checksum: 10c0/e9a0e6c119a80443395d8c73e9943c34563c3acaf46c1de455c431d040ea2e0966bbf73b4678d07a6909dda935411aadfdf398b0df796ed274ef4e16e1b5158b
   languageName: node
   linkType: hard
 
-"@usecapsule/user-management-client@npm:1.21.1":
-  version: 1.21.1
-  resolution: "@usecapsule/user-management-client@npm:1.21.1"
+"@usecapsule/user-management-client@npm:1.28.1":
+  version: 1.28.1
+  resolution: "@usecapsule/user-management-client@npm:1.28.1"
   dependencies:
     axios: "npm:^1.6.3"
     qs: "npm:^6.12.0"
-  checksum: 10c0/915d03b9c137518796bd55443a97fe4b740ae5fd32f6386f1566535a1942873e5a7ceaa727762cb3bd185031c0e3df58b9a91be1272e653c84833a79674c1d42
+  checksum: 10c0/c1412a1ea0d855a584b1add023d09955e66f7781e4358788b74aef8cc947380fc356d64ac76a9e48bef5691ce9abef03a0d3e34d3a182f7d2e8ddcd7c36a718b
   languageName: node
   linkType: hard
 
-"@usecapsule/viem-v2-integration@npm:1.23.1":
-  version: 1.23.1
-  resolution: "@usecapsule/viem-v2-integration@npm:1.23.1"
+"@usecapsule/viem-v2-integration@npm:2.6.1":
+  version: 2.6.1
+  resolution: "@usecapsule/viem-v2-integration@npm:2.6.1"
   dependencies:
-    "@usecapsule/core-sdk": "npm:1.24.1"
+    "@usecapsule/core-sdk": "npm:2.6.1"
   peerDependencies:
     viem: 2.x
-  checksum: 10c0/cb627b72daa60200137cdc4b0339d27af4d96e2a0245e9c71af4a410b3b7545e4510fb13dfa2099e74a476a9b1887db48aead6cee78d27674cb809df187b2835
+  checksum: 10c0/2a762b04f012c9b6cf7461f7c3f786e5fba907b60fc1de990bf535b1342aec954d7d7d0e16b7085dfddf2fbcde097b844672473fdb0ec3e68b0fb01f6f416cdf
   languageName: node
   linkType: hard
 
-"@usecapsule/wagmi-v2-integration@npm:^2.20.0":
-  version: 2.21.1
-  resolution: "@usecapsule/wagmi-v2-integration@npm:2.21.1"
+"@usecapsule/wagmi-v2-integration@npm:^3.6.1":
+  version: 3.6.1
+  resolution: "@usecapsule/wagmi-v2-integration@npm:3.6.1"
   dependencies:
-    "@usecapsule/react-sdk": "npm:3.20.1"
-    "@usecapsule/viem-v2-integration": "npm:1.23.1"
+    "@usecapsule/react-sdk": "npm:4.6.1"
+    "@usecapsule/viem-v2-integration": "npm:2.6.1"
   peerDependencies:
     react: "*"
     react-dom: "*"
     viem: 2.x
     wagmi: 2.x
-  checksum: 10c0/d48f82ceee256e7867119df50d0eb2b1fdf5210ca8e744c87bbe87442e0dccbaa952676f087997eb92124ef0e3f5db6993714d2c424e46d72e018b05224c2239
+  checksum: 10c0/2e9a21e6b436d5570a14030d3d2db7b8541c79f8c1df0a3b7c50121f9572d6034131f1247f8c833856697e2ca8f20ae89bd19d1668e3b57d9012865a3d4cfcd0
   languageName: node
   linkType: hard
 
-"@usecapsule/web-sdk@npm:1.26.1":
-  version: 1.26.1
-  resolution: "@usecapsule/web-sdk@npm:1.26.1"
+"@usecapsule/web-sdk@npm:2.6.1":
+  version: 2.6.1
+  resolution: "@usecapsule/web-sdk@npm:2.6.1"
   dependencies:
-    "@usecapsule/core-sdk": "npm:1.24.1"
-    "@usecapsule/user-management-client": "npm:1.21.1"
+    "@usecapsule/core-sdk": "npm:2.6.1"
+    "@usecapsule/user-management-client": "npm:1.28.1"
     assert: "npm:^2.1.0"
     base64url: "npm:3.0.1"
     buffer: "npm:6.0.3"
     cbor-web: "npm:8.1.0"
     node-forge: "npm:1.3.1"
-  checksum: 10c0/2b8bb1c0cb08b37b7d9e4898d4f44ceb15e888dde0c60f36382386cd9eafce7c681d8c0456dbf7b1485ca973ac63adb63b594e062122e123945316bcabe15c5e
+    ua-parser-js: "npm:1.0.39"
+  checksum: 10c0/3d674c8c02ca2507766fbc8b74f576369eaf4804a416292e87a3e62142f834a4c4d2a5c7cc7e1e311a9c03fc73e96c6eac83a33c7dd5c231b2ba753ba41a7b7c
   languageName: node
   linkType: hard
 
@@ -16681,7 +16701,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:2.1.1":
+"clsx@npm:2.1.1, clsx@npm:^2.0.0":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10c0/c4c8eb865f8c82baab07e71bfa8897c73454881c4f99d6bc81585aecd7c441746c1399d08363dc096c550cceaf97bd4ce1e8854e1771e9998d9f94c4fe075839
@@ -17197,7 +17217,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-pure@npm:^3.23.3, core-js-pure@npm:^3.30.2":
+"core-js-pure@npm:^3.23.3":
   version: 3.39.0
   resolution: "core-js-pure@npm:3.39.0"
   checksum: 10c0/5d954e467703ea1e860eb070bd72cf9dc5bfddd7037c09d750f0eba3ffc4066db741a595af86dc833a709929e161a909e48da3cbdd2d9bee7795cb516dc9f7d4
@@ -18426,7 +18446,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detect-browser@npm:5.3.0, detect-browser@npm:^5.2.0":
+"detect-browser@npm:5.3.0, detect-browser@npm:^5.2.0, detect-browser@npm:^5.3.0":
   version: 5.3.0
   resolution: "detect-browser@npm:5.3.0"
   checksum: 10c0/88d49b70ce3836e7971345b2ebdd486ad0d457d1e4f066540d0c12f9210c8f731ccbed955fcc9af2f048f5d4629702a8e46bedf5bcad42ad49a3a0927bfd5a76
@@ -23264,15 +23284,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"imask@npm:7.6.1":
-  version: 7.6.1
-  resolution: "imask@npm:7.6.1"
-  dependencies:
-    "@babel/runtime-corejs3": "npm:^7.24.4"
-  checksum: 10c0/cda75bb5036bf65b1028a39ee5fe7bb1a654838213e8f85288c5899a9e5eb84ce7d2b37ae2d9d600f553b7b0e9fd2f4ba2cbdb03a2c46cf0fa60075bc0c21f0c
-  languageName: node
-  linkType: hard
-
 "immutable@npm:^4.0.0":
   version: 4.3.7
   resolution: "immutable@npm:4.3.7"
@@ -23491,6 +23502,13 @@ __metadata:
     react: ^16.8 || ^17.0 || ^18.0 || ^19.0
     react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0
   checksum: 10c0/007a54776eefce08eb5a7e6c549dc7b018f692349d401917c503f8d1b55435e29263a3b395bf60327e26052fe8adb7a47478fcbd036cc8cd01e84335a531d9a4
+  languageName: node
+  linkType: hard
+
+"inputmask@npm:5.0.9":
+  version: 5.0.9
+  resolution: "inputmask@npm:5.0.9"
+  checksum: 10c0/12a8c350df5c9af101864a916fe12f997b103c4ae04037150564c9f8df31324460d775fe920d19d624a5df6e6cb1cdb43ecc24a6d07505d1f31b9fba6c7ec89d
   languageName: node
   linkType: hard
 
@@ -26227,8 +26245,8 @@ __metadata:
     "@uiw/react-color-chrome": "npm:^2.3.0"
     "@uiw/react-color-github": "npm:^2.3.0"
     "@uiw/react-split": "npm:^5.9.3"
-    "@usecapsule/react-sdk": "npm:^3.19.0"
-    "@usecapsule/wagmi-v2-integration": "npm:^2.20.0"
+    "@usecapsule/react-sdk": "npm:^4.6.1"
+    "@usecapsule/wagmi-v2-integration": "npm:^3.6.1"
     "@vitejs/plugin-react": "npm:^4.2.0"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
     "@vitest/coverage-v8": "npm:1.3.1"
@@ -26283,6 +26301,8 @@ __metadata:
     postcss: "npm:8.4.38"
     postcss-import: "npm:^16.1.0"
     prettier: "npm:^2.6.2"
+    prism-react-renderer: "npm:^2.4.0"
+    punycode: "npm:^2.3.1"
     qs: "npm:^6.12.0"
     react: "npm:18.3.1"
     react-code-blocks: "npm:^0.1.6"
@@ -26320,11 +26340,12 @@ __metadata:
     typedoc-plugin-markdown: "npm:^4.2.9"
     typescript: "npm:5.5.4"
     url-loader: "npm:^4.1.1"
+    vaul: "npm:^1.1.1"
     verdaccio: "npm:^5.0.4"
     viem: "npm:2.x"
     vite: "npm:~5.0.0"
     vite-plugin-dts: "npm:^3.7.3"
-    vite-plugin-node-polyfills: "npm:^0.21.0"
+    vite-plugin-node-polyfills: "npm:^0.22.0"
     vitest: "npm:1.3.1"
     wagmi: "npm:^2.5.7"
     webpack-cli: "npm:^5.1.4"
@@ -31878,6 +31899,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prism-react-renderer@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "prism-react-renderer@npm:2.4.0"
+  dependencies:
+    "@types/prismjs": "npm:^1.26.0"
+    clsx: "npm:^2.0.0"
+  peerDependencies:
+    react: ">=16.0.0"
+  checksum: 10c0/3d6969b057da0efe39e3e637bf93601cd5757de5919180e8df16daf1d1b8eedc39b70c7f6f28724fba0a01bc857c6b78312ab027f4e913159d1165c5aba235bb
+  languageName: node
+  linkType: hard
+
 "prismjs@npm:^1.27.0":
   version: 1.29.0
   resolution: "prismjs@npm:1.29.0"
@@ -32191,7 +32224,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"punycode@npm:^2.1.0, punycode@npm:^2.1.1, punycode@npm:^2.3.0":
+"punycode@npm:^2.1.0, punycode@npm:^2.1.1, punycode@npm:^2.3.0, punycode@npm:^2.3.1":
   version: 2.3.1
   resolution: "punycode@npm:2.3.1"
   checksum: 10c0/14f76a8206bc3464f794fb2e3d3cc665ae416c01893ad7a02b23766eb07159144ee612ad67af5e84fa4479ccfe67678c4feb126b0485651b302babf66f04f9e9
@@ -32569,7 +32602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.49.2, react-hook-form@npm:^7.53.0":
+"react-hook-form@npm:^7.53.0":
   version: 7.53.1
   resolution: "react-hook-form@npm:7.53.1"
   peerDependencies:
@@ -37077,7 +37110,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ua-parser-js@npm:^1.0.33, ua-parser-js@npm:^1.0.35, ua-parser-js@npm:^1.0.37":
+"ua-parser-js@npm:1.0.39, ua-parser-js@npm:^1.0.33, ua-parser-js@npm:^1.0.35, ua-parser-js@npm:^1.0.37":
   version: 1.0.39
   resolution: "ua-parser-js@npm:1.0.39"
   bin:
@@ -37821,6 +37854,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vaul@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "vaul@npm:1.1.1"
+  dependencies:
+    "@radix-ui/react-dialog": "npm:^1.1.1"
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0
+  checksum: 10c0/94f1b9e942db00c74dfd2d979da8113f88324393810e227ed829840f5c7e29aab45deb82cbd65ad2f1b84faa31132de98baea0ecd5d7dc6cb4996f9955f37685
+  languageName: node
+  linkType: hard
+
 "verdaccio-audit@npm:13.0.0-next-8.1":
   version: 13.0.0-next-8.1
   resolution: "verdaccio-audit@npm:13.0.0-next-8.1"
@@ -37987,15 +38032,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-node-polyfills@npm:^0.21.0":
-  version: 0.21.0
-  resolution: "vite-plugin-node-polyfills@npm:0.21.0"
+"vite-plugin-node-polyfills@npm:^0.22.0":
+  version: 0.22.0
+  resolution: "vite-plugin-node-polyfills@npm:0.22.0"
   dependencies:
     "@rollup/plugin-inject": "npm:^5.0.5"
     node-stdlib-browser: "npm:^1.2.0"
   peerDependencies:
     vite: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
-  checksum: 10c0/09095c1244dea0b9e2c78b9c44591c75048b6c12b65dd85e78edb3c1b7dd8222670f72e1849f70bbdb5a2a0e0b2b1c4deec7779cbe52664ba1f0fda1c19115f5
+  checksum: 10c0/f8ddc452eb6fba280977d037f8a6406aa522e69590641ce72ce5bb31c3498856a9f63ab3671bc6a822dcd1ff9ba5cac02cacef4a0e170fd8500cdeeb38c81675
   languageName: node
   linkType: hard
 
