@@ -216,7 +216,7 @@ const ContentSection: React.FC<ContentProps> = ({
             alt="profile-banner"
             style={{
               objectFit: 'cover',
-              height: '200px',
+              height: '20vh',
               width: '100%',
               borderRadius: '16px',
             }}

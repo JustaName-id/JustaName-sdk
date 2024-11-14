@@ -13,6 +13,7 @@
   gap: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
+  padding-bottom: 10px;
 }
 
 @media (min-width: 640px) {
@@ -36,5 +37,8 @@
 .loadingContainer {
   position: relative;
   display: flex;
-  height: 100px;
+  height: 50px;
+  width: 100%;
+  background: white;
+  min-height: 50px;
 }
