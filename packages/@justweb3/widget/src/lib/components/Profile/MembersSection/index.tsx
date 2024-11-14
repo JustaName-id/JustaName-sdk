@@ -22,26 +22,25 @@ const MembersSection: React.FC<MembersSectionProps> = ({
     data,
     hasNextPage,
     fetchNextPage,
-    isLoading
+    isFetching,
   } = useEnsSubnames({
     ensDomain: decodeURIComponent(fullSubname),
     chainId: chainId as ChainId,
     isClaimed: true,
-    limit: 15,
+    limit: 12,
   });
 
 
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
-    console.log("container", container.scrollTop, container.scrollHeight, container.clientHeight)
 
     const handleScroll = () => {
       if (
         container.scrollTop + container.clientHeight >=
         container.scrollHeight - 200
       ) {
-        if (!isLoading && hasNextPage) {
+        if (!isFetching && hasNextPage) {
           fetchNextPage();
         }
       }
@@ -49,7 +48,7 @@ const MembersSection: React.FC<MembersSectionProps> = ({
 
     container.addEventListener('scroll', handleScroll);
     return () => container.removeEventListener('scroll', handleScroll);
-  }, [isLoading, hasNextPage]);
+  }, [isFetching, hasNextPage]);
 
   return (
     <div className={styles.container}>
@@ -66,7 +65,7 @@ const MembersSection: React.FC<MembersSectionProps> = ({
             </div>
           ))}
       </div>
-      {isLoading && <div className={styles.loadingContainer}>
+      {isFetching && <div className={styles.loadingContainer}>
         <LoadingSpinner color={'var(--justweb3-primary-color)'} />
       </div>
       }
