@@ -1,22 +1,20 @@
-import { InfiniteData, useInfiniteQuery, UseInfiniteQueryResult } from '@tanstack/react-query';
+import {
+  InfiniteData,
+  useInfiniteQuery,
+  UseInfiniteQueryResult,
+} from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { ChainId, Pagination, sanitizeRecords } from '@justaname.id/sdk';
 import { Records } from '../../types';
+import { defaultOptions } from '../../query';
 
 export const buildEnsSubnamesKey = (
   domainName: string | undefined,
   isClaimed: boolean,
-  chainId: ChainId| undefined,
+  chainId: ChainId | undefined,
   page: number,
   limit: number
-) => [
-  'ENS_SUBNAMES',
-  domainName,
-  isClaimed,
-  chainId,
-  page,
-  limit,
-];
+) => ['ENS_SUBNAMES', domainName, isClaimed, chainId, page, limit];
 
 export interface UseEnsSubnamesParams {
   ensDomain: string;
@@ -28,34 +26,43 @@ export interface UseEnsSubnamesParams {
 
 export const useEnsSubnames = (
   props: UseEnsSubnamesParams
-): UseInfiniteQueryResult<InfiniteData<{
-  data: Records[],
-  pagination: Pagination
-}, unknown>, Error> => {
+): UseInfiniteQueryResult<
+  InfiniteData<
+    {
+      data: Records[];
+      pagination: Pagination;
+    },
+    unknown
+  >,
+  Error
+> => {
   const { justaname, chainId } = useJustaName();
 
   return useInfiniteQuery({
-    queryKey: buildEnsSubnamesKey(props.ensDomain, props.isClaimed, props.chainId || chainId, props.page ?? 1, props.limit ?? 20),
-    queryFn: async ({
-                pageParam: { page, limit },
-              }) => {
+    ...defaultOptions,
+    queryKey: buildEnsSubnamesKey(
+      props.ensDomain,
+      props.isClaimed,
+      props.chainId || chainId,
+      props.page ?? 1,
+      props.limit ?? 20
+    ),
+    queryFn: async ({ pageParam: { page, limit } }) => {
       const subnames = await justaname?.subnames.getSubnamesByEnsDomain({
         ensDomain: props.ensDomain,
         isClaimed: props.isClaimed,
         chainId: props?.chainId ? props?.chainId : chainId,
         page,
         limit,
-      })
-
+      });
 
       return {
         data: subnames.data.map((subname) => ({
           ...subname,
-          sanitizedRecords: sanitizeRecords(subname)
+          sanitizedRecords: sanitizeRecords(subname),
         })),
-        pagination: subnames.pagination
-      }
-
+        pagination: subnames.pagination,
+      };
     },
     initialPageParam: {
       page: props.page ?? 1,

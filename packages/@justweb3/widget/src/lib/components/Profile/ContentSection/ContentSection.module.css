@@ -10,6 +10,13 @@
   }
 }
 
+.bannerImage {
+  object-fit: cover;
+  height: 20vh;
+  width: 100%;
+  border-radius: 16px;
+}
+
 /* BannerContainer styles */
 .bannerContainer {
   width: 100%;
@@ -22,6 +29,11 @@
 @media (max-width: 768px) {
   .bannerContainer {
     aspect-ratio: 2 / 1;
+    height: 100px;
+  }
+
+  .bannerImage {
+    height: 100px;
   }
 }
 

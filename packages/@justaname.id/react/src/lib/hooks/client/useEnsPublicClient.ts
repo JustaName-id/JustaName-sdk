@@ -5,6 +5,7 @@ import { createPublicClient, http } from 'viem';
 import { addEnsContracts } from '@ensdomains/ensjs';
 import { mainnet, sepolia } from 'viem/chains';
 import { useMemo } from 'react';
+import { defaultOptions } from '../../query';
 
 export const getEnsPublicClient = (
   providerUrl: string,
@@ -50,6 +51,7 @@ export const useEnsPublicClient = (
   const _providerUrl = useMemo(() => _network?.providerUrl || '', [_network]);
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildEnsPublicClientKey(_chainId),
     queryFn: () => getEnsPublicClient(_providerUrl, _chainId),
   });

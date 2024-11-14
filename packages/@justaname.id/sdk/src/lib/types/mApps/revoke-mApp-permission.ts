@@ -1,11 +1,10 @@
 import { IRequest, IRoute, SubnameResponse } from '../common';
 
-
 export interface RevokeMAppPermissionRequest extends IRequest {
-
   address: string;
-  signature: string;
+  signature?: string;
   message: string;
 }
 
-export interface RevokeMAppPermissionRoute extends IRoute<RevokeMAppPermissionRequest, SubnameResponse> {}
+export interface RevokeMAppPermissionRoute
+  extends IRoute<RevokeMAppPermissionRequest, SubnameResponse> {}

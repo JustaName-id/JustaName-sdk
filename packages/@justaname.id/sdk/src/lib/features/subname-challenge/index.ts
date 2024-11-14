@@ -5,6 +5,8 @@ import {
   VerifyMessageRoute,
 } from '../../types';
 import { SiweConfig } from '../../types/siwe/siwe-config';
+import { ChallengeRequestException } from '../../errors/ChallengeRequest.expection';
+import { SiweMessage } from 'siwe';
 
 /**
  * Represents the Sign-In with Ethereum (SIWE) functionality, providing methods
@@ -63,20 +65,59 @@ export class SubnameChallenge {
    */
   requestChallenge(
     params: RequestChallengeRoute['params']
-  ): Promise<RequestChallengeRoute['response']> {
-    const { chainId, ttl, origin, domain, ...rest } = params;
-    const _ttl = this.subnameChallengeTtl || ttl || 120000;
-    const _chainId = this.chainId || chainId;
+  ): RequestChallengeRoute['response'] {
+    const { chainId, ttl, origin, domain, address } = params;
+    const _ttl = ttl || this.subnameChallengeTtl || 120000;
+    const _chainId = chainId || this.chainId;
     const _origin = this.siweConfig?.origin || origin;
     const _domain = this.siweConfig?.domain || domain;
+    const _address = address;
 
-    return assertRestCall('SIWE_REQUEST_CHALLENGE_ROUTE', 'POST', {
-      ttl: _ttl,
-      chainId: _chainId,
-      origin: _origin,
+    if (!_origin) {
+      throw ChallengeRequestException.originRequired();
+    }
+
+    if (!_domain) {
+      throw ChallengeRequestException.domainRequired();
+    }
+
+    if (_chainId !== 1 && _chainId !== 11155111) {
+      throw ChallengeRequestException.invalidChainId(_chainId);
+    }
+
+    if (_ttl <= 0 || _ttl + Date.now() >= Number.MAX_SAFE_INTEGER) {
+      throw ChallengeRequestException.invalidTimeValue();
+    }
+
+    const urlRegex = new RegExp('^(http|https)://', 'i');
+    if (!urlRegex.test(_origin)) {
+      throw ChallengeRequestException.invalidOrigin(_origin);
+    }
+
+    const ethAddressRegex = new RegExp('^0x[a-fA-F0-9]{40}$');
+    if (!ethAddressRegex.test(_address)) {
+      throw ChallengeRequestException.invalidAddress(_address);
+    }
+
+    const statement = `Please sign this message to verify that you want to add/update your subdomain provided by ${_domain} to your account ${_address} using JustAName`;
+
+    const { expirationTime, issuedAt } =
+      this.generateIssuedAndExpirationTime(_ttl);
+
+    const siweMessage = new SiweMessage({
       domain: _domain,
-      ...rest,
-    }, undefined , this.dev)(['origin', 'domain', 'chainId']);
+      uri: _origin,
+      address: _address,
+      statement: statement,
+      chainId: _chainId,
+      version: '1',
+      issuedAt,
+      expirationTime,
+    });
+
+    return {
+      challenge: siweMessage.prepareMessage(),
+    };
   }
 
   /**
@@ -92,8 +133,18 @@ export class SubnameChallenge {
       'SIWE_VERIFY_MESSAGE_ROUTE',
       'POST',
       params,
-      undefined ,
+      undefined,
       this.dev
     )(['address', 'signature', 'message']);
+  }
+
+  private generateIssuedAndExpirationTime(ttl: number) {
+    const date = new Date();
+    const issuedAt = date.toISOString();
+    const expirationTime = new Date(date.getTime() + ttl).toISOString();
+    return {
+      issuedAt,
+      expirationTime,
+    };
   }
 }

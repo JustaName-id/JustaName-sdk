@@ -13,6 +13,7 @@ import {
 } from '@justaname.id/sdk';
 import { useMemo } from 'react';
 import { Records } from '../../types';
+import { defaultOptions } from '../../query';
 
 export const buildRecordsBySubnameKey = (
   subname: string,
@@ -132,6 +133,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
   };
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildRecordsBySubnameKey(params?.ens || '', _chainId),
     queryFn: () =>
       getRecordsInternal(

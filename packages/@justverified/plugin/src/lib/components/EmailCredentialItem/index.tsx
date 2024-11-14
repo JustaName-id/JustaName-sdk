@@ -33,7 +33,7 @@ export const EmailCredentialItem: FC<EmailCredentialItemProps> = ({
   );
   const loading = useMemo(
     () => selectedCredential === 'email',
-    [selectedCredential, 'email']
+    [selectedCredential]
   );
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {

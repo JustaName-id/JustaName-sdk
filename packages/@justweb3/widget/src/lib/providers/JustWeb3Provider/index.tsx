@@ -226,15 +226,14 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
               }
               handleOpenDialog={handleOpenSignInDialog}
             />
-            {ensOpen && (
-              <ProfileDialog
-                plugins={plugins}
-                disableOverlay={config.disableOverlay}
-                handleOnClose={() => setEnsOpen(null)}
-                ens={ensOpen?.ens}
-                chainId={ensOpen?.chainId}
-              />
-            )}
+
+            <ProfileDialog
+              plugins={plugins}
+              disableOverlay={config.disableOverlay}
+              handleOnClose={() => setEnsOpen(null)}
+              ens={ensOpen?.ens}
+              chainId={ensOpen?.chainId}
+            />
 
             <SignInDialog
               open={signInOpen}
@@ -364,12 +363,16 @@ const CheckSession: FC<{
   const { signOut } = useEnsSignOut();
   const {
     address,
-    isConnected,
+    isConnected: isConnectedAccount,
     isDisconnected,
     isConnecting,
     isReconnecting,
     chainId,
   } = useMountedAccount();
+  const isConnected = useMemo(
+    () => isConnectedAccount && address,
+    [isConnectedAccount, address]
+  );
   const isConnectedPrevious = usePreviousState(isConnected, [isConnected]);
 
   useEffect(() => {

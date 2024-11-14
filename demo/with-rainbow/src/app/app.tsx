@@ -1,4 +1,5 @@
 import {
+  JustEnsCard,
   JustWeb3Button,
   JustWeb3Provider,
   JustWeb3ProviderConfig,
@@ -12,6 +13,8 @@ import {
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { EFPPlugin } from '@justweb3/efp-plugin';
+import { JustVerifiedPlugin } from '@justverified/plugin';
 
 const queryClient = new QueryClient();
 
@@ -32,11 +35,12 @@ const JustaNameConfig: JustWeb3ProviderConfig = {
     },
   ],
   openOnWalletConnect: true,
+  plugins: [EFPPlugin, JustVerifiedPlugin(['github', 'email', 'discord'])],
+  dev: import.meta.env.VITE_APP_DEV === 'true',
   allowedEns: 'all',
 };
 
 export function App() {
-  console.log('rainbow', import.meta.env.VITE_APP_CHAIN_ID);
   const config = getDefaultConfig({
     appName: 'My RainbowKit App',
     projectId: 'YOUR_PROJECT_ID',
@@ -48,9 +52,21 @@ export function App() {
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
           <JustWeb3Provider config={JustaNameConfig}>
-            <JustWeb3Button>
-              <ConnectButton />
-            </JustWeb3Button>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+              }}
+            >
+              <JustWeb3Button>
+                <ConnectButton />
+              </JustWeb3Button>
+
+              <JustEnsCard addressOrEns={'justhadi.eth'} />
+              <JustEnsCard addressOrEns={'mely.eth'} />
+              <JustEnsCard addressOrEns={'nick.eth'} />
+            </div>
           </JustWeb3Provider>
         </RainbowKitProvider>
       </QueryClientProvider>

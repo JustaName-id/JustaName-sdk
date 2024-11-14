@@ -5,7 +5,6 @@ import { SignInResponse } from '@justaname.id/sdk';
 export const POST = async (req: NextRequest) => {
   const { message, signature } = await req.json();
 
-  console.log(message, signature);
   const session = await Session.fromRequest(req);
 
   let signInMessage: SignInResponse;
