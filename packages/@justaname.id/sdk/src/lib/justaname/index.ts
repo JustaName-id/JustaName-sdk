@@ -15,6 +15,7 @@ import {
 } from '../features';
 import { InvalidConfigurationException } from '../errors/InvalidConfiguration.exception';
 import { ethers } from 'ethers';
+import { providerUrlChainIdLoadingMap, providerUrlChainIdMap } from '../memory';
 
 /**
  * The main class for the JustaName SDK.
@@ -235,6 +236,26 @@ export class JustaName {
       }, [] as ChainId[]);
 
       networks.forEach((network) => {
+        if (providerUrlChainIdLoadingMap.has(network.providerUrl)) {
+          if (providerUrlChainIdLoadingMap.get(network.providerUrl)) {
+            return;
+          }
+        }
+
+        providerUrlChainIdLoadingMap.set(network.providerUrl, true);
+
+        if (providerUrlChainIdMap.has(network.providerUrl)) {
+          if (
+            providerUrlChainIdMap.get(network.providerUrl) !== network.chainId
+          ) {
+            throw new InvalidConfigurationException(
+              'The chainId does not match the chainId of the providerUrl'
+            );
+          } else {
+            return;
+          }
+        }
+
         const provider = new ethers.JsonRpcProvider(network.providerUrl);
         provider.getNetwork().then((_network) => {
           if (network.chainId.toString() !== _network.chainId.toString()) {
@@ -242,6 +263,11 @@ export class JustaName {
               'The chainId does not match the chainId of the providerUrl'
             );
           }
+
+          providerUrlChainIdMap.set(
+            network.providerUrl,
+            parseInt(_network.chainId.toString())
+          );
         });
       });
     }
