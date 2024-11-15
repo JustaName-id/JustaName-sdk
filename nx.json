@@ -145,6 +145,9 @@
   "release": {
     "version": {
       "conventionalCommits": true,
+      "git": {
+        "commitMessage": "chore(release): publish [skip ci]"
+      },
       "generatorOptions": {
         "fallbackCurrentVersionResolver": "disk"
       }
