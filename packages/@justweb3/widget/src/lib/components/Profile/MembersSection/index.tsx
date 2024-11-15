@@ -72,7 +72,11 @@ const MembersSection: React.FC<MembersSectionProps> = ({
           key={`display-record-members-${fullSubname}-${subname}`}
           className={styles.memberCard}
         >
-          <JustEnsCard addressOrEns={subname} style={{ width: '100%' }} />
+          <JustEnsCard
+            addressOrEns={subname}
+            style={{ width: '100%' }}
+            chainId={chainId}
+          />
         </div>
       ))}
 

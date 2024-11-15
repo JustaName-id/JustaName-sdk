@@ -1,10 +1,10 @@
-import React, { Fragment, useContext, useEffect, useMemo } from 'react';
 import {
   useAccountEnsNames,
   useAccountSubnames,
   useEnsAvatar,
   useEnsSubnames,
   useMountedAccount,
+  useRecords,
 } from '@justaname.id/react';
 import {
   ChainId,
@@ -25,15 +25,17 @@ import {
   TabsList,
   TabsTrigger,
 } from '@justweb3/ui';
+import React, { Fragment, useContext, useEffect, useMemo } from 'react';
 import { getChainIcon } from '../../../icons/chain-icons';
 import { getContentHashIcon } from '../../../icons/contentHash-icons';
 import { getTextRecordIcon } from '../../../icons/records-icons';
-import styles from './ContentSection.module.css';
 import { JustaPlugin } from '../../../plugins';
+import { useJustWeb3 } from '../../../providers';
 import { PluginContext } from '../../../providers/PluginProvider';
-import { ProfileSection } from '../ProfileSection';
 import MetadataCard from '../../MetadataCard';
 import MembersSection from '../MembersSection';
+import { ProfileSection } from '../ProfileSection';
+import styles from './ContentSection.module.css';
 
 export interface ContentProps {
   fullSubname?: string;
@@ -58,6 +60,8 @@ const ContentSection: React.FC<ContentProps> = ({
   const { accountSubnames } = useAccountSubnames();
   const { accountEnsNames } = useAccountEnsNames();
   const [tab, setTab] = React.useState('Main');
+  const { openEnsProfile } = useJustWeb3();
+
   const isProfileSelf = useMemo(() => {
     const isEns = accountEnsNames?.map((ens) => ens.ens).includes(fullSubname);
 
@@ -96,11 +100,21 @@ const ContentSection: React.FC<ContentProps> = ({
     );
   }, [data]);
 
+  const communityName = useMemo(() => {
+    if (fullSubname.split('.').length == 2) return "";
+    return `${fullSubname.split(".")[1]}.${fullSubname.split(".")[2]}`
+  }, [fullSubname])
+
+  const { records: communityRecords } = useRecords({
+    ens: communityName,
+    chainId,
+    enabled: !isProfileCommunity
+  });
+
   const memberTabName = useMemo(() => {
-    return `Members (${
-      data?.pages?.flatMap((subnameData) => subnameData)[0].pagination
-        .totalCount
-    })`;
+    return `Members (${data?.pages?.flatMap((subnameData) => subnameData)[0].pagination
+      .totalCount
+      })`;
   }, [data]);
 
   const { createPluginApi } = useContext(PluginContext);
@@ -293,6 +307,28 @@ const ContentSection: React.FC<ContentProps> = ({
               margin: '0 15px',
             }}
           />
+          {!isProfileCommunity &&
+            <button
+              onClick={() => {
+                openEnsProfile(communityName, chainId)
+              }}
+              className={styles.communityBtn}
+            >
+              <Avatar
+                src={sanitizeEnsImage({
+                  image: communityRecords?.sanitizedRecords.avatar,
+                  name: communityName,
+                  chainId,
+                })}
+                style={{
+                  border: 'none',
+                  padding: 0
+                }}
+                size={10}
+              />
+              {communityName}
+            </button>
+          }
           <Flex direction={'row'} justify={'space-between'} align={'center'}>
             <P
               style={{
