@@ -1,3 +1,7 @@
+## 0.0.74 (2024-11-15)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
 ## 0.0.73 (2024-11-15)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
