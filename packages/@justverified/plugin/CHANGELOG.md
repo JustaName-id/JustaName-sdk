@@ -1,3 +1,35 @@
+## 0.0.82 (2024-11-15)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.81 (2024-11-15)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.80 (2024-11-15)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.79 (2024-11-15)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.78 (2024-11-15)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.77 (2024-11-15)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.76 (2024-11-15)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.75 (2024-11-15)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
 ## 0.0.74 (2024-11-14)
 
 This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
