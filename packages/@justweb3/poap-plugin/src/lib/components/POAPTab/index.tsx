@@ -1,43 +1,78 @@
-import { Flex, LoadingSpinner } from '@justweb3/ui';
+import { Flex, LoadingSpinner, P } from '@justweb3/ui';
 import { FC, useEffect, useRef, useState } from 'react';
 import { POAP, usePoaps } from '../../hooks';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import POAPCard from '../PoapCard';
-import styles from './POAPTab.module.css';
+
+type GroupedPoaps = {
+  [key: string]: POAP[];
+};
+
+const formatMonthYear = (date: string) => {
+  const d = new Date(date);
+  return d.toLocaleString('default', { month: 'long', year: 'numeric' });
+};
+
+const groupPoapsByMonth = (poaps: POAP[]): GroupedPoaps => {
+  return poaps.reduce((acc: GroupedPoaps, poap) => {
+    const monthYear = formatMonthYear(poap.created.toString());
+    if (!acc[monthYear]) {
+      acc[monthYear] = [];
+    }
+    acc[monthYear].push(poap);
+    return acc;
+  }, {});
+};
 
 export interface POAPTabProps {
   address: string;
 }
 
-const ITEMS_PER_PAGE = 20;
-
 
 export const POAPTab: FC<POAPTabProps> = ({ address }) => {
   const poapsRef = useRef<HTMLDivElement>(null);
-  const [poapList, setPoapList] = useState<POAP[]>([]);
+  const [groupedPoaps, setGroupedPoaps] = useState<GroupedPoaps>({});
+  const [displayedMonths, setDisplayedMonths] = useState<string[]>([]);
 
-  const {
-    poaps,
-    isPoapsLoading,
-  } = usePoaps({
+  const { poaps, isPoapsLoading } = usePoaps({
     address: address
   });
 
+  console.log("poaps", poaps);
 
+  useEffect(() => {
+    if (poaps) {
+      const sortedPoaps = [...poaps].sort((a, b) =>
+        new Date(b.created).getTime() - new Date(a.created).getTime()
+      );
+
+      const grouped = groupPoapsByMonth(sortedPoaps);
+      setGroupedPoaps(grouped);
+
+      const allMonths = Object.keys(grouped).sort((a, b) =>
+        new Date(b).getTime() - new Date(a).getTime()
+      );
+      setDisplayedMonths(allMonths.slice(0, 3));
+    }
+  }, [poaps]);
 
   const fetchMorePoaps = () => {
-    if (!poaps) return;
-    if (poapList.length >= poaps.length) {
-      return;
-    }
+    console.log("groupedPoaps", groupedPoaps);
+    if (!groupedPoaps) return;
+
+    const allMonths = Object.keys(groupedPoaps).sort((a, b) =>
+      new Date(b).getTime() - new Date(a).getTime()
+    );
+    console.log(displayedMonths, allMonths);
+    if (displayedMonths.length >= allMonths.length) return;
 
     setTimeout(() => {
-      setPoapList((prev) => [
+      setDisplayedMonths(prev => [
         ...prev,
-        ...poaps.slice(prev.length, prev.length + ITEMS_PER_PAGE)
+        ...allMonths.slice(prev.length, prev.length + 1)
       ]);
     }, 500);
-  }
+  };
 
   useInfiniteScroll(
     poapsRef,
@@ -45,14 +80,6 @@ export const POAPTab: FC<POAPTabProps> = ({ address }) => {
     !isPoapsLoading,
     50
   );
-
-
-  useEffect(() => {
-    if (poaps) {
-      setPoapList(poaps?.slice(0, ITEMS_PER_PAGE));
-    }
-  }, [poaps]);
-
 
   if (isPoapsLoading) {
     return (
@@ -85,21 +112,40 @@ export const POAPTab: FC<POAPTabProps> = ({ address }) => {
         style={{
           overflow: 'auto',
           maxHeight: '100%',
+          paddingRight: '5px',
         }}
         ref={poapsRef}
       >
-        <Flex
-          direction={'row'}
-          gap={'20px'}
-          wrap='wrap'
-          padding='10px 0px 10px 0px'
-          className={styles.poapListCard}
-        >
-          {poapList.length > 0 &&
-            poapList.map((poap) => (
-              <POAPCard key={poap.tokenId} poap={poap} />
-            ))}
-        </Flex>
+        {displayedMonths.map((monthYear) => (
+          <Flex
+            key={monthYear}
+            direction={'column'}
+            padding='10px'
+            gap={'10px'}
+            style={{
+              borderRadius: '10px',
+              border: '1px solid #F2F2F2',
+            }}
+          >
+            <P style={{
+              fontFamily: 'var(--justweb3-font-family)',
+              color: 'var(--justweb3-foreground-color-2)',
+              fontSize: '12px',
+              fontWeight: 300,
+            }}>{monthYear}</P>
+            <Flex
+              direction={'row'}
+              gap={'20px'}
+              wrap='wrap'
+              padding='0px 10px 10px 5px'
+              justify='flex-start'
+            >
+              {groupedPoaps[monthYear]?.map((poap) => (
+                <POAPCard key={poap.tokenId} poap={poap} />
+              ))}
+            </Flex>
+          </Flex>
+        ))}
         {isPoapsLoading && (
           <Flex
             style={{

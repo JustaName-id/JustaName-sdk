@@ -1,6 +1,0 @@
-.poapListCard {
-  justify-content: center;
-  @media (min-width: 768px) {
-    justify-content: space-around;
-  }
-}
