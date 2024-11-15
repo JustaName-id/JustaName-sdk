@@ -1,6 +1,6 @@
 {
   "name": "@justweb3/ui",
-  "version": "0.0.80",
+  "version": "0.0.81",
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
