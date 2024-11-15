@@ -1,9 +1,9 @@
 {
   "name": "@justaname.id/react",
-  "version": "0.3.141",
+  "version": "0.3.142",
   "dependencies": {
     "@ensdomains/ensjs": "4.0.1-alpha.0",
-    "@justaname.id/sdk": "0.2.138",
+    "@justaname.id/sdk": "0.2.139",
     "axios": "^1.6.0",
     "qs": "^6.12.0"
   },
