@@ -85,7 +85,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
     }
   };
 
-  if (isEnsAuthLoading || (connectedEns && isRecordsPending)) {
+  if (isEnsAuthLoading || (connectedEns?.ens && isRecordsPending)) {
     return (
       <ClickableItem
         title={'loading'}
@@ -108,7 +108,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
     );
   }
 
-  if (!connectedEns) {
+  if (!connectedEns?.ens) {
     if (isConnected && address) {
       return (
         <ClickableItem
