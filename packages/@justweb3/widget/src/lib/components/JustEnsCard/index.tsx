@@ -3,7 +3,15 @@ import React, { FC } from 'react';
 import { ChainId } from '@justaname.id/sdk';
 import { useJustWeb3 } from '../../providers';
 import { useEnsAvatar, usePrimaryName, useRecords } from '@justaname.id/react';
-import { Avatar, ClickableItem, CopiedIcon, CopyIcon, Flex, formatText, P } from '@justweb3/ui';
+import {
+  Avatar,
+  ClickableItem,
+  CopiedIcon,
+  CopyIcon,
+  Flex,
+  formatText,
+  P,
+} from '@justweb3/ui';
 import { getTextRecordIcon } from '../../icons/records-icons';
 import styles from './JustEnsCard.module.css'; // Import CSS module
 
@@ -21,7 +29,7 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
   style,
 }) => {
   const { openEnsProfile } = useJustWeb3();
-  const [isCopied, setIsCopied] = React.useState<boolean>(false)
+  const [isCopied, setIsCopied] = React.useState<boolean>(false);
   const isEns = addressOrEns?.includes('.');
   const { primaryName } = usePrimaryName({
     address: isEns ? undefined : (addressOrEns as `0x${string}`),
@@ -57,7 +65,10 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
 
   if (expanded) {
     return (
-      <div style={style} className={styles.expandableCard} onClick={() => handleEnsClick()}
+      <div
+        style={style}
+        className={styles.expandableCard}
+        onClick={() => handleEnsClick()}
       >
         <Flex>
           <img
@@ -86,9 +97,14 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
             borderSize="4px"
           />
         </Flex>
-        <Flex direction='row' justify='space-between' align='center' className={styles.expandableCardContent}>
-          <Flex direction='column' justify='flex-start' gap='5px'>
-            <Flex direction='row' justify='flex-start' align='center' gap='5px'>
+        <Flex
+          direction="row"
+          justify="space-between"
+          align="center"
+          className={styles.expandableCardContent}
+        >
+          <Flex direction="column" justify="flex-start" gap="5px">
+            <Flex direction="row" justify="flex-start" align="center" gap="5px">
               <P className={styles.expandabletitleText}>{ens}</P>
               {isCopied ? (
                 <CopiedIcon width={15} height={15} />
@@ -99,12 +115,12 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
                   style={{ cursor: 'pointer' }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    copyToClipboard()
+                    copyToClipboard();
                   }}
                 />
               )}
             </Flex>
-            {records && records?.sanitizedRecords?.socials?.length > 0 && (
+            {records && records?.sanitizedRecords?.socials?.length > 0 ? (
               <Flex className={styles.socialIconsContainer}>
                 {records.sanitizedRecords.socials.map((social, index) =>
                   React.cloneElement(getTextRecordIcon(social.key), {
@@ -114,11 +130,15 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
                   })
                 )}
               </Flex>
+            ) : (
+              <div style={{ height: 15, width: '100%' }} />
             )}
           </Flex>
-          {records?.sanitizedRecords.description &&
-            <P className={styles.descriptionText}>{records?.sanitizedRecords.description}</P>
-          }
+          {records?.sanitizedRecords.description && (
+            <P className={styles.descriptionText}>
+              {records?.sanitizedRecords.description}
+            </P>
+          )}
         </Flex>
       </div>
     );

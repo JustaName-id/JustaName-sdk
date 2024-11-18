@@ -149,6 +149,9 @@
         "fallbackCurrentVersionResolver": "disk"
       }
     },
+    "git": {
+      "commitMessage": "chore(release): publish [skip ci]"
+    },
     "changelog": {
       "projectChangelogs": {
         "createRelease": "github"

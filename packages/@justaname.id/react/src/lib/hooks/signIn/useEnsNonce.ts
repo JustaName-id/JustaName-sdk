@@ -13,6 +13,7 @@ export interface UseEnsNonceParams {
   signinNonceRoute?: string;
   backendUrl?: string;
   address?: string;
+  enabled?: boolean;
 }
 
 export interface UseEnsNonceResult {
@@ -25,7 +26,7 @@ export interface UseEnsNonceResult {
 
 export const useEnsNonce = (params?: UseEnsNonceParams): UseEnsNonceResult => {
   const { backendUrl, routes } = useJustaName();
-
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const _backendUrl = useMemo(
     () => params?.backendUrl || backendUrl || '',
     [backendUrl, params?.backendUrl]
@@ -41,6 +42,7 @@ export const useEnsNonce = (params?: UseEnsNonceParams): UseEnsNonceResult => {
 
   const query = useQuery({
     ...defaultOptions,
+    retry: 0,
     staleTime: Infinity,
     queryKey: buildNonceKey(
       _backendUrl,
@@ -58,7 +60,7 @@ export const useEnsNonce = (params?: UseEnsNonceParams): UseEnsNonceResult => {
 
       return nonceResponse.text();
     },
-    enabled: Boolean(params?.address),
+    enabled: Boolean(params?.address) && Boolean(_enabled),
   });
 
   return {

@@ -19,6 +19,7 @@ export interface SanitizeImageParams {
 export interface UseEnsAvatarParams {
   ens: string | undefined;
   chainId?: ChainId;
+  enabled?: boolean;
 }
 
 export interface GetEnsAvatarParams {
@@ -41,10 +42,11 @@ export const useEnsAvatar = (
     () => params?.chainId || chainId,
     [params?.chainId, chainId]
   );
-
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const { records, getRecords } = useRecords({
     chainId: _chainId,
     ens: params?.ens,
+    enabled: _enabled,
   });
 
   const sanitizeEnsImage = (_params: SanitizeImageParams) => {
@@ -102,7 +104,7 @@ export const useEnsAvatar = (
         chainId: _chainId,
       });
     },
-    enabled: Boolean(params?.ens) && Boolean(records),
+    enabled: Boolean(params?.ens) && Boolean(records) && Boolean(_enabled),
   });
 
   useEffect(() => {

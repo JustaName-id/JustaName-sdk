@@ -82,3 +82,27 @@
     grid-column: span 6 / span 6;
   }
 }
+
+.communityBtn {
+  padding: 3px;
+  padding-right: 8px;
+  border-radius: 100px;
+  cursor: pointer;
+  background-color: color-mix(
+    in srgb,
+    var(--justweb3-primary-color) 20%,
+    transparent
+  );
+  color: var(--justweb3-primary-color);
+  font-weight: 600;
+  font-size: 8px;
+  font-family: var(--justweb3-font-family);
+  border: none;
+  line-height: 150%;
+  text-transform: capitalize;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}

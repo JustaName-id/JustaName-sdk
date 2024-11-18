@@ -4,5 +4,6 @@ export const defaultOptions = {
   staleTime: 1000 * 60 * 5,
   networkMode: 'offlineFirst' as NetworkMode,
   refetchOnWindowFocus: false,
-  retry: 0,
+  retry: 3,
+  retryDelay: 1000,
 };

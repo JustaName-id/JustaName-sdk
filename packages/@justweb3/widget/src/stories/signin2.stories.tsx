@@ -38,7 +38,6 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
     },
   ],
   openOnWalletConnect: true,
-  dev: true,
   allowedEns: 'all',
 };
 
@@ -105,6 +104,10 @@ export const Example = () => {
                 <JustEnsCard addressOrEns={'josh.box'} />
                 <JustEnsCard addressOrEns={'justhadi.eth'} />
                 <JustEnsCard addressOrEns={'testt2.justan.id'} />
+                <JustEnsCard addressOrEns={'justan.id'} />
+                <JustEnsCard addressOrEns={'justadev.eth'} />
+                <JustEnsCard addressOrEns={'yodl.eth'} />
+                <JustEnsCard addressOrEns={'raffy.eth'} />
                 <JustEnsCard
                   addressOrEns={'hadikhai.jaw.eth'}
                   chainId={11155111}
@@ -116,6 +119,7 @@ export const Example = () => {
                 <JustEnsCard addressOrEns={'brantly.eth'} expanded />
                 <JustEnsCard addressOrEns={'vitalik.eth'} expanded />
                 <JustEnsCard addressOrEns={'dr3a.eth'} expanded />
+                <JustEnsCard addressOrEns={'justan.id'} expanded />
                 <JustEnsCard
                   addressOrEns={'hadikhai.jaw.eth'}
                   chainId={11155111}

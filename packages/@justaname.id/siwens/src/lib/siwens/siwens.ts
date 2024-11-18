@@ -101,7 +101,18 @@ export class SIWENS extends SiweMessage {
     let verification: SiweResponse;
 
     try {
-      verification = await super.verify(params, opts);
+      const { signature, ...rest } = params;
+      const _tempParams = {
+        signature,
+        ...rest,
+      };
+      const lastByte = parseInt(signature.slice(-2), 16);
+      if (lastByte < 27) {
+        const adjustedV = (27 + (lastByte % 2)).toString(16).padStart(2, '0');
+        _tempParams['signature'] = signature.slice(0, -2) + adjustedV;
+      }
+
+      verification = await super.verify(_tempParams, opts);
     } catch (e) {
       const statement = e.data.statement;
       const { ens } = extractDataFromStatement(statement);

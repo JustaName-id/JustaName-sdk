@@ -7,8 +7,11 @@ jobs:
   release:
     runs-on: ubuntu-latest
     if: >
-      ${{!contains(github.event.head_commit.message, format('chore(release){0} publish', ':')) 
-      && !contains(github.event.head_commit.message, format('CI{0} Update yarn.lock files', ':'))}}
+      ${{ 
+        !contains(github.event.head_commit.message, '[skip ci]') &&
+        !contains(github.event.head_commit.message, format('chore(release){0} publish', ':')) &&
+        !contains(github.event.head_commit.message, format('CI{0} Update yarn.lock files', ':'))
+      }}
     permissions:
       contents: write
       packages: write
@@ -69,7 +72,7 @@ jobs:
       - run: rm -rf node_modules/.cache/rollup-plugin-typescript2
       - name: Release
         run: |
-          npx nx release  --specifier=patch --yes
+          npx nx release --specifier=patch --yes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

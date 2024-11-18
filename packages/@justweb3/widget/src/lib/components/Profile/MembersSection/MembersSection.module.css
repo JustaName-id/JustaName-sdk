@@ -1,44 +1,27 @@
 .container {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-height: 100%;
-  padding-top: 5px;
-  padding-bottom: 24px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
   gap: 10px;
+  flex-wrap: wrap;
+  max-width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding-bottom: 10px;
+  width: 100%;
+  max-height: 100%;
 }
 
-@media (min-width: 640px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+.memberCard {
+  width: 100%;
+  min-width: 335px;
+  flex: 1;
 
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 .loadingContainer {
   position: relative;
   display: flex;
-  height: 50px;
   width: 100%;
-  background: white;
-  min-height: 50px;
+  height: 100px;
+    justify-content: center;
+    align-items: center;
 }

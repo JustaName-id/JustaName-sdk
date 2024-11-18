@@ -21,6 +21,7 @@ export interface UseSearchSubnamesParams
   data?: boolean;
   ensRegistered?: boolean;
   isClaimed?: boolean;
+  enabled?: boolean;
 }
 
 interface UseSearchSubnamesResult {
@@ -39,6 +40,7 @@ export const useSearchSubnames = (
   const { justaname, chainId: defaultChainId } = useJustaName();
   const { name, chainId, ...rest } = params;
   const _chainId = chainId || defaultChainId;
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
 
   const currentParams: SubnameSearchRoute['params'] = {
     name,
@@ -56,7 +58,7 @@ export const useSearchSubnames = (
     queryKey: buildSearchSubnamesKey(currentParams),
     queryFn: async () =>
       await justaname?.subnames.searchSubnames(currentParams),
-    enabled: Boolean(name) && Boolean(justaname),
+    enabled: Boolean(name) && Boolean(justaname) && Boolean(_enabled),
   });
 
   return {
