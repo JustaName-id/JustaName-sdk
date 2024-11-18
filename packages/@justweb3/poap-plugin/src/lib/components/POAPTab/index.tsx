@@ -26,16 +26,19 @@ const groupPoapsByMonth = (poaps: POAP[]): GroupedPoaps => {
 
 export interface POAPTabProps {
   address: string;
+  apiKey?: string;
+  backendUrl?: string;
 }
 
-
-export const POAPTab: FC<POAPTabProps> = ({ address }) => {
+export const POAPTab: FC<POAPTabProps> = ({ address, apiKey, backendUrl }) => {
   const poapsRef = useRef<HTMLDivElement>(null);
   const [groupedPoaps, setGroupedPoaps] = useState<GroupedPoaps>({});
   const [displayedMonths, setDisplayedMonths] = useState<string[]>([]);
 
   const { poaps, isPoapsLoading } = usePoaps({
-    address: address
+    address,
+    apiKey,
+    backendUrl
   });
 
   console.log("poaps", poaps);

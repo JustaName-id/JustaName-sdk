@@ -29,24 +29,34 @@ export interface Event {
   supply: number;
 }
 
-export const getPoaps = async (address: string) => {
+export interface UsePoapsParams {
+  address: string;
+  apiKey?: string;
+  backendUrl?: string;
+}
+
+export const getPoaps = async (
+  address: string,
+  apiKey?: string,
+  backendUrl?: string
+) => {
+  if (backendUrl) {
+    const poaps = await axios.get<POAP[]>(`${backendUrl}/poap/${address}`);
+    return poaps.data;
+  }
+
   const poaps = await axios.get<POAP[]>(
     `https://api.poap.tech/actions/scan/${address}`,
     {
       headers: {
         Accept: 'application/json',
-        // TODO: handle api key functionality
-        'x-api-key': '',
+        'x-api-key': apiKey || '',
       },
     }
   );
 
   return poaps.data;
 };
-
-export interface UsePoapsParams {
-  address: string;
-}
 
 export interface UsePoapsResult {
   poaps: POAP[] | undefined;
@@ -55,10 +65,14 @@ export interface UsePoapsResult {
   isPoapsLoading: boolean;
 }
 
-export const usePoaps = ({ address }: UsePoapsParams): UsePoapsResult => {
+export const usePoaps = ({
+  address,
+  apiKey,
+  backendUrl,
+}: UsePoapsParams): UsePoapsResult => {
   const query = useQuery({
-    queryKey: buildPoapsQueryKey(address),
-    queryFn: () => getPoaps(address),
+    queryKey: [...buildPoapsQueryKey(address), apiKey, backendUrl],
+    queryFn: () => getPoaps(address, apiKey, backendUrl),
     enabled: Boolean(address),
   });
 
