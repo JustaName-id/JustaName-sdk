@@ -35,7 +35,7 @@ export const getPoaps = async (address: string) => {
     {
       headers: {
         Accept: 'application/json',
-        // TODO: apikey
+        // TODO: handle api key functionality
         'x-api-key': '',
       },
     }
