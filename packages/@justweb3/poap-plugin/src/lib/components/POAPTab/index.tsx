@@ -1,8 +1,9 @@
 import { Flex, LoadingSpinner, P } from '@justweb3/ui';
 import { FC, useEffect, useRef, useState } from 'react';
-import { POAP, usePoaps } from '../../hooks';
+import { usePoaps } from '../../hooks';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import POAPCard from '../PoapCard';
+import { POAP } from '../../types';
 
 type GroupedPoaps = {
   [key: string]: POAP[];
@@ -41,8 +42,6 @@ export const POAPTab: FC<POAPTabProps> = ({ address, apiKey, backendUrl }) => {
     backendUrl
   });
 
-  console.log("poaps", poaps);
-
   useEffect(() => {
     if (poaps) {
       const sortedPoaps = [...poaps].sort((a, b) =>
@@ -60,13 +59,11 @@ export const POAPTab: FC<POAPTabProps> = ({ address, apiKey, backendUrl }) => {
   }, [poaps]);
 
   const fetchMorePoaps = () => {
-    console.log("groupedPoaps", groupedPoaps);
     if (!groupedPoaps) return;
 
     const allMonths = Object.keys(groupedPoaps).sort((a, b) =>
       new Date(b).getTime() - new Date(a).getTime()
     );
-    console.log(displayedMonths, allMonths);
     if (displayedMonths.length >= allMonths.length) return;
 
     setTimeout(() => {

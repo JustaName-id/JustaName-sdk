@@ -40,6 +40,9 @@
             "command": "node update-package-json.js"
           },
           {
+            "command": "node create-server-entry.js"
+          },
+          {
             "command": "rm -rf node_modules || rmdir /s /q node_modules"
           }
         ],

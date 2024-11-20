@@ -1,6 +1,6 @@
 import { P, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@justweb3/ui';
 import React from 'react';
-import { POAP } from '../../hooks';
+import { POAP } from '../../types';
 
 interface POAPCardProps {
   poap: POAP;

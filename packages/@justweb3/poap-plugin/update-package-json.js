@@ -10,12 +10,17 @@ packageJson.module = packageJson.module.replace('./dist/', './');
 packageJson.types = packageJson.types.replace('./dist/', './');
 
 if (packageJson.exports) {
-  Object.keys(packageJson.exports).forEach(key => {
+  Object.keys(packageJson.exports).forEach((key) => {
     if (typeof packageJson.exports[key] === 'string') {
-      packageJson.exports[key] = packageJson.exports[key].replace('./dist/', './');
+      packageJson.exports[key] = packageJson.exports[key].replace(
+        './dist/',
+        './'
+      );
     } else if (typeof packageJson.exports[key] === 'object') {
-      Object.keys(packageJson.exports[key]).forEach(subKey => {
-        packageJson.exports[key][subKey] = packageJson.exports[key][subKey].replace('./dist/', './');
+      Object.keys(packageJson.exports[key]).forEach((subKey) => {
+        packageJson.exports[key][subKey] = packageJson.exports[key][
+          subKey
+        ].replace('./dist/', './');
       });
     }
   });
