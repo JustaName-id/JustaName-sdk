@@ -51,6 +51,10 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
       apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,
     }),
   ],
+  color: {
+    primary: '#FF00FF',
+    background: '#000000',
+  },
 };
 
 export const Example = () => {
@@ -88,7 +92,6 @@ export const Example = () => {
                 <JustEnsCard addressOrEns={'dr3a.eth'} />
                 <JustEnsCard addressOrEns={'josh.box'} />
                 <JustEnsCard addressOrEns={'justghadi.eth'} />
-                <JustEnsCard addressOrEns={'justan.id'} />
                 <JustEnsCard
                   addressOrEns={'0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1'}
                   chainId={1}
@@ -120,7 +123,7 @@ export const Example = () => {
 
 const meta: Meta<typeof Example> = {
   component: Example,
-  title: 'Connect/POAP',
+  title: 'Connect/POAPColored',
 };
 export default meta;
 type Story = StoryObj<typeof Example>;

@@ -52,7 +52,6 @@ export const useEnsSubnames = (
   const isJustaNameResolver = useMemo(() => {
     if (!offchainResolvers) return false;
     if (!records) return false;
-
     const offchainResolver = offchainResolvers.offchainResolvers.find(
       (resolver) => resolver.chainId === _chainId
     );
