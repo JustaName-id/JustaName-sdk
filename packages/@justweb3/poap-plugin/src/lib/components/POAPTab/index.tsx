@@ -1,9 +1,8 @@
 import { Flex, LoadingSpinner, P } from '@justweb3/ui';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { usePoaps } from '../../hooks';
-import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
-import POAPCard from '../PoapCard';
 import { POAP } from '../../types';
+import POAPCard from '../PoapCard';
 
 type GroupedPoaps = {
   [key: string]: POAP[];
@@ -32,54 +31,30 @@ export interface POAPTabProps {
 }
 
 export const POAPTab: FC<POAPTabProps> = ({ address, apiKey, backendUrl }) => {
-  const poapsRef = useRef<HTMLDivElement>(null);
   const [groupedPoaps, setGroupedPoaps] = useState<GroupedPoaps>({});
   const [displayedMonths, setDisplayedMonths] = useState<string[]>([]);
 
   const { poaps, isPoapsLoading } = usePoaps({
     address,
     apiKey,
-    backendUrl
+    backendUrl,
   });
 
   useEffect(() => {
     if (poaps) {
-      const sortedPoaps = [...poaps].sort((a, b) =>
-        new Date(b.created).getTime() - new Date(a.created).getTime()
+      const sortedPoaps = [...poaps].sort(
+        (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime()
       );
 
       const grouped = groupPoapsByMonth(sortedPoaps);
       setGroupedPoaps(grouped);
 
-      const allMonths = Object.keys(grouped).sort((a, b) =>
-        new Date(b).getTime() - new Date(a).getTime()
+      const allMonths = Object.keys(grouped).sort(
+        (a, b) => new Date(b).getTime() - new Date(a).getTime()
       );
-      setDisplayedMonths(allMonths.slice(0, 3));
+      setDisplayedMonths(allMonths);
     }
   }, [poaps]);
-
-  const fetchMorePoaps = () => {
-    if (!groupedPoaps) return;
-
-    const allMonths = Object.keys(groupedPoaps).sort((a, b) =>
-      new Date(b).getTime() - new Date(a).getTime()
-    );
-    if (displayedMonths.length >= allMonths.length) return;
-
-    setTimeout(() => {
-      setDisplayedMonths(prev => [
-        ...prev,
-        ...allMonths.slice(prev.length, prev.length + 1)
-      ]);
-    }, 500);
-  };
-
-  useInfiniteScroll(
-    poapsRef,
-    fetchMorePoaps,
-    !isPoapsLoading,
-    50
-  );
 
   if (isPoapsLoading) {
     return (
@@ -114,36 +89,42 @@ export const POAPTab: FC<POAPTabProps> = ({ address, apiKey, backendUrl }) => {
           maxHeight: '100%',
           paddingRight: '5px',
         }}
-        ref={poapsRef}
       >
         {displayedMonths.map((monthYear) => (
           <Flex
             key={monthYear}
             direction={'column'}
-            padding='10px'
+            padding="10px"
             gap={'10px'}
             style={{
               borderRadius: '10px',
-              border: '1px solid #F2F2F2',
+              border: '1px solid var(--justweb3-foreground-color-4)',
             }}
           >
-            <P style={{
-              fontFamily: 'var(--justweb3-font-family)',
-              color: 'var(--justweb3-foreground-color-2)',
-              fontSize: '12px',
-              fontWeight: 300,
-            }}>{monthYear}</P>
-            <Flex
-              direction={'row'}
-              gap={'20px'}
-              wrap='wrap'
-              padding='0px 10px 10px 5px'
-              justify='flex-start'
+            <P
+              style={{
+                fontFamily: 'var(--justweb3-font-family)',
+                color: 'var(--justweb3-foreground-color-2)',
+                fontSize: '12px',
+                fontWeight: 300,
+              }}
+            >
+              {monthYear}
+            </P>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateRows: 'auto',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(64px, 1fr))',
+                gap: '20px',
+              }}
             >
               {groupedPoaps[monthYear]?.map((poap) => (
-                <POAPCard key={poap.tokenId} poap={poap} />
+                <Fragment key={poap.tokenId + address}>
+                  <POAPCard poap={poap} />
+                </Fragment>
               ))}
-            </Flex>
+            </div>
           </Flex>
         ))}
         {isPoapsLoading && (
