@@ -101,20 +101,21 @@ const ContentSection: React.FC<ContentProps> = ({
   }, [data]);
 
   const communityName = useMemo(() => {
-    if (fullSubname.split('.').length == 2) return "";
-    return `${fullSubname.split(".")[1]}.${fullSubname.split(".")[2]}`
-  }, [fullSubname])
+    if (fullSubname.split('.').length === 2) return '';
+    return `${fullSubname.split('.')[1]}.${fullSubname.split('.')[2]}`;
+  }, [fullSubname]);
 
   const { records: communityRecords } = useRecords({
     ens: communityName,
     chainId,
-    enabled: !isProfileCommunity
+    enabled: !isProfileCommunity,
   });
 
   const memberTabName = useMemo(() => {
-    return `Members (${data?.pages?.flatMap((subnameData) => subnameData)[0].pagination
-      .totalCount
-      })`;
+    return `Members (${
+      data?.pages?.flatMap((subnameData) => subnameData)[0].pagination
+        .totalCount
+    })`;
   }, [data]);
 
   const { createPluginApi } = useContext(PluginContext);
@@ -307,10 +308,10 @@ const ContentSection: React.FC<ContentProps> = ({
               margin: '0 15px',
             }}
           />
-          {!isProfileCommunity &&
+          {communityName.length > 0 && (
             <button
               onClick={() => {
-                openEnsProfile(communityName, chainId)
+                openEnsProfile(communityName, chainId);
               }}
               className={styles.communityBtn}
             >
@@ -322,13 +323,13 @@ const ContentSection: React.FC<ContentProps> = ({
                 })}
                 style={{
                   border: 'none',
-                  padding: 0
+                  padding: 0,
                 }}
                 size={10}
               />
               {communityName}
             </button>
-          }
+          )}
           <Flex direction={'row'} justify={'space-between'} align={'center'}>
             <P
               style={{
