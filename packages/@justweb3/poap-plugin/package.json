@@ -11,8 +11,7 @@
   },
   "exports": {
     "./package.json": "./dist/package.json",
-    ".": "./dist/index.esm.js",
-    "./server": "./server.js"
+    ".": "./dist/index.esm.js"
   },
   "publishConfig": {
     "access": "public"

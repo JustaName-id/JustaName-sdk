@@ -7,10 +7,6 @@ const path = require('path');
 
 module.exports = (config) => {
   const nxConfig = nrwlConfig(config);
-  nxConfig.input = {
-    index: path.join(__dirname, 'src/index.ts'),
-    'server/getPoaps': path.join(__dirname, 'src/server/getPoaps.ts'),
-  };
   return {
     ...nxConfig,
     plugins: [
