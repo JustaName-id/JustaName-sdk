@@ -33,12 +33,14 @@ export interface UseEnsPublicClientResult {
 
 export interface UseEnsPublicClientParams {
   chainId?: ChainId;
+  enabled?: boolean;
 }
 
 export const useEnsPublicClient = (
   params?: UseEnsPublicClientParams
 ): UseEnsPublicClientResult => {
   const { networks, chainId } = useJustaName();
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const _chainId = useMemo(
     () => params?.chainId || chainId,
     [params?.chainId, chainId]
@@ -54,6 +56,7 @@ export const useEnsPublicClient = (
     ...defaultOptions,
     queryKey: buildEnsPublicClientKey(_chainId),
     queryFn: () => getEnsPublicClient(_providerUrl, _chainId),
+    enabled: Boolean(_enabled),
   });
 
   return {

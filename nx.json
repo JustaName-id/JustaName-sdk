@@ -149,6 +149,9 @@
         "fallbackCurrentVersionResolver": "disk"
       }
     },
+    "git": {
+      "commitMessage": "chore(release): publish [skip ci]"
+    },
     "changelog": {
       "projectChangelogs": {
         "createRelease": "github"
@@ -163,7 +166,8 @@
       "packages/@justweb3/ui",
       "packages/@justweb3/widget",
       "packages/@justverified/plugin",
-      "packages/@justweb3/efp-plugin"
+      "packages/@justweb3/efp-plugin",
+      "packages/@justweb3/poap-plugin"
     ]
   },
   "defaultBase": "main"

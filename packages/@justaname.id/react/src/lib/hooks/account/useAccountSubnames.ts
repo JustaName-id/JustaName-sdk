@@ -1,9 +1,6 @@
-"use client";
+'use client';
 
-import {
-  QueryObserverResult,
-  RefetchOptions
-} from '@tanstack/react-query';
+import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { ChainId } from '@justaname.id/sdk';
 import { useMountedAccount } from './useMountedAccount';
 import { useAddressSubnames } from '../subname/useAddressSubnames';
@@ -12,13 +9,14 @@ import { useJustaName } from '../../providers';
 
 export interface UseConnectedWalletSubnamesOptions {
   chainId?: ChainId;
+  enabled?: boolean;
 }
 
 interface UseAccountSubnamesResult {
   accountSubnames: Records[];
   isAccountSubnamesPending: boolean;
   isAccountSubnamesFetching: boolean;
-  isAccountSubnamesLoading: boolean
+  isAccountSubnamesLoading: boolean;
   refetchAccountSubnames: (
     options?: RefetchOptions | undefined
   ) => Promise<QueryObserverResult<Records[] | undefined, unknown>>;
@@ -27,7 +25,7 @@ interface UseAccountSubnamesResult {
 export const useAccountSubnames = (
   params?: UseConnectedWalletSubnamesOptions
 ): UseAccountSubnamesResult => {
-  const { chainId } = useJustaName()
+  const { chainId } = useJustaName();
   const { address } = useMountedAccount();
   const _chainId = params?.chainId || chainId;
   const {
@@ -35,17 +33,18 @@ export const useAccountSubnames = (
     isAddressSubnamesFetching,
     isAddressSubnamesPending,
     isAddressSubnamesLoading,
-    refetchAddressSubnames
+    refetchAddressSubnames,
   } = useAddressSubnames({
     chainId: _chainId,
-    address
-  })
+    address,
+    enabled: params?.enabled,
+  });
 
   return {
     accountSubnames: addressSubnames,
     isAccountSubnamesPending: isAddressSubnamesPending,
     isAccountSubnamesFetching: isAddressSubnamesFetching,
     isAccountSubnamesLoading: isAddressSubnamesLoading,
-    refetchAccountSubnames: refetchAddressSubnames
-  }
+    refetchAccountSubnames: refetchAddressSubnames,
+  };
 };

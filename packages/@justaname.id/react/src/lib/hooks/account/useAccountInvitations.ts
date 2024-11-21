@@ -27,16 +27,17 @@ interface UseAccountInvitationsResult {
   ) => Promise<QueryObserverResult<Records[] | undefined, unknown>>;
 }
 
-export type UseAccountInvitationsParams = Omit<
-  SubnameGetInvitationsByAddressRoute['params'],
-  'address'
->;
+export interface UseAccountInvitationsParams
+  extends Omit<SubnameGetInvitationsByAddressRoute['params'], 'address'> {
+  enabled?: boolean;
+}
 
 export const useAccountInvitations = (
   params?: UseAccountInvitationsParams
 ): UseAccountInvitationsResult => {
   const { address } = useMountedAccount();
   const { justaname, chainId } = useJustaName();
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const _chainId = useMemo(() => params?.chainId || chainId, [params, chainId]);
 
   const query = useQuery({
@@ -55,7 +56,7 @@ export const useAccountInvitations = (
         })) || []
       );
     },
-    enabled: Boolean(address),
+    enabled: Boolean(address) && Boolean(justaname) && Boolean(_enabled),
   });
 
   return {

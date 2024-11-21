@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { justaname, Session, tap } from '../../../../lib';
+import { getJustaname, Session, tap } from '../../../../lib';
 import { SignInResponse } from '@justaname.id/sdk';
 
 export const POST = async (req: NextRequest) => {
@@ -10,7 +10,7 @@ export const POST = async (req: NextRequest) => {
   let signInMessage: SignInResponse;
 
   try {
-    signInMessage = await justaname.signIn.signIn({
+    signInMessage = await getJustaname().signIn.signIn({
       message,
       signature,
       nonce: session.nonce,

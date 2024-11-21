@@ -29,6 +29,7 @@ export interface UseAddressSubnamesParams
   address: string | undefined;
   isClaimed?: boolean;
   coinType?: number;
+  enabled?: boolean;
 }
 
 interface UseAddressSubnamesResult {
@@ -48,6 +49,7 @@ export const useAddressSubnames = (
   const { justaname, chainId: defaultChainId } = useJustaName();
   const { chainId, ...rest } = params;
   const _chainId = chainId || defaultChainId;
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
 
   const query = useQuery({
     ...defaultOptions,
@@ -82,7 +84,7 @@ export const useAddressSubnames = (
         })) || []
       );
     },
-    enabled: Boolean(justaname) && Boolean(params.address),
+    enabled: Boolean(justaname) && Boolean(params.address) && Boolean(_enabled),
   });
 
   return {

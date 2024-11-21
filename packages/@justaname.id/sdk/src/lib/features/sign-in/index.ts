@@ -128,9 +128,18 @@ export class SignIn {
           if (result.success) {
             return result;
           } else {
+            let signature = params.signature;
+            const lastByte = parseInt(params.signature.slice(-2), 16);
+            if (lastByte < 27) {
+              const adjustedV = (27 + (lastByte % 2))
+                .toString(16)
+                .padStart(2, '0');
+              signature = signature.slice(0, -2) + adjustedV;
+            }
+
             const viemResponse = await publicClient.verifySiweMessage({
               message: message.toMessage(),
-              signature: params.signature as `0x${string}`,
+              signature: signature as `0x${string}`,
               address: result.data.address as `0x${string}`,
               nonce: params.nonce,
               domain: params.domain as string,

@@ -1,84 +1,108 @@
 /* Container styles */
 .container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {
-    .container {
-        padding-left: 0;
-    }
+  .container {
+    padding-left: 0;
+  }
 }
 
 .bannerImage {
-    object-fit: cover;
-    height: 200px;
-    width: 100%;
-    border-radius: 16px;
+  object-fit: cover;
+  height: 20vh;
+  width: 100%;
+  border-radius: 16px;
 }
 
 /* BannerContainer styles */
 .bannerContainer {
-    width: 100%;
-    height: 200px;
-    aspect-ratio: 7 / 1;
-    overflow: hidden;
-    position: relative;
+  width: 100%;
+  height: 20vh;
+  aspect-ratio: 7 / 1;
+  overflow: hidden;
+  position: relative;
 }
 
 @media (max-width: 768px) {
-    .bannerContainer {
-        aspect-ratio: 2 / 1;
-        height: 100px;
-    }
+  .bannerContainer {
+    aspect-ratio: 2 / 1;
+    height: 100px;
+  }
 
-    .bannerImage{
-        height: 100px;
-    }
+  .bannerImage {
+    height: 100px;
+  }
 }
 
 /* SectionCard styles */
 .sectionCard {
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid var(--justweb3-foreground-color-4);
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--justweb3-foreground-color-4);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 /* SectionItemList styles */
 .sectionItemList {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    align-items: center;
-    gap: 10px;
-    overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
 }
 
 @media (max-width: 768px) {
-    .sectionItemList {
-        gap: 10px;
-    }
+  .sectionItemList {
+    gap: 10px;
+  }
 }
 
 @media (min-width: 768px) {
-    .sectionItemList {
-        display: flex;
-        flex-direction: row;
-    }
+  .sectionItemList {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 /* SectionItem styles */
 .sectionItem {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1.25rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.25rem;
 }
 
 @media (max-width: 768px) {
-    .sectionItem {
-        grid-column: span 6 / span 6;
-    }
+  .sectionItem {
+    grid-column: span 6 / span 6;
+  }
+}
+
+.communityBtn {
+  padding: 3px;
+  padding-right: 8px;
+  border-radius: 100px;
+  cursor: pointer;
+  background-color: color-mix(
+    in srgb,
+    var(--justweb3-primary-color) 20%,
+    transparent
+  );
+  color: var(--justweb3-primary-color);
+  font-weight: 600;
+  font-size: 8px;
+  font-family: var(--justweb3-font-family);
+  border: none;
+  line-height: 150%;
+  text-transform: capitalize;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
 }
