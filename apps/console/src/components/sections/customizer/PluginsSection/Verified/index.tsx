@@ -16,6 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '../../../../ui/accordion';
+import { getAnalyticsClient } from '../../../../../analytics';
 
 const socials: { logo: ReactNode; title: string; credential: Credentials }[] = [
   {
@@ -65,6 +66,7 @@ export const Verified = () => {
           ),
         ],
       });
+      getAnalyticsClient().track('JUST_VERIFIED_ENABLED', {});
     } else {
       handleJustWeb3Config({
         ...config,
@@ -72,6 +74,29 @@ export const Verified = () => {
           (plugin) => plugin.name !== 'JustVerifiedPlugin'
         ),
       });
+    }
+  };
+
+
+  const handleSocialEnabledAnalytics = (credential: Credentials) => {
+    switch (credential) {
+      case 'twitter':
+        getAnalyticsClient().track('TWITTER_ENABLED', {});
+        break;
+      case 'telegram':
+        getAnalyticsClient().track('TELEGRAM_ENABLED', {});
+        break;
+      case 'github':
+        getAnalyticsClient().track('GITHUB_ENABLED', {});
+        break;
+      case 'discord':
+        getAnalyticsClient().track('DISCORD_ENABLED', {});
+        break;
+      case 'email':
+        getAnalyticsClient().track('EMAIL_ENABLED', {});
+        break;
+      default:
+        break;
     }
   };
 
@@ -131,6 +156,7 @@ export const Verified = () => {
               onCheck={(platform) => {
                 if (justVerified) {
                   setJustVerified([...justVerified, platform as Credentials]);
+                  handleSocialEnabledAnalytics(platform as Credentials);
                 }
               }}
               onUncheck={(platform) => {
