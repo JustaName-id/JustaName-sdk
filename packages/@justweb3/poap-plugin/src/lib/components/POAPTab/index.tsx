@@ -1,8 +1,8 @@
 import { Flex, LoadingSpinner, P } from '@justweb3/ui';
-import { FC, Fragment, useEffect, useRef, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { usePoaps } from '../../hooks';
-import POAPCard from '../PoapCard';
 import { POAP } from '../../types';
+import POAPCard from '../PoapCard';
 
 type GroupedPoaps = {
   [key: string]: POAP[];
@@ -31,7 +31,6 @@ export interface POAPTabProps {
 }
 
 export const POAPTab: FC<POAPTabProps> = ({ address, apiKey, backendUrl }) => {
-  const poapsRef = useRef<HTMLDivElement>(null);
   const [groupedPoaps, setGroupedPoaps] = useState<GroupedPoaps>({});
   const [displayedMonths, setDisplayedMonths] = useState<string[]>([]);
 
@@ -90,7 +89,6 @@ export const POAPTab: FC<POAPTabProps> = ({ address, apiKey, backendUrl }) => {
           maxHeight: '100%',
           paddingRight: '5px',
         }}
-        ref={poapsRef}
       >
         {displayedMonths.map((monthYear) => (
           <Flex
