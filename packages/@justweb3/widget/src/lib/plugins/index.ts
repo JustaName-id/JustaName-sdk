@@ -37,6 +37,12 @@ type ProfileTabPluginComponent = (
   chainId: ChainId,
   address: string
 ) => { title: string; content: ReactNode } | undefined;
+type BadgePluginComponent = (
+  pluginApi: PluginApi,
+  ens: string,
+  chainId: ChainId,
+  address: string
+) => ReactNode | undefined;
 
 interface PluginComponents {
   Provider?: PluginProviderComponent;
@@ -45,6 +51,7 @@ interface PluginComponents {
   ProfileSection?: PluginRichComponent;
   ProfileHeader?: PluginRichComponent;
   ProfileTab?: ProfileTabPluginComponent;
+  Badge?: BadgePluginComponent;
 }
 
 type OnMountHook = (pluginApi: PluginApi) => void;
