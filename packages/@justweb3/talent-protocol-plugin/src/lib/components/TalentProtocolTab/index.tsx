@@ -1,9 +1,6 @@
 import { Flex, H2, LoadingSpinner } from '@justweb3/ui';
 import { FC, useEffect, useRef, useState } from 'react';
-import {
-  useTPCredentialsByAddress,
-  useTPPassportsByAddress,
-} from '../../hooks';
+import { useTPCredentialsByAddress, useTPPassportByAddress } from '../../hooks';
 import TalentProtocolCard from '../TalentProtocolCard';
 import { getCredentialIcon } from '../../icons';
 
@@ -32,7 +29,7 @@ export const TalentProtocolTab: FC<TalentProtocolTabProps> = ({
   apiKey,
   backendUrl,
 }) => {
-  const { tpPassports, isTPPassportsLoading } = useTPPassportsByAddress({
+  const { tpPassport, isTPPassportLoading } = useTPPassportByAddress({
     address,
     apiKey,
     backendUrl,
@@ -70,9 +67,9 @@ export const TalentProtocolTab: FC<TalentProtocolTabProps> = ({
     return () => {
       resizeObserver.unobserve(element); // Cleanup observer on unmount
     };
-  }, [credentialsRef, isTPCredentialsLoading, isTPPassportsLoading]);
+  }, [credentialsRef, isTPCredentialsLoading, isTPPassportLoading]);
 
-  if (isTPCredentialsLoading || isTPPassportsLoading) {
+  if (isTPCredentialsLoading || isTPPassportLoading) {
     return (
       <Flex
         style={{
@@ -107,7 +104,7 @@ export const TalentProtocolTab: FC<TalentProtocolTabProps> = ({
         }}
         ref={credentialsRef}
       >
-        {tpPassports && (
+        {tpPassport && (
           <div
             style={{
               minWidth: '335px',
@@ -125,11 +122,11 @@ export const TalentProtocolTab: FC<TalentProtocolTabProps> = ({
                     color: 'var(--justweb3-primary-color)',
                   }}
                 >
-                  {tpPassports.passport.score}
+                  {tpPassport.passport.score}
                 </H2>
               }
               title={'Builder Score'}
-              value={getScoreValue(tpPassports.passport.score)}
+              value={getScoreValue(tpPassport.passport.score)}
             />
           </div>
         )}

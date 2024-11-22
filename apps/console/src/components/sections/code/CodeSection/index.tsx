@@ -53,7 +53,7 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
 
     if (talentProtocolPluginEnabled) {
       plugins.push(
-        "%%TalentProtocolPlugin({ apiKey: '<YOUR_POAP_API_KEY>' })%%"
+        "%%TalentProtocolPlugin({ apiKey: '<YOUR_TALENT_PROTOCOL_API_KEY>' })%%"
       );
     }
 

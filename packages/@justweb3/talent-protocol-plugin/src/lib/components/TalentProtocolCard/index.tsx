@@ -37,6 +37,7 @@ const TalentProtocolCard: React.FC<TalentProtocolCardProps> = ({
           textAlign: 'center',
           alignItems: 'center',
           justifyContent: 'center',
+          boxSizing: 'content-box',
         }}
       >
         {icon}
