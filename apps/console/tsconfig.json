@@ -41,6 +41,12 @@
       ],
       "@justweb3/efp-plugin": [
         "packages/@justweb3/efp-plugin"
+      ],
+      "@justweb3/poap-plugin": [
+        "packages/@justweb3/poap-plugin"
+      ],
+      "@justweb3/talent-protocol-plugin": [
+        "packages/@justweb3/talent-protocol-plugin"
       ]
     }
   },

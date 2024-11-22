@@ -27,6 +27,11 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
     [config]
   );
 
+  const talentProtocolPluginEnabled = useMemo(
+    () => config.plugins?.find((p) => p.name === 'TalentProtocolPlugin'),
+    [config]
+  );
+
   const codeSnippet = useMemo(() => {
     const plugins = [];
 
@@ -44,6 +49,12 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
 
     if (poapPluginEnabled) {
       plugins.push("%%POAPPlugin({ apiKey: '<YOUR_POAP_API_KEY>' })%%");
+    }
+
+    if (talentProtocolPluginEnabled) {
+      plugins.push(
+        "%%TalentProtocolPlugin({ apiKey: '<YOUR_POAP_API_KEY>' })%%"
+      );
     }
 
     return `
@@ -80,6 +91,11 @@ ${
 ${efpPluginEnabled ? "import { EFPPlugin } from '@justweb3/efp-plugin';" : ''}
 ${
   poapPluginEnabled ? "import { POAPPlugin } from '@justweb3/poap-plugin';" : ''
+}
+${
+  talentProtocolPluginEnabled
+    ? "import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';"
+    : ''
 }
 
 export const App: React.FC = () => {
@@ -146,6 +162,7 @@ export default App;`.trim();
     justVerified,
     justVerifiedEnabled,
     poapPluginEnabled,
+    talentProtocolPluginEnabled,
   ]);
 
   const code = useMemo(() => {
@@ -157,10 +174,15 @@ export default App;`.trim();
   const dependencies = useMemo(() => {
     return `yarn add ${justVerifiedEnabled ? '@justverified/plugin' : ''} ${
       poapPluginEnabled ? '@justweb3/poap-plugin' : ''
-    } ${
-      efpPluginEnabled ? '@justweb3/efp-plugin' : ''
-    } @justweb3/widget viem wagmi @rainbow-me/rainbowkit @tanstack/react-query ethers`;
-  }, [efpPluginEnabled, justVerifiedEnabled, poapPluginEnabled]);
+    } ${efpPluginEnabled ? '@justweb3/efp-plugin' : ''}
+     ${talentProtocolPluginEnabled ? '@justweb3/talent-protocol-plugin' : ''}
+     @justweb3/widget viem wagmi @rainbow-me/rainbowkit @tanstack/react-query ethers`;
+  }, [
+    efpPluginEnabled,
+    justVerifiedEnabled,
+    poapPluginEnabled,
+    talentProtocolPluginEnabled,
+  ]);
 
   const handleDependenciesCopy = () => {
     navigator.clipboard.writeText(dependencies);
