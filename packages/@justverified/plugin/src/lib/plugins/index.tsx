@@ -12,7 +12,6 @@ export const JustVerifiedPlugin = (
   mApp = 'justverified.eth'
 ): JustaPlugin => ({
   name: 'JustVerifiedPlugin',
-  // mApps: [mApp],
   components: {
     Provider: (pluginApi, children) => {
       const chainId = pluginApi.chainId;
@@ -85,16 +84,6 @@ export const JustVerifiedPlugin = (
       }
 
       pluginApi.setState('verificationOpen', true);
-
-      // setTimeout(() => {
-      //   if (
-      //     canEnableMApps &&
-      //     !enabledMApps.includes('justverified.eth') &&
-      //     !Object.values(verifiableRecords).some((value) => value)
-      //   ) {
-      //     pluginApi.handleOpenAuthorizeMAppDialog(mApp, true);
-      //   }
-      // }, 1000);
     },
     onEnsSignOut: (pluginApi, ens) => {
       pluginApi.setState('verificationOpen', false);

@@ -181,19 +181,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
             setMobileDialogOpen(true);
           }
         }}
-        // right={
-        //   <Badge
-        //     withCopy={false}
-        //     style={{
-        //       padding: '5px',
-        //       fontSize: '10px',
-        //       fontWeight: 800,
-        //     }}
-        //   >
-        //     {address && formatText(address, 4)}
-        //     <WalletIcon width={15} />
-        //   </Badge>
-        // }
       />
     );
   };
@@ -303,9 +290,14 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           }
 
           return (
-            <Fragment key={'signin-item-' + plugin.name}>
+            <div
+              key={'signin-item-' + plugin.name}
+              onClick={() => {
+                setMobileDialogOpen(false);
+              }}
+            >
               {component(createPluginApi(plugin.name))}
-            </Fragment>
+            </div>
           );
         })}
 
