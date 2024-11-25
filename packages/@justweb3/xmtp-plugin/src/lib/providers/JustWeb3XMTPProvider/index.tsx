@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import {
   attachmentContentTypeConfig,
+  CachedConversation,
+  ContentTypeMetadata,
   reactionContentTypeConfig,
   replyContentTypeConfig,
   useClient,
@@ -8,6 +10,7 @@ import {
 } from '@xmtp/react-sdk';
 import { useJustWeb3 } from '@justweb3/widget';
 import { ChatSheet } from '../../components/ChatSheet';
+import { MessageSheet } from '../../components/MessageSheet';
 
 const contentTypeConfigs = [
   attachmentContentTypeConfig,
@@ -33,15 +36,34 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
   handleOpen,
 }) => {
   const [isXmtpEnabled, setIsXmtpEnabled] = React.useState(false);
+  const [conversation, setConversation] =
+    React.useState<CachedConversation<ContentTypeMetadata> | null>(null);
   const handleXmtpEnabled = (enabled: boolean) => {
     setIsXmtpEnabled(enabled);
+  };
+
+  const handleOpenChat = (
+    conversation: CachedConversation<ContentTypeMetadata> | null
+  ) => {
+    setConversation(conversation);
   };
 
   return (
     <XMTPProvider contentTypeConfigs={contentTypeConfigs}>
       <JustWeb3XMTPContext.Provider value={undefined}>
         <Checks open={open} handleXmtpEnabled={handleXmtpEnabled} />
-        {isXmtpEnabled && <ChatSheet open={open} handleOpen={handleOpen} />}
+        <MessageSheet
+          handleOpenChat={handleOpenChat}
+          openChat={!!conversation}
+          conversation={conversation}
+        />
+        {isXmtpEnabled && (
+          <ChatSheet
+            open={open}
+            handleOpen={handleOpen}
+            handleOpenChat={handleOpenChat}
+          />
+        )}
         {children}
       </JustWeb3XMTPContext.Provider>
     </XMTPProvider>

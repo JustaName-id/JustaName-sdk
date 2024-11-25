@@ -26,6 +26,7 @@ export const ChatButton: React.FC<ChatButtonProps> = ({ handleOpen }) => {
       handleOpen(true);
     }
   };
+
   return (
     <ClickableItem
       title={'Chat'}

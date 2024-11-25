@@ -9,8 +9,11 @@ import {
 } from '@justweb3/ui';
 import React, { useEffect, useMemo } from 'react';
 import {
+  CachedConversation,
+  ContentTypeMetadata,
   useConsent,
   useConversations,
+  useStreamAllMessages,
   useStreamConversations,
 } from '@xmtp/react-sdk';
 import { ChatList } from '../ChatList';
@@ -18,9 +21,16 @@ import { ChatList } from '../ChatList';
 export interface ChatSheetProps {
   open?: boolean;
   handleOpen?: (open: boolean) => void;
+  handleOpenChat: (
+    conversation: CachedConversation<ContentTypeMetadata> | null
+  ) => void;
 }
 
-export const ChatSheet: React.FC<ChatSheetProps> = ({ open, handleOpen }) => {
+export const ChatSheet: React.FC<ChatSheetProps> = ({
+  open,
+  handleOpen,
+  handleOpenChat,
+}) => {
   const [tab, setTab] = React.useState('Chats');
   const { conversations, isLoading } = useConversations();
   const [isConsentListLoading, setIsConsentListLoading] = React.useState(true);
@@ -58,6 +68,7 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({ open, handleOpen }) => {
   }, [loadConsentList]);
 
   useStreamConversations();
+  useStreamAllMessages();
 
   return (
     <Sheet open={open} onOpenChange={handleOpen}>
@@ -100,13 +111,22 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({ open, handleOpen }) => {
           ) : (
             <>
               <TabsContent value={'Chats'}>
-                <ChatList conversations={allowedConversations} />
+                <ChatList
+                  conversations={allowedConversations}
+                  handleOpenChat={handleOpenChat}
+                />
               </TabsContent>
               <TabsContent value={'Requests'}>
-                <ChatList conversations={requestConversations} />
+                <ChatList
+                  conversations={requestConversations}
+                  handleOpenChat={handleOpenChat}
+                />
               </TabsContent>
               <TabsContent value={'Blocked'}>
-                <ChatList conversations={blockedConversations} />
+                <ChatList
+                  conversations={blockedConversations}
+                  handleOpenChat={handleOpenChat}
+                />
               </TabsContent>
             </>
           )}
