@@ -18,7 +18,7 @@ const contentTypeConfigs = [
   replyContentTypeConfig,
 ];
 
-interface JustWeb3XMTPContextProps {}
+interface JustWeb3XMTPContextProps { }
 
 const JustWeb3XMTPContext = React.createContext<
   JustWeb3XMTPContextProps | undefined

@@ -1,5 +1,5 @@
 import { CachedConversation, ContentTypeMetadata } from '@xmtp/react-sdk';
-import { Sheet, SheetContent } from '@justweb3/ui';
+import { Sheet, SheetContent, SheetTitle } from '@justweb3/ui';
 import { Chat } from '../Chat';
 
 export interface MessageSheetProps {
@@ -21,8 +21,8 @@ export const MessageSheet: React.FC<MessageSheetProps> = ({
       onOpenChange={(open) => !open && handleOpenChat(null)}
     >
       <SheetContent side="right" overlay={false} style={{ width: '100%' }}>
-        Messages
-        {conversation && <Chat conversation={conversation} />}
+        <SheetTitle>Messages</SheetTitle>
+        {conversation && <Chat conversation={conversation} onBack={() => handleOpenChat(null)} />}
       </SheetContent>
     </Sheet>
   );

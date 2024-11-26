@@ -1,0 +1,10 @@
+<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="add_photo_alternate">
+<mask id="mask0_3905_2403" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="15">
+<rect id="Bounding box" width="15" height="15" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_3905_2403)">
+<path id="add_photo_alternate_2" d="M3.125 13.125C2.78125 13.125 2.48698 13.0026 2.24219 12.7578C1.9974 12.513 1.875 12.2188 1.875 11.875V3.125C1.875 2.78125 1.9974 2.48698 2.24219 2.24219C2.48698 1.9974 2.78125 1.875 3.125 1.875H8.75V5H10V6.25H13.125V11.875C13.125 12.2188 13.0026 12.513 12.7578 12.7578C12.513 13.0026 12.2188 13.125 11.875 13.125H3.125ZM3.75 10.625H11.25L8.90625 7.5L7.03125 10L5.625 8.125L3.75 10.625ZM10.625 5.625V4.375H9.375V3.125H10.625V1.875H11.875V3.125H13.125V4.375H11.875V5.625H10.625Z" fill="var(--justweb3-primary-color)"/>
+</g>
+</g>
+</svg>

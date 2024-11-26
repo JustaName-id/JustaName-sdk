@@ -40,7 +40,7 @@
             "command": "node update-package-json.js"
           },
           {
-            "command": "rm -rf node_modules || rmdir /s /q node_modules"
+            "command": "rmdir /s /q node_modules"
           }
         ],
         "cwd": "packages/@justweb3/ui",

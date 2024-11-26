@@ -1672,7 +1672,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.6, @babel/runtime@npm:^7.19.4, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.22.6, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.25.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.6, @babel/runtime@npm:^7.19.4, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.22.6, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.23.8, @babel/runtime@npm:^7.24.4, @babel/runtime@npm:^7.25.0, @babel/runtime@npm:^7.25.6, @babel/runtime@npm:^7.26.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.26.0
   resolution: "@babel/runtime@npm:7.26.0"
   dependencies:
@@ -7058,6 +7058,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/number@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@radix-ui/number@npm:1.1.0"
+  checksum: 10c0/a48e34d5ff1484de1b7cf5d7317fefc831d49e96a2229f300fd37b657bd8cfb59c922830c00ec02838ab21de3b299a523474592e4f30882153412ed47edce6a4
+  languageName: node
+  linkType: hard
+
 "@radix-ui/primitive@npm:1.1.0":
   version: 1.1.0
   resolution: "@radix-ui/primitive@npm:1.1.0"
@@ -7593,6 +7600,35 @@ __metadata:
     "@types/react-dom":
       optional: true
   checksum: 10c0/ce367d3033a12d639a8d445d2efa090aa4bc5a78125be568f8c8e4e59f30afd51b585a90031ec18cdba19afbaf1974633dbc0c2c3d2a14d9eb1bfea2ddbe5369
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-slider@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@radix-ui/react-slider@npm:1.2.1"
+  dependencies:
+    "@radix-ui/number": "npm:1.1.0"
+    "@radix-ui/primitive": "npm:1.1.0"
+    "@radix-ui/react-collection": "npm:1.1.0"
+    "@radix-ui/react-compose-refs": "npm:1.1.0"
+    "@radix-ui/react-context": "npm:1.1.1"
+    "@radix-ui/react-direction": "npm:1.1.0"
+    "@radix-ui/react-primitive": "npm:2.0.0"
+    "@radix-ui/react-use-controllable-state": "npm:1.1.0"
+    "@radix-ui/react-use-layout-effect": "npm:1.1.0"
+    "@radix-ui/react-use-previous": "npm:1.1.0"
+    "@radix-ui/react-use-size": "npm:1.1.0"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/f39b67f019accc2fddebddb0d7f5bca7fc6ce8b370d294779e5139f7f36135ead9dff8672a9e4d5c771103280df9a05185ff17656d11e9eb88170e8f30e5efb4
   languageName: node
   linkType: hard
 
@@ -15229,6 +15265,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"automation-events@npm:^7.0.9":
+  version: 7.1.4
+  resolution: "automation-events@npm:7.1.4"
+  dependencies:
+    "@babel/runtime": "npm:^7.26.0"
+    tslib: "npm:^2.8.1"
+  checksum: 10c0/422e6b9046640d6d527ec9662b07c4fa9c04f26ef56c6fa418fcfcd7e41b3e2a48b2ae72f8255fca64982f232155653aa814346fc963cb0f1adc61c00470bf81
+  languageName: node
+  linkType: hard
+
 "autoprefixer@npm:^10.4.20, autoprefixer@npm:^10.4.9":
   version: 10.4.20
   resolution: "autoprefixer@npm:10.4.20"
@@ -15967,6 +16013,18 @@ __metadata:
   dependencies:
     fill-range: "npm:^7.1.1"
   checksum: 10c0/7c6dfd30c338d2997ba77500539227b9d1f85e388a5f43220865201e407e076783d0881f2d297b9f80951b4c957fcf0b51c1d2d24227631643c3f7c284b0aa04
+  languageName: node
+  linkType: hard
+
+"broker-factory@npm:^3.0.107, broker-factory@npm:^3.0.97":
+  version: 3.0.107
+  resolution: "broker-factory@npm:3.0.107"
+  dependencies:
+    "@babel/runtime": "npm:^7.26.0"
+    fast-unique-numbers: "npm:^9.0.14"
+    tslib: "npm:^2.8.1"
+    worker-factory: "npm:^7.0.34"
+  checksum: 10c0/f0dd17dd86471e9b89b36fcb4e2dac2dc1457ed17e548fc65f95942e54f8330911666e226f077583fff33575200cedb07959658db86b64c4974fe3f3f792b5b2
   languageName: node
   linkType: hard
 
@@ -21260,6 +21318,56 @@ __metadata:
   languageName: node
   linkType: hard
 
+"extendable-media-recorder-wav-encoder-broker@npm:^7.0.100, extendable-media-recorder-wav-encoder-broker@npm:^7.0.111":
+  version: 7.0.111
+  resolution: "extendable-media-recorder-wav-encoder-broker@npm:7.0.111"
+  dependencies:
+    "@babel/runtime": "npm:^7.26.0"
+    broker-factory: "npm:^3.0.107"
+    extendable-media-recorder-wav-encoder-worker: "npm:^8.0.108"
+    tslib: "npm:^2.8.1"
+  checksum: 10c0/ecbfd6f600dbfa87d87332efc1eaedae5bdba90b60f6941178ebde5636aaa6b0bbfca3b17d611e8887c9fc52a5babf0f6b0737f8e0c2d4fc78b3d2c1ed3efe34
+  languageName: node
+  linkType: hard
+
+"extendable-media-recorder-wav-encoder-worker@npm:^8.0.108":
+  version: 8.0.108
+  resolution: "extendable-media-recorder-wav-encoder-worker@npm:8.0.108"
+  dependencies:
+    "@babel/runtime": "npm:^7.26.0"
+    tslib: "npm:^2.8.1"
+    worker-factory: "npm:^7.0.34"
+  checksum: 10c0/06cab89e1fe0d7e5f8113a4dab6ccb11a4083412eab2b64f02cc76e0637c7b6dcdad3731fef8533813fa716f789beff08a875f82a43d1b409a59d5ebc9591b2d
+  languageName: node
+  linkType: hard
+
+"extendable-media-recorder-wav-encoder@npm:^7.0.85":
+  version: 7.0.121
+  resolution: "extendable-media-recorder-wav-encoder@npm:7.0.121"
+  dependencies:
+    "@babel/runtime": "npm:^7.26.0"
+    extendable-media-recorder-wav-encoder-broker: "npm:^7.0.111"
+    extendable-media-recorder-wav-encoder-worker: "npm:^8.0.108"
+    tslib: "npm:^2.8.1"
+  checksum: 10c0/3afd95e9986214630dfe0e9ed55bb0cba5639ab3b98e15a8b97f58d2ba10e40d9eb3ef0c24cbd43cd44bef17fcfd1632b76734344ff514742b7171ad3c1c9499
+  languageName: node
+  linkType: hard
+
+"extendable-media-recorder@npm:^7.1.9":
+  version: 7.1.22
+  resolution: "extendable-media-recorder@npm:7.1.22"
+  dependencies:
+    "@babel/runtime": "npm:^7.22.6"
+    media-encoder-host: "npm:^8.0.98"
+    multi-buffer-data-view: "npm:^5.0.7"
+    recorder-audio-worklet: "npm:^6.0.12"
+    standardized-audio-context: "npm:^25.3.54"
+    subscribable-things: "npm:^2.1.22"
+    tslib: "npm:^2.6.0"
+  checksum: 10c0/ae7631708bf32feeb59ff058b6b1f09e75befb6c8d6c12b86e4a515f36e174f8d8d96b96658ea900201778622cfa5f39ca020c92ea53df2ae3cf548f2d1ab562
+  languageName: node
+  linkType: hard
+
 "extension-port-stream@npm:^3.0.0":
   version: 3.0.0
   resolution: "extension-port-stream@npm:3.0.0"
@@ -21405,6 +21513,16 @@ __metadata:
   version: 1.0.6
   resolution: "fast-text-encoding@npm:1.0.6"
   checksum: 10c0/e1d0381bda229c92c7906f63308f3b9caca8c78b732768b1ee16f560089ed21bc159bbe1434138ccd3815931ec8d4785bdade1ad1c45accfdf27ac6606ac67d2
+  languageName: node
+  linkType: hard
+
+"fast-unique-numbers@npm:^9.0.14, fast-unique-numbers@npm:^9.0.4":
+  version: 9.0.14
+  resolution: "fast-unique-numbers@npm:9.0.14"
+  dependencies:
+    "@babel/runtime": "npm:^7.26.0"
+    tslib: "npm:^2.8.1"
+  checksum: 10c0/cb9316e207f29ddc79ce6b893a86663883c2627a119226446b11086a9a31f990203097b3eb645c0de02937188866cdb419b8e0d41e83cbe1510b504539b36dda
   languageName: node
   linkType: hard
 
@@ -26575,6 +26693,7 @@ __metadata:
     "@radix-ui/react-label": "npm:^2.1.0"
     "@radix-ui/react-popover": "npm:^1.1.1"
     "@radix-ui/react-radio-group": "npm:^1.2.1"
+    "@radix-ui/react-slider": "npm:^1.2.1"
     "@radix-ui/react-switch": "npm:^1.1.1"
     "@radix-ui/react-tabs": "npm:^1.1.1"
     "@radix-ui/react-tooltip": "npm:^1.1.4"
@@ -26702,6 +26821,7 @@ __metadata:
     react-code-blocks: "npm:^0.1.6"
     react-dom: "npm:18.3.1"
     react-hook-form: "npm:^7.53.0"
+    react-media-recorder-2: "npm:^1.6.23"
     react-native: "npm:0.73.2"
     react-native-svg: "npm:14.1.0"
     react-native-svg-transformer: "npm:1.2.0"
@@ -26711,6 +26831,7 @@ __metadata:
     react-router-dom: "npm:6.11.2"
     react-split: "npm:^2.0.14"
     react-test-renderer: "npm:18.2.0"
+    react-timer-hook: "npm:^3.0.8"
     react-tiny-popover: "npm:^8.0.4"
     rollup: "npm:^4.24.0"
     rollup-plugin-postcss: "npm:^4.0.2"
@@ -28090,6 +28211,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"media-encoder-host-broker@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "media-encoder-host-broker@npm:7.1.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.24.4"
+    broker-factory: "npm:^3.0.97"
+    fast-unique-numbers: "npm:^9.0.4"
+    media-encoder-host-worker: "npm:^9.2.0"
+    tslib: "npm:^2.6.2"
+  checksum: 10c0/0387ef42930aa757377fb90542feb8dc0bac5a1f0baec97688fad9061afde0dbf1c75f4fe8f04412a087739c738f2556ca03d0d8a1dd5f064d0cad29c5c15c38
+  languageName: node
+  linkType: hard
+
+"media-encoder-host-worker@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "media-encoder-host-worker@npm:9.2.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.24.4"
+    extendable-media-recorder-wav-encoder-broker: "npm:^7.0.100"
+    tslib: "npm:^2.6.2"
+    worker-factory: "npm:^7.0.24"
+  checksum: 10c0/5fd1464898ec198e35877ead3e38998c7132425c35e49336986edce048088c1f2d5d3e15baac619cc217904090e8cf0d2a3ca44d6487244fbba3e62f1e58613b
+  languageName: node
+  linkType: hard
+
+"media-encoder-host@npm:^8.0.98":
+  version: 8.1.0
+  resolution: "media-encoder-host@npm:8.1.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.24.4"
+    media-encoder-host-broker: "npm:^7.1.0"
+    media-encoder-host-worker: "npm:^9.2.0"
+    tslib: "npm:^2.6.2"
+  checksum: 10c0/e274c446f20a175897ab593bd5bcb9d62dd65e6851a35bb9d117f3ada568cbcea91d878ebbd9a946f1abfb92286d626f02901777b8b478c74733201004c81c19
+  languageName: node
+  linkType: hard
+
 "media-query-parser@npm:^2.0.2":
   version: 2.0.2
   resolution: "media-query-parser@npm:2.0.2"
@@ -28934,6 +29092,16 @@ __metadata:
   version: 0.3.1
   resolution: "muggle-string@npm:0.3.1"
   checksum: 10c0/489b0575fa76e30914393915a36638590052409fca2206a6bef0fb0ad7b181c1cbf99761191bfd16fe402c6f5a3164897965422fa32ef20ada1b44024ba46ab6
+  languageName: node
+  linkType: hard
+
+"multi-buffer-data-view@npm:^5.0.7":
+  version: 5.0.14
+  resolution: "multi-buffer-data-view@npm:5.0.14"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.8"
+    tslib: "npm:^2.6.2"
+  checksum: 10c0/64722bff9c1d095feda26682a29587bb8ecad0ffbfcd8d89e90668f738ebc704612f88186f8af859af12bd8dfbac8933dcd1f27d96f772c9bb6154cc9b6fabbd
   languageName: node
   linkType: hard
 
@@ -33060,6 +33228,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-media-recorder-2@npm:^1.6.23":
+  version: 1.6.23
+  resolution: "react-media-recorder-2@npm:1.6.23"
+  dependencies:
+    extendable-media-recorder: "npm:^7.1.9"
+    extendable-media-recorder-wav-encoder: "npm:^7.0.85"
+  checksum: 10c0/fd922d6e40a39abb2b04001569c9309334ba747bd9c6ed190042e012142ebfd8cb44cae73fae685a46bda1d9ee49bdb11377a6286a41f96240e1b92fd3c5daa1
+  languageName: node
+  linkType: hard
+
 "react-native-svg-transformer@npm:1.2.0":
   version: 1.2.0
   resolution: "react-native-svg-transformer@npm:1.2.0"
@@ -33330,6 +33508,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-timer-hook@npm:^3.0.8":
+  version: 3.0.8
+  resolution: "react-timer-hook@npm:3.0.8"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10c0/3ee67def88bbe5d848ac02c9a795e49bc2bd248357e6119b26ad5ee1d98d66e5be21431d33e0e457da8bf2919c7cc5a3438f792e4fb5e44e8b80664f309af93e
+  languageName: node
+  linkType: hard
+
 "react-tiny-popover@npm:^8.0.4":
   version: 8.1.2
   resolution: "react-tiny-popover@npm:8.1.2"
@@ -33554,6 +33741,32 @@ __metadata:
   dependencies:
     resolve: "npm:^1.20.0"
   checksum: 10c0/1a30074124a22abbd5d44d802dac26407fa72a0a95f162aa5504ba8246bc5452f8b1a027b154d9bdbabcd8764920ff9333d934c46a8f17479c8912e92332f3ff
+  languageName: node
+  linkType: hard
+
+"recorder-audio-worklet-processor@npm:^5.0.29":
+  version: 5.0.29
+  resolution: "recorder-audio-worklet-processor@npm:5.0.29"
+  dependencies:
+    "@babel/runtime": "npm:^7.26.0"
+    tslib: "npm:^2.8.1"
+  checksum: 10c0/5485b3a84f1a5970fac35ce35315540367b286716246239d81ebb977c251c42386508df8ae01abe6e4f697312002c07d16ee0626fe0db95e2d794d05e88801f8
+  languageName: node
+  linkType: hard
+
+"recorder-audio-worklet@npm:^6.0.12":
+  version: 6.0.39
+  resolution: "recorder-audio-worklet@npm:6.0.39"
+  dependencies:
+    "@babel/runtime": "npm:^7.26.0"
+    broker-factory: "npm:^3.0.107"
+    fast-unique-numbers: "npm:^9.0.14"
+    recorder-audio-worklet-processor: "npm:^5.0.29"
+    standardized-audio-context: "npm:^25.3.77"
+    subscribable-things: "npm:^2.1.45"
+    tslib: "npm:^2.8.1"
+    worker-factory: "npm:^7.0.34"
+  checksum: 10c0/38ec13a988a130b2e65a62a54cbd8e37c77c5638f47ef8b3df85787311df4c6eb0024da1fb8e170ec8dedb2e477f83cf4faaf070d40bc46c87c7b81da51bda80
   languageName: node
   linkType: hard
 
@@ -34302,6 +34515,13 @@ __metadata:
   dependencies:
     queue-microtask: "npm:^1.2.2"
   checksum: 10c0/200b5ab25b5b8b7113f9901bfe3afc347e19bb7475b267d55ad0eb86a62a46d77510cb0f232507c9e5d497ebda569a08a9867d0d14f57a82ad5564d991588b39
+  languageName: node
+  linkType: hard
+
+"rxjs-interop@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "rxjs-interop@npm:2.0.0"
+  checksum: 10c0/609d4766630624af138b4def9dcc435b5e2118f72e2e84cda6213315585c7160b40c5d3a88c2c166997f5c28f5ea03451c73d86d240e92e7be5fce25b37b5028
   languageName: node
   linkType: hard
 
@@ -35539,6 +35759,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"standardized-audio-context@npm:^25.3.54, standardized-audio-context@npm:^25.3.77":
+  version: 25.3.77
+  resolution: "standardized-audio-context@npm:25.3.77"
+  dependencies:
+    "@babel/runtime": "npm:^7.25.6"
+    automation-events: "npm:^7.0.9"
+    tslib: "npm:^2.7.0"
+  checksum: 10c0/41d5e3a64b881691fecd709313045ab9bddb864ed79c6eb51490056cec080e808e9f5b3ef94d734567b9da88f9c95e68cc63a3a0343374b2f865b1a961fb46ef
+  languageName: node
+  linkType: hard
+
 "statuses@npm:2.0.1":
   version: 2.0.1
   resolution: "statuses@npm:2.0.1"
@@ -36163,6 +36394,17 @@ __metadata:
   bin:
     stylus: bin/stylus
   checksum: 10c0/77888e4bf66a934a70fcc39af015355c7a2e5ca4e4a8131ffac3a1021d6764380c0c9d882266fb278879501c55349e7cc3bb6cbde9c77cbd2605111ad5c51ad6
+  languageName: node
+  linkType: hard
+
+"subscribable-things@npm:^2.1.22, subscribable-things@npm:^2.1.45":
+  version: 2.1.45
+  resolution: "subscribable-things@npm:2.1.45"
+  dependencies:
+    "@babel/runtime": "npm:^7.26.0"
+    rxjs-interop: "npm:^2.0.0"
+    tslib: "npm:^2.8.1"
+  checksum: 10c0/6e2151b5ce0fdd1db671a139c4b878656ed4615525942f69501b9c0c37b955c13bdb566be3430cc29d89aedbdefae81bf61b473d54e68ab4b4185220096c5200
   languageName: node
   linkType: hard
 
@@ -37150,6 +37392,13 @@ __metadata:
   version: 2.8.0
   resolution: "tslib@npm:2.8.0"
   checksum: 10c0/31e4d14dc1355e9b89e4d3c893a18abb7f90b6886b089c2da91224d0a7752c79f3ddc41bc1aa0a588ac895bd97bb99c5bc2bfdb2f86de849f31caeb3ba79bbe5
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.7.0, tslib@npm:^2.8.1":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
   languageName: node
   linkType: hard
 
@@ -39388,6 +39637,17 @@ __metadata:
   version: 1.0.0
   resolution: "wordwrap@npm:1.0.0"
   checksum: 10c0/7ed2e44f3c33c5c3e3771134d2b0aee4314c9e49c749e37f464bf69f2bcdf0cbf9419ca638098e2717cff4875c47f56a007532f6111c3319f557a2ca91278e92
+  languageName: node
+  linkType: hard
+
+"worker-factory@npm:^7.0.24, worker-factory@npm:^7.0.34":
+  version: 7.0.34
+  resolution: "worker-factory@npm:7.0.34"
+  dependencies:
+    "@babel/runtime": "npm:^7.26.0"
+    fast-unique-numbers: "npm:^9.0.14"
+    tslib: "npm:^2.8.1"
+  checksum: 10c0/699b1141ca6262f315f2e54dc018da8b44ff3a4851c88f068cf524ae5988ebffb5a121bd48588dee58160ea6b84fbad28c6aded68e56d01a27141b2b4a0951f4
   languageName: node
   linkType: hard
 

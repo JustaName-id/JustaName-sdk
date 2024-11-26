@@ -1,5 +1,4 @@
 import type { SVGProps } from 'react';
-
 export default function Profile(props: SVGProps<SVGSVGElement>) {
   return (
     <svg

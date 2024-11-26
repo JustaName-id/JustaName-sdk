@@ -17,3 +17,4 @@ export * from './ToolTip';
 export * from './Sheet';
 export * from './Label';
 export * from './Checkbox';
+export * from './Skeleton';
