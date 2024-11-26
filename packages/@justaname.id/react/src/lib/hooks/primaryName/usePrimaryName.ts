@@ -1,10 +1,11 @@
 import { Address } from 'viem';
-import { getName } from '@ensdomains/ensjs/public';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ChainId } from '@justaname.id/sdk';
 import { useJustaName } from '../../providers';
 import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { defaultOptions } from '../../query';
+import { getName } from '@ensdomains/ensjs/public';
+import { PrimaryNameTaskQueue } from './primary-name-task-queue';
 
 export const buildPrimaryName = (
   address: string,
@@ -58,24 +59,52 @@ export const usePrimaryName = (
 
     let name = '';
 
-    const reverseResolution = await getName(ensClient, {
-      address: params?.address,
-    });
-
-    if (reverseResolution && reverseResolution?.name) {
-      name = reverseResolution.name;
-    } else {
+    try {
       const primaryNameGetByAddressResponse =
         await justaname.subnames.getPrimaryNameByAddress({
           address: params?.address,
           chainId: _chainId,
         });
 
-      if (primaryNameGetByAddressResponse) {
-        name = primaryNameGetByAddressResponse.name;
+      name = primaryNameGetByAddressResponse.name;
+    } catch (error) {
+      /* empty */
+    }
+    if (!name) {
+      const taskFn = () => {
+        if (!params?.address) {
+          throw new Error('Address is required');
+        }
+        return getName(ensClient, {
+          address: params?.address,
+        });
+      };
+
+      const reverseResolution = await PrimaryNameTaskQueue.enqueue(taskFn);
+
+      if (reverseResolution && reverseResolution?.name) {
+        name = reverseResolution.name;
       }
     }
 
+    // const reverseResolution = await getName(ensClient, {
+    //   address: params?.address,
+    // });
+    //
+    // if (reverseResolution && reverseResolution?.name) {
+    //   name = reverseResolution.name;
+    // } else {
+    //   const primaryNameGetByAddressResponse =
+    //     await justaname.subnames.getPrimaryNameByAddress({
+    //       address: params?.address,
+    //       chainId: _chainId,
+    //     });
+    //
+    //   if (primaryNameGetByAddressResponse) {
+    //     name = primaryNameGetByAddressResponse.name;
+    //   }
+    // }
+    //
     return name;
   };
 

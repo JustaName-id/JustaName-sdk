@@ -40,7 +40,7 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   mApps: ['justverified.eth', 'justweb3.eth'],
   openOnWalletConnect: false,
   allowedEns: 'all',
-  dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
 };
 
 const UpdateButton = () => {

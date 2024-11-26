@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { defaultOptions } from '@justaname.id/react';
 
 export const buildStatsQueryKey = (addressOrEns: string | undefined) => {
   return ['EFP_STATS', addressOrEns];
@@ -31,6 +32,7 @@ export interface UseStatsResult {
 
 export const useStats = ({ addressOrEns }: UseStatsParams): UseStatsResult => {
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildStatsQueryKey(addressOrEns),
     queryFn: () => getStats(addressOrEns),
     enabled: Boolean(addressOrEns),
