@@ -1,0 +1,13 @@
+<svg aria-hidden="true" color="white" fill="none" focusable="false" height="64" viewBox="0 0 65 64"
+     width="65" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_783_7237)">
+    <path
+      d="M31.9162 63.443C49.466 63.443 63.693 49.2408 63.693 31.7215C63.693 14.2022 49.466 0 31.9162 0C15.2659 0 1.60658 12.7835 0.25 29.055H42.2517V34.388H0.25C1.60658 50.6595 15.2659 63.443 31.9162 63.443Z"
+      fill="var(--justweb3-primary-color)"></path>
+  </g>
+  <defs>
+    <clipPath id="clip0_783_7237">
+      <rect fill="var(--justweb3-primary-color)" height="64" transform="translate(0.25)" width="64"></rect>
+    </clipPath>
+  </defs>
+</svg>

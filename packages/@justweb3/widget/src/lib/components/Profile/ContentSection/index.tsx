@@ -296,18 +296,52 @@ const ContentSection: React.FC<ContentProps> = ({
             zIndex: 1,
           }}
         >
-          <Avatar
-            src={sanitizeEnsImage({
-              image: sanitized?.avatar,
-              name: fullSubname,
-              chainId,
-            })}
-            size={74}
-            borderSize={'4px'}
-            style={{
-              margin: '0 15px',
-            }}
-          />
+          <div style={{ display: 'flex' }}>
+            <Avatar
+              src={sanitizeEnsImage({
+                image: sanitized?.avatar,
+                name: fullSubname,
+                chainId,
+              })}
+              size={74}
+              borderSize={'4px'}
+              style={{
+                margin: '0 15px',
+              }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                height: 'fit-content',
+                marginLeft: '-35px',
+                marginTop: 'auto',
+                marginBottom: '5px',
+              }}
+            >
+              {plugins.map((plugin) => {
+                const component = plugin.components?.Badge;
+                if (!component) {
+                  return null;
+                }
+                const componentApi = component(
+                  createPluginApi(plugin.name),
+                  fullSubname,
+                  chainId,
+                  sanitized.ethAddress.value
+                );
+
+                if (!componentApi) {
+                  return null;
+                }
+
+                return (
+                  <Fragment key={'profile-badge-' + plugin.name + fullSubname}>
+                    {componentApi}
+                  </Fragment>
+                );
+              })}
+            </div>
+          </div>
           {communityName.length > 0 && (
             <button
               onClick={() => {

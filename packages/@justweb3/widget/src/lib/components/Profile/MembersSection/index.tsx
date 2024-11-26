@@ -73,9 +73,11 @@ const MembersSection: React.FC<MembersSectionProps> = ({
           className={styles.memberCard}
         >
           <JustEnsCard
+            containerRef={scrollContainerRef}
             addressOrEns={subname}
             style={{ width: '100%' }}
             chainId={chainId}
+            skipInViewFetch={true}
           />
         </div>
       ))}

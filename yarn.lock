@@ -4580,6 +4580,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@justweb3/talent-protocol-plugin@workspace:packages/@justweb3/talent-protocol-plugin":
+  version: 0.0.0-use.local
+  resolution: "@justweb3/talent-protocol-plugin@workspace:packages/@justweb3/talent-protocol-plugin"
+  dependencies:
+    axios: "npm:^1.6.0"
+  peerDependencies:
+    "@justweb3/widget": ">=0.0.0"
+    "@tanstack/react-query": ^5.x
+    react: ">=17"
+  languageName: unknown
+  linkType: soft
+
 "@justweb3/ui@npm:^0.0.83, @justweb3/ui@workspace:packages/@justweb3/ui":
   version: 0.0.0-use.local
   resolution: "@justweb3/ui@workspace:packages/@justweb3/ui"

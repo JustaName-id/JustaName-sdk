@@ -1,30 +1,6 @@
 import { NextRequest } from 'next/server';
 import axios from 'axios';
 
-export interface POAP {
-  event: Event;
-  tokenId: string;
-  owner: string;
-  chain: string;
-  created: Date;
-}
-
-export interface Event {
-  id: number;
-  fancy_id: string;
-  name: string;
-  event_url: string;
-  image_url: string;
-  country: string;
-  city: string;
-  description: string;
-  year: number;
-  start_date: string;
-  end_date: string;
-  expiry_date: string;
-  supply: number;
-}
-
 interface QueryParams {
   address: string;
 }
@@ -37,10 +13,10 @@ export async function GET(req: NextRequest & { query: QueryParams }) {
     return new Response('Address is required', { status: 400 });
   }
 
-  let poaps: POAP[] = [];
+  let poaps = [];
 
   try {
-    const response = await axios.get<POAP[]>(
+    const response = await axios.get(
       `https://api.poap.tech/actions/scan/${address}`,
       {
         headers: {
