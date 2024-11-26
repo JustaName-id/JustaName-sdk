@@ -25,7 +25,6 @@
     * [Ens list](api-reference/subname/ens-list.md)
   * [Primary name](api-reference/primary-name/README.md)
     * [Address](api-reference/primary-name/address.md)
-    * [Name hash](api-reference/primary-name/name-hash.md)
     * [Set primary name](api-reference/primary-name/set-primary-name.md)
   * [Mapp](api-reference/mapp/README.md)
     * [Permission](api-reference/mapp/permission/README.md)
