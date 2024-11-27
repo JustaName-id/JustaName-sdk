@@ -22,7 +22,7 @@ export default function Arrow(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#arrow_svg__a)">
         <path
-          fill="var(--justweb3-primary-color)"
+          fill={props.fill || 'var(--justweb3-primary-color)'}
           d="m5.516 14.25-1.11-1.11L9.546 8l-5.14-5.14 1.11-1.11L11.766 8z"
         />
       </g>

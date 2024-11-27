@@ -19,11 +19,14 @@ export default function Pause(props: SVGProps<SVGSVGElement>) {
             maskType: 'alpha',
           }}
         >
-          <path fill="var(--justweb3-primary-color)" d="M20 .5H0v20h20z" />
+          <path
+            fill={props.fill || 'var(--justweb3-primary-color)'}
+            d="M20 .5H0v20h20z"
+          />
         </mask>
         <g mask="url(#pause_svg__b)">
           <path
-            fill="var(--justweb3-primary-color)"
+            fill={props.fill || 'var(--justweb3-primary-color)'}
             d="M11.667 16.333V4.667H15v11.666zm-6.667 0V4.667h3.333v11.666z"
           />
         </g>

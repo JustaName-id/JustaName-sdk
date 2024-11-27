@@ -20,7 +20,7 @@ export const MessageSheet: React.FC<MessageSheetProps> = ({
       open={openChat}
       onOpenChange={(open) => !open && handleOpenChat(null)}
     >
-      <SheetContent side="right" overlay={false} style={{ width: '100%' }}>
+      <SheetContent side="right" overlay={false} style={{ width: '100%', paddingLeft: 0, paddingRight: 0 }}>
         <SheetTitle>Messages</SheetTitle>
         {conversation && <Chat conversation={conversation} onBack={() => handleOpenChat(null)} />}
       </SheetContent>

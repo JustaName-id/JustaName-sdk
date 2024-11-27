@@ -21,7 +21,10 @@ export default function Play(props: SVGProps<SVGSVGElement>) {
         <path fill="#D9D9D9" d="M0 .5h24v24H0z" />
       </mask>
       <g mask="url(#play_svg__a)">
-        <path fill="var(--justweb3-primary-color)" d="M8 19.5v-14l11 7z" />
+        <path
+          fill={props.fill || 'var(--justweb3-primary-color)'}
+          d="M8 19.5v-14l11 7z"
+        />
       </g>
     </svg>
   );

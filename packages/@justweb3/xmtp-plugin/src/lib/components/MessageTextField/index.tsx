@@ -240,7 +240,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                 }} >{isReplyReply ? replyMessage.content.content : replyMessage.content}</P>
                             ) : (
                                 isReplyVoice ?
-                                    <VoiceMessageCard disabled message={replyMessage} style={{
+                                    <VoiceMessageCard disabled isReceiver={false} message={replyMessage} style={{
                                         padding: '0px',
                                         transform: 'scale(80%)',
                                         translate: '-x-6'
@@ -408,14 +408,14 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                 :
                                 <Input
                                     style={{
-                                        height: '45px',
-                                        paddingLeft: (!replyMessage && !newConvo) ? "40px" : "16px",
-                                        paddingRight: '50px',
-                                        boxShadow: "1px 1px 0px 0px #000000",
+                                        height: '44px',
+                                        maxHeight: '44px',
+                                        paddingLeft: (!replyMessage && !newConvo) ? "10px" : "16px",
+                                        paddingRight: '10px',
                                         borderRadius: "6px",
                                         borderTopLeftRadius: replyMessage ? 0 : "6px",
                                         borderTopRightRadius: replyMessage ? 0 : "6px",
-                                        borderTop: replyMessage ? "0px" : "1px solid #000000",
+                                        // borderTop: replyMessage ? "0px" : "auto",
                                     }}
                                     placeholder={`Send message...`}
                                     value={messageValue}
@@ -423,13 +423,15 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                         (!replyMessage && !newConvo) && (
                                             <MicIcon width="24" height="24" style={{
                                                 cursor: disabled ? "not-allowed" : "pointer",
-                                                opacity: disabled ? 0.5 : 1
+                                                opacity: disabled ? 0.5 : 1,
+                                                pointerEvents: 'auto'
                                             }}
                                                 onClick={() => {
                                                     if (disabled) return;
                                                     startRecording();
                                                     start();
-                                                }} />)}
+                                                }} />
+                                        )}
                                     right={
                                         <SendIcon width={24} height={24} style={{
                                             cursor: disabled ? "not-allowed" : "pointer"

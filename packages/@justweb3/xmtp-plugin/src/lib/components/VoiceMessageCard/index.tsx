@@ -5,18 +5,23 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { MessageWithReaction } from '../../utils/filterReactionsMessages';
 import useGetAudioDuration from '../../hooks/useGetAudioDuration';
 import { formatTime } from '../../utils/formatVoiceTime';
+import { formatMessageSentTime } from '../../utils/messageTimeFormat';
 
 
 interface VoiceMessageCardProps {
     message: MessageWithReaction | DecodedMessage;
     style?: React.CSSProperties;
     disabled?: boolean;
+    isReceiver: boolean;
+    isReply?: boolean;
 }
 
 const VoiceMessageCard: React.FC<VoiceMessageCardProps> = ({
     message,
     style,
-    disabled
+    disabled,
+    isReceiver,
+    isReply
 }) => {
     const [playing, setPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
@@ -81,62 +86,83 @@ const VoiceMessageCard: React.FC<VoiceMessageCardProps> = ({
     };
 
     return (
-        <Flex direction="row" align="center" justify="space-between" gap='10px' style={{
+        <Flex direction="row" align="flex-start" justify="space-between" gap='5px' style={{
             width: "200px",
-            padding: "5px 0",
+            padding: "5px",
             ...style
         }}>
             {playing ? (
-                <PauseIcon width="22" height="22" style={{
-                    cursor: 'pointer',
-                    scale: '1.5',
-                    width: '24px',
-                    height: '24px'
-                }} onClick={handlePlayPause} />
+                <PauseIcon width="24" height="24"
+                    fill={isReceiver ? 'var(--justweb3-primary-color)' : 'var(--justweb3-foreground-color-4)'}
+                    style={{
+                        cursor: 'pointer',
+                        scale: '1.5',
+                        width: '24px',
+                        height: '24px'
+                    }} onClick={handlePlayPause} />
             ) : (
-                <PlayIcon width="22" height="22" style={{
-                    cursor: 'pointer',
-                    scale: '1.5',
-                }} onClick={handlePlayPause} />
+                <PlayIcon width="22" height="22"
+                    fill={isReceiver ? 'var(--justweb3-primary-color)' : 'var(--justweb3-foreground-color-4)'}
+                    style={{
+                        cursor: 'pointer',
+                        scale: '1.5',
+                        width: '24px',
+                        height: '24px'
+                    }} onClick={handlePlayPause} />
             )}
             <Flex direction='column' gap='5px' style={{
-                flex: 1
+                flex: 1,
+                marginTop: 10
             }}>
-                <P style={{
-                    fontSize: "10px",
-                    fontWeight: 400,
-                    lineHeight: "100%",
-                    color: "var(--justweb3-text-color)",
-                    textTransform: "uppercase"
-                }}>{playing || currentTime > 0 ? formatTime(currentTime) : formatTime(duration ?? 0)}</P>
+
                 <Slider.Root disabled={disabled} style={{
                     width: "100%",
                     height: "5px",
                     position: "relative",
                     display: 'flex',
-                    alignItems: 'center'
+                    alignItems: 'center',
+
                 }} onValueChange={handleSliderChange} defaultValue={[0]} value={[playing || currentTime > 0 ? audioRef.current.currentTime : 0]} max={duration ?? 0} step={0.01}>
                     <Slider.Track style={{
-                        backgroundColor: "white",
+                        backgroundColor: !isReceiver ? "var(--justweb3-primary-color)" : "var(--justweb3-foreground-color-4)",
                         height: "5px",
                         borderRadius: "1000px",
-                        border: "0.5px solid var(--justweb3-border-unfocused)",
+                        border: isReceiver ? "0.5px solid var(--justweb3-primary-color)" : "0.5px solid var(--justweb3-foreground-color-4)",
                         flexGrow: 1
                     }} >
                         <Slider.Range style={{
-                            backgroundColor: "var(--justweb3-primary-color)",
+                            backgroundColor: isReceiver ? "var(--justweb3-primary-color)" : "var(--justweb3-foreground-color-4)",
                             height: "100%",
+                            borderRadius: "1000px",
                             position: "absolute"
                         }} />
                     </Slider.Track>
                     <Slider.Thumb style={{
-                        width: "8px",
+                        width: "6px",
                         height: "5px",
-                        backgroundColor: "var(--justweb3-primary-color)",
+                        backgroundColor: isReceiver ? "var(--justweb3-primary-color)" : "var(--justweb3-foreground-color-4)",
                         borderRadius: "2.5px",
                         display: 'block'
                     }} aria-label="Volume" />
                 </Slider.Root>
+                <Flex direction="row" align="center" justify='space-between'>
+                    <P style={{
+                        fontSize: '9px',
+                        fontWeight: '800',
+                        textTransform: 'uppercase',
+                        color: !isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)',
+                        opacity: '0.5',
+                    }}>{playing || currentTime > 0 ? formatTime(currentTime) : formatTime(duration ?? 0)}</P>
+                    {!isReply && (
+                        <P style={{
+                            fontSize: '9px',
+                            fontWeight: '800',
+                            textTransform: 'uppercase',
+                            color: !isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)',
+                            opacity: '0.5',
+                        }} >{formatMessageSentTime(message.sentAt)}</P>
+                    )}
+                </Flex>
             </Flex>
         </Flex>
     );

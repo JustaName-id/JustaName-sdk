@@ -25,12 +25,12 @@ interface MessageCardProps {
     onReaction: (message: MessageWithReaction) => void;
 }
 
-const MeasureAndHyphenateText: React.FC<{ text: string; maxWidth: number }> = ({ text, maxWidth }) => {
+const MeasureAndHyphenateText: React.FC<{ text: string; maxWidth: number, isReceiver: boolean }> = ({ text, maxWidth, isReceiver }) => {
     const [processedText, setProcessedText] = useState('');
 
     useEffect(() => {
         // Function to measure text width
-        const measureText = (text = '', font = '16px Arial') => {
+        const measureText = (text = '', font = '10px Inter') => {
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
             if (!context) return 0;
@@ -83,7 +83,12 @@ const MeasureAndHyphenateText: React.FC<{ text: string; maxWidth: number }> = ({
 
     return (
         <pre
-            style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0 }}>
+            style={{
+                whiteSpace: 'pre-wrap',
+                wordBreak: 'break-word',
+                margin: 0,
+                color: isReceiver ? 'var(--justweb3-foreground-color-2)' : 'var(--justweb3-foreground-color-4)'
+            }}>
             {processedText}
         </pre>
     );
@@ -97,6 +102,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
     onReaction
 }) => {
     const { address } = useMountedAccount();
+    const [hovered, setHovered] = useState<boolean>(false)
     const [repliedMessage, setRepliedMessage] = React.useState<DecodedMessage | null>(null);
     const divRef = useRef<HTMLDivElement | null>(null);
     const { mutateAsync: sendReaction } = useSendReactionMessage(conversation);
@@ -104,6 +110,27 @@ const MessageCard: React.FC<MessageCardProps> = ({
     const isText = useMemo(() => {
         return typeof message.content === "string"
     }, [message.content])
+
+
+    useEffect(() => {
+        function handleMouseEnter() {
+            setHovered(true)
+        }
+        function handleMouseLeave() {
+            setHovered(false)
+        }
+        const divElement = divRef.current;
+        if (divElement) {
+            divElement.addEventListener('mouseenter', handleMouseEnter);
+            divElement.addEventListener('mouseleave', handleMouseLeave);
+        }
+        return () => {
+            if (divElement) {
+                divElement.removeEventListener('mouseenter', handleMouseEnter);
+                divElement.removeEventListener('mouseleave', handleMouseLeave);
+            }
+        };
+    }, []);
 
 
     const attachmentExtention = useMemo(() => {
@@ -149,7 +176,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
         if (!repliedMessage) return;
         const element = document.getElementById(repliedMessage.id);
         if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
+            element.scrollIntoView({ behavior: "smooth", block: "center" });
         }
     }
 
@@ -200,11 +227,12 @@ const MessageCard: React.FC<MessageCardProps> = ({
                         lineHeight: '14px',
                         padding: isReply ? '4px' : '5px',
                         borderRadius: '5px',
-                        backgroundColor: isReceiver ? '#F5F5F5' : '#ffffff',
-                        border: '1px solid black',
-                        borderLeft: isReceiver ? 'none' : '1px solid black',
-                        borderRight: isReceiver ? '1px solid black' : 'none',
+                        backgroundColor: isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)',
+                        borderBottomLeftRadius: isReceiver ? '0px' : '5px',
+                        borderBottomRightRadius: !isReceiver ? '0px' : '5px',
+
                     }}
+                    gap="5px"
                     id={message.id}
                     data-message={JSON.stringify({
                         id: message.id,
@@ -235,11 +263,10 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                                 fontSize: '14px',
                                                 lineHeight: '14px',
                                                 padding: '10px',
-                                                border: '0.5px solid #E0E0E0',
-                                                backgroundColor: isReceiver ? '#FFFFFF' : '#F5F5F5',
+                                                backgroundColor: isReceiver ? 'var(--justweb3-primary-color)' : 'var(--justweb3-foreground-color-4)',
                                                 borderRadius: '5px',
-                                                borderLeft: isReceiver ? 'none' : '0.5px solid #E0E0E0',
-                                                borderRight: isReceiver ? '0.5px solid #E0E0E0' : 'none',
+                                                borderBottomLeftRadius: isReceiver ? '0px' : '5px',
+                                                borderBottomRightRadius: isReceiver ? '5px' : '0px',
                                             }}
                                             onClick={navigateToRepliedMessage}
                                         >
@@ -248,8 +275,8 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                                     fontSize: '12px',
                                                     fontWeight: '600',
                                                     lineHeight: '100%',
-                                                    color: 'var(--justweb3-primary-color)',
                                                     textTransform: 'uppercase',
+                                                    color: isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)'
                                                 }} >{repliedMessage?.senderAddress === address ? "YOU" : formatAddress(repliedMessage?.senderAddress ?? "")}</P>
 
                                                 {(isReplyText || isReplyReply) ? (
@@ -261,10 +288,11 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                                         overflow: 'hidden',
                                                         textOverflow: 'ellipsis',
                                                         whiteSpace: 'nowrap',
+                                                        color: isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)'
                                                     }} >{isReplyReply ? repliedMessage.content.content : repliedMessage.content}</P>
                                                 ) : (
                                                     isReplyVoice ?
-                                                        <VoiceMessageCard disabled message={repliedMessage} style={{
+                                                        <VoiceMessageCard isReply isReceiver={!isReceiver} disabled message={repliedMessage} style={{
                                                             padding: '0px',
                                                             margin: '0px',
                                                             scale: '80%',
@@ -302,7 +330,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                             </Flex>
                                         </Flex>
                                         <div style={{
-                                            padding: '6px 10px',
+                                            padding: '6px 0px',
                                         }} >
                                             <P
                                                 style={{
@@ -310,6 +338,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                                     width: 'fit-content',
                                                     lineHeight: 1,
                                                     letterSpacing: 0.6,
+                                                    color: isReceiver ? 'var(--justweb3-foreground-color-2)' : 'var(--justweb3-foreground-color-4)',
                                                     wordBreak: 'break-all'
                                                 }}
                                             >{message.content.content}</P>
@@ -319,12 +348,12 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                 :
                                 isText ?
                                     <Flex direction="row" align="center" gap="4px" >
-                                        <MeasureAndHyphenateText text={message.content} maxWidth={170} />
+                                        <MeasureAndHyphenateText text={message.content} maxWidth={170} isReceiver={isReceiver} />
                                     </Flex>
                                     :
                                     <Flex direction="row" align="baseline" gap='4px' >
                                         {isVoice ?
-                                            <VoiceMessageCard message={message} />
+                                            <VoiceMessageCard isReceiver={isReceiver} message={message} />
                                             :
                                             <Flex direction="row" align="center" gap='10px' >
                                                 {typeLookup[attachmentExtention] === "image" ?
@@ -370,7 +399,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                 style={{
                                     position: 'absolute',
                                     cursor: 'pointer',
-                                    bottom: '-1rem',
+                                    bottom: '-0.5rem',
                                     fontSize: '20px',
                                     right: isReceiver ? '-12px' : 'auto',
                                     left: isReceiver ? 'auto' : '-12px',
@@ -378,9 +407,19 @@ const MessageCard: React.FC<MessageCardProps> = ({
                             >{findEmojiByName(message.reactionMessage.content.content)}</P>
                         )}
                     </>
+                    {!isVoice && (
+                        <P style={{
+                            fontSize: '9px',
+                            fontWeight: '800',
+                            textTransform: 'uppercase',
+                            color: !isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)',
+                            opacity: '0.5',
+                        }} >{formatMessageSentTime(message.sentAt)}</P>)}
                 </Flex>
+
                 <Flex direction={isReceiver ? 'row' : 'row-reverse'} align="center" gap='4px' style={{
                     padding: '4px 0px',
+                    width: hovered ? 'auto' : '0px'
                 }} >
                     <ReplyIcon width="22" height="22" style={{
                         cursor: 'pointer',
@@ -401,13 +440,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
                 </Flex>
             </Flex>
-            <P style={{
-                fontSize: '8px',
-                fontWeight: '700',
-                textTransform: 'uppercase',
-                color: 'var(--justweb3-primary-color)',
-                opacity: '0.5',
-            }} >{formatMessageSentTime(message.sentAt)}</P>
+
         </Flex >
     );
 };

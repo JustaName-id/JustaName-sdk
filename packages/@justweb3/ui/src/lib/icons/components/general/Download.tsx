@@ -23,7 +23,7 @@ export default function Download(props: SVGProps<SVGSVGElement>) {
         </mask>
         <g mask="url(#download_svg__b)">
           <path
-            fill="var(--justweb3-primary-color)"
+            fill={props.fill || 'var(--justweb3-primary-color)'}
             d="M3.333 18.833v-1.666h13.334v1.666zM10 15.5 4.167 8H7.5V2.167h5V8h3.333z"
           />
         </g>

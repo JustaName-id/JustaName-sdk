@@ -73,24 +73,20 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
 
   useStreamMessages(conversation);
 
-  console.log(messages)
 
 
   // Memo
   const filteredMessages = useMemo(() => {
     const messagesWithoutRead = messages.filter((message) => !(message.contentType === "xmtp.org/readReceipt:1.0"));
-    console.log('messages without read', messagesWithoutRead)
     const res = filterReactionsMessages(messagesWithoutRead);
     return res;
   }, [messages]);
 
-  console.log("filtered msg", filteredMessages)
 
   const groupedMessages = useMemo(() => {
     return groupMessagesByDate(filteredMessages ?? []);
   }, [filteredMessages]);
 
-  console.log("grouped messages", groupedMessages)
 
 
   useEffect(() => {
@@ -142,7 +138,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
 
 
   return (
-    <Flex direction={'column'} gap={'15px'} style={{
+    <Flex direction={'column'} gap={'0px'} style={{
       height: '100%',
       width: '100%',
     }} >
@@ -170,13 +166,27 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
           replica?.remove();
         }}
       ></div>
-      <Flex direction='row' align='center' gap='10px' justify='space-between' style={{ paddingTop: 10 }} >
+      <Flex
+        direction='row'
+        align='center'
+        gap='10px'
+        justify='space-between'
+        style={{
+          padding: "10px 1.5rem", boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.05)',
+        }} >
         <Flex direction="row" align='center' gap='8px' >
-          <ArrowIcon height={24} width={24} style={{
+          <Flex align='center' justify='center' style={{
+            borderRadius: '50%',
+            width: 24,
+            height: 24,
             cursor: 'pointer',
-            flex: 1,
-          }} onClick={onBack} />
-          <Flex direction="row" align="center" gap="5px" >
+            backgroundColor: 'var(--justweb3-foreground-color-4)'
+          }} onClick={onBack}>
+            <ArrowIcon height={15} width={15} style={{
+              transform: 'rotate(180deg) translateX(1px)'
+            }} />
+          </Flex>
+          <Flex direction="row" align="center" gap="10px" >
             <Avatar
               src={
                 primaryName
@@ -197,16 +207,16 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
             }} >
               <P style={{
                 fontSize: 12,
-                fontWeight: 500,
-                lineHeight: 1
+                fontWeight: 700,
+                lineHeight: 1,
               }} >{primaryName ? primaryName : formatAddress(conversation.peerAddress)}</P>
-              {(!!primaryName) && (
+              {/* {(!!primaryName) && (
                 <P style={{
                   fontSize: 10,
                   fontWeight: 900,
                   lineHeight: 1
                 }} >{formatAddress(conversation.peerAddress)}</P>
-              )}
+              )} */}
             </Flex>
           </Flex>
         </Flex>
@@ -249,151 +259,158 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
           </Popover >
         </Flex>
       </Flex>
-      <div style={{
-        height: '1px',
-        backgroundColor: 'black',
-        width: '100%',
-      }} />
-      {
-        isCanMessageLoading || isLoading ? (
-          <Flex direction='column' gap='10px' style={{
-            flex: 1,
-            padding: '0px 10px',
-            height: '70%',
-          }} >
-            {[...Array(5)].map((_, index) => (
-              <MessageSkeletonCard key={`message-skeleton-${index}`} isReceiver={index % 2 === 0} />
-            ))}
-          </Flex>
-        ) : (
-          <Flex style={{
-            flex: 1,
-            maxHeight: '79.8vh'
-          }}>
-            {canMessage ? (
-              <Flex direction="column" gap="10px" style={{
-                padding: '10px 0px',
-                paddingTop: '0px',
-                overflowY: 'scroll',
-                height: '10w0%',
-                width: '100%'
-              }}>
-                {groupedMessages && Object.keys(groupedMessages).map((date, index) => (
-                  <Flex direction="column" gap="10px" key={index} >
-                    <P style={{
-                      textAlign: 'center',
-                      padding: '5px 0px',
-                      marginBottom: '8px',
-                      fontSize: '12px',
-                      fontWeight: 700,
-                      opacity: 0.5,
-                      minWidth: 'fit-content',
-                    }} >{date}</P>
-                    {groupedMessages[date].map((message) =>
-                      <MessageCard
-                        conversation={conversation}
-                        onReply={(msg) => setReplyMessage(msg)}
-                        message={message}
-                        peerAddress={conversation.peerAddress}
-                        key={`message-${message.id}`}
-                        onReaction={(message) => {
-                          setReactionMessage(message);
-
-                          const element = document.getElementById(message.id.toString());
-                          if (!element) return;
-                          const replica = element?.cloneNode(true) as HTMLElement;
-                          replica.id = `${message.id}-replica`;
-                          replica.style.position = 'absolute';
-                          replica.style.top = element?.offsetTop + 'px';
-                          replica.style.top = '100px';
-                          replica.style.zIndex = '90';
-                          element?.parentElement?.appendChild(replica);
-                          replica.classList.add('replica-animate');
-                          setEmojiSelectorTop(100 + element.getBoundingClientRect().height);
-                        }}
-                      />
-                    )}
-                  </Flex>
-                ))}
-                {
-                  reactionMessage && (
-                    <div
-                      style={{
-                        zIndex: 99,
-                        position: 'absolute',
-                        right: reactionMessage?.senderAddress === client?.address ? '20px' : 'auto',
-                        left: reactionMessage?.senderAddress === client?.address ? 'auto' : '20px',
-                        top: `${emojiSelectorTop + 20}px`,
-                      }}
-                    >
-                      <EmojiSelector onEmojiSelect={
-                        (emoji) => {
-                          handleEmojiSelect(emoji);
-                          setReactionMessage(null);
-                          const replica = document.getElementById(`${reactionMessage?.id}-replica`);
-                          replica?.remove();
-                        }}
-
-                      />
-                    </div>
-                  )
-                }
-              </Flex>
-            ) : (
-              <div>
-                <P>Cannot message {conversation.peerAddress}</P>
-              </div>
-            )}
-          </Flex>
-        )
-      }
-
-      {isRequest ? (
-        isRequestChangeLoading ?
-          <Flex direction='row' align='center' justify='center' style={{ height: '50px' }}>
-            <LoadingSpinner color={'var(--justweb3-primary-color)'} />
-          </Flex>
-          :
-          <Flex direction={'row'} gap={'15px'}>
-            <Button
-              variant={"secondary"}
-              style={{
-                width: '100%',
-              }}
-              onClick={() => { blockAddress(conversation.peerAddress) }}
-            >
-              IGNORE
-            </Button>
-            <Button
-              variant={"primary"}
-              style={{
-                width: '100%',
-              }}
-              onClick={handleAllowAddress}
-            >
-              ACCEPT
-            </Button>
-          </Flex>
-      ) : (
-        <Flex direction={'column'} gap={'2.5px'}>
-          {isMessagesSenderOnly && (
-            <Flex direction='column' gap='5px' style={{
-              padding: '20px',
-              borderRadius: '10px',
-              border: '1px solid black',
-              boxShadow: '1px 1px 0px 0px #000',
+      <Flex direction={'column'}
+        gap={'15px'} style={{
+          height: '100%',
+          paddingLeft: "1.5rem",
+          paddingRight: "1.5rem",
+        }} >
+        {
+          isCanMessageLoading || isLoading ? (
+            <Flex direction='column' gap='10px' style={{
+              flex: 1,
+              padding: '0px 10px',
+              height: '70%',
             }} >
-              <P style={{
-                fontSize: '20px',
-                fontWeight: 900,
-                lineHeight: '125%',
-              }} >Message in user’s Requests</P>
-              <P  >This user has not accepted your message request yet</P>
+              {[...Array(5)].map((_, index) => (
+                <MessageSkeletonCard key={`message-skeleton-${index}`} isReceiver={index % 2 === 0} />
+              ))}
             </Flex>
-          )}
-          <MessageTextField onCancelReply={() => setReplyMessage(null)} conversation={conversation} replyMessage={replyMessage} />
-        </Flex>
-      )}
-    </Flex>
+          ) : (
+            <Flex style={{
+              flex: 1,
+              maxHeight: '80vh'
+            }}>
+              {canMessage ? (
+                <Flex direction="column" className={'justweb3scrollbar'} gap="10px" style={{
+                  padding: '10px 0px',
+                  paddingTop: '0px',
+                  overflowY: 'scroll',
+                  height: '100%',
+                  width: '100%',
+                  flexShrink: 1
+                }}>
+                  {groupedMessages && Object.keys(groupedMessages).map((date, index) => (
+                    <Flex direction="column" gap="10px" key={index} >
+                      <P style={{
+                        textAlign: 'center',
+                        padding: '5px 0px',
+                        marginBottom: '8px',
+                        fontSize: '9px',
+                        fontWeight: 900,
+                        opacity: 0.35,
+                        minWidth: 'fit-content',
+                      }} >{date}</P>
+                      {groupedMessages[date].map((message) =>
+                        <MessageCard
+                          conversation={conversation}
+                          onReply={(msg) => setReplyMessage(msg)}
+                          message={message}
+                          peerAddress={conversation.peerAddress}
+                          key={`message-${message.id}`}
+                          onReaction={(message) => {
+                            setReactionMessage(message);
+
+                            const element = document.getElementById(message.id.toString());
+                            if (!element) return;
+                            const replica = element?.cloneNode(true) as HTMLElement;
+                            replica.id = `${message.id}-replica`;
+                            replica.style.position = 'absolute';
+                            replica.style.top = element?.offsetTop + 'px';
+                            replica.style.top = '100px';
+                            replica.style.zIndex = '90';
+                            element?.parentElement?.appendChild(replica);
+                            replica.classList.add('replica-animate');
+                            setEmojiSelectorTop(100 + element.getBoundingClientRect().height);
+                          }}
+                        />
+                      )}
+                    </Flex>
+                  ))}
+                  {
+                    reactionMessage && (
+                      <div
+                        style={{
+                          zIndex: 99,
+                          position: 'absolute',
+                          right: reactionMessage?.senderAddress === client?.address ? '20px' : 'auto',
+                          left: reactionMessage?.senderAddress === client?.address ? 'auto' : '20px',
+                          top: `${emojiSelectorTop + 20}px`,
+                        }}
+                      >
+                        <EmojiSelector onEmojiSelect={
+                          (emoji) => {
+                            handleEmojiSelect(emoji);
+                            setReactionMessage(null);
+                            const replica = document.getElementById(`${reactionMessage?.id}-replica`);
+                            replica?.remove();
+                          }}
+
+                        />
+                      </div>
+                    )
+                  }
+                </Flex>
+              ) : (
+                <div>
+                  <P>Cannot message {conversation.peerAddress}</P>
+                </div>
+              )}
+            </Flex>
+          )
+        }
+
+        {
+          isRequest ? (
+            isRequestChangeLoading ?
+              <Flex direction='row' align='center' justify='center' style={{ height: '50px' }}>
+                <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+              </Flex>
+              :
+              <Flex direction={'row'} gap={'15px'}>
+                <Button
+                  variant={"secondary"}
+                  style={{
+                    width: '100%',
+                  }}
+                  onClick={() => { blockAddress(conversation.peerAddress) }}
+                >
+                  IGNORE
+                </Button>
+                <Button
+                  variant={"primary"}
+                  style={{
+                    width: '100%',
+                  }}
+                  onClick={handleAllowAddress}
+                >
+                  ACCEPT
+                </Button>
+              </Flex>
+          ) : (
+            <Flex direction={'column'} gap={'2.5px'} style={{
+              flexGrow: 1
+            }} >
+              {isMessagesSenderOnly && (
+                <Flex direction='column' gap='5px' style={{
+                  padding: '20px',
+                  borderRadius: '10px',
+                  border: '1px solid black',
+                  boxShadow: '1px 1px 0px 0px #000',
+                }} >
+                  <P style={{
+                    fontSize: '20px',
+                    fontWeight: 900,
+                    lineHeight: '125%',
+                  }} >Message in user’s Requests</P>
+                  <P  >This user has not accepted your message request yet</P>
+                </Flex>
+              )}
+              <MessageTextField onCancelReply={() => setReplyMessage(null)} conversation={conversation} replyMessage={replyMessage} />
+            </Flex>
+          )
+        }
+      </Flex>
+    </Flex >
   );
 };
