@@ -270,7 +270,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
             <Flex direction='column' gap='10px' style={{
               flex: 1,
               padding: '0px 10px',
-              height: '70%',
+              height: '90%',
             }} >
               {[...Array(5)].map((_, index) => (
                 <MessageSkeletonCard key={`message-skeleton-${index}`} isReceiver={index % 2 === 0} />
@@ -279,7 +279,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
           ) : (
             <Flex style={{
               flex: 1,
-              maxHeight: '80vh'
+              maxHeight: !!replyMessage ? typeof replyMessage.content === 'string' ? 'calc(100vh - 248px)' : 'calc(100vh - 284px)' : 'calc(100vh - 200px)'
             }}>
               {canMessage ? (
                 <Flex direction="column" className={'justweb3scrollbar'} gap="10px" style={{

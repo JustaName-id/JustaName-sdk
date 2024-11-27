@@ -202,7 +202,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                 {replyMessage && (
                     <Flex direction='row' align='center' justify='space-between' style={{
                         padding: '8px 12px',
-                        height: isReplyText ? "50px" : isReplyVoice ? "60px" : isReplyVideoOrImage ? "fit-content" : "60px",
+                        height: isReplyText ? "30px" : isReplyVoice ? "60px" : isReplyVideoOrImage ? "60px" : "60px",
                         borderRadius: '5px',
                         // TODO: check background and border color
                         background: 'white',
@@ -248,7 +248,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                     :
                                     typeLookup[replyAttachmentExtention] === "image" ?
                                         <img src={URL.createObjectURL(new Blob([replyMessage.content.data], { type: replyMessage.content.mimeType }))} alt={replyMessage.content.filename} style={{
-                                            maxWidth: "100px",
+                                            maxWidth: "60px",
                                             // TODO: check border color
                                             border: "0.5px solid var(--justweb3-border-unfocused)",
                                             borderRadius: "5px",
@@ -408,8 +408,8 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                 :
                                 <Input
                                     style={{
-                                        height: '44px',
-                                        maxHeight: '44px',
+                                        height: 22,
+                                        maxHeight: 22!,
                                         paddingLeft: (!replyMessage && !newConvo) ? "10px" : "16px",
                                         paddingRight: '10px',
                                         borderRadius: "6px",
