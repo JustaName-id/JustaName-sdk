@@ -3,12 +3,21 @@ import styles from './LoadingSpinner.module.css'; // Import the CSS module
 
 export interface LoadingSpinnerProps {
   color?: string;
+  size?: number;
 }
 
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ color }) => {
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+  color,
+  size = 20,
+}) => {
   return (
     <div className={styles.spinnerWrapper}>
-      <svg className={styles.styledSvg} viewBox="0 0 50 50">
+      <svg
+        className={styles.styledSvg}
+        viewBox="0 0 50 50"
+        width={size}
+        height={size}
+      >
         <circle
           cx="25"
           cy="25"
