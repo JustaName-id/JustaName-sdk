@@ -5,14 +5,14 @@ import { EFPTab } from '../components/EFPTab';
 export const EFPPlugin: JustaPlugin = {
   name: 'EFPPlugin',
   components: {
-    ProfileTab: (pluginApi, ens, chainId) => {
+    ProfileTab: (pluginApi, ens, chainId, address) => {
       if (chainId !== 1) {
         return undefined;
       }
 
       return {
         title: 'EFP',
-        content: <EFPTab ens={ens} />,
+        content: <EFPTab ens={ens} address={address} />,
       };
     },
     ProfileHeader: (pluginApi, ens, chainId, address) => {
@@ -20,7 +20,7 @@ export const EFPPlugin: JustaPlugin = {
         return null;
       }
 
-      return <FollowButton ens={ens} />;
+      return <FollowButton ens={ens} address={address} />;
     },
   },
 };
