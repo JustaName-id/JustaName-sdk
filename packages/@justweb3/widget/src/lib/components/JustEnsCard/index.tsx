@@ -13,13 +13,17 @@ import {
   P,
 } from '@justweb3/ui';
 import { getTextRecordIcon } from '../../icons/records-icons';
-import styles from './JustEnsCard.module.css'; // Import CSS module
+import styles from './JustEnsCard.module.css';
+import useInView from '../../hooks/useInView'; // Import CSS module
 
 export interface JustEnsCardProps {
   addressOrEns: string;
   chainId?: ChainId;
   expanded?: boolean;
   style?: React.CSSProperties;
+  containerRef?: React.RefObject<HTMLDivElement>;
+  // skipQueue?: boolean;
+  skipInViewFetch?: boolean;
 }
 
 export const JustEnsCard: FC<JustEnsCardProps> = ({
@@ -27,13 +31,19 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
   chainId = 1,
   expanded = false,
   style,
+  containerRef,
+  // skipQueue,
+  skipInViewFetch = false,
 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, containerRef);
   const { openEnsProfile } = useJustWeb3();
   const [isCopied, setIsCopied] = React.useState<boolean>(false);
   const isEns = addressOrEns?.includes('.');
   const { primaryName } = usePrimaryName({
     address: isEns ? undefined : (addressOrEns as `0x${string}`),
     chainId,
+    enabled: !skipInViewFetch ? inView : true,
   });
 
   const ens =
@@ -41,6 +51,8 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
   const { records } = useRecords({
     ens: isEns ? addressOrEns : primaryName,
     chainId,
+    enabled: !skipInViewFetch ? inView : true,
+    skipQueue: skipInViewFetch,
   });
   const { sanitizeEnsImage } = useEnsAvatar();
 
@@ -67,6 +79,7 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
     return (
       <div
         style={style}
+        ref={ref}
         className={styles.expandableCard}
         onClick={() => handleEnsClick()}
       >
@@ -146,6 +159,7 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
 
   return (
     <ClickableItem
+      ref={ref}
       style={style}
       title={<P className={styles.titleText}>{ens}</P>}
       subtitle={

@@ -14,6 +14,7 @@ import {
 import { useMemo } from 'react';
 import { Records } from '../../types';
 import { defaultOptions } from '../../query';
+import { RecordsTaskQueue } from './records-task-queue';
 
 export const buildRecordsBySubnameKey = (
   subname: string,
@@ -29,11 +30,13 @@ export interface UseRecordsParams
   extends Omit<SubnameRecordsRoute['params'], 'ens' | 'providerUrl'> {
   ens?: string | undefined;
   enabled?: boolean;
+  skipQueue?: boolean;
 }
 
 export interface GetRecordsParams
   extends Omit<SubnameRecordsRoute['params'], 'ens' | 'providerUrl'> {
   ens: string;
+  skipQueue?: boolean;
 }
 
 export interface UseRecordsResult {
@@ -116,16 +119,25 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
       (network) => network.chainId === __chainId
     );
     const __providerUrl = __networks?.providerUrl;
-
+    const __skipQueue = _params?.skipQueue || params?.skipQueue;
     if (!__providerUrl) {
       throw new Error('ChainId not found');
     }
 
-    const records = await getRecords({
-      ens: _params.ens,
-      chainId: __chainId,
-      providerUrl: __providerUrl,
-    });
+    const taskFn = () => {
+      return getRecords({
+        ens: _params.ens,
+        chainId: __chainId,
+        providerUrl: __providerUrl,
+      });
+    };
+
+    let records: Records;
+    if (__skipQueue) {
+      records = await taskFn();
+    } else {
+      records = await RecordsTaskQueue.enqueue(taskFn);
+    }
 
     queryClient.setQueryData(
       buildRecordsBySubnameKey(_params.ens, __chainId),

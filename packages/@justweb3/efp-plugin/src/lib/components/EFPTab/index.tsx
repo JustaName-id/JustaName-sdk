@@ -247,6 +247,7 @@ export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
               }}
             >
               <JustEnsCard
+                containerRef={followingContainerRef}
                 addressOrEns={follow.data}
                 style={{ width: '100%' }}
               />
@@ -316,6 +317,7 @@ export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
               }}
             >
               <JustEnsCard
+                containerRef={followersContainerRef}
                 addressOrEns={follow.address}
                 style={{ width: '100%' }}
               />

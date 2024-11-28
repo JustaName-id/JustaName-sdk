@@ -40,7 +40,7 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   ],
   openOnWalletConnect: false,
   allowedEns: 'all',
-  dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
   plugins: [EFPPlugin],
 };
 
@@ -108,7 +108,7 @@ export const Example = () => {
                 <JustEnsCard addressOrEns={'justghadi.eth'} />
                 <JustEnsCard addressOrEns={'justan.id'} />
                 <JustEnsCard addressOrEns={'jaw.eth'} chainId={11155111} />
-                <JustEnsCard addressOrEns={'yodl.me'} />
+                <JustEnsCard addressOrEns={'yodl.eth'} />
                 <JustEnsCard
                   addressOrEns={'0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1'}
                   chainId={1}

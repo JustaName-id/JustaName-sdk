@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { defaultOptions } from '@justaname.id/react';
 
 export const buildFollowStateQueryKey = (
   addressOrEns1: string | undefined,
@@ -46,6 +47,7 @@ export const useFollowState = ({
   addressOrEns2,
 }: UseFollowStateParams): UseFollowStateResult => {
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildFollowStateQueryKey(addressOrEns1, addressOrEns2),
     queryFn: () => getFollowState(addressOrEns1, addressOrEns2),
     enabled: Boolean(addressOrEns1) && Boolean(addressOrEns2),
