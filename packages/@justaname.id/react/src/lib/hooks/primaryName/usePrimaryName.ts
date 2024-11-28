@@ -59,18 +59,14 @@ export const usePrimaryName = (
 
     let name = '';
 
-    try {
-      const primaryNameGetByAddressResponse =
-        await justaname.subnames.getPrimaryNameByAddress({
-          address: params?.address,
-          chainId: _chainId,
-        });
-
+    const primaryNameGetByAddressResponse =
+      await justaname.subnames.getPrimaryNameByAddress({
+        address: params?.address,
+        chainId: _chainId,
+      });
+    if (primaryNameGetByAddressResponse.name) {
       name = primaryNameGetByAddressResponse.name;
-    } catch (error) {
-      /* empty */
-    }
-    if (!name) {
+    } else {
       const taskFn = () => {
         if (!params?.address) {
           throw new Error('Address is required');
@@ -110,6 +106,13 @@ export const usePrimaryName = (
 
   const query = useQuery({
     ...defaultOptions,
+    retry: (_count, error) => {
+      console.log('Error fetching primary name', error, _count);
+      if (error?.message.includes('PrimaryNameNotFound')) {
+        return false;
+      }
+      return _count < 3;
+    },
     queryKey: buildPrimaryName(params?.address || '', _chainId),
     queryFn: () =>
       getPrimaryName({

@@ -1,0 +1,18 @@
+.label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    font-family: var(--justweb3-font-family);
+    color: var(--justweb3-foreground-color-2);
+}
+
+.required::after {
+    content: "*";
+    margin-left: 0.25rem;
+    color: var(--justweb3-destructive-color);
+}
+
+[data-disabled] + .label {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

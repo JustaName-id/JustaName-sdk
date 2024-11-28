@@ -22,7 +22,7 @@ export default function Close(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#close_svg__a)">
         <path
-          fill="var(--justweb3-primary-color)"
+          fill={props.fill || 'var(--justweb3-primary-color)'}
           d="m6.9 19-1.4-1.4 5.6-5.6-5.6-5.6L6.9 5l5.6 5.6L18.1 5l1.4 1.4-5.6 5.6 5.6 5.6-1.4 1.4-5.6-5.6z"
         />
       </g>

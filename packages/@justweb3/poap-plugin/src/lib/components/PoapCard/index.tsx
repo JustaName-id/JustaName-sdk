@@ -16,7 +16,7 @@ interface POAPCardProps {
 const POAPCard: React.FC<POAPCardProps> = ({ poap }) => {
   return (
     <a
-      href={`https://collectors.poap.xyz/token/${poap.event.id}`}
+      href={`https://collectors.poap.xyz/token/${poap.tokenId}`}
       target="_blank"
       rel="noopener noreferrer"
       style={{

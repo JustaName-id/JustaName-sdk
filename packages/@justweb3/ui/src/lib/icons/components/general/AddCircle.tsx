@@ -22,14 +22,14 @@ export default function AddCircle(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#add-circle_svg__a)">
         <path
-          fill="var(--justweb3-primary-color)"
+          fill={props.fill || 'var(--justweb3-primary-color)'}
           d="M9.929 10.571H6.5V9.43h3.429V6h1.142v3.429H14.5v1.142h-3.429V14H9.93z"
         />
         <circle
           cx={10.5}
           cy={10}
           r={8.5}
-          stroke="var(--justweb3-primary-color)"
+          stroke={props.fill || 'var(--justweb3-primary-color)'}
         />
       </g>
     </svg>

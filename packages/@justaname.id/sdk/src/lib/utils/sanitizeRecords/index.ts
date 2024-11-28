@@ -29,7 +29,7 @@ export interface SanitizedRecords {
   contentHash: ContentHash | null;
 }
 
-const generalKeys = [
+export const generalKeys = [
   'avatar',
   'banner',
   'header',

@@ -14,3 +14,7 @@ export * from './Separator';
 export * from './Tabs';
 export * from './Text';
 export * from './ToolTip';
+export * from './Sheet';
+export * from './Label';
+export * from './Checkbox';
+export * from './Skeleton';

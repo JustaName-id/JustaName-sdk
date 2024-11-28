@@ -1,11 +1,9 @@
-import { FC, Fragment, ReactNode, useContext, useMemo, useState } from 'react';
+import { FC, ReactNode, useContext, useMemo, useState } from 'react';
 import { JustWeb3Context, useJustWeb3 } from '../../providers';
 import {
   ArrowIcon,
-  ArrowWhiteIcon,
   Avatar,
   Badge,
-  Button,
   ClickableItem,
   Flex,
   formatText,
@@ -15,6 +13,7 @@ import {
   P,
   Popover,
   PopoverTrigger,
+  ProfileIcon,
   SPAN,
 } from '@justweb3/ui';
 import {
@@ -181,19 +180,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
             setMobileDialogOpen(true);
           }
         }}
-        // right={
-        //   <Badge
-        //     withCopy={false}
-        //     style={{
-        //       padding: '5px',
-        //       fontSize: '10px',
-        //       fontWeight: 800,
-        //     }}
-        //   >
-        //     {address && formatText(address, 4)}
-        //     <WalletIcon width={15} />
-        //   </Badge>
-        // }
       />
     );
   };
@@ -201,37 +187,37 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const connectedEnsProfileContent = (
     <Flex direction="column" gap={'10px'}>
       <Flex direction="column" gap={'10px'}>
-        <Flex direction="row" align="center" justify="space-between">
-          <P
-            style={{
-              fontSize: '12px',
-              fontWeight: 300,
-            }}
-          >
-            Profile Overview
-          </P>
-          <Button
-            variant={'primary'}
-            size={'sm'}
-            rightIcon={
-              <ArrowWhiteIcon
-                width={15}
-                color={'var(--justweb3-primary-color-foreground)'}
-              />
-            }
-            onClick={() => {
-              openEnsProfile(connectedEns?.ens, connectedEns?.chainId);
-            }}
-          >
-            View Full Profile
-          </Button>
-        </Flex>
+        {/*<Flex direction="row" align="center" justify="space-between">*/}
+        {/*  <P*/}
+        {/*    style={{*/}
+        {/*      fontSize: '12px',*/}
+        {/*      fontWeight: 300,*/}
+        {/*    }}*/}
+        {/*  >*/}
+        {/*    Profile Overview*/}
+        {/*  </P>*/}
+        {/*  <Button*/}
+        {/*    variant={'primary'}*/}
+        {/*    size={'sm'}*/}
+        {/*    rightIcon={*/}
+        {/*      <ArrowWhiteIcon*/}
+        {/*        width={15}*/}
+        {/*        color={'var(--justweb3-primary-color-foreground)'}*/}
+        {/*      />*/}
+        {/*    }*/}
+        {/*    onClick={() => {*/}
+        {/*      openEnsProfile(connectedEns?.ens, connectedEns?.chainId);*/}
+        {/*    }}*/}
+        {/*  >*/}
+        {/*    View Full Profile*/}
+        {/*  </Button>*/}
+        {/*</Flex>*/}
         {/* Profile */}
         <Flex
           direction="column"
           gap="15px"
           padding="10px"
-          border="1px solid #E5E5E5"
+          border="1px solid var(--justweb3-foreground-color-4)"
           borderRadius="16px"
         >
           <Flex direction="row" align="center" gap="10px">
@@ -296,6 +282,24 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
         </Flex>
       </Flex>
       <Flex direction="column" gap={'10px'}>
+        <ClickableItem
+          left={
+            <ProfileIcon width={20} color={'var(--justweb3-primary-color)'} />
+          }
+          title={'Profile'}
+          style={{
+            width: '100%',
+          }}
+          onClick={() =>
+            openEnsProfile(connectedEns?.ens, connectedEns?.chainId)
+          }
+          right={
+            <ArrowIcon
+              width={20}
+              color={'var(--justweb3-foreground-color-2)'}
+            />
+          }
+        />
         {plugins.map((plugin) => {
           const component = plugin.components?.SignInMenu;
           if (!component) {
@@ -303,9 +307,14 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           }
 
           return (
-            <Fragment key={'signin-item-' + plugin.name}>
+            <div
+              key={'signin-item-' + plugin.name}
+              onClick={() => {
+                setMobileDialogOpen(false);
+              }}
+            >
               {component(createPluginApi(plugin.name))}
-            </Fragment>
+            </div>
           );
         })}
 
@@ -314,6 +323,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           title={'mApps'}
           style={{
             width: '100%',
+            display: 'none',
           }}
           onClick={() => setOpenMApps(true)}
           right={
