@@ -1,5 +1,5 @@
 import { Flex, LoadingSpinner, P } from '@justweb3/ui';
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useMemo } from 'react';
 import { usePoaps } from '../../hooks';
 import { POAP } from '../../types';
 import POAPCard from '../PoapCard';
@@ -31,29 +31,27 @@ export interface POAPTabProps {
 }
 
 export const POAPTab: FC<POAPTabProps> = ({ address, apiKey, backendUrl }) => {
-  const [groupedPoaps, setGroupedPoaps] = useState<GroupedPoaps>({});
-  const [displayedMonths, setDisplayedMonths] = useState<string[]>([]);
-
   const { poaps, isPoapsLoading } = usePoaps({
     address,
     apiKey,
     backendUrl,
   });
 
-  useEffect(() => {
+  const [groupedPoaps, displayedMonths] = useMemo(() => {
     if (poaps) {
       const sortedPoaps = [...poaps].sort(
         (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime()
       );
 
       const grouped = groupPoapsByMonth(sortedPoaps);
-      setGroupedPoaps(grouped);
 
       const allMonths = Object.keys(grouped).sort(
         (a, b) => new Date(b).getTime() - new Date(a).getTime()
       );
-      setDisplayedMonths(allMonths);
+
+      return [grouped, allMonths];
     }
+    return [{}, []];
   }, [poaps]);
 
   if (isPoapsLoading) {
@@ -78,6 +76,7 @@ export const POAPTab: FC<POAPTabProps> = ({ address, apiKey, backendUrl }) => {
       direction={'column'}
       style={{
         maxHeight: '100%',
+        minHeight: '100%',
         height: '100%',
       }}
     >
@@ -87,47 +86,71 @@ export const POAPTab: FC<POAPTabProps> = ({ address, apiKey, backendUrl }) => {
         style={{
           overflow: 'auto',
           maxHeight: '100%',
+          minHeight: '100%',
           paddingRight: '5px',
         }}
       >
-        {displayedMonths.map((monthYear) => (
+        {poaps && poaps?.length > 0 ? (
+          displayedMonths.map((monthYear) => (
+            <Flex
+              key={monthYear}
+              direction={'column'}
+              padding="10px"
+              gap={'10px'}
+              style={{
+                borderRadius: '10px',
+                border: '1px solid var(--justweb3-foreground-color-4)',
+              }}
+            >
+              <P
+                style={{
+                  fontFamily: 'var(--justweb3-font-family)',
+                  color: 'var(--justweb3-foreground-color-2)',
+                  fontSize: '12px',
+                  fontWeight: 300,
+                }}
+              >
+                {monthYear}
+              </P>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateRows: 'auto',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(64px, 1fr))',
+                  gap: '20px',
+                }}
+              >
+                {groupedPoaps[monthYear]?.map((poap) => (
+                  <Fragment key={poap.tokenId + address}>
+                    <POAPCard poap={poap} />
+                  </Fragment>
+                ))}
+              </div>
+            </Flex>
+          ))
+        ) : (
           <Flex
-            key={monthYear}
-            direction={'column'}
-            padding="10px"
-            gap={'10px'}
             style={{
-              borderRadius: '10px',
-              border: '1px solid var(--justweb3-foreground-color-4)',
+              height: '100%',
+              minHeight: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative',
             }}
           >
             <P
               style={{
                 fontFamily: 'var(--justweb3-font-family)',
-                color: 'var(--justweb3-foreground-color-2)',
-                fontSize: '12px',
-                fontWeight: 300,
+                color: 'var(--justweb3-primary-color)',
+                fontSize: '32px',
+                fontWeight: 700,
               }}
             >
-              {monthYear}
+              No POAPs found
             </P>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateRows: 'auto',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(64px, 1fr))',
-                gap: '20px',
-              }}
-            >
-              {groupedPoaps[monthYear]?.map((poap) => (
-                <Fragment key={poap.tokenId + address}>
-                  <POAPCard poap={poap} />
-                </Fragment>
-              ))}
-            </div>
           </Flex>
-        ))}
-        {isPoapsLoading && (
+        )}
+        {(!poaps || isPoapsLoading) && (
           <Flex
             style={{
               height: '50px',

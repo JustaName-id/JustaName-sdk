@@ -31,8 +31,12 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
   networks: [
     {
-      providerUrl: import.meta.env.STORYBOOK_APP_PROVIDER_URL,
-      chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
+      providerUrl: import.meta.env.STORYBOOK_APP_MAINNET_PROVIDER_URL,
+      chainId: 1,
+    },
+    {
+      providerUrl: import.meta.env.STORYBOOK_APP_SEPOLIA_PROVIDER_URL,
+      chainId: 11155111,
     },
   ],
   ensDomains: [
@@ -47,7 +51,7 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   disableOverlay: true,
   plugins: [
     JustVerifiedPlugin(
-      ['email', 'twitter', 'github', 'discord', 'telegram'],
+      ['twitter', 'github', 'discord'],
       // 'http://localhost:3009/verifications/v1'
       'https://api-staging.justaname.id/verifications/v1'
     ),

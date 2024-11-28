@@ -59,18 +59,14 @@ export const usePrimaryName = (
 
     let name = '';
 
-    try {
-      const primaryNameGetByAddressResponse =
-        await justaname.subnames.getPrimaryNameByAddress({
-          address: params?.address,
-          chainId: _chainId,
-        });
-
+    const primaryNameGetByAddressResponse =
+      await justaname.subnames.getPrimaryNameByAddress({
+        address: params?.address,
+        chainId: _chainId,
+      });
+    if (primaryNameGetByAddressResponse.name) {
       name = primaryNameGetByAddressResponse.name;
-    } catch (error) {
-      /* empty */
-    }
-    if (!name) {
+    } else {
       const taskFn = () => {
         if (!params?.address) {
           throw new Error('Address is required');

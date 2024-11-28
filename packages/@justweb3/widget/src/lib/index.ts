@@ -8,6 +8,7 @@ import { MetadataCard } from './components/MetadataCard';
 import { JustEnsCard } from './components/JustEnsCard';
 import { BasePopoverContent } from './components/DefaultPopover';
 
+export * from './types';
 export * from './plugins';
 export * from './providers';
 export * from './hooks';

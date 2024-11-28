@@ -70,10 +70,21 @@ export const JustVerifiedPlugin = (
         return;
       }
 
+      let providerUrl = pluginApi?.config?.networks?.find(
+        (network) => network.chainId === chainId
+      )?.providerUrl;
+
+      if (!providerUrl) {
+        providerUrl =
+          chainId === 1
+            ? 'https://cloudflare-eth.com'
+            : 'https://rpc.sepolia.org';
+      }
+
       const verifiableRecords = await verifyRecords(
         ens,
         credentials,
-        chainId,
+        providerUrl,
         false,
         mApp,
         verificationBackendUrl
