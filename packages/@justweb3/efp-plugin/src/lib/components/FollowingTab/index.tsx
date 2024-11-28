@@ -11,6 +11,7 @@ export interface FollowingTabProps {
   ens: string;
   address: string;
 }
+
 export const FollowingTab: React.FC<FollowingTabProps> = ({ ens, address }) => {
   const [nbOfCardsPerFollowingRow, setNbOfCardsPerFollowingRow] = useState(0);
   const followingContainerRef = useRef<HTMLDivElement>(null);
