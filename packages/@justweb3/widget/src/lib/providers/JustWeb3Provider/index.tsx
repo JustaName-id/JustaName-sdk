@@ -22,10 +22,7 @@ import {
   useRecords,
   UseSubnameUpdateFunctionParams,
 } from '@justaname.id/react';
-import {
-  JustWeb3ThemeProvider,
-  JustWeb3ThemeProviderConfig,
-} from '@justweb3/ui';
+import { JustWeb3ThemeProvider } from '@justweb3/ui';
 import { SignInDialog } from '../../dialogs/SignInDialog';
 import { MAppsProvider } from '../MAppProvider';
 import { JustaPlugin } from '../../plugins';
@@ -33,19 +30,7 @@ import usePreviousState from '../../hooks/usePreviousState';
 import { ProfileDialog, UpdateRecordDialog } from '../../dialogs';
 import { isEqual } from 'lodash';
 import { ChainId } from '@justaname.id/sdk';
-
-// import '@justweb3/ui/styles.css';
-
-export interface JustWeb3ProviderConfig
-  extends JustaNameProviderConfig,
-    JustWeb3ThemeProviderConfig {
-  openOnWalletConnect?: boolean;
-  allowedEns?: 'all' | 'claimable' | string[];
-  logo?: string;
-  disableOverlay?: boolean;
-  mApps?: (string | { name: string; openOnConnect: boolean })[];
-  plugins?: JustaPlugin[];
-}
+import { JustWeb3ProviderConfig } from '../../types/config';
 
 export interface JustWeb3ProviderProps {
   children: ReactNode;
@@ -216,6 +201,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
             logo={config.logo}
             mApps={allMApps}
             plugins={plugins}
+            config={config}
             handleOpenSignInDialog={handleOpenSignInDialog}
           >
             <CheckSession

@@ -18,6 +18,7 @@ import { EventEmitter } from '../../plugins/eventEmitter';
 import { JustaPlugin, PluginApi } from '../../plugins';
 import usePreviousState from '../../hooks/usePreviousState';
 import { isEqual } from 'lodash';
+import { JustWeb3ProviderConfig } from '../../types/config';
 
 export interface PluginContextProps {
   createPluginApi: (pluginName: string) => PluginApi;
@@ -36,6 +37,7 @@ interface PluginProviderProps {
   handleOpenAuthorizeMAppDialog: (mAppName: string, open: boolean) => void;
   handleOpenRevokeMAppDialog: (mAppName: string, open: boolean) => void;
   mApps?: string[];
+  config: JustWeb3ProviderConfig;
 }
 
 export const PluginProvider: FC<PluginProviderProps> = ({
@@ -45,6 +47,7 @@ export const PluginProvider: FC<PluginProviderProps> = ({
   handleOpenAuthorizeMAppDialog,
   handleOpenRevokeMAppDialog,
   mApps,
+  config,
 }) => {
   const { connectedEns, isEnsAuthPending, isLoggedIn } = useEnsAuth();
   const { records } = useRecords({
@@ -85,6 +88,7 @@ export const PluginProvider: FC<PluginProviderProps> = ({
       handleOpenAuthorizeMAppDialog,
       handleOpenRevokeMAppDialog,
       records,
+      config,
       eventEmitter: new EventEmitter(),
       setState: function <T>(key: string, value: T): void {
         setPluginStates((prev) => ({
