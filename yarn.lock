@@ -2082,6 +2082,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ensdomains/ensjs@npm:4.0.2":
+  version: 4.0.2
+  resolution: "@ensdomains/ensjs@npm:4.0.2"
+  dependencies:
+    "@adraffy/ens-normalize": "npm:1.10.1"
+    "@ensdomains/address-encoder": "npm:1.1.1"
+    "@ensdomains/content-hash": "npm:3.1.0-rc.1"
+    "@ensdomains/dnsprovejs": "npm:^0.5.1"
+    abitype: "npm:^1.0.0"
+    dns-packet: "npm:^5.3.1"
+    graphql: "npm:^16.3.0"
+    graphql-request: "npm:6.1.0"
+    pako: "npm:^2.1.0"
+    ts-pattern: "npm:^5.4.0"
+  peerDependencies:
+    viem: ^2.9.2
+  checksum: 10c0/6c11ed790a482920f229078feeebdde0a96598fe17968660abdc780b8c0f02558ab2feaad784746952383ef9541988b46002c83cfc7e02000e683b2e40cadf65
+  languageName: node
+  linkType: hard
+
 "@esbuild/aix-ppc64@npm:0.19.12":
   version: 0.19.12
   resolution: "@esbuild/aix-ppc64@npm:0.19.12"
@@ -4517,7 +4537,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
-    "@ensdomains/ensjs": "npm:4.0.1-alpha.0"
+    "@ensdomains/ensjs": "npm:4.0.2"
     "@justaname.id/sdk": "npm:0.2.144"
     axios: "npm:^1.6.0"
     jest: "npm:^29.4.1"
@@ -37330,6 +37350,13 @@ __metadata:
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
   checksum: 10c0/95187932fb83f3901e22546bd2feeac7d2feb4f412f42ac3a595f049a23e8dcf70516dffb51866391228ea2dbcfaea039e250fb2bb334d48a86ab2b6aea0ae2d
+  languageName: node
+  linkType: hard
+
+"ts-pattern@npm:^5.4.0":
+  version: 5.5.0
+  resolution: "ts-pattern@npm:5.5.0"
+  checksum: 10c0/4ae1fbeadcf193e72b27419d5fe71f559c100e45710eabf29e2ff3a8fa9ba29adfcd6d5d7d8169b95e2b264683a2eb8d94dbd3c893357b045b52b0c34c2b7c72
   languageName: node
   linkType: hard
 
