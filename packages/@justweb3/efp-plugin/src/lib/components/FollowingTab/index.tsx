@@ -9,8 +9,9 @@ import {
 
 export interface FollowingTabProps {
   ens: string;
+  address: string;
 }
-export const FollowingTab: React.FC<FollowingTabProps> = ({ ens }) => {
+export const FollowingTab: React.FC<FollowingTabProps> = ({ ens, address }) => {
   const [nbOfCardsPerFollowingRow, setNbOfCardsPerFollowingRow] = useState(0);
   const followingContainerRef = useRef<HTMLDivElement>(null);
   const {
@@ -20,7 +21,7 @@ export const FollowingTab: React.FC<FollowingTabProps> = ({ ens }) => {
     isFollowingFetching,
     hasMoreFollowing,
   } = useFollowing({
-    addressOrEns: ens,
+    addressOrEns: address,
   });
 
   const followingFlat = useMemo(() => {
@@ -95,7 +96,7 @@ export const FollowingTab: React.FC<FollowingTabProps> = ({ ens }) => {
     >
       {followingFlat?.map((follow) => (
         <div
-          key={`display-following-members-${ens}-${follow.data}`}
+          key={`display-following-members-${ens}-${address}-${follow.data}`}
           style={{
             minWidth: '335px',
             flex: 1,
@@ -138,7 +139,7 @@ export const FollowingTab: React.FC<FollowingTabProps> = ({ ens }) => {
           },
           (_, i) => (
             <div
-              key={`display-following-members-${ens}-${i}`}
+              key={`display-following-members-${ens}-${address}-${i}`}
               style={{
                 minWidth: '335px',
                 flex: 1,
