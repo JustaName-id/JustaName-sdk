@@ -13,6 +13,7 @@
       "@justweb3/ui": ["packages/@justweb3/ui"],
       "@justweb3/widget": ["packages/@justweb3/widget"],
       "@justweb3/efp-plugin": ["packages/@justweb3/efp-plugin"],
+      "@justweb3/xmtp-plugin": ["packages/@justweb3/xmtp-plugin"],
       "@justverified/plugin": ["packages/@justverified/plugin"]
     }
   },

@@ -239,7 +239,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
   return {
     isRecordsPending: query.isPending,
     isRecordsFetching: query.isFetching,
-    isRecordsLoading: query.isLoading,
+    isRecordsLoading: query.isPending || query.isFetching,
     records: query.data,
     getRecords: getRecordsInternal,
     refetchRecords: query.refetch,

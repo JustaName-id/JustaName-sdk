@@ -12,7 +12,6 @@ export const JustVerifiedPlugin = (
   mApp = 'justverified.eth'
 ): JustaPlugin => ({
   name: 'JustVerifiedPlugin',
-  // mApps: [mApp],
   components: {
     Provider: (pluginApi, children) => {
       const chainId = pluginApi.chainId;

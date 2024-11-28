@@ -6,6 +6,7 @@ import { ProfileSection } from './components/Profile/ProfileSection';
 import { JustWeb3Button } from './components/JustWeb3Button';
 import { MetadataCard } from './components/MetadataCard';
 import { JustEnsCard } from './components/JustEnsCard';
+import { BasePopoverContent } from './components/DefaultPopover';
 
 export * from './types';
 export * from './plugins';
@@ -20,4 +21,5 @@ export {
   DefaultDialog as JustaNameDialog,
   LoadingDialog as JustaNameLoadingDialog,
   ProfileSection,
+  BasePopoverContent as JustaNamePopoverContent,
 };

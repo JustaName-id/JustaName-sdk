@@ -1,4 +1,7 @@
 import AddCircleIcon from './AddCircle';
+import AddFolderIcon from './AddFolder';
+import AddImageIcon from './AddImage';
+import AddVideoIcon from './AddVideo';
 import AddIcon from './Add';
 import AddressIcon from './Address';
 import ArrowWhiteIcon from './ArrowWhite';
@@ -6,6 +9,7 @@ import ArrowIcon from './Arrow';
 import AttachmentIcon from './Attachment';
 import AvatarIcon from './Avatar';
 import BannerIcon from './Banner';
+import BlockedAccountIcon from './BlockedAccount';
 import CalendarClockIcon from './CalendarClock';
 import CalendarMonthIcon from './CalendarMonth';
 import ClipIcon from './Clip';
@@ -15,7 +19,9 @@ import ContactsIcon from './Contacts';
 import CopiedIcon from './Copied';
 import CopyIcon from './Copy';
 import DeleteIcon from './Delete';
+import DocumentIcon from './Document';
 import DoneIcon from './Done';
+import DownloadIcon from './Download';
 import EditIcon from './Edit';
 import GeneralIcon from './General';
 import LocationOnIcon from './LocationOn';
@@ -23,21 +29,32 @@ import LocationIcon from './Location';
 import LogoutIcon from './Logout';
 import MappIcon from './Mapp';
 import MaximizeIcon from './Maximize';
+import MicIcon from './Mic';
 import MinimizeIcon from './Minimize';
 import MinusIcon from './Minus';
 import NicknameIcon from './Nickname';
 import NotificationIcon from './Notification';
+import PauseIcon from './Pause';
 import PenIcon from './Pen';
 import PersonEditIcon from './PersonEdit';
+import PlayIcon from './Play';
 import ProfileEditIcon from './ProfileEdit';
 import ProfileIcon from './Profile';
+import ReactionIcon from './Reaction';
+import ReplyIcon from './Reply';
+import SendIcon from './Send';
 import SocialIcon from './Social';
+import StopIcon from './Stop';
 import TrashWhiteIcon from './TrashWhite';
 import TrashIcon from './Trash';
+import TuneIcon from './Tune';
 import VerificationsIcon from './Verifications';
 import WalletIcon from './Wallet';
 const general = {
   'add-circle': AddCircleIcon,
+  'add-folder': AddFolderIcon,
+  'add-image': AddImageIcon,
+  'add-video': AddVideoIcon,
   add: AddIcon,
   address: AddressIcon,
   'arrow-white': ArrowWhiteIcon,
@@ -45,6 +62,7 @@ const general = {
   attachment: AttachmentIcon,
   avatar: AvatarIcon,
   banner: BannerIcon,
+  'blocked-account': BlockedAccountIcon,
   'calendar-clock': CalendarClockIcon,
   'calendar-month': CalendarMonthIcon,
   clip: ClipIcon,
@@ -54,7 +72,9 @@ const general = {
   copied: CopiedIcon,
   copy: CopyIcon,
   delete: DeleteIcon,
+  document: DocumentIcon,
   done: DoneIcon,
+  download: DownloadIcon,
   edit: EditIcon,
   general: GeneralIcon,
   'location-on': LocationOnIcon,
@@ -62,17 +82,25 @@ const general = {
   logout: LogoutIcon,
   mapp: MappIcon,
   maximize: MaximizeIcon,
+  mic: MicIcon,
   minimize: MinimizeIcon,
   minus: MinusIcon,
   nickname: NicknameIcon,
   notification: NotificationIcon,
+  pause: PauseIcon,
   pen: PenIcon,
   'person-edit': PersonEditIcon,
+  play: PlayIcon,
   'profile-edit': ProfileEditIcon,
   profile: ProfileIcon,
+  reaction: ReactionIcon,
+  reply: ReplyIcon,
+  send: SendIcon,
   social: SocialIcon,
+  stop: StopIcon,
   'trash-white': TrashWhiteIcon,
   trash: TrashIcon,
+  tune: TuneIcon,
   verifications: VerificationsIcon,
   wallet: WalletIcon,
 };
@@ -80,6 +108,9 @@ const general = {
 export {
   general,
   AddCircleIcon,
+  AddFolderIcon,
+  AddImageIcon,
+  AddVideoIcon,
   AddIcon,
   AddressIcon,
   ArrowWhiteIcon,
@@ -87,6 +118,7 @@ export {
   AttachmentIcon,
   AvatarIcon,
   BannerIcon,
+  BlockedAccountIcon,
   CalendarClockIcon,
   CalendarMonthIcon,
   ClipIcon,
@@ -96,7 +128,9 @@ export {
   CopiedIcon,
   CopyIcon,
   DeleteIcon,
+  DocumentIcon,
   DoneIcon,
+  DownloadIcon,
   EditIcon,
   GeneralIcon,
   LocationOnIcon,
@@ -104,17 +138,25 @@ export {
   LogoutIcon,
   MappIcon,
   MaximizeIcon,
+  MicIcon,
   MinimizeIcon,
   MinusIcon,
   NicknameIcon,
   NotificationIcon,
+  PauseIcon,
   PenIcon,
   PersonEditIcon,
+  PlayIcon,
   ProfileEditIcon,
   ProfileIcon,
+  ReactionIcon,
+  ReplyIcon,
+  SendIcon,
   SocialIcon,
+  StopIcon,
   TrashWhiteIcon,
   TrashIcon,
+  TuneIcon,
   VerificationsIcon,
   WalletIcon,
 };
