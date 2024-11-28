@@ -174,6 +174,7 @@ export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
           >
             No Followers or Following found
           </P>
+
         </Flex>
       )}
 
