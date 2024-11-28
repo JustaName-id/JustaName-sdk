@@ -1,4 +1,4 @@
-import { FC, Fragment, ReactNode, useContext, useMemo, useState } from 'react';
+import { FC, ReactNode, useContext, useMemo, useState } from 'react';
 import { JustWeb3Context, useJustWeb3 } from '../../providers';
 import {
   ArrowIcon,

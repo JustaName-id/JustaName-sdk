@@ -4,9 +4,9 @@ import type { Attachment } from '@xmtp/content-type-remote-attachment';
 import { ContentTypeAttachment } from '@xmtp/content-type-remote-attachment';
 import {
   CachedConversation,
-  useSendMessage,
-  SendOptions,
   DecodedMessage,
+  SendOptions,
+  useSendMessage,
 } from '@xmtp/react-sdk';
 
 export const sendAttachment = async (
@@ -22,7 +22,7 @@ export const sendAttachment = async (
   try {
     await sendMessage(conversation, attachment, ContentTypeAttachment);
   } catch (e) {
-    const error = e as Error;
+    // const error = e as Error;
   }
 };
 
