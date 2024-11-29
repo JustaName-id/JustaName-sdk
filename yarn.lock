@@ -2063,25 +2063,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ensdomains/ensjs@npm:4.0.1-alpha.0":
-  version: 4.0.1-alpha.0
-  resolution: "@ensdomains/ensjs@npm:4.0.1-alpha.0"
-  dependencies:
-    "@adraffy/ens-normalize": "npm:1.10.1"
-    "@ensdomains/address-encoder": "npm:1.1.1"
-    "@ensdomains/content-hash": "npm:3.1.0-rc.1"
-    "@ensdomains/dnsprovejs": "npm:^0.5.1"
-    abitype: "npm:^1.0.0"
-    dns-packet: "npm:^5.3.1"
-    graphql: "npm:^16.3.0"
-    graphql-request: "npm:6.1.0"
-    pako: "npm:^2.1.0"
-  peerDependencies:
-    viem: ^2.9.2
-  checksum: 10c0/44acb914772d8ad85ab0b4ea30f10d20da39213aa317f26fbbf9329bfcda8876666ed50905fccb4b89d8b4cc7e272aa1d40c3f5fc15ab89a62b6c01d07a4c05e
-  languageName: node
-  linkType: hard
-
 "@ensdomains/ensjs@npm:4.0.2":
   version: 4.0.2
   resolution: "@ensdomains/ensjs@npm:4.0.2"
@@ -4630,12 +4611,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justweb3/ui@workspace:packages/@justweb3/ui"
   dependencies:
+    "@radix-ui/react-checkbox": "npm:^1.1.2"
     "@radix-ui/react-dialog": "npm:^1.1.1"
     "@radix-ui/react-dropdown-menu": "npm:^2.1.2"
     "@radix-ui/react-label": "npm:^2.1.0"
     "@radix-ui/react-popover": "npm:^1.1.1"
     "@radix-ui/react-slot": "npm:1.1.0"
     "@radix-ui/react-tabs": "npm:^1.1.1"
+    "@radix-ui/react-tooltip": "npm:^1.1.4"
+    class-variance-authority: "npm:^0.7.0"
     clsx: "npm:1.2.1"
     embla-carousel-react: "npm:^8.3.0"
     input-otp: "npm:^1.2.4"
@@ -4650,7 +4634,6 @@ __metadata:
   resolution: "@justweb3/widget@workspace:packages/@justweb3/widget"
   dependencies:
     "@ensdomains/address-encoder": "npm:^1.1.2"
-    "@ensdomains/ensjs": "npm:4.0.1-alpha.0"
     "@hookform/resolvers": "npm:^3.9.0"
     "@justaname.id/react": "npm:0.3.149"
     "@justaname.id/sdk": "npm:0.2.146"
@@ -4670,9 +4653,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justweb3/xmtp-plugin@workspace:packages/@justweb3/xmtp-plugin"
   dependencies:
+    "@radix-ui/react-slider": "npm:^1.2.1"
+    "@xmtp/content-type-primitives": "npm:1.0.3"
+    "@xmtp/content-type-reaction": "npm:^1.1.11"
+    "@xmtp/content-type-remote-attachment": "npm:^1.1.12"
+    "@xmtp/content-type-reply": "npm:^1.1.12"
+    "@xmtp/content-type-text": "npm:1.0.1"
     "@xmtp/react-sdk": "npm:^9.0.0"
+    "@xmtp/xmtp-js": "npm:^13.0.4"
+    react-media-recorder-2: "npm:^1.6.23"
+    react-timer-hook: "npm:^3.0.8"
   peerDependencies:
     "@justweb3/widget": ">=0.0.0"
+    "@tanstack/react-query": ^5.x
     react: ">=17"
     wagmi: 2.x
   languageName: unknown
@@ -14257,7 +14250,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-primitives@npm:^1.0.1, @xmtp/content-type-primitives@npm:^1.0.3":
+"@xmtp/content-type-primitives@npm:1.0.3, @xmtp/content-type-primitives@npm:^1.0.1, @xmtp/content-type-primitives@npm:^1.0.3":
   version: 1.0.3
   resolution: "@xmtp/content-type-primitives@npm:1.0.3"
   dependencies:
@@ -14305,7 +14298,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-text@npm:^1.0.0, @xmtp/content-type-text@npm:^1.0.1":
+"@xmtp/content-type-text@npm:1.0.1, @xmtp/content-type-text@npm:^1.0.0, @xmtp/content-type-text@npm:^1.0.1":
   version: 1.0.1
   resolution: "@xmtp/content-type-text@npm:1.0.1"
   dependencies:
@@ -26684,7 +26677,7 @@ __metadata:
     "@chromatic-com/storybook": "npm:^1"
     "@docusaurus/eslint-plugin": "npm:^3.5.2"
     "@ensdomains/address-encoder": "npm:^1.1.2"
-    "@ensdomains/ensjs": "npm:4.0.1-alpha.0"
+    "@ensdomains/ensjs": "npm:4.0.2"
     "@hookform/error-message": "npm:^2.0.1"
     "@hookform/resolvers": "npm:^3.9.0"
     "@inquirer/prompts": "npm:^4.3.0"
