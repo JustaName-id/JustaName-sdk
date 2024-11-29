@@ -9,10 +9,11 @@ import {
   Credentials,
 } from '../../types';
 import { useQuery } from '@tanstack/react-query';
-import { useRecords } from '@justaname.id/react';
+import { useJustaName, useRecords } from '@justaname.id/react';
 import { useEffect } from 'react';
 import usePreviousState from '../usePreviousState';
 import isEqual from 'lodash/isEqual';
+import { VerifyResponse } from '../../types/verify-response';
 
 export const buildVerifyRecordsKey = (
   credentials: Credentials[],
@@ -34,26 +35,24 @@ export const buildVerifyRecordsKey = (
 export const verifyRecords = async (
   ens: string,
   credentials: Credentials[],
-  chainId: ChainId,
+  providerUrl: string,
   matchStandard = false,
   issuer = 'justverified.eth',
   backendUrl = 'https://api.justaname.id/verifications/v1'
 ) => {
-  const response = await axios.get<{
-    records: Partial<Record<CredentialMetadataKey, boolean>>;
-  }>(
+  const response = await axios.get<VerifyResponse>(
     `${backendUrl}/verify-records?${qs.stringify({
       credentials: credentials.map(
         (credential) => CredentialMetadataKeyStandard[credential]
       ),
-      ens,
-      chainId,
+      ens: ens,
+      providerUrl,
       matchStandard,
       issuer,
     })}`
   );
 
-  const records = response.data.records as Record<
+  const records = response.data[0].credentials as Record<
     CredentialMetadataKey,
     boolean
   >;
@@ -95,6 +94,8 @@ export const useVerifyRecords = ({
   verificationBackendUrl = 'https://api.justaname.id/verifications/v1',
   mApp = 'justverified.eth',
 }: UseVerifyRecordsParams) => {
+  const { networks } = useJustaName();
+  const _network = networks.find((network) => network.chainId === chainId);
   const { records } = useRecords({
     ens: ens,
     chainId: chainId,
@@ -114,7 +115,7 @@ export const useVerifyRecords = ({
       const credentialVerifications = await verifyRecords(
         ens,
         credentials,
-        chainId,
+        _network?.providerUrl as string,
         matchStandard,
         mApp,
         verificationBackendUrl

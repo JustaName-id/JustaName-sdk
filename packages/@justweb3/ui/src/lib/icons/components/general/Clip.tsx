@@ -22,7 +22,7 @@ export default function Clip(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#clip_svg__a)">
         <path
-          fill="var(--justweb3-primary-color)"
+          fill={props.fill || 'var(--justweb3-primary-color)'}
           d="M4.25 8a.8.8 0 0 1-.589-.245.8.8 0 0 1-.244-.588v-5q0-.345.244-.589a.8.8 0 0 1 .589-.245H8q.344 0 .589.245.244.245.244.589v5q0 .343-.244.588A.8.8 0 0 1 8 8zM2.583 9.667a.8.8 0 0 1-.588-.245.8.8 0 0 1-.245-.588V3h.833v5.834h4.584v.833z"
         />
       </g>

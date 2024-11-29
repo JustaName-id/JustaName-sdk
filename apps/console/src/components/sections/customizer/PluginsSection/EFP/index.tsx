@@ -29,8 +29,6 @@ export const EFP = () => {
   };
 
   return (
-    // <AccordionItem value="efp">
-    //   <AccordionTrigger>
     <div className="flex flex-row items-center justify-between w-full py-[16px] pl-[26px]">
       <p className="text-base text-black font-bold leading-[125%] my-[5px]">
         EFP
@@ -47,7 +45,5 @@ export const EFP = () => {
         }}
       />
     </div>
-    //   </AccordionTrigger>
-    // </AccordionItem>
   );
 };

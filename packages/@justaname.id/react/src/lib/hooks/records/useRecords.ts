@@ -7,18 +7,27 @@ import {
 } from '@tanstack/react-query';
 import {
   ChainId,
+  coinTypeMap,
+  generalKeys,
   SanitizedRecords,
   sanitizeRecords,
   SubnameRecordsRoute,
+  SUPPORTED_SOCIALS,
 } from '@justaname.id/sdk';
 import { useMemo } from 'react';
 import { Records } from '../../types';
 import { defaultOptions } from '../../query';
+import { RecordsTaskQueue } from './records-task-queue';
+import { checkEnsValid } from '../../helpers/checkEnsValid';
+import { useEnsPublicClient } from '../client/useEnsPublicClient';
+import { useOffchainResolvers } from '../offchainResolver';
+import { getRecords as getEnsRecords } from '@ensdomains/ensjs/public';
 
 export const buildRecordsBySubnameKey = (
   subname: string,
-  chainId: ChainId | undefined
-) => ['RECORDS_BY_SUBNAME', subname, chainId];
+  chainId: ChainId | undefined,
+  standard = false
+) => ['RECORDS_BY_SUBNAME', subname, chainId, standard];
 
 export interface GetRecordsResult {
   rawRecords: SubnameRecordsRoute['response'] | undefined;
@@ -29,11 +38,15 @@ export interface UseRecordsParams
   extends Omit<SubnameRecordsRoute['params'], 'ens' | 'providerUrl'> {
   ens?: string | undefined;
   enabled?: boolean;
+  skipQueue?: boolean;
+  // standard?: boolean;
 }
 
 export interface GetRecordsParams
   extends Omit<SubnameRecordsRoute['params'], 'ens' | 'providerUrl'> {
   ens: string;
+  // standard?: boolean;
+  skipQueue?: boolean;
 }
 
 export interface UseRecordsResult {
@@ -59,6 +72,10 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     () => params?.chainId || chainId,
     [params?.chainId, chainId]
   );
+  const { offchainResolvers } = useOffchainResolvers();
+  const { ensClient } = useEnsPublicClient({
+    chainId: _chainId,
+  });
 
   const _networks = useMemo(
     () => networks.find((network) => network.chainId === _chainId),
@@ -75,21 +92,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
       chainId: _params.chainId,
     });
 
-    if (
-      result.records.resolverAddress ===
-      '0x0000000000000000000000000000000000000000'
-    ) {
-      throw new Error('Resolver address not found');
-    }
-
-    let ethAddress = null;
-    if (result) {
-      ethAddress = result?.records.coins?.find((coin) => coin.id === 60)?.value;
-
-      if (!ethAddress) {
-        throw new Error('ETH address not found');
-      }
-    }
+    checkEnsValid(result);
 
     const sanitized = sanitizeRecords(result);
 
@@ -99,36 +102,113 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     };
   };
 
+  const getStandardRecords = async (
+    _params: SubnameRecordsRoute['params']
+  ): Promise<Records> => {
+    if (!ensClient) {
+      throw new Error('Public client not found');
+    }
+
+    const result = await getEnsRecords(ensClient, {
+      name: _params.ens,
+      coins: Object.keys(coinTypeMap),
+      texts: [
+        ...generalKeys,
+        ...SUPPORTED_SOCIALS.map((social) => social.identifier),
+      ],
+      contentHash: true,
+    });
+
+    const __chainId = _params?.chainId || _chainId;
+
+    const offchainResolver = offchainResolvers?.offchainResolvers?.find(
+      (resolver) => resolver.chainId === __chainId
+    );
+
+    const record = {
+      ens: _params.ens,
+      isJAN: result.resolverAddress === offchainResolver?.resolverAddress,
+      records: {
+        ...result,
+        contentHash: {
+          protocolType: result.contentHash?.protocolType || '',
+          decoded: result.contentHash?.decoded || '',
+        },
+      },
+    };
+
+    checkEnsValid(record);
+
+    const sanitized = sanitizeRecords(record);
+
+    return {
+      ...record,
+      sanitizedRecords: sanitized,
+    };
+  };
+
   const getRecordsInternal = async (
     _params: GetRecordsParams,
     forceUpdate = false
   ): Promise<Records> => {
+    const __chainId = _params?.chainId || _chainId;
+    // const __standard = _params?.standard || params?.standard;
+    const __standard = false;
     if (!forceUpdate) {
       const cachedRecords = queryClient.getQueryData(
-        buildRecordsBySubnameKey(_params?.ens, _params?.chainId || _chainId)
+        buildRecordsBySubnameKey(_params?.ens, __chainId, __standard)
       ) as Records;
       if (cachedRecords) {
         return cachedRecords;
       }
     }
-    const __chainId = _params?.chainId || _chainId;
+
     const __networks = networks.find(
       (network) => network.chainId === __chainId
     );
     const __providerUrl = __networks?.providerUrl;
-
+    const __skipQueue = _params?.skipQueue || params?.skipQueue;
     if (!__providerUrl) {
       throw new Error('ChainId not found');
     }
 
-    const records = await getRecords({
-      ens: _params.ens,
-      chainId: __chainId,
-      providerUrl: __providerUrl,
-    });
+    const taskFn = async () => {
+      let records: Records;
+      try {
+        records = await getRecords({
+          ens: _params.ens,
+          chainId: __chainId,
+          providerUrl: __providerUrl,
+        });
+      } catch (error) {
+        records = await getStandardRecords({
+          ens: _params.ens,
+          chainId: __chainId,
+          providerUrl: __providerUrl,
+        });
+      }
+
+      return records;
+    };
+
+    let records: Records;
+
+    // if (__standard) {
+    //   records = await getStandardRecords({
+    //     ens: _params.ens,
+    //     chainId: __chainId,
+    //     providerUrl: __providerUrl,
+    //   });
+    // } else {
+    if (__skipQueue) {
+      records = await taskFn();
+    } else {
+      records = await RecordsTaskQueue.enqueue(taskFn);
+    }
+    // }
 
     queryClient.setQueryData(
-      buildRecordsBySubnameKey(_params.ens, __chainId),
+      buildRecordsBySubnameKey(_params.ens, __chainId, __standard),
       records
     );
     return records;
@@ -136,7 +216,11 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
 
   const query = useQuery({
     ...defaultOptions,
-    queryKey: buildRecordsBySubnameKey(params?.ens || '', _chainId),
+    queryKey: buildRecordsBySubnameKey(
+      params?.ens || '',
+      _chainId
+      // params?.standard
+    ),
     queryFn: () =>
       getRecordsInternal(
         {
@@ -155,7 +239,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
   return {
     isRecordsPending: query.isPending,
     isRecordsFetching: query.isFetching,
-    isRecordsLoading: query.isLoading,
+    isRecordsLoading: query.isPending || query.isFetching,
     records: query.data,
     getRecords: getRecordsInternal,
     refetchRecords: query.refetch,

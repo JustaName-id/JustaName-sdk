@@ -166,7 +166,9 @@
       "packages/@justweb3/ui",
       "packages/@justweb3/widget",
       "packages/@justverified/plugin",
-      "packages/@justweb3/efp-plugin"
+      "packages/@justweb3/efp-plugin",
+      "packages/@justweb3/poap-plugin",
+      "packages/@justweb3/talent-protocol-plugin"
     ]
   },
   "defaultBase": "main"

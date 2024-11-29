@@ -2,6 +2,8 @@ import { FC } from 'react';
 import { Accordion } from '../../../ui/accordion';
 import { Verified } from './Verified';
 import { EFP } from './EFP';
+import { POAP } from './POAP';
+import { TalentProtocol } from './TalentProtocol';
 
 export const PluginsSection: FC = () => {
   return (
@@ -13,6 +15,10 @@ export const PluginsSection: FC = () => {
       <Accordion type="single" collapsible className="w-full">
         <Verified />
         <EFP />
+        <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
+        <POAP />
+        <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
+        <TalentProtocol />
       </Accordion>
     </div>
   );

@@ -1,0 +1,10 @@
+<svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="send">
+<mask id="mask0_3895_2183" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="16">
+<rect id="Bounding box" y="0.5" width="15" height="15" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_3895_2183)">
+<path id="send_2" d="M1.875 13V9.25L6.875 8L1.875 6.75V3L13.75 8L1.875 13Z" fill="var(--justweb3-primary-color)"/>
+</g>
+</g>
+</svg>

@@ -6,4 +6,5 @@ export const defaultOptions = {
   refetchOnWindowFocus: false,
   retry: 3,
   retryDelay: 1000,
+  retryOnMount: false,
 };

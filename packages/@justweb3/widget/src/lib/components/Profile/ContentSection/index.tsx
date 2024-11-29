@@ -101,20 +101,21 @@ const ContentSection: React.FC<ContentProps> = ({
   }, [data]);
 
   const communityName = useMemo(() => {
-    if (fullSubname.split('.').length == 2) return "";
-    return `${fullSubname.split(".")[1]}.${fullSubname.split(".")[2]}`
-  }, [fullSubname])
+    if (fullSubname.split('.').length === 2) return '';
+    return `${fullSubname.split('.')[1]}.${fullSubname.split('.')[2]}`;
+  }, [fullSubname]);
 
   const { records: communityRecords } = useRecords({
     ens: communityName,
     chainId,
-    enabled: !isProfileCommunity
+    enabled: !isProfileCommunity,
   });
 
   const memberTabName = useMemo(() => {
-    return `Members (${data?.pages?.flatMap((subnameData) => subnameData)[0].pagination
-      .totalCount
-      })`;
+    return `Members (${
+      data?.pages?.flatMap((subnameData) => subnameData)[0].pagination
+        .totalCount
+    })`;
   }, [data]);
 
   const { createPluginApi } = useContext(PluginContext);
@@ -295,22 +296,56 @@ const ContentSection: React.FC<ContentProps> = ({
             zIndex: 1,
           }}
         >
-          <Avatar
-            src={sanitizeEnsImage({
-              image: sanitized?.avatar,
-              name: fullSubname,
-              chainId,
-            })}
-            size={74}
-            borderSize={'4px'}
-            style={{
-              margin: '0 15px',
-            }}
-          />
-          {!isProfileCommunity &&
+          <div style={{ display: 'flex' }}>
+            <Avatar
+              src={sanitizeEnsImage({
+                image: sanitized?.avatar,
+                name: fullSubname,
+                chainId,
+              })}
+              size={74}
+              borderSize={'4px'}
+              style={{
+                margin: '0 15px',
+              }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                height: 'fit-content',
+                marginLeft: '-35px',
+                marginTop: 'auto',
+                marginBottom: '5px',
+              }}
+            >
+              {plugins.map((plugin) => {
+                const component = plugin.components?.Badge;
+                if (!component) {
+                  return null;
+                }
+                const componentApi = component(
+                  createPluginApi(plugin.name),
+                  fullSubname,
+                  chainId,
+                  sanitized.ethAddress.value
+                );
+
+                if (!componentApi) {
+                  return null;
+                }
+
+                return (
+                  <Fragment key={'profile-badge-' + plugin.name + fullSubname}>
+                    {componentApi}
+                  </Fragment>
+                );
+              })}
+            </div>
+          </div>
+          {communityName.length > 0 && (
             <button
               onClick={() => {
-                openEnsProfile(communityName, chainId)
+                openEnsProfile(communityName, chainId);
               }}
               className={styles.communityBtn}
             >
@@ -322,13 +357,13 @@ const ContentSection: React.FC<ContentProps> = ({
                 })}
                 style={{
                   border: 'none',
-                  padding: 0
+                  padding: 0,
                 }}
                 size={10}
               />
               {communityName}
             </button>
-          }
+          )}
           <Flex direction={'row'} justify={'space-between'} align={'center'}>
             <P
               style={{
