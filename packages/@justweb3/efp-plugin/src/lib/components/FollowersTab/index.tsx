@@ -11,6 +11,7 @@ export interface FollowersTabProps {
   ens: string;
   address: string;
 }
+
 export const FollowersTab: React.FC<FollowersTabProps> = ({ ens, address }) => {
   const [nbOfCardsPerFollowersRow, setNbOfCardsPerFollowersRow] = useState(0);
   const followingContainerRef = useRef<HTMLDivElement>(null);
