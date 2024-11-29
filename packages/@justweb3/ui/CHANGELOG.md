@@ -1,3 +1,7 @@
+## 0.0.91 (2024-11-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
 ## 0.0.90 (2024-11-29)
 
 This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
