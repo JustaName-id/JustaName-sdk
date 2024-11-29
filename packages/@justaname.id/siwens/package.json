@@ -1,6 +1,6 @@
 {
   "name": "@justaname.id/siwens",
-  "version": "0.0.79",
+  "version": "0.0.80",
   "peerDependencies": {
     "ethers": ">=6.0.0",
     "siwe": ">=2.0.0"

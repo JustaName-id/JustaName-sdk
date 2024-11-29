@@ -1,3 +1,61 @@
+## 0.0.86 (2024-11-29)
+
+
+### 🚀 Features
+
+- remove mapps from justverified ([2898c521](https://github.com/JustaName-id/JustaName-sdk/commit/2898c521))
+
+- efp ([36fcc153](https://github.com/JustaName-id/JustaName-sdk/commit/36fcc153))
+
+- efp and storybook for react sdk ([f0c5c7a0](https://github.com/JustaName-id/JustaName-sdk/commit/f0c5c7a0))
+
+- console fixes ([358b3a0e](https://github.com/JustaName-id/JustaName-sdk/commit/358b3a0e))
+
+- added docs and the sign in should only show ens set to default resolver or justaname resolver only ([a3bcecaa](https://github.com/JustaName-id/JustaName-sdk/commit/a3bcecaa))
+
+- sdk signin fix for aa wallets ([52944a72](https://github.com/JustaName-id/JustaName-sdk/commit/52944a72))
+
+- rainbow and privy examples ([fb2aa7dc](https://github.com/JustaName-id/JustaName-sdk/commit/fb2aa7dc))
+
+- remove currentChain ([43e8b6d6](https://github.com/JustaName-id/JustaName-sdk/commit/43e8b6d6))
+
+- dialog fixes and logo needs to be fixed ([fad47312](https://github.com/JustaName-id/JustaName-sdk/commit/fad47312))
+
+- expandableCard ([#54](https://github.com/JustaName-id/JustaName-sdk/pull/54))
+
+- community members tab ([#55](https://github.com/JustaName-id/JustaName-sdk/pull/55))
+
+- enabled in hooks and siwens fix and coinbase fix ([c3fb455e](https://github.com/JustaName-id/JustaName-sdk/commit/c3fb455e))
+
+- community button and release action ([0015df77](https://github.com/JustaName-id/JustaName-sdk/commit/0015df77))
+
+- **widget:** mobile dialogs ([#51](https://github.com/JustaName-id/JustaName-sdk/pull/51))
+
+
+### 🩹 Fixes
+
+- error from useEnsWalletClient ([67043376](https://github.com/JustaName-id/JustaName-sdk/commit/67043376))
+
+- update rest call and ui fixes ([81b05f29](https://github.com/JustaName-id/JustaName-sdk/commit/81b05f29))
+
+- justweb3button infinite loading ([465453ca](https://github.com/JustaName-id/JustaName-sdk/commit/465453ca))
+
+- justaname network and widget package json ([6afe04ce](https://github.com/JustaName-id/JustaName-sdk/commit/6afe04ce))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.147
+- Updated @justaname.id/react to 0.3.150
+- Updated @justweb3/ui to 0.0.86
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+- HadiKhai
+
 ## 0.0.85 (2024-11-15)
 
 

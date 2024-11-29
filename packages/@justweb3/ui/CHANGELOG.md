@@ -1,3 +1,42 @@
+## 0.0.86 (2024-11-29)
+
+
+### 🚀 Features
+
+- remove mapps from justverified ([2898c521](https://github.com/JustaName-id/JustaName-sdk/commit/2898c521))
+
+- efp ([36fcc153](https://github.com/JustaName-id/JustaName-sdk/commit/36fcc153))
+
+- efp and storybook for react sdk ([f0c5c7a0](https://github.com/JustaName-id/JustaName-sdk/commit/f0c5c7a0))
+
+- added docs and the sign in should only show ens set to default resolver or justaname resolver only ([a3bcecaa](https://github.com/JustaName-id/JustaName-sdk/commit/a3bcecaa))
+
+- move justweb3 to peer dep in the plugins ([316047cb](https://github.com/JustaName-id/JustaName-sdk/commit/316047cb))
+
+- sdk signin fix for aa wallets ([52944a72](https://github.com/JustaName-id/JustaName-sdk/commit/52944a72))
+
+- rainbow and privy examples ([fb2aa7dc](https://github.com/JustaName-id/JustaName-sdk/commit/fb2aa7dc))
+
+- dialog fixes and logo needs to be fixed ([fad47312](https://github.com/JustaName-id/JustaName-sdk/commit/fad47312))
+
+- expandableCard ([#54](https://github.com/JustaName-id/JustaName-sdk/pull/54))
+
+- packagejson fixes ([873f9967](https://github.com/JustaName-id/JustaName-sdk/commit/873f9967))
+
+- **widget:** mobile dialogs ([#51](https://github.com/JustaName-id/JustaName-sdk/pull/51))
+
+
+### 🩹 Fixes
+
+- update rest call and ui fixes ([81b05f29](https://github.com/JustaName-id/JustaName-sdk/commit/81b05f29))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+- HadiKhai
+
 ## 0.0.85 (2024-11-15)
 
 This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
