@@ -1,3 +1,20 @@
+## 0.3.156 (2024-12-01)
+
+
+### 🚀 Features
+
+- support ethers 5 and ethers 6 ([f82ab13](https://github.com/JustaName-id/JustaName-sdk/commit/f82ab13))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.153
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.155 (2024-11-29)
 
 
