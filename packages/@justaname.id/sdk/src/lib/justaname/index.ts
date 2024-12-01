@@ -14,8 +14,8 @@ import {
   Subnames,
 } from '../features';
 import { InvalidConfigurationException } from '../errors/InvalidConfiguration.exception';
-import { ethers } from 'ethers';
 import { providerUrlChainIdLoadingMap, providerUrlChainIdMap } from '../memory';
+import { getJsonRpcProvider } from '../utils/ethersCompat';
 
 /**
  * The main class for the JustaName SDK.
@@ -162,11 +162,11 @@ export class JustaName {
     const defaultMainnetProviderUrl = 'https://cloudflare-eth.com';
     const defaultTestnetProviderUrl = 'https://rpc.sepolia.org';
 
-    const defaultMainnetProvider = new ethers.JsonRpcProvider(
+    const defaultMainnetProvider = getJsonRpcProvider(
       defaultMainnetProviderUrl,
       1
     );
-    const defaultTestnetProvider = new ethers.JsonRpcProvider(
+    const defaultTestnetProvider = getJsonRpcProvider(
       defaultTestnetProviderUrl,
       11155111
     );
@@ -184,7 +184,7 @@ export class JustaName {
       },
       // {
       //   chainId: 31337 as ChainId,
-      //   provider: new ethers.JsonRpcProvider('http://localhost:8545'),
+      //   provider: getJsonRpcProvider('http://localhost:8545'),
       //   providerUrl: 'http://localhost:8545',
       // },
     ] as NetworksWithProvider;
@@ -194,7 +194,7 @@ export class JustaName {
       if (network && network?.providerUrl) {
         return {
           chainId: network.chainId,
-          provider: new ethers.JsonRpcProvider(network.providerUrl),
+          provider: getJsonRpcProvider(network.providerUrl),
           providerUrl: network.providerUrl,
         };
       } else {
@@ -256,7 +256,7 @@ export class JustaName {
           }
         }
 
-        const provider = new ethers.JsonRpcProvider(network.providerUrl);
+        const provider = getJsonRpcProvider(network.providerUrl);
         provider.getNetwork().then((_network) => {
           if (network.chainId.toString() !== _network.chainId.toString()) {
             throw new InvalidConfigurationException(

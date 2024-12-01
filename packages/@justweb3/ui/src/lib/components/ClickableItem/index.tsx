@@ -52,10 +52,11 @@ export const ClickableItem = React.forwardRef<
       <div
         ref={ref}
         className={clsx(wrapperClassNames, className)}
-        onClick={() => {
+        onClick={(e) => {
           if (!loading && !disabled && clickable) {
             onClick && onClick();
           }
+          e.stopPropagation();
         }}
         onPointerEnter={() => {
           if (!loading && !disabled && clickable) {
