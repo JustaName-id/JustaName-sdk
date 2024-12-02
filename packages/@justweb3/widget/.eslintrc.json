@@ -26,7 +26,7 @@
           "error",
           {
             "ignoredFiles": ["{projectRoot}/rollup.config.{js,ts,mjs,mts,cjs}", "{projectRoot}/src/stories/**/*", "{projectRoot}/.storybook/**/*"],
-            "ignoredDependencies": ["react-hook-form"]
+            "ignoredDependencies": ["react-hook-form", "@ensdomains/ensjs", "clsx"]
           }
         ]
       }

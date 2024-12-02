@@ -162,7 +162,7 @@ export const useStandardRecordsBatch = (
     ensRecords.forEach((result, index) => {
       if (result) {
         const record = {
-          ens: checkMissing[index],
+          ens: nonJanEns[index],
           isJAN: result.resolverAddress === offchainResolver?.resolverAddress,
           records: {
             ...result,
@@ -177,12 +177,12 @@ export const useStandardRecordsBatch = (
 
         const sanitized = sanitizeRecords(record);
 
-        recordsBatch[checkMissing[index]] = {
+        recordsBatch[nonJanEns[index]] = {
           ...record,
           sanitizedRecords: sanitized,
         };
       } else {
-        recordsBatch[checkMissing[index]] = undefined;
+        recordsBatch[nonJanEns[index]] = undefined;
       }
     });
 

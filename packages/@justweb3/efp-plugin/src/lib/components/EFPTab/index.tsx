@@ -6,15 +6,16 @@ import { FollowersTab } from '../FollowersTab';
 
 export interface EFPTabProps {
   ens: string;
+  address: string;
 }
 
-export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
+export const EFPTab: FC<EFPTabProps> = ({ ens, address }) => {
   const [tab, setTab] = useState<
     'following' | 'followers' | 'none' | 'loading'
   >('loading');
 
   const { stats, isStatsLoading } = useStats({
-    addressOrEns: ens,
+    addressOrEns: address,
   });
 
   useEffect(() => {
@@ -150,9 +151,9 @@ export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
         </button>
       </Flex>
 
-      {tab === 'following' && <FollowingTab ens={ens} />}
+      {tab === 'following' && <FollowingTab ens={ens} address={address} />}
 
-      {tab === 'followers' && <FollowersTab ens={ens} />}
+      {tab === 'followers' && <FollowersTab ens={ens} address={address} />}
 
       {tab === 'none' && (
         <Flex
@@ -174,6 +175,7 @@ export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
           >
             No Followers or Following found
           </P>
+
         </Flex>
       )}
 

@@ -191,7 +191,7 @@ export class JustaName {
 
     const baseNetworksConfig = baseNetworks.map((_network) => {
       const network = networks.find((n) => n.chainId === _network.chainId);
-      if (network) {
+      if (network && network?.providerUrl) {
         return {
           chainId: network.chainId,
           provider: new ethers.JsonRpcProvider(network.providerUrl),
