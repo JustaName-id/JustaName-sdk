@@ -1,3 +1,7 @@
+## 0.0.92 (2024-12-02)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
 ## 0.0.91 (2024-12-01)
 
 This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
