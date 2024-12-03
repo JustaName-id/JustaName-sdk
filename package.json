@@ -18,6 +18,7 @@
     "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^3.9.0",
     "@inquirer/prompts": "^4.3.0",
+    "@justaname.id/address-resolution": "^1.1.0",
     "@privy-io/react-auth": "^1.82.0",
     "@privy-io/wagmi": "^0.2.12",
     "@radix-ui/react-accordion": "^1.2.1",

@@ -21,23 +21,23 @@ import {
   CachedConversation,
   ContentTypeMetadata,
   useCanMessage,
-  useClient,
   useConsent,
   useMessages,
-  useStreamMessages,
+  useStreamMessages
 } from '@xmtp/react-sdk';
 import React, { useEffect, useMemo } from 'react';
 import { useSendReactionMessage } from '../../hooks';
+import { typeLookup } from '../../utils/attachments';
 import {
   filterReactionsMessages,
   MessageWithReaction,
 } from '../../utils/filterReactionsMessages';
 import { formatAddress } from '../../utils/formatAddress';
 import { groupMessagesByDate } from '../../utils/groupMessageByDate';
-import MessageCard from '../MessageCard';
 import EmojiSelector from '../EmojiSelector';
-import MessageTextField from '../MessageTextField';
+import MessageCard from '../MessageCard';
 import { MessageSkeletonCard } from '../MessageSkeletonCard';
+import MessageTextField from '../MessageTextField';
 
 export interface ChatProps {
   conversation: CachedConversation<ContentTypeMetadata>;
@@ -49,7 +49,6 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     React.useState<MessageWithReaction | null>(null);
   const [reactionMessage, setReactionMessage] =
     React.useState<MessageWithReaction | null>(null);
-  const [emojiSelectorTop, setEmojiSelectorTop] = React.useState<number>(0);
   const [isRequest, setIsRequest] = React.useState<boolean>(false);
   const [isRequestChangeLoading, setIsRequestChangeLoading] =
     React.useState<boolean>(false);
@@ -65,7 +64,6 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
   const { sanitizeEnsImage } = useEnsAvatar();
 
   const { address } = useMountedAccount();
-  const { client } = useClient();
 
   const [canMessage, setCanMessage] = React.useState<boolean>(true);
 
@@ -224,10 +222,10 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
               src={
                 primaryName
                   ? sanitizeEnsImage({
-                      name: primaryName,
-                      chainId: 1,
-                      image: records?.sanitizedRecords?.avatar,
-                    })
+                    name: primaryName,
+                    chainId: 1,
+                    image: records?.sanitizedRecords?.avatar,
+                  })
                   : undefined
               }
               style={{
@@ -337,14 +335,15 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
         {isCanMessageLoading || isLoading ? (
           <Flex
             direction="column"
-            gap="10px"
+            gap="5px"
             style={{
               flex: 1,
-              padding: '0px 10px',
-              height: '90%',
+              padding: '10px 10px',
+              minHeight: 'calc(100vh - 200px)',
+              maxHeight: 'calc(100vh - 200px)',
             }}
           >
-            {[...Array(5)].map((_, index) => (
+            {[...Array(8)].map((_, index) => (
               <MessageSkeletonCard
                 key={`message-skeleton-${index}`}
                 isReceiver={index % 2 === 0}
@@ -355,11 +354,28 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
           <Flex
             style={{
               flex: 1,
-              maxHeight: replyMessage
-                ? typeof replyMessage.content === 'string'
+              minHeight: replyMessage
+                ? typeof replyMessage.content === 'string' || typeof replyMessage.content.content === "string"
+                  ? 'calc(100vh - 245px)'
+                  : replyMessage.content?.mimeType === "audio/wav"
+                    ? 'calc(100vh - 260px)'
+                    : typeLookup[replyMessage.content?.mimeType.split("/")?.[1]] === "video" || typeLookup[replyMessage.content?.mimeType.split("/")?.[1]] === "image"
+                      ? 'calc(100vh - 315px)'
+                      : 'calc(100vh - 245px)'
+                : isMessagesSenderOnly
                   ? 'calc(100vh - 248px)'
-                  : 'calc(100vh - 284px)'
-                : 'calc(100vh - 200px)',
+                  : 'calc(100vh - 200px)',
+              maxHeight: replyMessage
+                ? typeof replyMessage.content === 'string' || typeof replyMessage.content.content === "string"
+                  ? 'calc(100vh - 245px)'
+                  : replyMessage.content?.mimeType === "audio/wav"
+                    ? 'calc(100vh - 260px)'
+                    : typeLookup[replyMessage.content?.mimeType.split("/")?.[1]] === "video" || typeLookup[replyMessage.content?.mimeType.split("/")?.[1]] === "image"
+                      ? 'calc(100vh - 315px)'
+                      : 'calc(100vh - 245px)'
+                : isMessagesSenderOnly
+                  ? 'calc(100vh - 248px)'
+                  : 'calc(100vh - 200px)',
             }}
           >
             {canMessage ? (
@@ -379,19 +395,34 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                 {groupedMessages &&
                   Object.keys(groupedMessages).map((date, index) => (
                     <Flex direction="column" gap="10px" key={index}>
-                      <P
-                        style={{
-                          textAlign: 'center',
-                          padding: '5px 0px',
-                          marginBottom: '8px',
-                          fontSize: '9px',
-                          fontWeight: 900,
+                      <Flex direction="row" align='center' gap="20px" style={{
+                        marginBottom: '8px',
+                      }}>
+                        <div style={{
+                          width: '100%',
+                          height: 1,
+                          backgroundColor: "var(--justweb3-foreground-color-2)",
                           opacity: 0.35,
-                          minWidth: 'fit-content',
-                        }}
-                      >
-                        {date}
-                      </P>
+                        }} />
+                        <P
+                          style={{
+                            textAlign: 'center',
+                            padding: '5px 0px',
+                            fontSize: '9px',
+                            fontWeight: 900,
+                            opacity: 0.35,
+                            minWidth: 'fit-content',
+                          }}
+                        >
+                          {date}
+                        </P>
+                        <div style={{
+                          width: '100%',
+                          height: 1,
+                          backgroundColor: "var(--justweb3-foreground-color-2)",
+                          opacity: 0.35,
+                        }} />
+                      </Flex>
                       {groupedMessages[date].map((message) => (
                         <MessageCard
                           conversation={conversation}
@@ -411,14 +442,12 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                             ) as HTMLElement;
                             replica.id = `${message.id}-replica`;
                             replica.style.position = 'absolute';
-                            replica.style.top = element?.offsetTop + 'px';
-                            replica.style.top = '100px';
+                            replica.style.bottom = '310px';
+                            replica.style.minHeight = '20px';
+                            replica.style.left = '4.2vw';
                             replica.style.zIndex = '90';
                             element?.parentElement?.appendChild(replica);
                             replica.classList.add('replica-animate');
-                            setEmojiSelectorTop(
-                              100 + element.getBoundingClientRect().height
-                            );
                           }}
                         />
                       ))}
@@ -429,15 +458,9 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                     style={{
                       zIndex: 99,
                       position: 'absolute',
-                      right:
-                        reactionMessage?.senderAddress === client?.address
-                          ? '20px'
-                          : 'auto',
-                      left:
-                        reactionMessage?.senderAddress === client?.address
-                          ? 'auto'
-                          : '20px',
-                      top: `${emojiSelectorTop + 20}px`,
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      bottom: `30px`,
                     }}
                   >
                     <EmojiSelector
@@ -506,30 +529,33 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
             {isMessagesSenderOnly && (
               <Flex
                 direction="column"
-                gap="5px"
+                gap="10px"
                 style={{
-                  padding: '20px',
+                  padding: '10px',
                   borderRadius: '10px',
-                  border: '1px solid black',
-                  boxShadow: '1px 1px 0px 0px #000',
+                  backgroundColor: 'var(--justweb3-foreground-color-4)'
                 }}
               >
                 <P
                   style={{
-                    fontSize: '20px',
+                    fontSize: '14px',
                     fontWeight: 900,
-                    lineHeight: '125%',
+                    lineHeight: '100%',
+                    color: 'black'
                   }}
                 >
                   Message in user’s Requests
                 </P>
-                <P>This user has not accepted your message request yet</P>
+                <P style={{
+                  fontSize: '12px'
+                }}>This user has not accepted your message request yet</P>
               </Flex>
             )}
             <MessageTextField
               onCancelReply={() => setReplyMessage(null)}
               conversation={conversation}
               replyMessage={replyMessage}
+              peerAddress={conversation.peerAddress}
             />
           </Flex>
         )}

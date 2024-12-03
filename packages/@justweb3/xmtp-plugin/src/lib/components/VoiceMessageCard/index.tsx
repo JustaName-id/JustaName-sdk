@@ -1,16 +1,16 @@
+import { Flex, P, PauseIcon, PlayIcon } from '@justweb3/ui';
 import * as Slider from '@radix-ui/react-slider';
 import { DecodedMessage } from '@xmtp/xmtp-js';
-import { Flex, PauseIcon, PlayIcon } from '@justweb3/ui';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { MessageWithReaction } from '../../utils/filterReactionsMessages';
 import useGetAudioDuration from '../../hooks/useGetAudioDuration';
+import { MessageWithReaction } from '../../utils/filterReactionsMessages';
+import { formatTime } from '../../utils/formatVoiceTime';
 
 interface VoiceMessageCardProps {
   message: MessageWithReaction | DecodedMessage;
   style?: React.CSSProperties;
   disabled?: boolean;
   isReceiver: boolean;
-  isReply?: boolean;
 }
 
 const VoiceMessageCard: React.FC<VoiceMessageCardProps> = ({
@@ -18,7 +18,6 @@ const VoiceMessageCard: React.FC<VoiceMessageCardProps> = ({
   style,
   disabled,
   isReceiver,
-  isReply,
 }) => {
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -116,9 +115,12 @@ const VoiceMessageCard: React.FC<VoiceMessageCardProps> = ({
           width="22"
           height="22"
           fill={
-            isReceiver
-              ? 'var(--justweb3-primary-color)'
-              : 'var(--justweb3-foreground-color-4)'
+            disabled ?
+              'var(--justweb3-primary-color)'
+              :
+              isReceiver
+                ? 'var(--justweb3-primary-color)'
+                : 'var(--justweb3-foreground-color-4)'
           }
           style={{
             cursor: 'pointer',
@@ -156,7 +158,7 @@ const VoiceMessageCard: React.FC<VoiceMessageCardProps> = ({
         >
           <Slider.Track
             style={{
-              backgroundColor: !isReceiver
+              background: !isReceiver
                 ? 'var(--justweb3-primary-color)'
                 : 'var(--justweb3-foreground-color-4)',
               height: '5px',
@@ -169,7 +171,7 @@ const VoiceMessageCard: React.FC<VoiceMessageCardProps> = ({
           >
             <Slider.Range
               style={{
-                backgroundColor: isReceiver
+                background: isReceiver
                   ? 'var(--justweb3-primary-color)'
                   : 'var(--justweb3-foreground-color-4)',
                 height: '100%',
@@ -182,7 +184,7 @@ const VoiceMessageCard: React.FC<VoiceMessageCardProps> = ({
             style={{
               width: '6px',
               height: '5px',
-              backgroundColor: isReceiver
+              background: isReceiver
                 ? 'var(--justweb3-primary-color)'
                 : 'var(--justweb3-foreground-color-4)',
               borderRadius: '2.5px',
@@ -191,24 +193,16 @@ const VoiceMessageCard: React.FC<VoiceMessageCardProps> = ({
             aria-label="Volume"
           />
         </Slider.Root>
-        {/*<Flex direction="row" align="center" justify='space-between'>*/}
-        {/*    <P style={{*/}
-        {/*        fontSize: '9px',*/}
-        {/*        fontWeight: '800',*/}
-        {/*        textTransform: 'uppercase',*/}
-        {/*        color: !isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)',*/}
-        {/*        opacity: '0.5',*/}
-        {/*    }}>{playing || currentTime > 0 ? formatTime(currentTime) : formatTime(duration ?? 0)}</P>*/}
-        {/*    {!isReply && (*/}
-        {/*        <P style={{*/}
-        {/*            fontSize: '9px',*/}
-        {/*            fontWeight: '800',*/}
-        {/*            textTransform: 'uppercase',*/}
-        {/*            color: !isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)',*/}
-        {/*            opacity: '0.5',*/}
-        {/*        }} >{formatMessageSentTime(message.sentAt)}</P>*/}
-        {/*    )}*/}
-        {/*</Flex>*/}
+        <Flex direction="row" align="center" justify='space-between'>
+          <P style={{
+            fontSize: '9px',
+            fontWeight: '800',
+            textTransform: 'uppercase',
+            color: !isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)',
+            opacity: '0.5',
+          }}>{playing || currentTime > 0 ? formatTime(currentTime) : formatTime(duration ?? 0)}</P>
+
+        </Flex>
       </Flex>
     </Flex>
   );

@@ -18,10 +18,10 @@ export const MessageSkeletonCard: React.FC<MessageSkeletonCardProps> = ({ isRece
         maxWidth: '170px',
         width: '170px',
         minHeight: '40px',
+        maxHeight: '40px',
         fontSize: '14px',
         display: 'flex',
         flexDirection: 'column',
-        padding: '10px',
         overflowWrap: 'break-word',
         borderRadius: '10px',
         border: '1px solid var(--justweb3-primary-color)',
@@ -31,6 +31,14 @@ export const MessageSkeletonCard: React.FC<MessageSkeletonCardProps> = ({ isRece
         borderBottomRightRadius: isReceiver ? '10px' : '0',
         boxShadow: isReceiver ? 'shadow-[-1px_2px_0_0_#3]' : 'shadow-[1px_2px_0_0_#88C6F5]',
       }}>
+      </Skeleton>
+      <Skeleton style={{
+        height: '8px',
+        width: '20px',
+        background: '#e1e1e19a',
+        borderRadius: '5px'
+      }}>
+
       </Skeleton>
     </Flex>
   )

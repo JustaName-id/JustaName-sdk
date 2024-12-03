@@ -3,7 +3,7 @@ import type { Attachment } from '@xmtp/content-type-remote-attachment';
 import { CachedConversation, useClient } from '@xmtp/react-sdk';
 import React, { Dispatch, SetStateAction, useEffect, useMemo, useRef, useState } from 'react';
 import { MessageWithReaction } from '../../utils/filterReactionsMessages';
-import { useMountedAccount } from '@justaname.id/react';
+import { useMountedAccount, usePrimaryName } from '@justaname.id/react';
 import { useAttachmentChange, useRecordingTimer, useRecordVoice, useSendAttachment, useSendMessages, useSendReplyMessage } from '../../hooks';
 import { AttachmentType, typeLookup } from '../../utils/attachments';
 import { Button, CloseIcon, Flex, Input, LoadingSpinner, P, AddImageIcon, AddVideoIcon, AddFolderIcon, DocumentIcon, SendIcon, StopIcon, MicIcon } from '@justweb3/ui';
@@ -20,6 +20,7 @@ interface MessageTextFieldProps {
     replyMessage?: MessageWithReaction | null;
     onCancelReply?: () => void;
     onNewConvo?: (message: string) => void;
+    peerAddress?: string;
 }
 
 const MessageTextField: React.FC<MessageTextFieldProps> = ({
@@ -28,7 +29,8 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
     replyMessage,
     onCancelReply,
     conversation,
-    onNewConvo
+    onNewConvo,
+    peerAddress
 }) => {
     const [messageValue, setMessageValue] = React.useState<string>("");
     const [attachment, setAttachment] = React.useState<Attachment | undefined>();
@@ -45,6 +47,9 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
         return attachment?.mimeType.split("/")?.[1] || "";
     }, [attachment]);
 
+    const { primaryName } = usePrimaryName({
+        address: peerAddress as `0x${string}`,
+    });
 
     // Attachments
     const [acceptedTypes, setAcceptedTypes]: [
@@ -202,9 +207,8 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                 {replyMessage && (
                     <Flex direction='row' align='center' justify='space-between' style={{
                         padding: '8px 12px',
-                        height: isReplyText ? "30px" : isReplyVoice ? "60px" : isReplyVideoOrImage ? "60px" : "60px",
+                        height: isReplyText ? "30px" : isReplyVoice ? "45px" : isReplyVideoOrImage ? "100px" : "30px",
                         borderRadius: '5px',
-                        // TODO: check background and border color
                         background: 'white',
                         border: '1px solid grey',
                         borderBottom: 0,
@@ -213,7 +217,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                         borderBottomRightRadius: 0,
                         borderBottomLeftRadius: 0,
                     }} >
-                        <Flex direction='column' align='flex-start' style={{
+                        <Flex direction='column' align='flex-start' gap='5px' style={{
                             cursor: 'pointer',
                             maxWidth: '90%',
                             flex: 1
@@ -221,12 +225,11 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                             onClick={navigateToRepliedMessage}
                         >
                             <P style={{
-                                fontSize: "12px",
+                                fontSize: "11px",
                                 fontWeight: 900,
                                 lineHeight: "100%",
-                                textTransform: "uppercase",
                                 color: "var(--justweb3-primary-color)"
-                            }} >{isSender ? "YOU" : formatAddress(replyMessage.senderAddress)}</P>
+                            }} >{isSender ? "YOU" : primaryName ?? formatAddress(replyMessage.senderAddress)}</P>
                             {(isReplyText || isReplyReply) ? (
                                 <P style={{
                                     fontSize: "12px",
@@ -248,8 +251,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                     :
                                     typeLookup[replyAttachmentExtention] === "image" ?
                                         <img src={URL.createObjectURL(new Blob([replyMessage.content.data], { type: replyMessage.content.mimeType }))} alt={replyMessage.content.filename} style={{
-                                            maxWidth: "60px",
-                                            // TODO: check border color
+                                            maxWidth: "150px",
                                             border: "0.5px solid var(--justweb3-border-unfocused)",
                                             borderRadius: "5px",
                                             margin: '0 auto'
@@ -257,7 +259,8 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                         :
                                         typeLookup[replyAttachmentExtention] === "video" ?
                                             <CustomPlayer disabled url={URL.createObjectURL(new Blob([replyMessage.content.data], { type: replyMessage.content.mimeType }))} style={{
-                                                width: '100px',
+                                                width: '150px',
+                                                margin: '0 auto'
                                             }} />
                                             :
                                             <Flex direction='row' align='center' justify='center' gap='4px'>
@@ -287,9 +290,18 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                             padding: '10px 15px',
                             borderRadius: '6px',
                             background: 'white',
-                            // TODO: check border color
                             border: '1px solid grey'
                         }} >
+                            {attachment?.mimeType !== "audio/wav" && (
+                                <div style={{
+                                    position: 'absolute',
+                                    left: '0px',
+                                    right: '0px',
+                                    bottom: '0px',
+                                    top: '0px',
+                                    backdropFilter: 'blur(8px)'
+                                }} />
+                            )}
                             {attachment?.mimeType === "audio/wav" ?
                                 <CustomVoicePreview audioUrl={attachmentPreview} onCancel={handleCancelAttachment} />
                                 :
@@ -299,32 +311,29 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                     zIndex: 5,
                                     padding: '10px 0px',
                                     right: '12px',
-                                    bottom: '4px',
+                                    bottom: '20px',
                                     borderRadius: '10px',
-                                    background: 'white',
-                                    border: '1px solid var(--justweb3-primary-color)',
                                 }} >
                                     {typeLookup[attachmentExtention] === "image" ?
                                         <img
                                             src={attachmentPreview || ""}
                                             alt={attachment?.filename}
                                             style={{
-                                                width: '220px',
-                                                aspectRatio: '16/9',
-                                                border: '1px solid var(--justweb3-primary-color)',
+                                                width: '350px',
                                                 borderRadius: '5px'
                                             }}
                                         />
                                         : typeLookup[attachmentExtention] === "video" ?
                                             <CustomPlayer url={attachmentPreview || ""} style={{
-                                                width: '220px',
+                                                width: '350px',
                                             }} />
                                             :
-                                            <Flex direction='row' justify='center' align='center' style={{
+                                            <Flex direction='row' gap='5px' justify='center' align='center' style={{
                                                 padding: '4px 12px',
-                                                width: '100px'
+                                                width: '250px',
+                                                marginBottom: '10px'
                                             }}>
-                                                <DocumentIcon width="24" height="24" />
+                                                <DocumentIcon width="30" height="30" />
                                                 <P style={{
                                                     maxWidth: '180px',
                                                     fontSize: '14px',
@@ -339,19 +348,22 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                     }
                                     <Flex direction='row' align='center' gap='10px' style={{
                                         flex: 1,
-                                        width: '100%'
+                                        width: '100%',
+                                        padding: '5px'
                                     }} >
                                         <Button
                                             variant={"secondary"}
                                             style={{
-                                                flex: '1 1 0%'
+                                                marginLeft: '10px',
+                                                width: '100%'
                                             }}
                                             onClick={handleCancelAttachment}
                                         >Cancel</Button>
                                         <Button
                                             variant={"primary"}
                                             style={{
-                                                flex: '1 1 0%'
+                                                marginRight: '10px',
+                                                width: '100%'
                                             }}
                                             onClick={handleSendAttachment}
                                         >Send</Button>
@@ -378,7 +390,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                 background: 'white'
                             }} >
                                 <P style={{
-                                    fontSize: '14px',
+                                    fontSize: '12px',
                                     letterSpacing: 0.7,
                                     color: "var(--justweb3-primary-color)",
                                     fontWeight: 900
@@ -386,13 +398,13 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                     {recordingValue}
                                 </P>
                                 <P style={{
-                                    fontSize: '14px',
+                                    fontSize: '12px',
                                     letterSpacing: 0.7,
                                     color: "var(--justweb3-primary-color)",
                                     fontWeight: 900,
                                     flex: 1
                                 }} >RECORDING...</P>
-                                <StopIcon width="24" height="24" style={{
+                                <StopIcon width="20" height="20" style={{
                                     cursor: "pointer"
                                 }} onClick={() => {
                                     stopRecording();
@@ -415,7 +427,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
                                         borderRadius: "6px",
                                         borderTopLeftRadius: replyMessage ? 0 : "6px",
                                         borderTopRightRadius: replyMessage ? 0 : "6px",
-                                        // borderTop: replyMessage ? "0px" : "auto",
+                                        borderTop: replyMessage ? "0px" : "",
                                     }}
                                     placeholder={`Send message...`}
                                     value={messageValue}

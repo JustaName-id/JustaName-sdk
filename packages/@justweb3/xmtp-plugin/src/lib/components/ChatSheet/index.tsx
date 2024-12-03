@@ -83,6 +83,7 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
             flexDirection: 'column',
             marginBottom: '0px',
             overflow: 'hidden',
+            marginTop: '10px',
             flex: '1',
           }}
         >
@@ -126,6 +127,7 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
                 <ChatList
                   conversations={blockedConversations}
                   handleOpenChat={handleOpenChat}
+                  blockedList
                 />
               </TabsContent>
             </>

@@ -56,29 +56,27 @@ const CustomVoicePreview: React.FC<CustomVoicePreviewProps> = ({
 
     return (
         <Flex direction="row" align="center" justify='space-between' gap='10px' style={{
-            height: '32px',
             background: 'var(--justweb3-primary-color)',
-            padding: '5px 10px',
-            borderRadius: '6px',
+            padding: '5px',
+            borderRadius: '10px',
         }} >
             {playing ?
-                <PauseIcon width={24} height={24} style={{
+                <PauseIcon fill='white' width={22} height={22} style={{
                     cursor: 'pointer',
                 }} onClick={handlePlayPause} />
                 :
-                <PlayIcon width={24} height={24} style={{
+                <PlayIcon fill='white' width={22} height={22} style={{
                     cursor: 'pointer',
                 }} onClick={handlePlayPause} />
             }
             <P style={{
                 fontWeight: 900,
-                fontSize: '14px',
+                fontSize: '12px',
                 lineHeight: '73%',
-                // TODO: check color
-                color: 'var(--justweb3-text-color)',
+                color: 'white',
                 letterSpacing: '0.7px',
             }} >{playing || currentTime > 0 ? formatTime(currentTime) : formatTime(audioDuration ?? 0)}</P>
-            <CloseIcon width={20} height={20} fill="#8714E3" style={{
+            <CloseIcon width={18} height={18} fill='white' style={{
                 cursor: 'pointer',
                 scale: '1.1',
             }} onClick={onCancel} />

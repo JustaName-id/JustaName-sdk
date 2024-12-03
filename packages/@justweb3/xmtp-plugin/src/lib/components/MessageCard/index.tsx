@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { CachedConversation, DecodedMessage } from "@xmtp/react-sdk";
 import { MessageWithReaction } from "../../utils/filterReactionsMessages";
 import { useState } from "react";
-import { useMountedAccount } from "@justaname.id/react";
+import { useMountedAccount, usePrimaryName } from "@justaname.id/react";
 import React from "react";
 import { useSendReactionMessage } from "../../hooks";
 import { typeLookup } from "../../utils/attachments";
@@ -87,6 +87,8 @@ const MeasureAndHyphenateText: React.FC<{ text: string; maxWidth: number, isRece
                 whiteSpace: 'pre-wrap',
                 wordBreak: 'break-word',
                 margin: 0,
+                paddingLeft: "2px",
+                fontFamily: 'var(--justweb3-font-family)',
                 color: isReceiver ? 'var(--justweb3-foreground-color-2)' : 'var(--justweb3-foreground-color-4)'
             }}>
             {processedText}
@@ -106,6 +108,10 @@ const MessageCard: React.FC<MessageCardProps> = ({
     const [repliedMessage, setRepliedMessage] = React.useState<DecodedMessage | null>(null);
     const divRef = useRef<HTMLDivElement | null>(null);
     const { mutateAsync: sendReaction } = useSendReactionMessage(conversation);
+
+    const { primaryName } = usePrimaryName({
+        address: peerAddress as `0x${string}`,
+    });
 
     const isText = useMemo(() => {
         return typeof message.content === "string"
@@ -226,10 +232,10 @@ const MessageCard: React.FC<MessageCardProps> = ({
                         fontSize: '14px',
                         lineHeight: '14px',
                         padding: isReply ? '4px' : '5px',
-                        borderRadius: '5px',
+                        borderRadius: '14px',
                         backgroundColor: isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)',
-                        borderBottomLeftRadius: isReceiver ? '0px' : '5px',
-                        borderBottomRightRadius: !isReceiver ? '0px' : '5px',
+                        borderBottomLeftRadius: isReceiver ? '0px' : '14px',
+                        borderBottomRightRadius: !isReceiver ? '0px' : '14px',
 
                     }}
                     gap="5px"
@@ -262,22 +268,21 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                                 maxWidth: !isImage ? '220px' : 'none',
                                                 fontSize: '14px',
                                                 lineHeight: '14px',
-                                                padding: '10px',
+                                                padding: '5px',
                                                 backgroundColor: isReceiver ? 'var(--justweb3-primary-color)' : 'var(--justweb3-foreground-color-4)',
-                                                borderRadius: '5px',
-                                                borderBottomLeftRadius: isReceiver ? '0px' : '5px',
-                                                borderBottomRightRadius: isReceiver ? '5px' : '0px',
+                                                borderRadius: '10px',
+                                                borderBottomLeftRadius: isReceiver ? '0px' : '10px',
+                                                borderBottomRightRadius: isReceiver ? '10px' : '0px',
                                             }}
                                             onClick={navigateToRepliedMessage}
                                         >
-                                            <Flex direction="column">
+                                            <Flex direction="column" gap="3px">
                                                 <P style={{
-                                                    fontSize: '12px',
-                                                    fontWeight: '600',
+                                                    fontSize: '10px',
+                                                    fontWeight: '700',
                                                     lineHeight: '100%',
-                                                    textTransform: 'uppercase',
                                                     color: isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)'
-                                                }} >{repliedMessage?.senderAddress === address ? "YOU" : formatAddress(repliedMessage?.senderAddress ?? "")}</P>
+                                                }} >{repliedMessage?.senderAddress === address ? "YOU" : primaryName ?? formatAddress(repliedMessage?.senderAddress ?? "")}</P>
 
                                                 {(isReplyText || isReplyReply) ? (
                                                     <P style={{
@@ -292,7 +297,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                                     }} >{isReplyReply ? repliedMessage.content.content : repliedMessage.content}</P>
                                                 ) : (
                                                     isReplyVoice ?
-                                                        <VoiceMessageCard isReply isReceiver={!isReceiver} disabled message={repliedMessage} style={{
+                                                        <VoiceMessageCard isReceiver={!isReceiver} disabled message={repliedMessage} style={{
                                                             padding: '0px',
                                                             margin: '0px',
                                                             scale: '80%',
@@ -309,7 +314,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                                             :
                                                             typeLookup[replyAttachmentExtention] === "video" ?
                                                                 <CustomPlayer disabled url={repliedMessage.content.url} style={{
-                                                                    width: '80px',
+                                                                    width: '120px',
                                                                 }} />
                                                                 :
                                                                 <Flex direction="row" align="center" gap='4px' >
@@ -357,35 +362,49 @@ const MessageCard: React.FC<MessageCardProps> = ({
                                             :
                                             <Flex direction="row" align="center" gap='10px' >
                                                 {typeLookup[attachmentExtention] === "image" ?
-                                                    <img src={URL.createObjectURL(new Blob([message.content.data], { type: message.content.mimeType }))} alt={message.content.filename} style={{
-                                                        maxWidth: '163px',
-                                                        border: '0.5px solid #E0E0E0',
-                                                        borderRadius: '5px',
-                                                    }} />
+                                                    <div style={{
+                                                        position: "relative",
+                                                    }}>
+                                                        <img src={URL.createObjectURL(new Blob([message.content.data], { type: message.content.mimeType }))} alt={message.content.filename} style={{
+                                                            maxWidth: '200px',
+                                                            border: '0.5px solid #E0E0E0',
+                                                            borderRadius: '5px',
+                                                        }} />
+                                                        <a style={{
+                                                            position: "absolute",
+                                                            left: '50%',
+                                                            transform: 'translateX(-50%) translateY(-50%)',
+                                                            top: "50%"
+
+                                                        }} href={URL.createObjectURL(new Blob([message.content.data], { type: message.content.mimeType }))} download={message.content.filename}>
+                                                            <DownloadIcon width="29" height="29" /></a>
+                                                    </div>
                                                     :
                                                     typeLookup[attachmentExtention] === "video" ?
-                                                        <CustomPlayer url={URL.createObjectURL(new Blob([message.content.data], { type: message.content.mimeType }))} style={{
+                                                        <CustomPlayer fileName={message.content.filename} url={URL.createObjectURL(new Blob([message.content.data], { type: message.content.mimeType }))} style={{
                                                             maxWidth: '220px',
                                                         }} />
                                                         :
                                                         <Flex direction="row" align="center" gap='10px' >
-                                                            <DocumentIcon width="22" height="22" />
-                                                            <Flex direction="column" >
+                                                            <DocumentIcon fill={
+                                                                !isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)'
+                                                            } width="30" height="30" />
+                                                            <Flex direction="column"  >
                                                                 <P style={{
-                                                                    color: 'var(--justweb3-primary-color)',
-                                                                    textTransform: 'uppercase',
+                                                                    color: !isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-primary-color)',
                                                                     fontWeight: '700',
-                                                                    fontSize: '12px',
+                                                                    fontSize: '10px',
                                                                     maxWidth: '180px',
                                                                 }}>{message.content.filename}</P>
                                                                 <P style={{
-                                                                    fontWeight: '400',
-                                                                    fontSize: '10px',
+                                                                    fontSize: '9px',
+                                                                    fontWeight: '700',
+                                                                    textTransform: 'uppercase',
+                                                                    color: !isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)',
+                                                                    opacity: '0.7',
                                                                 }}>{calculateFileSize(message.content.data?.byteLength ?? 0)}</P>
                                                             </Flex>
                                                         </Flex>}
-                                                <a href={URL.createObjectURL(new Blob([message.content.data], { type: message.content.mimeType }))} download={message.content.filename}>
-                                                    <DownloadIcon width="22" height="22" /></a>
                                             </Flex>}
                                     </Flex>
                         }
@@ -407,14 +426,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
                             >{findEmojiByName(message.reactionMessage.content.content)}</P>
                         )}
                     </>
-                    {!isVoice && (
-                        <P style={{
-                            fontSize: '9px',
-                            fontWeight: '800',
-                            textTransform: 'uppercase',
-                            color: !isReceiver ? 'var(--justweb3-foreground-color-4)' : 'var(--justweb3-foreground-color-2)',
-                            opacity: '0.5',
-                        }} >{formatMessageSentTime(message.sentAt)}</P>)}
+
                 </Flex>
 
                 <Flex direction={isReceiver ? 'row' : 'row-reverse'} align="center" gap='4px' style={{
@@ -440,7 +452,14 @@ const MessageCard: React.FC<MessageCardProps> = ({
 
                 </Flex>
             </Flex>
-
+            <P style={{
+                fontSize: '9px',
+                fontWeight: '800',
+                textTransform: 'uppercase',
+                // color:'var(--justweb3-foreground-color-2)',
+                opacity: '0.4',
+                textAlign: !isReceiver ? 'start' : 'end',
+            }} >{formatMessageSentTime(message.sentAt)}</P>
         </Flex >
     );
 };

@@ -1,4 +1,4 @@
-import { Flex, PauseIcon, PlayIcon } from '@justweb3/ui';
+import { DownloadIcon, Flex, PauseIcon, PlayIcon } from '@justweb3/ui';
 import React, { useEffect, useRef, useState } from 'react';
 
 
@@ -6,12 +6,14 @@ export interface CustomPlayerProps {
     style?: React.CSSProperties;
     url?: string;
     disabled?: boolean;
+    fileName?: string;
 }
 
 export const CustomPlayer: React.FC<CustomPlayerProps> = ({
     style,
     url = '',
-    disabled
+    disabled,
+    fileName
 }) => {
     const [playing, setPlaying] = React.useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -84,12 +86,21 @@ export const CustomPlayer: React.FC<CustomPlayerProps> = ({
             }
             {
                 !playing &&
-                <div style={{
+                <Flex align='center' direction='row' style={{
                     position: 'absolute'
                 }}>
                     <PlayIcon width={40} height={40} />
-                </div>
+                    {!!fileName && (
+                        <a onClick={(e) => {
+                            e.stopPropagation()
+                        }} style={{
+                            transform: 'translateY(2px)'
+                        }} href={url} download={fileName}>
+                            <DownloadIcon width="29" height="29" /></a>
+                    )}
+                </Flex>
             }
+
         </Flex >
     );
 }
