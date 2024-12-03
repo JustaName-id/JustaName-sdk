@@ -15,23 +15,17 @@ import { Meta, StoryObj } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
-import { XMTPPlugin } from '../lib';
-import { ChainId } from '@justaname.id/sdk';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { EFPPlugin } from '@justweb3/efp-plugin';
-import { POAPPlugin } from '@justweb3/poap-plugin';
-import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';
-import { JustVerifiedPlugin } from '@justverified/plugin';
 
 const queryClient = new QueryClient();
 
 const JustWeb3Config: JustWeb3ProviderConfig = {
-  config: {
-    origin: import.meta.env.STORYBOOK_APP_ORIGIN,
-    domain: import.meta.env.STORYBOOK_APP_DOMAIN,
-    signInTtl: 1000 * 60 * 60 * 24,
-  },
-  backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
+  // config: {
+  //   origin: import.meta.env.STORYBOOK_APP_ORIGIN,
+  //   domain: import.meta.env.STORYBOOK_APP_DOMAIN,
+  //   signInTtl: 1000 * 60 * 60 * 24,
+  // },
+  // backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
   networks: [
     {
       chainId: 1,
@@ -42,26 +36,26 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
       providerUrl: import.meta.env.STORYBOOK_APP_SEPOLIA_PROVIDER_URL,
     },
   ],
-  ensDomains: [
-    {
-      ensDomain: import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
-      chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
-    },
-  ],
-  openOnWalletConnect: false,
-  allowedEns: 'all',
-  dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
-  plugins: [
-    XMTPPlugin,
-    EFPPlugin,
-    POAPPlugin({
-      apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,
-    }),
-    TalentProtocolPlugin({
-      apiKey: import.meta.env.STORYBOOK_APP_TALENT_PROTOCOL_API_KEY,
-    }),
-    JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
-  ],
+  // ensDomains: [
+  //   {
+  //     ensDomain: import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
+  //     chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
+  //   },
+  // ],
+  // openOnWalletConnect: false,
+  // // allowedEns: 'all',
+  // // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  // plugins: [
+  //   XMTPPlugin,
+  //   EFPPlugin,
+  //   POAPPlugin({
+  //     apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,
+  //   }),
+  //   TalentProtocolPlugin({
+  //     apiKey: import.meta.env.STORYBOOK_APP_TALENT_PROTOCOL_API_KEY,
+  //   }),
+  //   JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
+  // ],
   // color: {
   //   primary: '#FF00FF',
   //   background: '#000000',
@@ -104,6 +98,13 @@ export const Example = () => {
                 <JustEnsCard addressOrEns={'josh.box'} />
                 <JustEnsCard addressOrEns={'justghadi.eth'} />
                 <JustEnsCard addressOrEns={'justan.id'} />
+                <JustEnsCard addressOrEns={'jesse.base.eth'} />
+                <JustEnsCard addressOrEns={'dave.base.eth'} />
+                <JustEnsCard addressOrEns={'xhris.eth'} />
+                <JustEnsCard addressOrEns={'raffy.eth'} />
+                <JustEnsCard addressOrEns={'slobo.eth'} />
+                <JustEnsCard addressOrEns={'obi-wan.eth'} />
+                <JustEnsCard addressOrEns={'threadgirl.eth'} />
                 <JustEnsCard addressOrEns={'bianc8.eth'} />
                 <JustEnsCard
                   addressOrEns={'0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1'}
@@ -114,7 +115,14 @@ export const Example = () => {
                   chainId={11155111}
                 />
               </div>
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <div
+                style={{
+                  marginTop: '100vh',
+                  display: 'flex',
+                  gap: '10px',
+                  flexWrap: 'wrap',
+                }}
+              >
                 <JustEnsCard addressOrEns={'mely.eth'} expanded />
                 <JustEnsCard addressOrEns={'nick.eth'} expanded />
                 <JustEnsCard addressOrEns={'brantly.eth'} expanded />

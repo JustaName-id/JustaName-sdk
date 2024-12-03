@@ -1,6 +1,7 @@
 .expandableCard {
-  height: 200px;
-  width: 400px;
+  height: 193px;
+  box-sizing: content-box;
+  width: 398px;
   display: flex;
   flex-direction: column;
   position: relative;
