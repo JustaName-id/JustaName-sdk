@@ -1,3 +1,20 @@
+## 0.2.155 (2024-12-03)
+
+
+### 🚀 Features
+
+- sign in optional ([3df90a7](https://github.com/JustaName-id/JustaName-sdk/commit/3df90a7))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.88
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.2.154 (2024-12-02)
 
 

@@ -1,3 +1,15 @@
+## 0.0.88 (2024-12-03)
+
+
+### 🚀 Features
+
+- sign in optional ([3df90a7](https://github.com/JustaName-id/JustaName-sdk/commit/3df90a7))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.87 (2024-12-02)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.

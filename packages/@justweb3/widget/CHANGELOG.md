@@ -1,3 +1,22 @@
+## 0.0.94 (2024-12-03)
+
+
+### 🚀 Features
+
+- sign in optional ([3df90a7](https://github.com/JustaName-id/JustaName-sdk/commit/3df90a7))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.155
+- Updated @justaname.id/react to 0.3.158
+- Updated @justweb3/ui to 0.0.94
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.93 (2024-12-02)
 
 
