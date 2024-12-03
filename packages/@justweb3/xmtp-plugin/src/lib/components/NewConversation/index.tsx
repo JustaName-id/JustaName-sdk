@@ -36,6 +36,7 @@ const NewConversation: React.FC<NewConversationProps> = ({
         value: debouncedAddress,
     } = useDebounced<string>(newAddress, 500);
 
+    // TODO: change to regex
     const isAddressName = useMemo(() => {
         return !debouncedAddress.startsWith("0x") && !debouncedAddress.startsWith("0X") && debouncedAddress.length > 0;
     }, [debouncedAddress])
