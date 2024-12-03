@@ -99,6 +99,7 @@
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.9",
     "react-router-dom": "6.11.2",
+    "react-scan": "^0.0.35",
     "react-split": "^2.0.14",
     "react-timer-hook": "^3.0.8",
     "react-tiny-popover": "^8.0.4",

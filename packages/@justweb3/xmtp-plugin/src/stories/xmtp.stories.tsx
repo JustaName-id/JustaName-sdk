@@ -1,21 +1,21 @@
 import {
   JustEnsCard,
+  JustWeb3Button,
   JustWeb3Provider,
   JustWeb3ProviderConfig,
 } from '@justweb3/widget';
 import '@justweb3/widget/styles.css';
-import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import {
+  ConnectButton,
+  getDefaultConfig,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import { Meta, StoryObj } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
-import { XMTPPlugin } from '../lib';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { EFPPlugin } from '@justweb3/efp-plugin';
-import { POAPPlugin } from '@justweb3/poap-plugin';
-import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';
-import { JustVerifiedPlugin } from '@justverified/plugin';
 
 const queryClient = new QueryClient();
 
@@ -42,20 +42,20 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   //     chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
   //   },
   // ],
-  openOnWalletConnect: false,
-  // allowedEns: 'all',
-  // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
-  plugins: [
-    XMTPPlugin,
-    EFPPlugin,
-    POAPPlugin({
-      apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,
-    }),
-    TalentProtocolPlugin({
-      apiKey: import.meta.env.STORYBOOK_APP_TALENT_PROTOCOL_API_KEY,
-    }),
-    JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
-  ],
+  // openOnWalletConnect: false,
+  // // allowedEns: 'all',
+  // // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  // plugins: [
+  //   XMTPPlugin,
+  //   EFPPlugin,
+  //   POAPPlugin({
+  //     apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,
+  //   }),
+  //   TalentProtocolPlugin({
+  //     apiKey: import.meta.env.STORYBOOK_APP_TALENT_PROTOCOL_API_KEY,
+  //   }),
+  //   JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
+  // ],
   // color: {
   //   primary: '#FF00FF',
   //   background: '#000000',
@@ -83,11 +83,11 @@ export const Example = () => {
                 flexDirection: 'column',
               }}
             >
-              {/*<div style={{ display: 'flex', justifyContent: 'end' }}>*/}
-              {/*  <JustWeb3Button>*/}
-              {/*    <ConnectButton />*/}
-              {/*  </JustWeb3Button>*/}
-              {/*</div>*/}
+              <div style={{ display: 'flex', justifyContent: 'end' }}>
+                <JustWeb3Button>
+                  <ConnectButton />
+                </JustWeb3Button>
+              </div>
 
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                 <JustEnsCard addressOrEns={'mely.eth'} />
@@ -115,17 +115,24 @@ export const Example = () => {
                   chainId={11155111}
                 />
               </div>
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                {/*<JustEnsCard addressOrEns={'mely.eth'} expanded />*/}
-                {/*<JustEnsCard addressOrEns={'nick.eth'} expanded />*/}
-                {/*<JustEnsCard addressOrEns={'brantly.eth'} expanded />*/}
-                {/*<JustEnsCard addressOrEns={'vitalik.eth'} expanded />*/}
-                {/*<JustEnsCard addressOrEns={'dr3a.eth'} expanded />*/}
-                {/*<JustEnsCard*/}
-                {/*  addressOrEns={'hadikhai.jaw.eth'}*/}
-                {/*  chainId={11155111}*/}
-                {/*  expanded*/}
-                {/*/>*/}
+              <div
+                style={{
+                  marginTop: '100vh',
+                  display: 'flex',
+                  gap: '10px',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <JustEnsCard addressOrEns={'mely.eth'} expanded />
+                <JustEnsCard addressOrEns={'nick.eth'} expanded />
+                <JustEnsCard addressOrEns={'brantly.eth'} expanded />
+                <JustEnsCard addressOrEns={'vitalik.eth'} expanded />
+                <JustEnsCard addressOrEns={'dr3a.eth'} expanded />
+                <JustEnsCard
+                  addressOrEns={'hadikhai.jaw.eth'}
+                  chainId={11155111}
+                  expanded
+                />
               </div>
             </div>
           </JustWeb3Provider>

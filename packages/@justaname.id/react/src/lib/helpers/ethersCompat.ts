@@ -1,6 +1,7 @@
 // inspired by spruceid siwe: https://github.com/spruceid/siwe/blob/main/packages/siwe/lib/ethersCompat.ts
 
 import { ethers } from 'ethers';
+
 // @ts-expect-error -- compatibility hack
 type ProviderV5 = ethers.providers.Provider;
 type ProviderV6 = ethers.Provider;
@@ -13,30 +14,38 @@ export type JsonRpcProvider = JsonRpcProviderV6 extends undefined
   ? JsonRpcProviderV5
   : JsonRpcProviderV6;
 
+interface EthersCompat {
+  namehash?: (name: string) => string;
+  getAddress?: (address: string) => string;
+  JsonRpcProvider?: new (...args: any[]) => JsonRpcProvider;
+  utils: {
+    namehash: (name: string) => string;
+    getAddress: (address: string) => string;
+  };
+  providers: {
+    JsonRpcProvider: new (...args: any[]) => JsonRpcProvider;
+  };
+}
+
+const ethersCompat = ethers as unknown as EthersCompat;
+
 export const getJsonRpcProvider = (
-  providerUrl?: string | undefined,
+  providerUrl?: string,
   chainId?: number
 ): JsonRpcProvider => {
-  try {
-    return new ethers.JsonRpcProvider(providerUrl, chainId);
-  } catch {
-    // @ts-expect-error -- compatibility hack
-    return new ethers.providers.JsonRpcProvider(providerUrl, chainId);
+  if ('JsonRpcProvider' in ethersCompat) {
+    return new ethersCompat.JsonRpcProvider!(providerUrl, chainId);
+  } else {
+    return new ethersCompat.providers.JsonRpcProvider(providerUrl, chainId);
   }
 };
 
-let ethersNamehash = null;
-let ethersGetAddress = null;
+export const namehash: (name: string) => string =
+  'namehash' in ethersCompat
+    ? ethersCompat.namehash!
+    : ethersCompat.utils.namehash;
 
-try {
-  // @ts-expect-error -- compatibility hack
-  ethersNamehash = ethers.utils.namehash;
-  // @ts-expect-error -- compatibility hack
-  ethersGetAddress = ethers.utils.getAddress;
-} catch {
-  ethersNamehash = ethers.namehash as (message: Uint8Array | string) => string;
-
-  ethersGetAddress = ethers.getAddress as (address: string) => string;
-}
-export const namehash = ethersNamehash as (name: string) => string;
-export const getAddress = ethersGetAddress as (address: string) => string;
+export const getAddress: (address: string) => string =
+  'getAddress' in ethersCompat
+    ? ethersCompat.getAddress!
+    : ethersCompat.utils.getAddress;

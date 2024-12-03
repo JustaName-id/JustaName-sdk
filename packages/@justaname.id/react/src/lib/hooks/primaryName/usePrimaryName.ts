@@ -107,7 +107,6 @@ export const usePrimaryName = (
   const query = useQuery({
     ...defaultOptions,
     retry: (_count, error) => {
-      console.log('Error fetching primary name', error, _count);
       if (error?.message.includes('PrimaryNameNotFound')) {
         return false;
       }

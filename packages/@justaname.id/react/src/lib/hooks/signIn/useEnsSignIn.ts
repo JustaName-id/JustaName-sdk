@@ -20,6 +20,7 @@ export interface UseEnsSignInParams
   signinNonceRoute?: string;
   signinRoute?: string;
   currentEnsRoute?: string;
+  local?: boolean;
 }
 
 export interface UseEnsSignInResult {
@@ -59,18 +60,35 @@ export const useEnsSignIn = (
   const { refreshEnsAuth } = useEnsAuth({
     backendUrl: _backendUrl,
     currentEnsRoute: _currentEnsRoute,
+    local: params?.local,
   });
 
   const { nonce, refetchNonce } = useEnsNonce({
     backendUrl: params?.backendUrl,
     signinNonceRoute: params?.signinNonceRoute,
     address,
+    enabled: !params?.local,
   });
 
   const mutation = useMutation({
     mutationFn: async (_params: UseEnsSignInFunctionParams) => {
       if (!address) {
         throw new Error('No address found');
+      }
+
+      if (params?.local) {
+        localStorage.setItem(
+          'ENS_AUTH',
+          JSON.stringify({
+            ens: _params.ens,
+            chainId,
+            address,
+          })
+        );
+
+        refreshEnsAuth();
+
+        return 'success';
       }
 
       if (!nonce) {

@@ -8,7 +8,7 @@ interface ClickableListItemProps {
   subtitle?: string | React.ReactNode;
   left?: React.ReactNode;
   loading?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   disabled?: boolean;
   right?: React.ReactNode;
   onHover?: (hover: boolean) => void;
@@ -54,9 +54,10 @@ export const ClickableItem = React.forwardRef<
         className={clsx(wrapperClassNames, className)}
         onClick={(e) => {
           if (!loading && !disabled && clickable) {
-            onClick && onClick();
+            onClick && onClick(e);
           }
-          e.stopPropagation();
+          // e.stopPropagation();
+          // e.preventDefault();
         }}
         onPointerEnter={() => {
           if (!loading && !disabled && clickable) {

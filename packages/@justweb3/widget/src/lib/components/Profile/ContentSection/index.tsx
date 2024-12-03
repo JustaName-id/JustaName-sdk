@@ -63,10 +63,14 @@ const ContentSection: React.FC<ContentProps> = ({
   const { openEnsProfile } = useJustWeb3();
 
   const isProfileSelf = useMemo(() => {
-    const isEns = accountEnsNames?.map((ens) => ens.ens).includes(fullSubname);
+    const tempEns = accountEnsNames
+      ?.map((ens) => ens.ens)
+      .find((e) => e === fullSubname);
 
-    if (isEns) {
-      return chainId === connectedWalletChainId;
+    if (tempEns) {
+      if (!accountSubnames?.find((subname) => subname.ens === tempEns)) {
+        return chainId === connectedWalletChainId;
+      }
     }
 
     return (
