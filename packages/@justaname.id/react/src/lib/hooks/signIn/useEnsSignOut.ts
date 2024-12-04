@@ -44,7 +44,7 @@ export const useEnsSignOut = (
     [routes.signinNonceRoute, params?.signinNonceRoute]
   );
 
-  const { refreshEnsAuth, connectedEns } = useEnsAuth({
+  const { refreshEnsAuth } = useEnsAuth({
     backendUrl: _backendUrl,
     currentEnsRoute: _currentEnsRoute,
     local: params?.local,
@@ -53,7 +53,6 @@ export const useEnsSignOut = (
   const { refetchNonce } = useEnsNonce({
     backendUrl: _backendUrl,
     signinNonceRoute: _signinNonceRoute,
-    address: connectedEns?.address,
     enabled: !params?.local,
   });
 
@@ -70,8 +69,8 @@ export const useEnsSignOut = (
         credentials: 'include',
       });
 
+      await refetchNonce();
       refreshEnsAuth();
-      refetchNonce();
     },
   });
 

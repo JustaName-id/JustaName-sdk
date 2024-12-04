@@ -47,6 +47,7 @@ export const useEnsAuth = <T extends object = {}>(
     () => _backendUrl + _currentEnsRoute,
     [_backendUrl, _currentEnsRoute]
   );
+
   const query = useQuery({
     ...defaultOptions,
     retry: 0,

@@ -22,7 +22,7 @@ export interface MessageItemProps {
 export const MessageItem: React.FC<MessageItemProps> = ({
   conversation,
   onClick,
-  blocked
+  blocked,
 }) => {
   const lastMessage = useLastMessage(conversation.topic);
   useStreamMessages(conversation);
@@ -34,13 +34,13 @@ export const MessageItem: React.FC<MessageItemProps> = ({
   });
   const { sanitizeEnsImage } = useEnsAvatar();
 
-  const { allow, refreshConsentList } = useConsent()
+  const { allow, refreshConsentList } = useConsent();
 
   const allowUser = async () => {
-    await refreshConsentList()
-    await allow([conversation.peerAddress])
-    await refreshConsentList()
-  }
+    await refreshConsentList();
+    await allow([conversation.peerAddress]);
+    await refreshConsentList();
+  };
 
   const lastContent = useMemo(() => {
     if (!lastMessage) return '';
@@ -76,23 +76,23 @@ export const MessageItem: React.FC<MessageItemProps> = ({
     <Flex
       style={{
         padding: '10px',
-        border: '1px solid #E8E8E8',
+        border: '1px solid var(--justweb3-foreground-color-4)',
         borderRadius: '5px',
         cursor: blocked ? 'auto' : 'pointer',
       }}
       onClick={() => {
-        if (blocked) return
-        onClick && onClick()
+        if (blocked) return;
+        onClick && onClick();
       }}
     >
       <Avatar
         src={
           primaryName
             ? sanitizeEnsImage({
-              name: primaryName,
-              chainId: 1,
-              image: records?.sanitizedRecords?.avatar,
-            })
+                name: primaryName,
+                chainId: 1,
+                image: records?.sanitizedRecords?.avatar,
+              })
             : undefined
         }
       />
@@ -139,14 +139,15 @@ export const MessageItem: React.FC<MessageItemProps> = ({
           textAlign: 'end',
         }}
       >
-        {blocked ?
-          <Button variant='primary' onClick={allowUser} style={{
-          }}>Unblock</Button>
-          :
+        {blocked ? (
+          <Button variant="primary" onClick={allowUser} style={{}}>
+            Unblock
+          </Button>
+        ) : (
           <SPAN style={{ fontSize: '10px' }}>
             {lastMessage?.sentAt ? formatChatDate(lastMessage.sentAt) : ''}
           </SPAN>
-        }
+        )}
       </Flex>
     </Flex>
   );

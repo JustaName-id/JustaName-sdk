@@ -13,7 +13,7 @@ export const buildPrimaryName = (
 ) => ['PRIMARY_NAME', address, chainId];
 
 export interface UsePrimaryNameParams {
-  address?: Address;
+  address?: string;
   chainId?: ChainId;
   enabled?: boolean;
 }
@@ -72,7 +72,7 @@ export const usePrimaryName = (
           throw new Error('Address is required');
         }
         return getName(ensClient, {
-          address: params?.address,
+          address: params?.address as Address,
         });
       };
 
@@ -115,7 +115,7 @@ export const usePrimaryName = (
     queryKey: buildPrimaryName(params?.address || '', _chainId),
     queryFn: () =>
       getPrimaryName({
-        address: params?.address,
+        address: params?.address as Address,
       }),
     enabled:
       Boolean(params?.address) && Boolean(ensClient) && Boolean(_enabled),

@@ -57,6 +57,10 @@ export const useEnsSignIn = (
     () => params?.currentEnsRoute || routes.currentEnsRoute,
     [routes.currentEnsRoute, params?.currentEnsRoute]
   );
+  const _signinNonceRoute = useMemo(
+    () => params?.signinNonceRoute || routes.signinNonceRoute,
+    [routes.signinNonceRoute, params?.signinNonceRoute]
+  );
   const { refreshEnsAuth } = useEnsAuth({
     backendUrl: _backendUrl,
     currentEnsRoute: _currentEnsRoute,
@@ -64,38 +68,37 @@ export const useEnsSignIn = (
   });
 
   const { nonce, refetchNonce } = useEnsNonce({
-    backendUrl: params?.backendUrl,
-    signinNonceRoute: params?.signinNonceRoute,
-    address,
+    backendUrl: _backendUrl,
+    signinNonceRoute: _signinNonceRoute,
     enabled: !params?.local,
   });
 
   const mutation = useMutation({
     mutationFn: async (_params: UseEnsSignInFunctionParams) => {
-      if (!address) {
-        throw new Error('No address found');
-      }
-
-      if (params?.local) {
-        localStorage.setItem(
-          'ENS_AUTH',
-          JSON.stringify({
-            ens: _params.ens,
-            chainId,
-            address,
-          })
-        );
-
-        refreshEnsAuth();
-
-        return 'success';
-      }
-
-      if (!nonce) {
-        throw new Error('No nonce found');
-      }
-
       try {
+        if (!address) {
+          throw new Error('No address found');
+        }
+
+        if (params?.local) {
+          localStorage.setItem(
+            'ENS_AUTH',
+            JSON.stringify({
+              ens: _params.ens,
+              chainId,
+              address,
+            })
+          );
+
+          refreshEnsAuth();
+
+          return 'success';
+        }
+
+        if (!nonce) {
+          throw new Error('No nonce found');
+        }
+
         const message = justaname.signIn.requestSignIn({
           ens: _params.ens,
           ttl: config?.signInTtl,
@@ -123,11 +126,15 @@ export const useEnsSignIn = (
           credentials: 'include',
         });
 
+        if (response.status !== 200) {
+          throw new Error('Failed to sign in');
+        }
+
         refreshEnsAuth();
 
         return response.text();
       } catch (e) {
-        refetchNonce();
+        await refetchNonce();
         throw e;
       }
     },

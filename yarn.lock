@@ -4535,6 +4535,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@justaname.id/address-resolution@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@justaname.id/address-resolution@npm:1.1.0"
+  peerDependencies:
+    ethers: 6.9.0
+  checksum: 10c0/f8ffb6eb96ca7497aee179a9714dc45c0dd31fe4a1564eea9faf1b26ff689c58539a20568f17ec107dbdf4d298cf1f1e6593aff0aee24023caf1d07c42d5e263
+  languageName: node
+  linkType: hard
+
 "@justaname.id/react@npm:0.3.158, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
@@ -26702,6 +26711,7 @@ __metadata:
     "@hookform/error-message": "npm:^2.0.1"
     "@hookform/resolvers": "npm:^3.9.0"
     "@inquirer/prompts": "npm:^4.3.0"
+    "@justaname.id/address-resolution": "npm:^1.1.0"
     "@nx/cypress": "npm:19.7.3"
     "@nx/eslint": "npm:19.7.3"
     "@nx/eslint-plugin": "npm:19.7.3"

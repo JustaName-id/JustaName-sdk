@@ -16,6 +16,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { XMTPPlugin } from '../lib';
+import { EFPPlugin } from '@justweb3/efp-plugin';
+import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';
+import { POAPPlugin } from '@justweb3/poap-plugin';
+import { JustVerifiedPlugin } from '@justverified/plugin';
 
 const queryClient = new QueryClient();
 
@@ -45,21 +50,21 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   // openOnWalletConnect: false,
   // // allowedEns: 'all',
   // // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
-  // plugins: [
-  //   XMTPPlugin,
-  //   EFPPlugin,
-  //   POAPPlugin({
-  //     apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,
-  //   }),
-  //   TalentProtocolPlugin({
-  //     apiKey: import.meta.env.STORYBOOK_APP_TALENT_PROTOCOL_API_KEY,
-  //   }),
-  //   JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
-  // ],
-  // color: {
-  //   primary: '#FF00FF',
-  //   background: '#000000',
-  // },
+  plugins: [
+    XMTPPlugin,
+    EFPPlugin,
+    POAPPlugin({
+      apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,
+    }),
+    TalentProtocolPlugin({
+      apiKey: import.meta.env.STORYBOOK_APP_TALENT_PROTOCOL_API_KEY,
+    }),
+    JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
+  ],
+  color: {
+    primary: '#FF00FF',
+    background: '#000000',
+  },
 };
 
 export const Example = () => {

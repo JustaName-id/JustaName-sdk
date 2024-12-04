@@ -23,7 +23,7 @@ import {
   useCanMessage,
   useConsent,
   useMessages,
-  useStreamMessages
+  useStreamMessages,
 } from '@xmtp/react-sdk';
 import React, { useEffect, useMemo } from 'react';
 import { useSendReactionMessage } from '../../hooks';
@@ -152,6 +152,35 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     // await checkMessageIfRead();
   }, [messages, conversation]);
 
+  const isStringContent =
+    typeof replyMessage?.content === 'string' ||
+    typeof replyMessage?.content?.content === 'string';
+
+  const mimeType = replyMessage?.content?.mimeType;
+  const type = mimeType ? typeLookup[mimeType.split('/')?.[1]] : null;
+
+  const computeHeight = useMemo(() => {
+    const additionalHeight = [];
+    const height = '100vh - 50px - 3rem - 1.5rem - 73px - 15px';
+    if (replyMessage) {
+      if (isStringContent) {
+        additionalHeight.push('46px');
+      } else if (mimeType === 'audio/wav') {
+        additionalHeight.push('61px');
+      } else if (type === 'video' || type === 'image') {
+        additionalHeight.push('116px');
+      }
+    }
+
+    if (isMessagesSenderOnly) {
+      additionalHeight.push('59px');
+    }
+
+    return `calc( ${height} ${
+      additionalHeight.length > 0 ? ' - ' + additionalHeight.join(' - ') : ''
+    } )`;
+  }, [replyMessage, isMessagesSenderOnly, isStringContent, mimeType, type]);
+
   return (
     <Flex
       direction={'column'}
@@ -222,10 +251,10 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
               src={
                 primaryName
                   ? sanitizeEnsImage({
-                    name: primaryName,
-                    chainId: 1,
-                    image: records?.sanitizedRecords?.avatar,
-                  })
+                      name: primaryName,
+                      chainId: 1,
+                      image: records?.sanitizedRecords?.avatar,
+                    })
                   : undefined
               }
               style={{
@@ -338,9 +367,9 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
             gap="5px"
             style={{
               flex: 1,
-              padding: '10px 10px',
-              minHeight: 'calc(100vh - 200px)',
-              maxHeight: 'calc(100vh - 200px)',
+              // padding: '10px 10px',
+              minHeight: computeHeight,
+              maxHeight: computeHeight,
             }}
           >
             {[...Array(8)].map((_, index) => (
@@ -354,28 +383,8 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
           <Flex
             style={{
               flex: 1,
-              minHeight: replyMessage
-                ? typeof replyMessage.content === 'string' || typeof replyMessage.content.content === "string"
-                  ? 'calc(100vh - 245px)'
-                  : replyMessage.content?.mimeType === "audio/wav"
-                    ? 'calc(100vh - 260px)'
-                    : typeLookup[replyMessage.content?.mimeType.split("/")?.[1]] === "video" || typeLookup[replyMessage.content?.mimeType.split("/")?.[1]] === "image"
-                      ? 'calc(100vh - 315px)'
-                      : 'calc(100vh - 245px)'
-                : isMessagesSenderOnly
-                  ? 'calc(100vh - 248px)'
-                  : 'calc(100vh - 200px)',
-              maxHeight: replyMessage
-                ? typeof replyMessage.content === 'string' || typeof replyMessage.content.content === "string"
-                  ? 'calc(100vh - 245px)'
-                  : replyMessage.content?.mimeType === "audio/wav"
-                    ? 'calc(100vh - 260px)'
-                    : typeLookup[replyMessage.content?.mimeType.split("/")?.[1]] === "video" || typeLookup[replyMessage.content?.mimeType.split("/")?.[1]] === "image"
-                      ? 'calc(100vh - 315px)'
-                      : 'calc(100vh - 245px)'
-                : isMessagesSenderOnly
-                  ? 'calc(100vh - 248px)'
-                  : 'calc(100vh - 200px)',
+              minHeight: computeHeight,
+              maxHeight: computeHeight,
             }}
           >
             {canMessage ? (
@@ -395,15 +404,23 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                 {groupedMessages &&
                   Object.keys(groupedMessages).map((date, index) => (
                     <Flex direction="column" gap="10px" key={index}>
-                      <Flex direction="row" align='center' gap="20px" style={{
-                        marginBottom: '8px',
-                      }}>
-                        <div style={{
-                          width: '100%',
-                          height: 1,
-                          backgroundColor: "var(--justweb3-foreground-color-2)",
-                          opacity: 0.35,
-                        }} />
+                      <Flex
+                        direction="row"
+                        align="center"
+                        gap="20px"
+                        style={{
+                          marginBottom: '8px',
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: '100%',
+                            height: 1,
+                            backgroundColor:
+                              'var(--justweb3-foreground-color-2)',
+                            opacity: 0.35,
+                          }}
+                        />
                         <P
                           style={{
                             textAlign: 'center',
@@ -416,12 +433,15 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                         >
                           {date}
                         </P>
-                        <div style={{
-                          width: '100%',
-                          height: 1,
-                          backgroundColor: "var(--justweb3-foreground-color-2)",
-                          opacity: 0.35,
-                        }} />
+                        <div
+                          style={{
+                            width: '100%',
+                            height: 1,
+                            backgroundColor:
+                              'var(--justweb3-foreground-color-2)',
+                            opacity: 0.35,
+                          }}
+                        />
                       </Flex>
                       {groupedMessages[date].map((message) => (
                         <MessageCard
@@ -533,7 +553,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                 style={{
                   padding: '10px',
                   borderRadius: '10px',
-                  backgroundColor: 'var(--justweb3-foreground-color-4)'
+                  backgroundColor: 'var(--justweb3-foreground-color-4)',
                 }}
               >
                 <P
@@ -541,14 +561,18 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                     fontSize: '14px',
                     fontWeight: 900,
                     lineHeight: '100%',
-                    color: 'black'
+                    color: 'black',
                   }}
                 >
                   Message in user’s Requests
                 </P>
-                <P style={{
-                  fontSize: '12px'
-                }}>This user has not accepted your message request yet</P>
+                <P
+                  style={{
+                    fontSize: '12px',
+                  }}
+                >
+                  This user has not accepted your message request yet
+                </P>
               </Flex>
             )}
             <MessageTextField
