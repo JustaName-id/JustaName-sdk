@@ -47,6 +47,7 @@ interface MessageTextFieldProps {
   onCancelReply?: () => void;
   onNewConvo?: (message: string) => void;
   peerAddress?: string;
+  style?: React.CSSProperties;
 }
 
 const MessageTextField: React.FC<MessageTextFieldProps> = ({
@@ -57,6 +58,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
   conversation,
   onNewConvo,
   peerAddress,
+  style
 }) => {
   const [messageValue, setMessageValue] = React.useState<string>('');
   const [attachment, setAttachment] = React.useState<Attachment | undefined>();
@@ -211,7 +213,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
   }, [replyAttachmentExtention]);
 
   return (
-    <Flex direction="column" gap="5px">
+    <Flex direction="column" gap="5px" style={{ ...style }}>
       {!replyMessage}
       {!newConvo && (
         <Flex direction="row" align="center" gap="10px">
@@ -263,16 +265,17 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
               height: isReplyText
                 ? '30px'
                 : isReplyVoice
-                ? '45px'
-                : isReplyVideoOrImage
-                ? '100px'
-                : '30px',
+                  ? '45px'
+                  : isReplyVideoOrImage
+                    ? '100px'
+                    : '30px',
               borderRadius: '5px',
               background: 'white',
+              paddingLeft: '14px',
               border: '1px solid grey',
               borderBottom: 0,
-              borderTopLeftRadius: '6px',
-              borderTopRightRadius: '6px',
+              borderTopLeftRadius: '25px',
+              borderTopRightRadius: '25px',
               borderBottomRightRadius: 0,
               borderBottomLeftRadius: 0,
             }}
@@ -395,9 +398,12 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
             justify="space-between"
             style={{
               padding: '10px 15px',
-              borderRadius: '6px',
+              borderRadius: '100px',
               background: 'white',
+              height: 22,
+              maxHeight: 22!,
               border: '1px solid grey',
+              paddingLeft: attachment?.mimeType === 'audio/wav' ? '5px' : '15px'
             }}
           >
             {attachment?.mimeType !== 'audio/wav' && (
@@ -586,9 +592,9 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
               maxHeight: 22!,
               paddingLeft: !replyMessage && !newConvo ? '10px' : '16px',
               paddingRight: '10px',
-              borderRadius: '6px',
-              borderTopLeftRadius: replyMessage ? 0 : '6px',
-              borderTopRightRadius: replyMessage ? 0 : '6px',
+              borderRadius: replyMessage ? '25px' : '100px',
+              borderTopLeftRadius: replyMessage ? 0 : '100px',
+              borderTopRightRadius: replyMessage ? 0 : '100px',
               borderTop: replyMessage ? '0px' : '',
             }}
             placeholder={`Send message...`}

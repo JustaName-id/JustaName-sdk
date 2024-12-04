@@ -125,8 +125,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     await refreshConsentList();
     await allow([conversation.peerAddress]);
     void refreshConsentList();
-    // TODO: check if this is needed
-    // onRequestAllowed();
+    setIsRequest(false)
     setIsRequestChangeLoading(false);
   };
 
@@ -162,6 +161,9 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
   const computeHeight = useMemo(() => {
     const additionalHeight = [];
     const height = '100vh - 50px - 3rem - 1.5rem - 73px - 15px';
+    if (isRequest) {
+      additionalHeight.push('-40px');
+    }
     if (replyMessage) {
       if (isStringContent) {
         additionalHeight.push('46px');
@@ -169,6 +171,8 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
         additionalHeight.push('61px');
       } else if (type === 'video' || type === 'image') {
         additionalHeight.push('116px');
+      } else {
+        additionalHeight.push('47px');
       }
     }
 
@@ -176,10 +180,9 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
       additionalHeight.push('59px');
     }
 
-    return `calc( ${height} ${
-      additionalHeight.length > 0 ? ' - ' + additionalHeight.join(' - ') : ''
-    } )`;
-  }, [replyMessage, isMessagesSenderOnly, isStringContent, mimeType, type]);
+    return `calc( ${height} ${additionalHeight.length > 0 ? ' - ' + additionalHeight.join(' - ') : ''
+      } )`;
+  }, [replyMessage, isMessagesSenderOnly, isStringContent, mimeType, type, isRequest]);
 
   return (
     <Flex
@@ -251,10 +254,10 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
               src={
                 primaryName
                   ? sanitizeEnsImage({
-                      name: primaryName,
-                      chainId: 1,
-                      image: records?.sanitizedRecords?.avatar,
-                    })
+                    name: primaryName,
+                    chainId: 1,
+                    image: records?.sanitizedRecords?.avatar,
+                  })
                   : undefined
               }
               style={{
@@ -281,18 +284,22 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                   ? primaryName
                   : formatAddress(conversation.peerAddress)}
               </P>
-              {/* {(!!primaryName) && (
-                <P style={{
-                  fontSize: 10,
-                  fontWeight: 900,
-                  lineHeight: 1
-                }} >{formatAddress(conversation.peerAddress)}</P>
-              )} */}
+              {primaryName && (
+                <P
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 600,
+                    lineHeight: 1,
+                  }}
+                >
+                  {formatAddress(conversation.peerAddress)}
+                </P>
+              )}
             </Flex>
           </Flex>
         </Flex>
         <Flex direction="row" align="center" gap="15px">
-          <Popover>
+          <Popover  >
             <PopoverTrigger>
               <TuneIcon
                 width={24}
@@ -303,19 +310,18 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                 }}
               />
             </PopoverTrigger>
-            <PopoverContent
+            <PopoverContent side='left'
               style={{
                 padding: '0px',
                 width: '100%',
                 borderRadius: '10px',
                 // zIndex: 110,
-                backgroundColor: 'white',
+                backgroundColor: 'var(--justweb3-destructive-color)',
               }}
             >
               <Flex
                 direction="column"
                 style={{
-                  padding: '8px',
                   gap: '10px',
                   borderRadius: '10px',
                 }}
@@ -331,21 +337,22 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                   }}
                   onClick={() => blockAddress(conversation.peerAddress)}
                 >
-                  <P
-                    style={{
-                      color: 'var(--justweb3-primary-color)',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Block
-                  </P>
                   <BlockedAccountIcon
                     width="22"
                     height="22"
                     style={{
                       cursor: 'pointer',
                     }}
+                    fill='var(--justweb3-background-color)'
                   />
+                  <P
+                    style={{
+                      color: 'var(--justweb3-background-color)',
+                      fontWeight: 500,
+                    }}
+                  >
+                    Block
+                  </P>
                 </Flex>
               </Flex>
             </PopoverContent>
@@ -549,7 +556,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
             {isMessagesSenderOnly && (
               <Flex
                 direction="column"
-                gap="10px"
+                gap="5px"
                 style={{
                   padding: '10px',
                   borderRadius: '10px',
@@ -561,7 +568,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                     fontSize: '14px',
                     fontWeight: 900,
                     lineHeight: '100%',
-                    color: 'black',
+                    color: 'var(--justweb3-foreground-color-3)',
                   }}
                 >
                   Message in user’s Requests

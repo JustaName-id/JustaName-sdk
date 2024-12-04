@@ -1,11 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { CachedConversation, DecodedMessage } from '@xmtp/react-sdk';
-import { MessageWithReaction } from '../../utils/filterReactionsMessages';
 import { useMountedAccount, usePrimaryName } from '@justaname.id/react';
-import { useSendReactionMessage } from '../../hooks';
-import { typeLookup } from '../../utils/attachments';
-import { findEmojiByName } from '../../utils/emojis';
-import { formatMessageSentTime } from '../../utils/messageTimeFormat';
 import {
   DocumentIcon,
   DownloadIcon,
@@ -14,10 +7,17 @@ import {
   ReactionIcon,
   ReplyIcon,
 } from '@justweb3/ui';
-import { formatAddress } from '../../utils/formatAddress';
+import { CachedConversation, DecodedMessage } from '@xmtp/react-sdk';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useSendReactionMessage } from '../../hooks';
+import { typeLookup } from '../../utils/attachments';
 import { calculateFileSize } from '../../utils/calculateFileSize';
-import VoiceMessageCard from '../VoiceMessageCard';
+import { findEmojiByName } from '../../utils/emojis';
+import { MessageWithReaction } from '../../utils/filterReactionsMessages';
+import { formatAddress } from '../../utils/formatAddress';
+import { formatMessageSentTime } from '../../utils/messageTimeFormat';
 import { CustomPlayer } from '../CustomPlayer';
+import VoiceMessageCard from '../VoiceMessageCard';
 
 interface MessageCardProps {
   message: MessageWithReaction;
@@ -259,17 +259,17 @@ const MessageCard: React.FC<MessageCardProps> = ({
             senderAddress: message.senderAddress,
             content:
               typeLookup[attachmentExtention] === 'image' ||
-              typeLookup[attachmentExtention] === 'video'
+                typeLookup[attachmentExtention] === 'video'
                 ? {
-                    data: message.content.data,
-                    mimeType: message.content.mimeType,
-                    filename: message.content.filename,
-                    url: URL.createObjectURL(
-                      new Blob([message.content.data], {
-                        type: message.content.mimeType,
-                      })
-                    ),
-                  }
+                  data: message.content.data,
+                  mimeType: message.content.mimeType,
+                  filename: message.content.filename,
+                  url: URL.createObjectURL(
+                    new Blob([message.content.data], {
+                      type: message.content.mimeType,
+                    })
+                  ),
+                }
                 : message.content,
             contentType: message.contentType,
           })}
@@ -317,15 +317,15 @@ const MessageCard: React.FC<MessageCardProps> = ({
                         {repliedMessage?.senderAddress === address
                           ? 'YOU'
                           : primaryName ??
-                            formatAddress(repliedMessage?.senderAddress ?? '')}
+                          formatAddress(repliedMessage?.senderAddress ?? '')}
                       </P>
 
                       {isReplyText || isReplyReply ? (
                         <P
                           style={{
-                            fontSize: '12px',
+                            fontSize: '10px',
                             fontWeight: '400',
-                            lineHeight: '105%',
+                            lineHeight: '150%',
                             maxWidth: '90%',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',

@@ -5,4 +5,5 @@ export * from './useSendReplyMessage';
 export * from './useAttachmentChange';
 export * from './useDebounced';
 export * from './useRecordingTimer';
+export * from './useEthersSigner';
 export * from './useVoiceRecording';

@@ -89,10 +89,10 @@ export const MessageItem: React.FC<MessageItemProps> = ({
         src={
           primaryName
             ? sanitizeEnsImage({
-                name: primaryName,
-                chainId: 1,
-                image: records?.sanitizedRecords?.avatar,
-              })
+              name: primaryName,
+              chainId: 1,
+              image: records?.sanitizedRecords?.avatar,
+            })
             : undefined
         }
       />
@@ -140,7 +140,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
         }}
       >
         {blocked ? (
-          <Button variant="primary" onClick={allowUser} style={{}}>
+          <Button variant="secondary" onClick={allowUser} style={{}}>
             Unblock
           </Button>
         ) : (

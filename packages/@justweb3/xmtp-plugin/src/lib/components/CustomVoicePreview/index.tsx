@@ -1,7 +1,7 @@
-import { Flex, P, PauseIcon, PlayIcon, CloseIcon } from '@justweb3/ui';
-import { formatTime } from '../../utils/formatVoiceTime';
+import { CloseIcon, Flex, P, PauseIcon, PlayIcon } from '@justweb3/ui';
 import React, { useEffect, useRef, useState } from 'react';
 import useGetAudioDuration from '../../hooks/useGetAudioDuration';
+import { formatTime } from '../../utils/formatVoiceTime';
 
 
 interface CustomVoicePreviewProps {
@@ -58,7 +58,7 @@ const CustomVoicePreview: React.FC<CustomVoicePreviewProps> = ({
         <Flex direction="row" align="center" justify='space-between' gap='10px' style={{
             background: 'var(--justweb3-primary-color)',
             padding: '5px',
-            borderRadius: '10px',
+            borderRadius: '100px',
         }} >
             {playing ?
                 <PauseIcon fill='white' width={22} height={22} style={{
@@ -78,7 +78,6 @@ const CustomVoicePreview: React.FC<CustomVoicePreviewProps> = ({
             }} >{playing || currentTime > 0 ? formatTime(currentTime) : formatTime(audioDuration ?? 0)}</P>
             <CloseIcon width={18} height={18} fill='white' style={{
                 cursor: 'pointer',
-                scale: '1.1',
             }} onClick={onCancel} />
         </Flex>
     );
