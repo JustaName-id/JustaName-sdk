@@ -17,7 +17,7 @@ export interface MessageItemProps {
   conversation: CachedConversation<ContentTypeMetadata>;
   onClick?: () => void;
   blocked?: boolean;
-  primaryName?: string;
+  primaryName?: string | null;
 }
 
 export const MessageItem: React.FC<MessageItemProps> = ({
@@ -32,7 +32,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
   //   address: conversation.peerAddress as `0x${string}`,
   // });
   const { records } = useRecords({
-    ens: primaryName,
+    ens: primaryName || undefined,
   });
   const { sanitizeEnsImage } = useEnsAvatar();
 

@@ -214,7 +214,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
           width: '100%',
           minWidth: '412px',
           height: '100%',
-          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          // backgroundColor: 'rgba(255, 255, 255, 0.05)',
           borderRadius: '16px',
 
           backdropFilter: reactionMessage ? 'blur(5px)' : 'none',
@@ -280,10 +280,11 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                     })
                   : undefined
               }
-              style={{
-                width: 30,
-                height: 30,
-              }}
+              size={30}
+              // style={{
+              //   width: 30,
+              //   height: 30,
+              // }}
             />
             <Flex
               direction="column"

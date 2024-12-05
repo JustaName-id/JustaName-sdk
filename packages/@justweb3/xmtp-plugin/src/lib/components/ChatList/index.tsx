@@ -7,7 +7,7 @@ import { usePrimaryNameBatch } from '@justaname.id/react';
 export interface ChatListProps {
   conversations: CachedConversation<ContentTypeMetadata>[];
   handleOpenChat: (
-    conversation: CachedConversation<ContentTypeMetadata> | null
+    conversation: CachedConversation<ContentTypeMetadata>
   ) => void;
   blockedList?: boolean;
 }

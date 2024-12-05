@@ -3,7 +3,7 @@ import { ArrowIcon, ClickableItem } from '@justweb3/ui';
 import { Client, ClientOptions, useClient } from '@xmtp/react-sdk';
 import { useEthersSigner } from '../../hooks';
 import { XmtpEnvironment } from '../../plugins';
-import { storeKeys, loadKeys, wipeKeys } from '../../utils/xmtp';
+import { loadKeys, storeKeys, wipeKeys } from '../../utils/xmtp';
 
 export interface ChatButtonProps {
   handleOpen: (open: boolean) => void;
@@ -12,28 +12,28 @@ export interface ChatButtonProps {
 export const ChatButton: React.FC<ChatButtonProps> = ({ handleOpen, env }) => {
   const { initialize } = useClient();
   const { client } = useClient();
-  const walletClient = useEthersSigner()
-  const { address } = useMountedAccount()
+  const walletClient = useEthersSigner();
+  const { address } = useMountedAccount();
 
   const handleChat = async () => {
     if (!client) {
-      const signer = await walletClient
+      const signer = walletClient;
       try {
         if (!signer) {
-          return
+          return;
         }
         const clientOptions: Partial<Omit<ClientOptions, 'codecs'>> = {
           appVersion: 'JustWeb3/1.0.0',
-          env: env
-        }
-        let keys = loadKeys(address ?? '', env)
+          env: env,
+        };
+        let keys = loadKeys(address ?? '', env);
         if (!keys) {
           keys = await Client.getKeys(signer, {
             env: env,
             skipContactPublishing: false,
             // persistConversations: false,
-          })
-          storeKeys(address ?? '', keys, env)
+          });
+          storeKeys(address ?? '', keys, env);
         }
         await initialize({
           keys,
@@ -41,12 +41,12 @@ export const ChatButton: React.FC<ChatButtonProps> = ({ handleOpen, env }) => {
           signer: signer,
         }).then(() => {
           handleOpen(true);
-        })
+        });
 
         // handleClient(client)
       } catch (error) {
-        console.error('Failed to initialize XMTP Client:', error)
-        wipeKeys(address ?? '', env)
+        console.error('Failed to initialize XMTP Client:', error);
+        wipeKeys(address ?? '', env);
       }
     } else {
       handleOpen(true);

@@ -75,7 +75,6 @@ const NewConversation: React.FC<NewConversationProps> = ({
     enabled: !isAddressName,
   });
 
-  console.log(records);
   const resolvedAddress = useMemo(() => {
     return records?.sanitizedRecords?.ethAddress?.value;
   }, [records]);

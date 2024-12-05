@@ -100,7 +100,6 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
       chainId: _params.chainId,
     });
 
-    console.log(__ens, result);
     checkEnsValid(result);
 
     const sanitized = sanitizeRecords(result);
@@ -152,7 +151,6 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
       },
     };
 
-    console.log(__ens, record);
     checkEnsValid(record);
 
     const sanitized = sanitizeRecords(record);
@@ -240,7 +238,6 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
   const query = useQuery({
     ...defaultOptions,
     retry: (failureCount, error) => {
-      console.log(error);
       if (error instanceof Error) {
         if (
           error.message.includes('NotFound') ||

@@ -45,7 +45,7 @@ const socials: { logo: ReactNode; title: string; credential: Credentials }[] = [
   },
 ];
 
-export const Verified = () => {
+export const JustVerified = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
   const { justVerified, setJustVerified } = useConsole();
 

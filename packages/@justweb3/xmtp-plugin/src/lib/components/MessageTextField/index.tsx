@@ -58,7 +58,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
   conversation,
   onNewConvo,
   peerAddress,
-  style
+  style,
 }) => {
   const [messageValue, setMessageValue] = React.useState<string>('');
   const [attachment, setAttachment] = React.useState<Attachment | undefined>();
@@ -265,10 +265,10 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
               height: isReplyText
                 ? '30px'
                 : isReplyVoice
-                  ? '45px'
-                  : isReplyVideoOrImage
-                    ? '100px'
-                    : '30px',
+                ? '45px'
+                : isReplyVideoOrImage
+                ? '100px'
+                : '30px',
               borderRadius: '5px',
               background: 'white',
               paddingLeft: '14px',
@@ -278,6 +278,7 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
               borderTopRightRadius: '25px',
               borderBottomRightRadius: 0,
               borderBottomLeftRadius: 0,
+              boxSizing: 'content-box',
             }}
           >
             <Flex
@@ -403,7 +404,9 @@ const MessageTextField: React.FC<MessageTextFieldProps> = ({
               height: 22,
               maxHeight: 22!,
               border: '1px solid grey',
-              paddingLeft: attachment?.mimeType === 'audio/wav' ? '5px' : '15px'
+              boxSizing: 'content-box',
+              paddingLeft:
+                attachment?.mimeType === 'audio/wav' ? '5px' : '15px',
             }}
           >
             {attachment?.mimeType !== 'audio/wav' && (

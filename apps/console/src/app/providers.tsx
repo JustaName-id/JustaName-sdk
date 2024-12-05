@@ -63,6 +63,7 @@ export const Providers: React.FC<ProviderProps> = (props) => {
         providerUrl: process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER_URL as string,
       },
     ],
+    enableAuth: true,
     openOnWalletConnect: true,
     allowedEns: 'all',
     disableOverlay: true,
