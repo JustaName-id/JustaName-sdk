@@ -1,3 +1,63 @@
+## 0.1.54 (2024-12-03)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.53 (2024-12-02)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.52 (2024-12-01)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.51 (2024-11-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.50 (2024-11-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.49 (2024-11-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.48 (2024-11-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.47 (2024-11-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.46 (2024-11-29)
+
+
+### 🚀 Features
+
+- move justweb3 to peer dep in the plugins ([316047cb](https://github.com/JustaName-id/JustaName-sdk/commit/316047cb))
+
+- sdk signin fix for aa wallets ([52944a72](https://github.com/JustaName-id/JustaName-sdk/commit/52944a72))
+
+- enabled in hooks and siwens fix and coinbase fix ([c3fb455e](https://github.com/JustaName-id/JustaName-sdk/commit/c3fb455e))
+
+
+### 🩹 Fixes
+
+- lint fix on react and package json of projects ([b29cd296](https://github.com/JustaName-id/JustaName-sdk/commit/b29cd296))
+
+- update rest call and ui fixes ([81b05f29](https://github.com/JustaName-id/JustaName-sdk/commit/81b05f29))
+
+- yarn lock ([98e8b8b2](https://github.com/JustaName-id/JustaName-sdk/commit/98e8b8b2))
+
+- justweb3button infinite loading ([465453ca](https://github.com/JustaName-id/JustaName-sdk/commit/465453ca))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- HadiKhai
+
 ## 0.1.45 (2024-11-15)
 
 This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.

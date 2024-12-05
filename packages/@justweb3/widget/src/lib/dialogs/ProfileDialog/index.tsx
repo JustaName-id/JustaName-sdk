@@ -350,6 +350,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       contentStyle={{
         width: '100%',
         height: '100%',
+        pointerEvents: 'auto',
       }}
       fullScreen={minimized}
       header={

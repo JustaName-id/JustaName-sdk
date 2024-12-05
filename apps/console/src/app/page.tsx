@@ -40,6 +40,7 @@ export default function Page() {
               </JustWeb3Button>
 
               <JustEnsCard addressOrEns={'justhadi.eth'} />
+              <JustEnsCard addressOrEns={'justghadi.eth'} />
               <JustEnsCard addressOrEns={'mely.eth'} />
               <JustEnsCard addressOrEns={'nick.eth'} />
               <JustEnsCard addressOrEns={'vitalik.eth'} />

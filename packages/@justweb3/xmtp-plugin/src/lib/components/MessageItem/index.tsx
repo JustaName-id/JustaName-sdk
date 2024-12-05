@@ -4,32 +4,45 @@ import {
   ContentTypeMetadata,
   reactionContentTypeConfig,
   replyContentTypeConfig,
+  useConsent,
   useLastMessage,
   useStreamMessages,
 } from '@xmtp/react-sdk';
-import { useEnsAvatar, usePrimaryName, useRecords } from '@justaname.id/react';
-import { Avatar, Flex, formatText, P, SPAN } from '@justweb3/ui';
+import { useEnsAvatar, useRecords } from '@justaname.id/react';
+import { Avatar, Button, Flex, formatText, P, SPAN } from '@justweb3/ui';
 import React, { useMemo } from 'react';
 import { formatChatDate } from '../../utils/formatChatDate';
 
 export interface MessageItemProps {
   conversation: CachedConversation<ContentTypeMetadata>;
   onClick?: () => void;
+  blocked?: boolean;
+  primaryName?: string | null;
 }
 
 export const MessageItem: React.FC<MessageItemProps> = ({
   conversation,
   onClick,
+  blocked,
+  primaryName,
 }) => {
   const lastMessage = useLastMessage(conversation.topic);
   useStreamMessages(conversation);
-  const { primaryName } = usePrimaryName({
-    address: conversation.peerAddress as `0x${string}`,
-  });
+  // const { primaryName } = usePrimaryName({
+  //   address: conversation.peerAddress as `0x${string}`,
+  // });
   const { records } = useRecords({
-    ens: primaryName,
+    ens: primaryName || undefined,
   });
   const { sanitizeEnsImage } = useEnsAvatar();
+
+  const { allow, refreshConsentList } = useConsent();
+
+  const allowUser = async () => {
+    await refreshConsentList();
+    await allow([conversation.peerAddress]);
+    await refreshConsentList();
+  };
 
   const lastContent = useMemo(() => {
     if (!lastMessage) return '';
@@ -65,11 +78,14 @@ export const MessageItem: React.FC<MessageItemProps> = ({
     <Flex
       style={{
         padding: '10px',
-        border: '1px solid #E8E8E8',
+        border: '1px solid var(--justweb3-foreground-color-4)',
         borderRadius: '5px',
-        cursor: 'pointer',
+        cursor: blocked ? 'auto' : 'pointer',
       }}
-      onClick={onClick}
+      onClick={() => {
+        if (blocked) return;
+        onClick && onClick();
+      }}
     >
       <Avatar
         src={
@@ -87,7 +103,9 @@ export const MessageItem: React.FC<MessageItemProps> = ({
         direction={'column'}
         style={{
           marginLeft: '10px',
-          maxWidth: 'calc(100% - 50px - 32px - 10px)',
+          maxWidth: blocked
+            ? 'calc(100% - 120px)'
+            : 'calc(100% - 50px - 32px - 10px)',
           justifyContent: 'space-between',
         }}
       >
@@ -123,12 +141,17 @@ export const MessageItem: React.FC<MessageItemProps> = ({
           marginLeft: 'auto',
           alignContent: 'space-between',
           textAlign: 'end',
-          width: '50px',
         }}
       >
-        <SPAN style={{ fontSize: '10px' }}>
-          {lastMessage?.sentAt ? formatChatDate(lastMessage.sentAt) : ''}
-        </SPAN>
+        {blocked ? (
+          <Button variant="secondary" onClick={allowUser} style={{}}>
+            Unblock
+          </Button>
+        ) : (
+          <SPAN style={{ fontSize: '10px' }}>
+            {lastMessage?.sentAt ? formatChatDate(lastMessage.sentAt) : ''}
+          </SPAN>
+        )}
       </Flex>
     </Flex>
   );

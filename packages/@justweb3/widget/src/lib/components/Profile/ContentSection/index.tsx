@@ -24,6 +24,10 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from '@justweb3/ui';
 import React, { Fragment, useContext, useEffect, useMemo } from 'react';
 import { getChainIcon } from '../../../icons/chain-icons';
@@ -63,10 +67,14 @@ const ContentSection: React.FC<ContentProps> = ({
   const { openEnsProfile } = useJustWeb3();
 
   const isProfileSelf = useMemo(() => {
-    const isEns = accountEnsNames?.map((ens) => ens.ens).includes(fullSubname);
+    const tempEns = accountEnsNames
+      ?.map((ens) => ens.ens)
+      .find((e) => e === fullSubname);
 
-    if (isEns) {
-      return chainId === connectedWalletChainId;
+    if (tempEns) {
+      if (!accountSubnames?.find((subname) => subname.ens === tempEns)) {
+        return chainId === connectedWalletChainId;
+      }
     }
 
     return (
@@ -187,13 +195,33 @@ const ContentSection: React.FC<ContentProps> = ({
           title={'Addresses'}
           items={sanitized?.allAddresses?.map((address) => {
             return (
-              <MetadataCard
-                key={address.id}
-                variant={'address'}
-                title={address.name}
-                value={address.value}
-                icon={getChainIcon(address.symbol)}
-              />
+              <TooltipProvider delayDuration={100}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div>
+                      <MetadataCard
+                        key={address.id}
+                        variant={'address'}
+                        title={address.name}
+                        value={address.value}
+                        icon={getChainIcon(address.symbol)}
+                      />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent style={{ zIndex: 9999 }}>
+                    <P
+                      style={{
+                        fontSize: '9px',
+                        fontWeight: 900,
+                        lineHeight: '150%',
+                        color: 'inherit',
+                      }}
+                    >
+                      {address.symbol.toUpperCase()}: {address.value}
+                    </P>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             );
           })}
         />

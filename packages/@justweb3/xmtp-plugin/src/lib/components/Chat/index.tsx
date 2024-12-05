@@ -21,23 +21,24 @@ import {
   CachedConversation,
   ContentTypeMetadata,
   useCanMessage,
-  useClient,
   useConsent,
   useMessages,
   useStreamMessages,
 } from '@xmtp/react-sdk';
 import React, { useEffect, useMemo } from 'react';
 import { useSendReactionMessage } from '../../hooks';
+import { typeLookup } from '../../utils/attachments';
 import {
   filterReactionsMessages,
   MessageWithReaction,
 } from '../../utils/filterReactionsMessages';
 import { formatAddress } from '../../utils/formatAddress';
 import { groupMessagesByDate } from '../../utils/groupMessageByDate';
-import MessageCard from '../MessageCard';
 import EmojiSelector from '../EmojiSelector';
-import MessageTextField from '../MessageTextField';
+import MessageCard from '../MessageCard';
 import { MessageSkeletonCard } from '../MessageSkeletonCard';
+import MessageTextField from '../MessageTextField';
+import { useJustWeb3 } from '@justweb3/widget';
 
 export interface ChatProps {
   conversation: CachedConversation<ContentTypeMetadata>;
@@ -45,11 +46,11 @@ export interface ChatProps {
 }
 
 export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
+  const { openEnsProfile } = useJustWeb3();
   const [replyMessage, setReplyMessage] =
     React.useState<MessageWithReaction | null>(null);
   const [reactionMessage, setReactionMessage] =
     React.useState<MessageWithReaction | null>(null);
-  const [emojiSelectorTop, setEmojiSelectorTop] = React.useState<number>(0);
   const [isRequest, setIsRequest] = React.useState<boolean>(false);
   const [isRequestChangeLoading, setIsRequestChangeLoading] =
     React.useState<boolean>(false);
@@ -65,7 +66,6 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
   const { sanitizeEnsImage } = useEnsAvatar();
 
   const { address } = useMountedAccount();
-  const { client } = useClient();
 
   const [canMessage, setCanMessage] = React.useState<boolean>(true);
 
@@ -127,8 +127,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     await refreshConsentList();
     await allow([conversation.peerAddress]);
     void refreshConsentList();
-    // TODO: check if this is needed
-    // onRequestAllowed();
+    setIsRequest(false);
     setIsRequestChangeLoading(false);
   };
 
@@ -154,6 +153,47 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     // await checkMessageIfRead();
   }, [messages, conversation]);
 
+  const isStringContent =
+    typeof replyMessage?.content === 'string' ||
+    typeof replyMessage?.content?.content === 'string';
+
+  const mimeType = replyMessage?.content?.mimeType;
+  const type = mimeType ? typeLookup[mimeType.split('/')?.[1]] : null;
+
+  const computeHeight = useMemo(() => {
+    const additionalHeight = [];
+    const height = '100vh - 50px - 3rem - 1.5rem - 73px - 15px';
+    if (isRequest) {
+      additionalHeight.push('-40px');
+    }
+    if (replyMessage) {
+      if (isStringContent) {
+        additionalHeight.push('46px');
+      } else if (mimeType === 'audio/wav') {
+        additionalHeight.push('61px');
+      } else if (type === 'video' || type === 'image') {
+        additionalHeight.push('116px');
+      } else {
+        additionalHeight.push('47px');
+      }
+    }
+
+    if (isMessagesSenderOnly) {
+      additionalHeight.push('59px');
+    }
+
+    return `calc( ${height} ${
+      additionalHeight.length > 0 ? ' - ' + additionalHeight.join(' - ') : ''
+    } )`;
+  }, [
+    replyMessage,
+    isMessagesSenderOnly,
+    isStringContent,
+    mimeType,
+    type,
+    isRequest,
+  ]);
+
   return (
     <Flex
       direction={'column'}
@@ -174,7 +214,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
           width: '100%',
           minWidth: '412px',
           height: '100%',
-          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          // backgroundColor: 'rgba(255, 255, 255, 0.05)',
           borderRadius: '16px',
 
           backdropFilter: reactionMessage ? 'blur(5px)' : 'none',
@@ -219,7 +259,17 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
               }}
             />
           </Flex>
-          <Flex direction="row" align="center" gap="10px">
+          <Flex
+            direction="row"
+            align="center"
+            gap="10px"
+            style={{ flexGrow: 1, cursor: primaryName ? 'pointer' : 'default' }}
+            onClick={() => {
+              if (primaryName) {
+                openEnsProfile(primaryName);
+              }
+            }}
+          >
             <Avatar
               src={
                 primaryName
@@ -230,10 +280,11 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                     })
                   : undefined
               }
-              style={{
-                width: 30,
-                height: 30,
-              }}
+              size={30}
+              // style={{
+              //   width: 30,
+              //   height: 30,
+              // }}
             />
             <Flex
               direction="column"
@@ -254,13 +305,17 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                   ? primaryName
                   : formatAddress(conversation.peerAddress)}
               </P>
-              {/* {(!!primaryName) && (
-                <P style={{
-                  fontSize: 10,
-                  fontWeight: 900,
-                  lineHeight: 1
-                }} >{formatAddress(conversation.peerAddress)}</P>
-              )} */}
+              {primaryName && (
+                <P
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 600,
+                    lineHeight: 1,
+                  }}
+                >
+                  {formatAddress(conversation.peerAddress)}
+                </P>
+              )}
             </Flex>
           </Flex>
         </Flex>
@@ -277,18 +332,18 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
               />
             </PopoverTrigger>
             <PopoverContent
+              side="left"
               style={{
                 padding: '0px',
                 width: '100%',
                 borderRadius: '10px',
                 // zIndex: 110,
-                backgroundColor: 'white',
+                backgroundColor: 'var(--justweb3-destructive-color)',
               }}
             >
               <Flex
                 direction="column"
                 style={{
-                  padding: '8px',
                   gap: '10px',
                   borderRadius: '10px',
                 }}
@@ -304,21 +359,22 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                   }}
                   onClick={() => blockAddress(conversation.peerAddress)}
                 >
-                  <P
-                    style={{
-                      color: 'var(--justweb3-primary-color)',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Block
-                  </P>
                   <BlockedAccountIcon
                     width="22"
                     height="22"
                     style={{
                       cursor: 'pointer',
                     }}
+                    fill="var(--justweb3-background-color)"
                   />
+                  <P
+                    style={{
+                      color: 'var(--justweb3-background-color)',
+                      fontWeight: 500,
+                    }}
+                  >
+                    Block
+                  </P>
                 </Flex>
               </Flex>
             </PopoverContent>
@@ -337,14 +393,15 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
         {isCanMessageLoading || isLoading ? (
           <Flex
             direction="column"
-            gap="10px"
+            gap="5px"
             style={{
               flex: 1,
-              padding: '0px 10px',
-              height: '90%',
+              // padding: '10px 10px',
+              minHeight: computeHeight,
+              maxHeight: computeHeight,
             }}
           >
-            {[...Array(5)].map((_, index) => (
+            {[...Array(8)].map((_, index) => (
               <MessageSkeletonCard
                 key={`message-skeleton-${index}`}
                 isReceiver={index % 2 === 0}
@@ -355,11 +412,8 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
           <Flex
             style={{
               flex: 1,
-              maxHeight: replyMessage
-                ? typeof replyMessage.content === 'string'
-                  ? 'calc(100vh - 248px)'
-                  : 'calc(100vh - 284px)'
-                : 'calc(100vh - 200px)',
+              minHeight: computeHeight,
+              maxHeight: computeHeight,
             }}
           >
             {canMessage ? (
@@ -379,19 +433,45 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                 {groupedMessages &&
                   Object.keys(groupedMessages).map((date, index) => (
                     <Flex direction="column" gap="10px" key={index}>
-                      <P
+                      <Flex
+                        direction="row"
+                        align="center"
+                        gap="20px"
                         style={{
-                          textAlign: 'center',
-                          padding: '5px 0px',
                           marginBottom: '8px',
-                          fontSize: '9px',
-                          fontWeight: 900,
-                          opacity: 0.35,
-                          minWidth: 'fit-content',
                         }}
                       >
-                        {date}
-                      </P>
+                        <div
+                          style={{
+                            width: '100%',
+                            height: 1,
+                            backgroundColor:
+                              'var(--justweb3-foreground-color-2)',
+                            opacity: 0.35,
+                          }}
+                        />
+                        <P
+                          style={{
+                            textAlign: 'center',
+                            padding: '5px 0px',
+                            fontSize: '9px',
+                            fontWeight: 900,
+                            opacity: 0.35,
+                            minWidth: 'fit-content',
+                          }}
+                        >
+                          {date}
+                        </P>
+                        <div
+                          style={{
+                            width: '100%',
+                            height: 1,
+                            backgroundColor:
+                              'var(--justweb3-foreground-color-2)',
+                            opacity: 0.35,
+                          }}
+                        />
+                      </Flex>
                       {groupedMessages[date].map((message) => (
                         <MessageCard
                           conversation={conversation}
@@ -411,14 +491,12 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                             ) as HTMLElement;
                             replica.id = `${message.id}-replica`;
                             replica.style.position = 'absolute';
-                            replica.style.top = element?.offsetTop + 'px';
-                            replica.style.top = '100px';
+                            replica.style.bottom = '310px';
+                            replica.style.minHeight = '20px';
+                            replica.style.left = '4.2vw';
                             replica.style.zIndex = '90';
                             element?.parentElement?.appendChild(replica);
                             replica.classList.add('replica-animate');
-                            setEmojiSelectorTop(
-                              100 + element.getBoundingClientRect().height
-                            );
                           }}
                         />
                       ))}
@@ -429,15 +507,9 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                     style={{
                       zIndex: 99,
                       position: 'absolute',
-                      right:
-                        reactionMessage?.senderAddress === client?.address
-                          ? '20px'
-                          : 'auto',
-                      left:
-                        reactionMessage?.senderAddress === client?.address
-                          ? 'auto'
-                          : '20px',
-                      top: `${emojiSelectorTop + 20}px`,
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      bottom: `30px`,
                     }}
                   >
                     <EmojiSelector
@@ -508,28 +580,35 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                 direction="column"
                 gap="5px"
                 style={{
-                  padding: '20px',
+                  padding: '10px',
                   borderRadius: '10px',
-                  border: '1px solid black',
-                  boxShadow: '1px 1px 0px 0px #000',
+                  backgroundColor: 'var(--justweb3-foreground-color-4)',
                 }}
               >
                 <P
                   style={{
-                    fontSize: '20px',
+                    fontSize: '14px',
                     fontWeight: 900,
-                    lineHeight: '125%',
+                    lineHeight: '100%',
+                    color: 'var(--justweb3-foreground-color-3)',
                   }}
                 >
                   Message in user’s Requests
                 </P>
-                <P>This user has not accepted your message request yet</P>
+                <P
+                  style={{
+                    fontSize: '12px',
+                  }}
+                >
+                  This user has not accepted your message request yet
+                </P>
               </Flex>
             )}
             <MessageTextField
               onCancelReply={() => setReplyMessage(null)}
               conversation={conversation}
               replyMessage={replyMessage}
+              peerAddress={conversation.peerAddress}
             />
           </Flex>
         )}

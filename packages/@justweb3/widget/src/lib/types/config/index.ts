@@ -9,6 +9,7 @@ export interface JustWeb3ProviderConfig
   allowedEns?: 'all' | 'claimable' | string[];
   logo?: string;
   disableOverlay?: boolean;
+  enableAuth?: boolean;
   mApps?: (string | { name: string; openOnConnect: boolean })[];
   plugins?: JustaPlugin[];
 }

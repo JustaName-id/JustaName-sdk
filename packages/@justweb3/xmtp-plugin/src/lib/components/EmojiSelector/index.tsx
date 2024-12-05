@@ -32,29 +32,30 @@ const EmojiSelector: React.FC<EmojiSelectorProps> = ({
 
 
     return (
-        <Flex direction='column' gap='4px' style={{
-            width: '220px',
-            paddingTop: '4px',
-            border: '1px solid var(--justweb3-foreground-color-2)',
-            borderRadius: '10px',
-            // TODO: fix with vars
-            background: 'white'
+        <Flex direction='column' gap='10px' style={{
+            width: '340px',
+            padding: '5px',
+            border: '2px solid rgba(var(--justweb3-foreground-color-2), 0.9)',
+            borderRadius: '5px',
+            background: 'var(--justweb3-foreground-color-4)'
         }} >
             <Input
                 style={{
-                    height: '40px',
-                    borderRadius: '10px',
+                    height: '20px',
+                    borderRadius: '5px',
                     fontSize: '14px',
-                    border: '1px solid var(--justweb3-foreground-color-2)'
+                    border: '2px solid var(--justweb3-foreground-color-4)'
                 }}
                 placeholder={`Search Emoji`}
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
             />
-            <div style={{
+            <div className='justweb3scrollbar' style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+                gridTemplateColumns: 'repeat(8, minmax(0, 1fr))',
+                gap: '10px',
                 overflowY: 'scroll',
+                maxHeight: '200px'
 
             }}>
                 {filteredEmojis.map((emoji, index) => (
@@ -62,10 +63,11 @@ const EmojiSelector: React.FC<EmojiSelectorProps> = ({
                         key={index}
                         onClick={() => onEmojiClickHandler(emoji)}
                         style={{
-                            padding: '2px',
-                            fontSize: '20px',
+                            aspectRatio: '1',
+                            fontSize: '16px',
                             borderRadius: '10px',
                             border: 'none',
+                            cursor: 'pointer'
                         }}
                     >
                         {emoji.emoji}
