@@ -19,7 +19,9 @@ const contentTypeConfigs = [
   replyContentTypeConfig,
 ];
 
-interface JustWeb3XMTPContextProps { }
+interface JustWeb3XMTPContextProps {
+  handleOpenChatWithAddressOrEns: (addressOrEns: string) => void;
+}
 
 const JustWeb3XMTPContext = React.createContext<
   JustWeb3XMTPContextProps | undefined
@@ -38,6 +40,8 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
 }) => {
   const [isXmtpEnabled, setIsXmtpEnabled] = React.useState(false);
   const [isNewChat, setIsNewChat] = React.useState(false);
+  const [isNewChatWithAddressOrEns, setIsNewChatWithAddressOrEns] =
+    React.useState('');
   const [conversation, setConversation] =
     React.useState<CachedConversation<ContentTypeMetadata> | null>(null);
   const handleXmtpEnabled = (enabled: boolean) => {
@@ -56,11 +60,20 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
 
   const handleNewChat = () => {
     setIsNewChat(true);
-  }
+  };
+
+  const handleNewChatWithAddressOrEns = (addressOrEns: string) => {
+    setIsNewChat(true);
+    setIsNewChatWithAddressOrEns(addressOrEns);
+  };
 
   return (
     <XMTPProvider contentTypeConfigs={contentTypeConfigs}>
-      <JustWeb3XMTPContext.Provider value={undefined}>
+      <JustWeb3XMTPContext.Provider
+        value={{
+          handleOpenChatWithAddressOrEns: handleNewChatWithAddressOrEns,
+        }}
+      >
         <Checks open={open} handleXmtpEnabled={handleXmtpEnabled} />
         <MessageSheet
           handleOpenChat={handleOpenChat}
@@ -71,6 +84,7 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
           openNewChat={isNewChat}
           handleOpenNewChat={handleOpenNewChat}
           onChatStarted={handleOpenChat}
+          addressOrEns={isNewChatWithAddressOrEns}
         />
         {isXmtpEnabled && (
           <ChatSheet
@@ -106,4 +120,14 @@ export const Checks: React.FC<ChecksProps> = ({ open, handleXmtpEnabled }) => {
   }, [connectedEns?.ens, disconnect]);
 
   return null;
+};
+
+export const useJustWeb3XMTP = () => {
+  const context = React.useContext(JustWeb3XMTPContext);
+  if (context === undefined) {
+    throw new Error(
+      'useJustWeb3XMTP must be used within a JustWeb3XMTPProvider'
+    );
+  }
+  return context;
 };

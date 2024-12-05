@@ -47,6 +47,7 @@ export interface JustWeb3ContextProps {
   ) => Promise<void>;
   handleJustWeb3Config: (config: JustWeb3ProviderConfig) => void;
   handleOpenEnsProfile: (ens: string, chainId?: ChainId) => void;
+  handleCloseEnsProfile: () => void;
   isSignInOpen: boolean;
   config: JustWeb3ProviderConfig;
   plugins: JustaPlugin[];
@@ -58,6 +59,7 @@ export const JustWeb3Context = createContext<JustWeb3ContextProps>({
   handleOpenSignInDialog: () => {},
   handleUpdateRecords: async () => {},
   handleOpenEnsProfile: () => {},
+  handleCloseEnsProfile: () => {},
   handleJustWeb3Config: () => {},
   config: {},
   plugins: [],
@@ -127,6 +129,10 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
 
   const handleOpenEnsProfile = (ens: string, chainId?: ChainId) => {
     setEnsOpen({ ens, chainId });
+  };
+
+  const handleCloseEnsProfile = () => {
+    setEnsOpen(null);
   };
 
   useEffect(() => {
@@ -212,6 +218,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
             handleUpdateRecords: handleUpdateRecords,
             handleJustWeb3Config,
             handleOpenEnsProfile,
+            handleCloseEnsProfile,
           }}
         >
           <MAppsProvider
@@ -279,6 +286,7 @@ export interface useJustWeb3 {
   refreshEnsAuth: () => void;
   connectedEns: UseEnsAuthReturn['connectedEns'];
   openEnsProfile: (ens: string, chainId?: ChainId) => void;
+  closeEnsProfile: () => void;
   updateRecords: (
     records: Omit<UseSubnameUpdateFunctionParams, 'ens'> & { ens?: string }
   ) => Promise<void>;
@@ -305,7 +313,8 @@ export const useJustWeb3 = (): useJustWeb3 => {
   } = useEnsAuth({
     local: !context.config.enableAuth,
   });
-  const { handleUpdateRecords, handleOpenEnsProfile } = context;
+  const { handleUpdateRecords, handleOpenEnsProfile, handleCloseEnsProfile } =
+    context;
   const handleUpdateRecordsInternal = async (
     records: Omit<UseSubnameUpdateFunctionParams, 'ens'> & {
       ens?: string;
@@ -362,6 +371,7 @@ export const useJustWeb3 = (): useJustWeb3 => {
     connectedEns,
     refreshEnsAuth,
     openEnsProfile: handleOpenEnsProfile,
+    closeEnsProfile: handleCloseEnsProfile,
     chainId: justanameContext?.chainId,
   };
 };

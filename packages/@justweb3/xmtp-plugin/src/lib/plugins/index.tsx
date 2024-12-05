@@ -1,11 +1,12 @@
 import { JustaPlugin } from '@justweb3/widget';
 import { JustWeb3XMTPProvider } from '../providers/JustWeb3XMTPProvider';
 import { ChatButton } from '../components/ChatButton';
+import { ChatWithProfileButton } from '../components/ChatWithProfileButton';
 
 export type XmtpEnvironment = 'local' | 'production' | 'dev';
 
 export const XMTPPlugin = (env: XmtpEnvironment): JustaPlugin => {
-  return ({
+  return {
     name: 'XMTPPlugin',
     components: {
       Provider: (pluginApi, children) => {
@@ -18,6 +19,9 @@ export const XMTPPlugin = (env: XmtpEnvironment): JustaPlugin => {
           </JustWeb3XMTPProvider>
         );
       },
+      ProfileHeader: (pluginApi, ens, chainId, address) => {
+        return <ChatWithProfileButton ens={ens} env={env} />;
+      },
       SignInMenu: (pluginApi) => {
         return (
           <ChatButton
@@ -26,6 +30,6 @@ export const XMTPPlugin = (env: XmtpEnvironment): JustaPlugin => {
           />
         );
       },
-    }
-  })
+    },
+  };
 };

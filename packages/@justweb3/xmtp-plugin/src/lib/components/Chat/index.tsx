@@ -38,6 +38,7 @@ import EmojiSelector from '../EmojiSelector';
 import MessageCard from '../MessageCard';
 import { MessageSkeletonCard } from '../MessageSkeletonCard';
 import MessageTextField from '../MessageTextField';
+import { useJustWeb3 } from '@justweb3/widget';
 
 export interface ChatProps {
   conversation: CachedConversation<ContentTypeMetadata>;
@@ -45,6 +46,7 @@ export interface ChatProps {
 }
 
 export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
+  const { openEnsProfile } = useJustWeb3();
   const [replyMessage, setReplyMessage] =
     React.useState<MessageWithReaction | null>(null);
   const [reactionMessage, setReactionMessage] =
@@ -125,7 +127,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     await refreshConsentList();
     await allow([conversation.peerAddress]);
     void refreshConsentList();
-    setIsRequest(false)
+    setIsRequest(false);
     setIsRequestChangeLoading(false);
   };
 
@@ -180,9 +182,17 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
       additionalHeight.push('59px');
     }
 
-    return `calc( ${height} ${additionalHeight.length > 0 ? ' - ' + additionalHeight.join(' - ') : ''
-      } )`;
-  }, [replyMessage, isMessagesSenderOnly, isStringContent, mimeType, type, isRequest]);
+    return `calc( ${height} ${
+      additionalHeight.length > 0 ? ' - ' + additionalHeight.join(' - ') : ''
+    } )`;
+  }, [
+    replyMessage,
+    isMessagesSenderOnly,
+    isStringContent,
+    mimeType,
+    type,
+    isRequest,
+  ]);
 
   return (
     <Flex
@@ -249,15 +259,25 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
               }}
             />
           </Flex>
-          <Flex direction="row" align="center" gap="10px">
+          <Flex
+            direction="row"
+            align="center"
+            gap="10px"
+            style={{ flexGrow: 1, cursor: primaryName ? 'pointer' : 'default' }}
+            onClick={() => {
+              if (primaryName) {
+                openEnsProfile(primaryName);
+              }
+            }}
+          >
             <Avatar
               src={
                 primaryName
                   ? sanitizeEnsImage({
-                    name: primaryName,
-                    chainId: 1,
-                    image: records?.sanitizedRecords?.avatar,
-                  })
+                      name: primaryName,
+                      chainId: 1,
+                      image: records?.sanitizedRecords?.avatar,
+                    })
                   : undefined
               }
               style={{
@@ -299,7 +319,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
           </Flex>
         </Flex>
         <Flex direction="row" align="center" gap="15px">
-          <Popover  >
+          <Popover>
             <PopoverTrigger>
               <TuneIcon
                 width={24}
@@ -310,7 +330,8 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                 }}
               />
             </PopoverTrigger>
-            <PopoverContent side='left'
+            <PopoverContent
+              side="left"
               style={{
                 padding: '0px',
                 width: '100%',
@@ -343,7 +364,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
                     style={{
                       cursor: 'pointer',
                     }}
-                    fill='var(--justweb3-background-color)'
+                    fill="var(--justweb3-background-color)"
                   />
                   <P
                     style={{

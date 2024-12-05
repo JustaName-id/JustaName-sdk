@@ -42,6 +42,7 @@ export const controlledAxiosPromise = <T extends NonNullable<unknown>>(
       return res.data.result.data as T;
     })
     .catch((err: AxiosError<BaseResponse<null>>) => {
+      console.error(err);
       if (err?.response) {
         if (err?.response?.data?.result) {
           if (err?.response?.data?.result?.error) {

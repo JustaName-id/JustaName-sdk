@@ -8,7 +8,7 @@ import {
   useLastMessage,
   useStreamMessages,
 } from '@xmtp/react-sdk';
-import { useEnsAvatar, usePrimaryName, useRecords } from '@justaname.id/react';
+import { useEnsAvatar, useRecords } from '@justaname.id/react';
 import { Avatar, Button, Flex, formatText, P, SPAN } from '@justweb3/ui';
 import React, { useMemo } from 'react';
 import { formatChatDate } from '../../utils/formatChatDate';
@@ -17,18 +17,20 @@ export interface MessageItemProps {
   conversation: CachedConversation<ContentTypeMetadata>;
   onClick?: () => void;
   blocked?: boolean;
+  primaryName?: string;
 }
 
 export const MessageItem: React.FC<MessageItemProps> = ({
   conversation,
   onClick,
   blocked,
+  primaryName,
 }) => {
   const lastMessage = useLastMessage(conversation.topic);
   useStreamMessages(conversation);
-  const { primaryName } = usePrimaryName({
-    address: conversation.peerAddress as `0x${string}`,
-  });
+  // const { primaryName } = usePrimaryName({
+  //   address: conversation.peerAddress as `0x${string}`,
+  // });
   const { records } = useRecords({
     ens: primaryName,
   });
@@ -89,10 +91,10 @@ export const MessageItem: React.FC<MessageItemProps> = ({
         src={
           primaryName
             ? sanitizeEnsImage({
-              name: primaryName,
-              chainId: 1,
-              image: records?.sanitizedRecords?.avatar,
-            })
+                name: primaryName,
+                chainId: 1,
+                image: records?.sanitizedRecords?.avatar,
+              })
             : undefined
         }
       />
@@ -101,7 +103,9 @@ export const MessageItem: React.FC<MessageItemProps> = ({
         direction={'column'}
         style={{
           marginLeft: '10px',
-          maxWidth: 'calc(100% - 50px - 32px - 10px)',
+          maxWidth: blocked
+            ? 'calc(100% - 120px)'
+            : 'calc(100% - 50px - 32px - 10px)',
           justifyContent: 'space-between',
         }}
       >

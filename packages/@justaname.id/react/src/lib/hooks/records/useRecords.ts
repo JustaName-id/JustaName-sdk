@@ -18,10 +18,11 @@ import { useMemo } from 'react';
 import { Records } from '../../types';
 import { defaultOptions } from '../../query';
 import { RecordsTaskQueue } from './records-task-queue';
-import { checkEnsValid } from '../../helpers/checkEnsValid';
 import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { useOffchainResolvers } from '../offchainResolver';
 import { getRecords as getEnsRecords } from '@ensdomains/ensjs/public';
+import { checkEnsValid } from '../../helpers/checkEnsValid';
+import { validateEns } from '../../helpers/validateEns';
 
 export const buildRecordsBySubnameKey = (
   subname: string,
@@ -72,6 +73,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     () => params?.chainId || chainId,
     [params?.chainId, chainId]
   );
+  const _ens = useMemo(() => validateEns(params?.ens), [params?.ens]);
   const { offchainResolvers } = useOffchainResolvers();
   const { ensClient } = useEnsPublicClient({
     chainId: _chainId,
@@ -86,12 +88,19 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
   const getRecords = async (
     _params: SubnameRecordsRoute['params']
   ): Promise<Records> => {
+    const __ens = validateEns(_params.ens);
+
+    if (!__ens) {
+      throw new Error('Invalid ENS name');
+    }
+
     const result = await justaname.subnames.getRecords({
-      ens: _params.ens,
+      ens: __ens,
       providerUrl: _params.providerUrl,
       chainId: _params.chainId,
     });
 
+    console.log(__ens, result);
     checkEnsValid(result);
 
     const sanitized = sanitizeRecords(result);
@@ -109,8 +118,14 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
       throw new Error('Public client not found');
     }
 
+    const __ens = validateEns(_params.ens) || _ens;
+
+    if (!__ens) {
+      throw new Error('Invalid ENS name');
+    }
+
     const result = await getEnsRecords(ensClient, {
-      name: _params.ens,
+      name: __ens,
       coins: Object.keys(coinTypeMap),
       texts: [
         ...generalKeys,
@@ -126,7 +141,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     );
 
     const record = {
-      ens: _params.ens,
+      ens: __ens,
       isJAN: result.resolverAddress === offchainResolver?.resolverAddress,
       records: {
         ...result,
@@ -137,6 +152,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
       },
     };
 
+    console.log(__ens, record);
     checkEnsValid(record);
 
     const sanitized = sanitizeRecords(record);
@@ -152,11 +168,15 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     forceUpdate = false
   ): Promise<Records> => {
     const __chainId = _params?.chainId || _chainId;
+    const __ens = validateEns(_params?.ens) || _ens;
+    if (!__ens) {
+      throw new Error('Invalid ENS name');
+    }
     // const __standard = _params?.standard || params?.standard;
     const __standard = false;
     if (!forceUpdate) {
       const cachedRecords = queryClient.getQueryData(
-        buildRecordsBySubnameKey(_params?.ens, __chainId, __standard)
+        buildRecordsBySubnameKey(__ens, __chainId, __standard)
       ) as Records;
       if (cachedRecords) {
         return cachedRecords;
@@ -176,13 +196,16 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
       let records: Records;
       try {
         records = await getRecords({
-          ens: _params.ens,
+          ens: __ens,
           chainId: __chainId,
           providerUrl: __providerUrl,
         });
       } catch (error) {
+        if (error instanceof Error && error.message.includes('NotFound')) {
+          throw error;
+        }
         records = await getStandardRecords({
-          ens: _params.ens,
+          ens: __ens,
           chainId: __chainId,
           providerUrl: __providerUrl,
         });
@@ -195,7 +218,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
 
     // if (__standard) {
     //   records = await getStandardRecords({
-    //     ens: _params.ens,
+    //     ens: __ens,
     //     chainId: __chainId,
     //     providerUrl: __providerUrl,
     //   });
@@ -208,7 +231,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     // }
 
     queryClient.setQueryData(
-      buildRecordsBySubnameKey(_params.ens, __chainId, __standard),
+      buildRecordsBySubnameKey(__ens, __chainId, __standard),
       records
     );
     return records;
@@ -216,21 +239,33 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
 
   const query = useQuery({
     ...defaultOptions,
+    retry: (failureCount, error) => {
+      console.log(error);
+      if (error instanceof Error) {
+        if (
+          error.message.includes('NotFound') ||
+          error.message.includes('ETH address not found')
+        ) {
+          return false;
+        }
+      }
+      return failureCount < 3;
+    },
     queryKey: buildRecordsBySubnameKey(
-      params?.ens || '',
+      _ens || '',
       _chainId
       // params?.standard
     ),
     queryFn: () =>
       getRecordsInternal(
         {
-          ens: params?.ens || '',
+          ens: _ens || '',
           chainId: _chainId,
         },
         true
       ),
     enabled:
-      Boolean(params?.ens) &&
+      Boolean(_ens) &&
       Boolean(_chainId) &&
       Boolean(_providerUrl) &&
       Boolean(_enabled),

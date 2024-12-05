@@ -20,7 +20,6 @@ import { XMTPPlugin } from '../lib';
 import { EFPPlugin } from '@justweb3/efp-plugin';
 import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';
 import { POAPPlugin } from '@justweb3/poap-plugin';
-import { JustVerifiedPlugin } from '@justverified/plugin';
 
 const queryClient = new QueryClient();
 
@@ -51,7 +50,7 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   // // allowedEns: 'all',
   // // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
   plugins: [
-    XMTPPlugin,
+    XMTPPlugin('production'),
     EFPPlugin,
     POAPPlugin({
       apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,
@@ -59,12 +58,12 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
     TalentProtocolPlugin({
       apiKey: import.meta.env.STORYBOOK_APP_TALENT_PROTOCOL_API_KEY,
     }),
-    JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
+    // JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
   ],
-  color: {
-    primary: '#FF00FF',
-    background: '#000000',
-  },
+  // color: {
+  //   primary: '#FF00FF',
+  //   background: '#000000',
+  // },
 };
 
 export const Example = () => {
