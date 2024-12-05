@@ -21,11 +21,9 @@ export const useEthersSigner = ({ chainId }: { chainId?: number } = {}):
   | JsonRpcSigner
   | undefined => {
   const { data: client } = useWalletClient({ chainId });
-  console.log(client);
   const signer = useMemo(
     () => (client ? clientToSigner(client) : undefined),
     [client]
   );
-  console.log(signer);
   return signer;
 };

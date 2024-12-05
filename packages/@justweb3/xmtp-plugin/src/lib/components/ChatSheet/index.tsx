@@ -37,7 +37,6 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
 }) => {
   const [tab, setTab] = React.useState('Chats');
   const { conversations, isLoading } = useConversations();
-  console.log(conversations);
   const [isConsentListLoading, setIsConsentListLoading] = React.useState(true);
   const { loadConsentList, entries } = useConsent();
 

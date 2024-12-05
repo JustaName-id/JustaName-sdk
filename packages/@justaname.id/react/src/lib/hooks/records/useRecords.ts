@@ -22,7 +22,7 @@ import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { useOffchainResolvers } from '../offchainResolver';
 import { getRecords as getEnsRecords } from '@ensdomains/ensjs/public';
 import { checkEnsValid } from '../../helpers/checkEnsValid';
-import { validateEns } from '../../helpers/validateEns';
+import { normalizeEns, validateEns } from '../../helpers/validateEns';
 
 export const buildRecordsBySubnameKey = (
   subname: string,
@@ -73,7 +73,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     () => params?.chainId || chainId,
     [params?.chainId, chainId]
   );
-  const _ens = useMemo(() => validateEns(params?.ens), [params?.ens]);
+  const _ens = useMemo(() => normalizeEns(params?.ens), [params?.ens]);
   const { offchainResolvers } = useOffchainResolvers();
   const { ensClient } = useEnsPublicClient({
     chainId: _chainId,
@@ -88,9 +88,13 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
   const getRecords = async (
     _params: SubnameRecordsRoute['params']
   ): Promise<Records> => {
-    const __ens = validateEns(_params.ens);
+    const __ens = normalizeEns(_params.ens);
 
     if (!__ens) {
+      throw new Error('Invalid ENS name');
+    }
+
+    if (!validateEns(__ens)) {
       throw new Error('Invalid ENS name');
     }
 
@@ -117,9 +121,13 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
       throw new Error('Public client not found');
     }
 
-    const __ens = validateEns(_params.ens) || _ens;
+    const __ens = normalizeEns(_params.ens) || _ens;
 
     if (!__ens) {
+      throw new Error('Invalid ENS name');
+    }
+
+    if (!validateEns(__ens)) {
       throw new Error('Invalid ENS name');
     }
 
@@ -166,8 +174,12 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
     forceUpdate = false
   ): Promise<Records> => {
     const __chainId = _params?.chainId || _chainId;
-    const __ens = validateEns(_params?.ens) || _ens;
+    const __ens = normalizeEns(_params?.ens) || _ens;
     if (!__ens) {
+      throw new Error('Invalid ENS name');
+    }
+
+    if (!validateEns(__ens)) {
       throw new Error('Invalid ENS name');
     }
     // const __standard = _params?.standard || params?.standard;
@@ -265,6 +277,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
       Boolean(_ens) &&
       Boolean(_chainId) &&
       Boolean(_providerUrl) &&
+      Boolean(validateEns(_ens)) &&
       Boolean(_enabled),
   });
 

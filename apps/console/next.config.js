@@ -13,6 +13,9 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  experimental: {
+    serverComponentsExternalPackages: ['@xmtp/user-preferences-bindings-wasm'],
+  },
 };
 
 const plugins = [

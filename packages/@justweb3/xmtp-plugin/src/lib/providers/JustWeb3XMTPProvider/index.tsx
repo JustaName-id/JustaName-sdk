@@ -112,7 +112,6 @@ export const Checks: React.FC<ChecksProps> = ({
   useEffect(() => {
     async function initializeXmtp() {
       if (isInitializing || isLoading || rejected) return;
-      console.log(signer);
       try {
         if (client) {
           return;
@@ -135,7 +134,6 @@ export const Checks: React.FC<ChecksProps> = ({
           });
           storeKeys(address ?? '', keys, env);
         }
-        console.log('Initializing XMTP Client:', keys);
         await initialize({
           keys,
           options: clientOptions,
