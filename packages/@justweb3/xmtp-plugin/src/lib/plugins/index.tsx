@@ -1,7 +1,7 @@
 import { JustaPlugin } from '@justweb3/widget';
 import { JustWeb3XMTPProvider } from '../providers/JustWeb3XMTPProvider';
-import { ChatButton } from '../components/ChatButton';
-import { ChatWithProfileButton } from '../components/ChatWithProfileButton';
+import { ChatMenuButton } from '../components/ChatMenuButton';
+import { ProfileChatButton } from '../components/ProfileChatButton';
 
 export type XmtpEnvironment = 'local' | 'production' | 'dev';
 
@@ -21,11 +21,11 @@ export const XMTPPlugin = (env: XmtpEnvironment): JustaPlugin => {
         );
       },
       ProfileHeader: (pluginApi, ens, chainId, address) => {
-        return <ChatWithProfileButton ens={ens} env={env} chainId={chainId} />;
+        return <ProfileChatButton ens={ens} env={env} chainId={chainId} />;
       },
       SignInMenu: (pluginApi) => {
         return (
-          <ChatButton
+          <ChatMenuButton
             handleOpen={(open) => pluginApi.setState('xmtpOpen', open)}
             env={env}
           />
