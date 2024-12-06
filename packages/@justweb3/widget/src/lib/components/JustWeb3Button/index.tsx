@@ -35,12 +35,14 @@ import styles from './JustWeb3Button.module.css';
 
 export interface JustWeb3Buttonrops {
   children: ReactNode;
+  style?: React.CSSProperties;
   logout?: () => void;
 }
 
 export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   children,
   logout,
+  style,
 }) => {
   const [openMApps, setOpenMApps] = useState(false);
   const { plugins, mApps, config } = useContext(JustWeb3Context);
@@ -89,6 +91,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
       <ClickableItem
         title={'loading'}
         clickable={false}
+        style={{
+          ...style,
+        }}
         left={
           <div
             style={{
@@ -123,6 +128,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           }
           onClick={() => {
             handleOpenSignInDialog(true);
+          }}
+          style={{
+            ...style,
           }}
           left={<Avatar />}
           right={
@@ -171,6 +179,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
         style={{
           backgroundColor: 'var(--justweb3-background-color)',
           color: 'var(--justweb3-primary-color)',
+          ...style,
         }}
         contentStyle={{
           alignItems: 'start',
@@ -187,32 +196,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const connectedEnsProfileContent = (
     <Flex direction="column" gap={'10px'}>
       <Flex direction="column" gap={'10px'}>
-        {/*<Flex direction="row" align="center" justify="space-between">*/}
-        {/*  <P*/}
-        {/*    style={{*/}
-        {/*      fontSize: '12px',*/}
-        {/*      fontWeight: 300,*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    Profile Overview*/}
-        {/*  </P>*/}
-        {/*  <Button*/}
-        {/*    variant={'primary'}*/}
-        {/*    size={'sm'}*/}
-        {/*    rightIcon={*/}
-        {/*      <ArrowWhiteIcon*/}
-        {/*        width={15}*/}
-        {/*        color={'var(--justweb3-primary-color-foreground)'}*/}
-        {/*      />*/}
-        {/*    }*/}
-        {/*    onClick={() => {*/}
-        {/*      openEnsProfile(connectedEns?.ens, connectedEns?.chainId);*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    View Full Profile*/}
-        {/*  </Button>*/}
-        {/*</Flex>*/}
-        {/* Profile */}
         <Flex
           direction="column"
           gap="15px"

@@ -1,136 +1,55 @@
-import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@justweb3/ui';
-import React, { useEffect, useMemo } from 'react';
-import {
-  CachedConversation,
-  ContentTypeMetadata,
-  useConsent,
-  useConversations,
-  useStreamAllMessages,
-  useStreamConversations,
-} from '@xmtp/react-sdk';
-import { ChatList } from '../ChatList';
+import { CachedConversation, ContentTypeMetadata } from '@xmtp/react-sdk';
+import { Sheet, SheetContent, SheetTitle } from '@justweb3/ui';
+import { Chat } from './Chat';
+import { useMemo } from 'react';
+import { NewChat } from './NewChat';
 
 export interface ChatSheetProps {
-  open?: boolean;
-  handleOpen?: (open: boolean) => void;
-  handleOpenChat: (
-    conversation: CachedConversation<ContentTypeMetadata> | null
+  // peerAddress?: string | null;
+  peer: CachedConversation<ContentTypeMetadata> | string | null;
+  openChat: boolean;
+  closeChat: () => void;
+  onChangePeer: (
+    peer: CachedConversation<ContentTypeMetadata> | string
   ) => void;
 }
 
 export const ChatSheet: React.FC<ChatSheetProps> = ({
-  open,
-  handleOpen,
-  handleOpenChat,
+  peer,
+  closeChat,
+  openChat,
+  onChangePeer,
 }) => {
-  const [tab, setTab] = React.useState('Chats');
-  const { conversations, isLoading } = useConversations();
-  const [isConsentListLoading, setIsConsentListLoading] = React.useState(true);
-  const { loadConsentList, entries } = useConsent();
-
-  const allowedConversations = useMemo(() => {
-    return conversations.filter(
-      (convo) =>
-        entries &&
-        entries[convo.peerAddress] &&
-        entries[convo.peerAddress]?.permissionType === 'allowed'
-    );
-  }, [conversations, entries]);
-
-  const blockedConversations = useMemo(() => {
-    return conversations.filter(
-      (convo) =>
-        entries &&
-        entries[convo.peerAddress] &&
-        entries[convo.peerAddress]?.permissionType === 'denied'
-    );
-  }, [conversations, entries]);
-
-  const requestConversations = useMemo(() => {
-    return conversations.filter((convo) => {
-      if (!entries[convo.peerAddress]) return true;
-      return entries[convo.peerAddress]?.permissionType === 'unknown';
-    });
-  }, [conversations, entries]);
-
-  useEffect(() => {
-    loadConsentList().then(() => {
-      setIsConsentListLoading(false);
-    });
-  }, [loadConsentList]);
-
-  useStreamConversations();
-  useStreamAllMessages();
+  const isPeerConversation = useMemo(() => {
+    return typeof peer !== 'string';
+  }, [peer]);
 
   return (
-    <Sheet open={open} onOpenChange={handleOpen}>
-      <SheetContent side="right" overlay={false} style={{ width: '100%' }}>
-        <SheetTitle>Chats</SheetTitle>
-        <Tabs
-          defaultValue={'Chats'}
-          value={tab}
-          onValueChange={(value) => setTab(value)}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginBottom: '0px',
-            overflow: 'hidden',
-            flex: '1',
-          }}
-        >
-          <TabsList>
-            <TabsTrigger
-              value={'Chats'}
-              style={{ flexBasis: 'calc( 100% / 3)' }}
-            >
-              Chats
-            </TabsTrigger>
-            <TabsTrigger
-              value={'Requests'}
-              style={{ flexBasis: 'calc( 100% / 3)' }}
-            >
-              Requests
-            </TabsTrigger>
-            <TabsTrigger
-              value={'Blocked'}
-              style={{ flexBasis: 'calc( 100% / 3)' }}
-            >
-              Blocked
-            </TabsTrigger>
-          </TabsList>
-          {isLoading || isConsentListLoading ? (
-            <div>Loading...</div>
+    <Sheet open={openChat} onOpenChange={(open) => !open && closeChat()}>
+      <SheetContent
+        side="right"
+        overlay={false}
+        style={{ width: '100%', paddingLeft: 0, paddingRight: 0 }}
+      >
+        <SheetTitle>
+          {isPeerConversation ? 'Messages' : 'New Conversation'}
+        </SheetTitle>
+
+        {peer !== null &&
+          (isPeerConversation ? (
+            <Chat
+              conversation={peer as CachedConversation<ContentTypeMetadata>}
+              onBack={closeChat}
+            />
           ) : (
-            <>
-              <TabsContent value={'Chats'}>
-                <ChatList
-                  conversations={allowedConversations}
-                  handleOpenChat={handleOpenChat}
-                />
-              </TabsContent>
-              <TabsContent value={'Requests'}>
-                <ChatList
-                  conversations={requestConversations}
-                  handleOpenChat={handleOpenChat}
-                />
-              </TabsContent>
-              <TabsContent value={'Blocked'}>
-                <ChatList
-                  conversations={blockedConversations}
-                  handleOpenChat={handleOpenChat}
-                />
-              </TabsContent>
-            </>
-          )}
-        </Tabs>
+            <NewChat
+              onBack={closeChat}
+              selectedAddress={(peer as string) ?? undefined}
+              onChatStarted={(conversation) => {
+                onChangePeer(conversation);
+              }}
+            />
+          ))}
       </SheetContent>
     </Sheet>
   );

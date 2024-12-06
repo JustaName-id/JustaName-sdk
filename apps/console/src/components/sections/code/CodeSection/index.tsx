@@ -32,6 +32,11 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
     [config]
   );
 
+  const xmtpPluginEnabled = useMemo(
+    () => config.plugins?.find((p) => p.name === 'XMTPPlugin'),
+    [config]
+  );
+
   const codeSnippet = useMemo(() => {
     const plugins = [];
 
@@ -55,6 +60,10 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
       plugins.push(
         "%%TalentProtocolPlugin({ apiKey: '<YOUR_TALENT_PROTOCOL_API_KEY>' })%%"
       );
+    }
+
+    if (xmtpPluginEnabled) {
+      plugins.push("%%XMTPPlugin('production')%%");
     }
 
     return `
@@ -96,6 +105,9 @@ ${
   talentProtocolPluginEnabled
     ? "import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';"
     : ''
+}
+${
+  xmtpPluginEnabled ? "import { XMTPPlugin } from '@justweb3/xmtp-plugin';" : ''
 }
 
 export const App: React.FC = () => {
@@ -163,6 +175,7 @@ export default App;`.trim();
     justVerifiedEnabled,
     poapPluginEnabled,
     talentProtocolPluginEnabled,
+    xmtpPluginEnabled,
   ]);
 
   const code = useMemo(() => {
@@ -172,9 +185,11 @@ export default App;`.trim();
   }, [codeSnippet]);
 
   const dependencies = useMemo(() => {
-    return `yarn add ${justVerifiedEnabled ? '@justverified/plugin' : ''} ${
-      poapPluginEnabled ? '@justweb3/poap-plugin' : ''
-    } ${efpPluginEnabled ? '@justweb3/efp-plugin' : ''}
+    return `yarn add ${xmtpPluginEnabled ? '@justweb3/xmtp-plugin' : ''} ${
+      justVerifiedEnabled ? '@justverified/plugin' : ''
+    } ${poapPluginEnabled ? '@justweb3/poap-plugin' : ''} ${
+      efpPluginEnabled ? '@justweb3/efp-plugin' : ''
+    }
      ${talentProtocolPluginEnabled ? '@justweb3/talent-protocol-plugin' : ''}
      @justweb3/widget viem wagmi @rainbow-me/rainbowkit @tanstack/react-query ethers`;
   }, [
@@ -182,6 +197,7 @@ export default App;`.trim();
     justVerifiedEnabled,
     poapPluginEnabled,
     talentProtocolPluginEnabled,
+    xmtpPluginEnabled,
   ]);
 
   const handleDependenciesCopy = () => {

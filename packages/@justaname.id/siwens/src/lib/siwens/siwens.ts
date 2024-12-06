@@ -1,4 +1,3 @@
-import { JsonRpcProvider } from 'ethers';
 import {
   generateNonce,
   SiweMessage,
@@ -19,6 +18,7 @@ import {
   extractDataFromStatement,
 } from '../utils';
 import { toASCII, toUnicode } from 'punycode';
+import { getJsonRpcProvider, JsonRpcProvider } from '../utils/ethersCompat';
 
 export interface SiwensResponse extends SiweResponse {
   ens: string;
@@ -50,7 +50,7 @@ export class SIWENS extends SiweMessage {
       if (!providerUrl) {
         throw InvalidConfigurationException.providerUrlRequired();
       }
-      this.provider = new JsonRpcProvider(providerUrl);
+      this.provider = getJsonRpcProvider(providerUrl);
       this.providerUrl = providerUrl;
       return;
     }
@@ -91,12 +91,12 @@ export class SIWENS extends SiweMessage {
       expirationTime,
     });
     this.providerUrl = providerUrl;
-    this.provider = new JsonRpcProvider(providerUrl);
+    this.provider = getJsonRpcProvider(providerUrl);
   }
 
   override async verify(
     params: VerifyParams,
-    opts: VerifyOpts
+    opts?: VerifyOpts
   ): Promise<SiwensResponse> {
     let verification: SiweResponse;
 

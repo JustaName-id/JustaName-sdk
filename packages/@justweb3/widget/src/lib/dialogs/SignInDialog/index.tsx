@@ -64,6 +64,7 @@ export interface SignInDialogProps {
   logo?: string;
   disableOverlay?: boolean;
   dev?: boolean;
+  local?: boolean;
 }
 
 export const SignInDialog: FC<SignInDialogProps> = ({
@@ -73,6 +74,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   logo,
   disableOverlay,
   dev = false,
+  local,
 }) => {
   const { chainId, ensDomains } = useJustaName();
   const { isConnected, address } = useMountedAccount();
@@ -152,7 +154,9 @@ export const SignInDialog: FC<SignInDialogProps> = ({
       : isAddSubnamePendingTestnet;
   }, [chainId, isAddSubnamePendingMainnet, isAddSubnamePendingTestnet]);
 
-  const { signIn } = useEnsSignIn();
+  const { signIn } = useEnsSignIn({
+    local: local,
+  });
 
   const { offchainResolvers, isOffchainResolversPending } =
     useOffchainResolvers();

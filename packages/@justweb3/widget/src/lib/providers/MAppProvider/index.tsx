@@ -33,6 +33,7 @@ export interface MAppContextProps {
   handleOpenAuthorizeMAppDialog: (mAppName: string, open?: boolean) => void;
   handleOpenRevokeMAppDialog: (mAppName: string, open?: boolean) => void;
   handleOpenSignInDialog: (open: boolean) => void;
+  config: JustWeb3ProviderConfig;
 }
 
 export const MAppContext = createContext<MAppContextProps>({
@@ -42,6 +43,7 @@ export const MAppContext = createContext<MAppContextProps>({
   handleOpenAuthorizeMAppDialog: () => {},
   handleOpenRevokeMAppDialog: () => {},
   handleOpenSignInDialog: () => {},
+  config: {},
 });
 
 interface MAppsProviderProps {
@@ -66,7 +68,9 @@ export const MAppsProvider: FC<MAppsProviderProps> = ({
   plugins,
   config,
 }) => {
-  const { isEnsAuthPending, isLoggedIn, connectedEns } = useEnsAuth();
+  const { isEnsAuthPending, isLoggedIn, connectedEns } = useEnsAuth({
+    local: !config.enableAuth,
+  });
   const [mAppsToEnableOpen, setMAppsToEnableOpen] = useState<
     { name: string; isOpen: boolean }[] | undefined
   >(undefined);
@@ -159,6 +163,7 @@ export const MAppsProvider: FC<MAppsProviderProps> = ({
         handleOpenRevokeMAppDialog,
         canEnableMApps,
         handleOpenSignInDialog,
+        config,
       }}
     >
       <PluginProvider
@@ -226,9 +231,11 @@ export const useMApp = ({ mApp }: UseMAppParams): UseMAppResult => {
     handleOpenAuthorizeMAppDialog: contextOpenAuthorizeMAppDialog,
     handleOpenRevokeMAppDialog: contextOpenRevokeMAppDialog,
     handleOpenSignInDialog,
+    config,
   } = useContext<MAppContextProps>(MAppContext);
-
-  const { connectedEns } = useEnsAuth();
+  const { connectedEns } = useEnsAuth({
+    local: !config.enableAuth,
+  });
   const { isMAppEnabled, isMAppEnabledPending } = useIsMAppEnabled({
     ens: connectedEns?.ens || '',
     mApp,

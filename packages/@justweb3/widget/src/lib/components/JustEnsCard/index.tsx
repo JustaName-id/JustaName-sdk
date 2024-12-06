@@ -111,8 +111,13 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
     return (
       <div
         style={style}
-       ref={ref} className={styles.expandableCard}
-        onClick={() => handleEnsClick()}
+        ref={ref}
+        className={styles.expandableCard}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          handleEnsClick();
+        }}
       >
         <Flex>
           <img
@@ -239,7 +244,11 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
         )
       }
       disabled={!isEns && !primaryName}
-      onClick={() => handleEnsClick()}
+      onClick={(event) => {
+        handleEnsClick();
+        event.stopPropagation();
+        event.preventDefault();
+      }}
     />
   );
 };

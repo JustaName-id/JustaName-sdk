@@ -16,6 +16,7 @@ export interface UseEnsSignOutParams {
   signoutRoute?: string;
   currentEnsRoute?: string;
   signinNonceRoute?: string;
+  local?: boolean;
 }
 
 export const useEnsSignOut = (
@@ -43,26 +44,33 @@ export const useEnsSignOut = (
     [routes.signinNonceRoute, params?.signinNonceRoute]
   );
 
-  const { refreshEnsAuth, connectedEns } = useEnsAuth({
+  const { refreshEnsAuth } = useEnsAuth({
     backendUrl: _backendUrl,
     currentEnsRoute: _currentEnsRoute,
+    local: params?.local,
   });
 
   const { refetchNonce } = useEnsNonce({
     backendUrl: _backendUrl,
     signinNonceRoute: _signinNonceRoute,
-    address: connectedEns?.address,
+    enabled: !params?.local,
   });
 
   const mutation = useMutation({
     mutationFn: async () => {
+      if (params?.local) {
+        localStorage.removeItem('ENS_AUTH');
+        refreshEnsAuth();
+        return;
+      }
+
       await fetch(signoutEndpoint, {
         method: 'POST',
         credentials: 'include',
       });
 
+      await refetchNonce();
       refreshEnsAuth();
-      refetchNonce();
     },
   });
 

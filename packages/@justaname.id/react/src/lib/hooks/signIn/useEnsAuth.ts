@@ -4,6 +4,7 @@ import { useJustaName } from '../../providers';
 import { ChainId } from '@justaname.id/sdk';
 import { defaultOptions } from '../../query';
 import axios from 'axios';
+import { isParseable } from '../../helpers/isParseable';
 
 export const buildEnsAuthKey = (backendUrl: string) => ['ENS_AUTH', backendUrl];
 
@@ -17,6 +18,7 @@ export interface UseEnsAuthParams {
   backendUrl?: string;
   currentEnsRoute?: string;
   enabled?: boolean;
+  local?: boolean;
 }
 
 export interface UseEnsAuthReturn<T extends object = {}> {
@@ -45,17 +47,28 @@ export const useEnsAuth = <T extends object = {}>(
     () => _backendUrl + _currentEnsRoute,
     [_backendUrl, _currentEnsRoute]
   );
+
   const query = useQuery({
     ...defaultOptions,
     retry: 0,
     queryKey: buildEnsAuthKey(_backendUrl),
     queryFn: async () => {
       try {
+        if (params?.local) {
+          const response = localStorage.getItem('ENS_AUTH') || '';
+          if (isParseable(response)) {
+            return JSON.parse(response);
+          } else {
+            localStorage.removeItem('ENS_AUTH');
+          }
+          return null;
+        }
+
         const response = await axios.get(currentEnsEndpoint, {
           headers: {
             'Content-Type': 'application/json',
           },
-          withCredentials: true, // Similar to 'credentials: include' in fetch
+          withCredentials: true,
         });
 
         return response.data;
