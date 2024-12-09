@@ -260,11 +260,7 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
       }
       return failureCount < 3;
     },
-    queryKey: buildRecordsBySubnameKey(
-      _ens || '',
-      _chainId
-      // params?.standard
-    ),
+    queryKey: buildRecordsBySubnameKey(_ens || '', _chainId),
     queryFn: () =>
       getRecordsInternal(
         {

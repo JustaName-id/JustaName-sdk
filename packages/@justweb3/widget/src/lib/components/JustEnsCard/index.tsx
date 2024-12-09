@@ -214,8 +214,7 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
             {records.sanitizedRecords.socials.map((social, index) =>
               React.cloneElement(getTextRecordIcon(social.key), {
                 key: `${ens}-${index}-${social.key}`,
-                width: 12,
-                height: 12,
+                className: styles.socialIcon,
               })
             )}
           </Flex>

@@ -6,6 +6,7 @@ import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { defaultOptions } from '../../query';
 import { getName } from '@ensdomains/ensjs/public';
 import { PrimaryNameTaskQueue } from './primary-name-task-queue';
+import { buildPrimaryNameBatchKey } from './usePrimaryNameBatch';
 
 export const buildPrimaryName = (
   address: string,
@@ -59,6 +60,16 @@ export const usePrimaryName = (
 
     let name = '';
 
+    const primaryNames = queryClient.getQueryData(
+      buildPrimaryNameBatchKey(_chainId)
+    ) as Record<string, string>;
+
+    if (primaryNames && _params?.address) {
+      if (primaryNames[_params?.address]) {
+        return primaryNames[_params.address];
+      }
+    }
+
     const primaryNameGetByAddressResponse =
       await justaname.subnames.getPrimaryNameByAddress({
         address: params?.address,
@@ -82,25 +93,6 @@ export const usePrimaryName = (
         name = reverseResolution.name;
       }
     }
-
-    // const reverseResolution = await getName(ensClient, {
-    //   address: params?.address,
-    // });
-    //
-    // if (reverseResolution && reverseResolution?.name) {
-    //   name = reverseResolution.name;
-    // } else {
-    //   const primaryNameGetByAddressResponse =
-    //     await justaname.subnames.getPrimaryNameByAddress({
-    //       address: params?.address,
-    //       chainId: _chainId,
-    //     });
-    //
-    //   if (primaryNameGetByAddressResponse) {
-    //     name = primaryNameGetByAddressResponse.name;
-    //   }
-    // }
-    //
     return name;
   };
 

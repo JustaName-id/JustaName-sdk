@@ -1,0 +1,26 @@
+.notificationIcon {
+    position: relative;
+    display: flex;
+}
+
+.icon {
+    font-size: 24px; /* Adjust icon size */
+    line-height: 40px; /* Center the icon vertically */
+    text-align: center;
+}
+
+.badge {
+    position: absolute;
+    top: 0;
+    right: 4px;
+    background-color: red;
+    color: white;
+    font-size: 8px;
+    font-weight: bold;
+    line-height: 1;
+    border-radius: 100px;
+    padding: 2px 4px;
+    transform: translate(50%, -50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}

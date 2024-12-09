@@ -1,7 +1,8 @@
 import { JustaPlugin } from '@justweb3/widget';
 import { JustWeb3XMTPProvider } from '../providers/JustWeb3XMTPProvider';
-import { ChatButton } from '../components/ChatButton';
-import { ChatWithProfileButton } from '../components/ChatWithProfileButton';
+import { ChatMenuButton } from '../components/ChatMenuButton';
+import { ProfileChatButton } from '../components/ProfileChatButton';
+import { JustWeb3ButtonRight } from '../components/JustWeb3ButtonRight';
 
 export type XmtpEnvironment = 'local' | 'production' | 'dev';
 
@@ -9,6 +10,14 @@ export const XMTPPlugin = (env: XmtpEnvironment): JustaPlugin => {
   return {
     name: 'XMTPPlugin',
     components: {
+      JustWeb3ButtonRight: (pluginApi) => {
+        return (
+          <JustWeb3ButtonRight
+            handleOpen={(open) => pluginApi.setState('xmtpOpen', open)}
+            env={env}
+          />
+        );
+      },
       Provider: (pluginApi, children) => {
         return (
           <JustWeb3XMTPProvider
@@ -21,11 +30,18 @@ export const XMTPPlugin = (env: XmtpEnvironment): JustaPlugin => {
         );
       },
       ProfileHeader: (pluginApi, ens, chainId, address) => {
-        return <ChatWithProfileButton ens={ens} env={env} chainId={chainId} />;
+        return (
+          <ProfileChatButton
+            ens={ens}
+            env={env}
+            chainId={chainId}
+            address={address}
+          />
+        );
       },
       SignInMenu: (pluginApi) => {
         return (
-          <ChatButton
+          <ChatMenuButton
             handleOpen={(open) => pluginApi.setState('xmtpOpen', open)}
             env={env}
           />

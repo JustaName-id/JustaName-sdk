@@ -404,6 +404,22 @@ const CheckSession: FC<{
   const isConnectedPrevious = usePreviousState(isConnected, [isConnected]);
 
   useEffect(() => {
+    if (isConnecting || isReconnecting || isEnsAuthPending) {
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      if (!isConnected) {
+        signOut();
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isConnected, isConnecting, isEnsAuthPending, isReconnecting, signOut]);
+
+  useEffect(() => {
     if (connectedEns && chainId) {
       if (
         (connectedEns?.chainId === 1 && chainId === 11155111) ||
