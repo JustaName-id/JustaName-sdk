@@ -14,6 +14,7 @@ const justweb3Config: JustWeb3ProviderConfig = {
     signInTtl: 86400000,
   },
   backendUrl: "http://localhost:3333/",  // Pointing to the backend server
+  enableAuth: true,
   openOnWalletConnect: true,
   allowedEns: "all",
   logo: "",
