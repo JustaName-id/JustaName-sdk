@@ -3,7 +3,7 @@
 Proof of Attendance Protocol allows event organizers—physical or virtual—to issue digital badges (NFTs) as proof that someone attended or participated in a specific event. These badges are ERC-721 tokens minted on Ethereum (often issued on Ethereum mainnet or side-chains for lower cost). POAPs have become popular at crypto conferences, online meetups, and community calls to:
 
 * Mark attendance and involvement.
-* Build personal on-chain histories.
+* Build personal onchain histories.
 * Reward loyal community members.
 
 Since POAPs are NFTs, they’re collectible and can be displayed as on-chain credentials that reflect a user’s engagement and interests over time.
