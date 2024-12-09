@@ -68,8 +68,8 @@ export const JustaNameProvider: FC<JustaNameProviderProps> = ({
   const { chainId } = useMountedAccount();
 
   const defaultChain = useMemo(() => {
-    return !chainId
-      ? undefined
+    return !chainId === undefined
+      ? 1
       : chainId !== 1 && chainId !== 11155111
       ? 1
       : chainId;

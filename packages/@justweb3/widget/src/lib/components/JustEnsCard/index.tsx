@@ -111,8 +111,13 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
     return (
       <div
         style={style}
-       ref={ref} className={styles.expandableCard}
-        onClick={() => handleEnsClick()}
+        ref={ref}
+        className={styles.expandableCard}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          handleEnsClick();
+        }}
       >
         <Flex>
           <img
@@ -209,8 +214,7 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
             {records.sanitizedRecords.socials.map((social, index) =>
               React.cloneElement(getTextRecordIcon(social.key), {
                 key: `${ens}-${index}-${social.key}`,
-                width: 12,
-                height: 12,
+                className: styles.socialIcon,
               })
             )}
           </Flex>
@@ -239,7 +243,11 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
         )
       }
       disabled={!isEns && !primaryName}
-      onClick={() => handleEnsClick()}
+      onClick={(event) => {
+        handleEnsClick();
+        event.stopPropagation();
+        event.preventDefault();
+      }}
     />
   );
 };

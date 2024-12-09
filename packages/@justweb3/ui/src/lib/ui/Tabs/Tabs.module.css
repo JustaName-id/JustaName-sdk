@@ -6,6 +6,8 @@
     margin-bottom: 10px;
     gap: 10px;
     display: flex;
+    overflow-x: auto;
+    overflow-y: visible;
 }
 
 /* Underlined variant */
@@ -21,6 +23,7 @@
     line-height: 18px;
     font-family: var(--justweb3-font-family);
     border-bottom: 2px solid transparent;
+
 
 }
 

@@ -18,3 +18,4 @@ export * from './Sheet';
 export * from './Label';
 export * from './Checkbox';
 export * from './Skeleton';
+export * from './NotificationBadge';

@@ -68,9 +68,15 @@ app.post('/api/signin', async (req: Request, res) => {
       return;
     }
 
+    if (!req.session.nonce) {
+      res.status(401).json({ message: 'No nonce found.' });
+      return;
+    }
+
     const { data: message, ens } = await justaname.signIn.signIn({
       message: req.body.message,
       signature: req.body.signature,
+      nonce: req.session.nonce,
     });
 
     if (!message) {

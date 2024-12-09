@@ -15,6 +15,9 @@ export const FollowButton: React.FC<FollowButtonProps> = ({ ens, address }) => {
     addressOrEns1: address,
     addressOrEns2: ownAddress,
   });
+  if (ownAddress === address) {
+    return null;
+  }
 
   if (!ownAddress) {
     return (

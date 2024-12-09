@@ -35,12 +35,14 @@ import styles from './JustWeb3Button.module.css';
 
 export interface JustWeb3Buttonrops {
   children: ReactNode;
+  style?: React.CSSProperties;
   logout?: () => void;
 }
 
 export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   children,
   logout,
+  style,
 }) => {
   const [openMApps, setOpenMApps] = useState(false);
   const { plugins, mApps, config } = useContext(JustWeb3Context);
@@ -89,6 +91,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
       <ClickableItem
         title={'loading'}
         clickable={false}
+        style={{
+          ...style,
+        }}
         left={
           <div
             style={{
@@ -124,6 +129,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           onClick={() => {
             handleOpenSignInDialog(true);
           }}
+          style={{
+            ...style,
+          }}
           left={<Avatar />}
           right={
             <Badge
@@ -154,6 +162,24 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   }
 
   const connectedEnsBtn = (withDialog: boolean) => {
+    const right = plugins.map((plugin) => {
+      const component = plugin.components?.JustWeb3ButtonRight;
+      if (!component) {
+        return null;
+      }
+
+      return (
+        <div
+          key={'signin-item-' + plugin.name}
+          onClick={() => {
+            setMobileDialogOpen(false);
+          }}
+        >
+          {component(createPluginApi(plugin.name))}
+        </div>
+      );
+    });
+
     return (
       <ClickableItem
         title={
@@ -171,7 +197,19 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
         style={{
           backgroundColor: 'var(--justweb3-background-color)',
           color: 'var(--justweb3-primary-color)',
+          ...style,
         }}
+        right={
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              marginRight: '10px',
+            }}
+          >
+            {right}
+          </div>
+        }
         contentStyle={{
           alignItems: 'start',
         }}
@@ -187,32 +225,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const connectedEnsProfileContent = (
     <Flex direction="column" gap={'10px'}>
       <Flex direction="column" gap={'10px'}>
-        {/*<Flex direction="row" align="center" justify="space-between">*/}
-        {/*  <P*/}
-        {/*    style={{*/}
-        {/*      fontSize: '12px',*/}
-        {/*      fontWeight: 300,*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    Profile Overview*/}
-        {/*  </P>*/}
-        {/*  <Button*/}
-        {/*    variant={'primary'}*/}
-        {/*    size={'sm'}*/}
-        {/*    rightIcon={*/}
-        {/*      <ArrowWhiteIcon*/}
-        {/*        width={15}*/}
-        {/*        color={'var(--justweb3-primary-color-foreground)'}*/}
-        {/*      />*/}
-        {/*    }*/}
-        {/*    onClick={() => {*/}
-        {/*      openEnsProfile(connectedEns?.ens, connectedEns?.chainId);*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    View Full Profile*/}
-        {/*  </Button>*/}
-        {/*</Flex>*/}
-        {/* Profile */}
         <Flex
           direction="column"
           gap="15px"

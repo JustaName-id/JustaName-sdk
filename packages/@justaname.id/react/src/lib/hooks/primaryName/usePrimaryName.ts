@@ -6,6 +6,7 @@ import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { defaultOptions } from '../../query';
 import { getName } from '@ensdomains/ensjs/public';
 import { PrimaryNameTaskQueue } from './primary-name-task-queue';
+import { buildPrimaryNameBatchKey } from './usePrimaryNameBatch';
 
 export const buildPrimaryName = (
   address: string,
@@ -13,7 +14,7 @@ export const buildPrimaryName = (
 ) => ['PRIMARY_NAME', address, chainId];
 
 export interface UsePrimaryNameParams {
-  address?: Address;
+  address?: string;
   chainId?: ChainId;
   enabled?: boolean;
 }
@@ -59,6 +60,16 @@ export const usePrimaryName = (
 
     let name = '';
 
+    const primaryNames = queryClient.getQueryData(
+      buildPrimaryNameBatchKey(_chainId)
+    ) as Record<string, string>;
+
+    if (primaryNames && _params?.address) {
+      if (primaryNames[_params?.address]) {
+        return primaryNames[_params.address];
+      }
+    }
+
     const primaryNameGetByAddressResponse =
       await justaname.subnames.getPrimaryNameByAddress({
         address: params?.address,
@@ -72,7 +83,7 @@ export const usePrimaryName = (
           throw new Error('Address is required');
         }
         return getName(ensClient, {
-          address: params?.address,
+          address: params?.address as Address,
         });
       };
 
@@ -82,32 +93,12 @@ export const usePrimaryName = (
         name = reverseResolution.name;
       }
     }
-
-    // const reverseResolution = await getName(ensClient, {
-    //   address: params?.address,
-    // });
-    //
-    // if (reverseResolution && reverseResolution?.name) {
-    //   name = reverseResolution.name;
-    // } else {
-    //   const primaryNameGetByAddressResponse =
-    //     await justaname.subnames.getPrimaryNameByAddress({
-    //       address: params?.address,
-    //       chainId: _chainId,
-    //     });
-    //
-    //   if (primaryNameGetByAddressResponse) {
-    //     name = primaryNameGetByAddressResponse.name;
-    //   }
-    // }
-    //
     return name;
   };
 
   const query = useQuery({
     ...defaultOptions,
     retry: (_count, error) => {
-      console.log('Error fetching primary name', error, _count);
       if (error?.message.includes('PrimaryNameNotFound')) {
         return false;
       }
@@ -116,7 +107,7 @@ export const usePrimaryName = (
     queryKey: buildPrimaryName(params?.address || '', _chainId),
     queryFn: () =>
       getPrimaryName({
-        address: params?.address,
+        address: params?.address as Address,
       }),
     enabled:
       Boolean(params?.address) && Boolean(ensClient) && Boolean(_enabled),

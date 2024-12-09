@@ -1,5 +1,4 @@
 import {
-  JustEnsCard,
   JustWeb3Button,
   JustWeb3Provider,
   JustWeb3ProviderConfig,
@@ -15,23 +14,21 @@ import { Meta, StoryObj } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
-import { XMTPPlugin } from '../lib';
-import { ChainId } from '@justaname.id/sdk';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { XMTPPlugin } from '../lib';
 import { EFPPlugin } from '@justweb3/efp-plugin';
-import { POAPPlugin } from '@justweb3/poap-plugin';
 import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';
-import { JustVerifiedPlugin } from '@justverified/plugin';
+import { POAPPlugin } from '@justweb3/poap-plugin';
 
 const queryClient = new QueryClient();
 
 const JustWeb3Config: JustWeb3ProviderConfig = {
-  config: {
-    origin: import.meta.env.STORYBOOK_APP_ORIGIN,
-    domain: import.meta.env.STORYBOOK_APP_DOMAIN,
-    signInTtl: 1000 * 60 * 60 * 24,
-  },
-  backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
+  // config: {
+  //   origin: import.meta.env.STORYBOOK_APP_ORIGIN,
+  //   domain: import.meta.env.STORYBOOK_APP_DOMAIN,
+  //   signInTtl: 1000 * 60 * 60 * 24,
+  // },
+  // backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
   networks: [
     {
       chainId: 1,
@@ -42,17 +39,17 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
       providerUrl: import.meta.env.STORYBOOK_APP_SEPOLIA_PROVIDER_URL,
     },
   ],
-  ensDomains: [
-    {
-      ensDomain: import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
-      chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
-    },
-  ],
-  openOnWalletConnect: false,
-  allowedEns: 'all',
-  dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  // ensDomains: [
+  //   {
+  //     ensDomain: import.meta.env.STORYBOOK_APP_ENS_DOMAIN,
+  //     chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
+  //   },
+  // ],
+  // openOnWalletConnect: false,
+  // // allowedEns: 'all',
+  // // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
   plugins: [
-    XMTPPlugin,
+    XMTPPlugin('production'),
     EFPPlugin,
     POAPPlugin({
       apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,
@@ -60,7 +57,7 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
     TalentProtocolPlugin({
       apiKey: import.meta.env.STORYBOOK_APP_TALENT_PROTOCOL_API_KEY,
     }),
-    JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
+    // JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
   ],
   // color: {
   //   primary: '#FF00FF',
@@ -95,37 +92,55 @@ export const Example = () => {
                 </JustWeb3Button>
               </div>
 
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <JustEnsCard addressOrEns={'mely.eth'} />
-                <JustEnsCard addressOrEns={'nick.eth'} />
-                <JustEnsCard addressOrEns={'brantly.eth'} />
-                <JustEnsCard addressOrEns={'vitalik.eth'} />
-                <JustEnsCard addressOrEns={'dr3a.eth'} />
-                <JustEnsCard addressOrEns={'josh.box'} />
-                <JustEnsCard addressOrEns={'justghadi.eth'} />
-                <JustEnsCard addressOrEns={'justan.id'} />
-                <JustEnsCard addressOrEns={'bianc8.eth'} />
-                <JustEnsCard
-                  addressOrEns={'0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1'}
-                  chainId={1}
-                />
-                <JustEnsCard
-                  addressOrEns={'hadikhai.jaw.eth'}
-                  chainId={11155111}
-                />
-              </div>
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <JustEnsCard addressOrEns={'mely.eth'} expanded />
-                <JustEnsCard addressOrEns={'nick.eth'} expanded />
-                <JustEnsCard addressOrEns={'brantly.eth'} expanded />
-                <JustEnsCard addressOrEns={'vitalik.eth'} expanded />
-                <JustEnsCard addressOrEns={'dr3a.eth'} expanded />
-                <JustEnsCard
-                  addressOrEns={'hadikhai.jaw.eth'}
-                  chainId={11155111}
-                  expanded
-                />
-              </div>
+              {/*<div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>*/}
+              {/*  <JustEnsCard addressOrEns={'mely.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'nick.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'brantly.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'vitalik.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'dr3a.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'josh.box'} />*/}
+              {/*  <JustEnsCard addressOrEns={'justghadi.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'justan.id'} />*/}
+              {/*  <JustEnsCard addressOrEns={'jesse.base.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'dave.base.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'xhris.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'raffy.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'slobo.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'obi-wan.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'threadgirl.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'bianc8.eth'} />*/}
+              {/*  <JustEnsCard*/}
+              {/*    addressOrEns={'justanthony.jaw.eth'}*/}
+              {/*    chainId={11155111}*/}
+              {/*  />*/}
+              {/*  <JustEnsCard*/}
+              {/*    addressOrEns={'0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1'}*/}
+              {/*    chainId={1}*/}
+              {/*  />*/}
+              {/*  <JustEnsCard*/}
+              {/*    addressOrEns={'hadikhai.jaw.eth'}*/}
+              {/*    chainId={11155111}*/}
+              {/*  />*/}
+              {/*</div>*/}
+              {/*<div*/}
+              {/*  style={{*/}
+              {/*    marginTop: '100vh',*/}
+              {/*    display: 'flex',*/}
+              {/*    gap: '10px',*/}
+              {/*    flexWrap: 'wrap',*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  <JustEnsCard addressOrEns={'mely.eth'} expanded />*/}
+              {/*  <JustEnsCard addressOrEns={'nick.eth'} expanded />*/}
+              {/*  <JustEnsCard addressOrEns={'brantly.eth'} expanded />*/}
+              {/*  <JustEnsCard addressOrEns={'vitalik.eth'} expanded />*/}
+              {/*  <JustEnsCard addressOrEns={'dr3a.eth'} expanded />*/}
+              {/*  <JustEnsCard*/}
+              {/*    addressOrEns={'hadikhai.jaw.eth'}*/}
+              {/*    chainId={11155111}*/}
+              {/*    expanded*/}
+              {/*  />*/}
+              {/*</div>*/}
             </div>
           </JustWeb3Provider>
         </RainbowKitProvider>

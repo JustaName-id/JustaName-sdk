@@ -22,7 +22,7 @@ export const getEnsPublicClient = (
 };
 
 export const buildEnsPublicClientKey = (chainId: ChainId | undefined) => [
-  'CLIENT',
+  'ENS_PUBLIC_CLIENT',
   chainId,
 ];
 
