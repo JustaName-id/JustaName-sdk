@@ -29,6 +29,10 @@
 
 * [Overview](plugins/overview.md)
 * [JustVerified](plugins/justverified.md)
+* [XMTP](plugins/xmtp.md)
+* [EFP](plugins/efp.md)
+* [POAP](plugins/poap.md)
+* [Talent Protocol](plugins/talent-protocol.md)
 
 ## Advanced
 

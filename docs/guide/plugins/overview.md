@@ -8,6 +8,18 @@ description: >-
 
 Plugins can handle a variety of tasks such as enhancing user authentication, integrating social verification (e.g., JustVerified), or interacting with decentralized applications (dApps). This section introduces the plugin system and how developers can create their own plugins by implementing the provided [interfaces](https://github.com/JustaName-id/JustaName-sdk/blob/main/packages/%40justweb3/widget/src/lib/plugins/index.ts).
 
+## Available Plugins
+
+JustVerified: Enables social verification across platforms like Twitter, GitHub, Discord, etc.
+
+XMTP: Enables secure, decentralized messaging capabilities within the JustWeb3 Widget using XMTP, letting users send and receive encrypted messages.
+
+#### EFP (EthFollow Protocol): Integrates follow functionality into the widget using EthFollow Protocol, allowing users to follow profiles onchain.
+
+POAP Plugin: Displays a user’s existing POAP badges (Proof of Attendance Protocol), reflecting their attendance at various events.
+
+Talent Protocol: Displays a user’s onchain reputation sourced from Talent Protocol, such as endorsements, skills, or other professional metrics visible onchain.
+
 ## Overview of the Plugin System
 
 A **plugin** in the JustWeb3 Widget is a modular component that interacts with the main application, extending its behavior. Plugins are designed to handle various events such as wallet connections, ENS sign-ins, and interactions with multiple applications.
