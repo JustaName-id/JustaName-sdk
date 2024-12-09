@@ -243,7 +243,6 @@ export const MessageCard: React.FC<MessageCardProps> = ({
             overflowWrap: 'break-word',
             maxWidth: !isImage ? '240px' : 'none',
             fontSize: '14px',
-            lineHeight: '14px',
             padding: isReply ? '4px' : '5px',
             borderRadius: '14px',
             backgroundColor: isReceiver

@@ -32,6 +32,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
         borderTopRightRadius: replyMessage ? 0 : '100px',
         borderTop: replyMessage ? '0px' : '',
       }}
+      autoFocus
       placeholder="Send message..."
       value={messageValue}
       left={

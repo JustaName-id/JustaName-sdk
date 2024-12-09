@@ -11,7 +11,6 @@ import {
   replyContentTypeConfig,
   useClient,
   useMessages,
-  useStreamMessages,
   XMTPProvider,
 } from '@xmtp/react-sdk';
 import { InboxSheet } from '../../components/InboxSheet';
@@ -56,6 +55,7 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
   handleOpen,
   env,
 }) => {
+  // const { isConnected } = useMountedAccount()
   const [isXmtpEnabled, setIsXmtpEnabled] = React.useState(false);
   const [conversation, setConversation] =
     React.useState<CachedConversation<ContentTypeMetadata> | null>(null);
@@ -77,7 +77,6 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
     }[]
   >([]);
 
-  console.log(conversations);
   const handleXmtpEnabled = (enabled: boolean) => {
     setIsXmtpEnabled(enabled);
   };
@@ -116,11 +115,10 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
       }
       prev[index].unreadCount = unreadCount;
       prev[index].lastMessage = lastMessage;
+      prev[index].consent = consent;
       return [...prev];
     });
   };
-
-  console.log('Conversations Info:', conversationsInfo);
 
   return (
     <XMTPProvider contentTypeConfigs={contentTypeConfigs}>
@@ -268,7 +266,6 @@ export const GetConversationInfo: React.FC<GetConversationInfoProps> = ({
 }) => {
   const { messages } = useMessages(conversation);
 
-  useStreamMessages(conversation);
   const _unreadCount = useMemo(() => {
     let count = 0;
     const _messages = [...messages].reverse();
@@ -285,12 +282,17 @@ export const GetConversationInfo: React.FC<GetConversationInfoProps> = ({
 
   const _lastMessage = useMemo(() => {
     const _messages = [...messages];
-    let lastMessage = _messages[_messages.length - 1];
-    if (lastMessage?.contentType === ContentTypeReadReceipt.toString()) {
-      lastMessage = _messages[_messages.length - 2];
+    // let lastMessage = _messages[_messages.length - 1];
+    let lastMessageIndex = _messages.length - 1;
+    let lastMessage = _messages[lastMessageIndex];
+    while (
+      lastMessage?.contentType === ContentTypeReadReceipt.toString() &&
+      lastMessageIndex > 0
+    ) {
+      lastMessageIndex--;
+      lastMessage = _messages[lastMessageIndex];
     }
 
-    console.log('Last Message:', lastMessage);
     return lastMessage;
   }, [messages]);
 
@@ -299,12 +301,6 @@ export const GetConversationInfo: React.FC<GetConversationInfoProps> = ({
       return;
     }
 
-    console.log(
-      'Updating Conversation Info:',
-      conversation.topic,
-      _unreadCount,
-      _lastMessage
-    );
     handleConversationInfo(conversation.topic, _unreadCount, _lastMessage);
   }, [
     conversation.topic,
@@ -330,44 +326,42 @@ export const Checks: React.FC<ChecksProps> = ({
   const [rejected, setRejected] = React.useState(false);
 
   useEffect(() => {
+    if (!client || !address || isInitializing) return;
+    if (client.address.toLowerCase() === address.toLowerCase()) return;
+
     async function reinitializeXmtp() {
-      if (client && address) {
-        if (client?.address?.toLowerCase() !== address.toLowerCase()) {
-          await disconnect();
+      await disconnect();
 
-          if (!signer) {
-            return;
-          }
-          setIsInitializing(true);
-          const clientOptions: Partial<Omit<ClientOptions, 'codecs'>> = {
-            appVersion: 'JustWeb3/1.0.0/' + env + '/0',
-            env: env,
-          };
-          let keys = loadKeys(address ?? '', env);
-          console.log('Keys:', keys);
-          if (!keys) {
-            keys = await Client.getKeys(signer, {
-              env: env,
-              skipContactPublishing: false,
-              // persistConversations: false,
-            });
-            storeKeys(address ?? '', keys, env);
-          }
-
-          await initialize({
-            keys,
-            options: clientOptions,
-            signer: signer,
-          });
-        }
+      if (!signer) {
+        return;
       }
+      setIsInitializing(true);
+      const clientOptions: Partial<Omit<ClientOptions, 'codecs'>> = {
+        appVersion: 'JustWeb3/1.0.0/' + env + '/0',
+        env: env,
+      };
+      let keys = loadKeys(address ?? '', env);
+      if (!keys) {
+        keys = await Client.getKeys(signer, {
+          env: env,
+          skipContactPublishing: false,
+          // persistConversations: false,
+        });
+        storeKeys(address ?? '', keys, env);
+      }
+
+      await initialize({
+        keys,
+        options: clientOptions,
+        signer: signer,
+      });
     }
     reinitializeXmtp();
-  }, [client, address, signer, env, initialize, disconnect]);
+  }, [client, address, signer, env, initialize, disconnect, isInitializing]);
 
   useEffect(() => {
+    if (isInitializing || isLoading || rejected) return;
     async function initializeXmtp() {
-      if (isInitializing || isLoading || rejected) return;
       try {
         if (client) {
           return;

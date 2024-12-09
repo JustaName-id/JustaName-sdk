@@ -1,3 +1,5 @@
+// taken from the xmtp web repository
+
 import {
   ContentTypeReadReceipt,
   ReadReceiptCodec,

@@ -4,6 +4,7 @@ import { DateDivider } from './DateDivider';
 import { EmojiSelector } from './EmojiSelector';
 import { MessageCard } from './MessageCard';
 import { MessageWithReaction } from '../../../../utils/filterReactionsMessages';
+import { useEffect, useState } from 'react';
 
 interface ChatMessagesListProps {
   canMessage: boolean;
@@ -26,6 +27,19 @@ export const ChatMessagesList: React.FC<ChatMessagesListProps> = ({
   handleEmojiSelect,
   computeHeight,
 }) => {
+  const [ref, setRef] = useState<HTMLElement | null>(null);
+  useEffect(() => {
+    if (ref) {
+      setTimeout(() => {
+        const lastGroupChild = ref.lastElementChild as HTMLElement;
+
+        const lastMessage = lastGroupChild?.lastElementChild as HTMLElement;
+
+        lastMessage?.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    }
+  }, [groupedMessages, ref]);
+
   if (!canMessage) {
     return (
       <Flex
@@ -38,24 +52,33 @@ export const ChatMessagesList: React.FC<ChatMessagesListProps> = ({
 
   return (
     <Flex
-      style={{ flex: 1, minHeight: computeHeight, maxHeight: computeHeight }}
+      style={{
+        flex: 1,
+        minHeight: computeHeight,
+        maxHeight: computeHeight,
+        overflowY: 'hidden',
+      }}
     >
       <Flex
         direction="column"
         className="justweb3scrollbar"
         gap="10px"
         style={{
-          padding: '10px 0px',
-          paddingTop: '0px',
           overflowY: 'scroll',
           height: '100%',
           width: '100%',
           flexShrink: 1,
         }}
+        ref={(el) => setRef(el)}
       >
         {groupedMessages &&
           Object.keys(groupedMessages).map((date, index) => (
-            <Flex direction="column" gap="10px" key={index}>
+            <Flex
+              direction="column"
+              gap="10px"
+              key={index}
+              style={{ marginTop: index === 0 ? '10px' : '0px' }}
+            >
               <DateDivider date={date} />
               {groupedMessages[date].map((message) => (
                 <MessageCard

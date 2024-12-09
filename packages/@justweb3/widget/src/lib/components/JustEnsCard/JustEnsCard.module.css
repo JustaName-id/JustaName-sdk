@@ -70,3 +70,8 @@
   display: flex;
   gap: 5px;
 }
+
+.socialIcon {
+  width: 12px;
+  height: 12px;
+}

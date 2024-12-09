@@ -11,7 +11,6 @@ import {
   useCanMessage,
   useConsent,
   useMessages,
-  useStreamMessages,
 } from '@xmtp/react-sdk';
 import { useJustWeb3 } from '@justweb3/widget';
 import { ChatTextField } from './ChatTextField';
@@ -46,7 +45,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
   const [isRequestChangeLoading, setIsRequestChangeLoading] =
     useState<boolean>(false);
 
-  const { entries, allow, refreshConsentList, deny } = useConsent();
+  const { entries, allow, deny } = useConsent();
   const { mutateAsync: sendReaction } = useSendReactionMessage(conversation);
   const { primaryName } = usePrimaryName({
     address: conversation.peerAddress as `0x${string}`,
@@ -59,7 +58,6 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     useCanMessage();
   const { mutateAsync: readReceipt, isPending: isReadReceiptSending } =
     useReadReceipt(conversation);
-  useStreamMessages(conversation);
 
   useEffect(() => {
     const lastMessage = messages[messages.length - 1];
@@ -70,8 +68,16 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
       return;
     }
 
-    readReceipt();
-  }, [messages, readReceipt, isReadReceiptSending]);
+    if (entries[conversation.peerAddress]?.permissionType === 'allowed') {
+      readReceipt();
+    }
+  }, [
+    messages,
+    readReceipt,
+    isReadReceiptSending,
+    entries,
+    conversation.peerAddress,
+  ]);
 
   // Determine if user can message
   useEffect(() => {
@@ -87,19 +93,6 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     );
   }, [entries, conversation.peerAddress]);
 
-  // Scroll to last message when messages change
-  useEffect(() => {
-    if (messages.length === 0) return;
-    setTimeout(() => {
-      const lastMessageId = messages[messages.length - 1]?.id;
-      const element = document.getElementById(lastMessageId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 500);
-  }, [messages, conversation]);
-
-  // Filter out read receipts and group messages by date
   const filteredMessages = useMemo(() => {
     const withoutRead = messages.filter(
       (message) => message.contentType !== 'xmtp.org/readReceipt:1.0'
@@ -125,10 +118,10 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
   const type = mimeType ? typeLookup[mimeType.split('/')?.[1]] : null;
 
   const computeHeight = useMemo(() => {
-    const baseHeight = 'calc(100vh - 50px - 3rem - 1.5rem - 73px - 15px)';
+    const baseHeight = '100vh - 50px - 3rem - 1.5rem - 73px - 15px';
     const adjustments: string[] = [];
 
-    if (isRequest) adjustments.push('40px');
+    if (isRequest) return 'calc(100vh - 50px - 3rem - 1.5rem - 15px - 34px)';
     if (replyMessage) {
       if (isStringContent) {
         adjustments.push('46px');
@@ -142,8 +135,9 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     }
     if (isMessagesSenderOnly) adjustments.push('59px');
 
-    if (adjustments.length === 0) return baseHeight;
-    return `${baseHeight}${adjustments.map((val) => ` - ${val}`).join('')}`;
+    return ` calc(${baseHeight}${adjustments
+      .map((val) => ` - ${val}`)
+      .join('')}) `;
   }, [
     replyMessage,
     isMessagesSenderOnly,
@@ -156,18 +150,18 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
   // Handlers
   const blockAddressHandler = async (peerAddress: string) => {
     setIsRequestChangeLoading(true);
-    await refreshConsentList();
+    // await refreshConsentList();
     await deny([peerAddress]);
-    await refreshConsentList();
+    // await refreshConsentList();
     setIsRequestChangeLoading(false);
     onBack();
   };
 
   const handleAllowAddress = async () => {
     setIsRequestChangeLoading(true);
-    await refreshConsentList();
+    // await refreshConsentList();
     await allow([conversation.peerAddress]);
-    await refreshConsentList();
+    // await refreshConsentList();
     setIsRequest(false);
     setIsRequestChangeLoading(false);
   };

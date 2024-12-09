@@ -6,7 +6,7 @@ import {
 } from '@xmtp/react-sdk';
 import React from 'react';
 import { MessageItem } from './MessageItem';
-import { usePrimaryNameBatch } from '@justaname.id/react';
+import { PrimaryNameRecord } from '@justaname.id/react';
 
 export interface ChatListProps {
   conversations: CachedConversation<ContentTypeMetadata>[];
@@ -14,6 +14,7 @@ export interface ChatListProps {
     conversation: CachedConversation<ContentTypeMetadata>
   ) => void;
   blockedList?: boolean;
+  primaryNames: PrimaryNameRecord | undefined;
   conversationsInfo?: {
     conversationId: string;
     unreadCount: number;
@@ -27,37 +28,50 @@ export const ChatList: React.FC<ChatListProps> = ({
   handleOpenChat,
   blockedList,
   conversationsInfo,
+  primaryNames,
 }) => {
-  const { allPrimaryNames } = usePrimaryNameBatch({
-    addresses: conversations.map((conversation) => conversation.peerAddress),
-  });
-
   return (
     <Flex
       direction={'column'}
       gap={'10px'}
-      style={{
-        paddingTop: '10px',
-      }}
+      // style={{
+      //   paddingTop: '10px',
+      // }}
     >
-      {conversations.map((conversation) => (
-        <MessageItem
-          primaryName={allPrimaryNames?.[conversation.peerAddress]}
-          conversation={conversation}
-          // unreadCount={
-          //   conversationsInfo?.find(
-          //     (item) => item.conversationId === conversation.topic
-          //   )?.unreadCount
-          // }
-          //
-          conversationInfo={conversationsInfo?.find(
-            (item) => item.conversationId === conversation.topic
-          )}
-          onClick={() => handleOpenChat(conversation)}
-          key={conversation.topic}
-          blocked={blockedList}
-        />
-      ))}
+      {conversationsInfo
+        ?.sort((a, b) => {
+          if (a.lastMessage?.sentAt && b.lastMessage?.sentAt) {
+            // a.lastMessage.sentAt and b.lastMessage.sentA are Date objects
+            return (
+              b.lastMessage.sentAt.getTime() - a.lastMessage.sentAt.getTime()
+            );
+          }
+          return 0;
+        })
+        .map((conv) => {
+          const conversation = conversations.find(
+            (item) => item.topic === conv.conversationId
+          );
+
+          if (!conversation) return null;
+
+          return (
+            <MessageItem
+              primaryName={primaryNames?.[conversation.peerAddress]}
+              conversation={conversation}
+              // unreadCount={
+              //   conversationsInfo?.find(
+              //     (item) => item.conversationId === conversation.topic
+              //   )?.unreadCount
+              // }
+              //
+              conversationInfo={conv}
+              onClick={() => handleOpenChat(conversation)}
+              key={conversation.topic}
+              blocked={blockedList}
+            />
+          );
+        })}
     </Flex>
   );
 };

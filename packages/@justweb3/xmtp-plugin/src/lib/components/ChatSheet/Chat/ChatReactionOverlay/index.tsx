@@ -1,4 +1,4 @@
-import { MessageWithReaction } from '../../../utils/filterReactionsMessages';
+import { MessageWithReaction } from '../../../../utils/filterReactionsMessages';
 
 interface ChatReactionOverlayProps {
   reactionMessage: MessageWithReaction | null;

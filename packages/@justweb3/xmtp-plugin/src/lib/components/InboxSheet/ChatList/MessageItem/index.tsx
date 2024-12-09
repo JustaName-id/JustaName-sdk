@@ -6,7 +6,6 @@ import {
   reactionContentTypeConfig,
   replyContentTypeConfig,
   useConsent,
-  useStreamMessages,
 } from '@xmtp/react-sdk';
 import { useEnsAvatar, useRecords } from '@justaname.id/react';
 import { Avatar, Button, Flex, formatText, P, SPAN } from '@justweb3/ui';
@@ -33,8 +32,6 @@ const MessageItem: React.FC<MessageItemProps> = ({
   primaryName,
   conversationInfo,
 }) => {
-  useStreamMessages(conversation);
-  // const { messages } = useMessages(conversation);
   const { records } = useRecords({
     ens: primaryName || undefined,
   });
@@ -45,15 +42,15 @@ const MessageItem: React.FC<MessageItemProps> = ({
   //   return lastMessage.contentType !== ContentTypeReadReceipt.toString();
   // }, [lastMessage]);
 
-  const { allow, refreshConsentList } = useConsent();
+  const { allow, deny } = useConsent();
 
   const allowUser = async () => {
-    await refreshConsentList();
     await allow([conversation.peerAddress]);
-    await refreshConsentList();
   };
 
-  console.log('conversationInfo', conversationInfo);
+  const ignoreUser = async () => {
+    await deny([conversation.peerAddress]);
+  };
 
   const lastContent = useMemo(() => {
     const lastMessage = conversationInfo?.lastMessage;
@@ -80,13 +77,11 @@ const MessageItem: React.FC<MessageItemProps> = ({
     if (
       replyContentTypeConfig.contentTypes.includes(lastMessage?.contentType)
     ) {
-      return lastMessage.contentFallback;
+      return 'replied "' + lastMessage.content.content + '"';
     }
 
     return lastMessage.contentFallback;
   }, [conversationInfo, conversationInfo?.lastMessage]);
-
-  console.log(lastContent);
 
   return (
     <Flex
@@ -117,9 +112,12 @@ const MessageItem: React.FC<MessageItemProps> = ({
         direction={'column'}
         style={{
           marginLeft: '10px',
-          maxWidth: blocked
-            ? 'calc(100% - 120px)'
-            : 'calc(100% - 50px - 32px - 10px)',
+          maxWidth:
+            conversationInfo?.consent === 'requested'
+              ? 'calc(100% - 132px - 44px)'
+              : conversationInfo?.consent === 'blocked'
+              ? 'calc(100% - 120px)'
+              : 'calc(100% - 50px - 32px - 10px)',
           justifyContent: 'space-between',
         }}
       >
@@ -158,10 +156,29 @@ const MessageItem: React.FC<MessageItemProps> = ({
           textAlign: 'end',
         }}
       >
-        {blocked ? (
-          <Button variant="secondary" onClick={allowUser} style={{}}>
-            Unblock
-          </Button>
+        {conversationInfo?.consent !== 'allowed' ? (
+          <Flex gap={'5px'}>
+            <Button
+              variant="secondary"
+              onClick={(event) => {
+                event.stopPropagation();
+                allowUser();
+              }}
+            >
+              {conversationInfo?.consent === 'requested' ? 'Allow' : 'Unblock'}
+            </Button>
+            {conversationInfo?.consent === 'requested' && (
+              <Button
+                variant="destructive-outline"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  ignoreUser();
+                }}
+              >
+                Ignore
+              </Button>
+            )}
+          </Flex>
         ) : (
           <div
             style={{

@@ -162,6 +162,24 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   }
 
   const connectedEnsBtn = (withDialog: boolean) => {
+    const right = plugins.map((plugin) => {
+      const component = plugin.components?.JustWeb3ButtonRight;
+      if (!component) {
+        return null;
+      }
+
+      return (
+        <div
+          key={'signin-item-' + plugin.name}
+          onClick={() => {
+            setMobileDialogOpen(false);
+          }}
+        >
+          {component(createPluginApi(plugin.name))}
+        </div>
+      );
+    });
+
     return (
       <ClickableItem
         title={
@@ -181,6 +199,17 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           color: 'var(--justweb3-primary-color)',
           ...style,
         }}
+        right={
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              marginRight: '10px',
+            }}
+          >
+            {right}
+          </div>
+        }
         contentStyle={{
           alignItems: 'start',
         }}

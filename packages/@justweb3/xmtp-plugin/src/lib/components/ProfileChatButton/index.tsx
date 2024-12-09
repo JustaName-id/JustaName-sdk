@@ -12,12 +12,14 @@ export interface ProfileChatButtonProps {
   ens: string;
   env: 'local' | 'production' | 'dev';
   chainId: ChainId;
+  address: string;
 }
 
 export const ProfileChatButton: React.FC<ProfileChatButtonProps> = ({
   ens,
   env,
   chainId,
+  address: profileAddress,
 }) => {
   const { closeEnsProfile } = useJustWeb3();
   const { handleOpenChat } = useJustWeb3XMTP();
@@ -91,6 +93,10 @@ export const ProfileChatButton: React.FC<ProfileChatButtonProps> = ({
       }
     }
   }, [canMessage, canMessageAddress, env, records]);
+
+  if (profileAddress === address) {
+    return null;
+  }
 
   return (
     <div
