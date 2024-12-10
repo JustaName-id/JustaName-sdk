@@ -3,7 +3,7 @@ import './global.css';
 import { Providers } from './providers';
 
 export const metadata = {
-  title: 'JustWeb3 Console',
+  title: 'JustWeb3 Demo Console',
   description: 'Your decentralized identity toolkit',
 };
 

@@ -26,8 +26,8 @@ export const Providers: React.FC<ProviderProps> = (props) => {
   const [queryClient] = useState(() => new QueryClient());
 
   const config = getDefaultConfig({
-    appName: 'JustaName Console',
-    projectId: 'YOUR_PROJECT_ID',
+    appName: 'JustWeb3 Demo Console',
+    projectId: process.env.NEXT_PUBLIC_PROJECT_ID as string,
     wallets: [
       ...wallets,
       {
