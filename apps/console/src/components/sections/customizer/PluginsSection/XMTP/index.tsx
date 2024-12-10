@@ -6,14 +6,13 @@ import { XMTPPlugin } from '@justweb3/xmtp-plugin';
 export const XMTP = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
 
-  console.log('config', config, XMTPPlugin, XMTPPlugin.name);
   const handleXMTPConfig = (enabled: boolean) => {
     if (enabled) {
       handleJustWeb3Config({
         ...config,
         plugins: [
           ...(config?.plugins || []).filter(
-            (plugin) => plugin.name !== XMTPPlugin.name
+            (plugin) => plugin.name !== 'XMTPPlugin'
           ),
           XMTPPlugin('production'),
         ],
@@ -22,7 +21,7 @@ export const XMTP = () => {
       handleJustWeb3Config({
         ...config,
         plugins: (config?.plugins || []).filter(
-          (plugin) => plugin.name !== XMTPPlugin.name
+          (plugin) => plugin.name !== 'XMTPPlugin'
         ),
       });
     }
@@ -35,7 +34,7 @@ export const XMTP = () => {
       </p>
       <Switch
         checked={
-          !!config?.plugins?.find((plugin) => plugin.name === XMTPPlugin.name)
+          !!config?.plugins?.find((plugin) => plugin.name === 'XMTPPlugin')
         }
         onClick={(e) => {
           e.stopPropagation();

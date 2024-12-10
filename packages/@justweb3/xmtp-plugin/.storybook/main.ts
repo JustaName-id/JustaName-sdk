@@ -13,16 +13,7 @@ const config: StorybookConfig = {
 
   viteFinal: async (config) =>
     mergeConfig(config, {
-      plugins: [
-        react(),
-        nxViteTsPaths(),
-        // MillionLint.vite({
-        //   filter: {
-        //     // I want a regex to exclude all the react tsx components with Icon at the end
-        //     exclude: /Icon$/,
-        //   },
-        // }),
-      ],
+      plugins: [react(), nxViteTsPaths()],
       define: {
         'process.env': process.env,
       },
