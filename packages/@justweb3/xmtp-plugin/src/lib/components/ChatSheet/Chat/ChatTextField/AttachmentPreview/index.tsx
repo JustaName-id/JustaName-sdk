@@ -56,7 +56,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
           border: '1px solid grey',
           boxSizing: 'content-box',
           paddingLeft: attachment?.mimeType === 'audio/wav' ? '5px' : '15px',
-          position: 'relative',
+          // position: 'relative',
         }}
       >
         {attachment?.mimeType !== 'audio/wav' && (

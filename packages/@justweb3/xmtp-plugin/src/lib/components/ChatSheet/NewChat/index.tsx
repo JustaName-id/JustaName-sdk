@@ -76,8 +76,12 @@ export const NewChat: React.FC<NewChatProps> = ({
   });
 
   const resolvedAddress = useMemo(() => {
-    return records?.sanitizedRecords?.ethAddress?.value;
-  }, [records]);
+    const ethAddress = records?.sanitizedRecords?.ethAddress?.value;
+    if (ethAddress && ethAddress !== client?.address) {
+      return ethAddress;
+    }
+    return;
+  }, [client?.address, records?.sanitizedRecords?.ethAddress?.value]);
 
   const handleCanMessage = async () => {
     if (!client) return;
@@ -90,7 +94,10 @@ export const NewChat: React.FC<NewChatProps> = ({
           // Resolved address is not available yet; do nothing
           return;
         }
-      } else if (debouncedAddress.length === 42) {
+      } else if (
+        debouncedAddress.length === 42 &&
+        client?.address !== debouncedAddress
+      ) {
         const res = await xmtpCanMessage(debouncedAddress);
         setCanMessage(res);
       } else {
@@ -161,6 +168,7 @@ export const NewChat: React.FC<NewChatProps> = ({
     isRecordsLoading,
     resolvedAddress,
     isAddressName,
+    handleCanMessage,
   ]);
 
   useEffect(() => {

@@ -11,7 +11,7 @@ export const ChatReactionOverlay: React.FC<ChatReactionOverlayProps> = ({
 }) => (
   <div
     style={{
-      zIndex: 89,
+      zIndex: 10001,
       position: 'absolute',
       top: '4px',
       left: '4px',
