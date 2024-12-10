@@ -6,7 +6,7 @@ import { XMTPPlugin } from '@justweb3/xmtp-plugin';
 export const XMTP = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
 
-  console.log('config', config);
+  console.log('config', config, XMTPPlugin, XMTPPlugin.name);
   const handleXMTPConfig = (enabled: boolean) => {
     if (enabled) {
       handleJustWeb3Config({
