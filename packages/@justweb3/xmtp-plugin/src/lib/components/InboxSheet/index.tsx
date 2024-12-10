@@ -237,36 +237,38 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                 value={'Requests'}
                 style={{ flexBasis: 'calc( 100% / 3)', position: 'relative' }}
               >
-                Requests
-                {requestConversations.length > 0 && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: -5,
-                      right: 10,
-                      background: 'var(--justweb3-primary-color)',
-                      padding: '5px',
-                      borderRadius: '100px',
-                      height: '8px',
-                      minWidth: '8px',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      boxSizing: 'content-box',
-                      width: 'fit-content',
-                      marginLeft: 'auto',
-                    }}
-                  >
-                    <SPAN
+                <Flex style={{ gap: '5px' }}>
+                  Requests
+                  {requestConversations.length > 0 && (
+                    <div
                       style={{
-                        fontSize: '10px',
-                        color: 'var(--justweb3-background-color)',
+                        // position: 'absolute',
+                        // top: -5,
+                        // right: 10,
+                        background: 'var(--justweb3-primary-color)',
+                        padding: '5px',
+                        borderRadius: '100px',
+                        height: '8px',
+                        minWidth: '8px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        boxSizing: 'content-box',
+                        width: 'fit-content',
+                        // marginLeft: 'auto',
                       }}
                     >
-                      {requestConversations.length}
-                    </SPAN>
-                  </div>
-                )}
+                      <SPAN
+                        style={{
+                          fontSize: '10px',
+                          color: 'var(--justweb3-background-color)',
+                        }}
+                      >
+                        {requestConversations.length}
+                      </SPAN>
+                    </div>
+                  )}
+                </Flex>
               </TabsTrigger>
               <TabsTrigger
                 value={'Blocked'}
@@ -292,7 +294,16 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
               </div>
             ) : (
               <>
-                <TabsContent value={'Chats'} style={{ overflowY: 'scroll' }}>
+                <TabsContent
+                  value={'Chats'}
+                  style={{
+                    overflowY: 'scroll',
+                    maxHeight:
+                      'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
+                    minHeight:
+                      'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
+                  }}
+                >
                   <ChatList
                     conversations={allowedConversations}
                     conversationsInfo={conversationsInfo}
@@ -300,7 +311,16 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                     primaryNames={allPrimaryNames}
                   />
                 </TabsContent>
-                <TabsContent value={'Requests'} style={{ overflowY: 'scroll' }}>
+                <TabsContent
+                  value={'Requests'}
+                  style={{
+                    overflowY: 'scroll',
+                    maxHeight:
+                      'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
+                    minHeight:
+                      'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
+                  }}
+                >
                   <ChatList
                     conversations={requestConversations}
                     handleOpenChat={handleOpenChat}
@@ -308,7 +328,16 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                     primaryNames={allPrimaryNames}
                   />
                 </TabsContent>
-                <TabsContent value={'Blocked'} style={{ overflowY: 'scroll' }}>
+                <TabsContent
+                  value={'Blocked'}
+                  style={{
+                    overflowY: 'scroll',
+                    maxHeight:
+                      'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
+                    minHeight:
+                      'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
+                  }}
+                >
                   <ChatList
                     conversations={blockedConversations}
                     handleOpenChat={handleOpenChat}

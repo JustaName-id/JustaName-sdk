@@ -226,15 +226,15 @@ export default App;`.trim();
         <p className="text-sm font-medium leading-[140%]">Dependencies</p>
 
         <div className="flex p-2 bg-gray-100 rounded-md pr-[46px] relative">
-          <div
-            className={
-              'w-full flex justify-between items-center  overflow-x-scroll'
-            }
-          >
-            <span className="text-xs text-gray-500 whitespace-nowrap">
-              {dependencies}
-            </span>
-          </div>
+          {/*<div*/}
+          {/*  className={*/}
+          {/*    'max-w-full flex justify-between items-center  overflow-x-scroll'*/}
+          {/*  }*/}
+          {/*>*/}
+          {/*  <span className="text-xs text-gray-500 whitespace-nowrap">*/}
+          {/*    {dependencies}*/}
+          {/*  </span>*/}
+          {/*</div>*/}
 
           <button
             onClick={handleDependenciesCopy}

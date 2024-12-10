@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');
-const MillionLint = require('@million/lint');
+// const MillionLint = require('@million/lint');
 
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
@@ -24,6 +24,8 @@ const plugins = [
   withNx,
 ];
 
-module.exports = MillionLint.next({ rsc: true })(
-  composePlugins(...plugins)(nextConfig)
-);
+// module.exports = MillionLint.next({ rsc: true })(
+//   composePlugins(...plugins)(nextConfig)
+// );
+
+module.exports = composePlugins(...plugins)(nextConfig);

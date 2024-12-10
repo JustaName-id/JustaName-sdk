@@ -86,6 +86,8 @@ export const ChatTextField: React.FC<ChatTextFieldProps> = ({
   const handleSendMessage = async () => {
     if (!client || disabled || messageValue.length === 0) return;
 
+    setMessageValue('');
+
     if (replyMessage) {
       await sendReply({
         message: messageValue,
@@ -95,8 +97,6 @@ export const ChatTextField: React.FC<ChatTextFieldProps> = ({
     } else {
       await sendMessage(messageValue);
     }
-
-    setMessageValue('');
   };
 
   const handleSendAttachment = async () => {

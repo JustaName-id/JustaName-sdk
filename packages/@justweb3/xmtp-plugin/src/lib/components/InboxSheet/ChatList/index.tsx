@@ -31,13 +31,7 @@ export const ChatList: React.FC<ChatListProps> = ({
   primaryNames,
 }) => {
   return (
-    <Flex
-      direction={'column'}
-      gap={'10px'}
-      // style={{
-      //   paddingTop: '10px',
-      // }}
-    >
+    <Flex direction={'column'} gap={'10px'}>
       {conversationsInfo
         ?.sort((a, b) => {
           if (a.lastMessage?.sentAt && b.lastMessage?.sentAt) {
