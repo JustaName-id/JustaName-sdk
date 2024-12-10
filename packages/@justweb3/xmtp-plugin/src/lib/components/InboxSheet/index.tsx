@@ -79,28 +79,34 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
     Conversation[] | null
   >(null);
   useEffect(() => {
-    if (!client) return;
+    if (!client || initialConversations !== null) return;
 
     const fetchConversations = async () => {
       const _conversations = await client.conversations.list();
-      setInitialConversations(_conversations);
+      setInitialConversations(
+        _conversations?.filter((convo) => convo.peerAddress !== address)
+      );
     };
     fetchConversations();
-  }, [client]);
+  }, [address, client, initialConversations]);
 
   const primaryNameConversations = useMemo(() => {
     if (!initialConversations) return;
+    console.log(
+      conversations?.map((convo) => convo.peerAddress),
+      initialConversations?.map((convo) => convo.peerAddress)
+    );
     if (conversations?.length > initialConversations?.length) {
       return conversations;
     }
 
     return initialConversations;
   }, [conversations, initialConversations]);
+  console.log(primaryNameConversations?.map((convo) => convo.peerAddress));
   const { allPrimaryNames } = usePrimaryNameBatch({
     addresses: primaryNameConversations?.map(
       (conversation) => conversation.peerAddress
     ),
-
     enabled: initialConversations !== null,
   });
 
@@ -288,9 +294,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                   width: '100%',
                 }}
               >
-                <SPAN style={{ fontSize: '12px', fontWeight: '700' }}>
-                  Loading...
-                </SPAN>
+                <SPAN style={{ fontSize: '12px' }}>Loading...</SPAN>
               </div>
             ) : (
               <>
@@ -356,7 +360,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
               margin: '0 auto',
               textAlign: 'center',
               gap: '5px',
-              opacity: '0.25',
+              opacity: '0.5',
             }}
           >
             <SPAN

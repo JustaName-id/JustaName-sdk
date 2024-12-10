@@ -84,6 +84,8 @@ export const usePrimaryNameBatch = (
       (address) => primaryNameBatch[address] === null
     );
 
+    console.log(checkMissing);
+
     const batchCalls = checkMissing?.map((address) =>
       getName.batch({ address: address as Address })
     );
@@ -95,6 +97,8 @@ export const usePrimaryNameBatch = (
         primaryNameBatch[checkMissing[index]] = name?.name;
       }
     });
+
+    console.log(checkMissing);
 
     checkMissing = Object.keys(primaryNameBatch).filter(
       (address) => primaryNameBatch[address] === null

@@ -75,6 +75,16 @@ export const NewChat: React.FC<NewChatProps> = ({
     enabled: !isAddressName,
   });
 
+  useEffect(() => {
+    if (isPrimaryNameLoading || isPrimaryNameFetching) {
+      return;
+    }
+
+    if (name) {
+      setNewAddress(name);
+      return;
+    }
+  }, [name, isPrimaryNameLoading, isPrimaryNameFetching]);
   const resolvedAddress = useMemo(() => {
     const ethAddress = records?.sanitizedRecords?.ethAddress?.value;
     if (ethAddress && ethAddress !== client?.address) {

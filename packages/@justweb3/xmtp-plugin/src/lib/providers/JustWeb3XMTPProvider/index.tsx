@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import {
   attachmentContentTypeConfig,
   CachedConversation,
@@ -36,6 +36,11 @@ interface JustWeb3XMTPContextProps {
     consent: 'allowed' | 'blocked' | 'requested';
     lastMessage: CachedMessage<any, ContentTypeMetadata>;
   }[];
+  env: 'local' | 'production' | 'dev';
+  isInitializing: boolean;
+  setIsInitializing: (isInitializing: boolean) => void;
+  rejected: boolean;
+  setRejected: (rejected: boolean) => void;
 }
 
 const JustWeb3XMTPContext = React.createContext<
@@ -76,11 +81,24 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
       lastMessage: CachedMessage<any, ContentTypeMetadata>;
     }[]
   >([]);
-
-  const handleXmtpEnabled = (enabled: boolean) => {
-    setIsXmtpEnabled(enabled);
-  };
   const [peerAddress, setPeerAddress] = React.useState<string | null>(null);
+  const [isInitializing, setIsInitializing] = React.useState(false);
+  const [rejected, setRejected] = React.useState(false);
+  const handleXmtpEnabled = (enabled: boolean) => {
+    if (enabled === isXmtpEnabled) return;
+    setIsXmtpEnabled(enabled);
+
+    if (!enabled) {
+      setConversationsInfo([]);
+      setConversation(null);
+      setConversations({
+        allowed: [],
+        blocked: [],
+        requested: [],
+      });
+      setPeerAddress(null);
+    }
+  };
 
   const handleOpenChat = (
     peer: string | CachedConversation<ContentTypeMetadata>
@@ -126,6 +144,11 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
         value={{
           handleOpenChat,
           conversationsInfo,
+          env,
+          isInitializing,
+          rejected,
+          setIsInitializing,
+          setRejected,
         }}
       >
         <Checks open={open} handleXmtpEnabled={handleXmtpEnabled} env={env} />
@@ -319,98 +342,37 @@ export const Checks: React.FC<ChecksProps> = ({
   handleXmtpEnabled,
   env,
 }) => {
-  const { client, initialize, isLoading, disconnect } = useClient();
-  const signer = useEthersSigner();
+  const { client, isLoading, disconnect } = useClient();
+  // const signer = useEthersSigner();
   const { address } = useMountedAccount();
-  const [isInitializing, setIsInitializing] = React.useState(false);
-  const [rejected, setRejected] = React.useState(false);
+  // const [isInitializing, setIsInitializing] = React.useState(false);
+  // const [rejected, setRejected] = React.useState(false);
+
+  const { initializeXmtp, isInitializing, rejected } = useJustWeb3XMTP();
 
   useEffect(() => {
     if (!client || !address || isInitializing) return;
     if (client.address.toLowerCase() === address.toLowerCase()) return;
 
-    async function reinitializeXmtp() {
+    const reinitialize = async () => {
       await disconnect();
+      initializeXmtp();
+    };
 
-      if (!signer) {
-        return;
-      }
-      setIsInitializing(true);
-      const clientOptions: Partial<Omit<ClientOptions, 'codecs'>> = {
-        appVersion: 'JustWeb3/1.0.0/' + env + '/0',
-        env: env,
-      };
-      let keys = loadKeys(address ?? '', env);
-      if (!keys) {
-        keys = await Client.getKeys(signer, {
-          env: env,
-          skipContactPublishing: false,
-          // persistConversations: false,
-        });
-        storeKeys(address ?? '', keys, env);
-      }
-
-      await initialize({
-        keys,
-        options: clientOptions,
-        signer: signer,
-      });
-    }
-    reinitializeXmtp();
-  }, [client, address, signer, env, initialize, disconnect, isInitializing]);
+    reinitialize();
+  }, [address, client, disconnect, isInitializing, initializeXmtp]);
 
   useEffect(() => {
     if (isInitializing || isLoading || rejected) return;
-    async function initializeXmtp() {
-      try {
-        if (client) {
-          return;
-        }
-
-        if (!signer) {
-          return;
-        }
-        setIsInitializing(true);
-        const clientOptions: Partial<Omit<ClientOptions, 'codecs'>> = {
-          appVersion: 'JustWeb3/1.0.0/' + env + '/0',
-          env: env,
-        };
-        let keys = loadKeys(address ?? '', env);
-        if (!keys) {
-          keys = await Client.getKeys(signer, {
-            env: env,
-            skipContactPublishing: false,
-            // persistConversations: false,
-          });
-          storeKeys(address ?? '', keys, env);
-        }
-
-        await initialize({
-          keys,
-          options: clientOptions,
-          signer: signer,
-        });
-
-        // _client?.registerCodec(new ReadReceiptCodec());
-        setIsInitializing(false);
-      } catch (error) {
-        console.error('Failed to initialize XMTP Client:', error);
-        wipeKeys(address ?? '', env);
-        setIsInitializing(false);
-        setRejected(true);
-      }
-    }
     initializeXmtp();
   }, [
     address,
     client,
-    env,
-    handleXmtpEnabled,
-    initialize,
-    isInitializing,
+    disconnect,
+    initializeXmtp,
     isLoading,
+    isInitializing,
     rejected,
-    signer,
   ]);
 
   useEffect(() => {
@@ -427,5 +389,89 @@ export const useJustWeb3XMTP = () => {
       'useJustWeb3XMTP must be used within a JustWeb3XMTPProvider'
     );
   }
-  return context;
+  const { isInitializing, setIsInitializing, env, setRejected } = context;
+  const { client, initialize } = useClient();
+  const { address } = useMountedAccount();
+  const signer = useEthersSigner();
+  const initializeXmtp = useCallback(
+    async (skipIsInitializing = false) => {
+      console.log(client, isInitializing, signer, skipIsInitializing);
+      try {
+        if (client) {
+          return;
+        }
+
+        if (isInitializing && !skipIsInitializing) return;
+
+        if (!signer) {
+          return;
+        }
+        setIsInitializing(true);
+        const clientOptions: Partial<Omit<ClientOptions, 'codecs'>> = {
+          appVersion: 'JustWeb3/1.0.0/' + env + '/0',
+          env: env,
+        };
+        let keys = loadKeys(address ?? '', env);
+
+        if (!keys) {
+          keys = await Client.getKeys(signer, {
+            env: env,
+            skipContactPublishing: false,
+            // persistConversations: false,
+          });
+          storeKeys(address ?? '', keys, env);
+        }
+
+        const _client = await initialize({
+          keys,
+          options: clientOptions,
+          signer: signer,
+        });
+
+        if (_client?.address !== address) {
+          wipeKeys(address ?? '', env);
+          let keys = loadKeys(address ?? '', env);
+
+          if (!keys) {
+            keys = await Client.getKeys(signer, {
+              env: env,
+              skipContactPublishing: false,
+              // persistConversations: false,
+            });
+            storeKeys(address ?? '', keys, env);
+          }
+
+          await initialize({
+            keys,
+            options: clientOptions,
+            signer: signer,
+          });
+          return;
+        }
+
+        // _client?.registerCodec(new ReadReceiptCodec());
+        setIsInitializing(false);
+      } catch (error) {
+        console.error('Failed to initialize XMTP Client:', error);
+        wipeKeys(address ?? '', env);
+        setIsInitializing(false);
+        setRejected(true);
+      }
+    },
+    [
+      address,
+      client,
+      env,
+      initialize,
+      isInitializing,
+      signer,
+      setRejected,
+      setIsInitializing,
+    ]
+  );
+
+  return {
+    ...context,
+    initializeXmtp,
+  };
 };
