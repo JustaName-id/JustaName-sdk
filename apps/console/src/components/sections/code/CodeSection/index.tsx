@@ -103,7 +103,7 @@ ${
 }
 ${
   talentProtocolPluginEnabled
-    ? "import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';"
+    ? `import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';`
     : ''
 }
 ${
@@ -210,7 +210,7 @@ export default App;`.trim();
 
   return (
     <div
-      className={`h-full mobile:w-[30%] min-w-[300px] border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto ${
+      className={`h-full mobile:w-[calc(100% - 1.25rem)]  border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto ${
         mobile ? 'pb-5' : 'py-5'
       } px-2.5 gap-5 justify-between`}
     >
@@ -225,16 +225,16 @@ export default App;`.trim();
       <div className="flex flex-col justify-between">
         <p className="text-sm font-medium leading-[140%]">Dependencies</p>
 
-        <div className="flex p-2 bg-gray-100 rounded-md pr-[46px] relative">
-          {/*<div*/}
-          {/*  className={*/}
-          {/*    'max-w-full flex justify-between items-center  overflow-x-scroll'*/}
-          {/*  }*/}
-          {/*>*/}
-          {/*  <span className="text-xs text-gray-500 whitespace-nowrap">*/}
-          {/*    {dependencies}*/}
-          {/*  </span>*/}
-          {/*</div>*/}
+        <div className="flex p-2 bg-gray-100 rounded-md pr-[46px] relative max-w-full overflow-hidden">
+          <div
+            className={
+              'max-w-full flex justify-between items-center  overflow-x-scroll'
+            }
+          >
+            <span className="text-xs text-gray-500 whitespace-nowrap">
+              {dependencies}
+            </span>
+          </div>
 
           <button
             onClick={handleDependenciesCopy}
@@ -255,39 +255,41 @@ export default App;`.trim();
           Copy
         </button>
       </div>
-      <Highlight code={code} language="tsx" theme={themes.vsLight}>
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre
-            className={`${className} relative`}
-            style={{ ...style, fontSize: '12px' }}
-          >
-            {tokens.map((line, i) => (
-              <div
-                key={i}
-                {...getLineProps({ line })}
-                style={{ display: 'table-row' }}
-              >
-                <span
-                  style={{
-                    display: 'table-cell',
-                    textAlign: 'right',
-                    paddingRight: '1em',
-                    userSelect: 'none',
-                    opacity: 0.5,
-                  }}
+      <div className="max-w-full overflow-x-scroll">
+        <Highlight code={code} language="tsx" theme={themes.vsLight}>
+          {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            <pre
+              className={`${className} relative`}
+              style={{ ...style, fontSize: '12px' }}
+            >
+              {tokens.map((line, i) => (
+                <div
+                  key={i}
+                  {...getLineProps({ line })}
+                  style={{ display: 'table-row' }}
                 >
-                  {i + 1}
-                </span>
-                <span style={{ display: 'table-cell' }}>
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token })} />
-                  ))}
-                </span>
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
+                  <span
+                    style={{
+                      display: 'table-cell',
+                      textAlign: 'right',
+                      paddingRight: '1em',
+                      userSelect: 'none',
+                      opacity: 0.5,
+                    }}
+                  >
+                    {i + 1}
+                  </span>
+                  <span style={{ display: 'table-cell' }}>
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </span>
+                </div>
+              ))}
+            </pre>
+          )}
+        </Highlight>
+      </div>
     </div>
   );
 };

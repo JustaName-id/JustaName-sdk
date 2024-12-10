@@ -1,4 +1,3 @@
-// import { AccordionItem, AccordionTrigger } from '../../../../ui/accordion';
 import { Switch } from '../../../../ui/switch';
 import { useContext } from 'react';
 import { JustWeb3Context } from '@justweb3/widget';
@@ -7,7 +6,8 @@ import { XMTPPlugin } from '@justweb3/xmtp-plugin';
 export const XMTP = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
 
-  const handleEFPConfig = (enabled: boolean) => {
+  console.log('config', config);
+  const handleXMTPConfig = (enabled: boolean) => {
     if (enabled) {
       handleJustWeb3Config({
         ...config,
@@ -41,7 +41,7 @@ export const XMTP = () => {
           e.stopPropagation();
         }}
         onCheckedChange={(checked) => {
-          handleEFPConfig(checked);
+          handleXMTPConfig(checked);
         }}
       />
     </div>
