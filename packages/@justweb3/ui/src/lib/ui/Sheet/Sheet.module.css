@@ -61,8 +61,9 @@
     color: var(--justweb3-foreground-color-2);
     font-family: var(--justweb3-font-family);
     position: absolute;
-    top: 0;
+    top: 1rem;
     left: 24px;
+    margin: 0;
 }
 
 .sheetDescription {

@@ -215,6 +215,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
         }}
       >
         {isCanMessageLoading || isLoading ? (
+          // {true ? (
           <LoadingMessagesList computeHeight={computeHeight} />
         ) : (
           <ChatMessagesList

@@ -164,6 +164,9 @@ const MessageItem: React.FC<MessageItemProps> = ({
                 event.stopPropagation();
                 allowUser();
               }}
+              style={{
+                height: '10px',
+              }}
             >
               {conversationInfo?.consent === 'requested' ? 'Allow' : 'Unblock'}
             </Button>
@@ -173,6 +176,9 @@ const MessageItem: React.FC<MessageItemProps> = ({
                 onClick={(event) => {
                   event.stopPropagation();
                   ignoreUser();
+                }}
+                style={{
+                  height: '10px',
                 }}
               >
                 Ignore

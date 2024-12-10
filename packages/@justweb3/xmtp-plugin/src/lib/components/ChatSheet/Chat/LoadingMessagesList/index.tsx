@@ -16,6 +16,7 @@ export const LoadingMessagesList: React.FC<LoadingMessagesListProps> = ({
       paddingTop: 20,
       minHeight: `calc( ${computeHeight} - 20px )`,
       maxHeight: `calc( ${computeHeight} - 20px )`,
+      boxSizing: 'content-box',
     }}
   >
     {Array.from({ length: 8 }).map((_, index) => (
