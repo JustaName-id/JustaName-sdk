@@ -47,6 +47,9 @@
       ],
       "@justweb3/talent-protocol-plugin": [
         "packages/@justweb3/talent-protocol-plugin"
+      ],
+      "@justweb3/xmtp-plugin": [
+        "packages/@justweb3/xmtp-plugin"
       ]
     }
   },
