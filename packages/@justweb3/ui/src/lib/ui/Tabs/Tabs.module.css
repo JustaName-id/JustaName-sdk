@@ -8,6 +8,8 @@
     display: flex;
     overflow-x: auto;
     overflow-y: visible;
+    height: 30px;
+    min-height: 30px;
 }
 
 /* Underlined variant */
