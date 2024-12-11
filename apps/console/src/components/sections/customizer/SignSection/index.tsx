@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { JustWeb3Context, JustWeb3ProviderConfig } from '@justweb3/widget';
 import { Input } from '../../../ui/input';
 import Image from 'next/image';
+import { getAnalyticsClient } from '../../../../analytics';
 
 export const SignSection = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
@@ -27,6 +28,14 @@ export const SignSection = () => {
         defaultValue="all"
         onValueChange={(e) => {
           const action = e as JustWeb3ProviderConfig['allowedEns'];
+          switch (action) {
+            case 'all':
+              getAnalyticsClient().track('ANY_ENS_SELECTED', {});
+              break;
+            case 'claimable':
+              getAnalyticsClient().track('CLAIMABLE_ENS_SELECTED', {});
+              break;
+          }
           handleJustWeb3Config({
             ...config,
             allowedEns:
@@ -50,6 +59,9 @@ export const SignSection = () => {
               placeholder="Add ENS"
               onKeyUp={(e) => {
                 if (e.key === 'Enter') {
+                  getAnalyticsClient().track('SPECIFIC_ENS_SELECTED', {
+                    ens: ensInput,
+                  });
                   setEnsList([...ensList, ensInput]);
                   setEnsInput('');
                 }

@@ -1,13 +1,48 @@
 'use client';
-import { JustEnsCard, JustWeb3Button } from '@justweb3/widget';
+import { useMountedAccount } from '@justaname.id/react';
+import { JustEnsCard, JustWeb3Button, useJustWeb3 } from '@justweb3/widget';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useEffect } from 'react';
+import { useAccountEffect } from 'wagmi';
+import { getAnalyticsClient } from '../analytics';
+import { SectionSlider } from '../components/reusable/SectionSlider';
 import { CodeSection } from '../components/sections/code/CodeSection';
 import { Customizer } from '../components/sections/customizer/Customizer';
 import { ConsoleProvider } from '../providers/ConsoleProvider';
-import { SectionSlider } from '../components/reusable/SectionSlider';
 import { useSplit } from '../hooks/useSplit';
 
 export default function Page() {
+  const { isConnected, address } = useMountedAccount();
+  const { connectedEns, isLoggedIn } = useJustWeb3();
+
+  const handleEnsClick = (ens: string) => {
+    getAnalyticsClient().track('PROFILE_VIEWED', {
+      ens,
+    });
+  };
+
+  useAccountEffect({
+    onDisconnect: () => {
+      getAnalyticsClient().reset();
+    },
+  });
+  useEffect(() => {
+    if (isConnected && address) {
+      getAnalyticsClient().identify(address);
+    }
+  }, [isConnected, address]);
+
+  useEffect(() => {
+    if (isLoggedIn && connectedEns) {
+      getAnalyticsClient().track('SUBNAME_CONNECTED', {
+        subname: connectedEns.ens,
+        chainId: connectedEns.chainId,
+      });
+      getAnalyticsClient().people_set({
+        ...connectedEns,
+      });
+    }
+  }, [isLoggedIn, connectedEns]);
   const { leftWidth, rightWidth, getBarProps } = useSplit({
     initialLeft: 70,
   });
@@ -45,15 +80,29 @@ export default function Page() {
               <ConnectButton />
             </JustWeb3Button>
 
-            <h1 className={'text-xl font-black'}>Profile Examples:</h1>
+            <h1 className={'text-xl font-black mt-5'}>Profile Examples:</h1>
 
-            <JustEnsCard addressOrEns={'justhadi.eth'} />
-            <JustEnsCard addressOrEns={'justghadi.eth'} />
-            <JustEnsCard addressOrEns={'mely.eth'} />
-            <JustEnsCard addressOrEns={'nick.eth'} />
-            <JustEnsCard addressOrEns={'vitalik.eth'} />
-            <JustEnsCard addressOrEns={'brantly.eth'} />
-            <JustEnsCard addressOrEns={'dr3a.eth'} />
+            <div onClick={() => handleEnsClick('justhadi.eth')}>
+              <JustEnsCard addressOrEns={'justhadi.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('justghadi.eth')}>
+              <JustEnsCard addressOrEns={'justghadi.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('mely.eth')}>
+              <JustEnsCard addressOrEns={'mely.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('nick.eth')}>
+              <JustEnsCard addressOrEns={'nick.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('vitalik.eth')}>
+              <JustEnsCard addressOrEns={'vitalik.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('brantly.eth')}>
+              <JustEnsCard addressOrEns={'brantly.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('dr3a.eth')}>
+              <JustEnsCard addressOrEns={'dr3a.eth'} />
+            </div>
           </div>
           <div
             {...getBarProps()}
@@ -91,13 +140,27 @@ export default function Page() {
                 <ConnectButton />
               </JustWeb3Button>
             </div>
-            <JustEnsCard addressOrEns={'justhadi.eth'} />
-            <JustEnsCard addressOrEns={'justghadi.eth'} />
-            <JustEnsCard addressOrEns={'mely.eth'} />
-            <JustEnsCard addressOrEns={'nick.eth'} />
-            <JustEnsCard addressOrEns={'vitalik.eth'} />
-            <JustEnsCard addressOrEns={'brantly.eth'} />
-            <JustEnsCard addressOrEns={'dr3a.eth'} />
+            <div onClick={() => handleEnsClick('justhadi.eth')}>
+              <JustEnsCard addressOrEns={'justhadi.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('justghadi.eth')}>
+              <JustEnsCard addressOrEns={'justghadi.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('mely.eth')}>
+              <JustEnsCard addressOrEns={'mely.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('nick.eth')}>
+              <JustEnsCard addressOrEns={'nick.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('vitalik.eth')}>
+              <JustEnsCard addressOrEns={'vitalik.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('brantly.eth')}>
+              <JustEnsCard addressOrEns={'brantly.eth'} />
+            </div>
+            <div onClick={() => handleEnsClick('dr3a.eth')}>
+              <JustEnsCard addressOrEns={'dr3a.eth'} />
+            </div>
           </div>
         </div>
       </ConsoleProvider>
