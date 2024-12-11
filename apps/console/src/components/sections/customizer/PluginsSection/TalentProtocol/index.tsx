@@ -2,6 +2,7 @@ import { Switch } from '../../../../ui/switch';
 import { useContext } from 'react';
 import { JustWeb3Context } from '@justweb3/widget';
 import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';
+import { getAnalyticsClient } from '../../../../../analytics';
 
 export const TalentProtocol = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
@@ -18,6 +19,7 @@ export const TalentProtocol = () => {
           TalentProtocolPluginInstance,
         ],
       });
+      getAnalyticsClient().track('TALENT_PROTOCOL_ENABLED', {});
     } else {
       handleJustWeb3Config({
         ...config,
@@ -25,6 +27,7 @@ export const TalentProtocol = () => {
           (plugin) => plugin.name !== TalentProtocolPluginInstance.name
         ),
       });
+      getAnalyticsClient().track('TALENT_PROTOCOL_DISABLED', {});
     }
   };
 

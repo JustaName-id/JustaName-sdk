@@ -9,6 +9,7 @@ import { Switch } from '../../../ui/switch';
 import { useSwitchChain } from 'wagmi';
 import { useMountedAccount } from '@justaname.id/react';
 import { PluginsSection } from '../PluginsSection';
+import { getAnalyticsClient } from '../../../../analytics';
 
 interface CustomizerProps {
   mobile?: boolean;
@@ -29,13 +30,39 @@ export const Customizer = ({ mobile }: CustomizerProps) => {
   }, [logoUrlDebounced]);
 
   return (
-    <div className={`flex flex-col gap-[5px] min-w-[350px] mobile:w-[350px] border-r-[1px] pointer-events-auto ${mobile ? 'pb-5' : 'py-5'} px-2.5 mobile:max-h-[calc(100vh-60px)] overflow-y-auto `}>
+    <div
+      className={`flex flex-col gap-[5px] min-w-[350px] mobile:w-[350px] border-r-[1px] pointer-events-auto ${mobile ? 'pb-5' : 'py-5'
+        } px-2.5 mobile:max-h-[calc(100vh-60px)] overflow-y-auto `}
+    >
       <div className="flex flex-col gap-2.5">
-        {!mobile && (
+        <div className="flex flex-row items-center justify-between w-full py-[5px]">
           <p className="text-base text-black font-bold leading-[125%] my-[5px]">
-            Customize Interface
+            Select Network
           </p>
-        )}
+          <div className="flex flex-row items-center gap-2.5">
+            <p className="text-sm text-black font-medium leading-[100%] whitespace-nowrap">
+              {chainId === 1 ? 'Mainnet' : 'Sepolia'}
+            </p>
+            <Switch
+              checked={chainId === 1}
+              onCheckedChange={() => {
+                getAnalyticsClient().track('NETWORK_CHANGED', {
+                  chainId: chainId === 1 ? 11155111 : 1,
+                });
+                switchChainAsync({
+                  chainId: chainId === 1 ? 11155111 : 1,
+                });
+              }}
+            />
+          </div>
+        </div>
+        <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
+
+        {/*{!mobile && (*/}
+        <p className="text-base text-black font-bold leading-[125%] my-[5px]">
+          Customize Widget
+        </p>
+        {/*)}*/}
         <div className="flex flex-row justify-between gap-2.5">
           <ColorSelector
             colors={['#FFFFFF', '#000000']}
@@ -46,7 +73,7 @@ export const Customizer = ({ mobile }: CustomizerProps) => {
             }}
           />
           <ColorSelector
-            colors={['#FEA801', '#C90018']}
+            colors={['#FEA801', '#C90018', '#3481f4']}
             title="Accent Color"
             onColorChange={(color: string) => {
               changeTheme('primary', color);
@@ -73,25 +100,6 @@ export const Customizer = ({ mobile }: CustomizerProps) => {
 
       <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
 
-      <div className="flex flex-row items-center justify-between w-full py-[5px]">
-        <p className="text-base text-black font-bold leading-[125%] my-[5px]">
-          Network
-        </p>
-        <div className="flex flex-row items-center gap-2.5">
-          <p className="text-sm text-black font-medium leading-[100%] whitespace-nowrap">
-            {chainId === 1 ? 'Mainnet' : 'Sepolia'}
-          </p>
-          <Switch
-            checked={chainId === 1}
-            onCheckedChange={() => {
-              switchChainAsync({
-                chainId: chainId === 1 ? 11155111 : 1,
-              });
-            }}
-          />
-        </div>
-      </div>
-      <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
       <ClaimSection />
       <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
       <SignSection />

@@ -3,6 +3,7 @@ import React, { useContext, useMemo } from 'react';
 import { useJustWeb3Theme } from '@justweb3/ui';
 import { useConsole } from '../../../../providers/ConsoleProvider';
 import { Highlight, themes } from 'prism-react-renderer';
+import { getAnalyticsClient } from 'apps/console/src/analytics';
 
 interface CodeSectionProps {
   mobile?: boolean;
@@ -205,6 +206,7 @@ export default App;`.trim();
   };
 
   const handleCopy = () => {
+    getAnalyticsClient().track('CODE_COPIED', {})
     navigator.clipboard.writeText(code);
   };
 

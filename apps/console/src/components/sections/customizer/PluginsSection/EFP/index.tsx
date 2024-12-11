@@ -3,6 +3,7 @@ import { Switch } from '../../../../ui/switch';
 import { useContext } from 'react';
 import { JustWeb3Context } from '@justweb3/widget';
 import { EFPPlugin } from '@justweb3/efp-plugin';
+import { getAnalyticsClient } from '../../../../../analytics';
 
 export const EFP = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
@@ -18,6 +19,7 @@ export const EFP = () => {
           EFPPlugin,
         ],
       });
+      getAnalyticsClient().track('EFP_ENABLED', {});
     } else {
       handleJustWeb3Config({
         ...config,
@@ -25,6 +27,7 @@ export const EFP = () => {
           (plugin) => plugin.name !== EFPPlugin.name
         ),
       });
+      getAnalyticsClient().track('EFP_DISABLED', {});
     }
   };
 

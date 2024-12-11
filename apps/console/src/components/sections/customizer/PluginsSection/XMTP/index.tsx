@@ -2,6 +2,7 @@ import { Switch } from '../../../../ui/switch';
 import { useContext } from 'react';
 import { JustWeb3Context } from '@justweb3/widget';
 import { XMTPPlugin } from '@justweb3/xmtp-plugin';
+import { getAnalyticsClient } from '../../../../../analytics';
 
 export const XMTP = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
@@ -17,6 +18,7 @@ export const XMTP = () => {
           XMTPPlugin('production'),
         ],
       });
+      getAnalyticsClient().track('XMTP_ENABLED', {});
     } else {
       handleJustWeb3Config({
         ...config,
@@ -24,8 +26,9 @@ export const XMTP = () => {
           (plugin) => plugin.name !== 'XMTPPlugin'
         ),
       });
-    }
-  };
+      getAnalyticsClient().track('XMTP_DISABLED', {});
+    };
+  }
 
   return (
     <div className="flex flex-row items-center justify-between w-full py-[16px] pl-[26px]">

@@ -10,7 +10,7 @@ export const PluginsSection: FC = () => {
   return (
     <div className="flex flex-col gap-2.5">
       <p className="text-base text-black font-bold leading-[125%] my-[5px]">
-        Plugins
+        Add Your Favorite Plugins
       </p>
 
       <Accordion type="single" collapsible className="w-full">
