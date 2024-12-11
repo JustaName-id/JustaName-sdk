@@ -12,7 +12,7 @@ import { ConsoleProvider } from '../providers/ConsoleProvider';
 import { useSplit } from '../hooks/useSplit';
 
 export default function Page() {
-  const { isConnected, address } = useMountedAccount()
+  const { isConnected, address } = useMountedAccount();
   const { connectedEns, isLoggedIn } = useJustWeb3();
 
   const handleEnsClick = (ens: string) => {
@@ -23,15 +23,14 @@ export default function Page() {
 
   useAccountEffect({
     onDisconnect: () => {
-      getAnalyticsClient().reset()
-    }
-  })
+      getAnalyticsClient().reset();
+    },
+  });
   useEffect(() => {
     if (isConnected && address) {
-      getAnalyticsClient().identify(address)
+      getAnalyticsClient().identify(address);
     }
-
-  }, [isConnected, address])
+  }, [isConnected, address]);
 
   useEffect(() => {
     if (isLoggedIn && connectedEns) {
@@ -41,9 +40,9 @@ export default function Page() {
       });
       getAnalyticsClient().people_set({
         ...connectedEns,
-      })
+      });
     }
-  }, [isLoggedIn, connectedEns])
+  }, [isLoggedIn, connectedEns]);
   const { leftWidth, rightWidth, getBarProps } = useSplit({
     initialLeft: 70,
   });
@@ -83,10 +82,10 @@ export default function Page() {
 
             <h1 className={'text-xl font-black'}>Profile Examples:</h1>
 
-            <div onClick={() => handleEnsClick('justhadi.eth')} >
+            <div onClick={() => handleEnsClick('justhadi.eth')}>
               <JustEnsCard addressOrEns={'justhadi.eth'} />
             </div>
-            <div onClick={() => handleEnsClick('justghadi.eth')} >
+            <div onClick={() => handleEnsClick('justghadi.eth')}>
               <JustEnsCard addressOrEns={'justghadi.eth'} />
             </div>
             <div onClick={() => handleEnsClick('mely.eth')}>
@@ -141,10 +140,10 @@ export default function Page() {
                 <ConnectButton />
               </JustWeb3Button>
             </div>
-            <div onClick={() => handleEnsClick('justhadi.eth')} >
+            <div onClick={() => handleEnsClick('justhadi.eth')}>
               <JustEnsCard addressOrEns={'justhadi.eth'} />
             </div>
-            <div onClick={() => handleEnsClick('justghadi.eth')} >
+            <div onClick={() => handleEnsClick('justghadi.eth')}>
               <JustEnsCard addressOrEns={'justghadi.eth'} />
             </div>
             <div onClick={() => handleEnsClick('mely.eth')}>
