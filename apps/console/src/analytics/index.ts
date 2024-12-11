@@ -20,7 +20,7 @@ class Index {
       }
       posthog.init(key, {
         api_host: host,
-        capture_pageview: false,
+        capture_pageview: true,
         capture_pageleave: true,
         autocapture: false,
         loaded: (posthog) => {
