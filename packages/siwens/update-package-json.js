@@ -34,3 +34,21 @@ fs.copyFileSync(
   path.join(__dirname, 'README.md'),
   path.join(__dirname, 'dist', 'README.md')
 );
+
+// I want to delete all .d.ts.map files
+const deleteFiles = (dir) => {
+  const files = fs.readdirSync(dir);
+  for (const file of files) {
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
+    if (stat.isDirectory()) {
+      deleteFiles(filePath);
+    } else {
+      if (filePath.endsWith('.d.ts.map')) {
+        fs.unlinkSync(filePath);
+      }
+    }
+  }
+};
+
+deleteFiles(path.join(__dirname, 'dist'));

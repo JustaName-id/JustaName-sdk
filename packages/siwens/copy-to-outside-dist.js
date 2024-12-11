@@ -2,7 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 const distPath = path.join(__dirname, 'dist');
-const targetPath = path.join(__dirname, '..', '..', '..', 'dist/packages/@justaname.id/siwens');
+const targetPath = path.join(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'dist/packages/siwens'
+);
 
 // Create the target directory
 fs.mkdirSync(targetPath, { recursive: true });
@@ -24,7 +30,7 @@ function copyDir(src, dest) {
 }
 
 // Copy files and directories
-fs.readdirSync(distPath).forEach(file => {
+fs.readdirSync(distPath).forEach((file) => {
   const srcPath = path.join(distPath, file);
   const destPath = path.join(targetPath, file);
 
