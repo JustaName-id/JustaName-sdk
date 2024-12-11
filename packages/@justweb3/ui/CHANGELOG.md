@@ -1,3 +1,33 @@
+## 0.0.95 (2024-12-11)
+
+
+### 🚀 Features
+
+- basic but need to move to js sdk ([55edbf2](https://github.com/JustaName-id/JustaName-sdk/commit/55edbf2))
+
+- chat and getting the messages ([9bc689c](https://github.com/JustaName-id/JustaName-sdk/commit/9bc689c))
+
+- working on chat ([cbfb4af](https://github.com/JustaName-id/JustaName-sdk/commit/cbfb4af))
+
+- finalizing xmtp widget ([9369bfb](https://github.com/JustaName-id/JustaName-sdk/commit/9369bfb))
+
+- xmtp refactor and unread count ([d4572e6](https://github.com/JustaName-id/JustaName-sdk/commit/d4572e6))
+
+- chat optimization ([4a3af5e](https://github.com/JustaName-id/JustaName-sdk/commit/4a3af5e))
+
+
+### 🩹 Fixes
+
+- tabs css ([b135daa](https://github.com/JustaName-id/JustaName-sdk/commit/b135daa))
+
+- xmtp build ([559d658](https://github.com/JustaName-id/JustaName-sdk/commit/559d658))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- HadiKhai
+
 ## 0.0.94 (2024-12-03)
 
 

@@ -1,3 +1,39 @@
+## 0.0.95 (2024-12-11)
+
+
+### 🚀 Features
+
+- basic but need to move to js sdk ([55edbf2](https://github.com/JustaName-id/JustaName-sdk/commit/55edbf2))
+
+- chat and getting the messages ([9bc689c](https://github.com/JustaName-id/JustaName-sdk/commit/9bc689c))
+
+- compute height for message, using justaname react hook for identity resolution and sign in fix ([bafad7b](https://github.com/JustaName-id/JustaName-sdk/commit/bafad7b))
+
+- chat from profile ([fb31ee7](https://github.com/JustaName-id/JustaName-sdk/commit/fb31ee7))
+
+- xmtp refactor and unread count ([d4572e6](https://github.com/JustaName-id/JustaName-sdk/commit/d4572e6))
+
+- chat optimization ([4a3af5e](https://github.com/JustaName-id/JustaName-sdk/commit/4a3af5e))
+
+
+### 🩹 Fixes
+
+- xmtp build ([559d658](https://github.com/JustaName-id/JustaName-sdk/commit/559d658))
+
+- xmtp chat height ([de9661b](https://github.com/JustaName-id/JustaName-sdk/commit/de9661b))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.156
+- Updated @justaname.id/react to 0.3.159
+- Updated @justweb3/ui to 0.0.95
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.94 (2024-12-03)
 
 

@@ -1,3 +1,22 @@
+## 0.2.156 (2024-12-11)
+
+
+### 🚀 Features
+
+- chat from profile ([fb31ee7](https://github.com/JustaName-id/JustaName-sdk/commit/fb31ee7))
+
+- chat optimization ([4a3af5e](https://github.com/JustaName-id/JustaName-sdk/commit/4a3af5e))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.89
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.2.155 (2024-12-03)
 
 

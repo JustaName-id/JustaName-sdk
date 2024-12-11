@@ -1,3 +1,17 @@
+## 0.0.94 (2024-12-11)
+
+
+### 🚀 Features
+
+- basic but need to move to js sdk ([55edbf2](https://github.com/JustaName-id/JustaName-sdk/commit/55edbf2))
+
+- compute height for message, using justaname react hook for identity resolution and sign in fix ([bafad7b](https://github.com/JustaName-id/JustaName-sdk/commit/bafad7b))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.93 (2024-12-03)
 
 This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
