@@ -17,10 +17,10 @@ export const buildPrimaryNameBatchKey = (chainId: ChainId | undefined) => [
   chainId,
 ];
 
-export type PrimaryNameRecord = Record<string | Address, string | null>;
+export type PrimaryNameRecord = Record<string | string, string | null>;
 
 export interface UsePrimaryNameBatchParams {
-  addresses?: Address[];
+  addresses?: string[];
   chainId?: ChainId;
   enabled?: boolean;
 }
@@ -143,7 +143,7 @@ export const usePrimaryNameBatch = (
     ),
     queryFn: () =>
       getPrimaryNameBatch({
-        addresses: params?.addresses,
+        addresses: params?.addresses as Address[],
       }),
     enabled:
       Boolean(params?.addresses) && Boolean(ensClient) && Boolean(_enabled),

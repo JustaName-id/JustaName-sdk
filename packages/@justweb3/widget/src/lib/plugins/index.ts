@@ -50,6 +50,7 @@ interface PluginComponents {
   Provider?: PluginProviderComponent;
   Global?: PluginComponent;
   SignInMenu?: PluginComponent;
+  JustWeb3ButtonRight?: PluginComponent;
   ProfileSection?: PluginRichComponent;
   ProfileHeader?: PluginRichComponent;
   ProfileTab?: ProfileTabPluginComponent;

@@ -1,7 +1,12 @@
 import { useMemo } from 'react';
 import { useJustaName } from '../../providers';
-import { useQuery } from '@tanstack/react-query';
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  useQuery,
+} from '@tanstack/react-query';
 import { defaultOptions } from '../../query';
+import { useMountedAccount } from '../account';
 
 export const buildNonceKey = (
   backendUrl: string,
@@ -12,13 +17,15 @@ export const buildNonceKey = (
 export interface UseEnsNonceParams {
   signinNonceRoute?: string;
   backendUrl?: string;
-  address?: string;
+  // address?: string;
   enabled?: boolean;
 }
 
 export interface UseEnsNonceResult {
   nonce: string | undefined;
-  refetchNonce: () => void;
+  refetchNonce: (
+    options?: RefetchOptions | undefined
+  ) => Promise<QueryObserverResult<string, Error>>;
   isNoncePending: boolean;
   isNonceLoading: boolean;
   isNonceFetching: boolean;
@@ -26,6 +33,7 @@ export interface UseEnsNonceResult {
 
 export const useEnsNonce = (params?: UseEnsNonceParams): UseEnsNonceResult => {
   const { backendUrl, routes } = useJustaName();
+  const { address } = useMountedAccount();
   const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const _backendUrl = useMemo(
     () => params?.backendUrl || backendUrl || '',
@@ -44,11 +52,7 @@ export const useEnsNonce = (params?: UseEnsNonceParams): UseEnsNonceResult => {
     ...defaultOptions,
     retry: 0,
     staleTime: Infinity,
-    queryKey: buildNonceKey(
-      _backendUrl,
-      _signinNonceRoute,
-      params?.address || ''
-    ),
+    queryKey: buildNonceKey(_backendUrl, _signinNonceRoute, address || ''),
     queryFn: async () => {
       const nonceResponse = await fetch(nonceEndpoint, {
         credentials: 'include',
@@ -60,7 +64,7 @@ export const useEnsNonce = (params?: UseEnsNonceParams): UseEnsNonceResult => {
 
       return nonceResponse.text();
     },
-    enabled: Boolean(params?.address) && Boolean(_enabled),
+    enabled: Boolean(address) && Boolean(_enabled),
   });
 
   return {

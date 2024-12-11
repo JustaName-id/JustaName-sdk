@@ -18,6 +18,7 @@ import {
   UseEnsSignInResult,
   useEnsSignOut,
   UseEnsSignOutResult,
+  useMounted,
   useMountedAccount,
   useRecords,
   UseSubnameUpdateFunctionParams,
@@ -46,6 +47,7 @@ export interface JustWeb3ContextProps {
   ) => Promise<void>;
   handleJustWeb3Config: (config: JustWeb3ProviderConfig) => void;
   handleOpenEnsProfile: (ens: string, chainId?: ChainId) => void;
+  handleCloseEnsProfile: () => void;
   isSignInOpen: boolean;
   config: JustWeb3ProviderConfig;
   plugins: JustaPlugin[];
@@ -57,6 +59,7 @@ export const JustWeb3Context = createContext<JustWeb3ContextProps>({
   handleOpenSignInDialog: () => {},
   handleUpdateRecords: async () => {},
   handleOpenEnsProfile: () => {},
+  handleCloseEnsProfile: () => {},
   handleJustWeb3Config: () => {},
   config: {},
   plugins: [],
@@ -128,6 +131,10 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
     setEnsOpen({ ens, chainId });
   };
 
+  const handleCloseEnsProfile = () => {
+    setEnsOpen(null);
+  };
+
   useEffect(() => {
     if (!updateRecord && updateRecordPromiseResolveRef.current) {
       updateRecordPromiseResolveRef.current();
@@ -182,6 +189,22 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
     }
   };
 
+  const mounted = useMounted();
+  useEffect(() => {
+    if (mounted) {
+      if (window !== undefined) {
+        handleJustWeb3Config({
+          ...initialConfig,
+          config: {
+            domain: window?.location?.hostname,
+            origin: window?.location?.origin,
+            ...initialConfig.config,
+          },
+        });
+      }
+    }
+  }, [initialConfig, mounted]);
+
   return (
     <JustaNameProvider config={justanameConfig}>
       <JustWeb3ThemeProvider color={config.color}>
@@ -195,6 +218,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
             handleUpdateRecords: handleUpdateRecords,
             handleJustWeb3Config,
             handleOpenEnsProfile,
+            handleCloseEnsProfile,
           }}
         >
           <MAppsProvider
@@ -211,6 +235,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
                   : true
               }
               handleOpenDialog={handleOpenSignInDialog}
+              enableAuth={config.enableAuth}
             />
 
             <ProfileDialog
@@ -228,6 +253,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
               logo={config.logo}
               disableOverlay={config.disableOverlay}
               dev={config.dev}
+              local={!config.enableAuth}
             />
             <UpdateRecordDialog
               open={Boolean(updateRecord)}
@@ -260,6 +286,7 @@ export interface useJustWeb3 {
   refreshEnsAuth: () => void;
   connectedEns: UseEnsAuthReturn['connectedEns'];
   openEnsProfile: (ens: string, chainId?: ChainId) => void;
+  closeEnsProfile: () => void;
   updateRecords: (
     records: Omit<UseSubnameUpdateFunctionParams, 'ens'> & { ens?: string }
   ) => Promise<void>;
@@ -269,8 +296,13 @@ export interface useJustWeb3 {
 export const useJustWeb3 = (): useJustWeb3 => {
   const context = useContext(JustWeb3Context);
   const justanameContext = useContext(JustaNameContext);
-  const { signIn, isSignInPending } = useEnsSignIn();
-  const { signOut, isSignOutPending } = useEnsSignOut();
+
+  const { signIn, isSignInPending } = useEnsSignIn({
+    local: !context.config.enableAuth,
+  });
+  const { signOut, isSignOutPending } = useEnsSignOut({
+    local: !context.config.enableAuth,
+  });
   const {
     connectedEns,
     isLoggedIn,
@@ -278,8 +310,11 @@ export const useJustWeb3 = (): useJustWeb3 => {
     isEnsAuthLoading,
     isEnsAuthFetching,
     refreshEnsAuth,
-  } = useEnsAuth();
-  const { handleUpdateRecords, handleOpenEnsProfile } = context;
+  } = useEnsAuth({
+    local: !context.config.enableAuth,
+  });
+  const { handleUpdateRecords, handleOpenEnsProfile, handleCloseEnsProfile } =
+    context;
   const handleUpdateRecordsInternal = async (
     records: Omit<UseSubnameUpdateFunctionParams, 'ens'> & {
       ens?: string;
@@ -336,6 +371,7 @@ export const useJustWeb3 = (): useJustWeb3 => {
     connectedEns,
     refreshEnsAuth,
     openEnsProfile: handleOpenEnsProfile,
+    closeEnsProfile: handleCloseEnsProfile,
     chainId: justanameContext?.chainId,
   };
 };
@@ -343,10 +379,16 @@ export const useJustWeb3 = (): useJustWeb3 => {
 const CheckSession: FC<{
   openOnWalletConnect: boolean;
   handleOpenDialog: (open: boolean) => void;
-}> = ({ openOnWalletConnect, handleOpenDialog }) => {
-  const { connectedEns, isEnsAuthPending } = useEnsAuth();
+  enableAuth?: boolean;
+}> = ({ openOnWalletConnect, handleOpenDialog, enableAuth }) => {
+  const { connectedEns, isEnsAuthPending } = useEnsAuth({
+    local: !enableAuth,
+  });
   const { getRecords } = useRecords();
-  const { signOut } = useEnsSignOut();
+  const { signOut } = useEnsSignOut({
+    local: !enableAuth,
+  });
+
   const {
     address,
     isConnected: isConnectedAccount,
@@ -360,6 +402,22 @@ const CheckSession: FC<{
     [isConnectedAccount, address]
   );
   const isConnectedPrevious = usePreviousState(isConnected, [isConnected]);
+
+  useEffect(() => {
+    if (isConnecting || isReconnecting || isEnsAuthPending) {
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      if (!isConnected) {
+        signOut();
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isConnected, isConnecting, isEnsAuthPending, isReconnecting, signOut]);
 
   useEffect(() => {
     if (connectedEns && chainId) {

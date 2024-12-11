@@ -32,6 +32,11 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
     [config]
   );
 
+  const xmtpPluginEnabled = useMemo(
+    () => config.plugins?.find((p) => p.name === 'XMTPPlugin'),
+    [config]
+  );
+
   const codeSnippet = useMemo(() => {
     const plugins = [];
 
@@ -55,6 +60,10 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
       plugins.push(
         "%%TalentProtocolPlugin({ apiKey: '<YOUR_TALENT_PROTOCOL_API_KEY>' })%%"
       );
+    }
+
+    if (xmtpPluginEnabled) {
+      plugins.push("%%XMTPPlugin('production')%%");
     }
 
     return `
@@ -94,8 +103,11 @@ ${
 }
 ${
   talentProtocolPluginEnabled
-    ? "import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';"
+    ? `import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';`
     : ''
+}
+${
+  xmtpPluginEnabled ? "import { XMTPPlugin } from '@justweb3/xmtp-plugin';" : ''
 }
 
 export const App: React.FC = () => {
@@ -163,6 +175,7 @@ export default App;`.trim();
     justVerifiedEnabled,
     poapPluginEnabled,
     talentProtocolPluginEnabled,
+    xmtpPluginEnabled,
   ]);
 
   const code = useMemo(() => {
@@ -172,9 +185,11 @@ export default App;`.trim();
   }, [codeSnippet]);
 
   const dependencies = useMemo(() => {
-    return `yarn add ${justVerifiedEnabled ? '@justverified/plugin' : ''} ${
-      poapPluginEnabled ? '@justweb3/poap-plugin' : ''
-    } ${efpPluginEnabled ? '@justweb3/efp-plugin' : ''}
+    return `yarn add ${xmtpPluginEnabled ? '@justweb3/xmtp-plugin' : ''} ${
+      justVerifiedEnabled ? '@justverified/plugin' : ''
+    } ${poapPluginEnabled ? '@justweb3/poap-plugin' : ''} ${
+      efpPluginEnabled ? '@justweb3/efp-plugin' : ''
+    }
      ${talentProtocolPluginEnabled ? '@justweb3/talent-protocol-plugin' : ''}
      @justweb3/widget viem wagmi @rainbow-me/rainbowkit @tanstack/react-query ethers`;
   }, [
@@ -182,6 +197,7 @@ export default App;`.trim();
     justVerifiedEnabled,
     poapPluginEnabled,
     talentProtocolPluginEnabled,
+    xmtpPluginEnabled,
   ]);
 
   const handleDependenciesCopy = () => {
@@ -194,7 +210,7 @@ export default App;`.trim();
 
   return (
     <div
-      className={`h-full mobile:w-[30%] min-w-[300px] border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto ${
+      className={`h-full mobile:w-[calc(100% - 1.25rem)]  border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto ${
         mobile ? 'pb-5' : 'py-5'
       } px-2.5 gap-5 justify-between`}
     >
@@ -209,10 +225,10 @@ export default App;`.trim();
       <div className="flex flex-col justify-between">
         <p className="text-sm font-medium leading-[140%]">Dependencies</p>
 
-        <div className="flex p-2 bg-gray-100 rounded-md pr-[46px] relative">
+        <div className="flex p-2 bg-gray-100 rounded-md pr-[46px] relative max-w-full overflow-hidden">
           <div
             className={
-              'w-full flex justify-between items-center  overflow-x-scroll'
+              'max-w-full flex justify-between items-center  overflow-x-scroll'
             }
           >
             <span className="text-xs text-gray-500 whitespace-nowrap">
@@ -239,39 +255,41 @@ export default App;`.trim();
           Copy
         </button>
       </div>
-      <Highlight code={code} language="tsx" theme={themes.vsLight}>
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre
-            className={`${className} relative`}
-            style={{ ...style, fontSize: '12px' }}
-          >
-            {tokens.map((line, i) => (
-              <div
-                key={i}
-                {...getLineProps({ line })}
-                style={{ display: 'table-row' }}
-              >
-                <span
-                  style={{
-                    display: 'table-cell',
-                    textAlign: 'right',
-                    paddingRight: '1em',
-                    userSelect: 'none',
-                    opacity: 0.5,
-                  }}
+      <div className="max-w-full overflow-x-scroll">
+        <Highlight code={code} language="tsx" theme={themes.vsLight}>
+          {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            <pre
+              className={`${className} relative`}
+              style={{ ...style, fontSize: '12px' }}
+            >
+              {tokens.map((line, i) => (
+                <div
+                  key={i}
+                  {...getLineProps({ line })}
+                  style={{ display: 'table-row' }}
                 >
-                  {i + 1}
-                </span>
-                <span style={{ display: 'table-cell' }}>
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token })} />
-                  ))}
-                </span>
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
+                  <span
+                    style={{
+                      display: 'table-cell',
+                      textAlign: 'right',
+                      paddingRight: '1em',
+                      userSelect: 'none',
+                      opacity: 0.5,
+                    }}
+                  >
+                    {i + 1}
+                  </span>
+                  <span style={{ display: 'table-cell' }}>
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </span>
+                </div>
+              ))}
+            </pre>
+          )}
+        </Highlight>
+      </div>
     </div>
   );
 };
