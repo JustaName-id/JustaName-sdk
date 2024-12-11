@@ -43,54 +43,60 @@ yarn add @justaname.id/siwens
 
 ### Example Usage
 ```typescript
-import { SIWENS, InvalidDomainException, InvalidENSException, InvalidStatementException, InvalidTimeException } f, InvalidDomainException, InvalidENSException, InvalidStatementException, InvalidTimeException } from '@justaname.id/siwens';rom '@justaname.id/siwens';
-import { ethers } from 'ethers';
+import { SIWENS, InvalidENSException } from '@justaname.id/siwens';
+import { Wallet } from 'ethers';
 
 // Define your provider URL (e.g., Infura)
-const providerUrl = 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY';
+const infuraProjectId = 'YOUR_INFURA_PROJECT_ID';
+const providerUrl = 'https://mainnet.infura.io/v3/' + infuraProjectId;
 
-const signer = new ethers.Wallet('YOUR_PRIVATE_KEY_ENS_HOLDER')
+// const signer = Wallet.createRandom();
+const signer = new Wallet('YOUR_PRIVATE_KEY');
 
 async function signInUser() {
    const siwens = new SIWENS({
       params: {
-         domain: 'example.eth',       // The domain you're authenticating for
+         domain: 'example.com',       // The domain you're authenticating for
+         uri: 'https://example.com',  // The URI of the dApp
+         chainId: 1,                   // The chain ID of the network
          ttl: 3600000,                // Time-to-Live (TTL) in milliseconds (1 hour)
          ens: 'user.example.eth',     // The ENS name being used
          statement: 'Signing into dApp',  // Optional custom sign-in statement
+         address: signer.address
       },
       providerUrl
-    });
+   });
    const message = await siwens.prepareMessage();
    const signature = await signer.signMessage(message);
-   return signature;
+   return {signature, message};
 }
 
 // Verifying a user's sign-in request
-async function verifyUserSignature(signature: string, message: string) {
-    try {
-        const siwe =  new SIWENS({
-          params: message,
-          providerUrl
-        })
-       
-        const verification = await siwe.verifySignature({ 
-            signature: signature,
-        });
-        
-        console.log('ENS Sign-in successful!', verification.ens);
-    } catch (error) {
-        if (error instanceof InvalidENSException) {
-            console.error('ENS Verification Failed:', error.message);
-        } else {
-            console.error('Error during verification:', error.message);
-        }
-    }
+async function verifyUserSignature(signature, message) {
+   try {
+      const siwe =  new SIWENS({
+         params: message,
+         providerUrl
+      })
+
+      const verification = await siwe.verify({
+         signature: signature,
+      });
+
+      console.log('ENS Sign-in successful!', verification.ens);
+   } catch (error) {
+      console.error('Error during verification:', error);
+      if (error instanceof InvalidENSException) {
+         console.error('ENS Verification Failed:', error.message);
+      } else {
+         console.error('Error during verification:', error);
+      }
+   }
 }
 
 // Example usage
-signInUser().then(async (signature) => {
-    await verifyUserSignature(signature, 'Signing into dApp');
+signInUser().then(async ({message, signature}) => {
+   await verifyUserSignature(signature, message);
 });
 ```
 

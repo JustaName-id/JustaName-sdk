@@ -1,6 +1,7 @@
 .expandableCard {
-  height: 200px;
-  width: 400px;
+  height: 193px;
+  box-sizing: content-box;
+  width: 398px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -68,4 +69,9 @@
 .socialIconsContainer {
   display: flex;
   gap: 5px;
+}
+
+.socialIcon {
+  width: 12px;
+  height: 12px;
 }

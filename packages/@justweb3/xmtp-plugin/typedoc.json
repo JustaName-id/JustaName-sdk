@@ -1,0 +1,7 @@
+{
+  "$schema": "https://typedoc-plugin-markdown.org/schema.json",
+  "entryPoints": ["./src/index.ts"],
+  "plugin": ["typedoc-plugin-markdown"],
+  "out": "../../../docs/sdk/JustWeb3 Talent Protocol Plugin",
+  "cleanOutputDir": true
+}

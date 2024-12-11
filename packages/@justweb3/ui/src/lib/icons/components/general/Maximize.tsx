@@ -22,7 +22,7 @@ export default function Maximize(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#maximize_svg__a)">
         <path
-          fill="var(--justweb3-primary-color)"
+          fill={props.fill || 'var(--justweb3-primary-color)'}
           d="M6.171 18.379v-6.364h2.051v4.313h4.313v2.05zm6.294-10.607v-2.05h6.364v6.363h-2.051V7.772z"
         />
       </g>

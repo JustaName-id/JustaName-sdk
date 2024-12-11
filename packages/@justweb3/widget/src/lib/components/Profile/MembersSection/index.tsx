@@ -33,6 +33,10 @@ const MembersSection: React.FC<MembersSectionProps> = ({
       .flatMap((sub) => sub.ens);
   }, [data]);
 
+  const subnameRecords = useMemo(() => {
+    return data?.pages.flatMap((subnameData) => subnameData.data);
+  }, [data]);
+
   useEffect(() => {
     const element = scrollContainerRef.current;
 
@@ -65,6 +69,11 @@ const MembersSection: React.FC<MembersSectionProps> = ({
     50
   );
 
+  // useStandardRecordsBatch({
+  //   enses: subnames,
+  //   chainId: chainId as ChainId,
+  // });
+
   return (
     <div className={styles.container} ref={scrollContainerRef}>
       {subnames?.map((subname) => (
@@ -73,9 +82,14 @@ const MembersSection: React.FC<MembersSectionProps> = ({
           className={styles.memberCard}
         >
           <JustEnsCard
+            containerRef={scrollContainerRef}
             addressOrEns={subname}
             style={{ width: '100%' }}
             chainId={chainId}
+            prefetchedRecords={subnameRecords?.find(
+              (record) => record.ens === subname
+            )}
+            // skipFetch
           />
         </div>
       ))}

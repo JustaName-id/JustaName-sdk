@@ -24,6 +24,10 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from '@justweb3/ui';
 import React, { Fragment, useContext, useEffect, useMemo } from 'react';
 import { getChainIcon } from '../../../icons/chain-icons';
@@ -47,6 +51,9 @@ export interface ContentProps {
   plugins: JustaPlugin[];
 }
 
+// const ENS_MAINNET_RESOLVER = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
+// const ENS_SEPOLIA_RESOLVER = '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD';
+
 const ContentSection: React.FC<ContentProps> = ({
   fullSubname = '',
   chainId = 1,
@@ -61,12 +68,16 @@ const ContentSection: React.FC<ContentProps> = ({
   const { accountEnsNames } = useAccountEnsNames();
   const [tab, setTab] = React.useState('Main');
   const { openEnsProfile } = useJustWeb3();
-
+  // const { offchainResolvers } = useOffchainResolvers()
   const isProfileSelf = useMemo(() => {
-    const isEns = accountEnsNames?.map((ens) => ens.ens).includes(fullSubname);
+    const tempEns = accountEnsNames
+      ?.map((ens) => ens.ens)
+      .find((e) => e === fullSubname);
 
-    if (isEns) {
-      return chainId === connectedWalletChainId;
+    if (tempEns) {
+      if (!accountSubnames?.find((subname) => subname.ens === tempEns)) {
+        return chainId === connectedWalletChainId;
+      }
     }
 
     return (
@@ -187,13 +198,33 @@ const ContentSection: React.FC<ContentProps> = ({
           title={'Addresses'}
           items={sanitized?.allAddresses?.map((address) => {
             return (
-              <MetadataCard
-                key={address.id}
-                variant={'address'}
-                title={address.name}
-                value={address.value}
-                icon={getChainIcon(address.symbol)}
-              />
+              <TooltipProvider delayDuration={100}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div>
+                      <MetadataCard
+                        key={address.id}
+                        variant={'address'}
+                        title={address.name}
+                        value={address.value}
+                        icon={getChainIcon(address.symbol)}
+                      />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent style={{ zIndex: 9999 }}>
+                    <P
+                      style={{
+                        fontSize: '9px',
+                        fontWeight: 900,
+                        lineHeight: '150%',
+                        color: 'inherit',
+                      }}
+                    >
+                      {address.symbol.toUpperCase()}: {address.value}
+                    </P>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             );
           })}
         />
@@ -296,18 +327,52 @@ const ContentSection: React.FC<ContentProps> = ({
             zIndex: 1,
           }}
         >
-          <Avatar
-            src={sanitizeEnsImage({
-              image: sanitized?.avatar,
-              name: fullSubname,
-              chainId,
-            })}
-            size={74}
-            borderSize={'4px'}
-            style={{
-              margin: '0 15px',
-            }}
-          />
+          <div style={{ display: 'flex' }}>
+            <Avatar
+              src={sanitizeEnsImage({
+                image: sanitized?.avatar,
+                name: fullSubname,
+                chainId,
+              })}
+              size={74}
+              borderSize={'4px'}
+              style={{
+                margin: '0 15px',
+              }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                height: 'fit-content',
+                marginLeft: '-35px',
+                marginTop: 'auto',
+                marginBottom: '5px',
+              }}
+            >
+              {plugins.map((plugin) => {
+                const component = plugin.components?.Badge;
+                if (!component) {
+                  return null;
+                }
+                const componentApi = component(
+                  createPluginApi(plugin.name),
+                  fullSubname,
+                  chainId,
+                  sanitized.ethAddress.value
+                );
+
+                if (!componentApi) {
+                  return null;
+                }
+
+                return (
+                  <Fragment key={'profile-badge-' + plugin.name + fullSubname}>
+                    {componentApi}
+                  </Fragment>
+                );
+              })}
+            </div>
+          </div>
           {communityName.length > 0 && (
             <button
               onClick={() => {

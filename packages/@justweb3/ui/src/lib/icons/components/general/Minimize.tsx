@@ -22,7 +22,7 @@ export default function Minimize(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#minimize_svg__a)">
         <path
-          fill="var(--justweb3-primary-color)"
+          fill={props.fill || 'var(--justweb3-primary-color)'}
           d="M4.651 15.965v-1.98h6.364v6.364h-1.98v-4.384zm9.334-4.95V4.651h1.98v4.384h4.384v1.98z"
         />
       </g>

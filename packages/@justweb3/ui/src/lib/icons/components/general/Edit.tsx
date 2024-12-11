@@ -22,7 +22,7 @@ export default function Edit(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#edit_svg__a)">
         <path
-          fill="var(--justweb3-primary-color)"
+          fill={props.fill || 'var(--justweb3-primary-color)'}
           d="M3.625 11.875h.89l6.11-6.11-.89-.89-6.11 6.11zm-1.25 1.25v-2.656l8.25-8.235q.188-.171.414-.265t.477-.094.484.094.406.281l.86.875q.188.172.273.406a1.35 1.35 0 0 1 0 .946q-.086.226-.273.414L5.03 13.125zm7.797-7.797-.438-.453.891.89z"
         />
       </g>

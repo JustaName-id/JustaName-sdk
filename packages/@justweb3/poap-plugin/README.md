@@ -34,7 +34,10 @@ const justweb3Config = {
     signInTtl: 86400000,
   },
   plugins: [
-    POAPPlugin, // Enable the POAP Plugin
+    POAPPlugin({
+      apiKey: "<YOUR_API_KEY>", // # Optional: Calls the Talent Protocol API from the client side
+      backendUrl: "<YOUR_BACKEND_URL>", // # Optional: Calls the Talent Protocol API from the backend, best for production
+    }) 
   ],
   ensDomains: [
     {

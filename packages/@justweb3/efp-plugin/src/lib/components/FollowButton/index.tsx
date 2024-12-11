@@ -6,16 +6,20 @@ import { useFollowState } from '../../hooks/useFollowState';
 
 interface FollowButtonProps {
   ens: string;
+  address: string;
 }
 
-export const FollowButton: React.FC<FollowButtonProps> = ({ ens }) => {
-  const { address } = useMountedAccount();
+export const FollowButton: React.FC<FollowButtonProps> = ({ ens, address }) => {
+  const { address: ownAddress } = useMountedAccount();
   const { followState, isFollowStateLoading } = useFollowState({
     addressOrEns1: address,
-    addressOrEns2: ens,
+    addressOrEns2: ownAddress,
   });
+  if (ownAddress === address) {
+    return null;
+  }
 
-  if (!address) {
+  if (!ownAddress) {
     return (
       <a
         href={'https://ethfollow.xyz/' + ens}

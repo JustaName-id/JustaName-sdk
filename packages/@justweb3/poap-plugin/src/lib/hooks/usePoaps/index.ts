@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { POAP } from '../../types';
-import { defaultQueryConfig } from '@justaname.id/react';
+import { defaultOptions } from '@justaname.id/react';
 import axios from 'axios';
 
 export const getPoaps = async (
@@ -52,7 +52,7 @@ export const usePoaps = ({
   backendUrl,
 }: UsePoapsParams): UsePoapsResult => {
   const query = useQuery({
-    ...defaultQueryConfig,
+    ...defaultOptions,
     retry: 3,
     retryDelay: 1000,
     queryKey: [...buildPoapsQueryKey(address), apiKey, backendUrl],

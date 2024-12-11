@@ -1,3 +1,128 @@
+## 0.2.155 (2024-12-03)
+
+
+### 🚀 Features
+
+- sign in optional ([3df90a7](https://github.com/JustaName-id/JustaName-sdk/commit/3df90a7))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.88
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.154 (2024-12-02)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.87
+
+## 0.2.153 (2024-12-01)
+
+
+### 🚀 Features
+
+- support ethers 5 and ethers 6 ([f82ab13](https://github.com/JustaName-id/JustaName-sdk/commit/f82ab13))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.86
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.152 (2024-11-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.85
+
+## 0.2.151 (2024-11-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.84
+
+## 0.2.150 (2024-11-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.83
+
+## 0.2.149 (2024-11-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.82
+
+## 0.2.148 (2024-11-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.81
+
+## 0.2.147 (2024-11-29)
+
+
+### 🚀 Features
+
+- efp ([36fcc153](https://github.com/JustaName-id/JustaName-sdk/commit/36fcc153))
+
+- console fixes ([358b3a0e](https://github.com/JustaName-id/JustaName-sdk/commit/358b3a0e))
+
+- added docs and the sign in should only show ens set to default resolver or justaname resolver only ([a3bcecaa](https://github.com/JustaName-id/JustaName-sdk/commit/a3bcecaa))
+
+- sdk signin fix for aa wallets ([52944a72](https://github.com/JustaName-id/JustaName-sdk/commit/52944a72))
+
+- enabled in hooks and siwens fix and coinbase fix ([c3fb455e](https://github.com/JustaName-id/JustaName-sdk/commit/c3fb455e))
+
+- cache provider url to reduce calls ([d4943d0b](https://github.com/JustaName-id/JustaName-sdk/commit/d4943d0b))
+
+
+### 🩹 Fixes
+
+- update rest call and ui fixes ([81b05f29](https://github.com/JustaName-id/JustaName-sdk/commit/81b05f29))
+
+- justaname network and widget package json ([6afe04ce](https://github.com/JustaName-id/JustaName-sdk/commit/6afe04ce))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.80
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- HadiKhai
+
+## 0.2.146 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.79
+
+## 0.2.145 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.78
+
 ## 0.2.144 (2024-11-15)
 
 

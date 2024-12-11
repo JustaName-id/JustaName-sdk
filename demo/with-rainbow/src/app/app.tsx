@@ -14,6 +14,7 @@ import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { EFPPlugin } from '@justweb3/efp-plugin';
+import { XMTPPlugin } from '@justweb3/xmtp-plugin';
 import { JustVerifiedPlugin } from '@justverified/plugin';
 
 const queryClient = new QueryClient();
@@ -35,7 +36,11 @@ const JustaNameConfig: JustWeb3ProviderConfig = {
     },
   ],
   openOnWalletConnect: true,
-  plugins: [EFPPlugin, JustVerifiedPlugin(['github', 'email', 'discord'])],
+  plugins: [
+    XMTPPlugin,
+    EFPPlugin,
+    JustVerifiedPlugin(['github', 'email', 'discord']),
+  ],
   dev: import.meta.env.VITE_APP_DEV === 'true',
   allowedEns: 'all',
 };

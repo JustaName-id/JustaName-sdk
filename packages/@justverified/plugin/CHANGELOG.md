@@ -1,3 +1,78 @@
+## 0.0.93 (2024-12-03)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.92 (2024-12-02)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.91 (2024-12-01)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.90 (2024-11-29)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.89 (2024-11-29)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.88 (2024-11-29)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.87 (2024-11-29)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.86 (2024-11-29)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.85 (2024-11-29)
+
+
+### 🚀 Features
+
+- remove mapps from justverified ([2898c521](https://github.com/JustaName-id/JustaName-sdk/commit/2898c521))
+
+- efp ([36fcc153](https://github.com/JustaName-id/JustaName-sdk/commit/36fcc153))
+
+- efp and storybook for react sdk ([f0c5c7a0](https://github.com/JustaName-id/JustaName-sdk/commit/f0c5c7a0))
+
+- console fixes ([358b3a0e](https://github.com/JustaName-id/JustaName-sdk/commit/358b3a0e))
+
+- added docs and the sign in should only show ens set to default resolver or justaname resolver only ([a3bcecaa](https://github.com/JustaName-id/JustaName-sdk/commit/a3bcecaa))
+
+- move justweb3 to peer dep in the plugins ([316047cb](https://github.com/JustaName-id/JustaName-sdk/commit/316047cb))
+
+- rainbow and privy examples ([fb2aa7dc](https://github.com/JustaName-id/JustaName-sdk/commit/fb2aa7dc))
+
+- dialog fixes and logo needs to be fixed ([fad47312](https://github.com/JustaName-id/JustaName-sdk/commit/fad47312))
+
+- **widget:** mobile dialogs ([#51](https://github.com/JustaName-id/JustaName-sdk/pull/51))
+
+
+### 🩹 Fixes
+
+- update rest call and ui fixes ([81b05f29](https://github.com/JustaName-id/JustaName-sdk/commit/81b05f29))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+- HadiKhai
+
+## 0.0.84 (2024-11-15)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.83 (2024-11-15)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
 ## 0.0.82 (2024-11-15)
 
 This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.

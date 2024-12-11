@@ -1,0 +1,10 @@
+<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="create_new_folder">
+<mask id="mask0_3905_2409" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="15">
+<rect id="Bounding box" width="15" height="15" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_3905_2409)">
+<path id="create_new_folder_2" d="M8.75 10H10V8.75H11.25V7.5H10V6.25H8.75V7.5H7.5V8.75H8.75V10ZM2.5 12.5C2.15625 12.5 1.86198 12.3776 1.61719 12.1328C1.3724 11.888 1.25 11.5938 1.25 11.25V3.75C1.25 3.40625 1.3724 3.11198 1.61719 2.86719C1.86198 2.6224 2.15625 2.5 2.5 2.5H6.25L7.5 3.75H12.5C12.8438 3.75 13.138 3.8724 13.3828 4.11719C13.6276 4.36198 13.75 4.65625 13.75 5V11.25C13.75 11.5938 13.6276 11.888 13.3828 12.1328C13.138 12.3776 12.8438 12.5 12.5 12.5H2.5Z" fill="var(--justweb3-primary-color)"/>
+</g>
+</g>
+</svg>

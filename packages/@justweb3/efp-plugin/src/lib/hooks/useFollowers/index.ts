@@ -5,6 +5,7 @@ import {
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import axios from 'axios';
+import { defaultOptions } from '@justaname.id/react';
 
 export const buildFollowersQueryKey = (addressOrEns: string | undefined) => {
   return ['EFP_FOLLOWERS', addressOrEns];
@@ -55,11 +56,12 @@ export const useFollowers = ({
   addressOrEns,
 }: UseFollowersParams): UseFollowersResult => {
   const query = useInfiniteQuery({
+    ...defaultOptions,
     queryKey: buildFollowersQueryKey(addressOrEns),
     queryFn: async ({ pageParam: { offset, limit } }) => {
       return getFollowers(addressOrEns, limit, offset);
     },
-    initialPageParam: { offset: 0, limit: 100 },
+    initialPageParam: { offset: 0, limit: 30 },
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.followers.length < 20) {
         return undefined;

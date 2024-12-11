@@ -1,10 +1,12 @@
 import { Address } from 'viem';
-import { getName } from '@ensdomains/ensjs/public';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ChainId } from '@justaname.id/sdk';
 import { useJustaName } from '../../providers';
 import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { defaultOptions } from '../../query';
+import { getName } from '@ensdomains/ensjs/public';
+import { PrimaryNameTaskQueue } from './primary-name-task-queue';
+import { buildPrimaryNameBatchKey } from './usePrimaryNameBatch';
 
 export const buildPrimaryName = (
   address: string,
@@ -12,7 +14,7 @@ export const buildPrimaryName = (
 ) => ['PRIMARY_NAME', address, chainId];
 
 export interface UsePrimaryNameParams {
-  address?: Address;
+  address?: string;
   chainId?: ChainId;
   enabled?: boolean;
 }
@@ -58,33 +60,54 @@ export const usePrimaryName = (
 
     let name = '';
 
-    const reverseResolution = await getName(ensClient, {
-      address: params?.address,
-    });
+    const primaryNames = queryClient.getQueryData(
+      buildPrimaryNameBatchKey(_chainId)
+    ) as Record<string, string>;
 
-    if (reverseResolution && reverseResolution?.name) {
-      name = reverseResolution.name;
-    } else {
-      const primaryNameGetByAddressResponse =
-        await justaname.subnames.getPrimaryNameByAddress({
-          address: params?.address,
-          chainId: _chainId,
-        });
-
-      if (primaryNameGetByAddressResponse) {
-        name = primaryNameGetByAddressResponse.name;
+    if (primaryNames && _params?.address) {
+      if (primaryNames[_params?.address]) {
+        return primaryNames[_params.address];
       }
     }
 
+    const primaryNameGetByAddressResponse =
+      await justaname.subnames.getPrimaryNameByAddress({
+        address: params?.address,
+        chainId: _chainId,
+      });
+    if (primaryNameGetByAddressResponse.name) {
+      name = primaryNameGetByAddressResponse.name;
+    } else {
+      const taskFn = () => {
+        if (!params?.address) {
+          throw new Error('Address is required');
+        }
+        return getName(ensClient, {
+          address: params?.address as Address,
+        });
+      };
+
+      const reverseResolution = await PrimaryNameTaskQueue.enqueue(taskFn);
+
+      if (reverseResolution && reverseResolution?.name) {
+        name = reverseResolution.name;
+      }
+    }
     return name;
   };
 
   const query = useQuery({
     ...defaultOptions,
+    retry: (_count, error) => {
+      if (error?.message.includes('PrimaryNameNotFound')) {
+        return false;
+      }
+      return _count < 3;
+    },
     queryKey: buildPrimaryName(params?.address || '', _chainId),
     queryFn: () =>
       getPrimaryName({
-        address: params?.address,
+        address: params?.address as Address,
       }),
     enabled:
       Boolean(params?.address) && Boolean(ensClient) && Boolean(_enabled),
