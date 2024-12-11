@@ -21,8 +21,8 @@ export default function Page() {
         <div className="mobile:hidden">
           <SectionSlider
             trigger={
-              <div className="py-[7px] px-2.5 bg-[#3280F4] font-xs font-black text-white border border-black rounded-[8px_8px_0px_0px] rotate-90">
-                Customise
+              <div className="py-[7px] px-2.5 bg-[#3280F4] font-xs font-black text-white border border-black rounded-[8px_8px_0px_0px]">
+                Customize
               </div>
             }
             side="left"
@@ -40,9 +40,12 @@ export default function Page() {
               maxWidth: `${leftWidth}%`,
             }}
           >
+            <h1 className={'text-xl font-black'}>Live Demo</h1>
             <JustWeb3Button>
               <ConnectButton />
             </JustWeb3Button>
+
+            <h1 className={'text-xl font-black'}>Profile Examples:</h1>
 
             <JustEnsCard addressOrEns={'justhadi.eth'} />
             <JustEnsCard addressOrEns={'justghadi.eth'} />
@@ -71,7 +74,7 @@ export default function Page() {
         <div className="mobile:hidden overflow-hidden w-full">
           <SectionSlider
             trigger={
-              <div className="py-[7px] px-2.5 bg-[#FEA801] font-xs font-black text-white border border-black rounded-[8px_8px_0px_0px] translate-y-[10px] -rotate-90">
+              <div className="py-[7px] px-2.5 bg-[#FEA801] font-xs font-black text-white border border-black rounded-[8px_8px_0px_0px] ">
                 Code Output
               </div>
             }
