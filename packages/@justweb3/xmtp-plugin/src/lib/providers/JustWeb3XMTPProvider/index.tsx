@@ -395,7 +395,6 @@ export const useJustWeb3XMTP = () => {
   const signer = useEthersSigner();
   const initializeXmtp = useCallback(
     async (skipIsInitializing = false) => {
-      console.log(client, isInitializing, signer, skipIsInitializing);
       try {
         if (client) {
           return;

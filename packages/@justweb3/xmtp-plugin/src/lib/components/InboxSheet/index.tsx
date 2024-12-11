@@ -92,17 +92,12 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
 
   const primaryNameConversations = useMemo(() => {
     if (!initialConversations) return;
-    console.log(
-      conversations?.map((convo) => convo.peerAddress),
-      initialConversations?.map((convo) => convo.peerAddress)
-    );
     if (conversations?.length > initialConversations?.length) {
       return conversations;
     }
 
     return initialConversations;
   }, [conversations, initialConversations]);
-  console.log(primaryNameConversations?.map((convo) => convo.peerAddress));
   const { allPrimaryNames } = usePrimaryNameBatch({
     addresses: primaryNameConversations?.map(
       (conversation) => conversation.peerAddress

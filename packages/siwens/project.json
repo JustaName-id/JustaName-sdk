@@ -1,0 +1,33 @@
+{
+  "name": "siwens",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/siwens/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx buildProject @justaname.id/siwens"
+          },
+          {
+            "command": "rm -rf ./dist && mkdir -p ./dist && cp -r ../@justaname.id/siwens/dist/* ./dist"
+          },
+          {
+            "command": "node update-package-json.js"
+          },
+          {
+            "command": "node copy-to-outside-dist.js"
+          },
+          {
+            "command": "rm -rf node_modules || rmdir /s /q node_modules"
+          }
+        ],
+        "cwd": "packages/siwens",
+        "parallel": false
+      }
+    }
+  }
+}

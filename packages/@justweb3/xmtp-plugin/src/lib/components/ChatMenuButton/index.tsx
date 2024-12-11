@@ -21,7 +21,6 @@ export const ChatMenuButton: React.FC<ChatMenuButtonProps> = ({
   const { client } = useClient();
 
   const handleChat = async () => {
-    console.log(client);
     if (!client) {
       initializeXmtp().then(() => {
         handleOpen(true);
