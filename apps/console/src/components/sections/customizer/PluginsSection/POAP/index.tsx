@@ -27,6 +27,7 @@ export const POAP = () => {
           (plugin) => plugin.name !== POAPPluginInstance.name
         ),
       });
+      getAnalyticsClient().track('POAP_DISABLED', {});
     }
   };
 

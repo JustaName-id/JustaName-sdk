@@ -80,7 +80,7 @@ export default function Page() {
               <ConnectButton />
             </JustWeb3Button>
 
-            <h1 className={'text-xl font-black'}>Profile Examples:</h1>
+            <h1 className={'text-xl font-black mt-5'}>Profile Examples:</h1>
 
             <div onClick={() => handleEnsClick('justhadi.eth')}>
               <JustEnsCard addressOrEns={'justhadi.eth'} />

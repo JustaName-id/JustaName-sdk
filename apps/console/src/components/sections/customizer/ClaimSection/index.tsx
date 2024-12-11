@@ -5,6 +5,7 @@ import { JustWeb3Context, useDebounce, useJustWeb3 } from '@justweb3/widget';
 import { Input } from '../../../ui/input';
 import axios from 'axios';
 import { ChainId } from '@justaname.id/sdk';
+import { getAnalyticsClient } from '../../../../analytics';
 
 export const ClaimSection = () => {
   const { config, handleJustWeb3Config } = useContext(JustWeb3Context);
@@ -52,12 +53,12 @@ export const ClaimSection = () => {
           ...(ens === 'jaw.eth' || ens === 'justan.eth'
             ? []
             : [
-                {
-                  ensDomain: ens,
-                  apiKey: apiKey,
-                  chainId: 11155111 as ChainId,
-                },
-              ]),
+              {
+                ensDomain: ens,
+                apiKey: apiKey,
+                chainId: 11155111 as ChainId,
+              },
+            ]),
         ],
       });
     }
@@ -80,8 +81,7 @@ export const ClaimSection = () => {
         };
         statusCode: number;
       }>(
-        `https://${
-          dev ? 'api-staging' : 'api'
+        `https://${dev ? 'api-staging' : 'api'
         }.justaname.id/ens/v1/ens/api-key`,
         {
           headers: {
@@ -90,6 +90,7 @@ export const ClaimSection = () => {
         }
       )
       .then((res) => {
+        getAnalyticsClient().track('ENS_BY_API_KEY_CALLED', {});
         setEnsByApiKey(res.data.result.data.domains);
       })
       .catch((err) => {
@@ -174,6 +175,9 @@ export const ClaimSection = () => {
                 href={'https://dashboard.justaname.id'}
                 target={'_blank'}
                 className={'text-primary'}
+                onClick={() => {
+                  getAnalyticsClient().track('DASHBOARD_LINK_CLICKED', {});
+                }}
               >
                 Dashboard
               </a>{' '}
@@ -186,9 +190,9 @@ export const ClaimSection = () => {
                   {index ===
                     ensByApiKey.filter((ens) => ens.chainId === chainId)
                       .length -
-                      1 && (
-                    <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
-                  )}
+                    1 && (
+                      <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
+                    )}
                   <OptionSelect key={ens.ens} label={ens.ens} value={ens.ens} />
                 </>
               ))}

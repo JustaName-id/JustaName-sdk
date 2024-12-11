@@ -74,26 +74,27 @@ export const JustVerified = () => {
           (plugin) => plugin.name !== 'JustVerifiedPlugin'
         ),
       });
+      getAnalyticsClient().track('JUST_VERIFIED_DISABLED', {});
     }
   };
 
 
-  const handleSocialEnabledAnalytics = (credential: Credentials) => {
+  const handleSocialEnabledAnalytics = (credential: Credentials, unCheck: boolean) => {
     switch (credential) {
       case 'twitter':
-        getAnalyticsClient().track('TWITTER_ENABLED', {});
+        getAnalyticsClient().track(unCheck ? 'TWITTER_DISABLED' : 'TWITTER_ENABLED', {});
         break;
       case 'telegram':
-        getAnalyticsClient().track('TELEGRAM_ENABLED', {});
+        getAnalyticsClient().track(unCheck ? 'TELEGRAM_DISABLED' : 'TELEGRAM_ENABLED', {});
         break;
       case 'github':
-        getAnalyticsClient().track('GITHUB_ENABLED', {});
+        getAnalyticsClient().track(unCheck ? 'GITHUB_DISABLED' : 'GITHUB_ENABLED', {});
         break;
       case 'discord':
-        getAnalyticsClient().track('DISCORD_ENABLED', {});
+        getAnalyticsClient().track(unCheck ? 'DISCORD_DISABLED' : 'DISCORD_ENABLED', {});
         break;
       case 'email':
-        getAnalyticsClient().track('EMAIL_ENABLED', {});
+        getAnalyticsClient().track(unCheck ? 'EMAIL_DISABLED' : 'EMAIL_ENABLED', {});
         break;
       default:
         break;
@@ -156,7 +157,7 @@ export const JustVerified = () => {
               onCheck={(platform) => {
                 if (justVerified) {
                   setJustVerified([...justVerified, platform as Credentials]);
-                  handleSocialEnabledAnalytics(platform as Credentials);
+                  handleSocialEnabledAnalytics(platform as Credentials, false);
                 }
               }}
               onUncheck={(platform) => {
@@ -164,6 +165,7 @@ export const JustVerified = () => {
                   setJustVerified(
                     justVerified.filter((verified) => verified !== platform)
                   );
+                  handleSocialEnabledAnalytics(platform as Credentials, true);
                 }
               }}
             />

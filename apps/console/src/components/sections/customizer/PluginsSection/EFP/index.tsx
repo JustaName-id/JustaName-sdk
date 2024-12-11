@@ -27,6 +27,7 @@ export const EFP = () => {
           (plugin) => plugin.name !== EFPPlugin.name
         ),
       });
+      getAnalyticsClient().track('EFP_DISABLED', {});
     }
   };
 

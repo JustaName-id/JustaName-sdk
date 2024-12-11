@@ -9,6 +9,7 @@ import { Switch } from '../../../ui/switch';
 import { useSwitchChain } from 'wagmi';
 import { useMountedAccount } from '@justaname.id/react';
 import { PluginsSection } from '../PluginsSection';
+import { getAnalyticsClient } from '../../../../analytics';
 
 interface CustomizerProps {
   mobile?: boolean;
@@ -30,9 +31,8 @@ export const Customizer = ({ mobile }: CustomizerProps) => {
 
   return (
     <div
-      className={`flex flex-col gap-[5px] min-w-[350px] mobile:w-[350px] border-r-[1px] pointer-events-auto ${
-        mobile ? 'pb-5' : 'py-5'
-      } px-2.5 mobile:max-h-[calc(100vh-60px)] overflow-y-auto `}
+      className={`flex flex-col gap-[5px] min-w-[350px] mobile:w-[350px] border-r-[1px] pointer-events-auto ${mobile ? 'pb-5' : 'py-5'
+        } px-2.5 mobile:max-h-[calc(100vh-60px)] overflow-y-auto `}
     >
       <div className="flex flex-col gap-2.5">
         <div className="flex flex-row items-center justify-between w-full py-[5px]">
@@ -46,6 +46,9 @@ export const Customizer = ({ mobile }: CustomizerProps) => {
             <Switch
               checked={chainId === 1}
               onCheckedChange={() => {
+                getAnalyticsClient().track('NETWORK_CHANGED', {
+                  chainId: chainId === 1 ? 11155111 : 1,
+                });
                 switchChainAsync({
                   chainId: chainId === 1 ? 11155111 : 1,
                 });
