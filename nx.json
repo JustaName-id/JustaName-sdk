@@ -160,8 +160,8 @@
     },
     "projectsRelationship": "independent",
     "projects": [
-      "packages/@justaname.id/sdk",
       "packages/@justaname.id/react",
+      "packages/@justaname.id/sdk",
       "packages/@justaname.id/siwens",
       "packages/@justweb3/ui",
       "packages/@justweb3/widget",

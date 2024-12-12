@@ -1,3 +1,19 @@
+## 0.0.92 (2024-12-12)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.91 (2024-12-11)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.90 (2024-12-11)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.89 (2024-12-11)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
 ## 0.0.88 (2024-12-03)
 
 

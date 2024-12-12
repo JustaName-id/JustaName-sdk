@@ -1,3 +1,53 @@
+## 0.3.162 (2024-12-12)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.159
+
+## 0.3.161 (2024-12-11)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.158
+
+## 0.3.160 (2024-12-11)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.157
+
+## 0.3.159 (2024-12-11)
+
+
+### 🚀 Features
+
+- basic but need to move to js sdk ([55edbf2](https://github.com/JustaName-id/JustaName-sdk/commit/55edbf2))
+
+- compute height for message, using justaname react hook for identity resolution and sign in fix ([bafad7b](https://github.com/JustaName-id/JustaName-sdk/commit/bafad7b))
+
+- chat from profile ([fb31ee7](https://github.com/JustaName-id/JustaName-sdk/commit/fb31ee7))
+
+- console ([3ade8be](https://github.com/JustaName-id/JustaName-sdk/commit/3ade8be))
+
+- xmtp fix nextjs config ([3900db0](https://github.com/JustaName-id/JustaName-sdk/commit/3900db0))
+
+- chat optimization ([4a3af5e](https://github.com/JustaName-id/JustaName-sdk/commit/4a3af5e))
+
+- siwens external package ([46e23cc](https://github.com/JustaName-id/JustaName-sdk/commit/46e23cc))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.156
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.3.158 (2024-12-03)
 
 

@@ -70,7 +70,7 @@ export const useUploadMedia = (
       // const baseUrl = 'http://localhost:3000';
       const baseUrl = dev
         ? 'https://api-staging.justaname.id'
-        : 'http://localhost:3000';
+        : 'https://api.justaname.id';
       const result = await axios.post<{
         result: {
           data: {
