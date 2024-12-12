@@ -1,3 +1,29 @@
+## 0.1.58 (2024-12-12)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.57 (2024-12-11)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.56 (2024-12-11)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.55 (2024-12-11)
+
+
+### 🚀 Features
+
+- basic but need to move to js sdk ([55edbf2](https://github.com/JustaName-id/JustaName-sdk/commit/55edbf2))
+
+- chat optimization ([4a3af5e](https://github.com/JustaName-id/JustaName-sdk/commit/4a3af5e))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.1.54 (2024-12-03)
 
 This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
