@@ -44,6 +44,7 @@
 
 * [Overview](wallet-providers/overview.md)
 * [RainbowKit](wallet-providers/rainbowkit.md)
+* [Capsule](wallet-providers/capsule.md)
 * [Privy](wallet-providers/privy.md)
 * [Coinbase Smart Wallet](wallet-providers/coinbase-smart-wallet.md)
 
