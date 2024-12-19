@@ -1,0 +1,28 @@
+{
+  "unversionedId": "home/use-cases/use-cases",
+  "id": "home/use-cases/use-cases",
+  "title": "Use Cases",
+  "description": "Use cases for JustaName",
+  "source": "@site/docs/home/use-cases/index.mdx",
+  "sourceDirName": "home/use-cases",
+  "slug": "/use-cases",
+  "permalink": "/use-cases",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "use-cases",
+    "title": "Use Cases",
+    "sidebar_label": "Use Cases",
+    "slug": "/use-cases"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Just A Name - How It Works",
+    "permalink": "/core-concepts/justaname"
+  },
+  "next": {
+    "title": "Wallets",
+    "permalink": "/use-cases/wallets"
+  }
+}

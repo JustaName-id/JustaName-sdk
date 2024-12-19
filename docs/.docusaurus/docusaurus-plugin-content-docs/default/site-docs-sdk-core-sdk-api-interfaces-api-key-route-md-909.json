@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/ApiKeyRoute",
+  "id": "sdk/core/sdk-api/interfaces/ApiKeyRoute",
+  "title": "Interface: ApiKeyRoute",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/ApiKeyRoute.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/ApiKeyRoute",
+  "permalink": "/sdk/core/sdk-api/interfaces/ApiKeyRoute",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "ApiKeyRoute",
+    "title": "Interface: ApiKeyRoute",
+    "sidebar_label": "ApiKeyRoute",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "ApiKeyResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/ApiKeyResponse"
+  },
+  "next": {
+    "title": "BaseResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/BaseResponse"
+  }
+}

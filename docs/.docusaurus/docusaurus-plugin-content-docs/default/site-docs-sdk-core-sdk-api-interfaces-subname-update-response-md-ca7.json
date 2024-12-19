@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SubnameUpdateResponse",
+  "id": "sdk/core/sdk-api/interfaces/SubnameUpdateResponse",
+  "title": "Interface: SubnameUpdateResponse",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SubnameUpdateResponse.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SubnameUpdateResponse",
+  "permalink": "/sdk/core/sdk-api/interfaces/SubnameUpdateResponse",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SubnameUpdateResponse",
+    "title": "Interface: SubnameUpdateResponse",
+    "sidebar_label": "SubnameUpdateResponse",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SubnameUpdateRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameUpdateRequest"
+  },
+  "next": {
+    "title": "SubnameUpdateRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameUpdateRoute"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "unversionedId": "api-reference/title",
+  "id": "api-reference/title",
+  "title": "Title",
+  "description": "description",
+  "source": "@site/docs/api-reference/title.info.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/title",
+  "permalink": "/api-reference/title",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "title",
+    "title": "Title",
+    "description": "description",
+    "sidebar_label": "Introduction",
+    "sidebar_position": 0,
+    "hide_title": true,
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "JustaName",
+    "permalink": "/api-reference"
+  },
+  "next": {
+    "title": "Siwe",
+    "permalink": "/api-reference/siwe"
+  }
+}

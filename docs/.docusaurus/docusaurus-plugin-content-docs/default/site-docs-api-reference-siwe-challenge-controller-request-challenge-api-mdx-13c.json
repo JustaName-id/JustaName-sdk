@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/siwe-challenge-controller-request-challenge",
+  "id": "api-reference/siwe-challenge-controller-request-challenge",
+  "title": "Request a challenge",
+  "description": "Request a challenge.",
+  "source": "@site/docs/api-reference/siwe-challenge-controller-request-challenge.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/siwe-challenge-controller-request-challenge",
+  "permalink": "/api-reference/siwe-challenge-controller-request-challenge",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "siwe-challenge-controller-request-challenge",
+    "title": "Request a challenge",
+    "description": "Request a challenge.",
+    "sidebar_label": "Request a challenge",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJytVttu4zYQ/ZUBn5JC8W2bbVdAH1InDym22YXj7Uu8WNASbTGVSJUXO4bhf+8MKVuKk924QBPAlsnhzOHMmTnaMl0Lw53U6jZnKbuXazEueFkKtRRjrZzR+Gy+GfGPF9YdtljCcmEzI2s6igcn0QA4ZHubHhrV3PBKOGEsSx++Jqzx87vONyzdhp/SCIzsjBcJyzCiUI62eF2XMgvI+o+WYmyZzQpRcXpym1pgVD1/FJmjOIbu4aSwtJvrikvVsbPOSLV8Afo62IFCiLgnnnhVl2TuECLbJYznuRHWvu3oqjHsOhk8DUfvfr58/8uvHwY/fqJQ2sjlKZA/RbtuoMK5Ou33S53xstDWpe8Gg+ATKyFDWQ9Ola/mwrxwOiZDkHkCawFalRuwvq61cXDjCmGEr+BPtFAC66tyuBe1LiWHKaaJ1s6GsNAGqmiSwHA4vLzEj7Bqo/H5M8h7C0LpXPk2wqmsBDgNH+VKwNl0+vEcEHEly1JagazJLZxV9jyBXCy4Lx1ICyPcVx5rCWcj+AneD/BjiKmB32A4GtADnujCiqsUOvjYL+x2SYeoD3t2tfQ4VK9NOVLdSRfuSi01OWqfq1o2S2y3i/5trZWN9B0NhoHFzzNQiLa1YM0tNL0kcqxWliGQhS/LDXXd/9RG1nHn7Vjn4rUCHdI2ijk7BhtPQ4bHQS8AiQT7W/ZYvHJI8pvNzN0JWA+pea2FWuLF2mH6lLOw0Z44ZeVSEZvW0hW0ZlrW8yzTXrl0ppoOn6mZ+lwKbkU85gokWoUbfBn4uRJGLja4zF1wT4FoHanS9zVeRcQI1s8bKHiNlcyxiPMNPHpM2pouEg4FywYCNADAW7wT/IGWV3c4twjQl8ltCt7ImfoLBy1WIIXhTMWmvr1OYRxJOVN3WmUiBUVfM3Vrrce4Vy6FawQ2UzdPtYxaANRvcZkd07/N9CkkjwWnegtjtHl7wN0hiUEuECSEE6CzzBuMnYCmsqyx4QOZ4m6T+94LmIE2+6inI50EVt6v+XKJLD922umIA4FP930f27R1Hlrf8SWJYzhMzlAuC01aXOMsDxLqCvzVt7jfb3r+IusIsRVmFQV2y7wpG0WwKAkIF8fS8oLXshe4RUrXkznbYRyaBpNWjm/2PdLKZ9TBjgz+F01rJe07AtXRp1YPGjloBm/CpFrowJkmw9PwfcyZ7q+ErWITkNveoJmGPKNJQ+mmrFY8zMGg+6++uhxH2LYj9XtvOg2rnXhy/bqk/GGwUI5tU0KkD5X48BJ08ayTKDFks93Ocbp8MeVuR8toaTbx3WnFjeRzSsPDV/RdCJ4ji6jqf4sNqXiEeDElJGReekL0QgF2yf7EFfKxdj+07RLy86f7KRrPm5e3KggDM3xNd8LPlM3wnyof0hbmcljfspKrpec0nVn0S3//AqDKksU=",
+    "sidebar_class_name": "post api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Siwe",
+    "permalink": "/api-reference/siwe"
+  },
+  "next": {
+    "title": "Sign Message",
+    "permalink": "/api-reference/siwe-sign-message"
+  }
+}

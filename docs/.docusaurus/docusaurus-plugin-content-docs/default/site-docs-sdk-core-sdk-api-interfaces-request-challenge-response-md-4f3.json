@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/RequestChallengeResponse",
+  "id": "sdk/core/sdk-api/interfaces/RequestChallengeResponse",
+  "title": "Interface: RequestChallengeResponse",
+  "description": "Represents the response to a request to challenge a specific address using SIWE.",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/RequestChallengeResponse.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/RequestChallengeResponse",
+  "permalink": "/sdk/core/sdk-api/interfaces/RequestChallengeResponse",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "RequestChallengeResponse",
+    "title": "Interface: RequestChallengeResponse",
+    "sidebar_label": "RequestChallengeResponse",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "RequestChallengeRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/RequestChallengeRequest"
+  },
+  "next": {
+    "title": "SIWEHeaders",
+    "permalink": "/sdk/core/sdk-api/interfaces/SIWEHeaders"
+  }
+}

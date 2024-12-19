@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SubnameGetBySubnameResponse",
+  "id": "sdk/core/sdk-api/interfaces/SubnameGetBySubnameResponse",
+  "title": "Interface: SubnameGetBySubnameResponse",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SubnameGetBySubnameResponse.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SubnameGetBySubnameResponse",
+  "permalink": "/sdk/core/sdk-api/interfaces/SubnameGetBySubnameResponse",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SubnameGetBySubnameResponse",
+    "title": "Interface: SubnameGetBySubnameResponse",
+    "sidebar_label": "SubnameGetBySubnameResponse",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SubnameGetBySubnameRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameGetBySubnameRequest"
+  },
+  "next": {
+    "title": "SubnameGetBySubnameRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameGetBySubnameRoute"
+  }
+}

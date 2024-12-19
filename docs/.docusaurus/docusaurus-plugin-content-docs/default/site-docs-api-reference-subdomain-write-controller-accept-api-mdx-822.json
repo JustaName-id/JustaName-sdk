@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/subdomain-write-controller-accept",
+  "id": "api-reference/subdomain-write-controller-accept",
+  "title": "Claim Subname",
+  "description": "Claim a reserved Subname.",
+  "source": "@site/docs/api-reference/subdomain-write-controller-accept.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/subdomain-write-controller-accept",
+  "permalink": "/api-reference/subdomain-write-controller-accept",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "subdomain-write-controller-accept",
+    "title": "Claim Subname",
+    "description": "Claim a reserved Subname.",
+    "sidebar_label": "Claim Subname",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJytVlFv2jAQ/iuRnzaJAtsjbx2rtGnqNgHTHhiaTHKAuyTObKeAIv777mwnMZBR1rWVWrDPd+f7Pn93FZMFKG6EzD8mbMSm5TKRGRf5dyUMjGVulExTUD95HENhWI8loGMlCjqB9uOUiyzikQIN6hGSCB3kPIM+WhZc4ScDSrPRvGK0jCd2N1qsc25KBWgjyMkGeALqzPdsA1FjSw4V/C6FAszTqBJ6TMcbyDgbVczsC/KtjRL5mh0OvSBcBlrz9TXB7p3l80PxJMFC6CtC3TrL/whViJtfsL8mVCGiT7D/t1ALZwzavJPJnixOz8bIDcgNbfGiSEVsSTR40BS4Onctlw8QE4EKRZQzAjTtlsgbd6mzJHoMcv3esrFzN97gDrG22cvLbIlVwD2PhIvhd7lS3BbMQKafzqwGszO0FPnMLp7FPoRlnrOWEs0ZrK0RJqVDngZ3eE8j7VkDO/P8nIkRXfk+8rTsKvFJso5QzjjIcoY5TSCWKqmz9OB/4HrztNcG4hDQFr4QLH//4wBBJo083Vo5QmpPHEsxqAurC5l72BNY8TI17uPpq/A6FW25jmISMdQuXaJXrVdlmtrn8kIU1wYVTI9l0kEXLMmOZwVd7u1w2KmA9nQU4/FIriKDS/Ut+8xd2V/ychYJN1fkKpJzPIMc2XDX79uwV7k7tMjdg+H2zCk7BDHA7jyBs7uzlQWlpOrK87h6nxHHSKyiXEb2RCTjuFQYthdJLKPaCg22nm43q9X/NEObXB31qiQnFpPplq/XHZIQ8KGB7yq3U8fP1q/lvOFrarDMM5pcYdfdSGrnhdQWFG7wnbKBrl0PmnZu27bv0KVKqZUYU+jRYIBprrGs1Gn6DyV+s30d4aLmQG9g0jaIu5ogoaAH/Gl1vF1s5Ht4JNfzQHkD40ZwhxTeqeTcC15r5nWuUaLFiVQFkijylbQcqkXO/j/lUPgN3WOl3Pqb/tALBI/p8REQVOyMW2nwBXDTUQ3Mie+q1ZeLY5QnOV15UKRURIxloao8sEipGlhSUwctXn1D6ONuVS25hm8qPRxoGVFTWLX5guqlBF/S/ecL9OqnCCpsIjRtIDwrnmq4kPurief26+hsYuvM3WF2PAfWwDEacp4dOxjgLkZuR8KXiRtMcxfjtsPAC8VtR7vLcZth8Siu2x477zf2ebUWZx2vPXFbi8ffbUMR+vplOkPjpR8kM9sImeJbkj/8O2I/8Be/SHtj24fsesVSnq9LQmrEnF/6+QOObl6W",
+    "sidebar_class_name": "post api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Verify a message",
+    "permalink": "/api-reference/siwe-verify-controller-verify"
+  },
+  "next": {
+    "title": "Reserve Subname",
+    "permalink": "/api-reference/subdomain-write-controller-api-reserve"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "unversionedId": "home/use-cases/embedded-wallets",
+  "id": "home/use-cases/embedded-wallets",
+  "title": "Embedded Wallets",
+  "description": "Streamlining Embedded Wallets for a Web2-Like Experience",
+  "source": "@site/docs/home/use-cases/02-embedded-wallets.md",
+  "sourceDirName": "home/use-cases",
+  "slug": "/use-cases/embedded-wallets",
+  "permalink": "/use-cases/embedded-wallets",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "id": "embedded-wallets",
+    "title": "Embedded Wallets",
+    "sidebar_label": "Embedded Wallets",
+    "slug": "/use-cases/embedded-wallets",
+    "description": "Streamlining Embedded Wallets for a Web2-Like Experience"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Wallets",
+    "permalink": "/use-cases/wallets"
+  },
+  "next": {
+    "title": "Exchanges",
+    "permalink": "/use-cases/exchanges"
+  }
+}

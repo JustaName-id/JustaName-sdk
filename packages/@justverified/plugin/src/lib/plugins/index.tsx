@@ -53,7 +53,7 @@ export const JustVerifiedPlugin = (
       return (
         <VerificationSection
           ens={ens}
-          credentials={['twitter', 'email', 'telegram', 'discord', 'github']}
+          credentials={['twitter', 'email', 'telegram', 'discord', 'github', 'openpassport']}
           chainId={chainId}
           mApp={mApp}
           verificationBackendUrl={verificationBackendUrl}

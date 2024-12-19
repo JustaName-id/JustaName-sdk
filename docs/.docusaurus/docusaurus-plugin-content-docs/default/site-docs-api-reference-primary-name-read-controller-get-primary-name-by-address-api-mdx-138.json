@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/primary-name-read-controller-get-primary-name-by-address",
+  "id": "api-reference/primary-name-read-controller-get-primary-name-by-address",
+  "title": "Get by Address",
+  "description": "Retrieves primary name for a given address",
+  "source": "@site/docs/api-reference/primary-name-read-controller-get-primary-name-by-address.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/primary-name-read-controller-get-primary-name-by-address",
+  "permalink": "/api-reference/primary-name-read-controller-get-primary-name-by-address",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "primary-name-read-controller-get-primary-name-by-address",
+    "title": "Get by Address",
+    "description": "Retrieves primary name for a given address",
+    "sidebar_label": "Get by Address",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJy9Vk1T2zAQ/SsanWDG5KMQCLmlKUN7KNMJ6YlhOoq9tkVtS0hywJPJf++uPxKTGCg99JJE0u7qvd23q6y50mCEkyr7FvAJ/2FkKkxxI1KYgwhmKnNGJQmYXxG41uHnYhoEBqzlHg/A+kZqioER5uCMhBVYpitzlqE9C5VhgkVyBRkTW1ctDB46MJZP7tacLDHE7tzAYy4NIDJncvC4pBseczDFwb2LGJrATIXM4bINAO3hWaQ6oQsGz8vL85EYhadiEM6G4y/js6vz8Xh86vvTYDQYn52NxMXl8GI6Rjfrx5AKPllzV2jytkgwi/hm420R+7GQlMAPIZ6RE5OBx56AqSwpmM21VsaxK0RvIE/Zd7TIwDGRBewWtEqkYAuwjvaOhmVS08rEY8PhcDTCj3LXVsbHbdqNQQelLE+XYJDSPTGwWmUWLJ0HEIo8cdXP/XS/KPCTsCwEh5ED5OH7WIcwT5KihxB8lBFkZRShdSL9UnD9B0uh1odw1PIBfEf6MCRPJysw1gmX25kK4BB6i+enwaBLHJU389G9EUhDtcc3Je+a6dsoAuH+AqsMOhTj1XrpOGg0/5rTV2HjzsNGeh3FbKvxjhDV93utDtvG3kVCDTjpykZpdfxUy3mdLroWjFHmENB+4m9QAkyGLFOs9GDK93ODiDymSORP0kJZiuo0RVAionrsgS+T3tz6LsB5WcrbJxFFHYloyWhb9XdD3laS3sXcUFgnIppcjQ8jJ4qFMy1WNE9xapZjzmHxeL9umBNKen9XAwtm1YzA3CRoGTun7aTfR6gRpvVEaNl7yHFFnj2sJDWqzEJVVqAGvii/9yvQXnmc7qn2h71B3ZnCJ9UTHa2sS0XZk/Vgu8ZBsyzYK8N+vevsj839WjQOnl1fJyg7klRJfV0n6463k9WSLBKPESZZrNdLYeGnSTYb2q6mLCUxkFYsE6p2KBILb6A+mtfCOGbvPyCdqH9D8eLJWokkJytOz8M/AflP78IbbHbP2Y7NPS2MJDqY43u0jfEPArYCJbxym2KLaNfyOhj2m3ZvXF8tsI/+AKkc7Pw=",
+    "sidebar_class_name": "get api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Available",
+    "permalink": "/api-reference/subdomain-read-controller-is-username-available"
+  },
+  "next": {
+    "title": "Set Primary Name",
+    "permalink": "/api-reference/primary-name-write-controller-set-primary-name"
+  }
+}

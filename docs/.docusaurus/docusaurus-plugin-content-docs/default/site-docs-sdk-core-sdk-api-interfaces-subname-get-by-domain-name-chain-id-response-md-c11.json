@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdResponse",
+  "id": "sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdResponse",
+  "title": "Interface: SubnameGetByDomainNameChainIdResponse",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdResponse.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdResponse",
+  "permalink": "/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdResponse",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SubnameGetByDomainNameChainIdResponse",
+    "title": "Interface: SubnameGetByDomainNameChainIdResponse",
+    "sidebar_label": "SubnameGetByDomainNameChainIdResponse",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SubnameGetByDomainNameChainIdRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdRequest"
+  },
+  "next": {
+    "title": "SubnameGetByDomainNameChainIdRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdRoute"
+  }
+}

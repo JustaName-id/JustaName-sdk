@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/Configuration",
+  "id": "sdk/core/sdk-api/interfaces/Configuration",
+  "title": "Interface: Configuration",
+  "description": "Properties",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/Configuration.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/Configuration",
+  "permalink": "/sdk/core/sdk-api/interfaces/Configuration",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "Configuration",
+    "title": "Interface: Configuration",
+    "sidebar_label": "Configuration",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "BaseResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/BaseResponse"
+  },
+  "next": {
+    "title": "IHeaders",
+    "permalink": "/sdk/core/sdk-api/interfaces/IHeaders"
+  }
+}

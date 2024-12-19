@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SubnameReserveResponse",
+  "id": "sdk/core/sdk-api/interfaces/SubnameReserveResponse",
+  "title": "Interface: SubnameReserveResponse",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SubnameReserveResponse.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SubnameReserveResponse",
+  "permalink": "/sdk/core/sdk-api/interfaces/SubnameReserveResponse",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SubnameReserveResponse",
+    "title": "Interface: SubnameReserveResponse",
+    "sidebar_label": "SubnameReserveResponse",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SubnameReserveRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameReserveRequest"
+  },
+  "next": {
+    "title": "SubnameReserveRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameReserveRoute"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/classes/JustaName",
+  "id": "sdk/core/sdk-api/classes/JustaName",
+  "title": "Class: JustaName",
+  "description": "The main class for the JustaName SDK.",
+  "source": "@site/docs/sdk/core/sdk-api/classes/JustaName.md",
+  "sourceDirName": "sdk/core/sdk-api/classes",
+  "slug": "/sdk/core/sdk-api/classes/JustaName",
+  "permalink": "/sdk/core/sdk-api/classes/JustaName",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "JustaName",
+    "title": "Class: JustaName",
+    "sidebar_label": "JustaName",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "Exports",
+    "permalink": "/sdk/core/sdk-api/modules"
+  },
+  "next": {
+    "title": "Siwe",
+    "permalink": "/sdk/core/sdk-api/classes/Siwe"
+  }
+}

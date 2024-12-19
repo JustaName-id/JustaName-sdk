@@ -1,0 +1,30 @@
+{
+  "unversionedId": "home/use-cases/exchanges",
+  "id": "home/use-cases/exchanges",
+  "title": "Exchanges",
+  "description": "Enhance User Experience and Simplify Deposits/Withdrawals on Exchanges with JustaName",
+  "source": "@site/docs/home/use-cases/03-exchange.md",
+  "sourceDirName": "home/use-cases",
+  "slug": "/use-cases/exchanges",
+  "permalink": "/use-cases/exchanges",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "id": "exchanges",
+    "title": "Exchanges",
+    "sidebar_label": "Exchanges",
+    "slug": "/use-cases/exchanges",
+    "description": "Enhance User Experience and Simplify Deposits/Withdrawals on Exchanges with JustaName"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Embedded Wallets",
+    "permalink": "/use-cases/embedded-wallets"
+  },
+  "next": {
+    "title": "Social Hub",
+    "permalink": "/use-cases/social-hub"
+  }
+}

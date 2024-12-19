@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SubnameRevokeRequest",
+  "id": "sdk/core/sdk-api/interfaces/SubnameRevokeRequest",
+  "title": "Interface: SubnameRevokeRequest",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SubnameRevokeRequest.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SubnameRevokeRequest",
+  "permalink": "/sdk/core/sdk-api/interfaces/SubnameRevokeRequest",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SubnameRevokeRequest",
+    "title": "Interface: SubnameRevokeRequest",
+    "sidebar_label": "SubnameRevokeRequest",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SubnameReserveRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameReserveRoute"
+  },
+  "next": {
+    "title": "SubnameRevokeResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameRevokeResponse"
+  }
+}

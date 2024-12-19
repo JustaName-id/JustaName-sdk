@@ -1,0 +1,609 @@
+{
+  "/__docusaurus/debug-417": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---docusaurus-debug-6-bf-8d5"
+    }
+  },
+  "/__docusaurus/debug/config-297": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---docusaurus-debug-6-bf-8d5"
+    }
+  },
+  "/__docusaurus/debug/content-337": {
+    "__comp": "__comp---theme-debug-contentba-8-ce7",
+    "__context": {
+      "plugin": "plugin---docusaurus-debug-6-bf-8d5"
+    },
+    "allContent": "allContent---docusaurus-debug-content-246-9aa"
+  },
+  "/__docusaurus/debug/globalData-cbc": {
+    "__comp": "__comp---theme-debug-global-dataede-0fa",
+    "__context": {
+      "plugin": "plugin---docusaurus-debug-6-bf-8d5"
+    }
+  },
+  "/__docusaurus/debug/metadata-c89": {
+    "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
+    "__context": {
+      "plugin": "plugin---docusaurus-debug-6-bf-8d5"
+    }
+  },
+  "/__docusaurus/debug/registry-d9c": {
+    "__comp": "__comp---theme-debug-registry-679-501",
+    "__context": {
+      "plugin": "plugin---docusaurus-debug-6-bf-8d5"
+    }
+  },
+  "/__docusaurus/debug/routes-03f": {
+    "__comp": "__comp---theme-debug-routes-946-699",
+    "__context": {
+      "plugin": "plugin---docusaurus-debug-6-bf-8d5"
+    }
+  },
+  "/blog-870": {
+    "__comp": "__comp---theme-blog-list-pagea-6-a-7ba",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "items": [
+      {
+        "content": "content---blog-766-e3c"
+      },
+      {
+        "content": "content---blogf-4-f-cd7"
+      },
+      {
+        "content": "content---blog-871-381"
+      },
+      {
+        "content": "content---blog-925-e00"
+      }
+    ],
+    "metadata": "metadata---blogb-2-b-df1"
+  },
+  "/blog/archive-200": {
+    "__comp": "__comp---theme-blog-archive-page-9-e-4-1d8",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "archive": "archive---blog-archiveb-2-f-393"
+  },
+  "/blog/first-blog-post-e18": {
+    "__comp": "__comp---theme-blog-post-pageccc-cab",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "content": "content---blog-first-blog-poste-27-4a1"
+  },
+  "/blog/long-blog-post-9e8": {
+    "__comp": "__comp---theme-blog-post-pageccc-cab",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "content": "content---blog-long-blog-post-736-bc7"
+  },
+  "/blog/mdx-blog-post-24e": {
+    "__comp": "__comp---theme-blog-post-pageccc-cab",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "content": "content---blog-mdx-blog-post-593-37b"
+  },
+  "/blog/tags-88e": {
+    "__comp": "__comp---theme-blog-tags-list-page-01-a-d0b",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "tags": "tags---blog-tagsa-70-da2"
+  },
+  "/blog/tags/docusaurus-d0a": {
+    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "items": [
+      {
+        "content": "content---blog-766-e3c"
+      },
+      {
+        "content": "content---blogf-4-f-cd7"
+      },
+      {
+        "content": "content---blog-871-381"
+      },
+      {
+        "content": "content---blog-925-e00"
+      }
+    ],
+    "tag": "tag---blog-tags-docusaurusa-80-728",
+    "listMetadata": "listMetadata---blog-tags-docusaurus-608-c09"
+  },
+  "/blog/tags/facebook-4a4": {
+    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "items": [
+      {
+        "content": "content---blog-766-e3c"
+      }
+    ],
+    "tag": "tag---blog-tags-facebook-031-c52",
+    "listMetadata": "listMetadata---blog-tags-facebook-096-d31"
+  },
+  "/blog/tags/hello-e9e": {
+    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "items": [
+      {
+        "content": "content---blog-766-e3c"
+      },
+      {
+        "content": "content---blog-871-381"
+      }
+    ],
+    "tag": "tag---blog-tags-hello-30-a-bed",
+    "listMetadata": "listMetadata---blog-tags-hello-664-70a"
+  },
+  "/blog/tags/hola-576": {
+    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "items": [
+      {
+        "content": "content---blog-925-e00"
+      }
+    ],
+    "tag": "tag---blog-tags-holae-16-18a",
+    "listMetadata": "listMetadata---blog-tags-hola-4-c-9-a24"
+  },
+  "/blog/welcome-7fe": {
+    "__comp": "__comp---theme-blog-post-pageccc-cab",
+    "__context": {
+      "plugin": "plugin---blogf-2-b-6aa"
+    },
+    "sidebar": "sidebar---blog-814-8ac",
+    "content": "content---blog-welcomed-9-f-ffb"
+  },
+  "/-69f": {
+    "__comp": "__comp---theme-doc-page-1-be-9be",
+    "__context": {
+      "plugin": "plugin---cff-471"
+    },
+    "versionMetadata": "versionMetadata---935-fcf"
+  },
+  "/-9d7": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---dc-2-3a4"
+  },
+  "/admin-dashboard-4df": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---admin-dashboarda-98-6bb"
+  },
+  "/api-reference-6df": {
+    "__comp": "__comp---theme-doc-category-generated-index-page-14-e-640",
+    "categoryGeneratedIndex": "categoryGeneratedIndex---api-reference-5-e-7-cf9"
+  },
+  "/api-reference/primary-name-read-controller-get-primary-name-by-address-879": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-primary-name-read-controller-get-primary-name-by-address-138-b5c"
+  },
+  "/api-reference/primary-name-write-controller-set-primary-name-a00": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-primary-name-write-controller-set-primary-name-27-a-ed0"
+  },
+  "/api-reference/siwe-dd6": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-siwefc-2-72d"
+  },
+  "/api-reference/siwe-challenge-controller-request-challenge-888": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-siwe-challenge-controller-request-challenge-13-c-a02"
+  },
+  "/api-reference/siwe-sign-message-9a6": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-siwe-sign-message-19-b-e85"
+  },
+  "/api-reference/siwe-verify-controller-verify-375": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-siwe-verify-controller-verify-197-f63"
+  },
+  "/api-reference/subdomain-read-controller-find-all-by-address-43a": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-read-controller-find-all-by-address-2-c-1-46b"
+  },
+  "/api-reference/subdomain-read-controller-find-all-by-domain-name-and-chain-id-f45": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-read-controller-find-all-by-domain-name-and-chain-id-98-d-090"
+  },
+  "/api-reference/subdomain-read-controller-find-by-domain-name-and-name-and-chain-id-36f": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-read-controller-find-by-domain-name-and-name-and-chain-id-957-85b"
+  },
+  "/api-reference/subdomain-read-controller-find-by-full-domain-and-chain-id-af5": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-read-controller-find-by-full-domain-and-chain-id-68-f-06b"
+  },
+  "/api-reference/subdomain-read-controller-get-invitations-0bd": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-read-controller-get-invitations-1-f-5-83c"
+  },
+  "/api-reference/subdomain-read-controller-is-username-available-8a1": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-read-controller-is-username-available-8-f-8-1ab"
+  },
+  "/api-reference/subdomain-write-controller-accept-1da": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-write-controller-accept-822-236"
+  },
+  "/api-reference/subdomain-write-controller-add-e4e": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-write-controller-add-4-d-0-477"
+  },
+  "/api-reference/subdomain-write-controller-api-reserve-3af": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-write-controller-api-reserve-2-cc-fc2"
+  },
+  "/api-reference/subdomain-write-controller-revoke-663": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-write-controller-revokea-6-b-be4"
+  },
+  "/api-reference/subdomain-write-controller-update-efd": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-subdomain-write-controller-update-1-df-839"
+  },
+  "/api-reference/title-6aa": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---api-reference-titlead-1-0e2"
+  },
+  "/core-concepts-b42": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---core-concepts-6-e-5-448"
+  },
+  "/core-concepts/ccip-read-75a": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---core-concepts-ccip-readcd-6-749"
+  },
+  "/core-concepts/ens-a5e": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---core-concepts-ens-0-f-5-5c5"
+  },
+  "/core-concepts/ens-architecture-495": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---core-concepts-ens-architecture-79-a-710"
+  },
+  "/core-concepts/justaname-a94": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---core-concepts-justaname-634-e31"
+  },
+  "/getting-started-00e": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---getting-started-6-df-d90"
+  },
+  "/sdk-0fc": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdke-54-84a"
+  },
+  "/sdk/core-c0f": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-corecea-1c7"
+  },
+  "/sdk/core/sdk-api/-96e": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-5-c-6-55b"
+  },
+  "/sdk/core/sdk-api/classes/JustaName-7b3": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-classes-justa-namebd-2-91d"
+  },
+  "/sdk/core/sdk-api/classes/Siwe-9ec": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-classes-siwea-53-c78"
+  },
+  "/sdk/core/sdk-api/classes/Subnames-ab9": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-classes-subnameseda-062"
+  },
+  "/sdk/core/sdk-api/interfaces/Address-06f": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-addressda-5-569"
+  },
+  "/sdk/core/sdk-api/interfaces/AddressResponse-f06": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-address-response-253-9f9"
+  },
+  "/sdk/core/sdk-api/interfaces/ApiKeyHeaders-21e": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-api-key-headers-8-ec-ffd"
+  },
+  "/sdk/core/sdk-api/interfaces/ApiKeyResponse-108": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-api-key-response-07-c-7e1"
+  },
+  "/sdk/core/sdk-api/interfaces/ApiKeyRoute-521": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-api-key-route-909-db5"
+  },
+  "/sdk/core/sdk-api/interfaces/BaseResponse-7ff": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-base-responsea-0-c-3f9"
+  },
+  "/sdk/core/sdk-api/interfaces/Configuration-a1c": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-configurationf-8-e-b0e"
+  },
+  "/sdk/core/sdk-api/interfaces/IHeaders-d00": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-i-headers-221-97c"
+  },
+  "/sdk/core/sdk-api/interfaces/IRequest-c33": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-i-request-126-e28"
+  },
+  "/sdk/core/sdk-api/interfaces/IResponse-9d7": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-i-response-36-c-e22"
+  },
+  "/sdk/core/sdk-api/interfaces/IRoute-6ed": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-i-routec-2-b-4a7"
+  },
+  "/sdk/core/sdk-api/interfaces/IsSubnameAvailableRequest-716": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-is-subname-available-request-860-a8f"
+  },
+  "/sdk/core/sdk-api/interfaces/IsSubnameAvailableResponse-072": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-is-subname-available-responsecf-3-5f6"
+  },
+  "/sdk/core/sdk-api/interfaces/IsSubnameAvailableRoute-27d": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-is-subname-available-routebaf-ec4"
+  },
+  "/sdk/core/sdk-api/interfaces/Metadata-8ef": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-metadata-244-e1e"
+  },
+  "/sdk/core/sdk-api/interfaces/MetadataResponse-7e8": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-metadata-responseea-3-661"
+  },
+  "/sdk/core/sdk-api/interfaces/RequestChallengeRequest-f78": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-request-challenge-request-4-b-3-ff8"
+  },
+  "/sdk/core/sdk-api/interfaces/RequestChallengeResponse-bd4": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-request-challenge-response-4-f-3-ae4"
+  },
+  "/sdk/core/sdk-api/interfaces/ROUTES-843": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-routes-53-d-a34"
+  },
+  "/sdk/core/sdk-api/interfaces/SIWEHeaders-661": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-siwe-headersa-62-0e6"
+  },
+  "/sdk/core/sdk-api/interfaces/SIWERequestChallengeRoute-811": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-siwe-request-challenge-routee-54-b27"
+  },
+  "/sdk/core/sdk-api/interfaces/SIWEVerifyMessageRoute-6fc": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-siwe-verify-message-route-0-ef-996"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameAddRequest-48a": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-add-requesta-88-fbb"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameAddResponse-e5d": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-add-response-09-f-69d"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameAddRoute-72a": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-add-routedb-8-930"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameClaimRequest-9ba": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-claim-request-6-c-8-7fb"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameClaimResponse-0a3": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-claim-response-20-b-42d"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameClaimRoute-9c3": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-claim-routebda-78c"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRequest-2e0": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-all-by-address-requeste-19-e61"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetAllByAddressResponse-13d": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-all-by-address-responsece-2-ebe"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRoute-7de": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-all-by-address-route-85-e-19c"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetAllByDomainChainIdRequest-83c": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-all-by-domain-chain-id-request-194-56a"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetAllByDomainChainIdResponse-a84": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-all-by-domain-chain-id-responsedb-2-be2"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetAllByDomainChainIdRoute-eca": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-all-by-domain-chain-id-route-1-b-7-950"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdRequest-ac7": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-by-domain-name-chain-id-request-0-f-4-397"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdResponse-5b8": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-by-domain-name-chain-id-responsec-11-d62"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdRoute-494": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-by-domain-name-chain-id-route-841-680"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetBySubnameRequest-cff": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-by-subname-request-71-b-242"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetBySubnameResponse-074": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-by-subname-responsec-28-60e"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameGetBySubnameRoute-01d": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-get-by-subname-route-785-354"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameReserveRequest-e3d": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-reserve-request-45-e-be7"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameReserveResponse-502": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-reserve-response-988-13e"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameReserveRoute-d66": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-reserve-route-9-de-6bb"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameRevokeRequest-9ee": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-revoke-requestaf-6-b94"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameRevokeResponse-edd": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-revoke-response-819-c70"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameRevokeRoute-e77": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-revoke-routed-23-2ee"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameUpdateRequest-208": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-update-requeste-69-ebf"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameUpdateResponse-d7d": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-update-responseca-7-afe"
+  },
+  "/sdk/core/sdk-api/interfaces/SubnameUpdateRoute-11c": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-subname-update-route-341-69b"
+  },
+  "/sdk/core/sdk-api/interfaces/TextRecord-940": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-text-record-1-e-6-16e"
+  },
+  "/sdk/core/sdk-api/interfaces/TextRecordResponse-8fe": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-text-record-response-61-b-a42"
+  },
+  "/sdk/core/sdk-api/interfaces/VerifyChallengeRequest-f23": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-verify-challenge-request-982-acf"
+  },
+  "/sdk/core/sdk-api/interfaces/VerifyChallengeResponse-aa4": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-interfaces-verify-challenge-response-406-86e"
+  },
+  "/sdk/core/sdk-api/modules-e8f": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-core-sdk-api-modules-024-d10"
+  },
+  "/sdk/react-e3f": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-react-7-c-1-8d0"
+  },
+  "/sdk/react/sdk-api/-b9b": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-react-sdk-api-a-8-a-7ab"
+  },
+  "/sdk/react/sdk-api/interfaces/BaseClaimSubnameRequest-874": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-react-sdk-api-interfaces-base-claim-subname-requestd-5-a-434"
+  },
+  "/sdk/react/sdk-api/interfaces/JustaNameContextProps-5ec": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-react-sdk-api-interfaces-justa-name-context-propsb-6-f-c84"
+  },
+  "/sdk/react/sdk-api/interfaces/JustaNameProvider-34a": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-react-sdk-api-interfaces-justa-name-providerf-38-88c"
+  },
+  "/sdk/react/sdk-api/interfaces/UseConnectedWalletSubnamesOptions-a01": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-react-sdk-api-interfaces-use-connected-wallet-subnames-options-93-e-6b4"
+  },
+  "/sdk/react/sdk-api/interfaces/UseIsSubnameAvailableOptions-c4c": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-react-sdk-api-interfaces-use-is-subname-available-options-466-100"
+  },
+  "/sdk/react/sdk-api/interfaces/UseSubnameOptions-da7": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-react-sdk-api-interfaces-use-subname-options-3-d-0-aa8"
+  },
+  "/sdk/react/sdk-api/modules-fed": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---sdk-react-sdk-api-modulesd-04-7a8"
+  },
+  "/the-app-1c9": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---the-app-4-fe-118"
+  },
+  "/use-cases-fdc": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---use-casese-58-83e"
+  },
+  "/use-cases/embedded-wallets-48a": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---use-cases-embedded-wallets-99-e-fd9"
+  },
+  "/use-cases/exchanges-a9a": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---use-cases-exchangesc-3-c-b7f"
+  },
+  "/use-cases/gaming-metaverses-33f": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---use-cases-gaming-metaverses-2-d-4-856"
+  },
+  "/use-cases/secure-messaging-cb6": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---use-cases-secure-messaging-474-b0f"
+  },
+  "/use-cases/social-hub-133": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---use-cases-social-hub-0-c-7-be8"
+  },
+  "/use-cases/wallets-77d": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---use-cases-walletse-70-08a"
+  },
+  "/why-we-exist-7c1": {
+    "__comp": "__comp---theme-api-item-4-c-5-a29",
+    "content": "content---why-we-existd-37-f2a"
+  }
+}

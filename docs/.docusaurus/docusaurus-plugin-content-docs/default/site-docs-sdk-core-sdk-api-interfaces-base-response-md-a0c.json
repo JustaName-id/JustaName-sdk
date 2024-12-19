@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/BaseResponse",
+  "id": "sdk/core/sdk-api/interfaces/BaseResponse",
+  "title": "Interface: BaseResponse<T>",
+  "description": "Represents the Base Response type of JustaName API.",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/BaseResponse.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/BaseResponse",
+  "permalink": "/sdk/core/sdk-api/interfaces/BaseResponse",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "BaseResponse",
+    "title": "Interface: BaseResponse<T>",
+    "sidebar_label": "BaseResponse",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "ApiKeyRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/ApiKeyRoute"
+  },
+  "next": {
+    "title": "Configuration",
+    "permalink": "/sdk/core/sdk-api/interfaces/Configuration"
+  }
+}

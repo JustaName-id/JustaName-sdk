@@ -1,0 +1,29 @@
+{
+  "unversionedId": "home/core-concepts/justaname",
+  "id": "home/core-concepts/justaname",
+  "title": "Just A Name - How It Works",
+  "description": "The Ethereum Name Service (ENS) protocol has revolutionized the ease of transactions on the Ethereum blockchain, by replacing long, complex addresses with human-readable names. In an ongoing effort to further improve usability and efficiency, we have developed JustaName, a sophisticated platform designed to operate as an extension to ENS.",
+  "source": "@site/docs/home/core-concepts/04-justaname.mdx",
+  "sourceDirName": "home/core-concepts",
+  "slug": "/core-concepts/justaname",
+  "permalink": "/core-concepts/justaname",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "id": "justaname",
+    "title": "Just A Name - How It Works",
+    "sidebar_label": "Just A Name - How It Works",
+    "slug": "/core-concepts/justaname"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "CCIP-Read (for Geeks)",
+    "permalink": "/core-concepts/ccip-read"
+  },
+  "next": {
+    "title": "Use Cases",
+    "permalink": "/use-cases"
+  }
+}

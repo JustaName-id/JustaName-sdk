@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/TextRecordResponse",
+  "id": "sdk/core/sdk-api/interfaces/TextRecordResponse",
+  "title": "Interface: TextRecordResponse",
+  "description": "Properties",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/TextRecordResponse.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/TextRecordResponse",
+  "permalink": "/sdk/core/sdk-api/interfaces/TextRecordResponse",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "TextRecordResponse",
+    "title": "Interface: TextRecordResponse",
+    "sidebar_label": "TextRecordResponse",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "TextRecord",
+    "permalink": "/sdk/core/sdk-api/interfaces/TextRecord"
+  },
+  "next": {
+    "title": "VerifyChallengeRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/VerifyChallengeRequest"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "unversionedId": "getting-started/intro",
+  "id": "getting-started/intro",
+  "title": "Getting Started",
+  "description": "",
+  "source": "@site/docs/getting-started/intro.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started",
+  "permalink": "/getting-started",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "intro",
+    "title": "Getting Started",
+    "sidebar_label": "Introduction",
+    "slug": "/getting-started"
+  },
+  "sidebar": "gettingStartedSidebar"
+}

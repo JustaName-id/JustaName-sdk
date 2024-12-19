@@ -1,0 +1,28 @@
+{
+  "unversionedId": "sdk/react/react-sdk",
+  "id": "sdk/react/react-sdk",
+  "title": "React JS SDK",
+  "description": "Android",
+  "source": "@site/docs/sdk/react/index.mdx",
+  "sourceDirName": "sdk/react",
+  "slug": "/sdk/react",
+  "permalink": "/sdk/react",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "react-sdk",
+    "title": "React JS SDK",
+    "sidebar_label": "React SDK",
+    "slug": "/sdk/react"
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "VerifyChallengeResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/VerifyChallengeResponse"
+  },
+  "next": {
+    "title": "Readme",
+    "permalink": "/sdk/react/sdk-api/"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/AddressResponse",
+  "id": "sdk/core/sdk-api/interfaces/AddressResponse",
+  "title": "Interface: AddressResponse",
+  "description": "Properties",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/AddressResponse.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/AddressResponse",
+  "permalink": "/sdk/core/sdk-api/interfaces/AddressResponse",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "AddressResponse",
+    "title": "Interface: AddressResponse",
+    "sidebar_label": "AddressResponse",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "Address",
+    "permalink": "/sdk/core/sdk-api/interfaces/Address"
+  },
+  "next": {
+    "title": "ApiKeyHeaders",
+    "permalink": "/sdk/core/sdk-api/interfaces/ApiKeyHeaders"
+  }
+}

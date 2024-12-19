@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRoute",
+  "id": "sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRoute",
+  "title": "Interface: SubnameGetAllByAddressRoute",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRoute.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRoute",
+  "permalink": "/sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRoute",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SubnameGetAllByAddressRoute",
+    "title": "Interface: SubnameGetAllByAddressRoute",
+    "sidebar_label": "SubnameGetAllByAddressRoute",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SubnameGetAllByAddressResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameGetAllByAddressResponse"
+  },
+  "next": {
+    "title": "SubnameGetAllByDomainChainIdRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameGetAllByDomainChainIdRequest"
+  }
+}

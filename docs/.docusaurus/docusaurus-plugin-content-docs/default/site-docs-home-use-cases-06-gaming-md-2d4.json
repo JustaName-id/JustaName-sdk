@@ -1,0 +1,26 @@
+{
+  "unversionedId": "home/use-cases/gaming-metaverses",
+  "id": "home/use-cases/gaming-metaverses",
+  "title": "Unified Gaming Identities",
+  "description": "Seamless Cross-Platform Identity Management for Gamers and Metaverse Enthusiasts",
+  "source": "@site/docs/home/use-cases/06-gaming.md",
+  "sourceDirName": "home/use-cases",
+  "slug": "/use-cases/gaming-metaverses",
+  "permalink": "/use-cases/gaming-metaverses",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "id": "gaming-metaverses",
+    "title": "Unified Gaming Identities",
+    "sidebar_label": "Gaming & Metaverses",
+    "slug": "/use-cases/gaming-metaverses",
+    "description": "Seamless Cross-Platform Identity Management for Gamers and Metaverse Enthusiasts"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Named Messaging (XMTP)",
+    "permalink": "/use-cases/secure-messaging"
+  }
+}

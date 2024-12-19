@@ -1,0 +1,32 @@
+{
+  "unversionedId": "api-reference/siwe-sign-message",
+  "id": "api-reference/siwe-sign-message",
+  "title": "Sign Message",
+  "description": "Sign a message with your wallet.",
+  "source": "@site/docs/api-reference/siwe-sign-message.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/siwe-sign-message",
+  "permalink": "/api-reference/siwe-sign-message",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "siwe-sign-message",
+    "title": "Sign Message",
+    "description": "Sign a message with your wallet.",
+    "sidebar_label": "Sign Message",
+    "sidebar_class_name": "sign api-method",
+    "info_path": "docs/api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Request a challenge",
+    "permalink": "/api-reference/siwe-challenge-controller-request-challenge"
+  },
+  "next": {
+    "title": "Verify a message",
+    "permalink": "/api-reference/siwe-verify-controller-verify"
+  }
+}

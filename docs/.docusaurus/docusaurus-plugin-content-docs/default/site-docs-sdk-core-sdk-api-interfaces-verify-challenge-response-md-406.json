@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/VerifyChallengeResponse",
+  "id": "sdk/core/sdk-api/interfaces/VerifyChallengeResponse",
+  "title": "Interface: VerifyChallengeResponse",
+  "description": "Represents the response to a request to verify a specific address using SIWE.",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/VerifyChallengeResponse.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/VerifyChallengeResponse",
+  "permalink": "/sdk/core/sdk-api/interfaces/VerifyChallengeResponse",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "VerifyChallengeResponse",
+    "title": "Interface: VerifyChallengeResponse",
+    "sidebar_label": "VerifyChallengeResponse",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "VerifyChallengeRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/VerifyChallengeRequest"
+  },
+  "next": {
+    "title": "React SDK",
+    "permalink": "/sdk/react"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/Metadata",
+  "id": "sdk/core/sdk-api/interfaces/Metadata",
+  "title": "Interface: Metadata",
+  "description": "Properties",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/Metadata.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/Metadata",
+  "permalink": "/sdk/core/sdk-api/interfaces/Metadata",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "Metadata",
+    "title": "Interface: Metadata",
+    "sidebar_label": "Metadata",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "IsSubnameAvailableRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/IsSubnameAvailableRoute"
+  },
+  "next": {
+    "title": "MetadataResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/MetadataResponse"
+  }
+}

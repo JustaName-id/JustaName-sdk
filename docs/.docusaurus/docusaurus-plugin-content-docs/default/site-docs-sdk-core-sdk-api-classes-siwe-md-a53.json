@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/classes/Siwe",
+  "id": "sdk/core/sdk-api/classes/Siwe",
+  "title": "Class: Siwe",
+  "description": "Constructors",
+  "source": "@site/docs/sdk/core/sdk-api/classes/Siwe.md",
+  "sourceDirName": "sdk/core/sdk-api/classes",
+  "slug": "/sdk/core/sdk-api/classes/Siwe",
+  "permalink": "/sdk/core/sdk-api/classes/Siwe",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "Siwe",
+    "title": "Class: Siwe",
+    "sidebar_label": "Siwe",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "JustaName",
+    "permalink": "/sdk/core/sdk-api/classes/JustaName"
+  },
+  "next": {
+    "title": "Subnames",
+    "permalink": "/sdk/core/sdk-api/classes/Subnames"
+  }
+}

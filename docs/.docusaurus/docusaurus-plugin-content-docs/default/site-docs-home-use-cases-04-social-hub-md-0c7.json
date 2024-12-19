@@ -1,0 +1,30 @@
+{
+  "unversionedId": "home/use-cases/social-hub",
+  "id": "home/use-cases/social-hub",
+  "title": "Social Hub",
+  "description": "Simplifying profile management and enabling a consistent identity across integrated dApps and social platforms.",
+  "source": "@site/docs/home/use-cases/04-social-hub.md",
+  "sourceDirName": "home/use-cases",
+  "slug": "/use-cases/social-hub",
+  "permalink": "/use-cases/social-hub",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "id": "social-hub",
+    "title": "Social Hub",
+    "sidebar_label": "Social Hub",
+    "slug": "/use-cases/social-hub",
+    "description": "Simplifying profile management and enabling a consistent identity across integrated dApps and social platforms."
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Exchanges",
+    "permalink": "/use-cases/exchanges"
+  },
+  "next": {
+    "title": "Named Messaging (XMTP)",
+    "permalink": "/use-cases/secure-messaging"
+  }
+}

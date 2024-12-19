@@ -1,0 +1,29 @@
+{
+  "unversionedId": "home/core-concepts/ens-architecture",
+  "id": "home/core-concepts/ens-architecture",
+  "title": "Deep dive into ENS architecture (for Geeks)",
+  "description": "ENS, standing for Ethereum Name Service, is a fundamental part of the Ethereum ecosystem. It equips the Ethereum blockchain to allocate, manage, and resolve human-friendly names, such as 'yourname.eth', thereby abstracting away the complexity of dealing with hexadecimal addresses for end users. In this guide, we will delve into the precise architecture and inner workings of the ENS protocol.",
+  "source": "@site/docs/home/core-concepts/02-ens-architecture.mdx",
+  "sourceDirName": "home/core-concepts",
+  "slug": "/core-concepts/ens-architecture",
+  "permalink": "/core-concepts/ens-architecture",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "id": "ens-architecture",
+    "title": "Deep dive into ENS architecture (for Geeks)",
+    "sidebar_label": "Deep dive into ENS (for Geeks)",
+    "slug": "/core-concepts/ens-architecture"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Intro To Ens",
+    "permalink": "/core-concepts/ens"
+  },
+  "next": {
+    "title": "CCIP-Read (for Geeks)",
+    "permalink": "/core-concepts/ccip-read"
+  }
+}

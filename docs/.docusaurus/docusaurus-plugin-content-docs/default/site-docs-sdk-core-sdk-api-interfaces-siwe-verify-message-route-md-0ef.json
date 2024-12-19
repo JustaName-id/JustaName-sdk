@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SIWEVerifyMessageRoute",
+  "id": "sdk/core/sdk-api/interfaces/SIWEVerifyMessageRoute",
+  "title": "Interface: SIWEVerifyMessageRoute",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SIWEVerifyMessageRoute.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SIWEVerifyMessageRoute",
+  "permalink": "/sdk/core/sdk-api/interfaces/SIWEVerifyMessageRoute",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SIWEVerifyMessageRoute",
+    "title": "Interface: SIWEVerifyMessageRoute",
+    "sidebar_label": "SIWEVerifyMessageRoute",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SIWERequestChallengeRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/SIWERequestChallengeRoute"
+  },
+  "next": {
+    "title": "SubnameAddRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameAddRequest"
+  }
+}

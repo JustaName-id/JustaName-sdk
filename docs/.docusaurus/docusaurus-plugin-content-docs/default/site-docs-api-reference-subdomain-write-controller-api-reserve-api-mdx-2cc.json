@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/subdomain-write-controller-api-reserve",
+  "id": "api-reference/subdomain-write-controller-api-reserve",
+  "title": "Reserve Subname",
+  "description": "Reserve Subname to be claimed later.",
+  "source": "@site/docs/api-reference/subdomain-write-controller-api-reserve.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/subdomain-write-controller-api-reserve",
+  "permalink": "/api-reference/subdomain-write-controller-api-reserve",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "subdomain-write-controller-api-reserve",
+    "title": "Reserve Subname",
+    "description": "Reserve Subname to be claimed later.",
+    "sidebar_label": "Reserve Subname",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJytVU2P2jAQ/SuWT63EAu2RG932UFVqK6Dqga4qJx6It06c+mNZFPHfO2MHEgLa5dBFWrBn5nnmvfG44aYGK7wy1WfJZ3wZMmlKoaqfVnm4N5W3Rmuwv0WtFuDAPgEfcQkut6qmKIxp9xnGVqIE5g3LgOVaqBIk08KDHWNQLSxaceH4bN1wcsXg5ztEvvsDe/RQhFaAkGAvDlkVwOa1Yl9gT2AW/gZlAVP2NsCIu7yAUvBZw/2+Jlznraq2/HB4SM7g/Acj9+QxjM2xSqg8mURda5VHOiaPjg5uLqFN9gi5p4oskecVOLIGZCEVdZHEiEPlPkZer1rzAi3E/8lWhTJDFijSF3MpLTh3rbo+E+suhf6BHfwZGPLildfQF71Vck5aR8rwhHSGq03lUp0SNiJon34OJTr2wE44ZhOaZC7kOR65CVpH8f4T4c4LH9y9kXBJHJb6LMqayns/nV5rphTNcgxnZsM8bh3LHPNUc1vly1lI4W/IVcnX1UOf10RJ+cW2sNbYS8xhpV+Rc6Y2rDIsRjCT58HigSNmsGS7Uw5i7claokxiSwQMcotVHk+9LctFJHC5E9stdfIAsCfeievbcJepmzrg2KJebGmu8LYBCQuHTWFoqNXGRUWEL3A1cUfsiT1NtPjdTqZgNc0h72s3m0ww0S0yS2Nq/BhwRfBj1IomC7Xsopsun449158GnTS9IdBtnu7+9Pyu98aDqjYmSt2Ss4rfQ6n7qxGnatL+u/G0vXMip34mtoiRUsTb1iY5GOJD9Ka7tLfO+7YxPTz7Sa2pajw4ctu0UmAXHKVITRDFQFoLEgzNTZMJBz+sPhxoG3m2OMHX+PNJWCUyYmP9gLDto0HqSeXIgIRuhHbwQh1vFm0/vmWD1+Vq6vRGnb9XT0IH8kNr05rvE/rdihA6j4sx10XMsZtr/6Jvv5e/f1uu0Dlr37IyTj9uxY4YxP8z/gs/uDCx4jh84n7Dtai2AW83+iRc+vsHAWvJiQ==",
+    "sidebar_class_name": "post api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Claim Subname",
+    "permalink": "/api-reference/subdomain-write-controller-accept"
+  },
+  "next": {
+    "title": "Add Subname",
+    "permalink": "/api-reference/subdomain-write-controller-add"
+  }
+}

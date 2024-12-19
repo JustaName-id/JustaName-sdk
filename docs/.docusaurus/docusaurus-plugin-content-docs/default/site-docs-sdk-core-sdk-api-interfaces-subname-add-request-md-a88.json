@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SubnameAddRequest",
+  "id": "sdk/core/sdk-api/interfaces/SubnameAddRequest",
+  "title": "Interface: SubnameAddRequest",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SubnameAddRequest.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SubnameAddRequest",
+  "permalink": "/sdk/core/sdk-api/interfaces/SubnameAddRequest",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SubnameAddRequest",
+    "title": "Interface: SubnameAddRequest",
+    "sidebar_label": "SubnameAddRequest",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SIWEVerifyMessageRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/SIWEVerifyMessageRoute"
+  },
+  "next": {
+    "title": "SubnameAddResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameAddResponse"
+  }
+}

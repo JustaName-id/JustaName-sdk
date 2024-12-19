@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/VerifyChallengeRequest",
+  "id": "sdk/core/sdk-api/interfaces/VerifyChallengeRequest",
+  "title": "Interface: VerifyChallengeRequest",
+  "description": "Represents the request to verify a specific address using SIWE.",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/VerifyChallengeRequest.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/VerifyChallengeRequest",
+  "permalink": "/sdk/core/sdk-api/interfaces/VerifyChallengeRequest",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "VerifyChallengeRequest",
+    "title": "Interface: VerifyChallengeRequest",
+    "sidebar_label": "VerifyChallengeRequest",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "TextRecordResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/TextRecordResponse"
+  },
+  "next": {
+    "title": "VerifyChallengeResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/VerifyChallengeResponse"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/subdomain-read-controller-find-by-full-domain-and-chain-id",
+  "id": "api-reference/subdomain-read-controller-find-by-full-domain-and-chain-id",
+  "title": "Get by Subname",
+  "description": "Retrieves subname details based on the specified subname and chainId",
+  "source": "@site/docs/api-reference/subdomain-read-controller-find-by-full-domain-and-chain-id.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/subdomain-read-controller-find-by-full-domain-and-chain-id",
+  "permalink": "/api-reference/subdomain-read-controller-find-by-full-domain-and-chain-id",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "subdomain-read-controller-find-by-full-domain-and-chain-id",
+    "title": "Get by Subname",
+    "description": "Retrieves subname details based on the specified subname and chainId",
+    "sidebar_label": "Get by Subname",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJy9Vktv2zAM/iuCTxvgJc2AXXLruu5x2A5JdyqKgbHoWJ0sqZLcLgjy30fKTuIkRh/bsEsciyL5fXx6nVmHHqKy5ovMptm8WUhbgzIzBHlhTfRWa/Q/SmXk+9XHRusPSXxu5EVFT1LKM4mh8MqxETIxw+gV3mMQoVkYqFFIjKB0EAsIKIU1IlYogsNClYoOttfASFHsjDrwdBjRh2x6vc74Bhnv7pLc412jPBLo6BvMM8W+7xr0qxNEV+xup4i/oHaajTUB/egWzAhjRYJQVFhDNl1nceWSMyJiltlmk+/87/G9wH+KlFAyFw9I9PWK0DhnfRSXFAmPTS2+0g2DMcVgjs5qBeIKQ+SzVxNRWi/q9kouJpPJu3f0k05De/l1n9j2wgAl09QL9ETphhkEZ03AwHKJJTQ6tn+PgzfvMvQAQZQYyShnrSgwhJJKYjUi7wUVC5pkAJzTqkhFNb4NbGV9isQubrGInGjPJRhViyNEiE24sBJPUfcovj07G8xy0hYFqQtbpjrbshxlm0S5I/k4CgnxGViVHCiWPJVVWy4Dwr+y3MX4M4RqUA5SEsMuo50UvAcuSRWxDoPFnUX8FWdYWC9fqBi20+LLEN5Nv0mumdMhgz7eQxCHlqlUo4qpY7/SJOEInjs16/LKvNGEQQT5bl4MyVS40KBq7GsurNUIJgW7FZ6ncqFWq4H+cf7wTVRpkjyD764Wusxvsea9SbbH0XfaY70byse0vbf+lNpxY3yjFhWqFMaKpCFsUTSeUObC8vx5UAFTq7TSmjICS+6XI0JbAsnrE/BmqdHmD7BcpnFzaKnX5LuefMLgvB03e4ubVLmw5PWQdQOKjdDOqCyvsiWmvgKa7dNsvCuo8T7wlJv77X5pvKZrVYwuTMdjArikUL4Bp0a3Db2xxogyynNTmdKmqHdwr9LzOOr9tzxjP+35ZHTW9QEUXFpMw9kQa0hzstszn2juL1bbwXtsfL2ftv9q3XYlxF04dlSEqQVSUNZdDK/3TdkrX4pHRehZvF6zx+9ebzZ83O5Cjq1UARaaU1+CDvgImVezrkpei8OlPQjvJ64OPgnuQTd8K+OF/UdO/9OmfoTNPiN7Njf84hXToXje0N2Kvs6oCzi4rdo5dYeLPa2THbzp98anyytqod87PHOn",
+    "sidebar_class_name": "get api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Get by Username and ENS Domain",
+    "permalink": "/api-reference/subdomain-read-controller-find-by-domain-name-and-name-and-chain-id"
+  },
+  "next": {
+    "title": "Get all by ENS Domain",
+    "permalink": "/api-reference/subdomain-read-controller-find-all-by-domain-name-and-chain-id"
+  }
+}

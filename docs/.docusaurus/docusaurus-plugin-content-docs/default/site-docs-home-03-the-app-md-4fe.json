@@ -1,0 +1,29 @@
+{
+  "unversionedId": "home/the-app",
+  "id": "home/the-app",
+  "title": "The App",
+  "description": "Your Personal Web3 Identity Command Center",
+  "source": "@site/docs/home/03-the-app.md",
+  "sourceDirName": "home",
+  "slug": "/the-app",
+  "permalink": "/the-app",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "id": "the-app",
+    "title": "The App",
+    "sidebar_label": "The App",
+    "slug": "/the-app"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Why We Exist",
+    "permalink": "/why-we-exist"
+  },
+  "next": {
+    "title": "Admin App",
+    "permalink": "/admin-dashboard"
+  }
+}

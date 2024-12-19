@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SubnameUpdateRoute",
+  "id": "sdk/core/sdk-api/interfaces/SubnameUpdateRoute",
+  "title": "Interface: SubnameUpdateRoute",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SubnameUpdateRoute.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SubnameUpdateRoute",
+  "permalink": "/sdk/core/sdk-api/interfaces/SubnameUpdateRoute",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SubnameUpdateRoute",
+    "title": "Interface: SubnameUpdateRoute",
+    "sidebar_label": "SubnameUpdateRoute",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SubnameUpdateResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameUpdateResponse"
+  },
+  "next": {
+    "title": "TextRecord",
+    "permalink": "/sdk/core/sdk-api/interfaces/TextRecord"
+  }
+}

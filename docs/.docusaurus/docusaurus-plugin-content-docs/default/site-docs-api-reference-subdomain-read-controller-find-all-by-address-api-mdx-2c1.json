@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/subdomain-read-controller-find-all-by-address",
+  "id": "api-reference/subdomain-read-controller-find-all-by-address",
+  "title": "Get all by Address",
+  "description": "Retrieves all subnames associated with an address",
+  "source": "@site/docs/api-reference/subdomain-read-controller-find-all-by-address.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/subdomain-read-controller-find-all-by-address",
+  "permalink": "/api-reference/subdomain-read-controller-find-all-by-address",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "subdomain-read-controller-find-all-by-address",
+    "title": "Get all by Address",
+    "description": "Retrieves all subnames associated with an address",
+    "sidebar_label": "Get all by Address",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJzFV02T2jgQ/SsqnZIqwsdmmBBuLJnK5pA9AHuamtqSrTZoVrYcSR6Govjv6bYNtsEDga3avQC2ulvvtbqfmi03KVjhlUm+ST7m8yyQJhYqmYGQU5N4a7QG+3ekEjnR+vfNREoLzvEOl+BCq1JyRccZeKvgBRwTWjOXBYmI6cE5EyrhQbK18ismEiYOEVJh0ciDdXz8uOXkgZGqdQs/MmUBcXmbQYcr2uhHBnZzsv1iBfvAzETM46PbU0FjeBVxqil6/zX4fD8Uw+ij6EfTwejL6O7hfjQafQzDiRz2R3d3Q/Hp8+DTZIRuLlxBLPh4y/0mJW+HJJMl3+06B7jhCrfA3F0Fd0pOTMkOWwMzid4g2jQ11rMHhG4hi9l3tEjAY8Ykm0NqtBJsAc7Tu3cDFhnL4sKkwwaDwXCIH/lbVxi/r9PeG7RQSrI4ANukZFSyoNU6p0hod/kMyJVR5P0pVKd5AHPf/zUYyk21UDHIK3Eo3JkOACsOS9GCz2zCwiJUVRUdhnZFsIZhlrSbJsaz1JoXJUE2PcqCL2wbTIs6OOEaGKNBJA2ykLgvhwDXsJ1YKzaU7SoC84ZFSmNj7RuhaMZgUwf3yJ9F0gW/4k8tGAWFRXPlIXZtHbB7IpwuNYmD3EBCJDLti5/HdTEvMLC1cCwCj7tRfsMQSyPKtN50casQ5QaSPIBIU63CXJZ6z46ibE8hmuAZQk86YknEvCpwOC985qZGwml51ej/1u+3FXDhjXUsDyW8Z9nlu5xySfI8Cin8L2BVsiW1HZ45sEVdtCz+q8hljv8QbtW6XrYruGtKocM9vPoZhMbKKx0PffOtDe+u3gqPxKnJoI63CaIZGUvVK5/r/3fwgjI4SdWsPFfijc3TiiCP8+ZRVArV0twItVic5OWC0hwL/EXnBx88LhDky3wPtVCe/B5rhazTUMpq0xrrw7V+TNtaY0+pHTfGn9iihQay3IOZMMysJSE0dF+tlYO8VYpV1BonltQvR4T2BPJdL8Cb5Y02X4vlsrgXGpFqTX7oyQsB54XcVBF3eeWKJU0fvBQoCoIjycrQMLSEvK8ESuSY9w4F1avuNDybl/34klmNZivvUzfu9RDgElP5QaSq+5zhE0Xv4omSbqokMnnWS7iL/Ps46/WnDqd9iveDbr/sAxFSaRGN1Dgfi1wnywvlK80OeGzBhr0xs20rxb1pfCtrhtqul2oatEi6KAvbMmmPvD6E7T0xASuES8vbbSAc/GX1bkevixuOkimVE4Gu3YBvIn83K8viPbswBLbi/Qc2jZnzReiMrDjdzTeh+I9muzNsqpH0RjYXJrlzW1ej4417/+/T2xl2dZ29kd6149oZNI2RsYLzRA9WER5spSc0X+F/OVQ86qvCc4JKmPqa18m8tavr4NeHBcrlTzF54/k=",
+    "sidebar_class_name": "get api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Get all by ENS Domain",
+    "permalink": "/api-reference/subdomain-read-controller-find-all-by-domain-name-and-chain-id"
+  },
+  "next": {
+    "title": "Get Subnames Reserved to an Address",
+    "permalink": "/api-reference/subdomain-read-controller-get-invitations"
+  }
+}

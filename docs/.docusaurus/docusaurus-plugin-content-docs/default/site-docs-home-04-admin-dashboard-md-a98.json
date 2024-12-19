@@ -1,0 +1,29 @@
+{
+  "unversionedId": "home/admin-dashboard",
+  "id": "home/admin-dashboard",
+  "title": "Admin App",
+  "description": "Your Command Center for Domain Setup, Subname Management, and Workspace Collaboration",
+  "source": "@site/docs/home/04-admin-dashboard.md",
+  "sourceDirName": "home",
+  "slug": "/admin-dashboard",
+  "permalink": "/admin-dashboard",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "id": "admin-dashboard",
+    "title": "Admin App",
+    "sidebar_label": "Admin App",
+    "slug": "/admin-dashboard"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "The App",
+    "permalink": "/the-app"
+  },
+  "next": {
+    "title": "Core Concepts",
+    "permalink": "/core-concepts"
+  }
+}

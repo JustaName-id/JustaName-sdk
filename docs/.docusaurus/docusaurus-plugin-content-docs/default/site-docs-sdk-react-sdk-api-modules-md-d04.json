@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/react/sdk-api/modules",
+  "id": "sdk/react/sdk-api/modules",
+  "title": "@justaname.id/react",
+  "description": "Interfaces",
+  "source": "@site/docs/sdk/react/sdk-api/modules.md",
+  "sourceDirName": "sdk/react/sdk-api",
+  "slug": "/sdk/react/sdk-api/modules",
+  "permalink": "/sdk/react/sdk-api/modules",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0.5,
+  "frontMatter": {
+    "id": "modules",
+    "title": "@justaname.id/react",
+    "sidebar_label": "Exports",
+    "sidebar_position": 0.5,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "Readme",
+    "permalink": "/sdk/react/sdk-api/"
+  },
+  "next": {
+    "title": "BaseClaimSubnameRequest",
+    "permalink": "/sdk/react/sdk-api/interfaces/BaseClaimSubnameRequest"
+  }
+}

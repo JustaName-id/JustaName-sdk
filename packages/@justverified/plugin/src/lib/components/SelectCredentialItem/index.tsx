@@ -58,6 +58,9 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
         return <DiscordIcon width={30} />;
       case 'email':
         return <EmailIcon width={30} />;
+      case 'openpassport':
+        // TODO: Change to OpenPassportIcon
+        return <TelegramIcon width={30} />;
     }
   }, [credential]);
 

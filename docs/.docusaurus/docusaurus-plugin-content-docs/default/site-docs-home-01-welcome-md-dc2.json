@@ -1,0 +1,25 @@
+{
+  "unversionedId": "home/welcome",
+  "id": "home/welcome",
+  "title": "Welcome To JustAName",
+  "description": "Justaname is your powerful ally for seamless integration of Ethereum Name Service (ENS) subnames into your applications and projects. Our platform offers a developer-friendly approach to creating, managing, and resolving ENS subnames with unparalleled efficiency and scalability.",
+  "source": "@site/docs/home/01-welcome.md",
+  "sourceDirName": "home",
+  "slug": "/",
+  "permalink": "/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "id": "welcome",
+    "title": "Welcome To JustAName",
+    "sidebar_label": "Welcome",
+    "slug": "/"
+  },
+  "sidebar": "homeSidebar",
+  "next": {
+    "title": "Why We Exist",
+    "permalink": "/why-we-exist"
+  }
+}

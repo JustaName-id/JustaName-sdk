@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/subdomain-write-controller-revoke",
+  "id": "api-reference/subdomain-write-controller-revoke",
+  "title": "Revoke Subname",
+  "description": "Revoke the specified subname",
+  "source": "@site/docs/api-reference/subdomain-write-controller-revoke.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/subdomain-write-controller-revoke",
+  "permalink": "/api-reference/subdomain-write-controller-revoke",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "subdomain-write-controller-revoke",
+    "title": "Revoke Subname",
+    "description": "Revoke the specified subname",
+    "sidebar_label": "Revoke Subname",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJytVV1v2jAU/SuWn1qJQpnUF9461odp2oeAaQ+sqkxyA6ZO7NkOFEX8991rJyF8qO2kgQSJfX1877nHxxXXBqzwUhefUz7i03KR6lzI4peVHsa68FYrBfbJwkY/A+/xFFxipaEVGD8Jw8yvgDkDicwkpMyVi0LkFGyExQcP1vHRvOJhdMRfboSRN8+wwwhJKCsQKdgz8Bmi3hvJvsCuj5MW/pTSAqbpbQk97pIV5IKPKu53hnCdt7JY8v3+MQaD8x91uqOI07UJVgaFpylhjJJJoGCwdrRxdQ6tF2tIPFVkiTAvwdEsFO5ToOs8i0vFUP1MZ4EuXMoi1RgKLyI3ilavRcH3PV46sJGtf8V1TQePYFPYEGyywglqdItalPniAvVjCmQy7bEtIhdqh7jGaOvZA25ioczZV4wowDNRpGwKRisp2Awpp7GrIcu0ZXkM6bHhcHh3hz9h1MXg626CTcB+3+3zvENwh5NDHdhoL32osFVulCTqZhIlgHqIqM7owsW+pZCJUvn4eMrmNMqXbYVjUfYk6SQB57JSqaDF/6Qf54Uv3VincKklLTsfbm8vtT2uZgkub7rfVNnnseS6yNezSIV/R64N9KUDd9y0NvKN9tRRuBqs1fZtrX9D+pnMWKFZWMF0kpQWd+0xTbLcShe9KM7m2DGxJC5OEgwFN7u+K8lJoHK6FcsltuYUr9PGlvV3wU6jrA64QapeLMkveS1EgkITXWkyaKNdaI3wK3wbtKd90Bo0npJNY7ilVWSv3hs3GgwwzSXSSu7bX5f4Ruh9mXIyTJLu5GCaD432jkwu2FPXnYKxdHylPcfk7JkOLa1ZmIX/05Z233qcEo/jw/5tfcxEQhImXqj2XIQDVu9eXz/T9sI5Aq8Ox/Sti6rWnYcXPzCKaiUTJvaqmmvscsdZa7aRtxU1BGeraiEc/LRqv6dhJNLizTPHx42wUiyIg/kjotaXHbUnlY4mkLdMKAevpH81qeV2zU5uxYuZ0916fM9uhCopDmerenoc0W9mhHCIOPOzw4p7VKvxr8Z2tfrj+3SGwYv6Ds6DzXErtkQg/o74b/ziiw4VR5eh8YorUSxLPLskuYBLn7/PiAFX",
+    "sidebar_class_name": "post api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Update Subname",
+    "permalink": "/api-reference/subdomain-write-controller-update"
+  },
+  "next": {
+    "title": "Get by Username and ENS Domain",
+    "permalink": "/api-reference/subdomain-read-controller-find-by-domain-name-and-name-and-chain-id"
+  }
+}

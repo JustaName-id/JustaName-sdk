@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/react/sdk-api/interfaces/BaseClaimSubnameRequest",
+  "id": "sdk/react/sdk-api/interfaces/BaseClaimSubnameRequest",
+  "title": "Interface: BaseClaimSubnameRequest",
+  "description": "Properties",
+  "source": "@site/docs/sdk/react/sdk-api/interfaces/BaseClaimSubnameRequest.md",
+  "sourceDirName": "sdk/react/sdk-api/interfaces",
+  "slug": "/sdk/react/sdk-api/interfaces/BaseClaimSubnameRequest",
+  "permalink": "/sdk/react/sdk-api/interfaces/BaseClaimSubnameRequest",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "BaseClaimSubnameRequest",
+    "title": "Interface: BaseClaimSubnameRequest",
+    "sidebar_label": "BaseClaimSubnameRequest",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "Exports",
+    "permalink": "/sdk/react/sdk-api/modules"
+  },
+  "next": {
+    "title": "JustaNameContextProps",
+    "permalink": "/sdk/react/sdk-api/interfaces/JustaNameContextProps"
+  }
+}

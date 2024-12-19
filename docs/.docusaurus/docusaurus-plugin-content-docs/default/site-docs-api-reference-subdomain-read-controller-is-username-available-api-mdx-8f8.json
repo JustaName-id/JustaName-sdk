@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/subdomain-read-controller-is-username-available",
+  "id": "api-reference/subdomain-read-controller-is-username-available",
+  "title": "Available",
+  "description": "Checks if a username is available for a given ENS domain",
+  "source": "@site/docs/api-reference/subdomain-read-controller-is-username-available.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/subdomain-read-controller-is-username-available",
+  "permalink": "/api-reference/subdomain-read-controller-is-username-available",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "subdomain-read-controller-is-username-available",
+    "title": "Available",
+    "description": "Checks if a username is available for a given ENS domain",
+    "sidebar_label": "Available",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJy9VU1v4jAQ/SuWT62UhbJSL9wqVK162B6AnlC1MskkMXVs13agKOK/74wTIEBbdXelvUBiz8ebmTcvDTcWnAjS6IeMj/msXmamElJPQWQTo4MzSoH7Jf2TB6dFBXdrIZVYKuAJz8CnTlryRt9JCemLZzJngtWdNZOeib0Hy43Du0KuQbP7xxlrU2EgKxwaB3CejxcNJ08M6OtlfEq4g9daOkCEwdWQcEn5Xmtw2wsU8xLY0RHeRGUVBSNEg5XQAwglXvi0hErwccPD1sZkwUld8N0uOeRPS0SHbfmj/BNyYjJL2AaY0WqLaKw1LrD7UIKDumI/0UJDYEJnbAbWKCnYHHygs6tR7FLVmiRsNBrd3uJPPPWt8XW/sL3BOyXpulqCw5KeqQJvjfbg6T6DXNQqtI/nzdtbso3wLIeAUTOsIU3B+7xWajvA9ClSA3SMIKxVMo0UGq48hWkuoZjlCtJAk3ZEuCBbID6IUPuJyeASdq/G7zc37445erMU3ZnJWeiBH/BdrLmr8nMUmQhfwHqgcc90aYwCoYk1PY4serbY+iBDZODD5Q7dWTntEBNgcM64S06e1/6IU6A104ZFD2bStHaYOmGGOLaROD3qRntb4eBEQS05Qxnr3mf9MtBp7OpsI4oikus0Zm+ihwF8OfSsZdkx9o7CB1GQLJA2xcXEcKgVpSG9KiAOSuBOj/nQ79VrKHoqhQnXe2WpnULDMgTrx8Mhgi2wwd+ElYNVjW8UfyAzThsjdW7iLDro8/h/Pov+W8IpT3s+Gtx0ayJSoiAVYo0PlYgL0inMh2LaHDfsX3S141GAtzC0is4QRuxB0zVtwQ9NQ/sT3pYIlwyaZik8PDm129FxK3vUzEx6ssU55EJ5+KSEq2lHkWt2qs/vAnyB7Yn6r4WqyYqTNv9V0v8kyp9Uc/yWHKt5phcnW01ZPKNtiV9dJD41t3W7w4Wwoed1oba7/jr8uJ/j1vwGBay2lw==",
+    "sidebar_class_name": "get api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Get Subnames Reserved to an Address",
+    "permalink": "/api-reference/subdomain-read-controller-get-invitations"
+  },
+  "next": {
+    "title": "Get by Address",
+    "permalink": "/api-reference/primary-name-read-controller-get-primary-name-by-address"
+  }
+}

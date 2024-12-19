@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/index",
+  "id": "sdk/core/sdk-api/index",
+  "title": "@justaname.id/sdk",
+  "description": "This library was generated with Nx.",
+  "source": "@site/docs/sdk/core/sdk-api/index.md",
+  "sourceDirName": "sdk/core/sdk-api",
+  "slug": "/sdk/core/sdk-api/",
+  "permalink": "/sdk/core/sdk-api/",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "index",
+    "title": "@justaname.id/sdk",
+    "sidebar_label": "Readme",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "Core SDK",
+    "permalink": "/sdk/core"
+  },
+  "next": {
+    "title": "Exports",
+    "permalink": "/sdk/core/sdk-api/modules"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "unversionedId": "home/core-concepts/ens",
+  "id": "home/core-concepts/ens",
+  "title": "Intro To Ens",
+  "description": "What is Ethereum Name Service (ENS)?",
+  "source": "@site/docs/home/core-concepts/01-intro-to-ens.mdx",
+  "sourceDirName": "home/core-concepts",
+  "slug": "/core-concepts/ens",
+  "permalink": "/core-concepts/ens",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "id": "ens",
+    "title": "Intro To Ens",
+    "sidebar_label": "Intro To Ens",
+    "slug": "/core-concepts/ens"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Core Concepts",
+    "permalink": "/core-concepts"
+  },
+  "next": {
+    "title": "Deep dive into ENS (for Geeks)",
+    "permalink": "/core-concepts/ens-architecture"
+  }
+}

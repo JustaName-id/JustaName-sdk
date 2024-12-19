@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/IHeaders",
+  "id": "sdk/core/sdk-api/interfaces/IHeaders",
+  "title": "Interface: IHeaders",
+  "description": "",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/IHeaders.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/IHeaders",
+  "permalink": "/sdk/core/sdk-api/interfaces/IHeaders",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "IHeaders",
+    "title": "Interface: IHeaders",
+    "sidebar_label": "IHeaders",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "Configuration",
+    "permalink": "/sdk/core/sdk-api/interfaces/Configuration"
+  },
+  "next": {
+    "title": "IRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/IRequest"
+  }
+}

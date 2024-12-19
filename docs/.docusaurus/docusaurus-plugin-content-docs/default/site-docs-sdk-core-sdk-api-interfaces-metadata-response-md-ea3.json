@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/MetadataResponse",
+  "id": "sdk/core/sdk-api/interfaces/MetadataResponse",
+  "title": "Interface: MetadataResponse",
+  "description": "Properties",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/MetadataResponse.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/MetadataResponse",
+  "permalink": "/sdk/core/sdk-api/interfaces/MetadataResponse",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "MetadataResponse",
+    "title": "Interface: MetadataResponse",
+    "sidebar_label": "MetadataResponse",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "Metadata",
+    "permalink": "/sdk/core/sdk-api/interfaces/Metadata"
+  },
+  "next": {
+    "title": "ROUTES",
+    "permalink": "/sdk/core/sdk-api/interfaces/ROUTES"
+  }
+}

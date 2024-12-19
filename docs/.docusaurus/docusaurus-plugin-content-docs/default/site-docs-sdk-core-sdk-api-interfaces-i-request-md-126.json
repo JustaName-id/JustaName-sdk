@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/IRequest",
+  "id": "sdk/core/sdk-api/interfaces/IRequest",
+  "title": "Interface: IRequest",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/IRequest.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/IRequest",
+  "permalink": "/sdk/core/sdk-api/interfaces/IRequest",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "IRequest",
+    "title": "Interface: IRequest",
+    "sidebar_label": "IRequest",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "IHeaders",
+    "permalink": "/sdk/core/sdk-api/interfaces/IHeaders"
+  },
+  "next": {
+    "title": "IResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/IResponse"
+  }
+}

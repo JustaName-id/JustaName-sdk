@@ -12,6 +12,7 @@ import {
   Credentials,
   DiscordEthereumEip712Signature,
   GithubEthereumEip712Signature,
+  OpenPassportEthereumEip712Signature,
   TelegramEthereumEip712Signature,
   TwitterEthereumEip712Signature,
 } from '../../types';
@@ -199,6 +200,12 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                                 ).credentialSubject.username;
                                 break;
                               }
+                              case 'openpassport': {
+                                socialValue = (
+                                  credentialValue as OpenPassportEthereumEip712Signature
+                                ).credentialSubject.proof;
+                                break;
+                              } 
                               default: {
                                 socialValue = '';
                               }

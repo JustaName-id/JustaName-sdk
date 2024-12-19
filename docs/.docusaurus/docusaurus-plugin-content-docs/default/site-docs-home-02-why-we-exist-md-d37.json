@@ -1,0 +1,29 @@
+{
+  "unversionedId": "home/why-we-exist",
+  "id": "home/why-we-exist",
+  "title": "Why We Exist",
+  "description": "ENS (Ethereum Name Service) was a significant improvement for interacting with blockchain addresses. Previously, wallet addresses were composed of long, complex strings of numbers and letters, creating a significant barrier to user adoption in the Web3 world. ENS introduced the ability to use human-readable names (like yourname.eth) making blockchain interactions much more intuitive and accessible. This transformation was crucial in shaping our understanding of digital identities within the Web3 world.",
+  "source": "@site/docs/home/02-why-we-exist.md",
+  "sourceDirName": "home",
+  "slug": "/why-we-exist",
+  "permalink": "/why-we-exist",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "id": "why-we-exist",
+    "title": "Why We Exist",
+    "sidebar_label": "Why We Exist",
+    "slug": "/why-we-exist"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Welcome",
+    "permalink": "/"
+  },
+  "next": {
+    "title": "The App",
+    "permalink": "/the-app"
+  }
+}

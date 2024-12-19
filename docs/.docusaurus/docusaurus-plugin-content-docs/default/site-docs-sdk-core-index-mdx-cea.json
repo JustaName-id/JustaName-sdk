@@ -1,0 +1,28 @@
+{
+  "unversionedId": "sdk/core/core-sdk",
+  "id": "sdk/core/core-sdk",
+  "title": "Core JS SDK",
+  "description": "Android",
+  "source": "@site/docs/sdk/core/index.mdx",
+  "sourceDirName": "sdk/core",
+  "slug": "/sdk/core",
+  "permalink": "/sdk/core",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "core-sdk",
+    "title": "Core JS SDK",
+    "sidebar_label": "Core SDK",
+    "slug": "/sdk/core"
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "Get Started",
+    "permalink": "/sdk"
+  },
+  "next": {
+    "title": "Readme",
+    "permalink": "/sdk/core/sdk-api/"
+  }
+}

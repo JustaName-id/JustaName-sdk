@@ -1,0 +1,30 @@
+{
+  "unversionedId": "home/use-cases/wallets",
+  "id": "home/use-cases/wallets",
+  "title": "Wallets",
+  "description": "Solving Wallet UX Challenges and Enhancing User Experience with JustaName",
+  "source": "@site/docs/home/use-cases/01-wallets.md",
+  "sourceDirName": "home/use-cases",
+  "slug": "/use-cases/wallets",
+  "permalink": "/use-cases/wallets",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "id": "wallets",
+    "title": "Wallets",
+    "sidebar_label": "Wallets",
+    "slug": "/use-cases/wallets",
+    "description": "Solving Wallet UX Challenges and Enhancing User Experience with JustaName"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Use Cases",
+    "permalink": "/use-cases"
+  },
+  "next": {
+    "title": "Embedded Wallets",
+    "permalink": "/use-cases/embedded-wallets"
+  }
+}

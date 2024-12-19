@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/subdomain-write-controller-add",
+  "id": "api-reference/subdomain-write-controller-add",
+  "title": "Add Subname",
+  "description": "Add a new subname",
+  "source": "@site/docs/api-reference/subdomain-write-controller-add.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/subdomain-write-controller-add",
+  "permalink": "/api-reference/subdomain-write-controller-add",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "subdomain-write-controller-add",
+    "title": "Add Subname",
+    "description": "Add a new subname",
+    "sidebar_label": "Add Subname",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJzNV21vGjkQ/iuWP7VSyksTEsqnI5B70TVtAlRVlYtOZu0Fp7vrre2FcCj//Wbs3WWBLXlRTrpESsAez4yfeebFa6pSoZmVKvmD0x4dZ1OuYiaTr1paMVCJ1SqKhP6bcU6PKBcm0DJFcRDuc04YScSSmGyasFiARMo0fLBCG9q7WVO32qP371gq330XK5CQeHQuGBd6T+NkLkg/leRPsWrAphY/MqkFOGZ1Jo6oCeYiZrS3pnaVol5jtUxm9OHhqGLKyFnCbKbFE4yVsi83Fwtj2Owpxi695MtNQRA06HgKiF7yeaZuvbAw9lzxFUrsng2AECKxuMXSNJKBY07zzqDh9b5qNb0TgUVaaOSZlcLgbmaE9pfadaLuLihJVEgsxqvgJ0iKexanER7mYkEfYCExQ7/5bL1wlNQovmMJKg7msIH5UapNsnhaA/0ABYnkR2QJqpNoBQ6nqdKWXIAVLbKYXIJEIixhCSdjkapIMjIByHHtTZuESpPYixyRdrvd6cAft2q88Nuqg4UA+JhzwwO8f9lymwRKw6dUJRyAIVb9HFfI34JxPdq6n3447bBOeMxa4aDdHXZPLk673e5xEPR5p9U9Oemwsw/ts36XIk9kMnFInbaQwRs17X77n6u2uOpc/yZC+X54eTUJJx8744/x4mwoF+EntnW8haTMMWdaM1dArIjN4yQrbe4RvWpgN6KQcBXW39BNypVn0CNpHT/yNLsA4lnlzlpxb+sjgDvPRB8LZo/apbRQUBuBimF/waIMTf9ylxnLXBYhwl50pTKbTcWOaEXyxWg6/TVI5jZq6tYWjL70e+EKfhPAZCQAE17gl1eY35mZPy2L8wNkDicOVwmZhqbXbF7Ho/71+ek3NlhJfnV89oUPk7tfv3UW15k818EPvlJf24NsOFvefx+e7N2krF3VerMpEdVEzNmwfanK7ctmCzSCrjfytRcsepvIkjKfQ5ZFPyHW2DdfsmQG01xwuH8QgAthFkWuj75S2QYW2cwMFK/JmwrQ71ut2lbrTkO8eFl1izs2qL9wfsXDXnBmn+Cr5HX0qZCB70UWlg4Fx7vq+ozWSj/Ozk8AP5EhSRRxJ4gKggyyH7qDwm6wlEb45uN242I62PXLXbiw+riHI4fjeMlms5p6VolhCfnjOseeUBuljqKWzXDKozkBUQ+MfnOFg2SqjAsKs5DHtFlmZNMPkpBEi2JGzHSEw4y1KaYnODgDNHFgbJSFq4HhAvXI2NFmRLkowlkdKdw0sDUMuDZe6eJF19xqmv+bZucayH9V/LfK60srIo6foXIJUNRx9383AarfwCGIt19vN1p5UWIBJjxyCfkSM1eO8jDi62Jcviu2NK83Fa32EZLnJULZTCPkAFhwNFvnjIREqPQI5CSAM0fOwtZ6PWVGfNHRwwMuA9004Htzi6BqyaauO9+CynwAx2hxaXAD2BWyyIgDDr8Z5en4luw8d2rd9rGtPqCKyLrQv9ju1svnoOXqe+p1bFceQgctb55Wr2O38io6jHU59G3Z9dsDr/2dy9mNxF5j3ZzoQ/FM7UHZaum8+jyegPA0f4PFrt9SzZZYseFvj/4Fv/BFuRu7dufW1zRiySxDxHrU68WffwGEXWi5",
+    "sidebar_class_name": "post api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Reserve Subname",
+    "permalink": "/api-reference/subdomain-write-controller-api-reserve"
+  },
+  "next": {
+    "title": "Update Subname",
+    "permalink": "/api-reference/subdomain-write-controller-update"
+  }
+}

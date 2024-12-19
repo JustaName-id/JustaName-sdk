@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/subdomain-read-controller-get-invitations",
+  "id": "api-reference/subdomain-read-controller-get-invitations",
+  "title": "Get Subnames Reserved to an Address",
+  "description": "Retrieves all subnames reserved to an address",
+  "source": "@site/docs/api-reference/subdomain-read-controller-get-invitations.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/subdomain-read-controller-get-invitations",
+  "permalink": "/api-reference/subdomain-read-controller-get-invitations",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "subdomain-read-controller-get-invitations",
+    "title": "Get Subnames Reserved to an Address",
+    "description": "Retrieves all subnames reserved to an address",
+    "sidebar_label": "Get Subnames Reserved to an Address",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJy9V02P2jwQ/iuWT61E+WiXLeWG6KrdQ98D0NNqVTnJhHjrxKnt7C5C/Pd3xgkhgXQpW6kXwPZ8PPM9bLnOwQgndXYb8SlfFkGkUyGzBYhorjNntFJgfqzB3WaP0nlKy3s8AhsamdMR2RbgjIRHsEwoxWwRZCLFgwEL5hEi5jQTGRNRhDfEnQuDBA6M5dO7LSdqlHJ4N/CrkAYQkTMF9LgkJb8KMJsT1asE9oKZjpnDo90bgcTwLNJckfThc/DpeizG8QcxjOejyefJ1c31ZDL5EIazaDycXF2NxcdPo4+zCbLZMIFU8OmWu01O3BYNzNZ8t+vVcMMEVaDXLoI7JyYmox57AqYztUG0ea6NYzcI3UCRsm9IkYFDj0VsCblWUrAVWEd3b0Ys1oalJUmPjUaj8Rg//K0tid82zd4TdJiUFWkApm2SltmKXps2xULZ8zEgVkaS91E4RLMGcz38MxiQ2c8+gPZCIDNjxIYAHCRQ7sVSYa7tc6PMzWDTRHbHH0TWB5fw+w6IgsQiuXSQ2q6k2N0TTptjbYAniCAWhXLlz2NXLUsM7ElYFoNDbRHiCkP0VlwotemjqhBrDzIvQOS5kqGvvMGDJSnbU4g6eIDQUWkZqmgnSxwWK7awcx3Bqccb5r8fDrtiWnJjaKM6qnsr+3znTa6MfBlFJNwfYJVRh2t7vMAeUuZFx+NfSa58/FXYpPO9ymCwl6RCjzt4dgsItYkuZKz71m0X3l2zFO7IprYFTbxtEG3JmKpOOt8Sv4ET5MFZLhdVXMluLJ5OBF7Ob0Mh7VwJmUKTM9Bagci8s8vHmU8X7FapwF8UP3jn8IEgn7e3zoUq8nusB2RNHE2lDavrGXdstjHanJp2XBj/YYkyGbNMM8/BdBgWBlH2mKYW/iQt+FIpX7HXWLGmejkyaG+A13oG3sIX2vJJrNdlq2xJahR5XZNnBC7LdnOQuPOZK9Y0kHnVoEgITulE02aAG4Af3Ngip3xQJ9RAttYCP++rqV4YhaSJc7mdDgYIco3ufCdy2X8o8EQa+hhV6p0yi7X3fAV55b+PPd889TjpKe9H/WFVCyKk9CJTcm1dKnyvrIbKFxyfy333X7Q3k1k9q1oat4c2fPGKUyUR1eEgV7SMUC8jl2wrL97x5qLS9CN6JEH8RLLdBsLCd6N2O7ouxx55N5JWBKoxFn+L/M2iypW37Myy1In5J2xau9mjUAVRcRrYr0Lxj3agF6w5rG6vtObMxvOS6sOK9Urdly45L4BpLVoHOPd0MJLwYK7dI3mCfwewT1DilZwz7B+5a3CdbCm7Zvf4crPCJvM/JpxHew==",
+    "sidebar_class_name": "get api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Get all by Address",
+    "permalink": "/api-reference/subdomain-read-controller-find-all-by-address"
+  },
+  "next": {
+    "title": "Available",
+    "permalink": "/api-reference/subdomain-read-controller-is-username-available"
+  }
+}

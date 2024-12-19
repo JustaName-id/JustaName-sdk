@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SubnameAddRoute",
+  "id": "sdk/core/sdk-api/interfaces/SubnameAddRoute",
+  "title": "Interface: SubnameAddRoute",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SubnameAddRoute.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SubnameAddRoute",
+  "permalink": "/sdk/core/sdk-api/interfaces/SubnameAddRoute",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SubnameAddRoute",
+    "title": "Interface: SubnameAddRoute",
+    "sidebar_label": "SubnameAddRoute",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SubnameAddResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameAddResponse"
+  },
+  "next": {
+    "title": "SubnameClaimRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameClaimRequest"
+  }
+}

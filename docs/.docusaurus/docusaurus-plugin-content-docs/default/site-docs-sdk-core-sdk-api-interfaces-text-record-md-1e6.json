@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/TextRecord",
+  "id": "sdk/core/sdk-api/interfaces/TextRecord",
+  "title": "Interface: TextRecord",
+  "description": "Properties",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/TextRecord.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/TextRecord",
+  "permalink": "/sdk/core/sdk-api/interfaces/TextRecord",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "TextRecord",
+    "title": "Interface: TextRecord",
+    "sidebar_label": "TextRecord",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SubnameUpdateRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameUpdateRoute"
+  },
+  "next": {
+    "title": "TextRecordResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/TextRecordResponse"
+  }
+}

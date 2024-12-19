@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/react/sdk-api/interfaces/UseIsSubnameAvailableOptions",
+  "id": "sdk/react/sdk-api/interfaces/UseIsSubnameAvailableOptions",
+  "title": "Interface: UseIsSubnameAvailableOptions",
+  "description": "Properties",
+  "source": "@site/docs/sdk/react/sdk-api/interfaces/UseIsSubnameAvailableOptions.md",
+  "sourceDirName": "sdk/react/sdk-api/interfaces",
+  "slug": "/sdk/react/sdk-api/interfaces/UseIsSubnameAvailableOptions",
+  "permalink": "/sdk/react/sdk-api/interfaces/UseIsSubnameAvailableOptions",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "UseIsSubnameAvailableOptions",
+    "title": "Interface: UseIsSubnameAvailableOptions",
+    "sidebar_label": "UseIsSubnameAvailableOptions",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "UseConnectedWalletSubnamesOptions",
+    "permalink": "/sdk/react/sdk-api/interfaces/UseConnectedWalletSubnamesOptions"
+  },
+  "next": {
+    "title": "UseSubnameOptions",
+    "permalink": "/sdk/react/sdk-api/interfaces/UseSubnameOptions"
+  }
+}

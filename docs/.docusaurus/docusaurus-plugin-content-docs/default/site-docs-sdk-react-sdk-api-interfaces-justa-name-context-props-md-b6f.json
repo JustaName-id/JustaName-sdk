@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/react/sdk-api/interfaces/JustaNameContextProps",
+  "id": "sdk/react/sdk-api/interfaces/JustaNameContextProps",
+  "title": "Interface: JustaNameContextProps",
+  "description": "Properties",
+  "source": "@site/docs/sdk/react/sdk-api/interfaces/JustaNameContextProps.md",
+  "sourceDirName": "sdk/react/sdk-api/interfaces",
+  "slug": "/sdk/react/sdk-api/interfaces/JustaNameContextProps",
+  "permalink": "/sdk/react/sdk-api/interfaces/JustaNameContextProps",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "JustaNameContextProps",
+    "title": "Interface: JustaNameContextProps",
+    "sidebar_label": "JustaNameContextProps",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "BaseClaimSubnameRequest",
+    "permalink": "/sdk/react/sdk-api/interfaces/BaseClaimSubnameRequest"
+  },
+  "next": {
+    "title": "JustaNameProvider",
+    "permalink": "/sdk/react/sdk-api/interfaces/JustaNameProvider"
+  }
+}

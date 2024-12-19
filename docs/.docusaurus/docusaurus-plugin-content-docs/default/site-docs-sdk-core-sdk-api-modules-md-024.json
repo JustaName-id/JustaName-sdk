@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/modules",
+  "id": "sdk/core/sdk-api/modules",
+  "title": "@justaname.id/sdk",
+  "description": "Classes",
+  "source": "@site/docs/sdk/core/sdk-api/modules.md",
+  "sourceDirName": "sdk/core/sdk-api",
+  "slug": "/sdk/core/sdk-api/modules",
+  "permalink": "/sdk/core/sdk-api/modules",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0.5,
+  "frontMatter": {
+    "id": "modules",
+    "title": "@justaname.id/sdk",
+    "sidebar_label": "Exports",
+    "sidebar_position": 0.5,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "Readme",
+    "permalink": "/sdk/core/sdk-api/"
+  },
+  "next": {
+    "title": "JustaName",
+    "permalink": "/sdk/core/sdk-api/classes/JustaName"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "unversionedId": "sdk/react/sdk-api/interfaces/UseSubnameOptions",
+  "id": "sdk/react/sdk-api/interfaces/UseSubnameOptions",
+  "title": "Interface: UseSubnameOptions",
+  "description": "Properties",
+  "source": "@site/docs/sdk/react/sdk-api/interfaces/UseSubnameOptions.md",
+  "sourceDirName": "sdk/react/sdk-api/interfaces",
+  "slug": "/sdk/react/sdk-api/interfaces/UseSubnameOptions",
+  "permalink": "/sdk/react/sdk-api/interfaces/UseSubnameOptions",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "UseSubnameOptions",
+    "title": "Interface: UseSubnameOptions",
+    "sidebar_label": "UseSubnameOptions",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "UseIsSubnameAvailableOptions",
+    "permalink": "/sdk/react/sdk-api/interfaces/UseIsSubnameAvailableOptions"
+  }
+}

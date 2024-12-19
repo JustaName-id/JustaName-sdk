@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/Address",
+  "id": "sdk/core/sdk-api/interfaces/Address",
+  "title": "Interface: Address",
+  "description": "Properties",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/Address.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/Address",
+  "permalink": "/sdk/core/sdk-api/interfaces/Address",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "Address",
+    "title": "Interface: Address",
+    "sidebar_label": "Address",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "Subnames",
+    "permalink": "/sdk/core/sdk-api/classes/Subnames"
+  },
+  "next": {
+    "title": "AddressResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/AddressResponse"
+  }
+}

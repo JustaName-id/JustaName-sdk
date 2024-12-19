@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/ROUTES",
+  "id": "sdk/core/sdk-api/interfaces/ROUTES",
+  "title": "Interface: ROUTES",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/ROUTES.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/ROUTES",
+  "permalink": "/sdk/core/sdk-api/interfaces/ROUTES",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "ROUTES",
+    "title": "Interface: ROUTES",
+    "sidebar_label": "ROUTES",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "MetadataResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/MetadataResponse"
+  },
+  "next": {
+    "title": "RequestChallengeRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/RequestChallengeRequest"
+  }
+}

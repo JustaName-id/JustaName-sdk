@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/IRoute",
+  "id": "sdk/core/sdk-api/interfaces/IRoute",
+  "title": "Interface: IRoute",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/IRoute.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/IRoute",
+  "permalink": "/sdk/core/sdk-api/interfaces/IRoute",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "IRoute",
+    "title": "Interface: IRoute",
+    "sidebar_label": "IRoute",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "IResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/IResponse"
+  },
+  "next": {
+    "title": "IsSubnameAvailableRequest",
+    "permalink": "/sdk/core/sdk-api/interfaces/IsSubnameAvailableRequest"
+  }
+}

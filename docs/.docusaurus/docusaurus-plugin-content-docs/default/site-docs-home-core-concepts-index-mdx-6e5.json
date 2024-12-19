@@ -1,0 +1,28 @@
+{
+  "unversionedId": "home/core-concepts/core-concepts",
+  "id": "home/core-concepts/core-concepts",
+  "title": "Core Concepts",
+  "description": "",
+  "source": "@site/docs/home/core-concepts/index.mdx",
+  "sourceDirName": "home/core-concepts",
+  "slug": "/core-concepts",
+  "permalink": "/core-concepts",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "core-concepts",
+    "title": "Core Concepts",
+    "sidebar_label": "Core Concepts",
+    "slug": "/core-concepts"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Admin App",
+    "permalink": "/admin-dashboard"
+  },
+  "next": {
+    "title": "Intro To Ens",
+    "permalink": "/core-concepts/ens"
+  }
+}

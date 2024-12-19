@@ -1,0 +1,571 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/",
+          "mainDocId": "home/welcome",
+          "docs": [
+            {
+              "id": "api-reference/primary-name-read-controller-get-primary-name-by-address",
+              "path": "/api-reference/primary-name-read-controller-get-primary-name-by-address",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/primary-name-write-controller-set-primary-name",
+              "path": "/api-reference/primary-name-write-controller-set-primary-name",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/siwe",
+              "path": "/api-reference/siwe",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/siwe-challenge-controller-request-challenge",
+              "path": "/api-reference/siwe-challenge-controller-request-challenge",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/siwe-sign-message",
+              "path": "/api-reference/siwe-sign-message",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/siwe-verify-controller-verify",
+              "path": "/api-reference/siwe-verify-controller-verify",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-read-controller-find-all-by-address",
+              "path": "/api-reference/subdomain-read-controller-find-all-by-address",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-read-controller-find-all-by-domain-name-and-chain-id",
+              "path": "/api-reference/subdomain-read-controller-find-all-by-domain-name-and-chain-id",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-read-controller-find-by-domain-name-and-name-and-chain-id",
+              "path": "/api-reference/subdomain-read-controller-find-by-domain-name-and-name-and-chain-id",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-read-controller-find-by-full-domain-and-chain-id",
+              "path": "/api-reference/subdomain-read-controller-find-by-full-domain-and-chain-id",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-read-controller-get-invitations",
+              "path": "/api-reference/subdomain-read-controller-get-invitations",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-read-controller-is-username-available",
+              "path": "/api-reference/subdomain-read-controller-is-username-available",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-write-controller-accept",
+              "path": "/api-reference/subdomain-write-controller-accept",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-write-controller-add",
+              "path": "/api-reference/subdomain-write-controller-add",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-write-controller-api-reserve",
+              "path": "/api-reference/subdomain-write-controller-api-reserve",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-write-controller-revoke",
+              "path": "/api-reference/subdomain-write-controller-revoke",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/subdomain-write-controller-update",
+              "path": "/api-reference/subdomain-write-controller-update",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "api-reference/title",
+              "path": "/api-reference/title",
+              "sidebar": "openApiSidebar"
+            },
+            {
+              "id": "getting-started/intro",
+              "path": "/getting-started",
+              "sidebar": "gettingStartedSidebar"
+            },
+            {
+              "id": "home/admin-dashboard",
+              "path": "/admin-dashboard",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/core-concepts/ccip-read",
+              "path": "/core-concepts/ccip-read",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/core-concepts/core-concepts",
+              "path": "/core-concepts",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/core-concepts/ens",
+              "path": "/core-concepts/ens",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/core-concepts/ens-architecture",
+              "path": "/core-concepts/ens-architecture",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/core-concepts/justaname",
+              "path": "/core-concepts/justaname",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/the-app",
+              "path": "/the-app",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/use-cases/embedded-wallets",
+              "path": "/use-cases/embedded-wallets",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/use-cases/exchanges",
+              "path": "/use-cases/exchanges",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/use-cases/gaming-metaverses",
+              "path": "/use-cases/gaming-metaverses",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/use-cases/secure-messaging",
+              "path": "/use-cases/secure-messaging",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/use-cases/social-hub",
+              "path": "/use-cases/social-hub",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/use-cases/use-cases",
+              "path": "/use-cases",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/use-cases/wallets",
+              "path": "/use-cases/wallets",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/welcome",
+              "path": "/",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "home/why-we-exist",
+              "path": "/why-we-exist",
+              "sidebar": "homeSidebar"
+            },
+            {
+              "id": "sdk/core/core-sdk",
+              "path": "/sdk/core",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/classes/JustaName",
+              "path": "/sdk/core/sdk-api/classes/JustaName",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/classes/Siwe",
+              "path": "/sdk/core/sdk-api/classes/Siwe",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/classes/Subnames",
+              "path": "/sdk/core/sdk-api/classes/Subnames",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/index",
+              "path": "/sdk/core/sdk-api/",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/Address",
+              "path": "/sdk/core/sdk-api/interfaces/Address",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/AddressResponse",
+              "path": "/sdk/core/sdk-api/interfaces/AddressResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/ApiKeyHeaders",
+              "path": "/sdk/core/sdk-api/interfaces/ApiKeyHeaders",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/ApiKeyResponse",
+              "path": "/sdk/core/sdk-api/interfaces/ApiKeyResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/ApiKeyRoute",
+              "path": "/sdk/core/sdk-api/interfaces/ApiKeyRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/BaseResponse",
+              "path": "/sdk/core/sdk-api/interfaces/BaseResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/Configuration",
+              "path": "/sdk/core/sdk-api/interfaces/Configuration",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/IHeaders",
+              "path": "/sdk/core/sdk-api/interfaces/IHeaders",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/IRequest",
+              "path": "/sdk/core/sdk-api/interfaces/IRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/IResponse",
+              "path": "/sdk/core/sdk-api/interfaces/IResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/IRoute",
+              "path": "/sdk/core/sdk-api/interfaces/IRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/IsSubnameAvailableRequest",
+              "path": "/sdk/core/sdk-api/interfaces/IsSubnameAvailableRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/IsSubnameAvailableResponse",
+              "path": "/sdk/core/sdk-api/interfaces/IsSubnameAvailableResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/IsSubnameAvailableRoute",
+              "path": "/sdk/core/sdk-api/interfaces/IsSubnameAvailableRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/Metadata",
+              "path": "/sdk/core/sdk-api/interfaces/Metadata",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/MetadataResponse",
+              "path": "/sdk/core/sdk-api/interfaces/MetadataResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/RequestChallengeRequest",
+              "path": "/sdk/core/sdk-api/interfaces/RequestChallengeRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/RequestChallengeResponse",
+              "path": "/sdk/core/sdk-api/interfaces/RequestChallengeResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/ROUTES",
+              "path": "/sdk/core/sdk-api/interfaces/ROUTES",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SIWEHeaders",
+              "path": "/sdk/core/sdk-api/interfaces/SIWEHeaders",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SIWERequestChallengeRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SIWERequestChallengeRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SIWEVerifyMessageRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SIWEVerifyMessageRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameAddRequest",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameAddRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameAddResponse",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameAddResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameAddRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameAddRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameClaimRequest",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameClaimRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameClaimResponse",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameClaimResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameClaimRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameClaimRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRequest",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetAllByAddressResponse",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetAllByAddressResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetAllByAddressRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetAllByDomainChainIdRequest",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetAllByDomainChainIdRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetAllByDomainChainIdResponse",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetAllByDomainChainIdResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetAllByDomainChainIdRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetAllByDomainChainIdRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdRequest",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdResponse",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetByDomainNameChainIdRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetBySubnameRequest",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetBySubnameRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetBySubnameResponse",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetBySubnameResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameGetBySubnameRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameGetBySubnameRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameReserveRequest",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameReserveRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameReserveResponse",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameReserveResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameReserveRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameReserveRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameRevokeRequest",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameRevokeRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameRevokeResponse",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameRevokeResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameRevokeRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameRevokeRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameUpdateRequest",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameUpdateRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameUpdateResponse",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameUpdateResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/SubnameUpdateRoute",
+              "path": "/sdk/core/sdk-api/interfaces/SubnameUpdateRoute",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/TextRecord",
+              "path": "/sdk/core/sdk-api/interfaces/TextRecord",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/TextRecordResponse",
+              "path": "/sdk/core/sdk-api/interfaces/TextRecordResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/VerifyChallengeRequest",
+              "path": "/sdk/core/sdk-api/interfaces/VerifyChallengeRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/interfaces/VerifyChallengeResponse",
+              "path": "/sdk/core/sdk-api/interfaces/VerifyChallengeResponse",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/core/sdk-api/modules",
+              "path": "/sdk/core/sdk-api/modules",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/get-started",
+              "path": "/sdk",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/react/react-sdk",
+              "path": "/sdk/react",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/react/sdk-api/index",
+              "path": "/sdk/react/sdk-api/",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/react/sdk-api/interfaces/BaseClaimSubnameRequest",
+              "path": "/sdk/react/sdk-api/interfaces/BaseClaimSubnameRequest",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/react/sdk-api/interfaces/JustaNameContextProps",
+              "path": "/sdk/react/sdk-api/interfaces/JustaNameContextProps",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/react/sdk-api/interfaces/JustaNameProvider",
+              "path": "/sdk/react/sdk-api/interfaces/JustaNameProvider",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/react/sdk-api/interfaces/UseConnectedWalletSubnamesOptions",
+              "path": "/sdk/react/sdk-api/interfaces/UseConnectedWalletSubnamesOptions",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/react/sdk-api/interfaces/UseIsSubnameAvailableOptions",
+              "path": "/sdk/react/sdk-api/interfaces/UseIsSubnameAvailableOptions",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/react/sdk-api/interfaces/UseSubnameOptions",
+              "path": "/sdk/react/sdk-api/interfaces/UseSubnameOptions",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "sdk/react/sdk-api/modules",
+              "path": "/sdk/react/sdk-api/modules",
+              "sidebar": "sdkSidebar"
+            },
+            {
+              "id": "/api-reference",
+              "path": "/api-reference",
+              "sidebar": "openApiSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "openApiSidebar": {
+              "link": {
+                "path": "/api-reference",
+                "label": "JustaName"
+              }
+            },
+            "homeSidebar": {
+              "link": {
+                "path": "/",
+                "label": "Welcome"
+              }
+            },
+            "gettingStartedSidebar": {
+              "link": {
+                "path": "/getting-started",
+                "label": "Introduction"
+              }
+            },
+            "sdkSidebar": {
+              "link": {
+                "path": "/sdk",
+                "label": "Get Started"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/SubnameClaimRequest",
+  "id": "sdk/core/sdk-api/interfaces/SubnameClaimRequest",
+  "title": "Interface: SubnameClaimRequest",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/SubnameClaimRequest.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/SubnameClaimRequest",
+  "permalink": "/sdk/core/sdk-api/interfaces/SubnameClaimRequest",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "SubnameClaimRequest",
+    "title": "Interface: SubnameClaimRequest",
+    "sidebar_label": "SubnameClaimRequest",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "SubnameAddRoute",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameAddRoute"
+  },
+  "next": {
+    "title": "SubnameClaimResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/SubnameClaimResponse"
+  }
+}

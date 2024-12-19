@@ -1,0 +1,31 @@
+{
+  "unversionedId": "sdk/core/sdk-api/interfaces/IsSubnameAvailableRoute",
+  "id": "sdk/core/sdk-api/interfaces/IsSubnameAvailableRoute",
+  "title": "Interface: IsSubnameAvailableRoute",
+  "description": "Hierarchy",
+  "source": "@site/docs/sdk/core/sdk-api/interfaces/IsSubnameAvailableRoute.md",
+  "sourceDirName": "sdk/core/sdk-api/interfaces",
+  "slug": "/sdk/core/sdk-api/interfaces/IsSubnameAvailableRoute",
+  "permalink": "/sdk/core/sdk-api/interfaces/IsSubnameAvailableRoute",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "id": "IsSubnameAvailableRoute",
+    "title": "Interface: IsSubnameAvailableRoute",
+    "sidebar_label": "IsSubnameAvailableRoute",
+    "sidebar_position": 0,
+    "custom_edit_url": null
+  },
+  "sidebar": "sdkSidebar",
+  "previous": {
+    "title": "IsSubnameAvailableResponse",
+    "permalink": "/sdk/core/sdk-api/interfaces/IsSubnameAvailableResponse"
+  },
+  "next": {
+    "title": "Metadata",
+    "permalink": "/sdk/core/sdk-api/interfaces/Metadata"
+  }
+}

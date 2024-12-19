@@ -1,0 +1,25 @@
+{
+  "unversionedId": "sdk/get-started",
+  "id": "sdk/get-started",
+  "title": "Get Started",
+  "description": "This library was generated with Nx.",
+  "source": "@site/docs/sdk/01-get-started.md",
+  "sourceDirName": "sdk",
+  "slug": "/sdk",
+  "permalink": "/sdk",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "id": "get-started",
+    "title": "Get Started",
+    "sidebar_label": "Get Started",
+    "slug": "/sdk"
+  },
+  "sidebar": "sdkSidebar",
+  "next": {
+    "title": "Core SDK",
+    "permalink": "/sdk/core"
+  }
+}

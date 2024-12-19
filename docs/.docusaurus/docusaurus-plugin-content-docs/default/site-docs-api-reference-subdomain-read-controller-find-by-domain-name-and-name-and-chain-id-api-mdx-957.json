@@ -1,0 +1,35 @@
+{
+  "unversionedId": "api-reference/subdomain-read-controller-find-by-domain-name-and-name-and-chain-id",
+  "id": "api-reference/subdomain-read-controller-find-by-domain-name-and-name-and-chain-id",
+  "title": "Get by Username and ENS Domain",
+  "description": "Retrieves subname details based on the specified ENS domain, username, and chainId",
+  "source": "@site/docs/api-reference/subdomain-read-controller-find-by-domain-name-and-name-and-chain-id.api.mdx",
+  "sourceDirName": "api-reference",
+  "slug": "/api-reference/subdomain-read-controller-find-by-domain-name-and-name-and-chain-id",
+  "permalink": "/api-reference/subdomain-read-controller-find-by-domain-name-and-name-and-chain-id",
+  "draft": false,
+  "editUrl": null,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "subdomain-read-controller-find-by-domain-name-and-name-and-chain-id",
+    "title": "Get by Username and ENS Domain",
+    "description": "Retrieves subname details based on the specified ENS domain, username, and chainId",
+    "sidebar_label": "Get by Username and ENS Domain",
+    "hide_title": true,
+    "hide_table_of_contents": true,
+    "api": "eJy9Vktv2zgQ/iuETi2g2nGBXnzLpkG3h+Zgp6cgWIzFkcUsRbIkldQw/N87Q0m2bKtp0mL34geHM/N98+Q2sw49RGXNZ5nNs2WzkrYGZRYI8sqa6K3W6P8plZF/bT4m0Q3UeGlk93VV0RHp5pnEUHjl2BZZWmD0Ch8xiNCsDN0VEiMoHcQKAkphjYgViuCwUKWig+ubpWh956IJ6FknF2CkKPYuHHg6jehDNr/bZnyFXKEJLTK64fFbozwSl+gbzDPFWL416DdnCG/J/cEpifE71E6zxQcwE4wVnYWiwhqy+TaLG8eiQLTMOtvt8r3/Hu3r3ae42LKNRB/6IyQSH1+I4hClV4BI2RNK5uKJgBi9IRjOWR/FNWHy2NTiC90wGFMmluisViBuMUQ+ezMTpfWibq/kYjabffhAH+k0tJffDvn0F0YomaZeoSdK98wgOGsCBpZLLKHRsf15GsG+uJ4giBIjGZV0VhQYQtlovZmQ94LqGE0yAM5pVaR6nz4EtrI9R2JXD1hELjfP3RFViyNEiE24shLPUQ8ovr+4GEt1qy0KUu8z3rOcZLtEuSP5PAoJ8QVYlRwplvxQqWPCP7LcxfhvCNWoHKQkhl1GOyl4D1ySKmIdRos7i/g9LrCwXr5Scd9Nn8fw7oZNcsecjhkM8R6DOLZMpRpVTI36haYbR/DSqUWXV+ZNs2kUQbLz01SocKVB1TjUXFmrEUwKdiu8TOVCrVZD5FEBEd9FlebQC/gOplbKfI/1gGyIY+h0wHq/L05pe2/9ObXTxrihFhWqFMaKpCFsUTSeUObC8vx5UgFTq7TSmjICa+6XE0I9geT1F/AWqdGWT7Bep3FzbGnQ5Pue/IXBZTtuDhZ3qXJhzUuKNVIwyQhtrsryll1j6iugDTPPpvuCmg5SQr8e+zXXeE33qhhdmE+nhHBNsXwHTk0eGvrHGhNKKQ9OZUqbwt7hvU3fp2Ef/ssz9tOezyYXXSNAwbXFPJwNsYY0KLtF84kG/2ojvnZg02LgPbrfwUfOtofx+9+8CboK4yadOs0IeNBxyLZdiO+y4W7dB5nCVRE5lm+3DOCr17sdH7e7kkMvVYCV5tIoQQd8htubRVdFb8XZw2IU4r+4OXm7PIJu+F7GW/23Pf/sTfEMiEHd/TmG/+lJ8QydQ20c2NzzH6+YDiX2nu5W9MKlduUst2qX1MYuDrTOHgu7YRN/ur6lXv8BKFngnA==",
+    "sidebar_class_name": "get api-method",
+    "info_path": "api-reference/title",
+    "custom_edit_url": null
+  },
+  "sidebar": "openApiSidebar",
+  "previous": {
+    "title": "Revoke Subname",
+    "permalink": "/api-reference/subdomain-write-controller-revoke"
+  },
+  "next": {
+    "title": "Get by Subname",
+    "permalink": "/api-reference/subdomain-read-controller-find-by-full-domain-and-chain-id"
+  }
+}

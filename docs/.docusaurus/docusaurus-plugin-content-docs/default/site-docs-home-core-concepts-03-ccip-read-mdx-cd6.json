@@ -1,0 +1,29 @@
+{
+  "unversionedId": "home/core-concepts/ccip-read",
+  "id": "home/core-concepts/ccip-read",
+  "title": "CCIP-Read (for Geeks)",
+  "description": "EIP-3668, commonly known as CCIP-Read, is a proposed protocol aimed at providing secure off-chain data retrieval. CCIP-Read introduces a standard set of rules and protocols to create a trusted environment for off-chain data reading, delivering a solution for the data interoperability issues that plague blockchain environments.",
+  "source": "@site/docs/home/core-concepts/03-ccip-read.mdx",
+  "sourceDirName": "home/core-concepts",
+  "slug": "/core-concepts/ccip-read",
+  "permalink": "/core-concepts/ccip-read",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "id": "ccip-read",
+    "title": "CCIP-Read (for Geeks)",
+    "sidebar_label": "CCIP-Read (for Geeks)",
+    "slug": "/core-concepts/ccip-read"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Deep dive into ENS (for Geeks)",
+    "permalink": "/core-concepts/ens-architecture"
+  },
+  "next": {
+    "title": "Just A Name - How It Works",
+    "permalink": "/core-concepts/justaname"
+  }
+}

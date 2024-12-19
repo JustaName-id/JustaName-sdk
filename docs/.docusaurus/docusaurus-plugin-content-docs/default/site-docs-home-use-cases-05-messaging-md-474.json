@@ -1,0 +1,30 @@
+{
+  "unversionedId": "home/use-cases/secure-messaging",
+  "id": "home/use-cases/secure-messaging",
+  "title": "Secure and Named Chats (XMTP)",
+  "description": "Integrate XMTP with JustaName for Encrypted, User-Friendly Messaging",
+  "source": "@site/docs/home/use-cases/05-messaging.md",
+  "sourceDirName": "home/use-cases",
+  "slug": "/use-cases/secure-messaging",
+  "permalink": "/use-cases/secure-messaging",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "id": "secure-messaging",
+    "title": "Secure and Named Chats (XMTP)",
+    "sidebar_label": "Named Messaging (XMTP)",
+    "slug": "/use-cases/secure-messaging",
+    "description": "Integrate XMTP with JustaName for Encrypted, User-Friendly Messaging"
+  },
+  "sidebar": "homeSidebar",
+  "previous": {
+    "title": "Social Hub",
+    "permalink": "/use-cases/social-hub"
+  },
+  "next": {
+    "title": "Gaming & Metaverses",
+    "permalink": "/use-cases/gaming-metaverses"
+  }
+}
