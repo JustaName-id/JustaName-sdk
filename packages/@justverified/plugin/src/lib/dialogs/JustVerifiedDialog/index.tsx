@@ -13,6 +13,7 @@ import {
   DiscordEthereumEip712Signature,
   GithubEthereumEip712Signature,
   TelegramEthereumEip712Signature,
+  OpenPassportEthereumEip712Signature,
   TwitterEthereumEip712Signature,
 } from '../../types';
 import { usePreviousState, useSocialVerification } from '../../hooks';
@@ -199,6 +200,12 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                                 ).credentialSubject.username;
                                 break;
                               }
+                              case 'openpassport': {
+                                socialValue = (
+                                  credentialValue as OpenPassportEthereumEip712Signature
+                                ).credentialSubject.proof;
+                                break;
+                              } 
                               default: {
                                 socialValue = '';
                               }
