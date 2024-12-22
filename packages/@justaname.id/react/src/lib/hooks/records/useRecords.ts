@@ -211,7 +211,11 @@ export const useRecords = (params?: UseRecordsParams): UseRecordsResult => {
           providerUrl: __providerUrl,
         });
       } catch (error) {
-        if (error instanceof Error && error.message.includes('NotFound')) {
+        if (
+          error instanceof Error &&
+          (error.message.includes('NotFound') ||
+            error.message.includes('ETH address not found'))
+        ) {
           throw error;
         }
         records = await getStandardRecords({
