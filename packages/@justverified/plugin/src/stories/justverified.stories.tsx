@@ -52,7 +52,7 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   // enableAuth: true,
   plugins: [
     JustVerifiedPlugin(
-      ['twitter', 'github', 'discord']
+      ['twitter', 'github', 'discord', 'openpassport'],
       // 'http://localhost:3009/verifications/v1'
       // 'https://api-staging.justaname.id/verifications/v1'
     ),

@@ -20,6 +20,7 @@ export interface SelectCredentialItemProps {
   onClick: () => void;
   credentialValue:
     | EthereumEip712Signature2021<{ username?: string; email?: string }>
+    | EthereumEip712Signature2021<{ proof?: string }>
     | undefined;
   disabled?: boolean;
 }
@@ -36,12 +37,15 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
     () => selectedCredential === credential,
     [selectedCredential, credential]
   );
-  const username = useMemo(
-    () =>
-      credentialValue?.credentialSubject?.username ||
-      credentialValue?.credentialSubject?.email,
-    [credentialValue]
-  );
+  const username = useMemo(() => {
+    const subject = credentialValue?.credentialSubject;
+    if (!subject) return undefined;
+    
+    return 'username' in subject ? subject.username :
+           'email' in subject ? subject.email :
+           'proof' in subject ? subject.proof :
+           undefined;
+  }, [credentialValue]);
   const expirationDate = useMemo(
     () => credentialValue?.expirationDate,
     [credentialValue]

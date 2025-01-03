@@ -21,6 +21,7 @@ export const ConsoleProvider: FC<ConsoleProviderProps> = ({ children }) => {
     'github',
     'discord',
     'email',
+    'openpassport',
   ]);
   return (
     <ConsoleContext.Provider
