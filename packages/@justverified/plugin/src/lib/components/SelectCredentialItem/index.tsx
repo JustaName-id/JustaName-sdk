@@ -20,7 +20,7 @@ export interface SelectCredentialItemProps {
   onClick: () => void;
   credentialValue:
     | EthereumEip712Signature2021<{ username?: string; email?: string }>
-    | EthereumEip712Signature2021<{ proof?: string }>
+    | EthereumEip712Signature2021<{ openPassportProof?: string }>
     | undefined;
   disabled?: boolean;
 }
@@ -43,7 +43,7 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
     
     return 'username' in subject ? subject.username :
            'email' in subject ? subject.email :
-           'proof' in subject ? subject.proof :
+           'openPassportProof' in subject ? subject.openPassportProof :
            undefined;
   }, [credentialValue]);
   const expirationDate = useMemo(

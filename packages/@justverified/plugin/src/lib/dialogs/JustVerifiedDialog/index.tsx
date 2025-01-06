@@ -203,13 +203,14 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                               case 'openpassport': {
                                 socialValue = (
                                   credentialValue as OpenPassportEthereumEip712Signature
-                                ).credentialSubject.proof;
+                                ).credentialSubject.openPassportProof;
                                 break;
                               } 
                               default: {
                                 socialValue = '';
                               }
                             }
+
                             if (mAppsAlreadyEnabled?.includes(mApp)) {
                               updateRecords({
                                 text: [
