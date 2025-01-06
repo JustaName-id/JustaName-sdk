@@ -40,6 +40,11 @@ const socials: { logo: ReactNode; title: string; credential: Credentials }[] = [
     credential: 'discord',
   },
   {
+    logo: <TelegramIcon width={20} />,
+    title: 'OpenPassport',
+    credential: 'openpassport',
+  },
+  {
     logo: <EmailIcon width={20} />,
     title: 'Email',
     credential: 'email',
@@ -95,6 +100,9 @@ export const JustVerified = () => {
         break;
       case 'email':
         getAnalyticsClient().track(unCheck ? 'EMAIL_DISABLED' : 'EMAIL_ENABLED', {});
+        break;
+      case 'openpassport':
+        getAnalyticsClient().track(unCheck ? 'OPENPASSPORT_DISABLED' : 'OPENPASSPORT_ENABLED', {});
         break;
       default:
         break;
