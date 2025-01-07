@@ -43,7 +43,7 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
     
     return 'username' in subject ? subject.username :
            'email' in subject ? subject.email :
-           'openPassportProof' in subject ? subject.openPassportProof :
+           'openPassportProof' in subject ? "Valid Passport" :
            undefined;
   }, [credentialValue]);
   const expirationDate = useMemo(
