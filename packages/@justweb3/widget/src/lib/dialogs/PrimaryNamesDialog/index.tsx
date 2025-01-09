@@ -1,4 +1,4 @@
-import { Records, useAccountEnsNames, useAccountSubnames, useMountedAccount, usePrimaryName, useSetPrimaryName } from '@justaname.id/react';
+import { Records, useAccountEnsNames, useAccountSubnames, useMountedAccount, useOffchainResolvers, usePrimaryName, useSetPrimaryName } from '@justaname.id/react';
 import {
   Avatar,
   BackBtn,
@@ -17,6 +17,9 @@ import { useDisconnect } from 'wagmi';
 import { JustWeb3Context, useJustWeb3 } from '../../providers';
 import { DefaultDialog } from '../DefaultDialog';
 
+const ENS_MAINNET_RESOLVER = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
+const ENS_SEPOLIA_RESOLVER = '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD';
+
 export interface PrimaryNamesDialogProps {
   open: boolean;
   handleOpenDialog: (open: boolean) => void;
@@ -31,12 +34,15 @@ export const PrimaryNamesDialog: FC<PrimaryNamesDialogProps> = ({
   const {
     config: { disableOverlay },
   } = useContext(JustWeb3Context);
-  const { address, isConnected } = useMountedAccount();
+  const { address, isConnected, chainId } = useMountedAccount();
   const { disconnect } = useDisconnect();
   const { connectedEns, isEnsAuthPending } = useJustWeb3();
 
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
   const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
+
+  const { offchainResolvers } =
+    useOffchainResolvers();
 
   const allNames = useMemo(() => {
     return [...accountEnsNames, ...accountSubnames].reduce(
@@ -47,7 +53,21 @@ export const PrimaryNamesDialog: FC<PrimaryNamesDialogProps> = ({
         return acc;
       },
       [] as Records[]
-    );
+    ).filter((name) => {
+      const resolverAddress =
+        chainId === 1 ? ENS_MAINNET_RESOLVER : ENS_SEPOLIA_RESOLVER;
+      const offchainResolver = offchainResolvers?.offchainResolvers.find(
+        (resolver) => resolver.chainId === chainId
+      );
+
+      return !(
+        name.records.resolverAddress !== resolverAddress &&
+        name.records.resolverAddress !== offchainResolver?.resolverAddress
+      );
+    })
+      .sort((a, b) => {
+        return a.ens.localeCompare(b.ens);
+      })
   }, [accountEnsNames, accountSubnames]);
 
   const { primaryName, isPrimaryNameLoading } = usePrimaryName({ address, enabled: !!address })

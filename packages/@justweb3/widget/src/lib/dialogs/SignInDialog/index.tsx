@@ -8,6 +8,7 @@ import {
   useJustaName,
   useMountedAccount,
   useOffchainResolvers,
+  usePrimaryName,
 } from '@justaname.id/react';
 import {
   Badge,
@@ -26,7 +27,7 @@ import clsx from 'clsx';
 import React, { FC, Fragment, useMemo, useState } from 'react';
 import { SelectSubnameItem } from '../../components/SelectSubnameItem';
 import { useDebounce } from '../../hooks/useDebounce';
-import { useHybridPrimaryName } from '../../hooks/useHybridPrimaryName';
+// import { useHybridPrimaryName } from '../../hooks/useHybridPrimaryName';
 import { DefaultDialog } from '../DefaultDialog';
 import styles from './SignInDialog.module.css';
 
@@ -83,9 +84,9 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
   const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
 
-  const { hybridPrimaryName } = useHybridPrimaryName({
-    address: address,
-    chainId: chainId,
+  const { primaryName } = usePrimaryName({
+    address,
+    chainId,
     enabled: !!address && !!chainId,
   })
 
@@ -309,7 +310,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                               setSubnameSigningIn('');
                             });
                         }}
-                        isPrimary={subname.ens === hybridPrimaryName}
+                        isPrimary={subname.ens === primaryName}
                       />
                     </Fragment>
                   ))}
