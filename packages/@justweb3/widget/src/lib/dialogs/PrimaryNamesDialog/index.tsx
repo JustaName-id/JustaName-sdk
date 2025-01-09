@@ -151,16 +151,13 @@ export const PrimaryNamesDialog: FC<PrimaryNamesDialogProps> = ({
                   width: '100%',
                 }}
                 right={
-                  <Flex direction={'row'} gap={"10px"} align={'center'}>
-                    <Badge withCopy={false}>
-                      <P style={{
-                        fontWeight: 900,
-                        fontSize: 10,
-                        color: 'var(--justweb3-primary-color)',
-                      }}>Primary</P>
-                    </Badge>
-                    <Button disabled={isSetPrimaryNamePending} variant={'secondary'}>{"Configure"}</Button>
-                  </Flex>
+                  <Badge withCopy={false}>
+                    <P style={{
+                      fontWeight: 900,
+                      fontSize: 10,
+                      color: 'var(--justweb3-primary-color)',
+                    }}>Primary</P>
+                  </Badge>
                 }
               />
             }
