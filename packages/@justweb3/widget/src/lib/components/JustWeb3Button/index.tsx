@@ -1,5 +1,7 @@
 import {
-  useAddressSubnames,
+  Records,
+  useAccountEnsNames,
+  useAccountSubnames,
   useCanEnableMApps,
   useEnabledMApps,
   useEnsAvatar,
@@ -84,10 +86,20 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const { avatar } = useEnsAvatar({
     ens: connectedEns?.ens,
   });
-  const { addressSubnames } = useAddressSubnames({
-    address: address || '',
-    enabled: !!address,
-  });
+  const { accountSubnames } = useAccountSubnames();
+  const { accountEnsNames } = useAccountEnsNames();
+
+  const allNames = useMemo(() => {
+    return [...accountEnsNames, ...accountSubnames].reduce(
+      (acc, subname) => {
+        if (!acc.find((name) => name.ens === subname.ens)) {
+          return [...acc, subname];
+        }
+        return acc;
+      },
+      [] as Records[]
+    );
+  }, [accountEnsNames, accountSubnames]);
 
   const hasTwitterOrX = useMemo(() => {
     return records?.sanitizedRecords.socials.find(
@@ -355,7 +367,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
                     color: 'var(--justweb3-primary-color)',
                     fontWeight: 900,
                     fontSize: 12,
-                  }}>{addressSubnames.length}</P>
+                  }}>{allNames.length}</P>
                   <ArrowIcon
                     width={20}
                     color={'var(--justweb3-foreground-color-2)'}

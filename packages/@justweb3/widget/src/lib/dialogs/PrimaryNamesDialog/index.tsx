@@ -1,4 +1,4 @@
-import { useAddressSubnames, useMountedAccount, usePrimaryName, useSetPrimaryName } from '@justaname.id/react';
+import { Records, useAccountEnsNames, useAccountSubnames, useMountedAccount, usePrimaryName, useSetPrimaryName } from '@justaname.id/react';
 import {
   Avatar,
   BackBtn,
@@ -16,7 +16,6 @@ import { FC, useContext, useMemo } from 'react';
 import { useDisconnect } from 'wagmi';
 import { JustWeb3Context, useJustWeb3 } from '../../providers';
 import { DefaultDialog } from '../DefaultDialog';
-import { ChainId } from '@justaname.id/sdk';
 
 export interface PrimaryNamesDialogProps {
   open: boolean;
@@ -32,27 +31,37 @@ export const PrimaryNamesDialog: FC<PrimaryNamesDialogProps> = ({
   const {
     config: { disableOverlay },
   } = useContext(JustWeb3Context);
-  const { address, isConnected, chainId } = useMountedAccount();
+  const { address, isConnected } = useMountedAccount();
   const { disconnect } = useDisconnect();
   const { connectedEns, isEnsAuthPending } = useJustWeb3();
 
-  const { addressSubnames, isAddressSubnamesLoading } = useAddressSubnames({
-    address: address || '',
-    chainId: chainId as ChainId,
-    enabled: !!address,
-  });
+  const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
+  const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
+
+  const allNames = useMemo(() => {
+    return [...accountEnsNames, ...accountSubnames].reduce(
+      (acc, subname) => {
+        if (!acc.find((name) => name.ens === subname.ens)) {
+          return [...acc, subname];
+        }
+        return acc;
+      },
+      [] as Records[]
+    );
+  }, [accountEnsNames, accountSubnames]);
+
   const { primaryName, isPrimaryNameLoading } = usePrimaryName({ address, enabled: !!address })
   const { setPrimaryName, isSetPrimaryNamePending } = useSetPrimaryName({
     address: address || '',
   })
 
   const primarySubname = useMemo(() => {
-    return addressSubnames.find((subname) => subname.ens === primaryName)
-  }, [addressSubnames, primaryName])
+    return allNames.find((subname) => subname.ens === primaryName)
+  }, [allNames, primaryName])
 
   const filteredSubnames = useMemo(() => {
-    return addressSubnames.filter((subname) => subname.ens !== primaryName)
-  }, [addressSubnames, primaryName])
+    return allNames.filter((subname) => subname.ens !== primaryName)
+  }, [allNames, primaryName])
 
   return (
     <DefaultDialog
@@ -89,7 +98,7 @@ export const PrimaryNamesDialog: FC<PrimaryNamesDialogProps> = ({
           : null
       }
     >
-      {!connectedEns || isEnsAuthPending || isAddressSubnamesLoading ? (
+      {!connectedEns || isEnsAuthPending || isAccountSubnamesPending || isAccountEnsNamesPending ? (
         <div
           style={{
             position: 'relative',

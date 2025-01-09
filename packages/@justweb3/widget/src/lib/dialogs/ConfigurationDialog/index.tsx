@@ -33,7 +33,6 @@ export const ConfigurationDialog: FC<ConfigurationDialogProps> = ({
   const { disconnect } = useDisconnect();
   const { connectedEns, isEnsAuthPending } = useJustWeb3();
 
-
   const { NameHashJustaNameResolverSet, isSetNameHashJustaNameResolverPending, setNameHashJustaNameResolver } = useSetNameHashJustaNameResolver()
 
   return (

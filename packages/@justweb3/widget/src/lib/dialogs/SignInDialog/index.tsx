@@ -1,4 +1,14 @@
-import React, { FC, Fragment, useMemo, useState } from 'react';
+import {
+  Records,
+  useAccountEnsNames,
+  useAccountSubnames,
+  useAddSubname,
+  useEnsSignIn,
+  useIsSubnameAvailable,
+  useJustaName,
+  useMountedAccount,
+  useOffchainResolvers,
+} from '@justaname.id/react';
 import {
   Badge,
   Button,
@@ -12,22 +22,13 @@ import {
   ProfileIcon,
   SPAN,
 } from '@justweb3/ui';
-import {
-  Records,
-  useAccountEnsNames,
-  useAccountSubnames,
-  useAddSubname,
-  useEnsSignIn,
-  useIsSubnameAvailable,
-  useJustaName,
-  useMountedAccount,
-  useOffchainResolvers,
-} from '@justaname.id/react';
-import { useDebounce } from '../../hooks/useDebounce';
-import { DefaultDialog } from '../DefaultDialog';
-import { SelectSubnameItem } from '../../components/SelectSubnameItem';
-import styles from './SignInDialog.module.css';
 import clsx from 'clsx';
+import React, { FC, Fragment, useMemo, useState } from 'react';
+import { SelectSubnameItem } from '../../components/SelectSubnameItem';
+import { useDebounce } from '../../hooks/useDebounce';
+import { useHybridPrimaryName } from '../../hooks/useHybridPrimaryName';
+import { DefaultDialog } from '../DefaultDialog';
+import styles from './SignInDialog.module.css';
 
 const ENS_MAINNET_RESOLVER = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
 // const BASE_MAINNET_RESOLVER = '0xde9049636F4a1dfE0a64d1bFe3155C0A14C54F31'
@@ -81,6 +82,13 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   const { isConnected, address } = useMountedAccount();
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
   const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
+
+  const { hybridPrimaryName } = useHybridPrimaryName({
+    address: address,
+    chainId: chainId,
+    enabled: !!address && !!chainId,
+  })
+
   const [username, setUsername] = useState('');
   const { debouncedValue: debouncedUsername, isDebouncing } = useDebounce(
     username,
@@ -270,8 +278,8 @@ export const SignInDialog: FC<SignInDialogProps> = ({
           </SPAN>
         </Badge>
         {isAccountSubnamesPending ||
-        isAccountEnsNamesPending ||
-        isOffchainResolversPending ? (
+          isAccountEnsNamesPending ||
+          isOffchainResolversPending ? (
           <div className={styles.loadingContainer}>
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
           </div>
@@ -301,6 +309,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                               setSubnameSigningIn('');
                             });
                         }}
+                        isPrimary={subname.ens === hybridPrimaryName}
                       />
                     </Fragment>
                   ))}

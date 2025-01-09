@@ -4751,6 +4751,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@justaname.id/hybrid-primary-name@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "@justaname.id/hybrid-primary-name@npm:0.0.7"
+  peerDependencies:
+    "@ensdomains/ensjs": ^4.0.0
+    viem: ^2.x
+  checksum: 10c0/8e0e14be3ea102fd2a2980ab6bc5e8d8fcda31a0dcd052dce2e4341cc6484545f675431e2db62fd7419c3b288d2fd03dc3bc13478252d8dd1f463667703024b9
+  languageName: node
+  linkType: hard
+
 "@justaname.id/react@npm:0.3.162, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
@@ -27356,6 +27366,7 @@ __metadata:
     "@hookform/resolvers": "npm:^3.9.0"
     "@inquirer/prompts": "npm:^4.3.0"
     "@justaname.id/address-resolution": "npm:^1.1.0"
+    "@justaname.id/hybrid-primary-name": "npm:^0.0.7"
     "@million/lint": "npm:^1.0.13"
     "@nx/cypress": "npm:19.7.3"
     "@nx/eslint": "npm:19.7.3"
