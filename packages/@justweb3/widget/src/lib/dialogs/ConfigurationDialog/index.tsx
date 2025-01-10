@@ -78,7 +78,7 @@ export const ConfigurationDialog: FC<ConfigurationDialogProps> = ({
           }}>Configure</H2>
         </Flex>
         <P style={{ fontSize: 12 }}>
-          To use your JustaName primary account across the blockchain ecosystem, you need to configure your resolver.
+          To use your JustaName primary account across the blockchain ecosystem, you need to perform a one time transaction to configure your resolver.
         </P>
         {isSetNameHashJustaNameResolverPending ? <Flex style={{
           position: 'relative'
