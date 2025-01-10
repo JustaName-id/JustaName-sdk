@@ -82,7 +82,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
   const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
 
-  const { primaryName } = usePrimaryName({
+  const { primaryName, isPrimaryNameLoading, refetchPrimaryName } = usePrimaryName({
     address,
     chainId,
     enabled: !!address && !!chainId,
@@ -233,6 +233,14 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     offchainResolvers?.offchainResolvers,
   ]);
 
+  const primarySubname = useMemo(() => {
+    return subnames.find((subname) => subname.ens === primaryName)
+  }, [subnames, primaryName,])
+
+  const filteredSubnames = useMemo(() => {
+    return subnames.filter((subname) => subname.ens !== primaryName)
+  }, [subnames, primaryName])
+
   const shouldBeAbleToSelect = useMemo(() => {
     return subnames.length > 0;
   }, [subnames]);
@@ -296,7 +304,22 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                   gap="15px"
                   className={clsx(styles.contentWrapper)}
                 >
-                  {subnames.map((subname, index) => (
+                  {!isPrimaryNameLoading && primarySubname &&
+                    <SelectSubnameItem
+                      selectedSubname={subnameSigningIn}
+                      subname={primarySubname}
+                      onClick={() => {
+                        setSubnameSigningIn(primarySubname.ens);
+                        signIn({ ens: primarySubname.ens })
+                          .then(() => handleOpenDialog(false))
+                          .finally(() => {
+                            setSubnameSigningIn('');
+                          });
+                      }}
+                      isPrimary={true}
+                    />
+                  }
+                  {filteredSubnames.map((subname, index) => (
                     <Fragment key={'subname-' + index}>
                       <SelectSubnameItem
                         selectedSubname={subnameSigningIn}
@@ -309,7 +332,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                               setSubnameSigningIn('');
                             });
                         }}
-                        isPrimary={subname.ens === primaryName}
+                        isPrimary={false}
                       />
                     </Fragment>
                   ))}
@@ -366,6 +389,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                         username: username,
                         ensDomain: claimableEns,
                       }).then(() => {
+                        refetchPrimaryName();
                         setSubnameSigningIn(username + '.' + claimableEns);
                         signIn({ ens: username + '.' + claimableEns })
                           .then(() => {
