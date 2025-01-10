@@ -27,12 +27,10 @@ import clsx from 'clsx';
 import React, { FC, Fragment, useMemo, useState } from 'react';
 import { SelectSubnameItem } from '../../components/SelectSubnameItem';
 import { useDebounce } from '../../hooks/useDebounce';
-// import { useHybridPrimaryName } from '../../hooks/useHybridPrimaryName';
 import { DefaultDialog } from '../DefaultDialog';
 import styles from './SignInDialog.module.css';
 
 const ENS_MAINNET_RESOLVER = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-// const BASE_MAINNET_RESOLVER = '0xde9049636F4a1dfE0a64d1bFe3155C0A14C54F31'
 const ENS_SEPOLIA_RESOLVER = '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD';
 
 interface TransitionElementProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -88,6 +86,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     address,
     chainId,
     enabled: !!address && !!chainId,
+    priority: 'onChain'
   })
 
   const [username, setUsername] = useState('');

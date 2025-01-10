@@ -16,6 +16,7 @@ import { FC, useContext, useMemo } from 'react';
 import { useDisconnect } from 'wagmi';
 import { JustWeb3Context, useJustWeb3 } from '../../providers';
 import { DefaultDialog } from '../DefaultDialog';
+import { ChainId } from '@justaname.id/sdk';
 
 const ENS_MAINNET_RESOLVER = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
 const ENS_SEPOLIA_RESOLVER = '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD';
@@ -70,7 +71,7 @@ export const PrimaryNamesDialog: FC<PrimaryNamesDialogProps> = ({
       })
   }, [accountEnsNames, accountSubnames]);
 
-  const { primaryName, isPrimaryNameLoading } = usePrimaryName({ address, enabled: !!address })
+  const { primaryName, isPrimaryNameLoading } = usePrimaryName({ address, enabled: !!address, chainId: chainId as ChainId, priority: 'onChain' });
   const { setPrimaryName, isSetPrimaryNamePending } = useSetPrimaryName({
     address: address || '',
   })

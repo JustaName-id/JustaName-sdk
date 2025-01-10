@@ -19,7 +19,6 @@
     "@hookform/resolvers": "^3.9.0",
     "@inquirer/prompts": "^4.3.0",
     "@justaname.id/address-resolution": "^1.1.0",
-    "@justaname.id/hybrid-primary-name": "^0.0.7",
     "@million/lint": "^1.0.13",
     "@privy-io/react-auth": "^1.82.0",
     "@privy-io/wagmi": "^0.2.12",
