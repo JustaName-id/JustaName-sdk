@@ -29,6 +29,9 @@
           },
           {
             "command": "node copy-to-outside-dist.js"
+          },
+          {
+            "command": "rm -rf node_modules || rmdir /s /q node_modules"
           }
         ],
         "cwd": "packages/@justaname.id/siwens",
