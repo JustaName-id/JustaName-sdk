@@ -1,10 +1,10 @@
-import { Address } from 'viem';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ChainId } from '@justaname.id/sdk';
-import { useJustaName } from '../../providers';
-import { useEnsPublicClient } from '../client/useEnsPublicClient';
-import { defaultOptions } from '../../query';
 import { getName } from '@ensdomains/ensjs/public';
+import { ChainId } from '@justaname.id/sdk';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Address } from 'viem';
+import { useJustaName } from '../../providers';
+import { defaultOptions } from '../../query';
+import { useEnsPublicClient } from '../client/useEnsPublicClient';
 import { PrimaryNameTaskQueue } from './primary-name-task-queue';
 import { buildPrimaryNameBatchKey } from './usePrimaryNameBatch';
 
@@ -17,6 +17,7 @@ export interface UsePrimaryNameParams {
   address?: string;
   chainId?: ChainId;
   enabled?: boolean;
+  priority?: "onChain" | "offChain";
 }
 
 export interface UsePrimaryNameResult {
@@ -40,6 +41,7 @@ export const usePrimaryName = (
   params?: UsePrimaryNameParams
 ): UsePrimaryNameResult => {
   const { chainId, justaname } = useJustaName();
+  const _priority = params?.priority || 'offChain';
   const _enabled = params?.enabled !== undefined ? params.enabled : true;
   const _chainId = params?.chainId || chainId;
   const { ensClient } = useEnsPublicClient({
@@ -47,9 +49,10 @@ export const usePrimaryName = (
   });
   const queryClient = useQueryClient();
 
-  const getPrimaryName = async (
+  const getOnChainPrimaryName = async (
     _params: getPrimaryNameParams
   ): Promise<string> => {
+
     if (!ensClient) {
       throw new Error('Public client not found');
     }
@@ -57,9 +60,25 @@ export const usePrimaryName = (
     if (!params?.address) {
       throw new Error('Address is required');
     }
+    const taskFn = () => {
+      return getName(ensClient, {
+        address: params?.address as Address,
+      });
+    };
+    const reverseResolution = await PrimaryNameTaskQueue.enqueue(taskFn);
+    if (reverseResolution && reverseResolution?.name) {
+      return reverseResolution.name;
+    }
+    return '';
+  }
 
-    let name = '';
-
+  
+  const getOffChainPrimaryName = async (
+    _params: getPrimaryNameParams
+  ): Promise<string> => {
+    if (!params?.address) {
+      throw new Error('Address is required');
+    }
     const primaryNames = queryClient.getQueryData(
       buildPrimaryNameBatchKey(_chainId)
     ) as Record<string, string>;
@@ -76,25 +95,35 @@ export const usePrimaryName = (
         chainId: _chainId,
       });
     if (primaryNameGetByAddressResponse.name) {
-      name = primaryNameGetByAddressResponse.name;
-    } else {
-      const taskFn = () => {
-        if (!params?.address) {
-          throw new Error('Address is required');
-        }
-        return getName(ensClient, {
-          address: params?.address as Address,
-        });
-      };
-
-      const reverseResolution = await PrimaryNameTaskQueue.enqueue(taskFn);
-
-      if (reverseResolution && reverseResolution?.name) {
-        name = reverseResolution.name;
-      }
+      return primaryNameGetByAddressResponse.name;
+    }else{
+      return '';
     }
-    return name;
-  };
+  }
+
+
+  const getPrimaryName = async (
+    _params: getPrimaryNameParams
+  ): Promise<string> => {
+    let name = '';
+    if(_priority === 'offChain'){
+      name = await getOffChainPrimaryName(_params);
+      if(name.length > 0){
+        return name;
+      }else{
+        name = await getOnChainPrimaryName(_params);
+        return name;
+      }
+    }else{
+      name = await getOnChainPrimaryName(_params);
+      if(name.length > 0){
+        return name;
+      }else{
+        name = await getOffChainPrimaryName(_params);
+        return name;
+    }
+  }
+};
 
   const query = useQuery({
     ...defaultOptions,

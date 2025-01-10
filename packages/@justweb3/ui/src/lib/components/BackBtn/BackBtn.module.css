@@ -1,0 +1,12 @@
+/* BackBtn.module.css */
+
+.btnCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--justweb3-foreground-color-4);
+  cursor: pointer;
+}
