@@ -92,8 +92,8 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const { avatar } = useEnsAvatar({
     ens: connectedEns?.ens,
   });
-  const { accountSubnames } = useAccountSubnames();
-  const { accountEnsNames } = useAccountEnsNames();
+  const { accountSubnames, isAccountSubnamesLoading } = useAccountSubnames();
+  const { accountEnsNames, isAccountEnsNamesLoading } = useAccountEnsNames();
 
   const allNames = useMemo(() => {
     return [...accountEnsNames, ...accountSubnames].reduce(
@@ -383,11 +383,13 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
               }}
               right={
                 <Flex direction='row' gap='5px' align='center'>
-                  <P style={{
-                    color: 'var(--justweb3-primary-color)',
-                    fontWeight: 900,
-                    fontSize: 12,
-                  }}>{allNames.length}</P>
+                  {!isAccountSubnamesLoading && !isAccountEnsNamesLoading && (
+                    <P style={{
+                      color: 'var(--justweb3-primary-color)',
+                      fontWeight: 900,
+                      fontSize: 12,
+                    }}>{allNames.length}</P>
+                  )}
                   <ArrowIcon
                     width={20}
                     color={'var(--justweb3-foreground-color-2)'}
