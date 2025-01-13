@@ -15,10 +15,12 @@ import CalendarMonthIcon from './CalendarMonth';
 import ClipIcon from './Clip';
 import CloseIcon from './Close';
 import ComicIcon from './Comic';
+import ConfigurationIcon from './Configuration';
 import ContactsIcon from './Contacts';
 import CopiedIcon from './Copied';
 import CopyIcon from './Copy';
 import DeleteIcon from './Delete';
+import DnsIcon from './Dns';
 import DocumentIcon from './Document';
 import DoneIcon from './Done';
 import DownloadIcon from './Download';
@@ -43,6 +45,7 @@ import ProfileIcon from './Profile';
 import ReactionIcon from './Reaction';
 import ReplyIcon from './Reply';
 import SendIcon from './Send';
+import SettingsIcon from './Settings';
 import SocialIcon from './Social';
 import StopIcon from './Stop';
 import TrashWhiteIcon from './TrashWhite';
@@ -68,10 +71,12 @@ const general = {
   clip: ClipIcon,
   close: CloseIcon,
   comic: ComicIcon,
+  configuration: ConfigurationIcon,
   contacts: ContactsIcon,
   copied: CopiedIcon,
   copy: CopyIcon,
   delete: DeleteIcon,
+  dns: DnsIcon,
   document: DocumentIcon,
   done: DoneIcon,
   download: DownloadIcon,
@@ -96,6 +101,7 @@ const general = {
   reaction: ReactionIcon,
   reply: ReplyIcon,
   send: SendIcon,
+  settings: SettingsIcon,
   social: SocialIcon,
   stop: StopIcon,
   'trash-white': TrashWhiteIcon,
@@ -124,10 +130,12 @@ export {
   ClipIcon,
   CloseIcon,
   ComicIcon,
+  ConfigurationIcon,
   ContactsIcon,
   CopiedIcon,
   CopyIcon,
   DeleteIcon,
+  DnsIcon,
   DocumentIcon,
   DoneIcon,
   DownloadIcon,
@@ -152,6 +160,7 @@ export {
   ReactionIcon,
   ReplyIcon,
   SendIcon,
+  SettingsIcon,
   SocialIcon,
   StopIcon,
   TrashWhiteIcon,
