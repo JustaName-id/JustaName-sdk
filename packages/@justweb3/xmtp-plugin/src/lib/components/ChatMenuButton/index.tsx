@@ -1,8 +1,8 @@
 import { ArrowIcon, ClickableItem, SPAN } from '@justweb3/ui';
-import { useClient } from '@xmtp/react-sdk';
 import { XmtpEnvironment } from '../../plugins';
 import { useJustWeb3XMTP } from '../../providers/JustWeb3XMTPProvider';
 import { useMemo } from 'react';
+import { useXMTPClient } from '../../hooks';
 
 export interface ChatMenuButtonProps {
   handleOpen: (open: boolean) => void;
@@ -18,7 +18,7 @@ export const ChatMenuButton: React.FC<ChatMenuButtonProps> = ({
       .filter((conversation) => conversation.consent === 'allowed')
       .reduce((acc, curr) => acc + curr.unreadCount, 0);
   }, [conversationsInfo]);
-  const { client } = useClient();
+  const { client } = useXMTPClient();
 
   const handleChat = async () => {
     if (!client) {

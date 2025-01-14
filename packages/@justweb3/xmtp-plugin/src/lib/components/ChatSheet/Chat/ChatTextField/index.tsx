@@ -7,24 +7,21 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {
-  CachedConversation,
-  ContentTypeMetadata,
-  useClient,
-} from '@xmtp/react-sdk';
-import { useMountedAccount, usePrimaryName } from '@justaname.id/react';
+import { usePrimaryName } from '@justaname.id/react';
 import { Flex, P } from '@justweb3/ui';
 import { AttachmentButtons } from './AttachmentButtons';
 import { ReplyPreview } from './ReplyPreview';
 import { AttachmentPreview } from './AttachmentPreview';
 import { MessageInput } from './MessageInput';
 import {
+  FullConversation,
   useAttachmentChange,
   useRecordingTimer,
   useRecordVoice,
   useSendAttachment,
   useSendMessages,
   useSendReplyMessage,
+  useXMTPClient,
 } from '../../../../hooks';
 import { AttachmentType, typeLookup } from '../../../../utils/attachments';
 import type { Attachment } from '@xmtp/content-type-remote-attachment';
@@ -33,7 +30,7 @@ import { MessageWithReaction } from '../../../../utils/filterReactionsMessages';
 export interface ChatTextFieldProps {
   isMessagesSenderOnly: boolean;
   replyMessage: MessageWithReaction | null;
-  conversation: CachedConversation<ContentTypeMetadata>;
+  conversation: FullConversation;
   peerAddress: string;
   onCancelReply: () => void;
   disabled?: boolean;
@@ -54,8 +51,7 @@ export const ChatTextField: React.FC<ChatTextFieldProps> = ({
   const [attachmentPreview, setAttachmentPreview] = useState<
     string | undefined
   >();
-  const { client } = useClient();
-  const { address } = useMountedAccount();
+  const { client } = useXMTPClient();
   const { mutateAsync: sendMessage } = useSendMessages(conversation);
   const { mutateAsync: sendReply } = useSendReplyMessage(conversation);
   const { mutateAsync: sendAttachment } = useSendAttachment(conversation);
@@ -128,8 +124,8 @@ export const ChatTextField: React.FC<ChatTextFieldProps> = ({
   };
 
   const isSender = useMemo(
-    () => address === replyMessage?.senderAddress,
-    [replyMessage, address]
+    () => client?.inboxId === replyMessage?.senderInboxId,
+    [replyMessage, client]
   );
 
   const navigateToRepliedMessage = () => {
@@ -192,6 +188,7 @@ export const ChatTextField: React.FC<ChatTextFieldProps> = ({
             isSender={isSender}
             primaryName={primaryName}
             navigateToRepliedMessage={navigateToRepliedMessage}
+            peerAddress={conversation.peerAddress}
           />
 
           <AttachmentPreview

@@ -1,14 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
-import { CachedConversation, useSendMessage } from '@xmtp/react-sdk';
 import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
+import { FullConversation } from '../useConversations';
 
-export const useReadReceipt = (conversation?: CachedConversation) => {
-  const { sendMessage } = useSendMessage();
+export const useReadReceipt = (conversation?: FullConversation) => {
 
   return useMutation({
     mutationFn: () => {
       if (!conversation) throw new Error('Conversation not found');
-      return sendMessage(conversation, {}, ContentTypeReadReceipt);
+      return conversation.send({}, ContentTypeReadReceipt);
     },
   });
 };

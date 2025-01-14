@@ -10,28 +10,18 @@ import {
   TabsList,
   TabsTrigger,
 } from '@justweb3/ui';
-import {
-  CachedConversation,
-  CachedMessage,
-  ContentTypeMetadata,
-  Conversation,
-  useClient,
-  useConsent,
-  useConversations,
-  useStreamAllMessages,
-  useStreamConsentList,
-  useStreamConversations,
-} from '@xmtp/react-sdk';
-import React, { useEffect, useMemo } from 'react';
-import { ChatList } from './ChatList';
-import { useMountedAccount, usePrimaryNameBatch } from '@justaname.id/react';
+import { usePrimaryNameBatch } from '@justaname.id/react';
+import { ConsentState, Conversation, DecodedMessage } from '@xmtp/browser-sdk';
 import { isEqual } from 'lodash';
+import React, { useEffect, useMemo } from 'react';
+import { FullConversation, useConversations } from '../../hooks';
+import { ChatList } from './ChatList';
 
 export interface InboxSheetProps {
   open?: boolean;
   handleOpen?: (open: boolean) => void;
   handleOpenChat: (
-    conversation: CachedConversation<ContentTypeMetadata>
+    conversation: FullConversation
   ) => void;
   handleNewChat: () => void;
   onConversationsUpdated: ({
@@ -39,20 +29,20 @@ export interface InboxSheetProps {
     blocked,
     requested,
   }: {
-    allowed: CachedConversation<ContentTypeMetadata>[];
-    blocked: CachedConversation<ContentTypeMetadata>[];
-    requested: CachedConversation<ContentTypeMetadata>[];
+    allowed: Conversation[];
+    blocked: Conversation[];
+    requested: Conversation[];
   }) => void;
   allConversations: {
-    allowed: CachedConversation<ContentTypeMetadata>[];
-    blocked: CachedConversation<ContentTypeMetadata>[];
-    requested: CachedConversation<ContentTypeMetadata>[];
+    allowed: Conversation[];
+    blocked: Conversation[];
+    requested: Conversation[];
   };
   conversationsInfo?: {
     conversationId: string;
     unreadCount: number;
     consent: 'allowed' | 'blocked' | 'requested';
-    lastMessage: CachedMessage<any, ContentTypeMetadata>;
+    lastMessage: DecodedMessage;
   }[];
 }
 
@@ -66,93 +56,65 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
   conversationsInfo,
 }) => {
   const [tab, setTab] = React.useState('Chats');
-  const { conversations: cachedConversations, isLoading } = useConversations();
-  const { address } = useMountedAccount();
-  const conversations = useMemo(() => {
-    return cachedConversations.filter((convo) => convo.peerAddress !== address);
-  }, [cachedConversations, address]);
-  const [isConsentListLoading, setIsConsentListLoading] = React.useState(true);
-  const { entries, loadConsentList } = useConsent();
-  const { client } = useClient();
+  const { conversations, conversationsLoading: isLoading } = useConversations();
 
-  const [initialConversations, setInitialConversations] = React.useState<
-    Conversation[] | null
-  >(null);
-  useEffect(() => {
-    if (!client || initialConversations !== null) return;
+  const [addresses, setAddresses] = React.useState<string[]>([]);
 
-    const fetchConversations = async () => {
-      const _conversations = await client.conversations.list();
-      setInitialConversations(
-        _conversations?.filter((convo) => convo.peerAddress !== address)
-      );
-    };
-    fetchConversations();
-  }, [address, client, initialConversations]);
+  React.useEffect(() => {
+    if (!conversations?.length) return;
+    Promise.all(
+      conversations.map((conversation) => conversation.dmPeerInboxId())
+    ).then((results) => setAddresses(results));
+  }, [conversations]);
 
-  const primaryNameConversations = useMemo(() => {
-    if (!initialConversations) return;
-    if (conversations?.length > initialConversations?.length) {
-      return conversations;
-    }
-
-    return initialConversations;
-  }, [conversations, initialConversations]);
   const { allPrimaryNames } = usePrimaryNameBatch({
-    addresses: primaryNameConversations?.map(
-      (conversation) => conversation.peerAddress
-    ),
-    enabled: initialConversations !== null,
+    addresses,
+    enabled: !!conversations?.length,
   });
 
   const allowedConversations = useMemo(() => {
     return conversations.filter(
       (convo) =>
-        entries &&
-        entries[convo.peerAddress] &&
-        entries[convo.peerAddress]?.permissionType === 'allowed'
+        convo.consent === ConsentState.Allowed
     );
-  }, [conversations, entries]);
+  }, [conversations]);
 
   const blockedConversations = useMemo(() => {
     return conversations.filter(
       (convo) =>
-        entries &&
-        entries[convo.peerAddress] &&
-        entries[convo.peerAddress]?.permissionType === 'denied'
+        convo.consent === ConsentState.Denied
     );
-  }, [conversations, entries]);
+  }, [conversations]);
 
   const requestConversations = useMemo(() => {
     return conversations.filter((convo) => {
-      if (!entries[convo.peerAddress]) return true;
-      return entries[convo.peerAddress]?.permissionType === 'unknown';
+      convo.consent === ConsentState.Unknown
     });
-  }, [conversations, entries]);
+  }, [conversations]);
 
   useEffect(() => {
     const allowedConversationsTopic = allowedConversations.map(
-      (convo) => convo.topic
+      (convo) => convo.id
     );
 
     const blockedConversationsTopic = blockedConversations.map(
-      (convo) => convo.topic
+      (convo) => convo.id
     );
 
     const requestConversationsTopic = requestConversations.map(
-      (convo) => convo.topic
+      (convo) => convo.id
     );
 
     const allConversationsAllowedTopic = allConversations.allowed.map(
-      (convo) => convo.topic
+      (convo) => convo.id
     );
 
     const allConversationsBlockedTopic = allConversations.blocked.map(
-      (convo) => convo.topic
+      (convo) => convo.id
     );
 
     const allConversationsRequestedTopic = allConversations.requested.map(
-      (convo) => convo.topic
+      (convo) => convo.id
     );
 
     if (
@@ -174,16 +136,9 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
     requestConversations,
   ]);
 
-  useEffect(() => {
-    if (!isConsentListLoading) return;
-    loadConsentList().then(() => {
-      setIsConsentListLoading(false);
-    });
-  }, [loadConsentList, isConsentListLoading]);
-
-  useStreamConversations();
-  useStreamAllMessages();
-  useStreamConsentList();
+  // await client?.conversations.syncAll();
+  // useStreamAllMessages();
+  // useStreamConsentList();
 
   return (
     <Sheet open={open} onOpenChange={handleOpen}>
@@ -278,7 +233,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                 Blocked
               </TabsTrigger>
             </TabsList>
-            {isLoading || isConsentListLoading ? (
+            {isLoading ? (
               // {true ? (
               <div
                 style={{

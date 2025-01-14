@@ -42,6 +42,7 @@
     "@uiw/react-color-github": "^2.3.0",
     "@usecapsule/react-sdk": "^4.6.1",
     "@usecapsule/wagmi-v2-integration": "^3.6.1",
+    "@xmtp/browser-sdk": "^0.0.13",
     "@xmtp/content-type-reaction": "^1.1.11",
     "@xmtp/content-type-read-receipt": "^1.1.12",
     "@xmtp/content-type-remote-attachment": "^1.1.12",

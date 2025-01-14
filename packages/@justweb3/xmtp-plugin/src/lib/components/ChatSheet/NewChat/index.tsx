@@ -1,20 +1,8 @@
-import {
-  CachedConversation,
-  toCachedConversation,
-  useCanMessage,
-  useClient,
-  useConsent,
-  useConversation,
-  useStartConversation,
-} from '@xmtp/react-sdk';
-import React, { useEffect, useMemo } from 'react';
-import { useDebounce } from '@justweb3/widget';
-import {
-  useMountedAccount,
-  usePrimaryName,
-  useRecords,
-} from '@justaname.id/react';
 
+import {
+  usePrimaryName,
+  useRecords
+} from '@justaname.id/react';
 import {
   ArrowIcon,
   CloseIcon,
@@ -24,10 +12,14 @@ import {
   P,
   VerificationsIcon,
 } from '@justweb3/ui';
+import { useDebounce } from '@justweb3/widget';
+import { ConsentState } from '@xmtp/browser-sdk';
+import React, { useEffect, useMemo } from 'react';
+import { FullConversation, useCanMessage, useXMTPClient } from '../../../hooks';
 import { NewChatTextField } from './NewChatTextField';
 
 interface NewChatProps {
-  onChatStarted: (conversation: CachedConversation) => void;
+  onChatStarted: (conversation: FullConversation) => void;
   onBack: () => void;
   selectedAddress?: string;
 }
@@ -43,12 +35,8 @@ export const NewChat: React.FC<NewChatProps> = ({
   );
   const [canMessage, setCanMessage] = React.useState<boolean>(false);
   //Queries
-  const { client } = useClient();
-  const { startConversation } = useStartConversation();
-  const { getCachedByPeerAddress } = useConversation();
-  const { refreshConsentList, allow } = useConsent();
-  const { address } = useMountedAccount();
-  const { canMessage: xmtpCanMessage, isLoading } = useCanMessage();
+  const { client } = useXMTPClient();
+  const { canMessageFn: xmtpCanMessage, canMessageLoading } = useCanMessage();
   const {
     debouncedValue: debouncedAddress,
     isDebouncing: isDebouncingAddress,
@@ -87,29 +75,29 @@ export const NewChat: React.FC<NewChatProps> = ({
   }, [name, isPrimaryNameLoading, isPrimaryNameFetching]);
   const resolvedAddress = useMemo(() => {
     const ethAddress = records?.sanitizedRecords?.ethAddress?.value;
-    if (ethAddress && ethAddress !== client?.address) {
+    if (ethAddress && ethAddress !== client?.accountAddress) {
       return ethAddress;
     }
     return;
-  }, [client?.address, records?.sanitizedRecords?.ethAddress?.value]);
+  }, [client?.accountAddress, records?.sanitizedRecords?.ethAddress?.value]);
 
   const handleCanMessage = async () => {
     if (!client) return;
     try {
       if (isAddressName) {
         if (resolvedAddress) {
-          const res = await xmtpCanMessage(resolvedAddress);
-          setCanMessage(res);
+          const res = await xmtpCanMessage(resolvedAddress as `0x${string}`);
+          setCanMessage(!!res);
         } else {
           // Resolved address is not available yet; do nothing
           return;
         }
       } else if (
         debouncedAddress.length === 42 &&
-        client?.address !== debouncedAddress
+        client.accountAddress !== debouncedAddress
       ) {
-        const res = await xmtpCanMessage(debouncedAddress);
-        setCanMessage(res);
+        const res = await xmtpCanMessage(debouncedAddress as `0x${string}`);
+        setCanMessage(!!res);
       } else {
         setCanMessage(false);
       }
@@ -124,26 +112,16 @@ export const NewChat: React.FC<NewChatProps> = ({
     const peerAddress =
       isAddressName && !!resolvedAddress ? resolvedAddress : debouncedAddress;
     try {
-      const conv = await startConversation(peerAddress, message ?? {});
-      if (!conv.cachedConversation) {
-        if (!conv.conversation) {
-          return;
-        } else {
-          const cachedConvo = toCachedConversation(
-            conv.conversation,
-            address ?? ''
-          );
-          await allow([conv.conversation.peerAddress]);
-          await refreshConsentList();
-          onChatStarted(cachedConvo);
-          onBack();
-        }
-      } else {
-        await allow([conv.cachedConversation.peerAddress]);
-        await refreshConsentList();
-        onChatStarted(conv.cachedConversation);
-        onBack();
-      }
+      const conv = await client.conversations.newDm(peerAddress);
+      conv.send(message);
+      await conv.updateConsentState(ConsentState.Allowed);
+      const peerInboxId = await conv.dmPeerInboxId();
+      const convoMembers = await conv.members();
+      const peerAdd = convoMembers.find((member) => member.inboxId === peerInboxId)?.accountAddresses[0];
+      const consent = await conv.consentState();
+      const newConvo = { ...conv, peerAddress: peerAdd, consent } as FullConversation;
+      onChatStarted(newConvo);
+      onBack();
     } catch (error) {
       const e = error as Error;
       console.log('error creating chat', e);
@@ -151,9 +129,16 @@ export const NewChat: React.FC<NewChatProps> = ({
   };
 
   const checkIfConversationExists = async (peerAddress: string) => {
-    const convoExists = await getCachedByPeerAddress(peerAddress);
+    const inboxId = await client?.findInboxIdByAddress(peerAddress);
+    if (!inboxId) return;
+    const convoExists = await client?.conversations.getDmByInboxId(inboxId);
     if (convoExists) {
-      onChatStarted(convoExists);
+      const peerInboxId = await convoExists.dmPeerInboxId();
+      const convoMembers = await convoExists.members();
+      const peerAdd = convoMembers.find((member) => member.inboxId === peerInboxId)?.accountAddresses[0];
+      const consent = await convoExists.consentState();
+      const newConvo = { ...convoExists, peerAddress: peerAdd, consent } as FullConversation;
+      onChatStarted(newConvo);
     }
   };
 
@@ -167,13 +152,13 @@ export const NewChat: React.FC<NewChatProps> = ({
         handleCanMessage();
       }
     } else {
-      if (!isLoading && !isPrimaryNameLoading) {
+      if (!canMessageLoading && !isPrimaryNameLoading) {
         handleCanMessage();
       }
     }
   }, [
     debouncedAddress,
-    isLoading,
+    canMessageLoading,
     isPrimaryNameLoading,
     isRecordsLoading,
     resolvedAddress,

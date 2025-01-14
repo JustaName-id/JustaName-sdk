@@ -13,6 +13,7 @@ export interface ReplyPreviewProps {
   isSender: boolean;
   primaryName: string | null | undefined;
   navigateToRepliedMessage: () => void;
+  peerAddress: string;
 }
 
 export const ReplyPreview: React.FC<ReplyPreviewProps> = ({
@@ -21,6 +22,7 @@ export const ReplyPreview: React.FC<ReplyPreviewProps> = ({
   isSender,
   primaryName,
   navigateToRepliedMessage,
+  peerAddress
 }) => {
   const isReplyText = useMemo(() => {
     if (!replyMessage) return false;
@@ -62,10 +64,10 @@ export const ReplyPreview: React.FC<ReplyPreviewProps> = ({
         height: isReplyText
           ? '30px'
           : isReplyVoice
-          ? '45px'
-          : isReplyVideoOrImage
-          ? '100px'
-          : '30px',
+            ? '45px'
+            : isReplyVideoOrImage
+              ? '100px'
+              : '30px',
         borderRadius: '5px',
         background: 'white',
         paddingLeft: '14px',
@@ -100,7 +102,7 @@ export const ReplyPreview: React.FC<ReplyPreviewProps> = ({
         >
           {isSender
             ? 'YOU'
-            : primaryName ?? formatAddress(replyMessage.senderAddress)}
+            : primaryName ?? formatAddress(peerAddress)}
         </P>
         {isReplyText || isReplyReply ? (
           <P

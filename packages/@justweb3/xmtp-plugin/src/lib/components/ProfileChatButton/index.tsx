@@ -1,12 +1,10 @@
-import { useJustWeb3XMTP } from '../../providers/JustWeb3XMTPProvider';
 import { useMountedAccount, useRecords } from '@justaname.id/react';
-import { ClientOptions, useCanMessage, useClient } from '@xmtp/react-sdk';
-import { useEffect, useState } from 'react';
-import { useJustWeb3 } from '@justweb3/widget';
-import { Client } from '@xmtp/xmtp-js';
-import { useEthersSigner } from '../../hooks';
-import { loadKeys, storeKeys, wipeKeys } from '../../utils/xmtp';
 import { ChainId } from '@justaname.id/sdk';
+import { useJustWeb3 } from '@justweb3/widget';
+import { Client } from '@xmtp/browser-sdk';
+import { useEffect, useState } from 'react';
+import { useXMTPClient } from '../../hooks';
+import { useJustWeb3XMTP } from '../../providers/JustWeb3XMTPProvider';
 
 export interface ProfileChatButtonProps {
   ens: string;
@@ -31,11 +29,7 @@ export const ProfileChatButton: React.FC<ProfileChatButtonProps> = ({
     null
   );
 
-  const { canMessage } = useCanMessage();
-
-  const { initialize } = useClient();
-  const { client } = useClient();
-  const walletClient = useEthersSigner();
+  const { client, initializeXmtp } = useXMTPClient();
   const { address } = useMountedAccount();
 
   const handleChat = async () => {
@@ -44,37 +38,9 @@ export const ProfileChatButton: React.FC<ProfileChatButtonProps> = ({
     }
 
     if (!client) {
-      const signer = await walletClient;
-      try {
-        if (!signer) {
-          return;
-        }
-        const clientOptions: Partial<Omit<ClientOptions, 'codecs'>> = {
-          appVersion: 'JustWeb3/1.0.0',
-          env: env,
-        };
-        let keys = loadKeys(address ?? '', env);
-        if (!keys) {
-          keys = await Client.getKeys(signer, {
-            env: env,
-            skipContactPublishing: false,
-            // persistConversations: false,
-          });
-          storeKeys(address ?? '', keys, env);
-        }
-        await initialize({
-          keys,
-          options: clientOptions,
-          signer: signer,
-        }).then(() => {
-          handleOpenChat(ens);
-        });
-
-        // handleClient(client)
-      } catch (error) {
-        console.error('Failed to initialize XMTP Client:', error);
-        wipeKeys(address ?? '', env);
-      }
+      initializeXmtp().then(() => {
+        handleOpenChat(ens);
+      });
     } else {
       handleOpenChat(ens);
     }
@@ -84,15 +50,13 @@ export const ProfileChatButton: React.FC<ProfileChatButtonProps> = ({
     if (canMessageAddress === null) {
       if (records) {
         if (records?.sanitizedRecords?.ethAddress) {
-          Client.canMessage(records?.sanitizedRecords?.ethAddress?.value, {
-            env: env,
-          }).then((canMessage) => {
-            setCanMessageAddress(canMessage);
+          Client.canMessage([records?.sanitizedRecords?.ethAddress?.value], env).then((canMessage) => {
+            setCanMessageAddress(canMessage.get(records?.sanitizedRecords?.ethAddress?.value) ?? false);
           });
         }
       }
     }
-  }, [canMessage, canMessageAddress, env, records]);
+  }, [canMessageAddress, env, records]);
 
   if (profileAddress === address) {
     return null;

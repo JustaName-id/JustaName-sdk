@@ -1,17 +1,14 @@
-import { Flex } from '@justweb3/ui';
-import {
-  CachedConversation,
-  CachedMessage,
-  ContentTypeMetadata,
-} from '@xmtp/react-sdk';
-import React from 'react';
-import { MessageItem } from './MessageItem';
 import { PrimaryNameRecord } from '@justaname.id/react';
+import { Flex } from '@justweb3/ui';
+import { DecodedMessage } from '@xmtp/browser-sdk';
+import React from 'react';
+import { FullConversation } from '../../../hooks';
+import { MessageItem } from './MessageItem';
 
 export interface ChatListProps {
-  conversations: CachedConversation<ContentTypeMetadata>[];
+  conversations: FullConversation[];
   handleOpenChat: (
-    conversation: CachedConversation<ContentTypeMetadata>
+    conversation: FullConversation
   ) => void;
   blockedList?: boolean;
   primaryNames: PrimaryNameRecord | undefined;
@@ -19,7 +16,7 @@ export interface ChatListProps {
     conversationId: string;
     unreadCount: number;
     consent: 'allowed' | 'blocked' | 'requested';
-    lastMessage: CachedMessage<any, ContentTypeMetadata>;
+    lastMessage: DecodedMessage;
   }[];
 }
 
@@ -34,17 +31,17 @@ export const ChatList: React.FC<ChatListProps> = ({
     <Flex direction={'column'} gap={'10px'}>
       {conversationsInfo
         ?.sort((a, b) => {
-          if (a.lastMessage?.sentAt && b.lastMessage?.sentAt) {
+          if (a.lastMessage?.sentAtNs && b.lastMessage?.sentAtNs) {
             // a.lastMessage.sentAt and b.lastMessage.sentA are Date objects
             return (
-              b.lastMessage.sentAt.getTime() - a.lastMessage.sentAt.getTime()
+              Number(b.lastMessage.sentAtNs - a.lastMessage.sentAtNs)
             );
           }
           return 0;
         })
         .map((conv) => {
           const conversation = conversations.find(
-            (item) => item.topic === conv.conversationId
+            (item) => item.id === conv.conversationId
           );
 
           if (!conversation) return null;
@@ -61,7 +58,7 @@ export const ChatList: React.FC<ChatListProps> = ({
               //
               conversationInfo={conv}
               onClick={() => handleOpenChat(conversation)}
-              key={conversation.topic}
+              key={conversation.id}
               blocked={blockedList}
             />
           );

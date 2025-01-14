@@ -3,6 +3,10 @@ import { useAccount } from 'wagmi';
 import { useState, useCallback, useEffect } from 'react';
 import { useEthersSigner } from '../useEthersSigner';
 import { arrayify } from '@ethersproject/bytes';
+import { AttachmentCodec } from '@xmtp/content-type-remote-attachment';
+import { ReactionCodec } from '@xmtp/content-type-reaction';
+import { ReplyCodec } from '@xmtp/content-type-reply';
+import { ReadReceiptCodec } from '@xmtp/content-type-read-receipt';
 
 function storeKeys(address: string, key: Uint8Array, env: string) {
   localStorage.setItem(
@@ -10,10 +14,12 @@ function storeKeys(address: string, key: Uint8Array, env: string) {
     JSON.stringify(Array.from(key))
   );
 }
+
 function loadKeys(address: string, env: string) {
   const stored = localStorage.getItem(`xmtp_keys_${env}_${address}`);
   return stored ? new Uint8Array(JSON.parse(stored)) : null;
 }
+
 function wipeKeys(address: string, env: string) {
   localStorage.removeItem(`xmtp_keys_${env}_${address}`);
 }
@@ -24,9 +30,16 @@ export function useXMTPClient(env: 'dev' | 'production' | 'local' = 'dev') {
   const [client, setClient] = useState<Client>();
   const [isInitializing, setIsInitializing] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  const [rejected, setRejected] = useState<boolean>(false);
 
-  const initializeXmtp = useCallback(async () => {
+  const initializeXmtp = useCallback(async (
+    skipIsInitializing = false
+  ) => {
+    try {
     if (!address || !wagmiSigner || client) return;
+    
+    if (isInitializing && !skipIsInitializing) return;
+
     setIsInitializing(true);
 
     const signer: Signer = {
@@ -38,6 +51,7 @@ export function useXMTPClient(env: 'dev' | 'production' | 'local' = 'dev') {
     };
 
     let encryptionKey = loadKeys(address, env);
+
     if (!encryptionKey) {
       encryptionKey = window.crypto.getRandomValues(new Uint8Array(32));
       storeKeys(address, encryptionKey, env);
@@ -45,9 +59,14 @@ export function useXMTPClient(env: 'dev' | 'production' | 'local' = 'dev') {
 
     const options: ClientOptions = {
       env: env,
+      codecs: [
+        new AttachmentCodec(),
+        new ReactionCodec(),
+        new ReplyCodec(),
+        new ReadReceiptCodec(),
+      ],
     };
 
-    try {
       const newClient = await Client.create(signer, encryptionKey, options);
       if (newClient.accountAddress !== address) {
         wipeKeys(address, env);
@@ -58,8 +77,10 @@ export function useXMTPClient(env: 'dev' | 'production' | 'local' = 'dev') {
         setClient(newClient);
       }
     } catch (e) {
-      wipeKeys(address, env);
+      console.error('Failed to initialize XMTP Client:', error);
+      wipeKeys(address ?? '', env);
       setError(e as Error);
+      setRejected(true);
     } finally {
       setIsInitializing(false);
     }
@@ -76,5 +97,6 @@ export function useXMTPClient(env: 'dev' | 'production' | 'local' = 'dev') {
     initializeXmtp,
     isInitializing,
     error,
+    rejected,
   };
 }

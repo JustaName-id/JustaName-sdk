@@ -1,24 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
-import { ContentTypeId } from '@xmtp/content-type-primitives';
+import { Conversation } from '@xmtp/browser-sdk';
 import { ContentTypeReaction, Reaction } from '@xmtp/content-type-reaction';
-import {
-  CachedConversation,
-  DecodedMessage,
-  SendOptions,
-  useSendMessage,
-} from '@xmtp/react-sdk';
 
 export const sendReactionMessage = async (
-  conversation: CachedConversation,
+  conversation: Conversation,
   action: 'added' | 'removed',
   content: string,
   referenceId: string,
-  sendMessage: <T = string>(
-    conversation: CachedConversation,
-    content: T,
-    contentType?: ContentTypeId,
-    sendOptions?: Omit<SendOptions, 'contentType'>
-  ) => Promise<DecodedMessage<any> | undefined>
 ) => {
   const reaction: Reaction = {
     reference: referenceId,
@@ -26,7 +14,10 @@ export const sendReactionMessage = async (
     content: content,
     schema: 'custom',
   };
-  return await sendMessage(conversation, reaction, ContentTypeReaction);
+  return await conversation.send(
+    reaction,
+    ContentTypeReaction,
+  ) 
 };
 
 type SendReactionMessageParams = {
@@ -35,9 +26,7 @@ type SendReactionMessageParams = {
   referenceId: string;
 };
 
-export const useSendReactionMessage = (conversation?: CachedConversation) => {
-  const { sendMessage } = useSendMessage();
-
+export const useSendReactionMessage = (conversation?: Conversation) => {
   return useMutation({
     mutationFn: ({
       action,
@@ -50,7 +39,6 @@ export const useSendReactionMessage = (conversation?: CachedConversation) => {
         action,
         content,
         referenceId,
-        sendMessage
       );
     },
   });

@@ -1,4 +1,4 @@
-import { useMountedAccount, usePrimaryName } from '@justaname.id/react';
+import { usePrimaryName } from '@justaname.id/react';
 import {
   DocumentIcon,
   DownloadIcon,
@@ -7,21 +7,22 @@ import {
   ReactionIcon,
   ReplyIcon,
 } from '@justweb3/ui';
-import { CachedConversation, DecodedMessage } from '@xmtp/react-sdk';
+import { Conversation, DecodedMessage } from '@xmtp/browser-sdk';
+import { ContentTypeReply } from '@xmtp/content-type-reply';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSendReactionMessage } from '../../../../../hooks';
+import { useAddressInboxId, useSendReactionMessage, useXMTPClient } from '../../../../../hooks';
 import { typeLookup } from '../../../../../utils/attachments';
 import { calculateFileSize } from '../../../../../utils/calculateFileSize';
 import { findEmojiByName } from '../../../../../utils/emojis';
 import { MessageWithReaction } from '../../../../../utils/filterReactionsMessages';
 import { formatAddress } from '../../../../../utils/formatAddress';
 import { formatMessageSentTime } from '../../../../../utils/messageTimeFormat';
-import VoiceNotePreview from '../../VoiceNotePreview';
 import { VideoPlayerPreview } from '../../VideoPlayerPreview';
+import VoiceNotePreview from '../../VoiceNotePreview';
 
 interface MessageCardProps {
   message: MessageWithReaction;
-  conversation: CachedConversation;
+  conversation: Conversation;
   peerAddress: string;
   // onReply: (message: DecodedMessage) => void;
   // onReaction: (message: DecodedMessage) => void;
@@ -114,12 +115,13 @@ export const MessageCard: React.FC<MessageCardProps> = ({
   conversation,
   onReaction,
 }) => {
-  const { address } = useMountedAccount();
   const [hovered, setHovered] = useState<boolean>(false);
   const [repliedMessage, setRepliedMessage] =
     React.useState<DecodedMessage | null>(null);
   const divRef = useRef<HTMLDivElement | null>(null);
   const { mutateAsync: sendReaction } = useSendReactionMessage(conversation);
+  const { inboxId } = useAddressInboxId(peerAddress);
+  const { client } = useXMTPClient();
 
   const { primaryName } = usePrimaryName({
     address: peerAddress as `0x${string}`,
@@ -156,8 +158,8 @@ export const MessageCard: React.FC<MessageCardProps> = ({
 
   const isImage = message.content && message.content.data;
   const isReply =
-    message.content && message.contentType === 'xmtp.org/reply:1.0';
-  const isReceiver = message.senderAddress === peerAddress;
+    message.content && message.contentType.sameAs(ContentTypeReply);
+  const isReceiver = message.senderInboxId === inboxId;
   const isVoice = message.content.mimeType === 'audio/wav';
 
   const getMessageDataById = (messageId: string) => {
@@ -255,20 +257,20 @@ export const MessageCard: React.FC<MessageCardProps> = ({
           id={message.id}
           data-message={JSON.stringify({
             id: message.id,
-            senderAddress: message.senderAddress,
+            senderInboxId: message.senderInboxId,
             content:
               typeLookup[attachmentExtention] === 'image' ||
-              typeLookup[attachmentExtention] === 'video'
+                typeLookup[attachmentExtention] === 'video'
                 ? {
-                    data: message.content.data,
-                    mimeType: message.content.mimeType,
-                    filename: message.content.filename,
-                    url: URL.createObjectURL(
-                      new Blob([message.content.data], {
-                        type: message.content.mimeType,
-                      })
-                    ),
-                  }
+                  data: message.content.data,
+                  mimeType: message.content.mimeType,
+                  filename: message.content.filename,
+                  url: URL.createObjectURL(
+                    new Blob([message.content.data], {
+                      type: message.content.mimeType,
+                    })
+                  ),
+                }
                 : message.content,
             contentType: message.contentType,
           })}
@@ -313,10 +315,10 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                             : 'var(--justweb3-foreground-color-2)',
                         }}
                       >
-                        {repliedMessage?.senderAddress === address
+                        {repliedMessage?.senderInboxId === client?.inboxId
                           ? 'YOU'
                           : primaryName ??
-                            formatAddress(repliedMessage?.senderAddress ?? '')}
+                          formatAddress(peerAddress ?? '')}
                       </P>
 
                       {isReplyText || isReplyReply ? (
@@ -529,7 +531,7 @@ export const MessageCard: React.FC<MessageCardProps> = ({
               <P
                 onClick={() => {
                   if (!message.reactionMessage) return;
-                  if (message.reactionMessage.senderAddress !== address) return;
+                  if (message.reactionMessage.senderInboxId !== client?.inboxId) return;
                   handleEmojiSelect('', 'removed');
                 }}
                 style={{
@@ -568,7 +570,7 @@ export const MessageCard: React.FC<MessageCardProps> = ({
             onClick={() => onReply(message)}
           />
 
-          {message.senderAddress !== address && (
+          {message.senderInboxId !== client?.inboxId && (
             <ReactionIcon
               width="22"
               height="22"
@@ -592,7 +594,7 @@ export const MessageCard: React.FC<MessageCardProps> = ({
           textAlign: !isReceiver ? 'start' : 'end',
         }}
       >
-        {formatMessageSentTime(message.sentAt)}
+        {formatMessageSentTime(message.sentAtNs)}
       </P>
     </Flex>
   );

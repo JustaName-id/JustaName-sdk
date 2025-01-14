@@ -1,10 +1,10 @@
 import { Flex, P, PauseIcon, PlayIcon } from '@justweb3/ui';
 import * as Slider from '@radix-ui/react-slider';
-import { DecodedMessage } from '@xmtp/xmtp-js';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { formatTime } from '../../../../utils/formatVoiceTime';
 import { useGetAudioDuration } from '../../../../hooks/useGetAudioDuration';
 import { MessageWithReaction } from '../../../../utils/filterReactionsMessages';
+import { DecodedMessage } from '@xmtp/browser-sdk';
 
 interface VoiceNotePreviewProps {
   message: MessageWithReaction | DecodedMessage;
@@ -118,8 +118,8 @@ const VoiceNotePreview: React.FC<VoiceNotePreviewProps> = ({
             disabled
               ? 'var(--justweb3-primary-color)'
               : isReceiver
-              ? 'var(--justweb3-primary-color)'
-              : 'var(--justweb3-foreground-color-4)'
+                ? 'var(--justweb3-primary-color)'
+                : 'var(--justweb3-foreground-color-4)'
           }
           style={{
             cursor: 'pointer',

@@ -1,6 +1,6 @@
-export const formatChatDate = (inputDate: Date): string => {
+export const formatChatDate = (inputDate: bigint): string => {
   const now = new Date();
-  const input = new Date(inputDate);
+  const input = new Date(Number(inputDate));
 
   // Helper function to format date as DD/MM/YYYY
   const formatDate = (date: Date): string =>

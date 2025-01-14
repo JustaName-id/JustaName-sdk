@@ -12589,6 +12589,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@xmtp/browser-sdk@npm:^0.0.13":
+  version: 0.0.13
+  resolution: "@xmtp/browser-sdk@npm:0.0.13"
+  dependencies:
+    "@xmtp/content-type-group-updated": "npm:^2.0.0"
+    "@xmtp/content-type-primitives": "npm:^2.0.0"
+    "@xmtp/content-type-text": "npm:^2.0.0"
+    "@xmtp/proto": "npm:^3.72.3"
+    "@xmtp/wasm-bindings": "npm:^0.0.11"
+    uuid: "npm:^11.0.3"
+  checksum: 10c0/669feda60294f163294ea58de7ca872fd3f226ff403535ee39e22b8e24b7bcb3b19baf4409fa61fb89b1cdb130d4b033c7ca55119f594a183163f59edbb117b7
+  languageName: node
+  linkType: hard
+
 "@xmtp/consent-proof-signature@npm:^0.1.4":
   version: 0.1.4
   resolution: "@xmtp/consent-proof-signature@npm:0.1.4"
@@ -12599,12 +12613,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@xmtp/content-type-group-updated@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@xmtp/content-type-group-updated@npm:2.0.0"
+  dependencies:
+    "@xmtp/content-type-primitives": "npm:^2.0.0"
+    "@xmtp/proto": "npm:^3.72.0"
+  checksum: 10c0/09dcb142c45168a79340a44b9d689079dcc9ed5f41adf9797497a49161f1ae553130153d57cd7b0fc52e0b00db5a2175cf650168abd1c7943e609dbf8ad64b67
+  languageName: node
+  linkType: hard
+
 "@xmtp/content-type-primitives@npm:1.0.3, @xmtp/content-type-primitives@npm:^1.0.1, @xmtp/content-type-primitives@npm:^1.0.3":
   version: 1.0.3
   resolution: "@xmtp/content-type-primitives@npm:1.0.3"
   dependencies:
     "@xmtp/proto": "npm:^3.72.0"
   checksum: 10c0/a644dd24d0edad2c67b4b7a42f5af32914fb2df935debaabde61dba9d0c061692b198757777323c266a1ce84a1a3050d98bde21f795035a18ae076fee9528a0e
+  languageName: node
+  linkType: hard
+
+"@xmtp/content-type-primitives@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@xmtp/content-type-primitives@npm:2.0.0"
+  dependencies:
+    "@xmtp/proto": "npm:^3.72.0"
+  checksum: 10c0/6e882168cea89e92f4f7c9fe1e3b0106d20ab032b1216afce7a65a741076bf6205f66701cc65c7afd84dcaa48dd0716d83138b310906abb74ec846a05a33062c
   languageName: node
   linkType: hard
 
@@ -12656,6 +12689,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@xmtp/content-type-text@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@xmtp/content-type-text@npm:2.0.0"
+  dependencies:
+    "@xmtp/content-type-primitives": "npm:^2.0.0"
+  checksum: 10c0/55f0fbc7f8cdb91e15be844cb023a5afea40b2234c0b74522d7492c8303523758d4111a96bb1239a5d8c1e292edc0806d6df1bd19cad54f455420ef6a2145bb7
+  languageName: node
+  linkType: hard
+
 "@xmtp/proto@npm:^3.72.0":
   version: 3.72.3
   resolution: "@xmtp/proto@npm:3.72.3"
@@ -12665,6 +12707,18 @@ __metadata:
     rxjs: "npm:^7.8.0"
     undici: "npm:^5.8.1"
   checksum: 10c0/ce899a62307853efd2fe199144ded806560b7f9f5d2b5b08948a001530a8cf43151fbb6b56e6e71879c4a72ab50ab7233b0cc9f7b1ed28e7e3ea86ff90f7d9df
+  languageName: node
+  linkType: hard
+
+"@xmtp/proto@npm:^3.72.3":
+  version: 3.72.4
+  resolution: "@xmtp/proto@npm:3.72.4"
+  dependencies:
+    long: "npm:^5.2.0"
+    protobufjs: "npm:^7.0.0"
+    rxjs: "npm:^7.8.0"
+    undici: "npm:^5.8.1"
+  checksum: 10c0/39b4930de9582fea3d1d907e96c2a9baf51a8d36257a736c1f605fc3cc70bed15b22c498b55d13c0dd1b37c8b8ffd804412dfe1769ef12e42e8479759ceff0e1
   languageName: node
   linkType: hard
 
@@ -12695,6 +12749,13 @@ __metadata:
   version: 0.3.6
   resolution: "@xmtp/user-preferences-bindings-wasm@npm:0.3.6"
   checksum: 10c0/8a28468e3c82c85157dd7962485fec2712f448aa510fb46c51ea0e01139b0e316aa52ecbbc4a84604b254aa848e045dd378b1c116465c7739926a9a0bb4425f6
+  languageName: node
+  linkType: hard
+
+"@xmtp/wasm-bindings@npm:^0.0.11":
+  version: 0.0.11
+  resolution: "@xmtp/wasm-bindings@npm:0.0.11"
+  checksum: 10c0/fe880406265437b95803a138e10b68c2ad201826bda93ad94d6f2d4bc6331d60ead1d68149f5f88011dd9afa8c07a0ac7b5b7d9d405e451f0e0351d9c2129a73
   languageName: node
   linkType: hard
 
@@ -23851,6 +23912,7 @@ __metadata:
     "@usecapsule/react-sdk": "npm:^4.6.1"
     "@usecapsule/wagmi-v2-integration": "npm:^3.6.1"
     "@vitejs/plugin-react": "npm:^4.2.0"
+    "@xmtp/browser-sdk": "npm:^0.0.13"
     "@xmtp/content-type-reaction": "npm:^1.1.11"
     "@xmtp/content-type-read-receipt": "npm:^1.1.12"
     "@xmtp/content-type-remote-attachment": "npm:^1.1.12"
@@ -33896,6 +33958,15 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 10c0/eab18c27fe4ab9fb9709a5d5f40119b45f2ec8314f8d4cf12ce27e4c6f4ffa4a6321dc7db6c515068fa373c075b49691ba969f0010bf37f44c37ca40cd6bf7fe
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^11.0.3":
+  version: 11.0.5
+  resolution: "uuid@npm:11.0.5"
+  bin:
+    uuid: dist/esm/bin/uuid
+  checksum: 10c0/6f59f0c605e02c14515401084ca124b9cb462b4dcac866916a49862bcf831874508a308588c23a7718269226ad11a92da29b39d761ad2b86e736623e3a33b6e7
   languageName: node
   linkType: hard
 

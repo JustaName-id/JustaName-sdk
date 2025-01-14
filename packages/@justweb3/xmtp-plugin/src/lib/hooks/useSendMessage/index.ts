@@ -1,33 +1,20 @@
 import { useMutation } from '@tanstack/react-query';
-import { ContentTypeId } from '@xmtp/content-type-primitives';
-import {
-  CachedConversation,
-  DecodedMessage,
-  SendOptions,
-  useSendMessage,
-} from '@xmtp/react-sdk';
+import { FullConversation } from '..';
+
 
 export const _sendMessages = async (
-  conversation: CachedConversation,
+  conversation: FullConversation,
   message: string,
-  sendMessage: <T = string>(
-    conversation: CachedConversation,
-    content: T,
-    contentType?: ContentTypeId,
-    sendOptions?: Omit<SendOptions, 'contentType'>
-  ) => Promise<DecodedMessage<any> | undefined>,
-  contentType?: SendOptions
 ) => {
-  await sendMessage(conversation, message, undefined, contentType);
+  await conversation.send(message);
 };
 
-export const useSendMessages = (conversation?: CachedConversation) => {
-  const { sendMessage } = useSendMessage();
+export const useSendMessages = (conversation: FullConversation) => {
 
   return useMutation({
-    mutationFn: (message: string, contentType?: SendOptions) => {
+    mutationFn: (message: string) => {
       if (!conversation) throw new Error('Conversation not found');
-      return _sendMessages(conversation, message, sendMessage, contentType);
+      return _sendMessages(conversation, message);
     },
   });
 };
