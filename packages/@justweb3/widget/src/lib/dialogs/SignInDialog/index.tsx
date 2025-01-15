@@ -1,4 +1,15 @@
-import React, { FC, Fragment, useMemo, useState } from 'react';
+import {
+  Records,
+  useAccountEnsNames,
+  useAccountSubnames,
+  useAddSubname,
+  useEnsSignIn,
+  useIsSubnameAvailable,
+  useJustaName,
+  useMountedAccount,
+  useOffchainResolvers,
+  usePrimaryName,
+} from '@justaname.id/react';
 import {
   Badge,
   Button,
@@ -12,25 +23,14 @@ import {
   ProfileIcon,
   SPAN,
 } from '@justweb3/ui';
-import {
-  Records,
-  useAccountEnsNames,
-  useAccountSubnames,
-  useAddSubname,
-  useEnsSignIn,
-  useIsSubnameAvailable,
-  useJustaName,
-  useMountedAccount,
-  useOffchainResolvers,
-} from '@justaname.id/react';
+import clsx from 'clsx';
+import React, { FC, Fragment, useMemo, useState } from 'react';
+import { SelectSubnameItem } from '../../components/SelectSubnameItem';
 import { useDebounce } from '../../hooks/useDebounce';
 import { DefaultDialog } from '../DefaultDialog';
-import { SelectSubnameItem } from '../../components/SelectSubnameItem';
 import styles from './SignInDialog.module.css';
-import clsx from 'clsx';
 
 const ENS_MAINNET_RESOLVER = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-// const BASE_MAINNET_RESOLVER = '0xde9049636F4a1dfE0a64d1bFe3155C0A14C54F31'
 const ENS_SEPOLIA_RESOLVER = '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD';
 
 interface TransitionElementProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -81,6 +81,14 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   const { isConnected, address } = useMountedAccount();
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
   const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
+
+  const { primaryName, isPrimaryNameLoading, refetchPrimaryName } = usePrimaryName({
+    address,
+    chainId,
+    enabled: !!address && !!chainId,
+    priority: 'onChain'
+  })
+
   const [username, setUsername] = useState('');
   const { debouncedValue: debouncedUsername, isDebouncing } = useDebounce(
     username,
@@ -225,6 +233,14 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     offchainResolvers?.offchainResolvers,
   ]);
 
+  const primarySubname = useMemo(() => {
+    return subnames.find((subname) => subname.ens === primaryName)
+  }, [subnames, primaryName,])
+
+  const filteredSubnames = useMemo(() => {
+    return subnames.filter((subname) => subname.ens !== primaryName)
+  }, [subnames, primaryName])
+
   const shouldBeAbleToSelect = useMemo(() => {
     return subnames.length > 0;
   }, [subnames]);
@@ -270,8 +286,8 @@ export const SignInDialog: FC<SignInDialogProps> = ({
           </SPAN>
         </Badge>
         {isAccountSubnamesPending ||
-        isAccountEnsNamesPending ||
-        isOffchainResolversPending ? (
+          isAccountEnsNamesPending ||
+          isOffchainResolversPending ? (
           <div className={styles.loadingContainer}>
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
           </div>
@@ -288,7 +304,22 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                   gap="15px"
                   className={clsx(styles.contentWrapper)}
                 >
-                  {subnames.map((subname, index) => (
+                  {!isPrimaryNameLoading && primarySubname &&
+                    <SelectSubnameItem
+                      selectedSubname={subnameSigningIn}
+                      subname={primarySubname}
+                      onClick={() => {
+                        setSubnameSigningIn(primarySubname.ens);
+                        signIn({ ens: primarySubname.ens })
+                          .then(() => handleOpenDialog(false))
+                          .finally(() => {
+                            setSubnameSigningIn('');
+                          });
+                      }}
+                      isPrimary={true}
+                    />
+                  }
+                  {filteredSubnames.map((subname, index) => (
                     <Fragment key={'subname-' + index}>
                       <SelectSubnameItem
                         selectedSubname={subnameSigningIn}
@@ -301,6 +332,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                               setSubnameSigningIn('');
                             });
                         }}
+                        isPrimary={false}
                       />
                     </Fragment>
                   ))}
@@ -357,6 +389,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                         username: username,
                         ensDomain: claimableEns,
                       }).then(() => {
+                        refetchPrimaryName();
                         setSubnameSigningIn(username + '.' + claimableEns);
                         signIn({ ens: username + '.' + claimableEns })
                           .then(() => {
