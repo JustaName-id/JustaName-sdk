@@ -32,7 +32,6 @@ export const ChatList: React.FC<ChatListProps> = ({
       {conversationsInfo
         ?.sort((a, b) => {
           if (a.lastMessage?.sentAtNs && b.lastMessage?.sentAtNs) {
-            // a.lastMessage.sentAt and b.lastMessage.sentA are Date objects
             return (
               Number(b.lastMessage.sentAtNs - a.lastMessage.sentAtNs)
             );

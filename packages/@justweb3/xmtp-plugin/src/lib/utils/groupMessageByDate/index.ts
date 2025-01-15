@@ -21,7 +21,7 @@ export const groupMessagesByDate = (
     messages: MessageWithReaction[],
 ): GroupedMessages => {
     const groupedMessages = messages.reduce<GroupedMessages>((acc, message) => {
-        const date = new Date(message.sentAt)
+        const date = new Date(Number(message.sentAtNs))
         const formattedDate = getFormattedDate(date)
 
         if (!acc[formattedDate]) {

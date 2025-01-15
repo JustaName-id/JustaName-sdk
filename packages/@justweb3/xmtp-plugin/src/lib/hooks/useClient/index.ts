@@ -66,7 +66,6 @@ export function useXMTPClient(env: 'dev' | 'production' | 'local' = 'dev') {
         new ReadReceiptCodec(),
       ],
     };
-
       const newClient = await Client.create(signer, encryptionKey, options);
       if (newClient.accountAddress !== address) {
         wipeKeys(address, env);
@@ -77,7 +76,7 @@ export function useXMTPClient(env: 'dev' | 'production' | 'local' = 'dev') {
         setClient(newClient);
       }
     } catch (e) {
-      console.error('Failed to initialize XMTP Client:', error);
+      console.error('Failed to initialize XMTP Client:', e, error);
       wipeKeys(address ?? '', env);
       setError(e as Error);
       setRejected(true);

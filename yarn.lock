@@ -12589,17 +12589,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/browser-sdk@npm:^0.0.13":
-  version: 0.0.13
-  resolution: "@xmtp/browser-sdk@npm:0.0.13"
+"@xmtp/browser-sdk@npm:^0.0.15":
+  version: 0.0.15
+  resolution: "@xmtp/browser-sdk@npm:0.0.15"
   dependencies:
     "@xmtp/content-type-group-updated": "npm:^2.0.0"
     "@xmtp/content-type-primitives": "npm:^2.0.0"
     "@xmtp/content-type-text": "npm:^2.0.0"
     "@xmtp/proto": "npm:^3.72.3"
-    "@xmtp/wasm-bindings": "npm:^0.0.11"
+    "@xmtp/wasm-bindings": "npm:^0.0.12"
     uuid: "npm:^11.0.3"
-  checksum: 10c0/669feda60294f163294ea58de7ca872fd3f226ff403535ee39e22b8e24b7bcb3b19baf4409fa61fb89b1cdb130d4b033c7ca55119f594a183163f59edbb117b7
+  checksum: 10c0/ac0557f46c544590a6ef9a6da0eb3c29495fe4917ae14bbe93d2d767911c969a8591c9c85d6578e685bb6c43f7bb71e357b392b0e9297c13d507b0b9685f7e23
   languageName: node
   linkType: hard
 
@@ -12752,10 +12752,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/wasm-bindings@npm:^0.0.11":
-  version: 0.0.11
-  resolution: "@xmtp/wasm-bindings@npm:0.0.11"
-  checksum: 10c0/fe880406265437b95803a138e10b68c2ad201826bda93ad94d6f2d4bc6331d60ead1d68149f5f88011dd9afa8c07a0ac7b5b7d9d405e451f0e0351d9c2129a73
+"@xmtp/wasm-bindings@npm:^0.0.12":
+  version: 0.0.12
+  resolution: "@xmtp/wasm-bindings@npm:0.0.12"
+  checksum: 10c0/0efc950e5629689d0cd4ddc45f191d7b2ef3c48dd21fae735706ce9741285b2c8fa8a8f16ae62069f84e4fc1eac19b3d41d4fd45144b57ab1f449e95382d42fb
   languageName: node
   linkType: hard
 
@@ -23912,7 +23912,7 @@ __metadata:
     "@usecapsule/react-sdk": "npm:^4.6.1"
     "@usecapsule/wagmi-v2-integration": "npm:^3.6.1"
     "@vitejs/plugin-react": "npm:^4.2.0"
-    "@xmtp/browser-sdk": "npm:^0.0.13"
+    "@xmtp/browser-sdk": "npm:^0.0.15"
     "@xmtp/content-type-reaction": "npm:^1.1.11"
     "@xmtp/content-type-read-receipt": "npm:^1.1.12"
     "@xmtp/content-type-remote-attachment": "npm:^1.1.12"

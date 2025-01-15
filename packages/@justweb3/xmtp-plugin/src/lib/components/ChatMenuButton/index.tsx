@@ -12,13 +12,13 @@ export const ChatMenuButton: React.FC<ChatMenuButtonProps> = ({
   handleOpen,
   env,
 }) => {
-  const { conversationsInfo, initializeXmtp } = useJustWeb3XMTP();
+  const { conversationsInfo } = useJustWeb3XMTP();
   const totalUnreadCount = useMemo(() => {
     return conversationsInfo
       .filter((conversation) => conversation.consent === 'allowed')
       .reduce((acc, curr) => acc + curr.unreadCount, 0);
   }, [conversationsInfo]);
-  const { client } = useXMTPClient();
+  const { client, initializeXmtp } = useXMTPClient();
 
   const handleChat = async () => {
     if (!client) {
