@@ -49,7 +49,7 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   // // allowedEns: 'all',
   // // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
   plugins: [
-    XMTPPlugin('production'),
+    XMTPPlugin('dev'),
     EFPPlugin,
     POAPPlugin({
       apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,

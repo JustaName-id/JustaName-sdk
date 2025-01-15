@@ -12650,12 +12650,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-read-receipt@npm:^1.1.12":
-  version: 1.1.12
-  resolution: "@xmtp/content-type-read-receipt@npm:1.1.12"
+"@xmtp/content-type-reaction@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@xmtp/content-type-reaction@npm:2.0.0"
   dependencies:
-    "@xmtp/content-type-primitives": "npm:^1.0.3"
-  checksum: 10c0/086094c96d13c088306e422b395752a033ac8ac7ad8c77611312fd4a0f7c776abc162c9d34de93a9cea9651505bb93be2074bef4d84f582d5202a45860965db1
+    "@xmtp/content-type-primitives": "npm:^2.0.0"
+  checksum: 10c0/bb166a9a0e18b3a7610d7631423d895b8fc4149ca594df9fa46c6d36e7caf95c59a71be3a085dab4ad15c18c66257f38cc7736ae4f24986706a3c56723164039
+  languageName: node
+  linkType: hard
+
+"@xmtp/content-type-read-receipt@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@xmtp/content-type-read-receipt@npm:2.0.0"
+  dependencies:
+    "@xmtp/content-type-primitives": "npm:^2.0.0"
+  checksum: 10c0/35592d22f1067c1de23caf9cb25eaf20702a1b5942e1bd680d31b7400220049353504f799af24b3819eff6b461f93b5575f13a2ac1d5f5482f5b90d5995f247b
   languageName: node
   linkType: hard
 
@@ -12670,6 +12679,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@xmtp/content-type-remote-attachment@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@xmtp/content-type-remote-attachment@npm:2.0.0"
+  dependencies:
+    "@noble/secp256k1": "npm:^1.7.1"
+    "@xmtp/content-type-primitives": "npm:^2.0.0"
+    "@xmtp/proto": "npm:^3.72.0"
+  checksum: 10c0/12ba02eac35934a78b613068c8f789a213cb566c4f1a6e26fea6b3c8abc3c1b943db75d0104209f56ac169b74a06a4c7a2dc87ea5a43c40f6326f1f1f0e9cce2
+  languageName: node
+  linkType: hard
+
 "@xmtp/content-type-reply@npm:^1.1.12":
   version: 1.1.12
   resolution: "@xmtp/content-type-reply@npm:1.1.12"
@@ -12677,6 +12697,16 @@ __metadata:
     "@xmtp/content-type-primitives": "npm:^1.0.3"
     "@xmtp/proto": "npm:^3.72.0"
   checksum: 10c0/e9e60e69277f91792a7b261321c7ab85d05af56d9f4f128c98ab185f6b973d4adbafa02c788127eca9f8ac517460b3a65314e34d56f44e3e7b201aa7681edb1e
+  languageName: node
+  linkType: hard
+
+"@xmtp/content-type-reply@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@xmtp/content-type-reply@npm:2.0.0"
+  dependencies:
+    "@xmtp/content-type-primitives": "npm:^2.0.0"
+    "@xmtp/proto": "npm:^3.72.0"
+  checksum: 10c0/14f51b0b7deaaddd5abab8186e27361a1d17395ad2cbeb558d1ea3723a60f136586a612b05fd08404317dc8ae453d68960e1f2d1441e66308cfb24ba7c5a083a
   languageName: node
   linkType: hard
 
@@ -23913,10 +23943,10 @@ __metadata:
     "@usecapsule/wagmi-v2-integration": "npm:^3.6.1"
     "@vitejs/plugin-react": "npm:^4.2.0"
     "@xmtp/browser-sdk": "npm:^0.0.15"
-    "@xmtp/content-type-reaction": "npm:^1.1.11"
-    "@xmtp/content-type-read-receipt": "npm:^1.1.12"
-    "@xmtp/content-type-remote-attachment": "npm:^1.1.12"
-    "@xmtp/content-type-reply": "npm:^1.1.12"
+    "@xmtp/content-type-reaction": "npm:^2.0.0"
+    "@xmtp/content-type-read-receipt": "npm:^2.0.0"
+    "@xmtp/content-type-remote-attachment": "npm:^2.0.0"
+    "@xmtp/content-type-reply": "npm:^2.0.0"
     "@xmtp/react-sdk": "npm:^9.0.0"
     "@xmtp/xmtp-js": "npm:^13.0.4"
     autoprefixer: "npm:^10.4.20"
