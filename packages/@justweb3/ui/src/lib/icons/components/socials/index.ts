@@ -8,6 +8,7 @@ import InstagramIcon from './Instagram';
 import LinkedinIcon from './Linkedin';
 import MediumIcon from './Medium';
 import MirrorIcon from './Mirror';
+import OpenPassportIcon from './OpenPassport';
 import RedditIcon from './Reddit';
 import TelegramIcon from './Telegram';
 import TwitterIcon from './Twitter';
@@ -25,6 +26,7 @@ const socials = {
   linkedin: LinkedinIcon,
   medium: MediumIcon,
   mirror: MirrorIcon,
+  'open-passport': OpenPassportIcon,
   reddit: RedditIcon,
   telegram: TelegramIcon,
   twitter: TwitterIcon,
@@ -45,6 +47,7 @@ export {
   LinkedinIcon,
   MediumIcon,
   MirrorIcon,
+  OpenPassportIcon,
   RedditIcon,
   TelegramIcon,
   TwitterIcon,

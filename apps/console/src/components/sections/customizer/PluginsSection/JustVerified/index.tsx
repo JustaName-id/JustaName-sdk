@@ -7,6 +7,7 @@ import {
   GithubIcon,
   TelegramIcon,
   TwitterIcon,
+  OpenPassportIcon
 } from '@justweb3/ui';
 import { useConsole } from '../../../../../providers/ConsoleProvider';
 import { Switch } from '../../../../ui/switch';
@@ -40,7 +41,7 @@ const socials: { logo: ReactNode; title: string; credential: Credentials }[] = [
     credential: 'discord',
   },
   {
-    logo: <TelegramIcon width={20} />,
+    logo: <OpenPassportIcon width={20} />,
     title: 'OpenPassport',
     credential: 'openpassport',
   },

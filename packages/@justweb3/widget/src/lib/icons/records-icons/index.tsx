@@ -14,6 +14,7 @@ import {
   TwitterIcon,
   WebsiteIcon,
   XIcon,
+  OpenPassportIcon
 } from '@justweb3/ui';
 
 export const getTextRecordIcon = (key: string) => {
@@ -49,7 +50,7 @@ export const getTextRecordIcon = (key: string) => {
     case 'org.telegram':
       return <TelegramIcon width={24} height={24} />;
     case 'app.openpassport':
-      return <TelegramIcon width={24} height={24} />;
+      return <OpenPassportIcon width={24} height={24} />;
     default:
       return (
         <div
