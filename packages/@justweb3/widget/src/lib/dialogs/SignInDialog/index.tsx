@@ -292,6 +292,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
           </SPAN>
         </Badge>
         {isAccountSubnamesPending ||
+          isInvitationsPending ||
           isAccountEnsNamesPending ||
           isOffchainResolversPending ? (
           <div className={styles.loadingContainer}>
@@ -309,10 +310,15 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                   direction="column"
                   gap="15px"
                   className={clsx(styles.contentWrapper)}
-                  style={{
-                    maxHeight: invitations.length > 0 ? '20vh' : '50vh'
-                  }}
                 >
+                  {invitations.length > 0 && invitations.map((inv, index) => (
+                    <Fragment key={'subname-invitation-' + index}>
+                      <SubnameInvitationItem
+                        subname={inv}
+                        onInvitationChange={refetchInvitations}
+                      />
+                    </Fragment>
+                  ))}
                   {!isPrimaryNameLoading && primarySubname &&
                     <SelectSubnameItem
                       selectedSubname={subnameSigningIn}
@@ -412,34 +418,6 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                   >
                     Claim
                   </Button>
-                </Flex>
-              </Flex>
-            </TransitionElement>
-            <TransitionElement
-              visible={!isInvitationsPending && invitations.length > 0}
-              maxheight="100px"
-            >
-              <OrLine />
-            </TransitionElement>
-            <TransitionElement
-              visible={!isInvitationsPending && invitations.length > 0}
-              maxheight="fit-content"
-            >
-              <Flex direction="column" gap="10px" justify={'space-between'}>
-                <H2>Invitations</H2>
-                <Flex
-                  direction="column"
-                  gap="15px"
-                  className={clsx(styles.invitationsWrapper)}
-                >
-                  {invitations.map((subname, index) => (
-                    <Fragment key={'subname-' + index}>
-                      <SubnameInvitationItem
-                        subname={subname}
-                        onInvitationChange={refetchInvitations}
-                      />
-                    </Fragment>
-                  ))}
                 </Flex>
               </Flex>
             </TransitionElement>

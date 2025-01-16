@@ -25,13 +25,7 @@
 }
 
 .contentWrapper {
-    max-height: 20vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.invitationsWrapper {
-    max-height: calc(20vh - 50px);
+    max-height: 50vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
