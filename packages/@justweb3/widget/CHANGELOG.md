@@ -1,3 +1,35 @@
+## 0.0.103 (2025-01-16)
+
+
+### 🚀 Features
+
+- **widget:** implemented invitations feature ([22447ba](https://github.com/JustaName-id/JustaName-sdk/commit/22447ba))
+
+
+### 🩹 Fixes
+
+- **widget:** fixes ([c2866dd](https://github.com/JustaName-id/JustaName-sdk/commit/c2866dd))
+
+- **widget:** configuration content ([28fd3da](https://github.com/JustaName-id/JustaName-sdk/commit/28fd3da))
+
+- **widget:** added key for primary names mapping ([c00615e](https://github.com/JustaName-id/JustaName-sdk/commit/c00615e))
+
+- **widget:** changed invitations placement ([a788385](https://github.com/JustaName-id/JustaName-sdk/commit/a788385))
+
+- **widget:** ui fix ([989de8c](https://github.com/JustaName-id/JustaName-sdk/commit/989de8c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.167
+- Updated @justaname.id/sdk to 0.2.164
+- Updated @justweb3/ui to 0.0.103
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.102 (2025-01-16)
 
 
