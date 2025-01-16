@@ -11,6 +11,14 @@ import {
 import { TELEGRAM_ENABLED, TelegramEnabledPayload } from './telegram-enabled';
 import { TWITTER_DISABLED, TwitterDisabledPayload } from './twitter-disabled';
 import { TWITTER_ENABLED, TwitterEnabledPayload } from './twitter-enabled';
+import {
+  OPENPASSPORT_DISABLED,
+  OpenPassportDisabledPayload,
+} from './openpassport-disabled';
+import {
+  OPENPASSPORT_ENABLED,
+  OpenPassportEnabledPayload,
+} from './openpassport-enabled';
 
 export const JUST_VERIFIED_EVENTS = {
   DISCORD_DISABLED,
@@ -23,6 +31,8 @@ export const JUST_VERIFIED_EVENTS = {
   TELEGRAM_ENABLED,
   TWITTER_DISABLED,
   TWITTER_ENABLED,
+  OPENPASSPORT_DISABLED,
+  OPENPASSPORT_ENABLED,
 } as const;
 
 export interface JustVerifiedEventsPayload {
@@ -36,4 +46,6 @@ export interface JustVerifiedEventsPayload {
   [TELEGRAM_ENABLED]: TelegramEnabledPayload;
   [TWITTER_DISABLED]: TwitterDisabledPayload;
   [TWITTER_ENABLED]: TwitterEnabledPayload;
+  [OPENPASSPORT_DISABLED]: OpenPassportDisabledPayload;
+  [OPENPASSPORT_ENABLED]: OpenPassportEnabledPayload;
 }

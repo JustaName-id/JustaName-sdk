@@ -7,6 +7,7 @@ import {
   GithubIcon,
   TelegramIcon,
   TwitterIcon,
+  OpenPassportIcon
 } from '@justweb3/ui';
 import { useConsole } from '../../../../../providers/ConsoleProvider';
 import { Switch } from '../../../../ui/switch';
@@ -38,6 +39,11 @@ const socials: { logo: ReactNode; title: string; credential: Credentials }[] = [
     logo: <DiscordIcon width={20} />,
     title: 'Discord',
     credential: 'discord',
+  },
+  {
+    logo: <OpenPassportIcon width={20} />,
+    title: 'OpenPassport',
+    credential: 'openpassport',
   },
   {
     logo: <EmailIcon width={20} />,
@@ -95,6 +101,9 @@ export const JustVerified = () => {
         break;
       case 'email':
         getAnalyticsClient().track(unCheck ? 'EMAIL_DISABLED' : 'EMAIL_ENABLED', {});
+        break;
+      case 'openpassport':
+        getAnalyticsClient().track(unCheck ? 'OPENPASSPORT_DISABLED' : 'OPENPASSPORT_ENABLED', {});
         break;
       default:
         break;

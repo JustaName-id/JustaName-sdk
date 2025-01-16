@@ -136,7 +136,7 @@ export const VerificationCard: FC<VerificationCardProps> = ({
                 fontFamily: 'var(--justweb3-font-family)'
               }}
             >
-              {verifiedRecords[credential]?.credentialSubject.username || verifiedRecords[credential]?.credentialSubject.email}
+              {verifiedRecords[credential]?.credentialSubject.username || verifiedRecords[credential]?.credentialSubject.email || (verifiedRecords[credential]?.credentialSubject.openPassportProof && "Valid Passport")}
             </P>
           </Flex>
 

@@ -9,6 +9,7 @@ import {
   GithubIcon,
   TelegramIcon,
   TwitterIcon,
+  OpenPassportIcon
 } from '@justweb3/ui';
 import { Credentials } from '../../types';
 import { EthereumEip712Signature2021 } from '../../types/ethereumEip712Signature';
@@ -19,8 +20,9 @@ export interface SelectCredentialItemProps {
   selectedCredential: Credentials | undefined;
   onClick: () => void;
   credentialValue:
-    | EthereumEip712Signature2021<{ username?: string; email?: string }>
-    | undefined;
+  | EthereumEip712Signature2021<{ username?: string; email?: string }>
+  | EthereumEip712Signature2021<{ openPassportProof?: string }>
+  | undefined;
   disabled?: boolean;
 }
 
@@ -36,12 +38,15 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
     () => selectedCredential === credential,
     [selectedCredential, credential]
   );
-  const username = useMemo(
-    () =>
-      credentialValue?.credentialSubject?.username ||
-      credentialValue?.credentialSubject?.email,
-    [credentialValue]
-  );
+  const username = useMemo(() => {
+    const subject = credentialValue?.credentialSubject;
+    if (!subject) return undefined;
+
+    return 'username' in subject ? subject.username :
+      'email' in subject ? subject.email :
+        'openPassportProof' in subject ? "Valid Passport" :
+          undefined;
+  }, [credentialValue]);
   const expirationDate = useMemo(
     () => credentialValue?.expirationDate,
     [credentialValue]
@@ -58,6 +63,8 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
         return <DiscordIcon width={30} />;
       case 'email':
         return <EmailIcon width={30} />;
+      case 'openpassport':
+        return <OpenPassportIcon width={30} />;
     }
   }, [credential]);
 
