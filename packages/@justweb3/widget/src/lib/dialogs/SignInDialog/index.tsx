@@ -1,6 +1,7 @@
 import {
   Records,
   useAccountEnsNames,
+  useAccountInvitations,
   useAccountSubnames,
   useAddSubname,
   useEnsSignIn,
@@ -26,6 +27,7 @@ import {
 import clsx from 'clsx';
 import React, { FC, Fragment, useMemo, useState } from 'react';
 import { SelectSubnameItem } from '../../components/SelectSubnameItem';
+import { SubnameInvitationItem } from '../../components/SubnameInvitationItem';
 import { useDebounce } from '../../hooks/useDebounce';
 import { DefaultDialog } from '../DefaultDialog';
 import styles from './SignInDialog.module.css';
@@ -81,6 +83,10 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   const { isConnected, address } = useMountedAccount();
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
   const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
+  const { invitations, isInvitationsPending, refetchInvitations } = useAccountInvitations({
+    chainId,
+    enabled: !!chainId && !!address,
+  });
 
   const { primaryName, isPrimaryNameLoading, refetchPrimaryName } = usePrimaryName({
     address,
@@ -286,24 +292,33 @@ export const SignInDialog: FC<SignInDialogProps> = ({
           </SPAN>
         </Badge>
         {isAccountSubnamesPending ||
+          isInvitationsPending ||
           isAccountEnsNamesPending ||
           isOffchainResolversPending ? (
           <div className={styles.loadingContainer}>
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
           </div>
         ) : (
-          <Flex direction="column" gap="20px">
+          <Flex direction="column" gap="10px">
             <TransitionElement
               visible={shouldBeAbleToSelect}
               maxheight="fit-content"
             >
-              <Flex direction="column" gap="20px" justify={'space-between'}>
+              <Flex direction="column" gap="10px" justify={'space-between'}>
                 <H2>Select an ENS</H2>
                 <Flex
                   direction="column"
                   gap="15px"
                   className={clsx(styles.contentWrapper)}
                 >
+                  {invitations.length > 0 && invitations.map((inv, index) => (
+                    <Fragment key={'subname-invitation-' + index}>
+                      <SubnameInvitationItem
+                        subname={inv}
+                        onInvitationChange={refetchInvitations}
+                      />
+                    </Fragment>
+                  ))}
                   {!isPrimaryNameLoading && primarySubname &&
                     <SelectSubnameItem
                       selectedSubname={subnameSigningIn}
