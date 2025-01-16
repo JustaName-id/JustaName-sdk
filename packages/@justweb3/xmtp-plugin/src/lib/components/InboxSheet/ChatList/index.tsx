@@ -1,12 +1,12 @@
+import { PrimaryNameRecord } from '@justaname.id/react';
 import { Flex } from '@justweb3/ui';
 import {
   CachedConversation,
   CachedMessage,
-  ContentTypeMetadata,
+  ContentTypeMetadata
 } from '@xmtp/react-sdk';
 import React from 'react';
 import { MessageItem } from './MessageItem';
-import { PrimaryNameRecord } from '@justaname.id/react';
 
 export interface ChatListProps {
   conversations: CachedConversation<ContentTypeMetadata>[];

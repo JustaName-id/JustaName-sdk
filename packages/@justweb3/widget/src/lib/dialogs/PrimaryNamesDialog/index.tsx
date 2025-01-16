@@ -172,6 +172,7 @@ export const PrimaryNamesDialog: FC<PrimaryNamesDialogProps> = ({
                 style={{
                   width: '100%',
                 }}
+                key={subname.ens}
                 right={
                   <Button disabled={isSetPrimaryNamePending} onClick={() => setPrimaryName({
                     name: subname.ens,
