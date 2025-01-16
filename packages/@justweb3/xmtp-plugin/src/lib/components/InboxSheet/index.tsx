@@ -1,3 +1,4 @@
+import { useMountedAccount, usePrimaryNameBatch } from '@justaname.id/react';
 import {
   AddIcon,
   Flex,
@@ -20,12 +21,11 @@ import {
   useConversations,
   useStreamAllMessages,
   useStreamConsentList,
-  useStreamConversations,
+  useStreamConversations
 } from '@xmtp/react-sdk';
+import { isEqual } from 'lodash';
 import React, { useEffect, useMemo } from 'react';
 import { ChatList } from './ChatList';
-import { useMountedAccount, usePrimaryNameBatch } from '@justaname.id/react';
-import { isEqual } from 'lodash';
 
 export interface InboxSheetProps {
   open?: boolean;
@@ -68,16 +68,28 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
   const [tab, setTab] = React.useState('Chats');
   const { conversations: cachedConversations, isLoading } = useConversations();
   const { address } = useMountedAccount();
+  const [initialConversations, setInitialConversations] = React.useState<
+    Conversation[] | null
+  >(null);
   const conversations = useMemo(() => {
-    return cachedConversations.filter((convo) => convo.peerAddress !== address);
-  }, [cachedConversations, address]);
+    if (!cachedConversations || initialConversations === null) return [];
+    const filtered = cachedConversations.filter(
+      (convo) => convo.peerAddress !== address
+    );
+    const result = filtered.filter((conv) => {
+      return initialConversations.some(
+        (initConv) =>
+          initConv.peerAddress === conv.peerAddress &&
+          initConv.topic === conv.topic
+      );
+    });
+    return result;
+  }, [cachedConversations, address, initialConversations]);
+
   const [isConsentListLoading, setIsConsentListLoading] = React.useState(true);
   const { entries, loadConsentList } = useConsent();
   const { client } = useClient();
 
-  const [initialConversations, setInitialConversations] = React.useState<
-    Conversation[] | null
-  >(null);
   useEffect(() => {
     if (!client || initialConversations !== null) return;
 
