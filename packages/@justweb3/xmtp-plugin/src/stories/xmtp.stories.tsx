@@ -1,4 +1,5 @@
 import {
+  JustEnsCard,
   JustWeb3Button,
   JustWeb3Provider,
   JustWeb3ProviderConfig,
@@ -93,30 +94,30 @@ export const Example = () => {
               </div>
 
               {/*<div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>*/}
-              {/*  <JustEnsCard addressOrEns={'mely.eth'} />*/}
-              {/*  <JustEnsCard addressOrEns={'nick.eth'} />*/}
-              {/*  <JustEnsCard addressOrEns={'brantly.eth'} />*/}
-              {/*  <JustEnsCard addressOrEns={'vitalik.eth'} />*/}
+              <JustEnsCard addressOrEns={'blockchain.com'} />
+              <JustEnsCard addressOrEns={'nick.eth'} />
+              <JustEnsCard addressOrEns={'brantly.eth'} />
+              <JustEnsCard addressOrEns={'vitalik.eth'} />
               {/*  <JustEnsCard addressOrEns={'dr3a.eth'} />*/}
               {/*  <JustEnsCard addressOrEns={'josh.box'} />*/}
-              {/*  <JustEnsCard addressOrEns={'justghadi.eth'} />*/}
-              {/*  <JustEnsCard addressOrEns={'justan.id'} />*/}
-              {/*  <JustEnsCard addressOrEns={'jesse.base.eth'} />*/}
+              <JustEnsCard addressOrEns={'justghadi.eth'} />
+              <JustEnsCard addressOrEns={'justan.id'} />
+              <JustEnsCard addressOrEns={'jesse.base.eth'} />
               {/*  <JustEnsCard addressOrEns={'dave.base.eth'} />*/}
               {/*  <JustEnsCard addressOrEns={'xhris.eth'} />*/}
-              {/*  <JustEnsCard addressOrEns={'raffy.eth'} />*/}
-              {/*  <JustEnsCard addressOrEns={'slobo.eth'} />*/}
+              <JustEnsCard addressOrEns={'raffy.eth'} />
+              <JustEnsCard addressOrEns={'slobo.eth'} />
               {/*  <JustEnsCard addressOrEns={'obi-wan.eth'} />*/}
-              {/*  <JustEnsCard addressOrEns={'threadgirl.eth'} />*/}
+              <JustEnsCard addressOrEns={'threadgirl.eth'} />
               {/*  <JustEnsCard addressOrEns={'bianc8.eth'} />*/}
               {/*  <JustEnsCard*/}
               {/*    addressOrEns={'justanthony.jaw.eth'}*/}
               {/*    chainId={11155111}*/}
               {/*  />*/}
-              {/*  <JustEnsCard*/}
-              {/*    addressOrEns={'0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1'}*/}
-              {/*    chainId={1}*/}
-              {/*  />*/}
+              <JustEnsCard
+                addressOrEns={'0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1'}
+                chainId={1}
+              />
               {/*  <JustEnsCard*/}
               {/*    addressOrEns={'hadikhai.jaw.eth'}*/}
               {/*    chainId={11155111}*/}
