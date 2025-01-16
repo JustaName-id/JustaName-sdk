@@ -2,6 +2,7 @@ import { Switch } from '../../../../ui/switch';
 import { useContext } from 'react';
 import { JustWeb3Context } from '@justweb3/widget';
 import { POAPPlugin } from '@justweb3/poap-plugin';
+import { getAnalyticsClient } from '../../../../../analytics';
 
 export const POAP = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
@@ -18,6 +19,7 @@ export const POAP = () => {
           POAPPluginInstance,
         ],
       });
+      getAnalyticsClient().track('POAP_ENABLED', {});
     } else {
       handleJustWeb3Config({
         ...config,
@@ -25,6 +27,7 @@ export const POAP = () => {
           (plugin) => plugin.name !== POAPPluginInstance.name
         ),
       });
+      getAnalyticsClient().track('POAP_DISABLED', {});
     }
   };
 

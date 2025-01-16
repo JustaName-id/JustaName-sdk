@@ -1,9 +1,11 @@
 import {
   ArrowIcon,
   Avatar,
+  Badge,
   ClickableItem,
   Flex,
   LoadingSpinner,
+  P,
 } from '@justweb3/ui';
 import React, { useMemo } from 'react';
 import { Records, useEnsAvatar } from '@justaname.id/react';
@@ -12,12 +14,14 @@ export interface SelectSubnameItemProps {
   subname: Records;
   selectedSubname: string;
   onClick: () => void;
+  isPrimary?: boolean;
 }
 
 export const SelectSubnameItem: React.FC<SelectSubnameItemProps> = ({
   subname,
   selectedSubname,
   onClick,
+  isPrimary,
 }) => {
   const [hover, setHover] = React.useState(false);
   const { avatar } = useEnsAvatar({
@@ -47,7 +51,15 @@ export const SelectSubnameItem: React.FC<SelectSubnameItemProps> = ({
           >
             <ArrowIcon />
           </div>
-
+          {isPrimary && (
+            <Badge withCopy={false}>
+              <P style={{
+                fontWeight: 900,
+                fontSize: 10,
+                color: 'var(--justweb3-primary-color)',
+              }}>Primary</P>
+            </Badge>
+          )}
           <div
             style={{
               display: 'flex',

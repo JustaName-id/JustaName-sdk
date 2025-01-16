@@ -1,10 +1,22 @@
-import { FC, ReactNode, useContext, useMemo, useState } from 'react';
-import { JustWeb3Context, useJustWeb3 } from '../../providers';
+import {
+  Records,
+  useAccountEnsNames,
+  useAccountSubnames,
+  useCanEnableMApps,
+  useEnabledMApps,
+  useEnsAvatar,
+  useMountedAccount,
+  useOffchainResolvers,
+  useRecords
+} from '@justaname.id/react';
 import {
   ArrowIcon,
   Avatar,
+  BackBtn,
   Badge,
   ClickableItem,
+  ConfigurationIcon,
+  DnsIcon,
   Flex,
   formatText,
   LoadingSpinner,
@@ -14,23 +26,20 @@ import {
   Popover,
   PopoverTrigger,
   ProfileIcon,
+  SettingsIcon,
   SPAN,
 } from '@justweb3/ui';
-import {
-  useCanEnableMApps,
-  useEnabledMApps,
-  useEnsAvatar,
-  useMountedAccount,
-  useRecords,
-} from '@justaname.id/react';
+import { FC, ReactNode, useContext, useMemo, useState } from 'react';
 import { useDisconnect } from 'wagmi';
-import { BasePopoverContent } from '../DefaultPopover';
-import { PluginContext } from '../../providers/PluginProvider';
+import { ConfigurationDialog, PrimaryNamesDialog } from '../../dialogs';
+import { DefaultDialog } from '../../dialogs/DefaultDialog';
 import { MAppsDialog } from '../../dialogs/MAppsDialog';
 import { getChainIcon } from '../../icons/chain-icons';
 import { getTextRecordIcon } from '../../icons/records-icons';
+import { JustWeb3Context, useJustWeb3 } from '../../providers';
+import { PluginContext } from '../../providers/PluginProvider';
+import { BasePopoverContent } from '../DefaultPopover';
 import MetadataCard from '../MetadataCard';
-import { DefaultDialog } from '../../dialogs/DefaultDialog';
 import styles from './JustWeb3Button.module.css';
 
 export interface JustWeb3Buttonrops {
@@ -39,15 +48,21 @@ export interface JustWeb3Buttonrops {
   logout?: () => void;
 }
 
+const ENS_MAINNET_RESOLVER = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
+const ENS_SEPOLIA_RESOLVER = '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD';
+
 export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   children,
   logout,
   style,
 }) => {
   const [openMApps, setOpenMApps] = useState(false);
+  const [openSettings, setOpenSettings] = useState(false);
+  const [openPrimaryNames, setOpenPrimaryNames] = useState(false);
+  const [openConfiguration, setOpenConfiguration] = useState(false);
   const { plugins, mApps, config } = useContext(JustWeb3Context);
   const { createPluginApi } = useContext(PluginContext);
-  const { address, isConnected } = useMountedAccount();
+  const { address, isConnected, chainId } = useMountedAccount();
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
   const { disconnect } = useDisconnect();
   const {
@@ -60,6 +75,9 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const { canEnableMApps, isCanEnableMAppsPending } = useCanEnableMApps({
     ens: connectedEns?.ens || '',
   });
+
+  const { offchainResolvers } = useOffchainResolvers();
+
   const { enabledMApps } = useEnabledMApps({
     ens: connectedEns?.ens || '',
   });
@@ -74,6 +92,35 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const { avatar } = useEnsAvatar({
     ens: connectedEns?.ens,
   });
+  const { accountSubnames, isAccountSubnamesLoading } = useAccountSubnames();
+  const { accountEnsNames, isAccountEnsNamesLoading } = useAccountEnsNames();
+
+  const allNames = useMemo(() => {
+    return [...accountEnsNames, ...accountSubnames].reduce(
+      (acc, subname) => {
+        if (!acc.find((name) => name.ens === subname.ens)) {
+          return [...acc, subname];
+        }
+        return acc;
+      },
+      [] as Records[]
+    ).filter((name) => {
+      const resolverAddress =
+        chainId === 1 ? ENS_MAINNET_RESOLVER : ENS_SEPOLIA_RESOLVER;
+      const offchainResolver = offchainResolvers?.offchainResolvers.find(
+        (resolver) => resolver.chainId === chainId
+      );
+
+      return !(
+        name.records.resolverAddress !== resolverAddress &&
+        name.records.resolverAddress !== offchainResolver?.resolverAddress
+      );
+    })
+      .sort((a, b) => {
+        return a.ens.localeCompare(b.ens);
+      });
+  }, [accountEnsNames, accountSubnames]);
+
   const hasTwitterOrX = useMemo(() => {
     return records?.sanitizedRecords.socials.find(
       (social) => social.key === 'com.twitter' || social.key === 'com.x'
@@ -83,6 +130,24 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const handleOpenMAppsDialog = (open: boolean) => {
     if (open !== openMApps) {
       setOpenMApps(open);
+    }
+  };
+
+  const handleOpenPrimaryNamesDialog = (open: boolean) => {
+    if (open !== openPrimaryNames) {
+      setOpenPrimaryNames(open);
+    }
+  };
+
+  const handleOpenConfigurationDialog = (open: boolean) => {
+    if (open !== openConfiguration) {
+      setOpenConfiguration(open);
+    }
+  };
+
+  const handleOpenSettingsDialog = (open: boolean) => {
+    if (open !== openSettings) {
+      setOpenSettings(open);
     }
   };
 
@@ -293,90 +358,172 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           </Flex>
         </Flex>
       </Flex>
-      <Flex direction="column" gap={'10px'}>
-        <ClickableItem
-          left={
-            <ProfileIcon width={20} color={'var(--justweb3-primary-color)'} />
-          }
-          title={'Profile'}
-          style={{
-            width: '100%',
-          }}
-          onClick={() =>
-            openEnsProfile(connectedEns?.ens, connectedEns?.chainId)
-          }
-          right={
-            <ArrowIcon
-              width={20}
-              color={'var(--justweb3-foreground-color-2)'}
-            />
-          }
-        />
-        {plugins.map((plugin) => {
-          const component = plugin.components?.SignInMenu;
-          if (!component) {
-            return null;
-          }
-
-          return (
-            <div
-              key={'signin-item-' + plugin.name}
-              onClick={() => {
-                setMobileDialogOpen(false);
+      {openSettings ? (
+        <Flex direction="column" gap={'20px'}>
+          <Flex direction='row' gap={'10px'} align={'center'} style={{ marginTop: 9 }} >
+            <BackBtn onClick={() => setOpenSettings(false)} />
+            <P style={{
+              fontWeight: 500,
+              fontSize: 16,
+              lineHeight: '20px',
+            }}>Settings</P>
+          </Flex>
+          <Flex direction="column" gap={'10px'}>
+            <ClickableItem
+              left={
+                <DnsIcon width={20} color={'var(--justweb3-primary-color)'} />
+              }
+              title={'Set Primary'}
+              style={{
+                width: '100%',
               }}
-            >
-              {component(createPluginApi(plugin.name))}
-            </div>
-          );
-        })}
-
-        <ClickableItem
-          left={<MappIcon width={20} />}
-          title={'mApps'}
-          style={{
-            width: '100%',
-            display: 'none',
-          }}
-          onClick={() => setOpenMApps(true)}
-          right={
-            <Flex justify={'space-between'} align={'center'} gap={'5px'}>
-              {mAppsToEnable && canEnableMApps && mAppsToEnable.length > 0 && (
-                <SPAN
-                  style={{
-                    color: '#FEA801',
-                    fontSize: '10px',
-                    fontWeight: 900,
-                  }}
-                >
-                  Configuration Required
-                </SPAN>
-              )}
+              onClick={() => {
+                setOpenPrimaryNames(true);
+                setOpenSettings(false)
+              }}
+              right={
+                <Flex direction='row' gap='5px' align='center'>
+                  {!isAccountSubnamesLoading && !isAccountEnsNamesLoading && (
+                    <P style={{
+                      color: 'var(--justweb3-primary-color)',
+                      fontWeight: 900,
+                      fontSize: 12,
+                    }}>{allNames.length}</P>
+                  )}
+                  <ArrowIcon
+                    width={20}
+                    color={'var(--justweb3-foreground-color-2)'}
+                  />
+                </Flex>
+              }
+            />
+            <ClickableItem
+              left={
+                <ConfigurationIcon width={20} color={'var(--justweb3-primary-color)'} />
+              }
+              title={'Configuration'}
+              style={{
+                width: '100%',
+              }}
+              onClick={() => {
+                setOpenConfiguration(true);
+                setOpenSettings(false)
+              }}
+              right={
+                <ArrowIcon
+                  width={20}
+                  color={'var(--justweb3-foreground-color-2)'}
+                />
+              }
+            />
+          </Flex>
+        </Flex>
+      ) : (
+        <Flex direction="column" gap={'10px'}>
+          <ClickableItem
+            left={
+              <ProfileIcon width={20} color={'var(--justweb3-primary-color)'} />
+            }
+            title={'Profile'}
+            style={{
+              width: '100%',
+            }}
+            onClick={() =>
+              openEnsProfile(connectedEns?.ens, connectedEns?.chainId)
+            }
+            right={
               <ArrowIcon
                 width={20}
                 color={'var(--justweb3-foreground-color-2)'}
               />
-            </Flex>
-          }
-          disabled={!canEnableMApps}
-          loading={isCanEnableMAppsPending}
-        />
+            }
+          />
+          <ClickableItem
+            left={
+              <SettingsIcon width={20} color={'var(--justweb3-primary-color)'} />
+            }
+            title={'Settings'}
+            style={{
+              width: '100%',
+            }}
+            onClick={() =>
+              handleOpenSettingsDialog(true)
+            }
+            right={
+              <ArrowIcon
+                width={20}
+                color={'var(--justweb3-foreground-color-2)'}
+              />
+            }
+          />
+          {plugins.map((plugin) => {
+            const component = plugin.components?.SignInMenu;
+            if (!component) {
+              return null;
+            }
 
-        <ClickableItem
-          style={{
-            width: '100%',
-          }}
-          left={<LogoutIcon width={20} />}
-          title={'Sign Out'}
-          onClick={signOut}
-          right={<ArrowIcon width={20} />}
-        />
-      </Flex>
+            return (
+              <div
+                key={'signin-item-' + plugin.name}
+                onClick={() => {
+                  setMobileDialogOpen(false);
+                }}
+              >
+                {component(createPluginApi(plugin.name))}
+              </div>
+            );
+          })}
+
+          <ClickableItem
+            left={<MappIcon width={20} />}
+            title={'mApps'}
+            style={{
+              width: '100%',
+              display: 'none',
+            }}
+            onClick={() => setOpenMApps(true)}
+            right={
+              <Flex justify={'space-between'} align={'center'} gap={'5px'}>
+                {mAppsToEnable && canEnableMApps && mAppsToEnable.length > 0 && (
+                  <SPAN
+                    style={{
+                      color: '#FEA801',
+                      fontSize: '10px',
+                      fontWeight: 900,
+                    }}
+                  >
+                    Configuration Required
+                  </SPAN>
+                )}
+                <ArrowIcon
+                  width={20}
+                  color={'var(--justweb3-foreground-color-2)'}
+                />
+              </Flex>
+            }
+            disabled={!canEnableMApps}
+            loading={isCanEnableMAppsPending}
+          />
+
+          <ClickableItem
+            style={{
+              width: '100%',
+            }}
+            left={<LogoutIcon width={20} />}
+            title={'Sign Out'}
+            onClick={signOut}
+            right={<ArrowIcon width={20} />}
+          />
+        </Flex>
+      )}
     </Flex>
   );
 
   return (
     <>
       <MAppsDialog open={openMApps} handleOpenDialog={handleOpenMAppsDialog} />
+      <PrimaryNamesDialog logout={logout} open={openPrimaryNames} handleOpenDialog={handleOpenPrimaryNamesDialog} />
+      <ConfigurationDialog logout={logout} open={openConfiguration} handleOpenDialog={handleOpenConfigurationDialog} />
       <div className={styles.desktopSection}>
         <Popover>
           <PopoverTrigger>{connectedEnsBtn(false)}</PopoverTrigger>

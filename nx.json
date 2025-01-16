@@ -169,7 +169,8 @@
       "packages/@justweb3/efp-plugin",
       "packages/@justweb3/poap-plugin",
       "packages/@justweb3/talent-protocol-plugin",
-      "packages/@justweb3/xmtp-plugin"
+      "packages/@justweb3/xmtp-plugin",
+      "packages/siwens"
     ]
   },
   "defaultBase": "main"

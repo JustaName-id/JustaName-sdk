@@ -17,9 +17,10 @@ import {
   SubnameRevokeRoute,
   SubnameSearchRoute,
   SubnameUpdateRoute,
+  PrimaryNameGetByAddressRoute,
+  SetPrimaryNameRoute,
 } from '../../types';
 import { sanitizeAddresses, sanitizeTexts } from '../../utils';
-import { PrimaryNameGetByAddressRoute } from '../../types/primary-name';
 import { InvalidConfigurationException } from '../../errors';
 
 export interface SubnamesConfig {
@@ -496,6 +497,31 @@ export class Subnames {
       undefined,
       this.dev
     )(['providerUrl']);
+  }
+
+  async setPrimaryName(
+    params: SetPrimaryNameRoute['params'],
+    headers: SetPrimaryNameRoute['headers']
+  ): Promise<SetPrimaryNameRoute['response']> {
+    const { chainId, signature: paramSignature, ...rest } = params;
+    const _chainId = chainId || this.chainId;
+
+    const { signature, xSignature } = this.checkSignature(
+      paramSignature,
+      headers.xSignature
+    );
+
+    return assertRestCall(
+      'SET_PRIMARY_NAME_ROUTE',
+      'POST',
+      {
+        chainId: _chainId,
+        signature,
+        ...rest,
+      },
+      { ...headers, xSignature },
+      this.dev
+    )(['chainId'], ['xMessage', 'xAddress']);
   }
 
   async getPrimaryNameByAddress(
