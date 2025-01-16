@@ -1,10 +1,10 @@
-import { Records, useAcceptSubname, useEnsAvatar, useRejectSubname } from '@justaname.id/react';
 import {
-  Avatar,
-  Button,
-  ClickableItem,
-  Flex
-} from '@justweb3/ui';
+  Records,
+  useAcceptSubname,
+  useEnsAvatar,
+  useRejectSubname,
+} from '@justaname.id/react';
+import { Avatar, Button, ClickableItem, Flex } from '@justweb3/ui';
 import React from 'react';
 
 export interface SubnameInvitationItemProps {
@@ -27,15 +27,18 @@ export const SubnameInvitationItem: React.FC<SubnameInvitationItemProps> = ({
       style={{
         width: '100%',
       }}
+      clickable={false}
       left={<Avatar src={avatar} initial={subname.ens[0]} />}
       right={
-        <Flex direction='row' gap='10px' align='center'>
+        <Flex direction="row" gap="10px" align="center">
           <Button
             type="button"
             variant="primary"
-            onClick={() => acceptSubname({
-              ens: subname.ens,
-            }).then(onInvitationChange)}
+            onClick={() =>
+              acceptSubname({
+                ens: subname.ens,
+              }).then(onInvitationChange)
+            }
             style={{ flexGrow: '0.5' }}
             disabled={isAcceptSubnamePending || isRejectSubnamePending}
           >
@@ -44,9 +47,11 @@ export const SubnameInvitationItem: React.FC<SubnameInvitationItemProps> = ({
           <Button
             type="button"
             variant="secondary"
-            onClick={() => rejectSubname({
-              ens: subname.ens,
-            }).then(onInvitationChange)}
+            onClick={() =>
+              rejectSubname({
+                ens: subname.ens,
+              }).then(onInvitationChange)
+            }
             style={{ flexGrow: '0.5' }}
             disabled={isAcceptSubnamePending || isRejectSubnamePending}
           >
