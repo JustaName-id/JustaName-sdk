@@ -1,3 +1,7 @@
+## 0.1.62 (2025-01-16)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
 ## 0.1.61 (2024-12-22)
 
 This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.

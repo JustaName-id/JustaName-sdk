@@ -4751,12 +4751,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.165, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.166, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
     "@ensdomains/ensjs": "npm:4.0.2"
-    "@justaname.id/sdk": "npm:0.2.162"
+    "@justaname.id/sdk": "npm:0.2.163"
     axios: "npm:^1.6.0"
     jest: "npm:^29.4.1"
     qs: "npm:^6.12.0"
@@ -4769,11 +4769,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justaname.id/sdk@npm:0.2.162, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.2.163, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
-    "@justaname.id/siwens": "npm:0.0.95"
+    "@justaname.id/siwens": "npm:0.0.96"
     axios: "npm:^1.6.0"
     jest: "npm:^29.4.1"
     qs: "npm:^6.12.0"
@@ -4784,7 +4784,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justaname.id/siwens@npm:0.0.95, @justaname.id/siwens@workspace:packages/@justaname.id/siwens":
+"@justaname.id/siwens@npm:0.0.96, @justaname.id/siwens@workspace:packages/@justaname.id/siwens":
   version: 0.0.0-use.local
   resolution: "@justaname.id/siwens@workspace:packages/@justaname.id/siwens"
   peerDependencies:
@@ -4844,7 +4844,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justweb3/ui@npm:^0.0.101, @justweb3/ui@workspace:packages/@justweb3/ui":
+"@justweb3/ui@npm:^0.0.102, @justweb3/ui@workspace:packages/@justweb3/ui":
   version: 0.0.0-use.local
   resolution: "@justweb3/ui@workspace:packages/@justweb3/ui"
   dependencies:
@@ -4872,9 +4872,9 @@ __metadata:
   dependencies:
     "@ensdomains/address-encoder": "npm:^1.1.2"
     "@hookform/resolvers": "npm:^3.9.0"
-    "@justaname.id/react": "npm:0.3.165"
-    "@justaname.id/sdk": "npm:0.2.162"
-    "@justweb3/ui": "npm:^0.0.101"
+    "@justaname.id/react": "npm:0.3.166"
+    "@justaname.id/sdk": "npm:0.2.163"
+    "@justweb3/ui": "npm:^0.0.102"
     clsx: "npm:1.2.1"
     cropperjs: "npm:^1.6.2"
     lodash: "npm:4.17.21"
@@ -18111,6 +18111,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js@npm:^3.38.1":
+  version: 3.40.0
+  resolution: "core-js@npm:3.40.0"
+  checksum: 10c0/db7946ada881e845d8b157061945b1187618fa45cf162f392a151e8a497962aed2da688c982eaa1d444c864be97a70f8be4d73385294b515d224dd164d19f1d4
+  languageName: node
+  linkType: hard
+
 "core-util-is@npm:1.0.2":
   version: 1.0.2
   resolution: "core-util-is@npm:1.0.2"
@@ -22251,7 +22258,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fflate@npm:^0.4.4":
+"fflate@npm:^0.4.4, fflate@npm:^0.4.8":
   version: 0.4.8
   resolution: "fflate@npm:0.4.8"
   checksum: 10c0/29d1eddaaa5deab61b1c6b0d21282adacadbc4d2c01e94d8b1ee784398151673b9c563e53f97a801bc410a1ae55e8de5378114a743430e643e7a0644ba8e5a42
@@ -27495,6 +27502,7 @@ __metadata:
     pino-pretty: "npm:^11.0.0"
     postcss: "npm:8.4.38"
     postcss-import: "npm:^16.1.0"
+    posthog-js: "npm:^1.187.2"
     prettier: "npm:^2.6.2"
     prism-react-renderer: "npm:^2.4.0"
     punycode: "npm:^2.3.1"
@@ -33109,10 +33117,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"posthog-js@npm:^1.187.2":
+  version: 1.206.1
+  resolution: "posthog-js@npm:1.206.1"
+  dependencies:
+    core-js: "npm:^3.38.1"
+    fflate: "npm:^0.4.8"
+    preact: "npm:^10.19.3"
+    web-vitals: "npm:^4.2.0"
+  checksum: 10c0/df46fbc25448a37882c414cb2805de667ccb50d39e827a82e81f5f1d05dd240d5148ee441b2f1e40ad2c6100089199acc2b0389cf642409950907f3a38b36b0a
+  languageName: node
+  linkType: hard
+
 "preact@npm:^10.16.0":
   version: 10.24.3
   resolution: "preact@npm:10.24.3"
   checksum: 10c0/c863df6d7be6a660480189762d8a8f2d4148733fc2bb9efbd9d2fd27315d2c7ede850a16077d716c91666c915c0349bd3c9699733e4f08457226a0519f408761
+  languageName: node
+  linkType: hard
+
+"preact@npm:^10.19.3":
+  version: 10.25.4
+  resolution: "preact@npm:10.25.4"
+  checksum: 10c0/33a009d614d2b47df1c867935fe057c1dfd2bae1aaab41d6e981434b761f75b88e82eac7847ae486b4dbcffc74af814b8dc59ccef17b10625e3effefa2e1ef67
   languageName: node
   linkType: hard
 
@@ -39988,6 +40015,13 @@ __metadata:
   dependencies:
     defaults: "npm:^1.0.3"
   checksum: 10c0/5b61ca583a95e2dd85d7078400190efd452e05751a64accb8c06ce4db65d7e0b0cde9917d705e826a2e05cc2548f61efde115ffa374c3e436d04be45c889e5b4
+  languageName: node
+  linkType: hard
+
+"web-vitals@npm:^4.2.0":
+  version: 4.2.4
+  resolution: "web-vitals@npm:4.2.4"
+  checksum: 10c0/383c9281d5b556bcd190fde3c823aeb005bb8cf82e62c75b47beb411014a4ed13fa5c5e0489ed0f1b8d501cd66b0bebcb8624c1a75750bd5df13e2a3b1b2d194
   languageName: node
   linkType: hard
 
