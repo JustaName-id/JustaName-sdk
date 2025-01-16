@@ -89,7 +89,7 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
   const { sanitizeEnsImage } = useEnsAvatar();
 
   const handleEnsClick = () => {
-    if (!isEns && !primaryName) {
+    if ((!isEns && !primaryName) || !records || !records?.sanitizedRecords) {
       return;
     }
     openEnsProfile(ens, chainId);
@@ -242,7 +242,11 @@ export const JustEnsCard: FC<JustEnsCardProps> = ({
           />
         )
       }
-      disabled={!isEns && !primaryName}
+      disabled={
+        (!isEns && !primaryName) ||
+        !records ||
+        !records?.sanitizedRecords?.ethAddress
+      }
       onClick={(event) => {
         handleEnsClick();
         event.stopPropagation();

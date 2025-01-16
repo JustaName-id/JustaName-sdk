@@ -14,7 +14,7 @@ import {
   Subnames,
 } from '../features';
 import { InvalidConfigurationException } from '../errors/InvalidConfiguration.exception';
-import { providerUrlChainIdLoadingMap, providerUrlChainIdMap } from '../memory';
+// import { providerUrlChainIdLoadingMap, providerUrlChainIdMap } from '../memory';
 import { getJsonRpcProvider } from '../utils/ethersCompat';
 
 /**
@@ -223,53 +223,54 @@ export class JustaName {
   }
 
   private static checkConfig(configuration: JustaNameConfigDefaults): void {
-    this.checkNetworks(configuration.networks);
+    // To be optimized for serverless and re added later
+    // this.checkNetworks(configuration.networks);
   }
 
-  private static checkNetworks(networks: Networks): void {
-    if (networks && networks.length > 0) {
-      networks.reduce((acc, network) => {
-        if (acc.includes(network.chainId)) {
-          throw new InvalidConfigurationException('The chainId is duplicated');
-        }
-        return [...acc, network.chainId];
-      }, [] as ChainId[]);
-
-      networks.forEach((network) => {
-        if (providerUrlChainIdLoadingMap.has(network.providerUrl)) {
-          if (providerUrlChainIdLoadingMap.get(network.providerUrl)) {
-            return;
-          }
-        }
-
-        providerUrlChainIdLoadingMap.set(network.providerUrl, true);
-
-        if (providerUrlChainIdMap.has(network.providerUrl)) {
-          if (
-            providerUrlChainIdMap.get(network.providerUrl) !== network.chainId
-          ) {
-            throw new InvalidConfigurationException(
-              'The chainId does not match the chainId of the providerUrl'
-            );
-          } else {
-            return;
-          }
-        }
-
-        const provider = getJsonRpcProvider(network.providerUrl);
-        provider.getNetwork().then((_network) => {
-          if (network.chainId.toString() !== _network.chainId.toString()) {
-            throw new InvalidConfigurationException(
-              'The chainId does not match the chainId of the providerUrl'
-            );
-          }
-
-          providerUrlChainIdMap.set(
-            network.providerUrl,
-            parseInt(_network.chainId.toString())
-          );
-        });
-      });
-    }
-  }
+  // private static checkNetworks(networks: Networks): void {
+  //   if (networks && networks.length > 0) {
+  //     networks.reduce((acc, network) => {
+  //       if (acc.includes(network.chainId)) {
+  //         throw new InvalidConfigurationException('The chainId is duplicated');
+  //       }
+  //       return [...acc, network.chainId];
+  //     }, [] as ChainId[]);
+  //
+  //     networks.forEach((network) => {
+  //       if (providerUrlChainIdLoadingMap.has(network.providerUrl)) {
+  //         if (providerUrlChainIdLoadingMap.get(network.providerUrl)) {
+  //           return;
+  //         }
+  //       }
+  //
+  //       providerUrlChainIdLoadingMap.set(network.providerUrl, true);
+  //
+  //       if (providerUrlChainIdMap.has(network.providerUrl)) {
+  //         if (
+  //           providerUrlChainIdMap.get(network.providerUrl) !== network.chainId
+  //         ) {
+  //           throw new InvalidConfigurationException(
+  //             'The chainId does not match the chainId of the providerUrl'
+  //           );
+  //         } else {
+  //           return;
+  //         }
+  //       }
+  //
+  //       const provider = getJsonRpcProvider(network.providerUrl);
+  //       provider.getNetwork().then((_network) => {
+  //         if (network.chainId.toString() !== _network.chainId.toString()) {
+  //           throw new InvalidConfigurationException(
+  //             'The chainId does not match the chainId of the providerUrl'
+  //           );
+  //         }
+  //
+  //         providerUrlChainIdMap.set(
+  //           network.providerUrl,
+  //           parseInt(_network.chainId.toString())
+  //         );
+  //       });
+  //     });
+  //   }
+  // }
 }

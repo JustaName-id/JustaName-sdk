@@ -83,17 +83,19 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   const { isConnected, address } = useMountedAccount();
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
   const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
-  const { invitations, isInvitationsPending, refetchInvitations } = useAccountInvitations({
-    chainId,
-    enabled: !!chainId && !!address,
-  });
+  const { invitations, isInvitationsPending, refetchInvitations } =
+    useAccountInvitations({
+      chainId,
+      enabled: !!chainId && !!address,
+    });
 
-  const { primaryName, isPrimaryNameLoading, refetchPrimaryName } = usePrimaryName({
-    address,
-    chainId,
-    enabled: !!address && !!chainId,
-    priority: 'onChain'
-  })
+  const { primaryName, isPrimaryNameLoading, refetchPrimaryName } =
+    usePrimaryName({
+      address,
+      chainId,
+      enabled: !!address && !!chainId,
+      priority: 'onChain',
+    });
 
   const [username, setUsername] = useState('');
   const { debouncedValue: debouncedUsername, isDebouncing } = useDebounce(
@@ -240,16 +242,16 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   ]);
 
   const primarySubname = useMemo(() => {
-    return subnames.find((subname) => subname.ens === primaryName)
-  }, [subnames, primaryName,])
+    return subnames.find((subname) => subname.ens === primaryName);
+  }, [subnames, primaryName]);
 
   const filteredSubnames = useMemo(() => {
-    return subnames.filter((subname) => subname.ens !== primaryName)
-  }, [subnames, primaryName])
+    return subnames.filter((subname) => subname.ens !== primaryName);
+  }, [subnames, primaryName]);
 
   const shouldBeAbleToSelect = useMemo(() => {
-    return subnames.length > 0;
-  }, [subnames]);
+    return subnames.length > 0 || invitations.length > 0;
+  }, [invitations.length, subnames.length]);
 
   const shouldBeAbleToClaim = useMemo(() => {
     return !subnames.find((subname) => subname.ens.endsWith(claimableEns));
@@ -292,9 +294,9 @@ export const SignInDialog: FC<SignInDialogProps> = ({
           </SPAN>
         </Badge>
         {isAccountSubnamesPending ||
-          isInvitationsPending ||
-          isAccountEnsNamesPending ||
-          isOffchainResolversPending ? (
+        isInvitationsPending ||
+        isAccountEnsNamesPending ||
+        isOffchainResolversPending ? (
           <div className={styles.loadingContainer}>
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
           </div>
@@ -311,15 +313,16 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                   gap="15px"
                   className={clsx(styles.contentWrapper)}
                 >
-                  {invitations.length > 0 && invitations.map((inv, index) => (
-                    <Fragment key={'subname-invitation-' + index}>
-                      <SubnameInvitationItem
-                        subname={inv}
-                        onInvitationChange={refetchInvitations}
-                      />
-                    </Fragment>
-                  ))}
-                  {!isPrimaryNameLoading && primarySubname &&
+                  {invitations.length > 0 &&
+                    invitations.map((inv, index) => (
+                      <Fragment key={'subname-invitation-' + index}>
+                        <SubnameInvitationItem
+                          subname={inv}
+                          onInvitationChange={refetchInvitations}
+                        />
+                      </Fragment>
+                    ))}
+                  {!isPrimaryNameLoading && primarySubname && (
                     <SelectSubnameItem
                       selectedSubname={subnameSigningIn}
                       subname={primarySubname}
@@ -333,7 +336,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                       }}
                       isPrimary={true}
                     />
-                  }
+                  )}
                   {filteredSubnames.map((subname, index) => (
                     <Fragment key={'subname-' + index}>
                       <SelectSubnameItem
