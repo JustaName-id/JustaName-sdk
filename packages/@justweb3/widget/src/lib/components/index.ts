@@ -1,4 +1,5 @@
 export * from './SelectSubnameItem';
+export * from './SubnameInvitationItem';
 export * from './Loading';
 export * from './JustaNameFooter';
 export * from './UpdateRecordItem';
