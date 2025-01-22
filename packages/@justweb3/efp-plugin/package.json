@@ -1,6 +1,6 @@
 {
   "name": "@justweb3/efp-plugin",
-  "version": "0.1.64",
+  "version": "0.1.65",
   "dependencies": {
     "axios": "^1.6.0"
   },
