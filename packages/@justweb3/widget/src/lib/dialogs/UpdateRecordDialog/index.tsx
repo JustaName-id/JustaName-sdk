@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useMemo, useState } from 'react';
 import {
   useRecords,
   UseSubnameUpdateFunctionParams,
@@ -18,6 +18,7 @@ import {
 import { DefaultDialog } from '../DefaultDialog';
 import { Loading } from '../../components/Loading';
 import { UpdateRecordItem } from '../../components/UpdateRecordItem';
+import usePreviousState from '../../hooks/usePreviousState';
 
 export interface UpdateRecordDialogProps
   extends Omit<UseSubnameUpdateFunctionParams, 'ens'> {
@@ -41,17 +42,27 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
   const [text, setText] = useState(initialText);
   const [addresses, setAddresses] = useState(initialAddresses);
   const [contentHash, setContentHash] = useState(initialContentHash);
-  const { records, isRecordsPending } = useRecords({
+  const { records, isRecordsLoading } = useRecords({
     ens: ens,
   });
 
-  const { changes, isUpdateChangesPending } = useUpdateChanges({
+  const [isInitialPending, setIsInitialPending] = useState(true);
+  const { changes: newChanges, isUpdateChangesPending } = useUpdateChanges({
     ens: ens || '',
     text,
     addresses,
     contentHash: contentHash,
   });
 
+  const previousState = usePreviousState(newChanges, [newChanges]);
+
+  const changes = useMemo(() => {
+    if (newChanges) {
+      return newChanges;
+    }
+
+    return previousState;
+  }, [newChanges, previousState]);
   const { updateSubname, isUpdateSubnamePending } = useUpdateSubname();
 
   useEffect(() => {
@@ -59,6 +70,16 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
     setAddresses(initialAddresses);
     setContentHash(initialContentHash);
   }, [initialText, initialAddresses, initialContentHash]);
+
+  useEffect(() => {
+    if (!isUpdateChangesPending) {
+      setIsInitialPending(false);
+    }
+
+    return () => {
+      setIsInitialPending(true);
+    };
+  }, [isUpdateChangesPending]);
 
   return (
     <DefaultDialog
@@ -92,8 +113,8 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
       onOpenChange={(_open) => handleOpen(_open)}
       disableOverlay={disableOverlay}
     >
-      {isUpdateChangesPending || isRecordsPending ? (
-        <div style={{ height: '200px', position: 'relative' }}>
+      {isRecordsLoading || isInitialPending ? (
+        <div style={{ height: '393px', position: 'relative' }}>
           <Loading />
         </div>
       ) : (
@@ -152,7 +173,8 @@ export const UpdateRecordDialog: FC<UpdateRecordDialogProps> = ({
                               if (Array.isArray(prevState)) {
                                 return prevState.filter(
                                   (address) =>
-                                    address.address !== change.address
+                                    address.coinType !==
+                                    change.coinType.toString()
                                 );
                               } else {
                                 return {

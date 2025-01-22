@@ -46,7 +46,6 @@ const Privy = () => {
             login();
           } else {
             logout().then(() => {
-              console.log('Logged out');
               login();
             });
           }
