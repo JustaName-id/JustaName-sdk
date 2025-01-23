@@ -1,3 +1,22 @@
+## 0.0.105 (2025-01-22)
+
+
+### 🩹 Fixes
+
+- addresses in update dialog ([74b4738](https://github.com/JustaName-id/JustaName-sdk/commit/74b4738))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.169
+- Updated @justaname.id/sdk to 0.2.166
+- Updated @justweb3/ui to 0.0.105
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.104 (2025-01-16)
 
 
