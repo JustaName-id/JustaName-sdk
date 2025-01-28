@@ -9,7 +9,8 @@ import { ChainId } from '@justaname.id/sdk';
 export const JustVerifiedPlugin = (
   credentials: Credentials[],
   verificationBackendUrl = 'https://api.justaname.id/verifications/v1',
-  mApp = 'justverified.eth'
+  mApp = 'justverified.eth',
+  openOnSignIn = false,
 ): JustaPlugin => ({
   name: 'JustVerifiedPlugin',
   components: {
@@ -94,7 +95,9 @@ export const JustVerifiedPlugin = (
         return;
       }
 
-      pluginApi.setState('verificationOpen', true);
+      if (openOnSignIn) {
+        pluginApi.setState('verificationOpen', true);
+      }
     },
     onEnsSignOut: (pluginApi, ens) => {
       pluginApi.setState('verificationOpen', false);
