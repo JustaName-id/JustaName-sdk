@@ -1,15 +1,16 @@
-import { Input } from '../../../ui/input';
-import { ClaimSection } from '../ClaimSection';
-import { SignSection } from '../SignSection';
-import { JustWeb3Context, useDebounce } from '@justweb3/widget';
-import { ColorSelector } from '../ColorSelector';
-import { useContext, useEffect, useState } from 'react';
-import { useJustWeb3Theme } from '@justweb3/ui';
-import { Switch } from '../../../ui/switch';
-import { useSwitchChain } from 'wagmi';
 import { useMountedAccount } from '@justaname.id/react';
-import { PluginsSection } from '../PluginsSection';
+import { useJustWeb3Theme } from '@justweb3/ui';
+import { JustWeb3Context, useDebounce } from '@justweb3/widget';
+import { useContext, useEffect, useState } from 'react';
+import { useSwitchChain } from 'wagmi';
 import { getAnalyticsClient } from '../../../../analytics';
+import { showToast } from '../../../toast';
+import { Input } from '../../../ui/input';
+import { Switch } from '../../../ui/switch';
+import { ClaimSection } from '../ClaimSection';
+import { ColorSelector } from '../ColorSelector';
+import { PluginsSection } from '../PluginsSection';
+import { SignSection } from '../SignSection';
 
 interface CustomizerProps {
   mobile?: boolean;
@@ -70,6 +71,7 @@ export const Customizer = ({ mobile }: CustomizerProps) => {
             onColorChange={(color: string) => {
               changeTheme('background', color);
               document.documentElement.style.setProperty('--background', color);
+              showToast('success', "Code updated!", "color")
             }}
           />
           <ColorSelector
@@ -82,6 +84,7 @@ export const Customizer = ({ mobile }: CustomizerProps) => {
                 '--rk-colors-accentColor',
                 color
               );
+              showToast('success', "Code updated!", "secondary color")
             }}
           />
         </div>
@@ -91,7 +94,10 @@ export const Customizer = ({ mobile }: CustomizerProps) => {
           </p>
           <Input
             value={logoUrl}
-            onChange={(e) => setLogoUrl(e.target.value)}
+            onChange={(e) => {
+              setLogoUrl(e.target.value)
+              showToast('success', "Code updated!", "logo")
+            }}
             placeholder="Logo URL"
             className="pointer-events-auto"
           />

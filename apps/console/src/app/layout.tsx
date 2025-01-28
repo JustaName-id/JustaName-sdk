@@ -1,3 +1,4 @@
+import { Toaster } from '../components/toast';
 import { Navbar } from '../layout/navbar';
 import './global.css';
 import { Providers } from './providers';
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <div className="w-screen  flex flex-col items-center justify-start h-screen">
+            <Toaster />
             <Navbar />
             {children}
           </div>

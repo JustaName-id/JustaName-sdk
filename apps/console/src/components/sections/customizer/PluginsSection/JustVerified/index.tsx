@@ -17,6 +17,7 @@ import {
   AccordionTrigger,
 } from '../../../../ui/accordion';
 import { getAnalyticsClient } from '../../../../../analytics';
+import { showToast } from '../../../../toast';
 
 const socials: { logo: ReactNode; title: string; credential: Credentials }[] = [
   {
@@ -99,6 +100,7 @@ export const JustVerified = () => {
       default:
         break;
     }
+    showToast('success', "Code Updated!", `justverified-social-${credential}`)
   };
 
   useEffect(() => {
@@ -123,6 +125,7 @@ export const JustVerified = () => {
         }}
         onCheckedChange={(checked) => {
           handleJustVerifiedConfig(checked);
+          showToast('success', "Code updated!", "justverified")
         }}
         style={{
           position: 'absolute',
