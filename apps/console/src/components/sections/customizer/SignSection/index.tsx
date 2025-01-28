@@ -5,6 +5,7 @@ import { JustWeb3Context, JustWeb3ProviderConfig } from '@justweb3/widget';
 import { Input } from '../../../ui/input';
 import Image from 'next/image';
 import { getAnalyticsClient } from '../../../../analytics';
+import { showToast } from '../../../toast';
 
 export const SignSection = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
@@ -41,6 +42,7 @@ export const SignSection = () => {
             allowedEns:
               action === 'all' || action === 'claimable' ? action : ensList,
           });
+          showToast('success', "Code updated!", "sign-section")
         }}
       >
         <p className="text-base text-black font-bold leading-[125%] my-[5px]">
@@ -64,6 +66,7 @@ export const SignSection = () => {
                   });
                   setEnsList([...ensList, ensInput]);
                   setEnsInput('');
+                  showToast('success', "Code updated!", `sign-section-${ensInput}`)
                 }
               }}
               rightIcon={
@@ -130,6 +133,7 @@ export const SignSection = () => {
                   className="cursor-pointer"
                   onClick={() => {
                     setEnsList(ensList.filter((ensl) => ensl !== _ens));
+                    showToast('success', "Code updated!", "sign-section-removed")
                   }}
                 />
               </div>

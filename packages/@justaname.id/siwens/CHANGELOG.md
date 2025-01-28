@@ -1,3 +1,15 @@
+## 0.0.102 (2025-01-28)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.101 (2025-01-28)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.100 (2025-01-28)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
 ## 0.0.99 (2025-01-22)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.

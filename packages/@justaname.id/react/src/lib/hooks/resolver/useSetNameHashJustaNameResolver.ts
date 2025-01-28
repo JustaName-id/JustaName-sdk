@@ -12,6 +12,8 @@ import { useOffchainResolvers } from '../offchainResolver/useOffchainResolvers';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { getAddress, namehash } from '../../helpers/ethersCompat';
 
+const ZeroAddress = '0x0000000000000000000000000000000000000000';
+
 const REGISTRY_ADDRESS = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e';
 const SEPOLIA_REGISTRAR_ADDRESS = '0xA0a1AbcDAe1a2a4A2EF8e9113Ff0e02DD81DC0C6';
 const MAINNET_REGISTRAR_ADDRESS = '0xa58E81fe9b61B5c3fE2AFD33CF304c454AbFc7Cb';
@@ -138,8 +140,15 @@ export const useSetNameHashJustaNameResolver = <
     address: REGISTRY_ADDRESS,
     abi: recordExistsABI,
     functionName: 'recordExists',
-    args: [namehash(getAddress(address ?? '').substring(2) + '.addr.reverse')],
+    args: [
+      namehash(
+        getAddress(address ?? ZeroAddress).substring(2) + '.addr.reverse'
+      ),
+    ],
     chainId: chainId,
+    query: {
+      enabled: address && address !== ZeroAddress
+    }
   });
 
   const { data: setClaimWithResolverConfig } = useSimulateContract({
@@ -147,10 +156,10 @@ export const useSetNameHashJustaNameResolver = <
       chainId === 1 ? MAINNET_REGISTRAR_ADDRESS : SEPOLIA_REGISTRAR_ADDRESS,
     abi: setClaimWithResolverABI,
     functionName: 'claimWithResolver',
-    args: [getAddress(address ?? ''), currentResolver],
+    args: [getAddress(address ?? ZeroAddress), currentResolver],
     chainId: chainId,
     query: {
-      enabled: recordExistsStatus === 'success' && recordExistsConfig === false,
+      enabled: recordExistsStatus === 'success' && recordExistsConfig === false && address && address !== ZeroAddress,
     },
   });
 
@@ -162,10 +171,14 @@ export const useSetNameHashJustaNameResolver = <
     address: REGISTRY_ADDRESS,
     abi: getResolverABI,
     functionName: 'resolver',
-    args: [namehash(getAddress(address ?? '').substring(2) + '.addr.reverse')],
+    args: [
+      namehash(
+        getAddress(address ?? ZeroAddress).substring(2) + '.addr.reverse'
+      ),
+    ],
     chainId: chainId,
     query: {
-      enabled: recordExistsStatus === 'success' && recordExistsConfig === true,
+      enabled: recordExistsStatus === 'success' && recordExistsConfig === true && address && address !== ZeroAddress
     },
   });
 
@@ -174,7 +187,9 @@ export const useSetNameHashJustaNameResolver = <
     abi: setResolverABI,
     functionName: 'setResolver',
     args: [
-      namehash(getAddress(address ?? '').substring(2) + '.addr.reverse'),
+      namehash(
+        getAddress(address ?? ZeroAddress).substring(2) + '.addr.reverse'
+      ),
       currentResolver,
     ],
     chainId: chainId,
@@ -182,7 +197,7 @@ export const useSetNameHashJustaNameResolver = <
       enabled:
         getResolverABIStatus === 'success' &&
         (getResolverABIConfig as string).toLowerCase() !==
-          currentResolver?.toLowerCase(),
+        currentResolver?.toLowerCase() && address && address !== ZeroAddress,
     },
   });
 

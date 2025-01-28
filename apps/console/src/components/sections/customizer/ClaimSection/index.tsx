@@ -6,6 +6,7 @@ import { Input } from '../../../ui/input';
 import axios from 'axios';
 import { ChainId } from '@justaname.id/sdk';
 import { getAnalyticsClient } from '../../../../analytics';
+import { showToast } from '../../../toast';
 
 export const ClaimSection = () => {
   const { config, handleJustWeb3Config } = useContext(JustWeb3Context);
@@ -106,6 +107,7 @@ export const ClaimSection = () => {
         value={currentVal}
         onValueChange={(value) => {
           handleEnsSelect(value, _chainId);
+          showToast('success', "Code updated!", "claim code")
         }}
       >
         <p className="text-base text-black font-bold leading-[125%] my-[5px]">

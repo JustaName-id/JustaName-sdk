@@ -65,6 +65,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   const { address, isConnected, chainId } = useMountedAccount();
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
   const { disconnect } = useDisconnect();
+  const [popupOpen, setPopupOpen] = useState(false);
   const {
     connectedEns,
     signOut,
@@ -150,6 +151,11 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
       setOpenSettings(open);
     }
   };
+
+  const handleSettingsBack = () => {
+    setPopupOpen(true);
+    setOpenSettings(true);
+  }
 
   if (isEnsAuthLoading || (connectedEns?.ens && isRecordsPending)) {
     return (
@@ -522,10 +528,10 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   return (
     <>
       <MAppsDialog open={openMApps} handleOpenDialog={handleOpenMAppsDialog} />
-      <PrimaryNamesDialog logout={logout} open={openPrimaryNames} handleOpenDialog={handleOpenPrimaryNamesDialog} />
-      <ConfigurationDialog logout={logout} open={openConfiguration} handleOpenDialog={handleOpenConfigurationDialog} />
+      <PrimaryNamesDialog logout={logout} open={openPrimaryNames} handleOpenDialog={handleOpenPrimaryNamesDialog} onBack={handleSettingsBack} />
+      <ConfigurationDialog logout={logout} open={openConfiguration} handleOpenDialog={handleOpenConfigurationDialog} onBack={handleSettingsBack} />
       <div className={styles.desktopSection}>
-        <Popover>
+        <Popover open={popupOpen} onOpenChange={setPopupOpen}>
           <PopoverTrigger>{connectedEnsBtn(false)}</PopoverTrigger>
           <BasePopoverContent sideOffset={10} align={'end'} side="bottom">
             {connectedEnsProfileContent}
