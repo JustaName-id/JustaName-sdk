@@ -43,8 +43,10 @@ export default function Page() {
       });
     }
   }, [isLoggedIn, connectedEns]);
+
   const { leftWidth, rightWidth, getBarProps } = useSplit({
     initialLeft: 70,
+    maxRightWidthPercentage: 0.5,
   });
 
   return (
@@ -114,7 +116,8 @@ export default function Page() {
           <div
             style={{
               width: `calc( ${rightWidth}% - 4px)`,
-              maxWidth: `calc( ${rightWidth}% - 4px)`,
+              minWidth: "100px",
+              overflowX: 'hidden'
             }}
           >
             <CodeSection />

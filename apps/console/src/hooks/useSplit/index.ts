@@ -4,12 +4,14 @@ interface UseSplitOptions {
   initialLeft?: number; // initial percentage of left pane (0 to 100)
   onDragging?: (leftWidth: number, rightWidth: number) => void;
   onDragEnd?: (leftWidth: number, rightWidth: number) => void;
+  maxRightWidthPercentage?: number;
 }
 
 export function useSplit({
   initialLeft = 50,
   onDragging,
   onDragEnd,
+  maxRightWidthPercentage
 }: UseSplitOptions = {}) {
   const [leftWidth, setLeftWidth] = useState(initialLeft);
   const rightWidth = 100 - leftWidth;
@@ -25,17 +27,23 @@ export function useSplit({
 
       const containerRect = containerRef.current.getBoundingClientRect();
       const deltaX = e.clientX - startXRef.current;
-      const newLeftWidth = Math.min(
-        Math.max(
-          startLeftWidthRef.current + (deltaX / containerRect.width) * 100,
-          0
-        ),
-        100
-      );
+    const barWidth = 4;
+
+    const minLeftWidth = 100 - (((containerRect.width * (maxRightWidthPercentage ?? 0.2)) + barWidth) / containerRect.width) * 100;
+    const effectiveMinLeft = Math.max(0, minLeftWidth);
+
+    const newLeftWidth = Math.min(
+      Math.max(
+        startLeftWidthRef.current + (deltaX / containerRect.width) * 100,
+        effectiveMinLeft
+      ),
+      100 - (barWidth / containerRect.width) * 100 // Ensure room for divider
+    );
+
       setLeftWidth(newLeftWidth);
       onDragging && onDragging(newLeftWidth, 100 - newLeftWidth);
     },
-    [onDragging]
+    [onDragging, maxRightWidthPercentage]
   );
 
   const onMouseUp = useCallback(() => {

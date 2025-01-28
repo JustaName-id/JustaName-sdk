@@ -25,12 +25,14 @@ export interface PrimaryNamesDialogProps {
   open: boolean;
   handleOpenDialog: (open: boolean) => void;
   logout?: () => void;
+  onBack: () => void;
 }
 
 export const PrimaryNamesDialog: FC<PrimaryNamesDialogProps> = ({
   open,
   handleOpenDialog,
-  logout
+  logout,
+  onBack
 }) => {
   const {
     config: { disableOverlay },
@@ -131,7 +133,7 @@ export const PrimaryNamesDialog: FC<PrimaryNamesDialogProps> = ({
       ) : (
         <Flex justify="space-between" direction="column" gap="20px">
           <Flex direction={'row'} gap={'10px'} align={'center'} style={{ marginTop: 9 }} >
-            <BackBtn onClick={() => handleOpenDialog(false)} />
+            <BackBtn onClick={() => { handleOpenDialog(false); onBack() }} />
             <H2 style={{
               fontWeight: 700,
             }}>Set Primary</H2>
