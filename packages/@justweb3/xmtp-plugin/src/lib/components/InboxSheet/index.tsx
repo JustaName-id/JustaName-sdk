@@ -1,6 +1,7 @@
 import { useMountedAccount, usePrimaryNameBatch } from '@justaname.id/react';
 import {
   AddIcon,
+  Button,
   Flex,
   Sheet,
   SheetContent,
@@ -315,12 +316,32 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                       'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
                   }}
                 >
-                  <ChatList
-                    conversations={allowedConversations}
-                    conversationsInfo={conversationsInfo}
-                    handleOpenChat={handleOpenChat}
-                    primaryNames={allPrimaryNames}
-                  />
+                  {allowedConversations.length === 0 ?
+                    <div
+                      style={{
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '20px',
+                        width: '100%',
+                      }}
+                    >
+                      <SPAN style={{ fontSize: '18px', fontWeight: "bold" }}>No conversations yet!</SPAN>
+                      <Button
+                        onClick={handleNewChat}>
+                        New Chat
+                      </Button>
+                    </div>
+                    :
+                    <ChatList
+                      conversations={allowedConversations}
+                      conversationsInfo={conversationsInfo}
+                      handleOpenChat={handleOpenChat}
+                      primaryNames={allPrimaryNames}
+                    />
+                  }
                 </TabsContent>
                 <TabsContent
                   value={'Requests'}
@@ -417,6 +438,6 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
           </Flex>
         </Flex>
       </SheetContent>
-    </Sheet>
+    </Sheet >
   );
 };
