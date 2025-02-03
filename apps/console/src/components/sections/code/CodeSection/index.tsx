@@ -93,23 +93,19 @@ import {
   JustWeb3Button
 } from '@justweb3/widget';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-${
-  justVerifiedEnabled
-    ? "import { JustVerifiedPlugin } from '@justverified/plugin';"
-    : ''
-}
+${justVerifiedEnabled
+        ? "import { JustVerifiedPlugin } from '@justverified/plugin';"
+        : ''
+      }
 ${efpPluginEnabled ? "import { EFPPlugin } from '@justweb3/efp-plugin';" : ''}
-${
-  poapPluginEnabled ? "import { POAPPlugin } from '@justweb3/poap-plugin';" : ''
-}
-${
-  talentProtocolPluginEnabled
-    ? `import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';`
-    : ''
-}
-${
-  xmtpPluginEnabled ? "import { XMTPPlugin } from '@justweb3/xmtp-plugin';" : ''
-}
+${poapPluginEnabled ? "import { POAPPlugin } from '@justweb3/poap-plugin';" : ''
+      }
+${talentProtocolPluginEnabled
+        ? `import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';`
+        : ''
+      }
+${xmtpPluginEnabled ? "import { XMTPPlugin } from '@justweb3/xmtp-plugin';" : ''
+      }
 
 export const App: React.FC = () => {
     const { wallets } = getDefaultWallets();
@@ -129,26 +125,26 @@ export const App: React.FC = () => {
     });
   
     const justweb3Config: JustWeb3ProviderConfig = ${JSON.stringify(
-      {
-        ...config,
-        networks: [
-          {
-            chainId: 1,
-            providerUrl: `<MAINNET_PROVIDER_URL>`,
-          },
-          {
-            chainId: 11155111,
-            providerUrl: `<SEPOLIA_PROVIDER_URL>`,
-          },
-        ],
-        dev: undefined,
-        disableOverlay: undefined,
-        plugins: plugins.length > 0 ? plugins : undefined,
-        color: color,
-      },
-      null,
-      2
-    )};
+        {
+          ...config,
+          networks: [
+            {
+              chainId: 1,
+              providerUrl: `<MAINNET_PROVIDER_URL>`,
+            },
+            {
+              chainId: 11155111,
+              providerUrl: `<SEPOLIA_PROVIDER_URL>`,
+            },
+          ],
+          dev: undefined,
+          disableOverlay: undefined,
+          plugins: plugins.length > 0 ? plugins : undefined,
+          color: color,
+        },
+        null,
+        2
+      )};
   
     const queryClient = new QueryClient();
   
@@ -186,11 +182,9 @@ export default App;`.trim();
   }, [codeSnippet]);
 
   const dependencies = useMemo(() => {
-    return `yarn add ${xmtpPluginEnabled ? '@justweb3/xmtp-plugin' : ''} ${
-      justVerifiedEnabled ? '@justverified/plugin' : ''
-    } ${poapPluginEnabled ? '@justweb3/poap-plugin' : ''} ${
-      efpPluginEnabled ? '@justweb3/efp-plugin' : ''
-    }
+    return `yarn add ${xmtpPluginEnabled ? '@justweb3/xmtp-plugin' : ''} ${justVerifiedEnabled ? '@justverified/plugin' : ''
+      } ${poapPluginEnabled ? '@justweb3/poap-plugin' : ''} ${efpPluginEnabled ? '@justweb3/efp-plugin' : ''
+      }
      ${talentProtocolPluginEnabled ? '@justweb3/talent-protocol-plugin' : ''}
      @justweb3/widget viem wagmi @rainbow-me/rainbowkit @tanstack/react-query ethers`;
   }, [
@@ -212,14 +206,12 @@ export default App;`.trim();
 
   return (
     <div
-      className={`h-full mobile:w-[calc(100% - 1.25rem)]  border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto ${
-        mobile ? 'pb-5' : 'py-5'
-      } px-2.5 gap-5 justify-between`}
+      className={`h-full mobile:w-[calc(100% - 1.25rem)]  border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto ${mobile ? 'pb-5' : 'py-5'
+        } px-2.5 gap-5 justify-between`}
     >
       <div
-        className={`flex justify-between items-center ${
-          mobile ? 'absolute top-4 right-6 ' : ''
-        }`}
+        className={`flex justify-between items-center ${mobile ? 'absolute top-4 right-6 ' : ''
+          }`}
       >
         {!mobile && <p className="text-sm font-medium leading-[140%]">Code</p>}
       </div>
@@ -230,7 +222,7 @@ export default App;`.trim();
         <div className="flex p-2 bg-gray-100 rounded-md pr-[46px] relative max-w-full overflow-hidden">
           <div
             className={
-              'max-w-full flex justify-between items-center  overflow-x-scroll'
+              'max-w-[500px] flex justify-between items-center  overflow-x-scroll'
             }
           >
             <span className="text-xs text-gray-500 whitespace-nowrap">
