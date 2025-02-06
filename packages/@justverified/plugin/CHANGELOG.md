@@ -1,3 +1,19 @@
+## 0.0.110 (2025-02-06)
+
+
+### 🩹 Fixes
+
+- **justVerified:** typo in expiry date ([638347ca](https://github.com/JustaName-id/JustaName-sdk/commit/638347ca))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.109 (2025-02-03)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
 ## 0.0.108 (2025-01-29)
 
 This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
