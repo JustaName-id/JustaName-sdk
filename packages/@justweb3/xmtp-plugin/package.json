@@ -1,6 +1,6 @@
 {
   "name": "@justweb3/xmtp-plugin",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "dependencies": {
     "@radix-ui/react-slider": "^1.2.1",
     "@xmtp/content-type-primitives": "1.0.3",
