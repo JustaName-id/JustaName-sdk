@@ -1,3 +1,10 @@
+## 0.3.178 (2025-02-07)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.175
+
 ## 0.3.177 (2025-02-06)
 
 

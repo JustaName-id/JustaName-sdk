@@ -1,3 +1,20 @@
+## 0.2.175 (2025-02-07)
+
+
+### 🩹 Fixes
+
+- **sdk:** made domain and origin optional ([b821e007](https://github.com/JustaName-id/JustaName-sdk/commit/b821e007))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.108
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.2.174 (2025-02-06)
 
 
