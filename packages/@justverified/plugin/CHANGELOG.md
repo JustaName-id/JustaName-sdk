@@ -1,3 +1,7 @@
+## 0.0.114 (2025-02-07)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
 ## 0.0.113 (2025-02-07)
 
 This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.

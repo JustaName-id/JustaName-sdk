@@ -1,3 +1,7 @@
+## 0.0.109 (2025-02-07)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
 ## 0.0.108 (2025-02-07)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.

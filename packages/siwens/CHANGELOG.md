@@ -1,3 +1,7 @@
+## 0.1.16 (2025-02-07)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
 ## 0.1.15 (2025-02-07)
 
 This was a version bump only for siwens to align it with other projects, there were no code changes.
