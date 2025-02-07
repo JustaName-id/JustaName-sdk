@@ -23,7 +23,7 @@ const config: StorybookConfig = {
         'process.env': process.env,
       },
       optimizeDeps: {
-        exclude: ['@xmtp/browser-sdk', '@xmtp/user-preferences-bindings-wasm'],
+        exclude: ['@xmtp/browser-sdk'],
         include: ['@xmtp/proto'],
       },
     }),
