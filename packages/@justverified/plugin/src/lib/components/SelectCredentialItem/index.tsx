@@ -19,8 +19,8 @@ export interface SelectCredentialItemProps {
   selectedCredential: Credentials | undefined;
   onClick: () => void;
   credentialValue:
-    | EthereumEip712Signature2021<{ username?: string; email?: string }>
-    | undefined;
+  | EthereumEip712Signature2021<{ username?: string; email?: string }>
+  | undefined;
   disabled?: boolean;
 }
 
@@ -78,7 +78,7 @@ export const SelectCredentialItem: FC<SelectCredentialItemProps> = ({
         (username ? `: ${username}` : '')
       }
       subtitle={
-        username ? 'Expires in ' + moment(expirationDate).fromNow() : undefined
+        username ? 'Expires ' + moment(expirationDate).fromNow() : undefined
       }
       onClick={onClick}
       left={icon}

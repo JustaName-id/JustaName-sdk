@@ -1,5 +1,7 @@
+import { useMountedAccount, usePrimaryNameBatch } from '@justaname.id/react';
 import {
   AddIcon,
+  Button,
   Flex,
   Sheet,
   SheetContent,
@@ -10,12 +12,12 @@ import {
   TabsList,
   TabsTrigger,
 } from '@justweb3/ui';
-import { usePrimaryNameBatch } from '@justaname.id/react';
 import { ConsentState, Conversation, DecodedMessage } from '@xmtp/browser-sdk';
 import { isEqual } from 'lodash';
 import React, { useEffect, useMemo } from 'react';
 import { FullConversation, useConversations } from '../../hooks';
 import { ChatList } from './ChatList';
+
 
 export interface InboxSheetProps {
   open?: boolean;
@@ -258,12 +260,32 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                       'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
                   }}
                 >
-                  <ChatList
-                    conversations={allowedConversations}
-                    conversationsInfo={conversationsInfo}
-                    handleOpenChat={handleOpenChat}
-                    primaryNames={allPrimaryNames}
-                  />
+                  {allowedConversations.length === 0 ?
+                    <div
+                      style={{
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '20px',
+                        width: '100%',
+                      }}
+                    >
+                      <SPAN style={{ fontSize: '18px', fontWeight: "bold" }}>No conversations yet!</SPAN>
+                      <Button
+                        onClick={handleNewChat}>
+                        New Chat
+                      </Button>
+                    </div>
+                    :
+                    <ChatList
+                      conversations={allowedConversations}
+                      conversationsInfo={conversationsInfo}
+                      handleOpenChat={handleOpenChat}
+                      primaryNames={allPrimaryNames}
+                    />
+                  }
                 </TabsContent>
                 <TabsContent
                   value={'Requests'}
@@ -360,6 +382,6 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
           </Flex>
         </Flex>
       </SheetContent>
-    </Sheet>
+    </Sheet >
   );
 };

@@ -1,4 +1,5 @@
 import {
+  JustEnsCard,
   JustWeb3Button,
   JustWeb3Provider,
   JustWeb3ProviderConfig,

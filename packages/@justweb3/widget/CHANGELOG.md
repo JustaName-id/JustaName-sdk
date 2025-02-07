@@ -1,3 +1,171 @@
+## 0.0.113 (2025-02-06)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.177
+- Updated @justaname.id/sdk to 0.2.174
+- Updated @justweb3/ui to 0.0.113
+
+## 0.0.112 (2025-02-06)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.176
+- Updated @justaname.id/sdk to 0.2.173
+- Updated @justweb3/ui to 0.0.112
+
+## 0.0.111 (2025-02-06)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.175
+- Updated @justaname.id/sdk to 0.2.172
+- Updated @justweb3/ui to 0.0.111
+
+## 0.0.110 (2025-02-03)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.174
+- Updated @justaname.id/sdk to 0.2.171
+- Updated @justweb3/ui to 0.0.110
+
+## 0.0.109 (2025-01-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.173
+- Updated @justaname.id/sdk to 0.2.170
+- Updated @justweb3/ui to 0.0.109
+
+## 0.0.108 (2025-01-28)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.172
+- Updated @justaname.id/sdk to 0.2.169
+- Updated @justweb3/ui to 0.0.108
+
+## 0.0.107 (2025-01-28)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.171
+- Updated @justaname.id/sdk to 0.2.168
+- Updated @justweb3/ui to 0.0.107
+
+## 0.0.106 (2025-01-28)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.170
+- Updated @justaname.id/sdk to 0.2.167
+- Updated @justweb3/ui to 0.0.106
+
+## 0.0.105 (2025-01-22)
+
+
+### 🩹 Fixes
+
+- addresses in update dialog ([74b4738](https://github.com/JustaName-id/JustaName-sdk/commit/74b4738))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.169
+- Updated @justaname.id/sdk to 0.2.166
+- Updated @justweb3/ui to 0.0.105
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.0.104 (2025-01-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.168
+- Updated @justaname.id/sdk to 0.2.165
+- Updated @justweb3/ui to 0.0.104
+
+## 0.0.103 (2025-01-16)
+
+
+### 🚀 Features
+
+- **widget:** implemented invitations feature ([22447ba](https://github.com/JustaName-id/JustaName-sdk/commit/22447ba))
+
+
+### 🩹 Fixes
+
+- **widget:** fixes ([c2866dd](https://github.com/JustaName-id/JustaName-sdk/commit/c2866dd))
+
+- **widget:** configuration content ([28fd3da](https://github.com/JustaName-id/JustaName-sdk/commit/28fd3da))
+
+- **widget:** added key for primary names mapping ([c00615e](https://github.com/JustaName-id/JustaName-sdk/commit/c00615e))
+
+- **widget:** changed invitations placement ([a788385](https://github.com/JustaName-id/JustaName-sdk/commit/a788385))
+
+- **widget:** ui fix ([989de8c](https://github.com/JustaName-id/JustaName-sdk/commit/989de8c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.167
+- Updated @justaname.id/sdk to 0.2.164
+- Updated @justweb3/ui to 0.0.103
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.102 (2025-01-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.166
+- Updated @justaname.id/sdk to 0.2.163
+- Updated @justweb3/ui to 0.0.102
+
+## 0.0.101 (2024-12-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.165
+- Updated @justaname.id/sdk to 0.2.162
+- Updated @justweb3/ui to 0.0.101
+
+## 0.0.100 (2024-12-17)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.164
+- Updated @justaname.id/sdk to 0.2.161
+- Updated @justweb3/ui to 0.0.100
+
+## 0.0.99 (2024-12-17)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.163
+- Updated @justaname.id/sdk to 0.2.160
+- Updated @justweb3/ui to 0.0.99
+
 ## 0.0.98 (2024-12-12)
 
 

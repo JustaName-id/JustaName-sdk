@@ -1,8 +1,8 @@
 import { JustaPlugin } from '@justweb3/widget';
-import { JustWeb3XMTPProvider } from '../providers/JustWeb3XMTPProvider';
 import { ChatMenuButton } from '../components/ChatMenuButton';
-import { ProfileChatButton } from '../components/ProfileChatButton';
 import { JustWeb3ButtonRight } from '../components/JustWeb3ButtonRight';
+import { ProfileChatButton } from '../components/ProfileChatButton';
+import { JustWeb3XMTPProvider } from '../providers/JustWeb3XMTPProvider';
 
 export type XmtpEnvironment = 'local' | 'production' | 'dev';
 
@@ -46,6 +46,14 @@ export const XMTPPlugin = (env: XmtpEnvironment): JustaPlugin => {
             env={env}
           />
         );
+      },
+    },
+    hooks: {
+      onWalletDisconnected: (pluginApi) => {
+        pluginApi.setState('xmtpOpen', false);
+      },
+      onEnsSignOut: (pluginApi) => {
+        pluginApi.setState('xmtpOpen', false);
       },
     },
   };

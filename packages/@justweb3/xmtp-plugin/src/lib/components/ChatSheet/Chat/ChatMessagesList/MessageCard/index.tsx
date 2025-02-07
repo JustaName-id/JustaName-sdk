@@ -39,7 +39,7 @@ const MeasureAndHyphenateText: React.FC<{
 
   useEffect(() => {
     // Function to measure text width
-    const measureText = (text = '', font = '10px Inter') => {
+    const measureText = (text = '', font = '12px Inter') => {
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
       if (!context) return 0;
@@ -57,22 +57,24 @@ const MeasureAndHyphenateText: React.FC<{
         const testLine = currentLine + word + ' ';
         const testLineWidth = measureText(testLine);
 
-        if (testLineWidth > maxWidth && currentLine !== '') {
-          // Check if it's necessary to hyphenate the current word
-          let hyphenated = false;
-          for (let i = word.length; i > 0; i--) {
-            const part = word.substring(0, i);
-            const testPartWidth = measureText(currentLine + part + '-');
-
-            if (testPartWidth <= maxWidth) {
-              finalText += currentLine + part + '-\n';
-              currentLine = word.substring(i) + ' ';
-              hyphenated = true;
-              break;
+        if (testLineWidth > maxWidth) {
+          // If the word itself exceeds the width, handle hyphenation
+          if (measureText(word) > maxWidth) {
+            let remainingWord = word;
+            while (measureText(remainingWord) > maxWidth) {
+              for (let i = remainingWord.length; i > 0; i--) {
+                const part = remainingWord.substring(0, i);
+                if (measureText(currentLine + part + '-') <= maxWidth) {
+                  finalText += currentLine + part + '-\n';
+                  remainingWord = remainingWord.substring(i);
+                  currentLine = '';
+                  break;
+                }
+              }
             }
-          }
-
-          if (!hyphenated) {
+            currentLine = remainingWord + ' ';
+          } else {
+            // Move the current line to finalText and start a new line
             finalText += currentLine + '\n';
             currentLine = word + ' ';
           }
@@ -81,7 +83,7 @@ const MeasureAndHyphenateText: React.FC<{
         }
       });
 
-      finalText += currentLine;
+      finalText += currentLine.trim();
       return finalText;
     };
 
