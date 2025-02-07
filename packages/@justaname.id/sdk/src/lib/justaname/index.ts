@@ -110,12 +110,15 @@ export class JustaName {
 
     this.checkConfig(sanitizedConfiguration);
 
-    const siweConfig = configuration.config
-      ? {
-          domain: configuration.config.domain,
-          origin: configuration.config.origin,
-        }
-      : undefined;
+    const siweConfig =
+      configuration.config &&
+      configuration.config.domain &&
+      configuration.config.origin
+        ? {
+            domain: configuration.config.domain,
+            origin: configuration.config.origin,
+          }
+        : undefined;
 
     const subnameChallenge = new SubnameChallenge({
       siweConfig,
