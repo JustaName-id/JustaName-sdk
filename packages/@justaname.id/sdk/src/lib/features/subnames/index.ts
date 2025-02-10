@@ -18,7 +18,7 @@ import {
   SubnameSearchRoute,
   SubnameUpdateRoute,
   PrimaryNameGetByAddressRoute,
-  SetPrimaryNameRoute,
+  SetPrimaryNameRoute, SIWEHeaders
 } from '../../types';
 import { sanitizeAddresses, sanitizeTexts } from '../../utils';
 import { InvalidConfigurationException } from '../../errors';
@@ -151,7 +151,7 @@ export class Subnames {
 
   async addSubname(
     params: SubnameAddRoute['params'],
-    headers: SubnameAddRoute['headers']
+    headers?: SubnameAddRoute['headers']
   ): Promise<SubnameAddRoute['response']> {
     const {
       text,
@@ -165,7 +165,8 @@ export class Subnames {
 
     const { signature, xSignature } = this.checkSignature(
       paramSignature,
-      headers.xSignature
+      headers?.xSignature,
+      rest.overrideSignatureCheck
     );
 
     const sanitizedAddresses = sanitizeAddresses(params.addresses);
@@ -180,10 +181,16 @@ export class Subnames {
         ?.ensDomain;
 
     const _apiKey =
-      headers.xApiKey ||
+      headers?.xApiKey ||
       this.ensDomains?.find((ensDomain) => ensDomain.chainId === _chainId)
         ?.apiKey ||
       apiKey;
+
+    const requiredHeaders = ["xApiKey"] as  ('xApiKey' | keyof SIWEHeaders)[]
+
+    if(!rest.overrideSignatureCheck) {
+      requiredHeaders.push("xAddress", "xMessage");
+    }
 
     return assertRestCall(
       'ADD_SUBNAME_ROUTE',
@@ -197,7 +204,7 @@ export class Subnames {
           : [
               {
                 coinType: 60,
-                address: headers.xAddress as string,
+                address: headers?.xAddress as string,
               },
               ...(sanitizedAddresses === undefined ? [] : sanitizedAddresses),
             ],
@@ -212,7 +219,7 @@ export class Subnames {
       this.dev
     )(
       ['username', 'ensDomain', 'chainId'],
-      ['xApiKey', 'xAddress', 'xMessage']
+      requiredHeaders
     );
   }
 
@@ -543,14 +550,21 @@ export class Subnames {
 
   private checkSignature(
     params: string | undefined,
-    headers: string | undefined
+    headers: string | undefined,
+    skipThrowError = false
   ): {
     signature: string | undefined;
     xSignature: string | undefined;
   } {
-    const signature = params || headers;
+    const signature = params || headers
 
     if (!signature) {
+      if (skipThrowError) {
+        return {
+          signature: undefined,
+          xSignature: undefined,
+        };
+      }
       throw InvalidConfigurationException.missingParameterOrHeader('signature');
     }
 

@@ -34,6 +34,8 @@ export interface SubnameAddRequest extends IRequest {
   contentHash?: string;
 
   signature?: string;
+
+  overrideSignatureCheck?: boolean;
 }
 
 export interface SubnameAddRoute
@@ -47,5 +49,6 @@ export interface SubnameAddRoute
       addresses?: PartialAddressJson | AddressWithTypedCoins[];
       text?: Record<string, string> | TextRecordAddRequest[];
       apiKey?: string;
+      overrideSignatureCheck?: boolean;
     }
   > {}
