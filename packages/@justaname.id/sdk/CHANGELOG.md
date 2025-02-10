@@ -1,3 +1,20 @@
+## 0.2.177 (2025-02-10)
+
+
+### 🚀 Features
+
+- override add ([3ed3ea98](https://github.com/JustaName-id/JustaName-sdk/commit/3ed3ea98))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.110
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.2.176 (2025-02-07)
 
 
