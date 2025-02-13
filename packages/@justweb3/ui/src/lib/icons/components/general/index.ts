@@ -48,6 +48,7 @@ import SendIcon from './Send';
 import SettingsIcon from './Settings';
 import SocialIcon from './Social';
 import StopIcon from './Stop';
+import SwitchAccountIcon from './SwitchAccount';
 import TrashWhiteIcon from './TrashWhite';
 import TrashIcon from './Trash';
 import TuneIcon from './Tune';
@@ -104,6 +105,7 @@ const general = {
   settings: SettingsIcon,
   social: SocialIcon,
   stop: StopIcon,
+  'switch-account': SwitchAccountIcon,
   'trash-white': TrashWhiteIcon,
   trash: TrashIcon,
   tune: TuneIcon,
@@ -163,6 +165,7 @@ export {
   SettingsIcon,
   SocialIcon,
   StopIcon,
+  SwitchAccountIcon,
   TrashWhiteIcon,
   TrashIcon,
   TuneIcon,

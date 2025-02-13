@@ -27,6 +27,7 @@ import {
   PopoverTrigger,
   ProfileIcon,
   SettingsIcon,
+  SwitchAccountIcon,
   SPAN,
 } from '@justweb3/ui';
 import { FC, ReactNode, useContext, useMemo, useState } from 'react';
@@ -515,9 +516,22 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
             style={{
               width: '100%',
             }}
-            left={<LogoutIcon width={20} />}
-            title={'Sign Out'}
+            left={<SwitchAccountIcon width={20} />}
+            title={'Switch ENS'}
             onClick={signOut}
+            right={<ArrowIcon width={20} />}
+          />
+
+          <ClickableItem
+            style={{
+              width: '100%',
+            }}
+            left={<LogoutIcon width={20} />}
+            title={'Disconnect Wallet'}
+            onClick={() => {
+              disconnect();
+              logout && logout();
+            }}
             right={<ArrowIcon width={20} />}
           />
         </Flex>

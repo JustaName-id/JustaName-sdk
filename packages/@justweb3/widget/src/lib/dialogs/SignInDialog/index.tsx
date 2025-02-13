@@ -20,12 +20,14 @@ import {
   Input,
   JustaNameLogoIcon,
   LoadingSpinner,
+  LogoutIcon,
   OrLine,
   ProfileIcon,
   SPAN,
 } from '@justweb3/ui';
 import clsx from 'clsx';
 import React, { FC, Fragment, useMemo, useState } from 'react';
+import { useDisconnect } from 'wagmi';
 import { SelectSubnameItem } from '../../components/SelectSubnameItem';
 import { SubnameInvitationItem } from '../../components/SubnameInvitationItem';
 import { useDebounce } from '../../hooks/useDebounce';
@@ -83,6 +85,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   const { isConnected, address } = useMountedAccount();
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
   const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
+  const { disconnect } = useDisconnect();
   const { invitations, isInvitationsPending, refetchInvitations } =
     useAccountInvitations({
       chainId,
@@ -288,15 +291,24 @@ export const SignInDialog: FC<SignInDialogProps> = ({
       }
     >
       <Flex direction="column" gap="10px">
-        <Badge value={address}>
-          <SPAN className={styles.badgeText}>
-            {address && formatText(address, 4)}
-          </SPAN>
-        </Badge>
+        <Flex direction="row" gap="10px" justify="space-between">
+          <Badge value={address}>
+            <SPAN className={styles.badgeText}>
+              {address && formatText(address, 4)}
+            </SPAN>
+          </Badge>
+          <Button
+            variant={'destructive-outline'}
+            rightIcon={<LogoutIcon fill={'var(--justweb3-destructive-color)'} width={15} />}
+            onClick={() => disconnect()}
+          >
+            Disconnect
+          </Button>
+        </Flex>
         {isAccountSubnamesPending ||
-        isInvitationsPending ||
-        isAccountEnsNamesPending ||
-        isOffchainResolversPending ? (
+          isInvitationsPending ||
+          isAccountEnsNamesPending ||
+          isOffchainResolversPending ? (
           <div className={styles.loadingContainer}>
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
           </div>
