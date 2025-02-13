@@ -12,4 +12,5 @@ export interface JustWeb3ProviderConfig
   enableAuth?: boolean;
   mApps?: (string | { name: string; openOnConnect: boolean })[];
   plugins?: JustaPlugin[];
+  onLogout?: () => void;
 }

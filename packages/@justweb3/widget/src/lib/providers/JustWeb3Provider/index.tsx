@@ -56,11 +56,11 @@ export interface JustWeb3ContextProps {
 
 export const JustWeb3Context = createContext<JustWeb3ContextProps>({
   isSignInOpen: false,
-  handleOpenSignInDialog: () => {},
-  handleUpdateRecords: async () => {},
-  handleOpenEnsProfile: () => {},
-  handleCloseEnsProfile: () => {},
-  handleJustWeb3Config: () => {},
+  handleOpenSignInDialog: () => { },
+  handleUpdateRecords: async () => { },
+  handleOpenEnsProfile: () => { },
+  handleCloseEnsProfile: () => { },
+  handleJustWeb3Config: () => { },
   config: {},
   plugins: [],
   mApps: [],
@@ -251,6 +251,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
               handleOpenDialog={handleOpenSignInDialog}
               allowedEns={allowedEns}
               logo={config.logo}
+              logout={config.onLogout}
               disableOverlay={config.disableOverlay}
               dev={config.dev}
               local={!config.enableAuth}
