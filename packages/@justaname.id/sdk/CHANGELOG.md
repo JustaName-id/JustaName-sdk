@@ -1,3 +1,82 @@
+## 0.2.179 (2025-02-12)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.112
+
+## 0.2.178 (2025-02-10)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.111
+
+## 0.2.177 (2025-02-10)
+
+
+### 🚀 Features
+
+- override add ([3ed3ea98](https://github.com/JustaName-id/JustaName-sdk/commit/3ed3ea98))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.110
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.176 (2025-02-07)
+
+
+### 🩹 Fixes
+
+- **sdk:** build ([0ce5463b](https://github.com/JustaName-id/JustaName-sdk/commit/0ce5463b))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.109
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.175 (2025-02-07)
+
+
+### 🩹 Fixes
+
+- **sdk:** made domain and origin optional ([b821e007](https://github.com/JustaName-id/JustaName-sdk/commit/b821e007))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.108
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.174 (2025-02-06)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.107
+
+## 0.2.173 (2025-02-06)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.106
+
 ## 0.2.172 (2025-02-06)
 
 

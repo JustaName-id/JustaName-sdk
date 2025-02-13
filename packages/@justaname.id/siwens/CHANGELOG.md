@@ -1,3 +1,31 @@
+## 0.0.112 (2025-02-12)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.111 (2025-02-10)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.110 (2025-02-10)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.109 (2025-02-07)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.108 (2025-02-07)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.107 (2025-02-06)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.106 (2025-02-06)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
 ## 0.0.105 (2025-02-06)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.

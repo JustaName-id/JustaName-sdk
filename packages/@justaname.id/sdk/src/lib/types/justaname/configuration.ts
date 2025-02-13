@@ -19,8 +19,8 @@ export type NetworksWithProvider = [
 ];
 
 export interface Configuration {
-  domain: string;
-  origin: string;
+  domain?: string;
+  origin?: string;
   subnameChallengeTtl?: number;
   signInTtl?: number;
 }

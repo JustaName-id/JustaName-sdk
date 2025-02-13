@@ -34,13 +34,13 @@ describe('justaname', () => {
   });
 
   it('should request a challenge', async () => {
-    const challenge = await justaname.siwe.requestChallenge({
+    const challenge = justaname.siwe.requestChallenge({
       // 30mins
       ttl: 1800000,
       chainId: CHAIN_ID,
       origin: 'http://localhost:3333',
       address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
-      domain: 'justaname.id',
+      domain: 'justaname.id'
     });
     expect(challenge).toBeDefined();
   });
@@ -106,6 +106,25 @@ describe('justaname', () => {
 
     expect(response).toBeDefined();
   });
+
+
+  it('should add a subname without signature if overrideSignatureCheck is enabled', async () => {
+
+    const response = await justaname.subnames.addSubname(
+      {
+        username: subnameToBeAdded,
+        chainId: CHAIN_ID,
+        addresses: [{
+          coinType: "60",
+          address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
+        }],
+        overrideSignatureCheck: true,
+      }
+    );
+
+    expect(response).toBeDefined();
+  });
+
 
   it('should check if subname2 is available', async () => {
     const response = await justaname.subnames.isSubnameAvailable({

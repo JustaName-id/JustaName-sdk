@@ -1,3 +1,31 @@
+## 0.1.19 (2025-02-12)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
+## 0.1.18 (2025-02-10)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
+## 0.1.17 (2025-02-10)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
+## 0.1.16 (2025-02-07)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
+## 0.1.15 (2025-02-07)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
+## 0.1.14 (2025-02-06)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
+## 0.1.13 (2025-02-06)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
 ## 0.1.12 (2025-02-06)
 
 This was a version bump only for siwens to align it with other projects, there were no code changes.
