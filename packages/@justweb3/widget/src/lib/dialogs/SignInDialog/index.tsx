@@ -70,6 +70,7 @@ export interface SignInDialogProps {
   disableOverlay?: boolean;
   dev?: boolean;
   local?: boolean;
+  logout?: () => void;
 }
 
 export const SignInDialog: FC<SignInDialogProps> = ({
@@ -78,6 +79,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   allowedEns,
   logo,
   disableOverlay,
+  logout,
   dev = false,
   local,
 }) => {
@@ -300,7 +302,13 @@ export const SignInDialog: FC<SignInDialogProps> = ({
           <Button
             variant={'destructive-outline'}
             rightIcon={<LogoutIcon fill={'var(--justweb3-destructive-color)'} width={15} />}
-            onClick={() => disconnect()}
+            style={{
+              padding: '6px 8px'
+            }}
+            onClick={() => {
+              disconnect()
+              logout && logout()
+            }}
           >
             Disconnect
           </Button>

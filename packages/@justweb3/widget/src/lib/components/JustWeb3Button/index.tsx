@@ -218,6 +218,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
 
               <LogoutIcon
                 width={15}
+                fill='var(--justweb3-destructive-color)'
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
@@ -526,7 +527,7 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
             style={{
               width: '100%',
             }}
-            left={<LogoutIcon width={20} />}
+            left={<LogoutIcon width={20} fill={'var(--justweb3-destructive-color)'} />}
             title={'Disconnect Wallet'}
             onClick={() => {
               disconnect();

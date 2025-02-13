@@ -1,3 +1,22 @@
+## 0.0.120 (2025-02-13)
+
+
+### 🚀 Features
+
+- changed logout icon color and added onLogout in provider config ([0a5efb74](https://github.com/JustaName-id/JustaName-sdk/commit/0a5efb74))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.184
+- Updated @justaname.id/sdk to 0.2.181
+- Updated @justweb3/ui to 0.0.120
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.119 (2025-02-13)
 
 
