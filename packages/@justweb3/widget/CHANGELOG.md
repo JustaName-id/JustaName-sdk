@@ -1,3 +1,28 @@
+## 0.0.119 (2025-02-13)
+
+
+### 🚀 Features
+
+- added disconnect and switch ens buttons ([d63d9163](https://github.com/JustaName-id/JustaName-sdk/commit/d63d9163))
+
+
+### 🩹 Fixes
+
+- feedbacks ([#97](https://github.com/JustaName-id/JustaName-sdk/pull/97))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.183
+- Updated @justaname.id/sdk to 0.2.180
+- Updated @justweb3/ui to 0.0.119
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
 ## 0.0.118 (2025-02-12)
 
 
