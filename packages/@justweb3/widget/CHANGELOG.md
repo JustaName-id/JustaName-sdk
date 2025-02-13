@@ -1,3 +1,91 @@
+## 0.0.119 (2025-02-13)
+
+
+### 🚀 Features
+
+- added disconnect and switch ens buttons ([d63d9163](https://github.com/JustaName-id/JustaName-sdk/commit/d63d9163))
+
+
+### 🩹 Fixes
+
+- feedbacks ([#97](https://github.com/JustaName-id/JustaName-sdk/pull/97))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.183
+- Updated @justaname.id/sdk to 0.2.180
+- Updated @justweb3/ui to 0.0.119
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
+## 0.0.118 (2025-02-12)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.182
+- Updated @justaname.id/sdk to 0.2.179
+- Updated @justweb3/ui to 0.0.118
+
+## 0.0.117 (2025-02-10)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.181
+- Updated @justaname.id/sdk to 0.2.178
+- Updated @justweb3/ui to 0.0.117
+
+## 0.0.116 (2025-02-10)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.180
+- Updated @justaname.id/sdk to 0.2.177
+- Updated @justweb3/ui to 0.0.116
+
+## 0.0.115 (2025-02-07)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.179
+- Updated @justaname.id/sdk to 0.2.176
+- Updated @justweb3/ui to 0.0.115
+
+## 0.0.114 (2025-02-07)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.178
+- Updated @justaname.id/sdk to 0.2.175
+- Updated @justweb3/ui to 0.0.114
+
+## 0.0.113 (2025-02-06)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.177
+- Updated @justaname.id/sdk to 0.2.174
+- Updated @justweb3/ui to 0.0.113
+
+## 0.0.112 (2025-02-06)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.176
+- Updated @justaname.id/sdk to 0.2.173
+- Updated @justweb3/ui to 0.0.112
+
 ## 0.0.111 (2025-02-06)
 
 

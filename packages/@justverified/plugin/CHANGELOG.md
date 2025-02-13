@@ -1,3 +1,43 @@
+## 0.0.118 (2025-02-13)
+
+
+### 🩹 Fixes
+
+- feedbacks ([#97](https://github.com/JustaName-id/JustaName-sdk/pull/97))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
+## 0.0.117 (2025-02-12)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.116 (2025-02-10)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.115 (2025-02-10)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.114 (2025-02-07)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.113 (2025-02-07)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.112 (2025-02-06)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.111 (2025-02-06)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
 ## 0.0.110 (2025-02-06)
 
 

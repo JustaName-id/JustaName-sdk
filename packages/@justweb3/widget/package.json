@@ -1,12 +1,12 @@
 {
   "name": "@justweb3/widget",
-  "version": "0.0.111",
+  "version": "0.0.119",
   "dependencies": {
     "@ensdomains/address-encoder": "^1.1.2",
     "@hookform/resolvers": "^3.9.0",
-    "@justaname.id/react": "0.3.175",
-    "@justaname.id/sdk": "0.2.172",
-    "@justweb3/ui": "^0.0.111",
+    "@justaname.id/react": "0.3.183",
+    "@justaname.id/sdk": "0.2.180",
+    "@justweb3/ui": "^0.0.119",
     "clsx": "1.2.1",
     "cropperjs": "^1.6.2",
     "lodash": "4.17.21",
