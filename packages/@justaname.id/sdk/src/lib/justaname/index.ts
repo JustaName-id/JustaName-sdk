@@ -162,8 +162,8 @@ export class JustaName {
   }
 
   static createNetworks(networks: Networks = []): NetworksWithProvider {
-    const defaultMainnetProviderUrl = 'https://cloudflare-eth.com';
-    const defaultTestnetProviderUrl = 'https://rpc.sepolia.org';
+    const defaultMainnetProviderUrl = 'https://eth.drpc.org';
+    const defaultTestnetProviderUrl = 'https://sepolia.drpc.org';
 
     const defaultMainnetProvider = getJsonRpcProvider(
       defaultMainnetProviderUrl,
