@@ -13,6 +13,9 @@ const config: StorybookConfig = {
   viteFinal: async (config) =>
     mergeConfig(config, {
       plugins: [react(), nxViteTsPaths()],
+      optimizeDeps: {
+        exclude: ['@xmtp/wasm-bindings'],
+      },
       server: {
         headers: {
           'Cross-Origin-Embedder-Policy': 'require-corp',
@@ -21,10 +24,6 @@ const config: StorybookConfig = {
       },
       define: {
         'process.env': process.env,
-      },
-      optimizeDeps: {
-        exclude: ['@xmtp/browser-sdk'],
-        include: ['@xmtp/proto'],
       },
     }),
   typescript: {

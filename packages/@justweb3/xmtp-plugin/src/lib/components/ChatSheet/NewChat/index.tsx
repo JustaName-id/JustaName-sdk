@@ -1,4 +1,3 @@
-
 import {
   usePrimaryName,
   useRecords
@@ -15,7 +14,8 @@ import {
 import { useDebounce } from '@justweb3/widget';
 import { ConsentState } from '@xmtp/browser-sdk';
 import React, { useEffect, useMemo } from 'react';
-import { FullConversation, useCanMessage, useXMTPClient } from '../../../hooks';
+import { FullConversation, useCanMessage } from '../../../hooks';
+import { useXMTPContext } from '../../../hooks/useXMTPContext';
 import { NewChatTextField } from './NewChatTextField';
 
 interface NewChatProps {
@@ -35,12 +35,14 @@ export const NewChat: React.FC<NewChatProps> = ({
   );
   const [canMessage, setCanMessage] = React.useState<boolean>(false);
   //Queries
-  const { client } = useXMTPClient();
+  const { client } = useXMTPContext();
   const { canMessageFn: xmtpCanMessage, canMessageLoading } = useCanMessage();
   const {
     debouncedValue: debouncedAddress,
     isDebouncing: isDebouncingAddress,
   } = useDebounce<string>(newAddress, 500);
+
+  
 
   const isAddressName = useMemo(() => {
     const ethAddressRegex = /^0x[a-fA-F0-9]{40}$/;

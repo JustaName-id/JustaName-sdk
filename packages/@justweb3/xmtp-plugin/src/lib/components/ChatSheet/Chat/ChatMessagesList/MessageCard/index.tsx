@@ -10,7 +10,8 @@ import {
 import { Conversation, DecodedMessage } from '@xmtp/browser-sdk';
 import { ContentTypeReply } from '@xmtp/content-type-reply';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useAddressInboxId, useSendReactionMessage, useXMTPClient } from '../../../../../hooks';
+import { useAddressInboxId, useSendReactionMessage } from '../../../../../hooks';
+import { useXMTPContext } from '../../../../../hooks/useXMTPContext';
 import { typeLookup } from '../../../../../utils/attachments';
 import { calculateFileSize } from '../../../../../utils/calculateFileSize';
 import { findEmojiByName } from '../../../../../utils/emojis';
@@ -123,7 +124,7 @@ export const MessageCard: React.FC<MessageCardProps> = ({
   const divRef = useRef<HTMLDivElement | null>(null);
   const { mutateAsync: sendReaction } = useSendReactionMessage(conversation);
   const { inboxId } = useAddressInboxId(peerAddress);
-  const { client } = useXMTPClient();
+  const { client } = useXMTPContext();
 
   const { primaryName } = usePrimaryName({
     address: peerAddress as `0x${string}`,

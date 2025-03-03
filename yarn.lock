@@ -2030,6 +2030,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild-plugins/node-globals-polyfill@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@esbuild-plugins/node-globals-polyfill@npm:0.2.3"
+  peerDependencies:
+    esbuild: "*"
+  checksum: 10c0/da3591b3943076a8d4a78320c176f37e5a5802512e2c3a792d4dfe495c051e097668dc56513160147b43e86987078559490164905ef41d1326ac0a9e7a6498ac
+  languageName: node
+  linkType: hard
+
 "@esbuild/aix-ppc64@npm:0.19.12":
   version: 0.19.12
   resolution: "@esbuild/aix-ppc64@npm:0.19.12"
@@ -12755,6 +12764,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@xmtp/browser-sdk@npm:^0.0.21":
+  version: 0.0.21
+  resolution: "@xmtp/browser-sdk@npm:0.0.21"
+  dependencies:
+    "@xmtp/content-type-group-updated": "npm:^2.0.0"
+    "@xmtp/content-type-primitives": "npm:^2.0.0"
+    "@xmtp/content-type-text": "npm:^2.0.0"
+    "@xmtp/proto": "npm:^3.72.3"
+    "@xmtp/wasm-bindings": "npm:^0.0.16"
+    uuid: "npm:^11.0.3"
+  checksum: 10c0/1295d58f2f3e83b50703cc11b0271e1a2fb6fc347d3236fea949217aa436c468a1eddff2cdc6076935e80dbd40cd27458b90c194b5a3c472a9da0374bb07fb89
+  languageName: node
+  linkType: hard
+
 "@xmtp/content-type-group-updated@npm:^2.0.0":
   version: 2.0.0
   resolution: "@xmtp/content-type-group-updated@npm:2.0.0"
@@ -12798,15 +12821,6 @@ __metadata:
   dependencies:
     "@xmtp/content-type-primitives": "npm:^2.0.0"
   checksum: 10c0/bb166a9a0e18b3a7610d7631423d895b8fc4149ca594df9fa46c6d36e7caf95c59a71be3a085dab4ad15c18c66257f38cc7736ae4f24986706a3c56723164039
-  languageName: node
-  linkType: hard
-
-"@xmtp/content-type-read-receipt@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@xmtp/content-type-read-receipt@npm:2.0.0"
-  dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.0"
-  checksum: 10c0/35592d22f1067c1de23caf9cb25eaf20702a1b5942e1bd680d31b7400220049353504f799af24b3819eff6b461f93b5575f13a2ac1d5f5482f5b90d5995f247b
   languageName: node
   linkType: hard
 
@@ -12898,6 +12912,13 @@ __metadata:
   version: 0.0.14
   resolution: "@xmtp/wasm-bindings@npm:0.0.14"
   checksum: 10c0/21576cd5506a03fb03cb9b20d0e367b5e32ac8237c2c63659a23de8bfbe5f0ad76412877d9d572d6e10a615c727496bededc0c1443e93218d20b1960d68c5bf0
+  languageName: node
+  linkType: hard
+
+"@xmtp/wasm-bindings@npm:^0.0.16":
+  version: 0.0.16
+  resolution: "@xmtp/wasm-bindings@npm:0.0.16"
+  checksum: 10c0/9e06ac703c6a5a38c14ac7fd3a7568ed26fb4b7cd4f584789b907fd3a355869e13c71152fc92f79852304d4b33b6ac26873e79a3dbb8420ea432032d27753daf
   languageName: node
   linkType: hard
 
@@ -23911,6 +23932,7 @@ __metadata:
     "@docusaurus/eslint-plugin": "npm:^3.5.2"
     "@ensdomains/address-encoder": "npm:^1.1.2"
     "@ensdomains/ensjs": "npm:4.0.2"
+    "@esbuild-plugins/node-globals-polyfill": "npm:^0.2.3"
     "@hookform/resolvers": "npm:^3.9.0"
     "@nx/cypress": "npm:19.7.3"
     "@nx/eslint": "npm:19.7.3"
@@ -23986,11 +24008,13 @@ __metadata:
     "@usecapsule/react-sdk": "npm:^4.6.1"
     "@usecapsule/wagmi-v2-integration": "npm:^3.6.1"
     "@vitejs/plugin-react": "npm:^4.2.0"
-    "@xmtp/browser-sdk": "npm:^0.0.18"
+    "@xmtp/browser-sdk": "npm:^0.0.21"
+    "@xmtp/content-type-group-updated": "npm:^2.0.0"
+    "@xmtp/content-type-primitives": "npm:^2.0.0"
     "@xmtp/content-type-reaction": "npm:^2.0.0"
-    "@xmtp/content-type-read-receipt": "npm:^2.0.0"
     "@xmtp/content-type-remote-attachment": "npm:^2.0.0"
     "@xmtp/content-type-reply": "npm:^2.0.0"
+    "@xmtp/content-type-text": "npm:^2.0.0"
     autoprefixer: "npm:^10.4.20"
     axios: "npm:^1.6.0"
     babel-jest: "npm:29.7.0"

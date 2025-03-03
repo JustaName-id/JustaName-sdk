@@ -21,8 +21,8 @@ import {
   useSendAttachment,
   useSendMessages,
   useSendReplyMessage,
-  useXMTPClient,
 } from '../../../../hooks';
+import { useXMTPContext } from '../../../../hooks/useXMTPContext';
 import { AttachmentType, typeLookup } from '../../../../utils/attachments';
 import type { Attachment } from '@xmtp/content-type-remote-attachment';
 import { MessageWithReaction } from '../../../../utils/filterReactionsMessages';
@@ -51,7 +51,7 @@ export const ChatTextField: React.FC<ChatTextFieldProps> = ({
   const [attachmentPreview, setAttachmentPreview] = useState<
     string | undefined
   >();
-  const { client } = useXMTPClient();
+  const { client } = useXMTPContext();
   const { mutateAsync: sendMessage } = useSendMessages(conversation);
   const { mutateAsync: sendReply } = useSendReplyMessage(conversation);
   const { mutateAsync: sendAttachment } = useSendAttachment(conversation);
@@ -165,7 +165,7 @@ export const ChatTextField: React.FC<ChatTextFieldProps> = ({
               color: 'var(--justweb3-foreground-color-3)',
             }}
           >
-            Message in user’s Requests
+            Message in user's Requests
           </P>
           <P style={{ fontSize: '12px' }}>
             This user has not accepted your message request yet

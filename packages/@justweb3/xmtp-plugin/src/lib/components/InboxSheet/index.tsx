@@ -1,4 +1,4 @@
-import { useMountedAccount, usePrimaryNameBatch } from '@justaname.id/react';
+import { usePrimaryNameBatch } from '@justaname.id/react';
 import {
   AddIcon,
   Button,
@@ -17,7 +17,6 @@ import { isEqual } from 'lodash';
 import React, { useEffect, useMemo } from 'react';
 import { FullConversation, useConversations } from '../../hooks';
 import { ChatList } from './ChatList';
-
 
 export interface InboxSheetProps {
   open?: boolean;
@@ -61,9 +60,8 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
   const { conversations, conversationsLoading: isLoading } = useConversations();
 
   const [addresses, setAddresses] = React.useState<string[]>([]);
-
   React.useEffect(() => {
-    if (!conversations?.length) return;
+    if (conversations.length === 0) return;
     Promise.all(
       conversations.map((conversation) => conversation.dmPeerInboxId())
     ).then((results) => setAddresses(results));
@@ -71,7 +69,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
 
   const { allPrimaryNames } = usePrimaryNameBatch({
     addresses,
-    enabled: !!conversations?.length,
+    enabled: conversations.length > 0,
   });
 
   const allowedConversations = useMemo(() => {
@@ -89,10 +87,11 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
   }, [conversations]);
 
   const requestConversations = useMemo(() => {
-    return conversations.filter((convo) => {
-      convo.consent === ConsentState.Unknown
-    });
+    return conversations.filter(
+      (convo) => convo.consent === ConsentState.Unknown
+    );
   }, [conversations]);
+
 
   useEffect(() => {
     const allowedConversationsTopic = allowedConversations.map(

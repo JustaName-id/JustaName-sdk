@@ -3,8 +3,9 @@ import { ChainId } from '@justaname.id/sdk';
 import { useJustWeb3 } from '@justweb3/widget';
 import { Client } from '@xmtp/browser-sdk';
 import { useEffect, useState } from 'react';
-import { useXMTPClient } from '../../hooks';
+import { useEthersSigner, useXMTPClient } from '../../hooks';
 import { useJustWeb3XMTP } from '../../providers/JustWeb3XMTPProvider';
+import { useXMTPContext } from '../../hooks/useXMTPContext';
 
 export interface ProfileChatButtonProps {
   ens: string;
@@ -29,16 +30,19 @@ export const ProfileChatButton: React.FC<ProfileChatButtonProps> = ({
     null
   );
 
-  const { client, initializeXmtp } = useXMTPClient();
+  const { initializeXmtp } = useXMTPClient();
+  const { client } = useXMTPContext();
+
   const { address } = useMountedAccount();
+  const signer = useEthersSigner();
 
   const handleChat = async () => {
     if (!records?.sanitizedRecords?.ethAddress?.value) {
       return;
     }
 
-    if (!client) {
-      initializeXmtp().then(() => {
+    if (!client && !!signer) {
+      initializeXmtp({ signer }).then(() => {
         handleOpenChat(ens);
       });
     } else {

@@ -16,12 +16,13 @@ import {
   filterReactionsMessages,
   MessageWithReaction,
 } from '../../../utils/filterReactionsMessages';
-import { FullConversation, useCanMessage, useMessages, useSendReactionMessage, useXMTPClient } from '../../../hooks';
+import { FullConversation, useCanMessage, useMessages, useSendReactionMessage } from '../../../hooks';
+import { useXMTPContext } from '../../../hooks/useXMTPContext';
 import { groupMessagesByDate } from '../../../utils/groupMessageByDate';
 import { typeLookup } from '../../../utils/attachments';
-import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
-import { useReadReceipt } from '../../../hooks/useReadReceipt';
 import { ConsentState } from '@xmtp/browser-sdk';
+import { useReadReceipt } from '../../../hooks/useReadReceipt';
+import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
 
 export interface ChatProps {
   conversation: FullConversation;
@@ -44,7 +45,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
   const { primaryName } = usePrimaryName({
     address: conversation.peerAddress as `0x${string}`,
   });
-  const { client } = useXMTPClient();
+  const { client } = useXMTPContext();
   const { records } = useRecords({ ens: primaryName });
   const { address } = useMountedAccount();
   const { messages, messagesLoading: isLoading } = useMessages(conversation);
