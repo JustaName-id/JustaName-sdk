@@ -63,7 +63,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
   React.useEffect(() => {
     if (conversations.length === 0) return;
     Promise.all(
-      conversations.map((conversation) => conversation.dmPeerInboxId())
+      conversations.map((conversation) => conversation.peerAddress)
     ).then((results) => setAddresses(results));
   }, [conversations]);
 

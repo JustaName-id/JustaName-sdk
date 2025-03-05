@@ -6,6 +6,7 @@ import { InboxSheet } from '../../components/InboxSheet';
 import { FullConversation, useEthersSigner, useMessages, useXMTPClient } from '../../hooks';
 import { XMTPProvider } from '../../contexts/XMTPContext';
 import { useXMTPContext } from '../../hooks/useXMTPContext';
+import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
 
 interface JustWeb3XMTPContextProps {
   handleOpenChat: (address: string) => void;
@@ -208,7 +209,7 @@ export const GetConversationInfo: React.FC<GetConversationInfoProps> = ({
     let count = 0;
     const _messages = [...messages].reverse();
     for (const message of _messages) {
-      if (message.contentType.toString().includes("read-receipt")) {
+      if (message.contentType.sameAs(ContentTypeReadReceipt)) {
         break;
       }
 
@@ -224,7 +225,7 @@ export const GetConversationInfo: React.FC<GetConversationInfoProps> = ({
     let lastMessageIndex = _messages.length - 1;
     let lastMessage = _messages[lastMessageIndex];
     while (
-      lastMessage?.contentType.toString().includes("read-receipt") &&
+      lastMessage?.contentType.sameAs(ContentTypeReadReceipt) &&
       lastMessageIndex > 0
     ) {
       lastMessageIndex--;

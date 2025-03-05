@@ -84,6 +84,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
         borderRadius: '5px',
         cursor: blocked ? 'auto' : 'pointer',
       }}
+      key={conversation.id}
       onClick={() => {
         if (blocked) return;
         onClick && onClick();
@@ -227,7 +228,14 @@ const MessageItem: React.FC<MessageItemProps> = ({
 };
 
 const MessageItemMemo = React.memo(MessageItem, (prevProps, nextProps) => {
-  return JSON.stringify(prevProps) === JSON.stringify(nextProps);
+  return (
+    prevProps.conversation.id === nextProps.conversation.id &&
+    prevProps.blocked === nextProps.blocked &&
+    prevProps.primaryName === nextProps.primaryName &&
+    prevProps.conversationInfo?.unreadCount === nextProps.conversationInfo?.unreadCount &&
+    prevProps.conversationInfo?.consent === nextProps.conversationInfo?.consent &&
+    prevProps.conversationInfo?.lastMessage?.id === nextProps.conversationInfo?.lastMessage?.id
+  );
 });
 
 export { MessageItemMemo as MessageItem };

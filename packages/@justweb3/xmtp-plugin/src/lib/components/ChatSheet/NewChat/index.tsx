@@ -13,7 +13,7 @@ import {
 } from '@justweb3/ui';
 import { useDebounce } from '@justweb3/widget';
 import { ConsentState } from '@xmtp/browser-sdk';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import { FullConversation, useCanMessage } from '../../../hooks';
 import { useXMTPContext } from '../../../hooks/useXMTPContext';
 import { NewChatTextField } from './NewChatTextField';
@@ -42,7 +42,6 @@ export const NewChat: React.FC<NewChatProps> = ({
     isDebouncing: isDebouncingAddress,
   } = useDebounce<string>(newAddress, 500);
 
-  
 
   const isAddressName = useMemo(() => {
     const ethAddressRegex = /^0x[a-fA-F0-9]{40}$/;
@@ -65,25 +64,16 @@ export const NewChat: React.FC<NewChatProps> = ({
     enabled: !isAddressName,
   });
 
-  useEffect(() => {
-    if (isPrimaryNameLoading || isPrimaryNameFetching) {
-      return;
-    }
-
-    if (name) {
-      setNewAddress(name);
-      return;
-    }
-  }, [name, isPrimaryNameLoading, isPrimaryNameFetching]);
   const resolvedAddress = useMemo(() => {
     const ethAddress = records?.sanitizedRecords?.ethAddress?.value;
     if (ethAddress && ethAddress !== client?.accountAddress) {
       return ethAddress;
     }
-    return;
+    return undefined;
   }, [client?.accountAddress, records?.sanitizedRecords?.ethAddress?.value]);
 
-  const handleCanMessage = async () => {
+  // Memoize this correctly to prevent recreation on renders
+  const handleCanMessage = useCallback(async () => {
     if (!client) return;
     try {
       if (isAddressName) {
@@ -107,7 +97,22 @@ export const NewChat: React.FC<NewChatProps> = ({
       console.log('error', e);
       setCanMessage(false);
     }
-  };
+  }, [client, isAddressName, resolvedAddress, debouncedAddress, xmtpCanMessage]);
+
+  const checkIfConversationExists = useCallback(async (peerAddress: string) => {
+    if (!client) return;
+    const inboxId = await client.findInboxIdByAddress(peerAddress);
+    if (!inboxId) return;
+    const convoExists = await client.conversations.getDmByInboxId(inboxId);
+    if (convoExists) {
+      const peerInboxId = await convoExists.dmPeerInboxId();
+      const convoMembers = await convoExists.members();
+      const peerAdd = convoMembers.find((member) => member.inboxId === peerInboxId)?.accountAddresses[0];
+      const consent = await convoExists.consentState();
+      const newConvo = { ...convoExists, peerAddress: peerAdd, consent } as FullConversation;
+      onChatStarted(newConvo);
+    }
+  }, [client, onChatStarted]);
 
   const handleNewChat = async (message: string) => {
     if (!client) return;
@@ -130,81 +135,46 @@ export const NewChat: React.FC<NewChatProps> = ({
     }
   };
 
-  const checkIfConversationExists = async (peerAddress: string) => {
-    const inboxId = await client?.findInboxIdByAddress(peerAddress);
-    if (!inboxId) return;
-    const convoExists = await client?.conversations.getDmByInboxId(inboxId);
-    if (convoExists) {
-      const peerInboxId = await convoExists.dmPeerInboxId();
-      const convoMembers = await convoExists.members();
-      const peerAdd = convoMembers.find((member) => member.inboxId === peerInboxId)?.accountAddresses[0];
-      const consent = await convoExists.consentState();
-      const newConvo = { ...convoExists, peerAddress: peerAdd, consent } as FullConversation;
-      onChatStarted(newConvo);
+  useEffect(() => {
+    if (name && !isPrimaryNameLoading && !isPrimaryNameFetching) {
+      setNewAddress(name);
     }
-  };
+  }, [name, isPrimaryNameLoading, isPrimaryNameFetching]);
 
+  // Move logic outside the useEffect to prevent excessive runs
+  const shouldCheckCanMessage = useMemo(() => {
+    if (debouncedAddress.length === 0) return false;
+
+    if (isAddressName) {
+      return !isRecordsLoading && resolvedAddress !== undefined;
+    } else {
+      return !canMessageLoading && !isPrimaryNameLoading;
+    }
+  }, [debouncedAddress, isAddressName, isRecordsLoading, resolvedAddress, canMessageLoading, isPrimaryNameLoading]);
+
+  // Fix the useEffect to run only when necessary
   useEffect(() => {
     if (debouncedAddress.length === 0) {
       setCanMessage(false);
       return;
     }
-    if (isAddressName) {
-      if (!isRecordsLoading && resolvedAddress) {
-        handleCanMessage();
-      }
-    } else {
-      if (!canMessageLoading && !isPrimaryNameLoading) {
-        handleCanMessage();
-      }
+
+    if (shouldCheckCanMessage) {
+      handleCanMessage();
     }
-  }, [
-    debouncedAddress,
-    canMessageLoading,
-    isPrimaryNameLoading,
-    isRecordsLoading,
-    resolvedAddress,
-    isAddressName,
-    handleCanMessage,
-  ]);
+  }, [shouldCheckCanMessage, handleCanMessage, debouncedAddress]);
 
+  // Only run this effect when canMessage changes, and add a check to prevent infinite loops
   useEffect(() => {
-    const checkConversation = async () => {
-      if (canMessage) {
-        await checkIfConversationExists(
-          isAddressName && resolvedAddress ? resolvedAddress : debouncedAddress
-        );
-      }
-    };
-
-    checkConversation();
-  }, [
-    canMessage,
-    resolvedAddress,
-    debouncedAddress,
-    checkIfConversationExists,
-    isAddressName,
-  ]);
+    if (canMessage && debouncedAddress) {
+      const targetAddress = isAddressName && resolvedAddress ? resolvedAddress : debouncedAddress;
+      checkIfConversationExists(targetAddress);
+    }
+  }, [canMessage, debouncedAddress, isAddressName, resolvedAddress, checkIfConversationExists]);
 
   const isSearchLoading = useMemo(() => {
-    return (
-      // (isAddressName && isPrimaryNameLoading && debouncedAddress.length > 4) ||
-      // isLoading
-      isDebouncingAddress || isRecordsFetching || isPrimaryNameFetching
-    );
+    return isDebouncingAddress || isRecordsFetching || isPrimaryNameFetching;
   }, [isDebouncingAddress, isRecordsFetching, isPrimaryNameFetching]);
-  // }, [isAddressName, isPrimaryNameLoading, debouncedAddress.length, isLoading]);
-
-  useEffect(() => {
-    if (isRecordsLoading || isPrimaryNameLoading) {
-      return;
-    }
-
-    if (name) {
-      setNewAddress(name);
-      return;
-    }
-  }, [name, isRecordsLoading, isPrimaryNameLoading]);
 
   return (
     <Flex
@@ -297,7 +267,7 @@ export const NewChat: React.FC<NewChatProps> = ({
           style={{
             flex: 1,
             height: 22,
-            maxHeight: 22!,
+            maxHeight: 22,
             gap: 5,
           }}
         />
