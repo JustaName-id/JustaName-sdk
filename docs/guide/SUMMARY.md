@@ -39,6 +39,7 @@
 * [JustaName Deployment Addresses](advanced/justaname-deployment-addresses.md)
 * [Coin Types](advanced/coin-types.md)
 * [JustaName - Under the Hood](advanced/justaname-under-the-hood.md)
+* [Reading JustaName Subname Events on OrbisDB](advanced/reading-justaname-subname-events-on-orbisdb.md)
 
 ## Wallet Providers
 
