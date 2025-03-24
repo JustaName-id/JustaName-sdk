@@ -4,7 +4,10 @@ import { useXMTPContext } from '../useXMTPContext';
 
 const getInboxId = async (client: Client, address?: string) => {
   if (!address) return null;
-  const inboxId = await client.findInboxIdByAddress(address);
+  const inboxId = await client.findInboxIdByIdentifier({
+    identifier: address,
+    identifierKind: 'Ethereum',
+  });
   if (!inboxId) return null;
   return inboxId;
 };

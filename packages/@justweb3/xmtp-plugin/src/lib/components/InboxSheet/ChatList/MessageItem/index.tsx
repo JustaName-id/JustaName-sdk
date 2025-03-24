@@ -5,7 +5,7 @@ import { ContentTypeReaction } from '@xmtp/content-type-reaction';
 import { ContentTypeAttachment } from '@xmtp/content-type-remote-attachment';
 import { ContentTypeReply } from '@xmtp/content-type-reply';
 import React, { useMemo } from 'react';
-import { FullConversation, useAddressInboxId } from '../../../../hooks';
+import { FullConversation, useAddressInboxId, useConversations } from '../../../../hooks';
 import { formatChatDate } from '../../../../utils/formatChatDate';
 
 export interface MessageItemProps {
@@ -33,6 +33,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
   });
   const { sanitizeEnsImage } = useEnsAvatar();
   const { inboxId } = useAddressInboxId(conversation.peerAddress);
+  const { refetchConvos } = useConversations();
 
   // const unreadMessages = useMemo(() => {
   //   if (!lastMessage) return false;
@@ -41,10 +42,12 @@ const MessageItem: React.FC<MessageItemProps> = ({
 
   const allowUser = async () => {
     await conversation.updateConsentState(ConsentState.Allowed)
+    await refetchConvos();
   };
 
   const ignoreUser = async () => {
     await conversation.updateConsentState(ConsentState.Denied)
+    await refetchConvos();
   };
 
   const lastContent = useMemo(() => {

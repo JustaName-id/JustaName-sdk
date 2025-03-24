@@ -1,9 +1,9 @@
 import { useMountedAccount } from '@justaname.id/react';
-import { Conversation, DecodedMessage } from '@xmtp/browser-sdk';
+import { ConsentState, Conversation, DecodedMessage } from '@xmtp/browser-sdk';
 import React, { useEffect, useMemo } from 'react';
 import { ChatSheet } from '../../components/ChatSheet';
 import { InboxSheet } from '../../components/InboxSheet';
-import { FullConversation, useEthersSigner, useMessages, useXMTPClient } from '../../hooks';
+import { FullConversation, useConversationConsent, useEthersSigner, useMessages, useXMTPClient } from '../../hooks';
 import { XMTPProvider } from '../../contexts/XMTPContext';
 import { useXMTPContext } from '../../hooks/useXMTPContext';
 import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
@@ -52,6 +52,46 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
     lastMessage: DecodedMessage;
   }[]>([]);
   const [peerAddress, setPeerAddress] = React.useState<string | null>(null);
+
+  const { streamedMessages, streamedConversations } = useXMTPContext();
+
+  useEffect(() => {
+    if (!streamedMessages.length || !streamedConversations.length || !conversations) return;
+
+    streamedConversations.forEach(conversation => {
+      const conversationId = conversation.id;
+      const conversationInfo = conversationsInfo.find(info => info.conversationId === conversationId);
+
+      if (!conversationInfo) {
+        setConversationsInfo(prev => [...prev, {
+          conversationId,
+          unreadCount: 0,
+          consent: 'requested',
+          lastMessage: streamedMessages.find(message => message.conversationId === conversationId)?.content ?? ''
+        }]);
+      }
+    });
+
+    streamedMessages.forEach(message => {
+      const conversationId = message.conversationId;
+      const conversationInfo = conversationsInfo.find(info => info.conversationId === conversationId);
+
+      let consent: 'allowed' | 'blocked' | 'requested' = 'requested';
+      if (conversations.allowed.some(conv => conv.id === conversationId)) {
+        consent = 'allowed';
+      } else if (conversations.blocked.some(conv => conv.id === conversationId)) {
+        consent = 'blocked';
+      }
+
+      if (message.contentType.sameAs(ContentTypeReadReceipt)) {
+        return;
+      }
+
+      const unreadCount = conversationInfo ? conversationInfo.unreadCount + 1 : 1;
+
+      handleConversationInfo(conversationId, unreadCount, message, consent);
+    });
+  }, [streamedMessages, conversations, streamedConversations, conversationsInfo]);
 
   const handleXmtpEnabled = (enabled: boolean) => {
     if (enabled === isXmtpEnabled) return;
@@ -129,8 +169,11 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
             lastMessage={
               conversationsInfo.find((item) => item.conversationId === conversation.id)?.lastMessage
             }
-            handleConversationInfo={(conversationId, unreadCount, lastMessage) =>
-              handleConversationInfo(conversationId, unreadCount, lastMessage, 'allowed')
+            consent={
+              conversationsInfo.find((item) => item.conversationId === conversation.id)?.consent ?? 'allowed'
+            }
+            handleConversationInfo={(conversationId, unreadCount, lastMessage, consent) =>
+              handleConversationInfo(conversationId, unreadCount, lastMessage, consent)
             }
           />
         ))}
@@ -144,8 +187,11 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
             lastMessage={
               conversationsInfo.find((item) => item.conversationId === conversation.id)?.lastMessage
             }
-            handleConversationInfo={(conversationId, unreadCount, lastMessage) =>
-              handleConversationInfo(conversationId, unreadCount, lastMessage, 'blocked')
+            consent={
+              conversationsInfo.find((item) => item.conversationId === conversation.id)?.consent ?? 'blocked'
+            }
+            handleConversationInfo={(conversationId, unreadCount, lastMessage, consent) =>
+              handleConversationInfo(conversationId, unreadCount, lastMessage, consent)
             }
           />
         ))}
@@ -159,8 +205,11 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
             lastMessage={
               conversationsInfo.find((item) => item.conversationId === conversation.id)?.lastMessage
             }
-            handleConversationInfo={(conversationId, unreadCount, lastMessage) =>
-              handleConversationInfo(conversationId, unreadCount, lastMessage, 'requested')
+            consent={
+              conversationsInfo.find((item) => item.conversationId === conversation.id)?.consent ?? 'requested'
+            }
+            handleConversationInfo={(conversationId, unreadCount, lastMessage, consent) =>
+              handleConversationInfo(conversationId, unreadCount, lastMessage, consent)
             }
           />
         ))}
@@ -191,9 +240,11 @@ interface GetConversationInfoProps {
   handleConversationInfo: (
     conversationId: string,
     unreadCount: number,
-    lastMessage: DecodedMessage
+    lastMessage: DecodedMessage,
+    consent: 'allowed' | 'blocked' | 'requested'
   ) => void;
   unreadCount?: number;
+  consent: 'allowed' | 'blocked' | 'requested';
   lastMessage?: DecodedMessage;
 }
 
@@ -202,8 +253,11 @@ export const GetConversationInfo: React.FC<GetConversationInfoProps> = ({
   handleConversationInfo,
   unreadCount,
   lastMessage,
+  consent,
 }) => {
   const { messages } = useMessages(conversation);
+  const { client } = useXMTPContext();
+  const { consentState } = useConversationConsent(conversation as FullConversation);
 
   const _unreadCount = useMemo(() => {
     let count = 0;
@@ -213,15 +267,16 @@ export const GetConversationInfo: React.FC<GetConversationInfoProps> = ({
         break;
       }
 
-      count++;
+      if (message.senderInboxId !== client?.inboxId) {
+        count++;
+      }
     }
 
     return count;
-  }, [messages]);
+  }, [messages, client?.inboxId]);
 
   const _lastMessage = useMemo(() => {
     const _messages = [...messages];
-    // let lastMessage = _messages[_messages.length - 1];
     let lastMessageIndex = _messages.length - 1;
     let lastMessage = _messages[lastMessageIndex];
     while (
@@ -235,12 +290,24 @@ export const GetConversationInfo: React.FC<GetConversationInfoProps> = ({
     return lastMessage;
   }, [messages]);
 
+  const checkConsentEqual = (consent: 'allowed' | 'blocked' | 'requested', consentState: ConsentState | null | undefined) => {
+    if (consent === 'allowed') return consentState === ConsentState.Allowed;
+    if (consent === 'blocked') return consentState === ConsentState.Denied;
+    return consentState === ConsentState.Unknown;
+  }
+
+  const convertConsentStateToConsent = (consentState: ConsentState | null | undefined) => {
+    if (consentState === ConsentState.Allowed) return 'allowed';
+    if (consentState === ConsentState.Denied) return 'blocked';
+    return 'requested';
+  }
+
   useEffect(() => {
-    if (unreadCount === _unreadCount && _lastMessage?.id === lastMessage?.id) {
+    if (unreadCount === _unreadCount && _lastMessage?.id === lastMessage?.id && checkConsentEqual(consent, consentState)) {
       return;
     }
 
-    handleConversationInfo(conversation.id, _unreadCount, _lastMessage);
+    handleConversationInfo(conversation.id, _unreadCount, _lastMessage, convertConsentStateToConsent(consentState));
   }, [
     conversation.id,
     handleConversationInfo,
@@ -265,15 +332,21 @@ export const Checks: React.FC<ChecksProps> = ({
 
   useEffect(() => {
     if (!client || !address || isInitializing || !signer) return;
-    if (client.accountAddress.toLowerCase() === address.toLowerCase()) return;
 
     const reinitialize = async () => {
+      if (await checkIfSameAccount()) return;
       client.close();
       await initializeXmtp({ signer });
     };
 
     reinitialize();
   }, [address, client, isInitializing, initializeXmtp, signer]);
+
+  const checkIfSameAccount = async () => {
+    if (!client || !address) return false;
+    const clientIdentifier = await client.accountIdentifier();
+    return clientIdentifier.identifier.toLowerCase() === address.toLowerCase();
+  };
 
   useEffect(() => {
     if (isInitializing || rejected || !signer) return;

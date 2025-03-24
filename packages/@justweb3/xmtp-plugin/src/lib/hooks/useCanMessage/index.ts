@@ -1,10 +1,14 @@
 import { useMountedAccount } from '@justaname.id/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { Client } from '@xmtp/browser-sdk';
+import { Client, Identifier } from '@xmtp/browser-sdk';
 
 const canMessageAddress = async (peerAddress?: `0x${string}`) => {
   if (!peerAddress) return false;
-  const response = await Client.canMessage([peerAddress]);
+  const peerIdentifier: Identifier = {
+    identifier: peerAddress,
+    identifierKind: 'Ethereum',
+  };
+  const response = await Client.canMessage([peerIdentifier]);
   return response.get(peerAddress.toLowerCase());
 };
 

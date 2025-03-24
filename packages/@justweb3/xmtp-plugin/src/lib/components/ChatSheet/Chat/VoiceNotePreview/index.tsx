@@ -173,7 +173,7 @@ const VoiceNotePreview: React.FC<VoiceNotePreviewProps> = ({
                 background: isReceiver
                   ? 'var(--justweb3-primary-color)'
                   : 'var(--justweb3-foreground-color-4)',
-                height: '100%',
+                height: '5px',
                 borderRadius: '1000px',
                 position: 'absolute',
               }}

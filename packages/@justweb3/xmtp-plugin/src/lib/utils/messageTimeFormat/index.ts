@@ -1,5 +1,5 @@
 export const formatMessageSentTime = (date: bigint) => {
-  const dateObj = new Date(Number(date));
+  const dateObj = new Date(Number(date / BigInt(1000000)));
   // Get hours, minutes, and AM/PM
   let hours = dateObj.getHours();
   const minutes = dateObj.getMinutes();

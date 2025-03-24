@@ -6,6 +6,7 @@ export const _sendMessages = async (
   message: string
 ) => {
   await conversation.send(message);
+  await conversation.sync();
 };
 
 export const useSendMessages = (conversation: FullConversation) => {

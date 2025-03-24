@@ -1,12 +1,17 @@
-import { Client, type Signer, type ClientOptions } from '@xmtp/browser-sdk';
-import { useAccount } from 'wagmi';
-import { useState, useCallback, useEffect } from 'react';
-import { useEthersSigner } from '../useEthersSigner';
 import { arrayify } from '@ethersproject/bytes';
-import { AttachmentCodec } from '@xmtp/content-type-remote-attachment';
+import { Client, type Signer } from '@xmtp/browser-sdk';
 import { ReactionCodec } from '@xmtp/content-type-reaction';
+import { AttachmentCodec } from '@xmtp/content-type-remote-attachment';
 import { ReplyCodec } from '@xmtp/content-type-reply';
+import { JsonRpcSigner } from 'ethers';
+import { useCallback, useContext, useRef, useState } from 'react';
+import { XMTPContext } from '../../contexts/XMTPContext';
 import { ReadReceiptCodec } from '@xmtp/content-type-read-receipt';
+import { useAccount } from 'wagmi';
+
+export type InitializeClientOptions = {
+  signer: JsonRpcSigner;
+};
 
 function storeKeys(address: string, key: Uint8Array, env: string) {
   localStorage.setItem(
@@ -24,78 +29,88 @@ function wipeKeys(address: string, env: string) {
   localStorage.removeItem(`xmtp_keys_${env}_${address}`);
 }
 
-export function useXMTPClient(env: 'dev' | 'production' | 'local' = 'dev') {
-  const { address, chainId } = useAccount();
-  const wagmiSigner = useEthersSigner({ chainId });
-  const [client, setClient] = useState<Client>();
+export const useXMTPClient = (onError?: (error: Error) => void) => {
   const [isInitializing, setIsInitializing] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  const [rejected, setRejected] = useState<boolean>(false);
+  const [rejected, setRejected] = useState(false);
+  const initializingRef = useRef(false);
+  const { address } = useAccount();
 
-  const initializeXmtp = useCallback(async (
-    skipIsInitializing = false
-  ) => {
-    try {
-    if (!address || !wagmiSigner || client) return;
-    
-    if (isInitializing && !skipIsInitializing) return;
+  const { client, setClient, env } = useContext(XMTPContext);
 
-    setIsInitializing(true);
+  const initializeXmtp = useCallback(
+    async ({ signer }: InitializeClientOptions) => {
+      if (!client) {
+        if (initializingRef.current) {
+          return undefined;
+        }
 
-    const signer: Signer = {
-      getAddress: () => Promise.resolve(address),
-      signMessage: async (message) => {
-        const signature = await wagmiSigner.signMessage(message);
-        return arrayify(signature);
-      },
-    };
+        initializingRef.current = true;
+        setError(null);
+        setIsInitializing(true);
+        setRejected(false);
 
-    let encryptionKey = loadKeys(address, env);
+        let xmtpClient: Client;
 
-    if (!encryptionKey) {
-      encryptionKey = window.crypto.getRandomValues(new Uint8Array(32));
-      storeKeys(address, encryptionKey, env);
-    }
+        try {
+          let encryptionKey = loadKeys(address ?? '', env);
+          if (!encryptionKey) {
+            encryptionKey = window.crypto.getRandomValues(new Uint8Array(32));
+            storeKeys(address ?? '', encryptionKey, env);
+          }
 
-    const options: ClientOptions = {
-      env: env,
-      codecs: [
-        new AttachmentCodec(),
-        new ReactionCodec(),
-        new ReplyCodec(),
-        new ReadReceiptCodec(),
-      ],
-    };
-      const newClient = await Client.create(signer, encryptionKey, options);
-      if (newClient.accountAddress !== address) {
-        wipeKeys(address, env);
-        const freshKey = window.crypto.getRandomValues(new Uint8Array(32));
-        storeKeys(address, freshKey, env);
-        setClient(await Client.create(signer, freshKey, options));
-      } else {
-        setClient(newClient);
+          // Create XMTP signer that converts ethers signatures to Uint8Array
+          const xmtpSigner: Signer = {
+            type: 'EOA',
+            getIdentifier: async () => {
+              const signerAddress = await signer.getAddress();
+              return {
+                identifier: signerAddress,
+                identifierKind: 'Ethereum',
+              };
+            },
+            signMessage: async (message: string) => {
+              const signature = await signer.signMessage(message);
+              return arrayify(signature);
+            },
+          };
+
+          xmtpClient = await Client.create(xmtpSigner, encryptionKey, {
+            env,
+            codecs: [
+              new AttachmentCodec(),
+              new ReactionCodec(),
+              new ReplyCodec(),
+              new ReadReceiptCodec(),
+            ],
+          });
+          setClient(xmtpClient);
+          storeKeys(address ?? '', encryptionKey, env);
+          await xmtpClient.conversations.syncAll();
+          await xmtpClient.conversations.sync();
+          return xmtpClient;
+        } catch (e) {
+          setClient(undefined);
+          setError(e as Error);
+          wipeKeys(address ?? '', env);
+          setRejected(true);
+          onError?.(e as Error);
+          throw e;
+        } finally {
+          initializingRef.current = false;
+          setIsInitializing(false);
+        }
       }
-    } catch (e) {
-      console.error('Failed to initialize XMTP Client:', e, error);
-      wipeKeys(address ?? '', env);
-      setError(e as Error);
-      setRejected(true);
-    } finally {
-      setIsInitializing(false);
-    }
-  }, [address, wagmiSigner, client, env]);
-
-  useEffect(() => {
-    if (!client && !isInitializing && address && wagmiSigner) {
-      initializeXmtp();
-    }
-  }, [client, isInitializing, address, wagmiSigner, initializeXmtp]);
+      return client;
+    },
+    [client, onError, setClient, env]
+  );
 
   return {
     client,
     initializeXmtp,
-    isInitializing,
     error,
+    isInitializing,
     rejected,
   };
-}
+};

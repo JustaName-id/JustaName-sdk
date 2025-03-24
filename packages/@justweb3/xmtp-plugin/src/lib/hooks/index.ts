@@ -12,3 +12,5 @@ export * from './useSendMessage';
 export * from './useSendReactionMessage';
 export * from './useSendReplyMessage';
 export * from './useVoiceRecording';
+export * from './useConversationConsent';
+export * from './useConversationConsentMutations';

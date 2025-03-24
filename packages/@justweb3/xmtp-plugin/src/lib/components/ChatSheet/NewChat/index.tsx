@@ -13,8 +13,9 @@ import {
 } from '@justweb3/ui';
 import { useDebounce } from '@justweb3/widget';
 import { ConsentState } from '@xmtp/browser-sdk';
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { FullConversation, useCanMessage } from '../../../hooks';
+import { useClientAddress } from '../../../hooks/useClientAddress';
 import { useXMTPContext } from '../../../hooks/useXMTPContext';
 import { NewChatTextField } from './NewChatTextField';
 
@@ -36,6 +37,7 @@ export const NewChat: React.FC<NewChatProps> = ({
   const [canMessage, setCanMessage] = React.useState<boolean>(false);
   //Queries
   const { client } = useXMTPContext();
+  const { clientAddress } = useClientAddress();
   const { canMessageFn: xmtpCanMessage, canMessageLoading } = useCanMessage();
   const {
     debouncedValue: debouncedAddress,
@@ -64,13 +66,14 @@ export const NewChat: React.FC<NewChatProps> = ({
     enabled: !isAddressName,
   });
 
+
   const resolvedAddress = useMemo(() => {
     const ethAddress = records?.sanitizedRecords?.ethAddress?.value;
-    if (ethAddress && ethAddress !== client?.accountAddress) {
+    if (ethAddress && ethAddress !== clientAddress) {
       return ethAddress;
     }
     return undefined;
-  }, [client?.accountAddress, records?.sanitizedRecords?.ethAddress?.value]);
+  }, [clientAddress, records?.sanitizedRecords?.ethAddress?.value]);
 
   // Memoize this correctly to prevent recreation on renders
   const handleCanMessage = useCallback(async () => {
@@ -86,7 +89,7 @@ export const NewChat: React.FC<NewChatProps> = ({
         }
       } else if (
         debouncedAddress.length === 42 &&
-        client.accountAddress !== debouncedAddress
+        clientAddress !== debouncedAddress
       ) {
         const res = await xmtpCanMessage(debouncedAddress as `0x${string}`);
         setCanMessage(!!res);
@@ -101,15 +104,20 @@ export const NewChat: React.FC<NewChatProps> = ({
 
   const checkIfConversationExists = useCallback(async (peerAddress: string) => {
     if (!client) return;
-    const inboxId = await client.findInboxIdByAddress(peerAddress);
+    const inboxId = await client.findInboxIdByIdentifier({
+      identifier: peerAddress,
+      identifierKind: "Ethereum",
+    });
     if (!inboxId) return;
     const convoExists = await client.conversations.getDmByInboxId(inboxId);
     if (convoExists) {
-      const peerInboxId = await convoExists.dmPeerInboxId();
+      const peerInboxId = await convoExists.peerInboxId();
       const convoMembers = await convoExists.members();
-      const peerAdd = convoMembers.find((member) => member.inboxId === peerInboxId)?.accountAddresses[0];
+      const peerAdd = convoMembers.find((member) => member.inboxId === peerInboxId)?.accountIdentifiers;
+      const addresses = peerAdd?.filter((i) => i.identifierKind === "Ethereum")
+        .map((i) => i.identifier);
       const consent = await convoExists.consentState();
-      const newConvo = { ...convoExists, peerAddress: peerAdd, consent } as FullConversation;
+      const newConvo = { ...convoExists, peerAddress: addresses ? addresses[0] : '', consent } as FullConversation;
       onChatStarted(newConvo);
     }
   }, [client, onChatStarted]);
@@ -119,14 +127,22 @@ export const NewChat: React.FC<NewChatProps> = ({
     const peerAddress =
       isAddressName && !!resolvedAddress ? resolvedAddress : debouncedAddress;
     try {
-      const conv = await client.conversations.newDm(peerAddress);
+      const inboxId = await client.findInboxIdByIdentifier({
+        identifier: peerAddress,
+        identifierKind: "Ethereum",
+      });
+      console.log('inboxId', inboxId);
+      if (!inboxId) return;
+      const conv = await client.conversations.newDm(inboxId);
       conv.send(message);
       await conv.updateConsentState(ConsentState.Allowed);
-      const peerInboxId = await conv.dmPeerInboxId();
+      const peerInboxId = await conv.peerInboxId();
       const convoMembers = await conv.members();
-      const peerAdd = convoMembers.find((member) => member.inboxId === peerInboxId)?.accountAddresses[0];
+      const peerAdd = convoMembers.find((member) => member.inboxId === peerInboxId)?.accountIdentifiers;
+      const addresses = peerAdd?.filter((i) => i.identifierKind === "Ethereum")
+        .map((i) => i.identifier);
       const consent = await conv.consentState();
-      const newConvo = { ...conv, peerAddress: peerAdd, consent } as FullConversation;
+      const newConvo = { ...conv, peerAddress: addresses ? addresses[0] : '', consent } as FullConversation;
       onChatStarted(newConvo);
       onBack();
     } catch (error) {

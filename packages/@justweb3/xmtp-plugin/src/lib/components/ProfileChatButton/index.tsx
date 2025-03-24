@@ -1,7 +1,7 @@
 import { useMountedAccount, useRecords } from '@justaname.id/react';
 import { ChainId } from '@justaname.id/sdk';
 import { useJustWeb3 } from '@justweb3/widget';
-import { Client } from '@xmtp/browser-sdk';
+import { Client, Identifier } from '@xmtp/browser-sdk';
 import { useEffect, useState } from 'react';
 import { useEthersSigner, useXMTPClient } from '../../hooks';
 import { useJustWeb3XMTP } from '../../providers/JustWeb3XMTPProvider';
@@ -54,7 +54,11 @@ export const ProfileChatButton: React.FC<ProfileChatButtonProps> = ({
     if (canMessageAddress === null) {
       if (records) {
         if (records?.sanitizedRecords?.ethAddress) {
-          Client.canMessage([records?.sanitizedRecords?.ethAddress?.value], env).then((canMessage) => {
+          const peerIdentifier: Identifier = {
+            identifier: records?.sanitizedRecords?.ethAddress?.value,
+            identifierKind: 'Ethereum',
+          }
+          Client.canMessage([peerIdentifier], env).then((canMessage) => {
             setCanMessageAddress(canMessage.get(records?.sanitizedRecords?.ethAddress?.value) ?? false);
           });
         }
