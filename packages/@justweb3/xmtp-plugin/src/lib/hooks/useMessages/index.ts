@@ -1,28 +1,49 @@
 import { useMountedAccount } from '@justaname.id/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Conversation, DecodedMessage } from '@xmtp/browser-sdk';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 
 const fetchMessages = async (conversation: Conversation) => {
+  await conversation.sync();
   const response = await conversation.messages();
   return response;
 };
 
-export const useMessages = (conversation: Conversation) => {
+interface UseMessagesOptions {
+  disableStream?: boolean;
+}
+
+export const useMessages = (
+  conversation: Conversation,
+  options?: UseMessagesOptions
+) => {
   const { address } = useMountedAccount();
   const queryClient = useQueryClient();
   const stopStreamRef = useRef<(() => void) | null>(null);
+  const lastMessageUpdateRef = useRef<string | null>(null);
 
-  const queryKey = ['MESSAGES', address, conversation?.id];
+  const queryKey = useMemo(
+    () => ['MESSAGES', address, conversation?.id],
+    [address, conversation?.id]
+  );
 
   const query = useQuery({
     queryKey,
     queryFn: () => fetchMessages(conversation),
     enabled: !!address && !!conversation,
+    staleTime: 5000,
   });
 
   useEffect(() => {
-    if (!conversation || !address) return;
+    if (!conversation || !address || options?.disableStream) {
+      if (stopStreamRef.current) {
+        stopStreamRef.current();
+        stopStreamRef.current = null;
+      }
+      return;
+    }
+
+    if (stopStreamRef.current) return;
 
     const startStream = async () => {
       const onMessage = (
@@ -30,6 +51,12 @@ export const useMessages = (conversation: Conversation) => {
         message: DecodedMessage | undefined
       ) => {
         if (message) {
+          if (lastMessageUpdateRef.current === message.id) {
+            return;
+          }
+
+          lastMessageUpdateRef.current = message.id;
+
           queryClient.setQueryData(
             queryKey,
             (oldData: DecodedMessage[] = []) => {
@@ -39,6 +66,10 @@ export const useMessages = (conversation: Conversation) => {
               return oldData;
             }
           );
+
+          setTimeout(() => {
+            queryClient.invalidateQueries({ queryKey });
+          }, 100);
         }
       };
 
@@ -59,7 +90,13 @@ export const useMessages = (conversation: Conversation) => {
         stopStreamRef.current = null;
       }
     };
-  }, [conversation?.id, address, queryClient, queryKey]);
+  }, [
+    conversation?.id,
+    address,
+    queryClient,
+    options?.disableStream,
+    queryKey,
+  ]);
 
   const syncMessages = async () => {
     if (!conversation) return;

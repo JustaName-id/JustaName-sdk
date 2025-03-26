@@ -103,7 +103,7 @@ export const useXMTPClient = (onError?: (error: Error) => void) => {
       }
       return client;
     },
-    [client, onError, setClient, env]
+    [client, onError, setClient, env, address]
   );
 
   return {

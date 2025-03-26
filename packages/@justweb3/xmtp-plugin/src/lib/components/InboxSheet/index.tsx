@@ -14,7 +14,7 @@ import {
 } from '@justweb3/ui';
 import { Conversation, DecodedMessage } from '@xmtp/browser-sdk';
 import { isEqual } from 'lodash';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { FullConversation, useConversations } from '../../hooks';
 import { ChatList } from './ChatList';
 
@@ -39,7 +39,7 @@ export interface InboxSheetProps {
     blocked: Conversation[];
     requested: Conversation[];
   };
-  conversationsInfo?: {
+  conversationsInfo: {
     conversationId: string;
     unreadCount: number;
     consent: 'allowed' | 'blocked' | 'requested';
@@ -60,63 +60,84 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
   const { conversations, conversationsLoading: isLoading } = useConversations();
 
   const [addresses, setAddresses] = React.useState<string[]>([]);
-  React.useEffect(() => {
-    if (conversations.allowed.length === 0 && conversations.blocked.length === 0 && conversations.requested.length === 0) return;
-    const allAddresses = [...conversations.allowed, ...conversations.blocked, ...conversations.requested].map((conversation) => conversation.peerAddress);
-    setAddresses(allAddresses);
-  }, [conversations]);
+
+  const extractedAddresses = useMemo(() => {
+    if (conversations.allowed.length === 0 && conversations.blocked.length === 0 && conversations.requested.length === 0) {
+      return [];
+    }
+    return [...conversations.allowed, ...conversations.blocked, ...conversations.requested]
+      .map((conversation) => conversation.peerAddress);
+  }, [conversations.allowed, conversations.blocked, conversations.requested]);
+
+  useEffect(() => {
+    if (extractedAddresses.length > 0 && !isEqual(addresses, extractedAddresses)) {
+      setAddresses(extractedAddresses);
+    }
+  }, [extractedAddresses, addresses]);
 
   const { allPrimaryNames } = usePrimaryNameBatch({
     addresses,
-    enabled: conversations.allowed.length > 0 || conversations.blocked.length > 0 || conversations.requested.length > 0,
+    enabled: addresses.length > 0,
   });
 
+  const updateConversations = useCallback(() => {
+    const shouldUpdate =
+      !isEqual(
+        conversations.allowed.map(convo => convo.id).sort(),
+        allConversations.allowed.map(convo => convo.id).sort()
+      ) ||
+      !isEqual(
+        conversations.blocked.map(convo => convo.id).sort(),
+        allConversations.blocked.map(convo => convo.id).sort()
+      ) ||
+      !isEqual(
+        conversations.requested.map(convo => convo.id).sort(),
+        allConversations.requested.map(convo => convo.id).sort()
+      );
 
-  useEffect(() => {
-    const allowedConversationsTopic = conversations.allowed.map(
-      (convo) => convo.id
-    );
-
-    const blockedConversationsTopic = conversations.blocked.map(
-      (convo) => convo.id
-    );
-
-    const requestConversationsTopic = conversations.requested.map(
-      (convo) => convo.id
-    );
-
-    const allConversationsAllowedTopic = allConversations.allowed.map(
-      (convo) => convo.id
-    );
-
-    const allConversationsBlockedTopic = allConversations.blocked.map(
-      (convo) => convo.id
-    );
-
-    const allConversationsRequestedTopic = allConversations.requested.map(
-      (convo) => convo.id
-    );
-
-    if (
-      !isEqual(allowedConversationsTopic, allConversationsAllowedTopic) ||
-      !isEqual(blockedConversationsTopic, allConversationsBlockedTopic) ||
-      !isEqual(requestConversationsTopic, allConversationsRequestedTopic)
-    ) {
+    if (shouldUpdate) {
       onConversationsUpdated({
         allowed: conversations.allowed,
         blocked: conversations.blocked,
         requested: conversations.requested,
       });
     }
-  }, [
-    allConversations,
-    conversations,
-    onConversationsUpdated,
-  ]);
+  }, [allConversations, conversations, onConversationsUpdated]);
 
-  // await client?.conversations.syncAll();
-  // useStreamAllMessages();
-  // useStreamConsentList();
+  useEffect(() => {
+    updateConversations();
+  }, [updateConversations]);
+
+  const allowedChatList = useMemo(() => (
+    <ChatList
+      conversations={conversations.allowed}
+      conversationsInfo={conversationsInfo}
+      handleOpenChat={handleOpenChat}
+      primaryNames={allPrimaryNames}
+      consent="allowed"
+    />
+  ), [conversations.allowed, conversationsInfo, handleOpenChat, allPrimaryNames]);
+
+  const requestedChatList = useMemo(() => (
+    <ChatList
+      conversations={conversations.requested}
+      handleOpenChat={handleOpenChat}
+      conversationsInfo={conversationsInfo}
+      primaryNames={allPrimaryNames}
+      consent="requested"
+    />
+  ), [conversations.requested, conversationsInfo, handleOpenChat, allPrimaryNames]);
+
+  const blockedChatList = useMemo(() => (
+    <ChatList
+      conversations={conversations.blocked}
+      handleOpenChat={handleOpenChat}
+      blockedList
+      conversationsInfo={conversationsInfo}
+      primaryNames={allPrimaryNames}
+      consent="blocked"
+    />
+  ), [conversations.blocked, conversationsInfo, handleOpenChat, allPrimaryNames]);
 
   return (
     <Sheet open={open} onOpenChange={handleOpen}>
@@ -173,7 +194,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
               >
                 <Flex style={{ gap: '5px' }}>
                   Requests
-                  {conversations.requested.length > 0 && (
+                  {conversationsInfo.filter(info => info.consent === 'requested').length > 0 && (
                     <div
                       style={{
                         // position: 'absolute',
@@ -198,7 +219,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                           color: 'var(--justweb3-background-color)',
                         }}
                       >
-                        {conversations.requested.length}
+                        {conversationsInfo.filter(info => info.consent === 'requested').length}
                       </SPAN>
                     </div>
                   )}
@@ -255,12 +276,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                       </Button>
                     </div>
                     :
-                    <ChatList
-                      conversations={conversations.allowed}
-                      conversationsInfo={conversationsInfo}
-                      handleOpenChat={handleOpenChat}
-                      primaryNames={allPrimaryNames}
-                    />
+                    allowedChatList
                   }
                 </TabsContent>
                 <TabsContent
@@ -273,12 +289,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                       'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
                   }}
                 >
-                  <ChatList
-                    conversations={conversations.requested}
-                    handleOpenChat={handleOpenChat}
-                    conversationsInfo={conversationsInfo}
-                    primaryNames={allPrimaryNames}
-                  />
+                  {requestedChatList}
                 </TabsContent>
                 <TabsContent
                   value={'Blocked'}
@@ -290,13 +301,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                       'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
                   }}
                 >
-                  <ChatList
-                    conversations={conversations.blocked}
-                    handleOpenChat={handleOpenChat}
-                    blockedList
-                    conversationsInfo={conversationsInfo}
-                    primaryNames={allPrimaryNames}
-                  />
+                  {blockedChatList}
                 </TabsContent>
               </>
             )}
@@ -358,6 +363,6 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
           </Flex>
         </Flex>
       </SheetContent>
-    </Sheet >
+    </Sheet>
   );
 };

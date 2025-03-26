@@ -23,7 +23,6 @@ export const XMTPProvider: React.FC<XMTPProviderProps> = ({
     env,
 }) => {
     const [client, setClient] = useState<Client | undefined>(initialClient);
-
     const value = useMemo(
         () => ({
             client,

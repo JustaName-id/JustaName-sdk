@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ConsentState } from '@xmtp/browser-sdk';
-import { FullConversation, useConversations, useXMTPClient } from '..';
+import { FullConversation, useConversations } from '..';
 
 export interface UseConversationConsentMutationsProps {
   conversation: FullConversation;
@@ -15,7 +15,6 @@ export const useConversationConsentMutations = ({
 }: UseConversationConsentMutationsProps) => {
   const queryClient = useQueryClient();
   const { refetchConvos } = useConversations();
-  const { client } = useXMTPClient();
 
   const allowAddressMutation = useMutation({
     mutationFn: async () => {
@@ -28,7 +27,6 @@ export const useConversationConsentMutations = ({
       if (onAllowSuccess) {
         onAllowSuccess();
       }
-      client?.conversations.syncAll();
       refetchConvos();
     },
   });
@@ -42,10 +40,8 @@ export const useConversationConsentMutations = ({
         queryKey: ['conversation', conversation.id],
       });
       if (onBlockSuccess) {
-        console.log('block success mutation');
         onBlockSuccess();
       }
-      client?.conversations.syncAll();
       refetchConvos();
     },
   });

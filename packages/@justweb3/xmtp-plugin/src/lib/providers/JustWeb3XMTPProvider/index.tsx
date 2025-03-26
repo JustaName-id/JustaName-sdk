@@ -1,12 +1,12 @@
 import { useMountedAccount } from '@justaname.id/react';
-import { ConsentState, Conversation, DecodedMessage } from '@xmtp/browser-sdk';
-import React, { useEffect, useMemo } from 'react';
+import { ConsentState, Conversation, DecodedMessage, Client } from '@xmtp/browser-sdk';
+import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
+import React, { useEffect, useMemo, useRef, useCallback } from 'react';
 import { ChatSheet } from '../../components/ChatSheet';
 import { InboxSheet } from '../../components/InboxSheet';
-import { FullConversation, useConversationConsent, useEthersSigner, useMessages, useXMTPClient } from '../../hooks';
 import { XMTPProvider } from '../../contexts/XMTPContext';
+import { FullConversation, useConversationConsent, useEthersSigner, useMessages, useStreamConversations, useStreamMessages, useXMTPClient } from '../../hooks';
 import { useXMTPContext } from '../../hooks/useXMTPContext';
-import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
 
 interface JustWeb3XMTPContextProps {
   handleOpenChat: (address: string) => void;
@@ -16,6 +16,12 @@ interface JustWeb3XMTPContextProps {
     consent: 'allowed' | 'blocked' | 'requested';
     lastMessage: DecodedMessage;
   }[];
+  setConversationsInfo: (conversationsInfo: {
+    conversationId: string;
+    unreadCount: number;
+    consent: 'allowed' | 'blocked' | 'requested';
+    lastMessage: DecodedMessage;
+  }[]) => void;
   env: 'local' | 'production' | 'dev';
 }
 
@@ -52,46 +58,20 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
     lastMessage: DecodedMessage;
   }[]>([]);
   const [peerAddress, setPeerAddress] = React.useState<string | null>(null);
+  const [clientState, setClientState] = React.useState<Client | undefined>(undefined);
 
-  const { streamedMessages, streamedConversations } = useXMTPContext();
 
-  useEffect(() => {
-    if (!streamedMessages.length || !streamedConversations.length || !conversations) return;
+  useStreamConversations({
+    conversationsInfo,
+    setConversationsInfo,
+    client: clientState,
+  });
 
-    streamedConversations.forEach(conversation => {
-      const conversationId = conversation.id;
-      const conversationInfo = conversationsInfo.find(info => info.conversationId === conversationId);
-
-      if (!conversationInfo) {
-        setConversationsInfo(prev => [...prev, {
-          conversationId,
-          unreadCount: 0,
-          consent: 'requested',
-          lastMessage: streamedMessages.find(message => message.conversationId === conversationId)?.content ?? ''
-        }]);
-      }
-    });
-
-    streamedMessages.forEach(message => {
-      const conversationId = message.conversationId;
-      const conversationInfo = conversationsInfo.find(info => info.conversationId === conversationId);
-
-      let consent: 'allowed' | 'blocked' | 'requested' = 'requested';
-      if (conversations.allowed.some(conv => conv.id === conversationId)) {
-        consent = 'allowed';
-      } else if (conversations.blocked.some(conv => conv.id === conversationId)) {
-        consent = 'blocked';
-      }
-
-      if (message.contentType.sameAs(ContentTypeReadReceipt)) {
-        return;
-      }
-
-      const unreadCount = conversationInfo ? conversationInfo.unreadCount + 1 : 1;
-
-      handleConversationInfo(conversationId, unreadCount, message, consent);
-    });
-  }, [streamedMessages, conversations, streamedConversations, conversationsInfo]);
+  useStreamMessages({
+    conversationsInfo,
+    setConversationsInfo,
+    client: clientState,
+  });
 
   const handleXmtpEnabled = (enabled: boolean) => {
     if (enabled === isXmtpEnabled) return;
@@ -125,12 +105,28 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
   ) => {
     setConversationsInfo((prev) => {
       const index = prev.findIndex((item) => item.conversationId === conversationId);
+
       if (index === -1) {
         return [...prev, { conversationId, unreadCount, lastMessage, consent }];
       }
-      const newState = [...prev];
-      newState[index] = { ...newState[index], unreadCount, lastMessage, consent };
-      return newState;
+
+      const existingInfo = prev[index];
+      let shouldUpdate = true;
+
+      if (existingInfo.lastMessage && lastMessage &&
+        existingInfo.lastMessage.sentAtNs && lastMessage.sentAtNs) {
+        shouldUpdate = BigInt(lastMessage.sentAtNs) >= BigInt(existingInfo.lastMessage.sentAtNs);
+
+      }
+
+      if (shouldUpdate) {
+
+        const newState = [...prev];
+        newState[index] = { ...newState[index], unreadCount, lastMessage, consent };
+        return newState;
+      }
+
+      return prev;
     });
   };
 
@@ -138,15 +134,21 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
     () => ({
       handleOpenChat,
       conversationsInfo,
+      setConversationsInfo,
       env,
     }),
     [conversationsInfo, env]
   );
 
   return (
-    <XMTPProvider env={env}>
+    <XMTPProvider env={env} client={clientState}>
       <JustWeb3XMTPContext.Provider value={contextValue}>
-        <Checks open={open} handleXmtpEnabled={handleXmtpEnabled} env={env} />
+        <Checks
+          open={open}
+          handleXmtpEnabled={handleXmtpEnabled}
+          env={env}
+          onClientUpdate={setClientState}
+        />
         {isXmtpEnabled && (
           <InboxSheet
             open={open}
@@ -233,6 +235,7 @@ interface ChecksProps {
   open?: boolean;
   handleXmtpEnabled: (enabled: boolean) => void;
   env: 'local' | 'production' | 'dev';
+  onClientUpdate: (client: Client | undefined) => void;
 }
 
 interface GetConversationInfoProps {
@@ -248,16 +251,18 @@ interface GetConversationInfoProps {
   lastMessage?: DecodedMessage;
 }
 
-export const GetConversationInfo: React.FC<GetConversationInfoProps> = ({
+export const GetConversationInfo: React.FC<GetConversationInfoProps> = React.memo(({
   conversation,
   handleConversationInfo,
   unreadCount,
   lastMessage,
   consent,
 }) => {
-  const { messages } = useMessages(conversation);
+  const { messages } = useMessages(conversation, { disableStream: true });
   const { client } = useXMTPContext();
   const { consentState } = useConversationConsent(conversation as FullConversation);
+  const lastUpdateRef = useRef(Date.now());
+  const processingUpdateRef = useRef(false);
 
   const _unreadCount = useMemo(() => {
     let count = 0;
@@ -290,52 +295,123 @@ export const GetConversationInfo: React.FC<GetConversationInfoProps> = ({
     return lastMessage;
   }, [messages]);
 
-  const checkConsentEqual = (consent: 'allowed' | 'blocked' | 'requested', consentState: ConsentState | null | undefined) => {
+  const checkConsentEqual = useCallback((consent: 'allowed' | 'blocked' | 'requested', consentState: ConsentState | null | undefined) => {
     if (consent === 'allowed') return consentState === ConsentState.Allowed;
     if (consent === 'blocked') return consentState === ConsentState.Denied;
     return consentState === ConsentState.Unknown;
-  }
+  }, []);
 
-  const convertConsentStateToConsent = (consentState: ConsentState | null | undefined) => {
+  const convertConsentStateToConsent = useCallback((consentState: ConsentState | null | undefined) => {
     if (consentState === ConsentState.Allowed) return 'allowed';
     if (consentState === ConsentState.Denied) return 'blocked';
     return 'requested';
-  }
+  }, []);
 
+  // Effect runs whenever lastMessage from props changes to update our ref timestamp
   useEffect(() => {
-    if (unreadCount === _unreadCount && _lastMessage?.id === lastMessage?.id && checkConsentEqual(consent, consentState)) {
+    if (lastMessage) {
+      lastUpdateRef.current = Date.now();
+    }
+  }, [lastMessage?.id]);
+
+  // Only update when necessary and prevent excessive updates
+  useEffect(() => {
+    if (processingUpdateRef.current) {
       return;
     }
 
-    handleConversationInfo(conversation.id, _unreadCount, _lastMessage, convertConsentStateToConsent(consentState));
+    if (unreadCount === _unreadCount &&
+      (!_lastMessage || _lastMessage?.id === lastMessage?.id) &&
+      checkConsentEqual(consent, consentState)) {
+      return;
+    }
+
+    if (lastMessage && !_lastMessage) {
+      return;
+    }
+
+    if (lastMessage && _lastMessage &&
+      lastMessage.sentAtNs && _lastMessage.sentAtNs &&
+      lastMessage.sentAtNs > _lastMessage.sentAtNs) {
+      return;
+    }
+
+    const messageChanged = !lastMessage || !_lastMessage || _lastMessage?.id !== lastMessage?.id;
+    const countChanged = unreadCount !== _unreadCount;
+    const consentChanged = !checkConsentEqual(consent, consentState);
+
+    if (!messageChanged && !consentChanged && countChanged && lastMessage) {
+      return;
+    }
+
+    processingUpdateRef.current = true;
+
+    setTimeout(() => {
+      handleConversationInfo(
+        conversation.id,
+        _unreadCount,
+        _lastMessage,
+        convertConsentStateToConsent(consentState)
+      );
+      processingUpdateRef.current = false;
+    }, 0);
+
   }, [
     conversation.id,
     handleConversationInfo,
     _unreadCount,
     unreadCount,
     _lastMessage,
-    lastMessage?.id,
+    lastMessage,
+    consentState,
+    consent,
+    checkConsentEqual,
+    convertConsentStateToConsent,
   ]);
 
   return null;
-};
+}, (prevProps, nextProps) => {
+  if (prevProps.conversation.id !== nextProps.conversation.id) {
+    return false;
+  }
+
+  if (prevProps.consent !== nextProps.consent) {
+    return false;
+  }
+
+  if (prevProps.unreadCount !== nextProps.unreadCount) {
+    return false;
+  }
+
+  if (prevProps.lastMessage?.id !== nextProps.lastMessage?.id) {
+    return false;
+  }
+
+  return true;
+});
 
 export const Checks: React.FC<ChecksProps> = ({
   open,
   handleXmtpEnabled,
   env,
+  onClientUpdate,
 }) => {
   const { isInitializing, initializeXmtp, rejected } = useXMTPClient();
-  const { client } = useXMTPContext();
+  const { client, setClient } = useXMTPContext();
   const { address } = useMountedAccount();
   const signer = useEthersSigner();
+  const clientInitializing = useRef(false);
 
   useEffect(() => {
     if (!client || !address || isInitializing || !signer) return;
 
     const reinitialize = async () => {
       if (await checkIfSameAccount()) return;
+      console.log("reinitializing")
       client.close();
+      handleXmtpEnabled(false);
+      setClient(undefined);
+      onClientUpdate(undefined);
       await initializeXmtp({ signer });
     };
 
@@ -349,11 +425,14 @@ export const Checks: React.FC<ChecksProps> = ({
   };
 
   useEffect(() => {
-    if (isInitializing || rejected || !signer) return;
-    initializeXmtp({ signer });
+    if (isInitializing || rejected || !signer || clientInitializing.current) return;
+
+    clientInitializing.current = true;
+    initializeXmtp({ signer }).finally(() => {
+      clientInitializing.current = false;
+    });
   }, [
     address,
-    client,
     initializeXmtp,
     isInitializing,
     rejected,
@@ -361,8 +440,13 @@ export const Checks: React.FC<ChecksProps> = ({
   ]);
 
   useEffect(() => {
+    if (client === undefined) return;
+
     handleXmtpEnabled(!!client);
-  }, [client, handleXmtpEnabled]);
+    setClient(client);
+    onClientUpdate(client);
+
+  }, [client, handleXmtpEnabled, onClientUpdate, setClient]);
 
   return null;
 };

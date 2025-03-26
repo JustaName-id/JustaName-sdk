@@ -231,14 +231,31 @@ const MessageItem: React.FC<MessageItemProps> = ({
 };
 
 const MessageItemMemo = React.memo(MessageItem, (prevProps, nextProps) => {
-  return (
-    prevProps.conversation.id === nextProps.conversation.id &&
-    prevProps.blocked === nextProps.blocked &&
-    prevProps.primaryName === nextProps.primaryName &&
-    prevProps.conversationInfo?.unreadCount === nextProps.conversationInfo?.unreadCount &&
-    prevProps.conversationInfo?.consent === nextProps.conversationInfo?.consent &&
-    prevProps.conversationInfo?.lastMessage?.id === nextProps.conversationInfo?.lastMessage?.id
-  );
+  if (!prevProps.conversationInfo || !nextProps.conversationInfo) {
+    return false;
+  }
+  if (prevProps.conversationInfo?.unreadCount !== nextProps.conversationInfo?.unreadCount) {
+    return false;
+  }
+  if (prevProps.conversationInfo?.consent !== nextProps.conversationInfo?.consent) {
+    return false;
+  }
+  if (prevProps.conversationInfo?.lastMessage?.id !== nextProps.conversationInfo?.lastMessage?.id) {
+    return false;
+  }
+  if (prevProps.conversationInfo?.lastMessage?.sentAtNs !== nextProps.conversationInfo?.lastMessage?.sentAtNs) {
+    return false;
+  }
+  if (prevProps.conversation.id !== nextProps.conversation.id) {
+    return false;
+  }
+  if (prevProps.blocked !== nextProps.blocked) {
+    return false;
+  }
+  if (prevProps.primaryName !== nextProps.primaryName) {
+    return false;
+  }
+  return true;
 });
 
 export { MessageItemMemo as MessageItem };

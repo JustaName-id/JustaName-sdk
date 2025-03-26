@@ -21,12 +21,12 @@ const preview: Preview = {
                 date: /Date$/,
             },
         },
-        server: {
-            headers: {
-                'Cross-Origin-Embedder-Policy': 'require-corp',
-                'Cross-Origin-Opener-Policy': 'same-origin',
-            },
-        },
+        // server: {
+        //     headers: {
+        //         'Cross-Origin-Embedder-Policy': 'require-corp',
+        //         'Cross-Origin-Opener-Policy': 'same-origin',
+        //     },
+        // },
     },
 };
 

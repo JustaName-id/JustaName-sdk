@@ -35,6 +35,7 @@ export const NewChat: React.FC<NewChatProps> = ({
     selectedAddress ?? ''
   );
   const [canMessage, setCanMessage] = React.useState<boolean>(false);
+  const [isVerifying, setIsVerifying] = React.useState<boolean>(false);
   //Queries
   const { client } = useXMTPContext();
   const { clientAddress } = useClientAddress();
@@ -75,16 +76,16 @@ export const NewChat: React.FC<NewChatProps> = ({
     return undefined;
   }, [clientAddress, records?.sanitizedRecords?.ethAddress?.value]);
 
-  // Memoize this correctly to prevent recreation on renders
   const handleCanMessage = useCallback(async () => {
     if (!client) return;
+    setIsVerifying(true);
     try {
       if (isAddressName) {
         if (resolvedAddress) {
           const res = await xmtpCanMessage(resolvedAddress as `0x${string}`);
           setCanMessage(!!res);
         } else {
-          // Resolved address is not available yet; do nothing
+          setIsVerifying(false);
           return;
         }
       } else if (
@@ -99,8 +100,10 @@ export const NewChat: React.FC<NewChatProps> = ({
     } catch (e) {
       console.log('error', e);
       setCanMessage(false);
+    } finally {
+      setIsVerifying(false);
     }
-  }, [client, isAddressName, resolvedAddress, debouncedAddress, xmtpCanMessage]);
+  }, [client, isAddressName, resolvedAddress, debouncedAddress, xmtpCanMessage, clientAddress]);
 
   const checkIfConversationExists = useCallback(async (peerAddress: string) => {
     if (!client) return;
@@ -117,7 +120,9 @@ export const NewChat: React.FC<NewChatProps> = ({
       const addresses = peerAdd?.filter((i) => i.identifierKind === "Ethereum")
         .map((i) => i.identifier);
       const consent = await convoExists.consentState();
-      const newConvo = { ...convoExists, peerAddress: addresses ? addresses[0] : '', consent } as FullConversation;
+      const newConvo = convoExists as unknown as FullConversation;
+      newConvo.peerAddress = addresses ? addresses[0] : '';
+      newConvo.consent = consent;
       onChatStarted(newConvo);
     }
   }, [client, onChatStarted]);
@@ -131,7 +136,6 @@ export const NewChat: React.FC<NewChatProps> = ({
         identifier: peerAddress,
         identifierKind: "Ethereum",
       });
-      console.log('inboxId', inboxId);
       if (!inboxId) return;
       const conv = await client.conversations.newDm(inboxId);
       conv.send(message);
@@ -142,7 +146,9 @@ export const NewChat: React.FC<NewChatProps> = ({
       const addresses = peerAdd?.filter((i) => i.identifierKind === "Ethereum")
         .map((i) => i.identifier);
       const consent = await conv.consentState();
-      const newConvo = { ...conv, peerAddress: addresses ? addresses[0] : '', consent } as FullConversation;
+      const newConvo = conv as unknown as FullConversation;
+      newConvo.peerAddress = addresses ? addresses[0] : '';
+      newConvo.consent = consent;
       onChatStarted(newConvo);
       onBack();
     } catch (error) {
@@ -157,18 +163,30 @@ export const NewChat: React.FC<NewChatProps> = ({
     }
   }, [name, isPrimaryNameLoading, isPrimaryNameFetching]);
 
-  // Move logic outside the useEffect to prevent excessive runs
   const shouldCheckCanMessage = useMemo(() => {
     if (debouncedAddress.length === 0) return false;
+
+    if (canMessage &&
+      ((isAddressName && resolvedAddress) ||
+        (!isAddressName && debouncedAddress.length === 42))) {
+      return false;
+    }
 
     if (isAddressName) {
       return !isRecordsLoading && resolvedAddress !== undefined;
     } else {
       return !canMessageLoading && !isPrimaryNameLoading;
     }
-  }, [debouncedAddress, isAddressName, isRecordsLoading, resolvedAddress, canMessageLoading, isPrimaryNameLoading]);
+  }, [
+    debouncedAddress,
+    isAddressName,
+    isRecordsLoading,
+    resolvedAddress,
+    canMessageLoading,
+    isPrimaryNameLoading,
+    canMessage
+  ]);
 
-  // Fix the useEffect to run only when necessary
   useEffect(() => {
     if (debouncedAddress.length === 0) {
       setCanMessage(false);
@@ -178,19 +196,18 @@ export const NewChat: React.FC<NewChatProps> = ({
     if (shouldCheckCanMessage) {
       handleCanMessage();
     }
-  }, [shouldCheckCanMessage, handleCanMessage, debouncedAddress]);
+  }, [shouldCheckCanMessage, handleCanMessage]);
 
-  // Only run this effect when canMessage changes, and add a check to prevent infinite loops
   useEffect(() => {
     if (canMessage && debouncedAddress) {
       const targetAddress = isAddressName && resolvedAddress ? resolvedAddress : debouncedAddress;
       checkIfConversationExists(targetAddress);
     }
-  }, [canMessage, debouncedAddress, isAddressName, resolvedAddress, checkIfConversationExists]);
+  }, [canMessage, checkIfConversationExists]);
 
   const isSearchLoading = useMemo(() => {
-    return isDebouncingAddress || isRecordsFetching || isPrimaryNameFetching;
-  }, [isDebouncingAddress, isRecordsFetching, isPrimaryNameFetching]);
+    return isDebouncingAddress || isRecordsFetching || isPrimaryNameFetching || isVerifying;
+  }, [isDebouncingAddress, isRecordsFetching, isPrimaryNameFetching, isVerifying]);
 
   return (
     <Flex
@@ -242,7 +259,9 @@ export const NewChat: React.FC<NewChatProps> = ({
                 To
               </P>
               {isSearchLoading ? (
-                <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+                <Flex direction="row" align="center" justify='flex-end'>
+                  <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+                </Flex>
               ) : debouncedAddress.length > 0 ? (
                 <VerificationsIcon
                   fill={
@@ -256,7 +275,9 @@ export const NewChat: React.FC<NewChatProps> = ({
           }
           right={
             isSearchLoading ? (
-              <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+              <Flex direction="row" align="center" justify='flex-end'>
+                <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+              </Flex>
             ) : (
               <Flex direction="row" gap="5px">
                 <Flex

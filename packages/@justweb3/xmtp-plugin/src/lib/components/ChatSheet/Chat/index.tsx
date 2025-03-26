@@ -12,6 +12,7 @@ import { useConversationConsent } from '../../../hooks/useConversationConsent';
 import { useConversationConsentMutations } from '../../../hooks/useConversationConsentMutations';
 import { useReadReceipt } from '../../../hooks/useReadReceipt';
 import { useXMTPContext } from '../../../hooks/useXMTPContext';
+import { useJustWeb3XMTP } from '../../../providers/JustWeb3XMTPProvider';
 import { typeLookup } from '../../../utils/attachments';
 import {
   filterReactionsMessages,
@@ -47,10 +48,10 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
   const { records } = useRecords({ ens: primaryName });
   const { address } = useMountedAccount();
   const { messages, messagesLoading: isLoading } = useMessages(conversation);
-  console.log('messages', messages);
   const { canMessage, canMessageLoading } = useCanMessage(conversation.peerAddress as `0x${string}`);
   const { mutateAsync: readReceipt, isPending: isReadReceiptSending } =
     useReadReceipt(conversation);
+  const { conversationsInfo, setConversationsInfo } = useJustWeb3XMTP();
 
   const {
     isRequest,
@@ -64,7 +65,6 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
   } = useConversationConsentMutations({
     conversation,
     onBlockSuccess: () => {
-      console.log('block success');
       onBack();
     }
   });
@@ -84,7 +84,15 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
       return;
     }
 
-    handleReadMessagesIfAllowed(readReceipt);
+    handleReadMessagesIfAllowed(() => {
+      const conversationInfo = conversationsInfo.find(info => info.conversationId === conversation.id);
+      if (conversationInfo) {
+        conversationInfo.unreadCount = 0;
+        const result = [conversationInfo, ...conversationsInfo.filter(info => info.conversationId !== conversation.id)];
+        setConversationsInfo(result);
+      }
+      return readReceipt();
+    });
 
   }, [messages.length, isReadReceiptSending, isLoading, client?.inboxId, handleReadMessagesIfAllowed, readReceipt]);
 
@@ -92,7 +100,10 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     const withoutRead = messages?.filter(
       (message) => !message.contentType.sameAs(ContentTypeReadReceipt)
     );
-    return filterReactionsMessages(withoutRead ?? []);
+    const withoutInitialMessage = withoutRead?.filter(
+      (message) => message.encodedContent.type.typeId !== "group_updated"
+    );
+    return filterReactionsMessages(withoutInitialMessage ?? []);
   }, [messages]);
 
   const groupedMessages = useMemo(() => {

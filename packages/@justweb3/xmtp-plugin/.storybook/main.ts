@@ -14,14 +14,14 @@ const config: StorybookConfig = {
     mergeConfig(config, {
       plugins: [react(), nxViteTsPaths()],
       optimizeDeps: {
-        exclude: ['@xmtp/wasm-bindings'],
+        exclude: ['@xmtp/user-preferences-bindings-wasm'],
       },
-      server: {
-        headers: {
-          'Cross-Origin-Embedder-Policy': 'require-corp',
-          'Cross-Origin-Opener-Policy': 'same-origin',
-        },
-      },
+      // server: {
+      //   headers: {
+      //     'Cross-Origin-Embedder-Policy': 'require-corp',
+      //     'Cross-Origin-Opener-Policy': 'same-origin',
+      //   },
+      // },
       define: {
         'process.env': process.env,
       },
