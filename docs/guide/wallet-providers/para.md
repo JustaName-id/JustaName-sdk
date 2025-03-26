@@ -1,6 +1,6 @@
-# Capsule
+# Para
 
-Capsule is a cross-app embedded wallet provider. It supports OAuth methods (e.g., Google, Apple) and other modern authentication mechanisms, making it an excellent choice for onboarding Web2 users into Web3.
+Para is a cross-app embedded wallet provider. It supports OAuth methods (e.g., Google, Apple) and other modern authentication mechanisms, making it an excellent choice for onboarding Web2 users into Web3.
 
 ## Installing Required Dependencies:
 
@@ -8,19 +8,19 @@ Run the following command to install the necessary packages:
 
 {% tabs %}
 {% tab title="npm" %}
-<pre class="language-bash"><code class="lang-bash"><strong>npm install @justweb3/widget @usecapsule/react-sdk @usecapsule/wagmi-v2-integration wagmi @tanstack/react-query ethers
+<pre class="language-bash"><code class="lang-bash"><strong>npm install @justweb3/widget @getpara/react-sdk @getpara/wagmi-v2-integration wagmi @tanstack/react-query ethers
 </strong></code></pre>
 {% endtab %}
 
 {% tab title="pnpm" %}
 ```bash
-pnpm install @justweb3/widget @usecapsule/react-sdk @usecapsule/wagmi-v2-integration wagmi @tanstack/react-query ethers
+pnpm install @justweb3/widget @getpara/react-sdk @getpara/wagmi-v2-integration wagmi @tanstack/react-query ethers
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```bash
-yarn add @justweb3/widget @usecapsule/react-sdk @usecapsule/wagmi-v2-integration wagmi @tanstack/react-query ethers
+yarn add @justweb3/widget @getpara/react-sdk @getpara/wagmi-v2-integration wagmi @tanstack/react-query ethers
 ```
 {% endtab %}
 {% endtabs %}
@@ -32,41 +32,41 @@ Set up environment variables in a `.env` file:
 ```bash
 VITE_JUSTANAME_API_KEY=your-justaname-api-key
 VITE_JUSTANAME_ENS_DOMAIN=your-ens-domain.eth
-VITE_CAPSULE_API_KEY=your-capsule-api-key
+VITE_PARA_API_KEY=your-para-api-key
 ```
 
 To configure your ens domain and get your JustaName api key, head over to the [Dashboard](https://dashboard.justaname.id)
 
-To configure your capsule api key, head over to the [Developer Dashboard](https://developer.usecapsule.com/)
+To configure your para api key, head over to the [Developer Dashboard](https://developer.getpara.com/)
 
 ## Project Configuration
 
-### Capsule Configuration
+### Para Configuration
 
-Import and initialize Capsule with your `VITE_CAPSULE_API_KEY`:
+Import and initialize Para with your `VITE_PARA_API_KEY`:
 
 ```tsx
-import CapsuleWeb, { Environment } from "@usecapsule/react-sdk";
+import ParaWeb, { Environment } from "@getpara/react-sdk";
 
-export const capsuleClient = new CapsuleWeb(
+export const paraClient = new ParaWeb(
   Environment.BETA,
-  import.meta.env.VITE_CAPSULE_API_KEY
+  import.meta.env.VITE_PARA_API_KEY
 );
 ```
 
-Configure the Capsule connector for Wagmi:
+Configure the Para connector for Wagmi:
 
 ```tsx
-import { capsuleConnector } from "@usecapsule/wagmi-v2-integration";
+import { paraConnector } from "@getpara/wagmi-v2-integration";
 import { sepolia } from "wagmi/chains";
 
-const connector = capsuleConnector({
-  capsule: capsuleClient,
+const connector = paraConnector({
+  para: paraClient,
   chains: [sepolia],
   appName: "JustaName Integration",
   options: {},
-  nameOverride: "Capsule",
-  idOverride: "capsule",
+  nameOverride: "Para",
+  idOverride: "Para",
   oAuthMethods: Object.values(OAuthMethod),
   disableEmailLogin: false,
   disablePhoneLogin: false,
@@ -108,7 +108,7 @@ const justweb3Config: JustWeb3ProviderConfig = {
 
 ### Setting Up Wagmi and Providers
 
-Integrate Capsule and JustWeb3 with Wagmi:
+Integrate Para and JustWeb3 with Wagmi:
 
 ```tsx
 import { createConfig, WagmiProvider } from "wagmi";
@@ -139,7 +139,7 @@ const AuthContent = () => {
 
   return (
     <div>
-      <h1>Capsule 🤝 JustaName</h1>
+      <h1>Para 🤝 JustaName</h1>
       {isConnected ? (
         <div>
           <p>Connected as {address}</p>
@@ -148,7 +148,7 @@ const AuthContent = () => {
       ) : (
         <div>
           {connectors
-            .filter((connector) => connector.id === "capsule")
+            .filter((connector) => connector.id === "para")
             .map((connector) => (
               <button key={connector.id} onClick={() => connect({ connector })}>
                 Connect with {connector.name}
