@@ -37,7 +37,7 @@ export const useConversationConsent = (conversation: FullConversation) => {
   }, [refetchConsentState]);
 
   const handleReadMessagesIfAllowed = useCallback(
-    async (readReceiptFn: () => Promise<any>) => {
+    async (readReceiptFn: () => Promise<string>) => {
       try {
         const currentConsentState =
           consentState || (await conversation.consentState());

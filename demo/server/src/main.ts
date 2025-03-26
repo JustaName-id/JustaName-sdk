@@ -45,7 +45,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     cookie: { secure: false, sameSite: true },
-  })
+  }) as unknown as express.RequestHandler
 );
 
 app.get('/api/signin/nonce', async (req: Request, res) => {
