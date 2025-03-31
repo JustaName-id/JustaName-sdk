@@ -77,6 +77,8 @@ export const useXMTPClient = (onError?: (error: Error) => void) => {
 
           xmtpClient = await Client.create(xmtpSigner, encryptionKey, {
             env,
+            loggingLevel:
+              env === 'local' ? 'debug' : env === 'dev' ? 'info' : 'off',
             codecs: [
               new AttachmentCodec(),
               new ReactionCodec(),
