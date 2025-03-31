@@ -1,36 +1,34 @@
-import React, { useEffect, useMemo, useState } from 'react';
 import {
   useMountedAccount,
   usePrimaryName,
   useRecords,
 } from '@justaname.id/react';
 import { Flex } from '@justweb3/ui';
-import {
-  CachedConversation,
-  ContentTypeMetadata,
-  useCanMessage,
-  useConsent,
-  useMessages,
-} from '@xmtp/react-sdk';
 import { useJustWeb3 } from '@justweb3/widget';
-import { ChatTextField } from './ChatTextField';
-import { ChatMessagesList } from './ChatMessagesList';
-import { LoadingMessagesList } from './LoadingMessagesList';
-import { ChatRequestControls } from './ChatRequestControl';
-import { ChatHeader } from './ChatHeader';
-import { ChatReactionOverlay } from './ChatReactionOverlay';
+import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
+import React, { useEffect, useMemo, useState } from 'react';
+import { FullConversation, useCanMessage, useMessages, useSendReactionMessage } from '../../../hooks';
+import { useConversationConsent } from '../../../hooks/useConversationConsent';
+import { useConversationConsentMutations } from '../../../hooks/useConversationConsentMutations';
+import { useReadReceipt } from '../../../hooks/useReadReceipt';
+import { useXMTPContext } from '../../../hooks/useXMTPContext';
+import { useJustWeb3XMTP } from '../../../providers/JustWeb3XMTPProvider';
+import { typeLookup } from '../../../utils/attachments';
 import {
   filterReactionsMessages,
   MessageWithReaction,
 } from '../../../utils/filterReactionsMessages';
-import { useSendReactionMessage } from '../../../hooks';
 import { groupMessagesByDate } from '../../../utils/groupMessageByDate';
-import { typeLookup } from '../../../utils/attachments';
-import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
-import { useReadReceipt } from '../../../hooks/useReadReceipt';
+import { ChatHeader } from './ChatHeader';
+import { ChatMessagesList } from './ChatMessagesList';
+import { ChatReactionOverlay } from './ChatReactionOverlay';
+import { ChatRequestControls } from './ChatRequestControl';
+import { ChatTextField } from './ChatTextField';
+import { LoadingMessagesList } from './LoadingMessagesList';
 
 export interface ChatProps {
-  conversation: CachedConversation<ContentTypeMetadata>;
+  conversation: FullConversation;
+  peerAddress: string;
   onBack: () => void;
 }
 
@@ -41,63 +39,71 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
   );
   const [reactionMessage, setReactionMessage] =
     useState<MessageWithReaction | null>(null);
-  const [isRequest, setIsRequest] = useState<boolean>(false);
-  const [isRequestChangeLoading, setIsRequestChangeLoading] =
-    useState<boolean>(false);
 
-  const { entries, allow, deny } = useConsent();
   const { mutateAsync: sendReaction } = useSendReactionMessage(conversation);
   const { primaryName } = usePrimaryName({
     address: conversation.peerAddress as `0x${string}`,
   });
+  const { client } = useXMTPContext();
   const { records } = useRecords({ ens: primaryName });
   const { address } = useMountedAccount();
-  const [canMessage, setCanMessage] = useState<boolean>(true);
-  const { messages, isLoading } = useMessages(conversation);
-  const { canMessage: canMessageFn, isLoading: isCanMessageLoading } =
-    useCanMessage();
+  const { messages, messagesLoading: isLoading } = useMessages(conversation);
+  const { canMessage, canMessageLoading } = useCanMessage(conversation.peerAddress as `0x${string}`);
   const { mutateAsync: readReceipt, isPending: isReadReceiptSending } =
     useReadReceipt(conversation);
+  const { conversationsInfo, setConversationsInfo } = useJustWeb3XMTP();
+
+  const {
+    isRequest,
+    handleReadMessagesIfAllowed
+  } = useConversationConsent(conversation);
+
+  const {
+    allowAddress,
+    blockAddress,
+    isLoading: isConsentChangeLoading
+  } = useConversationConsentMutations({
+    conversation,
+    onBlockSuccess: () => {
+      onBack();
+    }
+  });
 
   useEffect(() => {
+    if (isLoading || isReadReceiptSending) return;
+
     const lastMessage = messages[messages.length - 1];
 
-    if (!lastMessage || isReadReceiptSending) return;
+    if (!lastMessage) return;
 
-    if (lastMessage?.contentType === ContentTypeReadReceipt.toString()) {
+    if (lastMessage?.contentType.sameAs(ContentTypeReadReceipt)) {
       return;
     }
 
-    if (entries[conversation.peerAddress]?.permissionType === 'allowed') {
-      readReceipt();
+    if (lastMessage.senderInboxId === client?.inboxId) {
+      return;
     }
-  }, [
-    messages,
-    readReceipt,
-    isReadReceiptSending,
-    entries,
-    conversation.peerAddress,
-  ]);
 
-  // Determine if user can message
-  useEffect(() => {
-    if (isCanMessageLoading) return;
-    canMessageFn(conversation.peerAddress).then(setCanMessage);
-  }, [isCanMessageLoading, conversation, canMessageFn]);
+    handleReadMessagesIfAllowed(() => {
+      const conversationInfo = conversationsInfo.find(info => info.conversationId === conversation.id);
+      if (conversationInfo) {
+        conversationInfo.unreadCount = 0;
+        const result = [conversationInfo, ...conversationsInfo.filter(info => info.conversationId !== conversation.id)];
+        setConversationsInfo(result);
+      }
+      return readReceipt();
+    });
 
-  // Check if conversation is in "request" state
-  useEffect(() => {
-    const convoConsentState = entries[conversation.peerAddress]?.permissionType;
-    setIsRequest(
-      convoConsentState === 'unknown' || convoConsentState === undefined
-    );
-  }, [entries, conversation.peerAddress]);
+  }, [messages.length, isReadReceiptSending, isLoading, client?.inboxId, handleReadMessagesIfAllowed, readReceipt]);
 
   const filteredMessages = useMemo(() => {
-    const withoutRead = messages.filter(
-      (message) => message.contentType !== 'xmtp.org/readReceipt:1.0'
+    const withoutRead = messages?.filter(
+      (message) => !message.contentType.sameAs(ContentTypeReadReceipt)
     );
-    return filterReactionsMessages(withoutRead);
+    const withoutInitialMessage = withoutRead?.filter(
+      (message) => message.encodedContent.type.typeId !== "group_updated"
+    );
+    return filterReactionsMessages(withoutInitialMessage ?? []);
   }, [messages]);
 
   const groupedMessages = useMemo(() => {
@@ -106,7 +112,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
 
   const isMessagesSenderOnly = useMemo(() => {
     return filteredMessages.every(
-      (message) => message.senderAddress === address
+      (message) => message.senderInboxId === client?.inboxId
     );
   }, [filteredMessages, address]);
 
@@ -147,23 +153,12 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
     isRequest,
   ]);
 
-  // Handlers
-  const blockAddressHandler = async (peerAddress: string) => {
-    setIsRequestChangeLoading(true);
-    // await refreshConsentList();
-    await deny([peerAddress]);
-    // await refreshConsentList();
-    setIsRequestChangeLoading(false);
-    onBack();
+  const blockAddressHandler = async () => {
+    await blockAddress();
   };
 
   const handleAllowAddress = async () => {
-    setIsRequestChangeLoading(true);
-    // await refreshConsentList();
-    await allow([conversation.peerAddress]);
-    // await refreshConsentList();
-    setIsRequest(false);
-    setIsRequestChangeLoading(false);
+    await allowAddress();
   };
 
   const handleEmojiSelect = (emoji: string) => {
@@ -184,7 +179,6 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
       gap="0px"
       style={{ height: '100%', width: '100%' }}
     >
-      {/* Overlay for reaction */}
       <ChatReactionOverlay
         reactionMessage={reactionMessage}
         onOverlayClick={() => {
@@ -214,12 +208,11 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
           paddingRight: '1.5rem',
         }}
       >
-        {isCanMessageLoading || isLoading ? (
-          // {true ? (
+        {canMessageLoading || isLoading ? (
           <LoadingMessagesList computeHeight={computeHeight} />
         ) : (
           <ChatMessagesList
-            canMessage={canMessage}
+            canMessage={!!canMessage}
             groupedMessages={groupedMessages}
             conversation={conversation}
             setReplyMessage={setReplyMessage}
@@ -232,7 +225,7 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
 
         {isRequest ? (
           <ChatRequestControls
-            isRequestChangeLoading={isRequestChangeLoading}
+            isRequestChangeLoading={isConsentChangeLoading}
             blockAddressHandler={blockAddressHandler}
             peerAddress={conversation.peerAddress}
             handleAllowAddress={handleAllowAddress}

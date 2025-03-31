@@ -10,14 +10,14 @@ import {
   TuneIcon,
 } from '@justweb3/ui';
 import { formatAddress } from '../../../../utils/formatAddress';
-import { useEnsAvatar } from '@justaname.id/react';
+import { Records, useEnsAvatar } from '@justaname.id/react';
 
 export interface ChatHeaderProps {
   primaryName: string | undefined;
   peerAddress: string;
   onBack: () => void;
   openEnsProfile: (ens: string) => void;
-  records: any;
+  records: Records | undefined;
   blockAddressHandler: (peerAddress: string) => void;
 }
 
@@ -74,10 +74,10 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
             src={
               primaryName
                 ? sanitizeEnsImage({
-                    name: primaryName,
-                    chainId: 1,
-                    image: records?.sanitizedRecords?.avatar,
-                  })
+                  name: primaryName,
+                  chainId: 1,
+                  image: records?.sanitizedRecords?.avatar,
+                })
                 : undefined
             }
             size={30}

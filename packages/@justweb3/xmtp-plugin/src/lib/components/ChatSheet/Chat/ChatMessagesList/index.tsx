@@ -1,15 +1,15 @@
 import { Flex, P } from '@justweb3/ui';
-import { CachedConversation, ContentTypeMetadata } from '@xmtp/react-sdk';
 import { DateDivider } from './DateDivider';
 import { EmojiSelector } from './EmojiSelector';
 import { MessageCard } from './MessageCard';
 import { MessageWithReaction } from '../../../../utils/filterReactionsMessages';
 import { useEffect, useState } from 'react';
+import { FullConversation } from '../../../../hooks';
 
 interface ChatMessagesListProps {
   canMessage: boolean;
   groupedMessages: { [date: string]: MessageWithReaction[] };
-  conversation: CachedConversation<ContentTypeMetadata>;
+  conversation: FullConversation;
   setReplyMessage: (msg: MessageWithReaction | null) => void;
   setReactionMessage: (msg: MessageWithReaction | null) => void;
   reactionMessage: MessageWithReaction | null;
