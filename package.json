@@ -40,7 +40,7 @@
     "@uiw/react-color-github": "^2.3.0",
     "@usecapsule/react-sdk": "^4.6.1",
     "@usecapsule/wagmi-v2-integration": "^3.6.1",
-    "@xmtp/browser-sdk": "^1.1.2",
+    "@xmtp/browser-sdk": "^1.1.4",
     "@xmtp/content-type-group-updated": "^2.0.0",
     "@xmtp/content-type-primitives": "^2.0.0",
     "@xmtp/content-type-reaction": "^2.0.0",

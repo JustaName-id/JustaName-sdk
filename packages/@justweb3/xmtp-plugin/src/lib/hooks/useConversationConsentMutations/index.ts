@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ConsentState } from '@xmtp/browser-sdk';
-import { FullConversation, useConversations } from '..';
+import { FullConversation, useConversations } from '../useConversations';
 
 export interface UseConversationConsentMutationsProps {
   conversation: FullConversation;

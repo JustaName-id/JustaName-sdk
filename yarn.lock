@@ -3863,7 +3863,7 @@ __metadata:
   resolution: "@justweb3/xmtp-plugin@workspace:packages/@justweb3/xmtp-plugin"
   dependencies:
     "@radix-ui/react-slider": "npm:^1.2.1"
-    "@xmtp/browser-sdk": "npm:^1.1.2"
+    "@xmtp/browser-sdk": "npm:^1.1.4"
     "@xmtp/content-type-group-updated": "npm:^2.0.0"
     "@xmtp/content-type-primitives": "npm:^2.0.0"
     "@xmtp/content-type-reaction": "npm:^2.0.0"
@@ -12148,17 +12148,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/browser-sdk@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@xmtp/browser-sdk@npm:1.1.2"
+"@xmtp/browser-sdk@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "@xmtp/browser-sdk@npm:1.1.4"
   dependencies:
     "@xmtp/content-type-group-updated": "npm:^2.0.1"
     "@xmtp/content-type-primitives": "npm:^2.0.1"
     "@xmtp/content-type-text": "npm:^2.0.1"
     "@xmtp/proto": "npm:^3.78.0"
-    "@xmtp/wasm-bindings": "npm:^1.1.1"
+    "@xmtp/wasm-bindings": "npm:^1.1.3"
     uuid: "npm:^11.1.0"
-  checksum: 10c0/6e78872be248495752d54468653d398627f97e9f8642ef9fc18092b3bf17be5354f2e703cddb459b21af0cd5328429cc79fa959784ec721d68f1bfdd20b84f91
+  checksum: 10c0/3e894830b112ea2d82bb45cb67236920062228a80408047fe104dc9bae88fcd945fab93f1cf89d5f566473ff9d19285d7512e7cfd951089ad112496855dc0202
   languageName: node
   linkType: hard
 
@@ -12241,10 +12241,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/wasm-bindings@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@xmtp/wasm-bindings@npm:1.1.1"
-  checksum: 10c0/12bd28cc3c58c208325c709ffc6f3da752d2bfaa303986e1b1a5ef810e7f932e1bb1b08dd55287fbfad71ad0e0c36ed01d6175f0260dfa7c300e12d1bf0ae422
+"@xmtp/wasm-bindings@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@xmtp/wasm-bindings@npm:1.1.3"
+  checksum: 10c0/a4a2824657fb0e3e1df274a74b66ded14881e7195e39dd1b9ccaf7fc9e95eceb0edd53636a966c4a57ca933b6f95c90cb1f3efaba48334da59cc798a5f77b289
   languageName: node
   linkType: hard
 
@@ -22762,7 +22762,7 @@ __metadata:
     "@usecapsule/react-sdk": "npm:^4.6.1"
     "@usecapsule/wagmi-v2-integration": "npm:^3.6.1"
     "@vitejs/plugin-react": "npm:^4.2.0"
-    "@xmtp/browser-sdk": "npm:^1.1.2"
+    "@xmtp/browser-sdk": "npm:^1.1.4"
     "@xmtp/content-type-group-updated": "npm:^2.0.0"
     "@xmtp/content-type-primitives": "npm:^2.0.0"
     "@xmtp/content-type-reaction": "npm:^2.0.0"
