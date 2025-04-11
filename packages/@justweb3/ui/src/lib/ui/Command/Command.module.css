@@ -1,0 +1,127 @@
+.command {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  background-color: var(--justweb3-background-color);
+  color: var(--justweb3-foreground-color-2);
+}
+
+.dialogContent {
+  overflow: hidden;
+  padding: 0;
+}
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--justweb3-border-color);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.inputSearchIcon {
+  margin-right: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.input {
+  display: flex;
+  height: 2.5rem;
+  width: 100%;
+  border-radius: 0.375rem;
+  background-color: transparent;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--justweb3-foreground-color-3);
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.list {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.empty {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.group {
+  overflow: hidden;
+  padding: 0.25rem;
+  color: var(--justweb3-foreground-color-2);
+}
+
+.groupHeading {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--justweb3-foreground-color-3);
+}
+
+.separator {
+  margin-left: -0.25rem;
+  margin-right: -0.25rem;
+  height: 1px;
+  background-color: var(--justweb3-border-color);
+}
+
+.item {
+  position: relative;
+  display: flex;
+  cursor: default;
+  gap: 0.5rem;
+  user-select: none;
+  align-items: center;
+  border-radius: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.item svg {
+  pointer-events: none;
+  height: 1rem;
+  width: 1rem;
+  flex-shrink: 0;
+}
+
+.item[data-disabled='true'] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.item[data-selected='true'] {
+  background-color: var(--justweb3-primary-color-light);
+  color: var(--justweb3-primary-color-foreground);
+}
+
+.shortcut {
+  margin-left: auto;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--justweb3-foreground-color-3);
+}

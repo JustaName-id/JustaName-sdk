@@ -5,8 +5,9 @@ import React, { useEffect, useMemo, useRef, useCallback } from 'react';
 import { ChatSheet } from '../../components/ChatSheet';
 import { InboxSheet } from '../../components/InboxSheet';
 import { XMTPProvider } from '../../contexts/XMTPContext';
-import { FullConversation, useConversationConsent, useEthersSigner, useMessages, useStreamConversations, useStreamMessages, useXMTPClient } from '../../hooks';
+import { FullConversation, FullGroup, useConversationConsent, useEthersSigner, useMessages, useStreamConversations, useStreamMessages, useXMTPClient } from '../../hooks';
 import { useXMTPContext } from '../../hooks/useXMTPContext';
+import NewGroupSheet from '../../components/NewGroupSheet';
 
 interface JustWeb3XMTPContextProps {
   handleOpenChat: (address: string) => void;
@@ -42,14 +43,26 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
 }) => {
   const [isXmtpEnabled, setIsXmtpEnabled] = React.useState(false);
   const [conversation, setConversation] = React.useState<FullConversation | null>(null);
+  const [newGroup, setNewGroup] = React.useState<boolean>(false);
+  const [group, setGroup] = React.useState<FullGroup | null>(null);
   const [conversations, setConversations] = React.useState<{
     allowed: Conversation[];
     blocked: Conversation[];
     requested: Conversation[];
+    groups: {
+      allowed: FullGroup[];
+      blocked: FullGroup[];
+      requested: FullGroup[];
+    };
   }>({
     allowed: [],
     blocked: [],
     requested: [],
+    groups: {
+      allowed: [],
+      blocked: [],
+      requested: [],
+    }
   });
   const [conversationsInfo, setConversationsInfo] = React.useState<{
     conversationId: string;
@@ -59,6 +72,8 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
   }[]>([]);
   const [peerAddress, setPeerAddress] = React.useState<string | null>(null);
   const [clientState, setClientState] = React.useState<Client | undefined>(undefined);
+
+  console.log("group", group)
 
 
   useStreamConversations({
@@ -84,6 +99,11 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
         allowed: [],
         blocked: [],
         requested: [],
+        groups: {
+          allowed: [],
+          blocked: [],
+          requested: [],
+        },
       });
       setPeerAddress(null);
     }
@@ -154,7 +174,9 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
             open={open}
             handleOpen={handleOpen}
             handleOpenChat={handleOpenChat}
+            handleOpenGroup={setGroup}
             handleNewChat={() => handleOpenChat('')}
+            handleNewGroup={() => setNewGroup(true)}
             allConversations={conversations}
             onConversationsUpdated={setConversations}
             conversationsInfo={conversationsInfo}
@@ -215,7 +237,60 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
             }
           />
         ))}
-
+        {conversations.groups.allowed.map((group) => (
+          <GetConversationInfo
+            key={group.id}
+            conversation={group}
+            unreadCount={
+              conversationsInfo.find((item) => item.conversationId === group.id)?.unreadCount
+            }
+            lastMessage={
+              conversationsInfo.find((item) => item.conversationId === group.id)?.lastMessage
+            }
+            consent={
+              conversationsInfo.find((item) => item.conversationId === group.id)?.consent ?? 'allowed'
+            }
+            handleConversationInfo={(conversationId, unreadCount, lastMessage, consent) =>
+              handleConversationInfo(conversationId, unreadCount, lastMessage, consent)
+            }
+          />
+        ))}
+        {conversations.groups.requested.map((group) => (
+          <GetConversationInfo
+            key={group.id}
+            conversation={group}
+            unreadCount={
+              conversationsInfo.find((item) => item.conversationId === group.id)?.unreadCount
+            }
+            lastMessage={
+              conversationsInfo.find((item) => item.conversationId === group.id)?.lastMessage
+            }
+            consent={
+              conversationsInfo.find((item) => item.conversationId === group.id)?.consent ?? 'requested'
+            }
+            handleConversationInfo={(conversationId, unreadCount, lastMessage, consent) =>
+              handleConversationInfo(conversationId, unreadCount, lastMessage, consent)
+            }
+          />
+        ))}
+        {conversations.groups.blocked.map((group) => (
+          <GetConversationInfo
+            key={group.id}
+            conversation={group}
+            unreadCount={
+              conversationsInfo.find((item) => item.conversationId === group.id)?.unreadCount
+            }
+            lastMessage={
+              conversationsInfo.find((item) => item.conversationId === group.id)?.lastMessage
+            }
+            consent={
+              conversationsInfo.find((item) => item.conversationId === group.id)?.consent ?? 'blocked'
+            }
+            handleConversationInfo={(conversationId, unreadCount, lastMessage, consent) =>
+              handleConversationInfo(conversationId, unreadCount, lastMessage, consent)
+            }
+          />
+        ))}
         <ChatSheet
           openChat={peerAddress !== null || conversation !== null}
           closeChat={() => {
@@ -224,6 +299,11 @@ export const JustWeb3XMTPProvider: React.FC<JustWeb3XMTPProviderProps> = ({
           }}
           onChangePeer={handleOpenChat}
           peer={conversation ?? peerAddress ?? null}
+        />
+        <NewGroupSheet
+          open={newGroup}
+          onClose={() => setNewGroup(false)}
+          onGroupStarted={setGroup}
         />
         {children}
       </JustWeb3XMTPContext.Provider>

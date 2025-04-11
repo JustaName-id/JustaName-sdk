@@ -52,12 +52,13 @@ interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {
   overlay?: boolean;
+  hideClose?: boolean;
 }
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
->(({ side = 'right', overlay = true, className, children, ...props }, ref) => (
+>(({ side = 'right', overlay = true, className, children, hideClose = false, ...props }, ref) => (
   <SheetPortal>
     <SheetOverlay overlay={overlay} />
     <SheetPrimitive.Content
@@ -66,9 +67,11 @@ const SheetContent = React.forwardRef<
       {...props}
     >
       {children}
-      <SheetPrimitive.Close className={styles.sheetClose}>
-        <CloseIcon style={{ width: '24px', height: '24px' }} />
-      </SheetPrimitive.Close>
+      {!hideClose && (
+        <SheetPrimitive.Close className={styles.sheetClose}>
+          <CloseIcon style={{ width: '24px', height: '24px' }} />
+        </SheetPrimitive.Close>
+      )}
     </SheetPrimitive.Content>
   </SheetPortal>
 ));

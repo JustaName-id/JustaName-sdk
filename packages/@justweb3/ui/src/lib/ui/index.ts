@@ -2,6 +2,8 @@ export * from './Avatar';
 export * from './Badge';
 export * from './Button';
 export * from './Carousel';
+export * from './ComboBox';
+export * from './Command';
 export * from './Dialog';
 export * from './Divider';
 export * from './Dropdown';

@@ -1,0 +1,31 @@
+.triggerButton {
+  width: 200px;
+  justify-content: space-between;
+}
+
+.chevronsIcon {
+  margin-left: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.popoverContent {
+  width: 200px;
+  padding: 0;
+}
+
+.checkIcon {
+  margin-right: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+.checkIconVisible {
+  opacity: 1;
+}
+
+.checkIconHidden {
+  opacity: 0;
+}

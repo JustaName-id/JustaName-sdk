@@ -3,6 +3,8 @@ import {
   AddIcon,
   Button,
   Flex,
+  GroupIcon,
+  PersonIcon,
   Sheet,
   SheetContent,
   SheetTitle,
@@ -15,8 +17,9 @@ import {
 import { Conversation, DecodedMessage } from '@xmtp/browser-sdk';
 import { isEqual } from 'lodash';
 import React, { useCallback, useEffect, useMemo } from 'react';
-import { FullConversation, useConversations } from '../../hooks';
+import { FullConversation, FullGroup, useConversations } from '../../hooks';
 import { ChatList } from './ChatList';
+import { GroupList } from './GroupList';
 
 export interface InboxSheetProps {
   open?: boolean;
@@ -24,20 +27,35 @@ export interface InboxSheetProps {
   handleOpenChat: (
     conversation: FullConversation
   ) => void;
+  handleOpenGroup: (
+    group: FullGroup
+  ) => void;
   handleNewChat: () => void;
+  handleNewGroup: () => void;
   onConversationsUpdated: ({
     allowed,
     blocked,
     requested,
+    groups,
   }: {
     allowed: Conversation[];
     blocked: Conversation[];
     requested: Conversation[];
+    groups: {
+      allowed: FullGroup[];
+      blocked: FullGroup[];
+      requested: FullGroup[];
+    };
   }) => void;
   allConversations: {
     allowed: Conversation[];
     blocked: Conversation[];
     requested: Conversation[];
+    groups: {
+      allowed: FullGroup[];
+      blocked: FullGroup[];
+      requested: FullGroup[];
+    };
   };
   conversationsInfo: {
     conversationId: string;
@@ -51,23 +69,37 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
   open,
   handleOpen,
   handleOpenChat,
+  handleOpenGroup,
   handleNewChat,
+  handleNewGroup,
   onConversationsUpdated,
   allConversations,
   conversationsInfo,
 }) => {
   const [tab, setTab] = React.useState('Chats');
-  const { conversations, conversationsLoading: isLoading } = useConversations();
+  const { conversations, groups, conversationsLoading: isLoading } = useConversations();
+  const [isFabMenuOpen, setIsFabMenuOpen] = React.useState(false);
 
   const [addresses, setAddresses] = React.useState<string[]>([]);
 
   const extractedAddresses = useMemo(() => {
-    if (conversations.allowed.length === 0 && conversations.blocked.length === 0 && conversations.requested.length === 0) {
+    if (conversations.allowed.length === 0 &&
+      conversations.blocked.length === 0 &&
+      conversations.requested.length === 0 &&
+      groups.allowed.length === 0 &&
+      groups.blocked.length === 0 &&
+      groups.requested.length === 0) {
       return [];
     }
-    return [...conversations.allowed, ...conversations.blocked, ...conversations.requested]
+    const addresses = [...conversations.allowed, ...conversations.blocked, ...conversations.requested]
       .map((conversation) => conversation.peerAddress);
-  }, [conversations.allowed, conversations.blocked, conversations.requested]);
+
+    const groupAddresses = [...groups.allowed, ...groups.blocked, ...groups.requested]
+      .map((group) => group.membersAddress);
+
+    const uniqueAddresses = new Set([...addresses, ...groupAddresses.flat()]);
+    return Array.from(uniqueAddresses);
+  }, [conversations.allowed, conversations.blocked, conversations.requested, groups]);
 
   useEffect(() => {
     if (extractedAddresses.length > 0 && !isEqual(addresses, extractedAddresses)) {
@@ -93,6 +125,18 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
       !isEqual(
         conversations.requested.map(convo => convo.id).sort(),
         allConversations.requested.map(convo => convo.id).sort()
+      ) ||
+      !isEqual(
+        groups.allowed.map(group => group.id).sort(),
+        allConversations.groups.allowed.map(group => group.id).sort()
+      ) ||
+      !isEqual(
+        groups.blocked.map(group => group.id).sort(),
+        allConversations.groups.blocked.map(group => group.id).sort()
+      ) ||
+      !isEqual(
+        groups.requested.map(group => group.id).sort(),
+        allConversations.groups.requested.map(group => group.id).sort()
       );
 
     if (shouldUpdate) {
@@ -100,6 +144,11 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
         allowed: conversations.allowed,
         blocked: conversations.blocked,
         requested: conversations.requested,
+        groups: {
+          allowed: groups.allowed,
+          blocked: groups.blocked,
+          requested: groups.requested,
+        },
       });
     }
   }, [allConversations, conversations, onConversationsUpdated]);
@@ -107,6 +156,26 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
   useEffect(() => {
     updateConversations();
   }, [updateConversations]);
+
+  const onNewChatClick = () => {
+    handleNewChat();
+    setIsFabMenuOpen(false);
+  };
+
+  const onNewGroupClick = () => {
+    handleNewGroup();
+    setIsFabMenuOpen(false);
+  };
+
+  const groupsList = useMemo(() => (
+    <GroupList
+      groups={groups.allowed}
+      conversationsInfo={conversationsInfo}
+      handleOpenGroup={handleOpenGroup}
+      primaryNames={allPrimaryNames}
+      consent='allowed'
+    />
+  ), [groups, conversationsInfo, handleOpenGroup, allPrimaryNames]);
 
   const allowedChatList = useMemo(() => (
     <ChatList
@@ -128,6 +197,16 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
     />
   ), [conversations.requested, conversationsInfo, handleOpenChat, allPrimaryNames]);
 
+  const requestedGroupList = useMemo(() => (
+    <GroupList
+      groups={groups.requested}
+      conversationsInfo={conversationsInfo}
+      handleOpenGroup={handleOpenGroup}
+      primaryNames={allPrimaryNames}
+      consent="requested"
+    />
+  ), [groups, conversationsInfo, handleOpenGroup, allPrimaryNames]);
+
   const blockedChatList = useMemo(() => (
     <ChatList
       conversations={conversations.blocked}
@@ -139,13 +218,93 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
     />
   ), [conversations.blocked, conversationsInfo, handleOpenChat, allPrimaryNames]);
 
+  const blockedGroupList = useMemo(() => (
+    <GroupList
+      groups={groups.blocked}
+      conversationsInfo={conversationsInfo}
+      handleOpenGroup={handleOpenGroup}
+      primaryNames={allPrimaryNames}
+      consent="blocked"
+    />
+  ), [groups, conversationsInfo, handleOpenGroup, allPrimaryNames]);
+
   return (
     <Sheet open={open} onOpenChange={handleOpen}>
       <SheetContent side="right" overlay={false} style={{ width: '100%' }}>
         <SheetTitle>Chats</SheetTitle>
+
+        {/* FAB Menu Container */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 'calc(2rem + 45px + 10px)',
+            right: '2rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            alignItems: 'flex-end',
+            transition: 'opacity 0.3s ease, transform 0.3s ease',
+            opacity: isFabMenuOpen ? 1 : 0,
+            transform: isFabMenuOpen ? 'translateY(0)' : 'translateY(20px)',
+            pointerEvents: isFabMenuOpen ? 'auto' : 'none',
+            zIndex: 99,
+          }}
+        >
+          <Button
+            onClick={onNewChatClick}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              padding: '8px 12px',
+              backgroundColor: 'var(--justweb3-background-color)',
+              borderRadius: '8px',
+              boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+              cursor: 'pointer',
+            }}
+          >
+            <SPAN style={{ color: 'var(--justweb3-primary-color)' }}>New Chat</SPAN>
+            <Flex justify='center' align='center' style={{
+              width: '24px',
+              height: '24px',
+              backgroundColor: 'var(--justweb3-background-color)',
+              borderRadius: '50%',
+              filter: 'drop-shadow(2px 0px 20px rgba(0, 0, 0, 0.15))',
+            }}>
+              <PersonIcon />
+            </Flex>
+          </Button>
+
+          <Button
+            onClick={onNewGroupClick}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              padding: '8px 12px',
+              backgroundColor: 'var(--justweb3-background-color)',
+              borderRadius: '8px',
+              boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+              cursor: 'pointer',
+            }}
+          >
+            <SPAN style={{ color: 'var(--justweb3-primary-color)' }}>New Group</SPAN>
+            <Flex justify='center' align='center' style={{
+              width: '24px',
+              height: '24px',
+              backgroundColor: 'var(--justweb3-background-color)',
+              borderRadius: '50%',
+              filter: 'drop-shadow(2px 0px 20px rgba(0, 0, 0, 0.15))',
+            }}>
+              <GroupIcon />
+            </Flex>
+          </Button>
+        </div>
+
         <Flex
           align="center"
           justify="center"
+          onClick={() => setIsFabMenuOpen(!isFabMenuOpen)}
           style={{
             width: 45,
             height: 45,
@@ -159,10 +318,13 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
           }}
         >
           <AddIcon
-            onClick={handleNewChat}
             fill={'var(--justweb3-background-color'}
             width={35}
             height={35}
+            style={{
+              transition: 'transform 0.3s ease',
+              transform: isFabMenuOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+            }}
           />
         </Flex>
         <Flex direction={'column'} gap={'10px'}>
@@ -184,13 +346,19 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
             <TabsList>
               <TabsTrigger
                 value={'Chats'}
-                style={{ flexBasis: 'calc( 100% / 3)' }}
+                style={{ flexBasis: 'calc( 100% / 4)' }}
               >
                 Chats
               </TabsTrigger>
               <TabsTrigger
+                value={'Groups'}
+                style={{ flexBasis: 'calc( 100% / 4)' }}
+              >
+                Groups
+              </TabsTrigger>
+              <TabsTrigger
                 value={'Requests'}
-                style={{ flexBasis: 'calc( 100% / 3)', position: 'relative' }}
+                style={{ flexBasis: 'calc( 100% / 4)', position: 'relative' }}
               >
                 <Flex style={{ gap: '5px' }}>
                   Requests
@@ -227,7 +395,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
               </TabsTrigger>
               <TabsTrigger
                 value={'Blocked'}
-                style={{ flexBasis: 'calc( 100% / 3)' }}
+                style={{ flexBasis: 'calc( 100% / 4)' }}
               >
                 Blocked
               </TabsTrigger>
@@ -271,12 +439,44 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                     >
                       <SPAN style={{ fontSize: '18px', fontWeight: "bold" }}>No conversations yet!</SPAN>
                       <Button
-                        onClick={handleNewChat}>
+                        onClick={onNewChatClick}>
                         New Chat
                       </Button>
                     </div>
                     :
                     allowedChatList
+                  }
+                </TabsContent>
+                <TabsContent
+                  value={'Groups'}
+                  style={{
+                    overflowY: 'scroll',
+                    maxHeight:
+                      'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
+                    minHeight:
+                      'calc(100vh - 72px - 10px - 28px - 10px - 30px - 10px)',
+                  }}
+                >
+                  {groups.allowed.length === 0 ?
+                    <div
+                      style={{
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '20px',
+                        width: '100%',
+                      }}
+                    >
+                      <SPAN style={{ fontSize: '18px', fontWeight: "bold" }}>No groups yet!</SPAN>
+                      <Button
+                        onClick={onNewGroupClick}>
+                        New Group
+                      </Button>
+                    </div>
+                    :
+                    groupsList
                   }
                 </TabsContent>
                 <TabsContent
@@ -290,6 +490,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                   }}
                 >
                   {requestedChatList}
+                  {requestedGroupList}
                 </TabsContent>
                 <TabsContent
                   value={'Blocked'}
@@ -302,6 +503,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
                   }}
                 >
                   {blockedChatList}
+                  {blockedGroupList}
                 </TabsContent>
               </>
             )}

@@ -26,11 +26,13 @@ import DoneIcon from './Done';
 import DownloadIcon from './Download';
 import EditIcon from './Edit';
 import GeneralIcon from './General';
+import GroupIcon from './Group';
 import LocationOnIcon from './LocationOn';
 import LocationIcon from './Location';
 import LogoutIcon from './Logout';
 import MappIcon from './Mapp';
 import MaximizeIcon from './Maximize';
+import MemberContactsIcon from './MemberContacts';
 import MicIcon from './Mic';
 import MinimizeIcon from './Minimize';
 import MinusIcon from './Minus';
@@ -39,6 +41,8 @@ import NotificationIcon from './Notification';
 import PauseIcon from './Pause';
 import PenIcon from './Pen';
 import PersonEditIcon from './PersonEdit';
+import PersonIcon from './Person';
+import PhotoCameraIcon from './PhotoCamera';
 import PlayIcon from './Play';
 import ProfileEditIcon from './ProfileEdit';
 import ProfileIcon from './Profile';
@@ -83,11 +87,13 @@ const general = {
   download: DownloadIcon,
   edit: EditIcon,
   general: GeneralIcon,
+  group: GroupIcon,
   'location-on': LocationOnIcon,
   location: LocationIcon,
   logout: LogoutIcon,
   mapp: MappIcon,
   maximize: MaximizeIcon,
+  'member-contacts': MemberContactsIcon,
   mic: MicIcon,
   minimize: MinimizeIcon,
   minus: MinusIcon,
@@ -96,6 +102,8 @@ const general = {
   pause: PauseIcon,
   pen: PenIcon,
   'person-edit': PersonEditIcon,
+  person: PersonIcon,
+  'photo-camera': PhotoCameraIcon,
   play: PlayIcon,
   'profile-edit': ProfileEditIcon,
   profile: ProfileIcon,
@@ -143,11 +151,13 @@ export {
   DownloadIcon,
   EditIcon,
   GeneralIcon,
+  GroupIcon,
   LocationOnIcon,
   LocationIcon,
   LogoutIcon,
   MappIcon,
   MaximizeIcon,
+  MemberContactsIcon,
   MicIcon,
   MinimizeIcon,
   MinusIcon,
@@ -156,6 +166,8 @@ export {
   PauseIcon,
   PenIcon,
   PersonEditIcon,
+  PersonIcon,
+  PhotoCameraIcon,
   PlayIcon,
   ProfileEditIcon,
   ProfileIcon,
