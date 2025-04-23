@@ -110,9 +110,11 @@ describe('justaname', () => {
 
   it('should add a subname without signature if overrideSignatureCheck is enabled', async () => {
 
+    const subnameToBeAdded2 = Math.random().toString(36).substring(7);
+
     const response = await justaname.subnames.addSubname(
       {
-        username: subnameToBeAdded,
+        username: subnameToBeAdded2,
         chainId: CHAIN_ID,
         addresses: [{
           coinType: "60",
