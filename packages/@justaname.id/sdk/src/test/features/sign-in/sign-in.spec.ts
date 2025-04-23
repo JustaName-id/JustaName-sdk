@@ -5,12 +5,13 @@ import { OffchainResolvers } from '../../../lib/features';
 import { configureEnv } from '../../helpers/configureEnv';
 import { initializeJustaName } from '../../helpers/initializeJustaName';
 import { JustaName } from '../../../lib/justaname';
+import { ChainId } from '../../../lib/types';
 
 dotenv.config();
 
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
-const CHAIN_ID = 11155111;
+const CHAIN_ID = (parseInt(process.env["SDK_CHAIN_ID"] as string) || 11155111) as ChainId
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 
 const invalidSigner = new ethers.Wallet(
