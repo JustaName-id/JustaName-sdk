@@ -22,7 +22,7 @@ export const FollowButton: React.FC<FollowButtonProps> = ({ ens, address }) => {
   if (!ownAddress) {
     return (
       <a
-        href={'https://ethfollow.xyz/' + ens}
+        href={'https://efp.app/' + ens}
         target={'_blank'}
         rel="noreferrer"
       >
@@ -53,7 +53,7 @@ export const FollowButton: React.FC<FollowButtonProps> = ({ ens, address }) => {
   }
 
   return (
-    <a href={'https://ethfollow.xyz/' + ens} target={'_blank'} rel="noreferrer">
+    <a href={'https://efp.app/' + ens} target={'_blank'} rel="noreferrer">
       <Button
         leftIcon={
           <EFPIcon color={'var(--justweb3-primary-color-foreground)'} />
