@@ -57,12 +57,10 @@ export const useRecordVoice = ({ setAttachment, setAttachmentPreview, onError }:
             newMediaRecorder.start();
             setRecording(true);
           } catch (error) {
-            console.error("Error starting the MediaRecorder.", error);
             onError?.("Error starting the MediaRecorder.");
           }
         }, 10);
       } catch (error) {
-        console.error("Error accessing media devices.", error);
         onError?.("Error accessing media devices.");
       }
     } else if (mediaRecorder) {
@@ -70,7 +68,6 @@ export const useRecordVoice = ({ setAttachment, setAttachmentPreview, onError }:
         mediaRecorder.start();
         setRecording(true);
       } catch (error) {
-        console.error("Error starting the MediaRecorder.", error);
         onError?.("Error starting the MediaRecorder.");
       }
     }

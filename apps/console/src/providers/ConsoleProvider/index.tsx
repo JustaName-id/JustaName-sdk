@@ -1,3 +1,5 @@
+'use client';
+
 import { Credentials } from '@justverified/plugin';
 import { createContext, FC, ReactNode, useContext, useState } from 'react';
 
@@ -8,7 +10,7 @@ export interface ConsoleContext {
 
 export const ConsoleContext = createContext<ConsoleContext>({
   justVerified: [],
-  setJustVerified: () => {},
+  setJustVerified: () => { },
 });
 
 export interface ConsoleProviderProps {

@@ -1,20 +1,7 @@
 import {
-  CachedConversation,
-  toCachedConversation,
-  useCanMessage,
-  useClient,
-  useConsent,
-  useConversation,
-  useStartConversation,
-} from '@xmtp/react-sdk';
-import React, { useEffect, useMemo } from 'react';
-import { useDebounce } from '@justweb3/widget';
-import {
-  useMountedAccount,
   usePrimaryName,
-  useRecords,
+  useRecords
 } from '@justaname.id/react';
-
 import {
   ArrowIcon,
   CloseIcon,
@@ -24,10 +11,16 @@ import {
   P,
   VerificationsIcon,
 } from '@justweb3/ui';
+import { useDebounce } from '@justweb3/widget';
+import { ConsentState } from '@xmtp/browser-sdk';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { FullConversation, useCanMessage } from '../../../hooks';
+import { useClientAddress } from '../../../hooks/useClientAddress';
+import { useXMTPContext } from '../../../hooks/useXMTPContext';
 import { NewChatTextField } from './NewChatTextField';
 
 interface NewChatProps {
-  onChatStarted: (conversation: CachedConversation) => void;
+  onChatStarted: (conversation: FullConversation) => void;
   onBack: () => void;
   selectedAddress?: string;
 }
@@ -42,17 +35,16 @@ export const NewChat: React.FC<NewChatProps> = ({
     selectedAddress ?? ''
   );
   const [canMessage, setCanMessage] = React.useState<boolean>(false);
+  const [isVerifying, setIsVerifying] = React.useState<boolean>(false);
   //Queries
-  const { client } = useClient();
-  const { startConversation } = useStartConversation();
-  const { getCachedByPeerAddress } = useConversation();
-  const { refreshConsentList, allow } = useConsent();
-  const { address } = useMountedAccount();
-  const { canMessage: xmtpCanMessage, isLoading } = useCanMessage();
+  const { client } = useXMTPContext();
+  const { clientAddress } = useClientAddress();
+  const { canMessageFn: xmtpCanMessage, canMessageLoading } = useCanMessage();
   const {
     debouncedValue: debouncedAddress,
     isDebouncing: isDebouncingAddress,
   } = useDebounce<string>(newAddress, 500);
+
 
   const isAddressName = useMemo(() => {
     const ethAddressRegex = /^0x[a-fA-F0-9]{40}$/;
@@ -75,149 +67,147 @@ export const NewChat: React.FC<NewChatProps> = ({
     enabled: !isAddressName,
   });
 
-  useEffect(() => {
-    if (isPrimaryNameLoading || isPrimaryNameFetching) {
-      return;
-    }
 
-    if (name) {
-      setNewAddress(name);
-      return;
-    }
-  }, [name, isPrimaryNameLoading, isPrimaryNameFetching]);
   const resolvedAddress = useMemo(() => {
     const ethAddress = records?.sanitizedRecords?.ethAddress?.value;
-    if (ethAddress && ethAddress !== client?.address) {
+    if (ethAddress && ethAddress !== clientAddress) {
       return ethAddress;
     }
-    return;
-  }, [client?.address, records?.sanitizedRecords?.ethAddress?.value]);
+    return undefined;
+  }, [clientAddress, records?.sanitizedRecords?.ethAddress?.value]);
 
-  const handleCanMessage = async () => {
+  const handleCanMessage = useCallback(async () => {
     if (!client) return;
+    setIsVerifying(true);
     try {
       if (isAddressName) {
         if (resolvedAddress) {
-          const res = await xmtpCanMessage(resolvedAddress);
-          setCanMessage(res);
+          const res = await xmtpCanMessage(resolvedAddress as `0x${string}`);
+          setCanMessage(!!res);
         } else {
-          // Resolved address is not available yet; do nothing
+          setIsVerifying(false);
           return;
         }
       } else if (
         debouncedAddress.length === 42 &&
-        client?.address !== debouncedAddress
+        clientAddress !== debouncedAddress
       ) {
-        const res = await xmtpCanMessage(debouncedAddress);
-        setCanMessage(res);
+        const res = await xmtpCanMessage(debouncedAddress as `0x${string}`);
+        setCanMessage(!!res);
       } else {
         setCanMessage(false);
       }
     } catch (e) {
       console.log('error', e);
       setCanMessage(false);
+    } finally {
+      setIsVerifying(false);
     }
-  };
+  }, [client, isAddressName, resolvedAddress, debouncedAddress, xmtpCanMessage, clientAddress]);
+
+  const checkIfConversationExists = useCallback(async (peerAddress: string) => {
+    if (!client) return;
+    const inboxId = await client.findInboxIdByIdentifier({
+      identifier: peerAddress,
+      identifierKind: "Ethereum",
+    });
+    if (!inboxId) return;
+    const convoExists = await client.conversations.getDmByInboxId(inboxId);
+    if (convoExists) {
+      const peerInboxId = await convoExists.peerInboxId();
+      const convoMembers = await convoExists.members();
+      const peerAdd = convoMembers.find((member) => member.inboxId === peerInboxId)?.accountIdentifiers;
+      const addresses = peerAdd?.filter((i) => i.identifierKind === "Ethereum")
+        .map((i) => i.identifier);
+      const consent = await convoExists.consentState();
+      const newConvo = convoExists as unknown as FullConversation;
+      newConvo.peerAddress = addresses ? addresses[0] : '';
+      newConvo.consent = consent;
+      onChatStarted(newConvo);
+    }
+  }, [client, onChatStarted]);
 
   const handleNewChat = async (message: string) => {
     if (!client) return;
     const peerAddress =
       isAddressName && !!resolvedAddress ? resolvedAddress : debouncedAddress;
     try {
-      const conv = await startConversation(peerAddress, message ?? {});
-      if (!conv.cachedConversation) {
-        if (!conv.conversation) {
-          return;
-        } else {
-          const cachedConvo = toCachedConversation(
-            conv.conversation,
-            address ?? ''
-          );
-          await allow([conv.conversation.peerAddress]);
-          await refreshConsentList();
-          onChatStarted(cachedConvo);
-          onBack();
-        }
-      } else {
-        await allow([conv.cachedConversation.peerAddress]);
-        await refreshConsentList();
-        onChatStarted(conv.cachedConversation);
-        onBack();
-      }
+      const inboxId = await client.findInboxIdByIdentifier({
+        identifier: peerAddress,
+        identifierKind: "Ethereum",
+      });
+      if (!inboxId) return;
+      const conv = await client.conversations.newDm(inboxId);
+      conv.send(message);
+      await conv.updateConsentState(ConsentState.Allowed);
+      const peerInboxId = await conv.peerInboxId();
+      const convoMembers = await conv.members();
+      const peerAdd = convoMembers.find((member) => member.inboxId === peerInboxId)?.accountIdentifiers;
+      const addresses = peerAdd?.filter((i) => i.identifierKind === "Ethereum")
+        .map((i) => i.identifier);
+      const consent = await conv.consentState();
+      const newConvo = conv as unknown as FullConversation;
+      newConvo.peerAddress = addresses ? addresses[0] : '';
+      newConvo.consent = consent;
+      onChatStarted(newConvo);
+      onBack();
     } catch (error) {
       const e = error as Error;
       console.log('error creating chat', e);
     }
   };
 
-  const checkIfConversationExists = async (peerAddress: string) => {
-    const convoExists = await getCachedByPeerAddress(peerAddress);
-    if (convoExists) {
-      onChatStarted(convoExists);
+  useEffect(() => {
+    if (name && !isPrimaryNameLoading && !isPrimaryNameFetching) {
+      setNewAddress(name);
     }
-  };
+  }, [name, isPrimaryNameLoading, isPrimaryNameFetching]);
+
+  const shouldCheckCanMessage = useMemo(() => {
+    if (debouncedAddress.length === 0) return false;
+
+    if (canMessage &&
+      ((isAddressName && resolvedAddress) ||
+        (!isAddressName && debouncedAddress.length === 42))) {
+      return false;
+    }
+
+    if (isAddressName) {
+      return !isRecordsLoading && resolvedAddress !== undefined;
+    } else {
+      return !canMessageLoading && !isPrimaryNameLoading;
+    }
+  }, [
+    debouncedAddress,
+    isAddressName,
+    isRecordsLoading,
+    resolvedAddress,
+    canMessageLoading,
+    isPrimaryNameLoading,
+    canMessage
+  ]);
 
   useEffect(() => {
     if (debouncedAddress.length === 0) {
       setCanMessage(false);
       return;
     }
-    if (isAddressName) {
-      if (!isRecordsLoading && resolvedAddress) {
-        handleCanMessage();
-      }
-    } else {
-      if (!isLoading && !isPrimaryNameLoading) {
-        handleCanMessage();
-      }
+
+    if (shouldCheckCanMessage) {
+      handleCanMessage();
     }
-  }, [
-    debouncedAddress,
-    isLoading,
-    isPrimaryNameLoading,
-    isRecordsLoading,
-    resolvedAddress,
-    isAddressName,
-    handleCanMessage,
-  ]);
+  }, [shouldCheckCanMessage, handleCanMessage]);
 
   useEffect(() => {
-    const checkConversation = async () => {
-      if (canMessage) {
-        await checkIfConversationExists(
-          isAddressName && resolvedAddress ? resolvedAddress : debouncedAddress
-        );
-      }
-    };
-
-    checkConversation();
-  }, [
-    canMessage,
-    resolvedAddress,
-    debouncedAddress,
-    checkIfConversationExists,
-    isAddressName,
-  ]);
+    if (canMessage && debouncedAddress) {
+      const targetAddress = isAddressName && resolvedAddress ? resolvedAddress : debouncedAddress;
+      checkIfConversationExists(targetAddress);
+    }
+  }, [canMessage, checkIfConversationExists]);
 
   const isSearchLoading = useMemo(() => {
-    return (
-      // (isAddressName && isPrimaryNameLoading && debouncedAddress.length > 4) ||
-      // isLoading
-      isDebouncingAddress || isRecordsFetching || isPrimaryNameFetching
-    );
-  }, [isDebouncingAddress, isRecordsFetching, isPrimaryNameFetching]);
-  // }, [isAddressName, isPrimaryNameLoading, debouncedAddress.length, isLoading]);
-
-  useEffect(() => {
-    if (isRecordsLoading || isPrimaryNameLoading) {
-      return;
-    }
-
-    if (name) {
-      setNewAddress(name);
-      return;
-    }
-  }, [name, isRecordsLoading, isPrimaryNameLoading]);
+    return isDebouncingAddress || isRecordsFetching || isPrimaryNameFetching || isVerifying;
+  }, [isDebouncingAddress, isRecordsFetching, isPrimaryNameFetching, isVerifying]);
 
   return (
     <Flex
@@ -269,7 +259,9 @@ export const NewChat: React.FC<NewChatProps> = ({
                 To
               </P>
               {isSearchLoading ? (
-                <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+                <Flex direction="row" align="center" justify='flex-end'>
+                  <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+                </Flex>
               ) : debouncedAddress.length > 0 ? (
                 <VerificationsIcon
                   fill={
@@ -283,7 +275,9 @@ export const NewChat: React.FC<NewChatProps> = ({
           }
           right={
             isSearchLoading ? (
-              <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+              <Flex direction="row" align="center" justify='flex-end'>
+                <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+              </Flex>
             ) : (
               <Flex direction="row" gap="5px">
                 <Flex
@@ -310,7 +304,7 @@ export const NewChat: React.FC<NewChatProps> = ({
           style={{
             flex: 1,
             height: 22,
-            maxHeight: 22!,
+            maxHeight: 22,
             gap: 5,
           }}
         />

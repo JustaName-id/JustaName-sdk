@@ -1,19 +1,15 @@
-import {
-  attachmentContentTypeConfig,
-  CachedConversation,
-  CachedMessage,
-  ContentTypeMetadata,
-  reactionContentTypeConfig,
-  replyContentTypeConfig,
-  useConsent,
-} from '@xmtp/react-sdk';
 import { useEnsAvatar, useRecords } from '@justaname.id/react';
 import { Avatar, Button, Flex, formatText, P, SPAN } from '@justweb3/ui';
+import { ConsentState, DecodedMessage } from '@xmtp/browser-sdk';
+import { ContentTypeReaction } from '@xmtp/content-type-reaction';
+import { ContentTypeAttachment } from '@xmtp/content-type-remote-attachment';
+import { ContentTypeReply } from '@xmtp/content-type-reply';
 import React, { useMemo } from 'react';
+import { FullConversation, useAddressInboxId, useConversations } from '../../../../hooks';
 import { formatChatDate } from '../../../../utils/formatChatDate';
 
 export interface MessageItemProps {
-  conversation: CachedConversation<ContentTypeMetadata>;
+  conversation: FullConversation;
   onClick?: () => void;
   blocked?: boolean;
   primaryName?: string | null;
@@ -21,7 +17,7 @@ export interface MessageItemProps {
     conversationId: string;
     unreadCount: number;
     consent: 'allowed' | 'blocked' | 'requested';
-    lastMessage: CachedMessage<any, ContentTypeMetadata>;
+    lastMessage: DecodedMessage;
   };
 }
 
@@ -36,20 +32,22 @@ const MessageItem: React.FC<MessageItemProps> = ({
     ens: primaryName || undefined,
   });
   const { sanitizeEnsImage } = useEnsAvatar();
+  const { inboxId } = useAddressInboxId(conversation.peerAddress);
+  const { refetchConvos } = useConversations();
 
   // const unreadMessages = useMemo(() => {
   //   if (!lastMessage) return false;
   //   return lastMessage.contentType !== ContentTypeReadReceipt.toString();
   // }, [lastMessage]);
 
-  const { allow, deny } = useConsent();
-
   const allowUser = async () => {
-    await allow([conversation.peerAddress]);
+    await conversation.updateConsentState(ConsentState.Allowed)
+    await refetchConvos();
   };
 
   const ignoreUser = async () => {
-    await deny([conversation.peerAddress]);
+    await conversation.updateConsentState(ConsentState.Denied)
+    await refetchConvos();
   };
 
   const lastContent = useMemo(() => {
@@ -61,26 +59,24 @@ const MessageItem: React.FC<MessageItemProps> = ({
     }
 
     if (
-      attachmentContentTypeConfig.contentTypes.includes(
-        lastMessage?.contentType
-      )
+      lastMessage.contentType.sameAs(ContentTypeAttachment)
     ) {
       return lastMessage.content.filename;
     }
 
     if (
-      reactionContentTypeConfig.contentTypes.includes(lastMessage?.contentType)
+      lastMessage.contentType.sameAs(ContentTypeReaction)
     ) {
-      return lastMessage.contentFallback;
+      return lastMessage.fallback;
     }
 
     if (
-      replyContentTypeConfig.contentTypes.includes(lastMessage?.contentType)
+      lastMessage.contentType.sameAs(ContentTypeReply)
     ) {
       return 'replied "' + lastMessage.content.content + '"';
     }
 
-    return lastMessage.contentFallback;
+    return lastMessage.fallback;
   }, [conversationInfo, conversationInfo?.lastMessage]);
 
   return (
@@ -91,6 +87,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
         borderRadius: '5px',
         cursor: blocked ? 'auto' : 'pointer',
       }}
+      key={conversation.id}
       onClick={() => {
         if (blocked) return;
         onClick && onClick();
@@ -100,10 +97,10 @@ const MessageItem: React.FC<MessageItemProps> = ({
         src={
           primaryName
             ? sanitizeEnsImage({
-                name: primaryName,
-                chainId: 1,
-                image: records?.sanitizedRecords?.avatar,
-              })
+              name: primaryName,
+              chainId: 1,
+              image: records?.sanitizedRecords?.avatar,
+            })
             : undefined
         }
       />
@@ -116,8 +113,8 @@ const MessageItem: React.FC<MessageItemProps> = ({
             conversationInfo?.consent === 'requested'
               ? 'calc(100% - 132px - 44px)'
               : conversationInfo?.consent === 'blocked'
-              ? 'calc(100% - 120px)'
-              : 'calc(100% - 50px - 32px - 10px)',
+                ? 'calc(100% - 120px)'
+                : 'calc(100% - 50px - 32px - 10px)',
           justifyContent: 'space-between',
         }}
       >
@@ -134,8 +131,8 @@ const MessageItem: React.FC<MessageItemProps> = ({
           }}
         >
           {conversationInfo?.lastMessage
-            ? conversationInfo?.lastMessage.senderAddress !==
-              conversation.peerAddress
+            ? conversationInfo?.lastMessage.senderInboxId !==
+              inboxId
               ? 'You: '
               : ''
             : ''}
@@ -195,8 +192,8 @@ const MessageItem: React.FC<MessageItemProps> = ({
             }}
           >
             <SPAN style={{ fontSize: '10px' }}>
-              {conversationInfo?.lastMessage?.sentAt
-                ? formatChatDate(conversationInfo?.lastMessage.sentAt)
+              {conversationInfo?.lastMessage?.sentAtNs
+                ? formatChatDate(conversationInfo?.lastMessage.sentAtNs)
                 : ''}
             </SPAN>
             {!!conversationInfo?.unreadCount &&
@@ -234,7 +231,32 @@ const MessageItem: React.FC<MessageItemProps> = ({
 };
 
 const MessageItemMemo = React.memo(MessageItem, (prevProps, nextProps) => {
-  return JSON.stringify(prevProps) === JSON.stringify(nextProps);
+  if (!prevProps.conversationInfo || !nextProps.conversationInfo) {
+    return false;
+  }
+  if (prevProps.conversationInfo?.unreadCount !== nextProps.conversationInfo?.unreadCount) {
+    return false;
+  }
+  if (prevProps.conversationInfo?.consent !== nextProps.conversationInfo?.consent) {
+    return false;
+  }
+  if (prevProps.conversationInfo?.lastMessage?.id !== nextProps.conversationInfo?.lastMessage?.id) {
+    return false;
+  }
+  if (prevProps.conversationInfo?.lastMessage?.sentAtNs !== nextProps.conversationInfo?.lastMessage?.sentAtNs) {
+    return false;
+  }
+  if (prevProps.conversation.id !== nextProps.conversation.id) {
+    return false;
+  }
+  if (prevProps.blocked !== nextProps.blocked) {
+    return false;
+  }
+  if (prevProps.primaryName !== nextProps.primaryName) {
+    return false;
+  }
+  return true;
 });
 
 export { MessageItemMemo as MessageItem };
+

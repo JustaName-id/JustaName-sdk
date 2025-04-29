@@ -24,7 +24,7 @@ export const loadKeys = (
   env: XmtpEnvironment
 ): Uint8Array | null => {
   const val = localStorage.getItem(buildLocalStorageKey(walletAddress, env));
-  return val ? Buffer.from(val, ENCODING) : null;
+  return val ? new Uint8Array(Buffer.from(val, ENCODING)) : null;
 };
 
 export const wipeKeys = (walletAddress: string, env: XmtpEnvironment) => {
