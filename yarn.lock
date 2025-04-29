@@ -4072,29 +4072,44 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:^0.3.186, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:^0.3.189, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
     "@ensdomains/ensjs": "npm:4.0.2"
-    "@justaname.id/sdk": "npm:0.2.183"
+    "@justaname.id/sdk": "npm:0.2.187"
     axios: "npm:1.6.0"
     jest: "npm:29.4.1"
     qs: "npm:6.12.0"
   peerDependencies:
     "@tanstack/react-query": 5.x
     ethers: 5.6.8 || 6.0.8
-    react: 17
+    react: ">=17"
     viem: 2.x
     wagmi: 2.x
   languageName: unknown
   linkType: soft
 
-"@justaname.id/sdk@npm:0.2.183, @justaname.id/sdk@npm:^0.2.183, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.2.187":
+  version: 0.2.187
+  resolution: "@justaname.id/sdk@npm:0.2.187"
+  dependencies:
+    "@justaname.id/siwens": "npm:0.0.120"
+    axios: "npm:1.6.0"
+    qs: "npm:6.12.0"
+  peerDependencies:
+    ethers: 5.6.8 || 6.0.8
+    siwe: 2.0.0
+    viem: 2.28.1
+  checksum: 10c0/c0838fb496ede90d5808f8aebd92ab47ca8090db848c5e0c06d186aca73926ab437eb4a8a297a3f8c70aebd50ae8af306e3737931050082192c576c0966a5c20
+  languageName: node
+  linkType: hard
+
+"@justaname.id/sdk@npm:^0.2.186, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
-    "@justaname.id/siwens": "npm:0.0.116"
+    "@justaname.id/siwens": "npm:0.0.119"
     axios: "npm:1.6.0"
     jest: "npm:29.4.1"
     qs: "npm:6.12.0"
@@ -4105,7 +4120,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justaname.id/siwens@npm:0.0.116, @justaname.id/siwens@workspace:packages/@justaname.id/siwens":
+"@justaname.id/siwens@npm:0.0.119, @justaname.id/siwens@workspace:packages/@justaname.id/siwens":
   version: 0.0.0-use.local
   resolution: "@justaname.id/siwens@workspace:packages/@justaname.id/siwens"
   peerDependencies:
@@ -4113,6 +4128,16 @@ __metadata:
     siwe: 2.0.0
   languageName: unknown
   linkType: soft
+
+"@justaname.id/siwens@npm:0.0.120":
+  version: 0.0.120
+  resolution: "@justaname.id/siwens@npm:0.0.120"
+  peerDependencies:
+    ethers: 5.6.8 || 6.0.8
+    siwe: 2.0.0
+  checksum: 10c0/0e194ab9c54534bd71084f48d8c01c3c7616282d3e15085ac40e4988fac94c70cca2cd213090a2144f79289f3feb797c375b07cf5f84e062efc240a35aa56bf8
+  languageName: node
+  linkType: hard
 
 "@justverified/plugin@workspace:packages/@justverified/plugin":
   version: 0.0.0-use.local
@@ -4125,7 +4150,7 @@ __metadata:
   peerDependencies:
     "@justweb3/widget": ">=0.0.0"
     "@tanstack/react-query": 5.x
-    react: 17
+    react: ">=17"
   languageName: unknown
   linkType: soft
 
@@ -4137,7 +4162,7 @@ __metadata:
   peerDependencies:
     "@justweb3/widget": ">=0.0.0"
     "@tanstack/react-query": 5.x
-    react: 17
+    react: ">=17"
   languageName: unknown
   linkType: soft
 
@@ -4149,7 +4174,7 @@ __metadata:
   peerDependencies:
     "@justweb3/widget": ">=0.0.0"
     "@tanstack/react-query": 5.x
-    react: 17
+    react: ">=17"
   languageName: unknown
   linkType: soft
 
@@ -4161,11 +4186,11 @@ __metadata:
   peerDependencies:
     "@justweb3/widget": ">=0.0.0"
     "@tanstack/react-query": 5.x
-    react: 17
+    react: ">=17"
   languageName: unknown
   linkType: soft
 
-"@justweb3/ui@npm:^0.0.122, @justweb3/ui@workspace:packages/@justweb3/ui":
+"@justweb3/ui@npm:^0.0.125, @justweb3/ui@workspace:packages/@justweb3/ui":
   version: 0.0.0-use.local
   resolution: "@justweb3/ui@workspace:packages/@justweb3/ui"
   dependencies:
@@ -4193,9 +4218,9 @@ __metadata:
   dependencies:
     "@ensdomains/address-encoder": "npm:1.1.2"
     "@hookform/resolvers": "npm:3.9.0"
-    "@justaname.id/react": "npm:^0.3.186"
-    "@justaname.id/sdk": "npm:^0.2.183"
-    "@justweb3/ui": "npm:^0.0.122"
+    "@justaname.id/react": "npm:^0.3.189"
+    "@justaname.id/sdk": "npm:^0.2.186"
+    "@justweb3/ui": "npm:^0.0.125"
     clsx: "npm:1.2.1"
     cropperjs: "npm:1.6.2"
     lodash: "npm:4.17.21"
@@ -4225,7 +4250,7 @@ __metadata:
   peerDependencies:
     "@justweb3/widget": ">=0.0.95"
     "@tanstack/react-query": 5.x
-    react: 17
+    react: ">=17"
     wagmi: 2.x
   languageName: unknown
   linkType: soft

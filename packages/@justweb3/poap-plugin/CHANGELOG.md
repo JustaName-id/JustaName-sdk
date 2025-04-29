@@ -1,3 +1,15 @@
+## 0.0.43 (2025-04-29)
+
+This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.
+
+## 0.0.42 (2025-04-29)
+
+This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.
+
+## 0.0.41 (2025-04-29)
+
+This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.
+
 ## 0.0.40 (2025-04-23)
 
 This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.

@@ -1,16 +1,16 @@
 {
   "name": "@justaname.id/react",
-  "version": "0.3.186",
+  "version": "0.3.190",
   "dependencies": {
     "@ensdomains/ensjs": "4.0.2",
-    "@justaname.id/sdk": "0.2.183",
+    "@justaname.id/sdk": "0.2.187",
     "axios": "1.6.0",
     "qs": "6.12.0"
   },
   "peerDependencies": {
     "@tanstack/react-query": "5.x",
     "ethers": "5.6.8 || 6.0.8",
-    "react": "17",
+    "react": ">=17",
     "viem": "2.x",
     "wagmi": "2.x"
   },
