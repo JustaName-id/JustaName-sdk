@@ -1,3 +1,42 @@
+## 0.3.190 (2025-04-29)
+
+
+### 🩹 Fixes
+
+- react version ([1deab1d0](https://github.com/JustaName-id/JustaName-sdk/commit/1deab1d0))
+
+- lockfile ([2e4e7cb0](https://github.com/JustaName-id/JustaName-sdk/commit/2e4e7cb0))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.187
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.3.189 (2025-04-29)
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.186
+
+## 0.3.188 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.185
+
+## 0.3.187 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.184
+
 ## 0.3.186 (2025-04-23)
 
 ### 🧱 Updated Dependencies

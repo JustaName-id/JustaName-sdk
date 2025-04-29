@@ -1,3 +1,29 @@
+## 0.0.44 (2025-04-29)
+
+
+### 🩹 Fixes
+
+- react version ([1deab1d0](https://github.com/JustaName-id/JustaName-sdk/commit/1deab1d0))
+
+- lockfile ([2e4e7cb0](https://github.com/JustaName-id/JustaName-sdk/commit/2e4e7cb0))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.43 (2025-04-29)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
+## 0.0.42 (2025-04-29)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
+## 0.0.41 (2025-04-29)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
 ## 0.0.40 (2025-04-23)
 
 This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
