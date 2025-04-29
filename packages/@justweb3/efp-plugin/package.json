@@ -7,7 +7,7 @@
   "peerDependencies": {
     "@justweb3/widget": ">=0.0.0",
     "@tanstack/react-query": "5.x",
-    "react": ">=17"
+    "react": "17"
   },
   "exports": {
     "./package.json": "./dist/package.json",
