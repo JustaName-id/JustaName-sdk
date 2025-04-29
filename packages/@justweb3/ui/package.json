@@ -17,7 +17,7 @@
     "react-hook-form": "7.53.0"
   },
   "peerDependencies": {
-    "react": "17"
+    "react": ">=17"
   },
   "exports": {
     "./package.json": "./dist/package.json",

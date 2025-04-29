@@ -13,7 +13,7 @@
     "yup": "0.32.11"
   },
   "peerDependencies": {
-    "react": "17",
+    "react": ">=17",
     "viem": "2.x",
     "wagmi": "2.x"
   },
