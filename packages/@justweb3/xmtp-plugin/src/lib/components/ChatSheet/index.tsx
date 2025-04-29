@@ -1,16 +1,16 @@
-import { CachedConversation, ContentTypeMetadata } from '@xmtp/react-sdk';
 import { Sheet, SheetContent, SheetTitle } from '@justweb3/ui';
-import { Chat } from './Chat';
 import { useMemo } from 'react';
+import { FullConversation } from '../../hooks';
+import { Chat } from './Chat';
 import { NewChat } from './NewChat';
 
 export interface ChatSheetProps {
   // peerAddress?: string | null;
-  peer: CachedConversation<ContentTypeMetadata> | string | null;
+  peer: FullConversation | string | null;
   openChat: boolean;
   closeChat: () => void;
   onChangePeer: (
-    peer: CachedConversation<ContentTypeMetadata> | string
+    peer: FullConversation | string
   ) => void;
 }
 
@@ -38,7 +38,8 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
         {peer !== null &&
           (isPeerConversation ? (
             <Chat
-              conversation={peer as CachedConversation<ContentTypeMetadata>}
+              conversation={peer as FullConversation}
+              peerAddress={typeof peer === "string" ? peer : peer.peerAddress}
               onBack={closeChat}
             />
           ) : (

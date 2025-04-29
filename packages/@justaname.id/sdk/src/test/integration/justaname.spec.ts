@@ -13,7 +13,7 @@ jest.setTimeout(50000);
 const mAppPk = process.env['SDK_MAPP_PRIVATE_KEY'] as string;
 const mAppSigner = new ethers.Wallet(mAppPk);
 const subnameSigner = ethers.Wallet.createRandom();
-const subnameToBeAdded = Math.random().toString(36).substring(7);
+const subnameToBeAdded = Math.random().toString(36).substring(6);
 const CHAIN_ID = parseInt(process.env['SDK_CHAIN_ID'] as string) as ChainId;
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
 const MAPP = process.env['SDK_MAPP'] as string;
@@ -40,7 +40,7 @@ describe('justaname', () => {
       chainId: CHAIN_ID,
       origin: 'http://localhost:3333',
       address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
-      domain: 'justaname.id'
+      domain: 'justaname.id',
     });
     expect(challenge).toBeDefined();
   });
@@ -107,24 +107,23 @@ describe('justaname', () => {
     expect(response).toBeDefined();
   });
 
-
   it('should add a subname without signature if overrideSignatureCheck is enabled', async () => {
+    const subnameToBeAdded2 = Math.random().toString(36).substring(7);
 
-    const response = await justaname.subnames.addSubname(
-      {
-        username: subnameToBeAdded,
-        chainId: CHAIN_ID,
-        addresses: [{
-          coinType: "60",
+    const response = await justaname.subnames.addSubname({
+      username: subnameToBeAdded2,
+      chainId: CHAIN_ID,
+      addresses: [
+        {
+          coinType: '60',
           address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
-        }],
-        overrideSignatureCheck: true,
-      }
-    );
+        },
+      ],
+      overrideSignatureCheck: true,
+    });
 
     expect(response).toBeDefined();
   });
-
 
   it('should check if subname2 is available', async () => {
     const response = await justaname.subnames.isSubnameAvailable({

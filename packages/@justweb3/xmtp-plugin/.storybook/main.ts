@@ -10,15 +10,20 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
-
   viteFinal: async (config) =>
     mergeConfig(config, {
       plugins: [react(), nxViteTsPaths()],
-      define: {
-        'process.env': process.env,
-      },
       optimizeDeps: {
         exclude: ['@xmtp/user-preferences-bindings-wasm'],
+      },
+      // server: {
+      //   headers: {
+      //     'Cross-Origin-Embedder-Policy': 'require-corp',
+      //     'Cross-Origin-Opener-Policy': 'same-origin',
+      //   },
+      // },
+      define: {
+        'process.env': process.env,
       },
     }),
   typescript: {

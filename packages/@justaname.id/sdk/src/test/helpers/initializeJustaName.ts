@@ -25,6 +25,7 @@ export const initializeJustaName = (apiKey: string) => {
       subnameChallengeTtl: VALID_TTL,
       signInTtl: VALID_TTL,
     },
+    defaultChainId: CHAIN_ID,
     ensDomains: [
       {
         ensDomain: ENS_DOMAIN,
@@ -34,12 +35,12 @@ export const initializeJustaName = (apiKey: string) => {
     ],
     networks: [
       {
-        chainId: 11155111,
-        providerUrl: SEPOLIA_PROVIDER_URL,
-      },
-      {
         chainId: 1,
         providerUrl: MAINNET_PROVIDER_URL,
+      },
+      {
+        chainId: 11155111,
+        providerUrl: SEPOLIA_PROVIDER_URL,
       },
     ],
   });

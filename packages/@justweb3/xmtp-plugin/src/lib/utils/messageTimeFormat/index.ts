@@ -1,7 +1,8 @@
-export const formatMessageSentTime = (date: Date) => {
+export const formatMessageSentTime = (date: bigint) => {
+  const dateObj = new Date(Number(date / BigInt(1000000)));
   // Get hours, minutes, and AM/PM
-  let hours = date.getHours();
-  const minutes = date.getMinutes();
+  let hours = dateObj.getHours();
+  const minutes = dateObj.getMinutes();
   const ampm = hours >= 12 ? 'PM' : 'AM';
 
   // Convert 24h time to 12h format

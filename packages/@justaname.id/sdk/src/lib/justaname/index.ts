@@ -91,6 +91,7 @@ export class JustaName {
   }
 
   static init(configuration: JustaNameConfig = {}): JustaName {
+
     const dev = configuration.dev || false;
     const defaultChainId =
       configuration.defaultChainId ||
@@ -123,6 +124,7 @@ export class JustaName {
     const subnameChallenge = new SubnameChallenge({
       siweConfig,
       chainId: defaultChainId,
+      subnameChallengeTtl: configuration.config?.subnameChallengeTtl,
       dev,
     });
 
