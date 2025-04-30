@@ -3631,7 +3631,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/core@npm:^29.4.1, @jest/core@npm:^29.7.0":
+"@jest/core@npm:^29.7.0":
   version: 29.7.0
   resolution: "@jest/core@npm:29.7.0"
   dependencies:
@@ -4030,7 +4030,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:^29.4.1, @jest/types@npm:^29.6.3":
+"@jest/types@npm:^29.6.3":
   version: 29.6.3
   resolution: "@jest/types@npm:29.6.3"
   dependencies:
@@ -4179,7 +4179,7 @@ __metadata:
   dependencies:
     "@justaname.id/siwens": "npm:0.0.122"
     axios: "npm:^1.6.0"
-    jest: "npm:29.4.1"
+    jest: "npm:^29.4.1"
     qs: "npm:^6.12.0"
   peerDependencies:
     ethers: ^5.6.8 || ^6.0.8
@@ -23671,7 +23671,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-cli@npm:^29.4.1, jest-cli@npm:^29.7.0":
+"jest-cli@npm:^29.7.0":
   version: 29.7.0
   resolution: "jest-cli@npm:29.7.0"
   dependencies:
@@ -24510,25 +24510,6 @@ __metadata:
     merge-stream: "npm:^2.0.0"
     supports-color: "npm:^8.0.0"
   checksum: 10c0/5570a3a005b16f46c131968b8a5b56d291f9bbb85ff4217e31c80bd8a02e7de799e59a54b95ca28d5c302f248b54cbffde2d177c2f0f52ffcee7504c6eabf660
-  languageName: node
-  linkType: hard
-
-"jest@npm:29.4.1":
-  version: 29.4.1
-  resolution: "jest@npm:29.4.1"
-  dependencies:
-    "@jest/core": "npm:^29.4.1"
-    "@jest/types": "npm:^29.4.1"
-    import-local: "npm:^3.0.2"
-    jest-cli: "npm:^29.4.1"
-  peerDependencies:
-    node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
-  peerDependenciesMeta:
-    node-notifier:
-      optional: true
-  bin:
-    jest: bin/jest.js
-  checksum: 10c0/fd3264dc6d2269a9d8ea0874550b396b26cf32f828afd8c4a263bf869acfeff1b0cf46882a7371f3693a3e72f3ae2c689b9cc427f5a4b85dc59adf0adbc81034
   languageName: node
   linkType: hard
 
