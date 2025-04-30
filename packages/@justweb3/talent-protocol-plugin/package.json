@@ -1,6 +1,6 @@
 {
   "name": "@justweb3/talent-protocol-plugin",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "dependencies": {
     "axios": "^1.6.0"
   },

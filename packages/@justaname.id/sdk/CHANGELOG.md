@@ -1,3 +1,20 @@
+## 0.2.189 (2025-04-30)
+
+
+### 🩹 Fixes
+
+- versioning ([b0e7b00c](https://github.com/JustaName-id/JustaName-sdk/commit/b0e7b00c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.122
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.2.188 (2025-04-30)
 
 
