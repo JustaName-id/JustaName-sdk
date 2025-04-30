@@ -1,8 +1,8 @@
 {
   "name": "@justaname.id/sdk",
-  "version": "0.2.187",
+  "version": "0.2.188",
   "dependencies": {
-    "@justaname.id/siwens": "0.0.120",
+    "@justaname.id/siwens": "0.0.121",
     "axios": "1.6.0",
     "qs": "6.12.0"
   },
