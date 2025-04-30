@@ -1,3 +1,4 @@
+'use client';
 import { Client } from '@xmtp/browser-sdk';
 import React, { createContext, useMemo, useState } from 'react';
 

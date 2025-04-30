@@ -1,3 +1,4 @@
+'use client';
 import { usePrimaryNameBatch } from '@justaname.id/react';
 import {
   AddIcon,
