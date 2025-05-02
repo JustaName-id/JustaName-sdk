@@ -4723,14 +4723,14 @@ __metadata:
   resolution: "@justweb3/xmtp-plugin@workspace:packages/@justweb3/xmtp-plugin"
   dependencies:
     "@radix-ui/react-slider": "npm:1.2.1"
-    "@xmtp/browser-sdk": "npm:^2.0.12"
-    "@xmtp/content-type-group-updated": "npm:^2.0.2"
-    "@xmtp/content-type-primitives": "npm:^2.0.2"
-    "@xmtp/content-type-reaction": "npm:^2.0.2"
-    "@xmtp/content-type-read-receipt": "npm:^2.0.2"
-    "@xmtp/content-type-remote-attachment": "npm:^2.0.2"
-    "@xmtp/content-type-reply": "npm:^2.0.2"
-    "@xmtp/content-type-text": "npm:^2.0.2"
+    "@xmtp/browser-sdk": "npm:2.0.12"
+    "@xmtp/content-type-group-updated": "npm:2.0.2"
+    "@xmtp/content-type-primitives": "npm:2.0.2"
+    "@xmtp/content-type-reaction": "npm:2.0.2"
+    "@xmtp/content-type-read-receipt": "npm:2.0.2"
+    "@xmtp/content-type-remote-attachment": "npm:2.0.2"
+    "@xmtp/content-type-reply": "npm:2.0.2"
+    "@xmtp/content-type-text": "npm:2.0.2"
     react-media-recorder-2: "npm:1.6.23"
     react-timer-hook: "npm:3.0.8"
   peerDependencies:
@@ -14083,7 +14083,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/browser-sdk@npm:^2.0.12":
+"@xmtp/browser-sdk@npm:2.0.12":
   version: 2.0.12
   resolution: "@xmtp/browser-sdk@npm:2.0.12"
   dependencies:
@@ -14097,7 +14097,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-group-updated@npm:^2.0.2":
+"@xmtp/content-type-group-updated@npm:2.0.2, @xmtp/content-type-group-updated@npm:^2.0.2":
   version: 2.0.2
   resolution: "@xmtp/content-type-group-updated@npm:2.0.2"
   dependencies:
@@ -14107,7 +14107,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-primitives@npm:^2.0.2":
+"@xmtp/content-type-primitives@npm:2.0.2, @xmtp/content-type-primitives@npm:^2.0.2":
   version: 2.0.2
   resolution: "@xmtp/content-type-primitives@npm:2.0.2"
   dependencies:
@@ -14116,7 +14116,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-reaction@npm:^2.0.2":
+"@xmtp/content-type-reaction@npm:2.0.2":
   version: 2.0.2
   resolution: "@xmtp/content-type-reaction@npm:2.0.2"
   dependencies:
@@ -14125,7 +14125,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-read-receipt@npm:^2.0.2":
+"@xmtp/content-type-read-receipt@npm:2.0.2":
   version: 2.0.2
   resolution: "@xmtp/content-type-read-receipt@npm:2.0.2"
   dependencies:
@@ -14134,7 +14134,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-remote-attachment@npm:^2.0.2":
+"@xmtp/content-type-remote-attachment@npm:2.0.2":
   version: 2.0.2
   resolution: "@xmtp/content-type-remote-attachment@npm:2.0.2"
   dependencies:
@@ -14145,7 +14145,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-reply@npm:^2.0.2":
+"@xmtp/content-type-reply@npm:2.0.2":
   version: 2.0.2
   resolution: "@xmtp/content-type-reply@npm:2.0.2"
   dependencies:
@@ -14155,7 +14155,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-text@npm:^2.0.2":
+"@xmtp/content-type-text@npm:2.0.2, @xmtp/content-type-text@npm:^2.0.2":
   version: 2.0.2
   resolution: "@xmtp/content-type-text@npm:2.0.2"
   dependencies:
@@ -25811,14 +25811,14 @@ __metadata:
     "@usecapsule/react-sdk": "npm:4.6.1"
     "@usecapsule/wagmi-v2-integration": "npm:3.6.1"
     "@vitejs/plugin-react": "npm:4.2.0"
-    "@xmtp/browser-sdk": "npm:^2.0.12"
-    "@xmtp/content-type-group-updated": "npm:^2.0.2"
-    "@xmtp/content-type-primitives": "npm:^2.0.2"
-    "@xmtp/content-type-reaction": "npm:^2.0.2"
-    "@xmtp/content-type-read-receipt": "npm:^2.0.2"
-    "@xmtp/content-type-remote-attachment": "npm:^2.0.2"
-    "@xmtp/content-type-reply": "npm:^2.0.2"
-    "@xmtp/content-type-text": "npm:^2.0.2"
+    "@xmtp/browser-sdk": "npm:2.0.12"
+    "@xmtp/content-type-group-updated": "npm:2.0.2"
+    "@xmtp/content-type-primitives": "npm:2.0.2"
+    "@xmtp/content-type-reaction": "npm:2.0.2"
+    "@xmtp/content-type-read-receipt": "npm:2.0.2"
+    "@xmtp/content-type-remote-attachment": "npm:2.0.2"
+    "@xmtp/content-type-reply": "npm:2.0.2"
+    "@xmtp/content-type-text": "npm:2.0.2"
     autoprefixer: "npm:10.4.20"
     axios: "npm:1.6.0"
     babel-jest: "npm:29.7.0"
