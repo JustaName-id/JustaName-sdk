@@ -1,3 +1,4 @@
+'use client';
 import { Client, DecodedMessage } from '@xmtp/browser-sdk';
 import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
 import { useEffect, useRef, useCallback } from 'react';

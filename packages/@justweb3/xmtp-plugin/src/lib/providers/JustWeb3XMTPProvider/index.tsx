@@ -1,3 +1,4 @@
+'use client';
 import { useMountedAccount } from '@justaname.id/react';
 import { ConsentState, Conversation, DecodedMessage, Client } from '@xmtp/browser-sdk';
 import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';

@@ -1,12 +1,12 @@
 {
   "name": "@justweb3/efp-plugin",
-  "version": "0.1.85",
+  "version": "0.1.90",
   "dependencies": {
     "axios": "1.6.0"
   },
   "peerDependencies": {
     "@justweb3/widget": ">=0.0.0",
-    "@tanstack/react-query": "5.x",
+    "@tanstack/react-query": "^5.x",
     "react": ">=17"
   },
   "exports": {

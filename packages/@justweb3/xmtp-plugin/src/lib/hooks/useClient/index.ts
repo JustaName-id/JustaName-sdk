@@ -1,3 +1,5 @@
+'use client';
+
 import { arrayify } from '@ethersproject/bytes';
 import { Client, type Signer } from '@xmtp/browser-sdk';
 import { ReactionCodec } from '@xmtp/content-type-reaction';

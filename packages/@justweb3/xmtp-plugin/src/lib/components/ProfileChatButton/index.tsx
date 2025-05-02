@@ -1,3 +1,4 @@
+'use client';
 import { useMountedAccount, useRecords } from '@justaname.id/react';
 import { ChainId } from '@justaname.id/sdk';
 import { useJustWeb3 } from '@justweb3/widget';

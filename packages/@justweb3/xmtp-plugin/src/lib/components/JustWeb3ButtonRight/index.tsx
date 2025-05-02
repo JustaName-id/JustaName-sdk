@@ -1,3 +1,4 @@
+'use client';
 import { XmtpEnvironment } from '../../plugins';
 import { NotificationBadge } from '@justweb3/ui';
 import { ChatIcon } from '../../icons/ChatIcon';
