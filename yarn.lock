@@ -4723,14 +4723,14 @@ __metadata:
   resolution: "@justweb3/xmtp-plugin@workspace:packages/@justweb3/xmtp-plugin"
   dependencies:
     "@radix-ui/react-slider": "npm:1.2.1"
-    "@xmtp/browser-sdk": "npm:1.1.4"
-    "@xmtp/content-type-group-updated": "npm:2.0.0"
-    "@xmtp/content-type-primitives": "npm:2.0.0"
-    "@xmtp/content-type-reaction": "npm:2.0.0"
-    "@xmtp/content-type-read-receipt": "npm:2.0.0"
-    "@xmtp/content-type-remote-attachment": "npm:2.0.0"
-    "@xmtp/content-type-reply": "npm:2.0.0"
-    "@xmtp/content-type-text": "npm:2.0.0"
+    "@xmtp/browser-sdk": "npm:^2.0.12"
+    "@xmtp/content-type-group-updated": "npm:^2.0.2"
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
+    "@xmtp/content-type-reaction": "npm:^2.0.2"
+    "@xmtp/content-type-read-receipt": "npm:^2.0.2"
+    "@xmtp/content-type-remote-attachment": "npm:^2.0.2"
+    "@xmtp/content-type-reply": "npm:^2.0.2"
+    "@xmtp/content-type-text": "npm:^2.0.2"
     react-media-recorder-2: "npm:1.6.23"
     react-timer-hook: "npm:3.0.8"
   peerDependencies:
@@ -5788,10 +5788,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noble/secp256k1@npm:^1.7.1":
-  version: 1.7.2
-  resolution: "@noble/secp256k1@npm:1.7.2"
-  checksum: 10c0/dda1eea78ee6d4d9ef968bd63d3f7ed387332fa1670af2c9c4c75a69bb6a0ca396bc95b5bab437e40f6f47548a12037094bda55453e30b4a23054922a13f3d27
+"@noble/secp256k1@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "@noble/secp256k1@npm:2.2.3"
+  checksum: 10c0/d88c9c239ae6b1b7aeacf4212f84ab12dff51e12b1a221f52830cf275e19c66af9bd1bdbde2104090f5b1eb4325e24309eded312aa322104ec43f6c8b0877807
   languageName: node
   linkType: hard
 
@@ -14083,116 +14083,88 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/browser-sdk@npm:1.1.4":
-  version: 1.1.4
-  resolution: "@xmtp/browser-sdk@npm:1.1.4"
+"@xmtp/browser-sdk@npm:^2.0.12":
+  version: 2.0.12
+  resolution: "@xmtp/browser-sdk@npm:2.0.12"
   dependencies:
-    "@xmtp/content-type-group-updated": "npm:^2.0.1"
-    "@xmtp/content-type-primitives": "npm:^2.0.1"
-    "@xmtp/content-type-text": "npm:^2.0.1"
+    "@xmtp/content-type-group-updated": "npm:^2.0.2"
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
+    "@xmtp/content-type-text": "npm:^2.0.2"
     "@xmtp/proto": "npm:^3.78.0"
-    "@xmtp/wasm-bindings": "npm:^1.1.3"
+    "@xmtp/wasm-bindings": "npm:1.1.7"
     uuid: "npm:^11.1.0"
-  checksum: 10c0/3e894830b112ea2d82bb45cb67236920062228a80408047fe104dc9bae88fcd945fab93f1cf89d5f566473ff9d19285d7512e7cfd951089ad112496855dc0202
+  checksum: 10c0/d4efc3b20a5dafc02b456ef1a5a9650b618452096fcf200d0efbeff6647f90479e16b58501503eb6f1ff5c3bcec839c31d0adb9db9eb061e0b20c63b5a40d36b
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-group-updated@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@xmtp/content-type-group-updated@npm:2.0.0"
+"@xmtp/content-type-group-updated@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@xmtp/content-type-group-updated@npm:2.0.2"
   dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.0"
-    "@xmtp/proto": "npm:^3.72.0"
-  checksum: 10c0/09dcb142c45168a79340a44b9d689079dcc9ed5f41adf9797497a49161f1ae553130153d57cd7b0fc52e0b00db5a2175cf650168abd1c7943e609dbf8ad64b67
-  languageName: node
-  linkType: hard
-
-"@xmtp/content-type-group-updated@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@xmtp/content-type-group-updated@npm:2.0.1"
-  dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.1"
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
     "@xmtp/proto": "npm:^3.78.0"
-  checksum: 10c0/d0e142360bbf977bd211b4adae3725b17509cedee2f97e942a649aabed2ebb705755da1bc6db6283b30f7365f6edc4111e700120c54d76ddd9ffc141cbf7ee8b
+  checksum: 10c0/6a607b04d4ee92e4fbb374b3a347b9183d8e8c290cd3f6999d9480d85e9df7602b8c7f377ac36cf1c97f1cb412a014a0f493e91be8be4daa1c382d2152ccf960
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-primitives@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@xmtp/content-type-primitives@npm:2.0.0"
-  dependencies:
-    "@xmtp/proto": "npm:^3.72.0"
-  checksum: 10c0/6e882168cea89e92f4f7c9fe1e3b0106d20ab032b1216afce7a65a741076bf6205f66701cc65c7afd84dcaa48dd0716d83138b310906abb74ec846a05a33062c
-  languageName: node
-  linkType: hard
-
-"@xmtp/content-type-primitives@npm:^2.0.0, @xmtp/content-type-primitives@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@xmtp/content-type-primitives@npm:2.0.1"
+"@xmtp/content-type-primitives@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@xmtp/content-type-primitives@npm:2.0.2"
   dependencies:
     "@xmtp/proto": "npm:^3.78.0"
-  checksum: 10c0/dd53fc024363ea5d552ef2bd287fb5e0e5271bba232c8244d104e95485d1ae12fea387f7b7c2c8cf2fe8a894c079a09f31dd1096bae80508f5b163ac42c66561
+  checksum: 10c0/84ea3432e65e7f0483b5f396e1169e47d6f18201085b8f47e0f4e1d80d6573b97716f654acdef0390f2a3de987e6227cdceed99e446a0b60e4a0f116d4f6dded
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-reaction@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@xmtp/content-type-reaction@npm:2.0.0"
+"@xmtp/content-type-reaction@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@xmtp/content-type-reaction@npm:2.0.2"
   dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.0"
-  checksum: 10c0/bb166a9a0e18b3a7610d7631423d895b8fc4149ca594df9fa46c6d36e7caf95c59a71be3a085dab4ad15c18c66257f38cc7736ae4f24986706a3c56723164039
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
+  checksum: 10c0/cbad7e0bd930e565ecaef047966e4ee4df768a4bfdeb8af76c573dab2414ec0e675161d52539b66ac64dfa436aa472b6dd1f29554adfdf7e6ecfe122e711029b
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-read-receipt@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@xmtp/content-type-read-receipt@npm:2.0.0"
+"@xmtp/content-type-read-receipt@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@xmtp/content-type-read-receipt@npm:2.0.2"
   dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.0"
-  checksum: 10c0/35592d22f1067c1de23caf9cb25eaf20702a1b5942e1bd680d31b7400220049353504f799af24b3819eff6b461f93b5575f13a2ac1d5f5482f5b90d5995f247b
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
+  checksum: 10c0/d9c261f13918c500264ebc5d6a88684ac92fb030776901c510f83e75640cf73e10ff54adb33ce9952b22679d7c413801c2ceaea4998109a7c71f27a23acbd8c5
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-remote-attachment@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@xmtp/content-type-remote-attachment@npm:2.0.0"
+"@xmtp/content-type-remote-attachment@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@xmtp/content-type-remote-attachment@npm:2.0.2"
   dependencies:
-    "@noble/secp256k1": "npm:^1.7.1"
-    "@xmtp/content-type-primitives": "npm:^2.0.0"
-    "@xmtp/proto": "npm:^3.72.0"
-  checksum: 10c0/12ba02eac35934a78b613068c8f789a213cb566c4f1a6e26fea6b3c8abc3c1b943db75d0104209f56ac169b74a06a4c7a2dc87ea5a43c40f6326f1f1f0e9cce2
+    "@noble/secp256k1": "npm:^2.2.3"
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
+    "@xmtp/proto": "npm:^3.78.0"
+  checksum: 10c0/aacec27d001b4707c3a3c0bf3aa0402839e6e59deced0d777ff21906d21a6771b43bfe07d944d7269ca422a3f0f47bd227bbc6fef181307c3533abdb0606ab72
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-reply@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@xmtp/content-type-reply@npm:2.0.0"
+"@xmtp/content-type-reply@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@xmtp/content-type-reply@npm:2.0.2"
   dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.0"
-    "@xmtp/proto": "npm:^3.72.0"
-  checksum: 10c0/14f51b0b7deaaddd5abab8186e27361a1d17395ad2cbeb558d1ea3723a60f136586a612b05fd08404317dc8ae453d68960e1f2d1441e66308cfb24ba7c5a083a
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
+    "@xmtp/proto": "npm:^3.78.0"
+  checksum: 10c0/22a11eb19fad83bb4f340940ce7f067181d043eab5f278aeb1401a8ef72c1f7e7aa104c3ad0f6b41802603e6671699b0716219c16946a329f7e1f8e9dbe510c7
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-text@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@xmtp/content-type-text@npm:2.0.0"
+"@xmtp/content-type-text@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@xmtp/content-type-text@npm:2.0.2"
   dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.0"
-  checksum: 10c0/55f0fbc7f8cdb91e15be844cb023a5afea40b2234c0b74522d7492c8303523758d4111a96bb1239a5d8c1e292edc0806d6df1bd19cad54f455420ef6a2145bb7
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
+  checksum: 10c0/97676b533a9401cb110c586bd1a1a8ab03d15e66ad2c7f0fa6ed8aaa726cdab4b00d994b63e3743d2e84ac76e102f97149c7abbce3c8e3244cc7a1238d5130c1
   languageName: node
   linkType: hard
 
-"@xmtp/content-type-text@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@xmtp/content-type-text@npm:2.0.1"
-  dependencies:
-    "@xmtp/content-type-primitives": "npm:^2.0.1"
-  checksum: 10c0/edbefabd0963a995070d526d594342b6b96b11e8c0fd092e9b1f19e960d71b505971a232d1b8cfc42997dfb9553e051fa0cb593102488a091369b599f7e9b690
-  languageName: node
-  linkType: hard
-
-"@xmtp/proto@npm:^3.72.0, @xmtp/proto@npm:^3.78.0":
+"@xmtp/proto@npm:^3.78.0":
   version: 3.78.0
   resolution: "@xmtp/proto@npm:3.78.0"
   dependencies:
@@ -14204,10 +14176,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xmtp/wasm-bindings@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@xmtp/wasm-bindings@npm:1.1.3"
-  checksum: 10c0/a4a2824657fb0e3e1df274a74b66ded14881e7195e39dd1b9ccaf7fc9e95eceb0edd53636a966c4a57ca933b6f95c90cb1f3efaba48334da59cc798a5f77b289
+"@xmtp/wasm-bindings@npm:1.1.7":
+  version: 1.1.7
+  resolution: "@xmtp/wasm-bindings@npm:1.1.7"
+  checksum: 10c0/1a99334e948635cba661aebddf3acd85be325d32bd73578249e0e0b5169d7cdcac43387d1a701fde0fb4872a0303d4d5ed8dc29d7fc5928c3801160217e0cc51
   languageName: node
   linkType: hard
 
@@ -25839,14 +25811,14 @@ __metadata:
     "@usecapsule/react-sdk": "npm:4.6.1"
     "@usecapsule/wagmi-v2-integration": "npm:3.6.1"
     "@vitejs/plugin-react": "npm:4.2.0"
-    "@xmtp/browser-sdk": "npm:1.1.4"
-    "@xmtp/content-type-group-updated": "npm:2.0.0"
-    "@xmtp/content-type-primitives": "npm:2.0.0"
-    "@xmtp/content-type-reaction": "npm:2.0.0"
-    "@xmtp/content-type-read-receipt": "npm:2.0.0"
-    "@xmtp/content-type-remote-attachment": "npm:2.0.0"
-    "@xmtp/content-type-reply": "npm:2.0.0"
-    "@xmtp/content-type-text": "npm:2.0.0"
+    "@xmtp/browser-sdk": "npm:^2.0.12"
+    "@xmtp/content-type-group-updated": "npm:^2.0.2"
+    "@xmtp/content-type-primitives": "npm:^2.0.2"
+    "@xmtp/content-type-reaction": "npm:^2.0.2"
+    "@xmtp/content-type-read-receipt": "npm:^2.0.2"
+    "@xmtp/content-type-remote-attachment": "npm:^2.0.2"
+    "@xmtp/content-type-reply": "npm:^2.0.2"
+    "@xmtp/content-type-text": "npm:^2.0.2"
     autoprefixer: "npm:10.4.20"
     axios: "npm:1.6.0"
     babel-jest: "npm:29.7.0"
