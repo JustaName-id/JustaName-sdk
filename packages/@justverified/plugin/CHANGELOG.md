@@ -1,3 +1,15 @@
+## 0.0.129 (2025-05-02)
+
+
+### 🚀 Features
+
+- package fixed ([3402cb59](https://github.com/JustaName-id/JustaName-sdk/commit/3402cb59))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.128 (2025-04-30)
 
 This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.

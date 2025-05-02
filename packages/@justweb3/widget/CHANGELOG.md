@@ -1,3 +1,22 @@
+## 0.0.130 (2025-05-02)
+
+
+### 🚀 Features
+
+- package fixed ([3402cb59](https://github.com/JustaName-id/JustaName-sdk/commit/3402cb59))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.194
+- Updated @justaname.id/sdk to 0.2.191
+- Updated @justweb3/ui to 0.0.130
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
 ## 0.0.129 (2025-04-30)
 
 
