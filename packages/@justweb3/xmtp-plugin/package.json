@@ -1,6 +1,6 @@
 {
   "name": "@justweb3/xmtp-plugin",
-  "version": "0.1.31",
+  "version": "0.1.35",
   "dependencies": {
     "@radix-ui/react-slider": "1.2.1",
     "@xmtp/browser-sdk": "1.1.4",
@@ -16,7 +16,7 @@
   },
   "peerDependencies": {
     "@justweb3/widget": ">=0.0.95",
-    "@tanstack/react-query": "5.x",
+    "@tanstack/react-query": "^5.x",
     "react": ">=17",
     "wagmi": "2.x"
   },

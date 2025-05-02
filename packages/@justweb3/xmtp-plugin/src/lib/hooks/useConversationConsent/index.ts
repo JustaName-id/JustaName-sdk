@@ -1,3 +1,5 @@
+'use client';
+
 import { useQuery } from '@tanstack/react-query';
 import { ConsentState } from '@xmtp/browser-sdk';
 import { useCallback, useEffect, useState } from 'react';

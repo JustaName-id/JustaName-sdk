@@ -1,3 +1,27 @@
+## 0.1.31 (2025-05-02)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
+## 0.1.30 (2025-04-30)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
+## 0.1.29 (2025-04-30)
+
+
+### 🩹 Fixes
+
+- versioning ([b0e7b00c](https://github.com/JustaName-id/JustaName-sdk/commit/b0e7b00c))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.1.28 (2025-04-30)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
 ## 0.1.27 (2025-04-29)
 
 This was a version bump only for siwens to align it with other projects, there were no code changes.

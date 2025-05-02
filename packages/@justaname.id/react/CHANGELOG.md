@@ -1,3 +1,51 @@
+## 0.3.194 (2025-05-02)
+
+
+### 🚀 Features
+
+- package fixed ([3402cb59](https://github.com/JustaName-id/JustaName-sdk/commit/3402cb59))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.191
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.3.193 (2025-04-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.190
+
+## 0.3.192 (2025-04-30)
+
+
+### 🩹 Fixes
+
+- versioning ([b0e7b00c](https://github.com/JustaName-id/JustaName-sdk/commit/b0e7b00c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.189
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.3.191 (2025-04-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.188
+
 ## 0.3.190 (2025-04-29)
 
 

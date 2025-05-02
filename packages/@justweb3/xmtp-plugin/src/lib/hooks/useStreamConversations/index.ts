@@ -1,3 +1,4 @@
+'use client';
 import { Client, DecodedMessage } from '@xmtp/browser-sdk';
 import { useEffect, useRef, useCallback } from 'react';
 import { useConversations } from '../useConversations';

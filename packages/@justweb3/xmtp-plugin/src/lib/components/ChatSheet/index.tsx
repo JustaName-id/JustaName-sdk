@@ -1,3 +1,4 @@
+'use client';
 import { Sheet, SheetContent, SheetTitle } from '@justweb3/ui';
 import { useMemo } from 'react';
 import { FullConversation } from '../../hooks';
