@@ -84,7 +84,7 @@
     "vaul": "1.1.1",
     "viem": "2.x",
     "vite-plugin-dts": "3.7.3",
-    "wagmi": "2.5.7"
+    "wagmi": "2.14.16"
   },
   "devDependencies": {
     "@babel/core": "7.14.5",

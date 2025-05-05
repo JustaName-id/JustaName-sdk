@@ -129,6 +129,7 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
             <Input
               placeholder={'0x...'}
               onChange={(e) => setAddress(e.target.value)}
+              name='add-address-input'
               value={address}
               style={{
                 borderRadius: '10px',
@@ -258,8 +259,8 @@ export const AddressesSection: React.FC<AddressesSectionProps> = ({ form }) => {
                               }}
                             >
                               {`${coinDetails.symbol.split('Legacy')[0]} ${coinDetails.symbol.includes('Legacy')
-                                  ? 'Legacy'
-                                  : ''
+                                ? 'Legacy'
+                                : ''
                                 }`}
                             </P>
                           </div>

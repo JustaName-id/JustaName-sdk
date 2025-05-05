@@ -58,6 +58,7 @@ export const SignSection = () => {
             <Input
               value={ensInput}
               onChange={(e) => setEnsInput(e.target.value)}
+              name="add-ens-input"
               placeholder="Add ENS"
               onKeyUp={(e) => {
                 if (e.key === 'Enter') {
