@@ -1,11 +1,12 @@
 // ChatTextField/ReplyPreview.tsx
-import React, { useMemo } from 'react';
 import { CloseIcon, DocumentIcon, Flex, P } from '@justweb3/ui';
-import VoiceNotePreview from '../../VoiceNotePreview';
-import { VideoPlayerPreview } from '../../VideoPlayerPreview';
-import { formatAddress } from '../../../../../utils/formatAddress';
+import React, { useMemo } from 'react';
+import { AttachmentContent, ReplyContent } from '../../../../../../lib/types/messageContentTypes';
 import { typeLookup } from '../../../../../utils/attachments';
 import { MessageWithReaction } from '../../../../../utils/filterReactionsMessages';
+import { formatAddress } from '../../../../../utils/formatAddress';
+import { VideoPlayerPreview } from '../../VideoPlayerPreview';
+import VoiceNotePreview from '../../VoiceNotePreview';
 
 export interface ReplyPreviewProps {
   replyMessage: MessageWithReaction | null;
@@ -31,18 +32,23 @@ export const ReplyPreview: React.FC<ReplyPreviewProps> = ({
 
   const isReplyReply = useMemo(() => {
     if (!replyMessage) return false;
-    return !!replyMessage.content.reference;
+    const content = replyMessage.content as Partial<ReplyContent>;
+    return typeof content === 'object' && content !== null && !!content.reference;
   }, [replyMessage]);
 
-  const isReplyVoice = useMemo(
-    () => replyMessage?.content.mimeType === 'audio/wav',
-    [replyMessage]
-  );
+  const isReplyVoice = useMemo(() => {
+    if (!replyMessage) return false;
+    const content = replyMessage.content as Partial<AttachmentContent>;
+    return typeof content === 'object' && content !== null && content.mimeType === 'audio/wav';
+  }, [replyMessage]);
 
   const replyAttachmentExtension = useMemo(() => {
-    if (!isReplyText && replyMessage && !isReplyReply) {
-      return replyMessage.content.mimeType.split('/')?.[1] || '';
+    if (!replyMessage || isReplyText || isReplyReply) return '';
+    const content = replyMessage.content as Partial<AttachmentContent>;
+    if (typeof content === 'object' && content !== null && typeof content.mimeType === 'string') {
+      return content.mimeType.split('/')?.[1] || '';
     }
+    return '';
   }, [isReplyText, replyMessage, isReplyReply]);
 
   const isReplyVideoOrImage = useMemo(() => {
@@ -117,7 +123,21 @@ export const ReplyPreview: React.FC<ReplyPreviewProps> = ({
               color: 'black',
             }}
           >
-            {isReplyReply ? replyMessage.content.content : replyMessage.content}
+            {(() => {
+              const content = replyMessage.content;
+              if (isReplyReply) {
+                const replyContent = content as ReplyContent;
+                if (typeof replyContent.content === 'string') {
+                  return replyContent.content;
+                } else {
+                  return (replyContent.content as AttachmentContent).filename;
+                }
+              }
+              if (isReplyText) {
+                return content as string;
+              }
+              return '';
+            })()}
           </P>
         ) : isReplyVoice ? (
           <VoiceNotePreview
@@ -133,11 +153,11 @@ export const ReplyPreview: React.FC<ReplyPreviewProps> = ({
         ) : typeLookup[replyAttachmentExtension] === 'image' ? (
           <img
             src={URL.createObjectURL(
-              new Blob([replyMessage.content.data], {
-                type: replyMessage.content.mimeType,
+              new Blob([(replyMessage.content as AttachmentContent).data], {
+                type: (replyMessage.content as AttachmentContent).mimeType,
               })
             )}
-            alt={replyMessage.content.filename}
+            alt={(replyMessage.content as AttachmentContent).filename}
             style={{
               maxHeight: '75px',
               border: '0.5px solid var(--justweb3-border-unfocused)',
@@ -149,10 +169,11 @@ export const ReplyPreview: React.FC<ReplyPreviewProps> = ({
           <VideoPlayerPreview
             disabled
             url={URL.createObjectURL(
-              new Blob([replyMessage.content.data], {
-                type: replyMessage.content.mimeType,
+              new Blob([(replyMessage.content as AttachmentContent).data], {
+                type: (replyMessage.content as AttachmentContent).mimeType,
               })
             )}
+            fileName={(replyMessage.content as AttachmentContent).filename}
             style={{ width: '150px', margin: '0 auto' }}
           />
         ) : (
@@ -170,7 +191,7 @@ export const ReplyPreview: React.FC<ReplyPreviewProps> = ({
                 color: 'var(--justweb3-primary-color)',
               }}
             >
-              {replyMessage.content.filename}
+              {(replyMessage.content as AttachmentContent).filename}
             </P>
           </Flex>
         )}

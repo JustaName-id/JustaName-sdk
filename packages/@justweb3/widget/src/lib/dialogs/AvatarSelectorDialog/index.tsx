@@ -122,7 +122,7 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
             }
           });
         }
-        else{
+        else {
           const formData = new FormData();
           formData.append('file', blob);
 
@@ -152,6 +152,7 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
         onClick={handleButtonClick}
       >
         <input
+          name='image-selector-input'
           type="file"
           accept="image/jpeg, image/png, image/heic, image/heif, image/gif, image/avif"
           onChange={handleImageChange}
@@ -222,6 +223,7 @@ export const AvatarEditorDialog: React.FC<AvatarEditorDialogProps> = ({
           >
             <MinusIcon width={27} height={27} />
             <input
+              name='slider-zoom-range-input'
               className={styles.sliderInput}
               min="1"
               max="100"
