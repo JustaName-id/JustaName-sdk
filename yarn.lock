@@ -4511,6 +4511,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@justweb3/dentity-plugin@workspace:packages/@justweb3/dentity-plugin":
+  version: 0.0.0-use.local
+  resolution: "@justweb3/dentity-plugin@workspace:packages/@justweb3/dentity-plugin"
+  dependencies:
+    axios: "npm:1.6.0"
+  peerDependencies:
+    "@justweb3/widget": ">=0.0.0"
+    "@tanstack/react-query": ^5.x
+    react: ">=17"
+  languageName: unknown
+  linkType: soft
+
 "@justweb3/efp-plugin@workspace:packages/@justweb3/efp-plugin":
   version: 0.0.0-use.local
   resolution: "@justweb3/efp-plugin@workspace:packages/@justweb3/efp-plugin"
