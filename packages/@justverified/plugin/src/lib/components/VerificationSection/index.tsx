@@ -20,7 +20,7 @@ export const VerificationSection: FC<VerificationSectionProps> = ({
   chainId,
   mApp,
   verificationBackendUrl,
-                                                                  }) => {
+}) => {
 
   const { verifiedRecords, isVerifiedRecordsLoading } =
     useVerifyRecords({
@@ -31,30 +31,30 @@ export const VerificationSection: FC<VerificationSectionProps> = ({
       chainId,
     });
 
-  if(isVerifiedRecordsLoading || !verifiedRecords) {
-    return <ProfileSection title={'Verifications'} items={[<P>Loading...</P>]} />;
+  if (isVerifiedRecordsLoading || !verifiedRecords) {
+    return <ProfileSection title={'JustVerified'} items={[<P>Loading...</P>]} />;
   }
 
-  if(Object.keys(verifiedRecords).every((key) => !verifiedRecords[key as Credentials])) {
-    return <ProfileSection title={'Verifications'} items={[<P>No verifications found</P>]} />;
+  if (Object.keys(verifiedRecords).every((key) => !verifiedRecords[key as Credentials])) {
+    return <ProfileSection title={'JustVerified'} items={[<P>No verifications found</P>]} />;
   }
 
-  return <ProfileSection title={'Verifications'} items={
+  return <ProfileSection title={'JustVerified'} items={
 
 
-  Object.keys(verifiedRecords)
-    .filter((key) => !!verifiedRecords[key as Credentials])
-    .map((credential) =>
+    Object.keys(verifiedRecords)
+      .filter((key) => !!verifiedRecords[key as Credentials])
+      .map((credential) =>
 
-      <VerificationCard
-        ens={ens}
-        credential={credential as Credentials}
-        credentials={credentials}
-        chainId={chainId}
-        mApp={mApp}
-        verificationBackendUrl={verificationBackendUrl}
-      />
-    )
+        <VerificationCard
+          ens={ens}
+          credential={credential as Credentials}
+          credentials={credentials}
+          chainId={chainId}
+          mApp={mApp}
+          verificationBackendUrl={verificationBackendUrl}
+        />
+      )
   } />;
 
 }

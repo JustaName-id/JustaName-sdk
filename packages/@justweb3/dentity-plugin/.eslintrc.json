@@ -1,0 +1,40 @@
+{
+  "extends": ["plugin:@nx/react", "../../../.eslintrc.base.json"],
+  "ignorePatterns": ["!**/*", "dist", "src/test"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/ban-types": ["warn"],
+        "@typescript-eslint/no-empty-function": ["warn"],
+        "@typescript-eslint/no-empty-interface": ["warn"]
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.json"],
+      "parser": "jsonc-eslint-parser",
+      "rules": {
+        "@nx/dependency-checks": [
+          "error",
+          {
+            "ignoredFiles": ["{projectRoot}/rollup.config.{js,ts,mjs,mts,cjs}", "{projectRoot}/src/stories/**/*", "{projectRoot}/.storybook/**/*"],
+            "ignoredDependencies": [
+              "@justaname.id/siwens",
+              "@justaname.id/sdk",
+              "@justaname.id/react",
+              "@justweb3/ui"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

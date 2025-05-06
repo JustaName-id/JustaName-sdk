@@ -1,0 +1,27 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../dist/out-tsc",
+    "module": "commonjs",
+    "types": ["jest", "node"],
+    "paths": {
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
+      "@justaname.id/react": ["packages/@justaname.id/react"],
+      "@justweb3/ui": ["packages/@justweb3/ui"],
+      "@justweb3/widget": ["packages/@justweb3/widget"]
+    }
+  },
+  "include": [
+    "jest.config.ts",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.spec.tsx",
+    "src/**/*.test.js",
+    "src/**/*.spec.js",
+    "src/**/*.test.jsx",
+    "src/**/*.spec.jsx",
+    "src/**/*.d.ts"
+  ]
+}
