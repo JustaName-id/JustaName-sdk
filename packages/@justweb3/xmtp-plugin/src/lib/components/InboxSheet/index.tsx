@@ -1,3 +1,4 @@
+'use client';
 import { usePrimaryNameBatch } from '@justaname.id/react';
 import {
   AddIcon,
@@ -230,7 +231,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
 
   return (
     <Sheet open={open} onOpenChange={handleOpen}>
-      <SheetContent side="right" overlay={false} style={{ width: '100%' }}>
+      <SheetContent side="right" overlay={false} aria-describedby={undefined} style={{ width: '100%' }}>
         <SheetTitle>Chats</SheetTitle>
 
         {/* FAB Menu Container */}
@@ -255,11 +256,11 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
             style={{
               display: 'flex',
               alignItems: 'center',
+              border: 'none',
               gap: '10px',
               padding: '8px 12px',
               backgroundColor: 'var(--justweb3-background-color)',
               borderRadius: '8px',
-              boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
               cursor: 'pointer',
             }}
           >
@@ -271,7 +272,9 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
               borderRadius: '50%',
               filter: 'drop-shadow(2px 0px 20px rgba(0, 0, 0, 0.15))',
             }}>
-              <PersonIcon />
+              <PersonIcon width={50} height={50} style={{
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+              }} />
             </Flex>
           </Button>
 
@@ -281,10 +284,10 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
+              border: 'none',
               padding: '8px 12px',
               backgroundColor: 'var(--justweb3-background-color)',
               borderRadius: '8px',
-              boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
               cursor: 'pointer',
             }}
           >
@@ -296,7 +299,9 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
               borderRadius: '50%',
               filter: 'drop-shadow(2px 0px 20px rgba(0, 0, 0, 0.15))',
             }}>
-              <GroupIcon />
+              <GroupIcon width={50} height={50} style={{
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+              }} />
             </Flex>
           </Button>
         </div>

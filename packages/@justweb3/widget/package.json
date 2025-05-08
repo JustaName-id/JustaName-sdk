@@ -1,19 +1,19 @@
 {
   "name": "@justweb3/widget",
-  "version": "0.0.120",
+  "version": "0.0.130",
   "dependencies": {
-    "@ensdomains/address-encoder": "^1.1.2",
-    "@hookform/resolvers": "^3.9.0",
-    "@justaname.id/react": "0.3.184",
-    "@justaname.id/sdk": "0.2.181",
-    "@justweb3/ui": "^0.0.120",
+    "@ensdomains/address-encoder": "1.1.2",
+    "@hookform/resolvers": "3.9.0",
+    "@justaname.id/react": "0.3.194",
+    "@justaname.id/sdk": "0.2.191",
+    "@justweb3/ui": "0.0.130",
     "clsx": "1.2.1",
-    "cropperjs": "^1.6.2",
+    "cropperjs": "1.6.2",
     "lodash": "4.17.21",
     "yup": "0.32.11"
   },
   "peerDependencies": {
-    "react": ">=17",
+    "react": "17",
     "viem": "2.x",
     "wagmi": "2.x"
   },

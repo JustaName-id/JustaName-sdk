@@ -1,3 +1,5 @@
+'use client';
+
 import { arrayify } from '@ethersproject/bytes';
 import { Client, type Signer } from '@xmtp/browser-sdk';
 import { ReactionCodec } from '@xmtp/content-type-reaction';
@@ -75,7 +77,8 @@ export const useXMTPClient = (onError?: (error: Error) => void) => {
             },
           };
 
-          xmtpClient = await Client.create(xmtpSigner, encryptionKey, {
+          xmtpClient = await Client.create(xmtpSigner, {
+            dbEncryptionKey: encryptionKey,
             env,
             loggingLevel:
               env === 'local' ? 'debug' : env === 'dev' ? 'info' : 'off',

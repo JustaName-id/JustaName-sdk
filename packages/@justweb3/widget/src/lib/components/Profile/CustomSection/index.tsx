@@ -154,6 +154,7 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
           <Flex direction="row" gap="5px" align="center">
             <Input
               placeholder={'Key'}
+              name='add-another-field-key-input'
               onChange={(e) => setCustomKey(e.target.value)}
               value={customKey}
               style={{
@@ -165,6 +166,7 @@ export const CustomSection: React.FC<CustomSectionProps> = ({
 
             <Input
               placeholder={'Value'}
+              name='add-another-field-value-input'
               onChange={(e) => setCustomValue(e.target.value)}
               value={customValue}
               style={{

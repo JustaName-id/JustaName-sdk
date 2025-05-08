@@ -1,3 +1,115 @@
+## 0.0.130 (2025-05-02)
+
+
+### 🚀 Features
+
+- package fixed ([3402cb59](https://github.com/JustaName-id/JustaName-sdk/commit/3402cb59))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.194
+- Updated @justaname.id/sdk to 0.2.191
+- Updated @justweb3/ui to 0.0.130
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.0.129 (2025-04-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.193
+- Updated @justaname.id/sdk to 0.2.190
+- Updated @justweb3/ui to 0.0.129
+
+## 0.0.128 (2025-04-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.192
+- Updated @justaname.id/sdk to 0.2.189
+- Updated @justweb3/ui to 0.0.128
+
+## 0.0.127 (2025-04-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.191
+- Updated @justaname.id/sdk to 0.2.188
+- Updated @justweb3/ui to 0.0.127
+
+## 0.0.126 (2025-04-29)
+
+
+### 🩹 Fixes
+
+- react version ([1deab1d0](https://github.com/JustaName-id/JustaName-sdk/commit/1deab1d0))
+
+- lockfile ([2e4e7cb0](https://github.com/JustaName-id/JustaName-sdk/commit/2e4e7cb0))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.190
+- Updated @justaname.id/sdk to 0.2.187
+- Updated @justweb3/ui to 0.0.126
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.125 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.189
+- Updated @justaname.id/sdk to 0.2.186
+- Updated @justweb3/ui to 0.0.125
+
+## 0.0.124 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.188
+- Updated @justaname.id/sdk to 0.2.185
+- Updated @justweb3/ui to 0.0.124
+
+## 0.0.123 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.187
+- Updated @justaname.id/sdk to 0.2.184
+- Updated @justweb3/ui to 0.0.123
+
+## 0.0.122 (2025-04-23)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.186
+- Updated @justaname.id/sdk to 0.2.183
+- Updated @justweb3/ui to 0.0.122
+
+## 0.0.121 (2025-04-23)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.185
+- Updated @justaname.id/sdk to 0.2.182
+- Updated @justweb3/ui to 0.0.121
+
 ## 0.0.120 (2025-02-13)
 
 

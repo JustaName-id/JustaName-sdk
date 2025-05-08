@@ -1,11 +1,11 @@
 {
   "name": "@justaname.id/react",
-  "version": "0.3.184",
+  "version": "0.3.194",
   "dependencies": {
     "@ensdomains/ensjs": "4.0.2",
-    "@justaname.id/sdk": "0.2.181",
-    "axios": "^1.6.0",
-    "qs": "^6.12.0"
+    "@justaname.id/sdk": "0.2.191",
+    "axios": "1.6.0",
+    "qs": "6.12.0"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^5.x",

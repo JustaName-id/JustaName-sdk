@@ -32,6 +32,7 @@ export const GroupAvatarEditorDialog: React.FC<GroupAvatarEditorDialogProps> = (
   const imageElement = React.useRef<HTMLImageElement>(null);
   const cropper = React.useRef<Cropper>();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  // TODO: change params to accept group id
   const { uploadMedia, isUploadPending } = useUploadMedia({
     ens: connectedEns?.ens,
     type: 'Avatar',
@@ -149,7 +150,7 @@ export const GroupAvatarEditorDialog: React.FC<GroupAvatarEditorDialogProps> = (
         />
         <Avatar
           src={avatar}
-          size={82}
+          size={100}
           borderSize={'4px'}
           style={{
             borderRadius: '8px',

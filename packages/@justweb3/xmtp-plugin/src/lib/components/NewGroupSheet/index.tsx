@@ -6,7 +6,7 @@ import {
     SheetContent,
     SheetTitle
 } from '@justweb3/ui';
-import { GroupPermissionsOptions, IdentifierKind, SafeCreateGroupOptions } from '@xmtp/browser-sdk';
+import { ConsentState, GroupPermissionsOptions, IdentifierKind, SafeCreateGroupOptions } from '@xmtp/browser-sdk';
 import React from 'react';
 import { FullGroup } from '../../hooks';
 import { useXMTPContext } from '../../hooks/useXMTPContext';
@@ -34,11 +34,19 @@ export const NewGroup: React.FC<NewGroupProps> = ({
     const { client } = useXMTPContext();
 
     const onCreateGroup = async () => {
-        const identifiers = addedMembers.map(member => ({
-            identifier: member,
-            identifierKind: 'Ethereum' as IdentifierKind
-        }));
-        const newGroup = await client?.conversations.newGroupWithIdentifiers(identifiers, groupDetails);
+        try {
+            const identifiers = addedMembers.map(member => ({
+                identifier: member,
+                identifierKind: 'Ethereum' as IdentifierKind
+            }));
+            const newGroup = await client?.conversations.newGroupWithIdentifiers(identifiers, groupDetails);
+            newGroup?.updateConsentState(ConsentState.Allowed);
+            // newGroup?.updateImageUrl
+            onGroupStarted(newGroup as FullGroup);
+        } catch (error) {
+            const e = error as Error;
+            console.log('error creating group', e);
+        }
     }
 
     const backBtnHandler = () => {
@@ -69,7 +77,7 @@ export const NewGroup: React.FC<NewGroupProps> = ({
                         gap="10px"
                         justify="space-between"
                         style={{
-                            padding: '10px 1.5rem',
+                            padding: '10px',
                         }}
                     >
                         <Flex

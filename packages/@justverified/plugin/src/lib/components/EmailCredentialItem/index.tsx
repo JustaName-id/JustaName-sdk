@@ -69,6 +69,7 @@ export const EmailCredentialItem: FC<EmailCredentialItemProps> = ({
         mApp={mApp}
       />
       <Input
+        name='email-input'
         style={{
           borderColor: 'var(--justweb3-foreground-color-4)',
           opacity: loading ? 0.5 : 1,

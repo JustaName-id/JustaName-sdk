@@ -61,7 +61,7 @@ export const InfoSection: React.FC<InfoSectionProps> = ({
             gap="10px"
             justify='space-between'
             style={{
-                paddingTop: '10px',
+                paddingTop: '30px',
                 height: '100%',
                 width: '100%',
                 paddingLeft: '1.5rem',
@@ -77,16 +77,18 @@ export const InfoSection: React.FC<InfoSectionProps> = ({
             >
                 <Flex direction='column' gap='10px'>
                     <P style={{
-                        fontSize: '10px',
+                        fontSize: '12px',
                         fontWeight: '300',
-                        lineHeight: '14px',
+                        lineHeight: '140%',
                     }}>Group Info</P>
                     <Flex direction='row' gap='5px'>
                         <GroupAvatarEditorDialog
                             onImageChange={(newImage) => setGroupDetails({ ...groupDetails, imageUrlSquare: newImage })}
                             avatar={groupDetails.imageUrlSquare}
                         />
-                        <Flex direction='column' gap='5px'>
+                        <Flex direction='column' gap='5px' style={{
+                            flexGrow: 1,
+                        }}>
                             <Input
                                 value={groupDetails.name}
                                 placeholder='Group Name'
@@ -97,6 +99,7 @@ export const InfoSection: React.FC<InfoSectionProps> = ({
                                     padding: '10px 8px',
                                     fontSize: '10px',
                                     fontWeight: '400',
+                                    height: '22px',
                                     lineHeight: '10px',
                                 }}
                                 onChange={(e) => setGroupDetails({ ...groupDetails, name: e.target.value })}

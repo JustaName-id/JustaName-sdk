@@ -1,6 +1,11 @@
 .triggerButton {
-  width: 200px;
+  width: 100%;
   justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--justweb3-foreground-color-4);
 }
 
 .chevronsIcon {

@@ -1,18 +1,18 @@
 {
   "name": "@justweb3/xmtp-plugin",
-  "version": "0.1.25",
+  "version": "0.1.35",
   "dependencies": {
-    "@radix-ui/react-slider": "^1.2.1",
-    "@xmtp/browser-sdk": "^1.1.4",
-    "@xmtp/content-type-group-updated": "^2.0.0",
-    "@xmtp/content-type-primitives": "^2.0.0",
-    "@xmtp/content-type-reaction": "^2.0.0",
-    "@xmtp/content-type-read-receipt": "^2.0.0",
-    "@xmtp/content-type-remote-attachment": "^2.0.0",
-    "@xmtp/content-type-reply": "^2.0.0",
-    "@xmtp/content-type-text": "^2.0.0",
-    "react-media-recorder-2": "^1.6.23",
-    "react-timer-hook": "^3.0.8"
+    "@radix-ui/react-slider": "1.2.1",
+    "@xmtp/browser-sdk": "2.0.12",
+    "@xmtp/content-type-group-updated": "2.0.2",
+    "@xmtp/content-type-primitives": "2.0.2",
+    "@xmtp/content-type-reaction": "2.0.2",
+    "@xmtp/content-type-read-receipt": "2.0.2",
+    "@xmtp/content-type-remote-attachment": "2.0.2",
+    "@xmtp/content-type-reply": "2.0.2",
+    "@xmtp/content-type-text": "2.0.2",
+    "react-media-recorder-2": "1.6.23",
+    "react-timer-hook": "3.0.8"
   },
   "peerDependencies": {
     "@justweb3/widget": ">=0.0.95",

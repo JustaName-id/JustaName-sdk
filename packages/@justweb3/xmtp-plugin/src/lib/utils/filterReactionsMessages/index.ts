@@ -9,7 +9,10 @@ export const filterReactionsMessages = (messages: DecodedMessage[]) => {
   const messagesMap = new Map<string, MessageWithReaction>();
   for (const message of messages) {
     if (message.contentType.sameAs(ContentTypeReaction)) {
-      const referenceId = message.content.reference.toString();
+      const content = message.content as {
+        reference: string | { toString: () => string };
+      };
+      const referenceId = content.reference.toString();
       const reactionMessage = messagesMap.get(referenceId);
       if (reactionMessage) {
         reactionMessage.reactionMessage = message;

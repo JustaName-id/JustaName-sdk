@@ -15,6 +15,7 @@ export * from './Popover';
 export * from './Separator';
 export * from './Tabs';
 export * from './Text';
+export * from './TextField';
 export * from './ToolTip';
 export * from './Sheet';
 export * from './Label';

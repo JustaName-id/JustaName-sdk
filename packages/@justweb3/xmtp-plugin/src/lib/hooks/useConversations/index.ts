@@ -130,18 +130,18 @@ const getConversations = async (client: Client) => {
     client.inboxId ?? ''
   );
 
-  const clientIdentifier = await client.accountIdentifier();
+  const clientIdentifier = client.accountIdentifier;
   const filteredAllowedConvos = filterOwnConversations(
     allowedConvosWithPeerAddress,
-    clientIdentifier.identifier
+    clientIdentifier?.identifier ?? ''
   );
   const filteredBlockedConvos = filterOwnConversations(
     blockedConvosWithPeerAddress,
-    clientIdentifier.identifier
+    clientIdentifier?.identifier ?? ''
   );
   const filteredRequestedConvos = filterOwnConversations(
     requestedConvosWithPeerAddress,
-    clientIdentifier.identifier
+    clientIdentifier?.identifier ?? ''
   );
 
   return {

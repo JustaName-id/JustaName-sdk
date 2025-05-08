@@ -118,10 +118,21 @@ export const Chat: React.FC<ChatProps> = ({ conversation, onBack }) => {
 
   const isStringContent =
     typeof replyMessage?.content === 'string' ||
-    typeof replyMessage?.content?.content === 'string';
+    (typeof replyMessage?.content === 'object' &&
+      replyMessage?.content !== null &&
+      'content' in replyMessage.content &&
+      typeof replyMessage?.content?.content === 'string');
 
-  const mimeType = replyMessage?.content?.mimeType;
-  const type = mimeType ? typeLookup[mimeType.split('/')?.[1]] : null;
+  const mimeType =
+    typeof replyMessage?.content === 'object' &&
+      replyMessage?.content !== null &&
+      'mimeType' in replyMessage.content
+      ? replyMessage.content.mimeType
+      : undefined;
+  const type =
+    typeof mimeType === 'string'
+      ? typeLookup[mimeType.split('/')?.[1]]
+      : null;
 
   const computeHeight = useMemo(() => {
     const baseHeight = '100vh - 50px - 3rem - 1.5rem - 73px - 15px';

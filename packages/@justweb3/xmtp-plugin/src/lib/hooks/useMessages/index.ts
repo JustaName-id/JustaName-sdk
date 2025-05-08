@@ -1,3 +1,4 @@
+'use client';
 import { useMountedAccount } from '@justaname.id/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Conversation, DecodedMessage } from '@xmtp/browser-sdk';

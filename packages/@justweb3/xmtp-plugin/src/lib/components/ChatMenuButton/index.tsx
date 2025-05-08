@@ -1,3 +1,4 @@
+'use client';
 import { ArrowIcon, ClickableItem, SPAN } from '@justweb3/ui';
 import { XmtpEnvironment } from '../../plugins';
 import { useJustWeb3XMTP } from '../../providers/JustWeb3XMTPProvider';

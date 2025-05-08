@@ -39,7 +39,8 @@ export const NewChat: React.FC<NewChatProps> = ({
   //Queries
   const { client } = useXMTPContext();
   const { clientAddress } = useClientAddress();
-  const { canMessageFn: xmtpCanMessage, canMessageLoading } = useCanMessage();
+  const { canMessageFn: xmtpCanMessage } = useCanMessage();
+
   const {
     debouncedValue: debouncedAddress,
     isDebouncing: isDebouncingAddress,
@@ -164,27 +165,21 @@ export const NewChat: React.FC<NewChatProps> = ({
   }, [name, isPrimaryNameLoading, isPrimaryNameFetching]);
 
   const shouldCheckCanMessage = useMemo(() => {
-    if (debouncedAddress.length === 0) return false;
-
-    if (canMessage &&
-      ((isAddressName && resolvedAddress) ||
-        (!isAddressName && debouncedAddress.length === 42))) {
-      return false;
-    }
+    if (debouncedAddress.length === 0 || clientAddress === debouncedAddress) return false;
 
     if (isAddressName) {
       return !isRecordsLoading && resolvedAddress !== undefined;
-    } else {
-      return !canMessageLoading && !isPrimaryNameLoading;
+    }
+    else {
+      return !isPrimaryNameLoading;
     }
   }, [
     debouncedAddress,
+    clientAddress,
     isAddressName,
     isRecordsLoading,
     resolvedAddress,
-    canMessageLoading,
     isPrimaryNameLoading,
-    canMessage
   ]);
 
   useEffect(() => {

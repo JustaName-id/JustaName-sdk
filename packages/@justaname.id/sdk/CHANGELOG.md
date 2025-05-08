@@ -1,3 +1,105 @@
+## 0.2.191 (2025-05-02)
+
+
+### 🚀 Features
+
+- package fixed ([3402cb59](https://github.com/JustaName-id/JustaName-sdk/commit/3402cb59))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.124
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.190 (2025-04-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.123
+
+## 0.2.189 (2025-04-30)
+
+
+### 🩹 Fixes
+
+- versioning ([b0e7b00c](https://github.com/JustaName-id/JustaName-sdk/commit/b0e7b00c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.122
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.188 (2025-04-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.121
+
+## 0.2.187 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.120
+
+## 0.2.186 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.119
+
+## 0.2.185 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.118
+
+## 0.2.184 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.117
+
+## 0.2.183 (2025-04-23)
+
+
+### 🩹 Fixes
+
+- subnameChallenge in sdk ([39a23c44](https://github.com/JustaName-id/JustaName-sdk/commit/39a23c44))
+
+- tests ([82320e85](https://github.com/JustaName-id/JustaName-sdk/commit/82320e85))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.116
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.182 (2025-04-23)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.115
+
 ## 0.2.181 (2025-02-13)
 
 

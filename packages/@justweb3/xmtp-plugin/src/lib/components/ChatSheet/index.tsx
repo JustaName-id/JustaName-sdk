@@ -1,3 +1,4 @@
+'use client';
 import { Sheet, SheetContent, SheetTitle } from '@justweb3/ui';
 import { useMemo } from 'react';
 import { FullConversation } from '../../hooks';
@@ -29,6 +30,7 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
       <SheetContent
         side="right"
         overlay={false}
+        aria-describedby={undefined}
         style={{ width: '100%', paddingLeft: 0, paddingRight: 0 }}
       >
         <SheetTitle>

@@ -1,3 +1,69 @@
+## 0.0.48 (2025-05-02)
+
+
+### 🚀 Features
+
+- package fixed ([3402cb59](https://github.com/JustaName-id/JustaName-sdk/commit/3402cb59))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.0.47 (2025-04-30)
+
+This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.
+
+## 0.0.46 (2025-04-30)
+
+
+### 🩹 Fixes
+
+- versioning ([b0e7b00c](https://github.com/JustaName-id/JustaName-sdk/commit/b0e7b00c))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.45 (2025-04-30)
+
+This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.
+
+## 0.0.44 (2025-04-29)
+
+
+### 🩹 Fixes
+
+- react version ([1deab1d0](https://github.com/JustaName-id/JustaName-sdk/commit/1deab1d0))
+
+- lockfile ([2e4e7cb0](https://github.com/JustaName-id/JustaName-sdk/commit/2e4e7cb0))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.43 (2025-04-29)
+
+This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.
+
+## 0.0.42 (2025-04-29)
+
+This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.
+
+## 0.0.41 (2025-04-29)
+
+This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.
+
+## 0.0.40 (2025-04-23)
+
+This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.
+
+## 0.0.39 (2025-04-23)
+
+This was a version bump only for @justweb3/poap-plugin to align it with other projects, there were no code changes.
+
 ## 0.1.32 (2024-11-04)
 
 

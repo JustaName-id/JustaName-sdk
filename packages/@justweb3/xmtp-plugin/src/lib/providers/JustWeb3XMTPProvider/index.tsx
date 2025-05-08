@@ -1,3 +1,4 @@
+'use client';
 import { useMountedAccount } from '@justaname.id/react';
 import { ConsentState, Conversation, DecodedMessage, Client } from '@xmtp/browser-sdk';
 import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
@@ -486,7 +487,7 @@ export const Checks: React.FC<ChecksProps> = ({
     if (!client || !address || isInitializing || !signer) return;
 
     const reinitialize = async () => {
-      if (await checkIfSameAccount()) return;
+      if (checkIfSameAccount()) return;
       console.log("reinitializing")
       client.close();
       handleXmtpEnabled(false);
@@ -498,10 +499,10 @@ export const Checks: React.FC<ChecksProps> = ({
     reinitialize();
   }, [address, client, isInitializing, initializeXmtp, signer]);
 
-  const checkIfSameAccount = async () => {
+  const checkIfSameAccount = () => {
     if (!client || !address) return false;
-    const clientIdentifier = await client.accountIdentifier();
-    return clientIdentifier.identifier.toLowerCase() === address.toLowerCase();
+    const clientIdentifier = client.accountIdentifier;
+    return clientIdentifier?.identifier.toLowerCase() === address.toLowerCase();
   };
 
   useEffect(() => {

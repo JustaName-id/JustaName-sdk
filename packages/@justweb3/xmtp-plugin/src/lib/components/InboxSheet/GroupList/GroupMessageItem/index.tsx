@@ -70,7 +70,7 @@ const GroupMessageItem: React.FC<GroupMessageItemProps> = ({
     if (
       lastMessage.contentType.sameAs(ContentTypeAttachment)
     ) {
-      return lastMessage.content.filename;
+      return (lastMessage.content as { filename: string }).filename;
     }
 
     if (
@@ -82,7 +82,7 @@ const GroupMessageItem: React.FC<GroupMessageItemProps> = ({
     if (
       lastMessage.contentType.sameAs(ContentTypeReply)
     ) {
-      return 'replied "' + lastMessage.content.content + '"';
+      return 'replied "' + (lastMessage.content as { content: string }).content + '"';
     }
 
     return lastMessage.fallback;
