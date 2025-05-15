@@ -1,0 +1,21 @@
+:root {
+  --justweb3-primary-color: #007bff;
+  --justweb3-primary-foreground-color: #ffffff;
+  --justweb3-secondary-color: #6c757d;
+  --justweb3-secondary-foreground-color: #ffffff;
+  --justweb3-destructive-color: #dc3545;
+  --justweb3-destructive-foreground-color: #ffffff;
+  --justweb3-background-color: #ffffff;
+  --justweb3-foreground-color: #212529;
+  --justweb3-foreground-color-2: #495057;
+  --justweb3-foreground-color-4: #ced4da;
+  --justweb3-border-color: #dee2e6;
+  --justweb3-input-color: #ced4da;
+  --justweb3-ring-color: #80bdff;
+  --justweb3-radius: 0.5rem;
+  --justweb3-font-family: sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -157,6 +157,7 @@
     "nx": "19.7.3",
     "nx-release": "3.3.0",
     "postcss": "8.4.38",
+    "postcss-import": "^16.1.0",
     "prettier": "2.6.2",
     "react-refresh": "0.10.0",
     "rollup": "4.24.0",

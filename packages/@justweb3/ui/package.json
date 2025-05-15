@@ -16,6 +16,11 @@
     "input-otp": "1.2.4",
     "react-hook-form": "7.53.0"
   },
+  "devDependencies": {
+    "tailwindcss": "3.4.3",
+    "postcss": "8.4.38",
+    "autoprefixer": "10.4.20"
+  },
   "peerDependencies": {
     "react": "17"
   },

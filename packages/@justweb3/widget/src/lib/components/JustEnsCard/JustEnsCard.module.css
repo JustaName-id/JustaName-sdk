@@ -9,16 +9,14 @@
   overflow: hidden;
   cursor: pointer;
   background-color: var(--justweb3-background-color);
-  /*box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.05);*/
   border: 1px solid var(--justweb3-foreground-color-4);
 }
 
 .expandableCard:hover {
   border: 1px solid var(--justweb3-primary-color);
-  /*box-shadow: 1px 1px 5px 0px var(--justweb3-primary-color);*/
 }
 
-.descriptionText {
+p.descriptionText {
   color: var(--justweb3-foreground-color-2);
   text-align: right;
   font-size: 10px;
@@ -50,23 +48,23 @@
   padding: 35px 20px 20px 20px;
 }
 
-.titleText {
+p.titleText {
   font-weight: 700;
   color: var(--justweb3-primary-color);
   font-size: 12px;
 }
 
-.expandabletitleText {
+p.expandabletitleText {
   font-weight: 700;
   color: var(--justweb3-foreground-color-2);
   font-size: 16px;
 }
 
-.clickableItem {
+div.clickableItem {
   color: var(--justweb3-primary-color);
 }
 
-.socialIconsContainer {
+div.socialIconsContainer {
   display: flex;
   gap: 5px;
 }
