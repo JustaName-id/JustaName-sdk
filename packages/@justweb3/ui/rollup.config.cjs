@@ -21,7 +21,7 @@ module.exports = (config) => {
         require('tailwindcss')('./tailwind.config.js'),
         autoprefixer(),
       ],
-      modules: true,
+      autoModules: true,
       inject: { insertAt: 'top' },
     }),
     ...pluginsWithoutNxPostcss,
