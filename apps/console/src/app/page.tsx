@@ -8,8 +8,8 @@ import { getAnalyticsClient } from '../analytics';
 import { SectionSlider } from '../components/reusable/SectionSlider';
 import { CodeSection } from '../components/sections/code/CodeSection';
 import { Customizer } from '../components/sections/customizer/Customizer';
-import { ConsoleProvider } from '../providers/ConsoleProvider';
 import { useSplit } from '../hooks/useSplit';
+import { ConsoleStoreProvider } from '../providers/ConsoleStoreProvider';
 
 export default function Page() {
   const { isConnected, address } = useMountedAccount();
@@ -51,7 +51,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-row justify-between max-mobile:max-w-[100vw] max-mobile:overflow-x-hidden w-full h-full relative">
-      <ConsoleProvider>
+      <ConsoleStoreProvider>
         <div className="hidden mobile:block">
           <Customizer />
         </div>
@@ -166,7 +166,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-      </ConsoleProvider>
+      </ConsoleStoreProvider>
     </div>
   );
 }

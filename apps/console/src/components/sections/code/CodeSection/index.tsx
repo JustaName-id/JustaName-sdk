@@ -1,10 +1,9 @@
 import { JustWeb3Context } from '@justweb3/widget';
 import React, { useContext, useMemo } from 'react';
 import { useJustWeb3Theme } from '@justweb3/ui';
-import { useConsole } from '../../../../providers/ConsoleProvider';
 import { Highlight, themes } from 'prism-react-renderer';
-import { getAnalyticsClient } from 'apps/console/src/analytics';
-
+import { getAnalyticsClient } from '../../../../analytics';
+import { useConsoleStore } from '../../../../providers/ConsoleStoreProvider';
 interface CodeSectionProps {
   mobile?: boolean;
 }
@@ -12,7 +11,7 @@ interface CodeSectionProps {
 export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
   const { config } = useContext(JustWeb3Context);
   const { color } = useJustWeb3Theme();
-  const { justVerified } = useConsole();
+  const justVerified = useConsoleStore((state) => state.justVerified);
   const justVerifiedEnabled = useMemo(
     () => config.plugins?.find((p) => p.name === 'JustVerifiedPlugin'),
     [config]

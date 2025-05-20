@@ -8,7 +8,6 @@ import {
   TelegramIcon,
   TwitterIcon,
 } from '@justweb3/ui';
-import { useConsole } from '../../../../../providers/ConsoleProvider';
 import { Switch } from '../../../../ui/switch';
 import { SocialCard } from './socialCard';
 import {
@@ -18,6 +17,7 @@ import {
 } from '../../../../ui/accordion';
 import { getAnalyticsClient } from '../../../../../analytics';
 import { showToast } from '../../../../toast';
+import { useConsoleStore } from '../../../../../providers/ConsoleStoreProvider';
 
 const socials: { logo: ReactNode; title: string; credential: Credentials }[] = [
   {
@@ -49,7 +49,8 @@ const socials: { logo: ReactNode; title: string; credential: Credentials }[] = [
 
 export const JustVerified = () => {
   const { handleJustWeb3Config, config } = useContext(JustWeb3Context);
-  const { justVerified, setJustVerified } = useConsole();
+  const justVerified = useConsoleStore((state) => state.justVerified);
+  const setJustVerified = useConsoleStore((state) => state.setJustVerified);
 
   const handleJustVerifiedConfig = (enabled: boolean) => {
     if (enabled) {

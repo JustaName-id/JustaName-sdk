@@ -6,16 +6,16 @@ import {
 } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import '@justweb3/widget/styles.css';
+import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
 import {
   argentWallet,
   ledgerWallet,
   trustWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useState } from 'react';
 import { http, WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
-import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
-import { useState } from 'react';
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -74,7 +74,9 @@ export const Providers: React.FC<ProviderProps> = (props) => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <JustWeb3Provider config={justweb3Config}>
-          <RainbowKitProvider>{props.children}</RainbowKitProvider>
+          <RainbowKitProvider>
+            {props.children}
+          </RainbowKitProvider>
         </JustWeb3Provider>
       </QueryClientProvider>
     </WagmiProvider>
