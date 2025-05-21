@@ -2,12 +2,7 @@
 module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx}', // Widget's own files
-    // Important: Scan the UI package's components for Tailwind classes
-    // Adjust path based on your node_modules structure or monorepo setup
-    '../../node_modules/@justweb3/ui/src/**/*.{js,jsx,ts,tsx}',
-    // Or if in a monorepo and referencing source directly (less common for this setup):
-    // '../ui/src/**/*.{js,jsx,ts,tsx}',
-    ,
+    '../ui/src/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {

@@ -1,4 +1,4 @@
+@import '../../../ui/dist/index.esm.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '../../../ui/dist/index.esm.css';

@@ -4548,11 +4548,14 @@ __metadata:
     "@radix-ui/react-slot": "npm:1.1.0"
     "@radix-ui/react-tabs": "npm:1.1.1"
     "@radix-ui/react-tooltip": "npm:1.1.4"
+    autoprefixer: "npm:10.4.20"
     class-variance-authority: "npm:0.7.0"
     clsx: "npm:1.2.1"
     embla-carousel-react: "npm:8.3.0"
     input-otp: "npm:1.2.4"
+    postcss: "npm:8.4.38"
     react-hook-form: "npm:7.53.0"
+    tailwindcss: "npm:3.4.3"
   peerDependencies:
     react: 17
   languageName: unknown
@@ -4572,7 +4575,10 @@ __metadata:
     lodash: "npm:4.17.21"
     yup: "npm:0.32.11"
   peerDependencies:
+    autoprefixer: 10.4.20
+    postcss: 8.4.38
     react: 17
+    tailwindcss: 3.4.3
     viem: 2.x
     wagmi: 2.x
   languageName: unknown

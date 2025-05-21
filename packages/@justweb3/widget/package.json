@@ -13,12 +13,12 @@
     "yup": "0.32.11"
   },
   "peerDependencies": {
-    "react": "17",
-    "viem": "2.x",
-    "wagmi": "2.x",
-    "tailwindcss": "3.4.3",
+    "autoprefixer": "10.4.20",
     "postcss": "8.4.38",
-    "autoprefixer": "10.4.20"
+    "react": "17",
+    "tailwindcss": "3.4.3",
+    "viem": "2.x",
+    "wagmi": "2.x"
   },
   "exports": {
     "./package.json": "./dist/package.json",
