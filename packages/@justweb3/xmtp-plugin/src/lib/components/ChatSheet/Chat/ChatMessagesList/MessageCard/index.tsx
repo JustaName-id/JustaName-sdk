@@ -20,6 +20,11 @@ import { formatAddress } from '../../../../../utils/formatAddress';
 import { formatMessageSentTime } from '../../../../../utils/messageTimeFormat';
 import { VideoPlayerPreview } from '../../VideoPlayerPreview';
 import VoiceNotePreview from '../../VoiceNotePreview';
+import {
+  AttachmentContent,
+  ReactionContent,
+  ReplyContent,
+} from '../../../../../types/messageContentTypes';
 
 interface MessageCardProps {
   message: MessageWithReaction;
@@ -155,15 +160,30 @@ export const MessageCard: React.FC<MessageCardProps> = ({
   }, []);
 
   const attachmentExtention = useMemo(() => {
-    if (!isText && message.content.mimeType)
-      return message.content.mimeType.split('/')?.[1] || '';
-  }, [isText, message.content.mimeType]);
+    if (typeof message.content === 'object' && message.content !== null && 'mimeType' in message.content) {
+      const content = message.content as Partial<AttachmentContent>;
+      return content.mimeType?.split('/')?.[1] || '';
+    }
+    return '';
+  }, [message.content]);
 
-  const isImage = message.content && message.content.data;
-  const isReply =
-    message.content && message.contentType.sameAs(ContentTypeReply);
+  const isImage = useMemo(() => {
+    return typeof message.content === 'object' && message.content !== null && 'data' in message.content;
+  }, [message.content]);
+
+  const isReply = useMemo(() => {
+    return message.contentType.sameAs(ContentTypeReply);
+  }, [message.contentType])
+
   const isReceiver = message.senderInboxId === inboxId;
-  const isVoice = message.content.mimeType === 'audio/wav';
+
+  const isVoice = useMemo(() => {
+    if (typeof message.content === 'object' && message.content !== null && 'mimeType' in message.content) {
+      const content = message.content as Partial<AttachmentContent>;
+      return content.mimeType === 'audio/wav';
+    }
+    return false;
+  }, [message.content]);
 
   const getMessageDataById = (messageId: string) => {
     const messageElement = document.getElementById(messageId);
@@ -202,7 +222,10 @@ export const MessageCard: React.FC<MessageCardProps> = ({
 
   const isReplyVoice = useMemo(() => {
     if (!repliedMessage) return false;
-    return repliedMessage.content.mimeType === 'audio/wav';
+    if (typeof repliedMessage.content === 'object' && repliedMessage.content !== null && 'mimeType' in repliedMessage.content) {
+      return (repliedMessage.content as Partial<AttachmentContent>).mimeType === 'audio/wav';
+    }
+    return false;
   }, [repliedMessage]);
 
   const isReplyText = useMemo(() => {
@@ -212,19 +235,26 @@ export const MessageCard: React.FC<MessageCardProps> = ({
 
   const isReplyReply = useMemo(() => {
     if (!repliedMessage) return false;
-    return !!repliedMessage.content.reference;
+    return typeof repliedMessage.content === 'object' && repliedMessage.content !== null && 'reference' in repliedMessage.content;
   }, [repliedMessage]);
 
   const replyAttachmentExtention = useMemo(() => {
-    if (!isReplyText && !!repliedMessage && !isReplyReply)
-      return repliedMessage.content.mimeType.split('/')?.[1] || '';
-  }, [isReplyReply, isReplyText, repliedMessage]);
+    if (!repliedMessage) return '';
+    if (typeof repliedMessage.content === 'object' && repliedMessage.content !== null && 'mimeType' in repliedMessage.content && !isReplyReply) {
+      const content = repliedMessage.content as Partial<AttachmentContent>;
+      return content.mimeType?.split('/')?.[1] || '';
+    }
+    return '';
+  }, [isReplyReply, repliedMessage]);
 
   useEffect(() => {
     if (!isReply || !!repliedMessage) return;
-    const repliedMsg = getMessageDataById(message.content.reference);
-    setRepliedMessage(repliedMsg);
-  }, [isReply, message.content.reference, repliedMessage]);
+    if (typeof message.content === 'object' && message.content !== null && 'reference' in message.content) {
+      const content = message.content as ReplyContent;
+      const repliedMsg = getMessageDataById(content.reference);
+      setRepliedMessage(repliedMsg);
+    }
+  }, [isReply, message.content, repliedMessage]);
 
   return (
     <Flex
@@ -262,15 +292,14 @@ export const MessageCard: React.FC<MessageCardProps> = ({
             id: message.id,
             senderInboxId: message.senderInboxId,
             content:
-              typeLookup[attachmentExtention] === 'image' ||
-                typeLookup[attachmentExtention] === 'video'
+              typeof message.content === 'object' && message.content !== null && 'mimeType' in message.content && (typeLookup[(message.content as AttachmentContent).mimeType.split('/')?.[1]] === 'image' || typeLookup[(message.content as AttachmentContent).mimeType.split('/')?.[1]] === 'video')
                 ? {
-                  data: message.content.data,
-                  mimeType: message.content.mimeType,
-                  filename: message.content.filename,
+                  data: (message.content as AttachmentContent).data,
+                  mimeType: (message.content as AttachmentContent).mimeType,
+                  filename: (message.content as AttachmentContent).filename,
                   url: URL.createObjectURL(
-                    new Blob([message.content.data], {
-                      type: message.content.mimeType,
+                    new Blob([(message.content as AttachmentContent).data], {
+                      type: (message.content as AttachmentContent).mimeType,
                     })
                   ),
                 }
@@ -339,9 +368,18 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                               : 'var(--justweb3-foreground-color-2)',
                           }}
                         >
-                          {isReplyReply
-                            ? repliedMessage.content.content
-                            : repliedMessage.content}
+                          {
+                            isReplyReply
+                              ? (() => {
+                                const nestedContent = (repliedMessage.content as ReplyContent).content;
+                                return typeof nestedContent === 'string'
+                                  ? nestedContent
+                                  : (nestedContent as AttachmentContent).filename;
+                              })()
+                              : typeof repliedMessage.content === 'string'
+                                ? repliedMessage.content
+                                : ''
+                          }
                         </P>
                       ) : isReplyVoice ? (
                         <VoiceNotePreview
@@ -358,8 +396,8 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                         />
                       ) : typeLookup[replyAttachmentExtention] === 'image' ? (
                         <img
-                          src={repliedMessage.content.url}
-                          alt={repliedMessage.content.filename}
+                          src={(repliedMessage.content as AttachmentContent).url}
+                          alt={(repliedMessage.content as AttachmentContent).filename}
                           style={{
                             maxWidth: '100px',
                             border: '0.5px solid #E0E0E0',
@@ -369,7 +407,8 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                       ) : typeLookup[replyAttachmentExtention] === 'video' ? (
                         <VideoPlayerPreview
                           disabled
-                          url={repliedMessage.content.url}
+                          url={(repliedMessage.content as AttachmentContent).url}
+                          fileName={(repliedMessage.content as AttachmentContent).filename}
                           style={{
                             width: '120px',
                           }}
@@ -394,7 +433,7 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                               maxWidth: '150px',
                             }}
                           >
-                            {repliedMessage.content.filename}
+                            {(repliedMessage.content as AttachmentContent).filename}
                           </P>
                         </Flex>
                       )}
@@ -417,7 +456,16 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                         wordBreak: 'break-all',
                       }}
                     >
-                      {message.content.content}
+                      {
+                        typeof message.content === 'object' && message.content !== null && 'content' in message.content
+                          ? (() => {
+                            const nestedContent = (message.content as ReplyContent).content;
+                            return typeof nestedContent === 'string'
+                              ? nestedContent
+                              : (nestedContent as AttachmentContent).filename;
+                          })()
+                          : ''
+                      }
                     </P>
                   </div>
                 </Flex>
@@ -425,7 +473,7 @@ export const MessageCard: React.FC<MessageCardProps> = ({
             ) : isText ? (
               <Flex direction="row" align="center" gap="4px">
                 <MeasureAndHyphenateText
-                  text={message.content}
+                  text={typeof message.content === 'string' ? message.content : ''} // Ensure text is string
                   maxWidth={170}
                   isReceiver={isReceiver}
                 />
@@ -444,11 +492,11 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                       >
                         <img
                           src={URL.createObjectURL(
-                            new Blob([message.content.data], {
-                              type: message.content.mimeType,
+                            new Blob([(message.content as AttachmentContent).data], {
+                              type: (message.content as AttachmentContent).mimeType,
                             })
                           )}
-                          alt={message.content.filename}
+                          alt={(message.content as AttachmentContent).filename}
                           style={{
                             maxWidth: '200px',
                             border: '0.5px solid #E0E0E0',
@@ -463,21 +511,21 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                             top: '50%',
                           }}
                           href={URL.createObjectURL(
-                            new Blob([message.content.data], {
-                              type: message.content.mimeType,
+                            new Blob([(message.content as AttachmentContent).data], {
+                              type: (message.content as AttachmentContent).mimeType,
                             })
                           )}
-                          download={message.content.filename}
+                          download={(message.content as AttachmentContent).filename}
                         >
                           <DownloadIcon width="29" height="29" />
                         </a>
                       </div>
                     ) : typeLookup[attachmentExtention] === 'video' ? (
                       <VideoPlayerPreview
-                        fileName={message.content.filename}
+                        fileName={(message.content as AttachmentContent).filename}
                         url={URL.createObjectURL(
-                          new Blob([message.content.data], {
-                            type: message.content.mimeType,
+                          new Blob([(message.content as AttachmentContent).data], {
+                            type: (message.content as AttachmentContent).mimeType,
                           })
                         )}
                         style={{
@@ -506,7 +554,7 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                               maxWidth: '180px',
                             }}
                           >
-                            {message.content.filename}
+                            {(message.content as AttachmentContent).filename}
                           </P>
                           <P
                             style={{
@@ -520,7 +568,7 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                             }}
                           >
                             {calculateFileSize(
-                              message.content.data?.byteLength ?? 0
+                              (message.content as AttachmentContent).data?.byteLength ?? 0
                             )}
                           </P>
                         </Flex>
@@ -546,7 +594,7 @@ export const MessageCard: React.FC<MessageCardProps> = ({
                   left: isReceiver ? 'auto' : '-12px',
                 }}
               >
-                {findEmojiByName(message.reactionMessage.content.content)}
+                {findEmojiByName((message.reactionMessage?.content as ReactionContent)?.content)}
               </P>
             )}
           </>

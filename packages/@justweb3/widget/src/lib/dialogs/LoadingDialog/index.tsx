@@ -22,7 +22,7 @@ export const LoadingDialog: FC<LoadingDialogProps> = ({
       </div>
       <DialogContent
         onInteractOutside={(e) => disableOverlay && e.preventDefault()}
-        aria-describedby="loading-dialog"
+        aria-describedby={undefined}
         style={{
           padding: 0,
           transition: 'all 0.4 ease-in-out',

@@ -117,6 +117,7 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
             >
               <Input
                 placeholder={'ipfs://'}
+                name='add-contentHash-input'
                 style={{
                   height: '22px',
                   borderRadius: '10px',

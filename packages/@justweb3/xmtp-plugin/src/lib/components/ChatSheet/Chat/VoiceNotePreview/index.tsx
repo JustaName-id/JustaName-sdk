@@ -1,10 +1,11 @@
 import { Flex, P, PauseIcon, PlayIcon } from '@justweb3/ui';
 import * as Slider from '@radix-ui/react-slider';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { formatTime } from '../../../../utils/formatVoiceTime';
-import { useGetAudioDuration } from '../../../../hooks/useGetAudioDuration';
-import { MessageWithReaction } from '../../../../utils/filterReactionsMessages';
 import { DecodedMessage } from '@xmtp/browser-sdk';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useGetAudioDuration } from '../../../../hooks/useGetAudioDuration';
+import { AttachmentContent } from '../../../../types/messageContentTypes';
+import { MessageWithReaction } from '../../../../utils/filterReactionsMessages';
+import { formatTime } from '../../../../utils/formatVoiceTime';
 
 interface VoiceNotePreviewProps {
   message: MessageWithReaction | DecodedMessage;
@@ -24,8 +25,9 @@ const VoiceNotePreview: React.FC<VoiceNotePreviewProps> = ({
   const audioRef = useRef(new Audio());
 
   const audioUrl = useMemo(() => {
-    const blob = new Blob([message.content.data], {
-      type: message.content.mimeType,
+    const content = message.content as AttachmentContent;
+    const blob = new Blob([content.data], {
+      type: content.mimeType,
     });
     return URL.createObjectURL(blob);
   }, [message.content]);
@@ -173,7 +175,7 @@ const VoiceNotePreview: React.FC<VoiceNotePreviewProps> = ({
                 background: isReceiver
                   ? 'var(--justweb3-primary-color)'
                   : 'var(--justweb3-foreground-color-4)',
-                height: '5px',
+                height: '4px',
                 borderRadius: '1000px',
                 position: 'absolute',
               }}

@@ -142,7 +142,7 @@ export const InboxSheet: React.FC<InboxSheetProps> = ({
 
   return (
     <Sheet open={open} onOpenChange={handleOpen}>
-      <SheetContent side="right" overlay={false} style={{ width: '100%' }}>
+      <SheetContent side="right" overlay={false} aria-describedby={undefined} style={{ width: '100%' }}>
         <SheetTitle>Chats</SheetTitle>
         <Flex
           align="center"

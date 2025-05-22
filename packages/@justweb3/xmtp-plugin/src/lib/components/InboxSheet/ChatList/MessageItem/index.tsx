@@ -6,6 +6,10 @@ import { ContentTypeAttachment } from '@xmtp/content-type-remote-attachment';
 import { ContentTypeReply } from '@xmtp/content-type-reply';
 import React, { useMemo } from 'react';
 import { FullConversation, useAddressInboxId, useConversations } from '../../../../hooks';
+import {
+  AttachmentContent,
+  ReplyContent,
+} from '../../../../types/messageContentTypes';
 import { formatChatDate } from '../../../../utils/formatChatDate';
 
 export interface MessageItemProps {
@@ -58,26 +62,26 @@ const MessageItem: React.FC<MessageItemProps> = ({
       return lastMessage.content;
     }
 
-    if (
-      lastMessage.contentType.sameAs(ContentTypeAttachment)
-    ) {
-      return lastMessage.content.filename;
+    if (lastMessage.contentType.sameAs(ContentTypeAttachment)) {
+      return (lastMessage.content as AttachmentContent).filename;
     }
 
-    if (
-      lastMessage.contentType.sameAs(ContentTypeReaction)
-    ) {
-      return lastMessage.fallback;
+    if (lastMessage.contentType.sameAs(ContentTypeReaction)) {
+      return lastMessage.fallback ?? 'Reacted to a message';
     }
 
-    if (
-      lastMessage.contentType.sameAs(ContentTypeReply)
-    ) {
-      return 'replied "' + lastMessage.content.content + '"';
+    if (lastMessage.contentType.sameAs(ContentTypeReply)) {
+      const replyContent = lastMessage.content as ReplyContent;
+      const nestedContent = replyContent.content;
+      if (typeof nestedContent === 'string') {
+        return 'replied \"' + nestedContent + '\"';
+      } else {
+        return 'replied with attachment: ' + (nestedContent as AttachmentContent).filename;
+      }
     }
 
-    return lastMessage.fallback;
-  }, [conversationInfo, conversationInfo?.lastMessage]);
+    return lastMessage.fallback ?? 'Unsupported message type';
+  }, [conversationInfo]);
 
   return (
     <Flex
