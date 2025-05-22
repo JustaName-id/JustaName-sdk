@@ -93,6 +93,7 @@ export const Customizer = ({ mobile }: CustomizerProps) => {
             Add Logo
           </p>
           <Input
+            name='logo-url-input'
             value={logoUrl}
             onChange={(e) => {
               setLogoUrl(e.target.value)

@@ -77,7 +77,8 @@ export const useXMTPClient = (onError?: (error: Error) => void) => {
             },
           };
 
-          xmtpClient = await Client.create(xmtpSigner, encryptionKey, {
+          xmtpClient = await Client.create(xmtpSigner, {
+            dbEncryptionKey: encryptionKey,
             env,
             loggingLevel:
               env === 'local' ? 'debug' : env === 'dev' ? 'info' : 'off',

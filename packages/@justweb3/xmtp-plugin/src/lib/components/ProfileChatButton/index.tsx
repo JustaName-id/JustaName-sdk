@@ -2,11 +2,11 @@
 import { useMountedAccount, useRecords } from '@justaname.id/react';
 import { ChainId } from '@justaname.id/sdk';
 import { useJustWeb3 } from '@justweb3/widget';
-import { Client, Identifier } from '@xmtp/browser-sdk';
+import { Identifier } from '@xmtp/browser-sdk';
 import { useEffect, useState } from 'react';
 import { useEthersSigner, useXMTPClient } from '../../hooks';
-import { useJustWeb3XMTP } from '../../providers/JustWeb3XMTPProvider';
 import { useXMTPContext } from '../../hooks/useXMTPContext';
+import { useJustWeb3XMTP } from '../../providers/JustWeb3XMTPProvider';
 
 export interface ProfileChatButtonProps {
   ens: string;
@@ -51,21 +51,25 @@ export const ProfileChatButton: React.FC<ProfileChatButtonProps> = ({
     }
   };
 
+  const checkCanMessage = async () => {
+    if (records?.sanitizedRecords?.ethAddress && client) {
+      const peerIdentifier: Identifier = {
+        identifier: records?.sanitizedRecords?.ethAddress?.value,
+        identifierKind: 'Ethereum',
+      }
+      const response = await client.findInboxIdByIdentifier(peerIdentifier);
+      const canMessage = !!response;
+      setCanMessageAddress(canMessage);
+    }
+  }
+
   useEffect(() => {
     if (canMessageAddress === null) {
       if (records) {
-        if (records?.sanitizedRecords?.ethAddress) {
-          const peerIdentifier: Identifier = {
-            identifier: records?.sanitizedRecords?.ethAddress?.value,
-            identifierKind: 'Ethereum',
-          }
-          Client.canMessage([peerIdentifier], env).then((canMessage) => {
-            setCanMessageAddress(canMessage.get(records?.sanitizedRecords?.ethAddress?.value) ?? false);
-          });
-        }
+        checkCanMessage();
       }
     }
-  }, [canMessageAddress, env, records]);
+  }, [canMessageAddress, env, records, client]);
 
   if (profileAddress === address) {
     return null;

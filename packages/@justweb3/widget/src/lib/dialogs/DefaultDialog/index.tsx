@@ -45,6 +45,7 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
         fullScreen={fullScreen}
         onInteractOutside={(e) => disableOverlay && e.preventDefault()}
         disableOverlay={disableOverlay}
+        aria-describedby={undefined}
         style={{
           padding: 0,
           transition: 'all 0.4 ease-in-out',

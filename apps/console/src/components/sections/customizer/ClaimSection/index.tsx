@@ -130,6 +130,7 @@ export const ClaimSection = () => {
             <Input
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
+              name='justaname-api-key'
               placeholder="Justaname API Key"
               rightIcon={
                 <svg

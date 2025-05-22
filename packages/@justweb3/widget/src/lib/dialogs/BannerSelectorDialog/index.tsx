@@ -96,7 +96,7 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
             }
           })
         }
-        else{
+        else {
           const formData = new FormData();
           formData.append('file', blob);
 
@@ -134,6 +134,7 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
             }}
           />
           <input
+            name='banner-selector-input'
             type="file"
             accept="image/jpeg, image/png, image/heic, image/heif, image/gif, image/avif"
             onChange={handleImageChange}
@@ -194,6 +195,7 @@ export const BannerEditorDialog: React.FC<BannerEditorDialogProps> = ({
               }}
             />
             <input
+              name='slider-zoom-range-input'
               className={styles.sliderInput}
               min="1"
               max="100"
