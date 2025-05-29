@@ -5,6 +5,7 @@ import { EFP } from './EFP';
 import { POAP } from './POAP';
 import { TalentProtocol } from './TalentProtocol';
 import { XMTP } from './XMTP';
+import { Dentity } from './Dentity';
 
 export const PluginsSection: FC = () => {
   return (
@@ -22,6 +23,8 @@ export const PluginsSection: FC = () => {
         <TalentProtocol />
         <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
         <EFP />
+        <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
+        <Dentity />
       </Accordion>
     </div>
   );

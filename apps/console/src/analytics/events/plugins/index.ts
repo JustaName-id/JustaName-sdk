@@ -1,3 +1,5 @@
+import { DENTITY_ENABLED, DentityEnabledPayload } from './dentity-enabled';
+import { DENTITY_DISABLED, DentityDisabledPayload } from './dentity-disabled';
 import { EFP_DISABLED, EfpDisabledPayload } from './efp-disabled';
 import { EFP_ENABLED, EfpEnabledPayload } from './efp-enabled';
 import {
@@ -36,6 +38,8 @@ export const PLUGINS_EVENTS = {
   TALENT_PROTOCOL_ENABLED,
   XMTP_DISABLED,
   XMTP_ENABLED,
+  DENTITY_DISABLED,
+  DENTITY_ENABLED,
   ...JUST_VERIFIED_EVENTS,
 } as const;
 
@@ -50,4 +54,6 @@ export interface PluginsEventPayload extends JustVerifiedEventsPayload {
   [TALENT_PROTOCOL_ENABLED]: TalentProtocolEnabledPayload;
   [XMTP_DISABLED]: XmtpDisabledPayload;
   [XMTP_ENABLED]: XmtpEnabledPayload;
+  [DENTITY_DISABLED]: DentityDisabledPayload;
+  [DENTITY_ENABLED]: DentityEnabledPayload;
 }

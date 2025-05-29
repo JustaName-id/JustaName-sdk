@@ -52,7 +52,7 @@ export const DentitySection: FC<DentityTabProps> = ({ ens }) => {
           height: '100%',
         }}
       >
-        {isVerificationsLoading && (
+        {isVerificationsLoading ? (
           <Flex
             style={{
               height: '50px',
@@ -65,8 +65,7 @@ export const DentitySection: FC<DentityTabProps> = ({ ens }) => {
           >
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
           </Flex>
-        )}
-        {verifications && verifications.length > 0 ? (
+        ) : verifications && verifications.length > 0 ? (
           <ProfileSection title={'Dentity'} items={[
             // <ProfileBtn ens={ens} />,
             ...verifications.map((verification) => (
@@ -92,6 +91,6 @@ export const DentitySection: FC<DentityTabProps> = ({ ens }) => {
       </Flex>
     );
   } else {
-    return <ProfileSection title={'Dentity'} items={[<P>Ens name haven't verified with Dentity</P>]} />;
+    return <ProfileSection title={'Dentity'} items={[<P>Ens not verified with Dentity</P>]} />;
   }
 };
