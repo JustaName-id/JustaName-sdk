@@ -12,6 +12,7 @@
     "test:all": "yarn remove:cache && nx run-many -t test --all --parallel=1"
   },
   "dependencies": {
+    "@dentity/ens-client": "^1.0.0",
     "@docusaurus/eslint-plugin": "3.5.2",
     "@ensdomains/address-encoder": "1.1.2",
     "@ensdomains/ensjs": "4.0.2",

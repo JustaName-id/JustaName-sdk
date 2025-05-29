@@ -43,6 +43,7 @@ import PlayIcon from './Play';
 import ProfileEditIcon from './ProfileEdit';
 import ProfileIcon from './Profile';
 import ReactionIcon from './Reaction';
+import RedirectArrowIcon from './RedirectArrow';
 import ReplyIcon from './Reply';
 import SendIcon from './Send';
 import SettingsIcon from './Settings';
@@ -100,6 +101,7 @@ const general = {
   'profile-edit': ProfileEditIcon,
   profile: ProfileIcon,
   reaction: ReactionIcon,
+  'redirect-arrow': RedirectArrowIcon,
   reply: ReplyIcon,
   send: SendIcon,
   settings: SettingsIcon,
@@ -160,6 +162,7 @@ export {
   ProfileEditIcon,
   ProfileIcon,
   ReactionIcon,
+  RedirectArrowIcon,
   ReplyIcon,
   SendIcon,
   SettingsIcon,

@@ -2476,6 +2476,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dentity/ens-client@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@dentity/ens-client@npm:1.0.0"
+  dependencies:
+    "@ensdomains/ensjs": "npm:^4.0.1"
+    axios: "npm:^1.7.7"
+    viem: "npm:^2.21.16"
+  checksum: 10c0/7f278bd2e840f283a5b1c66b5cf924a2f0901b504e63ac970195806e8902732129ad5307475413f5cc0ca41ec4450d573a5489d7d36f2284a5ffa44616efbd43
+  languageName: node
+  linkType: hard
+
 "@discoveryjs/json-ext@npm:^0.5.0":
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
@@ -2656,7 +2667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ensdomains/ensjs@npm:4.0.2":
+"@ensdomains/ensjs@npm:4.0.2, @ensdomains/ensjs@npm:^4.0.1":
   version: 4.0.2
   resolution: "@ensdomains/ensjs@npm:4.0.2"
   dependencies:
@@ -4494,6 +4505,21 @@ __metadata:
     moment: "npm:2.30.1"
     qs: "npm:6.12.0"
   peerDependencies:
+    "@justweb3/widget": ">=0.0.0"
+    "@tanstack/react-query": ^5.x
+    react: ">=17"
+  languageName: unknown
+  linkType: soft
+
+"@justweb3/dentity-plugin@workspace:packages/@justweb3/dentity-plugin":
+  version: 0.0.0-use.local
+  resolution: "@justweb3/dentity-plugin@workspace:packages/@justweb3/dentity-plugin"
+  dependencies:
+    "@dentity/ens-client": "npm:^1.0.0"
+    "@tanstack/react-query": "npm:^5.x"
+    axios: "npm:1.6.0"
+  peerDependencies:
+    "@dentity/ens-client": ^1.0.0
     "@justweb3/widget": ">=0.0.0"
     "@tanstack/react-query": ^5.x
     react: ">=17"
@@ -10860,6 +10886,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.79.0":
+  version: 5.79.0
+  resolution: "@tanstack/query-core@npm:5.79.0"
+  checksum: 10c0/614c9f4dc7cb4df9c6804f67a76e2d580af5fa7b25505c2e3c5137bfa40d2005a1a96606c9f8e533754c78722e23708948760104a460fd8bc06df990fea42afb
+  languageName: node
+  linkType: hard
+
 "@tanstack/query-devtools@npm:5.58.0":
   version: 5.58.0
   resolution: "@tanstack/query-devtools@npm:5.58.0"
@@ -10887,6 +10920,17 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
   checksum: 10c0/5ffc31cedea548b697770c018fab7fcd35724caf6cf7d40a7370ef6ffeb2427f510ea9745a92ebd6e74f2c4c39a255eabcd2a181c97b54991563ad842945866e
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.x":
+  version: 5.79.0
+  resolution: "@tanstack/react-query@npm:5.79.0"
+  dependencies:
+    "@tanstack/query-core": "npm:5.79.0"
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: 10c0/f1d440075b7f8e7738cd4f26a87a089c0efaf282e633cfb9db249ef20068d5f4f14c9d990a304b96df183bffc8839ee579853fef212c213510c425b8092630be
   languageName: node
   linkType: hard
 
@@ -14733,6 +14777,17 @@ __metadata:
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
   checksum: 10c0/450993c2ba975ffccaf0d480b68839a3b2435a5469a71fa2fb0b8a55cdb2c2ae47e609360b9c1e2b2534b73dfd69e2733a1cf9f8215bee0bcd729b72f801b0ce
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.7.7":
+  version: 1.9.0
+  resolution: "axios@npm:1.9.0"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.0"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/9371a56886c2e43e4ff5647b5c2c3c046ed0a3d13482ef1d0135b994a628c41fbad459796f101c655e62f0c161d03883454474d2e435b2e021b1924d9f24994c
   languageName: node
   linkType: hard
 
@@ -25248,6 +25303,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:7.14.5"
     "@babel/preset-react": "npm:7.14.5"
+    "@dentity/ens-client": "npm:^1.0.0"
     "@docusaurus/eslint-plugin": "npm:3.5.2"
     "@ensdomains/address-encoder": "npm:1.1.2"
     "@ensdomains/ensjs": "npm:4.0.2"
@@ -36214,6 +36270,27 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/d403b03d464ddae8a121c092e96371ede39ce393caefe1b89b2f34d39c1e7751ab56e20b89da9598d9ac52ee337d340e2f41344ae74f77444978f8ed24a75775
+  languageName: node
+  linkType: hard
+
+"viem@npm:^2.21.16":
+  version: 2.29.0
+  resolution: "viem@npm:2.29.0"
+  dependencies:
+    "@noble/curves": "npm:1.8.2"
+    "@noble/hashes": "npm:1.7.2"
+    "@scure/bip32": "npm:1.6.2"
+    "@scure/bip39": "npm:1.5.4"
+    abitype: "npm:1.0.8"
+    isows: "npm:1.0.6"
+    ox: "npm:0.6.9"
+    ws: "npm:8.18.1"
+  peerDependencies:
+    typescript: ">=5.0.4"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10c0/0cc5c71fed5b8833cff69d875a472048969ca35054dc588445dcd0a2f23033d0b2c24e7af80d9cc823555bceece4f956adf2933870ae4e2126f4884d248aadb8
   languageName: node
   linkType: hard
 
