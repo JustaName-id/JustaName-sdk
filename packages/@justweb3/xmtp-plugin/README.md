@@ -1,12 +1,12 @@
 # @justweb3/xmtp-plugin
 
-The **@justweb3/xmtp-plugin** extends the **JustWeb3 Widget** with **Builder Score (Talent Protocol)** functionalities, allowing users to **view Talent Protocol Credentials and Builder Score** directly within your dApp.
+The **@justweb3/xmtp-plugin** extends the **JustWeb3 Widget** with **XMTP (Extensible Message Transport Protocol)** functionalities, allowing users to **Chat** directly within your dApp.
 
 ---
 
 ## Installation
 
-Install the **Talent Protocol Plugin** using your preferred package manager:
+Install the **XMTP Plugin** using your preferred package manager:
 
 ```bash
 bash
@@ -21,10 +21,10 @@ yarn add @justweb3/xmtp-plugin
 
 ## Usage Example
 
-Here’s how to enable the **Talent Protocol Plugin** in your **JustWeb3 Widget** configuration:
+Here’s how to enable the **XMTP Plugin** in your **JustWeb3 Widget** configuration:
 
 ```tsx
-import { TalentProtocolPlugin } from '@justweb3/xmtp-plugin';
+import { XMTPPlugin } from '@justweb3/xmtp-plugin';
 
 const justweb3Config = {
   config: {
@@ -33,10 +33,7 @@ const justweb3Config = {
     signInTtl: 86400000,
   },
   plugins: [
-    TalentProtocolPlugin({
-      apiKey: "<YOUR_API_KEY>", // # Optional: Calls the Talent Protocol API from the client side
-      backendUrl: "<YOUR_BACKEND_URL>", // # Optional: Calls the Talent Protocol API from the backend, best for production
-    })
+    XMTPPlugin(env), // 'local' | 'production' | 'dev'
   ],
   ensDomains: [
     {
