@@ -40,6 +40,7 @@
 * [Coin Types](advanced/coin-types.md)
 * [JustaName - Under the Hood](advanced/justaname-under-the-hood.md)
 * [Reading JustaName Subname Events from OrbisDB](advanced/reading-justaname-subname-events-from-orbisdb.md)
+* [Dynamic Records Resolution](advanced/dynamic-records-resolution.md)
 
 ## Wallet Providers
 
