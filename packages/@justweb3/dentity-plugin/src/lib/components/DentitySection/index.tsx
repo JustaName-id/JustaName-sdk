@@ -3,7 +3,6 @@ import { Flex, LoadingSpinner, P } from '@justweb3/ui';
 import { ProfileSection } from '@justweb3/widget';
 import { FC, useMemo } from 'react';
 import { useVerifications } from '../../hooks';
-import { ProfileBtn } from '../ProfileBtn';
 import { VerificationCard } from '../VerificationCard';
 
 export interface DentityTabProps {
@@ -69,7 +68,7 @@ export const DentitySection: FC<DentityTabProps> = ({ ens }) => {
         )}
         {verifications && verifications.length > 0 ? (
           <ProfileSection title={'Dentity'} items={[
-            <ProfileBtn ens={ens} />,
+            // <ProfileBtn ens={ens} />,
             ...verifications.map((verification) => (
               <VerificationCard
                 key={verification.type.toLocaleString()}
