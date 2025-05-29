@@ -4515,6 +4515,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justweb3/dentity-plugin@workspace:packages/@justweb3/dentity-plugin"
   dependencies:
+    "@dentity/ens-client": "npm:^1.0.0"
+    "@tanstack/react-query": "npm:^5.x"
     axios: "npm:1.6.0"
   peerDependencies:
     "@dentity/ens-client": ^1.0.0
@@ -10884,6 +10886,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.79.0":
+  version: 5.79.0
+  resolution: "@tanstack/query-core@npm:5.79.0"
+  checksum: 10c0/614c9f4dc7cb4df9c6804f67a76e2d580af5fa7b25505c2e3c5137bfa40d2005a1a96606c9f8e533754c78722e23708948760104a460fd8bc06df990fea42afb
+  languageName: node
+  linkType: hard
+
 "@tanstack/query-devtools@npm:5.58.0":
   version: 5.58.0
   resolution: "@tanstack/query-devtools@npm:5.58.0"
@@ -10911,6 +10920,17 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
   checksum: 10c0/5ffc31cedea548b697770c018fab7fcd35724caf6cf7d40a7370ef6ffeb2427f510ea9745a92ebd6e74f2c4c39a255eabcd2a181c97b54991563ad842945866e
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.x":
+  version: 5.79.0
+  resolution: "@tanstack/react-query@npm:5.79.0"
+  dependencies:
+    "@tanstack/query-core": "npm:5.79.0"
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: 10c0/f1d440075b7f8e7738cd4f26a87a089c0efaf282e633cfb9db249ef20068d5f4f14c9d990a304b96df183bffc8839ee579853fef212c213510c425b8092630be
   languageName: node
   linkType: hard
 
