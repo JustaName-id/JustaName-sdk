@@ -1,3 +1,15 @@
+## 0.1.38 (2025-05-29)
+
+
+### 🩹 Fixes
+
+- **xmtp-plugin:** readme ([efb8fa6c](https://github.com/JustaName-id/JustaName-sdk/commit/efb8fa6c))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.1.37 (2025-05-29)
 
 This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
