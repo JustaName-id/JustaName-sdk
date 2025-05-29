@@ -4518,7 +4518,6 @@ __metadata:
     "@dentity/ens-client": "npm:^1.0.0"
     axios: "npm:1.6.0"
   peerDependencies:
-    "@dentity/ens-client": ^1.0.0
     "@justweb3/widget": ">=0.0.0"
     "@tanstack/react-query": ^5.x
     react: ">=17"
