@@ -123,7 +123,7 @@ const MessageItem: React.FC<MessageItemProps> = ({
         }}
       >
         <P style={{ fontWeight: '700' }}>
-          {primaryName || formatText(conversation.peerAddress, 4)}
+          {primaryName || formatText(conversation.peerAddress || '', 4)}
         </P>
         <SPAN
           style={{
