@@ -16,41 +16,21 @@
         "name": "next"
       }
     ],
-    "types": [
-      "jest",
-      "node"
-    ],
+    "types": ["jest", "node"],
     "paths": {
-      "@justweb3/widget": [
-        "packages/@justweb3/widget"
-      ],
-      "@justweb3/ui": [
-        "packages/@justweb3/ui"
-      ],
-      "@justaname.id/react": [
-        "packages/@justaname.id/react"
-      ],
-      "@justaname.id/sdk": [
-        "packages/@justaname.id/sdk"
-      ],
-      "@justaname.id/siwens": [
-        "packages/@justaname.id/siwens"
-      ],
-      "@justverified/plugin": [
-        "packages/@justverified/plugin"
-      ],
-      "@justweb3/efp-plugin": [
-        "packages/@justweb3/efp-plugin"
-      ],
-      "@justweb3/poap-plugin": [
-        "packages/@justweb3/poap-plugin"
-      ],
+      "@justweb3/widget": ["packages/@justweb3/widget"],
+      "@justweb3/ui": ["packages/@justweb3/ui"],
+      "@justaname.id/react": ["packages/@justaname.id/react"],
+      "@justaname.id/sdk": ["packages/@justaname.id/sdk"],
+      "@justaname.id/siwens": ["packages/@justaname.id/siwens"],
+      "@justverified/plugin": ["packages/@justverified/plugin"],
+      "@justweb3/efp-plugin": ["packages/@justweb3/efp-plugin"],
+      "@justweb3/dentity-plugin": ["packages/@justweb3/dentity-plugin"],
+      "@justweb3/poap-plugin": ["packages/@justweb3/poap-plugin"],
       "@justweb3/talent-protocol-plugin": [
         "packages/@justweb3/talent-protocol-plugin"
       ],
-      "@justweb3/xmtp-plugin": [
-        "packages/@justweb3/xmtp-plugin"
-      ]
+      "@justweb3/xmtp-plugin": ["packages/@justweb3/xmtp-plugin"]
     }
   },
   "include": [
@@ -64,10 +44,5 @@
     ".next/types/**/*.ts",
     "../../dist/dist/apps/console/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "jest.config.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

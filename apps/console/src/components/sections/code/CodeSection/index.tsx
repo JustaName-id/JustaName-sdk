@@ -38,6 +38,11 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
     [config]
   );
 
+  const dentityPluginEnabled = useMemo(
+    () => config.plugins?.find((p) => p.name === 'DentityPlugin'),
+    [config]
+  );
+
   const codeSnippet = useMemo(() => {
     const plugins = [];
 
@@ -65,6 +70,10 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
 
     if (xmtpPluginEnabled) {
       plugins.push("%%XMTPPlugin('production')%%");
+    }
+
+    if (dentityPluginEnabled) {
+      plugins.push("%%DentityPlugin%%");
     }
 
     return `
@@ -106,6 +115,9 @@ ${talentProtocolPluginEnabled
       }
 ${xmtpPluginEnabled ? "import { XMTPPlugin } from '@justweb3/xmtp-plugin';" : ''
       }
+${dentityPluginEnabled ? "import { DentityPlugin } from '@justweb3/dentity-plugin';" : ''
+      }
+
 
 export const App: React.FC = () => {
     const { wallets } = getDefaultWallets();
@@ -173,6 +185,7 @@ export default App;`.trim();
     poapPluginEnabled,
     talentProtocolPluginEnabled,
     xmtpPluginEnabled,
+    dentityPluginEnabled,
   ]);
 
   const code = useMemo(() => {
@@ -183,11 +196,12 @@ export default App;`.trim();
 
   const dependencies = useMemo(() => {
     return `yarn add ${xmtpPluginEnabled ? '@justweb3/xmtp-plugin' : ''} ${justVerifiedEnabled ? '@justverified/plugin' : ''
-      } ${poapPluginEnabled ? '@justweb3/poap-plugin' : ''} ${efpPluginEnabled ? '@justweb3/efp-plugin' : ''
-      }
+      } ${poapPluginEnabled ? '@justweb3/poap-plugin' : ''}  ${efpPluginEnabled ? '@justweb3/efp-plugin' : ''
+      } ${dentityPluginEnabled ? '@justweb3/dentity-plugin' : ''}
      ${talentProtocolPluginEnabled ? '@justweb3/talent-protocol-plugin' : ''}
      @justweb3/widget viem wagmi @rainbow-me/rainbowkit @tanstack/react-query ethers`;
   }, [
+    dentityPluginEnabled,
     efpPluginEnabled,
     justVerifiedEnabled,
     poapPluginEnabled,

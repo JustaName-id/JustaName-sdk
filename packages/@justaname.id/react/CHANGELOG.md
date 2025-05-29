@@ -1,6 +1,5 @@
 ## 0.3.195 (2025-05-22)
 
-
 ### 🚀 Features
 
 - patch packages ([d4b53785](https://github.com/JustaName-id/JustaName-sdk/commit/d4b53785))

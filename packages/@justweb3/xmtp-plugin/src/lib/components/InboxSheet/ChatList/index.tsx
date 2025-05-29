@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { FullConversation } from '../../../hooks';
 import { useXMTPContext } from '../../../hooks/useXMTPContext';
 import { MessageItem } from './MessageItem';
+import { Conversation, Client, ConsentState } from '@xmtp/browser-sdk';
 
 export interface ChatListProps {
   conversations: FullConversation[];
@@ -22,6 +23,36 @@ export interface ChatListProps {
   }[];
 }
 
+const processSingleConversation = async (
+  convo: Conversation,
+  client: Client,
+  consent: 'allowed' | 'blocked' | 'requested'
+): Promise<FullConversation> => {
+  const convoMembers = await convo.members();
+  const ownInboxId = client.inboxId;
+
+  const peerMember = convoMembers.find(
+    (member) => member.inboxId !== ownInboxId
+  );
+
+  let peerAddressString: string | undefined;
+  if (peerMember) {
+    const peerIdentifiers = peerMember.accountIdentifiers;
+    peerAddressString = peerIdentifiers
+      ?.filter((i) => i.identifierKind === 'Ethereum')
+      .map((i) => i.identifier)[0];
+  }
+
+  const fullConvo = convo as unknown as FullConversation;
+  fullConvo.peerAddress = peerAddressString || '';
+
+  if (consent === 'allowed') fullConvo.consent = ConsentState.Allowed;
+  else if (consent === 'blocked') fullConvo.consent = ConsentState.Denied;
+  else fullConvo.consent = ConsentState.Unknown;
+
+  return fullConvo;
+};
+
 export const ChatList: React.FC<ChatListProps> = ({
   conversations,
   handleOpenChat,
@@ -37,20 +68,28 @@ export const ChatList: React.FC<ChatListProps> = ({
   useEffect(() => {
     const fetchMissingConversations = async () => {
       if (!conversationsInfo || !client) return;
-      const consentedConvsersationsInfo = conversationsInfo.filter(info => consent === info.consent);
+      const relevantConversationsInfo = conversationsInfo.filter(info => consent === info.consent);
 
-      const missingIds = consentedConvsersationsInfo.filter(info => !conversations.find(c => c.id === info.conversationId)).map(info => info.conversationId);
+      const missingConvDetails = relevantConversationsInfo
+        .filter(info => !conversations.find(c => c.id === info.conversationId))
+        .map(info => ({ id: info.conversationId, consentState: info.consent }));
 
-      const newConversations: Record<string, FullConversation> = {};
-      for (const id of missingIds) {
-        const conversation = await client.conversations.getConversationById(id);
-        if (conversation) newConversations[id] = conversation as unknown as FullConversation;
+      const newMissingConversations: Record<string, FullConversation> = {};
+      for (const detail of missingConvDetails) {
+        const rawConversation = await client.conversations.getConversationById(detail.id);
+        if (rawConversation) {
+          const processedConversation = await processSingleConversation(rawConversation, client, detail.consentState);
+          newMissingConversations[detail.id] = processedConversation;
+        }
       }
-      setMissingConversations(prev => ({ ...prev, ...newConversations }));
+      if (Object.keys(newMissingConversations).length > 0) {
+        setMissingConversations(prev => ({ ...prev, ...newMissingConversations }));
+      }
     };
 
     fetchMissingConversations();
-  }, [conversationsInfo, conversations, client]);
+  }, [conversationsInfo, conversations, client, consent]);
+
 
   const sortedConversations = useMemo(() => {
     if (!conversationsInfo || conversationsInfo.length === 0) {
@@ -76,7 +115,7 @@ export const ChatList: React.FC<ChatListProps> = ({
       .filter((item): item is { conversation: FullConversation; convInfo: typeof conversationsInfo[0] } =>
         item !== null
       );
-  }, [conversationsInfo, conversations]);
+  }, [conversationsInfo, conversations, missingConversations]);
 
   return (
     <Flex direction={'column'} gap={'10px'}>

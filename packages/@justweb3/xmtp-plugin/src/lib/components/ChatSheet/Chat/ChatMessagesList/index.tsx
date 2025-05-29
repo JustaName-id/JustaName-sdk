@@ -94,7 +94,7 @@ export const ChatMessagesList: React.FC<ChatMessagesListProps> = ({
                     const replica = element.cloneNode(true) as HTMLElement;
                     replica.id = `${msg.id}-replica`;
                     replica.style.position = 'absolute';
-                    replica.style.bottom = '310px';
+                    replica.style.bottom = '330px';
                     replica.style.minHeight = '20px';
                     replica.style.left = '4.2vw';
                     replica.style.zIndex = '90';
@@ -113,7 +113,7 @@ export const ChatMessagesList: React.FC<ChatMessagesListProps> = ({
               position: 'absolute',
               left: '50%',
               transform: 'translateX(-50%)',
-              bottom: `30px`,
+              bottom: `50px`,
             }}
           >
             <EmojiSelector onEmojiSelect={handleEmojiSelect} />
