@@ -1,3 +1,11 @@
+## 0.0.50 (2025-05-29)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
+## 0.0.49 (2025-05-22)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
 ## 0.0.48 (2025-05-02)
 
 

@@ -21,12 +21,18 @@ const convertConversation = async (
         (member) => member.inboxId === peerInboxId
       )?.accountIdentifiers;
 
-      const peerAddress = peerIdentifiers
-        ?.filter((i) => i.identifierKind === 'Ethereum')
-        .map((i) => i.identifier);
+      let resolvedPeerAddress: string | undefined;
+      if (peerIdentifiers) {
+        const ethAddresses = peerIdentifiers
+          .filter((i) => i.identifierKind === 'Ethereum')
+          .map((i) => i.identifier);
+        if (ethAddresses.length > 0) {
+          resolvedPeerAddress = ethAddresses[0];
+        }
+      }
 
       const fullConvo = convo as unknown as FullConversation;
-      fullConvo.peerAddress = peerAddress ? peerAddress[0] : '';
+      fullConvo.peerAddress = resolvedPeerAddress || '';
       fullConvo.consent = consentState;
 
       return fullConvo;

@@ -1,5 +1,5 @@
 'use client';
-import { Client, DecodedMessage } from '@xmtp/browser-sdk';
+import { Client, DecodedMessage, Dm, Group } from '@xmtp/browser-sdk';
 import { useEffect, useRef, useCallback } from 'react';
 import { useConversations } from '../useConversations';
 
@@ -23,7 +23,7 @@ export const useStreamConversations = ({
   setConversationsInfo,
   client,
 }: UseStreamConversationsProps) => {
-  const { refetchConvos } = useConversations();
+  const { refetchConvos, sync } = useConversations();
   const conversationStreamRef = useRef<any>(null);
   const isProcessingConversations = useRef<boolean>(false);
   const conversationsInfoRef = useRef<ConversationInfo[]>(conversationsInfo);
@@ -35,15 +35,15 @@ export const useStreamConversations = ({
   }, [conversationsInfo]);
 
   const addNewConversation = useCallback(
-    async (convoId: string) => {
+    async (convo: Group | Dm) => {
       setConversationsInfo((prevConversations) => {
         const exists = prevConversations.some(
-          (c) => c.conversationId === convoId
+          (c) => c.conversationId === convo.id
         );
         if (exists) return prevConversations;
         return [
           {
-            conversationId: convoId,
+            conversationId: convo.id,
             unreadCount: 0,
             consent: 'requested' as 'allowed' | 'blocked' | 'requested',
             lastMessage: null as unknown as DecodedMessage,
@@ -52,9 +52,10 @@ export const useStreamConversations = ({
         ];
       });
 
+      await sync();
       await refetchConvos();
     },
-    [refetchConvos, setConversationsInfo]
+    [refetchConvos, setConversationsInfo, sync]
   );
 
   useEffect(() => {
@@ -94,9 +95,23 @@ export const useStreamConversations = ({
             const conversationExists = currentConversationsInfo.some(
               (c) => c.conversationId === convo.id
             );
-
             if (!conversationExists) {
-              await addNewConversation(convo.id);
+              const members = await convo.members();
+              const peerMember = members.find(
+                (m) => m.inboxId !== client?.inboxId
+              );
+              if (
+                peerMember &&
+                peerMember.accountIdentifiers &&
+                peerMember.accountIdentifiers.length > 0
+              ) {
+                const ethIdentifier = peerMember.accountIdentifiers.find(
+                  (id) => id.identifierKind === 'Ethereum'
+                );
+                if (ethIdentifier) {
+                }
+              }
+              await addNewConversation(convo);
             }
           }
         }
