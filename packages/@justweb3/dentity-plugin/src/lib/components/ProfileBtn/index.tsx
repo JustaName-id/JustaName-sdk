@@ -10,6 +10,7 @@ export const ProfileBtn: FC<ProfileBtnProps> = ({
     ens,
 }) => {
     const cid = "";
+
     return (
         <A href={`https://oidc.dentity.com/oidc/ens/${ens}?cid=${cid}`} target="_blank">
             <Badge style={{ padding: '5px', border: '0.5px solid black' }} withCopy={false}>
