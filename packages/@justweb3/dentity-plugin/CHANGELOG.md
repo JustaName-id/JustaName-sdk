@@ -1,3 +1,15 @@
+## 0.0.11 (2025-05-30)
+
+
+### 🩹 Fixes
+
+- **dentity-plugin:** new release ([2482e157](https://github.com/JustaName-id/JustaName-sdk/commit/2482e157))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.10 (2025-05-30)
 
 

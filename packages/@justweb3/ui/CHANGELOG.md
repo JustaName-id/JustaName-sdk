@@ -1,3 +1,7 @@
+## 0.0.135 (2025-05-30)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
 ## 0.0.134 (2025-05-30)
 
 This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
