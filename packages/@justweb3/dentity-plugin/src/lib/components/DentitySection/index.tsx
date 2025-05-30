@@ -4,6 +4,7 @@ import { ProfileSection } from '@justweb3/widget';
 import { FC, useMemo } from 'react';
 import { useVerifications } from '../../hooks';
 import { VerificationCard } from '../VerificationCard';
+import { isVerificationDisplayable } from '../../utils';
 
 export interface DentityTabProps {
   ens: string;
@@ -68,12 +69,15 @@ export const DentitySection: FC<DentityTabProps> = ({ ens }) => {
         ) : verifications && verifications.length > 0 ? (
           <ProfileSection title={'Dentity'} items={[
             // <ProfileBtn ens={ens} />,
-            ...verifications.map((verification) => (
-              <VerificationCard
-                key={verification.type.toLocaleString()}
-                verification={verification}
-              />
-            ))
+            ...verifications
+              .filter(verification => isVerificationDisplayable(verification, records))
+              .map((verification) => (
+                <VerificationCard
+                  key={verification.type.toLocaleString()}
+                  verification={verification}
+                  records={records}
+                />
+              ))
           ]} />
         ) : (
           <Flex
