@@ -18,13 +18,11 @@
 
 - patch packages ([d4b53785](https://github.com/JustaName-id/JustaName-sdk/commit/d4b53785))
 
-
 ### 🧱 Updated Dependencies
 
 - Updated @justaname.id/sdk to 0.2.192
 
-
-### ❤️  Thank You
+### ❤️ Thank You
 
 - anthony2399 @anthony23991
 

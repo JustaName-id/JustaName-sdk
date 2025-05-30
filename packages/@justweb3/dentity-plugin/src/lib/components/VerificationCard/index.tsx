@@ -2,25 +2,30 @@ import { CredentialTemplate } from '@dentity/ens-client';
 import { Badge, Flex, P } from '@justweb3/ui';
 import { getTextRecordIcon } from '@justweb3/widget';
 import React, { FC, useMemo } from 'react';
-import { getCredentialKeyValue } from '../../utils';
+import { compareVerificationWithRecord, getCredentialKeyValue } from '../../utils';
 import { VerifiableCredentialPresentation } from '@dentity/ens-client';
 import { VerifiedIcon } from '../../icons';
+import { Records } from '@justaname.id/react';
 
 interface VerificationCardProps {
   verification: VerifiableCredentialPresentation;
+  records: Records | undefined;
 }
 
 export const VerificationCard: FC<VerificationCardProps> = ({
   verification,
+  records
 }) => {
 
   const credentialTemplateType = useMemo(() => {
     return Object.values(CredentialTemplate).find(template => verification.type.includes(template));
   }, [verification.type]);
 
-  const credentialKeyValue = getCredentialKeyValue(credentialTemplateType, verification.credentialSubject);
+  const credentialKeyValue = useMemo(() => getCredentialKeyValue(credentialTemplateType, verification.credentialSubject), [credentialTemplateType, verification.credentialSubject]);
 
-  if (!credentialTemplateType || credentialKeyValue.textRecord.length == 0) return null;
+  const isCredentialAsRecord = useMemo(() => compareVerificationWithRecord(credentialKeyValue, records), [credentialKeyValue, records]);
+
+  if (!credentialTemplateType || credentialKeyValue.textRecord.length == 0 || !isCredentialAsRecord) return <></>;
   return (
     <div>
       <Badge style={{ padding: '5px' }} withCopy={false}>
@@ -66,7 +71,7 @@ export const VerificationCard: FC<VerificationCardProps> = ({
                 fontFamily: 'var(--justweb3-font-family)'
               }}
             >
-              {credentialKeyValue.value}
+              {credentialKeyValue.textRecord === 'com.x' ? `@${credentialKeyValue.value.replace(/^@/, '')}` : credentialKeyValue.value}
             </P>
           </Flex>
 
