@@ -1,3 +1,27 @@
+## 0.0.11 (2025-05-30)
+
+
+### 🩹 Fixes
+
+- **dentity-plugin:** new release ([2482e157](https://github.com/JustaName-id/JustaName-sdk/commit/2482e157))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.10 (2025-05-30)
+
+
+### 🩹 Fixes
+
+- **dentity-plugin:** record display bug ([4e08b5cf](https://github.com/JustaName-id/JustaName-sdk/commit/4e08b5cf))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.9 (2025-05-29)
 
 This was a version bump only for @justweb3/dentity-plugin to align it with other projects, there were no code changes.

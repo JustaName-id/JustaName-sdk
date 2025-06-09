@@ -1,6 +1,6 @@
 {
   "name": "@justweb3/dentity-plugin",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "dependencies": {
     "@dentity/ens-client": "^1.0.0",
     "axios": "1.6.0"
