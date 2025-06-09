@@ -1,6 +1,6 @@
 {
   "name": "@justweb3/xmtp-plugin",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "dependencies": {
     "@radix-ui/react-slider": "1.2.1",
     "@xmtp/browser-sdk": "2.0.12",
