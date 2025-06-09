@@ -1,3 +1,22 @@
+## 0.0.138 (2025-06-09)
+
+
+### 🚀 Features
+
+- **widget:** release ([940864a1](https://github.com/JustaName-id/JustaName-sdk/commit/940864a1))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.202
+- Updated @justaname.id/sdk to 0.2.199
+- Updated @justweb3/ui to 0.0.138
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.137 (2025-06-09)
 
 
