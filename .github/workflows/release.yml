@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     if: >
       ${{ 
-        !contains(github.event.head_commit.message, '[skip ci]') &&
-        !contains(github.event.head_commit.message, format('chore(release){0} publish', ':')) &&
-        !contains(github.event.head_commit.message, format('CI{0} Update yarn.lock files', ':'))
+        !startsWith(github.event.head_commit.message, 'chore(release): publish') &&
+        !startsWith(github.event.head_commit.message, 'CI: Update yarn.lock files') &&
+        !startsWith(github.event.head_commit.message, '[skip ci]')
       }}
     permissions:
       contents: write

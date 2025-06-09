@@ -1,3 +1,50 @@
+## 0.0.138 (2025-06-09)
+
+
+### 🚀 Features
+
+- **widget:** release ([940864a1](https://github.com/JustaName-id/JustaName-sdk/commit/940864a1))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.202
+- Updated @justaname.id/sdk to 0.2.199
+- Updated @justweb3/ui to 0.0.138
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.137 (2025-06-09)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.201
+- Updated @justaname.id/sdk to 0.2.198
+- Updated @justweb3/ui to 0.0.137
+
+## 0.0.136 (2025-06-09)
+
+
+### 🩹 Fixes
+
+- **widget:** added public resolver ([fcd6b2d3](https://github.com/JustaName-id/JustaName-sdk/commit/fcd6b2d3))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.200
+- Updated @justaname.id/sdk to 0.2.197
+- Updated @justweb3/ui to 0.0.136
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.0.135 (2025-05-30)
 
 

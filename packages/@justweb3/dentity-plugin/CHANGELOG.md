@@ -1,3 +1,15 @@
+## 0.0.14 (2025-06-09)
+
+This was a version bump only for @justweb3/dentity-plugin to align it with other projects, there were no code changes.
+
+## 0.0.13 (2025-06-09)
+
+This was a version bump only for @justweb3/dentity-plugin to align it with other projects, there were no code changes.
+
+## 0.0.12 (2025-06-09)
+
+This was a version bump only for @justweb3/dentity-plugin to align it with other projects, there were no code changes.
+
 ## 0.0.11 (2025-05-30)
 
 
