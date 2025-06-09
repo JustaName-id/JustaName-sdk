@@ -95,6 +95,6 @@ export const DentitySection: FC<DentityTabProps> = ({ ens }) => {
       </Flex>
     );
   } else {
-    return <ProfileSection title={'Dentity'} items={[<P>Ens not verified with Dentity</P>]} />;
+    return <ProfileSection title={'Dentity'} items={[<P>Ens not verified with Dentity</P>]} />
   }
 };
