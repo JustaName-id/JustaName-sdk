@@ -49,7 +49,7 @@ export interface JustWeb3Buttonrops {
   logout?: () => void;
 }
 
-const ENS_MAINNET_RESOLVER = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
+const ENS_MAINNET_RESOLVER = ['0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41', '0x231b0Ee14048e9dCcD1d247744d114a4EB5E8E63'];
 const ENS_SEPOLIA_RESOLVER = '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD';
 
 export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
@@ -107,15 +107,15 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
       },
       [] as Records[]
     ).filter((name) => {
-      const resolverAddress =
-        chainId === 1 ? ENS_MAINNET_RESOLVER : ENS_SEPOLIA_RESOLVER;
+      const resolverAddresses =
+        chainId === 1 ? ENS_MAINNET_RESOLVER : [ENS_SEPOLIA_RESOLVER];
       const offchainResolver = offchainResolvers?.offchainResolvers.find(
         (resolver) => resolver.chainId === chainId
       );
 
-      return !(
-        name.records.resolverAddress !== resolverAddress &&
-        name.records.resolverAddress !== offchainResolver?.resolverAddress
+      return (
+        resolverAddresses.includes(name.records.resolverAddress) ||
+        name.records.resolverAddress === offchainResolver?.resolverAddress
       );
     })
       .sort((a, b) => {
