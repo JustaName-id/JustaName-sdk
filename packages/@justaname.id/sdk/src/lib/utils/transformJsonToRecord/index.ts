@@ -20,5 +20,6 @@ export const sanitizeAddresses = (addresses: PartialAddressJson | AddressWithTyp
     }));
   }
 
-  return Object.entries(addresses).map(([coinType, address]) => ({ coinType: parseInt(coinType), address }));
+  return Object.entries(addresses).map(([coinType, address]) => ({ coinType: parseInt(coinType), address }))
+    .filter(({ address }) => !!address ) as Address[] | undefined;;
 }
