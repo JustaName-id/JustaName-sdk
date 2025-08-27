@@ -52,7 +52,6 @@ export const useUploadMedia = (
   const { dev, chainId: defaultChainId } = useJustaName();
   const { getSignature } = useSubnameSignature();
   
-  // Use passed parameters or fallback to defaults
   const chainId = hookParams?.chainId ?? defaultChainId;
   const address = hookParams?.address;
   const signature = hookParams?.signature;
@@ -94,7 +93,6 @@ export const useUploadMedia = (
       }
 
       _params.form.append('signature', finalSignature);
-      // const baseUrl = 'http://localhost:3000';
       const baseUrl = dev
         ? 'https://api-staging.justaname.id'
         : 'https://api.justaname.id';
