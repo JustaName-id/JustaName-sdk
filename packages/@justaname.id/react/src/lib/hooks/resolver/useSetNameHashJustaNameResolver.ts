@@ -112,16 +112,32 @@ export interface UseSetNameHashJustaNameResolver<T = any> {
   isSetNameHashJustaNameResolverPending: boolean;
   setNameHashJustaNameResolverError: boolean;
 }
+
+/**
+ *  Interface defining the optional parameters for the hook.
+ *
+ *  @typedef UseSetNameHashJustaNameResolverParams
+ *  @type {object}
+ *  @property {number} [chainId] - Optional chain ID to use instead of the one from mounted account.
+ *  @property {string} [address] - Optional address to use instead of the one from mounted account.
+ */
+export interface UseSetNameHashJustaNameResolverParams {
+  chainId?: number;
+  address?: string;
+}
 /**
  * Custom hook for performing a mutation to set the JustaName resolver.
  *
  * @template T - The type of additional parameters that can be passed to the set JustaName resolver mutation, extending the base request.
+ * @param {UseSetNameHashJustaNameResolverParams} [params] - Optional parameters containing chainId and address to override mounted account values.
  * @returns {UseSetNameHashJustaNameResolver} An object containing the `setNameHashJustaNameResolver` async function to initiate the JustaName resolve,a boolean `NameHashJustaNameResolverSet` indicating if the resolver is set,a boolean `setNameHashJustaNameResolverPending` indicating the state of the process, and a boolean `setNameHashJustaNameResolverError` indicating if an error has occured.
  */
 export const useSetNameHashJustaNameResolver = <
   T = any
->(): UseSetNameHashJustaNameResolver<T> => {
-  const { chainId, address } = useMountedAccount();
+>(params?: UseSetNameHashJustaNameResolverParams): UseSetNameHashJustaNameResolver<T> => {
+  const mountedAccount = useMountedAccount();
+  const chainId = params?.chainId ?? mountedAccount.chainId;
+  const address = params?.address ?? mountedAccount.address;
   const { offchainResolvers, isOffchainResolversPending } =
     useOffchainResolvers();
 
@@ -147,7 +163,7 @@ export const useSetNameHashJustaNameResolver = <
     ],
     chainId: chainId,
     query: {
-      enabled: address && address !== ZeroAddress
+      enabled: !!address && address !== ZeroAddress
     }
   });
 
@@ -159,7 +175,7 @@ export const useSetNameHashJustaNameResolver = <
     args: [getAddress(address ?? ZeroAddress), currentResolver],
     chainId: chainId,
     query: {
-      enabled: recordExistsStatus === 'success' && recordExistsConfig === false && address && address !== ZeroAddress,
+      enabled: recordExistsStatus === 'success' && recordExistsConfig === false && !!address && address !== ZeroAddress,
     },
   });
 
@@ -178,7 +194,7 @@ export const useSetNameHashJustaNameResolver = <
     ],
     chainId: chainId,
     query: {
-      enabled: recordExistsStatus === 'success' && recordExistsConfig === true && address && address !== ZeroAddress
+      enabled: recordExistsStatus === 'success' && recordExistsConfig === true && !!address && address !== ZeroAddress
     },
   });
 
@@ -197,7 +213,7 @@ export const useSetNameHashJustaNameResolver = <
       enabled:
         getResolverABIStatus === 'success' &&
         (getResolverABIConfig as string).toLowerCase() !==
-        currentResolver?.toLowerCase() && address && address !== ZeroAddress,
+        currentResolver?.toLowerCase() && !!address && address !== ZeroAddress,
     },
   });
 
