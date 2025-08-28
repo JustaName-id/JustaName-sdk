@@ -1,3 +1,7 @@
+## 0.0.17 (2025-08-28)
+
+This was a version bump only for @justweb3/dentity-plugin to align it with other projects, there were no code changes.
+
 ## 0.0.16 (2025-08-27)
 
 This was a version bump only for @justweb3/dentity-plugin to align it with other projects, there were no code changes.
