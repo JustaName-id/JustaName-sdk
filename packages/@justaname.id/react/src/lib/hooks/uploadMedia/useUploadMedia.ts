@@ -9,6 +9,8 @@ interface UseUploadMediaFunctionParams {
   ens?: string;
   type?: 'Avatar' | 'Banner';
   chainId?: ChainId;
+  signature?: string;
+  message?: string;
 }
 
 export interface UseUploadMediaParams {
@@ -20,8 +22,6 @@ export interface UseUploadMediaParams {
 export interface UseUploadMediaHookParams {
   address?: string;
   chainId?: ChainId;
-  signature?: string;
-  message?: string;
 }
 
 export interface UseUploadMediaResponse {
@@ -54,8 +54,6 @@ export const useUploadMedia = (
   
   const chainId = hookParams?.chainId ?? defaultChainId;
   const address = hookParams?.address;
-  const signature = hookParams?.signature;
-  const message = hookParams?.message;
   const mutation = useMutation({
     mutationFn: async (_params: UseUploadMediaFunctionParams) => {
       const _ens = _params.ens || params?.ens;
@@ -81,9 +79,9 @@ export const useUploadMedia = (
       let finalMessage: string;
       let finalAddress: string;
 
-      if (signature && message && address) {
-        finalSignature = signature;
-        finalMessage = message;
+      if (_params.signature && _params.message && address) {
+        finalSignature = _params.signature;
+        finalMessage = _params.message;
         finalAddress = address;
       } else {
         const signatureData = await getSignature();
