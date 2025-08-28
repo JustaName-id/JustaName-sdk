@@ -1,3 +1,7 @@
+## 0.1.47 (2025-08-28)
+
+This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
+
 ## 0.1.46 (2025-08-28)
 
 This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.

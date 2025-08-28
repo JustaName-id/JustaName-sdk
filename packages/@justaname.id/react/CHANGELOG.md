@@ -1,3 +1,20 @@
+## 0.3.206 (2025-08-28)
+
+
+### 🩹 Fixes
+
+- useuploadmedia params ([0b75b857](https://github.com/JustaName-id/JustaName-sdk/commit/0b75b857))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.203
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.205 (2025-08-28)
 
 
