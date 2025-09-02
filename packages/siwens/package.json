@@ -1,6 +1,6 @@
 {
   "name": "siwens",
-  "version": "0.1.39",
+  "version": "0.1.43",
   "peerDependencies": {
     "ethers": "^5.6.8 || ^6.0.8",
     "siwe": ">=2.0.0"

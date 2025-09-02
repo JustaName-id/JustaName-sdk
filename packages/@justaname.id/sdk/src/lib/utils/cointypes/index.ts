@@ -1,6 +1,10 @@
 import { coinTypeToNameMap } from '@ensdomains/address-encoder';
 
-export type SupportedCoins = keyof typeof coinTypeToNameMap;
+const SLIP44_MSB = 2147483648;
+
+export type NativelySupportedCoins = keyof typeof coinTypeToNameMap
+
+export type SupportedCoins =  NativelySupportedCoins | string;
 export interface CoinType {
   coin: string;
   symbol: string;
@@ -13,7 +17,7 @@ export type CoinTypeMap = {
 
 export const coinTypeMap: CoinTypeMap = Object.keys(coinTypeToNameMap).reduce(
   (acc, key) => {
-    const coin = key as SupportedCoins;
+    const coin = key as NativelySupportedCoins;
     const symbol = coinTypeToNameMap[coin];
     acc[coin] = {
       coin: symbol[1],
@@ -27,12 +31,22 @@ export const coinTypeMap: CoinTypeMap = Object.keys(coinTypeToNameMap).reduce(
 
 export type CoinTypeKeys = keyof typeof coinTypeMap;
 
-export const getCoinTypeDetails = (cointype: SupportedCoins): CoinType => {
-  const coinTypeDetails = coinTypeMap[cointype];
+export const getCoinTypeDetails = (cointype: SupportedCoins | string): CoinType => {
+
+
+  const coinTypeDetails = coinTypeMap[cointype as SupportedCoins] as CoinType;
   if (coinTypeDetails) {
     return {
       ...coinTypeDetails,
     };
+  }
+
+  if (Number(cointype) >= SLIP44_MSB ) {
+    return {
+      coin: "NON",
+      symbol: "NON",
+      coinType: cointype as SupportedCoins,
+    }
   }
   return {
     coin: 'NON',

@@ -268,6 +268,9 @@ describe('justaname', () => {
           test: 'test',
           test2: 'test2',
         },
+        addresses: {
+          "3460645202": subnameSigner.address,
+        },
         signature,
       },
       {

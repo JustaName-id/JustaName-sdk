@@ -53,6 +53,7 @@ export const UpdateRecordItem: FC<UpdateRecordItemProps> = ({
   const previousKeySanitized = useMemo(() => {
     if (type === 'address') {
       const coinType = Object.keys(coinTypeToNameMap).find(
+      // @ts-expect-error trial
         (key) => coinTypeToNameMap[key as SupportedCoins][0] === previousKey
       );
 

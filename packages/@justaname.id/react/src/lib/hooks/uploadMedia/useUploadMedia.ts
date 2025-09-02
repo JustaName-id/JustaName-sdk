@@ -9,11 +9,18 @@ interface UseUploadMediaFunctionParams {
   ens?: string;
   type?: 'Avatar' | 'Banner';
   chainId?: ChainId;
+  signature?: string;
+  message?: string;
 }
 
 export interface UseUploadMediaParams {
   ens?: string;
   type?: 'Avatar' | 'Banner';
+  chainId?: ChainId;
+}
+
+export interface UseUploadMediaHookParams {
+  address?: string;
   chainId?: ChainId;
 }
 
@@ -39,10 +46,14 @@ const query = (ens: string, type: 'Avatar' | 'Banner', chainId: ChainId) =>
   });
 
 export const useUploadMedia = (
-  params?: UseUploadMediaParams
+  params?: UseUploadMediaParams,
+  hookParams?: UseUploadMediaHookParams
 ): UseUploadMediaResult => {
-  const { dev, chainId } = useJustaName();
+  const { dev, chainId: defaultChainId } = useJustaName();
   const { getSignature } = useSubnameSignature();
+  
+  const chainId = hookParams?.chainId ?? defaultChainId;
+  const address = hookParams?.address;
   const mutation = useMutation({
     mutationFn: async (_params: UseUploadMediaFunctionParams) => {
       const _ens = _params.ens || params?.ens;
@@ -64,10 +75,22 @@ export const useUploadMedia = (
         throw new Error('ChainId is required');
       }
 
-      const { signature, message, address } = await getSignature();
+      let finalSignature: string;
+      let finalMessage: string;
+      let finalAddress: string;
 
-      _params.form.append('signature', signature);
-      // const baseUrl = 'http://localhost:3000';
+      if (_params.signature && _params.message && address) {
+        finalSignature = _params.signature;
+        finalMessage = _params.message;
+        finalAddress = address;
+      } else {
+        const signatureData = await getSignature();
+        finalSignature = signatureData.signature;
+        finalMessage = signatureData.message;
+        finalAddress = signatureData.address;
+      }
+
+      _params.form.append('signature', finalSignature);
       const baseUrl = dev
         ? 'https://api-staging.justaname.id'
         : 'https://api.justaname.id';
@@ -86,8 +109,8 @@ export const useUploadMedia = (
         _params.form,
         {
           headers: {
-            'x-message': message.replace(/\n/g, '\\n'),
-            'x-address': address,
+            'x-message': finalMessage.replace(/\n/g, '\\n'),
+            'x-address': finalAddress,
           },
         }
       );
