@@ -9,10 +9,10 @@ import { ChainId } from '@justaname.id/sdk';
 export const JustVerifiedPlugin = (
   credentials: Credentials[],
   verificationBackendUrl = 'https://api.justaname.id/verifications/v1',
-  mApp = 'justverified.eth'
+  mApp = 'justverified.eth',
+  openOnSignIn = false,
 ): JustaPlugin => ({
   name: 'JustVerifiedPlugin',
-  // mApps: [mApp],
   components: {
     Provider: (pluginApi, children) => {
       const chainId = pluginApi.chainId;
@@ -51,32 +51,41 @@ export const JustVerifiedPlugin = (
       );
     },
     ProfileSection: (pluginApi, ens, chainId) => {
-      return <VerificationSection ens={ens} credentials={[
-        'twitter',
-        'email',
-        'telegram',
-        'discord',
-        'github'
-      ]} chainId={chainId} mApp={mApp} verificationBackendUrl={verificationBackendUrl} />;
-    }
+      return (
+        <VerificationSection
+          ens={ens}
+          credentials={['twitter', 'email', 'telegram', 'discord', 'github']}
+          chainId={chainId}
+          mApp={mApp}
+          verificationBackendUrl={verificationBackendUrl}
+        />
+      );
+    },
   },
   hooks: {
     onWalletDisconnected: (pluginApi) => {
       pluginApi.setState('verificationOpen', false);
     },
-    onEnsSignIn: async (
-      pluginApi,
-      ens,
-      chainId
-    ) => {
+    onEnsSignIn: async (pluginApi, ens, chainId) => {
       if (chainId !== 1 && chainId !== 11155111) {
         return;
+      }
+
+      let providerUrl = pluginApi?.config?.networks?.find(
+        (network) => network.chainId === chainId
+      )?.providerUrl;
+
+      if (!providerUrl) {
+        providerUrl =
+          chainId === 1
+            ? 'https://cloudflare-eth.com'
+            : 'https://rpc.sepolia.org';
       }
 
       const verifiableRecords = await verifyRecords(
         ens,
         credentials,
-        chainId,
+        providerUrl,
         false,
         mApp,
         verificationBackendUrl
@@ -86,17 +95,9 @@ export const JustVerifiedPlugin = (
         return;
       }
 
-      pluginApi.setState('verificationOpen', true);
-
-      // setTimeout(() => {
-      //   if (
-      //     canEnableMApps &&
-      //     !enabledMApps.includes('justverified.eth') &&
-      //     !Object.values(verifiableRecords).some((value) => value)
-      //   ) {
-      //     pluginApi.handleOpenAuthorizeMAppDialog(mApp, true);
-      //   }
-      // }, 1000);
+      if (openOnSignIn) {
+        pluginApi.setState('verificationOpen', true);
+      }
     },
     onEnsSignOut: (pluginApi, ens) => {
       pluginApi.setState('verificationOpen', false);

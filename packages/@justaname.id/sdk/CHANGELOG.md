@@ -1,3 +1,657 @@
+## 0.2.200 (2025-07-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.133
+
+## 0.2.199 (2025-06-09)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.132
+
+## 0.2.198 (2025-06-09)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.131
+
+## 0.2.197 (2025-06-09)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.130
+
+## 0.2.196 (2025-05-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.129
+
+## 0.2.195 (2025-05-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.128
+
+## 0.2.194 (2025-05-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.127
+
+## 0.2.193 (2025-05-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.126
+
+## 0.2.192 (2025-05-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.125
+
+## 0.2.191 (2025-05-02)
+
+
+### 🚀 Features
+
+- package fixed ([3402cb59](https://github.com/JustaName-id/JustaName-sdk/commit/3402cb59))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.124
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.190 (2025-04-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.123
+
+## 0.2.189 (2025-04-30)
+
+
+### 🩹 Fixes
+
+- versioning ([b0e7b00c](https://github.com/JustaName-id/JustaName-sdk/commit/b0e7b00c))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.122
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.188 (2025-04-30)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.121
+
+## 0.2.187 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.120
+
+## 0.2.186 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.119
+
+## 0.2.185 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.118
+
+## 0.2.184 (2025-04-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.117
+
+## 0.2.183 (2025-04-23)
+
+
+### 🩹 Fixes
+
+- subnameChallenge in sdk ([39a23c44](https://github.com/JustaName-id/JustaName-sdk/commit/39a23c44))
+
+- tests ([82320e85](https://github.com/JustaName-id/JustaName-sdk/commit/82320e85))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.116
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.182 (2025-04-23)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.115
+
+## 0.2.181 (2025-02-13)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.114
+
+## 0.2.180 (2025-02-13)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.113
+
+## 0.2.179 (2025-02-12)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.112
+
+## 0.2.178 (2025-02-10)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.111
+
+## 0.2.177 (2025-02-10)
+
+
+### 🚀 Features
+
+- override add ([3ed3ea98](https://github.com/JustaName-id/JustaName-sdk/commit/3ed3ea98))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.110
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.176 (2025-02-07)
+
+
+### 🩹 Fixes
+
+- **sdk:** build ([0ce5463b](https://github.com/JustaName-id/JustaName-sdk/commit/0ce5463b))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.109
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.175 (2025-02-07)
+
+
+### 🩹 Fixes
+
+- **sdk:** made domain and origin optional ([b821e007](https://github.com/JustaName-id/JustaName-sdk/commit/b821e007))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.108
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.2.174 (2025-02-06)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.107
+
+## 0.2.173 (2025-02-06)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.106
+
+## 0.2.172 (2025-02-06)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.105
+
+## 0.2.171 (2025-02-03)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.104
+
+## 0.2.170 (2025-01-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.103
+
+## 0.2.169 (2025-01-28)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.102
+
+## 0.2.168 (2025-01-28)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.101
+
+## 0.2.167 (2025-01-28)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.100
+
+## 0.2.166 (2025-01-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.99
+
+## 0.2.165 (2025-01-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.98
+
+## 0.2.164 (2025-01-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.97
+
+## 0.2.163 (2025-01-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.96
+
+## 0.2.162 (2024-12-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.95
+
+## 0.2.161 (2024-12-17)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.94
+
+## 0.2.160 (2024-12-17)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.93
+
+## 0.2.159 (2024-12-12)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.92
+
+## 0.2.158 (2024-12-11)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.91
+
+## 0.2.157 (2024-12-11)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.90
+
+## 0.2.156 (2024-12-11)
+
+
+### 🚀 Features
+
+- chat from profile ([fb31ee7](https://github.com/JustaName-id/JustaName-sdk/commit/fb31ee7))
+
+- chat optimization ([4a3af5e](https://github.com/JustaName-id/JustaName-sdk/commit/4a3af5e))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.89
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.155 (2024-12-03)
+
+
+### 🚀 Features
+
+- sign in optional ([3df90a7](https://github.com/JustaName-id/JustaName-sdk/commit/3df90a7))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.88
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.154 (2024-12-02)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.87
+
+## 0.2.153 (2024-12-01)
+
+
+### 🚀 Features
+
+- support ethers 5 and ethers 6 ([f82ab13](https://github.com/JustaName-id/JustaName-sdk/commit/f82ab13))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.86
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.2.152 (2024-11-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.85
+
+## 0.2.151 (2024-11-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.84
+
+## 0.2.150 (2024-11-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.83
+
+## 0.2.149 (2024-11-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.82
+
+## 0.2.148 (2024-11-29)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.81
+
+## 0.2.147 (2024-11-29)
+
+
+### 🚀 Features
+
+- efp ([36fcc153](https://github.com/JustaName-id/JustaName-sdk/commit/36fcc153))
+
+- console fixes ([358b3a0e](https://github.com/JustaName-id/JustaName-sdk/commit/358b3a0e))
+
+- added docs and the sign in should only show ens set to default resolver or justaname resolver only ([a3bcecaa](https://github.com/JustaName-id/JustaName-sdk/commit/a3bcecaa))
+
+- sdk signin fix for aa wallets ([52944a72](https://github.com/JustaName-id/JustaName-sdk/commit/52944a72))
+
+- enabled in hooks and siwens fix and coinbase fix ([c3fb455e](https://github.com/JustaName-id/JustaName-sdk/commit/c3fb455e))
+
+- cache provider url to reduce calls ([d4943d0b](https://github.com/JustaName-id/JustaName-sdk/commit/d4943d0b))
+
+
+### 🩹 Fixes
+
+- update rest call and ui fixes ([81b05f29](https://github.com/JustaName-id/JustaName-sdk/commit/81b05f29))
+
+- justaname network and widget package json ([6afe04ce](https://github.com/JustaName-id/JustaName-sdk/commit/6afe04ce))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.80
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- HadiKhai
+
+## 0.2.146 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.79
+
+## 0.2.145 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.78
+
+## 0.2.144 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.77
+
+## 0.2.143 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.76
+
+## 0.2.142 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.75
+
+## 0.2.141 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.74
+
+## 0.2.140 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.73
+
+## 0.2.139 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.72
+
+## 0.2.138 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.71
+
+## 0.2.137 (2024-11-15)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.70
+
+## 0.2.136 (2024-11-14)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.69
+
+## 0.2.135 (2024-11-14)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.68
+
+## 0.2.134 (2024-11-14)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.67
+
+## 0.2.133 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.66
+
+## 0.2.132 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.65
+
+## 0.2.131 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.64
+
+## 0.2.130 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.63
+
+## 0.2.129 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.62
+
+## 0.2.128 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.61
+
+## 0.2.127 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.60
+
+## 0.2.126 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.59
+
+## 0.2.125 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.58
+
 ## 0.2.124 (2024-10-31)
 
 

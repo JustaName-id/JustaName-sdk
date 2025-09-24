@@ -7,6 +7,7 @@ import { useJustaName } from '../../providers';
 import { useSignMessage } from 'wagmi';
 import { RequestSignInParams } from '@justaname.id/sdk';
 import { useEnsAuth } from './useEnsAuth';
+import { useEnsNonce } from './useEnsNonce';
 
 export type UseEnsSignInFunctionParams = Omit<
   RequestSignInParams,
@@ -19,6 +20,7 @@ export interface UseEnsSignInParams
   signinNonceRoute?: string;
   signinRoute?: string;
   currentEnsRoute?: string;
+  local?: boolean;
 }
 
 export interface UseEnsSignInResult {
@@ -41,18 +43,12 @@ export const useEnsSignIn = (
     () => params?.backendUrl || backendUrl || '',
     [backendUrl, params?.backendUrl]
   );
-  const _signinNonceRoute = useMemo(
-    () => params?.signinNonceRoute || routes.signinNonceRoute,
-    [routes.signinNonceRoute, params?.signinNonceRoute]
-  );
+
   const _signinRoute = useMemo(
     () => params?.signinRoute || routes.signinRoute,
     [routes.signinRoute, params?.signinRoute]
   );
-  const nonceEndpoint = useMemo(
-    () => _backendUrl + _signinNonceRoute,
-    [_backendUrl, _signinNonceRoute]
-  );
+
   const signinEndpoint = useMemo(
     () => _backendUrl + _signinRoute,
     [_backendUrl, _signinRoute]
@@ -61,53 +57,86 @@ export const useEnsSignIn = (
     () => params?.currentEnsRoute || routes.currentEnsRoute,
     [routes.currentEnsRoute, params?.currentEnsRoute]
   );
+  const _signinNonceRoute = useMemo(
+    () => params?.signinNonceRoute || routes.signinNonceRoute,
+    [routes.signinNonceRoute, params?.signinNonceRoute]
+  );
   const { refreshEnsAuth } = useEnsAuth({
     backendUrl: _backendUrl,
     currentEnsRoute: _currentEnsRoute,
+    local: params?.local,
+  });
+
+  const { nonce, refetchNonce } = useEnsNonce({
+    backendUrl: _backendUrl,
+    signinNonceRoute: _signinNonceRoute,
+    enabled: !params?.local,
   });
 
   const mutation = useMutation({
     mutationFn: async (_params: UseEnsSignInFunctionParams) => {
-      if (!address) {
-        throw new Error('No address found');
-      }
+      try {
+        if (!address) {
+          throw new Error('No address found');
+        }
 
-      const nonceResponse = await fetch(nonceEndpoint, {
-        credentials: 'include',
-      });
+        if (params?.local) {
+          localStorage.setItem(
+            'ENS_AUTH',
+            JSON.stringify({
+              ens: _params.ens,
+              chainId,
+              address,
+            })
+          );
 
-      const nonce = await nonceResponse.text();
+          refreshEnsAuth();
 
-      const message = justaname.signIn.requestSignIn({
-        ens: _params.ens,
-        ttl: config?.signInTtl,
-        uri: config?.origin,
-        domain: config?.domain,
-        chainId: chainId,
-        address,
-        nonce,
-      });
+          return 'success';
+        }
 
-      const signature = await signMessageAsync({
-        message: message,
-        account: address,
-      });
+        if (!nonce) {
+          throw new Error('No nonce found');
+        }
 
-      const response = await fetch(signinEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          signature: signature,
+        const message = justaname.signIn.requestSignIn({
+          ens: _params.ens,
+          ttl: config?.signInTtl,
+          uri: config?.origin,
+          domain: config?.domain,
+          chainId: chainId,
+          address,
+          nonce,
+        });
+
+        const signature = await signMessageAsync({
           message: message,
-        }),
-        credentials: 'include',
-      });
+          account: address,
+        });
 
-      refreshEnsAuth();
+        const response = await fetch(signinEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            signature: signature,
+            message: message,
+          }),
+          credentials: 'include',
+        });
 
-      return response.text();
+        if (response.status !== 200) {
+          throw new Error('Failed to sign in');
+        }
+
+        refreshEnsAuth();
+
+        return response.text();
+      } catch (e) {
+        await refetchNonce();
+        throw e;
+      }
     },
   });
 

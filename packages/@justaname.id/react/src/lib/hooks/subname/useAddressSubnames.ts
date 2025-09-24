@@ -14,6 +14,7 @@ import {
 } from '@justaname.id/sdk';
 import { buildSubnameBySubnameKey } from './useSubname';
 import { Records } from '../../types';
+import { defaultOptions } from '../../query';
 
 export const buildAddressSubnamesKey = (
   address: string | undefined,
@@ -28,6 +29,7 @@ export interface UseAddressSubnamesParams
   address: string | undefined;
   isClaimed?: boolean;
   coinType?: number;
+  enabled?: boolean;
 }
 
 interface UseAddressSubnamesResult {
@@ -47,8 +49,10 @@ export const useAddressSubnames = (
   const { justaname, chainId: defaultChainId } = useJustaName();
   const { chainId, ...rest } = params;
   const _chainId = chainId || defaultChainId;
+  const _enabled = params?.enabled !== undefined ? params.enabled : true;
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildAddressSubnamesKey(params.address, _chainId),
     queryFn: async () => {
       if (!params.address) {
@@ -80,7 +84,7 @@ export const useAddressSubnames = (
         })) || []
       );
     },
-    enabled: Boolean(justaname) && Boolean(params.address),
+    enabled: Boolean(justaname) && Boolean(params.address) && Boolean(_enabled),
   });
 
   return {

@@ -1,3 +1,410 @@
+## 0.0.139 (2025-07-30)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.138 (2025-06-09)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.137 (2025-06-09)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.136 (2025-06-09)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.135 (2025-05-30)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.134 (2025-05-30)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.133 (2025-05-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.132 (2025-05-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.131 (2025-05-22)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.130 (2025-05-02)
+
+
+### 🚀 Features
+
+- package fixed ([3402cb59](https://github.com/JustaName-id/JustaName-sdk/commit/3402cb59))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.0.129 (2025-04-30)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.128 (2025-04-30)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.127 (2025-04-30)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.126 (2025-04-29)
+
+
+### 🩹 Fixes
+
+- react version ([1deab1d0](https://github.com/JustaName-id/JustaName-sdk/commit/1deab1d0))
+
+- lockfile ([2e4e7cb0](https://github.com/JustaName-id/JustaName-sdk/commit/2e4e7cb0))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.125 (2025-04-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.124 (2025-04-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.123 (2025-04-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.122 (2025-04-23)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.121 (2025-04-23)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.120 (2025-02-13)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.119 (2025-02-13)
+
+
+### 🚀 Features
+
+- added disconnect and switch ens buttons ([d63d9163](https://github.com/JustaName-id/JustaName-sdk/commit/d63d9163))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.0.118 (2025-02-12)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.117 (2025-02-10)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.116 (2025-02-10)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.115 (2025-02-07)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.114 (2025-02-07)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.113 (2025-02-06)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.112 (2025-02-06)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.111 (2025-02-06)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.110 (2025-02-03)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.109 (2025-01-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.108 (2025-01-28)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.107 (2025-01-28)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.106 (2025-01-28)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.105 (2025-01-22)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.104 (2025-01-16)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.103 (2025-01-16)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.102 (2025-01-16)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.101 (2024-12-22)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.100 (2024-12-17)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.99 (2024-12-17)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.98 (2024-12-12)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.97 (2024-12-11)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.96 (2024-12-11)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.95 (2024-12-11)
+
+
+### 🚀 Features
+
+- basic but need to move to js sdk ([55edbf2](https://github.com/JustaName-id/JustaName-sdk/commit/55edbf2))
+
+- chat and getting the messages ([9bc689c](https://github.com/JustaName-id/JustaName-sdk/commit/9bc689c))
+
+- working on chat ([cbfb4af](https://github.com/JustaName-id/JustaName-sdk/commit/cbfb4af))
+
+- finalizing xmtp widget ([9369bfb](https://github.com/JustaName-id/JustaName-sdk/commit/9369bfb))
+
+- xmtp refactor and unread count ([d4572e6](https://github.com/JustaName-id/JustaName-sdk/commit/d4572e6))
+
+- chat optimization ([4a3af5e](https://github.com/JustaName-id/JustaName-sdk/commit/4a3af5e))
+
+
+### 🩹 Fixes
+
+- tabs css ([b135daa](https://github.com/JustaName-id/JustaName-sdk/commit/b135daa))
+
+- xmtp build ([559d658](https://github.com/JustaName-id/JustaName-sdk/commit/559d658))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- HadiKhai
+
+## 0.0.94 (2024-12-03)
+
+
+### 🚀 Features
+
+- sign in optional ([3df90a7](https://github.com/JustaName-id/JustaName-sdk/commit/3df90a7))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.0.93 (2024-12-02)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.92 (2024-12-01)
+
+
+### 🚀 Features
+
+- support ethers 5 and ethers 6 ([f82ab13](https://github.com/JustaName-id/JustaName-sdk/commit/f82ab13))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.0.91 (2024-11-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.90 (2024-11-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.89 (2024-11-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.88 (2024-11-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.87 (2024-11-29)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.86 (2024-11-29)
+
+
+### 🚀 Features
+
+- remove mapps from justverified ([2898c521](https://github.com/JustaName-id/JustaName-sdk/commit/2898c521))
+
+- efp ([36fcc153](https://github.com/JustaName-id/JustaName-sdk/commit/36fcc153))
+
+- efp and storybook for react sdk ([f0c5c7a0](https://github.com/JustaName-id/JustaName-sdk/commit/f0c5c7a0))
+
+- added docs and the sign in should only show ens set to default resolver or justaname resolver only ([a3bcecaa](https://github.com/JustaName-id/JustaName-sdk/commit/a3bcecaa))
+
+- move justweb3 to peer dep in the plugins ([316047cb](https://github.com/JustaName-id/JustaName-sdk/commit/316047cb))
+
+- sdk signin fix for aa wallets ([52944a72](https://github.com/JustaName-id/JustaName-sdk/commit/52944a72))
+
+- rainbow and privy examples ([fb2aa7dc](https://github.com/JustaName-id/JustaName-sdk/commit/fb2aa7dc))
+
+- dialog fixes and logo needs to be fixed ([fad47312](https://github.com/JustaName-id/JustaName-sdk/commit/fad47312))
+
+- expandableCard ([#54](https://github.com/JustaName-id/JustaName-sdk/pull/54))
+
+- packagejson fixes ([873f9967](https://github.com/JustaName-id/JustaName-sdk/commit/873f9967))
+
+- **widget:** mobile dialogs ([#51](https://github.com/JustaName-id/JustaName-sdk/pull/51))
+
+
+### 🩹 Fixes
+
+- update rest call and ui fixes ([81b05f29](https://github.com/JustaName-id/JustaName-sdk/commit/81b05f29))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+- HadiKhai
+
+## 0.0.85 (2024-11-15)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.84 (2024-11-15)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.83 (2024-11-15)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.82 (2024-11-15)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.81 (2024-11-15)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.80 (2024-11-15)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.79 (2024-11-15)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.78 (2024-11-15)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.77 (2024-11-15)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.76 (2024-11-15)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.75 (2024-11-14)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.74 (2024-11-14)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.73 (2024-11-14)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.72 (2024-11-04)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.71 (2024-11-04)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.70 (2024-11-04)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.69 (2024-11-04)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.68 (2024-11-04)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.67 (2024-10-31)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.66 (2024-10-31)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.65 (2024-10-31)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
+## 0.0.64 (2024-10-31)
+
+This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
+
 ## 0.0.63 (2024-10-31)
 
 This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.

@@ -40,31 +40,299 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   mApps: ['justverified.eth', 'justweb3.eth'],
   openOnWalletConnect: false,
   allowedEns: 'all',
-  dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
 };
 
 const UpdateButton = () => {
   const { updateRecords } = useJustWeb3();
 
   return (
-    <Button
-      onClick={() => {
-        updateRecords({
-          ens: 'hadikhai.jaw.eth',
-          chainId: 11155111,
-          text: [
-            {
-              key: 'com.twitter',
-              value: 'justhadi_eth',
-            },
-          ],
-          contentHash:
-            'ipns://k51qzi5uqu5dgccx524mfjv7znyfsa6g013o6v4yvis9dxnrjbwojc62pt0430',
-        });
-      }}
-    >
-      Update
-    </Button>
+    <div className={'flex flex-row'}>
+      <Button
+        onClick={() => {
+          updateRecords({
+            ens: 'hadikhai.jaw.eth',
+            chainId: 11155111,
+            text: [
+              {
+                key: 'com.twitter',
+                value: 'justhadi_eth',
+              },
+            ],
+            contentHash:
+              'ipns://k51qzi5uqu5dgccx524mfjv7znyfsa6g013o6v4yvis9dxnrjbwojc62pt0430',
+          });
+        }}
+      >
+        Update
+      </Button>
+      <Button
+        onClick={() => {
+          updateRecords({
+            chainId: 1,
+            addresses: [
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483658',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483673',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483704',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483708',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483709',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483736',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483747',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483748',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483756',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483785',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483817',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483894',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483898',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483936',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147483972',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147484009',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147484468',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147484736',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147488648',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147492101',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147523445',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147525809',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147525868',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147526762',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2147542792',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2148018000',
+              },
+              {
+                address: '0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1',
+                coinType: '2155261425',
+              },
+            ],
+          });
+        }}
+      >
+        Update EVM
+      </Button>
+      <Button
+        onClick={() => {
+          updateRecords({
+            chainId: 1,
+            addresses: [
+              {
+                address: '',
+                coinType: '2147483658',
+              },
+              {
+                address: '',
+                coinType: '2147483673',
+              },
+              {
+                address: '',
+                coinType: '2147483704',
+              },
+              {
+                address: '',
+                coinType: '2147483708',
+              },
+              {
+                address: '',
+                coinType: '2147483709',
+              },
+              {
+                address: '',
+                coinType: '2147483736',
+              },
+              {
+                address: '',
+                coinType: '2147483747',
+              },
+              {
+                address: '',
+                coinType: '2147483748',
+              },
+              {
+                address: '',
+                coinType: '2147483756',
+              },
+              {
+                address: '',
+                coinType: '2147483785',
+              },
+              {
+                address: '',
+                coinType: '2147483817',
+              },
+              {
+                address: '',
+                coinType: '2147483894',
+              },
+              {
+                address: '',
+                coinType: '2147483898',
+              },
+              {
+                address: '',
+                coinType: '2147483936',
+              },
+              {
+                address: '',
+                coinType: '2147483972',
+              },
+              {
+                address: '',
+                coinType: '2147484009',
+              },
+              {
+                address: '',
+                coinType: '2147484468',
+              },
+              {
+                address: '',
+                coinType: '2147484736',
+              },
+              {
+                address: '',
+                coinType: '2147488648',
+              },
+              {
+                address: '',
+                coinType: '2147492101',
+              },
+              {
+                address: '',
+                coinType: '2147523445',
+              },
+              {
+                address: '',
+                coinType: '2147525809',
+              },
+              {
+                address: '',
+                coinType: '2147525868',
+              },
+              {
+                address: '',
+                coinType: '2147526762',
+              },
+              {
+                address: '',
+                coinType: '2147542792',
+              },
+              {
+                address: '',
+                coinType: '2148018000',
+              },
+              {
+                address: '',
+                coinType: '2155261425',
+              },
+            ],
+          });
+        }}
+      >
+        Update NON EVM
+      </Button>
+      <Button
+        onClick={() => {
+          updateRecords({
+            text: [
+              {
+                key: 'com.twitter',
+                value: 'justhadi_eth',
+              },
+            ],
+          });
+        }}
+      >
+        Update Twitter
+      </Button>
+      <Button
+        onClick={() => {
+          updateRecords({
+            text: [
+              {
+                key: 'com.twitter',
+                value: '',
+              },
+            ],
+          });
+        }}
+      >
+        Delete Twitter
+      </Button>
+    </div>
   );
 };
 

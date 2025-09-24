@@ -11,6 +11,7 @@ import {
   generateDarkVariation,
   generateLightVariation,
 } from '../../utils';
+import { DialogProvider } from '../DialogProvider';
 
 const getPrimaryColorVariations = (color: string) => {
   const hsl = convertToHSL(color);
@@ -235,7 +236,8 @@ export const JustWeb3ThemeProvider: React.FC<JustWeb3ThemeProviderProps> = ({
 
   return (
     <JustWeb3ThemeContext.Provider value={{ changeTheme, theme, color }}>
-      <style>{`
+      <DialogProvider>
+        <style>{`
       
         :root {
           ${Object.entries(theme)
@@ -258,7 +260,8 @@ export const JustWeb3ThemeProvider: React.FC<JustWeb3ThemeProviderProps> = ({
         
        }
       `}</style>
-      {children}
+        {children}
+      </DialogProvider>
     </JustWeb3ThemeContext.Provider>
   );
 };

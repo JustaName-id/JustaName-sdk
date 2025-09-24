@@ -12,20 +12,22 @@ import {
   trustWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React from 'react';
-import { WagmiProvider } from 'wagmi';
+import { http, WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { JustWeb3Provider, JustWeb3ProviderConfig } from '@justweb3/widget';
+import { useState } from 'react';
 
 interface ProviderProps {
   children: React.ReactNode;
 }
+
 export const Providers: React.FC<ProviderProps> = (props) => {
   const { wallets } = getDefaultWallets();
+  const [queryClient] = useState(() => new QueryClient());
 
   const config = getDefaultConfig({
-    appName: 'JustaName Console',
-    projectId: 'YOUR_PROJECT_ID',
+    appName: 'JustWeb3 Demo Console',
+    projectId: process.env.NEXT_PUBLIC_PROJECT_ID as string,
     wallets: [
       ...wallets,
       {
@@ -35,6 +37,14 @@ export const Providers: React.FC<ProviderProps> = (props) => {
     ],
     chains: [mainnet, sepolia],
     ssr: true,
+    transports: {
+      [mainnet.id]: http(
+        process.env.NEXT_PUBLIC_MAINNET_PROVIDER_URL as string
+      ),
+      [sepolia.id]: http(
+        process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER_URL as string
+      ),
+    },
   });
 
   const justweb3Config: JustWeb3ProviderConfig = {
@@ -53,13 +63,13 @@ export const Providers: React.FC<ProviderProps> = (props) => {
         providerUrl: process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER_URL as string,
       },
     ],
+    enableAuth: true,
     openOnWalletConnect: true,
     allowedEns: 'all',
     disableOverlay: true,
     dev: process.env.NEXT_PUBLIC_DEV === 'true',
   };
 
-  const queryClient = new QueryClient();
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>

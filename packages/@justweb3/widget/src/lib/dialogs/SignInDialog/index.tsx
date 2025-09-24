@@ -1,4 +1,16 @@
-import React, { FC, Fragment, useMemo, useState } from 'react';
+import {
+  Records,
+  useAccountEnsNames,
+  useAccountInvitations,
+  useAccountSubnames,
+  useAddSubname,
+  useEnsSignIn,
+  useIsSubnameAvailable,
+  useJustaName,
+  useMountedAccount,
+  useOffchainResolvers,
+  usePrimaryName,
+} from '@justaname.id/react';
 import {
   Badge,
   Button,
@@ -8,28 +20,21 @@ import {
   Input,
   JustaNameLogoIcon,
   LoadingSpinner,
+  LogoutIcon,
   OrLine,
   ProfileIcon,
   SPAN,
 } from '@justweb3/ui';
-import {
-  Records,
-  useAccountEnsNames,
-  useAccountSubnames,
-  useAddSubname,
-  useEnsSignIn,
-  useIsSubnameAvailable,
-  useJustaName,
-  useMountedAccount,
-  useOffchainResolvers,
-} from '@justaname.id/react';
+import clsx from 'clsx';
+import React, { FC, Fragment, useMemo, useState } from 'react';
+import { useDisconnect } from 'wagmi';
+import { SelectSubnameItem } from '../../components/SelectSubnameItem';
+import { SubnameInvitationItem } from '../../components/SubnameInvitationItem';
 import { useDebounce } from '../../hooks/useDebounce';
 import { DefaultDialog } from '../DefaultDialog';
-import { SelectSubnameItem } from '../../components/SelectSubnameItem';
 import styles from './SignInDialog.module.css';
-import clsx from 'clsx';
 
-const ENS_MAINNET_RESOLVER = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
+const ENS_MAINNET_RESOLVER = ['0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41', '0x231b0Ee14048e9dCcD1d247744d114a4EB5E8E63'];
 const ENS_SEPOLIA_RESOLVER = '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD';
 
 interface TransitionElementProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -64,6 +69,8 @@ export interface SignInDialogProps {
   logo?: string;
   disableOverlay?: boolean;
   dev?: boolean;
+  local?: boolean;
+  logout?: () => void;
 }
 
 export const SignInDialog: FC<SignInDialogProps> = ({
@@ -72,12 +79,29 @@ export const SignInDialog: FC<SignInDialogProps> = ({
   allowedEns,
   logo,
   disableOverlay,
+  logout,
   dev = false,
+  local,
 }) => {
   const { chainId, ensDomains } = useJustaName();
   const { isConnected, address } = useMountedAccount();
   const { accountSubnames, isAccountSubnamesPending } = useAccountSubnames();
   const { accountEnsNames, isAccountEnsNamesPending } = useAccountEnsNames();
+  const { disconnect } = useDisconnect();
+  const { invitations, isInvitationsPending, refetchInvitations } =
+    useAccountInvitations({
+      chainId,
+      enabled: !!chainId && !!address,
+    });
+
+  const { primaryName, isPrimaryNameLoading, refetchPrimaryName } =
+    usePrimaryName({
+      address,
+      chainId,
+      enabled: !!address && !!chainId,
+      priority: 'onChain',
+    });
+
   const [username, setUsername] = useState('');
   const { debouncedValue: debouncedUsername, isDebouncing } = useDebounce(
     username,
@@ -152,7 +176,9 @@ export const SignInDialog: FC<SignInDialogProps> = ({
       : isAddSubnamePendingTestnet;
   }, [chainId, isAddSubnamePendingMainnet, isAddSubnamePendingTestnet]);
 
-  const { signIn } = useEnsSignIn();
+  const { signIn } = useEnsSignIn({
+    local: local,
+  });
 
   const { offchainResolvers, isOffchainResolversPending } =
     useOffchainResolvers();
@@ -193,15 +219,15 @@ export const SignInDialog: FC<SignInDialogProps> = ({
 
     accountNames = accountNames
       .filter((name) => {
-        const resolverAddress =
-          chainId === 1 ? ENS_MAINNET_RESOLVER : ENS_SEPOLIA_RESOLVER;
+        const resolverAddresses =
+          chainId === 1 ? ENS_MAINNET_RESOLVER : [ENS_SEPOLIA_RESOLVER];
         const offchainResolver = offchainResolvers?.offchainResolvers.find(
           (resolver) => resolver.chainId === chainId
         );
 
-        return !(
-          name.records.resolverAddress !== resolverAddress &&
-          name.records.resolverAddress !== offchainResolver?.resolverAddress
+        return (
+          resolverAddresses.includes(name.records.resolverAddress) ||
+          name.records.resolverAddress === offchainResolver?.resolverAddress
         );
       })
       .sort((a, b) => {
@@ -220,9 +246,17 @@ export const SignInDialog: FC<SignInDialogProps> = ({
     offchainResolvers?.offchainResolvers,
   ]);
 
+  const primarySubname = useMemo(() => {
+    return subnames.find((subname) => subname.ens === primaryName);
+  }, [subnames, primaryName]);
+
+  const filteredSubnames = useMemo(() => {
+    return subnames.filter((subname) => subname.ens !== primaryName);
+  }, [subnames, primaryName]);
+
   const shouldBeAbleToSelect = useMemo(() => {
-    return subnames.length > 0;
-  }, [subnames]);
+    return subnames.length > 0 || invitations.length > 0;
+  }, [invitations.length, subnames.length]);
 
   const shouldBeAbleToClaim = useMemo(() => {
     return !subnames.find((subname) => subname.ens.endsWith(claimableEns));
@@ -259,31 +293,71 @@ export const SignInDialog: FC<SignInDialogProps> = ({
       }
     >
       <Flex direction="column" gap="10px">
-        <Badge value={address}>
-          <SPAN className={styles.badgeText}>
-            {address && formatText(address, 4)}
-          </SPAN>
-        </Badge>
+        <Flex direction="row" gap="10px" justify="space-between">
+          <Badge value={address}>
+            <SPAN className={styles.badgeText}>
+              {address && formatText(address, 4)}
+            </SPAN>
+          </Badge>
+          <Button
+            variant={'destructive-outline'}
+            rightIcon={<LogoutIcon fill={'var(--justweb3-destructive-color)'} width={15} />}
+            style={{
+              padding: '6px 8px'
+            }}
+            onClick={() => {
+              disconnect()
+              logout && logout()
+            }}
+          >
+            Disconnect
+          </Button>
+        </Flex>
         {isAccountSubnamesPending ||
-        isAccountEnsNamesPending ||
-        isOffchainResolversPending ? (
+          isInvitationsPending ||
+          isAccountEnsNamesPending ||
+          isOffchainResolversPending ? (
           <div className={styles.loadingContainer}>
             <LoadingSpinner color={'var(--justweb3-primary-color)'} />
           </div>
         ) : (
-          <Flex direction="column" gap="20px">
+          <Flex direction="column" gap="10px">
             <TransitionElement
               visible={shouldBeAbleToSelect}
               maxheight="fit-content"
             >
-              <Flex direction="column" gap="20px" justify={'space-between'}>
+              <Flex direction="column" gap="10px" justify={'space-between'}>
                 <H2>Select an ENS</H2>
                 <Flex
                   direction="column"
                   gap="15px"
                   className={clsx(styles.contentWrapper)}
                 >
-                  {subnames.map((subname, index) => (
+                  {invitations.length > 0 &&
+                    invitations.map((inv, index) => (
+                      <Fragment key={'subname-invitation-' + index}>
+                        <SubnameInvitationItem
+                          subname={inv}
+                          onInvitationChange={refetchInvitations}
+                        />
+                      </Fragment>
+                    ))}
+                  {!isPrimaryNameLoading && primarySubname && (
+                    <SelectSubnameItem
+                      selectedSubname={subnameSigningIn}
+                      subname={primarySubname}
+                      onClick={() => {
+                        setSubnameSigningIn(primarySubname.ens);
+                        signIn({ ens: primarySubname.ens })
+                          .then(() => handleOpenDialog(false))
+                          .finally(() => {
+                            setSubnameSigningIn('');
+                          });
+                      }}
+                      isPrimary={true}
+                    />
+                  )}
+                  {filteredSubnames.map((subname, index) => (
                     <Fragment key={'subname-' + index}>
                       <SelectSubnameItem
                         selectedSubname={subnameSigningIn}
@@ -296,6 +370,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                               setSubnameSigningIn('');
                             });
                         }}
+                        isPrimary={false}
                       />
                     </Fragment>
                   ))}
@@ -308,7 +383,7 @@ export const SignInDialog: FC<SignInDialogProps> = ({
             >
               <OrLine />
             </TransitionElement>
-            <TransitionElement visible={shouldBeAbleToClaim} maxheight="102px">
+            <TransitionElement visible={shouldBeAbleToClaim} maxheight="107px">
               <Flex direction="column" gap="20px" justify={'space-between'}>
                 <H2>Claim a Subname</H2>
                 <Flex align="center">
@@ -352,9 +427,12 @@ export const SignInDialog: FC<SignInDialogProps> = ({
                         username: username,
                         ensDomain: claimableEns,
                       }).then(() => {
+                        refetchPrimaryName();
                         setSubnameSigningIn(username + '.' + claimableEns);
                         signIn({ ens: username + '.' + claimableEns })
-                          .then(() => handleOpenDialog(false))
+                          .then(() => {
+                            handleOpenDialog(false);
+                          })
                           .finally(() => {
                             setSubnameSigningIn('');
                           });

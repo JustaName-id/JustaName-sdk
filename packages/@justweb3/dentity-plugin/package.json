@@ -1,0 +1,27 @@
+{
+  "name": "@justweb3/dentity-plugin",
+  "version": "0.0.15",
+  "dependencies": {
+    "@dentity/ens-client": "^1.0.0",
+    "axios": "1.6.0"
+  },
+  "peerDependencies": {
+    "@justweb3/widget": ">=0.0.0",
+    "@tanstack/react-query": "^5.x",
+    "react": ">=17"
+  },
+  "exports": {
+    "./package.json": "./dist/package.json",
+    ".": "./dist/index.esm.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "module": "./dist/index.esm.js",
+  "main": "./dist/index.esm.js",
+  "types": "./dist/index.esm.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JustaName-id/JustaName-sdk"
+  }
+}

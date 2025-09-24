@@ -4,7 +4,7 @@ import { initializeJustaName } from '../helpers/initializeJustaName';
 import { ethers } from 'ethers';
 import * as dotenv from 'dotenv';
 import { ChainId } from '../../lib/types';
-import { InvalidConfigurationException } from '../../lib/errors';
+import { ChallengeRequestException } from '../../lib/errors/ChallengeRequest.expection';
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ jest.setTimeout(50000);
 const mAppPk = process.env['SDK_MAPP_PRIVATE_KEY'] as string;
 const mAppSigner = new ethers.Wallet(mAppPk);
 const subnameSigner = ethers.Wallet.createRandom();
-const subnameToBeAdded = Math.random().toString(36).substring(7);
+const subnameToBeAdded = Math.random().toString(36).substring(6);
 const CHAIN_ID = parseInt(process.env['SDK_CHAIN_ID'] as string) as ChainId;
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
 const MAPP = process.env['SDK_MAPP'] as string;
@@ -34,7 +34,7 @@ describe('justaname', () => {
   });
 
   it('should request a challenge', async () => {
-    const challenge = await justaname.siwe.requestChallenge({
+    const challenge = justaname.siwe.requestChallenge({
       // 30mins
       ttl: 1800000,
       chainId: CHAIN_ID,
@@ -62,9 +62,7 @@ describe('justaname', () => {
       return justaname.siwe.requestChallenge({
         address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
       });
-    }).toThrow(
-      InvalidConfigurationException.missingParameters(['origin', 'domain'])
-    );
+    }).toThrow(ChallengeRequestException.originRequired());
   });
 
   it('should sign in be 1 day', async () => {
@@ -97,6 +95,7 @@ describe('justaname', () => {
       {
         username: subnameToBeAdded,
         chainId: CHAIN_ID,
+        // signature,
       },
       {
         xMessage: challenge.challenge,
@@ -104,6 +103,24 @@ describe('justaname', () => {
         xSignature: signature,
       }
     );
+
+    expect(response).toBeDefined();
+  });
+
+  it('should add a subname without signature if overrideSignatureCheck is enabled', async () => {
+    const subnameToBeAdded2 = Math.random().toString(36).substring(7);
+
+    const response = await justaname.subnames.addSubname({
+      username: subnameToBeAdded2,
+      chainId: CHAIN_ID,
+      addresses: [
+        {
+          coinType: '60',
+          address: '0x59c44836630760F97b74b569B379ca94c37B93ca',
+        },
+      ],
+      overrideSignatureCheck: true,
+    });
 
     expect(response).toBeDefined();
   });
@@ -138,11 +155,11 @@ describe('justaname', () => {
         },
         contentHash:
           'ipfs://bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi',
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -181,11 +198,11 @@ describe('justaname', () => {
         ],
         contentHash:
           'ipns://k51qzi5uqu5dgccx524mfjv7znyfsa6g013o6v4yvis9dxnrjbwojc62pt0430',
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -251,11 +268,14 @@ describe('justaname', () => {
           test: 'test',
           test2: 'test2',
         },
+        addresses: {
+          "3460645202": subnameSigner.address,
+        },
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -277,11 +297,11 @@ describe('justaname', () => {
           chainId: CHAIN_ID,
           ensDomain: ENS_DOMAIN,
           contentHash: 'invalid-content-hash',
+          signature,
         },
         {
           xMessage: challenge.challenge,
           xAddress: subnameSigner.address,
-          xSignature: signature,
         }
       );
     } catch (e) {
@@ -311,11 +331,11 @@ describe('justaname', () => {
         ensDomain: ENS_DOMAIN,
         contentHash:
           'ipfs://bafybeiear427jnvpwhlnvptsc3n6shccecoclur2poxnsvlsqfgskdrjfi',
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
     const records2 = await justaname.subnames.getRecords({
@@ -350,11 +370,11 @@ describe('justaname', () => {
           mApps: 'shouldntBeUpdated',
           [`test_${MAPP}`]: 'shouldBeOverrideWhenMAppPermissionIsAdded',
         },
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -380,11 +400,11 @@ describe('justaname', () => {
         text: {
           test: '',
         },
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -547,11 +567,11 @@ describe('justaname', () => {
         text: {
           [`test2_${MAPP}`]: 'shouldntBeUpdated',
         },
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -584,11 +604,11 @@ describe('justaname', () => {
         chainId: CHAIN_ID,
         ensDomain: ENS_DOMAIN,
         contentHash: '',
+        signature,
       },
       {
         xMessage: challenge.challenge,
         xAddress: subnameSigner.address,
-        xSignature: signature,
       }
     );
 
@@ -703,10 +723,10 @@ describe('justaname', () => {
         chainId: CHAIN_ID,
         ensDomain: ENS_DOMAIN,
         username: subnameToBeAdded,
+        signature,
       },
       {
         xAddress: subnameSigner.address,
-        xSignature: signature,
         xMessage: challenge.challenge,
       }
     );
@@ -728,10 +748,10 @@ describe('justaname', () => {
         chainId: CHAIN_ID,
         ensDomain: ENS_DOMAIN,
         username: subnameToBeAdded + '2',
+        signature,
       },
       {
         xAddress: subnameSigner.address,
-        xSignature: signature,
         xMessage: challenge.challenge,
       }
     );

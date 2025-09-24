@@ -1,0 +1,10 @@
+<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="play_arrow">
+<mask id="mask0_3895_2315" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
+<rect id="Bounding box" y="0.5" width="24" height="24" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_3895_2315)">
+<path id="play_arrow_2" d="M8 19.5V5.5L19 12.5L8 19.5Z" fill="var(--justweb3-primary-color)"/>
+</g>
+</g>
+</svg>

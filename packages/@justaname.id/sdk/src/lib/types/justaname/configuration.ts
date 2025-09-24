@@ -1,5 +1,5 @@
+import { JsonRpcProvider } from '../../utils/ethersCompat';
 import { ChainId } from '../common';
-import { JsonRpcProvider } from 'ethers';
 
 export interface NetworkWithProvider<Chain extends ChainId = ChainId>
   extends Network<Chain> {
@@ -19,8 +19,8 @@ export type NetworksWithProvider = [
 ];
 
 export interface Configuration {
-  domain: string;
-  origin: string;
+  domain?: string;
+  origin?: string;
   subnameChallengeTtl?: number;
   signInTtl?: number;
 }

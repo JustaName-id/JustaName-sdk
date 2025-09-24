@@ -11,7 +11,6 @@ import { ChainId } from '@justaname.id/sdk';
 import { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@justweb3/ui';
 import {
-  JustEnsCard,
   JustWeb3Button,
   JustWeb3Provider,
   JustWeb3ProviderConfig,
@@ -19,6 +18,7 @@ import {
 } from '@justweb3/widget';
 import '@justweb3/widget/styles.css';
 import { JustVerifiedPlugin } from '../lib';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
@@ -31,8 +31,12 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
   networks: [
     {
-      providerUrl: import.meta.env.STORYBOOK_APP_PROVIDER_URL,
-      chainId: parseInt(import.meta.env.STORYBOOK_APP_CHAIN_ID) as ChainId,
+      providerUrl: import.meta.env.STORYBOOK_APP_MAINNET_PROVIDER_URL,
+      chainId: 1,
+    },
+    {
+      providerUrl: import.meta.env.STORYBOOK_APP_SEPOLIA_PROVIDER_URL,
+      chainId: 11155111,
     },
   ],
   ensDomains: [
@@ -43,12 +47,14 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   ],
   openOnWalletConnect: true,
   allowedEns: 'all',
-  dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  disableOverlay: true,
+  // enableAuth: true,
   plugins: [
     JustVerifiedPlugin(
-      ['email', 'twitter', 'github', 'discord', 'telegram'],
+      ['twitter', 'github', 'discord']
       // 'http://localhost:3009/verifications/v1'
-      'https://api-staging.justaname.id/verifications/v1'
+      // 'https://api-staging.justaname.id/verifications/v1'
     ),
   ],
 };
@@ -105,35 +111,36 @@ export const Example = () => {
                 </JustWeb3Button>
               </div>
 
-              <UpdateButton />
+              {/*<UpdateButton />*/}
 
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <JustEnsCard addressOrEns={'mely.eth'} />
-                <JustEnsCard addressOrEns={'nick.eth'} />
-                <JustEnsCard addressOrEns={'brantly.eth'} />
-                <JustEnsCard addressOrEns={'vitalik.eth'} />
-                <JustEnsCard addressOrEns={'dr3a.eth'} />
-                <JustEnsCard addressOrEns={'josh.box'} />
-                <JustEnsCard
-                  addressOrEns={'hadikhai.jaw.eth'}
-                  chainId={11155111}
-                />
-              </div>
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <JustEnsCard addressOrEns={'mely.eth'} expanded />
-                <JustEnsCard addressOrEns={'nick.eth'} expanded />
-                <JustEnsCard addressOrEns={'brantly.eth'} expanded />
-                <JustEnsCard addressOrEns={'vitalik.eth'} expanded />
-                <JustEnsCard addressOrEns={'dr3a.eth'} expanded />
-                <JustEnsCard
-                  ens={'hadikhai.jaw.eth'}
-                  chainId={11155111}
-                  expanded
-                />
-              </div>
+              {/*<div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>*/}
+              {/*  <JustEnsCard addressOrEns={'mely.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'nick.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'brantly.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'vitalik.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'dr3a.eth'} />*/}
+              {/*  <JustEnsCard addressOrEns={'jaw.eth'} chainId={11155111} />*/}
+              {/*  <JustEnsCard*/}
+              {/*    addressOrEns={'hadikhai.jaw.eth'}*/}
+              {/*    chainId={11155111}*/}
+              {/*  />*/}
+              {/*</div>*/}
+              {/*<div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>*/}
+              {/*  <JustEnsCard addressOrEns={'mely.eth'} expanded />*/}
+              {/*  <JustEnsCard addressOrEns={'nick.eth'} expanded />*/}
+              {/*  <JustEnsCard addressOrEns={'brantly.eth'} expanded />*/}
+              {/*  <JustEnsCard addressOrEns={'vitalik.eth'} expanded />*/}
+              {/*  <JustEnsCard addressOrEns={'dr3a.eth'} expanded />*/}
+              {/*  <JustEnsCard*/}
+              {/*    addressOrEns={'hadikhai.jaw.eth'}*/}
+              {/*    chainId={11155111}*/}
+              {/*    expanded*/}
+              {/*  />*/}
+              {/*</div>*/}
             </div>
           </JustWeb3Provider>
         </RainbowKitProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </WagmiProvider>
   );

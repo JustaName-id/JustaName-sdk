@@ -24,6 +24,7 @@ node_modules
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.cursor
 
 # misc
 /.sass-cache
@@ -63,3 +64,5 @@ cache/
 .yarn/install-state.gz
 
 storybook-static
+
+.million

@@ -4,7 +4,7 @@ import styles from './Avatar.module.css';
 import clsx from 'clsx';
 
 interface AvatarProps {
-  src?: string;
+  src?: string | React.ReactNode;
   alt?: string;
   initial?: string;
   size?: number;
@@ -36,16 +36,21 @@ export const Avatar: React.FC<AvatarProps> = ({
         minWidth: `${size}px`,
         border: `${borderSize} solid ${borderColor}`,
         boxShadow: `0px 0px ${boxShadowSize} 0px rgba(0, 0, 0, 0.25)`,
+        padding: src && !isImageError ? '0' : '2px 1px 1px 1px',
         ...style,
       }}
     >
       {src && !isImageError ? (
-        <img
-          className={styles.avatarImage}
-          src={src}
-          alt={alt || 'Avatar'}
-          onError={() => setIsImageError(true)} // Set error state when image fails to load
-        />
+        typeof src === 'string' ? (
+          <img
+            className={styles.avatarImage}
+            src={src}
+            alt={alt || 'Avatar'}
+            onError={() => setIsImageError(true)} // Set error state when image fails to load
+          />
+        ) : (
+          src
+        )
       ) : (
         <JustSomeone width={size} />
       )}

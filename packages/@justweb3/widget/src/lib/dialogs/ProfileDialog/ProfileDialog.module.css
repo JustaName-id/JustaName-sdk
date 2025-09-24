@@ -11,10 +11,17 @@
     transition: all 300ms ease-in-out;
 }
 
+
 .formContainerEditMode {
     flex: 1 1 0%;
     min-width: 100%;
     max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .minimize {
+        display: none;
+    }
 }
 
 @media (min-width: 768px) {
@@ -22,6 +29,8 @@
         min-width: 250px;
         max-width: 250px;
     }
+
+
 }
 
 /* FormInnerContainer styles */

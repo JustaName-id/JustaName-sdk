@@ -6,19 +6,23 @@ import { useFollowState } from '../../hooks/useFollowState';
 
 interface FollowButtonProps {
   ens: string;
+  address: string;
 }
 
-export const FollowButton: React.FC<FollowButtonProps> = ({ ens }) => {
-  const { address } = useMountedAccount();
+export const FollowButton: React.FC<FollowButtonProps> = ({ ens, address }) => {
+  const { address: ownAddress } = useMountedAccount();
   const { followState, isFollowStateLoading } = useFollowState({
     addressOrEns1: address,
-    addressOrEns2: ens,
+    addressOrEns2: ownAddress,
   });
+  if (ownAddress === address) {
+    return null;
+  }
 
-  if (!address) {
+  if (!ownAddress) {
     return (
       <a
-        href={'https://ethfollow.xyz/' + ens}
+        href={'https://efp.app/' + ens}
         target={'_blank'}
         rel="noreferrer"
       >
@@ -49,7 +53,7 @@ export const FollowButton: React.FC<FollowButtonProps> = ({ ens }) => {
   }
 
   return (
-    <a href={'https://ethfollow.xyz/' + ens} target={'_blank'} rel="noreferrer">
+    <a href={'https://efp.app/' + ens} target={'_blank'} rel="noreferrer">
       <Button
         leftIcon={
           <EFPIcon color={'var(--justweb3-primary-color-foreground)'} />

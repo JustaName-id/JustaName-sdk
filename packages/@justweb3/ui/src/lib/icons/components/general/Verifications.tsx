@@ -22,7 +22,7 @@ export default function Verifications(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#verifications_svg__a)">
         <path
-          fill="var(--justweb3-primary-color)"
+          fill={props.fill || 'var(--justweb3-primary-color)'}
           d="m7.167 18.75-1.584-2.667-3-.666.292-3.084L.833 10l2.042-2.333-.292-3.084 3-.666L7.167 1.25 10 2.458l2.833-1.208 1.584 2.667 3 .666-.292 3.084L19.167 10l-2.042 2.333.292 3.084-3 .666-1.584 2.667L10 17.542zm1.958-5.792 4.708-4.708-1.166-1.208-3.542 3.541-1.792-1.75L6.167 10z"
         />
       </g>

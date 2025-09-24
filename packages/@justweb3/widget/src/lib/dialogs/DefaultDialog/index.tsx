@@ -45,12 +45,13 @@ export const DefaultDialog: FC<DefaultDialogProps> = ({
         fullScreen={fullScreen}
         onInteractOutside={(e) => disableOverlay && e.preventDefault()}
         disableOverlay={disableOverlay}
+        aria-describedby={undefined}
         style={{
           padding: 0,
           transition: 'all 0.4 ease-in-out',
           display: 'flex',
           flexDirection: 'column',
-          borderRadius: fullScreen ? '0' : '24px',
+          borderRadius: fullScreen ? '0' : undefined,
           background: 'var(--justweb3-foreground-color-4)',
           boxSizing: 'content-box',
           ...contentStyle,

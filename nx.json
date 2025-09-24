@@ -15,36 +15,61 @@
       "options": {
         "packageRoot": "packages/{projectName}/dist"
       },
-      "dependsOn": ["^build", "^test"],
+      "dependsOn": [
+        "^build",
+        "^test"
+      ],
       "defaultConfiguration": "production"
     },
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "cache": true
     },
     "test": {
-      "dependsOn": ["build", "^build"],
+      "dependsOn": [
+        "build",
+        "^build"
+      ],
       "cache": true
     },
     "test:coverage": {
-      "dependsOn": ["build", "^build"],
+      "dependsOn": [
+        "build",
+        "^build"
+      ],
       "cache": true
     },
     "prepare": {
-      "dependsOn": ["^prepare"]
+      "dependsOn": [
+        "^prepare"
+      ]
     },
     "package": {
-      "dependsOn": ["^package"]
+      "dependsOn": [
+        "^package"
+      ]
     },
     "@nx/rollup:rollup": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^default"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "default",
+        "^default"
+      ]
     },
     "@nx/js:tsc": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^default"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "default",
+        "^default"
+      ]
     },
     "format": {
       "cache": true
@@ -56,7 +81,10 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheableOperations": ["build-storybook"]
+        "cacheableOperations": [
+          "build-storybook"
+        ],
+        "parallel": 1
       }
     }
   },
@@ -149,6 +177,9 @@
         "fallbackCurrentVersionResolver": "disk"
       }
     },
+    "git": {
+      "commitMessage": "chore(release): publish [skip ci]"
+    },
     "changelog": {
       "projectChangelogs": {
         "createRelease": "github"
@@ -157,13 +188,18 @@
     },
     "projectsRelationship": "independent",
     "projects": [
-      "packages/@justaname.id/sdk",
       "packages/@justaname.id/react",
+      "packages/@justaname.id/sdk",
       "packages/@justaname.id/siwens",
       "packages/@justweb3/ui",
       "packages/@justweb3/widget",
       "packages/@justverified/plugin",
-      "packages/@justweb3/efp-plugin"
+      "packages/@justweb3/efp-plugin",
+      "packages/@justweb3/poap-plugin",
+      "packages/@justweb3/talent-protocol-plugin",
+      "packages/@justweb3/xmtp-plugin",
+      "packages/@justweb3/dentity-plugin",
+      "packages/siwens"
     ]
   },
   "defaultBase": "main"

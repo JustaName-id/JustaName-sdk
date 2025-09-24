@@ -10,6 +10,7 @@ import {
 } from '@justaname.id/sdk';
 import { useRecords } from '../records';
 import { Records } from '../../types';
+import { defaultOptions } from '../../query';
 
 export const buildUpdateChangesKey = (params: GetUpdateChangesParams) => [
   'ENS_UPDATE_CHANGES',
@@ -101,6 +102,7 @@ export const useUpdateChanges = (
   };
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildUpdateChangesKey({
       ...params,
       ens: params?.ens || '',

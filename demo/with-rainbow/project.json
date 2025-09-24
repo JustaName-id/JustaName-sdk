@@ -1,0 +1,39 @@
+{
+  "name": "with-rainbow",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/with-rainbow/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "with-rainbow:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "with-rainbow:build:production"
+        }
+      },
+      "dependsOn": [
+        {
+          "projects": [
+            "@justweb3/widget",
+            "@justweb3/ui",
+            "@justaname.id/react",
+            "@justaname.id/sdk"
+          ],
+          "target": "build"
+        }
+      ]
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn tsc --noEmit",
+        "cwd": "apps/with-rainbow"
+      }
+    }
+  },
+  "tags": []
+}

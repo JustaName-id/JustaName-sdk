@@ -22,7 +22,7 @@ export default function Social(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#social_svg__a)">
         <path
-          fill="var(--justweb3-primary-color)"
+          fill={props.fill || 'var(--justweb3-primary-color)'}
           d="M9.667 17.417 7.25 15H3.833v-3.417L1.417 9.167 3.833 6.75V3.333H7.25L9.667.917l2.416 2.416H15.5V6.75l2.417 2.417-2.417 2.416 2.396 4.709q.146.27.083.53a.9.9 0 0 1-.229.428.9.9 0 0 1-.427.23.73.73 0 0 1-.531-.084L12.083 15z"
         />
       </g>

@@ -1,7 +1,6 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { ethers } from 'ethers';
 import { useEffect, useMemo } from 'react';
 import {
   useReadContract,
@@ -11,6 +10,9 @@ import {
 } from 'wagmi';
 import { useOffchainResolvers } from '../offchainResolver/useOffchainResolvers';
 import { useMountedAccount } from '../account/useMountedAccount';
+import { getAddress, namehash } from '../../helpers/ethersCompat';
+
+const ZeroAddress = '0x0000000000000000000000000000000000000000';
 
 const REGISTRY_ADDRESS = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e';
 const SEPOLIA_REGISTRAR_ADDRESS = '0xA0a1AbcDAe1a2a4A2EF8e9113Ff0e02DD81DC0C6';
@@ -110,22 +112,40 @@ export interface UseSetNameHashJustaNameResolver<T = any> {
   isSetNameHashJustaNameResolverPending: boolean;
   setNameHashJustaNameResolverError: boolean;
 }
+
+/**
+ *  Interface defining the optional parameters for the hook.
+ *
+ *  @typedef UseSetNameHashJustaNameResolverParams
+ *  @type {object}
+ *  @property {number} [chainId] - Optional chain ID to use instead of the one from mounted account.
+ *  @property {string} [address] - Optional address to use instead of the one from mounted account.
+ */
+export interface UseSetNameHashJustaNameResolverParams {
+  chainId?: number;
+  address?: string;
+}
 /**
  * Custom hook for performing a mutation to set the JustaName resolver.
  *
  * @template T - The type of additional parameters that can be passed to the set JustaName resolver mutation, extending the base request.
+ * @param {UseSetNameHashJustaNameResolverParams} [params] - Optional parameters containing chainId and address to override mounted account values.
  * @returns {UseSetNameHashJustaNameResolver} An object containing the `setNameHashJustaNameResolver` async function to initiate the JustaName resolve,a boolean `NameHashJustaNameResolverSet` indicating if the resolver is set,a boolean `setNameHashJustaNameResolverPending` indicating the state of the process, and a boolean `setNameHashJustaNameResolverError` indicating if an error has occured.
  */
 export const useSetNameHashJustaNameResolver = <
   T = any
->(): UseSetNameHashJustaNameResolver<T> => {
-  const { chainId, address } = useMountedAccount();
-  const { offchainResolvers, isOffchainResolversPending } = useOffchainResolvers();
+>(params?: UseSetNameHashJustaNameResolverParams): UseSetNameHashJustaNameResolver<T> => {
+  const mountedAccount = useMountedAccount();
+  const chainId = params?.chainId ?? mountedAccount.chainId;
+  const address = params?.address ?? mountedAccount.address;
+  const { offchainResolvers, isOffchainResolversPending } =
+    useOffchainResolvers();
 
   const currentResolver = useMemo(() => {
     if (!chainId || !offchainResolvers || isOffchainResolversPending) return;
-    return offchainResolvers?.offchainResolvers.find((resolver) => resolver.chainId === chainId)
-      ?.resolverAddress;
+    return offchainResolvers?.offchainResolvers.find(
+      (resolver) => resolver.chainId === chainId
+    )?.resolverAddress;
   }, [offchainResolvers, chainId, isOffchainResolversPending]);
 
   const {
@@ -137,11 +157,14 @@ export const useSetNameHashJustaNameResolver = <
     abi: recordExistsABI,
     functionName: 'recordExists',
     args: [
-      ethers.namehash(
-        ethers.getAddress(address ?? '').substring(2) + '.addr.reverse'
+      namehash(
+        getAddress(address ?? ZeroAddress).substring(2) + '.addr.reverse'
       ),
     ],
     chainId: chainId,
+    query: {
+      enabled: !!address && address !== ZeroAddress
+    }
   });
 
   const { data: setClaimWithResolverConfig } = useSimulateContract({
@@ -149,10 +172,10 @@ export const useSetNameHashJustaNameResolver = <
       chainId === 1 ? MAINNET_REGISTRAR_ADDRESS : SEPOLIA_REGISTRAR_ADDRESS,
     abi: setClaimWithResolverABI,
     functionName: 'claimWithResolver',
-    args: [ethers.getAddress(address ?? ''), currentResolver],
+    args: [getAddress(address ?? ZeroAddress), currentResolver],
     chainId: chainId,
     query: {
-      enabled: recordExistsStatus === 'success' && recordExistsConfig === false,
+      enabled: recordExistsStatus === 'success' && recordExistsConfig === false && !!address && address !== ZeroAddress,
     },
   });
 
@@ -165,13 +188,13 @@ export const useSetNameHashJustaNameResolver = <
     abi: getResolverABI,
     functionName: 'resolver',
     args: [
-      ethers.namehash(
-        ethers.getAddress(address ?? '').substring(2) + '.addr.reverse'
+      namehash(
+        getAddress(address ?? ZeroAddress).substring(2) + '.addr.reverse'
       ),
     ],
     chainId: chainId,
     query: {
-      enabled: recordExistsStatus === 'success' && recordExistsConfig === true,
+      enabled: recordExistsStatus === 'success' && recordExistsConfig === true && !!address && address !== ZeroAddress
     },
   });
 
@@ -180,8 +203,8 @@ export const useSetNameHashJustaNameResolver = <
     abi: setResolverABI,
     functionName: 'setResolver',
     args: [
-      ethers.namehash(
-        ethers.getAddress(address ?? '').substring(2) + '.addr.reverse'
+      namehash(
+        getAddress(address ?? ZeroAddress).substring(2) + '.addr.reverse'
       ),
       currentResolver,
     ],
@@ -190,7 +213,7 @@ export const useSetNameHashJustaNameResolver = <
       enabled:
         getResolverABIStatus === 'success' &&
         (getResolverABIConfig as string).toLowerCase() !==
-          currentResolver?.toLowerCase(),
+        currentResolver?.toLowerCase() && !!address && address !== ZeroAddress,
     },
   });
 

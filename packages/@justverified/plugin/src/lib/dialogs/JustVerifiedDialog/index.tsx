@@ -1,13 +1,17 @@
-import { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { useRecords } from '@justaname.id/react';
+import { ChainId } from '@justaname.id/sdk';
+import { Badge, Flex, H2, JustaNameLogoIcon, SPAN } from '@justweb3/ui';
 import {
   JustaNameDialog,
   JustWeb3Context,
   useJustWeb3,
   useMApps,
 } from '@justweb3/widget';
-import { useRecords } from '@justaname.id/react';
-import { Badge, Flex, H2, JustaNameLogoIcon, SPAN } from '@justweb3/ui';
+import { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { EmailCredentialItem } from '../../components/EmailCredentialItem';
 import { SelectCredentialItem } from '../../components/SelectCredentialItem';
+import { usePreviousState, useSocialVerification } from '../../hooks';
+import { useVerifyRecords } from '../../hooks/useVerifyRecords';
 import {
   Credentials,
   DiscordEthereumEip712Signature,
@@ -15,10 +19,6 @@ import {
   TelegramEthereumEip712Signature,
   TwitterEthereumEip712Signature,
 } from '../../types';
-import { usePreviousState, useSocialVerification } from '../../hooks';
-import { EmailCredentialItem } from '../../components/EmailCredentialItem';
-import { useVerifyRecords } from '../../hooks/useVerifyRecords';
-import { ChainId } from '@justaname.id/sdk';
 
 export interface JustVerifiedDialogProps {
   open: boolean;
@@ -124,7 +124,6 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
             gap: '20px',
             display: 'flex',
             flexDirection: 'column',
-            maxWidth: '500px',
           }}
         >
           <Flex justify="space-between" direction="row" gap="10px">

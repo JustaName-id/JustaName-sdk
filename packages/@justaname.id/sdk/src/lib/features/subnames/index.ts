@@ -17,9 +17,11 @@ import {
   SubnameRevokeRoute,
   SubnameSearchRoute,
   SubnameUpdateRoute,
+  PrimaryNameGetByAddressRoute,
+  SetPrimaryNameRoute, SIWEHeaders
 } from '../../types';
 import { sanitizeAddresses, sanitizeTexts } from '../../utils';
-import { PrimaryNameGetByAddressRoute } from '../../types/primary-name';
+import { InvalidConfigurationException } from '../../errors';
 
 export interface SubnamesConfig {
   /**
@@ -66,7 +68,20 @@ export class Subnames {
     params: SubnameAcceptRoute['params'],
     headers: SubnameAcceptRoute['headers']
   ): Promise<SubnameAcceptRoute['response']> {
-    const { text, addresses, ensDomain, chainId, ...rest } = params;
+    const {
+      text,
+      addresses,
+      ensDomain,
+      chainId,
+      signature: paramSignature,
+      ...rest
+    } = params;
+
+    const { signature, xSignature } = this.checkSignature(
+      paramSignature,
+      headers.xSignature
+    );
+
     const sanitizedAddresses = sanitizeAddresses(params.addresses);
     const hasAddress60 = sanitizedAddresses?.some(
       (address) => address.coinType === 60
@@ -95,14 +110,14 @@ export class Subnames {
               ...(sanitizedAddresses === undefined ? [] : sanitizedAddresses),
             ],
         ...rest,
+        signature,
       },
-
-      headers,
+      {
+        ...headers,
+        xSignature,
+      },
       this.dev
-    )(
-      ['username', 'ensDomain', 'chainId'],
-      ['xSignature', 'xMessage', 'xAddress']
-    );
+    )(['username', 'ensDomain', 'chainId'], ['xMessage', 'xAddress']);
   }
 
   async reserveSubname(
@@ -136,9 +151,24 @@ export class Subnames {
 
   async addSubname(
     params: SubnameAddRoute['params'],
-    headers: SubnameAddRoute['headers']
+    headers?: SubnameAddRoute['headers']
   ): Promise<SubnameAddRoute['response']> {
-    const { text, addresses, ensDomain, chainId, apiKey, ...rest } = params;
+    const {
+      text,
+      addresses,
+      ensDomain,
+      chainId,
+      apiKey,
+      signature: paramSignature,
+      ...rest
+    } = params;
+
+    const { signature, xSignature } = this.checkSignature(
+      paramSignature,
+      headers?.xSignature,
+      rest.overrideSignatureCheck
+    );
+
     const sanitizedAddresses = sanitizeAddresses(params.addresses);
     const hasAddress60 = sanitizedAddresses?.some(
       (address) => address.coinType === 60
@@ -151,10 +181,16 @@ export class Subnames {
         ?.ensDomain;
 
     const _apiKey =
-      headers.xApiKey ||
+      headers?.xApiKey ||
       this.ensDomains?.find((ensDomain) => ensDomain.chainId === _chainId)
         ?.apiKey ||
       apiKey;
+
+    const requiredHeaders = ["xApiKey"] as  ('xApiKey' | keyof SIWEHeaders)[]
+
+    if(!rest.overrideSignatureCheck) {
+      requiredHeaders.push("xAddress", "xMessage");
+    }
 
     return assertRestCall(
       'ADD_SUBNAME_ROUTE',
@@ -168,20 +204,22 @@ export class Subnames {
           : [
               {
                 coinType: 60,
-                address: headers.xAddress as string,
+                address: headers?.xAddress as string,
               },
               ...(sanitizedAddresses === undefined ? [] : sanitizedAddresses),
             ],
         ...rest,
+        signature,
       },
       {
         ...headers,
+        xSignature,
         xApiKey: _apiKey,
       },
       this.dev
     )(
       ['username', 'ensDomain', 'chainId'],
-      ['xApiKey', 'xAddress', 'xMessage', 'xSignature']
+      requiredHeaders
     );
   }
 
@@ -189,7 +227,20 @@ export class Subnames {
     params: SubnameUpdateRoute['params'],
     headers: SubnameUpdateRoute['headers']
   ): Promise<SubnameUpdateRoute['response']> {
-    const { text, addresses, ensDomain, chainId, ...rest } = params;
+    const {
+      text,
+      addresses,
+      ensDomain,
+      chainId,
+      signature: paramSignature,
+      ...rest
+    } = params;
+
+    const { signature, xSignature } = this.checkSignature(
+      paramSignature,
+      headers.xSignature
+    );
+
     const _chainId = chainId || this.chainId;
     const _ensDomain =
       ensDomain ||
@@ -205,23 +256,35 @@ export class Subnames {
         text: sanitizeTexts(params.text),
         addresses: sanitizeAddresses(params.addresses),
         ...rest,
+        signature,
       },
       {
         ...headers,
+        xSignature,
       },
       this.dev
-    )(
-      ['username', 'ensDomain', 'chainId'],
-      ['xSignature', 'xMessage', 'xAddress']
-    );
+    )(['username', 'ensDomain', 'chainId'], ['xMessage', 'xAddress']);
   }
 
   async revokeSubname(
     params: SubnameRevokeRoute['params'],
     headers: SubnameRevokeRoute['headers']
   ): Promise<SubnameRevokeRoute['response']> {
-    const { ensDomain, chainId, apiKey, ...rest } = params;
+    const {
+      ensDomain,
+      chainId,
+      apiKey,
+      signature: paramSignature,
+      ...rest
+    } = params;
+
+    const { signature, xSignature } = this.checkSignature(
+      paramSignature,
+      headers.xSignature
+    );
+
     const _chainId = chainId || this.chainId;
+
     const _ensDomain =
       ensDomain ||
       this.ensDomains?.find((ensDomain) => ensDomain.chainId === _chainId)
@@ -239,15 +302,17 @@ export class Subnames {
         chainId: _chainId,
         ensDomain: _ensDomain,
         ...rest,
+        signature,
       },
       {
         ...headers,
         xApiKey: _apiKey,
+        xSignature,
       },
       this.dev
     )(
       ['username', 'ensDomain', 'chainId'],
-      ['xApiKey', 'xAddress', 'xMessage', 'xSignature']
+      ['xApiKey', 'xAddress', 'xMessage']
     );
   }
 
@@ -255,7 +320,13 @@ export class Subnames {
     params: SubnameRejectRoute['params'],
     headers: SubnameRejectRoute['headers']
   ): Promise<SubnameRejectRoute['response']> {
-    const { ensDomain, chainId, username } = params;
+    const { ensDomain, chainId, username, signature: paramSignature } = params;
+
+    const { signature, xSignature } = this.checkSignature(
+      paramSignature,
+      headers.xSignature
+    );
+
     const _chainId = chainId || this.chainId;
     const _ensDomain =
       ensDomain ||
@@ -269,15 +340,14 @@ export class Subnames {
         chainId: _chainId,
         ensDomain: _ensDomain,
         username,
+        signature,
       },
       {
         ...headers,
+        xSignature,
       },
       this.dev
-    )(
-      ['username', 'ensDomain', 'chainId'],
-      ['xSignature', 'xMessage', 'xAddress']
-    );
+    )(['username', 'ensDomain', 'chainId'], ['xMessage', 'xAddress']);
   }
 
   async getSubnamesByEnsDomainWithCount(
@@ -436,6 +506,31 @@ export class Subnames {
     )(['providerUrl']);
   }
 
+  async setPrimaryName(
+    params: SetPrimaryNameRoute['params'],
+    headers: SetPrimaryNameRoute['headers']
+  ): Promise<SetPrimaryNameRoute['response']> {
+    const { chainId, signature: paramSignature, ...rest } = params;
+    const _chainId = chainId || this.chainId;
+
+    const { signature, xSignature } = this.checkSignature(
+      paramSignature,
+      headers.xSignature
+    );
+
+    return assertRestCall(
+      'SET_PRIMARY_NAME_ROUTE',
+      'POST',
+      {
+        chainId: _chainId,
+        signature,
+        ...rest,
+      },
+      { ...headers, xSignature },
+      this.dev
+    )(['chainId'], ['xMessage', 'xAddress']);
+  }
+
   async getPrimaryNameByAddress(
     params: PrimaryNameGetByAddressRoute['params']
   ): Promise<PrimaryNameGetByAddressRoute['response']> {
@@ -451,5 +546,38 @@ export class Subnames {
       undefined,
       this.dev
     )(['chainId']);
+  }
+
+  private checkSignature(
+    params: string | undefined,
+    headers: string | undefined,
+    skipThrowError = false
+  ): {
+    signature: string | undefined;
+    xSignature: string | undefined;
+  } {
+    const signature = params || headers
+
+    if (!signature) {
+      if (skipThrowError) {
+        return {
+          signature: undefined,
+          xSignature: undefined,
+        };
+      }
+      throw InvalidConfigurationException.missingParameterOrHeader('signature');
+    }
+
+    if (signature.length > 15000) {
+      return {
+        signature,
+        xSignature: undefined,
+      };
+    }
+
+    return {
+      signature: undefined,
+      xSignature: signature,
+    };
   }
 }

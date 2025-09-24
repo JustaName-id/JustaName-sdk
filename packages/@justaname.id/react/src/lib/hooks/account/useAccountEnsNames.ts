@@ -5,7 +5,8 @@ import { Records } from '../../types';
 import { useJustaName } from '../../providers';
 
 export interface UseAccountEnsNamesParams {
-  chainId?: ChainId
+  chainId?: ChainId;
+  enabled?: boolean;
 }
 
 export interface UseAccountEnsNamesResult {
@@ -16,25 +17,28 @@ export interface UseAccountEnsNamesResult {
   refetchAccountEnsNames: () => void;
 }
 
-export const useAccountEnsNames = (props?: UseAccountEnsNamesParams): UseAccountEnsNamesResult => {
-  const { chainId } = useJustaName()
-  const { address } = useMountedAccount()
+export const useAccountEnsNames = (
+  props?: UseAccountEnsNamesParams
+): UseAccountEnsNamesResult => {
+  const { chainId } = useJustaName();
+  const { address } = useMountedAccount();
   const {
-    addressEnsNames ,
+    addressEnsNames,
     isAddressEnsNamesPending,
     isAddressEnsNamesFetching,
     isAddressEnsNamesLoading,
-    refetchAddressEnsNames
+    refetchAddressEnsNames,
   } = useAddressEnsNames({
     address,
-    chainId: props?.chainId || chainId
-  })
+    chainId: props?.chainId || chainId,
+    enabled: props?.enabled,
+  });
 
   return {
     accountEnsNames: addressEnsNames,
     isAccountEnsNamesPending: isAddressEnsNamesPending,
     isAccountEnsNamesLoading: isAddressEnsNamesLoading,
     isAccountEnsNamesFetching: isAddressEnsNamesFetching,
-    refetchAccountEnsNames: refetchAddressEnsNames
-  }
-}
+    refetchAccountEnsNames: refetchAddressEnsNames,
+  };
+};

@@ -1,40 +1,77 @@
-
 .expandableCard {
-    height: 250px;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--justweb3-foreground-color-4);
+  height: 193px;
+  box-sizing: content-box;
+  width: 398px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--justweb3-background-color);
+  /*box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.05);*/
+  border: 1px solid var(--justweb3-foreground-color-4);
+}
+
+.expandableCard:hover {
+  border: 1px solid var(--justweb3-primary-color);
+  /*box-shadow: 1px 1px 5px 0px var(--justweb3-primary-color);*/
+}
+
+.descriptionText {
+  color: var(--justweb3-foreground-color-2);
+  text-align: right;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0.75;
+  max-width: 180px;
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .bannerImage {
-    object-fit: cover;
-    height: 100px;
-    width: 100%;
+  object-fit: cover;
+  height: 100px;
+  width: 100%;
 }
 
 .avatarContainer {
-    padding: 0 20px;
-    position: absolute;
-    top: 50px;
+  padding: 0 20px;
+  position: absolute;
+  top: 50px;
+}
+
+.expandableCardContent {
+  padding: 35px 20px 20px 20px;
 }
 
 .titleText {
-    font-weight: 700;
-    color: var(--justweb3-primary-color);
-    font-size: 12px;
+  font-weight: 700;
+  color: var(--justweb3-primary-color);
+  font-size: 12px;
+}
+
+.expandabletitleText {
+  font-weight: 700;
+  color: var(--justweb3-foreground-color-2);
+  font-size: 16px;
 }
 
 .clickableItem {
-    color: var(--justweb3-primary-color);
+  color: var(--justweb3-primary-color);
 }
 
 .socialIconsContainer {
-    display: flex;
-    gap: 5px;
+  display: flex;
+  gap: 5px;
+}
+
+.socialIcon {
+  width: 12px;
+  height: 12px;
 }

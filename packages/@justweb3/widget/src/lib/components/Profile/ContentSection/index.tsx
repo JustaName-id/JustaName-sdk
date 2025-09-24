@@ -1,11 +1,16 @@
-import React, { Fragment, useContext, useEffect, useMemo } from 'react';
 import {
   useAccountEnsNames,
   useAccountSubnames,
   useEnsAvatar,
+  useEnsSubnames,
   useMountedAccount,
+  useRecords,
 } from '@justaname.id/react';
-import { SanitizedRecords, SubnameRecordsRoute } from '@justaname.id/sdk';
+import {
+  ChainId,
+  SanitizedRecords,
+  SubnameRecordsRoute,
+} from '@justaname.id/sdk';
 import {
   A,
   Avatar,
@@ -19,18 +24,25 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from '@justweb3/ui';
+import React, { Fragment, useContext, useEffect, useMemo } from 'react';
 import { getChainIcon } from '../../../icons/chain-icons';
 import { getContentHashIcon } from '../../../icons/contentHash-icons';
 import { getTextRecordIcon } from '../../../icons/records-icons';
-import styles from './ContentSection.module.css';
 import { JustaPlugin } from '../../../plugins';
+import { useJustWeb3 } from '../../../providers';
 import { PluginContext } from '../../../providers/PluginProvider';
-import { ProfileSection } from '../ProfileSection';
 import MetadataCard from '../../MetadataCard';
+import MembersSection from '../MembersSection';
+import { ProfileSection } from '../ProfileSection';
+import styles from './ContentSection.module.css';
 
 export interface ContentProps {
-  fullSubname: string;
+  fullSubname?: string;
   chainId: 1 | 11155111 | undefined;
   records: SubnameRecordsRoute['response'];
   sanitized: SanitizedRecords;
@@ -39,8 +51,12 @@ export interface ContentProps {
   plugins: JustaPlugin[];
 }
 
+// const ENS_MAINNET_RESOLVER = ['0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41', '0x231b0Ee14048e9dCcD1d247744d114a4EB5E8E63'];
+// const ENS_SEPOLIA_RESOLVER = '0x8FADE66B79cC9f707aB26799354482EB93a5B7dD';
+
+
 const ContentSection: React.FC<ContentProps> = ({
-  fullSubname,
+  fullSubname = '',
   chainId = 1,
   editMode,
   sanitized,
@@ -52,11 +68,24 @@ const ContentSection: React.FC<ContentProps> = ({
   const { accountSubnames } = useAccountSubnames();
   const { accountEnsNames } = useAccountEnsNames();
   const [tab, setTab] = React.useState('Main');
+  const { openEnsProfile } = useJustWeb3();
+  // const { offchainResolvers } = useOffchainResolvers()
   const isProfileSelf = useMemo(() => {
+    const tempEns = accountEnsNames
+      ?.map((ens) => ens.ens)
+      .find((e) => e === fullSubname);
+
+    if (tempEns) {
+      if (!accountSubnames?.find((subname) => subname.ens === tempEns)) {
+        return chainId === connectedWalletChainId;
+      }
+    }
+
     return (
       (accountSubnames?.map((subname) => subname.ens).includes(fullSubname) ||
         accountEnsNames?.map((ens) => ens.ens).includes(fullSubname)) &&
-      chainId === connectedWalletChainId
+      !(chainId === 1 && connectedWalletChainId === 11155111) &&
+      !(chainId === 11155111 && connectedWalletChainId !== 11155111)
     );
   }, [
     fullSubname,
@@ -65,6 +94,41 @@ const ContentSection: React.FC<ContentProps> = ({
     connectedWalletChainId,
     chainId,
   ]);
+
+  const { data } = useEnsSubnames({
+    ensDomain: decodeURIComponent(fullSubname),
+    chainId: chainId as ChainId,
+    isClaimed: true,
+    limit: 15,
+    enabled: fullSubname.split('.').length === 2,
+  });
+
+  const isProfileCommunity = useMemo(() => {
+    return (
+      data?.pages &&
+      data?.pages
+        .flatMap((subnameData) => subnameData.data)
+        .flatMap((sub) => sub.ens).length > 0
+    );
+  }, [data]);
+
+  const communityName = useMemo(() => {
+    if (fullSubname.split('.').length === 2) return '';
+    return `${fullSubname.split('.')[1]}.${fullSubname.split('.')[2]}`;
+  }, [fullSubname]);
+
+  const { records: communityRecords } = useRecords({
+    ens: communityName,
+    chainId,
+    enabled: !isProfileCommunity,
+  });
+
+  const memberTabName = useMemo(() => {
+    return `Members (${data?.pages?.flatMap((subnameData) => subnameData)[0].pagination
+      .totalCount
+      })`;
+  }, [data]);
+
   const { createPluginApi } = useContext(PluginContext);
 
   const { sanitizeEnsImage } = useEnsAvatar();
@@ -74,8 +138,11 @@ const ContentSection: React.FC<ContentProps> = ({
   }, [fullSubname, chainId]);
 
   const hasTabs = useMemo(() => {
-    return plugins.some((plugin) => plugin.components?.ProfileTab);
-  }, [plugins]);
+    return (
+      plugins.some((plugin) => plugin.components?.ProfileTab) ||
+      isProfileCommunity
+    );
+  }, [plugins, isProfileCommunity]);
 
   const MainTab = (
     <div
@@ -131,13 +198,33 @@ const ContentSection: React.FC<ContentProps> = ({
           title={'Addresses'}
           items={sanitized?.allAddresses?.map((address) => {
             return (
-              <MetadataCard
-                key={address.id}
-                variant={'address'}
-                title={address.name}
-                value={address.value}
-                icon={getChainIcon(address.symbol)}
-              />
+              <TooltipProvider delayDuration={100}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div>
+                      <MetadataCard
+                        key={address.id}
+                        variant={'address'}
+                        title={address.name}
+                        value={address.value}
+                        icon={getChainIcon(address.symbol)}
+                      />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent style={{ zIndex: 9999 }}>
+                    <P
+                      style={{
+                        fontSize: '9px',
+                        fontWeight: 900,
+                        lineHeight: '150%',
+                        color: 'inherit',
+                      }}
+                    >
+                      {address.symbol.toUpperCase()}: {address.value}
+                    </P>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             );
           })}
         />
@@ -201,12 +288,7 @@ const ContentSection: React.FC<ContentProps> = ({
               'https://justaname-bucket.s3.eu-central-1.amazonaws.com/default-banner.png'
             }
             alt="profile-banner"
-            style={{
-              objectFit: 'cover',
-              height: '200px',
-              width: '100%',
-              borderRadius: '16px',
-            }}
+            className={styles.bannerImage}
           />
           <Flex
             gap="12px"
@@ -245,18 +327,74 @@ const ContentSection: React.FC<ContentProps> = ({
             zIndex: 1,
           }}
         >
-          <Avatar
-            src={sanitizeEnsImage({
-              image: sanitized?.avatar,
-              name: fullSubname,
-              chainId,
-            })}
-            size={74}
-            borderSize={'4px'}
-            style={{
-              margin: '0 15px',
-            }}
-          />
+          <div style={{ display: 'flex' }}>
+            <Avatar
+              src={sanitizeEnsImage({
+                image: sanitized?.avatar,
+                name: fullSubname,
+                chainId,
+              })}
+              size={74}
+              borderSize={'4px'}
+              style={{
+                margin: '0 15px',
+              }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                height: 'fit-content',
+                marginLeft: '-35px',
+                marginTop: 'auto',
+                marginBottom: '5px',
+              }}
+            >
+              {plugins.map((plugin) => {
+                const component = plugin.components?.Badge;
+                if (!component) {
+                  return null;
+                }
+                const componentApi = component(
+                  createPluginApi(plugin.name),
+                  fullSubname,
+                  chainId,
+                  sanitized.ethAddress.value
+                );
+
+                if (!componentApi) {
+                  return null;
+                }
+
+                return (
+                  <Fragment key={'profile-badge-' + plugin.name + fullSubname}>
+                    {componentApi}
+                  </Fragment>
+                );
+              })}
+            </div>
+          </div>
+          {communityName.length > 0 && (
+            <button
+              onClick={() => {
+                openEnsProfile(communityName, chainId);
+              }}
+              className={styles.communityBtn}
+            >
+              <Avatar
+                src={sanitizeEnsImage({
+                  image: communityRecords?.sanitizedRecords.avatar,
+                  name: communityName,
+                  chainId,
+                })}
+                style={{
+                  border: 'none',
+                  padding: 0,
+                }}
+                size={10}
+              />
+              {communityName}
+            </button>
+          )}
           <Flex direction={'row'} justify={'space-between'} align={'center'}>
             <P
               style={{
@@ -374,6 +512,9 @@ const ContentSection: React.FC<ContentProps> = ({
           >
             <TabsList>
               <TabsTrigger value={'Main'}>Main</TabsTrigger>
+              {isProfileCommunity && (
+                <TabsTrigger value={'Members'}>{memberTabName}</TabsTrigger>
+              )}
               {plugins.map((plugin) => {
                 const component = plugin.components?.ProfileTab;
                 if (!component) {
@@ -399,6 +540,11 @@ const ContentSection: React.FC<ContentProps> = ({
             <TabsContent value={'Main'}>
               {React.cloneElement(MainTab)}
             </TabsContent>
+            {isProfileCommunity && (
+              <TabsContent value={'Members'}>
+                <MembersSection fullSubname={fullSubname} chainId={chainId} />
+              </TabsContent>
+            )}
             {plugins.map((plugin) => {
               const component = plugin.components?.ProfileTab;
               if (!component) {

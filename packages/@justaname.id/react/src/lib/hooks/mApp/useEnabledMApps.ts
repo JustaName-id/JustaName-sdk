@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useJustaName } from '../../providers';
 import { useRecords } from '../records';
 import { useEffect, useMemo } from 'react';
+import { defaultOptions } from '../../query';
 
 export const buildEnabledMAppsKey = (
   ens: string,
@@ -35,6 +36,7 @@ export const useEnabledMApps = (
   });
 
   const query = useQuery({
+    ...defaultOptions,
     queryKey: buildEnabledMAppsKey(params.ens, _chainId),
     queryFn: async () => {
       if (!records) {

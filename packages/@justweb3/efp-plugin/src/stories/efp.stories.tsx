@@ -18,6 +18,8 @@ import {
 } from '@justweb3/widget';
 import '@justweb3/widget/styles.css';
 import { EFPPlugin } from '../lib';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { useStandardRecordsBatch } from '@justaname.id/react';
 
 const queryClient = new QueryClient();
 
@@ -27,7 +29,7 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
     domain: import.meta.env.STORYBOOK_APP_DOMAIN,
     signInTtl: 1000 * 60 * 60 * 24,
   },
-  backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
+  // backendUrl: import.meta.env.STORYBOOK_APP_BACKEND_URL,
   networks: [
     {
       chainId: 1,
@@ -40,12 +42,18 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
   ],
   openOnWalletConnect: false,
   allowedEns: 'all',
-  dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',
+  dev: true,
   plugins: [EFPPlugin],
 };
 
 const UpdateButton = () => {
   const { updateRecords } = useJustWeb3();
+
+  const { recordsBatch } = useStandardRecordsBatch({
+    enses: ['hadikhai.jaw.eth'],
+    chainId: 11155111,
+  });
 
   return (
     <Button
@@ -106,14 +114,17 @@ export const Example = () => {
                 <JustEnsCard addressOrEns={'dr3a.eth'} />
                 <JustEnsCard addressOrEns={'josh.box'} />
                 <JustEnsCard addressOrEns={'justghadi.eth'} />
+                <JustEnsCard addressOrEns={'justan.id'} />
+                <JustEnsCard addressOrEns={'jaw.eth'} chainId={11155111} />
+                <JustEnsCard addressOrEns={'yodl.eth'} />
                 <JustEnsCard
                   addressOrEns={'0x7Ca2C8acAcf728CeFB6c8cd8E9b2063C8763feB1'}
                   chainId={1}
                 />
-                <JustEnsCard
-                  addressOrEns={'hadikhai.jaw.eth'}
-                  chainId={11155111}
-                />
+                {/*<JustEnsCard*/}
+                {/*  addressOrEns={'hadikhai.jaw.eth'}*/}
+                {/*  chainId={11155111}*/}
+                {/*/>*/}
               </div>
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                 <JustEnsCard addressOrEns={'mely.eth'} expanded />
@@ -130,6 +141,7 @@ export const Example = () => {
             </div>
           </JustWeb3Provider>
         </RainbowKitProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </WagmiProvider>
   );

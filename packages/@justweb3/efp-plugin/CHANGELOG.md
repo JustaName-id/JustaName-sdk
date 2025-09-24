@@ -1,3 +1,412 @@
+## 0.1.99 (2025-07-30)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.98 (2025-06-09)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.97 (2025-06-09)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.96 (2025-06-09)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.95 (2025-05-30)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.94 (2025-05-30)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.93 (2025-05-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.92 (2025-05-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.91 (2025-05-22)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.90 (2025-05-02)
+
+
+### 🚀 Features
+
+- package fixed ([3402cb59](https://github.com/JustaName-id/JustaName-sdk/commit/3402cb59))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.1.89 (2025-04-30)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.88 (2025-04-30)
+
+
+### 🩹 Fixes
+
+- versioning ([b0e7b00c](https://github.com/JustaName-id/JustaName-sdk/commit/b0e7b00c))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.1.87 (2025-04-30)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.86 (2025-04-29)
+
+
+### 🩹 Fixes
+
+- react version ([1deab1d0](https://github.com/JustaName-id/JustaName-sdk/commit/1deab1d0))
+
+- lockfile ([2e4e7cb0](https://github.com/JustaName-id/JustaName-sdk/commit/2e4e7cb0))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
+## 0.1.85 (2025-04-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.84 (2025-04-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.83 (2025-04-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.82 (2025-04-23)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.81 (2025-04-23)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.80 (2025-02-13)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.79 (2025-02-13)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.78 (2025-02-12)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.77 (2025-02-10)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.76 (2025-02-10)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.75 (2025-02-07)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.74 (2025-02-07)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.73 (2025-02-06)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.72 (2025-02-06)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.71 (2025-02-06)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.70 (2025-02-03)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.69 (2025-01-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.68 (2025-01-28)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.67 (2025-01-28)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.66 (2025-01-28)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.65 (2025-01-22)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.64 (2025-01-16)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.63 (2025-01-16)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.62 (2025-01-16)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.61 (2024-12-22)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.60 (2024-12-17)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.59 (2024-12-17)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.58 (2024-12-12)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.57 (2024-12-11)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.56 (2024-12-11)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.55 (2024-12-11)
+
+
+### 🚀 Features
+
+- basic but need to move to js sdk ([55edbf2](https://github.com/JustaName-id/JustaName-sdk/commit/55edbf2))
+
+- chat optimization ([4a3af5e](https://github.com/JustaName-id/JustaName-sdk/commit/4a3af5e))
+
+
+### ❤️  Thank You
+
+- HadiKhai
+
+## 0.1.54 (2024-12-03)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.53 (2024-12-02)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.52 (2024-12-01)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.51 (2024-11-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.50 (2024-11-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.49 (2024-11-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.48 (2024-11-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.47 (2024-11-29)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.46 (2024-11-29)
+
+
+### 🚀 Features
+
+- move justweb3 to peer dep in the plugins ([316047cb](https://github.com/JustaName-id/JustaName-sdk/commit/316047cb))
+
+- sdk signin fix for aa wallets ([52944a72](https://github.com/JustaName-id/JustaName-sdk/commit/52944a72))
+
+- enabled in hooks and siwens fix and coinbase fix ([c3fb455e](https://github.com/JustaName-id/JustaName-sdk/commit/c3fb455e))
+
+
+### 🩹 Fixes
+
+- lint fix on react and package json of projects ([b29cd296](https://github.com/JustaName-id/JustaName-sdk/commit/b29cd296))
+
+- update rest call and ui fixes ([81b05f29](https://github.com/JustaName-id/JustaName-sdk/commit/81b05f29))
+
+- yarn lock ([98e8b8b2](https://github.com/JustaName-id/JustaName-sdk/commit/98e8b8b2))
+
+- justweb3button infinite loading ([465453ca](https://github.com/JustaName-id/JustaName-sdk/commit/465453ca))
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+- HadiKhai
+
+## 0.1.45 (2024-11-15)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.44 (2024-11-15)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.43 (2024-11-15)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.42 (2024-11-15)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.41 (2024-11-15)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.40 (2024-11-15)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.39 (2024-11-15)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.38 (2024-11-15)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.37 (2024-11-15)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.36 (2024-11-15)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.35 (2024-11-14)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.34 (2024-11-14)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.33 (2024-11-14)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.32 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.136
+- Updated @justweb3/ui to 0.0.72
+- Updated @justweb3/widget to 0.0.72
+
+## 0.1.31 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.135
+- Updated @justweb3/ui to 0.0.71
+- Updated @justweb3/widget to 0.0.71
+
+## 0.1.30 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.134
+- Updated @justweb3/ui to 0.0.70
+- Updated @justweb3/widget to 0.0.70
+
+## 0.1.29 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.133
+- Updated @justweb3/ui to 0.0.69
+- Updated @justweb3/widget to 0.0.69
+
+## 0.1.28 (2024-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.132
+- Updated @justweb3/ui to 0.0.68
+- Updated @justweb3/widget to 0.0.68
+
+## 0.1.27 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.131
+- Updated @justweb3/ui to 0.0.67
+- Updated @justweb3/widget to 0.0.67
+
+## 0.1.26 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.130
+- Updated @justweb3/ui to 0.0.66
+- Updated @justweb3/widget to 0.0.66
+
+## 0.1.25 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.129
+- Updated @justweb3/ui to 0.0.65
+- Updated @justweb3/widget to 0.0.65
+
+## 0.1.24 (2024-10-31)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.128
+- Updated @justweb3/ui to 0.0.64
+- Updated @justweb3/widget to 0.0.64
+
 ## 0.1.23 (2024-10-31)
 
 

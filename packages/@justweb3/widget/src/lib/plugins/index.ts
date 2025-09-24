@@ -2,6 +2,7 @@ import { UseEnsAuthReturn, UseRecordsResult } from '@justaname.id/react';
 import { EventEmitter } from './eventEmitter';
 import { ReactNode } from 'react';
 import { ChainId } from '@justaname.id/sdk';
+import { JustWeb3ProviderConfig } from '../types/config';
 
 export interface PluginApi {
   connectedEns: UseEnsAuthReturn['connectedEns'];
@@ -12,6 +13,7 @@ export interface PluginApi {
   mApps: string[];
   setState: <T>(key: string, value: T) => void;
   getState: <T>(key: string) => T | undefined;
+  config: JustWeb3ProviderConfig;
 
   eventEmitter: EventEmitter;
 
@@ -37,14 +39,22 @@ type ProfileTabPluginComponent = (
   chainId: ChainId,
   address: string
 ) => { title: string; content: ReactNode } | undefined;
+type BadgePluginComponent = (
+  pluginApi: PluginApi,
+  ens: string,
+  chainId: ChainId,
+  address: string
+) => ReactNode | undefined;
 
 interface PluginComponents {
   Provider?: PluginProviderComponent;
   Global?: PluginComponent;
   SignInMenu?: PluginComponent;
+  JustWeb3ButtonRight?: PluginComponent;
   ProfileSection?: PluginRichComponent;
   ProfileHeader?: PluginRichComponent;
   ProfileTab?: ProfileTabPluginComponent;
+  Badge?: BadgePluginComponent;
 }
 
 type OnMountHook = (pluginApi: PluginApi) => void;

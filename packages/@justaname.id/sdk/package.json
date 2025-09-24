@@ -1,17 +1,18 @@
 {
   "name": "@justaname.id/sdk",
-  "version": "0.2.124",
+  "version": "0.2.200",
   "dependencies": {
-    "@justaname.id/siwens": "0.0.57",
-    "axios": "^1.6.0",
-    "qs": "^6.12.0"
+    "@justaname.id/siwens": "0.0.133",
+    "axios": "1.6.0",
+    "qs": "6.12.0"
   },
   "devDependencies": {
     "jest": "^29.4.1"
   },
   "peerDependencies": {
-    "ethers": "^6.11.1",
-    "siwe": "^2.3.2"
+    "ethers": "^5.6.8 || ^6.0.8",
+    "siwe": ">=2.0.0",
+    "viem": ">=2.0.0"
   },
   "exports": {
     "./package.json": "./dist/package.json",

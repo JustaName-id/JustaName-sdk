@@ -51,8 +51,14 @@ import {
   MAPP_REVOKE_PERMISSION_ROUTE,
 } from './mapp';
 import { GET_ALL_OFFCHAIN_RESOLVERS_ROUTE } from './offchain-resolver';
-import { GET_PRIMARY_NAME_BY_ADDRESS_ROUTE } from './primary-name';
-import { PrimaryNameGetByAddressRoute } from '../../types/primary-name';
+import {
+  GET_PRIMARY_NAME_BY_ADDRESS_ROUTE,
+  SET_PRIMARY_NAME_ROUTE,
+} from './primary-name';
+import {
+  PrimaryNameGetByAddressRoute,
+  SetPrimaryNameRoute,
+} from '../../types/primary-name';
 
 export interface ROUTES {
   SIWE_VERIFY_MESSAGE_ROUTE: VerifyMessageRoute;
@@ -79,6 +85,7 @@ export interface ROUTES {
   GET_ALL_ENS_WITH_COUNT_ROUTE: SubnameGetAllByEnsDomainWithCountRoute;
   GET_ALL_OFFCHAIN_RESOLVERS_ROUTE: OffchainResolversGetAllRoute;
   GET_PRIMARY_NAME_BY_ADDRESS_ROUTE: PrimaryNameGetByAddressRoute;
+  SET_PRIMARY_NAME_ROUTE: SetPrimaryNameRoute;
 }
 
 export const Routes: Record<keyof ROUTES, string> = {
@@ -106,4 +113,5 @@ export const Routes: Record<keyof ROUTES, string> = {
   GET_ALL_ENS_WITH_COUNT_ROUTE,
   GET_ALL_OFFCHAIN_RESOLVERS_ROUTE,
   GET_PRIMARY_NAME_BY_ADDRESS_ROUTE,
+  SET_PRIMARY_NAME_ROUTE,
 };

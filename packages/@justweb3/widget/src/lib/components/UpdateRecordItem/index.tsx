@@ -11,6 +11,7 @@ import {
   TrashIcon,
 } from '@justweb3/ui';
 import { getCoinTypeDetails, SupportedCoins } from '@justaname.id/sdk';
+import { coinTypeToNameMap } from '@ensdomains/address-encoder';
 
 export interface UpdateRecordItemProps {
   previousValue: string;
@@ -51,9 +52,16 @@ export const UpdateRecordItem: FC<UpdateRecordItemProps> = ({
 
   const previousKeySanitized = useMemo(() => {
     if (type === 'address') {
-      return getCoinTypeDetails(
-        previousKey as SupportedCoins
-      )?.symbol.toUpperCase();
+      const coinType = Object.keys(coinTypeToNameMap).find(
+      // @ts-expect-error trial
+        (key) => coinTypeToNameMap[key as SupportedCoins][0] === previousKey
+      );
+
+      if (coinType) {
+        return getCoinTypeDetails(
+          coinType as SupportedCoins
+        )?.symbol.toUpperCase();
+      }
     }
 
     return previousKey;
@@ -80,7 +88,7 @@ export const UpdateRecordItem: FC<UpdateRecordItemProps> = ({
 
   const previousIcon = useMemo(() => {
     if (type === 'address') {
-      return getChainIcon(previousKeySanitized);
+      return getChainIcon(previousKeySanitized.toLowerCase());
     }
 
     if (type === 'text') {
@@ -96,7 +104,7 @@ export const UpdateRecordItem: FC<UpdateRecordItemProps> = ({
 
   const newIcon = useMemo(() => {
     if (type === 'address') {
-      return getChainIcon(newKeySanitized);
+      return getChainIcon(newKeySanitized.toLowerCase());
     }
 
     if (type === 'text') {

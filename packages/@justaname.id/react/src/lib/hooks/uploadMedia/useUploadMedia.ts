@@ -17,6 +17,13 @@ export interface UseUploadMediaParams {
   chainId?: ChainId;
 }
 
+export interface UseUploadMediaHookParams {
+  address?: string;
+  chainId?: ChainId;
+  signature?: string;
+  message?: string;
+}
+
 export interface UseUploadMediaResponse {
   url: string;
 }
@@ -39,10 +46,17 @@ const query = (ens: string, type: 'Avatar' | 'Banner', chainId: ChainId) =>
   });
 
 export const useUploadMedia = (
-  params?: UseUploadMediaParams
+  params?: UseUploadMediaParams,
+  hookParams?: UseUploadMediaHookParams
 ): UseUploadMediaResult => {
-  const { dev, chainId } = useJustaName();
+  const { dev, chainId: defaultChainId } = useJustaName();
   const { getSignature } = useSubnameSignature();
+  
+  // Use passed parameters or fallback to defaults
+  const chainId = hookParams?.chainId ?? defaultChainId;
+  const address = hookParams?.address;
+  const signature = hookParams?.signature;
+  const message = hookParams?.message;
   const mutation = useMutation({
     mutationFn: async (_params: UseUploadMediaFunctionParams) => {
       const _ens = _params.ens || params?.ens;
@@ -64,7 +78,23 @@ export const useUploadMedia = (
         throw new Error('ChainId is required');
       }
 
-      const { signature, message, address } = await getSignature();
+      let finalSignature: string;
+      let finalMessage: string;
+      let finalAddress: string;
+
+      if (signature && message && address) {
+        finalSignature = signature;
+        finalMessage = message;
+        finalAddress = address;
+      } else {
+        const signatureData = await getSignature();
+        finalSignature = signatureData.signature;
+        finalMessage = signatureData.message;
+        finalAddress = signatureData.address;
+      }
+
+      _params.form.append('signature', finalSignature);
+      // const baseUrl = 'http://localhost:3000';
       const baseUrl = dev
         ? 'https://api-staging.justaname.id'
         : 'https://api.justaname.id';
@@ -83,9 +113,8 @@ export const useUploadMedia = (
         _params.form,
         {
           headers: {
-            'x-signature': signature,
-            'x-message': message.replace(/\n/g, '\\n'),
-            'x-address': address,
+            'x-message': finalMessage.replace(/\n/g, '\\n'),
+            'x-address': finalAddress,
           },
         }
       );

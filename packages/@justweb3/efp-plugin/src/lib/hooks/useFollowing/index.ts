@@ -5,6 +5,7 @@ import {
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import axios from 'axios';
+import { defaultOptions } from '@justaname.id/react';
 
 export const buildFollowingQueryKey = (addressOrEns: string | undefined) => {
   return ['EFP_FOLLOWING', addressOrEns];
@@ -52,19 +53,20 @@ export const useFollowing = ({
   addressOrEns,
 }: UseFollowingParams): UseFollowingResult => {
   const query = useInfiniteQuery({
+    ...defaultOptions,
     queryKey: buildFollowingQueryKey(addressOrEns),
     queryFn: async ({ pageParam: { offset, limit } }) => {
       return getFollowing(addressOrEns, limit, offset);
     },
-    initialPageParam: { offset: 0, limit: 10 },
+    initialPageParam: { offset: 0, limit: 30 },
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.following.length < 10) {
+      if (lastPage.following.length < 20) {
         return undefined;
       }
 
       return {
         offset: allPages.flatMap((page) => page.following).length,
-        limit: 10,
+        limit: 20,
       };
     },
     enabled: Boolean(addressOrEns),

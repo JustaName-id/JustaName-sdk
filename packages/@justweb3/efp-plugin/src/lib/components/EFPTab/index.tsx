@@ -1,72 +1,50 @@
-import { useFollowing } from '../../hooks/useFollowing';
-import { useFollowers, useStats } from '../../hooks';
-import { FC, Fragment, useRef, useState } from 'react';
+import { useStats } from '../../hooks';
+import { FC, useEffect, useState } from 'react';
 import { Flex, LoadingSpinner, P } from '@justweb3/ui';
-import { JustEnsCard } from '@justweb3/widget';
-import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
+import { FollowingTab } from '../FollowingTab';
+import { FollowersTab } from '../FollowersTab';
 
 export interface EFPTabProps {
   ens: string;
+  address: string;
 }
 
-export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
-  const [tab, setTab] = useState<'following' | 'followers'>('following');
-  const followingRef = useRef<HTMLDivElement>(null);
-  const followersRef = useRef<HTMLDivElement>(null);
-
-  const {
-    following,
-    fetchMoreFollowing,
-    isFollowingLoading,
-    isFollowingFetching,
-    hasMoreFollowing,
-  } = useFollowing({
-    addressOrEns: ens,
-  });
-
-  const {
-    followers,
-    fetchMoreFollowers,
-    isFollowersLoading,
-    isFollowersFetching,
-    hasMoreFollowers,
-  } = useFollowers({
-    addressOrEns: ens,
-  });
-
-  useInfiniteScroll(
-    followersRef,
-    fetchMoreFollowers,
-    tab === 'followers' && !isFollowersLoading && hasMoreFollowers,
-    50
-  );
-
-  useInfiniteScroll(
-    followingRef,
-    fetchMoreFollowing,
-    tab === 'following' && !isFollowingLoading && hasMoreFollowing,
-    50
-  );
+export const EFPTab: FC<EFPTabProps> = ({ ens, address }) => {
+  const [tab, setTab] = useState<
+    'following' | 'followers' | 'none' | 'loading'
+  >('loading');
 
   const { stats, isStatsLoading } = useStats({
-    addressOrEns: ens,
+    addressOrEns: address,
   });
 
-  if (isStatsLoading) {
-    return (
-      <Flex
-        style={{
-          maxHeight: '100%',
-          height: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative',
-        }}
-      >
-        <LoadingSpinner color={'var(--justweb3-primary-color)'} />
-      </Flex>
-    );
-  }
+  useEffect(() => {
+    if (isStatsLoading) return;
+
+    if (stats && parseInt(stats?.following_count) > 0) {
+      setTab('following');
+    } else if (stats && parseInt(stats?.followers_count) > 0) {
+      setTab('followers');
+    } else {
+      setTab('none');
+    }
+  }, [stats, isStatsLoading]);
+
+  // if (isStatsLoading) {
+  //   return (
+  //     <Flex
+  //       style={{
+  //         maxHeight: '100%',
+  //         height: '100%',
+  //         justifyContent: 'center',
+  //         alignItems: 'center',
+  //         position: 'relative',
+  //       }}
+  //     >
+  //       <LoadingSpinner color={'var(--justweb3-primary-color)'} />
+  //     </Flex>
+  //   );
+  // }
 
   return (
     <Flex
@@ -85,8 +63,12 @@ export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
             padding: '5px 7px',
             display: 'flex',
             gap: '10px',
-            cursor: 'pointer',
+            cursor:
+              stats && parseInt(stats?.following_count) > 0
+                ? 'pointer'
+                : 'not-allowed',
             border: 'none',
+            opacity: stats && parseInt(stats?.following_count) > 0 ? 1 : 0.5,
           }}
           onClick={() => setTab('following')}
         >
@@ -128,8 +110,12 @@ export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
             padding: '5px 7px',
             display: 'flex',
             gap: '10px',
-            cursor: 'pointer',
+            cursor:
+              stats && parseInt(stats?.followers_count) > 0
+                ? 'pointer'
+                : 'not-allowed',
             border: 'none',
+            opacity: stats && parseInt(stats?.followers_count) > 0 ? 1 : 0.5,
           }}
           onClick={() => setTab('followers')}
         >
@@ -165,83 +151,46 @@ export const EFPTab: FC<EFPTabProps> = ({ ens }) => {
         </button>
       </Flex>
 
-      {tab === 'following' && (
-        <Flex
-          direction={'column'}
-          gap={'10px'}
-          style={{
-            overflow: 'auto',
-            maxHeight: 'calc(100% - 37px)',
-          }}
-          ref={followingRef}
-        >
-          {following?.pages
-            .flatMap((follow) => follow.following)
-            .map((follow) => (
-              <Fragment key={ens + follow.data}>
-                <JustEnsCard
-                  addressOrEns={follow.data}
-                  chainId={1}
-                  style={{
-                    width: '100%',
-                  }}
-                />
-              </Fragment>
-            ))}
+      {tab === 'following' && <FollowingTab ens={ens} address={address} />}
 
-          {isFollowingFetching && hasMoreFollowing && (
-            <Flex
-              style={{
-                height: '50px',
-                minHeight: '50px',
-                justifyContent: 'center',
-                alignItems: 'center',
-                position: 'relative',
-              }}
-            >
-              <LoadingSpinner color={'var(--justweb3-primary-color)'} />
-            </Flex>
-          )}
+      {tab === 'followers' && <FollowersTab ens={ens} address={address} />}
+
+      {tab === 'none' && (
+        <Flex
+          style={{
+            height: '100%',
+            minHeight: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
+          }}
+        >
+          <P
+            style={{
+              fontFamily: 'var(--justweb3-font-family)',
+              color: 'var(--justweb3-primary-color)',
+              fontSize: '32px',
+              fontWeight: 700,
+            }}
+          >
+            No Followers or Following found
+          </P>
+
         </Flex>
       )}
 
-      {tab === 'followers' && (
+      {tab === 'loading' && (
         <Flex
-          direction={'column'}
-          gap={'10px'}
           style={{
-            overflow: 'auto',
-            maxHeight: 'calc(100% - 37px)',
+            height: '50px',
+            minHeight: '50px',
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
           }}
-          ref={followersRef}
         >
-          {followers?.pages
-            .flatMap((follow) => follow.followers)
-            .map((follow) => (
-              <Fragment key={ens + follow.address}>
-                <JustEnsCard
-                  addressOrEns={follow.address}
-                  chainId={1}
-                  style={{
-                    width: '100%',
-                  }}
-                />
-              </Fragment>
-            ))}
-
-          {isFollowersFetching && hasMoreFollowers && (
-            <Flex
-              style={{
-                height: '50px',
-                minHeight: '50px',
-                justifyContent: 'center',
-                alignItems: 'center',
-                position: 'relative',
-              }}
-            >
-              <LoadingSpinner color={'var(--justweb3-primary-color)'} />
-            </Flex>
-          )}
+          <LoadingSpinner color={'var(--justweb3-primary-color)'} />
         </Flex>
       )}
     </Flex>

@@ -105,7 +105,7 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
           ref={contentHashesRef}
         >
           <Flex direction="column" gap="5px">
-            <P style={{ fontSize: '16px', fontWeight: 700, color: 'black' }}>
+            <P style={{ fontSize: '16px', fontWeight: 700 }}>
               Add ContentHash
             </P>
 
@@ -116,7 +116,8 @@ export const ContentHashSection: React.FC<ContentHashSectionProps> = ({
               }}
             >
               <Input
-                placeholder={'0x...'}
+                placeholder={'ipfs://'}
+                name='add-contentHash-input'
                 style={{
                   height: '22px',
                   borderRadius: '10px',

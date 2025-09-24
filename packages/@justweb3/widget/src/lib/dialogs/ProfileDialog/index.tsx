@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { Records, useRecords, useUpdateSubname } from '@justaname.id/react';
@@ -43,7 +43,7 @@ import clsx from 'clsx';
 import { JustaPlugin } from '../../plugins';
 
 export interface ProfileDialogProps {
-  ens: string;
+  ens?: string;
   chainId?: 1 | 11155111;
   handleOnClose: () => void;
   disableOverlay?: boolean;
@@ -74,12 +74,36 @@ const menuTabs = [
 ];
 
 export const ProfileDialog: FC<ProfileDialogProps> = ({
-  ens,
+  ens: initialEns,
   chainId = 1,
   handleOnClose,
   disableOverlay,
   plugins,
 }) => {
+  const [ens, setEns] = useState<string | undefined>(initialEns);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (timeoutRef.current !== null) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    if (initialEns === undefined) {
+      timeoutRef.current = setTimeout(() => {
+        setEns(initialEns);
+      }, 500);
+    } else {
+      timeoutRef.current = null;
+      setEns(initialEns);
+    }
+
+    return () => {
+      if (timeoutRef.current !== null) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [initialEns]);
+
   const { records, isRecordsPending, refetchRecords } = useRecords({
     ens: ens,
     chainId,
@@ -197,6 +221,10 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
   );
 
   const renderSelectedState = () => {
+    if (!ens) {
+      return <></>;
+    }
+
     switch (selectedState) {
       case 'General':
         return (
@@ -226,6 +254,10 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
   };
 
   const handleSaveMetadata = async (data: metadataForm) => {
+    if (!ens) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     const addresses = {
@@ -307,7 +339,7 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
 
   return (
     <DefaultDialog
-      open={true}
+      open={!!initialEns}
       disableOverlay={disableOverlay}
       handleClose={() => {
         handleOnClose();
@@ -318,30 +350,33 @@ export const ProfileDialog: FC<ProfileDialogProps> = ({
       contentStyle={{
         width: '100%',
         height: '100%',
+        pointerEvents: 'auto',
       }}
       fullScreen={minimized}
       header={
         ens && (
           <Flex gap={'5px'} className={styles.header}>
-            {minimized ? (
-              <MinimizeIcon
-                height={25}
-                width={25}
-                className={styles.iconButton}
-                onClick={() => {
-                  setMinimized(false);
-                }}
-              />
-            ) : (
-              <MaximizeIcon
-                height={25}
-                width={25}
-                className={styles.iconButton}
-                onClick={() => {
-                  setMinimized(true);
-                }}
-              />
-            )}
+            <div className={styles.minimize}>
+              {minimized ? (
+                <MinimizeIcon
+                  height={25}
+                  width={25}
+                  className={styles.iconButton}
+                  onClick={() => {
+                    setMinimized(false);
+                  }}
+                />
+              ) : (
+                <MaximizeIcon
+                  height={25}
+                  width={25}
+                  className={styles.iconButton}
+                  onClick={() => {
+                    setMinimized(true);
+                  }}
+                />
+              )}
+            </div>
             <Badge value={ens}>
               <SPAN className={styles.badgeText}>{ens}</SPAN>
             </Badge>

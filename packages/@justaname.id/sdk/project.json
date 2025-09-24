@@ -30,7 +30,7 @@
             "command": "node copy-to-outside-dist.js"
           },
           {
-            "command": "rm -rf node_modules"
+            "command": "rm -rf node_modules || rmdir /s /q node_modules"
           }
         ],
         "cwd": "packages/@justaname.id/sdk",
@@ -46,6 +46,7 @@
         "outputPath": "packages/@justaname.id/sdk/dist",
         "tsConfig": "packages/@justaname.id/sdk/tsconfig.lib.json",
         "project": "packages/@justaname.id/sdk/package.json",
+        "rollupConfig": "packages/@justaname.id/sdk/rollup.config.cjs",
         "generateExportsField": true,
         "allowJs": true,
         "compiler": "swc",
@@ -87,7 +88,7 @@
       "options": {
         "packageRoot": "packages/@justaname.id/sdk/dist"
       },
-      "dependsOn": ["build","^build"]
+      "dependsOn": ["build", "^build"]
     },
     "release:package": {
       "executor": "nx:run-commands",
