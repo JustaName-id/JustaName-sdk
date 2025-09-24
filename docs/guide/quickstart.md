@@ -1,8 +1,8 @@
 ---
-icon: gauge-max
 description: >-
   The JustWeb3 Widget is the easiest way to get the best digital identity suite
   in your dApp.
+icon: gauge-max
 ---
 
 # Quickstart
@@ -10,7 +10,6 @@ description: >-
 In under 5 minutes of setup and customization, you can start:
 
 * Issuing free branded subnames to your userbase
-* Authenticating your users with SIWENS
 * Enabling them to edit and manage their profile in a cryptographically secured way
 * Freeing your dApp from sybil actors with the use of social verifications and ZK-KYC
 
@@ -79,9 +78,11 @@ An example set up for a [NextJs](https://nextjs.org/) or a [React Vite](https://
 Please note the below example uses [RainbowKit](https://www.rainbowkit.com/). You can replace it with any web3 wallet provider. ([WalletConnect](https://explorer.walletconnect.com/), [Web3Auth](https://web3auth.io/), [Privy](https://www.privy.io/) ...)
 {% endhint %}
 
+#### Next Js
+
 {% tabs %}
-{% tab title="NextJS" %}
-```tsx
+{% tab title="Provider.tsx" %}
+```typescript
 'use client';
 
 import "@rainbow-me/rainbowkit/styles.css";
@@ -161,12 +162,52 @@ export default function Providers({children}: {children: React.ReactNode}) {
   );
 };
 
-export default App;
+export default Providers;
 ```
 {% endtab %}
 
-{% tab title="React" %}
-```tsx
+{% tab title="layout.tsx" %}
+```typescript
+// Wrap the Provider to access the widget across the app
+
+return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Providers> 
+        {children}
+        </Providers>
+      </body>
+    </html>
+  );
+```
+{% endtab %}
+
+{% tab title="page.tsx" %}
+```typescript
+import { JustWeb3Button } from "@justweb3/widget";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
+
+export default function Home() {
+  return (
+    <div>
+      <JustWeb3Button>
+        <ConnectButton/>
+      </JustWeb3Button>
+    </div>
+  );
+}
+```
+{% endtab %}
+{% endtabs %}
+
+#### React
+
+{% tabs %}
+{% tab title="App.tsx" %}
+```typescript
 import "@rainbow-me/rainbowkit/styles.css";
 import '@justweb3/widget/styles.css';
 import React from "react";
