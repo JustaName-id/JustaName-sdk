@@ -36,6 +36,4 @@
 - [ProfileSection](functions/ProfileSection.md)
 - [useDebounce](functions/useDebounce.md)
 - [useJustWeb3](functions/useJustWeb3.md)
-- [useMApp](functions/useMApp.md)
-- [useMApps](functions/useMApps.md)
 - [usePlugins](functions/usePlugins.md)
