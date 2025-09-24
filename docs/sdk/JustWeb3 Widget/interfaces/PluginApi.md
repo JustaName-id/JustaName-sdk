@@ -1,181 +1,183 @@
-[**@justweb3/widget**](../README.md) • **Docs**
+# PluginApi
+
+[**@justweb3/widget**](../../) • **Docs**
 
 ***
 
 [@justweb3/widget](../globals.md) / PluginApi
 
-# Interface: PluginApi
+## Interface: PluginApi
 
-## Properties
+### Properties
 
-### chainId
+#### chainId
 
-> **chainId**: `undefined` \| `number`
+> **chainId**: `undefined` | `number`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L10)
 
 ***
 
-### connectedEns
+#### connectedEns
 
-> **connectedEns**: `undefined` \| `null` \| `object`
+> **connectedEns**: `undefined` | `null` | `object`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L7)
 
 ***
 
-### eventEmitter
+#### eventEmitter
 
 > **eventEmitter**: `EventEmitter`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:16](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L16)
 
 ***
 
-### getState()
+#### getState()
 
-> **getState**: \<`T`\>(`key`) => `undefined` \| `T`
+> **getState**: <`T`>(`key`) => `undefined` | `T`
 
-#### Type Parameters
+**Type Parameters**
 
 • **T**
 
-#### Parameters
+**Parameters**
 
 • **key**: `string`
 
-#### Returns
+**Returns**
 
-`undefined` \| `T`
+`undefined` | `T`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:14](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L14)
 
 ***
 
-### handleOpenAuthorizeMAppDialog()
+#### handleOpenAuthorizeMAppDialog()
 
 > **handleOpenAuthorizeMAppDialog**: (`mApp`, `open`) => `void`
 
-#### Parameters
+**Parameters**
 
 • **mApp**: `string`
 
 • **open**: `boolean`
 
-#### Returns
+**Returns**
 
 `void`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:18](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L18)
 
 ***
 
-### handleOpenRevokeMAppDialog()
+#### handleOpenRevokeMAppDialog()
 
 > **handleOpenRevokeMAppDialog**: (`mApp`, `open`) => `void`
 
-#### Parameters
+**Parameters**
 
 • **mApp**: `string`
 
 • **open**: `boolean`
 
-#### Returns
+**Returns**
 
 `void`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:19](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L19)
 
 ***
 
-### handleOpenSignInDialog()
+#### handleOpenSignInDialog()
 
 > **handleOpenSignInDialog**: (`open`) => `void`
 
-#### Parameters
+**Parameters**
 
 • **open**: `boolean`
 
-#### Returns
+**Returns**
 
 `void`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:20](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L20)
 
 ***
 
-### isEnsAuthPending
+#### isEnsAuthPending
 
 > **isEnsAuthPending**: `boolean`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L8)
 
 ***
 
-### isLoggedIn
+#### isLoggedIn
 
 > **isLoggedIn**: `boolean`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L9)
 
 ***
 
-### mApps
+#### mApps
 
-> **mApps**: `string`[]
+> **mApps**: `string`\[]
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:12](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L12)
 
 ***
 
-### records
+#### records
 
-> **records**: `undefined` \| `Records`
+> **records**: `undefined` | `Records`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:11](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L11)
 
 ***
 
-### setState()
+#### setState()
 
-> **setState**: \<`T`\>(`key`, `value`) => `void`
+> **setState**: <`T`>(`key`, `value`) => `void`
 
-#### Type Parameters
+**Type Parameters**
 
 • **T**
 
-#### Parameters
+**Parameters**
 
 • **key**: `string`
 
 • **value**: `T`
 
-#### Returns
+**Returns**
 
 `void`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/plugins/index.ts:13](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/plugins/index.ts#L13)
