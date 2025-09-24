@@ -1,254 +1,247 @@
-[**@justaname.id/sdk**](../README.md) • **Docs**
+# RequestSignInParams
+
+[**@justaname.id/sdk**](../) • **Docs**
 
 ***
 
 [@justaname.id/sdk](../globals.md) / RequestSignInParams
 
-# Interface: RequestSignInParams
+## Interface: RequestSignInParams
 
-## Extends
+### Extends
 
-- `Omit`\<`SiwensParams`, `"domain"` \| `"origin"` \| `"chainId"`\>
+* `Omit`<`SiwensParams`, `"domain"` | `"origin"` | `"chainId"`>
 
-## Properties
+### Properties
 
-### address?
+#### address?
 
 > `optional` **address**: `string`
 
-Ethereum address performing the signing conformant to capitalization
-encoded checksum specified in EIP-55 where applicable.
+Ethereum address performing the signing conformant to capitalization encoded checksum specified in EIP-55 where applicable.
 
-#### Inherited from
+**Inherited from**
 
 `Omit.address`
 
-#### Defined in
+**Defined in**
 
 node\_modules/siwe/dist/client.d.ts:10
 
 ***
 
-### chainId?
+#### chainId?
 
 > `optional` **chainId**: [`ChainId`](../type-aliases/ChainId.md)
 
-#### Defined in
+**Defined in**
 
 [packages/@justaname.id/sdk/src/lib/types/signin/index.ts:9](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/signin/index.ts#L9)
 
 ***
 
-### domain?
+#### domain?
 
 > `optional` **domain**: `string`
 
-#### Defined in
+**Defined in**
 
 [packages/@justaname.id/sdk/src/lib/types/signin/index.ts:8](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/signin/index.ts#L8)
 
 ***
 
-### ens
+#### ens
 
 > **ens**: `string`
 
-#### Inherited from
+**Inherited from**
 
 `Omit.ens`
 
-#### Defined in
+**Defined in**
 
 packages/@justaname.id/siwens/dist/src/lib/siwens/siwens.d.ts:7
 
 ***
 
-### expirationTime?
+#### expirationTime?
 
 > `optional` **expirationTime**: `string`
 
-ISO 8601 datetime string that, if present, indicates when the signed
-authentication message is no longer valid.
+ISO 8601 datetime string that, if present, indicates when the signed authentication message is no longer valid.
 
-#### Inherited from
+**Inherited from**
 
 `Omit.expirationTime`
 
-#### Defined in
+**Defined in**
 
 packages/@justaname.id/siwens/dist/src/lib/siwens/siwens.d.ts:9
 
 ***
 
-### issuedAt?
+#### issuedAt?
 
 > `optional` **issuedAt**: `string`
 
 ISO 8601 datetime string of the current time.
 
-#### Inherited from
+**Inherited from**
 
 `Omit.issuedAt`
 
-#### Defined in
+**Defined in**
 
 packages/@justaname.id/siwens/dist/src/lib/siwens/siwens.d.ts:10
 
 ***
 
-### nonce?
+#### nonce?
 
 > `optional` **nonce**: `string`
 
-Randomized token used to prevent replay attacks, at least 8 alphanumeric
-characters.
+Randomized token used to prevent replay attacks, at least 8 alphanumeric characters.
 
-#### Inherited from
+**Inherited from**
 
 `Omit.nonce`
 
-#### Defined in
+**Defined in**
 
 node\_modules/siwe/dist/client.d.ts:24
 
 ***
 
-### notBefore?
+#### notBefore?
 
 > `optional` **notBefore**: `string`
 
-ISO 8601 datetime string that, if present, indicates when the signed
-authentication message will become valid.
+ISO 8601 datetime string that, if present, indicates when the signed authentication message will become valid.
 
-#### Inherited from
+**Inherited from**
 
 `Omit.notBefore`
 
-#### Defined in
+**Defined in**
 
 node\_modules/siwe/dist/client.d.ts:32
 
 ***
 
-### origin?
+#### origin?
 
 > `optional` **origin**: `string`
 
-#### Defined in
+**Defined in**
 
 [packages/@justaname.id/sdk/src/lib/types/signin/index.ts:7](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/signin/index.ts#L7)
 
 ***
 
-### requestId?
+#### requestId?
 
 > `optional` **requestId**: `string`
 
-System-specific identifier that may be used to uniquely refer to the
-sign-in request.
+System-specific identifier that may be used to uniquely refer to the sign-in request.
 
-#### Inherited from
+**Inherited from**
 
 `Omit.requestId`
 
-#### Defined in
+**Defined in**
 
 node\_modules/siwe/dist/client.d.ts:35
 
 ***
 
-### resources?
+#### resources?
 
-> `optional` **resources**: `string`[]
+> `optional` **resources**: `string`\[]
 
-List of information or references to information the user wishes to have
-resolved as part of authentication by the relying party. They are
-expressed as RFC 3986 URIs separated by `\n- `.
+List of information or references to information the user wishes to have resolved as part of authentication by the relying party. They are expressed as RFC 3986 URIs separated by `\n-` .
 
-#### Inherited from
+**Inherited from**
 
 `Omit.resources`
 
-#### Defined in
+**Defined in**
 
 node\_modules/siwe/dist/client.d.ts:39
 
 ***
 
-### scheme?
+#### scheme?
 
 > `optional` **scheme**: `string`
 
 RFC 3986 URI scheme for the authority that is requesting the signing.
 
-#### Inherited from
+**Inherited from**
 
 `Omit.scheme`
 
-#### Defined in
+**Defined in**
 
 node\_modules/siwe/dist/client.d.ts:5
 
 ***
 
-### statement?
+#### statement?
 
 > `optional` **statement**: `string`
 
-Human-readable ASCII assertion that the user will sign, and it must not
-contain `\n`.
+Human-readable ASCII assertion that the user will sign, and it must not contain .
 
-#### Inherited from
+**Inherited from**
 
 `Omit.statement`
 
-#### Defined in
+**Defined in**
 
 node\_modules/siwe/dist/client.d.ts:13
 
 ***
 
-### ttl?
+#### ttl?
 
 > `optional` **ttl**: `number`
 
-#### Overrides
+**Overrides**
 
 `Omit.ttl`
 
-#### Defined in
+**Defined in**
 
 [packages/@justaname.id/sdk/src/lib/types/signin/index.ts:10](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/sdk/src/lib/types/signin/index.ts#L10)
 
 ***
 
-### uri?
+#### uri?
 
 > `optional` **uri**: `string`
 
-RFC 3986 URI referring to the resource that is the subject of the signing
- (as in the __subject__ of a claim).
+RFC 3986 URI referring to the resource that is the subject of the signing (as in the **subject** of a claim).
 
-#### Inherited from
+**Inherited from**
 
 `Omit.uri`
 
-#### Defined in
+**Defined in**
 
 node\_modules/siwe/dist/client.d.ts:16
 
 ***
 
-### version?
+#### version?
 
 > `optional` **version**: `string`
 
 Current version of the message.
 
-#### Inherited from
+**Inherited from**
 
 `Omit.version`
 
-#### Defined in
+**Defined in**
 
 node\_modules/siwe/dist/client.d.ts:18

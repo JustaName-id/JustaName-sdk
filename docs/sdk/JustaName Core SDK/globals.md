@@ -1,10 +1,12 @@
-[**@justaname.id/sdk**](README.md) • **Docs**
+# globals
+
+[**@justaname.id/sdk**](./) • **Docs**
 
 ***
 
-# @justaname.id/sdk
+## @justaname.id/sdk
 
-## Classes
+### Classes
 
 - [ApiKeyRequiredException](classes/ApiKeyRequiredException.md)
 - [InvalidConfigurationException](classes/InvalidConfigurationException.md)
@@ -16,7 +18,8 @@
 - [SubnameChallenge](classes/SubnameChallenge.md)
 - [Subnames](classes/Subnames.md)
 
-## Interfaces
+
+### Interfaces
 
 - [Address](interfaces/Address.md)
 - [AddressWithTypedCoins](interfaces/AddressWithTypedCoins.md)
@@ -102,42 +105,41 @@
 - [TextRecord](interfaces/TextRecord.md)
 - [VerifyChallengeRequest](interfaces/VerifyChallengeRequest.md)
 - [VerifyChallengeResponse](interfaces/VerifyChallengeResponse.md)
-- [VerifyMessageRoute](interfaces/VerifyMessageRoute.md)
 
-## Type Aliases
+### Type Aliases
 
-- [AddressType](type-aliases/AddressType.md)
-- [ChainId](type-aliases/ChainId.md)
-- [CoinAndDetails](type-aliases/CoinAndDetails.md)
-- [CoinTypeKeys](type-aliases/CoinTypeKeys.md)
-- [CoinTypeMap](type-aliases/CoinTypeMap.md)
-- [EnsDomains](type-aliases/EnsDomains.md)
-- [GeneralsIdentifier](type-aliases/GeneralsIdentifier.md)
-- [GeneralsName](type-aliases/GeneralsName.md)
-- [MakeOptionalProps](type-aliases/MakeOptionalProps.md)
-- [Networks](type-aliases/Networks.md)
-- [NetworksWithProvider](type-aliases/NetworksWithProvider.md)
-- [PartialAddressJson](type-aliases/PartialAddressJson.md)
-- [SocialDetails](type-aliases/SocialDetails.md)
-- [SocialsIdentifier](type-aliases/SocialsIdentifier.md)
-- [SocialsName](type-aliases/SocialsName.md)
-- [SupportedCoins](type-aliases/SupportedCoins.md)
-- [SupportedGeneralsNames](type-aliases/SupportedGeneralsNames.md)
-- [SupportedSocialsNames](type-aliases/SupportedSocialsNames.md)
+* [AddressType](type-aliases/AddressType.md)
+* [ChainId](type-aliases/ChainId.md)
+* [CoinAndDetails](type-aliases/CoinAndDetails.md)
+* [CoinTypeKeys](type-aliases/CoinTypeKeys.md)
+* [CoinTypeMap](type-aliases/CoinTypeMap.md)
+* [EnsDomains](type-aliases/EnsDomains.md)
+* [GeneralsIdentifier](type-aliases/GeneralsIdentifier.md)
+* [GeneralsName](type-aliases/GeneralsName.md)
+* [MakeOptionalProps](type-aliases/MakeOptionalProps.md)
+* [Networks](type-aliases/Networks.md)
+* [NetworksWithProvider](type-aliases/NetworksWithProvider.md)
+* [PartialAddressJson](type-aliases/PartialAddressJson.md)
+* [SocialDetails](type-aliases/SocialDetails.md)
+* [SocialsIdentifier](type-aliases/SocialsIdentifier.md)
+* [SocialsName](type-aliases/SocialsName.md)
+* [SupportedCoins](type-aliases/SupportedCoins.md)
+* [SupportedGeneralsNames](type-aliases/SupportedGeneralsNames.md)
+* [SupportedSocialsNames](type-aliases/SupportedSocialsNames.md)
 
-## Variables
+### Variables
 
-- [coinTypeMap](variables/coinTypeMap.md)
-- [GENERAL\_FIELDS](variables/GENERAL_FIELDS.md)
-- [Routes](variables/Routes.md)
-- [SUPPORTED\_SOCIALS](variables/SUPPORTED_SOCIALS.md)
+* [coinTypeMap](variables/coinTypeMap.md)
+* [GENERAL\_FIELDS](variables/GENERAL_FIELDS.md)
+* [Routes](variables/Routes.md)
+* [SUPPORTED\_SOCIALS](variables/SUPPORTED_SOCIALS.md)
 
-## Functions
+### Functions
 
-- [createAddresses](functions/createAddresses.md)
-- [createGenerals](functions/createGenerals.md)
-- [createSocialsAndOthers](functions/createSocialsAndOthers.md)
-- [getCoinTypeDetails](functions/getCoinTypeDetails.md)
-- [sanitizeAddresses](functions/sanitizeAddresses.md)
-- [sanitizeRecords](functions/sanitizeRecords.md)
-- [sanitizeTexts](functions/sanitizeTexts.md)
+* [createAddresses](functions/createAddresses.md)
+* [createGenerals](functions/createGenerals.md)
+* [createSocialsAndOthers](functions/createSocialsAndOthers.md)
+* [getCoinTypeDetails](functions/getCoinTypeDetails.md)
+* [sanitizeAddresses](functions/sanitizeAddresses.md)
+* [sanitizeRecords](functions/sanitizeRecords.md)
+* [sanitizeTexts](functions/sanitizeTexts.md)

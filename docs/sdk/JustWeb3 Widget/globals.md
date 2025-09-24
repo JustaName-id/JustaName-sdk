@@ -1,27 +1,29 @@
-[**@justweb3/widget**](README.md) • **Docs**
+# globals
+
+[**@justweb3/widget**](../) • **Docs**
 
 ***
 
-# @justweb3/widget
+## @justweb3/widget
 
-## Interfaces
+### Interfaces
 
-- [JustaPlugin](interfaces/JustaPlugin.md)
-- [JustWeb3ContextProps](interfaces/JustWeb3ContextProps.md)
-- [JustWeb3ProviderConfig](interfaces/JustWeb3ProviderConfig.md)
-- [JustWeb3ProviderProps](interfaces/JustWeb3ProviderProps.md)
-- [PluginApi](interfaces/PluginApi.md)
-- [useJustWeb3](interfaces/useJustWeb3.md)
+* [JustaPlugin](interfaces/JustaPlugin.md)
+* [JustWeb3ContextProps](interfaces/JustWeb3ContextProps.md)
+* [JustWeb3ProviderConfig](interfaces/JustWeb3ProviderConfig.md)
+* [JustWeb3ProviderProps](interfaces/JustWeb3ProviderProps.md)
+* [PluginApi](interfaces/PluginApi.md)
+* [useJustWeb3](interfaces/useJustWeb3.md)
 
-## Type Aliases
+### Type Aliases
 
-- [UpdateRecordsParams](type-aliases/UpdateRecordsParams.md)
+* [UpdateRecordsParams](type-aliases/UpdateRecordsParams.md)
 
-## Variables
+### Variables
 
-- [JustWeb3Context](variables/JustWeb3Context.md)
+* [JustWeb3Context](variables/JustWeb3Context.md)
 
-## Functions
+### Functions
 
 - [EnsMetadataBadge](functions/EnsMetadataBadge.md)
 - [getChainIcon](functions/getChainIcon.md)
@@ -37,3 +39,4 @@
 - [useDebounce](functions/useDebounce.md)
 - [useJustWeb3](functions/useJustWeb3.md)
 - [usePlugins](functions/usePlugins.md)
+

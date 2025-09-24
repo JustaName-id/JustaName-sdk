@@ -1,10 +1,12 @@
-[**@justaname.id/react**](README.md) • **Docs**
+# globals
+
+[**@justaname.id/react**](./) • **Docs**
 
 ***
 
-# @justaname.id/react
+## @justaname.id/react
 
-## Interfaces
+### Interfaces
 
 - [GetEnsAvatarParams](interfaces/GetEnsAvatarParams.md)
 - [GetEnsNamesForAddressParams](interfaces/GetEnsNamesForAddressParams.md)
@@ -60,25 +62,26 @@
 - [UseUploadMediaResponse](interfaces/UseUploadMediaResponse.md)
 - [UseUploadMediaResult](interfaces/UseUploadMediaResult.md)
 
-## Type Aliases
 
-- [EnsAuth](type-aliases/EnsAuth.md)
-- [JustaNameConfigWithoutDefaultChainId](type-aliases/JustaNameConfigWithoutDefaultChainId.md)
-- [SubnameRecordResponse](type-aliases/SubnameRecordResponse.md)
-- [UseAcceptSubnameParams](type-aliases/UseAcceptSubnameParams.md)
-- [UseAccountInvitationsParams](type-aliases/UseAccountInvitationsParams.md)
-- [UseAddSubnameFunctionParams](type-aliases/UseAddSubnameFunctionParams.md)
-- [UseEnsSignInFunctionParams](type-aliases/UseEnsSignInFunctionParams.md)
-- [UseRejectSubnameParams](type-aliases/UseRejectSubnameParams.md)
-- [UseRevokeSubnameFunctionParams](type-aliases/UseRevokeSubnameFunctionParams.md)
-- [UseSubnameParams](type-aliases/UseSubnameParams.md)
+### Type Aliases
 
-## Variables
+* [EnsAuth](type-aliases/EnsAuth.md)
+* [JustaNameConfigWithoutDefaultChainId](type-aliases/JustaNameConfigWithoutDefaultChainId.md)
+* [SubnameRecordResponse](type-aliases/SubnameRecordResponse.md)
+* [UseAcceptSubnameParams](type-aliases/UseAcceptSubnameParams.md)
+* [UseAccountInvitationsParams](type-aliases/UseAccountInvitationsParams.md)
+* [UseAddSubnameFunctionParams](type-aliases/UseAddSubnameFunctionParams.md)
+* [UseEnsSignInFunctionParams](type-aliases/UseEnsSignInFunctionParams.md)
+* [UseRejectSubnameParams](type-aliases/UseRejectSubnameParams.md)
+* [UseRevokeSubnameFunctionParams](type-aliases/UseRevokeSubnameFunctionParams.md)
+* [UseSubnameParams](type-aliases/UseSubnameParams.md)
 
-- [JustaNameContext](variables/JustaNameContext.md)
-- [OFFCHAIN\_RESOLVERS\_KEY](variables/OFFCHAIN_RESOLVERS_KEY.md)
+### Variables
 
-## Functions
+* [JustaNameContext](variables/JustaNameContext.md)
+* [OFFCHAIN\_RESOLVERS\_KEY](variables/OFFCHAIN_RESOLVERS_KEY.md)
+
+### Functions
 
 - [getChangedAddresses](functions/getChangedAddresses.md)
 - [getChangedContentHash](functions/getChangedContentHash.md)
@@ -114,3 +117,4 @@
 - [useUpdateChanges](functions/useUpdateChanges.md)
 - [useUpdateSubname](functions/useUpdateSubname.md)
 - [useUploadMedia](functions/useUploadMedia.md)
+

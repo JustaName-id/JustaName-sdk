@@ -1,22 +1,24 @@
-[**@justaname.id/sdk**](../README.md) • **Docs**
+# IResponse
+
+[**@justaname.id/sdk**](../) • **Docs**
 
 ***
 
 [@justaname.id/sdk](../globals.md) / IResponse
 
-# Interface: IResponse
+## Interface: IResponse
 
-## Extended by
+### Extended by
 
-- [`ApiKeyResponse`](ApiKeyResponse.md)
-- [`SubnameResponse`](SubnameResponse.md)
-- [`PaginatedResponse`](PaginatedResponse.md)
-- [`OffchainResolverGetAllResponse`](OffchainResolverGetAllResponse.md)
-- [`RequestChallengeResponse`](RequestChallengeResponse.md)
-- [`VerifyChallengeResponse`](VerifyChallengeResponse.md)
-- [`RequestAddMAppPermissionChallengeResponse`](RequestAddMAppPermissionChallengeResponse.md)
-- [`RequestAppendMAppFieldChallengeResponse`](RequestAppendMAppFieldChallengeResponse.md)
-- [`RequestRevokeMAppPermissionChallengeResponse`](RequestRevokeMAppPermissionChallengeResponse.md)
-- [`IsSubnameAvailableResponse`](IsSubnameAvailableResponse.md)
-- [`SubnameGetAllByAddressResponse`](SubnameGetAllByAddressResponse.md)
-- [`SubnameSearchResponse`](SubnameSearchResponse.md)
+* [`ApiKeyResponse`](broken-reference)
+* [`SubnameResponse`](broken-reference)
+* [`PaginatedResponse`](broken-reference)
+* [`OffchainResolverGetAllResponse`](broken-reference)
+* [`RequestChallengeResponse`](broken-reference)
+* [`VerifyChallengeResponse`](broken-reference)
+* [`RequestAddMAppPermissionChallengeResponse`](broken-reference)
+* [`RequestAppendMAppFieldChallengeResponse`](broken-reference)
+* [`RequestRevokeMAppPermissionChallengeResponse`](broken-reference)
+* [`IsSubnameAvailableResponse`](broken-reference)
+* [`SubnameGetAllByAddressResponse`](broken-reference)
+* [`SubnameSearchResponse`](broken-reference)

@@ -1,221 +1,223 @@
-[**@justweb3/widget**](../README.md) • **Docs**
+# JustWeb3ProviderConfig
+
+[**@justweb3/widget**](../../) • **Docs**
 
 ***
 
 [@justweb3/widget](../globals.md) / JustWeb3ProviderConfig
 
-# Interface: JustWeb3ProviderConfig
+## Interface: JustWeb3ProviderConfig
 
-## Extends
+### Extends
 
-- `JustaNameProviderConfig`.`JustWeb3ThemeProviderConfig`
+* `JustaNameProviderConfig`.`JustWeb3ThemeProviderConfig`
 
-## Properties
+### Properties
 
-### allowedEns?
+#### allowedEns?
 
-> `optional` **allowedEns**: `"all"` \| `string`[] \| `"claimable"`
+> `optional` **allowedEns**: `"all"` | `string`\[] | `"claimable"`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:42](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L42)
 
 ***
 
-### backendUrl?
+#### backendUrl?
 
 > `optional` **backendUrl**: `string`
 
-#### Inherited from
+**Inherited from**
 
 `JustaNameProviderConfig.backendUrl`
 
-#### Defined in
+**Defined in**
 
 packages/@justaname.id/react/dist/src/lib/providers/JustaNameProvider.d.ts:21
 
 ***
 
-### color?
+#### color?
 
 > `optional` **color**: `object`
 
-#### background?
+**background?**
 
 > `optional` **background**: `string`
 
-#### destructive?
+**destructive?**
 
 > `optional` **destructive**: `string`
 
-#### primary?
+**primary?**
 
 > `optional` **primary**: `string`
 
-#### Inherited from
+**Inherited from**
 
 `JustWeb3ThemeProviderConfig.color`
 
-#### Defined in
+**Defined in**
 
 packages/@justweb3/ui/dist/src/lib/providers/JustWeb3ThemeProvider/index.d.ts:35
 
 ***
 
-### config?
+#### config?
 
 > `optional` **config**: `Configuration`
 
-#### Inherited from
+**Inherited from**
 
 `JustaNameProviderConfig.config`
 
-#### Defined in
+**Defined in**
 
 packages/@justaname.id/sdk/dist/src/lib/types/justaname/configuration.d.ts:28
 
 ***
 
-### dev?
+#### dev?
 
 > `optional` **dev**: `boolean`
 
-#### Inherited from
+**Inherited from**
 
 `JustaNameProviderConfig.dev`
 
-#### Defined in
+**Defined in**
 
 packages/@justaname.id/sdk/dist/src/lib/types/justaname/configuration.d.ts:32
 
 ***
 
-### disableOverlay?
+#### disableOverlay?
 
 > `optional` **disableOverlay**: `boolean`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:44](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L44)
 
 ***
 
-### ensDomains?
+#### ensDomains?
 
 > `optional` **ensDomains**: `EnsDomains`
 
-#### Inherited from
+**Inherited from**
 
 `JustaNameProviderConfig.ensDomains`
 
-#### Defined in
+**Defined in**
 
 packages/@justaname.id/sdk/dist/src/lib/types/justaname/configuration.d.ts:30
 
 ***
 
-### logo?
+#### logo?
 
 > `optional` **logo**: `string`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:43](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L43)
 
 ***
 
-### mApps?
+#### mApps?
 
-> `optional` **mApps**: (`string` \| `object`)[]
+> `optional` **mApps**: (`string` | `object`)\[]
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:45](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L45)
 
 ***
 
-### networks?
+#### networks?
 
 > `optional` **networks**: `Networks`
 
-#### Inherited from
+**Inherited from**
 
 `JustaNameProviderConfig.networks`
 
-#### Defined in
+**Defined in**
 
 packages/@justaname.id/sdk/dist/src/lib/types/justaname/configuration.d.ts:29
 
 ***
 
-### openOnWalletConnect?
+#### openOnWalletConnect?
 
 > `optional` **openOnWalletConnect**: `boolean`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:41](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L41)
 
 ***
 
-### plugins?
+#### plugins?
 
-> `optional` **plugins**: [`JustaPlugin`](JustaPlugin.md)[]
+> `optional` **plugins**: [`JustaPlugin`](JustaPlugin.md)\[]
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:46](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L46)
 
 ***
 
-### routes?
+#### routes?
 
-> `optional` **routes**: `Partial`\<`object`\>
+> `optional` **routes**: `Partial`<`object`>
 
-#### Type declaration
+**Type declaration**
 
-##### addSubnameRoute
+**addSubnameRoute**
 
 > **addSubnameRoute**: `string`
 
-##### currentEnsRoute
+**currentEnsRoute**
 
 > **currentEnsRoute**: `string`
 
-##### revokeSubnameRoute
+**revokeSubnameRoute**
 
 > **revokeSubnameRoute**: `string`
 
-##### signinNonceRoute
+**signinNonceRoute**
 
 > **signinNonceRoute**: `string`
 
-##### signinRoute
+**signinRoute**
 
 > **signinRoute**: `string`
 
-##### signoutRoute
+**signoutRoute**
 
 > **signoutRoute**: `string`
 
-#### Inherited from
+**Inherited from**
 
 `JustaNameProviderConfig.routes`
 
-#### Defined in
+**Defined in**
 
 packages/@justaname.id/react/dist/src/lib/providers/JustaNameProvider.d.ts:20
 
 ***
 
-### signOnMounted?
+#### signOnMounted?
 
 > `optional` **signOnMounted**: `boolean`
 
-#### Inherited from
+**Inherited from**
 
 `JustaNameProviderConfig.signOnMounted`
 
-#### Defined in
+**Defined in**
 
 packages/@justaname.id/react/dist/src/lib/providers/JustaNameProvider.d.ts:22
