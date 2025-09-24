@@ -44,11 +44,23 @@ To use the JustaName React SDK, wrap your application with the `JustaNameProvide
 ```tsx
 tsx
 'use client';
+import "@rainbow-me/rainbowkit/styles.css";
+import '@justweb3/widget/styles.css';
+import {
+  getDefaultConfig,
+  getDefaultWallets,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WagmiProvider } from "wagmi";
+import { mainnet, sepolia } from "wagmi/chains";
+import {
+  JustWeb3Provider,
+  JustWeb3ProviderConfig,
+} from "@justweb3/widget";
 import { JustaNameProvider } from '@justaname.id/react';
-import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { publicProvider } from 'wagmi/providers/public';
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import '@rainbow-me/rainbowkit/styles.css';
+import { JustVerifiedPlugin } from '@justverified/plugin';
+import { ChainId } from '@justaname.id/sdk';
 import { AddSubname } from './AddSubname';
 
 const { wallets } = getDefaultWallets();
@@ -68,6 +80,11 @@ const config = getDefaultConfig({
 });
 
 const justaNameConfig = {
+     config: {
+      origin: "http://localhost:3000/",
+      domain: "localhost",
+      signInTtl: 86400000,
+    },
   networks: [{ chainId: 1, providerUrl: 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY' }],
   ensDomains: [
     { 
@@ -79,15 +96,20 @@ const justaNameConfig = {
   backendUrl: 'https://your-backend-url.com' // Leave empty for same origin (e.g when using Next.js)
 };
 
+
+const queryClient = new QueryClient();
+
 export const App = () => {
   return (
-    <WagmiConfig client={config}>
-      <RainbowKitProvider chains={chains}>
-        <JustaNameProvider config={justaNameConfig}>
-            <AddSubname />
-        </JustaNameProvider>
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
+          <JustaNameProvider config={justnameConfig}>
+              <AddSubname />
+          </JustaNameProvider>
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }
 
@@ -164,18 +186,6 @@ The SDK offers various hooks for managing ENS accounts, subnames, and authentica
 - **`useSubname`**: Get the details of a specific subname.
 - **`useRecords`**: Fetch records associated with any ENS name.
 
-[//]: # (### mApp Management)
-
-[//]: # ()
-[//]: # (- **`useEnabledMApps`**: Get a list of enabled mApps.)
-
-[//]: # (- **`useIsMAppEnabled`**: Check if a specific mApp is enabled.)
-
-[//]: # (- **`useAddMAppPermission`**: Add permission for an mApp.)
-
-[//]: # (- **`useRevokeMAppPermission`**: Revoke an mApp's permission.)
-
-[//]: # (- **`useCanEnableMApps`**: Check if mApps can be enabled for a subname.)
 
 ### Authentication
 

@@ -1,22 +1,42 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# getChangedAddresses
 
-***
+Returns a list of addresses that have been changed in the subname records.
 
-[@justaname.id/react](../globals.md) / getChangedAddresses
+---
 
-# Function: getChangedAddresses()
+## Usage
 
-> **getChangedAddresses**(`sanitizedRequestAddress`, `records`): `Address`[]
+```typescript
+import { getChangedAddresses } from '@justaname.id/react'
 
-## Parameters
+// Example usage
+const changedAddresses = getChangedAddresses(sanitizedRequestAddress, records)
+```
 
-• **sanitizedRequestAddress**: `undefined` \| `Address`[]
+```typescript
+// With specific parameters
+const addresses = getChangedAddresses(
+  ['0x123...', '0x456...'], // sanitizedRequestAddress
+  { 
+    // records object
+    addresses: {
+      '60': '0x789...',
+      '0': '0xabc...'
+    }
+  }
+)
+```
 
-• **records**: [`Records`](../interfaces/Records.md)
+---
 
 ## Returns
 
-`Address`[]
+`Address[]` - An array of addresses that have been changed in the subname records.
+
+## Parameters
+
+- **sanitizedRequestAddress**: `undefined` | `Address[]` - The sanitized request addresses to compare against
+- **records**: [`Records`](../interfaces/Records.md) - The records object containing address mappings
 
 ## Defined in
 
