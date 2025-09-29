@@ -35,7 +35,7 @@ const addresses = getChangedAddresses(
 
 ## Parameters
 
-- **sanitizedRequestAddress**: `undefined` | `Address[]` - The sanitized request addresses to compare against
+- **sanitizedRequestAddress**: `undefined` | `Address[]` - The sanitized request addresses to compare against (use [`sanitizeRecords`](../../JustaName%20Core%20SDK/functions/sanitizeRecords.md) to sanitize raw data)
 - **records**: [`Records`](../interfaces/Records.md) - The records object containing address mappings
 
 ## Defined in

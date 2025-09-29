@@ -1,20 +1,38 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# splitDomain
 
-***
+Splits a domain string into its subdomain and parent domain parts.
 
-[@justaname.id/react](../globals.md) / splitDomain
+---
 
-# Function: splitDomain()
+## Usage
 
-> **splitDomain**(`domain`): [`string`, `string`]
+```typescript
+import { splitDomain } from '@justaname.id/react'
 
-## Parameters
+// Basic usage
+const [subdomain, parentDomain] = splitDomain('alice.justaname.eth')
+```
 
-• **domain**: `string`
+```typescript
+// With different domain formats
+const [subdomain, parentDomain] = splitDomain('bob.example.eth')
+// Returns: ['bob', 'example.eth']
+
+const [subdomain, parentDomain] = splitDomain('test.subdomain.justaname.eth')
+// Returns: ['test', 'subdomain.justaname.eth']
+```
+
+---
 
 ## Returns
 
-[`string`, `string`]
+[`string`, `string`] - A tuple containing:
+- **First element**: The subdomain part
+- **Second element**: The parent domain part
+
+## Parameters
+
+- **domain**: `string` - The domain string to split
 
 ## Defined in
 
