@@ -1,37 +1,53 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# JustaNameProvider
 
-***
+Provides JustaName context to child components, allowing them to access and interact with the JustaName service.
 
-[@justaname.id/react](../globals.md) / JustaNameProvider
+---
 
-# Function: JustaNameProvider()
+## Usage
 
-> **JustaNameProvider**(`props`, `deprecatedLegacyContext`?): `ReactNode`
+```typescript
+import { JustaNameProvider } from '@justaname.id/react'
 
-Provides JustaName context to child components, allowing them to access and interact
-with the JustaName service.
+// Basic usage
+function App() {
+  return (
+    <JustaNameProvider config={{ rpcUrl: 'https://mainnet.infura.io/v3/your-key' }}>
+      <YourAppComponents />
+    </JustaNameProvider>
+  )
+}
+```
 
-## Parameters
+```typescript
+// With additional configuration
+function App() {
+  return (
+    <JustaNameProvider 
+      config={{ 
+        rpcUrl: 'https://mainnet.infura.io/v3/your-key',
+        chainId: 1,
+        contractAddress: '0x...'
+      }}
+    >
+      <YourAppComponents />
+    </JustaNameProvider>
+  )
+}
+```
 
-• **props**: [`JustaNameProviderProps`](../interfaces/JustaNameProviderProps.md)
+> **Note**: For working with subname data, consider using [`sanitizeRecords`](../../JustaName%20Core%20SDK/functions/sanitizeRecords.md) to transform raw response data into a structured format.
 
-The props for the JustaNameProvider component.
-
-• **deprecatedLegacyContext?**: `any`
-
-**Deprecated**
-
-**See**
-
-[React Docs](https://legacy.reactjs.org/docs/legacy-context.html#referencing-context-in-lifecycle-methods)
+---
 
 ## Returns
 
-`ReactNode`
+`ReactNode` - The provider component wrapping children.
 
-The provider component wrapping children.
+## Parameters
 
-## Component
+- **props**: [`JustaNameProviderProps`](../interfaces/JustaNameProviderProps.md) - The props for the JustaNameProvider component
+- **deprecatedLegacyContext?**: `any` - **Deprecated** - See [React Docs](https://legacy.reactjs.org/docs/legacy-context.html#referencing-context-in-lifecycle-methods)
 
 ## Defined in
 

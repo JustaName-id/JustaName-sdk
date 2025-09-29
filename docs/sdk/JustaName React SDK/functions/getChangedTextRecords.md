@@ -1,22 +1,45 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# getChangedTextRecords
 
-***
+Returns the text records that have been changed in the subname records.
 
-[@justaname.id/react](../globals.md) / getChangedTextRecords
+---
 
-# Function: getChangedTextRecords()
+## Usage
 
-> **getChangedTextRecords**(`sanitizedRequestText`, `records`): `TextRecord`[]
+```typescript
+import { getChangedTextRecords } from '@justaname.id/react'
 
-## Parameters
+// Example usage
+const changedTextRecords = getChangedTextRecords(sanitizedRequestText, records)
+```
 
-• **sanitizedRequestText**: `undefined` \| `TextRecord`[]
+```typescript
+// With specific parameters
+const textRecords = getChangedTextRecords(
+  [
+    { key: 'description', value: 'My description' },
+    { key: 'url', value: 'https://example.com' }
+  ], // sanitizedRequestText
+  { 
+    // records object
+    text: [
+      { key: 'description', value: 'Old description' },
+      { key: 'url', value: 'https://old-example.com' }
+    ]
+  }
+)
+```
 
-• **records**: [`Records`](../interfaces/Records.md)
+---
 
 ## Returns
 
-`TextRecord`[]
+`TextRecord`[] - The text records that have been changed.
+
+## Parameters
+
+- **sanitizedRequestText**: `undefined` | `TextRecord`[] - The sanitized request text records to compare against (use [`sanitizeRecords`](../../JustaName%20Core%20SDK/functions/sanitizeRecords.md) to sanitize raw data)
+- **records**: [`Records`](../interfaces/Records.md) - The records object containing text record data
 
 ## Defined in
 

@@ -1,20 +1,55 @@
-[**@justaname.id/sdk**](../README.md) • **Docs**
+# sanitizeRecords
 
-***
+Transforms and sanitizes subname response data into a structured format with organized text records, addresses, and metadata.
 
-[@justaname.id/sdk](../globals.md) / sanitizeRecords
+---
 
-# Function: sanitizeRecords()
+## Usage
 
-> **sanitizeRecords**(`subnameResponse`): [`SanitizedRecords`](../interfaces/SanitizedRecords.md)
+```typescript
+import { sanitizeRecords } from '@justaname.id/sdk'
 
-## Parameters
+// Basic usage
+const sanitized = sanitizeRecords(subnameResponse)
+```
 
-• **subnameResponse**: `undefined` \| [`SubnameResponse`](../interfaces/SubnameResponse.md)
+```typescript
+// With subname response data
+const sanitized = sanitizeRecords({
+  records: {
+    texts: [
+      { key: 'description', value: 'My description' },
+      { key: 'url', value: 'https://example.com' },
+      { key: 'com.twitter', value: '@username' }
+    ],
+    coins: {
+      '60': '0x1234567890abcdef...',
+      '0': '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
+    },
+    contentHash: {
+      protocolType: 'ipfs',
+      decoded: 'QmHash...'
+    }
+  }
+})
+```
+
+---
 
 ## Returns
 
-[`SanitizedRecords`](../interfaces/SanitizedRecords.md)
+[`SanitizedRecords`](../interfaces/SanitizedRecords.md) - A structured object containing:
+- `generals`: General text records
+- `ethAddress`: Ethereum address details
+- `otherAddresses`: Non-ETH addresses
+- `socials`: Social media records
+- `allTexts`: All text records
+- `contentHash`: Content hash information
+- And other organized metadata
+
+## Parameters
+
+- **subnameResponse**: `undefined` | [`SubnameResponse`](../interfaces/SubnameResponse.md) - The subname response data to sanitize
 
 ## Defined in
 
