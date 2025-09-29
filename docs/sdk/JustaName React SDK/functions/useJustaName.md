@@ -1,26 +1,135 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# useJustaName
 
-***
+A React hook for accessing the JustaName context and service instance within components.
 
-[@justaname.id/react](../globals.md) / useJustaName
+---
 
-# Function: useJustaName()
+## Usage
 
-> **useJustaName**(): [`JustaNameContextProps`](../interfaces/JustaNameContextProps.md)
+```typescript
+import { useJustaName } from '@justaname.id/react'
 
-Custom hook for accessing the JustaNameContext.
+// Basic usage
+function MyComponent() {
+  const { justaname, config, isConnected } = useJustaName()
+  
+  const handleAction = async () => {
+    if (justaname && isConnected) {
+      // Use the justaname service instance
+      const result = await justaname.someMethod()
+      console.log('Result:', result)
+    }
+  }
+  
+  return (
+    <div>
+      <h3>JustaName Service</h3>
+      <p>Connected: {isConnected ? 'Yes' : 'No'}</p>
+      <p>RPC URL: {config?.rpcUrl}</p>
+      <button onClick={handleAction} disabled={!isConnected}>
+        Perform Action
+      </button>
+    </div>
+  )
+}
+```
+
+```typescript
+// With error handling and service methods
+function AdvancedComponent() {
+  const { justaname, config, isConnected, error } = useJustaName()
+  
+  const handleGetSubname = async () => {
+    try {
+      if (!justaname) {
+        throw new Error('JustaName service not available')
+      }
+      
+      const subname = await justaname.subnames.getSubname({
+        subname: 'alice',
+        parentDomain: 'justaname.eth'
+      })
+      
+      console.log('Subname data:', subname)
+    } catch (err) {
+      console.error('Error fetching subname:', err)
+    }
+  }
+  
+  const handleCreateSubname = async () => {
+    try {
+      if (!justaname) {
+        throw new Error('JustaName service not available')
+      }
+      
+      const result = await justaname.subnames.createSubname({
+        subname: 'bob',
+        parentDomain: 'justaname.eth',
+        records: {
+          texts: [
+            { key: 'description', value: 'My subname' }
+          ]
+        }
+      })
+      
+      console.log('Subname created:', result)
+    } catch (err) {
+      console.error('Error creating subname:', err)
+    }
+  }
+  
+  return (
+    <div className="justaname-service">
+      <h3>JustaName Service Integration</h3>
+      
+      <div className="service-info">
+        <p><strong>Status:</strong> {isConnected ? 'Connected' : 'Disconnected'}</p>
+        <p><strong>RPC URL:</strong> {config?.rpcUrl || 'Not configured'}</p>
+        <p><strong>Chain ID:</strong> {config?.chainId || 'Not set'}</p>
+        {error && <p className="error">Error: {error.message}</p>}
+      </div>
+      
+      <div className="actions">
+        <button 
+          onClick={handleGetSubname} 
+          disabled={!isConnected || !justaname}
+          className="action-btn"
+        >
+          Get Subname
+        </button>
+        
+        <button 
+          onClick={handleCreateSubname} 
+          disabled={!isConnected || !justaname}
+          className="action-btn"
+        >
+          Create Subname
+        </button>
+      </div>
+      
+      {!isConnected && (
+        <div className="warning">
+          <p>⚠️ JustaName service is not connected. Make sure you're using this hook within a JustaNameProvider.</p>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+---
 
 ## Returns
 
-[`JustaNameContextProps`](../interfaces/JustaNameContextProps.md)
-
-The context value with JustaName service instance and configuration.
-
-## Hook
+[`JustaNameContextProps`](../interfaces/JustaNameContextProps.md) - The context value containing:
+- `justaname`: JustaName service instance for API calls
+- `config`: Configuration object with RPC URL, chain ID, etc.
+- `isConnected`: Boolean indicating if the service is connected
+- `error`: Error object if there's a connection issue
 
 ## Throws
 
-If the hook is used outside a JustaNameProvider.
+If the hook is used outside a JustaNameProvider, it will throw an error.
 
 ## Defined in
 

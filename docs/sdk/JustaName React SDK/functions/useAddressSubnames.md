@@ -1,20 +1,89 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# useAddressSubnames
 
-***
+A React hook for fetching subnames owned by a specific Ethereum address.
 
-[@justaname.id/react](../globals.md) / useAddressSubnames
+---
 
-# Function: useAddressSubnames()
+## Usage
 
-> **useAddressSubnames**(`params`): `UseAddressSubnamesResult`
+```typescript
+import { useAddressSubnames } from '@justaname.id/react'
 
-## Parameters
+// Basic usage
+function AddressSubnamesComponent() {
+  const { subnames, isLoading, error, refetch } = useAddressSubnames({
+    address: '0x1234567890abcdef...'
+  })
+  
+  if (isLoading) return <div>Loading subnames...</div>
+  if (error) return <div>Error: {error.message}</div>
+  
+  return (
+    <div>
+      <h3>Subnames for Address</h3>
+      {subnames?.map((subname, index) => (
+        <div key={index}>
+          <p>Name: {subname.name}</p>
+          <p>Parent: {subname.parentDomain}</p>
+        </div>
+      ))}
+      <button onClick={refetch}>Refresh</button>
+    </div>
+  )
+}
+```
 
-• **params**: [`UseAddressSubnamesParams`](../interfaces/UseAddressSubnamesParams.md)
+```typescript
+// With additional parameters
+function AddressSubnamesComponent() {
+  const { subnames, isLoading, error } = useAddressSubnames({
+    address: '0x1234567890abcdef...',
+    parentDomain: 'justaname.eth',
+    includeExpired: false,
+    onSuccess: (subnames) => {
+      console.log('Subnames loaded:', subnames)
+    },
+    onError: (error) => {
+      console.error('Error loading subnames:', error)
+    }
+  })
+  
+  return (
+    <div>
+      <h3>Subnames for Address</h3>
+      {isLoading && <p>Loading subnames...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {subnames && (
+        <div className="subnames-grid">
+          {subnames.map((subname, index) => (
+            <div key={index} className="subname-card">
+              <h4>{subname.name}</h4>
+              <p>Parent: {subname.parentDomain}</p>
+              <p>Created: {subname.createdAt}</p>
+              <p>Status: {subname.status}</p>
+              <p>Expires: {subname.expiresAt}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+---
 
 ## Returns
 
-`UseAddressSubnamesResult`
+`UseAddressSubnamesResult` - An object containing:
+- `subnames`: Array of subnames owned by the address
+- `isLoading`: Boolean indicating if the data is being fetched
+- `error`: Error object if the operation failed
+- `refetch`: Function to manually refetch the data
+
+## Parameters
+
+- **params**: [`UseAddressSubnamesParams`](../interfaces/UseAddressSubnamesParams.md) - Required parameters for the hook
 
 ## Defined in
 
