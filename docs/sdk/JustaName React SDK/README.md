@@ -42,7 +42,6 @@ To use the JustaName React SDK, wrap your application with the `JustaNameProvide
 ### Example: Setup with `JustaNameProvider`
 
 ```tsx
-tsx
 'use client';
 import "@rainbow-me/rainbowkit/styles.css";
 import '@justweb3/widget/styles.css';
@@ -122,8 +121,6 @@ export const App = () => {
 Below is a complete example of a React component where users can claim a subname using the `useAddSubname` hook. It also checks subname availability with `useIsSubnameAvailable`.
 
 ```tsx
-tsx
-Copy code
 import { useAddSubname, useIsSubnameAvailable } from '@justaname.id/react';
 import { useState } from 'react';
 import { useDebounce } from '@uidotdev/usehooks';

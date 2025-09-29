@@ -1,22 +1,39 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# getChangedContentHash
 
-***
+Returns the content hash that has been changed in the subname records.
 
-[@justaname.id/react](../globals.md) / getChangedContentHash
+---
 
-# Function: getChangedContentHash()
+## Usage
 
-> **getChangedContentHash**(`contentHash`, `records`): `undefined` \| `string`
+```typescript
+import { getChangedContentHash } from '@justaname.id/react'
 
-## Parameters
+// Example usage
+const changedContentHash = getChangedContentHash(contentHash, records)
+```
 
-• **contentHash**: `undefined` \| `string`
+```typescript
+// With specific parameters
+const contentHash = getChangedContentHash(
+  '0x1234567890abcdef...', // contentHash
+  { 
+    // records object
+    contentHash: '0xabcdef1234567890...'
+  }
+)
+```
 
-• **records**: [`Records`](../interfaces/Records.md)
+---
 
 ## Returns
 
-`undefined` \| `string`
+`undefined` | `string` - The content hash that has been changed, or undefined if no change was detected.
+
+## Parameters
+
+- **contentHash**: `undefined` | `string` - The content hash to compare against
+- **records**: [`Records`](../interfaces/Records.md) - The records object containing content hash data (use [`sanitizeRecords`](../../JustaName%20Core%20SDK/functions/sanitizeRecords.md) to sanitize raw data)
 
 ## Defined in
 
