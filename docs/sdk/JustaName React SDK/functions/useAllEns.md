@@ -1,6 +1,6 @@
 # useAllEns
 
-A React hook for fetching all ENS names with infinite scroll pagination support.
+A React hook for fetching ENS domains with subname counts using infinite scroll pagination.
 
 ---
 
@@ -19,21 +19,22 @@ function AllEnsComponent() {
     hasNextPage,
     isFetchingNextPage
   } = useAllEns({
-    pageSize: 20
+    orderBy: 'subnameCount',
+    orderDirection: 'desc'
   })
   
-  if (isLoading) return <div>Loading ENS names...</div>
+  if (isLoading) return <div>Loading ENS domains...</div>
   if (error) return <div>Error: {error.message}</div>
   
-  const allEnsNames = data?.pages.flatMap(page => page.data) || []
+  const allEnsDomains = data?.pages.flatMap(page => page.data) || []
   
   return (
     <div>
-      <h3>All ENS Names ({allEnsNames.length})</h3>
-      {allEnsNames.map((ens, index) => (
+      <h3>ENS Domains ({allEnsDomains.length})</h3>
+      {allEnsDomains.map((domain, index) => (
         <div key={index}>
-          <p>Name: {ens.name}</p>
-          <p>Address: {ens.address}</p>
+          <p>Domain: {domain.ensDomain}</p>
+          <p>Subname Count: {domain.subnameCount}</p>
         </div>
       ))}
       {hasNextPage && (
@@ -50,7 +51,7 @@ function AllEnsComponent() {
 ```
 
 ```typescript
-// With advanced parameters
+// With custom ordering and chain
 function AllEnsComponent() {
   const {
     data,
@@ -58,38 +59,29 @@ function AllEnsComponent() {
     error,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage,
-    refetch
+    isFetchingNextPage
   } = useAllEns({
-    pageSize: 50,
-    enabled: true,
-    onSuccess: (data) => {
-      console.log('ENS names loaded:', data)
-    },
-    onError: (error) => {
-      console.error('Error loading ENS names:', error)
-    }
+    orderBy: 'createdAt',
+    orderDirection: 'asc',
+    chainId: 1,
+    enabled: true
   })
   
-  const allEnsNames = data?.pages.flatMap(page => page.data) || []
+  const allEnsDomains = data?.pages.flatMap(page => page.data) || []
   
   return (
     <div className="ens-list">
-      <div className="header">
-        <h3>All ENS Names</h3>
-        <button onClick={() => refetch()}>Refresh</button>
-      </div>
+      <h3>ENS Domains by Creation Date</h3>
       
       {isLoading && <p>Loading initial data...</p>}
       {error && <p>Error: {error.message}</p>}
       
       <div className="ens-grid">
-        {allEnsNames.map((ens, index) => (
+        {allEnsDomains.map((domain, index) => (
           <div key={index} className="ens-card">
-            <h4>{ens.name}</h4>
-            <p>Address: {ens.address}</p>
-            <p>Expires: {ens.expiryDate}</p>
-            <p>Registrant: {ens.registrant}</p>
+            <h4>{domain.ensDomain}</h4>
+            <p>Subname Count: {domain.subnameCount}</p>
+            <p>Records: {domain.ensSubname.records ? 'Available' : 'None'}</p>
           </div>
         ))}
       </div>
@@ -101,7 +93,7 @@ function AllEnsComponent() {
             disabled={isFetchingNextPage}
             className="load-more-btn"
           >
-            {isFetchingNextPage ? 'Loading more...' : 'Load More Names'}
+            {isFetchingNextPage ? 'Loading more...' : 'Load More Domains'}
           </button>
         </div>
       )}
@@ -115,13 +107,12 @@ function AllEnsComponent() {
 ## Returns
 
 `UseInfiniteQueryResult<InfiniteData<object, unknown>, Error>` - An infinite query result containing:
-- `data`: Paginated data with pages array
+- `data`: Paginated data with pages array containing ENS domains and subname counts
 - `isLoading`: Boolean indicating if initial data is being fetched
 - `error`: Error object if the operation failed
 - `fetchNextPage`: Function to load the next page
 - `hasNextPage`: Boolean indicating if more pages are available
 - `isFetchingNextPage`: Boolean indicating if next page is being fetched
-- `refetch`: Function to manually refetch all data
 
 ## Parameters
 

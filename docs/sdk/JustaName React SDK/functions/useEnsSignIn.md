@@ -11,13 +11,15 @@ import { useEnsSignIn } from '@justaname.id/react'
 
 // Basic usage
 function EnsSignInComponent() {
-  const { signIn, isLoading, error, data } = useEnsSignIn()
+  const { signIn, isSignInPending } = useEnsSignIn()
   
   const handleSignIn = async () => {
     try {
       await signIn({
-        ensName: 'alice.justaname.eth',
-        message: 'Sign in to access the application'
+        ens: 'alice.justaname.eth',
+        ttl: 3600,
+        uri: 'https://app.justaname.id',
+        domain: 'justaname.id'
       })
     } catch (err) {
       console.error('Sign in failed:', err)
@@ -26,78 +28,38 @@ function EnsSignInComponent() {
   
   return (
     <div>
-      <button onClick={handleSignIn} disabled={isLoading}>
-        {isLoading ? 'Signing In...' : 'Sign In with ENS'}
+      <button onClick={handleSignIn} disabled={isSignInPending}>
+        {isSignInPending ? 'Signing In...' : 'Sign In with ENS'}
       </button>
-      {error && <p>Error: {error.message}</p>}
-      {data && <p>Signed in as: {data.ensName}</p>}
     </div>
   )
 }
 ```
 
 ```typescript
-// With advanced parameters and callbacks
+// With custom backend configuration
 function EnsSignInComponent() {
-  const { signIn, isLoading, error, data } = useEnsSignIn({
-    onSuccess: (result) => {
-      console.log('Sign in successful:', result)
-      // Redirect to dashboard or update app state
-    },
-    onError: (error) => {
-      console.error('Sign in error:', error)
-      // Show error notification to user
-    }
+  const { signIn, isSignInPending } = useEnsSignIn({
+    backendUrl: 'https://api.justaname.id',
+    signinRoute: '/auth/signin',
+    signinNonceRoute: '/auth/nonce',
+    currentEnsRoute: '/auth/current-ens',
+    local: false
   })
   
   const handleSignIn = async () => {
     await signIn({
-      ensName: 'bob.justaname.eth',
-      message: 'Please sign this message to authenticate with our service',
-      nonce: Date.now().toString(),
-      domain: 'justaname.id',
-      statement: 'Sign in to access your account'
+      ens: 'bob.justaname.eth',
+      ttl: 7200,
+      uri: 'https://myapp.com',
+      domain: 'myapp.com'
     })
   }
   
   return (
-    <div className="sign-in-container">
-      <div className="sign-in-form">
-        <h3>Sign In with ENS</h3>
-        <p>Connect your ENS name to access the application</p>
-        
-        <button 
-          onClick={handleSignIn} 
-          disabled={isLoading}
-          className="sign-in-button"
-        >
-          {isLoading ? (
-            <>
-              <div className="spinner"></div>
-              Signing In...
-            </>
-          ) : (
-            'Connect ENS Name'
-          )}
-        </button>
-        
-        {error && (
-          <div className="error-message">
-            <p>❌ {error.message}</p>
-            <button onClick={() => window.location.reload()}>
-              Try Again
-            </button>
-          </div>
-        )}
-        
-        {data && (
-          <div className="success-message">
-            <p>✅ Successfully signed in as {data.ensName}</p>
-            <p>Address: {data.address}</p>
-          </div>
-        )}
-      </div>
-    </div>
+    <button onClick={handleSignIn} disabled={isSignInPending}>
+      {isSignInPending ? 'Signing In...' : 'Sign In with ENS'}
+    </button>
   )
 }
 ```
@@ -108,9 +70,7 @@ function EnsSignInComponent() {
 
 [`UseEnsSignInResult`](../interfaces/UseEnsSignInResult.md) - An object containing:
 - `signIn`: Function to initiate the sign-in process
-- `isLoading`: Boolean indicating if the sign-in is in progress
-- `error`: Error object if the sign-in failed
-- `data`: Result data if the sign-in succeeded
+- `isSignInPending`: Boolean indicating if the sign-in is in progress
 
 ## Parameters
 

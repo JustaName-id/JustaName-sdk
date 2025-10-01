@@ -1,6 +1,6 @@
 # usePrimaryName
 
-A React hook for managing and interacting with primary ENS names for connected accounts.
+A React hook for fetching the primary ENS name for a given address.
 
 ---
 
@@ -9,127 +9,19 @@ A React hook for managing and interacting with primary ENS names for connected a
 ```typescript
 import { usePrimaryName } from '@justaname.id/react'
 
-// Basic usage
 function PrimaryNameComponent() {
-  const { primaryName, isLoading, error, refetch } = usePrimaryName()
+  const { primaryName, isPrimaryNameLoading, refetchPrimaryName } = usePrimaryName({
+    address: '0x1234567890abcdef...',
+    chainId: 1
+  })
   
-  if (isLoading) return <div>Loading primary name...</div>
-  if (error) return <div>Error: {error.message}</div>
+  if (isPrimaryNameLoading) return <div>Loading primary name...</div>
   
   return (
     <div>
       <h3>Primary Name</h3>
       <p>Name: {primaryName || 'No primary name set'}</p>
-      <button onClick={refetch}>Refresh</button>
-    </div>
-  )
-}
-```
-
-```typescript
-// With primary name management
-function PrimaryNameManagementComponent() {
-  const { 
-    primaryName, 
-    isLoading, 
-    error, 
-    setPrimaryName, 
-    clearPrimaryName,
-    refetch 
-  } = usePrimaryName({
-    onSuccess: (name) => {
-      console.log('Primary name updated:', name)
-    },
-    onError: (error) => {
-      console.error('Error managing primary name:', error)
-    }
-  })
-  
-  const [newPrimaryName, setNewPrimaryName] = useState('')
-  const [isSetting, setIsSetting] = useState(false)
-  
-  const handleSetPrimaryName = async () => {
-    if (!newPrimaryName) return
-    
-    setIsSetting(true)
-    try {
-      await setPrimaryName(newPrimaryName)
-      setNewPrimaryName('')
-    } catch (err) {
-      console.error('Failed to set primary name:', err)
-    } finally {
-      setIsSetting(false)
-    }
-  }
-  
-  const handleClearPrimaryName = async () => {
-    try {
-      await clearPrimaryName()
-    } catch (err) {
-      console.error('Failed to clear primary name:', err)
-    }
-  }
-  
-  return (
-    <div className="primary-name-management">
-      <h3>Primary Name Management</h3>
-      
-      {isLoading && (
-        <div className="loading">
-          <div className="spinner"></div>
-          <p>Loading primary name...</p>
-        </div>
-      )}
-      
-      {error && (
-        <div className="error">
-          <p>❌ Error: {error.message}</p>
-          <button onClick={refetch}>Retry</button>
-        </div>
-      )}
-      
-      <div className="current-primary-name">
-        <h4>Current Primary Name</h4>
-        <div className="name-display">
-          {primaryName ? (
-            <div className="name-info">
-              <span className="name">{primaryName}</span>
-              <button 
-                onClick={handleClearPrimaryName}
-                className="clear-btn"
-              >
-                Clear
-              </button>
-            </div>
-          ) : (
-            <p className="no-name">No primary name set</p>
-          )}
-        </div>
-      </div>
-      
-      <div className="set-primary-name">
-        <h4>Set New Primary Name</h4>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Enter ENS name (e.g., alice.eth)"
-            value={newPrimaryName}
-            onChange={(e) => setNewPrimaryName(e.target.value)}
-            className="name-input"
-          />
-          <button 
-            onClick={handleSetPrimaryName}
-            disabled={!newPrimaryName || isSetting}
-            className="set-btn"
-          >
-            {isSetting ? 'Setting...' : 'Set Primary Name'}
-          </button>
-        </div>
-      </div>
-      
-      <div className="info">
-        <p><strong>Note:</strong> Setting a primary name will make it the default display name for your account across all applications.</p>
-      </div>
+      <button onClick={() => refetchPrimaryName()}>Refresh</button>
     </div>
   )
 }
@@ -139,18 +31,22 @@ function PrimaryNameManagementComponent() {
 
 ## Returns
 
-[`UsePrimaryNameResult`](../interfaces/UsePrimaryNameResult.md) - An object containing:
-- `primaryName`: The current primary ENS name for the account
-- `isLoading`: Boolean indicating if the operation is in progress
-- `error`: Error object if the operation failed
-- `setPrimaryName`: Function to set a new primary name
-- `clearPrimaryName`: Function to clear the current primary name
-- `refetch`: Function to manually refetch the primary name
+An object containing:
+- `primaryName`: The primary ENS name for the address (string or undefined)
+- `isPrimaryNamePending`: Boolean indicating if the query is pending
+- `isPrimaryNameFetching`: Boolean indicating if the query is fetching
+- `isPrimaryNameLoading`: Boolean indicating if the query is loading
+- `getPrimaryName`: Function to manually get the primary name
+- `refetchPrimaryName`: Function to manually refetch the primary name
 
 ## Parameters
 
-- **params?**: [`UsePrimaryNameParams`](../interfaces/UsePrimaryNameParams.md) - Optional parameters for the hook
+Optional parameters:
+- `address?`: The address to get the primary name for (optional)
+- `chainId?`: The chain ID to use (optional, defaults to provider chain ID)
+- `enabled?`: Boolean to enable/disable the query (optional, defaults to true)
+- `priority?`: Priority for name resolution ('onChain' | 'offChain', defaults to 'offChain')
 
 ## Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/primaryName/usePrimaryName.ts:35](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/react/src/lib/hooks/primaryName/usePrimaryName.ts#L35)
+[packages/@justaname.id/react/src/lib/hooks/primaryName/usePrimaryName.ts:40](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/react/src/lib/hooks/primaryName/usePrimaryName.ts#L40)
