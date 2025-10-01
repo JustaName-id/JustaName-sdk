@@ -1,6 +1,6 @@
 # useEnsAuth
 
-A React hook for ENS-based authentication and signing in with ENS names.
+A React hook for checking ENS-based authentication status and getting connected ENS information.
 
 ---
 
@@ -12,38 +12,27 @@ import { useEnsAuth } from '@justaname.id/react'
 // Basic usage
 function EnsAuthComponent() {
   const { 
-    signIn, 
-    signOut, 
-    isAuthenticated, 
-    isLoading, 
-    error, 
-    user 
+    isLoggedIn, 
+    connectedEns, 
+    isEnsAuthPending, 
+    refreshEnsAuth 
   } = useEnsAuth()
   
-  const handleSignIn = async () => {
-    try {
-      await signIn({
-        ensName: 'alice.justaname.eth',
-        message: 'Sign in to access the app'
-      })
-    } catch (err) {
-      console.error('Sign in failed:', err)
-    }
-  }
-  
-  if (isLoading) return <div>Loading...</div>
+  if (isEnsAuthPending) return <div>Loading...</div>
   
   return (
     <div>
-      {isAuthenticated ? (
+      {isLoggedIn && connectedEns ? (
         <div>
-          <p>Welcome, {user?.ensName}!</p>
-          <button onClick={signOut}>Sign Out</button>
+          <p>Welcome, {connectedEns.ens}!</p>
+          <p>Address: {connectedEns.address}</p>
+          <p>Chain ID: {connectedEns.chainId}</p>
+          <button onClick={refreshEnsAuth}>Refresh Auth</button>
         </div>
       ) : (
         <div>
-          <button onClick={handleSignIn}>Sign In with ENS</button>
-          {error && <p>Error: {error.message}</p>}
+          <p>Not authenticated</p>
+          <button onClick={refreshEnsAuth}>Check Auth Status</button>
         </div>
       )}
     </div>
@@ -52,80 +41,48 @@ function EnsAuthComponent() {
 ```
 
 ```typescript
-// With custom user type and advanced parameters
+// With custom user type and local storage
 interface CustomUser {
-  ensName: string
-  address: string
+  bio: string
+  website: string
   avatar?: string
-  profile: {
-    bio: string
-    website: string
-  }
 }
 
 function EnsAuthComponent() {
   const { 
-    signIn, 
-    signOut, 
-    isAuthenticated, 
-    isLoading, 
-    error, 
-    user 
+    isLoggedIn, 
+    connectedEns, 
+    isEnsAuthPending, 
+    isEnsAuthFetching,
+    isEnsAuthLoading,
+    refreshEnsAuth 
   } = useEnsAuth<CustomUser>({
-    onSignIn: (user) => {
-      console.log('User signed in:', user)
-      // Redirect to dashboard or update app state
-    },
-    onSignOut: () => {
-      console.log('User signed out')
-      // Clear app state or redirect to login
-    },
-    onError: (error) => {
-      console.error('Auth error:', error)
-      // Show error notification
-    }
+    backendUrl: 'https://api.justaname.id',
+    currentEnsRoute: '/auth/current-ens',
+    enabled: true,
+    local: false
   })
-  
-  const handleSignIn = async () => {
-    await signIn({
-      ensName: 'bob.justaname.eth',
-      message: 'Please sign this message to authenticate',
-      nonce: Date.now().toString()
-    })
-  }
   
   return (
     <div className="auth-container">
-      {isLoading && <div className="loading">Authenticating...</div>}
+      {isEnsAuthLoading && <div>Checking authentication...</div>}
       
-      {isAuthenticated && user ? (
+      {isLoggedIn && connectedEns ? (
         <div className="user-profile">
-          <div className="user-info">
-            <h3>Welcome, {user.ensName}!</h3>
-            <p>Address: {user.address}</p>
-            {user.avatar && (
-              <img src={user.avatar} alt="Avatar" className="avatar" />
-            )}
-            <div className="profile">
-              <p>Bio: {user.profile.bio}</p>
-              <p>Website: {user.profile.website}</p>
-            </div>
-          </div>
-          <button onClick={signOut} className="sign-out-btn">
-            Sign Out
-          </button>
+          <h3>Welcome, {connectedEns.ens}!</h3>
+          <p>Address: {connectedEns.address}</p>
+          <p>Chain ID: {connectedEns.chainId}</p>
+          {connectedEns.bio && <p>Bio: {connectedEns.bio}</p>}
+          {connectedEns.website && <p>Website: {connectedEns.website}</p>}
+          {connectedEns.avatar && (
+            <img src={connectedEns.avatar} alt="Avatar" />
+          )}
+          <button onClick={refreshEnsAuth}>Refresh</button>
         </div>
       ) : (
-        <div className="sign-in">
-          <h3>Sign In with ENS</h3>
-          <button onClick={handleSignIn} className="sign-in-btn">
-            Connect ENS Name
-          </button>
-          {error && (
-            <div className="error">
-              <p>Error: {error.message}</p>
-            </div>
-          )}
+        <div className="not-authenticated">
+          <p>Not authenticated</p>
+          <button onClick={refreshEnsAuth}>Check Status</button>
         </div>
       )}
     </div>
@@ -138,12 +95,12 @@ function EnsAuthComponent() {
 ## Returns
 
 [`UseEnsAuthReturn`](../interfaces/UseEnsAuthReturn.md)<`T`> - An object containing:
-- `signIn`: Function to authenticate with ENS name
-- `signOut`: Function to sign out the user
-- `isAuthenticated`: Boolean indicating if user is authenticated
-- `isLoading`: Boolean indicating if authentication is in progress
-- `error`: Error object if authentication failed
-- `user`: User object with ENS name and profile data
+- `isLoggedIn`: Boolean indicating if user is authenticated
+- `connectedEns`: ENS authentication data object or null/undefined
+- `isEnsAuthPending`: Boolean indicating if the auth check is pending
+- `isEnsAuthFetching`: Boolean indicating if the auth check is fetching
+- `isEnsAuthLoading`: Boolean indicating if the auth check is loading
+- `refreshEnsAuth`: Function to manually refresh the authentication status
 
 ## Parameters
 

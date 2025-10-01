@@ -11,12 +11,11 @@ import { useEnsAvatar } from '@justaname.id/react'
 
 // Basic usage
 function EnsAvatarComponent() {
-  const { avatar, isLoading, error, refetch } = useEnsAvatar({
-    ensName: 'alice.justaname.eth'
+  const { avatar, isLoading, getEnsAvatar, sanitizeEnsImage } = useEnsAvatar({
+    ens: 'alice.justaname.eth'
   })
   
   if (isLoading) return <div>Loading avatar...</div>
-  if (error) return <div>Error: {error.message}</div>
   
   return (
     <div>
@@ -26,71 +25,53 @@ function EnsAvatarComponent() {
       ) : (
         <div className="no-avatar">No avatar set</div>
       )}
-      <button onClick={refetch}>Refresh Avatar</button>
     </div>
   )
 }
 ```
 
 ```typescript
-// With advanced parameters and fallback handling
+// With custom chain and manual avatar fetching
 function EnsAvatarComponent() {
-  const { avatar, isLoading, error, refetch } = useEnsAvatar({
-    ensName: 'bob.justaname.eth',
-    enabled: true,
-    onSuccess: (avatarUrl) => {
-      console.log('Avatar loaded:', avatarUrl)
-    },
-    onError: (error) => {
-      console.error('Error loading avatar:', error)
-    }
+  const { avatar, isLoading, getEnsAvatar, sanitizeEnsImage } = useEnsAvatar({
+    ens: 'bob.justaname.eth',
+    chainId: 1,
+    enabled: true
   })
   
-  const handleImageError = () => {
-    console.log('Failed to load avatar image')
+  const handleManualFetch = async () => {
+    const avatarUrl = await getEnsAvatar({
+      name: 'bob.justaname.eth',
+      chainId: 1
+    })
+    console.log('Avatar URL:', avatarUrl)
+  }
+  
+  const handleSanitizeImage = () => {
+    const sanitizedUrl = sanitizeEnsImage({
+      name: 'bob.justaname.eth',
+      image: 'ipfs://QmHash...',
+      chainId: 1
+    })
+    console.log('Sanitized URL:', sanitizedUrl)
   }
   
   return (
-    <div className="avatar-container">
+    <div>
       <h3>Profile Picture</h3>
       
-      {isLoading && (
-        <div className="avatar-loading">
-          <div className="spinner"></div>
-          <p>Loading avatar...</p>
-        </div>
+      {isLoading && <div>Loading avatar...</div>}
+      
+      {avatar && (
+        <img src={avatar} alt="ENS Avatar" />
       )}
       
-      {error && (
-        <div className="avatar-error">
-          <p>Error: {error.message}</p>
-          <button onClick={refetch}>Retry</button>
-        </div>
+      {!avatar && !isLoading && (
+        <div>No avatar set</div>
       )}
       
-      {avatar && !isLoading && !error && (
-        <div className="avatar-display">
-          <img 
-            src={avatar} 
-            alt="ENS Avatar" 
-            className="avatar-image"
-            onError={handleImageError}
-          />
-          <button onClick={refetch} className="refresh-btn">
-            Refresh
-          </button>
-        </div>
-      )}
-      
-      {!avatar && !isLoading && !error && (
-        <div className="no-avatar">
-          <div className="default-avatar">
-            <span>👤</span>
-          </div>
-          <p>No avatar set for this ENS name</p>
-          <button onClick={refetch}>Check Again</button>
-        </div>
-      )}
+      <button onClick={handleManualFetch}>Fetch Avatar Manually</button>
+      <button onClick={handleSanitizeImage}>Sanitize Image URL</button>
     </div>
   )
 }
@@ -103,8 +84,8 @@ function EnsAvatarComponent() {
 [`UseEnsAvatarResult`](../interfaces/UseEnsAvatarResult.md) - An object containing:
 - `avatar`: URL string of the ENS avatar image
 - `isLoading`: Boolean indicating if the avatar is being fetched
-- `error`: Error object if the operation failed
-- `refetch`: Function to manually refetch the avatar
+- `getEnsAvatar`: Function to manually fetch avatar for a given ENS name
+- `sanitizeEnsImage`: Function to sanitize image URLs (handles IPFS and EIP formats)
 
 ## Parameters
 
