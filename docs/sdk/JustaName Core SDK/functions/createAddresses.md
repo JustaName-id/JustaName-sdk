@@ -1,6 +1,6 @@
 # createAddresses
 
-Creates detailed address information from coin data, including coin type details and validation.
+Creates detailed address information from coin data by enriching coin objects with coin type details.
 
 ---
 
@@ -9,80 +9,10 @@ Creates detailed address information from coin data, including coin type details
 ```typescript
 import { createAddresses } from '@justaname.id/sdk'
 
-// Basic usage
 const addresses = createAddresses([
-  { coinType: '60', address: '0x1234567890abcdef...' },
-  { coinType: '0', address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' }
+  { id: 60, name: 'ETH', value: '0x1234567890abcdef...' },
+  { id: 0, name: 'BTC', value: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' }
 ])
-```
-
-```typescript
-// With multiple coin types
-const addresses = createAddresses([
-  { coinType: '60', address: '0x1234567890abcdef...' }, // Ethereum
-  { coinType: '0', address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' }, // Bitcoin
-  { coinType: '137', address: '0xabcdef1234567890...' }, // Polygon
-  { coinType: '42161', address: '0x9876543210fedcba...' } // Arbitrum
-])
-
-console.log(addresses)
-// [
-//   {
-//     coinType: '60',
-//     address: '0x1234567890abcdef...',
-//     name: 'Ethereum',
-//     symbol: 'ETH',
-//     decimals: 18,
-//     chainId: 1
-//   },
-//   {
-//     coinType: '0',
-//     address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
-//     name: 'Bitcoin',
-//     symbol: 'BTC',
-//     decimals: 8,
-//     chainId: null
-//   },
-//   // ... more addresses with details
-// ]
-```
-
-```typescript
-// Processing subname records
-function processSubnameAddresses(records) {
-  const coins = records.coins || {}
-  const coinArray = Object.entries(coins).map(([coinType, address]) => ({
-    coinType,
-    address
-  }))
-  
-  const addressesWithDetails = createAddresses(coinArray)
-  
-  // Filter for specific networks
-  const ethereumAddresses = addressesWithDetails.filter(addr => addr.coinType === '60')
-  const bitcoinAddresses = addressesWithDetails.filter(addr => addr.coinType === '0')
-  
-  return {
-    all: addressesWithDetails,
-    ethereum: ethereumAddresses,
-    bitcoin: bitcoinAddresses
-  }
-}
-
-// Usage with subname data
-const subnameData = {
-  records: {
-    coins: {
-      '60': '0x1234567890abcdef...',
-      '0': '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
-      '137': '0xabcdef1234567890...'
-    }
-  }
-}
-
-const processedAddresses = processSubnameAddresses(subnameData.records)
-console.log('Ethereum addresses:', processedAddresses.ethereum)
-console.log('Bitcoin addresses:', processedAddresses.bitcoin)
 ```
 
 ---
@@ -90,16 +20,16 @@ console.log('Bitcoin addresses:', processedAddresses.bitcoin)
 ## Returns
 
 [`CoinAndDetails`](../type-aliases/CoinAndDetails.md)[] - An array of objects containing:
-- `coinType`: The coin type identifier
-- `address`: The cryptocurrency address
-- `name`: The full name of the cryptocurrency
+- `id`: The coin type identifier (number)
+- `name`: The original name from the coin object
+- `value`: The cryptocurrency address
+- `coin`: The full name of the cryptocurrency
 - `symbol`: The symbol of the cryptocurrency
-- `decimals`: The number of decimal places
-- `chainId`: The blockchain chain ID (if applicable)
+- `coinType`: The coin type as a string
 
 ## Parameters
 
-- **coins**: [`Coin`](../interfaces/Coin.md)[] - Array of coin objects with coinType and address
+- **coins**: [`Coin`](../interfaces/Coin.md)[] - Array of coin objects with id, name, and value
 
 ## Defined in
 
