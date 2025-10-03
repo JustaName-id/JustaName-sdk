@@ -9,16 +9,22 @@ A React hook for checking ENS-based authentication status and getting connected 
 ```typescript
 import { useEnsAuth } from '@justaname.id/react'
 
-// Basic usage
 function EnsAuthComponent() {
   const { 
     isLoggedIn, 
     connectedEns, 
     isEnsAuthPending, 
+    isEnsAuthFetching,
+    isEnsAuthLoading,
     refreshEnsAuth 
-  } = useEnsAuth()
+  } = useEnsAuth({
+    backendUrl: 'https://api.justaname.id',
+    currentEnsRoute: '/auth/current-ens',
+    enabled: true,
+    local: false
+  })
   
-  if (isEnsAuthPending) return <div>Loading...</div>
+  if (isEnsAuthLoading) return <div>Checking authentication...</div>
   
   return (
     <div>
@@ -40,56 +46,6 @@ function EnsAuthComponent() {
 }
 ```
 
-```typescript
-// With custom user type and local storage
-interface CustomUser {
-  bio: string
-  website: string
-  avatar?: string
-}
-
-function EnsAuthComponent() {
-  const { 
-    isLoggedIn, 
-    connectedEns, 
-    isEnsAuthPending, 
-    isEnsAuthFetching,
-    isEnsAuthLoading,
-    refreshEnsAuth 
-  } = useEnsAuth<CustomUser>({
-    backendUrl: 'https://api.justaname.id',
-    currentEnsRoute: '/auth/current-ens',
-    enabled: true,
-    local: false
-  })
-  
-  return (
-    <div className="auth-container">
-      {isEnsAuthLoading && <div>Checking authentication...</div>}
-      
-      {isLoggedIn && connectedEns ? (
-        <div className="user-profile">
-          <h3>Welcome, {connectedEns.ens}!</h3>
-          <p>Address: {connectedEns.address}</p>
-          <p>Chain ID: {connectedEns.chainId}</p>
-          {connectedEns.bio && <p>Bio: {connectedEns.bio}</p>}
-          {connectedEns.website && <p>Website: {connectedEns.website}</p>}
-          {connectedEns.avatar && (
-            <img src={connectedEns.avatar} alt="Avatar" />
-          )}
-          <button onClick={refreshEnsAuth}>Refresh</button>
-        </div>
-      ) : (
-        <div className="not-authenticated">
-          <p>Not authenticated</p>
-          <button onClick={refreshEnsAuth}>Check Status</button>
-        </div>
-      )}
-    </div>
-  )
-}
-```
-
 ---
 
 ## Returns
@@ -104,7 +60,7 @@ function EnsAuthComponent() {
 
 ## Parameters
 
-- **params?**: [`UseEnsAuthParams`](../interfaces/UseEnsAuthParams.md) - Optional parameters for the hook
+- **params?**: [`UseEnsAuthParams`](../interfaces/UseEnsAuthParams.md) - Optional parameters including `backendUrl`, `currentEnsRoute`, `enabled`, `local`
 
 ## Type Parameters
 
@@ -112,4 +68,4 @@ function EnsAuthComponent() {
 
 ## Defined in
 
-[packages/@justaname.id/react/src/lib/hooks/signIn/useEnsAuth.ts:28](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/react/src/lib/hooks/signIn/useEnsAuth.ts#L28)
+[packages/@justaname.id/react/src/lib/hooks/signIn/useEnsAuth.ts:33](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justaname.id/react/src/lib/hooks/signIn/useEnsAuth.ts#L33)
