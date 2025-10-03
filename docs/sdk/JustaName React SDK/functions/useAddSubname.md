@@ -1,6 +1,6 @@
 # useAddSubname
 
-A React hook for creating and managing subname creation operations.
+A React hook for creating new subnames with records and addresses.
 
 ---
 
@@ -9,95 +9,35 @@ A React hook for creating and managing subname creation operations.
 ```typescript
 import { useAddSubname } from '@justaname.id/react'
 
-// Basic usage
 function AddSubnameComponent() {
-  const { addSubname, isLoading, error, data } = useAddSubname()
+  const { addSubname, isAddSubnamePending } = useAddSubname()
   
   const handleAddSubname = async () => {
     try {
-      await addSubname({
-        subname: 'alice',
-        parentDomain: 'justaname.eth',
-        records: {
-          texts: [
-            { key: 'description', value: 'My subname' }
-          ]
-        }
-      })
-    } catch (err) {
-      console.error('Failed to add subname:', err)
-    }
-  }
-  
-  return (
-    <div>
-      <button onClick={handleAddSubname} disabled={isLoading}>
-        {isLoading ? 'Creating...' : 'Add Subname'}
-      </button>
-      {error && <p>Error: {error.message}</p>}
-      {data && <p>Subname created: {data.subname}</p>}
-    </div>
-  )
-}
-```
-
-```typescript
-// With parameters and callbacks
-function AddSubnameComponent() {
-  const { addSubname, isLoading, error, data } = useAddSubname({
-    onSuccess: (result) => {
-      console.log('Subname created successfully:', result)
-      // Redirect or show success message
-    },
-    onError: (error) => {
-      console.error('Error creating subname:', error)
-      // Show error message to user
-    }
-  })
-  
-  const handleAddSubname = async () => {
-    await addSubname({
-      subname: 'bob',
-      parentDomain: 'justaname.eth',
-      records: {
-        texts: [
-          { key: 'description', value: 'Bob\'s subname' },
-          { key: 'url', value: 'https://bob.example.com' }
+      const result = await addSubname({
+        username: 'alice',
+        ensDomain: 'justaname.eth',
+        chainId: 1,
+        text: [
+          { key: 'description', value: 'My subname' },
+          { key: 'url', value: 'https://alice.example.com' }
         ],
-        coins: {
-          '60': '0x1234567890abcdef...'
-        }
-      },
-      duration: 365 * 24 * 60 * 60, // 1 year in seconds
-      price: '1000000000000000000' // 1 ETH in wei
-    })
+        addresses: [
+          { address: '0x1234567890abcdef1234567890abcdef12345678', coinType: 60 }
+        ],
+        contentHash: 'ipfs://QmHash1234567890abcdef'
+      })
+      
+      console.log('Subname created:', result)
+    } catch (error) {
+      console.error('Failed to add subname:', error)
+    }
   }
   
   return (
-    <div className="add-subname-form">
-      <h3>Create New Subname</h3>
-      <button 
-        onClick={handleAddSubname} 
-        disabled={isLoading}
-        className="create-button"
-      >
-        {isLoading ? 'Creating Subname...' : 'Create Subname'}
-      </button>
-      
-      {error && (
-        <div className="error-message">
-          <p>Error: {error.message}</p>
-        </div>
-      )}
-      
-      {data && (
-        <div className="success-message">
-          <p>✅ Subname created successfully!</p>
-          <p>Name: {data.subname}</p>
-          <p>Transaction: {data.txHash}</p>
-        </div>
-      )}
-    </div>
+    <button onClick={handleAddSubname} disabled={isAddSubnamePending}>
+      {isAddSubnamePending ? 'Creating...' : 'Add Subname'}
+    </button>
   )
 }
 ```
@@ -108,13 +48,11 @@ function AddSubnameComponent() {
 
 [`UseAddSubnameResult`](../interfaces/UseAddSubnameResult.md) - An object containing:
 - `addSubname`: Function to create a new subname
-- `isLoading`: Boolean indicating if the operation is in progress
-- `error`: Error object if the operation failed
-- `data`: Result data if the operation succeeded
+- `isAddSubnamePending`: Boolean indicating if the operation is in progress
 
 ## Parameters
 
-- **params?**: [`UseAddSubnameParams`](../interfaces/UseAddSubnameParams.md) - Optional parameters for the hook
+- **params?**: [`UseAddSubnameParams`](../interfaces/UseAddSubnameParams.md) - Optional configuration parameters including `backendUrl`, `addSubnameRoute`, `ensDomain`, `chainId`, `addresses`, `text`, `contentHash`, `apiKey`
 
 ## Defined in
 

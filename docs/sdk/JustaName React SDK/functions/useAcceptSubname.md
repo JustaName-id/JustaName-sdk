@@ -9,42 +9,26 @@ A React hook for accepting subname invitations and managing the acceptance proce
 ```typescript
 import { useAcceptSubname } from '@justaname.id/react'
 
-// Basic usage
 function AcceptSubnameComponent() {
-  const { acceptSubname, isLoading, error } = useAcceptSubname()
+  const { acceptSubname, isAcceptSubnamePending } = useAcceptSubname()
   
   const handleAccept = async () => {
-    await acceptSubname()
+    try {
+      const result = await acceptSubname({
+        ens: 'alice.justaname.eth',
+        addresses: [{ coinType: '60', address: '0x1234...' }],
+        text: [{ key: 'description', value: 'My subname' }]
+      })
+      console.log('Subname accepted:', result)
+    } catch (error) {
+      console.error('Error accepting subname:', error)
+    }
   }
   
   return (
-    <button onClick={handleAccept} disabled={isLoading}>
-      {isLoading ? 'Accepting...' : 'Accept Subname'}
+    <button onClick={handleAccept} disabled={isAcceptSubnamePending}>
+      {isAcceptSubnamePending ? 'Accepting...' : 'Accept Subname'}
     </button>
-  )
-}
-```
-
-```typescript
-// With parameters
-function AcceptSubnameComponent() {
-  const { acceptSubname, isLoading, error } = useAcceptSubname({
-    subname: 'alice.justaname.eth',
-    onSuccess: (result) => {
-      console.log('Subname accepted:', result)
-    },
-    onError: (error) => {
-      console.error('Error accepting subname:', error)
-    }
-  })
-  
-  return (
-    <div>
-      <button onClick={acceptSubname} disabled={isLoading}>
-        Accept Subname
-      </button>
-      {error && <p>Error: {error.message}</p>}
-    </div>
   )
 }
 ```
@@ -54,10 +38,8 @@ function AcceptSubnameComponent() {
 ## Returns
 
 [`UseAcceptSubnameResult`](../interfaces/UseAcceptSubnameResult.md) - An object containing:
-- `acceptSubname`: Function to accept the subname invitation
-- `isLoading`: Boolean indicating if the operation is in progress
-- `error`: Error object if the operation failed
-- `data`: Result data if the operation succeeded
+- `acceptSubname`: Function that returns a `Records` object with `sanitizedRecords` property
+- `isAcceptSubnamePending`: Boolean indicating if the operation is in progress
 
 ## Parameters
 

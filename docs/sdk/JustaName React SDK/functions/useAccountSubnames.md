@@ -9,62 +9,28 @@ A React hook for fetching and managing subnames owned by a connected account.
 ```typescript
 import { useAccountSubnames } from '@justaname.id/react'
 
-// Basic usage
 function AccountSubnamesComponent() {
-  const { subnames, isLoading, error, refetch } = useAccountSubnames()
+  const { 
+    accountSubnames, 
+    isAccountSubnamesPending, 
+    isAccountSubnamesFetching,
+    isAccountSubnamesLoading,
+    refetchAccountSubnames 
+  } = useAccountSubnames()
   
-  if (isLoading) return <div>Loading subnames...</div>
-  if (error) return <div>Error: {error.message}</div>
+  if (isAccountSubnamesLoading) return <div>Loading subnames...</div>
   
   return (
     <div>
       <h3>Your Subnames</h3>
-      {subnames?.map((subname, index) => (
+      {accountSubnames?.map((record, index) => (
         <div key={index}>
-          <p>Name: {subname.name}</p>
-          <p>Parent: {subname.parentDomain}</p>
+          <strong>{record.ens}</strong>
+          <p>{record.sanitizedRecords?.description}</p>
+          <p>Claimed: {record.isClaimed ? 'Yes' : 'No'}</p>
         </div>
       ))}
-      <button onClick={refetch}>Refresh</button>
-    </div>
-  )
-}
-```
-
-```typescript
-// With parameters
-function AccountSubnamesComponent() {
-  const { subnames, isLoading, error } = useAccountSubnames({
-    account: '0x1234567890abcdef...',
-    parentDomain: 'justaname.eth',
-    includeExpired: false,
-    onSuccess: (subnames) => {
-      console.log('Subnames loaded:', subnames)
-    },
-    onError: (error) => {
-      console.error('Error loading subnames:', error)
-    }
-  })
-  
-  return (
-    <div>
-      {isLoading && <p>Loading subnames...</p>}
-      {error && <p>Error: {error.message}</p>}
-      {subnames && (
-        <div>
-          <h4>Your Subnames ({subnames.length})</h4>
-          <div className="subnames-grid">
-            {subnames.map((subname, index) => (
-              <div key={index} className="subname-card">
-                <h5>{subname.name}</h5>
-                <p>Parent: {subname.parentDomain}</p>
-                <p>Created: {subname.createdAt}</p>
-                <p>Status: {subname.status}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <button onClick={refetchAccountSubnames}>Refresh</button>
     </div>
   )
 }
@@ -74,11 +40,12 @@ function AccountSubnamesComponent() {
 
 ## Returns
 
-`UseAccountSubnamesResult` - An object containing:
-- `subnames`: Array of subnames owned by the account
-- `isLoading`: Boolean indicating if the data is being fetched
-- `error`: Error object if the operation failed
-- `refetch`: Function to manually refetch the data
+[`UseAccountSubnamesResult`](../interfaces/UseAccountSubnamesResult.md) - An object containing:
+- `accountSubnames`: Array of `Records` objects containing subname data with `sanitizedRecords` property
+- `isAccountSubnamesPending`: Boolean indicating if the data is being fetched
+- `isAccountSubnamesFetching`: Boolean indicating if the data is being fetched
+- `isAccountSubnamesLoading`: Boolean indicating if the data is loading
+- `refetchAccountSubnames`: Function to manually refetch the data
 
 ## Parameters
 
