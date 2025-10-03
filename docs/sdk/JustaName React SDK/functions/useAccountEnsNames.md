@@ -9,50 +9,28 @@ A React hook for fetching and managing ENS names associated with a connected acc
 ```typescript
 import { useAccountEnsNames } from '@justaname.id/react'
 
-// Basic usage
 function AccountEnsNamesComponent() {
-  const { ensNames, isLoading, error, refetch } = useAccountEnsNames()
+  const { 
+    accountEnsNames, 
+    isAccountEnsNamesPending, 
+    isAccountEnsNamesFetching,
+    isAccountEnsNamesLoading,
+    refetchAccountEnsNames 
+  } = useAccountEnsNames()
   
-  if (isLoading) return <div>Loading ENS names...</div>
-  if (error) return <div>Error: {error.message}</div>
+  if (isAccountEnsNamesLoading) return <div>Loading ENS names...</div>
   
   return (
     <div>
       <h3>Your ENS Names</h3>
-      {ensNames?.map((name, index) => (
-        <div key={index}>{name}</div>
+      {accountEnsNames?.map((record, index) => (
+        <div key={index}>
+          <strong>{record.ens}</strong>
+          <p>{record.sanitizedRecords?.description}</p>
+          <p>Claimed: {record.isClaimed ? 'Yes' : 'No'}</p>
+        </div>
       ))}
-      <button onClick={refetch}>Refresh</button>
-    </div>
-  )
-}
-```
-
-```typescript
-// With parameters
-function AccountEnsNamesComponent() {
-  const { ensNames, isLoading, error } = useAccountEnsNames({
-    account: '0x1234567890abcdef...',
-    enabled: true,
-    onSuccess: (names) => {
-      console.log('ENS names loaded:', names)
-    },
-    onError: (error) => {
-      console.error('Error loading ENS names:', error)
-    }
-  })
-  
-  return (
-    <div>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
-      {ensNames && (
-        <ul>
-          {ensNames.map((name, index) => (
-            <li key={index}>{name}</li>
-          ))}
-        </ul>
-      )}
+      <button onClick={refetchAccountEnsNames}>Refresh</button>
     </div>
   )
 }
@@ -63,10 +41,11 @@ function AccountEnsNamesComponent() {
 ## Returns
 
 [`UseAccountEnsNamesResult`](../interfaces/UseAccountEnsNamesResult.md) - An object containing:
-- `ensNames`: Array of ENS names associated with the account
-- `isLoading`: Boolean indicating if the data is being fetched
-- `error`: Error object if the operation failed
-- `refetch`: Function to manually refetch the data
+- `accountEnsNames`: Array of `Records` objects containing ENS name data with `sanitizedRecords` property
+- `isAccountEnsNamesPending`: Boolean indicating if the data is being fetched
+- `isAccountEnsNamesFetching`: Boolean indicating if the data is being fetched
+- `isAccountEnsNamesLoading`: Boolean indicating if the data is loading
+- `refetchAccountEnsNames`: Function to manually refetch the data
 
 ## Parameters
 

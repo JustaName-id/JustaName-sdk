@@ -9,63 +9,34 @@ A React hook for fetching subnames owned by a specific Ethereum address.
 ```typescript
 import { useAddressSubnames } from '@justaname.id/react'
 
-// Basic usage
 function AddressSubnamesComponent() {
-  const { subnames, isLoading, error, refetch } = useAddressSubnames({
-    address: '0x1234567890abcdef...'
+  const { 
+    addressSubnames, 
+    isAddressSubnamesPending, 
+    isAddressSubnamesFetching,
+    isAddressSubnamesLoading,
+    refetchAddressSubnames 
+  } = useAddressSubnames({
+    address: '0x1234567890abcdef1234567890abcdef12345678',
+    chainId: 1,
+    isClaimed: true,
+    coinType: 60
   })
   
-  if (isLoading) return <div>Loading subnames...</div>
-  if (error) return <div>Error: {error.message}</div>
+  if (isAddressSubnamesLoading) return <div>Loading subnames...</div>
   
   return (
     <div>
       <h3>Subnames for Address</h3>
-      {subnames?.map((subname, index) => (
+      {addressSubnames?.map((subname, index) => (
         <div key={index}>
-          <p>Name: {subname.name}</p>
-          <p>Parent: {subname.parentDomain}</p>
+          <strong>{subname.ens}</strong>
+          <p>{subname.sanitizedRecords?.description}</p>
+          <p>Claimed: {subname.isClaimed ? 'Yes' : 'No'}</p>
+          <p>JAN: {subname.isJAN ? 'Yes' : 'No'}</p>
         </div>
       ))}
-      <button onClick={refetch}>Refresh</button>
-    </div>
-  )
-}
-```
-
-```typescript
-// With additional parameters
-function AddressSubnamesComponent() {
-  const { subnames, isLoading, error } = useAddressSubnames({
-    address: '0x1234567890abcdef...',
-    parentDomain: 'justaname.eth',
-    includeExpired: false,
-    onSuccess: (subnames) => {
-      console.log('Subnames loaded:', subnames)
-    },
-    onError: (error) => {
-      console.error('Error loading subnames:', error)
-    }
-  })
-  
-  return (
-    <div>
-      <h3>Subnames for Address</h3>
-      {isLoading && <p>Loading subnames...</p>}
-      {error && <p>Error: {error.message}</p>}
-      {subnames && (
-        <div className="subnames-grid">
-          {subnames.map((subname, index) => (
-            <div key={index} className="subname-card">
-              <h4>{subname.name}</h4>
-              <p>Parent: {subname.parentDomain}</p>
-              <p>Created: {subname.createdAt}</p>
-              <p>Status: {subname.status}</p>
-              <p>Expires: {subname.expiresAt}</p>
-            </div>
-          ))}
-        </div>
-      )}
+      <button onClick={refetchAddressSubnames}>Refresh</button>
     </div>
   )
 }
@@ -75,15 +46,21 @@ function AddressSubnamesComponent() {
 
 ## Returns
 
-`UseAddressSubnamesResult` - An object containing:
-- `subnames`: Array of subnames owned by the address
-- `isLoading`: Boolean indicating if the data is being fetched
-- `error`: Error object if the operation failed
-- `refetch`: Function to manually refetch the data
+[`UseAddressSubnamesResult`](../interfaces/UseAddressSubnamesResult.md) - An object containing:
+- `addressSubnames`: Array of `Records` objects containing subname data with `sanitizedRecords` property
+- `isAddressSubnamesPending`: Boolean indicating if the data is being fetched
+- `isAddressSubnamesFetching`: Boolean indicating if the data is being fetched
+- `isAddressSubnamesLoading`: Boolean indicating if the data is loading
+- `refetchAddressSubnames`: Function to manually refetch the data
 
 ## Parameters
 
-- **params**: [`UseAddressSubnamesParams`](../interfaces/UseAddressSubnamesParams.md) - Required parameters for the hook
+- **params**: [`UseAddressSubnamesParams`](../interfaces/UseAddressSubnamesParams.md) - Required parameters for the hook:
+  - `address`: `string` - Ethereum address to fetch subnames for
+  - `chainId`: `ChainId` - Chain ID for the query
+  - `isClaimed?`: `boolean` - Filter by claimed status (default: true)
+  - `coinType?`: `number` - Coin type filter
+  - `enabled?`: `boolean` - Enable/disable the query
 
 ## Defined in
 

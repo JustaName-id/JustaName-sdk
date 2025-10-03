@@ -1,6 +1,6 @@
 # useAccountInvitations
 
-A React hook for fetching and managing subname invitations for a connected account.
+A React hook for fetching subname invitations issued to a connected account. Domain holders can issue subnames to user addresses, and users can fetch and accept these invitations.
 
 ---
 
@@ -9,58 +9,31 @@ A React hook for fetching and managing subname invitations for a connected accou
 ```typescript
 import { useAccountInvitations } from '@justaname.id/react'
 
-// Basic usage
 function AccountInvitationsComponent() {
-  const { invitations, isLoading, error, refetch } = useAccountInvitations()
-  
-  if (isLoading) return <div>Loading invitations...</div>
-  if (error) return <div>Error: {error.message}</div>
-  
-  return (
-    <div>
-      <h3>Your Invitations</h3>
-      {invitations?.map((invitation, index) => (
-        <div key={index}>
-          <p>Subname: {invitation.subname}</p>
-          <p>Status: {invitation.status}</p>
-        </div>
-      ))}
-      <button onClick={refetch}>Refresh</button>
-    </div>
-  )
-}
-```
-
-```typescript
-// With parameters
-function AccountInvitationsComponent() {
-  const { invitations, isLoading, error } = useAccountInvitations({
-    account: '0x1234567890abcdef...',
-    status: 'pending',
-    onSuccess: (invitations) => {
-      console.log('Invitations loaded:', invitations)
-    },
-    onError: (error) => {
-      console.error('Error loading invitations:', error)
-    }
+  const { 
+    invitations, 
+    isInvitationsPending, 
+    refetchInvitations 
+  } = useAccountInvitations({
+    coinType: 60,
+    chainId: 1,
+    isClaimed: false
   })
   
+  if (isInvitationsPending) return <div>Loading invitations...</div>
+  
   return (
     <div>
-      {isLoading && <p>Loading invitations...</p>}
-      {error && <p>Error: {error.message}</p>}
-      {invitations && (
-        <div>
-          <h4>Pending Invitations ({invitations.length})</h4>
-          {invitations.map((invitation, index) => (
-            <div key={index} className="invitation-card">
-              <h5>{invitation.subname}</h5>
-              <p>Invited by: {invitation.inviter}</p>
-              <p>Expires: {invitation.expiresAt}</p>
-            </div>
-          ))}
+      <h3>Your Subname Invitations</h3>
+      {invitations?.map((invitation, index) => (
+        <div key={index}>
+          <strong>{invitation.ens}</strong>
+          <p>{invitation.sanitizedRecords?.description}</p>
+          <p>Claimed: {invitation.isClaimed ? 'Yes' : 'No'}</p>
+          <p>JAN: {invitation.isJAN ? 'Yes' : 'No'}</p>
         </div>
-      )}
+      ))}
+      <button onClick={refetchInvitations}>Refresh</button>
     </div>
   )
 }
@@ -70,15 +43,18 @@ function AccountInvitationsComponent() {
 
 ## Returns
 
-`UseAccountInvitationsResult` - An object containing:
-- `invitations`: Array of subname invitations for the account
-- `isLoading`: Boolean indicating if the data is being fetched
-- `error`: Error object if the operation failed
-- `refetch`: Function to manually refetch the data
+[`UseAccountInvitationsResult`](../interfaces/UseAccountInvitationsResult.md) - An object containing:
+- `invitations`: Array of `Records` objects containing subname invitation data with `sanitizedRecords` property
+- `isInvitationsPending`: Boolean indicating if the data is being fetched
+- `refetchInvitations`: Function to manually refetch the data
 
 ## Parameters
 
-- **params?**: [`UseAccountInvitationsParams`](../type-aliases/UseAccountInvitationsParams.md) - Optional parameters for the hook
+- **params?**: [`UseAccountInvitationsParams`](../interfaces/UseAccountInvitationsParams.md) - Optional parameters for the hook:
+  - `coinType`: `number` - Coin type for the invitation (default: 60 for ETH)
+  - `chainId`: `ChainId` - Chain ID for the invitation
+  - `isClaimed`: `boolean` - Filter by claimed status
+  - `enabled`: `boolean` - Enable/disable the query
 
 ## Defined in
 
