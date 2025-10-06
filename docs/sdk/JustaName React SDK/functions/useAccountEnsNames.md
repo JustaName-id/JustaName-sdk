@@ -1,6 +1,6 @@
 # useAccountEnsNames
 
-A React hook for fetching and managing ENS names associated with a connected account.
+A React hook for fetching ENS names associated with a connected account.
 
 ---
 
