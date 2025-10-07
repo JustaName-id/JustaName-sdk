@@ -57,6 +57,16 @@ function EnsSubnamesComponent() {
 
 An infinite query result containing:
 - `data`: Paginated data with pages array containing Records objects
+  - `pageParams`: Array of page parameters for pagination
+  - `pages`: Array of page results
+    - `data`: Array of Records objects (subnames)
+    - `pagination`: Pagination metadata object
+      - `totalCount`: Total number of records
+      - `page`: Current page number
+      - `limit`: Number of items per page
+      - `totalPages`: Total number of pages
+      - `nextPage`: Next page number (null if no more pages)
+      - `prevPage`: Previous page number (null if on first page)
 - `isLoading`: Boolean indicating if initial data is being fetched
 - `error`: Error object if the operation failed
 - `fetchNextPage`: Function to load the next page of subnames
