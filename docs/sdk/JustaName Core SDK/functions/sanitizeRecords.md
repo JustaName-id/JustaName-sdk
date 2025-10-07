@@ -22,10 +22,10 @@ const subnameResponse = {
       { key: 'com.twitter', value: '@alice_dev' },
       { key: 'com.github', value: 'alice-dev' }
     ],
-    coins: {
-      '60': '0x1234567890abcdef1234567890abcdef12345678',
-      '0': '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
-    },
+    coins: [
+    { id: 60, name: 'ETH', value: '0x1234567890abcdef1234567890abcdef12345678' },
+    { id: 0, name: 'BTC', value: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' }
+  ],
     contentHash: {
       protocolType: 'ipfs',
       decoded: 'QmHash1234567890abcdef'
