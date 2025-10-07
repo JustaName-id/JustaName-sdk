@@ -1,6 +1,6 @@
 # useEnsAvatar
 
-A React hook for fetching and managing ENS avatar images associated with ENS names.
+A React hook for fetching ENS avatar images associated with ENS names.
 
 ---
 

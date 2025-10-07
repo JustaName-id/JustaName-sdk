@@ -1,6 +1,6 @@
 # useAccountSubnames
 
-A React hook for fetching and managing subnames owned by a connected account.
+A React hook for fetching subnames owned by a connected account.
 
 ---
 
