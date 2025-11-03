@@ -22,6 +22,9 @@ import {
 } from '../../types';
 import { sanitizeAddresses, sanitizeTexts } from '../../utils';
 import { InvalidConfigurationException } from '../../errors';
+import { createPublicClient, http, Address, toCoinType } from 'viem';
+import { getEnsName } from 'viem/actions';
+import { mainnet, sepolia } from 'viem/chains';
 
 export interface SubnamesConfig {
   /**
@@ -546,6 +549,80 @@ export class Subnames {
       undefined,
       this.dev
     )(['chainId']);
+  }
+
+  async reverseResolve(params: {
+    address: Address;
+    chainId: number;
+  }): Promise<string | null> {
+    const { address, chainId } = params;
+
+    // Get the network configuration for ENS queries
+    const ensChainId = this.chainId;
+    const network = this.networks.find(
+      (network) => network.chainId === ensChainId
+    );
+
+    if (!network) {
+      // If no network configured, fallback to JustaName offchain records only
+      try {
+        const response = await this.getPrimaryNameByAddress({
+          address,
+          chainId: ensChainId,
+        });
+        return response.name || null;
+      } catch {
+        return null;
+      }
+    }
+
+    const chain = ensChainId === 1 ? mainnet : sepolia;
+    const publicClient = createPublicClient({
+      chain,
+      transport: http(network.providerUrl),
+    });
+
+    // Try with coinType 0 (default)
+    try {
+      const ensName = await getEnsName(publicClient, {
+        address: address,
+        coinType: toCoinType(0),
+      });
+      if (ensName) {
+        return ensName;
+      }
+    } catch (error) {
+      // Continue to next fallback
+    }
+
+    // Try with coinType based on chainId
+    try {
+      const coinType = toCoinType(chainId);
+      const ethereumCoinType = toCoinType(1);
+      if (coinType !== ethereumCoinType) {
+        const ensName = await getEnsName(publicClient, {
+          address: address,
+          coinType,
+        });
+        if (ensName) {
+          return ensName;
+        }
+      }
+    } catch (error) {
+      // Continue to next fallback
+    }
+
+    // Try JustaName offchain records
+    try {
+      const response = await this.getPrimaryNameByAddress({
+        address,
+        chainId: ensChainId,
+      });
+      return response.name || null;
+    } catch {
+      // All attempts failed
+      return null;
+    }
   }
 
   private checkSignature(
