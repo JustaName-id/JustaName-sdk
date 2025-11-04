@@ -558,7 +558,7 @@ export class Subnames {
     const { address, chainId } = params;
 
     // Get the network configuration for ENS queries
-    const ensChainId = this.chainId;
+    const ensChainId = this.chainId ?? 1;
     const network = this.networks.find(
       (network) => network.chainId === ensChainId
     );
@@ -598,8 +598,6 @@ export class Subnames {
     // Try with coinType based on chainId
     try {
       const coinType = toCoinType(chainId);
-      const ethereumCoinType = toCoinType(1);
-      if (coinType !== ethereumCoinType) {
         const ensName = await getEnsName(publicClient, {
           address: address,
           coinType,
@@ -607,7 +605,6 @@ export class Subnames {
         if (ensName) {
           return ensName;
         }
-      }
     } catch (error) {
       // Continue to next fallback
     }
