@@ -1,24 +1,59 @@
 # Table of contents
 
-* [👋 Welcome to A Product](README.md)
+* [👋 Overview](README.md)
+* [Quickstart](quickstart.md)
 
-## Overview
+## Configuration
 
-* [💡 What we do](overview/what-we-do.md)
-* [✨ Our Features](overview/our-features.md)
+* [Overview](configuration/overview.md)
+* [Appearance](configuration/appearance.md)
+* [Allowed ENS Names](configuration/allowed-ens-names.md)
+* [ENS Domains](configuration/ens-domains.md)
+* [JustVerified](configuration/justverified.md)
+* [Networks](configuration/networks.md)
 
-## Product Guides
+## Backend Configuration
 
-* [📪 Making a post](product-guides/making-a-post.md)
-* [📎 Understanding Projects](product-guides/understanding-projects.md)
+* [Overview](backend-configuration/overview.md)
+* [Sign In Routes](backend-configuration/sign-in-routes.md)
+* [Subname Management Routes](backend-configuration/subname-management-routes.md)
+* [Full Implementation](backend-configuration/full-implementation.md)
 
-## Fundamentals
+## Learn & Engage
 
-* [🛠️ Getting set up](fundamentals/getting-set-up/README.md)
-  * [📝 Setting permissions](fundamentals/getting-set-up/setting-permissions.md)
-  * [🧑 Inviting Members](fundamentals/getting-set-up/inviting-members.md)
+* [Overview](learn-and-engage/overview.md)
+* [Views](learn-and-engage/views.md)
+* [Filters](learn-and-engage/filters.md)
+
+## Plugins
+
+* [Overview](plugins/overview.md)
+* [JustVerified](plugins/justverified.md)
+* [XMTP](plugins/xmtp.md)
+* [EFP](plugins/efp.md)
+* [POAP](plugins/poap.md)
+* [Talent Protocol](plugins/talent-protocol.md)
+
+## Advanced
+
+* [JustaName Deployment Addresses](advanced/justaname-deployment-addresses.md)
+* [Coin Types](advanced/coin-types.md)
+* [JustaName - Under the Hood](advanced/justaname-under-the-hood.md)
+* [Reading JustaName Subname Events from OrbisDB](advanced/reading-justaname-subname-events-from-orbisdb.md)
+* [Dynamic Records Resolution](advanced/dynamic-records-resolution.md)
+
+## Wallet Providers
+
+* [Overview](wallet-providers/overview.md)
+* [RainbowKit](wallet-providers/rainbowkit.md)
+* [Para](wallet-providers/para.md)
+* [Privy](wallet-providers/privy.md)
+* [Coinbase Smart Wallet](wallet-providers/coinbase-smart-wallet.md)
+
+## Design Components
+
+* [Logos](design-components/logos.md)
 
 ## Use Cases
 
-* [🎨 For Designers](use-cases/for-designers.md)
-* [🖥️ For Developers](use-cases/for-developers.md)
+* [Overview](use-cases/overview.md)

@@ -1,34 +1,31 @@
-[**@justaname.id/sdk**](README.md) • **Docs**
+# globals
+
+[**@justaname.id/sdk**](./) • **Docs**
 
 ***
 
-# @justaname.id/sdk
+## @justaname.id/sdk
 
-## Classes
+### Classes
 
 - [ApiKeyRequiredException](classes/ApiKeyRequiredException.md)
 - [InvalidConfigurationException](classes/InvalidConfigurationException.md)
 - [InvalidENSException](classes/InvalidENSException.md)
 - [InvalidSignInException](classes/InvalidSignInException.md)
 - [JustaName](classes/JustaName.md)
-- [MApps](classes/MApps.md)
 - [OffchainResolvers](classes/OffchainResolvers.md)
 - [SignIn](classes/SignIn.md)
 - [SubnameChallenge](classes/SubnameChallenge.md)
 - [Subnames](classes/Subnames.md)
 
-## Interfaces
 
-- [AddMAppPermissionRequest](interfaces/AddMAppPermissionRequest.md)
-- [AddMAppPermissionRoute](interfaces/AddMAppPermissionRoute.md)
+### Interfaces
+
 - [Address](interfaces/Address.md)
 - [AddressWithTypedCoins](interfaces/AddressWithTypedCoins.md)
 - [ApiKeyHeaders](interfaces/ApiKeyHeaders.md)
 - [ApiKeyResponse](interfaces/ApiKeyResponse.md)
 - [ApiKeyRoute](interfaces/ApiKeyRoute.md)
-- [AppendMAppFieldRequest](interfaces/AppendMAppFieldRequest.md)
-- [AppendMAppFieldRoute](interfaces/AppendMAppFieldRoute.md)
-- [AppendMAppFieldsRequest](interfaces/AppendMAppFieldsRequest.md)
 - [BaseResponse](interfaces/BaseResponse.md)
 - [Coin](interfaces/Coin.md)
 - [CoinType](interfaces/CoinType.md)
@@ -46,8 +43,6 @@
 - [IsSubnameAvailableRoute](interfaces/IsSubnameAvailableRoute.md)
 - [JustaNameConfig](interfaces/JustaNameConfig.md)
 - [JustaNameConfigDefaults](interfaces/JustaNameConfigDefaults.md)
-- [MApp](interfaces/MApp.md)
-- [MAppsParams](interfaces/MAppsParams.md)
 - [Network](interfaces/Network.md)
 - [NetworkWithProvider](interfaces/NetworkWithProvider.md)
 - [OffchainResolverGetAllRequest](interfaces/OffchainResolverGetAllRequest.md)
@@ -57,21 +52,10 @@
 - [PaginatedResponse](interfaces/PaginatedResponse.md)
 - [Pagination](interfaces/Pagination.md)
 - [RecordResponse](interfaces/RecordResponse.md)
-- [RequestAddMAppPermissionChallengeRequest](interfaces/RequestAddMAppPermissionChallengeRequest.md)
-- [RequestAddMAppPermissionChallengeResponse](interfaces/RequestAddMAppPermissionChallengeResponse.md)
-- [RequestAddMAppPermissionChallengeRoute](interfaces/RequestAddMAppPermissionChallengeRoute.md)
-- [RequestAppendMAppFieldChallengeRequest](interfaces/RequestAppendMAppFieldChallengeRequest.md)
-- [RequestAppendMAppFieldChallengeResponse](interfaces/RequestAppendMAppFieldChallengeResponse.md)
-- [RequestAppendMAppFieldChallengeRoute](interfaces/RequestAppendMAppFieldChallengeRoute.md)
 - [RequestChallengeRequest](interfaces/RequestChallengeRequest.md)
 - [RequestChallengeResponse](interfaces/RequestChallengeResponse.md)
 - [RequestChallengeRoute](interfaces/RequestChallengeRoute.md)
-- [RequestRevokeMAppPermissionChallengeRequest](interfaces/RequestRevokeMAppPermissionChallengeRequest.md)
-- [RequestRevokeMAppPermissionChallengeResponse](interfaces/RequestRevokeMAppPermissionChallengeResponse.md)
-- [RequestRevokeMAppPermissionChallengeRoute](interfaces/RequestRevokeMAppPermissionChallengeRoute.md)
 - [RequestSignInParams](interfaces/RequestSignInParams.md)
-- [RevokeMAppPermissionRequest](interfaces/RevokeMAppPermissionRequest.md)
-- [RevokeMAppPermissionRoute](interfaces/RevokeMAppPermissionRoute.md)
 - [ROUTES](interfaces/ROUTES.md)
 - [SanitizedRecords](interfaces/SanitizedRecords.md)
 - [SigninConfig](interfaces/SigninConfig.md)
@@ -121,42 +105,41 @@
 - [TextRecord](interfaces/TextRecord.md)
 - [VerifyChallengeRequest](interfaces/VerifyChallengeRequest.md)
 - [VerifyChallengeResponse](interfaces/VerifyChallengeResponse.md)
-- [VerifyMessageRoute](interfaces/VerifyMessageRoute.md)
 
-## Type Aliases
+### Type Aliases
 
-- [AddressType](type-aliases/AddressType.md)
-- [ChainId](type-aliases/ChainId.md)
-- [CoinAndDetails](type-aliases/CoinAndDetails.md)
-- [CoinTypeKeys](type-aliases/CoinTypeKeys.md)
-- [CoinTypeMap](type-aliases/CoinTypeMap.md)
-- [EnsDomains](type-aliases/EnsDomains.md)
-- [GeneralsIdentifier](type-aliases/GeneralsIdentifier.md)
-- [GeneralsName](type-aliases/GeneralsName.md)
-- [MakeOptionalProps](type-aliases/MakeOptionalProps.md)
-- [Networks](type-aliases/Networks.md)
-- [NetworksWithProvider](type-aliases/NetworksWithProvider.md)
-- [PartialAddressJson](type-aliases/PartialAddressJson.md)
-- [SocialDetails](type-aliases/SocialDetails.md)
-- [SocialsIdentifier](type-aliases/SocialsIdentifier.md)
-- [SocialsName](type-aliases/SocialsName.md)
-- [SupportedCoins](type-aliases/SupportedCoins.md)
-- [SupportedGeneralsNames](type-aliases/SupportedGeneralsNames.md)
-- [SupportedSocialsNames](type-aliases/SupportedSocialsNames.md)
+* [AddressType](type-aliases/AddressType.md)
+* [ChainId](type-aliases/ChainId.md)
+* [CoinAndDetails](type-aliases/CoinAndDetails.md)
+* [CoinTypeKeys](type-aliases/CoinTypeKeys.md)
+* [CoinTypeMap](type-aliases/CoinTypeMap.md)
+* [EnsDomains](type-aliases/EnsDomains.md)
+* [GeneralsIdentifier](type-aliases/GeneralsIdentifier.md)
+* [GeneralsName](type-aliases/GeneralsName.md)
+* [MakeOptionalProps](type-aliases/MakeOptionalProps.md)
+* [Networks](type-aliases/Networks.md)
+* [NetworksWithProvider](type-aliases/NetworksWithProvider.md)
+* [PartialAddressJson](type-aliases/PartialAddressJson.md)
+* [SocialDetails](type-aliases/SocialDetails.md)
+* [SocialsIdentifier](type-aliases/SocialsIdentifier.md)
+* [SocialsName](type-aliases/SocialsName.md)
+* [SupportedCoins](type-aliases/SupportedCoins.md)
+* [SupportedGeneralsNames](type-aliases/SupportedGeneralsNames.md)
+* [SupportedSocialsNames](type-aliases/SupportedSocialsNames.md)
 
-## Variables
+### Variables
 
-- [coinTypeMap](variables/coinTypeMap.md)
-- [GENERAL\_FIELDS](variables/GENERAL_FIELDS.md)
-- [Routes](variables/Routes.md)
-- [SUPPORTED\_SOCIALS](variables/SUPPORTED_SOCIALS.md)
+* [coinTypeMap](variables/coinTypeMap.md)
+* [GENERAL\_FIELDS](variables/GENERAL_FIELDS.md)
+* [Routes](variables/Routes.md)
+* [SUPPORTED\_SOCIALS](variables/SUPPORTED_SOCIALS.md)
 
-## Functions
+### Functions
 
-- [createAddresses](functions/createAddresses.md)
-- [createGenerals](functions/createGenerals.md)
-- [createSocialsAndOthers](functions/createSocialsAndOthers.md)
-- [getCoinTypeDetails](functions/getCoinTypeDetails.md)
-- [sanitizeAddresses](functions/sanitizeAddresses.md)
-- [sanitizeRecords](functions/sanitizeRecords.md)
-- [sanitizeTexts](functions/sanitizeTexts.md)
+* [createAddresses](functions/createAddresses.md)
+* [createGenerals](functions/createGenerals.md)
+* [createSocialsAndOthers](functions/createSocialsAndOthers.md)
+* [getCoinTypeDetails](functions/getCoinTypeDetails.md)
+* [sanitizeAddresses](functions/sanitizeAddresses.md)
+* [sanitizeRecords](functions/sanitizeRecords.md)
+* [sanitizeTexts](functions/sanitizeTexts.md)

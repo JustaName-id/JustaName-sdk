@@ -680,7 +680,7 @@
             "required": true,
             "in": "query",
             "description": "The ENS domain",
-            "example": "jan.eth",
+            "example": "justan.id",
             "schema": {
               "type": "string"
             }
@@ -690,7 +690,7 @@
             "required": true,
             "in": "query",
             "description": "Chain id, we only support Ethereum Mainnet and Sepolia Testnet (1 for mainnet, 11155111 for sepolia)",
-            "example": 11155111,
+            "example": 1,
             "schema": {
               "type": "number"
             }
@@ -940,7 +940,7 @@
             "required": true,
             "in": "query",
             "description": "The subname",
-            "example": "ghadi.justan.id",
+            "example": "user.justan.id",
             "schema": {
               "type": "string"
             }
@@ -997,8 +997,8 @@
     "/ens/v1/subname/search": {
       "get": {
         "operationId": "SubdomainReadController_searchSubnames",
-        "summary": "Get All Ens with Subname count",
-        "description": "Get All Ens with Subname count",
+        "summary": "Search Subnames",
+        "description": "Search subnames based on the provided query",
         "parameters": [
           {
             "name": "name",
@@ -1057,7 +1057,7 @@
         ]
       }
     },
-    "/ens/v1/subname/ens/list": {
+    "/ens/v1/subname/ens-list": {
       "get": {
         "operationId": "SubdomainReadController_getAllEnsWithSubnameCount",
         "summary": "Get All Ens with Subname count",
@@ -1303,8 +1303,8 @@
     }
   },
   "info": {
-    "title": "Title",
-    "description": "description",
+    "title": "JustaName API Reference",
+    "description": "Welcome to the JustaName API Reference, our centralized location for all things JustaName. Here you can find all the APIs needed to integrate with our services.",
     "version": "1.0",
     "contact": {}
   },
@@ -2367,7 +2367,7 @@
             "example": [
               {
                 "key": "twitter.com",
-                "value": "@justaname"
+                "value": "justaname_id"
               },
               {
                 "key": "youtube.com",
@@ -2395,10 +2395,12 @@
         "type": "object",
         "properties": {
           "key": {
-            "type": "string"
+            "type": "string",
+            "example": "com.twitter"
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "example": "justaname_id"
           }
         },
         "required": [
@@ -2410,13 +2412,16 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number"
+            "type": "number",
+            "example": 60
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "example": "eth"
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "example": "0x1FA89227d0F42960eb5f5693fAFCF58e255A4dfa"
           }
         },
         "required": [
@@ -2429,10 +2434,12 @@
         "type": "object",
         "properties": {
           "protocolType": {
-            "type": "string"
+            "type": "string",
+            "example": "ipfs"
           },
           "decoded": {
-            "type": "string"
+            "type": "string",
+            "example": "bafybeiafwq5iqeyk73or3dmzyjyqaauyzdwi3xtync7h6kp64umwvsiumi"
           }
         },
         "required": [
@@ -2444,15 +2451,29 @@
         "type": "object",
         "properties": {
           "resolverAddress": {
-            "type": "string"
+            "type": "string",
+            "example": "0x48De002d3c64e4cFD130A87A35ECD960c01954bc"
           },
           "texts": {
+            "example": [
+              {
+                "key": "com.twitter",
+                "value": "justaname_id"
+              }
+            ],
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Text"
             }
           },
           "coins": {
+            "example": [
+              {
+                "id": 60,
+                "name": "eth",
+                "value": "0x1FA89227d0F42960eb5f5693fAFCF58e255A4dfa"
+              }
+            ],
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Coin"
@@ -2474,7 +2495,7 @@
         "properties": {
           "ens": {
             "type": "string",
-            "example": "ghadi.justan.id"
+            "example": "user.justan.id"
           },
           "isClaimed": {
             "type": "boolean",
@@ -2540,15 +2561,17 @@
           "username": {
             "type": "string",
             "description": "The username",
-            "example": "dev"
+            "example": "ghadi"
           },
           "ensDomain": {
             "type": "string",
             "description": "The second-level domain",
-            "example": "jan.eth"
+            "example": "justan.id"
           },
           "chainId": {
-            "type": "number"
+            "type": "number",
+            "description": "The chain id",
+            "example": 1
           },
           "ethAddress": {
             "type": "string",
@@ -2568,7 +2591,7 @@
         "properties": {
           "ens": {
             "type": "string",
-            "example": "ghadi.justan.id"
+            "example": "user.justan.id"
           },
           "isClaimed": {
             "type": "boolean",
@@ -2668,7 +2691,7 @@
             "example": [
               {
                 "key": "twitter.com",
-                "value": "@justaname"
+                "value": "justaname_id"
               },
               {
                 "key": "youtube.com",
@@ -2698,7 +2721,7 @@
         "properties": {
           "ens": {
             "type": "string",
-            "example": "ghadi.justan.id"
+            "example": "user.justan.id"
           },
           "isClaimed": {
             "type": "boolean",
@@ -2798,7 +2821,7 @@
             "example": [
               {
                 "key": "twitter.com",
-                "value": "@justaname"
+                "value": "justaname_id"
               },
               {
                 "key": "youtube.com",
@@ -2827,7 +2850,7 @@
         "properties": {
           "ens": {
             "type": "string",
-            "example": "ghadi.justan.id"
+            "example": "user.justan.id"
           },
           "isClaimed": {
             "type": "boolean",
@@ -2940,7 +2963,7 @@
         "properties": {
           "ens": {
             "type": "string",
-            "example": "ghadi.justan.id"
+            "example": "user.justan.id"
           },
           "isClaimed": {
             "type": "boolean",
@@ -3030,7 +3053,7 @@
         "properties": {
           "ens": {
             "type": "string",
-            "example": "ghadi.justan.id"
+            "example": "user.justan.id"
           },
           "isClaimed": {
             "type": "boolean",
@@ -3108,7 +3131,7 @@
         "properties": {
           "ens": {
             "type": "string",
-            "example": "ghadi.justan.id"
+            "example": "user.justan.id"
           },
           "isClaimed": {
             "type": "boolean",
@@ -3140,7 +3163,7 @@
         "properties": {
           "ens": {
             "type": "string",
-            "example": "ghadi.justan.id"
+            "example": "user.justan.id"
           },
           "isClaimed": {
             "type": "boolean",
@@ -3238,6 +3261,34 @@
         "type": "object",
         "properties": {
           "subnames": {
+            "example": [
+              {
+                "ens": "user.justan.id",
+                "isClaimed": true,
+                "claimedAt": "2024-05-22T11:55:29.000Z",
+                "isJAN": true,
+                "records": {
+                  "resolverAddress": "0x48De002d3c64e4cFD130A87A35ECD960c01954bc",
+                  "texts": [
+                    {
+                      "key": "com.twitter",
+                      "value": "justaname_id"
+                    }
+                  ],
+                  "coins": [
+                    {
+                      "id": 60,
+                      "name": "eth",
+                      "value": "0x1FA89227d0F42960eb5f5693fAFCF58e255A4dfa"
+                    }
+                  ],
+                  "contentHash": {
+                    "protocolType": "ipfs",
+                    "decoded": "bafybeiafwq5iqeyk73or3dmzyjyqaauyzdwi3xtync7h6kp64umwvsiumi"
+                  }
+                }
+              }
+            ],
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SubnameApiResponse"
@@ -3253,7 +3304,7 @@
         "properties": {
           "ens": {
             "type": "string",
-            "example": "ghadi.justan.id"
+            "example": "user.justan.id"
           },
           "isClaimed": {
             "type": "boolean",
@@ -3285,7 +3336,7 @@
         "properties": {
           "isAvailable": {
             "type": "boolean",
-            "example": true,
+            "example": false,
             "description": "True if the subname is available, otherwise false."
           }
         },

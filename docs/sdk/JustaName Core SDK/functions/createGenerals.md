@@ -1,20 +1,41 @@
-[**@justaname.id/sdk**](../README.md) • **Docs**
+# createGenerals
 
-***
+Filters text records to return only general profile fields (avatar, banner, header, display, description, url, location).
 
-[@justaname.id/sdk](../globals.md) / createGenerals
+---
 
-# Function: createGenerals()
+## Usage
 
-> **createGenerals**(`texts`): [`Text`](../interfaces/Text.md)[]
+```typescript
+import { createGenerals } from '@justaname.id/sdk'
 
-## Parameters
+// Basic usage
+const generalTexts = createGenerals([
+  { key: 'description', value: 'My personal description' },
+  { key: 'url', value: 'https://example.com' },
+  { key: 'email', value: 'contact@example.com' },
+  { key: 'avatar', value: 'https://example.com/avatar.jpg' },
+  { key: 'com.twitter', value: '@username' }
+])
 
-• **texts**: [`Text`](../interfaces/Text.md)[]
+console.log(generalTexts)
+// [
+//   { key: 'description', value: 'My personal description' },
+//   { key: 'url', value: 'https://example.com' },
+//   { key: 'email', value: 'contact@example.com' },
+//   { key: 'avatar', value: 'https://example.com/avatar.jpg' }
+// ]
+```
+
+---
 
 ## Returns
 
-[`Text`](../interfaces/Text.md)[]
+[`Text`](../interfaces/Text.md)[] - An array of text records with keys: `avatar`, `banner`, `header`, `display`, `description`, `url`, `location`
+
+## Parameters
+
+- **texts**: [`Text`](../interfaces/Text.md)[] - Array of text records to filter
 
 ## Defined in
 

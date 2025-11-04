@@ -125,7 +125,6 @@ export interface UseSetNameHashJustaNameResolverParams {
   chainId?: number;
   address?: string;
 }
-
 /**
  * Custom hook for performing a mutation to set the JustaName resolver.
  *

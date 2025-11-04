@@ -1,20 +1,58 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# useAddSubname
 
-***
+A React hook for creating new subnames with records and addresses.
 
-[@justaname.id/react](../globals.md) / useAddSubname
+---
 
-# Function: useAddSubname()
+## Usage
 
-> **useAddSubname**(`params`?): [`UseAddSubnameResult`](../interfaces/UseAddSubnameResult.md)
+```typescript
+import { useAddSubname } from '@justaname.id/react'
 
-## Parameters
+function AddSubnameComponent() {
+  const { addSubname, isAddSubnamePending } = useAddSubname()
+  
+  const handleAddSubname = async () => {
+    try {
+      const result = await addSubname({
+        username: 'alice',
+        ensDomain: 'justaname.eth',
+        chainId: 1,
+        text: [
+          { key: 'description', value: 'My subname' },
+          { key: 'url', value: 'https://alice.example.com' }
+        ],
+        addresses: [
+          { address: '0x1234567890abcdef1234567890abcdef12345678', coinType: 60 }
+        ],
+        contentHash: 'ipfs://QmHash1234567890abcdef'
+      })
+      
+      console.log('Subname created:', result)
+    } catch (error) {
+      console.error('Failed to add subname:', error)
+    }
+  }
+  
+  return (
+    <button onClick={handleAddSubname} disabled={isAddSubnamePending}>
+      {isAddSubnamePending ? 'Creating...' : 'Add Subname'}
+    </button>
+  )
+}
+```
 
-• **params?**: [`UseAddSubnameParams`](../interfaces/UseAddSubnameParams.md)
+---
 
 ## Returns
 
-[`UseAddSubnameResult`](../interfaces/UseAddSubnameResult.md)
+[`UseAddSubnameResult`](../interfaces/UseAddSubnameResult.md) - An object containing:
+- `addSubname`: Function to create a new subname
+- `isAddSubnamePending`: Boolean indicating if the operation is in progress
+
+## Parameters
+
+- **params?**: [`UseAddSubnameParams`](../interfaces/UseAddSubnameParams.md) - Optional configuration parameters including `backendUrl`, `addSubnameRoute`, `ensDomain`, `chainId`, `addresses`, `text`, `contentHash`, `apiKey`
 
 ## Defined in
 

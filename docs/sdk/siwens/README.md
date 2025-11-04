@@ -1,4 +1,4 @@
-**@justaname.id/siwens** • [**Docs**](globals.md)
+**@justaname.id/siwens** 
 
 ***
 

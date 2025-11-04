@@ -1,20 +1,35 @@
-[**@justaname.id/sdk**](../README.md) • **Docs**
+# createAddresses
 
-***
+Creates detailed address information from coin data by enriching coin objects with coin type details.
 
-[@justaname.id/sdk](../globals.md) / createAddresses
+---
 
-# Function: createAddresses()
+## Usage
 
-> **createAddresses**(`coins`): [`CoinAndDetails`](../type-aliases/CoinAndDetails.md)[]
+```typescript
+import { createAddresses } from '@justaname.id/sdk'
 
-## Parameters
+const addresses = createAddresses([
+  { id: 60, name: 'ETH', value: '0x1234567890abcdef...' },
+  { id: 0, name: 'BTC', value: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' }
+])
+```
 
-• **coins**: [`Coin`](../interfaces/Coin.md)[]
+---
 
 ## Returns
 
-[`CoinAndDetails`](../type-aliases/CoinAndDetails.md)[]
+[`CoinAndDetails`](../type-aliases/CoinAndDetails.md)[] - An array of objects containing:
+- `id`: The coin type identifier (number)
+- `name`: The original name from the coin object
+- `value`: The cryptocurrency address
+- `coin`: The full name of the cryptocurrency
+- `symbol`: The symbol of the cryptocurrency
+- `coinType`: The coin type as a string
+
+## Parameters
+
+- **coins**: [`Coin`](../interfaces/Coin.md)[] - Array of coin objects with id, name, and value
 
 ## Defined in
 
