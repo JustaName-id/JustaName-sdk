@@ -9,6 +9,8 @@ interface UseUploadMediaFunctionParams {
   ens?: string;
   type?: 'Avatar' | 'Banner';
   chainId?: ChainId;
+  signature?: string;
+  message?: string;
 }
 
 export interface UseUploadMediaParams {
@@ -94,7 +96,6 @@ export const useUploadMedia = (
       }
 
       _params.form.append('signature', finalSignature);
-      // const baseUrl = 'http://localhost:3000';
       const baseUrl = dev
         ? 'https://api-staging.justaname.id'
         : 'https://api.justaname.id';

@@ -4461,12 +4461,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justaname.id/react@npm:0.3.203, @justaname.id/react@workspace:packages/@justaname.id/react":
+"@justaname.id/react@npm:0.3.206, @justaname.id/react@workspace:packages/@justaname.id/react":
   version: 0.0.0-use.local
   resolution: "@justaname.id/react@workspace:packages/@justaname.id/react"
   dependencies:
     "@ensdomains/ensjs": "npm:4.0.2"
-    "@justaname.id/sdk": "npm:0.2.200"
+    "@justaname.id/sdk": "npm:0.2.203"
     axios: "npm:1.6.0"
     jest: "npm:^29.4.1"
     qs: "npm:6.12.0"
@@ -4479,11 +4479,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justaname.id/sdk@npm:0.2.200, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
+"@justaname.id/sdk@npm:0.2.203, @justaname.id/sdk@workspace:packages/@justaname.id/sdk":
   version: 0.0.0-use.local
   resolution: "@justaname.id/sdk@workspace:packages/@justaname.id/sdk"
   dependencies:
-    "@justaname.id/siwens": "npm:0.0.133"
+    "@justaname.id/siwens": "npm:0.0.136"
     axios: "npm:1.6.0"
     jest: "npm:^29.4.1"
     qs: "npm:6.12.0"
@@ -4494,7 +4494,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justaname.id/siwens@npm:0.0.133, @justaname.id/siwens@workspace:packages/@justaname.id/siwens":
+"@justaname.id/siwens@npm:0.0.136, @justaname.id/siwens@workspace:packages/@justaname.id/siwens":
   version: 0.0.0-use.local
   resolution: "@justaname.id/siwens@workspace:packages/@justaname.id/siwens"
   peerDependencies:
@@ -4567,7 +4567,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justweb3/ui@npm:0.0.139, @justweb3/ui@workspace:packages/@justweb3/ui":
+"@justweb3/ui@npm:0.0.142, @justweb3/ui@workspace:packages/@justweb3/ui":
   version: 0.0.0-use.local
   resolution: "@justweb3/ui@workspace:packages/@justweb3/ui"
   dependencies:
@@ -4595,9 +4595,9 @@ __metadata:
   dependencies:
     "@ensdomains/address-encoder": "npm:1.1.2"
     "@hookform/resolvers": "npm:3.9.0"
-    "@justaname.id/react": "npm:0.3.203"
-    "@justaname.id/sdk": "npm:0.2.200"
-    "@justweb3/ui": "npm:0.0.139"
+    "@justaname.id/react": "npm:0.3.206"
+    "@justaname.id/sdk": "npm:0.2.203"
+    "@justweb3/ui": "npm:0.0.142"
     clsx: "npm:1.2.1"
     cropperjs: "npm:1.6.2"
     lodash: "npm:4.17.21"
