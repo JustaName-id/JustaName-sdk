@@ -1,3 +1,20 @@
+## 0.3.207 (2025-11-04)
+
+
+### 🚀 Features
+
+- added reverse resolve ([7712517a](https://github.com/JustaName-id/JustaName-sdk/commit/7712517a))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.204
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.206 (2025-08-28)
 
 

@@ -1,3 +1,7 @@
+## 0.1.44 (2025-11-04)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
 ## 0.1.43 (2025-08-28)
 
 This was a version bump only for siwens to align it with other projects, there were no code changes.

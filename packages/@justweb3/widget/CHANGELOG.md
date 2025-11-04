@@ -1,3 +1,12 @@
+## 0.0.143 (2025-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.207
+- Updated @justaname.id/sdk to 0.2.204
+- Updated @justweb3/ui to 0.0.143
+
 ## 0.0.142 (2025-08-28)
 
 
