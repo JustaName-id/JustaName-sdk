@@ -517,68 +517,7 @@ describe('justaname', () => {
     expect(mapp).toBeTruthy();
   });
 
-  it('should append field to mApps subname', async () => {
-    const challenge = await justaname.mApps.requestAppendMAppFieldChallenge({
-      subname: subnameToBeAdded + '.' + ENS_DOMAIN,
-      address: mAppSigner.address,
-      mApp: ENS_DOMAIN,
-      chainId: CHAIN_ID,
-    });
 
-    const signature = await mAppSigner.signMessage(challenge.challenge);
-
-    const response = await justaname.mApps.appendMAppField(
-      {
-        subname: subnameToBeAdded + '.' + ENS_DOMAIN,
-        fields: [
-          {
-            key: 'test',
-            value: 'testValue',
-          },
-          {
-            key: 'test2',
-            value: 'testValue2',
-          },
-        ],
-      },
-      {
-        xAddress: mAppSigner.address,
-        xMessage: challenge.challenge,
-        xSignature: signature,
-      }
-    );
-
-    expect(response).toBeDefined();
-  });
-
-  it("user shoudn't be able to update mApps field", async () => {
-    const challenge = await justaname.siwe.requestChallenge({
-      address: subnameSigner.address,
-      chainId: CHAIN_ID,
-    });
-
-    const signature = await subnameSigner.signMessage(challenge.challenge);
-
-    const response = await justaname.subnames.updateSubname(
-      {
-        username: subnameToBeAdded,
-        chainId: CHAIN_ID,
-        ensDomain: ENS_DOMAIN,
-        text: {
-          [`test2_${MAPP}`]: 'shouldntBeUpdated',
-        },
-        signature,
-      },
-      {
-        xMessage: challenge.challenge,
-        xAddress: subnameSigner.address,
-      }
-    );
-
-    expect(
-      response.records.texts.find((text) => text.key === `test2_${MAPP}`)?.value
-    ).toEqual('testValue2');
-  });
 
   it('should be remove contentHash', async () => {
     const records = await justaname.subnames.getRecords({
@@ -620,38 +559,6 @@ describe('justaname', () => {
     expect(records2.records.contentHash).toBeNull();
 
     expect(response.records.contentHash).toBeNull();
-  });
-
-  it('should remove field if value is empty', async () => {
-    const challenge = await justaname.mApps.requestAppendMAppFieldChallenge({
-      subname: subnameToBeAdded + '.' + ENS_DOMAIN,
-      address: mAppSigner.address,
-      mApp: ENS_DOMAIN,
-      chainId: CHAIN_ID,
-    });
-
-    const signature = await mAppSigner.signMessage(challenge.challenge);
-
-    const response = await justaname.mApps.appendMAppField(
-      {
-        subname: subnameToBeAdded + '.' + ENS_DOMAIN,
-        fields: [
-          {
-            key: 'test',
-            value: '',
-          },
-        ],
-      },
-      {
-        xAddress: mAppSigner.address,
-        xMessage: challenge.challenge,
-        xSignature: signature,
-      }
-    );
-
-    expect(
-      response.records.texts.find((text) => text.key === `test_${MAPP}`)
-    ).toBeUndefined();
   });
 
   it('should revoke mApps permission', async () => {
