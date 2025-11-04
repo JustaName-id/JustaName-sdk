@@ -1,181 +1,183 @@
-[**@justweb3/widget**](../README.md) • **Docs**
+# useJustWeb3
+
+[**@justweb3/widget**](../../) • **Docs**
 
 ***
 
 [@justweb3/widget](../globals.md) / useJustWeb3
 
-# Interface: useJustWeb3
+## Interface: useJustWeb3
 
-## Properties
+### Properties
 
-### chainId
+#### chainId
 
-> **chainId**: `undefined` \| `ChainId`
+> **chainId**: `undefined` | `ChainId`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:280](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L280)
 
 ***
 
-### connectedEns
+#### connectedEns
 
-> **connectedEns**: `undefined` \| `null` \| `object`
+> **connectedEns**: `undefined` | `null` | `object`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:275](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L275)
 
 ***
 
-### handleOpenSignInDialog()
+#### handleOpenSignInDialog()
 
 > **handleOpenSignInDialog**: (`open`) => `void`
 
-#### Parameters
+**Parameters**
 
 • **open**: `boolean`
 
-#### Returns
+**Returns**
 
 `void`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:265](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L265)
 
 ***
 
-### isEnsAuthFetching
+#### isEnsAuthFetching
 
 > **isEnsAuthFetching**: `boolean`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:273](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L273)
 
 ***
 
-### isEnsAuthLoading
+#### isEnsAuthLoading
 
 > **isEnsAuthLoading**: `boolean`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:272](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L272)
 
 ***
 
-### isEnsAuthPending
+#### isEnsAuthPending
 
 > **isEnsAuthPending**: `boolean`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:271](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L271)
 
 ***
 
-### isLoggedIn
+#### isLoggedIn
 
 > **isLoggedIn**: `boolean`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:270](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L270)
 
 ***
 
-### isSignInOpen
+#### isSignInOpen
 
 > **isSignInOpen**: `boolean`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:266](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L266)
 
 ***
 
-### openEnsProfile()
+#### openEnsProfile()
 
 > **openEnsProfile**: (`ens`, `chainId`?) => `void`
 
-#### Parameters
+**Parameters**
 
 • **ens**: `string`
 
 • **chainId?**: `ChainId`
 
-#### Returns
+**Returns**
 
 `void`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:276](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L276)
 
 ***
 
-### refreshEnsAuth()
+#### refreshEnsAuth()
 
 > **refreshEnsAuth**: () => `void`
 
-#### Returns
+**Returns**
 
 `void`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:274](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L274)
 
 ***
 
-### signIn
+#### signIn
 
-> **signIn**: `UseMutateAsyncFunction`\<`string`, `Error`, `UseEnsSignInFunctionParams`, `unknown`\>
+> **signIn**: `UseMutateAsyncFunction`<`string`, `Error`, `UseEnsSignInFunctionParams`, `unknown`>
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:267](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L267)
 
 ***
 
-### signOut()
+#### signOut()
 
-> **signOut**: () => `Promise`\<`void`\>
+> **signOut**: () => `Promise`<`void`>
 
-#### Returns
+**Returns**
 
-`Promise`\<`void`\>
+`Promise`<`void`>
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:268](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L268)
 
 ***
 
-### status
+#### status
 
-> **status**: `"pending"` \| `"signedIn"` \| `"signedOut"`
+> **status**: `"pending"` | `"signedIn"` | `"signedOut"`
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:269](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L269)
 
 ***
 
-### updateRecords()
+#### updateRecords()
 
-> **updateRecords**: (`records`) => `Promise`\<`void`\>
+> **updateRecords**: (`records`) => `Promise`<`void`>
 
-#### Parameters
+**Parameters**
 
-• **records**: `Omit`\<`UseSubnameUpdateFunctionParams`, `"ens"`\> & `object`
+• **records**: `Omit`<`UseSubnameUpdateFunctionParams`, `"ens"`> & `object`
 
-#### Returns
+**Returns**
 
-`Promise`\<`void`\>
+`Promise`<`void`>
 
-#### Defined in
+**Defined in**
 
 [packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx:277](https://github.com/JustaName-id/JustaName-sdk/blob/dc845c10af242e3ca87d95ef392516ac0bfa8b95/packages/@justweb3/widget/src/lib/providers/JustWeb3Provider/index.tsx#L277)

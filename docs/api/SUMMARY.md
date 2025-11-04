@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Introduction](README.md)
+* [Overview](README.md)
 * [API reference](api-reference/README.md)
   * [Siwe](api-reference/siwe/README.md)
     * [Request challenge](api-reference/siwe/request-challenge.md)
@@ -25,12 +25,5 @@
     * [Ens list](api-reference/subname/ens-list.md)
   * [Primary name](api-reference/primary-name/README.md)
     * [Address](api-reference/primary-name/address.md)
-    * [Name hash](api-reference/primary-name/name-hash.md)
     * [Set primary name](api-reference/primary-name/set-primary-name.md)
-  * [Mapp](api-reference/mapp/README.md)
-    * [Permission](api-reference/mapp/permission/README.md)
-      * [Add](api-reference/mapp/permission/add.md)
-      * [Revoke](api-reference/mapp/permission/revoke.md)
-    * [Field](api-reference/mapp/field/README.md)
-      * [Append](api-reference/mapp/field/append.md)
-* [Specification](https://firebasestorage.googleapis.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FvyoXIYjGGjTqA4R1wGF2%2Fimports%2FMyTbcHnP4s0MVaF5Mx0R%2Fswagger.json?alt=media\&token=4bd70bf5-4fad-4e9f-b303-fab3fc888923)
+* [Specification](https://firebasestorage.googleapis.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FvyoXIYjGGjTqA4R1wGF2%2Fimports%2FezRE3W4qiB2JfGTurbkv%2Fswagger.json?alt=media\&token=0f9ec4ae-aa72-4b12-9e5a-8d09bb9a6fdd)

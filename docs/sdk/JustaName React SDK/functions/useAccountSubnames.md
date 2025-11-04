@@ -1,20 +1,55 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# useAccountSubnames
 
-***
+A React hook for fetching subnames owned by a connected account.
 
-[@justaname.id/react](../globals.md) / useAccountSubnames
+---
 
-# Function: useAccountSubnames()
+## Usage
 
-> **useAccountSubnames**(`params`?): `UseAccountSubnamesResult`
+```typescript
+import { useAccountSubnames } from '@justaname.id/react'
 
-## Parameters
+function AccountSubnamesComponent() {
+  const { 
+    accountSubnames, 
+    isAccountSubnamesPending, 
+    isAccountSubnamesFetching,
+    isAccountSubnamesLoading,
+    refetchAccountSubnames 
+  } = useAccountSubnames()
+  
+  if (isAccountSubnamesLoading) return <div>Loading subnames...</div>
+  
+  return (
+    <div>
+      <h3>Your Subnames</h3>
+      {accountSubnames?.map((record, index) => (
+        <div key={index}>
+          <strong>{record.ens}</strong>
+          <p>{record.sanitizedRecords?.description}</p>
+          <p>Claimed: {record.isClaimed ? 'Yes' : 'No'}</p>
+        </div>
+      ))}
+      <button onClick={refetchAccountSubnames}>Refresh</button>
+    </div>
+  )
+}
+```
 
-• **params?**: [`UseConnectedWalletSubnamesOptions`](../interfaces/UseConnectedWalletSubnamesOptions.md)
+---
 
 ## Returns
 
-`UseAccountSubnamesResult`
+[`UseAccountSubnamesResult`](../interfaces/UseAccountSubnamesResult.md) - An object containing:
+- `accountSubnames`: Array of `Records` objects containing subname data with `sanitizedRecords` property
+- `isAccountSubnamesPending`: Boolean indicating if the data is being fetched
+- `isAccountSubnamesFetching`: Boolean indicating if the data is being fetched
+- `isAccountSubnamesLoading`: Boolean indicating if the data is loading
+- `refetchAccountSubnames`: Function to manually refetch the data
+
+## Parameters
+
+- **params?**: [`UseConnectedWalletSubnamesOptions`](../interfaces/UseConnectedWalletSubnamesOptions.md) - Optional parameters for the hook
 
 ## Defined in
 

@@ -1,4 +1,4 @@
-**@justweb3/efp-plugin** • [**Docs**](globals.md)
+**@justweb3/efp-plugin** 
 
 ***
 

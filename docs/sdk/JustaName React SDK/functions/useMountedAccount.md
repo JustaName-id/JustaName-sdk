@@ -1,21 +1,35 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# useMountedAccount
 
-***
+A React hook that wraps the `useAccount` hook from wagmi, incorporating a component mount check to prevent state updates on unmounted components.
 
-[@justaname.id/react](../globals.md) / useMountedAccount
+---
 
-# Function: useMountedAccount()
+## Usage
 
-> **useMountedAccount**(): `object` \| `object` \| `object` \| `object`
+```typescript
+import { useMountedAccount } from '@justaname.id/react'
 
-A custom hook that wraps the `useAccount` hook from wagmi, incorporating a component mount check.
+function AccountComponent() {
+  const { address, isConnected, isConnecting, connector } = useMountedAccount()
+  
+  return (
+    <div>
+      <h3>Account Information</h3>
+      <p>Connected: {isConnected ? 'Yes' : 'No'}</p>
+      <p>Connecting: {isConnecting ? 'Yes' : 'No'}</p>
+      {address && <p>Address: {address}</p>}
+      {connector && <p>Connector: {connector.name}</p>}
+    </div>
+  )
+}
+```
+
+---
 
 ## Returns
 
-`object` \| `object` \| `object` \| `object`
-
-An enhanced account object that includes all properties and methods from `useAccount`,
-along with an improved `isConnected` boolean that also takes the component's mount state into consideration.
+An object containing all properties and methods from wagmi's `useAccount` hook, plus:
+- `isConnected`: Boolean indicating if the account is connected AND the component is mounted
 
 ## Defined in
 

@@ -1,20 +1,59 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# useUpdateSubname
 
-***
+A React hook for updating subname records including text records, addresses, and content hash.
 
-[@justaname.id/react](../globals.md) / useUpdateSubname
+---
 
-# Function: useUpdateSubname()
+## Usage
 
-> **useUpdateSubname**(`params`?): [`UseUpdateSubnameResult`](../interfaces/UseUpdateSubnameResult.md)
+```typescript
+import { useUpdateSubname } from '@justaname.id/react'
 
-## Parameters
+function UpdateSubnameComponent() {
+  const { updateSubname, isUpdateSubnamePending } = useUpdateSubname()
+  
+  const handleUpdate = async () => {
+    await updateSubname({
+      ens: 'alice.justaname.eth',
+      text: [
+        { key: 'description', value: 'Updated description' },
+        { key: 'url', value: 'https://example.com' }
+      ],
+      addresses: [
+        { address: '0x1234567890abcdef...', coinType: 60 }
+      ]
+    })
+  }
+  
+  return (
+    <button onClick={handleUpdate} disabled={isUpdateSubnamePending}>
+      {isUpdateSubnamePending ? 'Updating...' : 'Update Subname'}
+    </button>
+  )
+}
+```
 
-• **params?**: [`UseUpdateSubnameParams`](../interfaces/UseUpdateSubnameParams.md)
+---
 
 ## Returns
 
-[`UseUpdateSubnameResult`](../interfaces/UseUpdateSubnameResult.md)
+An object containing:
+- `updateSubname`: Function to update the subname records
+- `isUpdateSubnamePending`: Boolean indicating if the update is in progress
+
+## Parameters
+
+- **params?**: Optional configuration object
+  - `chainId?`: The chain ID to use (defaults to provider chain ID)
+
+## Update Function Parameters
+
+The `updateSubname` function accepts:
+- `ens`: The ENS name to update (e.g., 'alice.justaname.eth')
+- `text?`: Array of text records `{ key: string, value: string }[]`
+- `addresses?`: Array of address records `{ address: string, coinType: number }[]`
+- `contentHash?`: Content hash string (e.g., 'ipfs://QmHash...')
+- `chainId?`: Override the chain ID for this operation
 
 ## Defined in
 

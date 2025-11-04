@@ -1,20 +1,70 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# useEnsSignOut
 
-***
+A React hook for handling ENS-based sign-out functionality and session cleanup.
 
-[@justaname.id/react](../globals.md) / useEnsSignOut
+---
 
-# Function: useEnsSignOut()
+## Usage
 
-> **useEnsSignOut**(`params`?): [`UseEnsSignOutResult`](../interfaces/UseEnsSignOutResult.md)
+```typescript
+import { useEnsSignOut } from '@justaname.id/react'
 
-## Parameters
+// Basic usage
+function EnsSignOutComponent() {
+  const { signOut, isSignOutPending } = useEnsSignOut()
+  
+  const handleSignOut = async () => {
+    try {
+      await signOut()
+    } catch (err) {
+      console.error('Sign out failed:', err)
+    }
+  }
+  
+  return (
+    <div>
+      <button onClick={handleSignOut} disabled={isSignOutPending}>
+        {isSignOutPending ? 'Signing Out...' : 'Sign Out'}
+      </button>
+    </div>
+  )
+}
+```
 
-• **params?**: [`UseEnsSignOutParams`](../interfaces/UseEnsSignOutParams.md)
+```typescript
+// With custom backend configuration
+function EnsSignOutComponent() {
+  const { signOut, isSignOutPending } = useEnsSignOut({
+    backendUrl: 'https://api.justaname.id',
+    signoutRoute: '/auth/signout',
+    currentEnsRoute: '/auth/current-ens',
+    signinNonceRoute: '/auth/nonce',
+    local: false
+  })
+  
+  const handleSignOut = async () => {
+    await signOut()
+  }
+  
+  return (
+    <button onClick={handleSignOut} disabled={isSignOutPending}>
+      {isSignOutPending ? 'Signing Out...' : 'Sign Out'}
+    </button>
+  )
+}
+```
+
+---
 
 ## Returns
 
-[`UseEnsSignOutResult`](../interfaces/UseEnsSignOutResult.md)
+[`UseEnsSignOutResult`](../interfaces/UseEnsSignOutResult.md) - An object containing:
+- `signOut`: Function to initiate the sign-out process
+- `isSignOutPending`: Boolean indicating if the sign-out is in progress
+
+## Parameters
+
+- **params?**: [`UseEnsSignOutParams`](../interfaces/UseEnsSignOutParams.md) - Optional parameters for the hook
 
 ## Defined in
 

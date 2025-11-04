@@ -1,20 +1,80 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# useEnsSignIn
 
-***
+A React hook for handling ENS-based sign-in authentication with message signing.
 
-[@justaname.id/react](../globals.md) / useEnsSignIn
+---
 
-# Function: useEnsSignIn()
+## Usage
 
-> **useEnsSignIn**(`params`?): [`UseEnsSignInResult`](../interfaces/UseEnsSignInResult.md)
+```typescript
+import { useEnsSignIn } from '@justaname.id/react'
 
-## Parameters
+// Basic usage
+function EnsSignInComponent() {
+  const { signIn, isSignInPending } = useEnsSignIn()
+  
+  const handleSignIn = async () => {
+    try {
+      await signIn({
+        ens: 'alice.justaname.eth',
+        ttl: 3600,
+        uri: 'https://app.justaname.id',
+        domain: 'justaname.id'
+      })
+    } catch (err) {
+      console.error('Sign in failed:', err)
+    }
+  }
+  
+  return (
+    <div>
+      <button onClick={handleSignIn} disabled={isSignInPending}>
+        {isSignInPending ? 'Signing In...' : 'Sign In with ENS'}
+      </button>
+    </div>
+  )
+}
+```
 
-• **params?**: [`UseEnsSignInParams`](../interfaces/UseEnsSignInParams.md)
+```typescript
+// With custom backend configuration
+function EnsSignInComponent() {
+  const { signIn, isSignInPending } = useEnsSignIn({
+    backendUrl: 'https://api.justaname.id',
+    signinRoute: '/auth/signin',
+    signinNonceRoute: '/auth/nonce',
+    currentEnsRoute: '/auth/current-ens',
+    local: false
+  })
+  
+  const handleSignIn = async () => {
+    await signIn({
+      ens: 'bob.justaname.eth',
+      ttl: 7200,
+      uri: 'https://myapp.com',
+      domain: 'myapp.com'
+    })
+  }
+  
+  return (
+    <button onClick={handleSignIn} disabled={isSignInPending}>
+      {isSignInPending ? 'Signing In...' : 'Sign In with ENS'}
+    </button>
+  )
+}
+```
+
+---
 
 ## Returns
 
-[`UseEnsSignInResult`](../interfaces/UseEnsSignInResult.md)
+[`UseEnsSignInResult`](../interfaces/UseEnsSignInResult.md) - An object containing:
+- `signIn`: Function to initiate the sign-in process
+- `isSignInPending`: Boolean indicating if the sign-in is in progress
+
+## Parameters
+
+- **params?**: [`UseEnsSignInParams`](../interfaces/UseEnsSignInParams.md) - Optional parameters for the hook
 
 ## Defined in
 

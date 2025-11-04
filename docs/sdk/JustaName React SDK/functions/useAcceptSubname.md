@@ -1,20 +1,49 @@
-[**@justaname.id/react**](../README.md) • **Docs**
+# useAcceptSubname
 
-***
+A React hook for accepting subname invitations and managing the acceptance process.
 
-[@justaname.id/react](../globals.md) / useAcceptSubname
+---
 
-# Function: useAcceptSubname()
+## Usage
 
-> **useAcceptSubname**(`params`?): [`UseAcceptSubnameResult`](../interfaces/UseAcceptSubnameResult.md)
+```typescript
+import { useAcceptSubname } from '@justaname.id/react'
 
-## Parameters
+function AcceptSubnameComponent() {
+  const { acceptSubname, isAcceptSubnamePending } = useAcceptSubname()
+  
+  const handleAccept = async () => {
+    try {
+      const result = await acceptSubname({
+        ens: 'alice.justaname.eth',
+        addresses: [{ coinType: '60', address: '0x1234...' }],
+        text: [{ key: 'description', value: 'My subname' }]
+      })
+      console.log('Subname accepted:', result)
+    } catch (error) {
+      console.error('Error accepting subname:', error)
+    }
+  }
+  
+  return (
+    <button onClick={handleAccept} disabled={isAcceptSubnamePending}>
+      {isAcceptSubnamePending ? 'Accepting...' : 'Accept Subname'}
+    </button>
+  )
+}
+```
 
-• **params?**: [`UseAcceptSubnameParams`](../type-aliases/UseAcceptSubnameParams.md)
+---
 
 ## Returns
 
-[`UseAcceptSubnameResult`](../interfaces/UseAcceptSubnameResult.md)
+[`UseAcceptSubnameResult`](../interfaces/UseAcceptSubnameResult.md) - An object containing:
+- `acceptSubname`: Function that returns a `Records` object with `sanitizedRecords` property
+- `isAcceptSubnamePending`: Boolean indicating if the operation is in progress
+
+## Parameters
+
+- **params?**: [`UseAcceptSubnameParams`](../type-aliases/UseAcceptSubnameParams.md) - Optional parameters for the hook
 
 ## Defined in
 

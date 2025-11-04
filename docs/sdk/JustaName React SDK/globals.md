@@ -1,10 +1,12 @@
-[**@justaname.id/react**](README.md) • **Docs**
+# globals
+
+[**@justaname.id/react**](./) • **Docs**
 
 ***
 
-# @justaname.id/react
+## @justaname.id/react
 
-## Interfaces
+### Interfaces
 
 - [GetEnsAvatarParams](interfaces/GetEnsAvatarParams.md)
 - [GetEnsNamesForAddressParams](interfaces/GetEnsNamesForAddressParams.md)
@@ -22,19 +24,13 @@
 - [UseAcceptSubnameResult](interfaces/UseAcceptSubnameResult.md)
 - [UseAccountEnsNamesParams](interfaces/UseAccountEnsNamesParams.md)
 - [UseAccountEnsNamesResult](interfaces/UseAccountEnsNamesResult.md)
-- [UseAddMAppPermissionFunctionParams](interfaces/UseAddMAppPermissionFunctionParams.md)
-- [UseAddMAppPermissionParams](interfaces/UseAddMAppPermissionParams.md)
 - [UseAddressEnsNamesParams](interfaces/UseAddressEnsNamesParams.md)
 - [UseAddressEnsNamesResult](interfaces/UseAddressEnsNamesResult.md)
 - [UseAddressSubnamesParams](interfaces/UseAddressSubnamesParams.md)
 - [UseAddSubnameParams](interfaces/UseAddSubnameParams.md)
 - [UseAddSubnameResult](interfaces/UseAddSubnameResult.md)
 - [UseAllEnsParams](interfaces/UseAllEnsParams.md)
-- [UseCanEnableMAppsParams](interfaces/UseCanEnableMAppsParams.md)
-- [UseCanEnableMAppsResult](interfaces/UseCanEnableMAppsResult.md)
 - [UseConnectedWalletSubnamesOptions](interfaces/UseConnectedWalletSubnamesOptions.md)
-- [UseEnabledMAppsParams](interfaces/UseEnabledMAppsParams.md)
-- [UseEnabledMAppsResult](interfaces/UseEnabledMAppsResult.md)
 - [UseEnsAuthParams](interfaces/UseEnsAuthParams.md)
 - [UseEnsAuthReturn](interfaces/UseEnsAuthReturn.md)
 - [UseEnsAvatarParams](interfaces/UseEnsAvatarParams.md)
@@ -44,8 +40,6 @@
 - [UseEnsSignOutParams](interfaces/UseEnsSignOutParams.md)
 - [UseEnsSignOutResult](interfaces/UseEnsSignOutResult.md)
 - [UseEnsSubnamesParams](interfaces/UseEnsSubnamesParams.md)
-- [UseIsMAppEnabledParams](interfaces/UseIsMAppEnabledParams.md)
-- [UseIsMAppEnabledResult](interfaces/UseIsMAppEnabledResult.md)
 - [UseIsSubnameAvailableParams](interfaces/UseIsSubnameAvailableParams.md)
 - [UseIsSubnameAvailableResult](interfaces/UseIsSubnameAvailableResult.md)
 - [UsePrimaryNameParams](interfaces/UsePrimaryNameParams.md)
@@ -54,10 +48,6 @@
 - [UseRecordsResult](interfaces/UseRecordsResult.md)
 - [UseRejectSubnameFunctionParams](interfaces/UseRejectSubnameFunctionParams.md)
 - [UseRejectSubnameResult](interfaces/UseRejectSubnameResult.md)
-- [UseRequestAddMAppPermission](interfaces/UseRequestAddMAppPermission.md)
-- [UseRequestRevokeMAppPermissionResult](interfaces/UseRequestRevokeMAppPermissionResult.md)
-- [UseRevokeMAppPermissionFunctionParams](interfaces/UseRevokeMAppPermissionFunctionParams.md)
-- [UseRevokeMAppPermissionParams](interfaces/UseRevokeMAppPermissionParams.md)
 - [UseRevokeSubnameParams](interfaces/UseRevokeSubnameParams.md)
 - [UseRevokeSubnameResult](interfaces/UseRevokeSubnameResult.md)
 - [UseSearchSubnamesParams](interfaces/UseSearchSubnamesParams.md)
@@ -72,43 +62,27 @@
 - [UseUploadMediaResponse](interfaces/UseUploadMediaResponse.md)
 - [UseUploadMediaResult](interfaces/UseUploadMediaResult.md)
 
-## Type Aliases
 
-- [EnsAuth](type-aliases/EnsAuth.md)
-- [JustaNameConfigWithoutDefaultChainId](type-aliases/JustaNameConfigWithoutDefaultChainId.md)
-- [SubnameRecordResponse](type-aliases/SubnameRecordResponse.md)
-- [UseAcceptSubnameParams](type-aliases/UseAcceptSubnameParams.md)
-- [UseAccountInvitationsParams](type-aliases/UseAccountInvitationsParams.md)
-- [UseAddSubnameFunctionParams](type-aliases/UseAddSubnameFunctionParams.md)
-- [UseEnsSignInFunctionParams](type-aliases/UseEnsSignInFunctionParams.md)
-- [UseRejectSubnameParams](type-aliases/UseRejectSubnameParams.md)
-- [UseRevokeSubnameFunctionParams](type-aliases/UseRevokeSubnameFunctionParams.md)
-- [UseSubnameParams](type-aliases/UseSubnameParams.md)
+### Type Aliases
 
-## Variables
+* [EnsAuth](type-aliases/EnsAuth.md)
+* [JustaNameConfigWithoutDefaultChainId](type-aliases/JustaNameConfigWithoutDefaultChainId.md)
+* [SubnameRecordResponse](type-aliases/SubnameRecordResponse.md)
+* [UseAcceptSubnameParams](type-aliases/UseAcceptSubnameParams.md)
+* [UseAccountInvitationsParams](type-aliases/UseAccountInvitationsParams.md)
+* [UseAddSubnameFunctionParams](type-aliases/UseAddSubnameFunctionParams.md)
+* [UseEnsSignInFunctionParams](type-aliases/UseEnsSignInFunctionParams.md)
+* [UseRejectSubnameParams](type-aliases/UseRejectSubnameParams.md)
+* [UseRevokeSubnameFunctionParams](type-aliases/UseRevokeSubnameFunctionParams.md)
+* [UseSubnameParams](type-aliases/UseSubnameParams.md)
 
-- [JustaNameContext](variables/JustaNameContext.md)
-- [OFFCHAIN\_RESOLVERS\_KEY](variables/OFFCHAIN_RESOLVERS_KEY.md)
+### Variables
 
-## Functions
+* [JustaNameContext](variables/JustaNameContext.md)
+* [OFFCHAIN\_RESOLVERS\_KEY](variables/OFFCHAIN_RESOLVERS_KEY.md)
 
-- [buildAccountInvitationsKey](functions/buildAccountInvitationsKey.md)
-- [buildAddressEnsNames](functions/buildAddressEnsNames.md)
-- [buildAddressSubnamesKey](functions/buildAddressSubnamesKey.md)
-- [buildAllEnsKey](functions/buildAllEnsKey.md)
-- [buildCanEnableMAppsKey](functions/buildCanEnableMAppsKey.md)
-- [buildEnabledMAppsKey](functions/buildEnabledMAppsKey.md)
-- [buildEnsAuthKey](functions/buildEnsAuthKey.md)
-- [buildEnsAvatarKey](functions/buildEnsAvatarKey.md)
-- [buildEnsSubnamesKey](functions/buildEnsSubnamesKey.md)
-- [buildIsMAppEnabledKey](functions/buildIsMAppEnabledKey.md)
-- [buildIsSubnameAvailableKey](functions/buildIsSubnameAvailableKey.md)
-- [buildPrimaryName](functions/buildPrimaryName.md)
-- [buildRecordsBySubnameKey](functions/buildRecordsBySubnameKey.md)
-- [buildSearchSubnamesKey](functions/buildSearchSubnamesKey.md)
-- [buildSignature](functions/buildSignature.md)
-- [buildSubnameBySubnameKey](functions/buildSubnameBySubnameKey.md)
-- [buildUpdateChangesKey](functions/buildUpdateChangesKey.md)
+### Functions
+
 - [getChangedAddresses](functions/getChangedAddresses.md)
 - [getChangedContentHash](functions/getChangedContentHash.md)
 - [getChangedTextRecords](functions/getChangedTextRecords.md)
@@ -118,19 +92,15 @@
 - [useAccountEnsNames](functions/useAccountEnsNames.md)
 - [useAccountInvitations](functions/useAccountInvitations.md)
 - [useAccountSubnames](functions/useAccountSubnames.md)
-- [useAddMAppPermission](functions/useAddMAppPermission.md)
 - [useAddressEnsNames](functions/useAddressEnsNames.md)
 - [useAddressSubnames](functions/useAddressSubnames.md)
 - [useAddSubname](functions/useAddSubname.md)
 - [useAllEns](functions/useAllEns.md)
-- [useCanEnableMApps](functions/useCanEnableMApps.md)
-- [useEnabledMApps](functions/useEnabledMApps.md)
 - [useEnsAuth](functions/useEnsAuth.md)
 - [useEnsAvatar](functions/useEnsAvatar.md)
 - [useEnsSignIn](functions/useEnsSignIn.md)
 - [useEnsSignOut](functions/useEnsSignOut.md)
 - [useEnsSubnames](functions/useEnsSubnames.md)
-- [useIsMAppEnabled](functions/useIsMAppEnabled.md)
 - [useIsSubnameAvailable](functions/useIsSubnameAvailable.md)
 - [useJustaName](functions/useJustaName.md)
 - [useMounted](functions/useMounted.md)
@@ -139,7 +109,6 @@
 - [usePrimaryName](functions/usePrimaryName.md)
 - [useRecords](functions/useRecords.md)
 - [useRejectSubname](functions/useRejectSubname.md)
-- [useRevokeMAppPermission](functions/useRevokeMAppPermission.md)
 - [useRevokeSubname](functions/useRevokeSubname.md)
 - [useSearchSubnames](functions/useSearchSubnames.md)
 - [useSetNameHashJustaNameResolver](functions/useSetNameHashJustaNameResolver.md)
@@ -148,3 +117,4 @@
 - [useUpdateChanges](functions/useUpdateChanges.md)
 - [useUpdateSubname](functions/useUpdateSubname.md)
 - [useUploadMedia](functions/useUploadMedia.md)
+

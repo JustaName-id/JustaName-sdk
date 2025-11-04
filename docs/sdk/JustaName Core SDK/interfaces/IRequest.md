@@ -1,32 +1,34 @@
-[**@justaname.id/sdk**](../README.md) • **Docs**
+# IRequest
+
+[**@justaname.id/sdk**](../) • **Docs**
 
 ***
 
 [@justaname.id/sdk](../globals.md) / IRequest
 
-# Interface: IRequest
+## Interface: IRequest
 
-## Extended by
+### Extended by
 
-- [`RequestChallengeRequest`](RequestChallengeRequest.md)
-- [`VerifyChallengeRequest`](VerifyChallengeRequest.md)
-- [`RequestAddMAppPermissionChallengeRequest`](RequestAddMAppPermissionChallengeRequest.md)
-- [`RequestAppendMAppFieldChallengeRequest`](RequestAppendMAppFieldChallengeRequest.md)
-- [`RequestRevokeMAppPermissionChallengeRequest`](RequestRevokeMAppPermissionChallengeRequest.md)
-- [`SubnameAcceptRequest`](SubnameAcceptRequest.md)
-- [`SubnameAddRequest`](SubnameAddRequest.md)
-- [`IsSubnameAvailableRequest`](IsSubnameAvailableRequest.md)
-- [`SubnameGetAllByEnsDomainWithCountRequest`](SubnameGetAllByEnsDomainWithCountRequest.md)
-- [`SubnameGetAllByAddressRequest`](SubnameGetAllByAddressRequest.md)
-- [`SubnameGetAllByDomainChainIdRequest`](SubnameGetAllByDomainChainIdRequest.md)
-- [`SubnameGetBySubnameRequest`](SubnameGetBySubnameRequest.md)
-- [`SubnameRecordsRequest`](SubnameRecordsRequest.md)
-- [`SubnameRejectRequest`](SubnameRejectRequest.md)
-- [`SubnameReserveRequest`](SubnameReserveRequest.md)
-- [`SubnameRevokeRequest`](SubnameRevokeRequest.md)
-- [`SubnameSearchRequest`](SubnameSearchRequest.md)
-- [`SubnameUpdateRequest`](SubnameUpdateRequest.md)
-- [`SubnameGetInvitationsByAddressRequest`](SubnameGetInvitationsByAddressRequest.md)
-- [`AddMAppPermissionRequest`](AddMAppPermissionRequest.md)
-- [`AppendMAppFieldRequest`](AppendMAppFieldRequest.md)
-- [`RevokeMAppPermissionRequest`](RevokeMAppPermissionRequest.md)
+* [`RequestChallengeRequest`](broken-reference)
+* [`VerifyChallengeRequest`](broken-reference)
+* [`RequestAddMAppPermissionChallengeRequest`](broken-reference)
+* [`RequestAppendMAppFieldChallengeRequest`](broken-reference)
+* [`RequestRevokeMAppPermissionChallengeRequest`](broken-reference)
+* [`SubnameAcceptRequest`](broken-reference)
+* [`SubnameAddRequest`](broken-reference)
+* [`IsSubnameAvailableRequest`](broken-reference)
+* [`SubnameGetAllByEnsDomainWithCountRequest`](broken-reference)
+* [`SubnameGetAllByAddressRequest`](broken-reference)
+* [`SubnameGetAllByDomainChainIdRequest`](broken-reference)
+* [`SubnameGetBySubnameRequest`](broken-reference)
+* [`SubnameRecordsRequest`](broken-reference)
+* [`SubnameRejectRequest`](broken-reference)
+* [`SubnameReserveRequest`](broken-reference)
+* [`SubnameRevokeRequest`](broken-reference)
+* [`SubnameSearchRequest`](broken-reference)
+* [`SubnameUpdateRequest`](broken-reference)
+* [`SubnameGetInvitationsByAddressRequest`](broken-reference)
+* [`AddMAppPermissionRequest`](broken-reference)
+* [`AppendMAppFieldRequest`](broken-reference)
+* [`RevokeMAppPermissionRequest`](broken-reference)

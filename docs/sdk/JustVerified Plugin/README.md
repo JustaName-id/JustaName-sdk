@@ -1,4 +1,4 @@
-**@justverified/plugin** • [**Docs**](globals.md)
+**@justverified/plugin**
 
 ***
 
