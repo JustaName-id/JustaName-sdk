@@ -2,6 +2,8 @@
 
 The Admin Dashboard provides a clear and detailed view of all subnames issued under your ENS domain, offering key information such as addresses, claim dates, resolution counts, social handles, and verifications.
 
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
 ## Viewing Subname Data on the Dashboard
 
 When an admin navigates to the **Admin Dashboard**, they will have access to a comprehensive view of all subnames issued under the ENS domains they've configured. This default view provides key insights about each subname and its associated metadata.
@@ -13,7 +15,9 @@ When an admin navigates to the **Admin Dashboard**, they will have access to a c
 * **Claim Date**: The date when the subname was claimed.
 * **Resolution Count**: The number of times the subname has been resolved (i.e., looked up or used on any platform).
 * **Social Handles**: The social media accounts (Twitter, GitHub, etc.) that the user has linked to their subname.
-* **Verifications**: The completed verifications attached to the subname, that the user has performed through **JustVerified** or other verification mechanisms.
+*   **Verifications**: The completed verifications attached to the subname, that the user has performed through **JustVerified** or other verification mechanisms.<br>
+
+    <figure><img src="../.gitbook/assets/Screenshot 2025-12-02 at 4.20.31 PM.png" alt=""><figcaption></figcaption></figure>
 
 This default view is designed to give admins a quick and comprehensive overview of the key data points for each subname under their ENS domain, providing valuable information at a glance.
 

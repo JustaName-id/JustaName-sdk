@@ -1,6 +1,6 @@
 # Filters
 
-The Admin Dashboard offers powerful filtering options to help you manage and analyze your user data more effectively. These filters allow you to refine your view of the subnames associated with your ENS domain, making it easier to find specific subnames or groups of users based on various criteria. By using these filters, admins can extract meaningful insights, target specific user groups, and monitor engagement trends within their platform.
+The [Admin Dashboard ](https://dashboard.justaname.id/)offers powerful filtering options to help you manage and analyze your user data more effectively. These filters allow you to refine your view of the subnames associated with your ENS domain, making it easier to find specific subnames or groups of users based on various criteria. By using these filters, admins can extract meaningful insights, target specific user groups, and monitor engagement trends within their platform.
 
 ## Available Filters
 
@@ -64,10 +64,3 @@ One of the strengths of the filtering mechanism is the ability to apply multiple
 * And were claimed between **two specific dates**
 
 This layered approach ensures that admins can zero in on very specific groups of users, enabling more targeted engagement, communication, or analysis.
-
-
-
-
-
-
-

@@ -1,23 +1,28 @@
 # Table of contents
 
 * [👋 Overview](README.md)
-* [Quickstart](quickstart.md)
 
-## Configuration
+## React sdk
 
-* [Overview](configuration/overview.md)
-* [Appearance](configuration/appearance.md)
-* [Allowed ENS Names](configuration/allowed-ens-names.md)
-* [ENS Domains](configuration/ens-domains.md)
-* [JustVerified](configuration/justverified.md)
-* [Networks](configuration/networks.md)
+* [Overview](react-sdk/overview.md)
+* [Quickstart](react-sdk/quickstart.md)
+* [Check Availability](react-sdk/check-availability.md)
+* [Issue Subnames](react-sdk/issue-subnames.md)
+* [Update Subnames](react-sdk/update-subnames.md)
+* [Resolution](react-sdk/resolution.md)
+* [Reverse Resolution](react-sdk/reverse-resolution.md)
+* [Get All Subnames for an Owner](react-sdk/get-all-subnames-for-an-owner.md)
+* [Demo](react-sdk/demo.md)
 
-## Backend Configuration
+## Plug n Play (Widget)
 
-* [Overview](backend-configuration/overview.md)
-* [Sign In Routes](backend-configuration/sign-in-routes.md)
-* [Subname Management Routes](backend-configuration/subname-management-routes.md)
-* [Full Implementation](backend-configuration/full-implementation.md)
+* [Overview](plug-n-play-widget/overview.md)
+* [Quickstart](plug-n-play-widget/quickstart.md)
+* [Appearance](plug-n-play-widget/appearance.md)
+* [Allowed ENS Names](plug-n-play-widget/allowed-ens-names.md)
+* [ENS Domains](plug-n-play-widget/ens-domains.md)
+* [JustVerified](plug-n-play-widget/justverified.md)
+* [Networks](plug-n-play-widget/networks.md)
 
 ## Learn & Engage
 
@@ -25,35 +30,18 @@
 * [Views](learn-and-engage/views.md)
 * [Filters](learn-and-engage/filters.md)
 
-## Plugins
-
-* [Overview](plugins/overview.md)
-* [JustVerified](plugins/justverified.md)
-* [XMTP](plugins/xmtp.md)
-* [EFP](plugins/efp.md)
-* [POAP](plugins/poap.md)
-* [Talent Protocol](plugins/talent-protocol.md)
-
 ## Advanced
 
 * [JustaName Deployment Addresses](advanced/justaname-deployment-addresses.md)
 * [Coin Types](advanced/coin-types.md)
 * [JustaName - Under the Hood](advanced/justaname-under-the-hood.md)
-* [Reading JustaName Subname Events from OrbisDB](advanced/reading-justaname-subname-events-from-orbisdb.md)
+* [Allowed Domains](advanced/allowed-domains.md)
 * [Dynamic Records Resolution](advanced/dynamic-records-resolution.md)
-
-## Wallet Providers
-
-* [Overview](wallet-providers/overview.md)
-* [RainbowKit](wallet-providers/rainbowkit.md)
-* [Para](wallet-providers/para.md)
-* [Privy](wallet-providers/privy.md)
-* [Coinbase Smart Wallet](wallet-providers/coinbase-smart-wallet.md)
-
-## Design Components
-
-* [Logos](design-components/logos.md)
 
 ## Use Cases
 
 * [Overview](use-cases/overview.md)
+
+## Design Components
+
+* [Logos](design-components/logos.md)

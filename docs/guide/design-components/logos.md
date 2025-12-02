@@ -1,7 +1,6 @@
 # Logos
 
-List of JustaName Logos in various file formats.\
-
+List of JustaName Logos in various file formats.<br>
 
 |         Format        |                                     SVG                                    |                      PNG                      |
 | :-------------------: | :------------------------------------------------------------------------: | :-------------------------------------------: |

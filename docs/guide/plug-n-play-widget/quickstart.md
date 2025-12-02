@@ -2,7 +2,6 @@
 description: >-
   The JustWeb3 Widget is the easiest way to get the best digital identity suite
   in your dApp.
-icon: gauge-max
 ---
 
 # Quickstart
@@ -71,8 +70,7 @@ You're all set. Now, you can move forward with configuring the widget.
 
 In your project, import the JustWeb3Provider component and wrap your app with it.
 
-An example set up for a [NextJs](https://nextjs.org/) or a [React Vite](https://vite.dev/guide/) project, can be found below:\
-
+An example set up for a [NextJs](https://nextjs.org/) or a [React Vite](https://vite.dev/guide/) project, can be found below:<br>
 
 {% hint style="info" %}
 Please note the below example uses [RainbowKit](https://www.rainbowkit.com/). You can replace it with any web3 wallet provider. ([WalletConnect](https://explorer.walletconnect.com/), [Web3Auth](https://web3auth.io/), [Privy](https://www.privy.io/) ...)
@@ -318,6 +316,6 @@ yarn add wagmi @rainbow-me/rainbowkit @tanstack/react-query
 
 You can find more information on how to customize your widget in the configuration section
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="/broken/pages/RxyyyIPeROyPcHZXgDpi" %}
+[Broken link](/broken/pages/RxyyyIPeROyPcHZXgDpi)
 {% endcontent-ref %}

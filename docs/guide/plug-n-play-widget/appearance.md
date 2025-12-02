@@ -4,8 +4,7 @@ The JustWeb3 Widget offers flexible appearance customization, allowing you to st
 
 ## Primary Color
 
-The `primary` color controls the main accent color used throughout the widget for buttons, links, and other interactive elements. You can specify any valid CSS color format (hex, rgb, hsl, etc.).\
-
+The `primary` color controls the main accent color used throughout the widget for buttons, links, and other interactive elements. You can specify any valid CSS color format (hex, rgb, hsl, etc.).<br>
 
 ```typescript
 const justweb3Config: JustWeb3ProviderConfig = {

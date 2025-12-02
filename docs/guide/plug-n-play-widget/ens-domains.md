@@ -10,7 +10,7 @@ However, if you have your own ENS domain and want to use it, you can configure i
 **Example Configuration:**
 
 {% hint style="info" %}
-For security reasons and to follow best practices, it's important to avoid exposing your **API key** directly in the frontend configuration. Always refer to the [Backend Configuration ](broken-reference)section for guidance on securely managing API keys and handling sensitive operations.
+For security reasons and to follow best practices, it's important to avoid exposing your **API key** directly in the frontend configuration. Always refer to the [Backend Configuration ](/broken/pages/nvPN32lXOjH9c9eqKkX7)section for guidance on securely managing API keys and handling sensitive operations.
 {% endhint %}
 
 ```tsx

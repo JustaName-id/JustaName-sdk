@@ -1,15 +1,10 @@
----
-description: >-
-  After setting up the JustWeb3 Widget on your platform and issuing subnames
-  under your configured ENS domain, the Admin Dashboard becomes your central hub
-  for managing, viewing, and analyzing user data
----
-
 # Overview
 
+After issuing subnames under your configured ENS domain, the [Admin Dashboard](https://dashboard.justaname.id/) becomes your central hub for managing, viewing, and analyzing user data\
+\
 In this section, you'll learn how to:
 
-**View Subname Data**: Explore the different views available in the Admin Dashboard to monitor key data points such as subnames, attached addresses, claim dates, social handles, verification statuses, and resolution counts. Customize the dashboard view to show the data most relevant to your platform’s needs.
+**View Subname Data**: Explore the different views available in the [Admin Dashboard](https://dashboard.justaname.id/) to monitor key data points such as subnames, attached addresses, claim dates, social handles, verification statuses, and resolution counts. Customize the dashboard view to show the data most relevant to your platform’s needs.
 
 {% content-ref url="views.md" %}
 [views.md](views.md)

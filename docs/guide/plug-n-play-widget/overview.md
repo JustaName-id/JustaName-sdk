@@ -4,6 +4,12 @@ description: 'This section covers four key areas of configuration:'
 
 # Overview
 
+**Quickstart**: A fast and easy setup guide to help you integrate the JustWeb3 Widget and get started with issuing ENS subnames on your platform.
+
+{% content-ref url="quickstart.md" %}
+[quickstart.md](quickstart.md)
+{% endcontent-ref %}
+
 **Appearance**: Customize the widget's color scheme and branding, including primary colors, background, and logos, to match your dApp's design.
 
 {% content-ref url="appearance.md" %}
