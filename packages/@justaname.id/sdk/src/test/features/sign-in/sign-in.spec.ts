@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts';
 import * as dotenv from 'dotenv';
 import SignIn from '../../../lib/features/sign-in';
 import { OffchainResolvers } from '../../../lib/features';
@@ -14,11 +14,9 @@ const URI = 'https://' + DOMAIN;
 const CHAIN_ID = (parseInt(process.env["SDK_CHAIN_ID"] as string) || 11155111) as ChainId
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 
-const invalidSigner = new ethers.Wallet(
-  ethers.Wallet.createRandom().privateKey
-);
+const invalidSigner = privateKeyToAccount(generatePrivateKey());
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
-const subnameSigner = ethers.Wallet.createRandom();
+const subnameSigner = privateKeyToAccount(generatePrivateKey());
 const subnameToBeAdded = Math.random().toString(36).substring(7);
 const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 const JUSTANAME_ENV = process.env['SDK_JUSTANAME_DEV'] === 'true';
@@ -60,7 +58,7 @@ describe('SignIn', () => {
       address: subnameSigner.address,
     });
 
-    const signature = await subnameSigner.signMessage(challenge.challenge);
+    const signature = await subnameSigner.signMessage({ message: challenge.challenge });
     const response = await justaname.subnames.addSubname(
       {
         username: subnameToBeAdded,
@@ -102,7 +100,7 @@ describe('SignIn', () => {
       address: subnameSigner.address,
       ens: subnameToBeAdded + '.' + ENS_DOMAIN,
     });
-    const signature = await subnameSigner.signMessage(message);
+    const signature = await subnameSigner.signMessage({ message });
     const response = await signIn.signIn({ message, signature });
     expect(response.success).toBeTruthy();
   }, 60000);
@@ -112,8 +110,8 @@ describe('SignIn', () => {
       address: invalidSigner.address,
       ens: subnameToBeAdded + '.' + ENS_DOMAIN,
     });
-    const signer2 = new ethers.Wallet(ethers.Wallet.createRandom().privateKey);
-    const signature = await signer2.signMessage(message);
+    const signer2 = privateKeyToAccount(generatePrivateKey());
+    const signature = await signer2.signMessage({ message });
     try {
       await signIn.signIn({ message, signature });
     } catch (e) {
@@ -129,7 +127,7 @@ describe('SignIn', () => {
       address: subnameSigner.address,
       ens: subnameToBeAdded + '.' + ENS_DOMAIN,
     });
-    const signature = await subnameSigner.signMessage(message);
+    const signature = await subnameSigner.signMessage({ message });
     const response = await signIn.signIn({ message, signature });
     expect(response.isJustaName).toBeTruthy();
   }, 60000);
@@ -139,7 +137,7 @@ describe('SignIn', () => {
       address: subnameSigner.address,
     });
 
-    const signature = await subnameSigner.signMessage(challenge.challenge);
+    const signature = await subnameSigner.signMessage({ message: challenge.challenge });
 
     const response = await justaname.subnames.revokeSubname(
       {

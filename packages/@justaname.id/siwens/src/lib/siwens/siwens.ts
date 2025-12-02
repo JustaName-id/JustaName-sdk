@@ -18,7 +18,7 @@ import {
   extractDataFromStatement,
 } from '../utils';
 import { toASCII, toUnicode } from 'punycode';
-import { getJsonRpcProvider, JsonRpcProvider } from '../utils/ethersCompat';
+import { getPublicClient, ViemPublicClient } from '../utils/ethersCompat';
 
 export interface SiwensResponse extends SiweResponse {
   ens: string;
@@ -37,20 +37,21 @@ export interface SiwensParams
 export interface SiwensConfig {
   params: string | SiwensParams;
   providerUrl?: string;
+  chainId?: number;
 }
 
 export class SIWENS extends SiweMessage {
-  readonly provider: JsonRpcProvider;
+  readonly provider: ViemPublicClient;
   readonly providerUrl: string | undefined;
 
   constructor(signInConfig: SiwensConfig) {
-    const { params, providerUrl } = signInConfig;
+    const { params, providerUrl, chainId } = signInConfig;
     if (typeof params === 'string') {
       super(params);
       if (!providerUrl) {
         throw InvalidConfigurationException.providerUrlRequired();
       }
-      this.provider = getJsonRpcProvider(providerUrl);
+      this.provider = getPublicClient(providerUrl, chainId);
       this.providerUrl = providerUrl;
       return;
     }
@@ -91,7 +92,7 @@ export class SIWENS extends SiweMessage {
       expirationTime,
     });
     this.providerUrl = providerUrl;
-    this.provider = getJsonRpcProvider(providerUrl);
+    this.provider = getPublicClient(providerUrl, params.chainId || chainId);
   }
 
   override async verify(
@@ -151,12 +152,12 @@ export class SIWENS extends SiweMessage {
   }
 
   private async verifyEnsAddress(ens: string, address: string) {
-    const resolvedAddress = await this.provider.resolveName(ens);
+    const resolvedAddress = await this.provider.getEnsAddress({ name: ens });
     if (!resolvedAddress) {
       throw InvalidENSException.notRegisteredENS(ens);
     }
 
-    if (resolvedAddress !== address) {
+    if (resolvedAddress.toLowerCase() !== address.toLowerCase()) {
       throw InvalidENSException.invalidENSOwner(ens, address);
     }
     return true;

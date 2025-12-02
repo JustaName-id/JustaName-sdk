@@ -107,6 +107,7 @@ export class SignIn {
     const siwens = new SIWENS({
       params: params.message,
       providerUrl: network.providerUrl,
+      chainId: chainId,
     });
 
     const siwensResponse = await siwens.verify(
@@ -116,10 +117,9 @@ export class SignIn {
         domain: params.domain,
       },
       {
-        provider: network.provider,
         verificationFallback: async (params, opts, message, EIP1271Promise) => {
           const publicClient = createPublicClient({
-            chain: this.chainId === 1 ? mainnet : sepolia,
+            chain: chainId === 1 ? mainnet : sepolia,
             transport: http(network.providerUrl),
           });
 
@@ -209,7 +209,7 @@ export class SignIn {
     }
 
     const [resolverAddress, resolvers] = await Promise.all([
-      network.provider.getResolver(ens),
+      network.provider.getEnsResolver({ name: ens }),
       this.offchainResolvers.getAllOffchainResolvers(),
     ]);
 
@@ -221,11 +221,11 @@ export class SignIn {
       throw InvalidENSException.chainNotSupported(chainId.toString());
     }
 
-    if (!resolverAddress?.address) {
+    if (!resolverAddress) {
       throw InvalidENSException.notRegisteredENS(ens);
     }
 
-    return currentOffchainResolver.resolverAddress === resolverAddress?.address;
+    return currentOffchainResolver.resolverAddress === resolverAddress;
   }
 }
 
