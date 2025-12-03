@@ -4473,7 +4473,7 @@ __metadata:
   peerDependencies:
     "@tanstack/react-query": ^5.x
     react: ">=17"
-    viem: ">=2.0.0"
+    viem: ">=2.35.0"
     wagmi: ">=2.0.0"
   languageName: unknown
   linkType: soft
@@ -4488,7 +4488,7 @@ __metadata:
     qs: "npm:6.12.0"
   peerDependencies:
     siwe: ">=2.0.0"
-    viem: ">=2.0.0"
+    viem: ">=2.35.0"
   languageName: unknown
   linkType: soft
 
@@ -4497,7 +4497,7 @@ __metadata:
   resolution: "@justaname.id/siwens@workspace:packages/@justaname.id/siwens"
   peerDependencies:
     siwe: ">=2.0.0"
-    viem: ">=2.0.0"
+    viem: ">=2.35.0"
   languageName: unknown
   linkType: soft
 
