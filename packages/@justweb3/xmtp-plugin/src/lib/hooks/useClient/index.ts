@@ -1,11 +1,10 @@
 'use client';
 
-import { arrayify } from '@ethersproject/bytes';
 import { Client, type Signer } from '@xmtp/browser-sdk';
 import { ReactionCodec } from '@xmtp/content-type-reaction';
 import { AttachmentCodec } from '@xmtp/content-type-remote-attachment';
 import { ReplyCodec } from '@xmtp/content-type-reply';
-import { JsonRpcSigner } from 'ethers';
+import { JsonRpcSigner, getBytes } from 'ethers';
 import { useCallback, useContext, useRef, useState } from 'react';
 import { XMTPContext } from '../../contexts/XMTPContext';
 import { ReadReceiptCodec } from '@xmtp/content-type-read-receipt';
@@ -73,7 +72,7 @@ export const useXMTPClient = (onError?: (error: Error) => void) => {
             },
             signMessage: async (message: string) => {
               const signature = await signer.signMessage(message);
-              return arrayify(signature);
+              return getBytes(signature);
             },
           };
 

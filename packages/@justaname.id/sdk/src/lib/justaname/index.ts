@@ -15,7 +15,7 @@ import {
 } from '../features';
 import { InvalidConfigurationException } from '../errors/InvalidConfiguration.exception';
 // import { providerUrlChainIdLoadingMap, providerUrlChainIdMap } from '../memory';
-import { getJsonRpcProvider } from '../utils/ethersCompat';
+import { getPublicClient } from '../utils/ethersCompat';
 
 /**
  * The main class for the JustaName SDK.
@@ -164,14 +164,14 @@ export class JustaName {
   }
 
   static createNetworks(networks: Networks = []): NetworksWithProvider {
-    const defaultMainnetProviderUrl = 'https://cloudflare-eth.com';
-    const defaultTestnetProviderUrl = 'https://rpc.sepolia.org';
+    const defaultMainnetProviderUrl = 'https://eth.drpc.org';
+    const defaultTestnetProviderUrl = 'https://sepolia.drpc.org';
 
-    const defaultMainnetProvider = getJsonRpcProvider(
+    const defaultMainnetProvider = getPublicClient(
       defaultMainnetProviderUrl,
       1
     );
-    const defaultTestnetProvider = getJsonRpcProvider(
+    const defaultTestnetProvider = getPublicClient(
       defaultTestnetProviderUrl,
       11155111
     );
@@ -187,11 +187,6 @@ export class JustaName {
         provider: defaultTestnetProvider,
         providerUrl: defaultTestnetProviderUrl,
       },
-      // {
-      //   chainId: 31337 as ChainId,
-      //   provider: getJsonRpcProvider('http://localhost:8545'),
-      //   providerUrl: 'http://localhost:8545',
-      // },
     ] as NetworksWithProvider;
 
     const baseNetworksConfig = baseNetworks.map((_network) => {
@@ -199,7 +194,7 @@ export class JustaName {
       if (network && network?.providerUrl) {
         return {
           chainId: network.chainId,
-          provider: getJsonRpcProvider(network.providerUrl),
+          provider: getPublicClient(network.providerUrl, network.chainId),
           providerUrl: network.providerUrl,
         };
       } else {
@@ -213,9 +208,7 @@ export class JustaName {
     const testnetNetwork = baseNetworksConfig.find(
       (n) => n.chainId === 11155111
     ) as NetworkWithProvider<11155111>;
-    // const localNetwork = baseNetworksConfig.find(
-    //   (n) => n.chainId === 31337
-    // ) as NetworkWithProvider<31337>;
+
     if (!mainnetNetwork) {
       throw new InvalidConfigurationException('The mainnet network is missing');
     }

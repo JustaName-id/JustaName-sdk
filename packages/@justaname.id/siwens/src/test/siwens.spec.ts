@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { privateKeyToAccount, generatePrivateKey } from 'viem/accounts';
 import * as dotenv from 'dotenv';
 import {
   SIWENS,
@@ -7,8 +7,8 @@ import {
 } from '../';
 dotenv.config();
 
-const pk = process.env['SIWENS_PRIVATE_KEY'] as string;
-const signer = new ethers.Wallet(pk);
+const pk = process.env['SIWENS_PRIVATE_KEY'] as `0x${string}`;
+const signer = privateKeyToAccount(pk);
 const PROVIDER_URL = process.env['SIWENS_PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
@@ -128,16 +128,17 @@ describe('SIWENS', () => {
   })
 
   it('should generate a valid signature', async () => {
-    const signature = await signer.signMessage(siwens.prepareMessage());
+    const signature = await signer.signMessage({ message: siwens.prepareMessage() });
     expect(signature).toBeTruthy();
   });
 
   it('should verify a valid signature', async () => {
-    const signature = await signer.signMessage(message);
+    const signature = await signer.signMessage({ message });
 
     const address = await new SIWENS({
       params:message,
-      providerUrl: PROVIDER_URL
+      providerUrl: PROVIDER_URL,
+      chainId: CHAIN_ID
     }).verify({
       signature
     });
@@ -145,10 +146,11 @@ describe('SIWENS', () => {
   },60000)
 
   it('should return ens in the response', async () => {
-    const signature = await signer.signMessage(message);
+    const signature = await signer.signMessage({ message });
     const address = await new SIWENS({
       params:message,
-      providerUrl: PROVIDER_URL
+      providerUrl: PROVIDER_URL,
+      chainId: CHAIN_ID
     }).verify({
       signature
     });
@@ -156,12 +158,13 @@ describe('SIWENS', () => {
   },60000)
 
   it('should return ens in the failed response', async () => {
-    const signer2 = ethers.Wallet.createRandom();
-    const signature = await signer2.signMessage(message);
+    const signer2 = privateKeyToAccount(generatePrivateKey());
+    const signature = await signer2.signMessage({ message });
     try {
       await new SIWENS({
         params: message,
-        providerUrl: PROVIDER_URL
+        providerUrl: PROVIDER_URL,
+        chainId: CHAIN_ID
       }).verify({
         signature: signature
       });
@@ -173,11 +176,11 @@ describe('SIWENS', () => {
   },60000)
 
   it('should throw an error if address isn\'t owner of ens', async () => {
-    const signer = ethers.Wallet.createRandom();
+    const randomSigner = privateKeyToAccount(generatePrivateKey());
     const siwens = new SIWENS({
       params: {
         domain: DOMAIN,
-        address: signer.address,
+        address: randomSigner.address,
         uri: URI,
         version: VERSION,
         nonce: NONCE,
@@ -188,14 +191,15 @@ describe('SIWENS', () => {
       providerUrl: PROVIDER_URL
     });
     const message = siwens.prepareMessage();
-    const signature = await signer.signMessage(message);
+    const signature = await randomSigner.signMessage({ message });
     const siwensInstance = new SIWENS({
       params: message,
-      providerUrl: PROVIDER_URL
+      providerUrl: PROVIDER_URL,
+      chainId: CHAIN_ID
     })
 
     await expect(siwensInstance.verify({
       signature
-    })).rejects.toThrow(InvalidENSException.invalidENSOwner(VALID_ENS, signer.address).message);
+    })).rejects.toThrow(InvalidENSException.invalidENSOwner(VALID_ENS, randomSigner.address).message);
   }, 60000);
 });

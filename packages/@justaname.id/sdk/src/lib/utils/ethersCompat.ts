@@ -1,51 +1,32 @@
-// inspired by spruceid siwe: https://github.com/spruceid/siwe/blob/main/packages/siwe/lib/ethersCompat.ts
+import {
+  createPublicClient,
+  http,
+  getAddress as viemGetAddress,
+  PublicClient,
+  Chain,
+  Transport,
+} from 'viem';
+import { namehash as viemNamehash } from 'viem/ens';
+import { mainnet, sepolia } from 'viem/chains';
 
-import { ethers } from 'ethers';
+export type ViemPublicClient = PublicClient<Transport, Chain>;
 
-// @ts-expect-error -- compatibility hack
-type ProviderV5 = ethers.providers.Provider;
-type ProviderV6 = ethers.Provider;
-// @ts-expect-error -- compatibility hack
-type JsonRpcProviderV5 = ethers.providers.JsonRpcProvider;
-type JsonRpcProviderV6 = ethers.JsonRpcProvider;
-
-export type Provider = ProviderV6 extends undefined ? ProviderV5 : ProviderV6;
-export type JsonRpcProvider = JsonRpcProviderV6 extends undefined
-  ? JsonRpcProviderV5
-  : JsonRpcProviderV6;
-
-interface EthersCompat {
-  namehash?: (name: string) => string;
-  getAddress?: (address: string) => string;
-  JsonRpcProvider?: new (...args: any[]) => JsonRpcProvider;
-  utils: {
-    namehash: (name: string) => string;
-    getAddress: (address: string) => string;
-  };
-  providers: {
-    JsonRpcProvider: new (...args: any[]) => JsonRpcProvider;
-  };
-}
-
-const ethersCompat = ethers as unknown as EthersCompat;
-
-export const getJsonRpcProvider = (
-  providerUrl?: string,
-  chainId?: number
-): JsonRpcProvider => {
-  if ('JsonRpcProvider' in ethersCompat) {
-    return new ethersCompat.JsonRpcProvider!(providerUrl, chainId);
-  } else {
-    return new ethersCompat.providers.JsonRpcProvider(providerUrl, chainId);
-  }
+const chainIdToChain: Record<number, Chain> = {
+  1: mainnet,
+  11155111: sepolia,
 };
 
-export const namehash: (name: string) => string =
-  'namehash' in ethersCompat
-    ? ethersCompat.namehash!
-    : ethersCompat.utils.namehash;
+export const getPublicClient = (
+  providerUrl?: string,
+  chainId?: number
+): ViemPublicClient => {
+  const chain = chainId ? chainIdToChain[chainId] : mainnet;
+  return createPublicClient({
+    chain,
+    transport: http(providerUrl),
+  });
+};
 
-export const getAddress: (address: string) => string =
-  'getAddress' in ethersCompat
-    ? ethersCompat.getAddress!
-    : ethersCompat.utils.getAddress;
+export const namehash = viemNamehash;
+
+export const getAddress = viemGetAddress;
