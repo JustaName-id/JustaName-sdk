@@ -1,3 +1,7 @@
+## 0.1.107 (2026-04-16)
+
+This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
+
 ## 0.1.106 (2026-04-16)
 
 This was a version bump only for @justweb3/efp-plugin to align it with other projects, there were no code changes.
