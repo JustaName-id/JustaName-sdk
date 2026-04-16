@@ -1,3 +1,7 @@
+## 0.0.140 (2026-04-16)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
 ## 0.0.139 (2026-04-16)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
