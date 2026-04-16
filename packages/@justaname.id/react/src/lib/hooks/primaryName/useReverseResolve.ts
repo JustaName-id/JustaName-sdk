@@ -5,7 +5,7 @@ import { defaultOptions } from '../../query';
 
 export const buildReverseResolveKey = (
   address: string,
-  chainId: number | undefined
+  chainId: number | undefined,
 ) => ['REVERSE_RESOLVE', address, chainId];
 
 export interface UseReverseResolveParams {
@@ -45,7 +45,7 @@ export interface UseReverseResolveResult {
    */
   reverseResolve: (
     params: ReverseResolveParams,
-    force?: boolean
+    force?: boolean,
   ) => Promise<string | null>;
   /**
    * Refetch the reverse resolution
@@ -77,9 +77,8 @@ export interface ReverseResolveParams {
  * });
  * ```
  */
-
 export const useReverseResolve = (
-  params?: UseReverseResolveParams
+  params?: UseReverseResolveParams,
 ): UseReverseResolveResult => {
   const { chainId: defaultChainId, justaname } = useJustaName();
   const _enabled = params?.enabled !== undefined ? params.enabled : true;
@@ -87,7 +86,7 @@ export const useReverseResolve = (
   const queryClient = useQueryClient();
 
   const reverseResolveInternal = async (
-    _params: ReverseResolveParams
+    _params: ReverseResolveParams,
   ): Promise<string | null> => {
     if (!_params.address) {
       throw new Error('Address is required for reverse resolution');
@@ -116,7 +115,7 @@ export const useReverseResolve = (
 
   const reverseResolve = async (
     params: ReverseResolveParams,
-    force = false
+    force = false,
   ): Promise<string | null> => {
     const _address = params.address;
     if (!_address) {
@@ -127,7 +126,7 @@ export const useReverseResolve = (
 
     if (!force) {
       const cachedName = queryClient.getQueryData(
-        buildReverseResolveKey(_address, _resolveChainId)
+        buildReverseResolveKey(_address, _resolveChainId),
       ) as string | null;
       if (cachedName !== undefined) {
         return cachedName;
@@ -141,7 +140,7 @@ export const useReverseResolve = (
 
     queryClient.setQueryData(
       buildReverseResolveKey(_address, _resolveChainId),
-      ensName
+      ensName,
     );
 
     return ensName;
