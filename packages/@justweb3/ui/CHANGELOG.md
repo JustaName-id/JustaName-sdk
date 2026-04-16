@@ -1,3 +1,25 @@
+## 0.0.144 (2026-04-16)
+
+
+### 🚀 Features
+
+- removed caret range from versions and fixed efp url ([#104](https://github.com/JustaName-id/JustaName-sdk/pull/104))
+
+- **dentity-plugin:** added Dentity plugin, missing clientId ([#110](https://github.com/JustaName-id/JustaName-sdk/pull/110))
+
+
+### 🩹 Fixes
+
+- siwe and viem versions ([cd53b7f8](https://github.com/JustaName-id/JustaName-sdk/commit/cd53b7f8))
+
+- **xmtp-plugin:** bugs ([1a5acf13](https://github.com/JustaName-id/JustaName-sdk/commit/1a5acf13))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
 ## 0.0.143 (2025-11-04)
 
 This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.

@@ -1,3 +1,25 @@
+## 0.0.20 (2026-04-16)
+
+
+### 🚀 Features
+
+- **dentity-plugin:** added Dentity plugin, missing clientId ([#110](https://github.com/JustaName-id/JustaName-sdk/pull/110))
+
+- **console:** added dentity plugin ([81229b7b](https://github.com/JustaName-id/JustaName-sdk/commit/81229b7b))
+
+
+### 🩹 Fixes
+
+- **dentity-plugin:** fixed package.json ([3b3ed61c](https://github.com/JustaName-id/JustaName-sdk/commit/3b3ed61c))
+
+- **dentity-plugin:** wrong verification value format ([6f19ac4b](https://github.com/JustaName-id/JustaName-sdk/commit/6f19ac4b))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
 ## 0.0.19 (2025-11-04)
 
 This was a version bump only for @justweb3/dentity-plugin to align it with other projects, there were no code changes.

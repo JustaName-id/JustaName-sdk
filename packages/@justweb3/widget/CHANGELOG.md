@@ -1,3 +1,28 @@
+## 0.0.144 (2026-04-16)
+
+
+### 🚀 Features
+
+- removed caret range from versions and fixed efp url ([#104](https://github.com/JustaName-id/JustaName-sdk/pull/104))
+
+
+### 🩹 Fixes
+
+- siwe and viem versions ([cd53b7f8](https://github.com/JustaName-id/JustaName-sdk/commit/cd53b7f8))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.208
+- Updated @justaname.id/sdk to 0.2.205
+- Updated @justweb3/ui to 0.0.144
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
 ## 0.0.143 (2025-11-04)
 
 
