@@ -16,14 +16,6 @@ import {
 } from './justVerified';
 import { POAP_DISABLED, PoapDisabledPayload } from './poap-disabled';
 import { POAP_ENABLED, PoapEnabledPayload } from './poap-enabled';
-import {
-  TALENT_PROTOCOL_DISABLED,
-  TalentProtocolDisabledPayload,
-} from './talent-protocol-disabled';
-import {
-  TALENT_PROTOCOL_ENABLED,
-  TalentProtocolEnabledPayload,
-} from './talent-protocol-enabled';
 import { XMTP_DISABLED, XmtpDisabledPayload } from './xmtp-disabled';
 import { XMTP_ENABLED, XmtpEnabledPayload } from './xmtp-enabled';
 
@@ -34,8 +26,6 @@ export const PLUGINS_EVENTS = {
   EFP_ENABLED,
   POAP_DISABLED,
   POAP_ENABLED,
-  TALENT_PROTOCOL_DISABLED,
-  TALENT_PROTOCOL_ENABLED,
   XMTP_DISABLED,
   XMTP_ENABLED,
   DENTITY_DISABLED,
@@ -50,8 +40,6 @@ export interface PluginsEventPayload extends JustVerifiedEventsPayload {
   [EFP_ENABLED]: EfpEnabledPayload;
   [POAP_DISABLED]: PoapDisabledPayload;
   [POAP_ENABLED]: PoapEnabledPayload;
-  [TALENT_PROTOCOL_DISABLED]: TalentProtocolDisabledPayload;
-  [TALENT_PROTOCOL_ENABLED]: TalentProtocolEnabledPayload;
   [XMTP_DISABLED]: XmtpDisabledPayload;
   [XMTP_ENABLED]: XmtpEnabledPayload;
   [DENTITY_DISABLED]: DentityDisabledPayload;

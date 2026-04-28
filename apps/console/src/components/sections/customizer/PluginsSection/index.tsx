@@ -3,7 +3,6 @@ import { Accordion } from '../../../ui/accordion';
 import { JustVerified } from './JustVerified';
 import { EFP } from './EFP';
 import { POAP } from './POAP';
-import { TalentProtocol } from './TalentProtocol';
 import { XMTP } from './XMTP';
 import { Dentity } from './Dentity';
 
@@ -19,8 +18,6 @@ export const PluginsSection: FC = () => {
         <XMTP />
         <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
         <POAP />
-        <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
-        <TalentProtocol />
         <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
         <EFP />
         <div className="w-full h-[1px] min-h-[1px] bg-[#CBD5E180]" />
