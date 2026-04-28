@@ -18,7 +18,7 @@ XMTP: Enables secure, decentralized messaging capabilities within the JustWeb3 W
 
 POAP Plugin: Displays a user’s existing POAP badges (Proof of Attendance Protocol), reflecting their attendance at various events.
 
-Talent Protocol: Displays a user’s onchain reputation sourced from Talent Protocol, such as endorsements, skills, or other professional metrics visible onchain.
+Talent Protocol _(Deprecated)_: Displays a user’s onchain reputation sourced from Talent Protocol, such as endorsements, skills, or other professional metrics visible onchain. **`@justweb3/talent-protocol-plugin` is deprecated and no longer maintained — see [Talent Protocol](talent-protocol.md) for details.**
 
 ## Overview of the Plugin System
 

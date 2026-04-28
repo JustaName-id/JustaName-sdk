@@ -55,7 +55,7 @@ jobs:
           SIWENS_PROVIDER_URL: ${{ secrets.SIWENS_PROVIDER_URL }}
           SIWENS_VALID_ENS: ${{ secrets.SIWENS_VALID_ENS }}
         run: |
-          npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console --parallel=1
+          npx nx affected -t test --configuration=ci --passWithNoTests --exclude=justaname-mono-sdk,console,@justweb3/talent-protocol-plugin --parallel=1
 
       - name: Pull latest changes from main
         run: git pull origin main

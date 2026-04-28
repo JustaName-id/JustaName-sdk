@@ -18,7 +18,6 @@ import { mainnet, sepolia } from 'wagmi/chains';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { XMTPPlugin } from '../lib';
 import { EFPPlugin } from '@justweb3/efp-plugin';
-import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';
 import { POAPPlugin } from '@justweb3/poap-plugin';
 
 const queryClient = new QueryClient();
@@ -54,9 +53,6 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
     EFPPlugin,
     POAPPlugin({
       apiKey: import.meta.env.STORYBOOK_APP_POAP_KEY,
-    }),
-    TalentProtocolPlugin({
-      apiKey: import.meta.env.STORYBOOK_APP_TALENT_PROTOCOL_API_KEY,
     }),
     // JustVerifiedPlugin(['email', 'telegram', 'twitter', 'discord']),
   ],

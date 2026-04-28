@@ -1,5 +1,7 @@
 # Talent Protocol
 
+> **⚠️ Deprecated** — `@justweb3/talent-protocol-plugin` is deprecated and is no longer maintained. New integrations should not depend on it; existing integrations should plan to remove it. This page is preserved for reference only.
+
 Talent Protocol is a platform that helps emerging professionals bootstrap their careers by building communities around their professional growth. It fosters a unique incentive structure, where supporters—such as fans, mentors, and colleagues—gain closer connections, receive updates, and may enjoy unique benefits tied to the talent’s achievements. By establishing an onchain reputation and professional track record, Talent Protocol aims to create a more transparent, community-backed professional network, where success and value creation are shared more equitably between emerging talent and their early supporters.
 
 ```tsx
@@ -31,4 +33,3 @@ const justweb3Config: JustWeb3ProviderConfig = {
   }
 };
 ```
-
