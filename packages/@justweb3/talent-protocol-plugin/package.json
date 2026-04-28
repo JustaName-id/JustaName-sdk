@@ -1,6 +1,7 @@
 {
   "name": "@justweb3/talent-protocol-plugin",
-  "version": "0.0.60",
+  "version": "0.0.68",
+  "deprecated": "@justweb3/talent-protocol-plugin is deprecated and no longer maintained. Please remove it from your dependencies.",
   "dependencies": {
     "axios": "1.6.0"
   },

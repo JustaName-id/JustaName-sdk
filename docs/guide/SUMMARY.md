@@ -32,7 +32,7 @@
 * [XMTP](plugins/xmtp.md)
 * [EFP](plugins/efp.md)
 * [POAP](plugins/poap.md)
-* [Talent Protocol](plugins/talent-protocol.md)
+* [Talent Protocol (Deprecated)](plugins/talent-protocol.md)
 
 ## Advanced
 

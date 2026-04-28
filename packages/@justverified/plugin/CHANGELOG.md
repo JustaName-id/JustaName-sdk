@@ -1,3 +1,55 @@
+## 0.0.150 (2026-04-28)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.149 (2026-04-16)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.148 (2026-04-16)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.147 (2026-04-16)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.146 (2026-04-16)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.145 (2026-04-16)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.144 (2026-04-16)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
+## 0.0.143 (2026-04-16)
+
+
+### 🚀 Features
+
+- removed caret range from versions and fixed efp url ([#104](https://github.com/JustaName-id/JustaName-sdk/pull/104))
+
+- **dentity-plugin:** added Dentity plugin, missing clientId ([#110](https://github.com/JustaName-id/JustaName-sdk/pull/110))
+
+
+### 🩹 Fixes
+
+- siwe and viem versions ([cd53b7f8](https://github.com/JustaName-id/JustaName-sdk/commit/cd53b7f8))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
+## 0.0.142 (2025-11-04)
+
+This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.
+
 ## 0.0.141 (2025-08-28)
 
 This was a version bump only for @justverified/plugin to align it with other projects, there were no code changes.

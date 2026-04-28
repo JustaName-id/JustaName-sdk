@@ -1,3 +1,99 @@
+## 0.3.215 (2026-04-28)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.212
+
+## 0.3.214 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.211
+
+## 0.3.213 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.210
+
+## 0.3.212 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.209
+
+## 0.3.211 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.208
+
+## 0.3.210 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.207
+
+## 0.3.209 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.206
+
+## 0.3.208 (2026-04-16)
+
+
+### 🚀 Features
+
+- removed caret range from versions and fixed efp url ([#104](https://github.com/JustaName-id/JustaName-sdk/pull/104))
+
+- **react:** added optional params for usesetnamehashresolver and useuploadmedia ([c0278857](https://github.com/JustaName-id/JustaName-sdk/commit/c0278857))
+
+- **react:** support interop name format in ENS validation ([d919e53f](https://github.com/JustaName-id/JustaName-sdk/commit/d919e53f))
+
+- **react:** support interop name format in ENS validation ([7932e0df](https://github.com/JustaName-id/JustaName-sdk/commit/7932e0df))
+
+
+### 🩹 Fixes
+
+- siwe and viem versions ([cd53b7f8](https://github.com/JustaName-id/JustaName-sdk/commit/cd53b7f8))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.205
+
+
+### ❤️  Thank You
+
+- AngeloAyranji @AngeloAyranji
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
+## 0.3.207 (2025-11-04)
+
+
+### 🚀 Features
+
+- added reverse resolve ([7712517a](https://github.com/JustaName-id/JustaName-sdk/commit/7712517a))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.204
+
+
+### ❤️  Thank You
+
+- anthony2399 @anthony23991
+
 ## 0.3.206 (2025-08-28)
 
 

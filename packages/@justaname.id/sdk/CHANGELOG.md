@@ -1,3 +1,84 @@
+## 0.2.212 (2026-04-28)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.145
+
+## 0.2.211 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.144
+
+## 0.2.210 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.143
+
+## 0.2.209 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.142
+
+## 0.2.208 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.141
+
+## 0.2.207 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.140
+
+## 0.2.206 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.139
+
+## 0.2.205 (2026-04-16)
+
+
+### 🚀 Features
+
+- removed caret range from versions and fixed efp url ([#104](https://github.com/JustaName-id/JustaName-sdk/pull/104))
+
+
+### 🩹 Fixes
+
+- test and xmtp logging ([ba6935e3](https://github.com/JustaName-id/JustaName-sdk/commit/ba6935e3))
+
+- siwe and viem versions ([cd53b7f8](https://github.com/JustaName-id/JustaName-sdk/commit/cd53b7f8))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.138
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
+## 0.2.204 (2025-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/siwens to 0.0.137
+
 ## 0.2.203 (2025-08-28)
 
 

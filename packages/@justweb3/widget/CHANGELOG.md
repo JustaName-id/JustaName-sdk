@@ -1,3 +1,100 @@
+## 0.0.151 (2026-04-28)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.215
+- Updated @justaname.id/sdk to 0.2.212
+- Updated @justweb3/ui to 0.0.151
+
+## 0.0.150 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.214
+- Updated @justaname.id/sdk to 0.2.211
+- Updated @justweb3/ui to 0.0.150
+
+## 0.0.149 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.213
+- Updated @justaname.id/sdk to 0.2.210
+- Updated @justweb3/ui to 0.0.149
+
+## 0.0.148 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.212
+- Updated @justaname.id/sdk to 0.2.209
+- Updated @justweb3/ui to 0.0.148
+
+## 0.0.147 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.211
+- Updated @justaname.id/sdk to 0.2.208
+- Updated @justweb3/ui to 0.0.147
+
+## 0.0.146 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.210
+- Updated @justaname.id/sdk to 0.2.207
+- Updated @justweb3/ui to 0.0.146
+
+## 0.0.145 (2026-04-16)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.209
+- Updated @justaname.id/sdk to 0.2.206
+- Updated @justweb3/ui to 0.0.145
+
+## 0.0.144 (2026-04-16)
+
+
+### 🚀 Features
+
+- removed caret range from versions and fixed efp url ([#104](https://github.com/JustaName-id/JustaName-sdk/pull/104))
+
+
+### 🩹 Fixes
+
+- siwe and viem versions ([cd53b7f8](https://github.com/JustaName-id/JustaName-sdk/commit/cd53b7f8))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.208
+- Updated @justaname.id/sdk to 0.2.205
+- Updated @justweb3/ui to 0.0.144
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
+## 0.0.143 (2025-11-04)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.207
+- Updated @justaname.id/sdk to 0.2.204
+- Updated @justweb3/ui to 0.0.143
+
 ## 0.0.142 (2025-08-28)
 
 

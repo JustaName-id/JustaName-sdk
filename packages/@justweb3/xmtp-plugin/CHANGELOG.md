@@ -1,3 +1,67 @@
+## 0.1.56 (2026-04-28)
+
+
+### 🚀 Features
+
+- **talent-protocol-plugin:** deprecated ([#142](https://github.com/JustaName-id/JustaName-sdk/pull/142))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
+## 0.1.55 (2026-04-16)
+
+This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.54 (2026-04-16)
+
+This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.53 (2026-04-16)
+
+This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.52 (2026-04-16)
+
+This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.51 (2026-04-16)
+
+This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.50 (2026-04-16)
+
+This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.49 (2026-04-16)
+
+
+### 🚀 Features
+
+- removed caret range from versions and fixed efp url ([#104](https://github.com/JustaName-id/JustaName-sdk/pull/104))
+
+
+### 🩹 Fixes
+
+- test and xmtp logging ([ba6935e3](https://github.com/JustaName-id/JustaName-sdk/commit/ba6935e3))
+
+- siwe and viem versions ([cd53b7f8](https://github.com/JustaName-id/JustaName-sdk/commit/cd53b7f8))
+
+- **xmtp-plugin:** circular and updated browser sdk ([97de1d66](https://github.com/JustaName-id/JustaName-sdk/commit/97de1d66))
+
+- **xmtp-plugin:** bugs ([1a5acf13](https://github.com/JustaName-id/JustaName-sdk/commit/1a5acf13))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
+## 0.1.48 (2025-11-04)
+
+This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
+
 ## 0.1.47 (2025-08-28)
 
 This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.

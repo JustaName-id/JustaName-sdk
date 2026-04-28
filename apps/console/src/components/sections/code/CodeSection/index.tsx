@@ -15,32 +15,27 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
   const { justVerified } = useConsole();
   const justVerifiedEnabled = useMemo(
     () => config.plugins?.find((p) => p.name === 'JustVerifiedPlugin'),
-    [config]
+    [config],
   );
 
   const efpPluginEnabled = useMemo(
     () => config.plugins?.find((p) => p.name === 'EFPPlugin'),
-    [config]
+    [config],
   );
 
   const poapPluginEnabled = useMemo(
     () => config.plugins?.find((p) => p.name === 'POAPPlugin'),
-    [config]
-  );
-
-  const talentProtocolPluginEnabled = useMemo(
-    () => config.plugins?.find((p) => p.name === 'TalentProtocolPlugin'),
-    [config]
+    [config],
   );
 
   const xmtpPluginEnabled = useMemo(
     () => config.plugins?.find((p) => p.name === 'XMTPPlugin'),
-    [config]
+    [config],
   );
 
   const dentityPluginEnabled = useMemo(
     () => config.plugins?.find((p) => p.name === 'DentityPlugin'),
-    [config]
+    [config],
   );
 
   const codeSnippet = useMemo(() => {
@@ -50,7 +45,7 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
       plugins.push(
         `%%JustVerifiedPlugin([${justVerified
           .map((v) => `'${v}'`)
-          .join(', ')}])%%`
+          .join(', ')}])%%`,
       );
     }
 
@@ -62,18 +57,12 @@ export const CodeSection: React.FC<CodeSectionProps> = ({ mobile }) => {
       plugins.push("%%POAPPlugin({ apiKey: '<YOUR_POAP_API_KEY>' })%%");
     }
 
-    if (talentProtocolPluginEnabled) {
-      plugins.push(
-        "%%TalentProtocolPlugin({ apiKey: '<YOUR_TALENT_PROTOCOL_API_KEY>' })%%"
-      );
-    }
-
     if (xmtpPluginEnabled) {
       plugins.push("%%XMTPPlugin('production')%%");
     }
 
     if (dentityPluginEnabled) {
-      plugins.push("%%DentityPlugin%%");
+      plugins.push('%%DentityPlugin%%');
     }
 
     return `
@@ -102,21 +91,23 @@ import {
   JustWeb3Button
 } from '@justweb3/widget';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-${justVerifiedEnabled
-        ? "import { JustVerifiedPlugin } from '@justverified/plugin';"
-        : ''
-      }
+${
+  justVerifiedEnabled
+    ? "import { JustVerifiedPlugin } from '@justverified/plugin';"
+    : ''
+}
 ${efpPluginEnabled ? "import { EFPPlugin } from '@justweb3/efp-plugin';" : ''}
-${poapPluginEnabled ? "import { POAPPlugin } from '@justweb3/poap-plugin';" : ''
-      }
-${talentProtocolPluginEnabled
-        ? `import { TalentProtocolPlugin } from '@justweb3/talent-protocol-plugin';`
-        : ''
-      }
-${xmtpPluginEnabled ? "import { XMTPPlugin } from '@justweb3/xmtp-plugin';" : ''
-      }
-${dentityPluginEnabled ? "import { DentityPlugin } from '@justweb3/dentity-plugin';" : ''
-      }
+${
+  poapPluginEnabled ? "import { POAPPlugin } from '@justweb3/poap-plugin';" : ''
+}
+${
+  xmtpPluginEnabled ? "import { XMTPPlugin } from '@justweb3/xmtp-plugin';" : ''
+}
+${
+  dentityPluginEnabled
+    ? "import { DentityPlugin } from '@justweb3/dentity-plugin';"
+    : ''
+}
 
 
 export const App: React.FC = () => {
@@ -137,26 +128,26 @@ export const App: React.FC = () => {
     });
   
     const justweb3Config: JustWeb3ProviderConfig = ${JSON.stringify(
-        {
-          ...config,
-          networks: [
-            {
-              chainId: 1,
-              providerUrl: `<MAINNET_PROVIDER_URL>`,
-            },
-            {
-              chainId: 11155111,
-              providerUrl: `<SEPOLIA_PROVIDER_URL>`,
-            },
-          ],
-          dev: undefined,
-          disableOverlay: undefined,
-          plugins: plugins.length > 0 ? plugins : undefined,
-          color: color,
-        },
-        null,
-        2
-      )};
+      {
+        ...config,
+        networks: [
+          {
+            chainId: 1,
+            providerUrl: `<MAINNET_PROVIDER_URL>`,
+          },
+          {
+            chainId: 11155111,
+            providerUrl: `<SEPOLIA_PROVIDER_URL>`,
+          },
+        ],
+        dev: undefined,
+        disableOverlay: undefined,
+        plugins: plugins.length > 0 ? plugins : undefined,
+        color: color,
+      },
+      null,
+      2,
+    )};
   
     const queryClient = new QueryClient();
   
@@ -183,7 +174,6 @@ export default App;`.trim();
     justVerified,
     justVerifiedEnabled,
     poapPluginEnabled,
-    talentProtocolPluginEnabled,
     xmtpPluginEnabled,
     dentityPluginEnabled,
   ]);
@@ -195,17 +185,17 @@ export default App;`.trim();
   }, [codeSnippet]);
 
   const dependencies = useMemo(() => {
-    return `yarn add ${xmtpPluginEnabled ? '@justweb3/xmtp-plugin' : ''} ${justVerifiedEnabled ? '@justverified/plugin' : ''
-      } ${poapPluginEnabled ? '@justweb3/poap-plugin' : ''}  ${efpPluginEnabled ? '@justweb3/efp-plugin' : ''
-      } ${dentityPluginEnabled ? '@justweb3/dentity-plugin' : ''}
-     ${talentProtocolPluginEnabled ? '@justweb3/talent-protocol-plugin' : ''}
+    return `yarn add ${xmtpPluginEnabled ? '@justweb3/xmtp-plugin' : ''} ${
+      justVerifiedEnabled ? '@justverified/plugin' : ''
+    } ${poapPluginEnabled ? '@justweb3/poap-plugin' : ''}  ${
+      efpPluginEnabled ? '@justweb3/efp-plugin' : ''
+    } ${dentityPluginEnabled ? '@justweb3/dentity-plugin' : ''}
      @justweb3/widget viem wagmi @rainbow-me/rainbowkit @tanstack/react-query ethers`;
   }, [
     dentityPluginEnabled,
     efpPluginEnabled,
     justVerifiedEnabled,
     poapPluginEnabled,
-    talentProtocolPluginEnabled,
     xmtpPluginEnabled,
   ]);
 
@@ -214,18 +204,20 @@ export default App;`.trim();
   };
 
   const handleCopy = () => {
-    getAnalyticsClient().track('CODE_COPIED', {})
+    getAnalyticsClient().track('CODE_COPIED', {});
     navigator.clipboard.writeText(code);
   };
 
   return (
     <div
-      className={`h-full mobile:w-[calc(100% - 1.25rem)]  border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto ${mobile ? 'pb-5' : 'py-5'
-        } px-2.5 gap-5 justify-between`}
+      className={`h-full mobile:w-[calc(100% - 1.25rem)]  border-l-[1px] pointer-events-auto flex flex-col max-h-[calc(100vh-60px)] overflow-y-auto ${
+        mobile ? 'pb-5' : 'py-5'
+      } px-2.5 gap-5 justify-between`}
     >
       <div
-        className={`flex justify-between items-center ${mobile ? 'absolute top-4 right-6 ' : ''
-          }`}
+        className={`flex justify-between items-center ${
+          mobile ? 'absolute top-4 right-6 ' : ''
+        }`}
       >
         {!mobile && <p className="text-sm font-medium leading-[140%]">Code</p>}
       </div>

@@ -1,3 +1,53 @@
+## 0.0.145 (2026-04-28)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.144 (2026-04-16)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.143 (2026-04-16)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.142 (2026-04-16)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.141 (2026-04-16)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.140 (2026-04-16)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.139 (2026-04-16)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.138 (2026-04-16)
+
+
+### 🚀 Features
+
+- removed caret range from versions and fixed efp url ([#104](https://github.com/JustaName-id/JustaName-sdk/pull/104))
+
+
+### 🩹 Fixes
+
+- siwe and viem versions ([cd53b7f8](https://github.com/JustaName-id/JustaName-sdk/commit/cd53b7f8))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
+## 0.0.137 (2025-11-04)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
 ## 0.0.136 (2025-08-28)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.

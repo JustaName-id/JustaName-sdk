@@ -1,3 +1,49 @@
+## 0.0.68 (2026-04-16)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
+## 0.0.67 (2026-04-16)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
+## 0.0.66 (2026-04-16)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
+## 0.0.65 (2026-04-16)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
+## 0.0.64 (2026-04-16)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
+## 0.0.63 (2026-04-16)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
+## 0.0.62 (2026-04-16)
+
+
+### 🚀 Features
+
+- removed caret range from versions and fixed efp url ([#104](https://github.com/JustaName-id/JustaName-sdk/pull/104))
+
+
+### 🩹 Fixes
+
+- siwe and viem versions ([cd53b7f8](https://github.com/JustaName-id/JustaName-sdk/commit/cd53b7f8))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+- anthony2399 @anthony23991
+
+## 0.0.61 (2025-11-04)
+
+This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
+
 ## 0.0.60 (2025-08-28)
 
 This was a version bump only for @justweb3/talent-protocol-plugin to align it with other projects, there were no code changes.
