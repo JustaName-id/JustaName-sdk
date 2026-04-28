@@ -1,3 +1,15 @@
+## 0.1.56 (2026-04-28)
+
+
+### 🚀 Features
+
+- **talent-protocol-plugin:** deprecated ([#142](https://github.com/JustaName-id/JustaName-sdk/pull/142))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.1.55 (2026-04-16)
 
 This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.

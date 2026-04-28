@@ -1,3 +1,7 @@
+## 0.1.52 (2026-04-28)
+
+This was a version bump only for siwens to align it with other projects, there were no code changes.
+
 ## 0.1.51 (2026-04-16)
 
 This was a version bump only for siwens to align it with other projects, there were no code changes.
