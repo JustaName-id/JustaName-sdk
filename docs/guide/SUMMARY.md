@@ -14,6 +14,11 @@
 * [Get All Subnames for an Owner](react-sdk/get-all-subnames-for-an-owner.md)
 * [Demo](react-sdk/demo.md)
 
+## Resolution
+
+* [Forward Resolution](resolution/forward-resolution.md)
+* [Reverse Resolution](resolution/reverse-resolution.md)
+
 ## Plug n Play (Widget)
 
 * [Overview](plug-n-play-widget/overview.md)
