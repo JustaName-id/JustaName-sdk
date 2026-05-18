@@ -5,7 +5,6 @@ import {
   JustaNameDialog,
   JustWeb3Context,
   useJustWeb3,
-  useMApps,
 } from '@justweb3/widget';
 import { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { EmailCredentialItem } from '../../components/EmailCredentialItem';
@@ -47,7 +46,9 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
     selectedCredential,
   ]);
   const { connectedEns, updateRecords } = useJustWeb3();
-  const { mAppsAlreadyEnabled } = useMApps();
+  // mApps deprecated — justverified no longer participates in mApp permission UX.
+  // The cast preserves the `string[] | undefined` shape so consumers compile.
+  const mAppsAlreadyEnabled = undefined as string[] | undefined;
   const { refetchRecords } = useRecords({
     ens: connectedEns?.ens || '',
   });

@@ -5,7 +5,7 @@ import { useJustaName, useSubnameSignature } from '../../providers';
 import { useMountedAccount } from '../account/useMountedAccount';
 import { sanitizeRecords, SubnameAddRoute } from '@justaname.id/sdk';
 import { useAccountSubnames } from '../account/useAccountSubnames';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Records } from '../../types';
 
 export type UseAddSubnameFunctionParams = SubnameAddRoute['params'];
@@ -28,7 +28,8 @@ export interface UseAddSubnameResult {
 export const useAddSubname = (
   params?: UseAddSubnameParams
 ): UseAddSubnameResult => {
-  const { justaname, backendUrl, routes, chainId, ensDomains } = useJustaName();
+  const { justaname, backendUrl, routes, chainId, ensDomains, dev } =
+    useJustaName();
   const { address } = useMountedAccount();
   const { getSignature } = useSubnameSignature();
   const { refetchAccountSubnames } = useAccountSubnames();
@@ -42,6 +43,7 @@ export const useAddSubname = (
       ensDomains.find((ensDomain) => ensDomain.chainId === _chainId)?.ensDomain,
     [params?.ensDomain, ensDomains, _chainId]
   );
+
   const _backendUrl = useMemo(
     () => params?.backendUrl || backendUrl,
     [params?.backendUrl, backendUrl]
@@ -57,6 +59,18 @@ export const useAddSubname = (
   const _apiKey =
     params?.apiKey ||
     ensDomains.find((ensDomain) => ensDomain.chainId === _chainId)?.apiKey;
+
+  useEffect(() => {
+    if (dev) {
+      // eslint-disable-next-line no-console
+      console.debug(
+        '[JustaName] useAddSubname resolved chainId:',
+        _chainId,
+        'ensDomain:',
+        _ensDomain
+      );
+    }
+  }, [dev, _chainId, _ensDomain]);
 
   const mutate = useMutation({
     mutationFn: async (_params: UseAddSubnameFunctionParams) => {

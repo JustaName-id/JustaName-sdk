@@ -10,6 +10,7 @@ import { OffchainResolvers } from '../offchain-resolvers';
 import { RequestSignInParams, SignInFunctionParams } from '../../types/signin';
 import { createPublicClient, http } from 'viem';
 import { mainnet, sepolia } from 'viem/chains';
+import { normalize } from 'viem/ens';
 
 export interface SignInResponse extends SiwensResponse {
   isJustaName: boolean;
@@ -209,7 +210,9 @@ export class SignIn {
     }
 
     const [resolverAddress, resolvers] = await Promise.all([
-      network.provider.getResolver(ens),
+      network.provider
+        .getEnsResolver({ name: normalize(ens) })
+        .catch(() => undefined),
       this.offchainResolvers.getAllOffchainResolvers(),
     ]);
 
@@ -221,11 +224,14 @@ export class SignIn {
       throw InvalidENSException.chainNotSupported(chainId.toString());
     }
 
-    if (!resolverAddress?.address) {
+    if (!resolverAddress) {
       throw InvalidENSException.notRegisteredENS(ens);
     }
 
-    return currentOffchainResolver.resolverAddress === resolverAddress?.address;
+    return (
+      currentOffchainResolver.resolverAddress.toLowerCase() ===
+      resolverAddress.toLowerCase()
+    );
   }
 }
 

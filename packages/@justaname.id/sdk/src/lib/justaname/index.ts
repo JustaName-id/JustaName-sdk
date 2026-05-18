@@ -15,7 +15,13 @@ import {
 } from '../features';
 import { InvalidConfigurationException } from '../errors/InvalidConfiguration.exception';
 // import { providerUrlChainIdLoadingMap, providerUrlChainIdMap } from '../memory';
-import { getJsonRpcProvider } from '../utils/ethersCompat';
+import { createPublicClient, http, PublicClient } from 'viem';
+import { mainnet, sepolia } from 'viem/chains';
+
+const buildPublicClient = (providerUrl: string, chainId: 1 | 11155111): PublicClient => {
+  const chain = chainId === 1 ? mainnet : sepolia;
+  return createPublicClient({ chain, transport: http(providerUrl) });
+};
 
 /**
  * The main class for the JustaName SDK.
@@ -70,6 +76,7 @@ export class JustaName {
 
   /**
    * The MApps feature.
+   * @deprecated mApps is deprecated and will be removed in the next major version.
    * @public
    * @type {MApps}
    * @memberof JustaName
@@ -167,11 +174,11 @@ export class JustaName {
     const defaultMainnetProviderUrl = 'https://cloudflare-eth.com';
     const defaultTestnetProviderUrl = 'https://rpc.sepolia.org';
 
-    const defaultMainnetProvider = getJsonRpcProvider(
+    const defaultMainnetProvider = buildPublicClient(
       defaultMainnetProviderUrl,
       1
     );
-    const defaultTestnetProvider = getJsonRpcProvider(
+    const defaultTestnetProvider = buildPublicClient(
       defaultTestnetProviderUrl,
       11155111
     );
@@ -187,11 +194,6 @@ export class JustaName {
         provider: defaultTestnetProvider,
         providerUrl: defaultTestnetProviderUrl,
       },
-      // {
-      //   chainId: 31337 as ChainId,
-      //   provider: getJsonRpcProvider('http://localhost:8545'),
-      //   providerUrl: 'http://localhost:8545',
-      // },
     ] as NetworksWithProvider;
 
     const baseNetworksConfig = baseNetworks.map((_network) => {
@@ -199,7 +201,10 @@ export class JustaName {
       if (network && network?.providerUrl) {
         return {
           chainId: network.chainId,
-          provider: getJsonRpcProvider(network.providerUrl),
+          provider: buildPublicClient(
+            network.providerUrl,
+            network.chainId as 1 | 11155111
+          ),
           providerUrl: network.providerUrl,
         };
       } else {
@@ -213,9 +218,6 @@ export class JustaName {
     const testnetNetwork = baseNetworksConfig.find(
       (n) => n.chainId === 11155111
     ) as NetworkWithProvider<11155111>;
-    // const localNetwork = baseNetworksConfig.find(
-    //   (n) => n.chainId === 31337
-    // ) as NetworkWithProvider<31337>;
     if (!mainnetNetwork) {
       throw new InvalidConfigurationException('The mainnet network is missing');
     }
@@ -231,51 +233,4 @@ export class JustaName {
     // To be optimized for serverless and re added later
     // this.checkNetworks(configuration.networks);
   }
-
-  // private static checkNetworks(networks: Networks): void {
-  //   if (networks && networks.length > 0) {
-  //     networks.reduce((acc, network) => {
-  //       if (acc.includes(network.chainId)) {
-  //         throw new InvalidConfigurationException('The chainId is duplicated');
-  //       }
-  //       return [...acc, network.chainId];
-  //     }, [] as ChainId[]);
-  //
-  //     networks.forEach((network) => {
-  //       if (providerUrlChainIdLoadingMap.has(network.providerUrl)) {
-  //         if (providerUrlChainIdLoadingMap.get(network.providerUrl)) {
-  //           return;
-  //         }
-  //       }
-  //
-  //       providerUrlChainIdLoadingMap.set(network.providerUrl, true);
-  //
-  //       if (providerUrlChainIdMap.has(network.providerUrl)) {
-  //         if (
-  //           providerUrlChainIdMap.get(network.providerUrl) !== network.chainId
-  //         ) {
-  //           throw new InvalidConfigurationException(
-  //             'The chainId does not match the chainId of the providerUrl'
-  //           );
-  //         } else {
-  //           return;
-  //         }
-  //       }
-  //
-  //       const provider = getJsonRpcProvider(network.providerUrl);
-  //       provider.getNetwork().then((_network) => {
-  //         if (network.chainId.toString() !== _network.chainId.toString()) {
-  //           throw new InvalidConfigurationException(
-  //             'The chainId does not match the chainId of the providerUrl'
-  //           );
-  //         }
-  //
-  //         providerUrlChainIdMap.set(
-  //           network.providerUrl,
-  //           parseInt(_network.chainId.toString())
-  //         );
-  //       });
-  //     });
-  //   }
-  // }
 }

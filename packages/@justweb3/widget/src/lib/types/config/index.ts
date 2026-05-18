@@ -10,6 +10,9 @@ export interface JustWeb3ProviderConfig
   logo?: string;
   disableOverlay?: boolean;
   enableAuth?: boolean;
+  /**
+   * @deprecated mApps is deprecated and will be removed in the next major version.
+   */
   mApps?: (string | { name: string; openOnConnect: boolean })[];
   plugins?: JustaPlugin[];
   onLogout?: () => void;

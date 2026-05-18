@@ -18,6 +18,9 @@ import {
 } from '@justweb3/ui';
 import { DefaultDialog } from '../DefaultDialog';
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export interface RevokeMAppDialogProps {
   mApp: {
     name: string;
@@ -32,6 +35,9 @@ export interface RevokeMAppDialogProps {
   disableOverlay?: boolean;
 }
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export const RevokeMAppDialog: FC<RevokeMAppDialogProps> = ({
   mApp: { name: mApp, isOpen: open },
   handleOpenDialog,

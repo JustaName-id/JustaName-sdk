@@ -21,6 +21,9 @@ export interface UseRevokeMAppPermissionParams {
   providerUrl?: string
 }
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export const useRevokeMAppPermission = (params: UseRevokeMAppPermissionParams): UseRequestRevokeMAppPermissionResult => {
   const { justaname, chainId } = useJustaName()
   const _chainId = useMemo(() => params.chainId || chainId, [params.chainId, chainId])

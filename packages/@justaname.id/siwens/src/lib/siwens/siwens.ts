@@ -18,7 +18,30 @@ import {
   extractDataFromStatement,
 } from '../utils';
 import { toASCII, toUnicode } from 'punycode';
-import { getJsonRpcProvider, JsonRpcProvider } from '../utils/ethersCompat';
+import {
+  createPublicClient,
+  http,
+  PublicClient,
+  isAddressEqual,
+  getAddress as viemGetAddress,
+} from 'viem';
+import { mainnet, sepolia } from 'viem/chains';
+import type { Chain } from 'viem';
+import { normalize } from 'viem/ens';
+
+const SUPPORTED_CHAINS: Record<number, Chain> = {
+  1: mainnet,
+  11155111: sepolia,
+};
+
+const buildPublicClient = (
+  providerUrl?: string,
+  chainId?: number
+): PublicClient =>
+  createPublicClient({
+    chain: SUPPORTED_CHAINS[chainId ?? 1] ?? mainnet,
+    transport: http(providerUrl),
+  });
 
 export interface SiwensResponse extends SiweResponse {
   ens: string;
@@ -40,7 +63,7 @@ export interface SiwensConfig {
 }
 
 export class SIWENS extends SiweMessage {
-  readonly provider: JsonRpcProvider;
+  readonly provider: PublicClient;
   readonly providerUrl: string | undefined;
 
   constructor(signInConfig: SiwensConfig) {
@@ -50,7 +73,7 @@ export class SIWENS extends SiweMessage {
       if (!providerUrl) {
         throw InvalidConfigurationException.providerUrlRequired();
       }
-      this.provider = getJsonRpcProvider(providerUrl);
+      this.provider = buildPublicClient(providerUrl, this.chainId);
       this.providerUrl = providerUrl;
       return;
     }
@@ -91,7 +114,7 @@ export class SIWENS extends SiweMessage {
       expirationTime,
     });
     this.providerUrl = providerUrl;
-    this.provider = getJsonRpcProvider(providerUrl);
+    this.provider = buildPublicClient(providerUrl, this.chainId);
   }
 
   override async verify(
@@ -151,12 +174,14 @@ export class SIWENS extends SiweMessage {
   }
 
   private async verifyEnsAddress(ens: string, address: string) {
-    const resolvedAddress = await this.provider.resolveName(ens);
+    const resolvedAddress = await this.provider.getEnsAddress({
+      name: normalize(ens),
+    });
     if (!resolvedAddress) {
       throw InvalidENSException.notRegisteredENS(ens);
     }
 
-    if (resolvedAddress !== address) {
+    if (!isAddressEqual(resolvedAddress, viemGetAddress(address))) {
       throw InvalidENSException.invalidENSOwner(ens, address);
     }
     return true;

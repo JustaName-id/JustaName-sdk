@@ -21,6 +21,9 @@ export interface UseRequestAddMAppPermission {
 }
 
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export const useAddMAppPermission = (params: UseAddMAppPermissionParams): UseRequestAddMAppPermission => {
   const { justaname, chainId  } = useJustaName()
   const { signMessageAsync } = useSignMessage()

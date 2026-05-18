@@ -19,11 +19,17 @@ import { DefaultDialog } from '../DefaultDialog';
 import { JustWeb3Context, useJustWeb3 } from '../../providers';
 import { useMApps } from '../../providers/MAppProvider';
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export interface AuthorizeMAppDialogProps {
   open: boolean;
   handleOpenDialog: (open: boolean) => void;
 }
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export const MAppsDialog: FC<AuthorizeMAppDialogProps> = ({
   open,
   handleOpenDialog,

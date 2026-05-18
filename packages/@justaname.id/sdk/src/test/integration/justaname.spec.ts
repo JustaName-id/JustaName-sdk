@@ -1,26 +1,55 @@
 import { JustaName } from '../../lib/justaname';
 import { configureEnv } from '../helpers/configureEnv';
 import { initializeJustaName } from '../helpers/initializeJustaName';
-import { ethers } from 'ethers';
+import {
+  generatePrivateKey,
+  privateKeyToAccount,
+  type PrivateKeyAccount,
+} from 'viem/accounts';
 import * as dotenv from 'dotenv';
 import { ChainId } from '../../lib/types';
 import { ChallengeRequestException } from '../../lib/errors/ChallengeRequest.expection';
 
 dotenv.config();
 
+interface TestSigner {
+  address: string;
+  signMessage(message: string): Promise<string>;
+}
+
+const toTestSigner = (account: PrivateKeyAccount): TestSigner => ({
+  address: account.address,
+  signMessage: (message: string) => account.signMessage({ message }),
+});
+
 const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 jest.setTimeout(50000);
-const mAppPk = process.env['SDK_MAPP_PRIVATE_KEY'] as string;
-const mAppSigner = new ethers.Wallet(mAppPk);
-const subnameSigner = ethers.Wallet.createRandom();
+// mApps integration tests are gated on the env vars existing — the feature is
+// deprecated and CI no longer provides these. Tests below use `itMApp` so they
+// skip cleanly when the env is not set.
+const mAppPk = process.env['SDK_MAPP_PRIVATE_KEY'];
+const MAPP_ENABLED = Boolean(mAppPk && process.env['SDK_MAPP']);
+const itMApp = MAPP_ENABLED ? it : it.skip;
+const mAppSigner = MAPP_ENABLED
+  ? toTestSigner(privateKeyToAccount(mAppPk as `0x${string}`))
+  : (undefined as unknown as TestSigner);
+const subnameSigner = toTestSigner(privateKeyToAccount(generatePrivateKey()));
 const subnameToBeAdded = Math.random().toString(36).substring(6);
 const CHAIN_ID = parseInt(process.env['SDK_CHAIN_ID'] as string) as ChainId;
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
-const MAPP = process.env['SDK_MAPP'] as string;
+const MAPP = (process.env['SDK_MAPP'] as string) || 'deprecated.mApp';
 const MAPP_2 = MAPP.split('.')[0] + '2' + '.' + MAPP.split('.')[1];
 const SEPOLIA_PROVIDER_URL = process.env['SDK_SEPOLIA_PROVIDER_URL'] as string;
 const MAINNET_PROVIDER_URL = process.env['SDK_MAINNET_PROVIDER_URL'] as string;
-describe('justaname', () => {
+
+// Integration tests require live env vars (API key, provider URLs, ENS
+// domain). Skip the entire suite cleanly when not configured.
+const INTEGRATION_ENABLED = Boolean(
+  validApiKey && ENS_DOMAIN && SEPOLIA_PROVIDER_URL && MAINNET_PROVIDER_URL
+);
+const describeIntegration = INTEGRATION_ENABLED ? describe : describe.skip;
+
+describeIntegration('justaname', () => {
   let justaname: JustaName;
 
   beforeAll(async () => {
@@ -353,7 +382,7 @@ describe('justaname', () => {
     });
   });
 
-  it("mApps shouldn't be updated", async () => {
+  itMApp("mApps shouldn't be updated", async () => {
     const challenge = await justaname.siwe.requestChallenge({
       address: subnameSigner.address,
       chainId: CHAIN_ID,
@@ -430,7 +459,7 @@ describe('justaname', () => {
     expect(response).toBeDefined();
   });
 
-  it("should return false if ens can't enable mApps", async () => {
+  itMApp("should return false if ens can't enable mApps", async () => {
     const canEnable = await justaname.mApps.canEnableMApps({
       ens: 'justatest2.eth',
       chainId: CHAIN_ID,
@@ -439,7 +468,7 @@ describe('justaname', () => {
     expect(canEnable).toBeFalsy();
   });
 
-  it('should return true if ens can enable mApps', async () => {
+  itMApp('should return true if ens can enable mApps', async () => {
     const canEnable = await justaname.mApps.canEnableMApps({
       ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       chainId: CHAIN_ID,
@@ -448,7 +477,7 @@ describe('justaname', () => {
     expect(canEnable).toBeTruthy();
   });
 
-  it("shouldn't have mApps enabled", async () => {
+  itMApp("shouldn't have mApps enabled", async () => {
     const subname = await justaname.mApps.checkIfMAppIsEnabled({
       ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       mApp: MAPP,
@@ -458,7 +487,7 @@ describe('justaname', () => {
     expect(subname).toBeFalsy();
   });
 
-  it('should add mApps permission', async () => {
+  itMApp('should add mApps permission', async () => {
     const challenge = await justaname.mApps.requestAddMAppPermissionChallenge({
       address: subnameSigner.address,
       subname: subnameToBeAdded + '.' + ENS_DOMAIN,
@@ -476,7 +505,7 @@ describe('justaname', () => {
     expect(response).toBeDefined();
   });
 
-  it('should add mApps2 permission', async () => {
+  itMApp('should add mApps2 permission', async () => {
     const challenge = await justaname.mApps.requestAddMAppPermissionChallenge({
       address: subnameSigner.address,
       subname: subnameToBeAdded + '.' + ENS_DOMAIN,
@@ -494,7 +523,7 @@ describe('justaname', () => {
     expect(response).toBeDefined();
   });
 
-  it('should have removed test_mApps', async () => {
+  itMApp('should have removed test_mApps', async () => {
     const subname = await justaname.subnames.getRecords({
       ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       chainId: CHAIN_ID,
@@ -507,7 +536,7 @@ describe('justaname', () => {
     expect(testMApps).toBeUndefined();
   });
 
-  it('should have mApps enabled', async () => {
+  itMApp('should have mApps enabled', async () => {
     const mapp = await justaname.mApps.checkIfMAppIsEnabled({
       ens: subnameToBeAdded + '.' + ENS_DOMAIN,
       mApp: MAPP,
@@ -561,7 +590,7 @@ describe('justaname', () => {
     expect(response.records.contentHash).toBeNull();
   });
 
-  it('should revoke mApps permission', async () => {
+  itMApp('should revoke mApps permission', async () => {
     const challenge =
       await justaname.mApps.requestRevokeMAppPermissionChallenge({
         subname: subnameToBeAdded + '.' + ENS_DOMAIN,

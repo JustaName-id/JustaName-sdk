@@ -1,9 +1,9 @@
-import { JsonRpcProvider } from '../../utils/ethersCompat';
+import type { PublicClient } from 'viem';
 import { ChainId } from '../common';
 
 export interface NetworkWithProvider<Chain extends ChainId = ChainId>
   extends Network<Chain> {
-  provider: JsonRpcProvider;
+  provider: PublicClient;
 }
 
 export interface Network<Chain extends ChainId = ChainId> {

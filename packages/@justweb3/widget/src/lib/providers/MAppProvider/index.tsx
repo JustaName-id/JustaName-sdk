@@ -21,11 +21,17 @@ import { JustaPlugin } from '../../plugins';
 import { RevokeMAppDialog } from '../../dialogs/RevokeMAppDialog';
 import { JustWeb3ProviderConfig } from '../../types/config';
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export interface MApp {
   name: string;
   isOpen: boolean;
 }
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export interface MAppContextProps {
   mAppsToEnable: string[] | undefined;
   mAppsAlreadyEnabled: string[] | undefined;
@@ -59,6 +65,9 @@ interface MAppsProviderProps {
   config: JustWeb3ProviderConfig;
 }
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export const MAppsProvider: FC<MAppsProviderProps> = ({
   logo,
   handleOpenSignInDialog,
@@ -226,6 +235,9 @@ interface UseMAppResult {
   isPending: boolean;
 }
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export const useMApp = ({ mApp }: UseMAppParams): UseMAppResult => {
   const {
     handleOpenAuthorizeMAppDialog: contextOpenAuthorizeMAppDialog,
@@ -313,6 +325,9 @@ export const useMApp = ({ mApp }: UseMAppParams): UseMAppResult => {
   };
 };
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export const useMApps = (): MAppContextProps => {
   const context = useContext(MAppContext);
   if (context === undefined) {

@@ -23,6 +23,9 @@ export interface UseIsMAppEnabledResult {
   refetchIsMAppEnabled: () => void;
 }
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export const useIsMAppEnabled = (
   params: UseIsMAppEnabledParams
 ): UseIsMAppEnabledResult => {

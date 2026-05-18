@@ -13,6 +13,19 @@ import {
 import { assertRestCall } from '../../api/rest';
 import { Subnames } from '../subnames';
 
+let mAppsDeprecationWarned = false;
+const warnDeprecated = () => {
+  if (mAppsDeprecationWarned) return;
+  mAppsDeprecationWarned = true;
+  // eslint-disable-next-line no-console
+  console.warn(
+    '[JustaName] The mApps feature is deprecated and will be removed in the next major version.'
+  );
+};
+
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export interface MAppsParams {
   siweConfig?: Omit<SiweConfig, 'chainId'>;
   chainId: ChainId;
@@ -21,6 +34,9 @@ export interface MAppsParams {
   dev: boolean;
 }
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export class MApps {
   private readonly siweConfig?: Omit<SiweConfig, 'chainId' | 'ttl'>;
   private readonly chainId: ChainId;
@@ -41,6 +57,7 @@ export class MApps {
     ens: string;
     chainId?: ChainId;
   }): Promise<boolean> {
+    warnDeprecated();
     const chainId = params.chainId || this.chainId;
     const network = this.networks.find((network) => network.chainId === chainId);
     if (!network) {
@@ -83,6 +100,7 @@ export class MApps {
     ens: string;
     chainId?: ChainId;
   }): Promise<boolean> {
+    warnDeprecated();
     const chainId = params.chainId || this.chainId;
     const ens = params.ens;
     const records = await this.subnames.getRecords({
@@ -94,6 +112,7 @@ export class MApps {
   }
 
   requestAddMAppPermissionChallenge(params: RequestAddMAppPermissionChallengeRoute['params']): Promise<RequestAddMAppPermissionChallengeRoute['response']> {
+    warnDeprecated();
     const { chainId, ttl, origin, domain,...rest } = params;
 
     const _chainId = chainId || this.chainId;
@@ -110,6 +129,7 @@ export class MApps {
   }
 
   requestAppendMAppFieldChallenge(params: RequestAppendMAppFieldChallengeRoute['params']): Promise<RequestAppendMAppFieldChallengeRoute['response']> {
+    warnDeprecated();
     const { chainId, ttl, origin, domain,...rest } = params;
     const _chainId = chainId || this.chainId;
     const _ttl = ttl || 120000;
@@ -126,6 +146,7 @@ export class MApps {
   }
 
   requestRevokeMAppPermissionChallenge(params: RequestRevokeMAppPermissionChallengeRoute['params']): Promise<RequestRevokeMAppPermissionChallengeRoute['response']> {
+    warnDeprecated();
     const { chainId, ttl, origin, domain,...rest } = params;
     const _chainId = chainId || this.chainId;
     const _ttl = ttl || 120000;
@@ -144,6 +165,7 @@ export class MApps {
   addMAppPermission(
     params: AddMAppPermissionRoute['params'],
   ): Promise<AddMAppPermissionRoute['response']> {
+    warnDeprecated();
     return assertRestCall('MAPP_ADD_PERMISSION_ROUTE', 'POST', {
       ...params
     }, undefined, this.dev)(['message','address','signature'])
@@ -153,6 +175,7 @@ export class MApps {
     params: AppendMAppFieldRoute['params'],
     headers: AppendMAppFieldRoute['headers']
   ): Promise<AppendMAppFieldRoute['response']> {
+    warnDeprecated();
     return assertRestCall('MAPP_APPEND_FIELD_ROUTE', 'POST', {
       ...params
     }, {
@@ -163,6 +186,7 @@ export class MApps {
   revokeMAppPermission(
     params: RevokeMAppPermissionRoute['params']
   ): Promise<RevokeMAppPermissionRoute['response']> {
+    warnDeprecated();
     return assertRestCall('MAPP_REVOKE_PERMISSION_ROUTE', 'POST', {
       ...params
     }, undefined, this.dev)(['message','address','signature'])

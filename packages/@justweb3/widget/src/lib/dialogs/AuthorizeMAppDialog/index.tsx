@@ -18,6 +18,9 @@ import {
 import { isParseable } from '../../utils';
 import { DefaultDialog } from '../DefaultDialog';
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export interface AuthorizeMAppDialogProps {
   mApp: {
     name: string;
@@ -32,6 +35,9 @@ export interface AuthorizeMAppDialogProps {
   disableOverlay?: boolean;
 }
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export const AuthorizeMAppDialog: FC<AuthorizeMAppDialogProps> = ({
   mApp: { name: mApp, isOpen: open },
   handleOpenDialog,

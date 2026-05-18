@@ -21,6 +21,9 @@ export interface UseCanEnableMAppsResult {
   refetchCanEnableMApps: () => void;
 }
 
+/**
+ * @deprecated mApps is deprecated and will be removed in the next major version.
+ */
 export const useCanEnableMApps = (
   params: UseCanEnableMAppsParams
 ): UseCanEnableMAppsResult => {

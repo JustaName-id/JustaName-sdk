@@ -10,7 +10,8 @@ import {
 } from 'wagmi';
 import { useOffchainResolvers } from '../offchainResolver/useOffchainResolvers';
 import { useMountedAccount } from '../account/useMountedAccount';
-import { getAddress, namehash } from '../../helpers/ethersCompat';
+import { getAddress } from 'viem';
+import { namehash } from 'viem/ens';
 
 const ZeroAddress = '0x0000000000000000000000000000000000000000';
 
