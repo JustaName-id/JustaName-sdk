@@ -7,7 +7,6 @@ import {
   NetworkWithProvider,
 } from '../types';
 import {
-  MApps,
   OffchainResolvers,
   SignIn,
   SubnameChallenge,
@@ -74,27 +73,16 @@ export class JustaName {
    **/
   signIn: SignIn;
 
-  /**
-   * The MApps feature.
-   * @deprecated mApps is deprecated and will be removed in the next major version.
-   * @public
-   * @type {MApps}
-   * @memberof JustaName
-   */
-  mApps: MApps;
-
   constructor(
     siwe: SubnameChallenge,
     subnames: Subnames,
     offchainResolvers: OffchainResolvers,
-    signIn: SignIn,
-    mApps: MApps
+    signIn: SignIn
   ) {
     this.siwe = siwe;
     this.subnames = subnames;
     this.offchainResolvers = offchainResolvers;
     this.signIn = signIn;
-    this.mApps = mApps;
   }
 
   static init(configuration: JustaNameConfig = {}): JustaName {
@@ -153,20 +141,11 @@ export class JustaName {
       offchainResolvers,
     });
 
-    const mApps = new MApps({
-      siweConfig,
-      chainId: defaultChainId,
-      networks,
-      subnames,
-      dev,
-    });
-
     return new JustaName(
       subnameChallenge,
       subnames,
       offchainResolvers,
-      signIn,
-      mApps
+      signIn
     );
   }
 

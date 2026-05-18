@@ -46,9 +46,6 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
     selectedCredential,
   ]);
   const { connectedEns, updateRecords } = useJustWeb3();
-  // mApps deprecated — justverified no longer participates in mApp permission UX.
-  // The cast preserves the `string[] | undefined` shape so consumers compile.
-  const mAppsAlreadyEnabled = undefined as string[] | undefined;
   const { refetchRecords } = useRecords({
     ens: connectedEns?.ens || '',
   });
@@ -204,35 +201,21 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                                 socialValue = '';
                               }
                             }
-                            if (mAppsAlreadyEnabled?.includes(mApp)) {
-                              updateRecords({
-                                text: [
-                                  {
-                                    key: socialKey,
-                                    value: socialValue,
-                                  },
-                                ],
-                              }).then(() => {
-                                refetchRecords();
-                                refetchVerifyRecords();
-                              });
-                            } else {
-                              updateRecords({
-                                text: [
-                                  {
-                                    key: socialKey,
-                                    value: socialValue,
-                                  },
-                                  {
-                                    key: credentialKey,
-                                    value: JSON.stringify(credentialValue),
-                                  },
-                                ],
-                              }).then(() => {
-                                refetchRecords();
-                                refetchVerifyRecords();
-                              });
-                            }
+                            updateRecords({
+                              text: [
+                                {
+                                  key: socialKey,
+                                  value: socialValue,
+                                },
+                                {
+                                  key: credentialKey,
+                                  value: JSON.stringify(credentialValue),
+                                },
+                              ],
+                            }).then(() => {
+                              refetchRecords();
+                              refetchVerifyRecords();
+                            });
                           })
                           .catch((error) => {
                             setSelectedCredential(undefined);
@@ -264,7 +247,6 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                 ) : (
                   <EmailCredentialItem
                     mApp={mApp}
-                    mAppsAlreadyEnabled={mAppsAlreadyEnabled}
                     refetchRecords={refetchRecords}
                     refetchVerifyRecords={refetchVerifyRecords}
                     verificationBackendUrl={verificationBackendUrl}

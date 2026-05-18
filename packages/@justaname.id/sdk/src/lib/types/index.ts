@@ -7,5 +7,4 @@ export * from './offchain-resolver';
 export * from './primary-name';
 export * from './siwe';
 export * from './subnames';
-export * from './mApps';
 export * from './signin';

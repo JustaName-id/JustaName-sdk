@@ -8,8 +8,6 @@ import React, {
   useState,
 } from 'react';
 import {
-  useCanEnableMApps,
-  useEnabledMApps,
   useEnsAuth,
   useMountedAccount,
   useRecords,
@@ -34,9 +32,6 @@ interface PluginProviderProps {
   children: React.ReactNode;
   plugins: JustaPlugin[];
   handleOpenSignInDialog: (open: boolean) => void;
-  handleOpenAuthorizeMAppDialog: (mAppName: string, open: boolean) => void;
-  handleOpenRevokeMAppDialog: (mAppName: string, open: boolean) => void;
-  mApps?: string[];
   config: JustWeb3ProviderConfig;
 }
 
@@ -44,9 +39,6 @@ export const PluginProvider: FC<PluginProviderProps> = ({
   children,
   plugins,
   handleOpenSignInDialog,
-  handleOpenAuthorizeMAppDialog,
-  handleOpenRevokeMAppDialog,
-  mApps,
   config,
 }) => {
   const { connectedEns, isEnsAuthPending, isLoggedIn } = useEnsAuth({
@@ -55,23 +47,14 @@ export const PluginProvider: FC<PluginProviderProps> = ({
   const { records } = useRecords({
     ens: connectedEns?.ens || '',
   });
-  const { enabledMApps } = useEnabledMApps({
-    ens: connectedEns?.ens || '',
-  });
-  const { canEnableMApps } = useCanEnableMApps({
-    ens: connectedEns?.ens || '',
-  });
   const { address, chain } = useMountedAccount();
   const previousConnectedEns = usePreviousState(connectedEns, [
     connectedEns,
     records,
-    enabledMApps,
-    canEnableMApps,
   ]);
   const previousChain = usePreviousState(chain, [chain]);
   const previousAddress = usePreviousState(address, [address]);
   const previousRecords = usePreviousState(records, [records]);
-  const previousEnabledMApps = usePreviousState(enabledMApps, [enabledMApps]);
 
   const [pluginStates, setPluginStates] = useState<
     Record<string, Record<string, any>>
@@ -84,11 +67,8 @@ export const PluginProvider: FC<PluginProviderProps> = ({
       connectedEns,
       isEnsAuthPending,
       isLoggedIn,
-      mApps: mApps || [],
       chainId: chain?.id,
       handleOpenSignInDialog,
-      handleOpenAuthorizeMAppDialog,
-      handleOpenRevokeMAppDialog,
       records,
       config,
       eventEmitter: new EventEmitter(),
@@ -110,9 +90,6 @@ export const PluginProvider: FC<PluginProviderProps> = ({
       isEnsAuthPending,
       isLoggedIn,
       handleOpenSignInDialog,
-      handleOpenAuthorizeMAppDialog,
-      handleOpenRevokeMAppDialog,
-      mApps,
       eventEmitter,
       pluginStates,
       records,
@@ -174,8 +151,6 @@ export const PluginProvider: FC<PluginProviderProps> = ({
 
       if (
         records &&
-        enabledMApps !== undefined &&
-        canEnableMApps !== undefined &&
         connectedEns &&
         !previousConnectedEns &&
         plugin.hooks?.onEnsSignIn
@@ -185,9 +160,7 @@ export const PluginProvider: FC<PluginProviderProps> = ({
             pluginApi,
             connectedEns?.ens,
             chain?.id || 1,
-            records,
-            enabledMApps,
-            canEnableMApps
+            records
           );
         } catch (error) {
           console.error(
@@ -199,21 +172,13 @@ export const PluginProvider: FC<PluginProviderProps> = ({
 
       if (
         records &&
-        enabledMApps !== undefined &&
-        canEnableMApps !== undefined &&
         connectedEns &&
         previousConnectedEns &&
         connectedEns.ens !== previousConnectedEns.ens &&
         plugin.hooks?.onEnsChange
       ) {
         try {
-          plugin.hooks?.onEnsChange(
-            pluginApi,
-            connectedEns?.ens,
-            records,
-            enabledMApps,
-            canEnableMApps
-          );
+          plugin.hooks?.onEnsChange(pluginApi, connectedEns?.ens, records);
         } catch (error) {
           console.error(
             `Error in plugin ${plugin.name} onEnsChange hook:`,
@@ -233,14 +198,7 @@ export const PluginProvider: FC<PluginProviderProps> = ({
         }
       }
     });
-  }, [
-    plugins,
-    connectedEns,
-    previousConnectedEns,
-    records,
-    enabledMApps,
-    canEnableMApps,
-  ]);
+  }, [plugins, connectedEns, previousConnectedEns, records]);
 
   useEffect(() => {
     plugins?.forEach((plugin) => {
@@ -290,24 +248,13 @@ export const PluginProvider: FC<PluginProviderProps> = ({
     plugins?.forEach((plugin) => {
       const pluginApi = createPluginApi(plugin.name);
 
-      if (
-        !records ||
-        enabledMApps === undefined ||
-        canEnableMApps === undefined ||
-        !connectedEns
-      ) {
+      if (!records || !connectedEns) {
         return;
       }
 
       if (!isEqual(records, previousRecords) && plugin.hooks?.onRecordsChange) {
         try {
-          plugin.hooks.onRecordsChange(
-            pluginApi,
-            connectedEns?.ens,
-            records,
-            enabledMApps,
-            canEnableMApps
-          );
+          plugin.hooks.onRecordsChange(pluginApi, connectedEns?.ens, records);
         } catch (error) {
           console.error(
             `Error in plugin ${plugin.name} onRecordsChange hook:`,
@@ -316,70 +263,7 @@ export const PluginProvider: FC<PluginProviderProps> = ({
         }
       }
     });
-  }, [
-    plugins,
-    records,
-    previousRecords,
-    connectedEns,
-    enabledMApps,
-    canEnableMApps,
-  ]);
-
-  useEffect(() => {
-    plugins?.forEach((plugin) => {
-      const pluginApi = createPluginApi(plugin.name);
-
-      if (
-        enabledMApps === undefined ||
-        !connectedEns ||
-        !previousEnabledMApps
-      ) {
-        return;
-      }
-
-      if (
-        !isEqual(enabledMApps, previousEnabledMApps) &&
-        plugin.hooks?.onMAppAdd
-      ) {
-        const addedMApp = enabledMApps.find(
-          (mApp) => !previousEnabledMApps.includes(mApp)
-        );
-        if (addedMApp) {
-          try {
-            plugin.hooks.onMAppAdd(pluginApi, connectedEns?.ens, addedMApp);
-          } catch (error) {
-            console.error(
-              `Error in plugin ${plugin.name} onMAppAdd hook:`,
-              error
-            );
-          }
-        }
-      }
-
-      if (
-        !isEqual(enabledMApps, previousEnabledMApps) &&
-        plugin.hooks?.onMAppRemove
-      ) {
-        const removedMApp = previousEnabledMApps.find(
-          (mApp) => !enabledMApps.includes(mApp)
-        );
-        if (removedMApp) {
-          try {
-            plugin.hooks.onMAppRemove(
-              pluginApi,
-              connectedEns?.ens,
-              removedMApp
-            );
-          } catch (error) {
-            console.error(
-              `Error in plugin ${plugin.name} onMAppRemove hook:`,
-              error
-            );
-          }
-        }
-      }
-    });
-  }, [plugins, enabledMApps, previousEnabledMApps, connectedEns]);
+  }, [plugins, records, previousRecords, connectedEns]);
 
   const globalComponentsArray: ReactNode[] = plugins?.reduce(
     (acc: ReactNode[], plugin: JustaPlugin) => {

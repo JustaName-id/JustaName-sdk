@@ -1,6 +1,9 @@
 {
   "name": "@justaname.id/siwens",
   "version": "0.0.145",
+  "dependencies": {
+    "punycode": "^2.3.1"
+  },
   "peerDependencies": {
     "siwe": ">=2.0.0",
     "viem": "^2.48.0"

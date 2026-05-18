@@ -29,7 +29,6 @@ import GeneralIcon from './General';
 import LocationOnIcon from './LocationOn';
 import LocationIcon from './Location';
 import LogoutIcon from './Logout';
-import MappIcon from './Mapp';
 import MaximizeIcon from './Maximize';
 import MicIcon from './Mic';
 import MinimizeIcon from './Minimize';
@@ -87,7 +86,6 @@ const general = {
   'location-on': LocationOnIcon,
   location: LocationIcon,
   logout: LogoutIcon,
-  mapp: MappIcon,
   maximize: MaximizeIcon,
   mic: MicIcon,
   minimize: MinimizeIcon,
@@ -148,7 +146,6 @@ export {
   LocationOnIcon,
   LocationIcon,
   LogoutIcon,
-  MappIcon,
   MaximizeIcon,
   MicIcon,
   MinimizeIcon,

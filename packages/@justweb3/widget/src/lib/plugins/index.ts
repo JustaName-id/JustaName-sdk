@@ -10,15 +10,12 @@ export interface PluginApi {
   isLoggedIn: boolean;
   chainId: number | undefined;
   records: UseRecordsResult['records'];
-  mApps: string[];
   setState: <T>(key: string, value: T) => void;
   getState: <T>(key: string) => T | undefined;
   config: JustWeb3ProviderConfig;
 
   eventEmitter: EventEmitter;
 
-  handleOpenAuthorizeMAppDialog: (mApp: string, open: boolean) => void;
-  handleOpenRevokeMAppDialog: (mApp: string, open: boolean) => void;
   handleOpenSignInDialog: (open: boolean) => void;
 }
 
@@ -74,30 +71,18 @@ type OnEnsSignInHook = (
   pluginApi: PluginApi,
   ens: string,
   chainId: number,
-  records: UseRecordsResult['records'],
-  enabledMApps: string[],
-  canEnableMApps: boolean
+  records: UseRecordsResult['records']
 ) => void;
 type OnEnsChangeHook = (
   pluginApi: PluginApi,
   ens: string,
-  records: UseRecordsResult['records'],
-  enabledMApps: string[],
-  canEnableMApps: boolean
+  records: UseRecordsResult['records']
 ) => void;
 type OnEnsSignOutHook = (pluginApi: PluginApi, ens: string) => void;
-type OnMAppAddHook = (pluginApi: PluginApi, ens: string, mApp: string) => void;
-type OnMAppRemoveHook = (
-  pluginApi: PluginApi,
-  ens: string,
-  mApp: string
-) => void;
 type OnRecordsChangeHook = (
   pluginApi: PluginApi,
   ens: string,
-  records: UseRecordsResult['records'],
-  enabledMApps: string[],
-  canEnableMApps: boolean
+  records: UseRecordsResult['records']
 ) => void;
 type OnSubnameClaimedHook = (pluginApi: PluginApi, subname: string) => void;
 type OnSwitchChain = (
@@ -117,8 +102,6 @@ interface Hooks {
   onSwitchChain?: OnSwitchChain;
   onSubnameClaimed?: OnSubnameClaimedHook;
   onEnsChange?: OnEnsChangeHook;
-  onMAppAdd?: OnMAppAddHook;
-  onMAppRemove?: OnMAppRemoveHook;
   onRecordsChange?: OnRecordsChangeHook;
   onStateChange?: (
     pluginApi: PluginApi,
@@ -132,8 +115,6 @@ export interface JustaPlugin {
   name: string;
 
   components?: PluginComponents;
-
-  mApps?: string[];
 
   hooks?: Hooks;
 

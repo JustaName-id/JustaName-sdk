@@ -37,7 +37,6 @@ const JustWeb3Config: JustWeb3ProviderConfig = {
       providerUrl: import.meta.env.STORYBOOK_APP_SEPOLIA_PROVIDER_URL,
     },
   ],
-  mApps: ['justverified.eth', 'justweb3.eth'],
   openOnWalletConnect: false,
   allowedEns: 'all',
   // dev: import.meta.env.STORYBOOK_APP_DEV === 'true',

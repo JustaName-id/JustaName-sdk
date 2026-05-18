@@ -122,8 +122,11 @@ export class SignIn {
         // We no longer pass `provider` here because it must be an ethers
         // `Provider`, and the SDK is now viem-only.
         verificationFallback: async (params, opts, message, EIP1271Promise) => {
+          // Use the chainId extracted from the SIWE message itself, not the
+          // SDK-default. Otherwise contract-wallet (EIP-1271) verification
+          // runs against the wrong chain when the message is cross-chain.
           const publicClient = createPublicClient({
-            chain: this.chainId === 1 ? mainnet : sepolia,
+            chain: chainId === 1 ? mainnet : sepolia,
             transport: http(network.providerUrl),
           });
 
@@ -213,9 +216,13 @@ export class SignIn {
     }
 
     const [resolverAddress, resolvers] = await Promise.all([
-      network.provider
-        .getEnsResolver({ name: normalize(ens) })
-        .catch(() => undefined),
+      // Narrow the catch to "resolver not found" (the only expected miss).
+      // Network / RPC errors must bubble up so callers see a real failure
+      // rather than a misleading "ENS not registered" downstream.
+      network.provider.getEnsResolver({ name: normalize(ens) }).catch((e) => {
+        if (e?.name === 'EnsResolverNotFoundError') return undefined;
+        throw e;
+      }),
       this.offchainResolvers.getAllOffchainResolvers(),
     ]);
 

@@ -24,26 +24,10 @@ const toTestSigner = (account: PrivateKeyAccount): TestSigner => ({
 
 const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 jest.setTimeout(50000);
-// mApps integration tests are gated on the env vars existing — the feature is
-// deprecated and CI no longer provides these. Tests below use `itMApp` so they
-// skip cleanly when the env is not set.
-const rawMAppPk = process.env['SDK_MAPP_PRIVATE_KEY'];
-// CI sets unconfigured env vars to empty string (not undefined).
-const mAppPk =
-  rawMAppPk && rawMAppPk.startsWith('0x')
-    ? (rawMAppPk as `0x${string}`)
-    : undefined;
-const MAPP_ENABLED = Boolean(mAppPk && process.env['SDK_MAPP']);
-const itMApp = MAPP_ENABLED ? it : it.skip;
-const mAppSigner = MAPP_ENABLED
-  ? toTestSigner(privateKeyToAccount(mAppPk as `0x${string}`))
-  : (undefined as unknown as TestSigner);
 const subnameSigner = toTestSigner(privateKeyToAccount(generatePrivateKey()));
 const subnameToBeAdded = Math.random().toString(36).substring(6);
 const CHAIN_ID = parseInt(process.env['SDK_CHAIN_ID'] as string) as ChainId;
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
-const MAPP = (process.env['SDK_MAPP'] as string) || 'deprecated.mApp';
-const MAPP_2 = MAPP.split('.')[0] + '2' + '.' + MAPP.split('.')[1];
 const SEPOLIA_PROVIDER_URL = process.env['SDK_SEPOLIA_PROVIDER_URL'] as string;
 const MAINNET_PROVIDER_URL = process.env['SDK_MAINNET_PROVIDER_URL'] as string;
 
@@ -387,37 +371,6 @@ describeIntegration('justaname', () => {
     });
   });
 
-  itMApp("mApps shouldn't be updated", async () => {
-    const challenge = await justaname.siwe.requestChallenge({
-      address: subnameSigner.address,
-      chainId: CHAIN_ID,
-    });
-
-    const signature = await subnameSigner.signMessage(challenge.challenge);
-
-    const response = await justaname.subnames.updateSubname(
-      {
-        username: subnameToBeAdded,
-        chainId: CHAIN_ID,
-        ensDomain: ENS_DOMAIN,
-        text: {
-          mApps: 'shouldntBeUpdated',
-          [`test_${MAPP}`]: 'shouldBeOverrideWhenMAppPermissionIsAdded',
-        },
-        signature,
-      },
-      {
-        xMessage: challenge.challenge,
-        xAddress: subnameSigner.address,
-      }
-    );
-
-    const mApps = response.records.texts.find(
-      (text) => text.key === 'mApps'
-    )?.value;
-    expect(mApps).toBeUndefined();
-  });
-
   it('should remove test if value is empty', async () => {
     const challenge = await justaname.siwe.requestChallenge({
       address: subnameSigner.address,
@@ -464,95 +417,6 @@ describeIntegration('justaname', () => {
     expect(response).toBeDefined();
   });
 
-  itMApp("should return false if ens can't enable mApps", async () => {
-    const canEnable = await justaname.mApps.canEnableMApps({
-      ens: 'justatest2.eth',
-      chainId: CHAIN_ID,
-    });
-
-    expect(canEnable).toBeFalsy();
-  });
-
-  itMApp('should return true if ens can enable mApps', async () => {
-    const canEnable = await justaname.mApps.canEnableMApps({
-      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
-      chainId: CHAIN_ID,
-    });
-
-    expect(canEnable).toBeTruthy();
-  });
-
-  itMApp("shouldn't have mApps enabled", async () => {
-    const subname = await justaname.mApps.checkIfMAppIsEnabled({
-      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
-      mApp: MAPP,
-      chainId: CHAIN_ID,
-    });
-
-    expect(subname).toBeFalsy();
-  });
-
-  itMApp('should add mApps permission', async () => {
-    const challenge = await justaname.mApps.requestAddMAppPermissionChallenge({
-      address: subnameSigner.address,
-      subname: subnameToBeAdded + '.' + ENS_DOMAIN,
-      mApp: MAPP,
-      chainId: CHAIN_ID,
-    });
-
-    const signature = await subnameSigner.signMessage(challenge.challenge);
-    const response = await justaname.mApps.addMAppPermission({
-      address: subnameSigner.address,
-      signature,
-      message: challenge.challenge,
-    });
-
-    expect(response).toBeDefined();
-  });
-
-  itMApp('should add mApps2 permission', async () => {
-    const challenge = await justaname.mApps.requestAddMAppPermissionChallenge({
-      address: subnameSigner.address,
-      subname: subnameToBeAdded + '.' + ENS_DOMAIN,
-      mApp: MAPP_2,
-      chainId: CHAIN_ID,
-    });
-
-    const signature = await subnameSigner.signMessage(challenge.challenge);
-    const response = await justaname.mApps.addMAppPermission({
-      address: subnameSigner.address,
-      signature,
-      message: challenge.challenge,
-    });
-
-    expect(response).toBeDefined();
-  });
-
-  itMApp('should have removed test_mApps', async () => {
-    const subname = await justaname.subnames.getRecords({
-      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
-      chainId: CHAIN_ID,
-    });
-
-    const testMApps = subname.records.texts.find(
-      (text) => text.key === `test_${MAPP}`
-    )?.value;
-
-    expect(testMApps).toBeUndefined();
-  });
-
-  itMApp('should have mApps enabled', async () => {
-    const mapp = await justaname.mApps.checkIfMAppIsEnabled({
-      ens: subnameToBeAdded + '.' + ENS_DOMAIN,
-      mApp: MAPP,
-      chainId: CHAIN_ID,
-    });
-
-    expect(mapp).toBeTruthy();
-  });
-
-
-
   it('should be remove contentHash', async () => {
     const records = await justaname.subnames.getRecords({
       ens: subnameToBeAdded + '.' + ENS_DOMAIN,
@@ -595,33 +459,6 @@ describeIntegration('justaname', () => {
     expect(response.records.contentHash).toBeNull();
   });
 
-  itMApp('should revoke mApps permission', async () => {
-    const challenge =
-      await justaname.mApps.requestRevokeMAppPermissionChallenge({
-        subname: subnameToBeAdded + '.' + ENS_DOMAIN,
-        address: subnameSigner.address,
-        mApp: MAPP,
-        chainId: CHAIN_ID,
-      });
-
-    const signature = await subnameSigner.signMessage(challenge.challenge);
-
-    const response = await justaname.mApps.revokeMAppPermission({
-      address: subnameSigner.address,
-      signature,
-      message: challenge.challenge,
-    });
-
-    const mApps = response.records.texts.find(
-      (text) => text.key === 'mApps'
-    )?.value;
-    const testJawEth = response.records.texts.find(
-      (text) => text.key === `test_${MAPP}`
-    )?.value;
-
-    expect(mApps).toEqual(`{"mApps":["${MAPP_2}"]}`);
-    expect(testJawEth).toEqual(undefined);
-  });
 
   it('should get all subnames', async () => {
     const subnames = await justaname.subnames.getSubnamesByAddress({
