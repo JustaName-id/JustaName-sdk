@@ -27,7 +27,10 @@ const randomTestSigner = (): TestSigner =>
 // want unit-level tests (TTL validation, ENS format, nonce) to run, so we
 // stub `signer` with a deterministic random account and use `itIntegration`
 // for tests that actually need the configured wallet/provider.
-const pk = process.env['SIWENS_PRIVATE_KEY'] as `0x${string}` | undefined;
+const rawPk = process.env['SIWENS_PRIVATE_KEY'];
+// CI sets unconfigured env vars to the empty string (not undefined), so we
+// need to treat empty as "not provided" before handing it to viem.
+const pk = rawPk && rawPk.startsWith('0x') ? (rawPk as `0x${string}`) : undefined;
 const INTEGRATION_ENABLED = Boolean(pk && process.env['SIWENS_PROVIDER_URL']);
 const itIntegration = INTEGRATION_ENABLED ? it : it.skip;
 const signer = toTestSigner(

@@ -27,7 +27,12 @@ jest.setTimeout(50000);
 // mApps integration tests are gated on the env vars existing — the feature is
 // deprecated and CI no longer provides these. Tests below use `itMApp` so they
 // skip cleanly when the env is not set.
-const mAppPk = process.env['SDK_MAPP_PRIVATE_KEY'];
+const rawMAppPk = process.env['SDK_MAPP_PRIVATE_KEY'];
+// CI sets unconfigured env vars to empty string (not undefined).
+const mAppPk =
+  rawMAppPk && rawMAppPk.startsWith('0x')
+    ? (rawMAppPk as `0x${string}`)
+    : undefined;
 const MAPP_ENABLED = Boolean(mAppPk && process.env['SDK_MAPP']);
 const itMApp = MAPP_ENABLED ? it : it.skip;
 const mAppSigner = MAPP_ENABLED

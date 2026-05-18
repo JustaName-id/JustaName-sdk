@@ -117,7 +117,10 @@ export class SignIn {
         domain: params.domain,
       },
       {
-        provider: network.provider,
+        // Smart-contract (EIP-1271) verification is handled inside
+        // `verificationFallback` below using viem's `verifySiweMessage`.
+        // We no longer pass `provider` here because it must be an ethers
+        // `Provider`, and the SDK is now viem-only.
         verificationFallback: async (params, opts, message, EIP1271Promise) => {
           const publicClient = createPublicClient({
             chain: this.chainId === 1 ? mainnet : sepolia,
