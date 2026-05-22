@@ -1,3 +1,15 @@
+## 0.1.57 (2026-05-22)
+
+
+### 🩹 Fixes
+
+- **console:** removed dapps, removed ethers, and enhancements ([#144](https://github.com/JustaName-id/JustaName-sdk/pull/144), [#145](https://github.com/JustaName-id/JustaName-sdk/pull/145))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.1.56 (2026-04-28)
 
 

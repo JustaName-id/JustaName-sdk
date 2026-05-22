@@ -1,3 +1,15 @@
+## 0.0.152 (2026-05-22)
+
+
+### 🩹 Fixes
+
+- **console:** removed dapps, removed ethers, and enhancements ([#144](https://github.com/JustaName-id/JustaName-sdk/pull/144), [#145](https://github.com/JustaName-id/JustaName-sdk/pull/145))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.0.151 (2026-04-28)
 
 This was a version bump only for @justweb3/ui to align it with other projects, there were no code changes.
