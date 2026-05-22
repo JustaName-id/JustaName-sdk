@@ -1,6 +1,6 @@
 {
   "name": "@justaname.id/siwens",
-  "version": "0.0.146",
+  "version": "0.0.147",
   "dependencies": {
     "punycode": "^2.3.1"
   },
