@@ -11,7 +11,6 @@ export interface EmailCredentialItemProps {
   credentialValue: EthereumEip712Signature2021<{ email: string }> | undefined;
   disabled?: boolean;
   refetchRecords: () => void;
-  mAppsAlreadyEnabled: string[] | undefined;
   mApp: string;
 }
 
@@ -22,7 +21,6 @@ export const EmailCredentialItem: FC<EmailCredentialItemProps> = ({
   verificationBackendUrl,
   disabled = false,
   refetchRecords,
-  mAppsAlreadyEnabled,
   mApp,
 }) => {
   const [email, setEmail] = useState('');
@@ -65,7 +63,6 @@ export const EmailCredentialItem: FC<EmailCredentialItemProps> = ({
         verificationBackendUrl={verificationBackendUrl}
         refetchVerifyRecords={refetchVerifyRecords}
         refetchRecords={refetchRecords}
-        mAppsAlreadyEnabled={mAppsAlreadyEnabled}
         mApp={mApp}
       />
       <Input

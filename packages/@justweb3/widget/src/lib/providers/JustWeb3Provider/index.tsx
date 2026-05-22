@@ -25,7 +25,7 @@ import {
 } from '@justaname.id/react';
 import { JustWeb3ThemeProvider } from '@justweb3/ui';
 import { SignInDialog } from '../../dialogs/SignInDialog';
-import { MAppsProvider } from '../MAppProvider';
+import { PluginProvider } from '../PluginProvider';
 import { JustaPlugin } from '../../plugins';
 import usePreviousState from '../../hooks/usePreviousState';
 import { ProfileDialog, UpdateRecordDialog } from '../../dialogs';
@@ -51,7 +51,6 @@ export interface JustWeb3ContextProps {
   isSignInOpen: boolean;
   config: JustWeb3ProviderConfig;
   plugins: JustaPlugin[];
-  mApps: string[];
 }
 
 export const JustWeb3Context = createContext<JustWeb3ContextProps>({
@@ -63,7 +62,6 @@ export const JustWeb3Context = createContext<JustWeb3ContextProps>({
   handleJustWeb3Config: () => { },
   config: {},
   plugins: [],
-  mApps: [],
 });
 
 export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
@@ -104,20 +102,6 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
     [config.plugins]
   );
 
-  const pluginsMApps =
-    (useMemo(
-      () =>
-        plugins
-          ?.filter((plugin) => plugin.mApps)
-          ?.map((plugin) => plugin.mApps)
-          .flat()
-          .map((mApp) => ({
-            name: mApp,
-            openOnConnect: false,
-          })),
-      [plugins]
-    ) as { name: string; openOnConnect: boolean }[]) || [];
-
   const handleUpdateRecords = async (
     records: UpdateRecordsParams & { ens: string }
   ) => {
@@ -141,27 +125,6 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
       updateRecordPromiseResolveRef.current = null;
     }
   }, [updateRecord]);
-
-  const mAppsWithOpenOnConnect =
-    config?.mApps?.map((mApp) => {
-      if (typeof mApp === 'string') {
-        return {
-          name: mApp,
-          openOnConnect: false,
-        };
-      }
-      return mApp;
-    }) || [];
-
-  const allMApps = [...mAppsWithOpenOnConnect, ...pluginsMApps].reduce(
-    (acc, mApp) => {
-      if (!acc.find((accMApp) => accMApp.name === mApp.name)) {
-        return [...acc, mApp];
-      }
-      return acc;
-    },
-    [] as { name: string; openOnConnect: boolean }[]
-  );
 
   const handleOpenSignInDialog = (open: boolean) => {
     if (!isConnected) {
@@ -214,16 +177,13 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
             isSignInOpen: signInOpen,
             config: config,
             plugins,
-            mApps: allMApps.map((mApp) => mApp.name),
             handleUpdateRecords: handleUpdateRecords,
             handleJustWeb3Config,
             handleOpenEnsProfile,
             handleCloseEnsProfile,
           }}
         >
-          <MAppsProvider
-            logo={config.logo}
-            mApps={allMApps}
+          <PluginProvider
             plugins={plugins}
             config={config}
             handleOpenSignInDialog={handleOpenSignInDialog}
@@ -267,7 +227,7 @@ export const JustWeb3Provider: FC<JustWeb3ProviderProps> = ({
               logo={config.logo}
             />
             {children}
-          </MAppsProvider>
+          </PluginProvider>
         </JustWeb3Context.Provider>
       </JustWeb3ThemeProvider>
     </JustaNameProvider>

@@ -1,13 +1,7 @@
 import {
-  AddMAppPermissionRoute,
-  AppendMAppFieldRoute,
   IsSubnameAvailableRoute,
   OffchainResolversGetAllRoute,
-  RequestAddMAppPermissionChallengeRoute,
-  RequestAppendMAppFieldChallengeRoute,
   RequestChallengeRoute,
-  RequestRevokeMAppPermissionChallengeRoute,
-  RevokeMAppPermissionRoute,
   SubnameAcceptRoute,
   SubnameAddRoute,
   SubnameGetAllByAddressRoute,
@@ -39,17 +33,9 @@ import {
   UPDATE_SUBNAME_ROUTE,
 } from './subnames';
 import {
-  SIWE_MAPP_ADD_PERMISSION_ROUTE,
-  SIWE_MAPP_APPEND_FIELD_ROUTE,
-  SIWE_MAPP_REVOKE_PERMISSION_ROUTE,
   SIWE_REQUEST_CHALLENGE_ROUTE,
   SIWE_VERIFY_MESSAGE_ROUTE,
 } from './siwe';
-import {
-  MAPP_ADD_PERMISSION_ROUTE,
-  MAPP_APPEND_FIELD_ROUTE,
-  MAPP_REVOKE_PERMISSION_ROUTE,
-} from './mapp';
 import { GET_ALL_OFFCHAIN_RESOLVERS_ROUTE } from './offchain-resolver';
 import {
   GET_PRIMARY_NAME_BY_ADDRESS_ROUTE,
@@ -63,12 +49,6 @@ import {
 export interface ROUTES {
   SIWE_VERIFY_MESSAGE_ROUTE: VerifyMessageRoute;
   SIWE_REQUEST_CHALLENGE_ROUTE: RequestChallengeRoute;
-  SIWE_MAPP_ADD_PERMISSION_ROUTE: RequestAddMAppPermissionChallengeRoute;
-  SIWE_MAPP_APPEND_FIELD_ROUTE: RequestAppendMAppFieldChallengeRoute;
-  SIWE_MAPP_REVOKE_PERMISSION_ROUTE: RequestRevokeMAppPermissionChallengeRoute;
-  MAPP_ADD_PERMISSION_ROUTE: AddMAppPermissionRoute;
-  MAPP_APPEND_FIELD_ROUTE: AppendMAppFieldRoute;
-  MAPP_REVOKE_PERMISSION_ROUTE: RevokeMAppPermissionRoute;
   ACCEPT_SUBNAME_ROUTE: SubnameAcceptRoute;
   RESERVE_SUBNAME_ROUTE: SubnameReserveRoute;
   ADD_SUBNAME_ROUTE: SubnameAddRoute;
@@ -91,12 +71,6 @@ export interface ROUTES {
 export const Routes: Record<keyof ROUTES, string> = {
   SIWE_VERIFY_MESSAGE_ROUTE,
   SIWE_REQUEST_CHALLENGE_ROUTE,
-  SIWE_MAPP_ADD_PERMISSION_ROUTE,
-  SIWE_MAPP_APPEND_FIELD_ROUTE,
-  SIWE_MAPP_REVOKE_PERMISSION_ROUTE,
-  MAPP_ADD_PERMISSION_ROUTE,
-  MAPP_APPEND_FIELD_ROUTE,
-  MAPP_REVOKE_PERMISSION_ROUTE,
   ACCEPT_SUBNAME_ROUTE,
   RESERVE_SUBNAME_ROUTE,
   ADD_SUBNAME_ROUTE,
