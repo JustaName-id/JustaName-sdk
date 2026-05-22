@@ -1,10 +1,14 @@
 import { SubnameChallenge } from '../../../lib/features/subname-challenge';
 // import rest from '../../../lib/api/rest';
 import dotenv from 'dotenv';
-import { ethers } from 'ethers';
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts';
 dotenv.config();
 const JUSTANAME_ENV = process.env['SDK_JUSTANAME_DEV'] === 'true'
-const signer = ethers.Wallet.createRandom();
+const account = privateKeyToAccount(generatePrivateKey());
+const signer = {
+  address: account.address,
+  signMessage: (message: string) => account.signMessage({ message }),
+};
 describe('subnameChallenge', () => {
 
   let subnameChallenge: SubnameChallenge;

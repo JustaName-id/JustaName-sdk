@@ -102,8 +102,5 @@ export const JustVerifiedPlugin = (
     onEnsSignOut: (pluginApi, ens) => {
       pluginApi.setState('verificationOpen', false);
     },
-    onMAppAdd: (pluginApi, ens, mApp) => {
-      pluginApi.setState('verificationOpen', true);
-    },
   },
 });

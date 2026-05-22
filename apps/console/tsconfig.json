@@ -11,6 +11,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
+    "target": "ESNext",
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "composite": false,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "plugins": [
       {
         "name": "next"
@@ -41,5 +47,11 @@
     ".next/types/**/*.ts",
     "../../dist/dist/apps/console/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
+  "exclude": [
+    "node_modules",
+    "**/node_modules/**",
+    "jest.config.ts",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }

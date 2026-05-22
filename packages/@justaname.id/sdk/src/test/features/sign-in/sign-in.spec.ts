@@ -1,4 +1,8 @@
-import { ethers } from 'ethers';
+import {
+  generatePrivateKey,
+  privateKeyToAccount,
+  type PrivateKeyAccount,
+} from 'viem/accounts';
 import * as dotenv from 'dotenv';
 import SignIn from '../../../lib/features/sign-in';
 import { OffchainResolvers } from '../../../lib/features';
@@ -14,18 +18,34 @@ const URI = 'https://' + DOMAIN;
 const CHAIN_ID = (parseInt(process.env["SDK_CHAIN_ID"] as string) || 11155111) as ChainId
 const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 
-const invalidSigner = new ethers.Wallet(
-  ethers.Wallet.createRandom().privateKey
-);
+interface TestSigner {
+  address: string;
+  signMessage(message: string): Promise<string>;
+}
+const toTestSigner = (account: PrivateKeyAccount): TestSigner => ({
+  address: account.address,
+  signMessage: (message: string) => account.signMessage({ message }),
+});
+const randomTestSigner = (): TestSigner =>
+  toTestSigner(privateKeyToAccount(generatePrivateKey()));
+
+const invalidSigner = randomTestSigner();
 const ENS_DOMAIN = process.env['SDK_ENS_DOMAIN'] as string;
-const subnameSigner = ethers.Wallet.createRandom();
+const subnameSigner = randomTestSigner();
 const subnameToBeAdded = Math.random().toString(36).substring(7);
 const validApiKey = process.env['SDK_JUSTANAME_TEST_API_KEY'] as string;
 const JUSTANAME_ENV = process.env['SDK_JUSTANAME_DEV'] === 'true';
 const SEPOLIA_PROVIDER_URL = process.env['SDK_SEPOLIA_PROVIDER_URL'] as string;
 const MAINNET_PROVIDER_URL = process.env['SDK_MAINNET_PROVIDER_URL'] as string;
 
-describe('SignIn', () => {
+// Integration tests require a live API key + provider URLs. Skip cleanly
+// when env is not configured so unit-level assertions can still run.
+const INTEGRATION_ENABLED = Boolean(
+  validApiKey && SEPOLIA_PROVIDER_URL && MAINNET_PROVIDER_URL
+);
+const describeIntegration = INTEGRATION_ENABLED ? describe : describe.skip;
+
+describeIntegration('SignIn', () => {
   let signIn: SignIn;
   let justaname: JustaName;
 
@@ -112,7 +132,7 @@ describe('SignIn', () => {
       address: invalidSigner.address,
       ens: subnameToBeAdded + '.' + ENS_DOMAIN,
     });
-    const signer2 = new ethers.Wallet(ethers.Wallet.createRandom().privateKey);
+    const signer2 = randomTestSigner();
     const signature = await signer2.signMessage(message);
     try {
       await signIn.signIn({ message, signature });

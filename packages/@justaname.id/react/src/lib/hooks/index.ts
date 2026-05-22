@@ -1,6 +1,5 @@
 export * from './account';
 export * from './ens';
-export * from './mApp';
 export * from './uploadMedia';
 export * from './records';
 export * from './resolver';

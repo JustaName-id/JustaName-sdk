@@ -27,7 +27,6 @@ import {
 export interface EmailDialogProps {
   refetchVerifyRecords: () => void;
   refetchRecords: () => void;
-  mAppsAlreadyEnabled: string[] | undefined;
   mApp: string;
   open: boolean;
   email: string | undefined;
@@ -38,7 +37,6 @@ export interface EmailDialogProps {
 export const EmailDialog: FC<EmailDialogProps> = ({
   refetchRecords,
   mApp,
-  mAppsAlreadyEnabled,
   refetchVerifyRecords,
   open,
   email,
@@ -250,35 +248,21 @@ export const EmailDialog: FC<EmailDialogProps> = ({
                   const key = 'email';
                   const vc = res.verifiableCredential;
                   const value = vc.credentialSubject.email;
-                  if (mAppsAlreadyEnabled?.includes(mApp)) {
-                    updateRecords({
-                      text: [
-                        {
-                          key: key,
-                          value: value,
-                        },
-                      ],
-                    }).then(() => {
-                      refetchRecords();
-                      refetchVerifyRecords();
-                    });
-                  } else {
-                    updateRecords({
-                      text: [
-                        {
-                          key: key,
-                          value: value,
-                        },
-                        {
-                          key: res.dataKey,
-                          value: JSON.stringify(vc),
-                        },
-                      ],
-                    }).then(() => {
-                      refetchRecords();
-                      refetchVerifyRecords();
-                    });
-                  }
+                  updateRecords({
+                    text: [
+                      {
+                        key: key,
+                        value: value,
+                      },
+                      {
+                        key: res.dataKey,
+                        value: JSON.stringify(vc),
+                      },
+                    ],
+                  }).then(() => {
+                    refetchRecords();
+                    refetchVerifyRecords();
+                  });
                   handleInternalOpenDialog(false);
                 });
               }}

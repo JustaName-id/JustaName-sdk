@@ -10,7 +10,6 @@ export interface JustWeb3ProviderConfig
   logo?: string;
   disableOverlay?: boolean;
   enableAuth?: boolean;
-  mApps?: (string | { name: string; openOnConnect: boolean })[];
   plugins?: JustaPlugin[];
   onLogout?: () => void;
 }

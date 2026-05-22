@@ -115,8 +115,20 @@ export class SubnameChallenge {
       expirationTime,
     });
 
+    const prepared = siweMessage.prepareMessage();
+
+    if (this.dev) {
+      // eslint-disable-next-line no-console
+      console.debug(
+        '[JustaName] SIWE challenge prepared (chainId:',
+        _chainId,
+        ')\n',
+        prepared
+      );
+    }
+
     return {
-      challenge: siweMessage.prepareMessage(),
+      challenge: prepared,
     };
   }
 

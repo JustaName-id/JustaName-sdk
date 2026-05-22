@@ -1,18 +1,16 @@
 'use client';
 
-import { arrayify } from '@ethersproject/bytes';
 import { Client, type Signer } from '@xmtp/browser-sdk';
 import { ReactionCodec } from '@xmtp/content-type-reaction';
 import { AttachmentCodec } from '@xmtp/content-type-remote-attachment';
 import { ReplyCodec } from '@xmtp/content-type-reply';
-import { JsonRpcSigner } from 'ethers';
 import { useCallback, useContext, useRef, useState } from 'react';
 import { XMTPContext } from '../../contexts/XMTPContext';
 import { ReadReceiptCodec } from '@xmtp/content-type-read-receipt';
 import { useAccount } from 'wagmi';
 
 export type InitializeClientOptions = {
-  signer: JsonRpcSigner;
+  signer: Signer;
 };
 
 function storeKeys(address: string, key: Uint8Array, env: string) {
@@ -61,23 +59,7 @@ export const useXMTPClient = (onError?: (error: Error) => void) => {
             storeKeys(address ?? '', encryptionKey, env);
           }
 
-          // Create XMTP signer that converts ethers signatures to Uint8Array
-          const xmtpSigner: Signer = {
-            type: 'EOA',
-            getIdentifier: async () => {
-              const signerAddress = await signer.getAddress();
-              return {
-                identifier: signerAddress,
-                identifierKind: 'Ethereum',
-              };
-            },
-            signMessage: async (message: string) => {
-              const signature = await signer.signMessage(message);
-              return arrayify(signature);
-            },
-          };
-
-          xmtpClient = await Client.create(xmtpSigner, {
+          xmtpClient = await Client.create(signer, {
             dbEncryptionKey: encryptionKey,
             env,
             loggingLevel:
