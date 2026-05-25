@@ -5,7 +5,6 @@ import {
   JustaNameDialog,
   JustWeb3Context,
   useJustWeb3,
-  useMApps,
 } from '@justweb3/widget';
 import { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { EmailCredentialItem } from '../../components/EmailCredentialItem';
@@ -47,7 +46,6 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
     selectedCredential,
   ]);
   const { connectedEns, updateRecords } = useJustWeb3();
-  const { mAppsAlreadyEnabled } = useMApps();
   const { refetchRecords } = useRecords({
     ens: connectedEns?.ens || '',
   });
@@ -203,35 +201,21 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                                 socialValue = '';
                               }
                             }
-                            if (mAppsAlreadyEnabled?.includes(mApp)) {
-                              updateRecords({
-                                text: [
-                                  {
-                                    key: socialKey,
-                                    value: socialValue,
-                                  },
-                                ],
-                              }).then(() => {
-                                refetchRecords();
-                                refetchVerifyRecords();
-                              });
-                            } else {
-                              updateRecords({
-                                text: [
-                                  {
-                                    key: socialKey,
-                                    value: socialValue,
-                                  },
-                                  {
-                                    key: credentialKey,
-                                    value: JSON.stringify(credentialValue),
-                                  },
-                                ],
-                              }).then(() => {
-                                refetchRecords();
-                                refetchVerifyRecords();
-                              });
-                            }
+                            updateRecords({
+                              text: [
+                                {
+                                  key: socialKey,
+                                  value: socialValue,
+                                },
+                                {
+                                  key: credentialKey,
+                                  value: JSON.stringify(credentialValue),
+                                },
+                              ],
+                            }).then(() => {
+                              refetchRecords();
+                              refetchVerifyRecords();
+                            });
                           })
                           .catch((error) => {
                             setSelectedCredential(undefined);
@@ -263,7 +247,6 @@ export const JustVerifiedDialog: FC<JustVerifiedDialogProps> = ({
                 ) : (
                   <EmailCredentialItem
                     mApp={mApp}
-                    mAppsAlreadyEnabled={mAppsAlreadyEnabled}
                     refetchRecords={refetchRecords}
                     refetchVerifyRecords={refetchVerifyRecords}
                     verificationBackendUrl={verificationBackendUrl}

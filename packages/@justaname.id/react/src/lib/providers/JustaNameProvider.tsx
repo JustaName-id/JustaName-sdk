@@ -19,6 +19,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { defaultRoutes } from '../constants/default-routes';
 import { useMountedAccount } from '../hooks/account/useMountedAccount';
 import { useSignMessage } from 'wagmi';
+import { resolveDefaultChain } from '../helpers/resolveDefaultChain';
 
 export type JustaNameConfigWithoutDefaultChainId = Omit<
   JustaNameConfig,
@@ -32,7 +33,7 @@ export interface JustaNameContextProps
   justaname: JustaName;
   routes: typeof defaultRoutes;
   backendUrl: string;
-  selectedNetwork: NetworkWithProvider;
+  selectedNetwork: NetworkWithProvider | undefined;
   selectedEnsDomain: string | undefined;
   chainId: ChainId | undefined;
 }
@@ -67,13 +68,20 @@ export const JustaNameProvider: FC<JustaNameProviderProps> = ({
 }) => {
   const { chainId } = useMountedAccount();
 
-  const defaultChain = useMemo(() => {
-    return !chainId === undefined
-      ? 1
-      : chainId !== 1 && chainId !== 11155111
-      ? 1
-      : chainId;
-  }, [chainId]);
+  const defaultChain = useMemo(() => resolveDefaultChain(chainId), [chainId]);
+
+  useEffect(() => {
+    if (initialConfig.dev) {
+      // eslint-disable-next-line no-console
+      console.debug(
+        '[JustaName] defaultChain resolved:',
+        defaultChain,
+        '(wagmi chainId:',
+        chainId,
+        ')'
+      );
+    }
+  }, [defaultChain, chainId, initialConfig.dev]);
 
   // const [config, setConfig] = useState<JustaNameProviderConfig>(initialConfig);
   const config: JustaNameProviderConfig = useMemo(
@@ -104,10 +112,10 @@ export const JustaNameProvider: FC<JustaNameProviderProps> = ({
     return JustaName.createNetworks(justanameConfig.networks);
   }, [justanameConfig.networks]);
 
-  const selectedNetwork = useMemo(() => {
+  const selectedNetwork = useMemo<NetworkWithProvider | undefined>(() => {
     return configuredNetworks.find(
       (network) => network.chainId === defaultChain
-    ) as NetworkWithProvider;
+    );
   }, [configuredNetworks, defaultChain]);
 
   return (

@@ -63,6 +63,17 @@ export const restCall = <
     }
   }
 
+  if (dev) {
+    // Log only the route and the non-sensitive top-level keys present on the
+    // payload. We avoid dumping the full body because it can contain SIWE
+    // messages, addresses, and other PII.
+    const payload = (request ?? {}) as Record<string, unknown>;
+    const keys = Object.keys(payload);
+    const chainId = (payload as { chainId?: unknown }).chainId;
+    // eslint-disable-next-line no-console
+    console.debug('[JustaName]', method, Routes[route], { chainId, keys });
+  }
+
   return controlledAxiosPromise<ROUTES[T]['response']>(
     justANameInstance(dev).request({
       url: Routes[route],

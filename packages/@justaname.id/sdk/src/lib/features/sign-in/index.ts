@@ -10,6 +10,7 @@ import { OffchainResolvers } from '../offchain-resolvers';
 import { RequestSignInParams, SignInFunctionParams } from '../../types/signin';
 import { createPublicClient, http } from 'viem';
 import { mainnet, sepolia } from 'viem/chains';
+import { normalize } from 'viem/ens';
 
 export interface SignInResponse extends SiwensResponse {
   isJustaName: boolean;
@@ -116,10 +117,16 @@ export class SignIn {
         domain: params.domain,
       },
       {
-        provider: network.provider,
+        // Smart-contract (EIP-1271) verification is handled inside
+        // `verificationFallback` below using viem's `verifySiweMessage`.
+        // We no longer pass `provider` here because it must be an ethers
+        // `Provider`, and the SDK is now viem-only.
         verificationFallback: async (params, opts, message, EIP1271Promise) => {
+          // Use the chainId extracted from the SIWE message itself, not the
+          // SDK-default. Otherwise contract-wallet (EIP-1271) verification
+          // runs against the wrong chain when the message is cross-chain.
           const publicClient = createPublicClient({
-            chain: this.chainId === 1 ? mainnet : sepolia,
+            chain: chainId === 1 ? mainnet : sepolia,
             transport: http(network.providerUrl),
           });
 
@@ -209,7 +216,13 @@ export class SignIn {
     }
 
     const [resolverAddress, resolvers] = await Promise.all([
-      network.provider.getResolver(ens),
+      // Narrow the catch to "resolver not found" (the only expected miss).
+      // Network / RPC errors must bubble up so callers see a real failure
+      // rather than a misleading "ENS not registered" downstream.
+      network.provider.getEnsResolver({ name: normalize(ens) }).catch((e) => {
+        if (e?.name === 'EnsResolverNotFoundError') return undefined;
+        throw e;
+      }),
       this.offchainResolvers.getAllOffchainResolvers(),
     ]);
 
@@ -221,11 +234,14 @@ export class SignIn {
       throw InvalidENSException.chainNotSupported(chainId.toString());
     }
 
-    if (!resolverAddress?.address) {
+    if (!resolverAddress) {
       throw InvalidENSException.notRegisteredENS(ens);
     }
 
-    return currentOffchainResolver.resolverAddress === resolverAddress?.address;
+    return (
+      currentOffchainResolver.resolverAddress.toLowerCase() ===
+      resolverAddress.toLowerCase()
+    );
   }
 }
 

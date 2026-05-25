@@ -190,7 +190,7 @@ export default App;`.trim();
     } ${poapPluginEnabled ? '@justweb3/poap-plugin' : ''}  ${
       efpPluginEnabled ? '@justweb3/efp-plugin' : ''
     } ${dentityPluginEnabled ? '@justweb3/dentity-plugin' : ''}
-     @justweb3/widget viem wagmi @rainbow-me/rainbowkit @tanstack/react-query ethers`;
+     @justweb3/widget viem wagmi @rainbow-me/rainbowkit @tanstack/react-query`;
   }, [
     dentityPluginEnabled,
     efpPluginEnabled,

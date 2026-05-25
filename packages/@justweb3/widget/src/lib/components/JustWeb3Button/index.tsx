@@ -2,8 +2,6 @@ import {
   Records,
   useAccountEnsNames,
   useAccountSubnames,
-  useCanEnableMApps,
-  useEnabledMApps,
   useEnsAvatar,
   useMountedAccount,
   useOffchainResolvers,
@@ -21,20 +19,17 @@ import {
   formatText,
   LoadingSpinner,
   LogoutIcon,
-  MappIcon,
   P,
   Popover,
   PopoverTrigger,
   ProfileIcon,
   SettingsIcon,
   SwitchAccountIcon,
-  SPAN,
 } from '@justweb3/ui';
 import { FC, ReactNode, useContext, useMemo, useState } from 'react';
 import { useDisconnect } from 'wagmi';
 import { ConfigurationDialog, PrimaryNamesDialog } from '../../dialogs';
 import { DefaultDialog } from '../../dialogs/DefaultDialog';
-import { MAppsDialog } from '../../dialogs/MAppsDialog';
 import { getChainIcon } from '../../icons/chain-icons';
 import { getTextRecordIcon } from '../../icons/records-icons';
 import { JustWeb3Context, useJustWeb3 } from '../../providers';
@@ -57,11 +52,10 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
   logout,
   style,
 }) => {
-  const [openMApps, setOpenMApps] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
   const [openPrimaryNames, setOpenPrimaryNames] = useState(false);
   const [openConfiguration, setOpenConfiguration] = useState(false);
-  const { plugins, mApps, config } = useContext(JustWeb3Context);
+  const { plugins, config } = useContext(JustWeb3Context);
   const { createPluginApi } = useContext(PluginContext);
   const { address, isConnected, chainId } = useMountedAccount();
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
@@ -74,22 +68,10 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
     handleOpenSignInDialog,
     openEnsProfile,
   } = useJustWeb3();
-  const { canEnableMApps, isCanEnableMAppsPending } = useCanEnableMApps({
-    ens: connectedEns?.ens || '',
-  });
 
   const { offchainResolvers } = useOffchainResolvers();
 
-  const { enabledMApps } = useEnabledMApps({
-    ens: connectedEns?.ens || '',
-  });
   const { records, isRecordsPending } = useRecords({ ens: connectedEns?.ens });
-  const mAppsToEnable = useMemo(() => {
-    if (!mApps || !enabledMApps) {
-      return undefined;
-    }
-    return mApps.filter((mApp) => !enabledMApps.includes(mApp));
-  }, [mApps, enabledMApps]);
 
   const { avatar } = useEnsAvatar({
     ens: connectedEns?.ens,
@@ -128,12 +110,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
       (social) => social.key === 'com.twitter' || social.key === 'com.x'
     );
   }, [records]);
-
-  const handleOpenMAppsDialog = (open: boolean) => {
-    if (open !== openMApps) {
-      setOpenMApps(open);
-    }
-  };
 
   const handleOpenPrimaryNamesDialog = (open: boolean) => {
     if (open !== openPrimaryNames) {
@@ -483,37 +459,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
           })}
 
           <ClickableItem
-            left={<MappIcon width={20} />}
-            title={'mApps'}
-            style={{
-              width: '100%',
-              display: 'none',
-            }}
-            onClick={() => setOpenMApps(true)}
-            right={
-              <Flex justify={'space-between'} align={'center'} gap={'5px'}>
-                {mAppsToEnable && canEnableMApps && mAppsToEnable.length > 0 && (
-                  <SPAN
-                    style={{
-                      color: '#FEA801',
-                      fontSize: '10px',
-                      fontWeight: 900,
-                    }}
-                  >
-                    Configuration Required
-                  </SPAN>
-                )}
-                <ArrowIcon
-                  width={20}
-                  color={'var(--justweb3-foreground-color-2)'}
-                />
-              </Flex>
-            }
-            disabled={!canEnableMApps}
-            loading={isCanEnableMAppsPending}
-          />
-
-          <ClickableItem
             style={{
               width: '100%',
             }}
@@ -542,7 +487,6 @@ export const JustWeb3Button: FC<JustWeb3Buttonrops> = ({
 
   return (
     <>
-      <MAppsDialog open={openMApps} handleOpenDialog={handleOpenMAppsDialog} />
       <PrimaryNamesDialog logout={logout} open={openPrimaryNames} handleOpenDialog={handleOpenPrimaryNamesDialog} onBack={handleSettingsBack} />
       <ConfigurationDialog logout={logout} open={openConfiguration} handleOpenDialog={handleOpenConfigurationDialog} onBack={handleSettingsBack} />
       <div className={styles.desktopSection}>

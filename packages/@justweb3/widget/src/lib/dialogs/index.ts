@@ -1,4 +1,3 @@
-export * from './AuthorizeMAppDialog';
 export * from './AvatarSelectorDialog';
 export * from './BannerSelectorDialog';
 export * from './ConfigurationDialog';

@@ -1,4 +1,8 @@
-import { ethers } from 'ethers';
+import {
+  generatePrivateKey,
+  privateKeyToAccount,
+  type PrivateKeyAccount,
+} from 'viem/accounts';
 import * as dotenv from 'dotenv';
 import {
   SIWENS,
@@ -7,8 +11,31 @@ import {
 } from '../';
 dotenv.config();
 
-const pk = process.env['SIWENS_PRIVATE_KEY'] as string;
-const signer = new ethers.Wallet(pk);
+interface TestSigner {
+  address: string;
+  signMessage(message: string): Promise<string>;
+}
+const toTestSigner = (account: PrivateKeyAccount): TestSigner => ({
+  address: account.address,
+  signMessage: (message: string) => account.signMessage({ message }),
+});
+const randomTestSigner = (): TestSigner =>
+  toTestSigner(privateKeyToAccount(generatePrivateKey()));
+
+// Integration tests are gated on env vars — they hit a real Sepolia provider
+// and require a funded test wallet. When the env is not configured we still
+// want unit-level tests (TTL validation, ENS format, nonce) to run, so we
+// stub `signer` with a deterministic random account and use `itIntegration`
+// for tests that actually need the configured wallet/provider.
+const rawPk = process.env['SIWENS_PRIVATE_KEY'];
+// CI sets unconfigured env vars to the empty string (not undefined), so we
+// need to treat empty as "not provided" before handing it to viem.
+const pk = rawPk && rawPk.startsWith('0x') ? (rawPk as `0x${string}`) : undefined;
+const INTEGRATION_ENABLED = Boolean(pk && process.env['SIWENS_PROVIDER_URL']);
+const itIntegration = INTEGRATION_ENABLED ? it : it.skip;
+const signer = toTestSigner(
+  privateKeyToAccount(pk ?? generatePrivateKey())
+);
 const PROVIDER_URL = process.env['SIWENS_PROVIDER_URL'] as string;
 const DOMAIN = 'justaname.id';
 const URI = 'https://' + DOMAIN;
@@ -20,7 +47,9 @@ const VALID_TTL = 60 * 60 * 24 * 1000; // 1 day
 const TTL_LESS_THAN_ZERO = -1;
 const TTL_GREATER_THAN_MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER + 1;
 const INVALID_ENS = 'justaname';
-const VALID_ENS = process.env['SIWENS_VALID_ENS'] as string;
+// Fallback ENS for unit-level tests (the value is only consequential for
+// the integration tests guarded by `itIntegration`).
+const VALID_ENS = (process.env['SIWENS_VALID_ENS'] as string) || 'test.eth';
 
 describe('SIWENS', () => {
 
@@ -132,7 +161,7 @@ describe('SIWENS', () => {
     expect(signature).toBeTruthy();
   });
 
-  it('should verify a valid signature', async () => {
+  itIntegration('should verify a valid signature', async () => {
     const signature = await signer.signMessage(message);
 
     const address = await new SIWENS({
@@ -144,7 +173,7 @@ describe('SIWENS', () => {
     expect(address.success).toBeTruthy();
   },60000)
 
-  it('should return ens in the response', async () => {
+  itIntegration('should return ens in the response', async () => {
     const signature = await signer.signMessage(message);
     const address = await new SIWENS({
       params:message,
@@ -155,8 +184,8 @@ describe('SIWENS', () => {
     expect(address.ens).toBe(VALID_ENS);
   },60000)
 
-  it('should return ens in the failed response', async () => {
-    const signer2 = ethers.Wallet.createRandom();
+  itIntegration('should return ens in the failed response', async () => {
+    const signer2 = randomTestSigner();
     const signature = await signer2.signMessage(message);
     try {
       await new SIWENS({
@@ -172,8 +201,8 @@ describe('SIWENS', () => {
     throw new Error('Should have thrown an error');
   },60000)
 
-  it('should throw an error if address isn\'t owner of ens', async () => {
-    const signer = ethers.Wallet.createRandom();
+  itIntegration('should throw an error if address isn\'t owner of ens', async () => {
+    const signer = randomTestSigner();
     const siwens = new SIWENS({
       params: {
         domain: DOMAIN,
