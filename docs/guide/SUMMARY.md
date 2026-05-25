@@ -43,10 +43,6 @@
 * [Allowed Domains](advanced/allowed-domains.md)
 * [Dynamic Records Resolution](advanced/dynamic-records-resolution.md)
 
-## Use Cases
-
-* [Overview](use-cases/overview.md)
-
 ## Design Components
 
 * [Logos](design-components/logos.md)
