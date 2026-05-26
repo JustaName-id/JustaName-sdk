@@ -22,7 +22,6 @@
     * [Records](api-reference/subname/records.md)
     * [Available](api-reference/subname/available.md)
     * [Search](api-reference/subname/search.md)
-    * [Ens list](api-reference/subname/ens-list.md)
   * [Primary name](api-reference/primary-name/README.md)
     * [Address](api-reference/primary-name/address.md)
     * [Set primary name](api-reference/primary-name/set-primary-name.md)
