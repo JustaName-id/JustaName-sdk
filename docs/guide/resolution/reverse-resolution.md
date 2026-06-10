@@ -27,17 +27,26 @@ url.searchParams.set('rpcUrl', process.env.RPC_URL!);
 const res = await fetch(url);
 ```
 
+To get the full profile in the same call, add `records=true`. The response then includes every record set on the resolved name (text records, addresses, contenthash) alongside it:
+
+```bash
+curl "https://api.justaname.id/ens/v2/reverse?address=0xd8da6bf26964af9d7eed9e03e53415d37aa96045&coinType=60&records=true&rpcUrl=https://eth.drpc.org"
+```
+
+\
+\
 The caller's RPC pays for the on-chain reads. JustaName performs the reverse lookup through the ENS Universal Resolver and falls back to its off-chain reverse-record store when no on-chain reverse record is set.
 
 > **Autonomous clients without an RPC URL** (AI agents, MCP servers, scripts) can pay per-request in USDC on Base instead of supplying `rpcUrl`. See [#programmatic-access-without-an-rpc-url](reverse-resolution.md#programmatic-access-without-an-rpc-url "mention").
 
 ### Parameters
 
-| Parameter  | Type                  | Required    | Description                                                                                                                                                                                                        |
-| ---------- | --------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `address`  | `string` (repeatable) | Yes         | Address to reverse-resolve. Repeat to batch up to **50** addresses (`?address=0x…&address=0x…`). Plain (`0x…`) or interop-formatted — see [#interop-addresses](reverse-resolution.md#interop-addresses "mention"). |
-| `coinType` | `number`              | Conditional | ENSIP-19 coinType — see [#cointype-reference](reverse-resolution.md#cointype-reference "mention"). Required for plain addresses; optional when every address in the batch carries an interop suffix.               |
-| `rpcUrl`   | `string`              | See below   | HTTPS RPC URL used to perform the on-chain resolution.                                                                                                                                                             |
+| Parameter  | Type                  | Required    | Description                                                                                                                                                                                                                                            |
+| ---------- | --------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `address`  | `string` (repeatable) | Yes         | Address to reverse-resolve. Repeat to batch up to **50** addresses (`?address=0x…&address=0x…`). Plain (`0x…`) or interop-formatted — see [#interop-addresses](reverse-resolution.md#interop-addresses "mention").                                     |
+| `coinType` | `number`              | Conditional | ENSIP-19 coinType — see [#cointype-reference](reverse-resolution.md#cointype-reference "mention"). Required for plain addresses; optional when every address in the batch carries an interop suffix.                                                   |
+| `rpcUrl`   | `string`              | See below   | HTTPS RPC URL used to perform the on-chain resolution.                                                                                                                                                                                                 |
+| `records`  | `boolean`             | No          | Default `false`. When `true`, fetches all records set on each resolved name (text records, addresses, contenthash) and returns them in the response. Applies to every address in a batch. Skipped for addresses with no reverse record (`name: null`). |
 
 Either `rpcUrl` must be present **or** the request must carry a valid payment header. Without either, the endpoint returns `402` with a payment challenge — see [#programmatic-access-without-an-rpc-url](reverse-resolution.md#programmatic-access-without-an-rpc-url "mention").
 
