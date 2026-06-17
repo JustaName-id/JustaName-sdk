@@ -19,7 +19,10 @@ export const POAP = () => {
           POAPPluginInstance,
         ],
       });
-      getAnalyticsClient().track('POAP_ENABLED', {});
+      getAnalyticsClient().track('PLUGIN_TOGGLED', {
+        plugin: 'poap',
+        enabled: true,
+      });
     } else {
       handleJustWeb3Config({
         ...config,
@@ -27,7 +30,10 @@ export const POAP = () => {
           (plugin) => plugin.name !== POAPPluginInstance.name
         ),
       });
-      getAnalyticsClient().track('POAP_DISABLED', {});
+      getAnalyticsClient().track('PLUGIN_TOGGLED', {
+        plugin: 'poap',
+        enabled: false,
+      });
     }
   };
 

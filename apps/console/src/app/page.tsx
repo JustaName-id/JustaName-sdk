@@ -18,6 +18,7 @@ export default function Page() {
   const handleEnsClick = (ens: string) => {
     getAnalyticsClient().track('PROFILE_VIEWED', {
       ens,
+      location: 'demo_card',
     });
   };
 

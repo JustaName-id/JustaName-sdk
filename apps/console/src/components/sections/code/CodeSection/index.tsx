@@ -200,11 +200,18 @@ export default App;`.trim();
   ]);
 
   const handleDependenciesCopy = () => {
+    getAnalyticsClient().track('CODE_COPIED', {
+      location: 'code_section',
+      snippet: 'dependencies',
+    });
     navigator.clipboard.writeText(dependencies);
   };
 
   const handleCopy = () => {
-    getAnalyticsClient().track('CODE_COPIED', {});
+    getAnalyticsClient().track('CODE_COPIED', {
+      location: 'code_section',
+      snippet: 'integration',
+    });
     navigator.clipboard.writeText(code);
   };
 

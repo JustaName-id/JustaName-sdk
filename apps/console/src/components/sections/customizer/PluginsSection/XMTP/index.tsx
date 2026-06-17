@@ -18,7 +18,10 @@ export const XMTP = () => {
           XMTPPlugin('production'),
         ],
       });
-      getAnalyticsClient().track('XMTP_ENABLED', {});
+      getAnalyticsClient().track('PLUGIN_TOGGLED', {
+        plugin: 'xmtp',
+        enabled: true,
+      });
     } else {
       handleJustWeb3Config({
         ...config,
@@ -26,7 +29,10 @@ export const XMTP = () => {
           (plugin) => plugin.name !== 'XMTPPlugin'
         ),
       });
-      getAnalyticsClient().track('XMTP_DISABLED', {});
+      getAnalyticsClient().track('PLUGIN_TOGGLED', {
+        plugin: 'xmtp',
+        enabled: false,
+      });
     };
   }
 
