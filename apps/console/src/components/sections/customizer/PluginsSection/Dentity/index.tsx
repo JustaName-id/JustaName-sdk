@@ -18,7 +18,10 @@ export const Dentity = () => {
           DentityPlugin,
         ],
       });
-      getAnalyticsClient().track('DENTITY_ENABLED', {});
+      getAnalyticsClient().track('PLUGIN_TOGGLED', {
+        plugin: 'dentity',
+        enabled: true,
+      });
     } else {
       handleJustWeb3Config({
         ...config,
@@ -26,7 +29,10 @@ export const Dentity = () => {
           (plugin) => plugin.name !== DentityPlugin.name
         ),
       });
-      getAnalyticsClient().track('DENTITY_DISABLED', {});
+      getAnalyticsClient().track('PLUGIN_TOGGLED', {
+        plugin: 'dentity',
+        enabled: false,
+      });
     }
   };
 

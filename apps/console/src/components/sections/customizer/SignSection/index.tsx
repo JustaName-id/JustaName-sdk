@@ -31,10 +31,14 @@ export const SignSection = () => {
           const action = e as JustWeb3ProviderConfig['allowedEns'];
           switch (action) {
             case 'all':
-              getAnalyticsClient().track('ANY_ENS_SELECTED', {});
+              getAnalyticsClient().track('ENS_SELECTION_CHANGED', {
+                mode: 'any',
+              });
               break;
             case 'claimable':
-              getAnalyticsClient().track('CLAIMABLE_ENS_SELECTED', {});
+              getAnalyticsClient().track('ENS_SELECTION_CHANGED', {
+                mode: 'claimable',
+              });
               break;
           }
           handleJustWeb3Config({
@@ -62,7 +66,8 @@ export const SignSection = () => {
               placeholder="Add ENS"
               onKeyUp={(e) => {
                 if (e.key === 'Enter') {
-                  getAnalyticsClient().track('SPECIFIC_ENS_SELECTED', {
+                  getAnalyticsClient().track('ENS_SELECTION_CHANGED', {
+                    mode: 'specific',
                     ens: ensInput,
                   });
                   setEnsList([...ensList, ensInput]);

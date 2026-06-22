@@ -13,7 +13,12 @@ export const Navbar = () => {
         href={'https://docs.justaname.id'}
         passHref
         target="_blank"
-        onClick={() => getAnalyticsClient().track('DOCS_LINK_CLICKED', {})}
+        onClick={() =>
+          getAnalyticsClient().track('LINK_CLICKED', {
+            target: 'docs',
+            location: 'navbar',
+          })
+        }
       >
         <Button variant="secondary">Documentation</Button>
       </Link>
