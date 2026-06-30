@@ -8,19 +8,19 @@ Run the following command to install the necessary packages:
 
 {% tabs %}
 {% tab title="npm" %}
-<pre class="language-bash"><code class="lang-bash"><strong>npm install @justweb3/widget @getpara/react-sdk @getpara/wagmi-v2-integration wagmi @tanstack/react-query ethers
+<pre class="language-bash"><code class="lang-bash"><strong>npm install @justweb3/widget @getpara/react-sdk @getpara/wagmi-v2-integration wagmi @tanstack/react-query
 </strong></code></pre>
 {% endtab %}
 
 {% tab title="pnpm" %}
 ```bash
-pnpm install @justweb3/widget @getpara/react-sdk @getpara/wagmi-v2-integration wagmi @tanstack/react-query ethers
+pnpm install @justweb3/widget @getpara/react-sdk @getpara/wagmi-v2-integration wagmi @tanstack/react-query
 ```
 {% endtab %}
 
 {% tab title="yarn" %}
 ```bash
-yarn add @justweb3/widget @getpara/react-sdk @getpara/wagmi-v2-integration wagmi @tanstack/react-query ethers
+yarn add @justweb3/widget @getpara/react-sdk @getpara/wagmi-v2-integration wagmi @tanstack/react-query
 ```
 {% endtab %}
 {% endtabs %}

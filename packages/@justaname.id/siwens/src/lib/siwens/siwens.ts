@@ -1,11 +1,4 @@
 import {
-  generateNonce,
-  SiweMessage,
-  SiweResponse,
-  VerifyOpts,
-  VerifyParams,
-} from 'siwe';
-import {
   InvalidConfigurationException,
   InvalidENSException,
   InvalidStatementException,
@@ -16,7 +9,16 @@ import {
   checkTTL,
   constructSignInStatement,
   extractDataFromStatement,
+  generateNonce,
 } from '../utils';
+import {
+  SiweError,
+  SiweErrorType,
+  SiweMessageFields,
+  SiweResponse,
+  VerifyOpts,
+  VerifyParams,
+} from '../types';
 import { toASCII, toUnicode } from 'punycode';
 import {
   createPublicClient,
@@ -28,6 +30,11 @@ import {
 import { mainnet, sepolia } from 'viem/chains';
 import type { Chain } from 'viem';
 import { normalize } from 'viem/ens';
+import {
+  createSiweMessage,
+  parseSiweMessage,
+  verifySiweMessage,
+} from 'viem/siwe';
 
 const SUPPORTED_CHAINS: Record<number, Chain> = {
   1: mainnet,
@@ -43,14 +50,18 @@ const buildPublicClient = (
     transport: http(providerUrl),
   });
 
+const toISOStringOrUndefined = (value?: string | Date): string | undefined => {
+  if (!value) {
+    return undefined;
+  }
+  return value instanceof Date ? value.toISOString() : value;
+};
+
 export interface SiwensResponse extends SiweResponse {
   ens: string;
 }
 
-export interface SiwensParams
-  extends Partial<
-    Omit<SiweMessage, 'toMessage' | 'prepareMessage' | 'verify' | 'validate'>
-  > {
+export interface SiwensParams extends Partial<SiweMessageFields> {
   ens: string;
   ttl?: number;
   expirationTime?: string;
@@ -62,19 +73,57 @@ export interface SiwensConfig {
   providerUrl?: string;
 }
 
-export class SIWENS extends SiweMessage {
+/**
+ * Sign-In with ENS message. Previously this extended `siwe`'s `SiweMessage`;
+ * it is now a standalone, ethers-free implementation backed by viem's native
+ * SIWE module (`viem/siwe`). The public surface (fields, `prepareMessage`,
+ * `verify`, `generateNonce`) is preserved.
+ */
+export class SIWENS {
+  readonly scheme?: string;
+  readonly domain: string;
+  readonly address: string;
+  readonly statement?: string;
+  readonly uri: string;
+  readonly version: string;
+  readonly chainId: number;
+  readonly nonce: string;
+  readonly issuedAt?: string;
+  readonly expirationTime?: string;
+  readonly notBefore?: string;
+  readonly requestId?: string;
+  readonly resources?: string[];
   readonly provider: PublicClient;
   readonly providerUrl: string | undefined;
+  /** The raw EIP-4361 message string (parsed input, or the built message). */
+  private readonly message: string;
 
   constructor(signInConfig: SiwensConfig) {
     const { params, providerUrl } = signInConfig;
+
     if (typeof params === 'string') {
-      super(params);
       if (!providerUrl) {
         throw InvalidConfigurationException.providerUrlRequired();
       }
-      this.provider = buildPublicClient(providerUrl, this.chainId);
+      const parsed = parseSiweMessage(params);
+      this.scheme = parsed.scheme;
+      this.domain = parsed.domain as string;
+      // Normalize to EIP-55 checksum so `data.address` matches the casing that
+      // `siwe` always returned (it rejected non-checksummed addresses).
+      this.address = viemGetAddress(parsed.address as string);
+      this.statement = parsed.statement;
+      this.uri = parsed.uri as string;
+      this.version = (parsed.version as string) || '1';
+      this.chainId = (parsed.chainId as number) ?? 1;
+      this.nonce = parsed.nonce as string;
+      this.issuedAt = toISOStringOrUndefined(parsed.issuedAt);
+      this.expirationTime = toISOStringOrUndefined(parsed.expirationTime);
+      this.notBefore = toISOStringOrUndefined(parsed.notBefore);
+      this.requestId = parsed.requestId;
+      this.resources = parsed.resources;
+      this.message = params;
       this.providerUrl = providerUrl;
+      this.provider = buildPublicClient(providerUrl, this.chainId);
       return;
     }
 
@@ -86,18 +135,11 @@ export class SIWENS extends SiweMessage {
       throw InvalidConfigurationException.domainRequired();
     }
 
-    let issuedAt = params.issuedAt;
-    let expirationTime = params.expirationTime;
-
-    if (params.ttl) {
-      checkTTL(params.ttl);
-      const {
-        issuedAt: issuedAtGenerated,
-        expirationTime: expirationTimeGenerated,
-      } = SIWENS.generateIssuedAndExpirationTime(params.ttl);
-      issuedAt = issuedAt || issuedAtGenerated;
-      expirationTime = expirationTime || expirationTimeGenerated;
-    }
+    checkTTL(params.ttl);
+    const {
+      issuedAt: issuedAtGenerated,
+      expirationTime: expirationTimeGenerated,
+    } = SIWENS.generateIssuedAndExpirationTime(params.ttl);
 
     checkDomainValid(params.ens);
 
@@ -106,46 +148,140 @@ export class SIWENS extends SiweMessage {
       params?.statement || ''
     );
 
-    super({
-      ...params,
-      statement,
-      version: params.version || '1',
-      issuedAt,
-      expirationTime,
-    });
+    this.scheme = params.scheme;
+    this.domain = params.domain;
+    this.address = viemGetAddress(params.address as string);
+    this.statement = statement;
+    this.uri = params.uri as string;
+    this.version = params.version || '1';
+    this.chainId = (params.chainId as number) ?? 1;
+    this.nonce = params.nonce || generateNonce();
+    this.issuedAt = params.issuedAt || issuedAtGenerated;
+    this.expirationTime = params.expirationTime || expirationTimeGenerated;
+    this.notBefore = params.notBefore;
+    this.requestId = params.requestId;
+    this.resources = params.resources;
     this.providerUrl = providerUrl;
     this.provider = buildPublicClient(providerUrl, this.chainId);
+    this.message = this.buildMessage();
   }
 
-  override async verify(
+  toMessage(): string {
+    return this.message;
+  }
+
+  prepareMessage(): string {
+    return this.message;
+  }
+
+  async verify(
     params: VerifyParams,
     opts?: VerifyOpts
   ): Promise<SiwensResponse> {
-    let verification: SiweResponse;
+    const suppress = opts?.suppressExceptions ?? false;
+    const data = this.toFields();
 
-    try {
-      const { signature, ...rest } = params;
-      const _tempParams = {
-        signature,
-        ...rest,
-      };
-      const lastByte = parseInt(signature.slice(-2), 16);
-      if (lastByte < 27) {
-        const adjustedV = (27 + (lastByte % 2)).toString(16).padStart(2, '0');
-        _tempParams['signature'] = signature.slice(0, -2) + adjustedV;
+    const computeEns = (): string | undefined => {
+      try {
+        return this.statement
+          ? toUnicode(extractDataFromStatement(this.statement).ens)
+          : undefined;
+      } catch {
+        return undefined;
       }
+    };
 
-      verification = await super.verify(_tempParams, opts);
-    } catch (e) {
-      const statement = e.data.statement;
-      const { ens } = extractDataFromStatement(statement);
-      throw {
-        ...e,
-        ens: toUnicode(ens),
+    const fail = (error: SiweError): SiwensResponse => {
+      const result: SiwensResponse = {
+        success: false,
+        data,
+        error,
+        ens: computeEns() as string,
       };
+      if (suppress) {
+        return result;
+      }
+      throw result;
+    };
+
+    // Normalize legacy `v` values (< 27) to canonical 27/28 before verifying.
+    let signature = params.signature;
+    const lastByte = parseInt(signature.slice(-2), 16);
+    if (lastByte < 27) {
+      const adjustedV = (27 + (lastByte % 2)).toString(16).padStart(2, '0');
+      signature = signature.slice(0, -2) + adjustedV;
     }
 
-    const statement = verification.data.statement;
+    // Field validation — mirrors `siwe`'s order and error types so the thrown
+    // shape is unchanged for consumers.
+    if (params.scheme && params.scheme !== this.scheme) {
+      return fail(
+        new SiweError(SiweErrorType.SCHEME_MISMATCH, params.scheme, this.scheme)
+      );
+    }
+    if (params.domain && params.domain !== this.domain) {
+      return fail(
+        new SiweError(SiweErrorType.DOMAIN_MISMATCH, params.domain, this.domain)
+      );
+    }
+    if (params.nonce && params.nonce !== this.nonce) {
+      return fail(
+        new SiweError(SiweErrorType.NONCE_MISMATCH, params.nonce, this.nonce)
+      );
+    }
+
+    const checkTime = new Date(params.time || new Date());
+    if (this.expirationTime) {
+      const expirationDate = new Date(this.expirationTime);
+      if (checkTime.getTime() >= expirationDate.getTime()) {
+        return fail(
+          new SiweError(
+            SiweErrorType.EXPIRED_MESSAGE,
+            `${checkTime.toISOString()} < ${expirationDate.toISOString()}`,
+            `${checkTime.toISOString()} >= ${expirationDate.toISOString()}`
+          )
+        );
+      }
+    }
+    if (this.notBefore) {
+      const notBefore = new Date(this.notBefore);
+      if (checkTime.getTime() < notBefore.getTime()) {
+        return fail(
+          new SiweError(
+            SiweErrorType.NOT_YET_VALID_MESSAGE,
+            `${checkTime.toISOString()} >= ${notBefore.toISOString()}`,
+            `${checkTime.toISOString()} < ${notBefore.toISOString()}`
+          )
+        );
+      }
+    }
+
+    // Signature verification — EOA recovery + EIP-1271 + ERC-6492 in a single
+    // viem call against the configured public client. A genuine signature
+    // mismatch resolves to `false`; operational errors (RPC/transport failures)
+    // are intentionally left to propagate rather than be masked as an invalid
+    // signature, so contract-wallet checks on a flaky RPC surface a real error.
+    const valid = await verifySiweMessage(this.provider, {
+      message: this.message,
+      signature: signature as `0x${string}`,
+      address: this.address as `0x${string}`,
+      ...(params.domain ? { domain: params.domain } : {}),
+      ...(params.nonce ? { nonce: params.nonce } : {}),
+      ...(params.scheme ? { scheme: params.scheme } : {}),
+      time: checkTime,
+    });
+
+    if (!valid) {
+      return fail(
+        new SiweError(
+          SiweErrorType.INVALID_SIGNATURE,
+          undefined,
+          `Resolved address to be ${this.address}`
+        )
+      );
+    }
+
+    const statement = this.statement;
     if (!statement) {
       throw InvalidStatementException.invalidStatement();
     }
@@ -154,7 +290,8 @@ export class SIWENS extends SiweMessage {
     await this.verifyEnsAddress(ens, this.address);
 
     return {
-      ...verification,
+      success: true,
+      data,
       ens,
     };
   }
@@ -169,8 +306,46 @@ export class SIWENS extends SiweMessage {
     };
   }
 
-  static generateNonce() {
+  static generateNonce(): string {
     return generateNonce();
+  }
+
+  private toFields(): SiweMessageFields {
+    return {
+      scheme: this.scheme,
+      domain: this.domain,
+      address: this.address,
+      statement: this.statement,
+      uri: this.uri,
+      version: this.version,
+      chainId: this.chainId,
+      nonce: this.nonce,
+      issuedAt: this.issuedAt,
+      expirationTime: this.expirationTime,
+      notBefore: this.notBefore,
+      requestId: this.requestId,
+      resources: this.resources,
+    };
+  }
+
+  private buildMessage(): string {
+    return createSiweMessage({
+      ...(this.scheme ? { scheme: this.scheme } : {}),
+      domain: this.domain,
+      address: viemGetAddress(this.address),
+      ...(this.statement ? { statement: this.statement } : {}),
+      uri: this.uri,
+      version: this.version as '1',
+      chainId: this.chainId,
+      nonce: this.nonce,
+      ...(this.issuedAt ? { issuedAt: new Date(this.issuedAt) } : {}),
+      ...(this.expirationTime
+        ? { expirationTime: new Date(this.expirationTime) }
+        : {}),
+      ...(this.notBefore ? { notBefore: new Date(this.notBefore) } : {}),
+      ...(this.requestId ? { requestId: this.requestId } : {}),
+      ...(this.resources ? { resources: this.resources } : {}),
+    });
   }
 
   private async verifyEnsAddress(ens: string, address: string) {

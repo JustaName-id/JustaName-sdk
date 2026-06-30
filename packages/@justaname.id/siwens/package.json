@@ -2,10 +2,10 @@
   "name": "@justaname.id/siwens",
   "version": "0.0.145",
   "dependencies": {
+    "@stablelib/random": "^1.0.2",
     "punycode": "^2.3.1"
   },
   "peerDependencies": {
-    "siwe": ">=2.0.0",
     "viem": "^2.48.0"
   },
   "exports": {
