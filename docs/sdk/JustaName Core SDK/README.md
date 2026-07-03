@@ -60,7 +60,7 @@ First, import the JustaName SDK and initialize it with your configuration:
 
 ```typescript
 import { JustaName } from '@justaname.id/sdk';
-import { ethers } from 'ethers';
+import { privateKeyToAccount, generatePrivateKey } from 'viem/accounts';
 
 // Initialize the SDK with your configuration
 const justaname = JustaName.init({
@@ -85,7 +85,7 @@ const justaname = JustaName.init({
 });
 
 // Create a signer (for example purposes, we're creating a random wallet)
-const signer = ethers.Wallet.createRandom();
+const signer = privateKeyToAccount(generatePrivateKey());
 ```
 
 ### Issuing a Subname
@@ -98,7 +98,7 @@ async function issueSubname() {
         chainId: 1 // Ethereum Mainnet
     });
     
-    const signature = await signer.signMessage(challenge.challenge);
+    const signature = await signer.signMessage({ message: challenge.challenge });
     
     const response = await justaname.subnames.addSubname(
     {
@@ -125,7 +125,7 @@ async function updateSubname() {
         chainId: 1
     });
     
-    const signature = await signer.signMessage(challenge.challenge);
+    const signature = await signer.signMessage({ message: challenge.challenge });
     
     const response = await justaname.subnames.updateSubname(
     {
@@ -159,7 +159,7 @@ async function signIn() {
         address: signer.address
     });
     
-    const signature = await signer.signMessage(message);
+    const signature = await signer.signMessage({ message });
     
     const response = await justaname.signIn.signIn({
         message: message,

@@ -8,8 +8,6 @@ import {
 } from '../../errors';
 import { OffchainResolvers } from '../offchain-resolvers';
 import { RequestSignInParams, SignInFunctionParams } from '../../types/signin';
-import { createPublicClient, http } from 'viem';
-import { mainnet, sepolia } from 'viem/chains';
 import { normalize } from 'viem/ens';
 
 export interface SignInResponse extends SiwensResponse {
@@ -110,62 +108,13 @@ export class SignIn {
       providerUrl: network.providerUrl,
     });
 
-    const siwensResponse = await siwens.verify(
-      {
-        signature: params.signature,
-        nonce: params.nonce,
-        domain: params.domain,
-      },
-      {
-        // Smart-contract (EIP-1271) verification is handled inside
-        // `verificationFallback` below using viem's `verifySiweMessage`.
-        // We no longer pass `provider` here because it must be an ethers
-        // `Provider`, and the SDK is now viem-only.
-        verificationFallback: async (params, opts, message, EIP1271Promise) => {
-          // Use the chainId extracted from the SIWE message itself, not the
-          // SDK-default. Otherwise contract-wallet (EIP-1271) verification
-          // runs against the wrong chain when the message is cross-chain.
-          const publicClient = createPublicClient({
-            chain: chainId === 1 ? mainnet : sepolia,
-            transport: http(network.providerUrl),
-          });
-
-          const result = await EIP1271Promise;
-
-          if (result.success) {
-            return result;
-          } else {
-            let signature = params.signature;
-            const lastByte = parseInt(params.signature.slice(-2), 16);
-            if (lastByte < 27) {
-              const adjustedV = (27 + (lastByte % 2))
-                .toString(16)
-                .padStart(2, '0');
-              signature = signature.slice(0, -2) + adjustedV;
-            }
-
-            const viemResponse = await publicClient.verifySiweMessage({
-              message: message.toMessage(),
-              signature: signature as `0x${string}`,
-              address: result.data.address as `0x${string}`,
-              nonce: params.nonce,
-              domain: params.domain as string,
-              time: params.time ? new Date(params.time) : undefined,
-              scheme: params.scheme as string,
-            });
-
-            if (viemResponse) {
-              return {
-                data: result.data,
-                success: true,
-              };
-            }
-
-            return result;
-          }
-        },
-      }
-    );
+    // SIWENS.verify performs EOA recovery, EIP-1271 and ERC-6492 verification
+    // internally via viem (`verifySiweMessage`) against the message's chain.
+    const siwensResponse = await siwens.verify({
+      signature: params.signature,
+      nonce: params.nonce,
+      domain: params.domain,
+    });
 
     if (siwensResponse.data.chainId !== chainId) {
       throw InvalidSignInException.chainIdMismatch(
