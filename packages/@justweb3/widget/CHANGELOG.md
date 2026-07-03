@@ -1,3 +1,40 @@
+## 0.0.154 (2026-05-25)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.218
+- Updated @justaname.id/sdk to 0.2.215
+- Updated @justweb3/ui to 0.0.154
+
+## 0.0.153 (2026-05-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.217
+- Updated @justaname.id/sdk to 0.2.214
+- Updated @justweb3/ui to 0.0.153
+
+## 0.0.152 (2026-05-22)
+
+
+### 🩹 Fixes
+
+- **console:** removed dapps, removed ethers, and enhancements ([#144](https://github.com/JustaName-id/JustaName-sdk/pull/144), [#145](https://github.com/JustaName-id/JustaName-sdk/pull/145))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/react to 0.3.216
+- Updated @justaname.id/sdk to 0.2.213
+- Updated @justweb3/ui to 0.0.152
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.0.151 (2026-04-28)
 
 

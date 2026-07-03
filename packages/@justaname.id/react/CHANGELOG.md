@@ -1,3 +1,34 @@
+## 0.3.218 (2026-05-25)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.215
+
+## 0.3.217 (2026-05-22)
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.214
+
+## 0.3.216 (2026-05-22)
+
+
+### 🩹 Fixes
+
+- **console:** removed dapps, removed ethers, and enhancements ([#144](https://github.com/JustaName-id/JustaName-sdk/pull/144), [#145](https://github.com/JustaName-id/JustaName-sdk/pull/145))
+
+
+### 🧱 Updated Dependencies
+
+- Updated @justaname.id/sdk to 0.2.213
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.3.215 (2026-04-28)
 
 

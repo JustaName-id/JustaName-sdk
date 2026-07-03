@@ -1,3 +1,23 @@
+## 0.1.59 (2026-05-25)
+
+This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.58 (2026-05-22)
+
+This was a version bump only for @justweb3/xmtp-plugin to align it with other projects, there were no code changes.
+
+## 0.1.57 (2026-05-22)
+
+
+### 🩹 Fixes
+
+- **console:** removed dapps, removed ethers, and enhancements ([#144](https://github.com/JustaName-id/JustaName-sdk/pull/144), [#145](https://github.com/JustaName-id/JustaName-sdk/pull/145))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.1.56 (2026-04-28)
 
 

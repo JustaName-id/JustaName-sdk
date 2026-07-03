@@ -77,18 +77,22 @@ jobs:
         run: |
           TITLE=$(printf '%s' "$COMMIT_MSG" | head -n1)
           echo "Commit title: $TITLE"
-          if printf '%s' "$TITLE" | grep -qE '^feat(\(.+\))?!?:'; then
+          # Breaking change (feat!:, fix!:, feat(scope)!:) -> major
+          if printf '%s' "$TITLE" | grep -qE '^[a-z]+(\(.+\))?!:'; then
+            SPECIFIER=major
+          elif printf '%s' "$TITLE" | grep -qE '^feat(\(.+\))?:'; then
             SPECIFIER=minor
-          elif printf '%s' "$TITLE" | grep -qE '^fix(\(.+\))?!?:'; then
+          elif printf '%s' "$TITLE" | grep -qE '^fix(\(.+\))?:'; then
             SPECIFIER=patch
           else
+            # perf/refactor/chore/docs/etc. default to patch
             SPECIFIER=patch
           fi
           echo "Resolved specifier: $SPECIFIER"
           echo "specifier=$SPECIFIER" >> "$GITHUB_OUTPUT"
       - name: Release
         run: |
-          npx nx release --specifier=${{ steps.specifier.outputs.specifier }} --yes
+          npx nx release --specifier="${{ steps.specifier.outputs.specifier }}" --yes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

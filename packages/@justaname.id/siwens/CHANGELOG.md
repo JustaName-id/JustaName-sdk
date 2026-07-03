@@ -1,3 +1,23 @@
+## 0.0.148 (2026-05-25)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.147 (2026-05-22)
+
+This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
+
+## 0.0.146 (2026-05-22)
+
+
+### 🩹 Fixes
+
+- **console:** removed dapps, removed ethers, and enhancements ([#144](https://github.com/JustaName-id/JustaName-sdk/pull/144), [#145](https://github.com/JustaName-id/JustaName-sdk/pull/145))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.0.145 (2026-04-28)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
