@@ -1,6 +1,6 @@
 {
   "name": "@justaname.id/siwens",
-  "version": "0.0.148",
+  "version": "0.1.0",
   "dependencies": {
     "@stablelib/random": "^1.0.2",
     "punycode": "^2.3.1"

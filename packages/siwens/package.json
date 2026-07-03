@@ -1,6 +1,6 @@
 {
   "name": "siwens",
-  "version": "0.1.55",
+  "version": "0.2.0",
   "dependencies": {
     "punycode": "^2.3.1"
   },

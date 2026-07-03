@@ -1,3 +1,15 @@
+## 0.1.0 (2026-07-03)
+
+
+### 🚀 Features
+
+- replaced siwe to complete remove ethers ([#150](https://github.com/JustaName-id/JustaName-sdk/pull/150))
+
+
+### ❤️  Thank You
+
+- Anthony Khoury @anthony23991
+
 ## 0.0.148 (2026-05-25)
 
 This was a version bump only for @justaname.id/siwens to align it with other projects, there were no code changes.
