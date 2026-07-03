@@ -1,47 +1,15 @@
-import { DENTITY_ENABLED, DentityEnabledPayload } from './dentity-enabled';
-import { DENTITY_DISABLED, DentityDisabledPayload } from './dentity-disabled';
-import { EFP_DISABLED, EfpDisabledPayload } from './efp-disabled';
-import { EFP_ENABLED, EfpEnabledPayload } from './efp-enabled';
+import { PLUGIN_TOGGLED, PluginToggledPayload } from './plugin-toggled';
 import {
-  JUST_VERIFIED_DISABLED,
-  JustVerifiedDisabledPayload,
-} from './just-verified-disabled';
-import {
-  JUST_VERIFIED_ENABLED,
-  JustVerifiedEnabledPayload,
-} from './just-verified-enabled';
-import {
-  JUST_VERIFIED_EVENTS,
-  JustVerifiedEventsPayload,
-} from './justVerified';
-import { POAP_DISABLED, PoapDisabledPayload } from './poap-disabled';
-import { POAP_ENABLED, PoapEnabledPayload } from './poap-enabled';
-import { XMTP_DISABLED, XmtpDisabledPayload } from './xmtp-disabled';
-import { XMTP_ENABLED, XmtpEnabledPayload } from './xmtp-enabled';
+  VERIFICATION_TOGGLED,
+  VerificationToggledPayload,
+} from './verification-toggled';
 
 export const PLUGINS_EVENTS = {
-  JUST_VERIFIED_DISABLED,
-  JUST_VERIFIED_ENABLED,
-  EFP_DISABLED,
-  EFP_ENABLED,
-  POAP_DISABLED,
-  POAP_ENABLED,
-  XMTP_DISABLED,
-  XMTP_ENABLED,
-  DENTITY_DISABLED,
-  DENTITY_ENABLED,
-  ...JUST_VERIFIED_EVENTS,
+  PLUGIN_TOGGLED,
+  VERIFICATION_TOGGLED,
 } as const;
 
-export interface PluginsEventPayload extends JustVerifiedEventsPayload {
-  [JUST_VERIFIED_DISABLED]: JustVerifiedDisabledPayload;
-  [JUST_VERIFIED_ENABLED]: JustVerifiedEnabledPayload;
-  [EFP_DISABLED]: EfpDisabledPayload;
-  [EFP_ENABLED]: EfpEnabledPayload;
-  [POAP_DISABLED]: PoapDisabledPayload;
-  [POAP_ENABLED]: PoapEnabledPayload;
-  [XMTP_DISABLED]: XmtpDisabledPayload;
-  [XMTP_ENABLED]: XmtpEnabledPayload;
-  [DENTITY_DISABLED]: DentityDisabledPayload;
-  [DENTITY_ENABLED]: DentityEnabledPayload;
+export interface PluginsEventPayload {
+  [PLUGIN_TOGGLED]: PluginToggledPayload;
+  [VERIFICATION_TOGGLED]: VerificationToggledPayload;
 }

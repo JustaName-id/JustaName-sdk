@@ -6,7 +6,9 @@ import {
 } from '../../types';
 import { SiweConfig } from '../../types/siwe/siwe-config';
 import { ChallengeRequestException } from '../../errors/ChallengeRequest.expection';
-import { SiweMessage } from 'siwe';
+import { generateNonce } from '@justaname.id/siwens';
+import { getAddress } from 'viem';
+import { createSiweMessage } from 'viem/siwe';
 
 /**
  * Represents the Sign-In with Ethereum (SIWE) functionality, providing methods
@@ -104,18 +106,17 @@ export class SubnameChallenge {
     const { expirationTime, issuedAt } =
       this.generateIssuedAndExpirationTime(_ttl);
 
-    const siweMessage = new SiweMessage({
+    const prepared = createSiweMessage({
       domain: _domain,
       uri: _origin,
-      address: _address,
+      address: getAddress(_address),
       statement: statement,
       chainId: _chainId,
       version: '1',
-      issuedAt,
-      expirationTime,
+      nonce: generateNonce(),
+      issuedAt: new Date(issuedAt),
+      expirationTime: new Date(expirationTime),
     });
-
-    const prepared = siweMessage.prepareMessage();
 
     if (this.dev) {
       // eslint-disable-next-line no-console

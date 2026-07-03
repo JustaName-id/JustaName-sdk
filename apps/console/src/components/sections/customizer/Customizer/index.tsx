@@ -49,6 +49,7 @@ export const Customizer = ({ mobile }: CustomizerProps) => {
               onCheckedChange={() => {
                 getAnalyticsClient().track('NETWORK_CHANGED', {
                   chainId: chainId === 1 ? 11155111 : 1,
+                  network: chainId === 1 ? 'sepolia' : 'mainnet',
                 });
                 switchChainAsync({
                   chainId: chainId === 1 ? 11155111 : 1,

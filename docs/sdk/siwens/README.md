@@ -48,12 +48,12 @@ yarn add @justaname.id/siwens
 ### Example Usage
 ```typescript
 import { SIWENS, InvalidDomainException, InvalidENSException, InvalidStatementException, InvalidTimeException } f, InvalidDomainException, InvalidENSException, InvalidStatementException, InvalidTimeException } from '@justaname.id/siwens';rom '@justaname.id/siwens';
-import { ethers } from 'ethers';
+import { privateKeyToAccount } from 'viem/accounts';
 
 // Define your provider URL (e.g., Infura)
 const providerUrl = 'https://mainnet.infura.io/v3/YOUR_INFURA_KEY';
 
-const signer = new ethers.Wallet('YOUR_PRIVATE_KEY_ENS_HOLDER')
+const signer = privateKeyToAccount('YOUR_PRIVATE_KEY_ENS_HOLDER')
 
 async function signInUser() {
    const siwens = new SIWENS({
@@ -66,7 +66,7 @@ async function signInUser() {
       providerUrl
     });
    const message = await siwens.prepareMessage();
-   const signature = await signer.signMessage(message);
+   const signature = await signer.signMessage({ message });
    return signature;
 }
 

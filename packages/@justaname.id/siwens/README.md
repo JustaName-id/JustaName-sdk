@@ -44,14 +44,13 @@ yarn add @justaname.id/siwens
 ### Example Usage
 ```typescript
 import { SIWENS, InvalidENSException } from '@justaname.id/siwens';
-import { Wallet } from 'ethers';
+import { privateKeyToAccount } from 'viem/accounts';
 
 // Define your provider URL (e.g., Infura)
 const infuraProjectId = 'YOUR_INFURA_PROJECT_ID';
 const providerUrl = 'https://mainnet.infura.io/v3/' + infuraProjectId;
 
-// const signer = Wallet.createRandom();
-const signer = new Wallet('YOUR_PRIVATE_KEY');
+const signer = privateKeyToAccount('YOUR_PRIVATE_KEY');
 
 async function signInUser() {
    const siwens = new SIWENS({
@@ -67,7 +66,7 @@ async function signInUser() {
       providerUrl
    });
    const message = await siwens.prepareMessage();
-   const signature = await signer.signMessage(message);
+   const signature = await signer.signMessage({ message });
    return {signature, message};
 }
 

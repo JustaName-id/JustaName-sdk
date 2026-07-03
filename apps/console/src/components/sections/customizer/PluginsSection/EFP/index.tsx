@@ -19,7 +19,10 @@ export const EFP = () => {
           EFPPlugin,
         ],
       });
-      getAnalyticsClient().track('EFP_ENABLED', {});
+      getAnalyticsClient().track('PLUGIN_TOGGLED', {
+        plugin: 'efp',
+        enabled: true,
+      });
     } else {
       handleJustWeb3Config({
         ...config,
@@ -27,7 +30,10 @@ export const EFP = () => {
           (plugin) => plugin.name !== EFPPlugin.name
         ),
       });
-      getAnalyticsClient().track('EFP_DISABLED', {});
+      getAnalyticsClient().track('PLUGIN_TOGGLED', {
+        plugin: 'efp',
+        enabled: false,
+      });
     }
   };
 

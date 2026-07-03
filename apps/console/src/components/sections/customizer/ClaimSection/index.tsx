@@ -91,8 +91,12 @@ export const ClaimSection = () => {
         }
       )
       .then((res) => {
-        getAnalyticsClient().track('ENS_BY_API_KEY_CALLED', {});
-        setEnsByApiKey(res.data.result.data.domains);
+        const domains = res.data.result.data.domains;
+        getAnalyticsClient().track('ENS_BY_API_KEY_CALLED', {
+          location: 'claim_section',
+          domainCount: domains?.length ?? 0,
+        });
+        setEnsByApiKey(domains);
       })
       .catch((err) => {
         setEnsByApiKey([]);
@@ -179,7 +183,10 @@ export const ClaimSection = () => {
                 target={'_blank'}
                 className={'text-primary'}
                 onClick={() => {
-                  getAnalyticsClient().track('DASHBOARD_LINK_CLICKED', {});
+                  getAnalyticsClient().track('LINK_CLICKED', {
+                    target: 'dashboard',
+                    location: 'claim_section',
+                  });
                 }}
               >
                 Dashboard
